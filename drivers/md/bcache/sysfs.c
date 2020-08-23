@@ -10,7 +10,13 @@
 #include "btree.h"
 #include "request.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include "writeback.h"
+
+#include <linux/blkdev.h>
+>>>>>>> v3.18
 =======
 #include "writeback.h"
 
@@ -26,13 +32,19 @@ static const char * const cache_replacement_policies[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const char * const error_actions[] = {
 	"unregister",
 	"panic",
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 write_attribute(attach);
 write_attribute(detach);
@@ -62,7 +74,10 @@ sysfs_time_stats_attribute(btree_split, sec, us);
 sysfs_time_stats_attribute(btree_sort,	ms,  us);
 sysfs_time_stats_attribute(btree_read,	ms,  us);
 <<<<<<< HEAD
+<<<<<<< HEAD
 sysfs_time_stats_attribute(try_harder,	ms,  us);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -83,7 +98,10 @@ rw_attribute(congested_write_threshold_us);
 
 rw_attribute(sequential_cutoff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 rw_attribute(sequential_merge);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 rw_attribute(data_csum);
@@ -98,15 +116,21 @@ rw_attribute(writeback_rate_update_seconds);
 rw_attribute(writeback_rate_d_term);
 rw_attribute(writeback_rate_p_term_inverse);
 <<<<<<< HEAD
+<<<<<<< HEAD
 rw_attribute(writeback_rate_d_smooth);
 read_attribute(writeback_rate_debug);
 
 =======
+=======
+>>>>>>> v3.18
 read_attribute(writeback_rate_debug);
 
 read_attribute(stripe_size);
 read_attribute(partial_stripes_expensive);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 rw_attribute(synchronous);
 rw_attribute(journal_delay_ms);
@@ -115,6 +139,7 @@ rw_attribute(running);
 rw_attribute(label);
 rw_attribute(readahead);
 <<<<<<< HEAD
+<<<<<<< HEAD
 rw_attribute(io_error_limit);
 rw_attribute(io_error_halflife);
 rw_attribute(verify);
@@ -122,6 +147,8 @@ rw_attribute(key_merging_disabled);
 rw_attribute(gc_always_rewrite);
 rw_attribute(freelist_percent);
 =======
+=======
+>>>>>>> v3.18
 rw_attribute(errors);
 rw_attribute(io_error_limit);
 rw_attribute(io_error_halflife);
@@ -130,6 +157,9 @@ rw_attribute(bypass_torture_test);
 rw_attribute(key_merging_disabled);
 rw_attribute(gc_always_rewrite);
 rw_attribute(expensive_debug_checks);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 rw_attribute(cache_replacement_policy);
 rw_attribute(btree_shrinker_disabled);
@@ -152,6 +182,10 @@ SHOW(__bch_cached_dev)
 	sysfs_printf(data_csum,		"%i", dc->disk.data_csum);
 	var_printf(verify,		"%i");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	var_printf(bypass_torture_test,	"%i");
+>>>>>>> v3.18
 =======
 	var_printf(bypass_torture_test,	"%i");
 >>>>>>> v3.18
@@ -160,7 +194,11 @@ SHOW(__bch_cached_dev)
 	var_print(writeback_delay);
 	var_print(writeback_percent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_print(writeback_rate,	dc->writeback_rate.rate);
+=======
+	sysfs_hprint(writeback_rate,	dc->writeback_rate.rate << 9);
+>>>>>>> v3.18
 =======
 	sysfs_hprint(writeback_rate,	dc->writeback_rate.rate << 9);
 >>>>>>> v3.18
@@ -168,6 +206,7 @@ SHOW(__bch_cached_dev)
 	var_print(writeback_rate_update_seconds);
 	var_print(writeback_rate_d_term);
 	var_print(writeback_rate_p_term_inverse);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	var_print(writeback_rate_d_smooth);
 
@@ -196,6 +235,8 @@ SHOW(__bch_cached_dev)
 
 	var_printf(sequential_merge,	"%i");
 =======
+=======
+>>>>>>> v3.18
 
 	if (attr == &sysfs_writeback_rate_debug) {
 		char rate[20];
@@ -234,6 +275,9 @@ SHOW(__bch_cached_dev)
 	sysfs_hprint(stripe_size,	dc->disk.stripe_size << 9);
 	var_printf(partial_stripes_expensive,	"%u");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	var_hprint(sequential_cutoff);
 	var_hprint(readahead);
@@ -260,18 +304,25 @@ STORE(__cached_dev)
 	unsigned v = size;
 	struct cache_set *c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define d_strtoul(var)		sysfs_strtoul(var, dc->var)
 =======
+=======
+>>>>>>> v3.18
 	struct kobj_uevent_env *env;
 
 #define d_strtoul(var)		sysfs_strtoul(var, dc->var)
 #define d_strtoul_nonzero(var)	sysfs_strtoul_clamp(var, dc->var, 1, INT_MAX)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define d_strtoi_h(var)		sysfs_hatoi(var, dc->var)
 
 	sysfs_strtoul(data_csum,	dc->disk.data_csum);
 	d_strtoul(verify);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	d_strtoul(writeback_metadata);
 	d_strtoul(writeback_running);
@@ -289,6 +340,8 @@ STORE(__cached_dev)
 
 	d_strtoul(sequential_merge);
 =======
+=======
+>>>>>>> v3.18
 	d_strtoul(bypass_torture_test);
 	d_strtoul(writeback_metadata);
 	d_strtoul(writeback_running);
@@ -303,6 +356,9 @@ STORE(__cached_dev)
 	d_strtoul(writeback_rate_d_term);
 	d_strtoul_nonzero(writeback_rate_p_term_inverse);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	d_strtoi_h(sequential_cutoff);
 	d_strtoi_h(readahead);
@@ -341,7 +397,10 @@ STORE(__cached_dev)
 			bch_uuid_write(dc->disk.c);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		env = kzalloc(sizeof(struct kobj_uevent_env), GFP_KERNEL);
 		if (!env)
 			return -ENOMEM;
@@ -351,6 +410,9 @@ STORE(__cached_dev)
 		kobject_uevent_env(
 			&disk_to_dev(dc->disk.disk)->kobj, KOBJ_CHANGE, env->envp);
 		kfree(env);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -413,17 +475,23 @@ static struct attribute *bch_cached_dev_files[] = {
 	&sysfs_writeback_rate_d_term,
 	&sysfs_writeback_rate_p_term_inverse,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&sysfs_writeback_rate_d_smooth,
 	&sysfs_writeback_rate_debug,
 	&sysfs_dirty_data,
 	&sysfs_sequential_cutoff,
 	&sysfs_sequential_merge,
 =======
+=======
+>>>>>>> v3.18
 	&sysfs_writeback_rate_debug,
 	&sysfs_dirty_data,
 	&sysfs_stripe_size,
 	&sysfs_partial_stripes_expensive,
 	&sysfs_sequential_cutoff,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	&sysfs_clear_stats,
 	&sysfs_running,
@@ -433,6 +501,10 @@ static struct attribute *bch_cached_dev_files[] = {
 #ifdef CONFIG_BCACHE_DEBUG
 	&sysfs_verify,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&sysfs_bypass_torture_test,
+>>>>>>> v3.18
 =======
 	&sysfs_bypass_torture_test,
 >>>>>>> v3.18
@@ -484,7 +556,11 @@ STORE(__bch_flash_dev)
 
 	if (attr == &sysfs_unregister) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_set(&d->detaching, 1);
+=======
+		set_bit(BCACHE_DEV_DETACHING, &d->flags);
+>>>>>>> v3.18
 =======
 		set_bit(BCACHE_DEV_DETACHING, &d->flags);
 >>>>>>> v3.18
@@ -506,6 +582,7 @@ static struct attribute *bch_flash_dev_files[] = {
 };
 KTYPE(bch_flash_dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 SHOW(__bch_cache_set)
 {
@@ -583,6 +660,8 @@ lock_root:
 	}
 
 =======
+=======
+>>>>>>> v3.18
 struct bset_stats_op {
 	struct btree_op op;
 	size_t nodes;
@@ -700,6 +779,9 @@ static unsigned bch_average_key_size(struct cache_set *c)
 
 SHOW(__bch_cache_set)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct cache_set *c = container_of(kobj, struct cache_set, kobj);
 
@@ -709,20 +791,27 @@ SHOW(__bch_cache_set)
 	sysfs_hprint(block_size,		block_bytes(c));
 	sysfs_print(tree_depth,			c->root->level);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_print(root_usage_percent,		root_usage(c));
 
 	sysfs_hprint(btree_cache_size,		cache_size(c));
 	sysfs_print(btree_cache_max_chain,	cache_max_chain(c));
 =======
+=======
+>>>>>>> v3.18
 	sysfs_print(root_usage_percent,		bch_root_usage(c));
 
 	sysfs_hprint(btree_cache_size,		bch_cache_size(c));
 	sysfs_print(btree_cache_max_chain,	bch_cache_max_chain(c));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sysfs_print(cache_available_percent,	100 - c->gc_stats.in_use);
 
 	sysfs_print_time_stats(&c->btree_gc_time,	btree_gc, sec, ms);
 	sysfs_print_time_stats(&c->btree_split_time,	btree_split, sec, us);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sysfs_print_time_stats(&c->sort_time,		btree_sort, ms, us);
 	sysfs_print_time_stats(&c->btree_read_time,	btree_read, ms, us);
@@ -733,12 +822,17 @@ SHOW(__bch_cache_set)
 	sysfs_hprint(dirty_data,	c->gc_stats.dirty);
 	sysfs_hprint(average_key_size,	average_key_size(c));
 =======
+=======
+>>>>>>> v3.18
 	sysfs_print_time_stats(&c->sort.time,		btree_sort, ms, us);
 	sysfs_print_time_stats(&c->btree_read_time,	btree_read, ms, us);
 
 	sysfs_print(btree_used_percent,	bch_btree_used(c));
 	sysfs_print(btree_nodes,	c->gc_stats.nodes);
 	sysfs_hprint(average_key_size,	bch_average_key_size(c));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sysfs_print(cache_read_races,
@@ -750,11 +844,17 @@ SHOW(__bch_cache_set)
 		    atomic_long_read(&c->writeback_keys_failed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (attr == &sysfs_errors)
 		return bch_snprint_string_list(buf, PAGE_SIZE, error_actions,
 					       c->on_error);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* See count_io_errors for why 88 */
 	sysfs_print(io_error_halflife,	c->error_decay * 88);
@@ -771,6 +871,11 @@ SHOW(__bch_cache_set)
 	sysfs_printf(verify,			"%i", c->verify);
 	sysfs_printf(key_merging_disabled,	"%i", c->key_merging_disabled);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sysfs_printf(expensive_debug_checks,
+		     "%i", c->expensive_debug_checks);
+>>>>>>> v3.18
 =======
 	sysfs_printf(expensive_debug_checks,
 		     "%i", c->expensive_debug_checks);
@@ -825,7 +930,11 @@ STORE(__bch_cache_set)
 
 	if (attr == &sysfs_trigger_gc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bch_queue_gc(c);
+=======
+		wake_up_gc(c);
+>>>>>>> v3.18
 =======
 		wake_up_gc(c);
 >>>>>>> v3.18
@@ -835,7 +944,11 @@ STORE(__bch_cache_set)
 		sc.gfp_mask = GFP_KERNEL;
 		sc.nr_to_scan = strtoul_or_return(buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		c->shrink.shrink(&c->shrink, &sc);
+=======
+		c->shrink.scan_objects(&c->shrink, &sc);
+>>>>>>> v3.18
 =======
 		c->shrink.scan_objects(&c->shrink, &sc);
 >>>>>>> v3.18
@@ -847,7 +960,10 @@ STORE(__bch_cache_set)
 		      c->congested_write_threshold_us);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (attr == &sysfs_errors) {
 		ssize_t v = bch_read_string_list(buf, error_actions);
 
@@ -857,6 +973,9 @@ STORE(__bch_cache_set)
 		c->on_error = v;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (attr == &sysfs_io_error_limit)
 		c->error_limit = strtoul_or_return(buf) << IO_ERROR_SHIFT;
@@ -869,6 +988,10 @@ STORE(__bch_cache_set)
 	sysfs_strtoul(verify,			c->verify);
 	sysfs_strtoul(key_merging_disabled,	c->key_merging_disabled);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sysfs_strtoul(expensive_debug_checks,	c->expensive_debug_checks);
+>>>>>>> v3.18
 =======
 	sysfs_strtoul(expensive_debug_checks,	c->expensive_debug_checks);
 >>>>>>> v3.18
@@ -912,8 +1035,13 @@ static struct attribute *bch_cache_set_files[] = {
 
 	&sysfs_average_key_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&sysfs_dirty_data,
 
+=======
+
+	&sysfs_errors,
+>>>>>>> v3.18
 =======
 
 	&sysfs_errors,
@@ -936,7 +1064,10 @@ static struct attribute *bch_cache_set_internal_files[] = {
 	sysfs_time_stats_attribute_list(btree_sort, ms, us)
 	sysfs_time_stats_attribute_list(btree_read, ms, us)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_time_stats_attribute_list(try_harder, ms, us)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -955,6 +1086,10 @@ static struct attribute *bch_cache_set_internal_files[] = {
 	&sysfs_verify,
 	&sysfs_key_merging_disabled,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&sysfs_expensive_debug_checks,
+>>>>>>> v3.18
 =======
 	&sysfs_expensive_debug_checks,
 >>>>>>> v3.18
@@ -985,9 +1120,12 @@ SHOW(__bch_cache)
 		    atomic_read(&ca->io_errors) >> IO_ERROR_SHIFT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_print(freelist_percent, ca->free.size * 100 /
 		    ((size_t) ca->sb.nbuckets));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (attr == &sysfs_cache_replacement_policy)
@@ -1000,6 +1138,7 @@ SHOW(__bch_cache)
 		{	return *((uint16_t *) r) - *((uint16_t *) l); }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Number of quantiles we compute */
 		const unsigned nq = 31;
 
@@ -1007,12 +1146,17 @@ SHOW(__bch_cache)
 		uint64_t sum = 0;
 		uint16_t q[nq], *p, *cached;
 =======
+=======
+>>>>>>> v3.18
 		struct bucket *b;
 		size_t n = ca->sb.nbuckets, i;
 		size_t unused = 0, available = 0, dirty = 0, meta = 0;
 		uint64_t sum = 0;
 		/* Compute 31 quantiles */
 		uint16_t q[31], *p, *cached;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ssize_t ret;
 
@@ -1022,7 +1166,10 @@ SHOW(__bch_cache)
 
 		mutex_lock(&ca->set->bucket_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		for_each_bucket(b, ca) {
 			if (!GC_SECTORS_USED(b))
 				unused++;
@@ -1034,6 +1181,9 @@ SHOW(__bch_cache)
 				meta++;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (i = ca->sb.first_bucket; i < n; i++)
 			p[i] = ca->buckets[i].prio;
@@ -1050,10 +1200,14 @@ SHOW(__bch_cache)
 		while (cached < p + n &&
 		       *cached == BTREE_PRIO)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			cached++;
 
 		btree = cached - p;
 		n -= btree;
+=======
+			cached++, n--;
+>>>>>>> v3.18
 =======
 			cached++, n--;
 >>>>>>> v3.18
@@ -1064,6 +1218,7 @@ SHOW(__bch_cache)
 		if (n)
 			do_div(sum, n);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (i = 0; i < nq; i++)
 			q[i] = INITIAL_PRIO - cached[n * (i + 1) / (nq + 1)];
@@ -1086,6 +1241,8 @@ SHOW(__bch_cache)
 
 		buf[PAGE_SIZE - 1] = '\0';
 =======
+=======
+>>>>>>> v3.18
 		for (i = 0; i < ARRAY_SIZE(q); i++)
 			q[i] = INITIAL_PRIO - cached[n * (i + 1) /
 				(ARRAY_SIZE(q) + 1)];
@@ -1113,6 +1270,9 @@ SHOW(__bch_cache)
 
 		ret += scnprintf(buf + ret, PAGE_SIZE - ret, "]\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return ret;
 	}
@@ -1153,6 +1313,7 @@ STORE(__bch_cache)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (attr == &sysfs_freelist_percent) {
 		DECLARE_FIFO(long, free);
 		long i;
@@ -1181,6 +1342,8 @@ STORE(__bch_cache)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	if (attr == &sysfs_clear_stats) {
 		atomic_long_set(&ca->sectors_written, 0);
 		atomic_long_set(&ca->btree_sectors_written, 0);
@@ -1205,7 +1368,10 @@ static struct attribute *bch_cache_files[] = {
 	&sysfs_io_errors,
 	&sysfs_clear_stats,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&sysfs_freelist_percent,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	&sysfs_cache_replacement_policy,

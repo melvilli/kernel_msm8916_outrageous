@@ -17,8 +17,13 @@
 
 #define PRCM_ACLK_MGT		(0x004)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PRCM_SVACLK_MGT		(0x008)
 #define PRCM_SIACLK_MGT		(0x00C)
+=======
+#define PRCM_SVAMMCSPCLK_MGT	(0x008)
+#define PRCM_SIAMMDSPCLK_MGT	(0x00C)
+>>>>>>> v3.18
 =======
 #define PRCM_SVAMMCSPCLK_MGT	(0x008)
 #define PRCM_SIAMMDSPCLK_MGT	(0x00C)

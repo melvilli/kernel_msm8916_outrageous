@@ -18,7 +18,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/input-polldev.h>
@@ -132,7 +135,11 @@ static int sgi_buttons_probe(struct platform_device *pdev)
 
 	bdev->poll_dev = poll_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, bdev);
+=======
+	platform_set_drvdata(pdev, bdev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, bdev);
 >>>>>>> v3.18
@@ -147,7 +154,10 @@ static int sgi_buttons_probe(struct platform_device *pdev)
 	input_free_polled_device(poll_dev);
 	kfree(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return error;
@@ -156,8 +166,12 @@ static int sgi_buttons_probe(struct platform_device *pdev)
 static int sgi_buttons_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *dev = &pdev->dev;
 	struct buttons_dev *bdev = dev_get_drvdata(dev);
+=======
+	struct buttons_dev *bdev = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct buttons_dev *bdev = platform_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -166,7 +180,10 @@ static int sgi_buttons_remove(struct platform_device *pdev)
 	input_free_polled_device(bdev->poll_dev);
 	kfree(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

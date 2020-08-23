@@ -21,9 +21,14 @@ af-rxrpc-y := \
 	ar-transport.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ifeq ($(CONFIG_PROC_FS),y)
 af-rxrpc-y += ar-proc.o
 endif
+=======
+af-rxrpc-$(CONFIG_PROC_FS) += ar-proc.o
+af-rxrpc-$(CONFIG_SYSCTL) += sysctl.o
+>>>>>>> v3.18
 =======
 af-rxrpc-$(CONFIG_PROC_FS) += ar-proc.o
 af-rxrpc-$(CONFIG_SYSCTL) += sysctl.o

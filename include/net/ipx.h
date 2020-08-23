@@ -124,7 +124,11 @@ extern rwlock_t ipx_routes_lock;
 
 extern struct list_head ipx_interfaces;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct ipx_interface *ipx_interfaces_head(void);
+=======
+struct ipx_interface *ipx_interfaces_head(void);
+>>>>>>> v3.18
 =======
 struct ipx_interface *ipx_interfaces_head(void);
 >>>>>>> v3.18
@@ -133,17 +137,23 @@ extern spinlock_t ipx_interfaces_lock;
 extern struct ipx_interface *ipx_primary_net;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ipx_proc_init(void);
 extern void ipx_proc_exit(void);
 
 extern const char *ipx_frame_name(__be16);
 extern const char *ipx_device_name(struct ipx_interface *intrfc);
 =======
+=======
+>>>>>>> v3.18
 int ipx_proc_init(void);
 void ipx_proc_exit(void);
 
 const char *ipx_frame_name(__be16);
 const char *ipx_device_name(struct ipx_interface *intrfc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static __inline__ void ipxitf_hold(struct ipx_interface *intrfc)
@@ -152,8 +162,11 @@ static __inline__ void ipxitf_hold(struct ipx_interface *intrfc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ipxitf_down(struct ipx_interface *intrfc);
 =======
+=======
+>>>>>>> v3.18
 void ipxitf_down(struct ipx_interface *intrfc);
 struct ipx_interface *ipxitf_find_using_net(__be32 net);
 int ipxitf_send(struct ipx_interface *intrfc, struct sk_buff *skb, char *node);
@@ -166,6 +179,9 @@ int ipxrtr_route_packet(struct sock *sk, struct sockaddr_ipx *usipx,
 int ipxrtr_route_skb(struct sk_buff *skb);
 struct ipx_route *ipxrtr_lookup(__be32 net);
 int ipxrtr_ioctl(unsigned int cmd, void __user *arg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static __inline__ void ipxitf_put(struct ipx_interface *intrfc)

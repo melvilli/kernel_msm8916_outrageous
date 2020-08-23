@@ -12,6 +12,7 @@ fork. So if you have any comments or updates for this file, please try
 to update the original English file first.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Last Updated: 2011/03/31
 ==================================
 これは、
@@ -21,6 +22,8 @@ linux-2.6.38/Documentation/HOWTO
 翻訳団体： JF プロジェクト < http://www.linux.or.jp/JF/ >
 翻訳日： 2011/3/28
 =======
+=======
+>>>>>>> v3.18
 Last Updated: 2013/07/19
 ==================================
 これは、
@@ -29,6 +32,9 @@ linux-3.10/Documentation/HOWTO
 
 翻訳団体： JF プロジェクト < http://linuxjf.sourceforge.jp/ >
 翻訳日： 2013/7/19
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 翻訳者： Tsugikazu Shibata <tshibata at ab dot jp dot nec dot com>
 校正者： 松倉さん <nbh--mats at nifty dot com>
@@ -161,7 +167,11 @@ linux-api@ver.kernel.org に送ることを勧めます。
 
 	"The Perfect Patch"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		http://userweb.kernel.org/~akpm/stuff/tpp.txt
+=======
+		http://www.ozlabs.org/~akpm/stuff/tpp.txt
+>>>>>>> v3.18
 =======
 		http://www.ozlabs.org/~akpm/stuff/tpp.txt
 >>>>>>> v3.18
@@ -261,7 +271,11 @@ Linux カーネルソースツリーの中に含まれる、きれいにし、�
 できます。この最新の素晴しいカーネルコードのリポジトリは以下で見つかり
 ます-
 <<<<<<< HEAD
+<<<<<<< HEAD
 	http://sosdg.org/~qiyong/lxr/
+=======
+	http://lxr.linux.no/+trees
+>>>>>>> v3.18
 =======
 	http://lxr.linux.no/+trees
 >>>>>>> v3.18
@@ -272,6 +286,7 @@ Linux カーネルソースツリーの中に含まれる、きれいにし、�
 Linux カーネルの開発プロセスは現在幾つかの異なるメインカーネル「ブラン
 チ」と多数のサブシステム毎のカーネルブランチから構成されます。
 これらのブランチとは-
+<<<<<<< HEAD
 <<<<<<< HEAD
   - メインの 2.6.x カーネルツリー
   - 2.6.x.y -stable カーネルツリー
@@ -285,6 +300,8 @@ Linux カーネルの開発プロセスは現在幾つかの異なるメイン�
 2.6.x カーネルは Linus Torvalds によってメンテナンスされ、kernel.org
 の pub/linux/kernel/v2.6/ ディレクトリに存在します。この開発プロセスは
 =======
+=======
+>>>>>>> v3.18
   - メインの 3.x カーネルツリー
   - 3.x.y -stable カーネルツリー
   - 3.x -git カーネルパッチ
@@ -296,6 +313,9 @@ Linux カーネルの開発プロセスは現在幾つかの異なるメイン�
 
 3.x カーネルは Linus Torvalds によってメンテナンスされ、kernel.org
 の pub/linux/kernel/v3.x/ ディレクトリに存在します。この開発プロセスは
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 以下のとおり-
 
@@ -304,7 +324,11 @@ Linux カーネルの開発プロセスは現在幾つかの異なるメイン�
     このような差分は通常 -next カーネルに数週間含まれてきたパッチです。
     大きな変更は git(カーネルのソース管理ツール、詳細は
 <<<<<<< HEAD
+<<<<<<< HEAD
     http://git-scm.com/  参照) を使って送るのが好ましいやり方ですが、パッ
+=======
+    http://git-scm.com/ 参照) を使って送るのが好ましいやり方ですが、パッ
+>>>>>>> v3.18
 =======
     http://git-scm.com/ 参照) を使って送るのが好ましいやり方ですが、パッ
 >>>>>>> v3.18
@@ -340,17 +364,23 @@ Andrew Morton が Linux-kernel メーリングリストにカーネルリリー�
   れた計画によってリリースされるものではないからです。」
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2.6.x.y -stable カーネルツリー
 ---------------------------
 
 バージョン番号が4つの数字に分かれているカーネルは -stable カーネルです。
 これには、2.6.x カーネルで見つかったセキュリティ問題や重大な後戻りに対
 =======
+=======
+>>>>>>> v3.18
 3.x.y -stable カーネルツリー
 ---------------------------
 
 バージョン番号が3つの数字に分かれているカーネルは -stable カーネルです。
 これには、3.x カーネルで見つかったセキュリティ問題や重大な後戻りに対
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 する比較的小さい重要な修正が含まれます。
 
@@ -358,15 +388,21 @@ Andrew Morton が Linux-kernel メーリングリストにカーネルリリー�
 最新の安定したカーネルを使いたいユーザに推奨するブランチです。
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 もし、2.6.x.y カーネルが存在しない場合には、番号が一番大きい 2.6.x が
 最新の安定版カーネルです。
 
 2.6.x.y は "stable" チーム <stable@vger.kernel.org> でメンテされており、必
 =======
+=======
+>>>>>>> v3.18
 もし、3.x.y カーネルが存在しない場合には、番号が一番大きい 3.x が
 最新の安定版カーネルです。
 
 3.x.y は "stable" チーム <stable@vger.kernel.org> でメンテされており、必
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 要に応じてリリースされます。通常のリリース期間は 2週間毎ですが、差し迫っ
 た問題がなければもう少し長くなることもあります。セキュリティ関連の問題
@@ -377,7 +413,11 @@ Andrew Morton が Linux-kernel メーリングリストにカーネルリリー�
 リースプロセスがどう動くかが記述されています。
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2.6.x -git パッチ
+=======
+3.x -git パッチ
+>>>>>>> v3.18
 =======
 3.x -git パッチ
 >>>>>>> v3.18
@@ -415,6 +455,7 @@ quilt シリーズとして公開されているパッチキューも使われ�
 http://patchwork.kernel.org/ でリストされています。
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 統合テストのための 2.6.x -next カーネルツリー
 ---------------------------------------------
 
@@ -424,6 +465,8 @@ http://patchwork.kernel.org/ でリストされています。
 ポジトリが存在します-
        http://git.kernel.org/?p=linux/kernel/git/sfr/linux-next.git
 =======
+=======
+>>>>>>> v3.18
 統合テストのための 3.x -next カーネルツリー
 ---------------------------------------------
 
@@ -432,6 +475,9 @@ http://patchwork.kernel.org/ でリストされています。
 に全サブシステムツリーからほぼ毎日プルされてできる特別なテスト用のリ
 ポジトリが存在します-
        http://git.kernel.org/?p=linux/kernel/git/next/linux-next.git
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
        http://linux.f-seidel.de/linux-next/pmwiki/
 
@@ -690,7 +736,11 @@ Linux カーネルコミュニティは、一度に大量のコードの塊を�
 ントの ChangeLog セクションを見てください-
   "The Perfect Patch"
 <<<<<<< HEAD
+<<<<<<< HEAD
       http://userweb.kernel.org/~akpm/stuff/tpp.txt
+=======
+      http://www.ozlabs.org/~akpm/stuff/tpp.txt
+>>>>>>> v3.18
 =======
       http://www.ozlabs.org/~akpm/stuff/tpp.txt
 >>>>>>> v3.18

@@ -30,6 +30,7 @@ This document contains the following sections:
 	 (7) Data file registration
 	 (8) Miscellaneous object registration
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 (9) Setting the data file size
 	(10) Page alloc/read/write
 	(11) Page uncaching
@@ -40,6 +41,8 @@ This document contains the following sections:
 	(16) Data file invalidation
 	(17) FS-Cache specific page flags.
 =======
+=======
+>>>>>>> v3.18
  	 (9) Setting the data file size
 	(10) Page alloc/read/write
 	(11) Page uncaching
@@ -50,6 +53,9 @@ This document contains the following sections:
 	(16) Index invalidation
 	(17) Data file invalidation
 	(18) FS-Cache specific page flags.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -348,7 +354,12 @@ the path to the file:
 	fscache_acquire_cookie(struct fscache_cookie *parent,
 			       const struct fscache_object_def *def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       void *netfs_data);
+=======
+			       void *netfs_data,
+			       bool enable);
+>>>>>>> v3.18
 =======
 			       void *netfs_data,
 			       bool enable);
@@ -369,11 +380,17 @@ may be created in several different caches independently at different times.
 This is all handled transparently, and the netfs doesn't see any of it.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 A cookie will be created in the disabled state if enabled is false.  A cookie
 must be enabled to do anything with it.  A disabled cookie can be enabled by
 calling fscache_enable_cookie() (see below).
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 For example, with AFS, a cell would be added to the primary index.  This index
 entry would have a dependent inode containing a volume location index for the
@@ -383,7 +400,11 @@ volume mappings within this cell:
 		fscache_acquire_cookie(afs_cache_netfs.primary_index,
 				       &afs_cell_cache_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       cell);
+=======
+				       cell, true);
+>>>>>>> v3.18
 =======
 				       cell, true);
 >>>>>>> v3.18
@@ -396,7 +417,11 @@ combination:
 		fscache_acquire_cookie(cell->cache,
 				       &afs_vlocation_cache_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       vlocation);
+=======
+				       vlocation, true);
+>>>>>>> v3.18
 =======
 				       vlocation, true);
 >>>>>>> v3.18
@@ -408,7 +433,11 @@ that index, creating another index for vnodes (AFS inode equivalents):
 		fscache_acquire_cookie(vlocation->cache,
 				       &afs_volume_cache_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       volume);
+=======
+				       volume, true);
+>>>>>>> v3.18
 =======
 				       volume, true);
 >>>>>>> v3.18
@@ -426,7 +455,11 @@ the object definition should be something other than index type.
 		fscache_acquire_cookie(volume->cache,
 				       &afs_vnode_cache_object_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       vnode);
+=======
+				       vnode, true);
+>>>>>>> v3.18
 =======
 				       vnode, true);
 >>>>>>> v3.18
@@ -446,7 +479,11 @@ it would be some other type of object such as a data file.
 		fscache_acquire_cookie(vnode->cache,
 				       &afs_xattr_cache_object_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       xattr);
+=======
+				       xattr, true);
+>>>>>>> v3.18
 =======
 				       xattr, true);
 >>>>>>> v3.18
@@ -479,7 +516,11 @@ to the caller.  The attribute adjustment excludes read and write operations.
 
 =====================
 <<<<<<< HEAD
+<<<<<<< HEAD
 PAGE READ/ALLOC/WRITE
+=======
+PAGE ALLOC/READ/WRITE
+>>>>>>> v3.18
 =======
 PAGE ALLOC/READ/WRITE
 >>>>>>> v3.18
@@ -549,7 +590,11 @@ Else if there's a copy of the page resident in the cache:
 
      If an error occurs, it should be assumed that the page contains no usable
 <<<<<<< HEAD
+<<<<<<< HEAD
      data.
+=======
+     data.  fscache_readpages_cancel() may need to be called.
+>>>>>>> v3.18
 =======
      data.  fscache_readpages_cancel() may need to be called.
 >>>>>>> v3.18
@@ -677,7 +722,10 @@ been marked appropriately and will need uncaching.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 CANCELLATION OF UNREAD PAGES
 ----------------------------
 
@@ -694,6 +742,9 @@ fscache_read_or_alloc_pages().  Every page in the pages list will be examined
 and any that have PG_fscache set will be uncached.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ==============
 PAGE UNCACHING
@@ -763,10 +814,13 @@ error is returned.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ==========================
 INDEX AND DATA FILE UPDATE
 ==========================
 =======
+=======
+>>>>>>> v3.18
 ===============================
 INDEX AND DATA FILE CONSISTENCY
 ===============================
@@ -779,6 +833,9 @@ cache, the following function can be called:
 This will call back to the netfs to check whether the auxiliary data associated
 with a cookie is correct.  It returns 0 if it is and -ESTALE if it isn't; it
 may also return -ENOMEM and -ERESTARTSYS.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 To request an update of the index data for an index or other object, the
@@ -796,7 +853,10 @@ data blocks are added to a data file object.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 =================
 COOKIE ENABLEMENT
 =================
@@ -838,6 +898,9 @@ All possible failures are handled internally.  The cookie will only be marked
 as enabled if provisional backing objects are allocated.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ===============================
 MISCELLANEOUS COOKIE OPERATIONS
@@ -885,7 +948,11 @@ To get rid of a cookie, this function should be called.
 
 	void fscache_relinquish_cookie(struct fscache_cookie *cookie,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       int retire);
+=======
+				       bool retire);
+>>>>>>> v3.18
 =======
 				       bool retire);
 >>>>>>> v3.18

@@ -41,7 +41,10 @@
 #include <linux/miscdevice.h>
 #include <linux/fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/ioport.h>
@@ -213,7 +216,11 @@ static int mtx1_wdt_probe(struct platform_device *pdev)
 
 	mtx1_wdt_device.gpio = pdev->resource[0].start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = gpio_request_one(mtx1_wdt_device.gpio,
+=======
+	ret = devm_gpio_request_one(&pdev->dev, mtx1_wdt_device.gpio,
+>>>>>>> v3.18
 =======
 	ret = devm_gpio_request_one(&pdev->dev, mtx1_wdt_device.gpio,
 >>>>>>> v3.18
@@ -249,7 +256,10 @@ static int mtx1_wdt_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_free(mtx1_wdt_device.gpio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	misc_deregister(&mtx1_wdt_misc);
@@ -269,7 +279,10 @@ MODULE_AUTHOR("Michael Stickel, Florian Fainelli");
 MODULE_DESCRIPTION("Driver for the MTX-1 watchdog");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_ALIAS("platform:mtx1-wdt");

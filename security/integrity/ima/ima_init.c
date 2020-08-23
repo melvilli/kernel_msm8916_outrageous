@@ -15,6 +15,12 @@
  *             initialization and cleanup functions
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -25,6 +31,10 @@
 #include <linux/slab.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/hash_info.h>
+>>>>>>> v3.18
 =======
 #include <crypto/hash_info.h>
 >>>>>>> v3.18
@@ -49,6 +59,7 @@ int ima_used_chip;
  * a different value.) Violations add a zero entry to the measurement
  * list and extend the aggregate PCR value with ff...ff's.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init ima_add_boot_aggregate(void)
 {
@@ -82,6 +93,8 @@ err_out:
 	integrity_audit_msg(AUDIT_INTEGRITY_PCR, NULL, boot_aggregate_name, op,
 			    audit_cause, result, 0);
 =======
+=======
+>>>>>>> v3.18
 static int __init ima_add_boot_aggregate(void)
 {
 	static const char op[] = "add_boot_aggregate";
@@ -128,13 +141,20 @@ err_out:
 	integrity_audit_msg(AUDIT_INTEGRITY_PCR, NULL, boot_aggregate_name, op,
 			    audit_cause, result, 0);
 	return result;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int __init ima_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 pcr_i[IMA_DIGEST_SIZE];
+=======
+	u8 pcr_i[TPM_DIGEST_SIZE];
+>>>>>>> v3.18
 =======
 	u8 pcr_i[TPM_DIGEST_SIZE];
 >>>>>>> v3.18
@@ -147,21 +167,30 @@ int __init ima_init(void)
 
 	if (!ima_used_chip)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_info("IMA: No TPM chip found, activating TPM-bypass!\n");
 =======
+=======
+>>>>>>> v3.18
 		pr_info("No TPM chip found, activating TPM-bypass!\n");
 
 	rc = ima_init_keyring(INTEGRITY_KEYRING_IMA);
 	if (rc)
 		return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = ima_init_crypto();
 	if (rc)
 		return rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ima_add_boot_aggregate();	/* boot aggregate must be first entry */
 =======
+=======
+>>>>>>> v3.18
 	rc = ima_init_template();
 	if (rc != 0)
 		return rc;
@@ -170,6 +199,9 @@ int __init ima_init(void)
 	if (rc != 0)
 		return rc;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ima_init_policy();
 

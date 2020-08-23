@@ -114,6 +114,11 @@ static int wl18xx_scan_send(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 				 req->ie,
 				 req->ie_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				 NULL,
+				 0,
+>>>>>>> v3.18
 =======
 				 NULL,
 				 0,
@@ -134,6 +139,11 @@ static int wl18xx_scan_send(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 				 req->ie,
 				 req->ie_len,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				 NULL,
+				 0,
+>>>>>>> v3.18
 =======
 				 NULL,
 				 0,
@@ -172,7 +182,11 @@ int wl18xx_scan_sched_scan_config(struct wl1271 *wl,
 				  struct wl12xx_vif *wlvif,
 				  struct cfg80211_sched_scan_request *req,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct ieee80211_sched_scan_ies *ies)
+=======
+				  struct ieee80211_scan_ies *ies)
+>>>>>>> v3.18
 =======
 				  struct ieee80211_scan_ies *ies)
 >>>>>>> v3.18
@@ -252,13 +266,19 @@ int wl18xx_scan_sched_scan_config(struct wl1271 *wl,
 				 req->ssids ? req->ssids[0].ssid : NULL,
 				 req->ssids ? req->ssids[0].ssid_len : 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 ies->ie[band],
 				 ies->len[band],
 =======
+=======
+>>>>>>> v3.18
 				 ies->ies[band],
 				 ies->len[band],
 				 ies->common_ies,
 				 ies->common_ie_len,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 true);
 		if (ret < 0) {
@@ -274,13 +294,19 @@ int wl18xx_scan_sched_scan_config(struct wl1271 *wl,
 				 req->ssids ? req->ssids[0].ssid : NULL,
 				 req->ssids ? req->ssids[0].ssid_len : 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 ies->ie[band],
 				 ies->len[band],
 =======
+=======
+>>>>>>> v3.18
 				 ies->ies[band],
 				 ies->len[band],
 				 ies->common_ies,
 				 ies->common_ie_len,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 true);
 		if (ret < 0) {
@@ -306,7 +332,11 @@ out:
 int wl18xx_sched_scan_start(struct wl1271 *wl, struct wl12xx_vif *wlvif,
 			    struct cfg80211_sched_scan_request *req,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct ieee80211_sched_scan_ies *ies)
+=======
+			    struct ieee80211_scan_ies *ies)
+>>>>>>> v3.18
 =======
 			    struct ieee80211_scan_ies *ies)
 >>>>>>> v3.18

@@ -193,7 +193,10 @@ static inline struct dentry *debugfs_create_x32(const char *name, umode_t mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct dentry *debugfs_create_x64(const char *name, umode_t mode,
 						struct dentry *parent,
 						u64 *value)
@@ -201,6 +204,9 @@ static inline struct dentry *debugfs_create_x64(const char *name, umode_t mode,
 	return ERR_PTR(-ENODEV);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct dentry *debugfs_create_size_t(const char *name, umode_t mode,
 				     struct dentry *parent,
@@ -210,13 +216,19 @@ static inline struct dentry *debugfs_create_size_t(const char *name, umode_t mod
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline struct dentry *debugfs_create_atomic_t(const char *name, umode_t mode,
 				     struct dentry *parent, atomic_t *value)
 {
 	return ERR_PTR(-ENODEV);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct dentry *debugfs_create_bool(const char *name, umode_t mode,
 						 struct dentry *parent,
@@ -240,13 +252,19 @@ static inline struct dentry *debugfs_create_regset32(const char *name,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int debugfs_print_regs32(struct seq_file *s, const struct debugfs_reg32 *regs,
 			 int nregs, void __iomem *base, char *prefix)
 {
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool debugfs_initialized(void)
 {

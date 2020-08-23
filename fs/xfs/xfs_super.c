@@ -18,6 +18,7 @@
 
 #include "xfs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_inum.h"
 #include "xfs_trans.h"
@@ -48,6 +49,8 @@
 #include "xfs_filestream.h"
 #include "xfs_da_btree.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -69,6 +72,9 @@
 #include "xfs_log_priv.h"
 #include "xfs_da_btree.h"
 #include "xfs_dir2.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_extfree_item.h"
 #include "xfs_mru_cache.h"
@@ -76,12 +82,18 @@
 #include "xfs_icache.h"
 #include "xfs_trace.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_icreate_item.h"
 #include "xfs_dinode.h"
 #include "xfs_filestream.h"
 #include "xfs_quota.h"
 #include "xfs_sysfs.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/namei.h>
@@ -99,12 +111,18 @@ static kmem_zone_t *xfs_ioend_zone;
 mempool_t *xfs_ioend_pool;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct kset *xfs_kset;		/* top-level xfs sysfs dir */
 #ifdef DEBUG
 static struct xfs_kobj xfs_dbg_kobj;	/* global debug sysfs attrs */
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MNTOPT_LOGBUFS	"logbufs"	/* number of XFS log buffers */
 #define MNTOPT_LOGBSIZE	"logbsize"	/* size of XFS log buffers */
@@ -230,7 +248,11 @@ xfs_parseargs(
 	mp->m_fsname = kstrndup(sb->s_id, MAXNAMELEN, GFP_KERNEL);
 	if (!mp->m_fsname)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ENOMEM;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -253,9 +275,12 @@ xfs_parseargs(
 	mp->m_flags |= XFS_MOUNT_BARRIER;
 	mp->m_flags |= XFS_MOUNT_COMPAT_IOSIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !XFS_BIG_INUMS
 	mp->m_flags |= XFS_MOUNT_SMALL_INUMS;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -279,35 +304,48 @@ xfs_parseargs(
 				xfs_warn(mp, "%s option requires an argument",
 					this_char);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return EINVAL;
 			}
 			if (kstrtoint(value, 10, &mp->m_logbufs))
 				return EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			if (kstrtoint(value, 10, &mp->m_logbufs))
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (!strcmp(this_char, MNTOPT_LOGBSIZE)) {
 			if (!value || !*value) {
 				xfs_warn(mp, "%s option requires an argument",
 					this_char);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return EINVAL;
 			}
 			if (suffix_kstrtoint(value, 10, &mp->m_logbsize))
 				return EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			if (suffix_kstrtoint(value, 10, &mp->m_logbsize))
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (!strcmp(this_char, MNTOPT_LOGDEV)) {
 			if (!value || !*value) {
 				xfs_warn(mp, "%s option requires an argument",
 					this_char);
+<<<<<<< HEAD
 <<<<<<< HEAD
 				return EINVAL;
 			}
@@ -319,6 +357,8 @@ xfs_parseargs(
 				this_char);
 			return EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			mp->m_logname = kstrndup(value, MAXNAMELEN, GFP_KERNEL);
@@ -328,11 +368,15 @@ xfs_parseargs(
 			xfs_warn(mp, "%s option not allowed on this system",
 				this_char);
 			return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (!strcmp(this_char, MNTOPT_RTDEV)) {
 			if (!value || !*value) {
 				xfs_warn(mp, "%s option requires an argument",
 					this_char);
+<<<<<<< HEAD
 <<<<<<< HEAD
 				return EINVAL;
 			}
@@ -340,26 +384,37 @@ xfs_parseargs(
 			if (!mp->m_rtname)
 				return ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			mp->m_rtname = kstrndup(value, MAXNAMELEN, GFP_KERNEL);
 			if (!mp->m_rtname)
 				return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (!strcmp(this_char, MNTOPT_BIOSIZE)) {
 			if (!value || !*value) {
 				xfs_warn(mp, "%s option requires an argument",
 					this_char);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return EINVAL;
 			}
 			if (kstrtoint(value, 10, &iosize))
 				return EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			if (kstrtoint(value, 10, &iosize))
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			iosizelog = ffs(iosize) - 1;
 		} else if (!strcmp(this_char, MNTOPT_ALLOCSIZE)) {
@@ -367,15 +422,21 @@ xfs_parseargs(
 				xfs_warn(mp, "%s option requires an argument",
 					this_char);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return EINVAL;
 			}
 			if (suffix_kstrtoint(value, 10, &iosize))
 				return EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			if (suffix_kstrtoint(value, 10, &iosize))
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			iosizelog = ffs(iosize) - 1;
 		} else if (!strcmp(this_char, MNTOPT_GRPID) ||
@@ -397,41 +458,56 @@ xfs_parseargs(
 				xfs_warn(mp, "%s option requires an argument",
 					this_char);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return EINVAL;
 			}
 			if (kstrtoint(value, 10, &dsunit))
 				return EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			if (kstrtoint(value, 10, &dsunit))
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (!strcmp(this_char, MNTOPT_SWIDTH)) {
 			if (!value || !*value) {
 				xfs_warn(mp, "%s option requires an argument",
 					this_char);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return EINVAL;
 			}
 			if (kstrtoint(value, 10, &dswidth))
 				return EINVAL;
 =======
+=======
+>>>>>>> v3.18
 				return -EINVAL;
 			}
 			if (kstrtoint(value, 10, &dswidth))
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (!strcmp(this_char, MNTOPT_32BITINODE)) {
 			mp->m_flags |= XFS_MOUNT_SMALL_INUMS;
 		} else if (!strcmp(this_char, MNTOPT_64BITINODE)) {
 			mp->m_flags &= ~XFS_MOUNT_SMALL_INUMS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if !XFS_BIG_INUMS
 			xfs_warn(mp, "%s option not allowed on this system",
 				this_char);
 			return EINVAL;
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		} else if (!strcmp(this_char, MNTOPT_NOUUID)) {
@@ -472,6 +548,7 @@ xfs_parseargs(
 			   !strcmp(this_char, MNTOPT_PRJQUOTA)) {
 			mp->m_qflags |= (XFS_PQUOTA_ACCT | XFS_PQUOTA_ACTIVE |
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 XFS_OQUOTA_ENFD);
 		} else if (!strcmp(this_char, MNTOPT_PQUOTANOENF)) {
 			mp->m_qflags |= (XFS_PQUOTA_ACCT | XFS_PQUOTA_ACTIVE);
@@ -484,6 +561,8 @@ xfs_parseargs(
 			mp->m_qflags |= (XFS_GQUOTA_ACCT | XFS_GQUOTA_ACTIVE);
 			mp->m_qflags &= ~XFS_OQUOTA_ENFD;
 =======
+=======
+>>>>>>> v3.18
 					 XFS_PQUOTA_ENFD);
 		} else if (!strcmp(this_char, MNTOPT_PQUOTANOENF)) {
 			mp->m_qflags |= (XFS_PQUOTA_ACCT | XFS_PQUOTA_ACTIVE);
@@ -495,6 +574,9 @@ xfs_parseargs(
 		} else if (!strcmp(this_char, MNTOPT_GQUOTANOENF)) {
 			mp->m_qflags |= (XFS_GQUOTA_ACCT | XFS_GQUOTA_ACTIVE);
 			mp->m_qflags &= ~XFS_GQUOTA_ENFD;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else if (!strcmp(this_char, MNTOPT_DELAYLOG)) {
 			xfs_warn(mp,
@@ -521,7 +603,11 @@ xfs_parseargs(
 		} else {
 			xfs_warn(mp, "unknown mount option [%s].", this_char);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return EINVAL;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -535,7 +621,11 @@ xfs_parseargs(
 	    !(mp->m_flags & XFS_MOUNT_RDONLY)) {
 		xfs_warn(mp, "no-recovery mounts must be read-only.");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return EINVAL;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -545,7 +635,11 @@ xfs_parseargs(
 		xfs_warn(mp,
 	"sunit and swidth options incompatible with the noalign option");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return EINVAL;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -554,6 +648,7 @@ xfs_parseargs(
 #ifndef CONFIG_XFS_QUOTA
 	if (XFS_IS_QUOTA_RUNNING(mp)) {
 		xfs_warn(mp, "quota support not available in this kernel.");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return EINVAL;
 	}
@@ -569,6 +664,8 @@ xfs_parseargs(
 		xfs_warn(mp, "sunit and swidth must be specified together");
 		return EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 #endif
@@ -576,6 +673,9 @@ xfs_parseargs(
 	if ((dsunit && !dswidth) || (!dsunit && dswidth)) {
 		xfs_warn(mp, "sunit and swidth must be specified together");
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -584,17 +684,23 @@ xfs_parseargs(
 	"stripe width (%d) must be a multiple of the stripe unit (%d)",
 			dswidth, dsunit);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return EINVAL;
 	}
 
 done:
 	if (!(mp->m_flags & XFS_MOUNT_NOALIGN)) {
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
 done:
 	if (dsunit && !(mp->m_flags & XFS_MOUNT_NOALIGN)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * At this point the superblock has not been read
@@ -603,6 +709,7 @@ done:
 		 * these to FSBs.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dsunit) {
 			mp->m_dalign = dsunit;
 			mp->m_flags |= XFS_MOUNT_RETERR;
@@ -610,6 +717,10 @@ done:
 
 		if (dswidth)
 			mp->m_swidth = dswidth;
+=======
+		mp->m_dalign = dsunit;
+		mp->m_swidth = dswidth;
+>>>>>>> v3.18
 =======
 		mp->m_dalign = dsunit;
 		mp->m_swidth = dswidth;
@@ -623,7 +734,11 @@ done:
 		xfs_warn(mp, "invalid logbufs value: %d [not %d-%d]",
 			mp->m_logbufs, XLOG_MIN_ICLOGS, XLOG_MAX_ICLOGS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EINVAL);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -637,7 +752,11 @@ done:
 			"invalid logbufsize: %d [not 16k,32k,64k,128k or 256k]",
 			mp->m_logbsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EINVAL);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -650,7 +769,11 @@ done:
 				iosizelog, XFS_MIN_IO_LOG,
 				XFS_MAX_IO_LOG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -734,6 +857,7 @@ xfs_showargs(
 		seq_puts(m, "," MNTOPT_UQUOTANOENF);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Either project or group quotas can be active, not both */
 
 	if (mp->m_qflags & XFS_PQUOTA_ACCT) {
@@ -744,6 +868,8 @@ xfs_showargs(
 	} else if (mp->m_qflags & XFS_GQUOTA_ACCT) {
 		if (mp->m_qflags & XFS_OQUOTA_ENFD)
 =======
+=======
+>>>>>>> v3.18
 	if (mp->m_qflags & XFS_PQUOTA_ACCT) {
 		if (mp->m_qflags & XFS_PQUOTA_ENFD)
 			seq_puts(m, "," MNTOPT_PRJQUOTA);
@@ -752,6 +878,9 @@ xfs_showargs(
 	}
 	if (mp->m_qflags & XFS_GQUOTA_ACCT) {
 		if (mp->m_qflags & XFS_GQUOTA_ENFD)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			seq_puts(m, "," MNTOPT_GRPQUOTA);
 		else
@@ -798,9 +927,12 @@ xfs_max_file_offset(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 xfs_agnumber_t
 xfs_set_inode32(struct xfs_mount *mp)
 =======
+=======
+>>>>>>> v3.18
 /*
  * xfs_set_inode32() and xfs_set_inode64() are passed an agcount
  * because in the growfs case, mp->m_sb.sb_agcount is not updated
@@ -808,6 +940,9 @@ xfs_set_inode32(struct xfs_mount *mp)
  */
 xfs_agnumber_t
 xfs_set_inode32(struct xfs_mount *mp, xfs_agnumber_t agcount)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	xfs_agnumber_t	index = 0;
@@ -815,8 +950,13 @@ xfs_set_inode32(struct xfs_mount *mp, xfs_agnumber_t agcount)
 	xfs_sb_t	*sbp = &mp->m_sb;
 	xfs_agnumber_t	max_metadata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_agino_t	agino =	XFS_OFFBNO_TO_AGINO(mp, sbp->sb_agblocks -1, 0);
 	xfs_ino_t	ino = XFS_AGINO_TO_INO(mp, sbp->sb_agcount -1, agino);
+=======
+	xfs_agino_t	agino;
+	xfs_ino_t	ino;
+>>>>>>> v3.18
 =======
 	xfs_agino_t	agino;
 	xfs_ino_t	ino;
@@ -836,17 +976,23 @@ xfs_set_inode32(struct xfs_mount *mp, xfs_agnumber_t agcount)
 		max_metadata = icount;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max_metadata = sbp->sb_agcount;
 	}
 
 	for (index = 0; index < sbp->sb_agcount; index++) {
 =======
+=======
+>>>>>>> v3.18
 		max_metadata = agcount;
 	}
 
 	agino =	XFS_OFFBNO_TO_AGINO(mp, sbp->sb_agblocks - 1, 0);
 
 	for (index = 0; index < agcount; index++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ino = XFS_AGINO_TO_INO(mp, index, agino);
 
@@ -873,17 +1019,23 @@ xfs_set_inode32(struct xfs_mount *mp, xfs_agnumber_t agcount)
 
 xfs_agnumber_t
 <<<<<<< HEAD
+<<<<<<< HEAD
 xfs_set_inode64(struct xfs_mount *mp)
 {
 	xfs_agnumber_t index = 0;
 
 	for (index = 0; index < mp->m_sb.sb_agcount; index++) {
 =======
+=======
+>>>>>>> v3.18
 xfs_set_inode64(struct xfs_mount *mp, xfs_agnumber_t agcount)
 {
 	xfs_agnumber_t index = 0;
 
 	for (index = 0; index < agcount; index++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct xfs_perag	*pag;
 
@@ -919,7 +1071,11 @@ xfs_blkdev_get(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -error;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -993,7 +1149,11 @@ xfs_open_devices(
 			xfs_warn(mp,
 	"Cannot mount filesystem with identical rtdev and ddev/logdev.");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = EINVAL;
+=======
+			error = -EINVAL;
+>>>>>>> v3.18
 =======
 			error = -EINVAL;
 >>>>>>> v3.18
@@ -1005,8 +1165,13 @@ xfs_open_devices(
 	 * Setup xfs_mount buffer target pointers
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = ENOMEM;
 	mp->m_ddev_targp = xfs_alloc_buftarg(mp, ddev, 0, mp->m_fsname);
+=======
+	error = -ENOMEM;
+	mp->m_ddev_targp = xfs_alloc_buftarg(mp, ddev);
+>>>>>>> v3.18
 =======
 	error = -ENOMEM;
 	mp->m_ddev_targp = xfs_alloc_buftarg(mp, ddev);
@@ -1016,8 +1181,12 @@ xfs_open_devices(
 
 	if (rtdev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mp->m_rtdev_targp = xfs_alloc_buftarg(mp, rtdev, 1,
 							mp->m_fsname);
+=======
+		mp->m_rtdev_targp = xfs_alloc_buftarg(mp, rtdev);
+>>>>>>> v3.18
 =======
 		mp->m_rtdev_targp = xfs_alloc_buftarg(mp, rtdev);
 >>>>>>> v3.18
@@ -1027,8 +1196,12 @@ xfs_open_devices(
 
 	if (logdev && logdev != ddev) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mp->m_logdev_targp = xfs_alloc_buftarg(mp, logdev, 1,
 							mp->m_fsname);
+=======
+		mp->m_logdev_targp = xfs_alloc_buftarg(mp, logdev);
+>>>>>>> v3.18
 =======
 		mp->m_logdev_targp = xfs_alloc_buftarg(mp, logdev);
 >>>>>>> v3.18
@@ -1065,8 +1238,12 @@ xfs_setup_devices(
 	int			error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_setsize_buftarg(mp->m_ddev_targp, mp->m_sb.sb_blocksize,
 				    mp->m_sb.sb_sectsize);
+=======
+	error = xfs_setsize_buftarg(mp->m_ddev_targp, mp->m_sb.sb_sectsize);
+>>>>>>> v3.18
 =======
 	error = xfs_setsize_buftarg(mp->m_ddev_targp, mp->m_sb.sb_sectsize);
 >>>>>>> v3.18
@@ -1080,7 +1257,10 @@ xfs_setup_devices(
 			log_sector_size = mp->m_sb.sb_logsectsize;
 		error = xfs_setsize_buftarg(mp->m_logdev_targp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    mp->m_sb.sb_blocksize,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					    log_sector_size);
@@ -1090,7 +1270,10 @@ xfs_setup_devices(
 	if (mp->m_rtdev_targp) {
 		error = xfs_setsize_buftarg(mp->m_rtdev_targp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    mp->m_sb.sb_blocksize,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					    mp->m_sb.sb_sectsize);
@@ -1107,7 +1290,11 @@ xfs_init_mount_workqueues(
 {
 	mp->m_data_workqueue = alloc_workqueue("xfs-data/%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WQ_MEM_RECLAIM, 0, mp->m_fsname);
+=======
+			WQ_MEM_RECLAIM|WQ_FREEZABLE, 0, mp->m_fsname);
+>>>>>>> v3.18
 =======
 			WQ_MEM_RECLAIM|WQ_FREEZABLE, 0, mp->m_fsname);
 >>>>>>> v3.18
@@ -1116,7 +1303,11 @@ xfs_init_mount_workqueues(
 
 	mp->m_unwritten_workqueue = alloc_workqueue("xfs-conv/%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WQ_MEM_RECLAIM, 0, mp->m_fsname);
+=======
+			WQ_MEM_RECLAIM|WQ_FREEZABLE, 0, mp->m_fsname);
+>>>>>>> v3.18
 =======
 			WQ_MEM_RECLAIM|WQ_FREEZABLE, 0, mp->m_fsname);
 >>>>>>> v3.18
@@ -1125,7 +1316,11 @@ xfs_init_mount_workqueues(
 
 	mp->m_cil_workqueue = alloc_workqueue("xfs-cil/%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WQ_MEM_RECLAIM, 0, mp->m_fsname);
+=======
+			WQ_MEM_RECLAIM|WQ_FREEZABLE, 0, mp->m_fsname);
+>>>>>>> v3.18
 =======
 			WQ_MEM_RECLAIM|WQ_FREEZABLE, 0, mp->m_fsname);
 >>>>>>> v3.18
@@ -1134,7 +1329,11 @@ xfs_init_mount_workqueues(
 
 	mp->m_reclaim_workqueue = alloc_workqueue("xfs-reclaim/%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WQ_NON_REENTRANT, 0, mp->m_fsname);
+=======
+			WQ_FREEZABLE, 0, mp->m_fsname);
+>>>>>>> v3.18
 =======
 			WQ_FREEZABLE, 0, mp->m_fsname);
 >>>>>>> v3.18
@@ -1143,7 +1342,11 @@ xfs_init_mount_workqueues(
 
 	mp->m_log_workqueue = alloc_workqueue("xfs-log/%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WQ_NON_REENTRANT, 0, mp->m_fsname);
+=======
+			WQ_FREEZABLE, 0, mp->m_fsname);
+>>>>>>> v3.18
 =======
 			WQ_FREEZABLE, 0, mp->m_fsname);
 >>>>>>> v3.18
@@ -1152,7 +1355,11 @@ xfs_init_mount_workqueues(
 
 	mp->m_eofblocks_workqueue = alloc_workqueue("xfs-eofblocks/%s",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WQ_NON_REENTRANT, 0, mp->m_fsname);
+=======
+			WQ_FREEZABLE, 0, mp->m_fsname);
+>>>>>>> v3.18
 =======
 			WQ_FREEZABLE, 0, mp->m_fsname);
 >>>>>>> v3.18
@@ -1229,10 +1436,13 @@ xfs_fs_destroy_inode(
 	XFS_STATS_INC(vn_reclaim);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* bad inode, get out here ASAP */
 	if (is_bad_inode(inode))
 		goto out_reclaim;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ASSERT(XFS_FORCED_SHUTDOWN(ip->i_mount) || ip->i_delayed_blks == 0);
@@ -1251,7 +1461,10 @@ xfs_fs_destroy_inode(
 	 * reclaim tear down all inodes.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_reclaim:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xfs_inode_set_reclaim_tag(ip);
@@ -1295,7 +1508,11 @@ xfs_fs_evict_inode(
 	trace_xfs_evict_inode(ip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	truncate_inode_pages(&inode->i_data, 0);
+=======
+	truncate_inode_pages_final(&inode->i_data);
+>>>>>>> v3.18
 =======
 	truncate_inode_pages_final(&inode->i_data);
 >>>>>>> v3.18
@@ -1418,8 +1635,13 @@ xfs_fs_statfs(
 
 	if ((ip->i_d.di_flags & XFS_DIFLAG_PROJINHERIT) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ((mp->m_qflags & (XFS_PQUOTA_ACCT|XFS_OQUOTA_ENFD))) ==
 			      (XFS_PQUOTA_ACCT|XFS_OQUOTA_ENFD))
+=======
+	    ((mp->m_qflags & (XFS_PQUOTA_ACCT|XFS_PQUOTA_ENFD))) ==
+			      (XFS_PQUOTA_ACCT|XFS_PQUOTA_ENFD))
+>>>>>>> v3.18
 =======
 	    ((mp->m_qflags & (XFS_PQUOTA_ACCT|XFS_PQUOTA_ENFD))) ==
 			      (XFS_PQUOTA_ACCT|XFS_PQUOTA_ENFD))
@@ -1463,7 +1685,11 @@ xfs_restore_resvblks(struct xfs_mount *mp)
  * it is started again when appropriate.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -1505,6 +1731,10 @@ xfs_fs_remount(
 {
 	struct xfs_mount	*mp = XFS_M(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xfs_sb_t		*sbp = &mp->m_sb;
+>>>>>>> v3.18
 =======
 	xfs_sb_t		*sbp = &mp->m_sb;
 >>>>>>> v3.18
@@ -1513,6 +1743,10 @@ xfs_fs_remount(
 	int			error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -1532,15 +1766,21 @@ xfs_fs_remount(
 			break;
 		case Opt_inode64:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mp->m_maxagi = xfs_set_inode64(mp);
 			break;
 		case Opt_inode32:
 			mp->m_maxagi = xfs_set_inode32(mp);
 =======
+=======
+>>>>>>> v3.18
 			mp->m_maxagi = xfs_set_inode64(mp, sbp->sb_agcount);
 			break;
 		case Opt_inode32:
 			mp->m_maxagi = xfs_set_inode32(mp, sbp->sb_agcount);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		default:
@@ -1563,7 +1803,11 @@ xfs_fs_remount(
 #if 0
 			xfs_info(mp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"mount option \"%s\" not supported for remount\n", p);
+=======
+		"mount option \"%s\" not supported for remount", p);
+>>>>>>> v3.18
 =======
 		"mount option \"%s\" not supported for remount", p);
 >>>>>>> v3.18
@@ -1630,7 +1874,11 @@ xfs_fs_freeze(
 	xfs_save_resvblks(mp);
 	xfs_quiesce_attr(mp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -xfs_fs_log_dummy(mp);
+=======
+	return xfs_fs_log_dummy(mp);
+>>>>>>> v3.18
 =======
 	return xfs_fs_log_dummy(mp);
 >>>>>>> v3.18
@@ -1653,7 +1901,11 @@ xfs_fs_show_options(
 	struct dentry		*root)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -xfs_showargs(XFS_M(root->d_sb), m);
+=======
+	return xfs_showargs(XFS_M(root->d_sb), m);
+>>>>>>> v3.18
 =======
 	return xfs_showargs(XFS_M(root->d_sb), m);
 >>>>>>> v3.18
@@ -1679,7 +1931,11 @@ xfs_finish_flags(
 			xfs_warn(mp,
 		"logbuf size must be greater than or equal to log stripe size");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -1690,7 +1946,11 @@ xfs_finish_flags(
 			xfs_warn(mp,
 		"logbuf size for version 1 logs must be 16K or 32K");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(EINVAL);
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -1706,7 +1966,11 @@ xfs_finish_flags(
 "Cannot mount a V5 filesystem as %s. %s is always enabled for V5 filesystems.",
 			MNTOPT_NOATTR2, MNTOPT_ATTR2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EINVAL);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -1727,8 +1991,11 @@ xfs_finish_flags(
 		xfs_warn(mp,
 			"cannot mount a read-only filesystem as read-write");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(EROFS);
 =======
+=======
+>>>>>>> v3.18
 		return -EROFS;
 	}
 
@@ -1738,6 +2005,9 @@ xfs_finish_flags(
 		xfs_warn(mp,
 		  "Super block does not support project and group quota together");
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1753,7 +2023,11 @@ xfs_fs_fill_super(
 	struct inode		*root;
 	struct xfs_mount	*mp = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			flags = 0, error = ENOMEM;
+=======
+	int			flags = 0, error = -ENOMEM;
+>>>>>>> v3.18
 =======
 	int			flags = 0, error = -ENOMEM;
 >>>>>>> v3.18
@@ -1768,6 +2042,10 @@ xfs_fs_fill_super(
 	INIT_DELAYED_WORK(&mp->m_reclaim_work, xfs_reclaim_worker);
 	INIT_DELAYED_WORK(&mp->m_eofblocks_work, xfs_eofblocks_worker);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mp->m_kobj.kobject.kset = xfs_kset;
+>>>>>>> v3.18
 =======
 	mp->m_kobj.kobject.kset = xfs_kset;
 >>>>>>> v3.18
@@ -1831,11 +2109,17 @@ xfs_fs_fill_super(
 	set_posix_acl_flag(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* version 5 superblocks support inode version counters. */
 	if (XFS_SB_VERSION_NUM(&mp->m_sb) == XFS_SB_VERSION_5)
 		sb->s_flags |= MS_I_VERSION;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = xfs_mountfs(mp);
 	if (error)
@@ -1843,6 +2127,7 @@ xfs_fs_fill_super(
 
 	root = igrab(VFS_I(mp->m_rootip));
 	if (!root) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		error = ENOENT;
 		goto out_unmount;
@@ -1852,12 +2137,19 @@ xfs_fs_fill_super(
 =======
 		error = -ENOENT;
 >>>>>>> v3.18
+=======
+		error = -ENOENT;
+>>>>>>> v3.18
 		goto out_unmount;
 	}
 	sb->s_root = d_make_root(root);
 	if (!sb->s_root) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = ENOMEM;
+=======
+		error = -ENOMEM;
+>>>>>>> v3.18
 =======
 		error = -ENOMEM;
 >>>>>>> v3.18
@@ -1881,7 +2173,11 @@ out_destroy_workqueues:
 	kfree(mp);
  out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -error;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -1903,19 +2199,26 @@ xfs_fs_mount(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 xfs_fs_nr_cached_objects(
 	struct super_block	*sb)
 =======
+=======
+>>>>>>> v3.18
 static long
 xfs_fs_nr_cached_objects(
 	struct super_block	*sb,
 	int			nid)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return xfs_reclaim_inodes_count(XFS_M(sb));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void
 xfs_fs_free_cached_objects(
@@ -1924,6 +2227,8 @@ xfs_fs_free_cached_objects(
 {
 	xfs_reclaim_inodes_nr(XFS_M(sb), nr_to_scan);
 =======
+=======
+>>>>>>> v3.18
 static long
 xfs_fs_free_cached_objects(
 	struct super_block	*sb,
@@ -1931,6 +2236,9 @@ xfs_fs_free_cached_objects(
 	int			nid)
 {
 	return xfs_reclaim_inodes_nr(XFS_M(sb), nr_to_scan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2041,10 +2349,13 @@ xfs_init_zones(void)
 	if (!xfs_ili_zone)
 		goto out_destroy_inode_zone;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	xfs_icreate_zone = kmem_zone_init(sizeof(struct xfs_icreate_item),
 					"xfs_icr");
 	if (!xfs_icreate_zone)
@@ -2054,6 +2365,9 @@ xfs_init_zones(void)
 
  out_destroy_ili_zone:
 	kmem_zone_destroy(xfs_ili_zone);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out_destroy_inode_zone:
 	kmem_zone_destroy(xfs_inode_zone);
@@ -2094,6 +2408,10 @@ xfs_destroy_zones(void)
 	 */
 	rcu_barrier();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kmem_zone_destroy(xfs_icreate_zone);
+>>>>>>> v3.18
 =======
 	kmem_zone_destroy(xfs_icreate_zone);
 >>>>>>> v3.18
@@ -2124,7 +2442,12 @@ xfs_init_workqueues(void)
 	 * max_active value for this workqueue.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_alloc_wq = alloc_workqueue("xfsalloc", WQ_MEM_RECLAIM, 0);
+=======
+	xfs_alloc_wq = alloc_workqueue("xfsalloc",
+			WQ_MEM_RECLAIM|WQ_FREEZABLE, 0);
+>>>>>>> v3.18
 =======
 	xfs_alloc_wq = alloc_workqueue("xfsalloc",
 			WQ_MEM_RECLAIM|WQ_FREEZABLE, 0);
@@ -2164,6 +2487,7 @@ init_xfs_fs(void)
 		goto out_destroy_wq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_filestream_init();
 	if (error)
 		goto out_mru_cache_uninit;
@@ -2171,6 +2495,11 @@ init_xfs_fs(void)
 	error = xfs_buf_init();
 	if (error)
 		goto out_filestream_uninit;
+=======
+	error = xfs_buf_init();
+	if (error)
+		goto out_mru_cache_uninit;
+>>>>>>> v3.18
 =======
 	error = xfs_buf_init();
 	if (error)
@@ -2186,10 +2515,13 @@ init_xfs_fs(void)
 		goto out_cleanup_procfs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_qm_init();
 	if (error)
 		goto out_sysctl_unregister;
 =======
+=======
+>>>>>>> v3.18
 	xfs_kset = kset_create_and_add("xfs", NULL, fs_kobj);
 	if (!xfs_kset) {
 		error = -ENOMEM;
@@ -2206,6 +2538,9 @@ init_xfs_fs(void)
 	error = xfs_qm_init();
 	if (error)
 		goto out_remove_kobj;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	error = register_filesystem(&xfs_fs_type);
@@ -2216,13 +2551,19 @@ init_xfs_fs(void)
  out_qm_exit:
 	xfs_qm_exit();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  out_remove_kobj:
 #ifdef DEBUG
 	xfs_sysfs_del(&xfs_dbg_kobj);
  out_kset_unregister:
 #endif
 	kset_unregister(xfs_kset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  out_sysctl_unregister:
 	xfs_sysctl_unregister();
@@ -2231,8 +2572,11 @@ init_xfs_fs(void)
  out_buf_terminate:
 	xfs_buf_terminate();
 <<<<<<< HEAD
+<<<<<<< HEAD
  out_filestream_uninit:
 	xfs_filestream_uninit();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  out_mru_cache_uninit:
@@ -2251,11 +2595,14 @@ exit_xfs_fs(void)
 	xfs_qm_exit();
 	unregister_filesystem(&xfs_fs_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_sysctl_unregister();
 	xfs_cleanup_procfs();
 	xfs_buf_terminate();
 	xfs_filestream_uninit();
 =======
+=======
+>>>>>>> v3.18
 #ifdef DEBUG
 	xfs_sysfs_del(&xfs_dbg_kobj);
 #endif
@@ -2263,6 +2610,9 @@ exit_xfs_fs(void)
 	xfs_sysctl_unregister();
 	xfs_cleanup_procfs();
 	xfs_buf_terminate();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xfs_mru_cache_uninit();
 	xfs_destroy_workqueues();

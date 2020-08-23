@@ -19,6 +19,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "pstore: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "pstore: " fmt
 
@@ -32,6 +37,10 @@
 #include <linux/module.h>
 #include <linux/pstore.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/zlib.h>
+>>>>>>> v3.18
 =======
 #include <linux/zlib.h>
 >>>>>>> v3.18
@@ -75,7 +84,10 @@ struct pstore_info *psinfo;
 static char *backend;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Compression parameters */
 #define COMPR_LEVEL 6
 #define WINDOW_BITS 12
@@ -85,6 +97,9 @@ static struct z_stream_s stream;
 static char *big_oops_buf;
 static size_t big_oops_buf_sz;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* How much of the console log to snapshot */
 static unsigned long kmsg_bytes = 10240;
@@ -139,7 +154,10 @@ bool pstore_cannot_block_path(enum kmsg_dump_reason reason)
 EXPORT_SYMBOL_GPL(pstore_cannot_block_path);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Derived from logfs_compress() */
 static int pstore_compress(const void *in, void *out, size_t inlen,
 							size_t outlen)
@@ -274,6 +292,9 @@ static size_t copy_kmsg_to_buffer(int hsize, size_t len)
 	return total_len;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * callback from kmsg_dump. (s2,l2) has the most recently
@@ -307,6 +328,7 @@ static void pstore_dump(struct kmsg_dumper *dumper,
 		unsigned long size;
 		int hsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size_t len;
 
 		dst = psinfo->buf;
@@ -324,6 +346,8 @@ static void pstore_dump(struct kmsg_dumper *dumper,
 
 		total += hsize + len;
 =======
+=======
+>>>>>>> v3.18
 		int zipped_len = -1;
 		size_t len;
 		bool compressed;
@@ -370,6 +394,9 @@ static void pstore_dump(struct kmsg_dumper *dumper,
 			pstore_new_entry = 1;
 
 		total += total_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		part++;
 	}
@@ -404,7 +431,11 @@ static void pstore_console_write(struct console *con, const char *s, unsigned c)
 		}
 		memcpy(psinfo->buf, s, c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		psinfo->write(PSTORE_TYPE_CONSOLE, 0, &id, 0, 0, c, psinfo);
+=======
+		psinfo->write(PSTORE_TYPE_CONSOLE, 0, &id, 0, 0, 0, c, psinfo);
+>>>>>>> v3.18
 =======
 		psinfo->write(PSTORE_TYPE_CONSOLE, 0, &id, 0, 0, 0, c, psinfo);
 >>>>>>> v3.18
@@ -433,15 +464,21 @@ static int pstore_write_compat(enum pstore_type_id type,
 			       enum kmsg_dump_reason reason,
 			       u64 *id, unsigned int part, int count,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       size_t size, struct pstore_info *psi)
 {
 	return psi->write_buf(type, reason, id, part, psinfo->buf, size, psi);
 =======
+=======
+>>>>>>> v3.18
 			       bool compressed, size_t size,
 			       struct pstore_info *psi)
 {
 	return psi->write_buf(type, reason, id, part, psinfo->buf, compressed,
 			     size, psi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -459,6 +496,12 @@ int pstore_register(struct pstore_info *psi)
 	struct module *owner = psi->owner;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (backend && strcmp(backend, psi->name))
+		return -EPERM;
+
+>>>>>>> v3.18
 =======
 	if (backend && strcmp(backend, psi->name))
 		return -EPERM;
@@ -471,11 +514,14 @@ int pstore_register(struct pstore_info *psi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (backend && strcmp(backend, psi->name)) {
 		spin_unlock(&pstore_lock);
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!psi->write)
@@ -490,6 +536,11 @@ int pstore_register(struct pstore_info *psi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	allocate_buf_for_compression();
+
+>>>>>>> v3.18
 =======
 	allocate_buf_for_compression();
 
@@ -499,15 +550,21 @@ int pstore_register(struct pstore_info *psi)
 
 	kmsg_dump_register(&pstore_dumper);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pstore_register_console();
 	pstore_register_ftrace();
 	pstore_register_pmsg();
 =======
+=======
+>>>>>>> v3.18
 
 	if ((psi->flags & PSTORE_FLAGS_FRAGILE) == 0) {
 		pstore_register_console();
 		pstore_register_ftrace();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pstore_update_ms >= 0) {
@@ -517,6 +574,11 @@ int pstore_register(struct pstore_info *psi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pr_info("Registered %s as persistent store backend\n", psi->name);
+
+>>>>>>> v3.18
 =======
 	pr_info("Registered %s as persistent store backend\n", psi->name);
 
@@ -542,6 +604,11 @@ void pstore_get_records(int quiet)
 	struct timespec		time;
 	int			failed = 0, rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			compressed;
+	int			unzipped_len = -1;
+>>>>>>> v3.18
 =======
 	bool			compressed;
 	int			unzipped_len = -1;
@@ -555,12 +622,15 @@ void pstore_get_records(int quiet)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((size = psi->read(&id, &type, &count, &time, &buf, psi)) > 0) {
 		rc = pstore_mkfile(type, psi->name, id, count, buf,
 				  (size_t)size, time, psi);
 		kfree(buf);
 		buf = NULL;
 =======
+=======
+>>>>>>> v3.18
 	while ((size = psi->read(&id, &type, &count, &time, &buf, &compressed,
 				psi)) > 0) {
 		if (compressed && (type == PSTORE_TYPE_DMESG)) {
@@ -588,6 +658,9 @@ void pstore_get_records(int quiet)
 			buf = NULL;
 		} else
 			unzipped_len = -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (rc && (rc != -EEXIST || !quiet))
 			failed++;
@@ -599,8 +672,13 @@ out:
 
 	if (failed)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "pstore: failed to load %d record(s) from '%s'\n",
 		       failed, psi->name);
+=======
+		pr_warn("failed to load %d record(s) from '%s'\n",
+			failed, psi->name);
+>>>>>>> v3.18
 =======
 		pr_warn("failed to load %d record(s) from '%s'\n",
 			failed, psi->name);

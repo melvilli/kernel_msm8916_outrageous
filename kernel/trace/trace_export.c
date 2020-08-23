@@ -174,12 +174,15 @@ struct ftrace_event_class __refdata event_class_ftrace_##call = {	\
 									\
 struct ftrace_event_call __used event_##call = {			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name			= #call,				\
 	.event.type		= etype,				\
 	.class			= &event_class_ftrace_##call,		\
 	.print_fmt		= print,				\
 	.flags			= TRACE_EVENT_FL_IGNORE_ENABLE,		\
 =======
+=======
+>>>>>>> v3.18
 	.class			= &event_class_ftrace_##call,		\
 	{								\
 		.name			= #call,			\
@@ -187,6 +190,9 @@ struct ftrace_event_call __used event_##call = {			\
 	.event.type		= etype,				\
 	.print_fmt		= print,				\
 	.flags			= TRACE_EVENT_FL_IGNORE_ENABLE | TRACE_EVENT_FL_USE_CALL_FILTER, \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };									\
 struct ftrace_event_call __used						\

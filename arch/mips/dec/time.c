@@ -126,8 +126,14 @@ int rtc_mips_set_mmss(unsigned long nowtime)
 void __init plat_time_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 start, end;
 	int i = HZ / 10;
+=======
+	int ioasic_clock = 0;
+	u32 start, end;
+	int i = HZ / 8;
+>>>>>>> v3.18
 =======
 	int ioasic_clock = 0;
 	u32 start, end;
@@ -138,13 +144,19 @@ void __init plat_time_init(void)
 	ds1287_set_base_clock(HZ);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_counter) {
 =======
+=======
+>>>>>>> v3.18
 	/* On some I/O ASIC systems we have the I/O ASIC's counter.  */
 	if (IOASIC)
 		ioasic_clock = dec_ioasic_clocksource_init() == 0;
 	if (cpu_has_counter) {
 		ds1287_timer_state();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		while (!ds1287_timer_state())
 			;
@@ -158,6 +170,7 @@ void __init plat_time_init(void)
 		end = read_c0_count();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mips_hpt_frequency = (end - start) * 10;
 		printk(KERN_INFO "MIPS counter frequency %dHz\n",
 			mips_hpt_frequency);
@@ -165,6 +178,8 @@ void __init plat_time_init(void)
 		/* For pre-R4k systems we use the I/O ASIC's counter.  */
 		dec_ioasic_clocksource_init();
 =======
+=======
+>>>>>>> v3.18
 		mips_hpt_frequency = (end - start) * 8;
 		printk(KERN_INFO "MIPS counter frequency %dHz\n",
 			mips_hpt_frequency);
@@ -183,6 +198,9 @@ void __init plat_time_init(void)
 			mips_hpt_frequency = 0;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ds1287_clockevent_init(dec_interrupt[DEC_IRQ_RTC]);

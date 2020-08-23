@@ -216,7 +216,11 @@ static unsigned long kfifo_copy_from_user(struct __kfifo *fifo,
 	 */
 	smp_wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*copied = len - ret;
+=======
+	*copied = len - ret * esize;
+>>>>>>> v3.18
 =======
 	*copied = len - ret * esize;
 >>>>>>> v3.18
@@ -280,7 +284,11 @@ static unsigned long kfifo_copy_to_user(struct __kfifo *fifo, void __user *to,
 	 */
 	smp_wmb();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*copied = len - ret;
+=======
+	*copied = len - ret * esize;
+>>>>>>> v3.18
 =======
 	*copied = len - ret * esize;
 >>>>>>> v3.18
@@ -570,8 +578,12 @@ unsigned int __kfifo_dma_in_prepare_r(struct __kfifo *fifo,
 	struct scatterlist *sgl, int nents, unsigned int len, size_t recsize)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nents)
 		BUG();
+=======
+	BUG_ON(!nents);
+>>>>>>> v3.18
 =======
 	BUG_ON(!nents);
 >>>>>>> v3.18
@@ -598,8 +610,12 @@ unsigned int __kfifo_dma_out_prepare_r(struct __kfifo *fifo,
 	struct scatterlist *sgl, int nents, unsigned int len, size_t recsize)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!nents)
 		BUG();
+=======
+	BUG_ON(!nents);
+>>>>>>> v3.18
 =======
 	BUG_ON(!nents);
 >>>>>>> v3.18

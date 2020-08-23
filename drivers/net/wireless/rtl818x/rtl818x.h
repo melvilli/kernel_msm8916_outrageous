@@ -3,15 +3,21 @@
  *
  * Copyright 2007 Michael Wu <flamingice@sourmilk.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2007 Andrea Merello <andreamrl@tiscali.it>
  *
  * Based on the r8187 driver, which is:
  * Copyright 2005 Andrea Merello <andreamrl@tiscali.it>, et al.
 =======
+=======
+>>>>>>> v3.18
  * Copyright 2007 Andrea Merello <andrea.merello@gmail.com>
  *
  * Based on the r8187 driver, which is:
  * Copyright 2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -23,6 +29,7 @@
 #define RTL818X_H
 
 struct rtl818x_csr {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8	MAC[6];
 	u8	reserved_0[2];
@@ -49,6 +56,8 @@ struct rtl818x_csr {
 	__le16	INT_MASK;
 	__le16	INT_STATUS;
 =======
+=======
+>>>>>>> v3.18
 
 	u8	MAC[6];
 	u8	reserved_0[2];
@@ -125,6 +134,9 @@ struct rtl818x_csr {
 		__le32	INT_STATUS_SE; /* 0x3c */
 	} __packed;
 /* status bits for rtl8187 and rtl8180/8185 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RTL818X_INT_RX_OK		(1 <<  0)
 #define RTL818X_INT_RX_ERR		(1 <<  1)
@@ -143,8 +155,11 @@ struct rtl818x_csr {
 #define RTL818X_INT_TIME_OUT		(1 << 14)
 #define RTL818X_INT_TX_FO		(1 << 15)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__le32	TX_CONF;
 =======
+=======
+>>>>>>> v3.18
 /* status bits for rtl8187se */
 #define RTL818X_INT_SE_TIMER3		(1 <<  0)
 #define RTL818X_INT_SE_TIMER2		(1 <<  1)
@@ -173,6 +188,9 @@ struct rtl818x_csr {
 #define RTL818X_INT_SE_BK_DMA		(1 << 24)
 #define RTL818X_INT_SE_TMGD_OK		(1 << 30)
 	__le32	TX_CONF; /* 0x40 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RTL818X_TX_CONF_LOOPBACK_MAC	(1 << 17)
 #define RTL818X_TX_CONF_LOOPBACK_CONT	(3 << 17)
@@ -186,6 +204,10 @@ struct rtl818x_csr {
 #define RTL818X_TX_CONF_R8187vD		(5 << 25)
 #define RTL818X_TX_CONF_R8187vD_B	(6 << 25)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RTL818X_TX_CONF_RTL8187SE	(6 << 25)
+>>>>>>> v3.18
 =======
 #define RTL818X_TX_CONF_RTL8187SE	(6 << 25)
 >>>>>>> v3.18
@@ -244,6 +266,7 @@ struct rtl818x_csr {
 	u8	SECURITY;
 	__le32	ANAPARAM2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	reserved_10[12];
 	__le16	BEACON_INTERVAL;
 	__le16	ATIM_WND;
@@ -270,6 +293,8 @@ struct rtl818x_csr {
 #define RTL818X_TX_AGC_CTL_PERPACKET_ANTSEL_SHIFT	(1 << 1)
 #define RTL818X_TX_AGC_CTL_FEEDBACK_ANT			(1 << 2)
 =======
+=======
+>>>>>>> v3.18
 	u8	reserved_10[8];
 	__le32  IMR;		/* 0x6c	- Interrupt mask reg for 8187se */
 #define IMR_TMGDOK      ((1 << 30))
@@ -331,6 +356,9 @@ struct rtl818x_csr {
 #define RTL818X_TX_AGC_CTL_PERPACKET_GAIN	(1 << 0)
 #define RTL818X_TX_AGC_CTL_PERPACKET_ANTSEL	(1 << 1)
 #define RTL818X_TX_AGC_CTL_FEEDBACK_ANT		(1 << 2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8	TX_GAIN_CCK;
 	u8	TX_GAIN_OFDM;
@@ -344,8 +372,13 @@ struct rtl818x_csr {
 	u8	reserved_16[5];
 	u8	CW_CONF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTL818X_CW_CONF_PERPACKET_CW_SHIFT	(1 << 0)
 #define RTL818X_CW_CONF_PERPACKET_RETRY_SHIFT	(1 << 1)
+=======
+#define RTL818X_CW_CONF_PERPACKET_CW	(1 << 0)
+#define RTL818X_CW_CONF_PERPACKET_RETRY	(1 << 1)
+>>>>>>> v3.18
 =======
 #define RTL818X_CW_CONF_PERPACKET_CW	(1 << 0)
 #define RTL818X_CW_CONF_PERPACKET_RETRY	(1 << 1)
@@ -358,7 +391,12 @@ struct rtl818x_csr {
 	u8	CONFIG5;
 	u8	TX_DMA_POLLING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	reserved_18[2];
+=======
+	u8	PHY_PR;
+	u8	reserved_18;
+>>>>>>> v3.18
 =======
 	u8	PHY_PR;
 	u8	reserved_18;
@@ -375,6 +413,7 @@ struct rtl818x_csr {
 	__le16	TID_AC_MAP;
 	u8	reserved_20[4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	ANAPARAM3;
 	u8	reserved_21[5];
 	__le16	FEMR;
@@ -384,6 +423,8 @@ struct rtl818x_csr {
 } __packed;
 
 =======
+=======
+>>>>>>> v3.18
 	union {
 		__le16	ANAPARAM3; /* 0xee */
 		u8	ANAPARAM3A; /* for rtl8187 */
@@ -437,6 +478,9 @@ struct rtl818x_csr {
 #define PI_DATA_REG	REG_ADDR2(0x360)
 #define SI_DATA_REG     REG_ADDR2(0x362)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct rtl818x_rf_ops {
 	char *name;
@@ -444,7 +488,10 @@ struct rtl818x_rf_ops {
 	void (*stop)(struct ieee80211_hw *);
 	void (*set_chan)(struct ieee80211_hw *, struct ieee80211_conf *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*conf_erp)(struct ieee80211_hw *, struct ieee80211_bss_conf *);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 (*calc_rssi)(u8 agc, u8 sq);

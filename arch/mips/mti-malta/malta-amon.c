@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007  MIPS Technologies, Inc.
  *	All rights reserved.
 
@@ -27,6 +28,8 @@
 #include <asm/mips-boards/launch.h>
 #include <asm/mipsmtregs.h>
 =======
+=======
+>>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
  * License.  See the file "COPYING" in the main directory of this archive
  * for more details.
@@ -43,6 +46,9 @@
 #include <asm/mipsmtregs.h>
 #include <asm/mips-boards/launch.h>
 #include <asm/vpe.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int amon_cpu_avail(int cpu)
@@ -68,7 +74,11 @@ int amon_cpu_avail(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void amon_cpu_start(int cpu,
+=======
+int amon_cpu_start(int cpu,
+>>>>>>> v3.18
 =======
 int amon_cpu_start(int cpu,
 >>>>>>> v3.18
@@ -80,15 +90,21 @@ int amon_cpu_start(int cpu,
 
 	if (!amon_cpu_avail(cpu))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
 	if (cpu == smp_processor_id()) {
 		pr_debug("launch: I am cpu%d!\n", cpu);
 		return;
 =======
+=======
+>>>>>>> v3.18
 		return -1;
 	if (cpu == smp_processor_id()) {
 		pr_debug("launch: I am cpu%d!\n", cpu);
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	launch += cpu;
@@ -109,8 +125,11 @@ int amon_cpu_start(int cpu,
 	smp_rmb();	/* Target will be updating flags soon */
 	pr_debug("launch: cpu%d gone!\n", cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -129,4 +148,7 @@ int vpe_run(struct vpe *v)
 	return 0;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

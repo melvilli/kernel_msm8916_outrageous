@@ -3,6 +3,10 @@
 
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 >>>>>>> v3.18
@@ -12,7 +16,11 @@
 /*
  * Kernel pointers have redundant information, so we can use a
 <<<<<<< HEAD
+<<<<<<< HEAD
  * scheme where we can return either an error code or a dentry
+=======
+ * scheme where we can return either an error code or a normal
+>>>>>>> v3.18
 =======
  * scheme where we can return either an error code or a normal
 >>>>>>> v3.18
@@ -33,7 +41,11 @@ static inline void * __must_check ERR_PTR(long error)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline long __must_check PTR_ERR(const void *ptr)
+=======
+static inline long __must_check PTR_ERR(__force const void *ptr)
+>>>>>>> v3.18
 =======
 static inline long __must_check PTR_ERR(__force const void *ptr)
 >>>>>>> v3.18
@@ -42,7 +54,11 @@ static inline long __must_check PTR_ERR(__force const void *ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline long __must_check IS_ERR(const void *ptr)
+=======
+static inline bool __must_check IS_ERR(__force const void *ptr)
+>>>>>>> v3.18
 =======
 static inline bool __must_check IS_ERR(__force const void *ptr)
 >>>>>>> v3.18
@@ -51,7 +67,11 @@ static inline bool __must_check IS_ERR(__force const void *ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline long __must_check IS_ERR_OR_NULL(const void *ptr)
+=======
+static inline bool __must_check IS_ERR_OR_NULL(__force const void *ptr)
+>>>>>>> v3.18
 =======
 static inline bool __must_check IS_ERR_OR_NULL(__force const void *ptr)
 >>>>>>> v3.18
@@ -67,7 +87,11 @@ static inline bool __must_check IS_ERR_OR_NULL(__force const void *ptr)
  * way as to make it clear that's what's going on.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void * __must_check ERR_CAST(const void *ptr)
+=======
+static inline void * __must_check ERR_CAST(__force const void *ptr)
+>>>>>>> v3.18
 =======
 static inline void * __must_check ERR_CAST(__force const void *ptr)
 >>>>>>> v3.18
@@ -77,7 +101,11 @@ static inline void * __must_check ERR_CAST(__force const void *ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int __must_check PTR_RET(const void *ptr)
+=======
+static inline int __must_check PTR_ERR_OR_ZERO(__force const void *ptr)
+>>>>>>> v3.18
 =======
 static inline int __must_check PTR_ERR_OR_ZERO(__force const void *ptr)
 >>>>>>> v3.18
@@ -89,6 +117,12 @@ static inline int __must_check PTR_ERR_OR_ZERO(__force const void *ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Deprecated */
+#define PTR_RET(p) PTR_ERR_OR_ZERO(p)
+
+>>>>>>> v3.18
 =======
 /* Deprecated */
 #define PTR_RET(p) PTR_ERR_OR_ZERO(p)

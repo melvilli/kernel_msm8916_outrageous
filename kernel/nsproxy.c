@@ -30,6 +30,7 @@ static struct kmem_cache *nsproxy_cachep;
 
 struct nsproxy init_nsproxy = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.count	= ATOMIC_INIT(1),
 	.uts_ns	= &init_uts_ns,
 #if defined(CONFIG_POSIX_MQUEUE) || defined(CONFIG_SYSVIPC)
@@ -40,6 +41,8 @@ struct nsproxy init_nsproxy = {
 #ifdef CONFIG_NET
 	.net_ns	= &init_net,
 =======
+=======
+>>>>>>> v3.18
 	.count			= ATOMIC_INIT(1),
 	.uts_ns			= &init_uts_ns,
 #if defined(CONFIG_POSIX_MQUEUE) || defined(CONFIG_SYSVIPC)
@@ -49,6 +52,9 @@ struct nsproxy init_nsproxy = {
 	.pid_ns_for_children	= &init_pid_ns,
 #ifdef CONFIG_NET
 	.net_ns			= &init_net,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };
@@ -98,14 +104,20 @@ static struct nsproxy *create_new_namespaces(unsigned long flags,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_nsp->pid_ns = copy_pid_ns(flags, user_ns, tsk->nsproxy->pid_ns);
 	if (IS_ERR(new_nsp->pid_ns)) {
 		err = PTR_ERR(new_nsp->pid_ns);
 =======
+=======
+>>>>>>> v3.18
 	new_nsp->pid_ns_for_children =
 		copy_pid_ns(flags, user_ns, tsk->nsproxy->pid_ns_for_children);
 	if (IS_ERR(new_nsp->pid_ns_for_children)) {
 		err = PTR_ERR(new_nsp->pid_ns_for_children);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out_pid;
 	}
@@ -120,8 +132,13 @@ static struct nsproxy *create_new_namespaces(unsigned long flags,
 
 out_net:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_nsp->pid_ns)
 		put_pid_ns(new_nsp->pid_ns);
+=======
+	if (new_nsp->pid_ns_for_children)
+		put_pid_ns(new_nsp->pid_ns_for_children);
+>>>>>>> v3.18
 =======
 	if (new_nsp->pid_ns_for_children)
 		put_pid_ns(new_nsp->pid_ns_for_children);
@@ -150,6 +167,7 @@ int copy_namespaces(unsigned long flags, struct task_struct *tsk)
 	struct user_namespace *user_ns = task_cred_xxx(tsk, user_ns);
 	struct nsproxy *new_ns;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0;
 
 	if (!old_ns)
@@ -167,6 +185,8 @@ int copy_namespaces(unsigned long flags, struct task_struct *tsk)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 	if (likely(!(flags & (CLONE_NEWNS | CLONE_NEWUTS | CLONE_NEWIPC |
 			      CLONE_NEWPID | CLONE_NEWNET)))) {
@@ -177,6 +197,9 @@ int copy_namespaces(unsigned long flags, struct task_struct *tsk)
 	if (!ns_capable(user_ns, CAP_SYS_ADMIN))
 		return -EPERM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * CLONE_NEWIPC must detach from the undolist: after switching
@@ -185,6 +208,7 @@ int copy_namespaces(unsigned long flags, struct task_struct *tsk)
 	 * means share undolist with parent, so we must forbid using
 	 * it along with CLONE_NEWIPC.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((flags & CLONE_NEWIPC) && (flags & CLONE_SYSVSEM)) {
 		err = -EINVAL;
@@ -203,6 +227,8 @@ out:
 	put_nsproxy(old_ns);
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	if ((flags & (CLONE_NEWIPC | CLONE_SYSVSEM)) ==
 		(CLONE_NEWIPC | CLONE_SYSVSEM)) 
 		return -EINVAL;
@@ -213,6 +239,9 @@ out:
 
 	tsk->nsproxy = new_ns;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -225,8 +254,13 @@ void free_nsproxy(struct nsproxy *ns)
 	if (ns->ipc_ns)
 		put_ipc_ns(ns->ipc_ns);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ns->pid_ns)
 		put_pid_ns(ns->pid_ns);
+=======
+	if (ns->pid_ns_for_children)
+		put_pid_ns(ns->pid_ns_for_children);
+>>>>>>> v3.18
 =======
 	if (ns->pid_ns_for_children)
 		put_pid_ns(ns->pid_ns_for_children);
@@ -271,6 +305,7 @@ void switch_task_namespaces(struct task_struct *p, struct nsproxy *new)
 	might_sleep();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ns = p->nsproxy;
 
 	rcu_assign_pointer(p->nsproxy, new);
@@ -286,6 +321,8 @@ void switch_task_namespaces(struct task_struct *p, struct nsproxy *new)
 		free_nsproxy(ns);
 	}
 =======
+=======
+>>>>>>> v3.18
 	task_lock(p);
 	ns = p->nsproxy;
 	p->nsproxy = new;
@@ -293,6 +330,9 @@ void switch_task_namespaces(struct task_struct *p, struct nsproxy *new)
 
 	if (ns && atomic_dec_and_test(&ns->count))
 		free_nsproxy(ns);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

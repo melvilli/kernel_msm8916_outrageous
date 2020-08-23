@@ -20,6 +20,11 @@
 #include <media/v4l2-ioctl.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-ctrls.h>
+#include <media/v4l2-event.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-ctrls.h>
 #include <media/v4l2-event.h>
@@ -50,7 +55,12 @@ static int timbradio_vidioc_querycap(struct file *file, void  *priv,
 	strlcpy(v->card, "Timberdale Radio", sizeof(v->card));
 	snprintf(v->bus_info, sizeof(v->bus_info), "platform:"DRIVER_NAME);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v->capabilities = V4L2_CAP_TUNER | V4L2_CAP_RADIO;
+=======
+	v->device_caps = V4L2_CAP_TUNER | V4L2_CAP_RADIO;
+	v->capabilities = v->device_caps | V4L2_CAP_DEVICE_CAPS;
+>>>>>>> v3.18
 =======
 	v->device_caps = V4L2_CAP_TUNER | V4L2_CAP_RADIO;
 	v->capabilities = v->device_caps | V4L2_CAP_DEVICE_CAPS;
@@ -72,6 +82,7 @@ static int timbradio_vidioc_s_tuner(struct file *file, void *priv,
 	return v4l2_subdev_call(tr->sd_tuner, tuner, s_tuner, v);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int timbradio_vidioc_g_input(struct file *filp, void *priv,
 	unsigned int *i)
@@ -103,6 +114,8 @@ static int timbradio_vidioc_s_audio(struct file *file, void *priv,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int timbradio_vidioc_s_frequency(struct file *file, void *priv,
 	const struct v4l2_frequency *f)
 {
@@ -117,6 +130,7 @@ static int timbradio_vidioc_g_frequency(struct file *file, void *priv,
 	return v4l2_subdev_call(tr->sd_tuner, tuner, g_frequency, f);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int timbradio_vidioc_queryctrl(struct file *file, void *priv,
 	struct v4l2_queryctrl *qc)
@@ -141,12 +155,15 @@ static int timbradio_vidioc_s_ctrl(struct file *file, void *priv,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct v4l2_ioctl_ops timbradio_ioctl_ops = {
 	.vidioc_querycap	= timbradio_vidioc_querycap,
 	.vidioc_g_tuner		= timbradio_vidioc_g_tuner,
 	.vidioc_s_tuner		= timbradio_vidioc_s_tuner,
 	.vidioc_g_frequency	= timbradio_vidioc_g_frequency,
 	.vidioc_s_frequency	= timbradio_vidioc_s_frequency,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.vidioc_g_input		= timbradio_vidioc_g_input,
 	.vidioc_s_input		= timbradio_vidioc_s_input,
@@ -160,11 +177,22 @@ static const struct v4l2_ioctl_ops timbradio_ioctl_ops = {
 	.vidioc_subscribe_event = v4l2_ctrl_subscribe_event,
 	.vidioc_unsubscribe_event = v4l2_event_unsubscribe,
 >>>>>>> v3.18
+=======
+	.vidioc_log_status      = v4l2_ctrl_log_status,
+	.vidioc_subscribe_event = v4l2_ctrl_subscribe_event,
+	.vidioc_unsubscribe_event = v4l2_event_unsubscribe,
+>>>>>>> v3.18
 };
 
 static const struct v4l2_file_operations timbradio_fops = {
 	.owner		= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.open		= v4l2_fh_open,
+	.release	= v4l2_fh_release,
+	.poll		= v4l2_ctrl_poll,
+>>>>>>> v3.18
 =======
 	.open		= v4l2_fh_open,
 	.release	= v4l2_fh_release,
@@ -210,7 +238,10 @@ static int timbradio_probe(struct platform_device *pdev)
 	tr->video_dev.v4l2_dev = &tr->v4l2_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	tr->sd_tuner = v4l2_i2c_new_subdev_board(&tr->v4l2_dev,
 		i2c_get_adapter(pdata->i2c_adapter), pdata->tuner, NULL);
 	tr->sd_dsp = v4l2_i2c_new_subdev_board(&tr->v4l2_dev,
@@ -220,6 +251,9 @@ static int timbradio_probe(struct platform_device *pdev)
 
 	tr->v4l2_dev.ctrl_handler = tr->sd_dsp->ctrl_handler;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = video_register_device(&tr->video_dev, VFL_TYPE_RADIO, -1);
 	if (err) {
@@ -234,7 +268,10 @@ static int timbradio_probe(struct platform_device *pdev)
 
 err_video_req:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	video_device_release_empty(&tr->video_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	v4l2_device_unregister(&tr->v4l2_dev);
@@ -250,10 +287,14 @@ static int timbradio_remove(struct platform_device *pdev)
 
 	video_unregister_device(&tr->video_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	video_device_release_empty(&tr->video_dev);
 
 	v4l2_device_unregister(&tr->v4l2_dev);
 
+=======
+	v4l2_device_unregister(&tr->v4l2_dev);
+>>>>>>> v3.18
 =======
 	v4l2_device_unregister(&tr->v4l2_dev);
 >>>>>>> v3.18

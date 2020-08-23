@@ -19,8 +19,11 @@
 static struct option set_opts[] = {
 	{ .name = "perf-bias",	.has_arg = optional_argument,	.flag = NULL,	.val = 'b'},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ .name = "sched-mc",	.has_arg = optional_argument,	.flag = NULL,	.val = 'm'},
 	{ .name = "sched-smt",	.has_arg = optional_argument,	.flag = NULL,	.val = 's'},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ },
@@ -41,8 +44,11 @@ int cmd_info(int argc, char **argv)
 	union {
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int sched_mc:1;
 			int sched_smt:1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			int perf_bias:1;
@@ -56,7 +62,11 @@ int cmd_info(int argc, char **argv)
 
 	/* parameter parsing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((ret = getopt_long(argc, argv, "msb", set_opts, NULL)) != -1) {
+=======
+	while ((ret = getopt_long(argc, argv, "b", set_opts, NULL)) != -1) {
+>>>>>>> v3.18
 =======
 	while ((ret = getopt_long(argc, argv, "b", set_opts, NULL)) != -1) {
 >>>>>>> v3.18
@@ -66,6 +76,7 @@ int cmd_info(int argc, char **argv)
 				print_wrong_arg_exit();
 			params.perf_bias = 1;
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case 'm':
 			if (params.sched_mc)
@@ -77,6 +88,8 @@ int cmd_info(int argc, char **argv)
 				print_wrong_arg_exit();
 			params.sched_smt = 1;
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		default:
@@ -91,6 +104,7 @@ int cmd_info(int argc, char **argv)
 	if (bitmask_isallclear(cpus_chosen))
 		bitmask_setbit(cpus_chosen, 0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (params.sched_mc) {
 		ret = sysfs_get_sched("mc");
@@ -111,6 +125,8 @@ int cmd_info(int argc, char **argv)
 			printf("%d\n", ret);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Add more per cpu options here */
@@ -142,8 +158,14 @@ int cmd_info(int argc, char **argv)
 			ret = msr_intel_get_perf_bias(cpu);
 			if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printf(_("Could not read perf-bias value\n"));
 				break;
+=======
+				fprintf(stderr,
+			_("Could not read perf-bias value[%d]\n"), ret);
+				exit(EXIT_FAILURE);
+>>>>>>> v3.18
 =======
 				fprintf(stderr,
 			_("Could not read perf-bias value[%d]\n"), ret);
@@ -154,7 +176,11 @@ int cmd_info(int argc, char **argv)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

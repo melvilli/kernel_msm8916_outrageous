@@ -113,6 +113,7 @@ static struct regulator_consumer_supply devkit8000_vio_supply[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct panel_generic_dpi_data lcd_panel = {
 	.name			= "innolux_at070tn83",
 	/* gpios filled in code */
@@ -158,6 +159,8 @@ static struct omap_dss_board_info devkit8000_dss_data = {
 	.devices = devkit8000_dss_devices,
 	.default_device = &devkit8000_lcd_device,
 =======
+=======
+>>>>>>> v3.18
 static const struct display_timing devkit8000_lcd_videomode = {
 	.pixelclock	= { 0, 40000000, 0 },
 
@@ -233,6 +236,9 @@ static struct platform_device devkit8000_tv_connector_device = {
 
 static struct omap_dss_board_info devkit8000_dss_data = {
 	.default_display_name = "lcd",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -283,16 +289,22 @@ static int devkit8000_twl_gpio_setup(struct device *dev,
 
 	/* TWL4030_GPIO_MAX + 0 is "LCD_PWREN" (out, active high) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_panel.num_gpios = 1;
 	lcd_panel.gpios[0] = gpio + TWL4030_GPIO_MAX + 0;
 
 	/* gpio + 7 is "DVI_PD" (out, active low) */
 	dvi_panel.power_down_gpio = gpio + 7;
 =======
+=======
+>>>>>>> v3.18
 	devkit8000_lcd_pdata.enable_gpio = gpio + TWL4030_GPIO_MAX + 0;
 
 	/* gpio + 7 is "DVI_PD" (out, active low) */
 	devkit8000_tfp410_pdata.power_down_gpio = gpio + 7;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -308,6 +320,10 @@ static struct twl4030_gpio_platform_data devkit8000_gpio_data = {
 static struct regulator_consumer_supply devkit8000_vpll1_supplies[] = {
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
+>>>>>>> v3.18
 =======
 	REGULATOR_SUPPLY("vdds_dsi", "omapdss_dpi.0"),
 >>>>>>> v3.18
@@ -502,11 +518,17 @@ static struct platform_device *devkit8000_devices[] __initdata = {
 	&keys_gpio,
 	&omap_dm9000_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	&devkit8000_lcd_device,
 	&devkit8000_tfp410_device,
 	&devkit8000_dvi_connector_device,
 	&devkit8000_tv_connector_device,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -709,7 +731,10 @@ MACHINE_START(DEVKIT8000, "OMAP3 Devkit8000")
 	.init_early	= omap35xx_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= devkit8000_init,

@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
  * ########################################################################
@@ -33,6 +37,8 @@
 ieee754sp ieee754sp_mul(ieee754sp x, ieee754sp y)
 {
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -52,6 +58,9 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 	unsigned t;
 	unsigned at;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	COMPXSP;
 	COMPYSP;
@@ -60,7 +69,11 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 	EXPLODEYSP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLEARCX;
+=======
+	ieee754_clearcx();
+>>>>>>> v3.18
 =======
 	ieee754_clearcx();
 >>>>>>> v3.18
@@ -81,8 +94,13 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 	case CLPAIR(IEEE754_CLASS_SNAN, IEEE754_CLASS_DNORM):
 	case CLPAIR(IEEE754_CLASS_SNAN, IEEE754_CLASS_INF):
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754sp_nanxcpt(ieee754sp_indef(), "mul", x, y);
+=======
+		ieee754_setcx(IEEE754_INVALID_OPERATION);
+		return ieee754sp_nanxcpt(ieee754sp_indef());
+>>>>>>> v3.18
 =======
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754sp_nanxcpt(ieee754sp_indef());
@@ -103,6 +121,7 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Infinity handling */
 
 	case CLPAIR(IEEE754_CLASS_INF, IEEE754_CLASS_ZERO):
@@ -110,6 +129,8 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754sp_xcpt(ieee754sp_indef(), "mul", x, y);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Infinity handling
 	 */
@@ -117,6 +138,9 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 	case CLPAIR(IEEE754_CLASS_ZERO, IEEE754_CLASS_INF):
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754sp_indef();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	case CLPAIR(IEEE754_CLASS_NORM, IEEE754_CLASS_INF):
@@ -152,6 +176,7 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 	assert(xm & SP_HIDDEN_BIT);
 	assert(ym & SP_HIDDEN_BIT);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{
 		int re = xe + ye;
@@ -213,6 +238,8 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 		SPNORMRET2(rs, re, rm, "mul", x, y);
 	}
 =======
+=======
+>>>>>>> v3.18
 	re = xe + ye;
 	rs = xs ^ ys;
 
@@ -259,5 +286,8 @@ union ieee754sp ieee754sp_mul(union ieee754sp x, union ieee754sp y)
 	assert(rm & (SP_HIDDEN_BIT << 3));
 
 	return ieee754sp_format(rs, re, rm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

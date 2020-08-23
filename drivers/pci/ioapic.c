@@ -21,7 +21,10 @@
 #include <linux/acpi.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -41,7 +44,11 @@ static int ioapic_probe(struct pci_dev *dev, const struct pci_device_id *ent)
 	struct resource *res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	handle = DEVICE_ACPI_HANDLE(&dev->dev);
+=======
+	handle = ACPI_HANDLE(&dev->dev);
+>>>>>>> v3.18
 =======
 	handle = ACPI_HANDLE(&dev->dev);
 >>>>>>> v3.18
@@ -107,7 +114,11 @@ static void ioapic_remove(struct pci_dev *dev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ioapic_devices) = {
+=======
+static const struct pci_device_id ioapic_devices[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ioapic_devices[] = {
 >>>>>>> v3.18
@@ -129,6 +140,7 @@ static int __init ioapic_init(void)
 	return pci_register_driver(&ioapic_driver);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void __exit ioapic_exit(void)
 {
@@ -137,6 +149,9 @@ static void __exit ioapic_exit(void)
 
 module_init(ioapic_init);
 module_exit(ioapic_exit);
+=======
+module_init(ioapic_init);
+>>>>>>> v3.18
 =======
 module_init(ioapic_init);
 >>>>>>> v3.18

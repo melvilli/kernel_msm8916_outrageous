@@ -35,6 +35,10 @@
 #include "libfdt.h"
 #include "util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "version_gen.h"
+>>>>>>> v3.18
 =======
 #include "version_gen.h"
 >>>>>>> v3.18
@@ -77,7 +81,11 @@ int util_is_printable_string(const void *data, int len)
 {
 	const char *s = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ss;
+=======
+	const char *ss, *se;
+>>>>>>> v3.18
 =======
 	const char *ss, *se;
 >>>>>>> v3.18
@@ -91,6 +99,7 @@ int util_is_printable_string(const void *data, int len)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ss = s;
 	while (*s && isprint(*s))
 		s++;
@@ -99,6 +108,8 @@ int util_is_printable_string(const void *data, int len)
 	if (*s != '\0' || (s + 1 - ss) < len)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	se = s + len;
 
 	while (s < se) {
@@ -112,6 +123,9 @@ int util_is_printable_string(const void *data, int len)
 
 		s++;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -216,7 +230,11 @@ char get_escape_char(const char *s, int *i)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int utilfdt_read_err(const char *filename, char **buffp)
+=======
+int utilfdt_read_err_len(const char *filename, char **buffp, off_t *len)
+>>>>>>> v3.18
 =======
 int utilfdt_read_err_len(const char *filename, char **buffp, off_t *len)
 >>>>>>> v3.18
@@ -235,7 +253,11 @@ int utilfdt_read_err_len(const char *filename, char **buffp, off_t *len)
 
 	/* Loop until we have read everything */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = malloc(bufsize);
+=======
+	buf = xmalloc(bufsize);
+>>>>>>> v3.18
 =======
 	buf = xmalloc(bufsize);
 >>>>>>> v3.18
@@ -244,7 +266,11 @@ int utilfdt_read_err_len(const char *filename, char **buffp, off_t *len)
 		if (offset == bufsize) {
 			bufsize *= 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			buf = realloc(buf, bufsize);
+=======
+			buf = xrealloc(buf, bufsize);
+>>>>>>> v3.18
 =======
 			buf = xrealloc(buf, bufsize);
 >>>>>>> v3.18
@@ -269,6 +295,7 @@ int utilfdt_read_err_len(const char *filename, char **buffp, off_t *len)
 	else
 		*buffp = buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 }
 
@@ -277,6 +304,8 @@ char *utilfdt_read(const char *filename)
 	char *buff;
 	int ret = utilfdt_read_err(filename, &buff);
 =======
+=======
+>>>>>>> v3.18
 	*len = bufsize;
 	return ret;
 }
@@ -291,6 +320,9 @@ char *utilfdt_read_len(const char *filename, off_t *len)
 {
 	char *buff;
 	int ret = utilfdt_read_err_len(filename, &buff, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret) {
@@ -303,13 +335,19 @@ char *utilfdt_read_len(const char *filename, off_t *len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 char *utilfdt_read(const char *filename)
 {
 	off_t len;
 	return utilfdt_read_len(filename, &len);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int utilfdt_write_err(const char *filename, const void *blob)
 {
@@ -392,7 +430,10 @@ int utilfdt_decode_type(const char *fmt, int *type, int *size)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void utilfdt_print_data(const char *data, int len)
 {
@@ -490,4 +531,7 @@ void util_usage(const char *errmsg, const char *synopsis,
 	} else
 		exit(EXIT_SUCCESS);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -2,7 +2,11 @@
  * net/tipc/link.h: Include file for TIPC link code
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 1995-2006, Ericsson AB
+=======
+ * Copyright (c) 1995-2006, 2013-2014, Ericsson AB
+>>>>>>> v3.18
 =======
  * Copyright (c) 1995-2006, 2013-2014, Ericsson AB
 >>>>>>> v3.18
@@ -45,6 +49,7 @@
 #include "node.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Out-of-range value for link sequence numbers
  */
@@ -53,11 +58,16 @@
 /*
  * Link states
 =======
+=======
+>>>>>>> v3.18
 /* Out-of-range value for link sequence numbers
  */
 #define INVALID_LINK_SEQ 0x10000
 
 /* Link working states
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define WORKING_WORKING 560810u
@@ -66,15 +76,21 @@
 #define RESET_RESET     560813u
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Starting value for maximum packet size negotiation on unicast links
 =======
+=======
+>>>>>>> v3.18
 /* Link endpoint execution states
  */
 #define LINK_STARTED    0x0001
 #define LINK_STOPPED    0x0002
 
 /* Starting value for maximum packet size negotiation on unicast links
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * (unless bearer MTU is less)
  */
@@ -118,6 +134,7 @@ struct tipc_stats {
  * @timer: link timer
  * @owner: pointer to peer node
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @link_list: adjacent links in bearer's list of links
  * @started: indicates if link has been started
  * @checkpoint: reference point for triggering link continuity checking
@@ -125,18 +142,26 @@ struct tipc_stats {
  * @peer_bearer_id: bearer id used by link's peer endpoint
  * @b_ptr: pointer to bearer used by link
 =======
+=======
+>>>>>>> v3.18
  * @flags: execution state flags for link endpoint instance
  * @checkpoint: reference point for triggering link continuity checking
  * @peer_session: link session # being used by peer end of link
  * @peer_bearer_id: bearer id used by link's peer endpoint
  * @bearer_id: local bearer id used by link
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @tolerance: minimum link continuity loss needed to reset link [in ms]
  * @continuity_interval: link continuity testing interval [in ms]
  * @abort_limit: # of unacknowledged continuity probes needed to reset link
  * @state: current state of link FSM
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @blocked: indicates if link has been administratively blocked
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @fsm_msg_cnt: # of protocol messages link FSM has sent in current state
@@ -144,6 +169,10 @@ struct tipc_stats {
  * @pmsg: convenience pointer to "proto_msg" field
  * @priority: current link priority
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @net_plane: current link network plane ('A' through 'H')
+>>>>>>> v3.18
 =======
  * @net_plane: current link network plane ('A' through 'H')
 >>>>>>> v3.18
@@ -169,9 +198,15 @@ struct tipc_stats {
  * @retransm_queue_head: sequence number of first message to retransmit
  * @next_out: ptr to first unsent outbound message in queue
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @waiting_ports: linked list of ports waiting for link congestion to abate
  * @long_msg_seq_no: next identifier to use for outbound fragmented messages
  * @defragm_buf: list of partially reassembled inbound message fragments
+=======
+ * @waiting_sks: linked list of sockets waiting for link congestion to abate
+ * @long_msg_seq_no: next identifier to use for outbound fragmented messages
+ * @reasm_buf: head of partially reassembled inbound message fragments
+>>>>>>> v3.18
 =======
  * @waiting_sks: linked list of sockets waiting for link congestion to abate
  * @long_msg_seq_no: next identifier to use for outbound fragmented messages
@@ -186,6 +221,7 @@ struct tipc_link {
 	struct timer_list timer;
 	struct tipc_node *owner;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head link_list;
 
 	/* Management and link supervision data */
@@ -195,6 +231,8 @@ struct tipc_link {
 	u32 peer_bearer_id;
 	struct tipc_bearer *b_ptr;
 =======
+=======
+>>>>>>> v3.18
 
 	/* Management and link supervision data */
 	unsigned int flags;
@@ -202,13 +240,19 @@ struct tipc_link {
 	u32 peer_session;
 	u32 peer_bearer_id;
 	u32 bearer_id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 tolerance;
 	u32 continuity_interval;
 	u32 abort_limit;
 	int state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int blocked;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32 fsm_msg_cnt;
@@ -219,6 +263,10 @@ struct tipc_link {
 	struct tipc_msg *pmsg;
 	u32 priority;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char net_plane;
+>>>>>>> v3.18
 =======
 	char net_plane;
 >>>>>>> v3.18
@@ -254,17 +302,23 @@ struct tipc_link {
 	u32 retransm_queue_head;
 	struct sk_buff *next_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head waiting_ports;
 
 	/* Fragmentation/defragmentation */
 	u32 long_msg_seq_no;
 	struct sk_buff *defragm_buf;
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff_head waiting_sks;
 
 	/* Fragmentation/reassembly */
 	u32 long_msg_seq_no;
 	struct sk_buff *reasm_buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Statistics */
@@ -276,6 +330,7 @@ struct tipc_port;
 struct tipc_link *tipc_link_create(struct tipc_node *n_ptr,
 			      struct tipc_bearer *b_ptr,
 			      const struct tipc_media_addr *media_addr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 void tipc_link_delete(struct tipc_link *l_ptr);
 void tipc_link_changeover(struct tipc_link *l_ptr);
@@ -310,6 +365,8 @@ u32 tipc_link_defer_pkt(struct sk_buff **head, struct sk_buff **tail,
 		   struct sk_buff *buf);
 void tipc_link_wakeup_ports(struct tipc_link *l_ptr, int all);
 =======
+=======
+>>>>>>> v3.18
 void tipc_link_delete_list(unsigned int bearer_id, bool shutting_down);
 void tipc_link_failover_send_queue(struct tipc_link *l_ptr);
 void tipc_link_dup_queue_xmit(struct tipc_link *l_ptr, struct tipc_link *dest);
@@ -336,6 +393,9 @@ void tipc_link_proto_xmit(struct tipc_link *l_ptr, u32 msg_typ, int prob,
 void tipc_link_push_queue(struct tipc_link *l_ptr);
 u32 tipc_link_defer_pkt(struct sk_buff **head, struct sk_buff **tail,
 			struct sk_buff *buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void tipc_link_set_queue_limits(struct tipc_link *l_ptr, u32 window);
 void tipc_link_retransmit(struct tipc_link *l_ptr,
@@ -403,11 +463,14 @@ static inline int link_reset_reset(struct tipc_link *l_ptr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int link_blocked(struct tipc_link *l_ptr)
 {
 	return l_ptr->exp_msg_count || l_ptr->blocked;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int link_congested(struct tipc_link *l_ptr)

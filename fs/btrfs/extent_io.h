@@ -12,8 +12,11 @@
 #define EXTENT_DELALLOC (1 << 5)
 #define EXTENT_DEFRAG (1 << 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXTENT_DEFRAG_DONE (1 << 7)
 #define EXTENT_BUFFER_FILLED (1 << 8)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EXTENT_BOUNDARY (1 << 9)
@@ -23,6 +26,10 @@
 #define EXTENT_NEED_WAIT (1 << 13)
 #define EXTENT_DAMAGED (1 << 14)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EXTENT_NORESERVE (1 << 15)
+>>>>>>> v3.18
 =======
 #define EXTENT_NORESERVE (1 << 15)
 >>>>>>> v3.18
@@ -36,6 +43,10 @@
 #define EXTENT_BIO_COMPRESSED 1
 #define EXTENT_BIO_TREE_LOG 2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define EXTENT_BIO_PARENT_LOCKED 4
+>>>>>>> v3.18
 =======
 #define EXTENT_BIO_PARENT_LOCKED 4
 >>>>>>> v3.18
@@ -44,7 +55,10 @@
 /* these are bit numbers for test/set bit */
 #define EXTENT_BUFFER_UPTODATE 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXTENT_BUFFER_BLOCKING 1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define EXTENT_BUFFER_DIRTY 2
@@ -53,6 +67,7 @@
 #define EXTENT_BUFFER_TREE_REF 5
 #define EXTENT_BUFFER_STALE 6
 #define EXTENT_BUFFER_WRITEBACK 7
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define EXTENT_BUFFER_IOERR 8
 #define EXTENT_BUFFER_DUMMY 9
@@ -67,6 +82,8 @@
 #define EXTENT_SET_PRIVATE2	 0x40
 #define EXTENT_CLEAR_ACCOUNTING  0x80
 =======
+=======
+>>>>>>> v3.18
 #define EXTENT_BUFFER_READ_ERR 8        /* read IO error */
 #define EXTENT_BUFFER_DUMMY 9
 #define EXTENT_BUFFER_IN_TREE 10
@@ -78,6 +95,9 @@
 #define PAGE_SET_WRITEBACK	(1 << 2)
 #define PAGE_END_WRITEBACK	(1 << 3)
 #define PAGE_SET_PRIVATE2	(1 << 4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -86,15 +106,21 @@
  */
 #define EXTENT_PAGE_PRIVATE 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXTENT_PAGE_PRIVATE_FIRST_PAGE 3
 
 struct extent_state;
 struct btrfs_root;
 =======
+=======
+>>>>>>> v3.18
 
 struct extent_state;
 struct btrfs_root;
 struct btrfs_io_bio;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 typedef	int (extent_submit_bio_hook_t)(struct inode *inode, int rw,
@@ -112,8 +138,14 @@ struct extent_io_ops {
 			      unsigned long bio_flags);
 	int (*readpage_io_failed_hook)(struct page *page, int failed_mirror);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*readpage_end_io_hook)(struct page *page, u64 start, u64 end,
 				    struct extent_state *state, int mirror);
+=======
+	int (*readpage_end_io_hook)(struct btrfs_io_bio *io_bio, u64 phy_offset,
+				    struct page *page, u64 start, u64 end,
+				    int mirror);
+>>>>>>> v3.18
 =======
 	int (*readpage_end_io_hook)(struct btrfs_io_bio *io_bio, u64 phy_offset,
 				    struct page *page, u64 start, u64 end,
@@ -135,7 +167,10 @@ struct extent_io_ops {
 struct extent_io_tree {
 	struct rb_root state;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct radix_tree_root buffer;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct address_space *mapping;
@@ -143,7 +178,10 @@ struct extent_io_tree {
 	int track_uptodate;
 	spinlock_t lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t buffer_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct extent_io_ops *ops;
@@ -156,7 +194,10 @@ struct extent_state {
 
 	/* ADD NEW ELEMENTS AFTER THIS */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct extent_io_tree *tree;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wait_queue_head_t wq;
@@ -177,10 +218,15 @@ struct extent_buffer {
 	u64 start;
 	unsigned long len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long map_start;
 	unsigned long map_len;
 	unsigned long bflags;
 	struct extent_io_tree *tree;
+=======
+	unsigned long bflags;
+	struct btrfs_fs_info *fs_info;
+>>>>>>> v3.18
 =======
 	unsigned long bflags;
 	struct btrfs_fs_info *fs_info;
@@ -200,7 +246,13 @@ struct extent_buffer {
 	atomic_t spinning_readers;
 	atomic_t spinning_writers;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int lock_nested;
+=======
+	short lock_nested;
+	/* >= 0 if eb belongs to a log tree, -1 otherwise */
+	short log_index;
+>>>>>>> v3.18
 =======
 	short lock_nested;
 	/* >= 0 if eb belongs to a log tree, -1 otherwise */
@@ -220,7 +272,10 @@ struct extent_buffer {
 	 */
 	wait_queue_head_t read_lock_wq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t lock_wq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct page *pages[INLINE_EXTENT_BUFFER_PAGES];
@@ -264,6 +319,11 @@ int try_lock_extent(struct extent_io_tree *tree, u64 start, u64 end);
 int extent_read_full_page(struct extent_io_tree *tree, struct page *page,
 			  get_extent_t *get_extent, int mirror_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int extent_read_full_page_nolock(struct extent_io_tree *tree, struct page *page,
+				 get_extent_t *get_extent, int mirror_num);
+>>>>>>> v3.18
 =======
 int extent_read_full_page_nolock(struct extent_io_tree *tree, struct page *page,
 				 get_extent_t *get_extent, int mirror_num);
@@ -330,6 +390,7 @@ int extent_readpages(struct extent_io_tree *tree,
 int extent_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
 		__u64 start, __u64 len, get_extent_t *get_extent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int set_state_private(struct extent_io_tree *tree, u64 start, u64 private);
 void extent_cache_csums_dio(struct extent_io_tree *tree, u64 start, u32 csums[],
 			    int count);
@@ -345,6 +406,8 @@ struct extent_buffer *btrfs_clone_extent_buffer(struct extent_buffer *src);
 struct extent_buffer *find_extent_buffer(struct extent_io_tree *tree,
 					 u64 start, unsigned long len);
 =======
+=======
+>>>>>>> v3.18
 int get_state_private(struct extent_io_tree *tree, u64 start, u64 *private);
 void set_page_extent_mapped(struct page *page);
 
@@ -354,6 +417,9 @@ struct extent_buffer *alloc_dummy_extent_buffer(u64 start, unsigned long len);
 struct extent_buffer *btrfs_clone_extent_buffer(struct extent_buffer *src);
 struct extent_buffer *find_extent_buffer(struct btrfs_fs_info *fs_info,
 					 u64 start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void free_extent_buffer(struct extent_buffer *eb);
 void free_extent_buffer_stale(struct extent_buffer *eb);
@@ -372,12 +438,15 @@ static inline unsigned long num_extent_pages(u64 start, u64 len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct page *extent_buffer_page(struct extent_buffer *eb,
 					      unsigned long i)
 {
 	return eb->pages[i];
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void extent_buffer_get(struct extent_buffer *eb)
@@ -392,6 +461,12 @@ void read_extent_buffer(struct extent_buffer *eb, void *dst,
 			unsigned long start,
 			unsigned long len);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int read_extent_buffer_to_user(struct extent_buffer *eb, void __user *dst,
+			       unsigned long start,
+			       unsigned long len);
+>>>>>>> v3.18
 =======
 int read_extent_buffer_to_user(struct extent_buffer *eb, void __user *dst,
 			       unsigned long start,
@@ -414,6 +489,10 @@ int set_extent_buffer_uptodate(struct extent_buffer *eb);
 int clear_extent_buffer_uptodate(struct extent_buffer *eb);
 int extent_buffer_uptodate(struct extent_buffer *eb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int extent_buffer_under_io(struct extent_buffer *eb);
+>>>>>>> v3.18
 =======
 int extent_buffer_under_io(struct extent_buffer *eb);
 >>>>>>> v3.18
@@ -424,15 +503,21 @@ int map_private_extent_buffer(struct extent_buffer *eb, unsigned long offset,
 int extent_range_clear_dirty_for_io(struct inode *inode, u64 start, u64 end);
 int extent_range_redirty_for_io(struct inode *inode, u64 start, u64 end);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int extent_clear_unlock_delalloc(struct inode *inode,
 				struct extent_io_tree *tree,
 				u64 start, u64 end, struct page *locked_page,
 				unsigned long op);
 =======
+=======
+>>>>>>> v3.18
 int extent_clear_unlock_delalloc(struct inode *inode, u64 start, u64 end,
 				 struct page *locked_page,
 				 unsigned long bits_to_clear,
 				 unsigned long page_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct bio *
 btrfs_bio_alloc(struct block_device *bdev, u64 first_sector, int nr_vecs,
@@ -443,6 +528,7 @@ struct bio *btrfs_bio_clone(struct bio *bio, gfp_t gfp_mask);
 struct btrfs_fs_info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int repair_io_failure(struct btrfs_fs_info *fs_info, u64 start,
 			u64 length, u64 logical, struct page *page,
 			int mirror_num);
@@ -450,6 +536,8 @@ int end_extent_writepage(struct page *page, int err, u64 start, u64 end);
 int repair_eb_io_failure(struct btrfs_root *root, struct extent_buffer *eb,
 			 int mirror_num);
 =======
+=======
+>>>>>>> v3.18
 int repair_io_failure(struct inode *inode, u64 start, u64 length, u64 logical,
 		      struct page *page, unsigned int pg_offset,
 		      int mirror_num);
@@ -496,5 +584,8 @@ noinline u64 find_lock_delalloc_range(struct inode *inode,
 #endif
 struct extent_buffer *alloc_test_extent_buffer(struct btrfs_fs_info *fs_info,
 					       u64 start, unsigned long len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

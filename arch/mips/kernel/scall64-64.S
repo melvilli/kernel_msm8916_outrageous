@@ -81,14 +81,20 @@ syscall_trace_entry:
 	move	s0, t2
 	move	a0, sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jal	syscall_trace_enter
 
 =======
+=======
+>>>>>>> v3.18
 	daddiu	a1, v0, __NR_64_Linux
 	jal	syscall_trace_enter
 
 	bltz	v0, 2f			# seccomp failed? Skip syscall
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	move	t0, s0
 	RESTORE_STATIC
@@ -111,7 +117,11 @@ syscall_trace_entry:
 1:	sd	v0, PT_R2(sp)		# result
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	j	syscall_exit
+=======
+2:	j	syscall_exit
+>>>>>>> v3.18
 =======
 2:	j	syscall_exit
 >>>>>>> v3.18
@@ -127,7 +137,12 @@ illegal_syscall:
 
 	.align	3
 <<<<<<< HEAD
+<<<<<<< HEAD
 sys_call_table:
+=======
+	.type	sys_call_table, @object
+EXPORT(sys_call_table)
+>>>>>>> v3.18
 =======
 	.type	sys_call_table, @object
 EXPORT(sys_call_table)
@@ -361,8 +376,13 @@ EXPORT(sys_call_table)
 	PTR	sys_utimes
 	PTR	sys_mbind
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	sys_ni_syscall			/* sys_get_mempolicy */
 	PTR	sys_ni_syscall			/* sys_set_mempolicy */
+=======
+	PTR	sys_get_mempolicy
+	PTR	sys_set_mempolicy
+>>>>>>> v3.18
 =======
 	PTR	sys_get_mempolicy
 	PTR	sys_set_mempolicy
@@ -447,7 +467,10 @@ EXPORT(sys_call_table)
 	PTR	sys_finit_module
 	PTR	sys_getdents64
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	PTR	sys_sched_setattr
 	PTR	sys_sched_getattr		/* 5310 */
 	PTR	sys_renameat2
@@ -455,5 +478,8 @@ EXPORT(sys_call_table)
 	PTR	sys_getrandom
 	PTR	sys_memfd_create
 	PTR	sys_bpf				/* 5315 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.size	sys_call_table,.-sys_call_table

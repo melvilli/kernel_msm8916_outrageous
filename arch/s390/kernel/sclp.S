@@ -10,6 +10,10 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/irq.h>
+>>>>>>> v3.18
 =======
 #include <asm/irq.h>
 >>>>>>> v3.18
@@ -78,9 +82,15 @@ _sclp_wait_int:
 .LwaitS1:
 	lh	%r7,LC_EXT_INT_CODE
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chi	%r7,0x1004			# timeout?
 	je	.LtimeoutS1
 	chi	%r7,0x2401			# service int?
+=======
+	chi	%r7,EXT_IRQ_CLK_COMP		# timeout?
+	je	.LtimeoutS1
+	chi	%r7,EXT_IRQ_SERVICE_SIG		# service int?
+>>>>>>> v3.18
 =======
 	chi	%r7,EXT_IRQ_CLK_COMP		# timeout?
 	je	.LtimeoutS1
@@ -287,8 +297,11 @@ ENTRY(_sclp_print_early)
 	ahi	%r15,-80
 	stmh	%r6,%r15,96(%r15)		# store upper register halves
 <<<<<<< HEAD
+<<<<<<< HEAD
 	basr	%r13,0
 	lmh	%r0,%r15,.Lzeroes-.(%r13)	# clear upper register halves
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 .Lesa2:
@@ -315,8 +328,11 @@ ENTRY(_sclp_print_early)
 	lm	%r6,%r15,120(%r15)		# restore registers
 	br	%r14
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Lzeroes:
 	.fill	64,4,0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

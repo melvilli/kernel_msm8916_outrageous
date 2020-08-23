@@ -366,7 +366,11 @@ static ssize_t serio_show_description(struct device *dev, struct device_attribut
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t serio_show_modalias(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t modalias_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t modalias_show(struct device *dev, struct device_attribute *attr, char *buf)
 >>>>>>> v3.18
@@ -378,7 +382,11 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr, 
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t serio_show_id_type(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t type_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t type_show(struct device *dev, struct device_attribute *attr, char *buf)
 >>>>>>> v3.18
@@ -388,7 +396,11 @@ static ssize_t type_show(struct device *dev, struct device_attribute *attr, char
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t serio_show_id_proto(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t proto_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t proto_show(struct device *dev, struct device_attribute *attr, char *buf)
 >>>>>>> v3.18
@@ -398,7 +410,11 @@ static ssize_t proto_show(struct device *dev, struct device_attribute *attr, cha
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t serio_show_id_id(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t id_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t id_show(struct device *dev, struct device_attribute *attr, char *buf)
 >>>>>>> v3.18
@@ -408,7 +424,11 @@ static ssize_t id_show(struct device *dev, struct device_attribute *attr, char *
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t serio_show_id_extra(struct device *dev, struct device_attribute *attr, char *buf)
+=======
+static ssize_t extra_show(struct device *dev, struct device_attribute *attr, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t extra_show(struct device *dev, struct device_attribute *attr, char *buf)
 >>>>>>> v3.18
@@ -417,6 +437,7 @@ static ssize_t extra_show(struct device *dev, struct device_attribute *attr, cha
 	return sprintf(buf, "%02x\n", serio->id.extra);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(type, S_IRUGO, serio_show_id_type, NULL);
 static DEVICE_ATTR(proto, S_IRUGO, serio_show_id_proto, NULL);
@@ -442,6 +463,9 @@ static const struct attribute_group *serio_device_attr_groups[] = {
 };
 
 static ssize_t serio_rebind_driver(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+=======
+static ssize_t drvctl_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t drvctl_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
 >>>>>>> v3.18
@@ -499,6 +523,7 @@ static ssize_t serio_set_bind_mode(struct device *dev, struct device_attribute *
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_attribute serio_device_attrs[] = {
 	__ATTR(description, S_IRUGO, serio_show_description, NULL),
 	__ATTR(modalias, S_IRUGO, serio_show_modalias, NULL),
@@ -508,6 +533,8 @@ static struct device_attribute serio_device_attrs[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static ssize_t firmware_id_show(struct device *dev, struct device_attribute *attr, char *buf)
 {
 	struct serio *serio = to_serio_port(dev);
@@ -557,6 +584,9 @@ static const struct attribute_group *serio_device_attr_groups[] = {
 	&serio_device_attr_group,
 	NULL
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void serio_release_port(struct device *dev)
@@ -583,8 +613,13 @@ static void serio_init_port(struct serio *serio)
 	mutex_init(&serio->drv_mutex);
 	device_initialize(&serio->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&serio->dev, "serio%ld",
 			(long)atomic_inc_return(&serio_no) - 1);
+=======
+	dev_set_name(&serio->dev, "serio%lu",
+		     (unsigned long)atomic_inc_return(&serio_no) - 1);
+>>>>>>> v3.18
 =======
 	dev_set_name(&serio->dev, "serio%lu",
 		     (unsigned long)atomic_inc_return(&serio_no) - 1);
@@ -814,7 +849,11 @@ EXPORT_SYMBOL(serio_unregister_child_port);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t serio_driver_show_description(struct device_driver *drv, char *buf)
+=======
+static ssize_t description_show(struct device_driver *drv, char *buf)
+>>>>>>> v3.18
 =======
 static ssize_t description_show(struct device_driver *drv, char *buf)
 >>>>>>> v3.18
@@ -823,8 +862,14 @@ static ssize_t description_show(struct device_driver *drv, char *buf)
 	return sprintf(buf, "%s\n", driver->description ? driver->description : "(none)");
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static ssize_t serio_driver_show_bind_mode(struct device_driver *drv, char *buf)
+=======
+static DRIVER_ATTR_RO(description);
+
+static ssize_t bind_mode_show(struct device_driver *drv, char *buf)
+>>>>>>> v3.18
 =======
 static DRIVER_ATTR_RO(description);
 
@@ -836,7 +881,11 @@ static ssize_t bind_mode_show(struct device_driver *drv, char *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t serio_driver_set_bind_mode(struct device_driver *drv, const char *buf, size_t count)
+=======
+static ssize_t bind_mode_store(struct device_driver *drv, const char *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t bind_mode_store(struct device_driver *drv, const char *buf, size_t count)
 >>>>>>> v3.18
@@ -856,6 +905,7 @@ static ssize_t bind_mode_store(struct device_driver *drv, const char *buf, size_
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 static struct driver_attribute serio_driver_attrs[] = {
@@ -865,6 +915,8 @@ static struct driver_attribute serio_driver_attrs[] = {
 	__ATTR_NULL
 };
 =======
+=======
+>>>>>>> v3.18
 static DRIVER_ATTR_RW(bind_mode);
 
 static struct attribute *serio_driver_attrs[] = {
@@ -873,6 +925,9 @@ static struct attribute *serio_driver_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(serio_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int serio_driver_probe(struct device *dev)
@@ -1018,10 +1073,13 @@ static int serio_uevent(struct device *dev, struct kobj_uevent_env *env)
 	SERIO_ADD_UEVENT_VAR("SERIO_ID=%02x", serio->id.id);
 	SERIO_ADD_UEVENT_VAR("SERIO_EXTRA=%02x", serio->id.extra);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SERIO_ADD_UEVENT_VAR("MODALIAS=serio:ty%02Xpr%02Xid%02Xex%02X",
 				serio->id.type, serio->id.proto, serio->id.id, serio->id.extra);
 
 =======
+=======
+>>>>>>> v3.18
 
 	SERIO_ADD_UEVENT_VAR("MODALIAS=serio:ty%02Xpr%02Xid%02Xex%02X",
 				serio->id.type, serio->id.proto, serio->id.id, serio->id.extra);
@@ -1030,6 +1088,9 @@ static int serio_uevent(struct device *dev, struct kobj_uevent_env *env)
 		SERIO_ADD_UEVENT_VAR("SERIO_FIRMWARE_ID=%s",
 				     serio->firmware_id);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1113,8 +1174,12 @@ EXPORT_SYMBOL(serio_interrupt);
 static struct bus_type serio_bus = {
 	.name		= "serio",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= serio_device_attrs,
 	.drv_attrs	= serio_driver_attrs,
+=======
+	.drv_groups	= serio_driver_groups,
+>>>>>>> v3.18
 =======
 	.drv_groups	= serio_driver_groups,
 >>>>>>> v3.18

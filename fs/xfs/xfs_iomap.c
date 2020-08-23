@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_sb.h"
@@ -46,6 +47,8 @@
 #include "xfs_dquot_item.h"
 #include "xfs_dquot.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -68,6 +71,9 @@
 #include "xfs_dquot_item.h"
 #include "xfs_dquot.h"
 #include "xfs_dinode.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -135,7 +141,11 @@ xfs_alert_fsblock_zero(
 			"Access to block zero in inode %llu "
 			"start_block: %llx start_off: %llx "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"blkcnt: %llx extent-state: %x\n",
+=======
+			"blkcnt: %llx extent-state: %x",
+>>>>>>> v3.18
 =======
 			"blkcnt: %llx extent-state: %x",
 >>>>>>> v3.18
@@ -145,7 +155,11 @@ xfs_alert_fsblock_zero(
 		(unsigned long long)imap->br_blockcount,
 		imap->br_state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return EFSCORRUPTED;
+=======
+	return -EFSCORRUPTED;
+>>>>>>> v3.18
 =======
 	return -EFSCORRUPTED;
 >>>>>>> v3.18
@@ -167,7 +181,10 @@ xfs_iomap_write_direct(
 	xfs_extlen_t	extsz, temp;
 	int		nimaps;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		bmapi_flag;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int		quota_flag;
@@ -181,7 +198,11 @@ xfs_iomap_write_direct(
 	error = xfs_qm_dqattach(ip, 0);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(error);
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -195,7 +216,11 @@ xfs_iomap_write_direct(
 		error = xfs_iomap_eof_align_last_fsb(mp, ip, extsz, &last_fsb);
 		if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(error);
+=======
+			return error;
+>>>>>>> v3.18
 =======
 			return error;
 >>>>>>> v3.18
@@ -232,10 +257,15 @@ xfs_iomap_write_direct(
 	 */
 	tp = xfs_trans_alloc(mp, XFS_TRANS_DIOSTRAT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_trans_reserve(tp, resblks,
 			XFS_WRITE_LOG_RES(mp), resrtextents,
 			XFS_TRANS_PERM_LOG_RES,
 			XFS_WRITE_LOG_COUNT);
+=======
+	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_write,
+				  resblks, resrtextents);
+>>>>>>> v3.18
 =======
 	error = xfs_trans_reserve(tp, &M_RES(mp)->tr_write,
 				  resblks, resrtextents);
@@ -246,7 +276,11 @@ xfs_iomap_write_direct(
 	if (error) {
 		xfs_trans_cancel(tp, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(error);
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -261,10 +295,13 @@ xfs_iomap_write_direct(
 	xfs_trans_ijoin(tp, ip, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bmapi_flag = 0;
 	if (offset < XFS_ISIZE(ip) || extsz)
 		bmapi_flag |= XFS_BMAPI_PREALLOC;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -274,8 +311,14 @@ xfs_iomap_write_direct(
 	xfs_bmap_init(&free_list, &firstfsb);
 	nimaps = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = xfs_bmapi_write(tp, ip, offset_fsb, count_fsb, bmapi_flag,
 				&firstfsb, 0, imap, &nimaps, &free_list);
+=======
+	error = xfs_bmapi_write(tp, ip, offset_fsb, count_fsb,
+				XFS_BMAPI_PREALLOC, &firstfsb, 0,
+				imap, &nimaps, &free_list);
+>>>>>>> v3.18
 =======
 	error = xfs_bmapi_write(tp, ip, offset_fsb, count_fsb,
 				XFS_BMAPI_PREALLOC, &firstfsb, 0,
@@ -299,7 +342,11 @@ xfs_iomap_write_direct(
 	 */
 	if (nimaps == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = XFS_ERROR(ENOSPC);
+=======
+		error = -ENOSPC;
+>>>>>>> v3.18
 =======
 		error = -ENOSPC;
 >>>>>>> v3.18
@@ -351,7 +398,10 @@ xfs_iomap_eof_want_preallocate(
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * If the file is smaller than the minimum prealloc and we are using
 	 * dynamic preallocation, don't do any preallocation at all as it is
 	 * likely this is the only write to the file that is going to be done.
@@ -361,6 +411,9 @@ xfs_iomap_eof_want_preallocate(
 		return 0;
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * If there are any real blocks past eof, then don't
 	 * do any speculative allocation.
@@ -424,11 +477,17 @@ xfs_iomap_eof_prealloc_initial_size(
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* If the file is small, then use the minimum prealloc */
 	if (XFS_ISIZE(ip) < XFS_FSB_TO_B(mp, mp->m_dalign))
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * As we write multiple pages, the offset will always align to the
@@ -481,7 +540,12 @@ xfs_quota_calc_throttle(
 	int type,
 	xfs_fsblock_t *qblocks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int *qshift)
+=======
+	int *qshift,
+	int64_t	*qfreesp)
+>>>>>>> v3.18
 =======
 	int *qshift,
 	int64_t	*qfreesp)
@@ -492,14 +556,20 @@ xfs_quota_calc_throttle(
 	struct xfs_dquot *dq = xfs_inode_dquot(ip, type);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* over hi wmark, squash the prealloc completely */
 	if (dq->q_res_bcount >= dq->q_prealloc_hi_wmark) {
 		*qblocks = 0;
 =======
+=======
+>>>>>>> v3.18
 	/* no dq, or over hi wmark, squash the prealloc completely */
 	if (!dq || dq->q_res_bcount >= dq->q_prealloc_hi_wmark) {
 		*qblocks = 0;
 		*qfreesp = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -514,6 +584,12 @@ xfs_quota_calc_throttle(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (freesp < *qfreesp)
+		*qfreesp = freesp;
+
+>>>>>>> v3.18
 =======
 	if (freesp < *qfreesp)
 		*qfreesp = freesp;
@@ -578,6 +654,7 @@ xfs_iomap_prealloc_size(
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Check each quota to cap the prealloc size and provide a shift
 	 * value to throttle with.
 	 */
@@ -588,6 +665,8 @@ xfs_iomap_prealloc_size(
 	if (xfs_quota_need_throttle(ip, XFS_DQ_PROJ, alloc_blocks))
 		xfs_quota_calc_throttle(ip, XFS_DQ_PROJ, &qblocks, &qshift);
 =======
+=======
+>>>>>>> v3.18
 	 * Check each quota to cap the prealloc size, provide a shift value to
 	 * throttle with and adjust amount of available space.
 	 */
@@ -600,6 +679,9 @@ xfs_iomap_prealloc_size(
 	if (xfs_quota_need_throttle(ip, XFS_DQ_PROJ, alloc_blocks))
 		xfs_quota_calc_throttle(ip, XFS_DQ_PROJ, &qblocks, &qshift,
 					&freesp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -669,7 +751,11 @@ xfs_iomap_write_delay(
 	error = xfs_qm_dqattach_locked(ip, 0);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(error);
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -717,17 +803,23 @@ retry:
 	switch (error) {
 	case 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ENOSPC:
 	case EDQUOT:
 		break;
 	default:
 		return XFS_ERROR(error);
 =======
+=======
+>>>>>>> v3.18
 	case -ENOSPC:
 	case -EDQUOT:
 		break;
 	default:
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -743,7 +835,11 @@ retry:
 			goto retry;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(error ? error : ENOSPC);
+=======
+		return error ? error : -ENOSPC;
+>>>>>>> v3.18
 =======
 		return error ? error : -ENOSPC;
 >>>>>>> v3.18
@@ -778,7 +874,10 @@ xfs_iomap_write_allocate(
 	xfs_inode_t	*ip,
 	xfs_off_t	offset,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t		count,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	xfs_bmbt_irec_t *imap)
@@ -800,7 +899,11 @@ xfs_iomap_write_allocate(
 	error = xfs_qm_dqattach(ip, 0);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(error);
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -827,6 +930,7 @@ xfs_iomap_write_allocate(
 			tp->t_flags |= XFS_TRANS_RESERVE;
 			nres = XFS_EXTENTADD_SPACE_RES(mp, XFS_DATA_FORK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = xfs_trans_reserve(tp, nres,
 					XFS_WRITE_LOG_RES(mp),
 					0, XFS_TRANS_PERM_LOG_RES,
@@ -835,11 +939,16 @@ xfs_iomap_write_allocate(
 				xfs_trans_cancel(tp, 0);
 				return XFS_ERROR(error);
 =======
+=======
+>>>>>>> v3.18
 			error = xfs_trans_reserve(tp, &M_RES(mp)->tr_write,
 						  nres, 0);
 			if (error) {
 				xfs_trans_cancel(tp, 0);
 				return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 			xfs_ilock(ip, XFS_ILOCK_EXCL);
@@ -881,7 +990,11 @@ xfs_iomap_write_allocate(
 			nimaps = 1;
 			end_fsb = XFS_B_TO_FSB(mp, XFS_ISIZE(ip));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			error = xfs_bmap_last_offset(NULL, ip, &last_block,
+=======
+			error = xfs_bmap_last_offset(ip, &last_block,
+>>>>>>> v3.18
 =======
 			error = xfs_bmap_last_offset(ip, &last_block,
 >>>>>>> v3.18
@@ -894,7 +1007,11 @@ xfs_iomap_write_allocate(
 				count_fsb = last_block - map_start_fsb;
 				if (count_fsb == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					error = EAGAIN;
+=======
+					error = -EAGAIN;
+>>>>>>> v3.18
 =======
 					error = -EAGAIN;
 >>>>>>> v3.18
@@ -908,8 +1025,12 @@ xfs_iomap_write_allocate(
 			 */
 			error = xfs_bmapi_write(tp, ip, map_start_fsb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						count_fsb,
 						XFS_BMAPI_STACK_SWITCH,
+=======
+						count_fsb, 0,
+>>>>>>> v3.18
 =======
 						count_fsb, 0,
 >>>>>>> v3.18
@@ -957,7 +1078,11 @@ trans_cancel:
 error0:
 	xfs_iunlock(ip, XFS_ILOCK_EXCL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return XFS_ERROR(error);
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -1017,6 +1142,7 @@ xfs_iomap_write_unwritten(
 		tp = _xfs_trans_alloc(mp, XFS_TRANS_STRAT_WRITE, KM_NOFS);
 		tp->t_flags |= XFS_TRANS_RESERVE | XFS_TRANS_FREEZE_PROT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = xfs_trans_reserve(tp, resblks,
 				XFS_WRITE_LOG_RES(mp), 0,
 				XFS_TRANS_PERM_LOG_RES,
@@ -1025,11 +1151,16 @@ xfs_iomap_write_unwritten(
 			xfs_trans_cancel(tp, 0);
 			return XFS_ERROR(error);
 =======
+=======
+>>>>>>> v3.18
 		error = xfs_trans_reserve(tp, &M_RES(mp)->tr_write,
 					  resblks, 0);
 		if (error) {
 			xfs_trans_cancel(tp, 0);
 			return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1070,7 +1201,11 @@ xfs_iomap_write_unwritten(
 		xfs_iunlock(ip, XFS_ILOCK_EXCL);
 		if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return XFS_ERROR(error);
+=======
+			return error;
+>>>>>>> v3.18
 =======
 			return error;
 >>>>>>> v3.18
@@ -1097,7 +1232,11 @@ error_on_bmapi_transaction:
 	xfs_trans_cancel(tp, (XFS_TRANS_RELEASE_LOG_RES | XFS_TRANS_ABORT));
 	xfs_iunlock(ip, XFS_ILOCK_EXCL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return XFS_ERROR(error);
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18

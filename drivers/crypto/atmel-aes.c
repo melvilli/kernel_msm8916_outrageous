@@ -31,6 +31,10 @@
 #include <linux/scatterlist.h>
 #include <linux/dma-mapping.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -44,6 +48,10 @@
 #include <crypto/internal/hash.h>
 #include <linux/platform_data/crypto-atmel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <dt-bindings/dma/at91.h>
+>>>>>>> v3.18
 =======
 #include <dt-bindings/dma/at91.h>
 >>>>>>> v3.18
@@ -723,13 +731,19 @@ static int atmel_aes_crypt(struct ablkcipher_request *req, unsigned long mode)
 		}
 		ctx->block_size = CFB32_BLOCK_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if (mode & AES_FLAGS_CFB64) {
 		if (!IS_ALIGNED(req->nbytes, CFB64_BLOCK_SIZE)) {
 			pr_err("request size is not exact amount of CFB64 blocks\n");
 			return -EINVAL;
 		}
 		ctx->block_size = CFB64_BLOCK_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		if (!IS_ALIGNED(req->nbytes, AES_BLOCK_SIZE)) {
@@ -764,6 +778,7 @@ static int atmel_aes_dma_init(struct atmel_aes_dev *dd,
 	struct crypto_platform_data *pdata)
 {
 	int err = -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dma_cap_mask_t mask_in, mask_out;
 
@@ -815,6 +830,8 @@ static int atmel_aes_dma_init(struct atmel_aes_dev *dd,
 		return -ENODEV;
 	}
 =======
+=======
+>>>>>>> v3.18
 	dma_cap_mask_t mask;
 
 	dma_cap_zero(mask);
@@ -854,12 +871,19 @@ static int atmel_aes_dma_init(struct atmel_aes_dev *dd,
 	dd->dma_lch_out.dma_conf.device_fc = false;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 err_dma_out:
 	dma_release_channel(dd->dma_lch_in.chan);
 err_dma_in:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev_warn(dd->dev, "no DMA channel available\n");
+>>>>>>> v3.18
 =======
 	dev_warn(dd->dev, "no DMA channel available\n");
 >>>>>>> v3.18
@@ -1140,7 +1164,11 @@ static struct crypto_alg aes_algs[] = {
 	.cra_priority		= 100,
 	.cra_flags		= CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_ASYNC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cra_blocksize		= CFB64_BLOCK_SIZE,
+=======
+	.cra_blocksize		= CFB8_BLOCK_SIZE,
+>>>>>>> v3.18
 =======
 	.cra_blocksize		= CFB8_BLOCK_SIZE,
 >>>>>>> v3.18
@@ -1329,7 +1357,10 @@ static void atmel_aes_get_cap(struct atmel_aes_dev *dd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_OF)
 static const struct of_device_id atmel_aes_dt_ids[] = {
 	{ .compatible = "atmel,at91sam9g46-aes" },
@@ -1371,6 +1402,9 @@ static inline struct crypto_platform_data *atmel_aes_of_init(struct platform_dev
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int atmel_aes_probe(struct platform_device *pdev)
 {
@@ -1384,7 +1418,10 @@ static int atmel_aes_probe(struct platform_device *pdev)
 	pdata = pdev->dev.platform_data;
 	if (!pdata) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		pdata = atmel_aes_of_init(pdev);
 		if (IS_ERR(pdata)) {
 			err = PTR_ERR(pdata);
@@ -1393,6 +1430,9 @@ static int atmel_aes_probe(struct platform_device *pdev)
 	}
 
 	if (!pdata->dma_slave) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -ENXIO;
 		goto aes_dd_err;
@@ -1481,7 +1521,13 @@ static int atmel_aes_probe(struct platform_device *pdev)
 		goto err_algs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev, "Atmel AES\n");
+=======
+	dev_info(dev, "Atmel AES - Using %s, %s for DMA transfers\n",
+			dma_chan_name(aes_dd->dma_lch_in.chan),
+			dma_chan_name(aes_dd->dma_lch_out.chan));
+>>>>>>> v3.18
 =======
 	dev_info(dev, "Atmel AES - Using %s, %s for DMA transfers\n",
 			dma_chan_name(aes_dd->dma_lch_in.chan),
@@ -1553,6 +1599,10 @@ static struct platform_driver atmel_aes_driver = {
 		.name	= "atmel_aes",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(atmel_aes_dt_ids),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(atmel_aes_dt_ids),
 >>>>>>> v3.18

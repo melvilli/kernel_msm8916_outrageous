@@ -25,10 +25,13 @@
 #include <linux/slab.h>
 #include <sound/core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "hda_codec.h"
 #include "hda_local.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/module.h>
 #include "hda_codec.h"
 #include "hda_local.h"
@@ -37,6 +40,9 @@ static int dump_coef = -1;
 module_param(dump_coef, int, 0644);
 MODULE_PARM_DESC(dump_coef, "Dump processing coefficients in codec proc file (-1=auto, 0=disable, 1=enable)");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static char *bits_names(unsigned int bits, char *names[], int size)
 {
@@ -141,6 +147,7 @@ static void print_amp_caps(struct snd_info_buffer *buffer,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* is this a stereo widget or a stereo-to-mono mix? */
 static bool is_stereo_amps(struct hda_codec *codec, hda_nid_t nid,
 			   int dir, unsigned int wcaps, int indices)
@@ -174,6 +181,8 @@ static void print_amp_vals(struct snd_info_buffer *buffer,
 	stereo = is_stereo_amps(codec, nid, dir, wcaps, indices);
 
 =======
+=======
+>>>>>>> v3.18
 static void print_amp_vals(struct snd_info_buffer *buffer,
 			   struct hda_codec *codec, hda_nid_t nid,
 			   int dir, int stereo, int indices)
@@ -181,6 +190,9 @@ static void print_amp_vals(struct snd_info_buffer *buffer,
 	unsigned int val;
 	int i;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dir = dir == HDA_OUTPUT ? AC_AMP_GET_OUTPUT : AC_AMP_GET_INPUT;
 	for (i = 0; i < indices; i++) {
@@ -535,6 +547,7 @@ static void print_unsol_cap(struct snd_info_buffer *buffer,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void print_proc_caps(struct snd_info_buffer *buffer,
 			    struct hda_codec *codec, hda_nid_t nid)
 {
@@ -544,6 +557,8 @@ static void print_proc_caps(struct snd_info_buffer *buffer,
 		    proc_caps & AC_PCAP_BENIGN,
 		    (proc_caps & AC_PCAP_NUM_COEF) >> AC_PCAP_NUM_COEF_SHIFT);
 =======
+=======
+>>>>>>> v3.18
 static inline bool can_dump_coef(struct hda_codec *codec)
 {
 	switch (dump_coef) {
@@ -577,6 +592,9 @@ static void print_proc_caps(struct snd_info_buffer *buffer,
 		snd_iprintf(buffer, "    Coeff 0x%02x: 0x%04x\n", i, val);
 	}
 	snd_hda_codec_write(codec, nid, 0, AC_VERB_SET_COEF_INDEX, oldindex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -587,6 +605,11 @@ static void print_conn_list(struct snd_info_buffer *buffer,
 {
 	int c, curr = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const hda_nid_t *list;
+	int cache_len;
+>>>>>>> v3.18
 =======
 	const hda_nid_t *list;
 	int cache_len;
@@ -609,7 +632,10 @@ static void print_conn_list(struct snd_info_buffer *buffer,
 		snd_iprintf(buffer, "\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Get Cache connections info */
 	cache_len = snd_hda_get_conn_list(codec, nid, &list);
@@ -623,6 +649,9 @@ static void print_conn_list(struct snd_info_buffer *buffer,
 			snd_iprintf(buffer, "\n");
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -671,7 +700,10 @@ static void print_gpio(struct snd_info_buffer *buffer,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void print_device_list(struct snd_info_buffer *buffer,
 			    struct hda_codec *codec, hda_nid_t nid)
 {
@@ -702,6 +734,9 @@ static void print_device_list(struct snd_info_buffer *buffer,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void print_codec_info(struct snd_info_entry *entry,
 			     struct snd_info_buffer *buffer)
@@ -819,17 +854,23 @@ static void print_codec_info(struct snd_info_entry *entry,
 			     wid_type == AC_WID_AUD_IN))
 				print_amp_vals(buffer, codec, nid, HDA_INPUT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       wid_caps, 1);
 			else
 				print_amp_vals(buffer, codec, nid, HDA_INPUT,
 					       wid_caps, conn_len);
 =======
+=======
+>>>>>>> v3.18
 					       wid_caps & AC_WCAP_STEREO,
 					       1);
 			else
 				print_amp_vals(buffer, codec, nid, HDA_INPUT,
 					       wid_caps & AC_WCAP_STEREO,
 					       conn_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		if (wid_caps & AC_WCAP_OUT_AMP) {
@@ -840,16 +881,22 @@ static void print_codec_info(struct snd_info_entry *entry,
 			    codec->pin_amp_workaround)
 				print_amp_vals(buffer, codec, nid, HDA_OUTPUT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       wid_caps, conn_len);
 			else
 				print_amp_vals(buffer, codec, nid, HDA_OUTPUT,
 					       wid_caps, 1);
 =======
+=======
+>>>>>>> v3.18
 					       wid_caps & AC_WCAP_STEREO,
 					       conn_len);
 			else
 				print_amp_vals(buffer, codec, nid, HDA_OUTPUT,
 					       wid_caps & AC_WCAP_STEREO, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -887,6 +934,12 @@ static void print_codec_info(struct snd_info_entry *entry,
 				    AC_WCAP_DELAY_SHIFT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (wid_type == AC_WID_PIN && codec->dp_mst)
+			print_device_list(buffer, codec, nid);
+
+>>>>>>> v3.18
 =======
 		if (wid_type == AC_WID_PIN && codec->dp_mst)
 			print_device_list(buffer, codec, nid);

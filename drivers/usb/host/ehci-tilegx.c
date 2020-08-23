@@ -62,7 +62,11 @@ static const struct hc_driver ehci_tilegx_hc_driver = {
 	 */
 	.irq			= ehci_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags			= HCD_MEMORY | HCD_USB2,
+=======
+	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
+>>>>>>> v3.18
 =======
 	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
 >>>>>>> v3.18
@@ -106,7 +110,11 @@ static int ehci_hcd_tilegx_drv_probe(struct platform_device *pdev)
 	struct usb_hcd *hcd;
 	struct ehci_hcd *ehci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tilegx_usb_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct tilegx_usb_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct tilegx_usb_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -151,8 +159,13 @@ static int ehci_hcd_tilegx_drv_probe(struct platform_device *pdev)
 
 	/* Create our IRQs and register them. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata->irq = create_irq();
 	if (pdata->irq < 0) {
+=======
+	pdata->irq = irq_alloc_hwirq(-1);
+	if (!pdata->irq) {
+>>>>>>> v3.18
 =======
 	pdata->irq = irq_alloc_hwirq(-1);
 	if (!pdata->irq) {
@@ -184,6 +197,10 @@ static int ehci_hcd_tilegx_drv_probe(struct platform_device *pdev)
 	if (ret == 0) {
 		platform_set_drvdata(pdev, hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 		device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -192,7 +209,11 @@ static int ehci_hcd_tilegx_drv_probe(struct platform_device *pdev)
 
 err_have_irq:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	destroy_irq(pdata->irq);
+=======
+	irq_free_hwirq(pdata->irq);
+>>>>>>> v3.18
 =======
 	irq_free_hwirq(pdata->irq);
 >>>>>>> v3.18
@@ -208,7 +229,11 @@ static int ehci_hcd_tilegx_drv_remove(struct platform_device *pdev)
 {
 	struct usb_hcd *hcd = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tilegx_usb_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct tilegx_usb_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct tilegx_usb_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -218,8 +243,12 @@ static int ehci_hcd_tilegx_drv_remove(struct platform_device *pdev)
 	tilegx_stop_ehc();
 	gxio_usb_host_destroy(&pdata->usb_ctx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	destroy_irq(pdata->irq);
 	platform_set_drvdata(pdev, NULL);
+=======
+	irq_free_hwirq(pdata->irq);
+>>>>>>> v3.18
 =======
 	irq_free_hwirq(pdata->irq);
 >>>>>>> v3.18

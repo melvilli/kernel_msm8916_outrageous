@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * max77686.c - mfd core driver for the Maxim 77686
+=======
+ * max77686.c - mfd core driver for the Maxim 77686/802
+>>>>>>> v3.18
 =======
  * max77686.c - mfd core driver for the Maxim 77686/802
 >>>>>>> v3.18
@@ -30,6 +34,11 @@
 #include <linux/slab.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irq.h>
+#include <linux/interrupt.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 #include <linux/interrupt.h>
@@ -41,6 +50,7 @@
 #include <linux/mfd/max77686-private.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define I2C_ADDR_RTC	(0x0C >> 1)
 
@@ -50,6 +60,8 @@ static struct mfd_cell max77686_devs[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 
 #define I2C_ADDR_RTC	(0x0C >> 1)
@@ -128,6 +140,9 @@ static bool max77802_is_volatile_reg(struct device *dev, unsigned int reg)
 		max77802_rtc_is_volatile_reg(dev, reg));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct regmap_config max77686_regmap_config = {
 	.reg_bits = 8,
@@ -135,11 +150,14 @@ static struct regmap_config max77686_regmap_config = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_OF
 static struct of_device_id max77686_pmic_dt_match[] = {
 	{.compatible = "maxim,max77686", .data = NULL},
 	{},
 =======
+=======
+>>>>>>> v3.18
 static struct regmap_config max77686_rtc_regmap_config = {
 	.reg_bits = 8,
 	.val_bits = 8,
@@ -227,6 +245,9 @@ static const struct of_device_id max77686_pmic_dt_match[] = {
 		.data = (void *)TYPE_MAX77802,
 	},
 	{ },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -237,6 +258,7 @@ static struct max77686_platform_data *max77686_i2c_parse_dt_pdata(struct device
 
 	pd = devm_kzalloc(dev, sizeof(*pd), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pd) {
 		dev_err(dev, "could not allocate memory for pdata\n");
 		return NULL;
@@ -245,10 +267,15 @@ static struct max77686_platform_data *max77686_i2c_parse_dt_pdata(struct device
 	if (!pd)
 		return NULL;
 >>>>>>> v3.18
+=======
+	if (!pd)
+		return NULL;
+>>>>>>> v3.18
 
 	dev->platform_data = pd;
 	return pd;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 static struct max77686_platform_data *max77686_i2c_parse_dt_pdata(struct device
@@ -259,11 +286,14 @@ static struct max77686_platform_data *max77686_i2c_parse_dt_pdata(struct device
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static int max77686_i2c_probe(struct i2c_client *i2c,
 			      const struct i2c_device_id *id)
 {
 	struct max77686_dev *max77686 = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct max77686_platform_data *pdata = i2c->dev.platform_data;
 	unsigned int data;
@@ -293,6 +323,8 @@ static int max77686_i2c_probe(struct i2c_client *i2c,
 
 	max77686->regmap = devm_regmap_init_i2c(i2c, &max77686_regmap_config);
 =======
+=======
+>>>>>>> v3.18
 	struct max77686_platform_data *pdata = dev_get_platdata(&i2c->dev);
 	const struct of_device_id *match;
 	unsigned int data;
@@ -350,11 +382,15 @@ static int max77686_i2c_probe(struct i2c_client *i2c,
 	}
 
 	max77686->regmap = devm_regmap_init_i2c(i2c, config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(max77686->regmap)) {
 		ret = PTR_ERR(max77686->regmap);
 		dev_err(max77686->dev, "Failed to allocate register map: %d\n",
 				ret);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		kfree(max77686);
 		return ret;
@@ -392,6 +428,8 @@ err_mfd:
 err:
 	kfree(max77686);
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
@@ -457,6 +495,9 @@ err_unregister_i2c:
 	if (max77686->type == TYPE_MAX77686)
 		i2c_unregister_device(max77686->rtc);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -467,15 +508,21 @@ static int max77686_i2c_remove(struct i2c_client *i2c)
 
 	mfd_remove_devices(max77686->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_unregister_device(max77686->rtc);
 	kfree(max77686);
 =======
+=======
+>>>>>>> v3.18
 
 	regmap_del_irq_chip(max77686->irq, max77686->rtc_irq_data);
 	regmap_del_irq_chip(max77686->irq, max77686->irq_data);
 
 	if (max77686->type == TYPE_MAX77686)
 		i2c_unregister_device(max77686->rtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -488,7 +535,10 @@ static const struct i2c_device_id max77686_i2c_id[] = {
 MODULE_DEVICE_TABLE(i2c, max77686_i2c_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int max77686_suspend(struct device *dev)
 {
@@ -528,12 +578,19 @@ static int max77686_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(max77686_pm, max77686_suspend, max77686_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_driver max77686_i2c_driver = {
 	.driver = {
 		   .name = "max77686",
 		   .owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		   .pm = &max77686_pm,
+>>>>>>> v3.18
 =======
 		   .pm = &max77686_pm,
 >>>>>>> v3.18
@@ -558,7 +615,11 @@ static void __exit max77686_i2c_exit(void)
 module_exit(max77686_i2c_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_DESCRIPTION("MAXIM 77686 multi-function core driver");
+=======
+MODULE_DESCRIPTION("MAXIM 77686/802 multi-function core driver");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("MAXIM 77686/802 multi-function core driver");
 >>>>>>> v3.18

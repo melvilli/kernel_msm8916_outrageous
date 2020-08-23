@@ -114,6 +114,11 @@
 #define IS_NVAAF(x) ((x) >= 0xaa && (x) <= 0xac)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/fb.h>
+
+>>>>>>> v3.18
 =======
 #include <subdev/fb.h>
 
@@ -575,15 +580,21 @@ nv50_graph_construct_mmio(struct nouveau_grctx *ctx)
 		else if (device->chipset < 0xa0)
 			gr_def(ctx, 0x407d08, 0x00390040);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else
 			gr_def(ctx, 0x407d08, 0x003d0040);
 =======
+=======
+>>>>>>> v3.18
 		else {
 			if (nouveau_fb(device)->ram->type != NV_MEM_TYPE_GDDR5)
 				gr_def(ctx, 0x407d08, 0x003d0040);
 			else
 				gr_def(ctx, 0x407d08, 0x003c0040);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		gr_def(ctx, 0x407d0c, 0x00000022);
 	}

@@ -23,11 +23,14 @@
 #include "br_private.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct stp_proto br_stp_proto = {
 	.rcv	= br_stp_rcv,
 };
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Handle changes in state of network devices enslaved to a bridge.
  *
@@ -141,17 +144,26 @@ static void __net_exit br_net_exit(struct net *net)
 
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct pernet_operations br_net_ops = {
 	.exit	= br_net_exit,
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct stp_proto br_stp_proto = {
 	.rcv	= br_stp_rcv,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init br_init(void)
 {
@@ -172,7 +184,11 @@ static int __init br_init(void)
 		goto err_out1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = br_netfilter_init();
+=======
+	err = br_nf_core_init();
+>>>>>>> v3.18
 =======
 	err = br_nf_core_init();
 >>>>>>> v3.18
@@ -194,12 +210,15 @@ static int __init br_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 err_out4:
 	unregister_netdevice_notifier(&br_device_notifier);
 err_out3:
 	br_netfilter_fini();
 =======
+=======
+>>>>>>> v3.18
 	pr_info("bridge: automatic filtering via arp/ip/ip6tables has been "
 		"deprecated. Update your scripts to load br_netfilter if you "
 		"need this.\n");
@@ -210,6 +229,9 @@ err_out4:
 	unregister_netdevice_notifier(&br_device_notifier);
 err_out3:
 	br_nf_core_fini();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_out2:
 	unregister_pernet_subsys(&br_net_ops);
@@ -224,6 +246,7 @@ static void __exit br_deinit(void)
 {
 	stp_proto_unregister(&br_stp_proto);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	br_netlink_fini();
 	unregister_netdevice_notifier(&br_device_notifier);
@@ -234,10 +257,16 @@ static void __exit br_deinit(void)
 	unregister_netdevice_notifier(&br_device_notifier);
 	brioctl_set(NULL);
 >>>>>>> v3.18
+=======
+	br_netlink_fini();
+	unregister_netdevice_notifier(&br_device_notifier);
+	brioctl_set(NULL);
+>>>>>>> v3.18
 	unregister_pernet_subsys(&br_net_ops);
 
 	rcu_barrier(); /* Wait for completion of call_rcu()'s */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	br_netfilter_fini();
 #if IS_ENABLED(CONFIG_ATM_LANE)
@@ -245,10 +274,15 @@ static void __exit br_deinit(void)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	br_nf_core_fini();
 #if IS_ENABLED(CONFIG_ATM_LANE)
 	br_fdb_test_addr_hook = NULL;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	br_fdb_fini();
 }

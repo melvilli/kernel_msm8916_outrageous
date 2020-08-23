@@ -72,7 +72,11 @@ config KEYBOARD_ATKBD
 	select SERIO
 	select SERIO_LIBPS2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select SERIO_I8042 if X86
+=======
+	select SERIO_I8042 if ARCH_MIGHT_HAVE_PC_SERIO
+>>>>>>> v3.18
 =======
 	select SERIO_I8042 if ARCH_MIGHT_HAVE_PC_SERIO
 >>>>>>> v3.18
@@ -156,7 +160,10 @@ config KEYBOARD_BFIN
 	  module will be called bf54x-keys.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config KEYBOARD_CLPS711X
 	tristate "CLPS711X Keypad support"
 	depends on OF_GPIO && (ARCH_CLPS711X || COMPILE_TEST)
@@ -169,6 +176,9 @@ config KEYBOARD_CLPS711X
 	  To compile this driver as a module, choose M here: the
 	  module will be called clps711x-keypad.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config KEYBOARD_LKKBD
 	tristate "DECstation/VAXstation LK201/LK401 keyboard"
@@ -438,7 +448,10 @@ config KEYBOARD_NOMADIK
 	  module will be called nmk-ske-keypad.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config KEYBOARD_NSPIRE
 	tristate "TI-NSPIRE built-in keyboard"
 	depends on ARCH_NSPIRE && OF
@@ -449,6 +462,9 @@ config KEYBOARD_NSPIRE
 	  To compile this driver as a module, choose M here: the
 	  module will be called nspire-keypad.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config KEYBOARD_TEGRA
 	tristate "NVIDIA Tegra internal matrix keyboard controller support"
@@ -475,6 +491,10 @@ config KEYBOARD_PXA27x
 	tristate "PXA27x/PXA3xx keypad support"
 	depends on PXA27x || PXA3xx || ARCH_MMP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select INPUT_MATRIXKMAP
+>>>>>>> v3.18
 =======
 	select INPUT_MATRIXKMAP
 >>>>>>> v3.18
@@ -506,6 +526,7 @@ config KEYBOARD_PMIC8XXX
 	  be called pmic8xxx-keypad.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config KEYBOARD_QPNP
 	tristate "Qualcomm QPNP PMIC keypad support"
 	depends on OF_SPMI && SPMI && MSM_QPNP_INT
@@ -517,6 +538,8 @@ config KEYBOARD_QPNP
 	  To compile this driver as a module, choose M here: the module will
 	  be called qpnp-keypad.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config KEYBOARD_SAMSUNG
@@ -552,7 +575,10 @@ config KEYBOARD_STOWAWAY
 	  module will be called stowaway.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config KEYBOARD_ST_KEYSCAN
 	tristate "STMicroelectronics keyscan support"
 	depends on ARCH_STI || COMPILE_TEST
@@ -564,6 +590,9 @@ config KEYBOARD_ST_KEYSCAN
 	  To compile this driver as a module, choose M here: the
 	  module will be called st-keyscan.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config KEYBOARD_SUNKBD
 	tristate "Sun Type 4 and Type 5 keyboard"
@@ -579,7 +608,11 @@ config KEYBOARD_SUNKBD
 config KEYBOARD_SH_KEYSC
 	tristate "SuperH KEYSC keypad support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SUPERH || ARCH_SHMOBILE
+=======
+	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
 >>>>>>> v3.18
@@ -624,7 +657,11 @@ config KEYBOARD_OMAP
 config KEYBOARD_OMAP4
 	tristate "TI OMAP4+ keypad support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_OMAP2PLUS
+=======
+	depends on OF || ARCH_OMAP2PLUS
+>>>>>>> v3.18
 =======
 	depends on OF || ARCH_OMAP2PLUS
 >>>>>>> v3.18
@@ -657,6 +694,7 @@ config KEYBOARD_TC3589X
 	  module will be called tc3589x-keypad.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config KEYBOARD_TNETV107X
 	tristate "TI TNETV107X keypad support"
 	depends on ARCH_DAVINCI_TNETV107X
@@ -667,6 +705,8 @@ config KEYBOARD_TNETV107X
 	  To compile this driver as a module, choose M here: the
 	  module will be called tnetv107x-keypad.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config KEYBOARD_TWL4030
@@ -694,6 +734,7 @@ config KEYBOARD_XTKBD
 	  module will be called xtkbd.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config KEYBOARD_QCIKBD_REPEAT
 	bool "Enable Quanta Computer Inc. keyboard key repeat feature"
 	depends on KEYBOARD_QCIKBD
@@ -710,6 +751,8 @@ config KEYBOARD_QCIKBD_LID
 	  Say Y here if you want to register lid event in Quanta keyboard
 	  driver.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config KEYBOARD_W90P910
@@ -736,7 +779,10 @@ config KEYBOARD_CROS_EC
 	  module will be called cros_ec_keyb.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config KEYBOARD_CAP1106
 	tristate "Microchip CAP1106 touch sensor"
 	depends on OF && I2C
@@ -747,5 +793,8 @@ config KEYBOARD_CAP1106
 	  To compile this driver as a module, choose M here: the
 	  module will be called cap1106.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

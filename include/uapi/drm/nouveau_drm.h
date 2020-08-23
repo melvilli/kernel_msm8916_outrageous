@@ -26,7 +26,10 @@
 #define __NOUVEAU_DRM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRM_NOUVEAU_EVENT_NVIF                                       0x80000000
 
 /* reserved object handles when using deprecated object APIs - these
@@ -37,6 +40,9 @@
 #define NOUVEAU_ABI16_DEVICE   0xdddddddd
 #define NOUVEAU_ABI16_CHAN(n) (0xcccc0000 | (n))
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NOUVEAU_GEM_DOMAIN_CPU       (1 << 0)
 #define NOUVEAU_GEM_DOMAIN_VRAM      (1 << 1)
@@ -137,6 +143,10 @@ struct drm_nouveau_gem_cpu_fini {
 #define DRM_NOUVEAU_NOTIFIEROBJ_ALLOC  0x05 /* deprecated */
 #define DRM_NOUVEAU_GPUOBJ_FREE        0x06 /* deprecated */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DRM_NOUVEAU_NVIF               0x07
+>>>>>>> v3.18
 =======
 #define DRM_NOUVEAU_NVIF               0x07
 >>>>>>> v3.18

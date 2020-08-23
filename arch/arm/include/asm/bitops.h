@@ -253,6 +253,7 @@ static inline int constant_fls(int x)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * On ARMv5 and above those functions can be implemented around
  * the clz instruction for much better code efficiency.
  */
@@ -273,6 +274,8 @@ static inline int fls(int x)
 #define ffs(x) ({ unsigned long __t = (x); fls(__t & -__t); })
 #define __ffs(x) (ffs(x) - 1)
 =======
+=======
+>>>>>>> v3.18
  * On ARMv5 and above those functions can be implemented around the
  * clz instruction for much better code efficiency.  __clz returns
  * the number of leading zeros, zero input will return 32, and
@@ -326,6 +329,9 @@ static inline unsigned long __ffs(unsigned long x)
 	return ffs(x) - 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ffz(x) __ffs( ~(x) )
 

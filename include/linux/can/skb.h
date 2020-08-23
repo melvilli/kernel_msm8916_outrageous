@@ -8,8 +8,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CAN_SKB_H
 #define CAN_SKB_H
+=======
+#ifndef _CAN_SKB_H
+#define _CAN_SKB_H
+>>>>>>> v3.18
 =======
 #ifndef _CAN_SKB_H
 #define _CAN_SKB_H
@@ -86,7 +91,11 @@ static inline struct sk_buff *can_create_echo_skb(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CAN_SKB_H */
+=======
+#endif /* !_CAN_SKB_H */
+>>>>>>> v3.18
 =======
 #endif /* !_CAN_SKB_H */
 >>>>>>> v3.18

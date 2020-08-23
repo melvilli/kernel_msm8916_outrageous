@@ -87,6 +87,10 @@ struct xenbus_device_id
 /* A xenbus driver. */
 struct xenbus_driver {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const char *name;       /* defaults to ids[0].devicetype */
+>>>>>>> v3.18
 =======
 	const char *name;       /* defaults to ids[0].devicetype */
 >>>>>>> v3.18
@@ -105,6 +109,7 @@ struct xenbus_driver {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DEFINE_XENBUS_DRIVER(var, drvname, methods...)		\
 struct xenbus_driver var ## _driver = {				\
 	.driver.name = drvname + 0 ?: var ## _ids->devicetype,	\
@@ -114,15 +119,20 @@ struct xenbus_driver var ## _driver = {				\
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline struct xenbus_driver *to_xenbus_driver(struct device_driver *drv)
 {
 	return container_of(drv, struct xenbus_driver, driver);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __must_check xenbus_register_frontend(struct xenbus_driver *);
 int __must_check xenbus_register_backend(struct xenbus_driver *);
 =======
+=======
+>>>>>>> v3.18
 int __must_check __xenbus_register_frontend(struct xenbus_driver *drv,
 					    struct module *owner,
 					    const char *mod_name);
@@ -134,6 +144,9 @@ int __must_check __xenbus_register_backend(struct xenbus_driver *drv,
 	__xenbus_register_frontend(drv, THIS_MODULE, KBUILD_MODNAME);
 #define xenbus_register_backend(drv) \
 	__xenbus_register_backend(drv, THIS_MODULE, KBUILD_MODNAME);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void xenbus_unregister_driver(struct xenbus_driver *drv);
@@ -229,7 +242,10 @@ int xenbus_unmap_ring(struct xenbus_device *dev,
 
 int xenbus_alloc_evtchn(struct xenbus_device *dev, int *port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int xenbus_bind_evtchn(struct xenbus_device *dev, int remote_port, int *port);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int xenbus_free_evtchn(struct xenbus_device *dev, int port);

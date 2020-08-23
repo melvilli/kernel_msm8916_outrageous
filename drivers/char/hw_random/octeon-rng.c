@@ -11,7 +11,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
@@ -100,7 +103,11 @@ static int octeon_rng_probe(struct platform_device *pdev)
 	rng->ops = ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, &rng->ops);
+=======
+	platform_set_drvdata(pdev, &rng->ops);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, &rng->ops);
 >>>>>>> v3.18
@@ -116,7 +123,11 @@ static int octeon_rng_probe(struct platform_device *pdev)
 static int __exit octeon_rng_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hwrng *rng = dev_get_drvdata(&pdev->dev);
+=======
+	struct hwrng *rng = platform_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct hwrng *rng = platform_get_drvdata(pdev);
 >>>>>>> v3.18

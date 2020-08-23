@@ -19,6 +19,11 @@
 #include <linux/export.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+#include <linux/miscdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include <linux/miscdevice.h>
@@ -40,6 +45,10 @@
 #include <linux/highmem.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "book3s.h"
+>>>>>>> v3.18
 =======
 #include "book3s.h"
 >>>>>>> v3.18
@@ -79,11 +88,14 @@ void kvmppc_core_load_guest_debugstate(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_inject_interrupt(struct kvm_vcpu *vcpu, int vec, u64 flags)
 {
 	vcpu->arch.shared->srr0 = kvmppc_get_pc(vcpu);
 	vcpu->arch.shared->srr1 = vcpu->arch.shared->msr | flags;
 =======
+=======
+>>>>>>> v3.18
 void kvmppc_unfixup_split_real(struct kvm_vcpu *vcpu)
 {
 	if (vcpu->arch.hflags & BOOK3S_HFLAG_SPLIT_HACK) {
@@ -144,6 +156,9 @@ void kvmppc_inject_interrupt(struct kvm_vcpu *vcpu, int vec, u64 flags)
 	kvmppc_unfixup_split_real(vcpu);
 	kvmppc_set_srr0(vcpu, kvmppc_get_pc(vcpu));
 	kvmppc_set_srr1(vcpu, kvmppc_get_msr(vcpu) | flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kvmppc_set_pc(vcpu, kvmppc_interrupt_offset(vcpu) + vec);
 	vcpu->arch.mmu.reset_msr(vcpu);
@@ -171,6 +186,10 @@ static int kvmppc_book3s_vec2irqprio(unsigned int vec)
 	case 0xf20: prio = BOOK3S_IRQPRIO_ALTIVEC;		break;
 	case 0xf40: prio = BOOK3S_IRQPRIO_VSX;			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 0xf60: prio = BOOK3S_IRQPRIO_FAC_UNAVAIL;		break;
+>>>>>>> v3.18
 =======
 	case 0xf60: prio = BOOK3S_IRQPRIO_FAC_UNAVAIL;		break;
 >>>>>>> v3.18
@@ -203,7 +222,11 @@ void kvmppc_book3s_queue_irqprio(struct kvm_vcpu *vcpu, unsigned int vec)
 #endif
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+EXPORT_SYMBOL_GPL(kvmppc_book3s_queue_irqprio);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(kvmppc_book3s_queue_irqprio);
 >>>>>>> v3.18
@@ -214,6 +237,10 @@ void kvmppc_core_queue_program(struct kvm_vcpu *vcpu, ulong flags)
 	kvmppc_inject_interrupt(vcpu, BOOK3S_INTERRUPT_PROGRAM, flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kvmppc_core_queue_program);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(kvmppc_core_queue_program);
 >>>>>>> v3.18
@@ -223,6 +250,10 @@ void kvmppc_core_queue_dec(struct kvm_vcpu *vcpu)
 	kvmppc_book3s_queue_irqprio(vcpu, BOOK3S_INTERRUPT_DECREMENTER);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kvmppc_core_queue_dec);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(kvmppc_core_queue_dec);
 >>>>>>> v3.18
@@ -232,6 +263,10 @@ int kvmppc_core_pending_dec(struct kvm_vcpu *vcpu)
 	return test_bit(BOOK3S_IRQPRIO_DECREMENTER, &vcpu->arch.pending_exceptions);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kvmppc_core_pending_dec);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(kvmppc_core_pending_dec);
 >>>>>>> v3.18
@@ -241,6 +276,10 @@ void kvmppc_core_dequeue_dec(struct kvm_vcpu *vcpu)
 	kvmppc_book3s_dequeue_irqprio(vcpu, BOOK3S_INTERRUPT_DECREMENTER);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(kvmppc_core_dequeue_dec);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(kvmppc_core_dequeue_dec);
 >>>>>>> v3.18
@@ -263,7 +302,10 @@ void kvmppc_core_dequeue_external(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void kvmppc_core_queue_data_storage(struct kvm_vcpu *vcpu, ulong dar,
 				    ulong flags)
 {
@@ -281,6 +323,9 @@ void kvmppc_core_queue_inst_storage(struct kvm_vcpu *vcpu, ulong flags)
 	kvmppc_book3s_queue_irqprio(vcpu, BOOK3S_INTERRUPT_INST_STORAGE);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int kvmppc_book3s_irqprio_deliver(struct kvm_vcpu *vcpu, unsigned int priority)
 {
@@ -291,7 +336,11 @@ int kvmppc_book3s_irqprio_deliver(struct kvm_vcpu *vcpu, unsigned int priority)
 	switch (priority) {
 	case BOOK3S_IRQPRIO_DECREMENTER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		deliver = (vcpu->arch.shared->msr & MSR_EE) && !crit;
+=======
+		deliver = (kvmppc_get_msr(vcpu) & MSR_EE) && !crit;
+>>>>>>> v3.18
 =======
 		deliver = (kvmppc_get_msr(vcpu) & MSR_EE) && !crit;
 >>>>>>> v3.18
@@ -300,7 +349,11 @@ int kvmppc_book3s_irqprio_deliver(struct kvm_vcpu *vcpu, unsigned int priority)
 	case BOOK3S_IRQPRIO_EXTERNAL:
 	case BOOK3S_IRQPRIO_EXTERNAL_LEVEL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		deliver = (vcpu->arch.shared->msr & MSR_EE) && !crit;
+=======
+		deliver = (kvmppc_get_msr(vcpu) & MSR_EE) && !crit;
+>>>>>>> v3.18
 =======
 		deliver = (kvmppc_get_msr(vcpu) & MSR_EE) && !crit;
 >>>>>>> v3.18
@@ -349,6 +402,12 @@ int kvmppc_book3s_irqprio_deliver(struct kvm_vcpu *vcpu, unsigned int priority)
 		vec = BOOK3S_INTERRUPT_PERFMON;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case BOOK3S_IRQPRIO_FAC_UNAVAIL:
+		vec = BOOK3S_INTERRUPT_FAC_UNAVAIL;
+		break;
+>>>>>>> v3.18
 =======
 	case BOOK3S_IRQPRIO_FAC_UNAVAIL:
 		vec = BOOK3S_INTERRUPT_FAC_UNAVAIL;
@@ -416,6 +475,7 @@ int kvmppc_core_prepare_to_enter(struct kvm_vcpu *vcpu)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 pfn_t kvmppc_gfn_to_pfn(struct kvm_vcpu *vcpu, gfn_t gfn)
 {
@@ -429,6 +489,8 @@ pfn_t kvmppc_gfn_to_pfn(struct kvm_vcpu *vcpu, gfn_t gfn)
 	    unlikely(((gfn << PAGE_SHIFT) & KVM_PAM) ==
 		     ((mp_pa & PAGE_MASK) & KVM_PAM))) {
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(kvmppc_core_prepare_to_enter);
 
 pfn_t kvmppc_gpa_to_pfn(struct kvm_vcpu *vcpu, gpa_t gpa, bool writing,
@@ -443,12 +505,16 @@ pfn_t kvmppc_gpa_to_pfn(struct kvm_vcpu *vcpu, gpa_t gpa, bool writing,
 	/* Magic page override */
 	gpa &= ~0xFFFULL;
 	if (unlikely(mp_pa) && unlikely((gpa & KVM_PAM) == mp_pa)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ulong shared_page = ((ulong)vcpu->arch.shared) & PAGE_MASK;
 		pfn_t pfn;
 
 		pfn = (pfn_t)virt_to_phys((void*)shared_page) >> PAGE_SHIFT;
 		get_page(pfn_to_page(pfn));
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return pfn;
 	}
@@ -465,6 +531,8 @@ static int kvmppc_xlate(struct kvm_vcpu *vcpu, ulong eaddr, bool data,
 	if (relocated) {
 		r = vcpu->arch.mmu.xlate(vcpu, eaddr, pte, data);
 =======
+=======
+>>>>>>> v3.18
 		if (writable)
 			*writable = true;
 		return pfn;
@@ -484,6 +552,9 @@ int kvmppc_xlate(struct kvm_vcpu *vcpu, ulong eaddr, enum xlate_instdata xlid,
 
 	if (relocated) {
 		r = vcpu->arch.mmu.xlate(vcpu, eaddr, pte, data, iswrite);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		pte->eaddr = eaddr;
@@ -494,7 +565,10 @@ int kvmppc_xlate(struct kvm_vcpu *vcpu, ulong eaddr, enum xlate_instdata xlid,
 		pte->may_execute = true;
 		r = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if ((kvmppc_get_msr(vcpu) & (MSR_IR | MSR_DR)) == MSR_DR &&
 		    !data) {
@@ -502,12 +576,16 @@ int kvmppc_xlate(struct kvm_vcpu *vcpu, ulong eaddr, enum xlate_instdata xlid,
 			    ((eaddr & SPLIT_HACK_MASK) == SPLIT_HACK_OFFS))
 			pte->raddr &= ~SPLIT_HACK_MASK;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	return r;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static hva_t kvmppc_bad_hva(void)
 {
@@ -598,6 +676,8 @@ int kvmppc_subarch_vcpu_init(struct kvm_vcpu *vcpu)
 void kvmppc_subarch_vcpu_uninit(struct kvm_vcpu *vcpu)
 {
 =======
+=======
+>>>>>>> v3.18
 int kvmppc_load_last_inst(struct kvm_vcpu *vcpu, enum instruction_type type,
 					 u32 *inst)
 {
@@ -639,6 +719,9 @@ int kvm_arch_vcpu_ioctl_set_sregs(struct kvm_vcpu *vcpu,
 				  struct kvm_sregs *sregs)
 {
 	return vcpu->kvm->arch.kvm_ops->set_sregs(vcpu, sregs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -651,6 +734,7 @@ int kvm_arch_vcpu_ioctl_get_regs(struct kvm_vcpu *vcpu, struct kvm_regs *regs)
 	regs->ctr = kvmppc_get_ctr(vcpu);
 	regs->lr = kvmppc_get_lr(vcpu);
 	regs->xer = kvmppc_get_xer(vcpu);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	regs->msr = vcpu->arch.shared->msr;
 	regs->srr0 = vcpu->arch.shared->srr0;
@@ -665,6 +749,8 @@ int kvm_arch_vcpu_ioctl_get_regs(struct kvm_vcpu *vcpu, struct kvm_regs *regs)
 	regs->sprg6 = vcpu->arch.shared->sprg6;
 	regs->sprg7 = vcpu->arch.shared->sprg7;
 =======
+=======
+>>>>>>> v3.18
 	regs->msr = kvmppc_get_msr(vcpu);
 	regs->srr0 = kvmppc_get_srr0(vcpu);
 	regs->srr1 = kvmppc_get_srr1(vcpu);
@@ -677,6 +763,9 @@ int kvm_arch_vcpu_ioctl_get_regs(struct kvm_vcpu *vcpu, struct kvm_regs *regs)
 	regs->sprg5 = kvmppc_get_sprg5(vcpu);
 	regs->sprg6 = kvmppc_get_sprg6(vcpu);
 	regs->sprg7 = kvmppc_get_sprg7(vcpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(regs->gpr); i++)
@@ -696,6 +785,7 @@ int kvm_arch_vcpu_ioctl_set_regs(struct kvm_vcpu *vcpu, struct kvm_regs *regs)
 	kvmppc_set_xer(vcpu, regs->xer);
 	kvmppc_set_msr(vcpu, regs->msr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vcpu->arch.shared->srr0 = regs->srr0;
 	vcpu->arch.shared->srr1 = regs->srr1;
 	vcpu->arch.shared->sprg0 = regs->sprg0;
@@ -707,6 +797,8 @@ int kvm_arch_vcpu_ioctl_set_regs(struct kvm_vcpu *vcpu, struct kvm_regs *regs)
 	vcpu->arch.shared->sprg6 = regs->sprg6;
 	vcpu->arch.shared->sprg7 = regs->sprg7;
 =======
+=======
+>>>>>>> v3.18
 	kvmppc_set_srr0(vcpu, regs->srr0);
 	kvmppc_set_srr1(vcpu, regs->srr1);
 	kvmppc_set_sprg0(vcpu, regs->sprg0);
@@ -717,6 +809,9 @@ int kvm_arch_vcpu_ioctl_set_regs(struct kvm_vcpu *vcpu, struct kvm_regs *regs)
 	kvmppc_set_sprg5(vcpu, regs->sprg5);
 	kvmppc_set_sprg6(vcpu, regs->sprg6);
 	kvmppc_set_sprg7(vcpu, regs->sprg7);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(regs->gpr); i++)
@@ -735,6 +830,7 @@ int kvm_arch_vcpu_ioctl_set_fpu(struct kvm_vcpu *vcpu, struct kvm_fpu *fpu)
 	return -ENOTSUPP;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int kvm_vcpu_ioctl_get_one_reg(struct kvm_vcpu *vcpu, struct kvm_one_reg *reg)
 {
@@ -788,6 +884,8 @@ int kvm_vcpu_ioctl_get_one_reg(struct kvm_vcpu *vcpu, struct kvm_one_reg *reg)
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 int kvmppc_get_one_reg(struct kvm_vcpu *vcpu, u64 id,
 			union kvmppc_one_reg *val)
 {
@@ -825,6 +923,9 @@ int kvmppc_get_one_reg(struct kvm_vcpu *vcpu, u64 id,
 		case KVM_REG_PPC_DEBUG_INST:
 			*val = get_reg_val(id, INS_TW);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_KVM_XICS
 		case KVM_REG_PPC_ICP_STATE:
@@ -833,10 +934,13 @@ int kvmppc_get_one_reg(struct kvm_vcpu *vcpu, u64 id,
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			val = get_reg_val(reg->id, kvmppc_xics_get_icp(vcpu));
 			break;
 #endif /* CONFIG_KVM_XICS */
 =======
+=======
+>>>>>>> v3.18
 			*val = get_reg_val(id, kvmppc_xics_get_icp(vcpu));
 			break;
 #endif /* CONFIG_KVM_XICS */
@@ -861,12 +965,16 @@ int kvmppc_get_one_reg(struct kvm_vcpu *vcpu, u64 id,
 		case KVM_REG_PPC_IC:
 			*val = get_reg_val(id, vcpu->arch.ic);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			r = -EINVAL;
 			break;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (r)
 		return r;
@@ -875,10 +983,13 @@ int kvmppc_get_one_reg(struct kvm_vcpu *vcpu, u64 id,
 		r = -EFAULT;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	return r;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int kvm_vcpu_ioctl_set_one_reg(struct kvm_vcpu *vcpu, struct kvm_one_reg *reg)
 {
@@ -929,6 +1040,8 @@ int kvm_vcpu_ioctl_set_one_reg(struct kvm_vcpu *vcpu, struct kvm_one_reg *reg)
 			break;
 #endif /* CONFIG_ALTIVEC */
 =======
+=======
+>>>>>>> v3.18
 int kvmppc_set_one_reg(struct kvm_vcpu *vcpu, u64 id,
 			union kvmppc_one_reg *val)
 {
@@ -963,6 +1076,9 @@ int kvmppc_set_one_reg(struct kvm_vcpu *vcpu, u64 id,
 			}
 			break;
 #endif /* CONFIG_VSX */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_KVM_XICS
 		case KVM_REG_PPC_ICP_STATE:
@@ -972,10 +1088,13 @@ int kvmppc_set_one_reg(struct kvm_vcpu *vcpu, u64 id,
 			}
 			r = kvmppc_xics_set_icp(vcpu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						set_reg_val(reg->id, val));
 			break;
 #endif /* CONFIG_KVM_XICS */
 =======
+=======
+>>>>>>> v3.18
 						set_reg_val(id, *val));
 			break;
 #endif /* CONFIG_KVM_XICS */
@@ -1000,6 +1119,9 @@ int kvmppc_set_one_reg(struct kvm_vcpu *vcpu, u64 id,
 		case KVM_REG_PPC_IC:
 			vcpu->arch.ic = set_reg_val(id, *val);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			r = -EINVAL;
@@ -1011,7 +1133,10 @@ int kvmppc_set_one_reg(struct kvm_vcpu *vcpu, u64 id,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void kvmppc_core_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
 {
 	vcpu->kvm->arch.kvm_ops->vcpu_load(vcpu, cpu);
@@ -1033,6 +1158,9 @@ int kvmppc_vcpu_run(struct kvm_run *kvm_run, struct kvm_vcpu *vcpu)
 	return vcpu->kvm->arch.kvm_ops->vcpu_run(kvm_run, vcpu);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int kvm_arch_vcpu_ioctl_translate(struct kvm_vcpu *vcpu,
                                   struct kvm_translation *tr)
@@ -1043,6 +1171,7 @@ int kvm_arch_vcpu_ioctl_translate(struct kvm_vcpu *vcpu,
 int kvm_arch_vcpu_ioctl_set_guest_debug(struct kvm_vcpu *vcpu,
 					struct kvm_guest_debug *dbg)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return -EINVAL;
 }
@@ -1055,6 +1184,8 @@ void kvmppc_decrementer_func(unsigned long data)
 	kvm_vcpu_kick(vcpu);
 }
 =======
+=======
+>>>>>>> v3.18
 	vcpu->guest_debug = dbg->control;
 	return 0;
 }
@@ -1213,4 +1344,7 @@ module_exit(kvmppc_book3s_exit);
 MODULE_ALIAS_MISCDEV(KVM_MINOR);
 MODULE_ALIAS("devname:kvm");
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

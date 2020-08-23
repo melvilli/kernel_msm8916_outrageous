@@ -11,6 +11,7 @@
 #include <linux/export.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_RUNTIME
 /**
  * pm_generic_runtime_idle - Generic runtime idle callback for subsystems.
@@ -35,6 +36,9 @@ int pm_generic_runtime_idle(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(pm_generic_runtime_idle);
 
+=======
+#ifdef CONFIG_PM
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ int pm_generic_runtime_resume(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(pm_generic_runtime_resume);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_PM_RUNTIME */
+=======
+#endif /* CONFIG_PM */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PM */
 >>>>>>> v3.18
@@ -317,7 +325,11 @@ EXPORT_SYMBOL_GPL(pm_generic_restore);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pm_generic_complete - Generic routine competing a device power transition.
+=======
+ * pm_generic_complete - Generic routine completing a device power transition.
+>>>>>>> v3.18
 =======
  * pm_generic_complete - Generic routine completing a device power transition.
 >>>>>>> v3.18

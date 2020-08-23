@@ -310,7 +310,10 @@ static ssize_t pm8001_ctl_aap_log_show(struct device *cdev,
 static DEVICE_ATTR(aap_log, S_IRUGO, pm8001_ctl_aap_log_show, NULL);
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pm8001_ctl_ib_queue_log_show - Out bound Queue log
  * @cdev:pointer to embedded class device
  * @buf: the buffer returned
@@ -412,6 +415,9 @@ static ssize_t pm8001_ctl_bios_version_show(struct device *cdev,
 }
 static DEVICE_ATTR(bios_version, S_IRUGO, pm8001_ctl_bios_version_show, NULL);
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * pm8001_ctl_aap_log_show - IOP event log
  * @cdev: pointer to embedded class device
@@ -449,7 +455,10 @@ static ssize_t pm8001_ctl_iop_log_show(struct device *cdev,
 static DEVICE_ATTR(iop_log, S_IRUGO, pm8001_ctl_iop_log_show, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  ** pm8001_ctl_fatal_log_show - fatal error logging
  ** @cdev:pointer to embedded class device
@@ -487,6 +496,9 @@ static ssize_t pm8001_ctl_gsm_log_show(struct device *cdev,
 
 static DEVICE_ATTR(gsm_log, S_IRUGO, pm8001_ctl_gsm_log_show, NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FLASH_CMD_NONE      0x00
 #define FLASH_CMD_UPDATE    0x01
@@ -531,6 +543,7 @@ static int pm8001_set_nvmd(struct pm8001_hba_info *pm8001_ha)
 	struct pm8001_ioctl_payload	*payload;
 	DECLARE_COMPLETION_ONSTACK(completion);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8		*ioctlbuffer = NULL;
 	u32		length = 0;
 	u32		ret = 0;
@@ -544,6 +557,8 @@ static int pm8001_set_nvmd(struct pm8001_hba_info *pm8001_ha)
 		ret = FAIL_FILE_SIZE;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	u8		*ioctlbuffer;
 	u32		ret;
 	u32		length = 1024 * 5 + sizeof(*payload) - 1;
@@ -557,6 +572,9 @@ static int pm8001_set_nvmd(struct pm8001_hba_info *pm8001_ha)
 	if (!ioctlbuffer) {
 		pm8001_ha->fw_status = FAIL_OUT_MEMORY;
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	payload = (struct pm8001_ioctl_payload *)ioctlbuffer;
@@ -568,11 +586,17 @@ static int pm8001_set_nvmd(struct pm8001_hba_info *pm8001_ha)
 	pm8001_ha->nvmd_completion = &completion;
 	ret = PM8001_CHIP_DISP->set_nvmd_req(pm8001_ha, payload);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		pm8001_ha->fw_status = FAIL_OUT_MEMORY;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wait_for_completion(&completion);
 out:
@@ -584,6 +608,7 @@ static int pm8001_update_flash(struct pm8001_hba_info *pm8001_ha)
 {
 	struct pm8001_ioctl_payload	*payload;
 	DECLARE_COMPLETION_ONSTACK(completion);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8		*ioctlbuffer = NULL;
 	u32		length = 0;
@@ -606,6 +631,8 @@ static int pm8001_update_flash(struct pm8001_hba_info *pm8001_ha)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	u8		*ioctlbuffer;
 	struct fw_control_info	*fwControl;
 	u32		partitionSize, partitionSizeTmp;
@@ -625,17 +652,25 @@ static int pm8001_update_flash(struct pm8001_hba_info *pm8001_ha)
 		return -ENOMEM;
 	}
 	image_hdr = (struct pm8001_fw_image_header *)pm8001_ha->fw_image->data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (sizeRead < pm8001_ha->fw_image->size) {
 		partitionSizeTmp =
 			*(u32 *)((u8 *)&image_hdr->image_length + sizeRead);
 		partitionSize = be32_to_cpu(partitionSizeTmp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		loopcount = (partitionSize + HEADER_LEN)/IOCTL_BUF_SIZE;
 		if (loopcount % IOCTL_BUF_SIZE)
 			loopcount++;
 		if (loopcount == 0)
 			loopcount++;
+=======
+		loopcount = DIV_ROUND_UP(partitionSize + HEADER_LEN,
+					IOCTL_BUF_SIZE);
+>>>>>>> v3.18
 =======
 		loopcount = DIV_ROUND_UP(partitionSize + HEADER_LEN,
 					IOCTL_BUF_SIZE);
@@ -672,6 +707,7 @@ static int pm8001_update_flash(struct pm8001_hba_info *pm8001_ha)
 		pm8001_ha->nvmd_completion = &completion;
 		ret = PM8001_CHIP_DISP->fw_flash_update_req(pm8001_ha, payload);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wait_for_completion(&completion);
 		if (ret || (fwControl->retcode > FLASH_UPDATE_IN_PROGRESS)) {
 			ret = fwControl->retcode;
@@ -685,6 +721,8 @@ static int pm8001_update_flash(struct pm8001_hba_info *pm8001_ha)
 	partitionNumber++;
 }
 =======
+=======
+>>>>>>> v3.18
 		if (ret) {
 			pm8001_ha->fw_status = FAIL_OUT_MEMORY;
 			goto out;
@@ -697,6 +735,9 @@ static int pm8001_update_flash(struct pm8001_hba_info *pm8001_ha)
 		}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	kfree(ioctlbuffer);
@@ -713,6 +754,7 @@ static ssize_t pm8001_store_update_fw(struct device *cdev,
 	int res, i;
 	int flash_command = FLASH_CMD_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EACCES;
@@ -723,6 +765,8 @@ static ssize_t pm8001_store_update_fw(struct device *cdev,
 		err = FAIL_OUT_MEMORY;
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	if (!capable(CAP_SYS_ADMIN))
@@ -738,6 +782,9 @@ static ssize_t pm8001_store_update_fw(struct device *cdev,
 	if (!cmd_ptr) {
 		pm8001_ha->fw_status = FAIL_OUT_MEMORY;
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -745,8 +792,14 @@ static ssize_t pm8001_store_update_fw(struct device *cdev,
 	res = sscanf(buf, "%s %s", cmd_ptr, filename_ptr);
 	if (res != 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = FAIL_PARAMETERS;
 		goto out1;
+=======
+		pm8001_ha->fw_status = FAIL_PARAMETERS;
+		ret = -EINVAL;
+		goto out;
+>>>>>>> v3.18
 =======
 		pm8001_ha->fw_status = FAIL_PARAMETERS;
 		ret = -EINVAL;
@@ -762,6 +815,7 @@ static ssize_t pm8001_store_update_fw(struct device *cdev,
 		}
 	}
 	if (flash_command == FLASH_CMD_NONE) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = FAIL_PARAMETERS;
 		goto out1;
@@ -808,6 +862,8 @@ out:
 	else
 		return -err;
 =======
+=======
+>>>>>>> v3.18
 		pm8001_ha->fw_status = FAIL_PARAMETERS;
 		ret = -EINVAL;
 		goto out;
@@ -840,6 +896,9 @@ out:
 
 	pm8001_ha->fw_status = FLASH_OK;
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -864,7 +923,11 @@ static ssize_t pm8001_show_update_fw(struct device *cdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(update_fw, S_IRUGO|S_IWUGO,
+=======
+static DEVICE_ATTR(update_fw, S_IRUGO|S_IWUSR|S_IWGRP,
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(update_fw, S_IRUGO|S_IWUSR|S_IWGRP,
 >>>>>>> v3.18
@@ -876,6 +939,11 @@ struct device_attribute *pm8001_host_attrs[] = {
 	&dev_attr_aap_log,
 	&dev_attr_iop_log,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&dev_attr_fatal_log,
+	&dev_attr_gsm_log,
+>>>>>>> v3.18
 =======
 	&dev_attr_fatal_log,
 	&dev_attr_gsm_log,
@@ -887,6 +955,12 @@ struct device_attribute *pm8001_host_attrs[] = {
 	&dev_attr_logging_level,
 	&dev_attr_host_sas_address,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&dev_attr_bios_version,
+	&dev_attr_ib_log,
+	&dev_attr_ob_log,
+>>>>>>> v3.18
 =======
 	&dev_attr_bios_version,
 	&dev_attr_ib_log,

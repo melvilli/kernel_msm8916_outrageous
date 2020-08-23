@@ -256,7 +256,11 @@ module_exit(md4_mod_fini);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("MD4 Message Digest Algorithm");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("md4");
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

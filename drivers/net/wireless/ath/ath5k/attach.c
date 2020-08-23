@@ -352,8 +352,12 @@ void ath5k_hw_deinit(struct ath5k_hw *ah)
 	__set_bit(ATH_STAT_INVALID, ah->status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ah->ah_rf_banks != NULL)
 		kfree(ah->ah_rf_banks);
+=======
+	kfree(ah->ah_rf_banks);
+>>>>>>> v3.18
 =======
 	kfree(ah->ah_rf_banks);
 >>>>>>> v3.18

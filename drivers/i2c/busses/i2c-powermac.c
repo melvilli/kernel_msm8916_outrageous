@@ -15,10 +15,13 @@
     GNU General Public License for more details.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -28,9 +31,15 @@
 #include <linux/types.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/device.h>
 #include <linux/platform_device.h>
+=======
+#include <linux/device.h>
+#include <linux/platform_device.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 #include <linux/platform_device.h>
@@ -408,7 +417,11 @@ static void i2c_powermac_register_devices(struct i2c_adapter *adap,
 static int i2c_powermac_probe(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pmac_i2c_bus *bus = dev->dev.platform_data;
+=======
+	struct pmac_i2c_bus *bus = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	struct pmac_i2c_bus *bus = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18
@@ -454,7 +467,13 @@ static int i2c_powermac_probe(struct platform_device *dev)
 	i2c_set_adapdata(adapter, bus);
 	adapter->dev.parent = &dev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->dev.of_node = dev->dev.of_node;
+=======
+
+	/* Clear of_node to skip automatic registration of i2c child nodes */
+	adapter->dev.of_node = NULL;
+>>>>>>> v3.18
 =======
 
 	/* Clear of_node to skip automatic registration of i2c child nodes */
@@ -466,6 +485,10 @@ static int i2c_powermac_probe(struct platform_device *dev)
 		       "failed\n", adapter->name);
 		memset(adapter, 0, sizeof(*adapter));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		return rc;
+>>>>>>> v3.18
 =======
 		return rc;
 >>>>>>> v3.18
@@ -474,6 +497,7 @@ static int i2c_powermac_probe(struct platform_device *dev)
 	printk(KERN_INFO "PowerMac i2c bus %s registered\n", adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Cannot use of_i2c_register_devices() due to Apple device-tree
 	 * funkyness
 	 */
@@ -481,11 +505,16 @@ static int i2c_powermac_probe(struct platform_device *dev)
 
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	/* Use custom child registration due to Apple device-tree funkyness */
 	adapter->dev.of_node = dev->dev.of_node;
 	i2c_powermac_register_devices(adapter, bus);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -19,9 +19,12 @@
 #include <linux/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "soc.h"
 #include "iomap.h"
 #include "common.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "prm2xxx_3xxx.h"
@@ -392,7 +395,12 @@ void omap3_cm_save_context(void)
 	cm_context.iva2_cm_clksel2 =
 		omap2_cm_read_mod_reg(OMAP3430_IVA2_MOD, CM_CLKSEL2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cm_context.cm_sysconfig = __raw_readl(OMAP3430_CM_SYSCONFIG);
+=======
+	cm_context.cm_sysconfig =
+		omap2_cm_read_mod_reg(OCP_MOD, OMAP3430_CM_SYSCONFIG);
+>>>>>>> v3.18
 =======
 	cm_context.cm_sysconfig =
 		omap2_cm_read_mod_reg(OCP_MOD, OMAP3430_CM_SYSCONFIG);
@@ -427,7 +435,12 @@ void omap3_cm_save_context(void)
 	cm_context.pll_cm_clken2 =
 		omap2_cm_read_mod_reg(PLL_MOD, OMAP3430ES2_CM_CLKEN2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cm_context.cm_polctrl = __raw_readl(OMAP3430_CM_POLCTRL);
+=======
+	cm_context.cm_polctrl =
+		omap2_cm_read_mod_reg(OCP_MOD, OMAP3430_CM_POLCTRL);
+>>>>>>> v3.18
 =======
 	cm_context.cm_polctrl =
 		omap2_cm_read_mod_reg(OCP_MOD, OMAP3430_CM_POLCTRL);
@@ -533,7 +546,12 @@ void omap3_cm_restore_context(void)
 	omap2_cm_write_mod_reg(cm_context.iva2_cm_clksel2, OMAP3430_IVA2_MOD,
 			       CM_CLKSEL2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(cm_context.cm_sysconfig, OMAP3430_CM_SYSCONFIG);
+=======
+	omap2_cm_write_mod_reg(cm_context.cm_sysconfig, OCP_MOD,
+			       OMAP3430_CM_SYSCONFIG);
+>>>>>>> v3.18
 =======
 	omap2_cm_write_mod_reg(cm_context.cm_sysconfig, OCP_MOD,
 			       OMAP3430_CM_SYSCONFIG);
@@ -566,7 +584,12 @@ void omap3_cm_restore_context(void)
 	omap2_cm_write_mod_reg(cm_context.pll_cm_clken2, PLL_MOD,
 			       OMAP3430ES2_CM_CLKEN2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(cm_context.cm_polctrl, OMAP3430_CM_POLCTRL);
+=======
+	omap2_cm_write_mod_reg(cm_context.cm_polctrl, OCP_MOD,
+			       OMAP3430_CM_POLCTRL);
+>>>>>>> v3.18
 =======
 	omap2_cm_write_mod_reg(cm_context.cm_polctrl, OCP_MOD,
 			       OMAP3430_CM_POLCTRL);
@@ -660,7 +683,10 @@ void omap3_cm_restore_context(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void omap3_cm_save_scratchpad_contents(u32 *ptr)
 {
 	*ptr++ = omap2_cm_read_mod_reg(CORE_MOD, CM_CLKSEL);
@@ -683,6 +709,9 @@ void omap3_cm_save_scratchpad_contents(u32 *ptr)
 	*ptr++ = omap2_cm_read_mod_reg(MPU_MOD, OMAP3430_CM_CLKSEL2_PLL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *
@@ -696,9 +725,12 @@ static struct cm_ll_data omap3xxx_cm_ll_data = {
 int __init omap3xxx_cm_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_is_omap34xx())
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return cm_register(&omap3xxx_cm_ll_data);
@@ -707,12 +739,16 @@ int __init omap3xxx_cm_init(void)
 static void __exit omap3xxx_cm_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_is_omap34xx())
 		return;
 
 	/* Should never happen */
 	WARN(cm_unregister(&omap3xxx_cm_ll_data),
 	     "%s: cm_ll_data function pointer mismatch\n", __func__);
+=======
+	cm_unregister(&omap3xxx_cm_ll_data);
+>>>>>>> v3.18
 =======
 	cm_unregister(&omap3xxx_cm_ll_data);
 >>>>>>> v3.18

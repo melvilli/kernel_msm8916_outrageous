@@ -1,7 +1,11 @@
 /*
  * Copyright (C) 2007 Google, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2008-2014, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2008-2010, Code Aurora Forum. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2008-2010, Code Aurora Forum. All rights reserved.
 >>>>>>> v3.18
@@ -21,6 +25,7 @@
 #ifndef __ASM_ARCH_MSM_IRQS_H
 #define __ASM_ARCH_MSM_IRQS_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * 0-15:  STI/SGI (software triggered/generated interrupts)
@@ -47,6 +52,8 @@
 #define NR_BOARD_IRQS NR_QPNP_IRQS
 
 =======
+=======
+>>>>>>> v3.18
 #define MSM_IRQ_BIT(irq)     (1 << ((irq) & 31))
 
 #if defined(CONFIG_ARCH_MSM7X30)
@@ -58,11 +65,15 @@
 #include "irqs-7x00.h"
 #else
 #error "Unknown architecture specification"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 #define NR_IRQS (NR_MSM_IRQS + NR_GPIO_IRQS + NR_BOARD_IRQS)
 #define MSM_GPIO_TO_INT(n) (NR_MSM_IRQS + (n))
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FIRST_GPIO_IRQ MSM_GPIO_TO_INT(0)
 #define MSM_INT_TO_REG(base, irq) (base + irq / 32)
@@ -75,6 +86,11 @@
 #endif
 
 #endif
+=======
+#define MSM_INT_TO_REG(base, irq) (base + irq / 32)
+
+#endif
+>>>>>>> v3.18
 =======
 #define MSM_INT_TO_REG(base, irq) (base + irq / 32)
 

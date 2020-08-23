@@ -24,7 +24,10 @@
 #include <linux/i2c.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -287,6 +290,7 @@ static int indycam_s_ctrl(struct v4l2_subdev *sd, struct v4l2_control *ctrl)
 /* I2C-interface */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int indycam_g_chip_ident(struct v4l2_subdev *sd,
 		struct v4l2_dbg_chip_ident *chip)
 {
@@ -301,6 +305,11 @@ static int indycam_g_chip_ident(struct v4l2_subdev *sd,
 
 static const struct v4l2_subdev_core_ops indycam_core_ops = {
 	.g_chip_ident = indycam_g_chip_ident,
+=======
+/* ----------------------------------------------------------------------- */
+
+static const struct v4l2_subdev_core_ops indycam_core_ops = {
+>>>>>>> v3.18
 =======
 /* ----------------------------------------------------------------------- */
 

@@ -161,14 +161,20 @@ static int kvm_set_msi_inatomic(struct kvm_kernel_irq_routing_entry *e,
 int kvm_set_irq_inatomic(struct kvm *kvm, int irq_source_id, u32 irq, int level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct kvm_kernel_irq_routing_entry *e;
 	int ret = -EINVAL;
 	struct kvm_irq_routing_table *irq_rt;
 =======
+=======
+>>>>>>> v3.18
 	struct kvm_kernel_irq_routing_entry entries[KVM_NR_IRQCHIPS];
 	struct kvm_kernel_irq_routing_entry *e;
 	int ret = -EINVAL;
 	int idx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	trace_kvm_set_irq(irq, level, irq_source_id);
@@ -182,6 +188,7 @@ int kvm_set_irq_inatomic(struct kvm *kvm, int irq_source_id, u32 irq, int level)
 	 * which is limited to 1:1 GSI mapping.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_lock();
 	irq_rt = rcu_dereference(kvm->irq_routing);
 	if (irq < irq_rt->nr_rt_entries)
@@ -194,6 +201,8 @@ int kvm_set_irq_inatomic(struct kvm *kvm, int irq_source_id, u32 irq, int level)
 		}
 	rcu_read_unlock();
 =======
+=======
+>>>>>>> v3.18
 	idx = srcu_read_lock(&kvm->irq_srcu);
 	if (kvm_irq_map_gsi(kvm, entries, irq) > 0) {
 		e = &entries[0];
@@ -203,6 +212,9 @@ int kvm_set_irq_inatomic(struct kvm *kvm, int irq_source_id, u32 irq, int level)
 			ret = -EWOULDBLOCK;
 	}
 	srcu_read_unlock(&kvm->irq_srcu, idx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -273,7 +285,11 @@ void kvm_unregister_irq_mask_notifier(struct kvm *kvm, int irq,
 	hlist_del_rcu(&kimn->link);
 	mutex_unlock(&kvm->irq_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	synchronize_rcu();
+=======
+	synchronize_srcu(&kvm->irq_srcu);
+>>>>>>> v3.18
 =======
 	synchronize_srcu(&kvm->irq_srcu);
 >>>>>>> v3.18
@@ -284,20 +300,27 @@ void kvm_fire_mask_notifiers(struct kvm *kvm, unsigned irqchip, unsigned pin,
 {
 	struct kvm_irq_mask_notifier *kimn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int gsi;
 
 	rcu_read_lock();
 	gsi = rcu_dereference(kvm->irq_routing)->chip[irqchip][pin];
 =======
+=======
+>>>>>>> v3.18
 	int idx, gsi;
 
 	idx = srcu_read_lock(&kvm->irq_srcu);
 	gsi = kvm_irq_map_chip_pin(kvm, irqchip, pin);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (gsi != -1)
 		hlist_for_each_entry_rcu(kimn, &kvm->mask_notifier_list, link)
 			if (kimn->irq == gsi)
 				kimn->func(kimn, mask);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rcu_read_unlock();
 }
@@ -305,10 +328,15 @@ void kvm_fire_mask_notifiers(struct kvm *kvm, unsigned irqchip, unsigned pin,
 int kvm_set_routing_entry(struct kvm_irq_routing_table *rt,
 			  struct kvm_kernel_irq_routing_entry *e,
 =======
+=======
+>>>>>>> v3.18
 	srcu_read_unlock(&kvm->irq_srcu, idx);
 }
 
 int kvm_set_routing_entry(struct kvm_kernel_irq_routing_entry *e,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  const struct kvm_irq_routing_entry *ue)
 {
@@ -341,7 +369,10 @@ int kvm_set_routing_entry(struct kvm_kernel_irq_routing_entry *e,
 		if (e->irqchip.pin >= max_pin)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rt->chip[ue->u.irqchip.irqchip][e->irqchip.pin] = ue->gsi;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		break;
@@ -363,7 +394,11 @@ out:
 #define IOAPIC_ROUTING_ENTRY(irq) \
 	{ .gsi = irq, .type = KVM_IRQ_ROUTING_IRQCHIP,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  .u.irqchip.irqchip = KVM_IRQCHIP_IOAPIC, .u.irqchip.pin = (irq) }
+=======
+	  .u.irqchip = { .irqchip = KVM_IRQCHIP_IOAPIC, .pin = (irq) } }
+>>>>>>> v3.18
 =======
 	  .u.irqchip = { .irqchip = KVM_IRQCHIP_IOAPIC, .pin = (irq) } }
 >>>>>>> v3.18
@@ -373,7 +408,11 @@ out:
 #  define PIC_ROUTING_ENTRY(irq) \
 	{ .gsi = irq, .type = KVM_IRQ_ROUTING_IRQCHIP,	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  .u.irqchip.irqchip = SELECT_PIC(irq), .u.irqchip.pin = (irq) % 8 }
+=======
+	  .u.irqchip = { .irqchip = SELECT_PIC(irq), .pin = (irq) % 8 } }
+>>>>>>> v3.18
 =======
 	  .u.irqchip = { .irqchip = SELECT_PIC(irq), .pin = (irq) % 8 } }
 >>>>>>> v3.18

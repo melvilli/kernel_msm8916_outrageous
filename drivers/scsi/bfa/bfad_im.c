@@ -74,10 +74,13 @@ bfa_cb_ioim_done(void *drv, struct bfad_ioim_s *dio,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case BFI_IOIM_STS_ABORTED:
 	case BFI_IOIM_STS_TIMEDOUT:
 	case BFI_IOIM_STS_PATHTOV:
 =======
+=======
+>>>>>>> v3.18
 	case BFI_IOIM_STS_TIMEDOUT:
 		host_status = DID_TIME_OUT;
 		cmnd->result = ScsiResult(host_status, 0);
@@ -86,6 +89,9 @@ bfa_cb_ioim_done(void *drv, struct bfad_ioim_s *dio,
 		host_status = DID_TRANSPORT_DISRUPTED;
 		cmnd->result = ScsiResult(host_status, 0);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		host_status = DID_ERROR;
@@ -218,7 +224,11 @@ bfad_im_abort_handler(struct scsi_cmnd *cmnd)
 	hal_io = (struct bfa_ioim_s *) cmnd->host_scribble;
 	if (!hal_io) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* IO has been completed, retrun success */
+=======
+		/* IO has been completed, return success */
+>>>>>>> v3.18
 =======
 		/* IO has been completed, return success */
 >>>>>>> v3.18
@@ -960,9 +970,14 @@ bfad_im_slave_alloc(struct scsi_device *sdev)
 {
 	struct fc_rport *rport = starget_to_rport(scsi_target(sdev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bfad_itnim_data_s *itnim_data =
 				(struct bfad_itnim_data_s *) rport->dd_data;
 	struct bfa_s *bfa = itnim_data->itnim->bfa_itnim->bfa;
+=======
+	struct bfad_itnim_data_s *itnim_data;
+	struct bfa_s *bfa;
+>>>>>>> v3.18
 =======
 	struct bfad_itnim_data_s *itnim_data;
 	struct bfa_s *bfa;
@@ -972,6 +987,12 @@ bfad_im_slave_alloc(struct scsi_device *sdev)
 		return -ENXIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	itnim_data = (struct bfad_itnim_data_s *) rport->dd_data;
+	bfa = itnim_data->itnim->bfa_itnim->bfa;
+
+>>>>>>> v3.18
 =======
 	itnim_data = (struct bfad_itnim_data_s *) rport->dd_data;
 	bfa = itnim_data->itnim->bfa_itnim->bfa;
@@ -1062,7 +1083,11 @@ bfad_fc_host_init(struct bfad_im_port_s *im_port)
 	fc_host_supported_fc4s(host)[7] = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(symname, bfad->bfa_fcs.fabric.bport.port_cfg.sym_name.symname,
+=======
+	strlcpy(symname, bfad->bfa_fcs.fabric.bport.port_cfg.sym_name.symname,
+>>>>>>> v3.18
 =======
 	strlcpy(symname, bfad->bfa_fcs.fabric.bport.port_cfg.sym_name.symname,
 >>>>>>> v3.18

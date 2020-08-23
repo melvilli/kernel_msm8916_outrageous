@@ -28,7 +28,10 @@
 
 extern void msp_serial_setup(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void pmctwiled_setup(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -53,7 +56,11 @@ void msp7120_reset(void)
 	__asm__ __volatile__ (
 		"	.set	push				\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"	.set	mips3				\n"
+=======
+		"	.set	arch=r4000			\n"
+>>>>>>> v3.18
 =======
 		"	.set	arch=r4000			\n"
 >>>>>>> v3.18
@@ -156,8 +163,11 @@ void __init plat_mem_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct plat_smp_ops msp_smtc_smp_ops;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init prom_init(void)
@@ -241,6 +251,7 @@ void __init prom_init(void)
 	msp_serial_setup();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (register_vsmp_smp_ops()) {
 #ifdef CONFIG_MIPS_MT_SMTC
 		register_smp_ops(&msp_smtc_smp_ops);
@@ -254,6 +265,9 @@ void __init prom_init(void)
 	 */
 	pmctwiled_setup();
 #endif
+=======
+	register_vsmp_smp_ops();
+>>>>>>> v3.18
 =======
 	register_vsmp_smp_ops();
 >>>>>>> v3.18

@@ -16,6 +16,10 @@
 #include <linux/kdebug.h>
 #include <asm/pgalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mmu.h>
+>>>>>>> v3.18
 =======
 #include <asm/mmu.h>
 >>>>>>> v3.18
@@ -56,8 +60,12 @@ bad_area:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_page_fault(struct pt_regs *regs, int write, unsigned long address,
 		   unsigned long cause_code)
+=======
+void do_page_fault(unsigned long address, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void do_page_fault(unsigned long address, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -68,6 +76,10 @@ void do_page_fault(unsigned long address, struct pt_regs *regs)
 	siginfo_t info;
 	int fault, ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int write = regs->ecr_cause & ECR_C_PROTV_STORE;  /* ST/EX */
+>>>>>>> v3.18
 =======
 	int write = regs->ecr_cause & ECR_C_PROTV_STORE;  /* ST/EX */
 >>>>>>> v3.18
@@ -123,7 +135,12 @@ good_area:
 	/* Handle protection violation, execute on heap or stack */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cause_code == ((ECR_V_PROTV << 16) | ECR_C_PROTV_INST_FETCH))
+=======
+	if ((regs->ecr_vec == ECR_V_PROTV) &&
+	    (regs->ecr_cause == ECR_C_PROTV_INST_FETCH))
+>>>>>>> v3.18
 =======
 	if ((regs->ecr_vec == ECR_V_PROTV) &&
 	    (regs->ecr_cause == ECR_C_PROTV_INST_FETCH))
@@ -175,11 +192,16 @@ good_area:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* TBD: switch to pagefault_out_of_memory() */
 	if (fault & VM_FAULT_OOM)
 		goto out_of_memory;
 	else if (fault & VM_FAULT_SIGSEGV)
 		goto bad_area;
+=======
+	if (fault & VM_FAULT_OOM)
+		goto out_of_memory;
+>>>>>>> v3.18
 =======
 	if (fault & VM_FAULT_OOM)
 		goto out_of_memory;
@@ -202,7 +224,10 @@ bad_area_nosemaphore:
 	if (user_mode(regs)) {
 		tsk->thread.fault_address = address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsk->thread.cause_code = cause_code;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		info.si_signo = SIGSEGV;
@@ -226,7 +251,11 @@ no_context:
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	die("Oops", regs, address, cause_code);
+=======
+	die("Oops", regs, address);
+>>>>>>> v3.18
 =======
 	die("Oops", regs, address);
 >>>>>>> v3.18
@@ -249,7 +278,10 @@ do_sigbus:
 
 	tsk->thread.fault_address = address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tsk->thread.cause_code = cause_code;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	info.si_signo = SIGBUS;

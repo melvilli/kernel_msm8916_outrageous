@@ -8,9 +8,12 @@
 #include <linux/module.h>
 #include <linux/spi/pxa2xx_spi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int ce4100_spi_probe(struct pci_dev *dev,
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/clk-provider.h>
 
@@ -99,6 +102,9 @@ static struct pxa_spi_info spi_info_configs[] = {
 };
 
 static int pxa2xx_spi_pci_probe(struct pci_dev *dev,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		const struct pci_device_id *ent)
 {
@@ -108,6 +114,12 @@ static int pxa2xx_spi_pci_probe(struct pci_dev *dev,
 	struct pxa2xx_spi_master spi_pdata;
 	struct ssp_device *ssp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct pxa_spi_info *c;
+	char buf[40];
+	struct pci_dev *dma_dev;
+>>>>>>> v3.18
 =======
 	struct pxa_spi_info *c;
 	char buf[40];
@@ -123,9 +135,12 @@ static int pxa2xx_spi_pci_probe(struct pci_dev *dev,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(&spi_pdata, 0, sizeof(spi_pdata));
 	spi_pdata.num_chipselect = dev->devfn;
 =======
+=======
+>>>>>>> v3.18
 	c = &spi_info_configs[ent->driver_data];
 
 	memset(&spi_pdata, 0, sizeof(spi_pdata));
@@ -154,6 +169,9 @@ static int pxa2xx_spi_pci_probe(struct pci_dev *dev,
 	spi_pdata.tx_param = c->tx_param;
 	spi_pdata.rx_param = c->rx_param;
 	spi_pdata.enable_dma = c->rx_param && c->tx_param;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ssp = &spi_pdata.ssp;
@@ -165,9 +183,12 @@ static int pxa2xx_spi_pci_probe(struct pci_dev *dev,
 	}
 	ssp->irq = dev->irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssp->port_id = dev->devfn;
 	ssp->type = PXA25x_SSP;
 =======
+=======
+>>>>>>> v3.18
 	ssp->port_id = (c->port_id >= 0) ? c->port_id : dev->devfn;
 	ssp->type = c->type;
 
@@ -176,6 +197,9 @@ static int pxa2xx_spi_pci_probe(struct pci_dev *dev,
 					CLK_IS_ROOT, c->max_clk_rate);
 	 if (IS_ERR(ssp->clk))
 		return PTR_ERR(ssp->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	memset(&pi, 0, sizeof(pi));
@@ -187,13 +211,19 @@ static int pxa2xx_spi_pci_probe(struct pci_dev *dev,
 
 	pdev = platform_device_register_full(&pi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(pdev))
 		return PTR_ERR(pdev);
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(pdev)) {
 		clk_unregister(ssp->clk);
 		return PTR_ERR(pdev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pci_set_drvdata(dev, pdev);
@@ -201,6 +231,7 @@ static int pxa2xx_spi_pci_probe(struct pci_dev *dev,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void ce4100_spi_remove(struct pci_dev *dev)
 {
@@ -226,6 +257,8 @@ module_pci_driver(ce4100_spi_driver);
 
 MODULE_DESCRIPTION("CE4100 PCI-SPI glue code for PXA's driver");
 =======
+=======
+>>>>>>> v3.18
 static void pxa2xx_spi_pci_remove(struct pci_dev *dev)
 {
 	struct platform_device *pdev = pci_get_drvdata(dev);
@@ -257,6 +290,9 @@ static struct pci_driver pxa2xx_spi_pci_driver = {
 module_pci_driver(pxa2xx_spi_pci_driver);
 
 MODULE_DESCRIPTION("CE4100/LPSS PCI-SPI glue code for PXA's driver");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL v2");
 MODULE_AUTHOR("Sebastian Andrzej Siewior <bigeasy@linutronix.de>");

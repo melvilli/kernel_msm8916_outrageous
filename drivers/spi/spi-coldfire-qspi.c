@@ -78,8 +78,11 @@ struct mcfqspi {
 
 	wait_queue_head_t waitq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct device *dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -139,7 +142,11 @@ static void mcfqspi_cs_deselect(struct mcfqspi *mcfqspi, u8 chip_select,
 static int mcfqspi_cs_setup(struct mcfqspi *mcfqspi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (mcfqspi->cs_control && mcfqspi->cs_control->setup) ?
+=======
+	return (mcfqspi->cs_control->setup) ?
+>>>>>>> v3.18
 =======
 	return (mcfqspi->cs_control->setup) ?
 >>>>>>> v3.18
@@ -149,7 +156,11 @@ static int mcfqspi_cs_setup(struct mcfqspi *mcfqspi)
 static void mcfqspi_cs_teardown(struct mcfqspi *mcfqspi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mcfqspi->cs_control && mcfqspi->cs_control->teardown)
+=======
+	if (mcfqspi->cs_control->teardown)
+>>>>>>> v3.18
 =======
 	if (mcfqspi->cs_control->teardown)
 >>>>>>> v3.18
@@ -312,6 +323,7 @@ static void mcfqspi_transfer_msg16(struct mcfqspi *mcfqspi, unsigned count,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mcfqspi_transfer_one_message(struct spi_master *master,
 					 struct spi_message *msg)
 {
@@ -384,6 +396,8 @@ static int mcfqspi_unprepare_transfer_hw(struct spi_master *master)
 
 	pm_runtime_put_sync(mcfqspi->dev);
 =======
+=======
+>>>>>>> v3.18
 static void mcfqspi_set_cs(struct spi_device *spi, bool enable)
 {
 	struct mcfqspi *mcfqspi = spi_master_get_devdata(spi->master);
@@ -417,6 +431,9 @@ static int mcfqspi_transfer_one(struct spi_master *master,
 		mcfqspi_transfer_msg16(mcfqspi, t->len / 2, t->tx_buf,
 				       t->rx_buf);
 	mcfqspi_wr_qir(mcfqspi, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -424,6 +441,7 @@ static int mcfqspi_transfer_one(struct spi_master *master,
 
 static int mcfqspi_setup(struct spi_device *spi)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((spi->bits_per_word < 8) || (spi->bits_per_word > 16)) {
 		dev_dbg(&spi->dev, "%d bits per word is not supported\n",
@@ -436,6 +454,8 @@ static int mcfqspi_setup(struct spi_device *spi)
 		return -EINVAL;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mcfqspi_cs_deselect(spi_master_get_devdata(spi->master),
@@ -459,7 +479,10 @@ static int mcfqspi_probe(struct platform_device *pdev)
 	int status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pdata = dev_get_platdata(&pdev->dev);
 	if (!pdata) {
 		dev_dbg(&pdev->dev, "platform data is missing\n");
@@ -471,6 +494,9 @@ static int mcfqspi_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	master = spi_alloc_master(&pdev->dev, sizeof(*mcfqspi));
 	if (master == NULL) {
@@ -481,6 +507,7 @@ static int mcfqspi_probe(struct platform_device *pdev)
 	mcfqspi = spi_master_get_devdata(master);
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		dev_dbg(&pdev->dev, "platform_get_resource failed\n");
@@ -502,17 +529,23 @@ static int mcfqspi_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	mcfqspi->iobase = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(mcfqspi->iobase)) {
 		status = PTR_ERR(mcfqspi->iobase);
 		goto fail0;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mcfqspi->irq = platform_get_irq(pdev, 0);
 	if (mcfqspi->irq < 0) {
 		dev_dbg(&pdev->dev, "platform_get_irq failed\n");
 		status = -ENXIO;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail2;
 	}
@@ -538,6 +571,8 @@ static int mcfqspi_probe(struct platform_device *pdev)
 		goto fail4;
 	}
 =======
+=======
+>>>>>>> v3.18
 		goto fail0;
 	}
 
@@ -556,6 +591,9 @@ static int mcfqspi_probe(struct platform_device *pdev)
 	}
 	clk_enable(mcfqspi->clk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	master->bus_num = pdata->bus_num;
 	master->num_chipselect = pdata->num_chipselect;
@@ -564,6 +602,7 @@ static int mcfqspi_probe(struct platform_device *pdev)
 	status = mcfqspi_cs_setup(mcfqspi);
 	if (status) {
 		dev_dbg(&pdev->dev, "error initializing cs_control\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail4;
 	}
@@ -586,6 +625,8 @@ static int mcfqspi_probe(struct platform_device *pdev)
 	}
 	pm_runtime_enable(mcfqspi->dev);
 =======
+=======
+>>>>>>> v3.18
 		goto fail1;
 	}
 
@@ -606,12 +647,16 @@ static int mcfqspi_probe(struct platform_device *pdev)
 		goto fail2;
 	}
 	pm_runtime_enable(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_info(&pdev->dev, "Coldfire QSPI bus driver\n");
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 fail5:
 	mcfqspi_cs_teardown(mcfqspi);
@@ -625,10 +670,15 @@ fail2:
 fail1:
 	release_mem_region(res->start, resource_size(res));
 =======
+=======
+>>>>>>> v3.18
 fail2:
 	mcfqspi_cs_teardown(mcfqspi);
 fail1:
 	clk_disable(mcfqspi->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 fail0:
 	spi_master_put(master);
@@ -642,6 +692,7 @@ static int mcfqspi_remove(struct platform_device *pdev)
 {
 	struct spi_master *master = platform_get_drvdata(pdev);
 	struct mcfqspi *mcfqspi = spi_master_get_devdata(master);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct resource *res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 
@@ -658,6 +709,8 @@ static int mcfqspi_remove(struct platform_device *pdev)
 	release_mem_region(res->start, resource_size(res));
 	spi_unregister_master(master);
 =======
+=======
+>>>>>>> v3.18
 
 	pm_runtime_disable(&pdev->dev);
 	/* disable the hardware (set the baud rate to 0) */
@@ -665,6 +718,9 @@ static int mcfqspi_remove(struct platform_device *pdev)
 
 	mcfqspi_cs_teardown(mcfqspi);
 	clk_disable(mcfqspi->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -676,14 +732,20 @@ static int mcfqspi_suspend(struct device *dev)
 	struct spi_master *master = dev_get_drvdata(dev);
 	struct mcfqspi *mcfqspi = spi_master_get_devdata(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spi_master_suspend(master);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = spi_master_suspend(master);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clk_disable(mcfqspi->clk);
@@ -697,11 +759,17 @@ static int mcfqspi_resume(struct device *dev)
 	struct mcfqspi *mcfqspi = spi_master_get_devdata(master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_master_resume(master);
 
 	clk_enable(mcfqspi->clk);
 
 	return 0;
+=======
+	clk_enable(mcfqspi->clk);
+
+	return spi_master_resume(master);
+>>>>>>> v3.18
 =======
 	clk_enable(mcfqspi->clk);
 
@@ -714,7 +782,12 @@ static int mcfqspi_resume(struct device *dev)
 static int mcfqspi_runtime_suspend(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mcfqspi *mcfqspi = platform_get_drvdata(to_platform_device(dev));
+=======
+	struct spi_master *master = dev_get_drvdata(dev);
+	struct mcfqspi *mcfqspi = spi_master_get_devdata(master);
+>>>>>>> v3.18
 =======
 	struct spi_master *master = dev_get_drvdata(dev);
 	struct mcfqspi *mcfqspi = spi_master_get_devdata(master);
@@ -728,7 +801,12 @@ static int mcfqspi_runtime_suspend(struct device *dev)
 static int mcfqspi_runtime_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mcfqspi *mcfqspi = platform_get_drvdata(to_platform_device(dev));
+=======
+	struct spi_master *master = dev_get_drvdata(dev);
+	struct mcfqspi *mcfqspi = spi_master_get_devdata(master);
+>>>>>>> v3.18
 =======
 	struct spi_master *master = dev_get_drvdata(dev);
 	struct mcfqspi *mcfqspi = spi_master_get_devdata(master);

@@ -16,13 +16,19 @@
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/irq.h>
 #include <plat/orion-gpio.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/exception.h>
 #include <plat/irq.h>
 #include <plat/orion-gpio.h>
 #include <mach/bridge-regs.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void __init orion_irq_init(unsigned int irq_start, void __iomem *maskaddr)
@@ -43,6 +49,7 @@ void __init orion_irq_init(unsigned int irq_start, void __iomem *maskaddr)
 	irq_setup_generic_chip(gc, IRQ_MSK(32), IRQ_GC_INIT_MASK_CACHE,
 			       IRQ_NOREQUEST, IRQ_LEVEL | IRQ_NOPROBE);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef CONFIG_OF
@@ -76,5 +83,7 @@ void __init orion_dt_init_irq(void)
 	of_irq_init(orion_irq_match);
 }
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

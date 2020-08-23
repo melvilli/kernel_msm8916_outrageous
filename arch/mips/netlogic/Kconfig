@@ -5,6 +5,10 @@ config DT_XLP_EVP
 	bool "Built-in device tree for XLP EVP boards"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select BUILTIN_DTB
+>>>>>>> v3.18
 =======
 	select BUILTIN_DTB
 >>>>>>> v3.18
@@ -18,6 +22,10 @@ config DT_XLP_SVP
 	bool "Built-in device tree for XLP SVP boards"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select BUILTIN_DTB
+>>>>>>> v3.18
 =======
 	select BUILTIN_DTB
 >>>>>>> v3.18
@@ -28,7 +36,10 @@ config DT_XLP_SVP
 	  arch/mips/netlogic/dts/xlp_svp.dts
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DT_XLP_FVP
 	bool "Built-in device tree for XLP FVP boards"
 	default y
@@ -49,6 +60,9 @@ config DT_XLP_GVP
 	  pointer to the kernel.  The corresponding DTS file is at
 	  arch/mips/netlogic/dts/xlp_gvp.dts
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config NLM_MULTINODE
 	bool "Support for multi-chip boards"
@@ -83,7 +97,10 @@ config NLM_COMMON
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config IOMMU_HELPER
 	bool
 
@@ -95,5 +112,8 @@ config SWIOTLB
 	select NEED_SG_DMA_LENGTH
 	select IOMMU_HELPER
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

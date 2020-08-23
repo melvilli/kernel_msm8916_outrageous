@@ -17,7 +17,10 @@
 #include <linux/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "common.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "powerdomain.h"

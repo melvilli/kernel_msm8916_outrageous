@@ -39,6 +39,12 @@
 #include <linux/iommu-helper.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CREATE_TRACE_POINTS
+#include <trace/events/swiotlb.h>
+
+>>>>>>> v3.18
 =======
 #define CREATE_TRACE_POINTS
 #include <trace/events/swiotlb.h>
@@ -90,6 +96,10 @@ static unsigned int io_tlb_index;
  * for the sync operations.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define INVALID_PHYS_ADDR (~(phys_addr_t)0)
+>>>>>>> v3.18
 =======
 #define INVALID_PHYS_ADDR (~(phys_addr_t)0)
 >>>>>>> v3.18
@@ -127,8 +137,13 @@ unsigned long swiotlb_nr_tbl(void)
 EXPORT_SYMBOL_GPL(swiotlb_nr_tbl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* default to 1MB */
 #define IO_TLB_DEFAULT_SIZE SZ_1M
+=======
+/* default to 64MB */
+#define IO_TLB_DEFAULT_SIZE (64UL<<20)
+>>>>>>> v3.18
 =======
 /* default to 64MB */
 #define IO_TLB_DEFAULT_SIZE (64UL<<20)
@@ -185,8 +200,14 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
 	 * Get the overflow emergency buffer
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v_overflow_buffer = alloc_bootmem_low_pages_nopanic(
 						PAGE_ALIGN(io_tlb_overflow));
+=======
+	v_overflow_buffer = memblock_virt_alloc_low_nopanic(
+						PAGE_ALIGN(io_tlb_overflow),
+						PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	v_overflow_buffer = memblock_virt_alloc_low_nopanic(
 						PAGE_ALIGN(io_tlb_overflow),
@@ -203,12 +224,15 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
 	 * between io_tlb_start and io_tlb_end.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io_tlb_list = alloc_bootmem_pages(PAGE_ALIGN(io_tlb_nslabs * sizeof(int)));
 	for (i = 0; i < io_tlb_nslabs; i++)
  		io_tlb_list[i] = IO_TLB_SEGSIZE - OFFSET(i, IO_TLB_SEGSIZE);
 	io_tlb_index = 0;
 	io_tlb_orig_addr = alloc_bootmem_pages(PAGE_ALIGN(io_tlb_nslabs * sizeof(phys_addr_t)));
 =======
+=======
+>>>>>>> v3.18
 	io_tlb_list = memblock_virt_alloc(
 				PAGE_ALIGN(io_tlb_nslabs * sizeof(int)),
 				PAGE_SIZE);
@@ -220,6 +244,9 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
 		io_tlb_orig_addr[i] = INVALID_PHYS_ADDR;
 	}
 	io_tlb_index = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (verbose)
@@ -248,7 +275,11 @@ swiotlb_init(int verbose)
 
 	/* Get IO TLB memory from the low pages */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vstart = alloc_bootmem_low_pages_nopanic(PAGE_ALIGN(bytes));
+=======
+	vstart = memblock_virt_alloc_low_nopanic(PAGE_ALIGN(bytes), PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	vstart = memblock_virt_alloc_low_nopanic(PAGE_ALIGN(bytes), PAGE_SIZE);
 >>>>>>> v3.18
@@ -257,8 +288,13 @@ swiotlb_init(int verbose)
 
 	if (io_tlb_start)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_bootmem(io_tlb_start,
 				 PAGE_ALIGN(io_tlb_nslabs << IO_TLB_SHIFT));
+=======
+		memblock_free_early(io_tlb_start,
+				    PAGE_ALIGN(io_tlb_nslabs << IO_TLB_SHIFT));
+>>>>>>> v3.18
 =======
 		memblock_free_early(io_tlb_start,
 				    PAGE_ALIGN(io_tlb_nslabs << IO_TLB_SHIFT));
@@ -350,10 +386,13 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
 		goto cleanup3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < io_tlb_nslabs; i++)
  		io_tlb_list[i] = IO_TLB_SEGSIZE - OFFSET(i, IO_TLB_SEGSIZE);
 	io_tlb_index = 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	io_tlb_orig_addr = (phys_addr_t *)
@@ -364,13 +403,19 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
 		goto cleanup4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(io_tlb_orig_addr, 0, io_tlb_nslabs * sizeof(phys_addr_t));
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < io_tlb_nslabs; i++) {
 		io_tlb_list[i] = IO_TLB_SEGSIZE - OFFSET(i, IO_TLB_SEGSIZE);
 		io_tlb_orig_addr[i] = INVALID_PHYS_ADDR;
 	}
 	io_tlb_index = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	swiotlb_print_info();
@@ -410,6 +455,7 @@ void __init swiotlb_free(void)
 			   get_order(io_tlb_nslabs << IO_TLB_SHIFT));
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		free_bootmem_late(io_tlb_overflow_buffer,
 				  PAGE_ALIGN(io_tlb_overflow));
 		free_bootmem_late(__pa(io_tlb_orig_addr),
@@ -419,6 +465,8 @@ void __init swiotlb_free(void)
 		free_bootmem_late(io_tlb_start,
 				  PAGE_ALIGN(io_tlb_nslabs << IO_TLB_SHIFT));
 =======
+=======
+>>>>>>> v3.18
 		memblock_free_late(io_tlb_overflow_buffer,
 				   PAGE_ALIGN(io_tlb_overflow));
 		memblock_free_late(__pa(io_tlb_orig_addr),
@@ -427,13 +475,20 @@ void __init swiotlb_free(void)
 				   PAGE_ALIGN(io_tlb_nslabs * sizeof(int)));
 		memblock_free_late(io_tlb_start,
 				   PAGE_ALIGN(io_tlb_nslabs << IO_TLB_SHIFT));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	io_tlb_nslabs = 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int is_swiotlb_buffer(phys_addr_t paddr)
+=======
+int is_swiotlb_buffer(phys_addr_t paddr)
+>>>>>>> v3.18
 =======
 int is_swiotlb_buffer(phys_addr_t paddr)
 >>>>>>> v3.18
@@ -573,6 +628,11 @@ phys_addr_t swiotlb_tbl_map_single(struct device *hwdev,
 not_found:
 	spin_unlock_irqrestore(&io_tlb_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (printk_ratelimit())
+		dev_warn(hwdev, "swiotlb buffer is full (sz: %zd bytes)\n", size);
+>>>>>>> v3.18
 =======
 	if (printk_ratelimit())
 		dev_warn(hwdev, "swiotlb buffer is full (sz: %zd bytes)\n", size);
@@ -622,7 +682,12 @@ void swiotlb_tbl_unmap_single(struct device *hwdev, phys_addr_t tlb_addr,
 	 * First, sync the memory before unmapping the entry
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (orig_addr && ((dir == DMA_FROM_DEVICE) || (dir == DMA_BIDIRECTIONAL)))
+=======
+	if (orig_addr != INVALID_PHYS_ADDR &&
+	    ((dir == DMA_FROM_DEVICE) || (dir == DMA_BIDIRECTIONAL)))
+>>>>>>> v3.18
 =======
 	if (orig_addr != INVALID_PHYS_ADDR &&
 	    ((dir == DMA_FROM_DEVICE) || (dir == DMA_BIDIRECTIONAL)))
@@ -644,13 +709,19 @@ void swiotlb_tbl_unmap_single(struct device *hwdev, phys_addr_t tlb_addr,
 		 * slots with superceeding slots
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = index + nslots - 1; i >= index; i--)
 			io_tlb_list[i] = ++count;
 =======
+=======
+>>>>>>> v3.18
 		for (i = index + nslots - 1; i >= index; i--) {
 			io_tlb_list[i] = ++count;
 			io_tlb_orig_addr[i] = INVALID_PHYS_ADDR;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Step 2: merge the returned slots with the preceding slots,
@@ -671,6 +742,11 @@ void swiotlb_tbl_sync_single(struct device *hwdev, phys_addr_t tlb_addr,
 	phys_addr_t orig_addr = io_tlb_orig_addr[index];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (orig_addr == INVALID_PHYS_ADDR)
+		return;
+>>>>>>> v3.18
 =======
 	if (orig_addr == INVALID_PHYS_ADDR)
 		return;
@@ -819,6 +895,11 @@ dma_addr_t swiotlb_map_page(struct device *dev, struct page *page,
 		return dev_addr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	trace_swiotlb_bounced(dev, dev_addr, size, swiotlb_force);
+
+>>>>>>> v3.18
 =======
 	trace_swiotlb_bounced(dev, dev_addr, size, swiotlb_force);
 
@@ -968,7 +1049,11 @@ swiotlb_map_sg_attrs(struct device *hwdev, struct scatterlist *sgl, int nelems,
 				swiotlb_unmap_sg_attrs(hwdev, sgl, i, dir,
 						       attrs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sgl[0].dma_length = 0;
+=======
+				sg_dma_len(sgl) = 0;
+>>>>>>> v3.18
 =======
 				sg_dma_len(sgl) = 0;
 >>>>>>> v3.18
@@ -978,7 +1063,11 @@ swiotlb_map_sg_attrs(struct device *hwdev, struct scatterlist *sgl, int nelems,
 		} else
 			sg->dma_address = dev_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sg->dma_length = sg->length;
+=======
+		sg_dma_len(sg) = sg->length;
+>>>>>>> v3.18
 =======
 		sg_dma_len(sg) = sg->length;
 >>>>>>> v3.18
@@ -1010,7 +1099,11 @@ swiotlb_unmap_sg_attrs(struct device *hwdev, struct scatterlist *sgl,
 
 	for_each_sg(sgl, sg, nelems, i)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unmap_single(hwdev, sg->dma_address, sg->dma_length, dir);
+=======
+		unmap_single(hwdev, sg->dma_address, sg_dma_len(sg), dir);
+>>>>>>> v3.18
 =======
 		unmap_single(hwdev, sg->dma_address, sg_dma_len(sg), dir);
 >>>>>>> v3.18
@@ -1044,7 +1137,11 @@ swiotlb_sync_sg(struct device *hwdev, struct scatterlist *sgl,
 	for_each_sg(sgl, sg, nelems, i)
 		swiotlb_sync_single(hwdev, sg->dma_address,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    sg->dma_length, dir, target);
+=======
+				    sg_dma_len(sg), dir, target);
+>>>>>>> v3.18
 =======
 				    sg_dma_len(sg), dir, target);
 >>>>>>> v3.18

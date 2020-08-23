@@ -10,8 +10,11 @@ obj-y				+= pic.o setup.o time.o feature.o pci.o \
 				   pfunc_base.o udbg_scc.o udbg_adb.o
 obj-$(CONFIG_PMAC_BACKLIGHT)	+= backlight.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_CPU_FREQ_PMAC)	+= cpufreq_32.o
 obj-$(CONFIG_CPU_FREQ_PMAC64)	+= cpufreq_64.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_NVRAM is an arch. independent tristate symbol, for pmac32 we really

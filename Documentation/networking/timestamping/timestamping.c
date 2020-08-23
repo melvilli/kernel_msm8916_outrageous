@@ -77,7 +77,10 @@ static void usage(const char *error)
 	       "  SOF_TIMESTAMPING_RX_SOFTWARE - software fallback for incoming packets\n"
 	       "  SOF_TIMESTAMPING_SOFTWARE - request reporting of software time stamps\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       "  SOF_TIMESTAMPING_SYS_HARDWARE - request reporting of transformed HW time stamps\n"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	       "  SOF_TIMESTAMPING_RAW_HARDWARE - request reporting of raw HW time stamps\n"
@@ -206,9 +209,13 @@ static void printpacket(struct msghdr *msg, int res,
 				       (long)stamp->tv_nsec);
 				stamp++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printf("HW transformed %ld.%09ld ",
 				       (long)stamp->tv_sec,
 				       (long)stamp->tv_nsec);
+=======
+				/* skip deprecated HW transformed */
+>>>>>>> v3.18
 =======
 				/* skip deprecated HW transformed */
 >>>>>>> v3.18
@@ -369,8 +376,11 @@ int main(int argc, char **argv)
 		else if (!strcasecmp(argv[i], "SOF_TIMESTAMPING_SOFTWARE"))
 			so_timestamping_flags |= SOF_TIMESTAMPING_SOFTWARE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (!strcasecmp(argv[i], "SOF_TIMESTAMPING_SYS_HARDWARE"))
 			so_timestamping_flags |= SOF_TIMESTAMPING_SYS_HARDWARE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (!strcasecmp(argv[i], "SOF_TIMESTAMPING_RAW_HARDWARE"))

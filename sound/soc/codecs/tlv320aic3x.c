@@ -41,6 +41,10 @@
 #include <linux/gpio.h>
 #include <linux/regulator/consumer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -77,9 +81,15 @@ struct aic3x_disable_nb {
 struct aic3x_priv {
 	struct snd_soc_codec *codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_bulk_data supplies[AIC3X_NUM_SUPPLIES];
 	struct aic3x_disable_nb disable_nb[AIC3X_NUM_SUPPLIES];
 	enum snd_soc_control_type control_type;
+=======
+	struct regmap *regmap;
+	struct regulator_bulk_data supplies[AIC3X_NUM_SUPPLIES];
+	struct aic3x_disable_nb disable_nb[AIC3X_NUM_SUPPLIES];
+>>>>>>> v3.18
 =======
 	struct regmap *regmap;
 	struct regulator_bulk_data supplies[AIC3X_NUM_SUPPLIES];
@@ -100,6 +110,7 @@ struct aic3x_priv {
 	enum aic3x_micbias_voltage micbias_vg;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * AIC3X register cache
@@ -144,6 +155,8 @@ static const u8 aic3x_reg[AIC3X_CACHEREGNUM] = {
 	.get = snd_soc_dapm_get_volsw, .put = snd_soc_dapm_put_volsw_aic3x, \
 	.private_value =  SOC_SINGLE_VALUE(reg, shift, mask, invert) }
 =======
+=======
+>>>>>>> v3.18
 static const struct reg_default aic3x_reg[] = {
 	{   0, 0x00 }, {   1, 0x00 }, {   2, 0x00 }, {   3, 0x10 },
 	{   4, 0x04 }, {   5, 0x00 }, {   6, 0x00 }, {   7, 0x00 },
@@ -188,6 +201,9 @@ static const struct regmap_config aic3x_regmap = {
 #define SOC_DAPM_SINGLE_AIC3X(xname, reg, shift, mask, invert) \
 	SOC_SINGLE_EXT(xname, reg, shift, mask, invert, \
 		snd_soc_dapm_get_volsw, snd_soc_dapm_put_volsw_aic3x)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -198,8 +214,12 @@ static int snd_soc_dapm_put_volsw_aic3x(struct snd_kcontrol *kcontrol,
 					struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_dapm_widget_list *wlist = snd_kcontrol_chip(kcontrol);
 	struct snd_soc_dapm_widget *widget = wlist->widgets[0];
+=======
+	struct snd_soc_codec *codec = snd_soc_dapm_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_dapm_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -211,10 +231,16 @@ static int snd_soc_dapm_put_volsw_aic3x(struct snd_kcontrol *kcontrol,
 	unsigned int mask = (1 << fls(max)) - 1;
 	unsigned int invert = mc->invert;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned short val, val_mask;
 	int ret;
 	struct snd_soc_dapm_path *path;
 	int found = 0;
+=======
+	unsigned short val;
+	struct snd_soc_dapm_update update;
+	int connect, change;
+>>>>>>> v3.18
 =======
 	unsigned short val;
 	struct snd_soc_dapm_update update;
@@ -227,6 +253,7 @@ static int snd_soc_dapm_put_volsw_aic3x(struct snd_kcontrol *kcontrol,
 	if (val)
 		val = mask;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (invert)
 		val = mask - val;
@@ -265,6 +292,8 @@ static int snd_soc_dapm_put_volsw_aic3x(struct snd_kcontrol *kcontrol,
 	ret = snd_soc_update_bits_locked(widget->codec, reg, val_mask, val);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	connect = !!val;
 
 	if (invert)
@@ -285,6 +314,9 @@ static int snd_soc_dapm_put_volsw_aic3x(struct snd_kcontrol *kcontrol,
 	}
 
 	return change;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -456,6 +488,7 @@ static const struct snd_kcontrol_new aic3x_snd_controls[] = {
 			 0, 118, 1, output_stage_tlv),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_DOUBLE_R_TLV("Mono Line2 Bypass Volume",
 			 LINE2L_2_MONOLOPM_VOL, LINE2R_2_MONOLOPM_VOL,
 			 0, 118, 1, output_stage_tlv),
@@ -466,6 +499,8 @@ static const struct snd_kcontrol_new aic3x_snd_controls[] = {
 			 DACL1_2_MONOLOPM_VOL, DACR1_2_MONOLOPM_VOL,
 			 0, 118, 1, output_stage_tlv),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SOC_DOUBLE_R_TLV("HP Line2 Bypass Volume",
@@ -492,7 +527,10 @@ static const struct snd_kcontrol_new aic3x_snd_controls[] = {
 	SOC_DOUBLE_R("Line Playback Switch", LLOPM_CTRL, RLOPM_CTRL, 3,
 		     0x01, 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SOC_SINGLE("Mono Playback Switch", MONOLOPM_CTRL, 3, 0x01, 0),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SOC_DOUBLE_R("HP Playback Switch", HPLOUT_CTRL, HPROUT_CTRL, 3,
@@ -524,7 +562,10 @@ static const struct snd_kcontrol_new aic3x_snd_controls[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_kcontrol_new aic3x_mono_controls[] = {
 	SOC_DOUBLE_R_TLV("Mono Line2 Bypass Volume",
 			 LINE2L_2_MONOLOPM_VOL, LINE2R_2_MONOLOPM_VOL,
@@ -539,6 +580,9 @@ static const struct snd_kcontrol_new aic3x_mono_controls[] = {
 	SOC_SINGLE("Mono Playback Switch", MONOLOPM_CTRL, 3, 0x01, 0),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Class-D amplifier gain. From 0 to 18 dB in 6 dB steps
@@ -694,9 +738,12 @@ static const struct snd_soc_dapm_widget aic3x_dapm_widgets[] = {
 	SND_SOC_DAPM_PGA("Right HP Com", HPRCOM_CTRL, 0, 0, NULL, 0),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Mono Output */
 	SND_SOC_DAPM_PGA("Mono Out", MONOLOPM_CTRL, 0, 0, NULL, 0),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Inputs to Left ADC */
@@ -758,9 +805,12 @@ static const struct snd_soc_dapm_widget aic3x_dapm_widgets[] = {
 			   &aic3x_right_line_mixer_controls[0],
 			   ARRAY_SIZE(aic3x_right_line_mixer_controls)),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SND_SOC_DAPM_MIXER("Mono Mixer", SND_SOC_NOPM, 0, 0,
 			   &aic3x_mono_mixer_controls[0],
 			   ARRAY_SIZE(aic3x_mono_mixer_controls)),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SND_SOC_DAPM_MIXER("Left HP Mixer", SND_SOC_NOPM, 0, 0,
@@ -779,7 +829,10 @@ static const struct snd_soc_dapm_widget aic3x_dapm_widgets[] = {
 	SND_SOC_DAPM_OUTPUT("LLOUT"),
 	SND_SOC_DAPM_OUTPUT("RLOUT"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SND_SOC_DAPM_OUTPUT("MONO_LOUT"),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SND_SOC_DAPM_OUTPUT("HPLOUT"),
@@ -804,7 +857,10 @@ static const struct snd_soc_dapm_widget aic3x_dapm_widgets[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_widget aic3x_dapm_mono_widgets[] = {
 	/* Mono Output */
 	SND_SOC_DAPM_PGA("Mono Out", MONOLOPM_CTRL, 0, 0, NULL, 0),
@@ -816,6 +872,9 @@ static const struct snd_soc_dapm_widget aic3x_dapm_mono_widgets[] = {
 	SND_SOC_DAPM_OUTPUT("MONO_LOUT"),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct snd_soc_dapm_widget aic3007_dapm_widgets[] = {
 	/* Class-D outputs */
@@ -831,6 +890,11 @@ static const struct snd_soc_dapm_route intercon[] = {
 	{"Left Line1L Mux", "single-ended", "LINE1L"},
 	{"Left Line1L Mux", "differential", "LINE1L"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"Left Line1R Mux", "single-ended", "LINE1R"},
+	{"Left Line1R Mux", "differential", "LINE1R"},
+>>>>>>> v3.18
 =======
 	{"Left Line1R Mux", "single-ended", "LINE1R"},
 	{"Left Line1R Mux", "differential", "LINE1R"},
@@ -852,6 +916,11 @@ static const struct snd_soc_dapm_route intercon[] = {
 	{"Right Line1R Mux", "single-ended", "LINE1R"},
 	{"Right Line1R Mux", "differential", "LINE1R"},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"Right Line1L Mux", "single-ended", "LINE1L"},
+	{"Right Line1L Mux", "differential", "LINE1L"},
+>>>>>>> v3.18
 =======
 	{"Right Line1L Mux", "single-ended", "LINE1L"},
 	{"Right Line1L Mux", "differential", "LINE1L"},
@@ -912,6 +981,7 @@ static const struct snd_soc_dapm_route intercon[] = {
 	{"RLOUT", NULL, "Right Line Out"},
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Mono Output */
 	{"Mono Mixer", "Line2L Bypass Switch", "Left Line2L Mux"},
 	{"Mono Mixer", "PGAL Bypass Switch", "Left PGA Mixer"},
@@ -923,6 +993,8 @@ static const struct snd_soc_dapm_route intercon[] = {
 	{"Mono Out", NULL, "Mono Mixer"},
 	{"MONO_LOUT", NULL, "Mono Out"},
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Left HP Output */
@@ -981,7 +1053,10 @@ static const struct snd_soc_dapm_route intercon[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_route intercon_mono[] = {
 	/* Mono Output */
 	{"Mono Mixer", "Line2L Bypass Switch", "Left Line2L Mux"},
@@ -994,6 +1069,9 @@ static const struct snd_soc_dapm_route intercon_mono[] = {
 	{"MONO_LOUT", NULL, "Mono Out"},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct snd_soc_dapm_route intercon_3007[] = {
 	/* Class-D outputs */
@@ -1009,6 +1087,7 @@ static int aic3x_add_widgets(struct snd_soc_codec *codec)
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_dapm_new_controls(dapm, aic3x_dapm_widgets,
 				  ARRAY_SIZE(aic3x_dapm_widgets));
 
@@ -1017,6 +1096,8 @@ static int aic3x_add_widgets(struct snd_soc_codec *codec)
 
 	if (aic3x->model == AIC3X_MODEL_3007) {
 =======
+=======
+>>>>>>> v3.18
 	switch (aic3x->model) {
 	case AIC3X_MODEL_3X:
 	case AIC3X_MODEL_33:
@@ -1026,12 +1107,19 @@ static int aic3x_add_widgets(struct snd_soc_codec *codec)
 					ARRAY_SIZE(intercon_mono));
 		break;
 	case AIC3X_MODEL_3007:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snd_soc_dapm_new_controls(dapm, aic3007_dapm_widgets,
 			ARRAY_SIZE(aic3007_dapm_widgets));
 		snd_soc_dapm_add_routes(dapm, intercon_3007,
 					ARRAY_SIZE(intercon_3007));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18
@@ -1054,6 +1142,7 @@ static int aic3x_hw_params(struct snd_pcm_substream *substream,
 	/* select data word length */
 	data = snd_soc_read(codec, AIC3X_ASD_INTF_CTRLB) & (~(0x3 << 4));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -1065,6 +1154,8 @@ static int aic3x_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -1075,6 +1166,9 @@ static int aic3x_hw_params(struct snd_pcm_substream *substream,
 		data |= (0x02 << 4);
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		data |= (0x03 << 4);
 		break;
@@ -1292,6 +1386,7 @@ static int aic3x_set_dai_fmt(struct snd_soc_dai *codec_dai,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int aic3x_init_3007(struct snd_soc_codec *codec)
 {
 	u8 tmp1, tmp2, *cache = codec->reg_cache;
@@ -1317,6 +1412,8 @@ static int aic3x_init_3007(struct snd_soc_codec *codec)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int aic3x_regulator_event(struct notifier_block *nb,
 				 unsigned long event, void *data)
 {
@@ -1332,7 +1429,11 @@ static int aic3x_regulator_event(struct notifier_block *nb,
 		if (gpio_is_valid(aic3x->gpio_reset))
 			gpio_set_value(aic3x->gpio_reset, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		aic3x->codec->cache_sync = 1;
+=======
+		regcache_mark_dirty(aic3x->regmap);
+>>>>>>> v3.18
 =======
 		regcache_mark_dirty(aic3x->regmap);
 >>>>>>> v3.18
@@ -1345,8 +1446,13 @@ static int aic3x_set_power(struct snd_soc_codec *codec, int power)
 {
 	struct aic3x_priv *aic3x = snd_soc_codec_get_drvdata(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, ret;
 	u8 *cache = codec->reg_cache;
+=======
+	unsigned int pll_c, pll_d;
+	int ret;
+>>>>>>> v3.18
 =======
 	unsigned int pll_c, pll_d;
 	int ret;
@@ -1359,12 +1465,15 @@ static int aic3x_set_power(struct snd_soc_codec *codec, int power)
 			goto out;
 		aic3x->power = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Reset release and cache sync is necessary only if some
 		 * supply was off or if there were cached writes
 		 */
 		if (!codec->cache_sync)
 			goto out;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1375,6 +1484,7 @@ static int aic3x_set_power(struct snd_soc_codec *codec, int power)
 
 		/* Sync reg_cache with the hardware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		codec->cache_only = 0;
 		for (i = AIC3X_SAMPLE_RATE_SEL_REG; i < ARRAY_SIZE(aic3x_reg); i++)
 			snd_soc_write(codec, i, cache[i]);
@@ -1382,6 +1492,8 @@ static int aic3x_set_power(struct snd_soc_codec *codec, int power)
 			aic3x_init_3007(codec);
 		codec->cache_sync = 0;
 =======
+=======
+>>>>>>> v3.18
 		regcache_cache_only(aic3x->regmap, false);
 		regcache_sync(aic3x->regmap);
 
@@ -1396,6 +1508,9 @@ static int aic3x_set_power(struct snd_soc_codec *codec, int power)
 			snd_soc_write(codec, AIC3X_PLL_PROGC_REG, pll_c);
 			snd_soc_write(codec, AIC3X_PLL_PROGD_REG, pll_d);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/*
@@ -1405,15 +1520,21 @@ static int aic3x_set_power(struct snd_soc_codec *codec, int power)
 		 */
 		snd_soc_write(codec, AIC3X_RESET, SOFT_RESET);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		codec->cache_sync = 1;
 		aic3x->power = 0;
 		/* HW writes are needless when bias is off */
 		codec->cache_only = 1;
 =======
+=======
+>>>>>>> v3.18
 		regcache_mark_dirty(aic3x->regmap);
 		aic3x->power = 0;
 		/* HW writes are needless when bias is off */
 		regcache_cache_only(aic3x->regmap, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = regulator_bulk_disable(ARRAY_SIZE(aic3x->supplies),
 					     aic3x->supplies);
@@ -1461,7 +1582,12 @@ static int aic3x_set_bias_level(struct snd_soc_codec *codec,
 #define AIC3X_RATES	SNDRV_PCM_RATE_8000_96000
 #define AIC3X_FORMATS	(SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S20_3LE | \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 SNDRV_PCM_FMTBIT_S24_3LE | SNDRV_PCM_FMTBIT_S32_LE)
+=======
+			 SNDRV_PCM_FMTBIT_S24_3LE | SNDRV_PCM_FMTBIT_S24_LE | \
+			 SNDRV_PCM_FMTBIT_S32_LE)
+>>>>>>> v3.18
 =======
 			 SNDRV_PCM_FMTBIT_S24_3LE | SNDRV_PCM_FMTBIT_S24_LE | \
 			 SNDRV_PCM_FMTBIT_S32_LE)
@@ -1493,6 +1619,7 @@ static struct snd_soc_dai_driver aic3x_dai = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int aic3x_suspend(struct snd_soc_codec *codec)
 {
 	aic3x_set_bias_level(codec, SND_SOC_BIAS_OFF);
@@ -1506,6 +1633,8 @@ static int aic3x_resume(struct snd_soc_codec *codec)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 static void aic3x_mono_init(struct snd_soc_codec *codec)
 {
 	/* DAC to Mono Line Out default volume and route to Output mixer */
@@ -1522,6 +1651,9 @@ static void aic3x_mono_init(struct snd_soc_codec *codec)
 	/* Line2 to Mono Out default volume, disconnect from Output Mixer */
 	snd_soc_write(codec, LINE2L_2_MONOLOPM_VOL, DEFAULT_VOL);
 	snd_soc_write(codec, LINE2R_2_MONOLOPM_VOL, DEFAULT_VOL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1549,9 +1681,12 @@ static int aic3x_init(struct snd_soc_codec *codec)
 	snd_soc_write(codec, DACL1_2_LLOPM_VOL, DEFAULT_VOL | ROUTE_ON);
 	snd_soc_write(codec, DACR1_2_RLOPM_VOL, DEFAULT_VOL | ROUTE_ON);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* DAC to Mono Line Out default volume and route to Output mixer */
 	snd_soc_write(codec, DACL1_2_MONOLOPM_VOL, DEFAULT_VOL | ROUTE_ON);
 	snd_soc_write(codec, DACR1_2_MONOLOPM_VOL, DEFAULT_VOL | ROUTE_ON);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1559,7 +1694,10 @@ static int aic3x_init(struct snd_soc_codec *codec)
 	snd_soc_update_bits(codec, LLOPM_CTRL, UNMUTE, UNMUTE);
 	snd_soc_update_bits(codec, RLOPM_CTRL, UNMUTE, UNMUTE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_update_bits(codec, MONOLOPM_CTRL, UNMUTE, UNMUTE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snd_soc_update_bits(codec, HPLOUT_CTRL, UNMUTE, UNMUTE);
@@ -1583,9 +1721,12 @@ static int aic3x_init(struct snd_soc_codec *codec)
 	snd_soc_write(codec, PGAL_2_LLOPM_VOL, DEFAULT_VOL);
 	snd_soc_write(codec, PGAR_2_RLOPM_VOL, DEFAULT_VOL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* PGA to Mono Line Out default volume, disconnect from Output Mixer */
 	snd_soc_write(codec, PGAL_2_MONOLOPM_VOL, DEFAULT_VOL);
 	snd_soc_write(codec, PGAR_2_MONOLOPM_VOL, DEFAULT_VOL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1598,6 +1739,7 @@ static int aic3x_init(struct snd_soc_codec *codec)
 	snd_soc_write(codec, LINE2L_2_LLOPM_VOL, DEFAULT_VOL);
 	snd_soc_write(codec, LINE2R_2_RLOPM_VOL, DEFAULT_VOL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Line2 to Mono Out default volume, disconnect from Output Mixer */
 	snd_soc_write(codec, LINE2L_2_MONOLOPM_VOL, DEFAULT_VOL);
 	snd_soc_write(codec, LINE2R_2_MONOLOPM_VOL, DEFAULT_VOL);
@@ -1606,6 +1748,8 @@ static int aic3x_init(struct snd_soc_codec *codec)
 		aic3x_init_3007(codec);
 		snd_soc_write(codec, CLASSD_CTRL, 0);
 =======
+=======
+>>>>>>> v3.18
 
 	switch (aic3x->model) {
 	case AIC3X_MODEL_3X:
@@ -1615,6 +1759,9 @@ static int aic3x_init(struct snd_soc_codec *codec)
 	case AIC3X_MODEL_3007:
 		snd_soc_write(codec, CLASSD_CTRL, 0);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1643,6 +1790,7 @@ static int aic3x_probe(struct snd_soc_codec *codec)
 	aic3x->codec = codec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 8, 8, aic3x->control_type);
 	if (ret != 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
@@ -1668,6 +1816,8 @@ static int aic3x_probe(struct snd_soc_codec *codec)
 	}
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(aic3x->supplies); i++) {
 		aic3x->disable_nb[i].nb.notifier_call = aic3x_regulator_event;
 		aic3x->disable_nb[i].aic3x = aic3x;
@@ -1682,7 +1832,11 @@ static int aic3x_probe(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->cache_only = 1;
+=======
+	regcache_mark_dirty(aic3x->regmap);
+>>>>>>> v3.18
 =======
 	regcache_mark_dirty(aic3x->regmap);
 >>>>>>> v3.18
@@ -1697,11 +1851,14 @@ static int aic3x_probe(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_add_codec_controls(codec, aic3x_snd_controls,
 			     ARRAY_SIZE(aic3x_snd_controls));
 	if (aic3x->model == AIC3X_MODEL_3007)
 		snd_soc_add_codec_controls(codec, &aic3x_classd_amp_gain_ctrl, 1);
 =======
+=======
+>>>>>>> v3.18
 	switch (aic3x->model) {
 	case AIC3X_MODEL_3X:
 	case AIC3X_MODEL_33:
@@ -1713,6 +1870,9 @@ static int aic3x_probe(struct snd_soc_codec *codec)
 				&aic3x_classd_amp_gain_ctrl, 1);
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set mic bias voltage */
@@ -1735,7 +1895,10 @@ static int aic3x_probe(struct snd_soc_codec *codec)
 
 	aic3x_add_widgets(codec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add(&aic3x->list, &reset_list);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1746,12 +1909,15 @@ err_notif:
 		regulator_unregister_notifier(aic3x->supplies[i].consumer,
 					      &aic3x->disable_nb[i].nb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator_bulk_free(ARRAY_SIZE(aic3x->supplies), aic3x->supplies);
 err_get:
 	if (gpio_is_valid(aic3x->gpio_reset) &&
 	    !aic3x_is_shared_reset(aic3x))
 		gpio_free(aic3x->gpio_reset);
 err_gpio:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -1764,6 +1930,7 @@ static int aic3x_remove(struct snd_soc_codec *codec)
 
 	aic3x_set_bias_level(codec, SND_SOC_BIAS_OFF);
 	list_del(&aic3x->list);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gpio_is_valid(aic3x->gpio_reset) &&
 	    !aic3x_is_shared_reset(aic3x)) {
@@ -1779,6 +1946,11 @@ static int aic3x_remove(struct snd_soc_codec *codec)
 		regulator_unregister_notifier(aic3x->supplies[i].consumer,
 					      &aic3x->disable_nb[i].nb);
 >>>>>>> v3.18
+=======
+	for (i = 0; i < ARRAY_SIZE(aic3x->supplies); i++)
+		regulator_unregister_notifier(aic3x->supplies[i].consumer,
+					      &aic3x->disable_nb[i].nb);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1786,6 +1958,7 @@ static int aic3x_remove(struct snd_soc_codec *codec)
 static struct snd_soc_codec_driver soc_codec_dev_aic3x = {
 	.set_bias_level = aic3x_set_bias_level,
 	.idle_bias_off = true,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.reg_cache_size = ARRAY_SIZE(aic3x_reg),
 	.reg_word_size = sizeof(u8),
@@ -1795,6 +1968,8 @@ static struct snd_soc_codec_driver soc_codec_dev_aic3x = {
 	.suspend = aic3x_suspend,
 	.resume = aic3x_resume,
 =======
+=======
+>>>>>>> v3.18
 	.probe = aic3x_probe,
 	.remove = aic3x_remove,
 	.controls = aic3x_snd_controls,
@@ -1803,6 +1978,9 @@ static struct snd_soc_codec_driver soc_codec_dev_aic3x = {
 	.num_dapm_widgets = ARRAY_SIZE(aic3x_dapm_widgets),
 	.dapm_routes = intercon,
 	.num_dapm_routes = ARRAY_SIZE(intercon),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1816,6 +1994,10 @@ static const struct i2c_device_id aic3x_i2c_id[] = {
 	{ "tlv320aic33", AIC3X_MODEL_33 },
 	{ "tlv320aic3007", AIC3X_MODEL_3007 },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ "tlv320aic3106", AIC3X_MODEL_3X },
+>>>>>>> v3.18
 =======
 	{ "tlv320aic3106", AIC3X_MODEL_3X },
 >>>>>>> v3.18
@@ -1824,7 +2006,10 @@ static const struct i2c_device_id aic3x_i2c_id[] = {
 MODULE_DEVICE_TABLE(i2c, aic3x_i2c_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct reg_default aic3007_class_d[] = {
 	/* Class-D speaker driver init; datasheet p. 46 */
 	{ AIC3X_PAGE_SELECT, 0x0D },
@@ -1835,6 +2020,9 @@ static const struct reg_default aic3007_class_d[] = {
 	{ AIC3X_PAGE_SELECT, 0x00 },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * If the i2c layer weren't so broken, we could pass this kind of data
@@ -1848,6 +2036,7 @@ static int aic3x_i2c_probe(struct i2c_client *i2c,
 	struct aic3x_setup_data *ai3x_setup;
 	struct device_node *np = i2c->dev.of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	u32 value;
 
@@ -1859,6 +2048,8 @@ static int aic3x_i2c_probe(struct i2c_client *i2c,
 
 	aic3x->control_type = SND_SOC_I2C;
 =======
+=======
+>>>>>>> v3.18
 	int ret, i;
 	u32 value;
 
@@ -1873,6 +2064,9 @@ static int aic3x_i2c_probe(struct i2c_client *i2c,
 	}
 
 	regcache_cache_only(aic3x->regmap, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i2c_set_clientdata(i2c, aic3x);
@@ -1884,10 +2078,15 @@ static int aic3x_i2c_probe(struct i2c_client *i2c,
 		ai3x_setup = devm_kzalloc(&i2c->dev, sizeof(*ai3x_setup),
 								GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ai3x_setup == NULL) {
 			dev_err(&i2c->dev, "failed to create private data\n");
 			return -ENOMEM;
 		}
+=======
+		if (!ai3x_setup)
+			return -ENOMEM;
+>>>>>>> v3.18
 =======
 		if (!ai3x_setup)
 			return -ENOMEM;
@@ -1931,9 +2130,12 @@ static int aic3x_i2c_probe(struct i2c_client *i2c,
 	aic3x->model = id->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_register_codec(&i2c->dev,
 			&soc_codec_dev_aic3x, &aic3x_dai, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (gpio_is_valid(aic3x->gpio_reset) &&
 	    !aic3x_is_shared_reset(aic3x)) {
 		ret = gpio_request(aic3x->gpio_reset, "tlv320aic3x reset");
@@ -1975,6 +2177,9 @@ err_gpio:
 	    !aic3x_is_shared_reset(aic3x))
 		gpio_free(aic3x->gpio_reset);
 err:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1982,8 +2187,11 @@ err:
 static int aic3x_i2c_remove(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_unregister_codec(&client->dev);
 =======
+=======
+>>>>>>> v3.18
 	struct aic3x_priv *aic3x = i2c_get_clientdata(client);
 
 	snd_soc_unregister_codec(&client->dev);
@@ -1992,6 +2200,9 @@ static int aic3x_i2c_remove(struct i2c_client *client)
 		gpio_set_value(aic3x->gpio_reset, 0);
 		gpio_free(aic3x->gpio_reset);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2000,6 +2211,12 @@ static int aic3x_i2c_remove(struct i2c_client *client)
 static const struct of_device_id tlv320aic3x_of_match[] = {
 	{ .compatible = "ti,tlv320aic3x", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "ti,tlv320aic33" },
+	{ .compatible = "ti,tlv320aic3007" },
+	{ .compatible = "ti,tlv320aic3106" },
+>>>>>>> v3.18
 =======
 	{ .compatible = "ti,tlv320aic33" },
 	{ .compatible = "ti,tlv320aic3007" },

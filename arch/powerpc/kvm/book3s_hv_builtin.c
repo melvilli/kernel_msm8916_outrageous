@@ -7,6 +7,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/cpu.h>
+>>>>>>> v3.18
 =======
 #include <linux/cpu.h>
 >>>>>>> v3.18
@@ -18,6 +22,12 @@
 #include <linux/bootmem.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+#include <linux/sizes.h>
+#include <linux/cma.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 #include <linux/sizes.h>
@@ -28,6 +38,7 @@
 #include <asm/kvm_ppc.h>
 #include <asm/kvm_book3s.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define KVM_LINEAR_RMA		0
 #define KVM_LINEAR_HPT		1
@@ -44,6 +55,8 @@ EXPORT_SYMBOL_GPL(kvm_hpt_order);
 /*
  * This maintains a list of RMAs (real mode areas) for KVM guests to use.
 =======
+=======
+>>>>>>> v3.18
 #define KVM_CMA_CHUNK_ORDER	18
 
 /*
@@ -57,17 +70,23 @@ EXPORT_SYMBOL_GPL(kvm_hpt_order);
 static unsigned long kvm_cma_resv_ratio = 5;
 /*
  * We allocate RMAs (real mode areas) for KVM guests from the KVM CMA area.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Each RMA has to be physically contiguous and of a size that the
  * hardware supports.  PPC970 and POWER7 support 64MB, 128MB and 256MB,
  * and other larger sizes.  Since we are unlikely to be allocate that
  * much physically contiguous memory after the system is up and running,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * we preallocate a set of RMAs in early boot for KVM to use.
  */
 static unsigned long kvm_rma_size = 64 << 20;	/* 64MB */
 static unsigned long kvm_rma_count;
 =======
+=======
+>>>>>>> v3.18
  * we preallocate a set of RMAs in early boot using CMA.
  * should be power of 2.
  */
@@ -75,6 +94,9 @@ unsigned long kvm_rma_pages = (1 << 27) >> PAGE_SHIFT;	/* 128MB */
 EXPORT_SYMBOL_GPL(kvm_rma_pages);
 
 static struct cma *kvm_cma;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Work out RMLS (real mode limit selector) field value for a given RMA size.
@@ -106,12 +128,15 @@ static inline int lpcr_rmls(unsigned long rma_size)
 static int __init early_parse_rma_size(char *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!p)
 		return 1;
 
 	kvm_rma_size = memparse(p, &p);
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long kvm_rma_size;
 
 	pr_debug("%s(%s)\n", __func__, p);
@@ -126,11 +151,15 @@ static int __init early_parse_rma_size(char *p)
 		return -EINVAL;
 	}
 	kvm_rma_pages = kvm_rma_size >> PAGE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 early_param("kvm_rma_size", early_parse_rma_size);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init early_parse_rma_count(char *p)
 {
@@ -286,6 +315,8 @@ void __init kvm_linear_init(void)
 	kvm_linear_init_one(kvm_rma_size, kvm_rma_count, KVM_LINEAR_RMA);
 }
 =======
+=======
+>>>>>>> v3.18
 struct kvm_rma_info *kvm_alloc_rma()
 {
 	struct page *page;
@@ -431,4 +462,7 @@ int kvmppc_hcall_impl_hv_realmode(unsigned long cmd)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(kvmppc_hcall_impl_hv_realmode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

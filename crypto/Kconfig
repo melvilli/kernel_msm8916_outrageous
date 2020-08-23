@@ -24,7 +24,12 @@ comment "Crypto core or helper"
 config CRYPTO_FIPS
 	bool "FIPS 200 compliance"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CRYPTO_ANSI_CPRNG && !CRYPTO_MANAGER_DISABLE_TESTS
+=======
+	depends on (CRYPTO_ANSI_CPRNG || CRYPTO_DRBG) && !CRYPTO_MANAGER_DISABLE_TESTS
+	depends on MODULE_SIG
+>>>>>>> v3.18
 =======
 	depends on (CRYPTO_ANSI_CPRNG || CRYPTO_DRBG) && !CRYPTO_MANAGER_DISABLE_TESTS
 	depends on MODULE_SIG
@@ -163,7 +168,10 @@ config CRYPTO_CRYPTD
 	  into an asynchronous algorithm that executes in a kernel thread.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CRYPTO_MCRYPTD
 	tristate "Software async multi-buffer crypto daemon"
 	select CRYPTO_BLKCIPHER
@@ -178,6 +186,9 @@ config CRYPTO_MCRYPTD
 	  in the context of this kernel thread and drivers can post
 	  their crypto request asynchronously to be processed by this daemon.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CRYPTO_AUTHENC
 	tristate "Authenc support"
@@ -197,11 +208,14 @@ config CRYPTO_TEST
 	  Quick & dirty crypto test module.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CRYPTO_ABLK_HELPER_X86
 	tristate
 	depends on X86
 	select CRYPTO_CRYPTD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config CRYPTO_ABLK_HELPER
@@ -406,7 +420,10 @@ config CRYPTO_CRC32_PCLMUL
 	  and gain better performance as compared with the table implementation.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CRYPTO_CRCT10DIF
 	tristate "CRCT10DIF algorithm"
 	select CRYPTO_HASH
@@ -426,6 +443,9 @@ config CRYPTO_CRCT10DIF_PCLMUL
 	  'crct10dif-plcmul' module, which is faster when computing the
 	  crct10dif checksum as compared with the generic table implementation.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CRYPTO_GHASH
 	tristate "GHASH digest algorithm"
@@ -525,7 +545,11 @@ config CRYPTO_SHA1
 
 config CRYPTO_SHA1_SSSE3
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "SHA1 digest algorithm (SSSE3/AVX)"
+=======
+	tristate "SHA1 digest algorithm (SSSE3/AVX/AVX2)"
+>>>>>>> v3.18
 =======
 	tristate "SHA1 digest algorithm (SSSE3/AVX/AVX2)"
 >>>>>>> v3.18
@@ -536,7 +560,11 @@ config CRYPTO_SHA1_SSSE3
 	  SHA-1 secure hash standard (FIPS 180-1/DFIPS 180-2) implemented
 	  using Supplemental SSE3 (SSSE3) instructions or Advanced Vector
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Extensions (AVX), when available.
+=======
+	  Extensions (AVX/AVX2), when available.
+>>>>>>> v3.18
 =======
 	  Extensions (AVX/AVX2), when available.
 >>>>>>> v3.18
@@ -582,7 +610,10 @@ config CRYPTO_SHA1_ARM
 	  using optimized ARM assembler.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CRYPTO_SHA1_ARM_NEON
 	tristate "SHA1 digest algorithm (ARM NEON)"
 	depends on ARM && KERNEL_MODE_NEON
@@ -594,6 +625,9 @@ config CRYPTO_SHA1_ARM_NEON
 	  using optimized ARM NEON assembly, when NEON instructions are
 	  available.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CRYPTO_SHA1_PPC
 	tristate "SHA1 digest algorithm (powerpc)"
@@ -602,6 +636,7 @@ config CRYPTO_SHA1_PPC
 	  This is the powerpc hardware accelerated implementation of the
 	  SHA-1 secure hash standard (FIPS 180-1/DFIPS 180-2).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config CRYPTO_SHA1_ARM_NEON
 	tristate "SHA1 digest algorithm (ARM NEON)"
@@ -614,6 +649,8 @@ config CRYPTO_SHA1_ARM_NEON
 	  using optimized ARM NEON assembly, when NEON instructions are
 	  available.
 =======
+=======
+>>>>>>> v3.18
 config CRYPTO_SHA1_MB
 	tristate "SHA1 digest algorithm (x86_64 Multi-Buffer, Experimental)"
 	depends on X86 && 64BIT
@@ -629,6 +666,9 @@ config CRYPTO_SHA1_MB
 	  the data lanes filled to get performance benefit.  If the data
 	  lanes remain unfilled, a flush operation will be initiated to
 	  process the crypto jobs, adding a slight latency.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config CRYPTO_SHA256
@@ -665,10 +705,13 @@ config CRYPTO_SHA512
 	  of security against collision attacks.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CRYPTO_SHA512_ARM_NEON
 	tristate "SHA384 and SHA512 digest algorithm (ARM NEON)"
 	depends on ARM && KERNEL_MODE_NEON && !CPU_BIG_ENDIAN
 =======
+=======
+>>>>>>> v3.18
 config CRYPTO_SHA512_SPARC64
 	tristate "SHA384 and SHA512 digest algorithm (SPARC64)"
 	depends on SPARC64
@@ -681,6 +724,9 @@ config CRYPTO_SHA512_SPARC64
 config CRYPTO_SHA512_ARM_NEON
 	tristate "SHA384 and SHA512 digest algorithm (ARM NEON)"
 	depends on ARM && KERNEL_MODE_NEON
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select CRYPTO_SHA512
 	select CRYPTO_HASH
@@ -695,6 +741,7 @@ config CRYPTO_SHA512_ARM_NEON
 	  of security against collision attacks.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CRYPTO_SHA512_SPARC64
 	tristate "SHA384 and SHA512 digest algorithm (SPARC64)"
 	depends on SPARC64
@@ -704,6 +751,8 @@ config CRYPTO_SHA512_SPARC64
 	  SHA-512 secure hash standard (DFIPS 180-2) implemented
 	  using sparc64 crypto instructions, when available.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config CRYPTO_TGR192
@@ -812,7 +861,11 @@ config CRYPTO_AES_NI_INTEL
 	select CRYPTO_AES_586 if !64BIT
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -976,6 +1029,7 @@ config CRYPTO_BLOWFISH_X86_64
 	  <http://www.schneier.com/blowfish.html>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config CRYPTO_BLOWFISH_AVX2_X86_64
 	tristate "Blowfish cipher algorithm (x86_64/AVX2)"
 	depends on X86 && 64BIT
@@ -995,6 +1049,8 @@ config CRYPTO_BLOWFISH_AVX2_X86_64
 	  See also:
 	  <http://www.schneier.com/blowfish.html>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config CRYPTO_CAMELLIA
@@ -1038,7 +1094,11 @@ config CRYPTO_CAMELLIA_AESNI_AVX_X86_64
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1064,7 +1124,11 @@ config CRYPTO_CAMELLIA_AESNI_AVX2_X86_64
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1120,7 +1184,11 @@ config CRYPTO_CAST5_AVX_X86_64
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1147,7 +1215,11 @@ config CRYPTO_CAST6_AVX_X86_64
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1179,7 +1251,10 @@ config CRYPTO_DES_SPARC64
 	  optimized using SPARC64 crypto opcodes.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CRYPTO_DES3_EDE_X86_64
 	tristate "Triple DES EDE cipher algorithm (x86-64)"
 	depends on X86 && 64BIT
@@ -1193,6 +1268,9 @@ config CRYPTO_DES3_EDE_X86_64
 	  algorithm are provided; regular processing one input block and
 	  one that processes three blocks parallel.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CRYPTO_FCRYPT
 	tristate "FCrypt cipher algorithm"
@@ -1285,7 +1363,11 @@ config CRYPTO_SERPENT_SSE2_X86_64
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1311,7 +1393,11 @@ config CRYPTO_SERPENT_SSE2_586
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1337,7 +1423,11 @@ config CRYPTO_SERPENT_AVX_X86_64
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1363,7 +1453,11 @@ config CRYPTO_SERPENT_AVX2_X86_64
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1483,7 +1577,11 @@ config CRYPTO_TWOFISH_AVX_X86_64
 	select CRYPTO_ALGAPI
 	select CRYPTO_CRYPTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select CRYPTO_ABLK_HELPER_X86
+=======
+	select CRYPTO_ABLK_HELPER
+>>>>>>> v3.18
 =======
 	select CRYPTO_ABLK_HELPER
 >>>>>>> v3.18
@@ -1507,6 +1605,7 @@ config CRYPTO_TWOFISH_AVX_X86_64
 	  See also:
 	  <http://www.schneier.com/twofish.html>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config CRYPTO_TWOFISH_AVX2_X86_64
 	tristate "Twofish cipher algorithm (x86_64/AVX2)"
@@ -1533,6 +1632,8 @@ config CRYPTO_TWOFISH_AVX2_X86_64
 	  See also:
 	  <http://www.schneier.com/twofish.html>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 comment "Compression"
@@ -1575,7 +1676,10 @@ config CRYPTO_842
 	  This is the 842 algorithm.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CRYPTO_LZ4
 	tristate "LZ4 compression algorithm"
 	select CRYPTO_ALGAPI
@@ -1592,6 +1696,9 @@ config CRYPTO_LZ4HC
 	help
 	  This is the LZ4 high compression mode algorithm.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 comment "Random Number Generation"
 
@@ -1607,7 +1714,10 @@ config CRYPTO_ANSI_CPRNG
 	  CRYPTO_FIPS is selected
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 menuconfig CRYPTO_DRBG_MENU
 	tristate "NIST SP800-90A DRBG"
 	help
@@ -1642,6 +1752,9 @@ config CRYPTO_DRBG
 
 endif	# if CRYPTO_DRBG_MENU
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CRYPTO_USER_API
 	tristate
@@ -1665,6 +1778,12 @@ config CRYPTO_USER_API_SKCIPHER
 	  key cipher algorithms.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config CRYPTO_HASH_INFO
+	bool
+
+>>>>>>> v3.18
 =======
 config CRYPTO_HASH_INFO
 	bool

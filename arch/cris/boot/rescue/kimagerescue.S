@@ -51,7 +51,10 @@
 	nop
 	di
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_SVINTO_SIM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	;; setup port PA and PB default initial directions and data
@@ -71,7 +74,10 @@
 #include "../../lib/dram_init.S"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	;; Setup the stack to a suitably high address.

@@ -188,7 +188,11 @@ static int __init ab3100_otp_probe(struct platform_device *pdev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	otp = kzalloc(sizeof(struct ab3100_otp), GFP_KERNEL);
+=======
+	otp = devm_kzalloc(&pdev->dev, sizeof(struct ab3100_otp), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	otp = devm_kzalloc(&pdev->dev, sizeof(struct ab3100_otp), GFP_KERNEL);
 >>>>>>> v3.18
@@ -204,7 +208,11 @@ static int __init ab3100_otp_probe(struct platform_device *pdev)
 	err = ab3100_otp_read(otp);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_otp_read;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -217,7 +225,11 @@ static int __init ab3100_otp_probe(struct platform_device *pdev)
 					 &ab3100_otp_attrs[i]);
 		if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_create_file;
+=======
+			goto err;
+>>>>>>> v3.18
 =======
 			goto err;
 >>>>>>> v3.18
@@ -226,6 +238,7 @@ static int __init ab3100_otp_probe(struct platform_device *pdev)
 	/* debugfs entries */
 	err = ab3100_otp_init_debugfs(&pdev->dev, otp);
 	if (err)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_init_debugfs;
 
@@ -238,6 +251,8 @@ err_create_file:
 err_otp_read:
 	kfree(otp);
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 
 	return 0;
@@ -245,6 +260,9 @@ err_otp_read:
 err:
 	while (--i >= 0)
 		device_remove_file(&pdev->dev, &ab3100_otp_attrs[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return err;
 }
@@ -259,7 +277,10 @@ static int __exit ab3100_otp_remove(struct platform_device *pdev)
 				   &ab3100_otp_attrs[i]);
 	ab3100_otp_exit_debugfs(otp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(otp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -53,6 +53,7 @@ void sort_extable(struct exception_table_entry *start,
 
 	/* Normalize entries to being relative to the start of the section */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (p = start, i = 0; p < finish; p++, i += 8) {
 		p->insn += i;
 		p->fixup += i + 4;
@@ -64,12 +65,17 @@ void sort_extable(struct exception_table_entry *start,
 		p->fixup -= i + 4;
 	}
 =======
+=======
+>>>>>>> v3.18
 	for (p = start, i = 0; p < finish; p++, i += 8)
 		p->insn += i;
 	sort(start, finish - start, sizeof(*start), cmp_ex, NULL);
 	/* Denormalize all entries */
 	for (p = start, i = 0; p < finish; p++, i += 8)
 		p->insn -= i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

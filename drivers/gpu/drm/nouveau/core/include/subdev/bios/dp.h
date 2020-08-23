@@ -18,14 +18,20 @@ u16 nvbios_dpout_match(struct nouveau_bios *, u16 type, u16 mask,
 
 struct nvbios_dpcfg {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 drv;
 	u8 pre;
 	u8 unk;
 =======
+=======
+>>>>>>> v3.18
 	u8 pc;
 	u8 dc;
 	u8 pe;
 	u8 tx_pu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -35,7 +41,11 @@ nvbios_dpcfg_parse(struct nouveau_bios *, u16 outp, u8 idx,
 		   struct nvbios_dpcfg *);
 u16
 <<<<<<< HEAD
+<<<<<<< HEAD
 nvbios_dpcfg_match(struct nouveau_bios *, u16 outp, u8 un, u8 vs, u8 pe,
+=======
+nvbios_dpcfg_match(struct nouveau_bios *, u16 outp, u8 pc, u8 vs, u8 pe,
+>>>>>>> v3.18
 =======
 nvbios_dpcfg_match(struct nouveau_bios *, u16 outp, u8 pc, u8 vs, u8 pe,
 >>>>>>> v3.18

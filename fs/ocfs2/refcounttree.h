@@ -54,7 +54,11 @@ int ocfs2_prepare_refcount_change_for_del(struct inode *inode,
 					  int *ref_blocks);
 int ocfs2_refcount_cow(struct inode *inode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       struct file *filep, struct buffer_head *di_bh,
+=======
+		       struct buffer_head *di_bh,
+>>>>>>> v3.18
 =======
 		       struct buffer_head *di_bh,
 >>>>>>> v3.18
@@ -90,17 +94,23 @@ int ocfs2_refcount_cow_xattr(struct inode *inode,
 			     struct ocfs2_post_refcount *post);
 int ocfs2_duplicate_clusters_by_page(handle_t *handle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     struct file *file,
 				     u32 cpos, u32 old_cluster,
 				     u32 new_cluster, u32 new_len);
 int ocfs2_duplicate_clusters_by_jbd(handle_t *handle,
 				    struct file *file,
 =======
+=======
+>>>>>>> v3.18
 				     struct inode *inode,
 				     u32 cpos, u32 old_cluster,
 				     u32 new_cluster, u32 new_len);
 int ocfs2_duplicate_clusters_by_jbd(handle_t *handle,
 				    struct inode *inode,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				    u32 cpos, u32 old_cluster,
 				    u32 new_cluster, u32 new_len);

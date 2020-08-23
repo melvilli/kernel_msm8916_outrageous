@@ -86,7 +86,11 @@ static inline void mpc8610_suspend_init(void) { }
 #endif /* CONFIG_SUSPEND */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata mpc8610_ids[] = {
+=======
+static const struct of_device_id mpc8610_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc8610_ids[] __initconst = {
 >>>>>>> v3.18

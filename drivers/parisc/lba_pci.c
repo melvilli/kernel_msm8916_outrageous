@@ -1591,7 +1591,10 @@ lba_driver_probe(struct parisc_device *dev)
 #endif
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_enable_bridges(lba_bus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

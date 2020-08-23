@@ -1,6 +1,10 @@
 config SFC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Solarflare SFC4000/SFC9000-family support"
+=======
+	tristate "Solarflare SFC4000/SFC9000/SFC9100-family support"
+>>>>>>> v3.18
 =======
 	tristate "Solarflare SFC4000/SFC9000/SFC9100-family support"
 >>>>>>> v3.18
@@ -12,8 +16,14 @@ config SFC
 	select PTP_1588_CLOCK
 	---help---
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This driver supports 10-gigabit Ethernet cards based on
 	  the Solarflare SFC4000 and SFC9000-family controllers.
+=======
+	  This driver supports 10/40-gigabit Ethernet cards based on
+	  the Solarflare SFC4000, SFC9000-family and SFC9100-family
+	  controllers.
+>>>>>>> v3.18
 =======
 	  This driver supports 10/40-gigabit Ethernet cards based on
 	  the Solarflare SFC4000, SFC9000-family and SFC9100-family
@@ -24,7 +34,11 @@ config SFC
 	  will be called sfc.
 config SFC_MTD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Solarflare SFC4000/SFC9000-family MTD support"
+=======
+	bool "Solarflare SFC4000/SFC9000/SFC9100-family MTD support"
+>>>>>>> v3.18
 =======
 	bool "Solarflare SFC4000/SFC9000/SFC9100-family MTD support"
 >>>>>>> v3.18
@@ -36,7 +50,11 @@ config SFC_MTD
 	  the boot configuration under Linux.
 config SFC_MCDI_MON
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Solarflare SFC9000-family hwmon support"
+=======
+	bool "Solarflare SFC9000/SFC9100-family hwmon support"
+>>>>>>> v3.18
 =======
 	bool "Solarflare SFC9000/SFC9100-family hwmon support"
 >>>>>>> v3.18

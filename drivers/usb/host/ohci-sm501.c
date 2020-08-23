@@ -169,6 +169,10 @@ static int ohci_hcd_sm501_drv_probe(struct platform_device *pdev)
 	if (retval)
 		goto err5;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -212,7 +216,10 @@ static int ohci_hcd_sm501_drv_remove(struct platform_device *pdev)
 	sm501_unit_power(pdev->dev.parent, SM501_GATE_USB_HOST, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -225,12 +232,18 @@ static int ohci_sm501_suspend(struct platform_device *pdev, pm_message_t msg)
 {
 	struct device *dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ohci_hcd	*ohci = hcd_to_ohci(platform_get_drvdata(pdev));
 =======
+=======
+>>>>>>> v3.18
 	struct usb_hcd  *hcd = platform_get_drvdata(pdev);
 	struct ohci_hcd	*ohci = hcd_to_ohci(hcd);
 	bool do_wakeup = device_may_wakeup(dev);
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (time_before(jiffies, ohci->next_statechange))
@@ -238,15 +251,21 @@ static int ohci_sm501_suspend(struct platform_device *pdev, pm_message_t msg)
 	ohci->next_statechange = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sm501_unit_power(dev->parent, SM501_GATE_USB_HOST, 0);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = ohci_suspend(hcd, do_wakeup);
 	if (ret)
 		return ret;
 
 	sm501_unit_power(dev->parent, SM501_GATE_USB_HOST, 0);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

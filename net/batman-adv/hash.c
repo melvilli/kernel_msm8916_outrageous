@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2006-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2006-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2006-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -57,6 +65,7 @@ struct batadv_hashtable *batadv_hash_new(uint32_t size)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hash->table = kmalloc(sizeof(*hash->table) * size, GFP_ATOMIC);
 	if (!hash->table)
 		goto free_hash;
@@ -64,12 +73,17 @@ struct batadv_hashtable *batadv_hash_new(uint32_t size)
 	hash->list_locks = kmalloc(sizeof(*hash->list_locks) * size,
 				   GFP_ATOMIC);
 =======
+=======
+>>>>>>> v3.18
 	hash->table = kmalloc_array(size, sizeof(*hash->table), GFP_ATOMIC);
 	if (!hash->table)
 		goto free_hash;
 
 	hash->list_locks = kmalloc_array(size, sizeof(*hash->list_locks),
 					 GFP_ATOMIC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!hash->list_locks)
 		goto free_table;

@@ -33,9 +33,12 @@ gnet_stats_copy(struct gnet_dump *d, int type, void *buf, int size)
 
 nla_put_failure:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(d->xstats);
 	d->xstats = NULL;
 	d->xstats_len = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_bh(d->lock);
@@ -104,7 +107,10 @@ gnet_stats_start_copy(struct sk_buff *skb, int type, spinlock_t *lock,
 EXPORT_SYMBOL(gnet_stats_start_copy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 __gnet_stats_copy_basic_cpu(struct gnet_stats_basic_packed *bstats,
 			    struct gnet_stats_basic_cpu __percpu *cpu)
@@ -142,6 +148,9 @@ __gnet_stats_copy_basic(struct gnet_stats_basic_packed *bstats,
 }
 EXPORT_SYMBOL(__gnet_stats_copy_basic);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * gnet_stats_copy_basic - copy basic statistics into statistic TLV
@@ -156,12 +165,15 @@ EXPORT_SYMBOL(__gnet_stats_copy_basic);
  */
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 gnet_stats_copy_basic(struct gnet_dump *d, struct gnet_stats_basic_packed *b)
 {
 	if (d->compat_tc_stats) {
 		d->tc_stats.bytes = b->bytes;
 		d->tc_stats.packets = b->packets;
 =======
+=======
+>>>>>>> v3.18
 gnet_stats_copy_basic(struct gnet_dump *d,
 		      struct gnet_stats_basic_cpu __percpu *cpu,
 		      struct gnet_stats_basic_packed *b)
@@ -173,6 +185,9 @@ gnet_stats_copy_basic(struct gnet_dump *d,
 	if (d->compat_tc_stats) {
 		d->tc_stats.bytes = bstats.bytes;
 		d->tc_stats.packets = bstats.packets;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -181,8 +196,13 @@ gnet_stats_copy_basic(struct gnet_dump *d,
 
 		memset(&sb, 0, sizeof(sb));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sb.bytes = b->bytes;
 		sb.packets = b->packets;
+=======
+		sb.bytes = bstats.bytes;
+		sb.packets = bstats.packets;
+>>>>>>> v3.18
 =======
 		sb.bytes = bstats.bytes;
 		sb.packets = bstats.packets;
@@ -209,6 +229,7 @@ int
 gnet_stats_copy_rate_est(struct gnet_dump *d,
 			 const struct gnet_stats_basic_packed *b,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 struct gnet_stats_rate_est *r)
 {
 	if (b && !gen_estimator_active(b, r))
@@ -222,6 +243,8 @@ gnet_stats_copy_rate_est(struct gnet_dump *d,
 	if (d->tail)
 		return gnet_stats_copy(d, TCA_STATS_RATE_EST, r, sizeof(*r));
 =======
+=======
+>>>>>>> v3.18
 			 struct gnet_stats_rate_est64 *r)
 {
 	struct gnet_stats_rate_est est;
@@ -246,12 +269,16 @@ gnet_stats_copy_rate_est(struct gnet_dump *d,
 		/* emit 64bit stats only if needed */
 		return gnet_stats_copy(d, TCA_STATS_RATE_EST64, r, sizeof(*r));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 EXPORT_SYMBOL(gnet_stats_copy_rate_est);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * gnet_stats_copy_queue - copy queue statistics into statistics TLV
@@ -261,6 +288,8 @@ EXPORT_SYMBOL(gnet_stats_copy_rate_est);
  * Appends the queue statistics to the top level TLV created by
  * gnet_stats_start_copy().
 =======
+=======
+>>>>>>> v3.18
 static void
 __gnet_stats_copy_queue_cpu(struct gnet_stats_queue *qstats,
 			    const struct gnet_stats_queue __percpu *q)
@@ -306,12 +335,16 @@ static void __gnet_stats_copy_queue(struct gnet_stats_queue *qstats,
  * Appends the queue statistics to the top level TLV created by
  * gnet_stats_start_copy(). Using per cpu queue statistics if
  * they are available.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Returns 0 on success or -1 with the statistic lock released
  * if the room in the socket buffer was not sufficient.
  */
 int
+<<<<<<< HEAD
 <<<<<<< HEAD
 gnet_stats_copy_queue(struct gnet_dump *d, struct gnet_stats_queue *q)
 {
@@ -325,6 +358,8 @@ gnet_stats_copy_queue(struct gnet_dump *d, struct gnet_stats_queue *q)
 	if (d->tail)
 		return gnet_stats_copy(d, TCA_STATS_QUEUE, q, sizeof(*q));
 =======
+=======
+>>>>>>> v3.18
 gnet_stats_copy_queue(struct gnet_dump *d,
 		      struct gnet_stats_queue __percpu *cpu_q,
 		      struct gnet_stats_queue *q, __u32 qlen)
@@ -343,6 +378,9 @@ gnet_stats_copy_queue(struct gnet_dump *d,
 	if (d->tail)
 		return gnet_stats_copy(d, TCA_STATS_QUEUE,
 				       &qstats, sizeof(qstats));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -356,7 +394,11 @@ EXPORT_SYMBOL(gnet_stats_copy_queue);
  * @len: length of data
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Appends the application sepecific statistics to the top level TLV created by
+=======
+ * Appends the application specific statistics to the top level TLV created by
+>>>>>>> v3.18
 =======
  * Appends the application specific statistics to the top level TLV created by
 >>>>>>> v3.18
@@ -371,9 +413,13 @@ gnet_stats_copy_app(struct gnet_dump *d, void *st, int len)
 {
 	if (d->compat_xstats) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		d->xstats = kmemdup(st, len, GFP_ATOMIC);
 		if (!d->xstats)
 			goto err_out;
+=======
+		d->xstats = st;
+>>>>>>> v3.18
 =======
 		d->xstats = st;
 >>>>>>> v3.18
@@ -385,11 +431,14 @@ gnet_stats_copy_app(struct gnet_dump *d, void *st, int len)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err_out:
 	d->xstats_len = 0;
 	spin_unlock_bh(d->lock);
 	return -1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -425,9 +474,12 @@ gnet_stats_finish_copy(struct gnet_dump *d)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(d->xstats);
 	d->xstats = NULL;
 	d->xstats_len = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock_bh(d->lock);

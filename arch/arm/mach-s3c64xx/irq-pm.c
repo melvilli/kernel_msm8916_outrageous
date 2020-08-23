@@ -13,16 +13,23 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * NOTE: Code in this file is not used when booting with Device Tree support.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/syscore_ops.h>
 #include <linux/interrupt.h>
 #include <linux/serial_core.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/irq.h>
 #include <linux/io.h>
@@ -32,6 +39,8 @@
 #include <plat/regs-serial.h>
 #include <plat/regs-timer.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/serial_s3c.h>
 #include <linux/irq.h>
 #include <linux/io.h>
@@ -39,6 +48,9 @@
 
 #include <mach/map.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <mach/regs-gpio.h>
 #include <plat/cpu.h>
@@ -61,7 +73,10 @@ static struct sleep_save irq_save[] = {
 	SAVE_ITEM(S3C64XX_EINT0FLTCON3),
 	SAVE_ITEM(S3C64XX_EINT0MASK),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SAVE_ITEM(S3C64XX_TINT_CSTAT),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -73,8 +88,11 @@ static struct irq_grp_save {
 } eint_grp_save[5];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 irq_uart_mask[CONFIG_SERIAL_SAMSUNG_UARTS];
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_SERIAL_SAMSUNG_UARTS
 #define SERIAL_SAMSUNG_UARTS 0
 #else
@@ -82,6 +100,9 @@ static u32 irq_uart_mask[CONFIG_SERIAL_SAMSUNG_UARTS];
 #endif
 
 static u32 irq_uart_mask[SERIAL_SAMSUNG_UARTS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int s3c64xx_irq_pm_suspend(void)
@@ -94,7 +115,11 @@ static int s3c64xx_irq_pm_suspend(void)
 	s3c_pm_do_save(irq_save, ARRAY_SIZE(irq_save));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < CONFIG_SERIAL_SAMSUNG_UARTS; i++)
+=======
+	for (i = 0; i < SERIAL_SAMSUNG_UARTS; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < SERIAL_SAMSUNG_UARTS; i++)
 >>>>>>> v3.18
@@ -119,7 +144,11 @@ static void s3c64xx_irq_pm_resume(void)
 	s3c_pm_do_restore(irq_save, ARRAY_SIZE(irq_save));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < CONFIG_SERIAL_SAMSUNG_UARTS; i++)
+=======
+	for (i = 0; i < SERIAL_SAMSUNG_UARTS; i++)
+>>>>>>> v3.18
 =======
 	for (i = 0; i < SERIAL_SAMSUNG_UARTS; i++)
 >>>>>>> v3.18
@@ -142,11 +171,17 @@ static struct syscore_ops s3c64xx_irq_syscore_ops = {
 static __init int s3c64xx_syscore_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Appropriate drivers (pinctrl, uart) handle this when using DT. */
 	if (of_have_populated_dt())
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	register_syscore_ops(&s3c64xx_irq_syscore_ops);
 

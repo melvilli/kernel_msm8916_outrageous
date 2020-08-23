@@ -78,15 +78,21 @@ _GLOBAL(memset)
 	blr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 _GLOBAL(memmove)
 	cmplw	0,r3,r4
 	bgt	.backwards_memcpy
 	b	.memcpy
 =======
+=======
+>>>>>>> v3.18
 _GLOBAL_TOC(memmove)
 	cmplw	0,r3,r4
 	bgt	backwards_memcpy
 	b	memcpy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 _GLOBAL(backwards_memcpy)

@@ -6,11 +6,14 @@ config DRM_QXL
 	select FB_SYS_IMAGEBLIT
 	select FB_DEFERRED_IO
 <<<<<<< HEAD
+<<<<<<< HEAD
         select DRM_KMS_HELPER
         select DRM_TTM
 	help
 		QXL virtual GPU for Spice virtualization desktop integration. Do not enable this driver unless your distro ships a corresponding X.org QXL driver that can handle kernel modesetting.
 =======
+=======
+>>>>>>> v3.18
 	select DRM_KMS_HELPER
 	select DRM_KMS_FB_HELPER
 	select DRM_TTM
@@ -19,4 +22,7 @@ config DRM_QXL
 	  QXL virtual GPU for Spice virtualization desktop integration.
 	  Do not enable this driver unless your distro ships a corresponding
 	  X.org QXL driver that can handle kernel modesetting.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

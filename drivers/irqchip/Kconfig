@@ -7,7 +7,10 @@ config ARM_GIC
 	select IRQ_DOMAIN
 	select MULTI_IRQ_HANDLER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MSM_SHOW_RESUME_IRQ
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -15,10 +18,13 @@ config GIC_NON_BANKED
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GIC_SECURE
 	bool
 	depends on ARM_GIC
 =======
+=======
+>>>>>>> v3.18
 config ARM_GIC_V3
 	bool
 	select IRQ_DOMAIN
@@ -28,6 +34,9 @@ config ARM_NVIC
 	bool
 	select IRQ_DOMAIN
 	select GENERIC_IRQ_CHIP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ARM_VIC
@@ -39,7 +48,10 @@ config ARM_VIC_NR
 	int
 	default 4 if ARCH_S5PV210
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default 3 if ARCH_S5PC100
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default 2
@@ -48,6 +60,7 @@ config ARM_VIC_NR
 	  The maximum number of VICs available in the system, for
 	  power management.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MSM_SHOW_RESUME_IRQ
 	bool "Enable logging of interrupts that could have caused resume"
@@ -59,6 +72,8 @@ config MSM_SHOW_RESUME_IRQ
 	  wake up interrupts that causes system to come out of low power modes.
 	  Say Y if you want to debug why the system resumed.
 =======
+=======
+>>>>>>> v3.18
 config ATMEL_AIC_IRQ
 	bool
 	select GENERIC_IRQ_CHIP
@@ -109,6 +124,9 @@ config ORION_IRQCHIP
 	bool
 	select IRQ_DOMAIN
 	select MULTI_IRQ_HANDLER
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config RENESAS_INTC_IRQPIN
@@ -120,12 +138,18 @@ config RENESAS_IRQC
 	select IRQ_DOMAIN
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config TB10X_IRQC
 	bool
 	select IRQ_DOMAIN
 	select GENERIC_IRQ_CHIP
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config VERSATILE_FPGA_IRQ
 	bool
@@ -137,10 +161,13 @@ config VERSATILE_FPGA_IRQ_NR
        depends on VERSATILE_FPGA_IRQ
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MSM_IRQ
 	bool
 	select IRQ_DOMAIN
 =======
+=======
+>>>>>>> v3.18
 config XTENSA_MX
 	bool
 	select IRQ_DOMAIN
@@ -159,4 +186,7 @@ config KEYSTONE_IRQ
 	help
 		Support for Texas Instruments Keystone 2 IRQ controller IP which
 		is part of the Keystone 2 IPC mechanism
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

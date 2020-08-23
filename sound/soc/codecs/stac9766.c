@@ -29,8 +29,11 @@
 #include "stac9766.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define STAC9766_VERSION "0.10"
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -68,6 +71,7 @@ static const char *stac9766_boost2[] = {"0dB", "20dB"};
 static const char *stac9766_stereo_mic[] = {"Off", "On"};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum stac9766_record_enum =
 	SOC_ENUM_DOUBLE(AC97_REC_SEL, 8, 0, 8, stac9766_record_mux);
 static const struct soc_enum stac9766_mono_enum =
@@ -88,6 +92,8 @@ static const struct soc_enum stac9766_boost2_enum =
 static const struct soc_enum stac9766_stereo_mic_enum =
 	SOC_ENUM_SINGLE(AC97_STAC_STEREO_MIC, 2, 1, stac9766_stereo_mic);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_DOUBLE_DECL(stac9766_record_enum,
 			    AC97_REC_SEL, 8, 0, stac9766_record_mux);
 static SOC_ENUM_SINGLE_DECL(stac9766_mono_enum,
@@ -107,6 +113,9 @@ static SOC_ENUM_SINGLE_DECL(stac9766_boost2_enum,
 			    AC97_STAC_ANALOG_SPECIAL, 2, stac9766_boost2); /* 0/20dB */
 static SOC_ENUM_SINGLE_DECL(stac9766_stereo_mic_enum,
 			    AC97_STAC_STEREO_MIC, 2, stac9766_stereo_mic);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const DECLARE_TLV_DB_LINEAR(master_tlv, -4600, 0);
@@ -171,7 +180,11 @@ static int stac9766_ac97_write(struct snd_soc_codec *codec, unsigned int reg,
 	if (reg > AC97_STAC_PAGE0) {
 		stac9766_ac97_write(codec, AC97_INT_PAGING, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		soc_ac97_ops.write(codec->ac97, reg, val);
+=======
+		soc_ac97_ops->write(codec->ac97, reg, val);
+>>>>>>> v3.18
 =======
 		soc_ac97_ops->write(codec->ac97, reg, val);
 >>>>>>> v3.18
@@ -182,7 +195,11 @@ static int stac9766_ac97_write(struct snd_soc_codec *codec, unsigned int reg,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc_ac97_ops.write(codec->ac97, reg, val);
+=======
+	soc_ac97_ops->write(codec->ac97, reg, val);
+>>>>>>> v3.18
 =======
 	soc_ac97_ops->write(codec->ac97, reg, val);
 >>>>>>> v3.18
@@ -198,7 +215,11 @@ static unsigned int stac9766_ac97_read(struct snd_soc_codec *codec,
 	if (reg > AC97_STAC_PAGE0) {
 		stac9766_ac97_write(codec, AC97_INT_PAGING, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = soc_ac97_ops.read(codec->ac97, reg - AC97_STAC_PAGE0);
+=======
+		val = soc_ac97_ops->read(codec->ac97, reg - AC97_STAC_PAGE0);
+>>>>>>> v3.18
 =======
 		val = soc_ac97_ops->read(codec->ac97, reg - AC97_STAC_PAGE0);
 >>>>>>> v3.18
@@ -213,7 +234,11 @@ static unsigned int stac9766_ac97_read(struct snd_soc_codec *codec,
 		reg == AC97_VENDOR_ID2) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val = soc_ac97_ops.read(codec->ac97, reg);
+=======
+		val = soc_ac97_ops->read(codec->ac97, reg);
+>>>>>>> v3.18
 =======
 		val = soc_ac97_ops->read(codec->ac97, reg);
 >>>>>>> v3.18
@@ -284,8 +309,13 @@ static int stac9766_set_bias_level(struct snd_soc_codec *codec,
 static int stac9766_reset(struct snd_soc_codec *codec, int try_warm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (try_warm && soc_ac97_ops.warm_reset) {
 		soc_ac97_ops.warm_reset(codec->ac97);
+=======
+	if (try_warm && soc_ac97_ops->warm_reset) {
+		soc_ac97_ops->warm_reset(codec->ac97);
+>>>>>>> v3.18
 =======
 	if (try_warm && soc_ac97_ops->warm_reset) {
 		soc_ac97_ops->warm_reset(codec->ac97);
@@ -295,9 +325,15 @@ static int stac9766_reset(struct snd_soc_codec *codec, int try_warm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc_ac97_ops.reset(codec->ac97);
 	if (soc_ac97_ops.warm_reset)
 		soc_ac97_ops.warm_reset(codec->ac97);
+=======
+	soc_ac97_ops->reset(codec->ac97);
+	if (soc_ac97_ops->warm_reset)
+		soc_ac97_ops->warm_reset(codec->ac97);
+>>>>>>> v3.18
 =======
 	soc_ac97_ops->reset(codec->ac97);
 	if (soc_ac97_ops->warm_reset)
@@ -327,7 +363,11 @@ reset:
 	}
 	codec->ac97->bus->ops->warm_reset(codec->ac97);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id = soc_ac97_ops.read(codec->ac97, AC97_VENDOR_ID2);
+=======
+	id = soc_ac97_ops->read(codec->ac97, AC97_VENDOR_ID2);
+>>>>>>> v3.18
 =======
 	id = soc_ac97_ops->read(codec->ac97, AC97_VENDOR_ID2);
 >>>>>>> v3.18
@@ -395,9 +435,13 @@ static int stac9766_codec_probe(struct snd_soc_codec *codec)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "STAC9766 SoC Audio Codec %s\n", STAC9766_VERSION);
 
 	ret = snd_soc_new_ac97_codec(codec, &soc_ac97_ops, 0);
+=======
+	ret = snd_soc_new_ac97_codec(codec, soc_ac97_ops, 0);
+>>>>>>> v3.18
 =======
 	ret = snd_soc_new_ac97_codec(codec, soc_ac97_ops, 0);
 >>>>>>> v3.18

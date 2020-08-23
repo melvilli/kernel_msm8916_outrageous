@@ -23,6 +23,10 @@
 #include <linux/netfilter/x_tables.h>
 #include <net/netfilter/nf_nat.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netfilter/ipv4/nf_nat_masquerade.h>
+>>>>>>> v3.18
 =======
 #include <net/netfilter/ipv4/nf_nat_masquerade.h>
 >>>>>>> v3.18
@@ -50,6 +54,7 @@ static int masquerade_tg_check(const struct xt_tgchk_param *par)
 static unsigned int
 masquerade_tg(struct sk_buff *skb, const struct xt_action_param *par)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct nf_conn *ct;
 	struct nf_conn_nat *nat;
@@ -159,6 +164,8 @@ static struct notifier_block masq_inet_notifier = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	struct nf_nat_range range;
 	const struct nf_nat_ipv4_multi_range_compat *mr;
 
@@ -170,6 +177,9 @@ static struct notifier_block masq_inet_notifier = {
 	return nf_nat_masquerade_ipv4(skb, par->hooknum, &range, par->out);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct xt_target masquerade_tg_reg __read_mostly = {
 	.name		= "MASQUERADE",
@@ -189,12 +199,17 @@ static int __init masquerade_tg_init(void)
 	ret = xt_register_target(&masquerade_tg_reg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == 0) {
 		/* Register for device down reports */
 		register_netdevice_notifier(&masq_dev_notifier);
 		/* Register IP address change reports */
 		register_inetaddr_notifier(&masq_inet_notifier);
 	}
+=======
+	if (ret == 0)
+		nf_nat_masquerade_ipv4_register_notifier();
+>>>>>>> v3.18
 =======
 	if (ret == 0)
 		nf_nat_masquerade_ipv4_register_notifier();
@@ -207,8 +222,12 @@ static void __exit masquerade_tg_exit(void)
 {
 	xt_unregister_target(&masquerade_tg_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_netdevice_notifier(&masq_dev_notifier);
 	unregister_inetaddr_notifier(&masq_inet_notifier);
+=======
+	nf_nat_masquerade_ipv4_unregister_notifier();
+>>>>>>> v3.18
 =======
 	nf_nat_masquerade_ipv4_unregister_notifier();
 >>>>>>> v3.18

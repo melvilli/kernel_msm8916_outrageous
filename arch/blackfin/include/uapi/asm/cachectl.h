@@ -8,8 +8,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef	_ASM_CACHECTL
 #define	_ASM_CACHECTL
+=======
+#ifndef _UAPI_ASM_CACHECTL
+#define _UAPI_ASM_CACHECTL
+>>>>>>> v3.18
 =======
 #ifndef _UAPI_ASM_CACHECTL
 #define _UAPI_ASM_CACHECTL
@@ -23,7 +28,11 @@
 #define	BCACHE	(ICACHE|DCACHE)	/* flush both caches              */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* _ASM_CACHECTL */
+=======
+#endif /* _UAPI_ASM_CACHECTL */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI_ASM_CACHECTL */
 >>>>>>> v3.18

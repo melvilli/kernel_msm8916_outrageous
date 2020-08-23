@@ -2,7 +2,11 @@
  * in-kernel handling for sie intercepts
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright IBM Corp. 2008, 2009
+=======
+ * Copyright IBM Corp. 2008, 2014
+>>>>>>> v3.18
 =======
  * Copyright IBM Corp. 2008, 2014
 >>>>>>> v3.18
@@ -21,6 +25,11 @@
 
 #include <asm/kvm_host.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/asm-offsets.h>
+#include <asm/irq.h>
+>>>>>>> v3.18
 =======
 #include <asm/asm-offsets.h>
 #include <asm/irq.h>
@@ -31,6 +40,7 @@
 #include "trace.h"
 #include "trace-s390.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int handle_lctlg(struct kvm_vcpu *vcpu)
 {
@@ -115,6 +125,8 @@ static int handle_eb(struct kvm_vcpu *vcpu)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static const intercept_handler_t instruction_handlers[256] = {
 	[0x01] = kvm_s390_handle_01,
@@ -123,16 +135,22 @@ static const intercept_handler_t instruction_handlers[256] = {
 	[0xae] = kvm_s390_handle_sigp,
 	[0xb2] = kvm_s390_handle_b2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[0xb7] = handle_lctl,
 	[0xb9] = kvm_s390_handle_b9,
 	[0xe5] = kvm_s390_handle_e5,
 	[0xeb] = handle_eb,
 =======
+=======
+>>>>>>> v3.18
 	[0xb6] = kvm_s390_handle_stctl,
 	[0xb7] = kvm_s390_handle_lctl,
 	[0xb9] = kvm_s390_handle_b9,
 	[0xe5] = kvm_s390_handle_e5,
 	[0xeb] = kvm_s390_handle_eb,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -146,9 +164,12 @@ static int handle_noop(struct kvm_vcpu *vcpu)
 		vcpu->stat.exit_external_request++;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0x14:
 		vcpu->stat.exit_external_interrupt++;
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -160,6 +181,7 @@ static int handle_noop(struct kvm_vcpu *vcpu)
 static int handle_stop(struct kvm_vcpu *vcpu)
 {
 	int rc = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	vcpu->stat.exit_stop_request++;
@@ -195,6 +217,8 @@ static int handle_stop(struct kvm_vcpu *vcpu)
 		spin_unlock_bh(&vcpu->arch.local_int.lock);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int action_bits;
 
 	vcpu->stat.exit_stop_request++;
@@ -215,11 +239,15 @@ static int handle_stop(struct kvm_vcpu *vcpu)
 	if (!kvm_s390_user_cpu_state_ctrl(vcpu->kvm))
 		kvm_s390_vcpu_stop(vcpu);
 	return -EOPNOTSUPP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int handle_validity(struct kvm_vcpu *vcpu)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long vmaddr;
 	int viwhy = vcpu->arch.sie_block->ipb >> 16;
@@ -263,12 +291,17 @@ out:
 			   viwhy);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	int viwhy = vcpu->arch.sie_block->ipb >> 16;
 
 	vcpu->stat.exit_validity++;
 	trace_kvm_s390_intercept_validity(vcpu, viwhy);
 	WARN_ONCE(true, "kvm: unhandled validity intercept 0x%x\n", viwhy);
 	return -EOPNOTSUPP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -287,12 +320,15 @@ static int handle_instruction(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int handle_prog(struct kvm_vcpu *vcpu)
 {
 	vcpu->stat.exit_program_interruption++;
 	trace_kvm_s390_intercept_prog(vcpu, vcpu->arch.sie_block->iprcc);
 	return kvm_s390_inject_program_int(vcpu, vcpu->arch.sie_block->iprcc);
 =======
+=======
+>>>>>>> v3.18
 static void __extract_prog_irq(struct kvm_vcpu *vcpu,
 			       struct kvm_s390_pgm_info *pgm_info)
 {
@@ -407,6 +443,9 @@ static int handle_prog(struct kvm_vcpu *vcpu)
 
 	__extract_prog_irq(vcpu, &pgm_info);
 	return kvm_s390_inject_prog_irq(vcpu, &pgm_info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -426,7 +465,10 @@ static int handle_instruction_and_prog(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * handle_external_interrupt - used for external interruption interceptions
  *
@@ -519,6 +561,9 @@ static int handle_partial_execution(struct kvm_vcpu *vcpu)
 	return -EOPNOTSUPP;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const intercept_handler_t intercept_funcs[] = {
 	[0x00 >> 2] = handle_noop,
@@ -527,7 +572,11 @@ static const intercept_handler_t intercept_funcs[] = {
 	[0x0C >> 2] = handle_instruction_and_prog,
 	[0x10 >> 2] = handle_noop,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[0x14 >> 2] = handle_noop,
+=======
+	[0x14 >> 2] = handle_external_interrupt,
+>>>>>>> v3.18
 =======
 	[0x14 >> 2] = handle_external_interrupt,
 >>>>>>> v3.18
@@ -536,6 +585,10 @@ static const intercept_handler_t intercept_funcs[] = {
 	[0x20 >> 2] = handle_validity,
 	[0x28 >> 2] = handle_stop,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	[0x38 >> 2] = handle_partial_execution,
+>>>>>>> v3.18
 =======
 	[0x38 >> 2] = handle_partial_execution,
 >>>>>>> v3.18

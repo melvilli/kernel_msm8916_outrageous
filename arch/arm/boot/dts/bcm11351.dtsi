@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2012 Broadcom Corporation
+=======
+ * Copyright (C) 2012-2013 Broadcom Corporation
+>>>>>>> v3.18
 =======
  * Copyright (C) 2012-2013 Broadcom Corporation
 >>>>>>> v3.18
@@ -16,12 +20,15 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
 
 / {
 	model = "BCM11351 SoC";
 	compatible = "bcm,bcm11351";
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 
@@ -32,6 +39,9 @@
 / {
 	model = "BCM11351 SoC";
 	compatible = "brcm,bcm11351";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	interrupt-parent = <&gic>;
 
@@ -40,7 +50,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -60,6 +73,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	gic: interrupt-controller@3ff00100 {
 		compatible = "arm,cortex-a9-gic";
@@ -72,6 +88,7 @@
 
 	smc@0x3404c000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "bcm,bcm11351-smc", "bcm,kona-smc";
 		reg = <0x3404c000 0x400>; //1 KiB in SRAM
 	};
@@ -83,6 +100,8 @@
 		clock-frequency = <13000000>;
 		interrupts = <0x0 67 0x4>;
 =======
+=======
+>>>>>>> v3.18
 		compatible = "brcm,bcm11351-smc", "brcm,kona-smc";
 		reg = <0x3404c000 0x400>; /* 1 KiB in SRAM */
 	};
@@ -123,12 +142,16 @@
 		reg = <0x3e003000 0x1000>;
 		clocks = <&slave_ccu BCM281XX_SLAVE_CCU_UARTB4>;
 		interrupts = <GIC_SPI 64 IRQ_TYPE_LEVEL_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg-shift = <2>;
 		reg-io-width = <4>;
 	};
 
 	L2: l2-cache {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		    compatible = "arm,pl310-cache";
 		    reg = <0x3ff20000 0x1000>;
@@ -144,6 +167,8 @@
 	};
 
 =======
+=======
+>>>>>>> v3.18
 		compatible = "brcm,bcm11351-a2-pl310-cache";
 		reg = <0x3ff20000 0x1000>;
 		cache-unified;
@@ -464,5 +489,8 @@
 		#phy-cells = <0>;
 		status = "disabled";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

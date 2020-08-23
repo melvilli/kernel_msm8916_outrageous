@@ -425,7 +425,11 @@ nmi_interrupt:
 	nop
 	jsr	handle_watchdog_bite	; In time.c.
 <<<<<<< HEAD
+<<<<<<< HEAD
         move.d	$sp, $r10		; Pointer to registers
+=======
+	move.d	$sp, $r10		; Pointer to registers
+>>>>>>> v3.18
 =======
 	move.d	$sp, $r10		; Pointer to registers
 >>>>>>> v3.18
@@ -457,7 +461,11 @@ spurious_interrupt:
 
 	;; This handles the case when multiple interrupts arrive at the same
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;; time. Jump to the first set interrupt bit in a priotiry fashion. The
+=======
+	;; time. Jump to the first set interrupt bit in a priority fashion. The
+>>>>>>> v3.18
 =======
 	;; time. Jump to the first set interrupt bit in a priority fashion. The
 >>>>>>> v3.18
@@ -894,6 +902,7 @@ sys_call_table:
 	.long sys_pwritev
 	.long sys_setns			/* 335 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         /*
          * NOTE!! This doesn't have to be exact - we just have
@@ -902,6 +911,8 @@ sys_call_table:
          * been shrunk every time we add a new system call.
          */
 =======
+=======
+>>>>>>> v3.18
 	.long sys_name_to_handle_at
 	.long sys_open_by_handle_at
 	.long sys_rt_tgsigqueueinfo
@@ -925,6 +936,9 @@ sys_call_table:
 	 * entries. Don't panic if you notice that this hasn't
 	 * been shrunk every time we add a new system call.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.rept NR_syscalls - (.-sys_call_table) / 4

@@ -17,9 +17,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the
  * Free Software Foundation, Inc.,
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -49,7 +53,10 @@ DEFINE_MUTEX(nfc_devlist_mutex);
 static DEFINE_IDA(nfc_index_ida);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int nfc_fw_download(struct nfc_dev *dev, const char *firmware_name)
 {
 	int rc = 0;
@@ -99,6 +106,9 @@ int nfc_fw_download_done(struct nfc_dev *dev, const char *firmware_name,
 }
 EXPORT_SYMBOL(nfc_fw_download_done);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * nfc_dev_up - turn on the NFC device
@@ -126,12 +136,18 @@ int nfc_dev_up(struct nfc_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (dev->fw_download_in_progress) {
 		rc = -EBUSY;
 		goto error;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dev->dev_up) {
 		rc = -EALREADY;
@@ -145,11 +161,17 @@ int nfc_dev_up(struct nfc_dev *dev)
 		dev->dev_up = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* We have to enable the device before discovering SEs */
 	if (dev->ops->discover_se && dev->ops->discover_se(dev))
 		pr_err("SE discovery failed\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error:
 	device_unlock(&dev->dev);
@@ -296,9 +318,12 @@ static struct nfc_target *nfc_find_target(struct nfc_dev *dev, u32 target_idx)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->n_targets == 0)
 		return NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < dev->n_targets; i++) {
@@ -398,7 +423,10 @@ int nfc_dep_link_is_up(struct nfc_dev *dev, u32 target_idx,
 	dev->dep_link_up = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!dev->active_target && rf_mode == NFC_RF_INITIATOR) {
 		struct nfc_target *target;
 
@@ -412,6 +440,9 @@ int nfc_dep_link_is_up(struct nfc_dev *dev, u32 target_idx,
 	dev->polling = false;
 	dev->rf_mode = rf_mode;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nfc_llcp_mac_is_up(dev, target_idx, comm_mode, rf_mode);
 
@@ -566,7 +597,10 @@ error:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct nfc_se *nfc_find_se(struct nfc_dev *dev, u32 se_idx)
 {
 	struct nfc_se *se;
@@ -674,15 +708,21 @@ error:
 	return rc;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int nfc_set_remote_general_bytes(struct nfc_dev *dev, u8 *gb, u8 gb_len)
 {
 	pr_debug("dev_name=%s gb_len=%d\n", dev_name(&dev->dev), gb_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gb_len > NFC_MAX_GT_LEN)
 		return -EINVAL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return nfc_llcp_set_remote_gb(dev, gb, gb_len);
@@ -911,10 +951,13 @@ inline void nfc_driver_failure(struct nfc_dev *dev, int err)
 EXPORT_SYMBOL(nfc_driver_failure);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void nfc_release(struct device *d)
 {
 	struct nfc_dev *dev = to_nfc_dev(d);
 =======
+=======
+>>>>>>> v3.18
 int nfc_add_se(struct nfc_dev *dev, u32 se_idx, u16 type)
 {
 	struct nfc_se *se;
@@ -976,6 +1019,9 @@ static void nfc_release(struct device *d)
 {
 	struct nfc_dev *dev = to_nfc_dev(d);
 	struct nfc_se *se, *n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pr_debug("dev_name=%s\n", dev_name(&dev->dev));
@@ -983,7 +1029,10 @@ static void nfc_release(struct device *d)
 	nfc_genl_data_exit(&dev->genl_data);
 	kfree(dev->targets);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry_safe(se, n, &dev->secure_elements, list) {
 			nfc_genl_se_removed(dev, se->idx);
@@ -991,6 +1040,9 @@ static void nfc_release(struct device *d)
 			kfree(se);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(dev);
 }
@@ -1064,7 +1116,10 @@ struct nfc_dev *nfc_get_device(unsigned int idx)
 struct nfc_dev *nfc_allocate_device(struct nfc_ops *ops,
 				    u32 supported_protocols,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    u32 supported_se,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				    int tx_headroom, int tx_tailroom)
@@ -1085,10 +1140,16 @@ struct nfc_dev *nfc_allocate_device(struct nfc_ops *ops,
 	dev->ops = ops;
 	dev->supported_protocols = supported_protocols;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->supported_se = supported_se;
 	dev->active_se = NFC_SE_NONE;
 	dev->tx_headroom = tx_headroom;
 	dev->tx_tailroom = tx_tailroom;
+=======
+	dev->tx_headroom = tx_headroom;
+	dev->tx_tailroom = tx_tailroom;
+	INIT_LIST_HEAD(&dev->secure_elements);
+>>>>>>> v3.18
 =======
 	dev->tx_headroom = tx_headroom;
 	dev->tx_tailroom = tx_tailroom;

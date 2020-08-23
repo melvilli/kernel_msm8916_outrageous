@@ -15,9 +15,12 @@
 #define PXA2XX_DAI_AC97_MIC		2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* platform data */
 extern struct snd_ac97_bus_ops pxa2xx_ac97_ops;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

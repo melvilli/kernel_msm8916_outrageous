@@ -24,10 +24,13 @@ static struct dentry *fnic_trace_debugfs_root;
 static struct dentry *fnic_trace_debugfs_file;
 static struct dentry *fnic_trace_enable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * fnic_trace_ctrl_open - Open the trace_enable file
 =======
+=======
+>>>>>>> v3.18
 static struct dentry *fnic_stats_debugfs_root;
 
 static struct dentry *fnic_fc_trace_debugfs_file;
@@ -114,13 +117,20 @@ void fnic_debugfs_terminate(void)
 /*
  * fnic_trace_ctrl_open - Open the trace_enable file for fnic_trace
  *               Or Open fc_trace_enable file for fc_trace
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @inode: The inode pointer.
  * @file: The file pointer to attach the trace enable/disable flag.
  *
  * Description:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This routine opens a debugsfs file trace_enable.
+=======
+ * This routine opens a debugsfs file trace_enable or fc_trace_enable.
+>>>>>>> v3.18
 =======
  * This routine opens a debugsfs file trace_enable or fc_trace_enable.
 >>>>>>> v3.18
@@ -136,7 +146,13 @@ static int fnic_trace_ctrl_open(struct inode *inode, struct file *filp)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * fnic_trace_ctrl_read - Read a trace_enable debugfs file
+=======
+ * fnic_trace_ctrl_read -
+ *          Read  trace_enable ,fc_trace_enable
+ *              or fc_trace_clear debugfs file
+>>>>>>> v3.18
 =======
  * fnic_trace_ctrl_read -
  *          Read  trace_enable ,fc_trace_enable
@@ -149,13 +165,19 @@ static int fnic_trace_ctrl_open(struct inode *inode, struct file *filp)
  *
  * Description:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * This routine reads value of variable fnic_tracing_enabled
  * and stores into local @buf. It will start reading file at @ppos and
 =======
+=======
+>>>>>>> v3.18
  * This routine reads value of variable fnic_tracing_enabled or
  * fnic_fc_tracing_enabled or fnic_fc_trace_cleared
  * and stores into local @buf.
  * It will start reading file at @ppos and
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * copy up to @cnt of data to @ubuf from @buf.
  *
@@ -169,8 +191,11 @@ static ssize_t fnic_trace_ctrl_read(struct file *filp,
 	char buf[64];
 	int len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = sprintf(buf, "%u\n", fnic_tracing_enabled);
 =======
+=======
+>>>>>>> v3.18
 	u8 *trace_type;
 	len = 0;
 	trace_type = (u8 *)filp->private_data;
@@ -182,6 +207,9 @@ static ssize_t fnic_trace_ctrl_read(struct file *filp,
 		len = sprintf(buf, "%u\n", fnic_fc_trace_cleared);
 	else
 		pr_err("fnic: Cannot read to any debugfs file\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return simple_read_from_buffer(ubuf, cnt, ppos, buf, len);
@@ -189,7 +217,13 @@ static ssize_t fnic_trace_ctrl_read(struct file *filp,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * fnic_trace_ctrl_write - Write to trace_enable debugfs file
+=======
+ * fnic_trace_ctrl_write -
+ * Write to trace_enable, fc_trace_enable or
+ *         fc_trace_clear debugfs file
+>>>>>>> v3.18
 =======
  * fnic_trace_ctrl_write -
  * Write to trace_enable, fc_trace_enable or
@@ -203,7 +237,12 @@ static ssize_t fnic_trace_ctrl_read(struct file *filp,
  * Description:
  * This routine writes data from user buffer @ubuf to buffer @buf and
 <<<<<<< HEAD
+<<<<<<< HEAD
  * sets fnic_tracing_enabled value as per user input.
+=======
+ * sets fc_trace_enable ,tracing_enable or fnic_fc_trace_cleared
+ * value as per user input.
+>>>>>>> v3.18
 =======
  * sets fc_trace_enable ,tracing_enable or fnic_fc_trace_cleared
  * value as per user input.
@@ -220,6 +259,11 @@ static ssize_t fnic_trace_ctrl_write(struct file *filp,
 	unsigned long val;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 *trace_type;
+	trace_type = (u8 *)filp->private_data;
+>>>>>>> v3.18
 =======
 	u8 *trace_type;
 	trace_type = (u8 *)filp->private_data;
@@ -238,8 +282,11 @@ static ssize_t fnic_trace_ctrl_write(struct file *filp,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fnic_tracing_enabled = val;
 =======
+=======
+>>>>>>> v3.18
 	if (*trace_type == fc_trc_flag->fnic_trace)
 		fnic_tracing_enabled = val;
 	else if (*trace_type == fc_trc_flag->fc_trace)
@@ -249,6 +296,9 @@ static ssize_t fnic_trace_ctrl_write(struct file *filp,
 	else
 		pr_err("fnic: cannot write to any debugfs file\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	(*ppos)++;
 
@@ -256,7 +306,10 @@ static ssize_t fnic_trace_ctrl_write(struct file *filp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct file_operations fnic_trace_ctrl_fops = {
 	.owner = THIS_MODULE,
 	.open = fnic_trace_ctrl_open,
@@ -264,6 +317,9 @@ static const struct file_operations fnic_trace_ctrl_fops = {
 	.write = fnic_trace_ctrl_write,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * fnic_trace_debugfs_open - Open the fnic trace log
@@ -285,6 +341,11 @@ static int fnic_trace_debugfs_open(struct inode *inode,
 {
 	fnic_dbgfs_t *fnic_dbg_prt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 *rdata_ptr;
+	rdata_ptr = (u8 *)inode->i_private;
+>>>>>>> v3.18
 =======
 	u8 *rdata_ptr;
 	rdata_ptr = (u8 *)inode->i_private;
@@ -293,6 +354,7 @@ static int fnic_trace_debugfs_open(struct inode *inode,
 	if (!fnic_dbg_prt)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fnic_dbg_prt->buffer = vmalloc((3*(trace_max_pages * PAGE_SIZE)));
 	if (!fnic_dbg_prt->buffer) {
@@ -304,6 +366,8 @@ static int fnic_trace_debugfs_open(struct inode *inode,
 	fnic_dbg_prt->buffer_len = fnic_get_trace_data(fnic_dbg_prt);
 	file->private_data = fnic_dbg_prt;
 =======
+=======
+>>>>>>> v3.18
 	if (*rdata_ptr == fc_trc_flag->fnic_trace) {
 		fnic_dbg_prt->buffer = vmalloc(3 *
 					(trace_max_pages * PAGE_SIZE));
@@ -328,6 +392,9 @@ static int fnic_trace_debugfs_open(struct inode *inode,
 	}
 	file->private_data = fnic_dbg_prt;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -355,6 +422,7 @@ static loff_t fnic_trace_debugfs_lseek(struct file *file,
 {
 	fnic_dbgfs_t *fnic_dbg_prt = file->private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	loff_t pos = -1;
 
 	switch (howto) {
@@ -369,6 +437,10 @@ static loff_t fnic_trace_debugfs_lseek(struct file *file,
 	}
 	return (pos < 0 || pos > fnic_dbg_prt->buffer_len) ?
 			  -EINVAL : (file->f_pos = pos);
+=======
+	return fixed_size_llseek(file, offset, howto,
+				fnic_dbg_prt->buffer_len);
+>>>>>>> v3.18
 =======
 	return fixed_size_llseek(file, offset, howto,
 				fnic_dbg_prt->buffer_len);
@@ -428,6 +500,7 @@ static int fnic_trace_debugfs_release(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct file_operations fnic_trace_ctrl_fops = {
 	.owner = THIS_MODULE,
 	.open = fnic_trace_ctrl_open,
@@ -435,6 +508,8 @@ static const struct file_operations fnic_trace_ctrl_fops = {
 	.write = fnic_trace_ctrl_write,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct file_operations fnic_trace_debugfs_fops = {
@@ -452,9 +527,15 @@ static const struct file_operations fnic_trace_debugfs_fops = {
  * When Debugfs is configured this routine sets up the fnic debugfs
  * file system. If not already created, this routine will create the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * fnic directory. It will create file trace to log fnic trace buffer
  * output into debugfs and it will also create file trace_enable to
  * control enable/disable of trace logging into trace buffer.
+=======
+ * create file trace to log fnic trace buffer output into debugfs and
+ * it will also create file trace_enable to control enable/disable of
+ * trace logging into trace buffer.
+>>>>>>> v3.18
 =======
  * create file trace to log fnic trace buffer output into debugfs and
  * it will also create file trace_enable to control enable/disable of
@@ -464,6 +545,7 @@ static const struct file_operations fnic_trace_debugfs_fops = {
 int fnic_trace_debugfs_init(void)
 {
 	int rc = -1;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fnic_trace_debugfs_root = debugfs_create_dir("fnic", NULL);
 	if (!fnic_trace_debugfs_root) {
@@ -479,6 +561,8 @@ int fnic_trace_debugfs_init(void)
 		printk(KERN_DEBUG "Cannot create trace_enable file"
 				  " under debugfs");
 =======
+=======
+>>>>>>> v3.18
 	if (!fnic_trace_debugfs_root) {
 		printk(KERN_DEBUG
 			"FNIC Debugfs root directory doesn't exist\n");
@@ -493,11 +577,15 @@ int fnic_trace_debugfs_init(void)
 	if (!fnic_trace_enable) {
 		printk(KERN_DEBUG
 			"Cannot create trace_enable file under debugfs\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return rc;
 	}
 
 	fnic_trace_debugfs_file = debugfs_create_file("trace",
+<<<<<<< HEAD
 <<<<<<< HEAD
 						  S_IFREG|S_IRUGO|S_IWUSR,
 						  fnic_trace_debugfs_root,
@@ -507,6 +595,8 @@ int fnic_trace_debugfs_init(void)
 	if (!fnic_trace_debugfs_file) {
 		printk(KERN_DEBUG "Cannot create trace file under debugfs");
 =======
+=======
+>>>>>>> v3.18
 					S_IFREG|S_IRUGO|S_IWUSR,
 					fnic_trace_debugfs_root,
 					&(fc_trc_flag->fnic_trace),
@@ -515,6 +605,9 @@ int fnic_trace_debugfs_init(void)
 	if (!fnic_trace_debugfs_file) {
 		printk(KERN_DEBUG
 			"Cannot create trace file under debugfs\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return rc;
 	}
@@ -532,6 +625,7 @@ int fnic_trace_debugfs_init(void)
 void fnic_trace_debugfs_terminate(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fnic_trace_debugfs_file) {
 		debugfs_remove(fnic_trace_debugfs_file);
 		fnic_trace_debugfs_file = NULL;
@@ -545,6 +639,8 @@ void fnic_trace_debugfs_terminate(void)
 		fnic_trace_debugfs_root = NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	debugfs_remove(fnic_trace_debugfs_file);
 	fnic_trace_debugfs_file = NULL;
 
@@ -962,5 +1058,8 @@ void fnic_stats_debugfs_remove(struct fnic *fnic)
 
 	debugfs_remove(fnic->fnic_stats_debugfs_host);
 	fnic->fnic_stats_debugfs_host = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

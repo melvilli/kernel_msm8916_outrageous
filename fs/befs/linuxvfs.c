@@ -6,6 +6,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -37,7 +42,11 @@ MODULE_LICENSE("GPL");
 #define VFS_BLOCK_SIZE 512
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int befs_readdir(struct file *, void *, filldir_t);
+=======
+static int befs_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 =======
 static int befs_readdir(struct file *, struct dir_context *);
 >>>>>>> v3.18
@@ -49,10 +58,16 @@ static struct inode *befs_iget(struct super_block *, unsigned long);
 static struct inode *befs_alloc_inode(struct super_block *sb);
 static void befs_destroy_inode(struct inode *inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int befs_init_inodecache(void);
 static void befs_destroy_inodecache(void);
 static void *befs_follow_link(struct dentry *, struct nameidata *);
 static void befs_put_link(struct dentry *, struct nameidata *, void *);
+=======
+static void befs_destroy_inodecache(void);
+static void *befs_follow_link(struct dentry *, struct nameidata *);
+static void *befs_fast_follow_link(struct dentry *, struct nameidata *);
+>>>>>>> v3.18
 =======
 static void befs_destroy_inodecache(void);
 static void *befs_follow_link(struct dentry *, struct nameidata *);
@@ -82,7 +97,11 @@ static struct kmem_cache *befs_inode_cachep;
 static const struct file_operations befs_dir_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= befs_readdir,
+=======
+	.iterate	= befs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= befs_readdir,
 >>>>>>> v3.18
@@ -99,11 +118,14 @@ static const struct address_space_operations befs_aops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct inode_operations befs_symlink_inode_operations = {
 	.readlink	= generic_readlink,
 	.follow_link	= befs_follow_link,
 	.put_link	= befs_put_link,
 =======
+=======
+>>>>>>> v3.18
 static const struct inode_operations befs_fast_symlink_inode_operations = {
 	.readlink	= generic_readlink,
 	.follow_link	= befs_fast_follow_link,
@@ -113,6 +135,9 @@ static const struct inode_operations befs_symlink_inode_operations = {
 	.readlink	= generic_readlink,
 	.follow_link	= befs_follow_link,
 	.put_link	= kfree_put_link,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -158,6 +183,7 @@ befs_get_block(struct inode *inode, sector_t block,
 
 	befs_debug(sb, "---> befs_get_block() for inode %lu, block %ld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   inode->i_ino, block);
 
 	if (block < 0) {
@@ -171,11 +197,16 @@ befs_get_block(struct inode *inode, sector_t block,
 		befs_error(sb, "befs_get_block() was asked to write to "
 			   "block %ld in inode %lu", block, inode->i_ino);
 =======
+=======
+>>>>>>> v3.18
 		   (unsigned long)inode->i_ino, (long)block);
 	if (create) {
 		befs_error(sb, "befs_get_block() was asked to write to "
 			   "block %ld in inode %lu", (long)block,
 			   (unsigned long)inode->i_ino);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EPERM;
 	}
@@ -184,8 +215,14 @@ befs_get_block(struct inode *inode, sector_t block,
 	if (res != BEFS_OK) {
 		befs_error(sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "<--- befs_get_block() for inode %lu, block "
 			   "%ld ERROR", inode->i_ino, block);
+=======
+			   "<--- %s for inode %lu, block %ld ERROR",
+			   __func__, (unsigned long)inode->i_ino,
+			   (long)block);
+>>>>>>> v3.18
 =======
 			   "<--- %s for inode %lu, block %ld ERROR",
 			   __func__, (unsigned long)inode->i_ino,
@@ -199,8 +236,14 @@ befs_get_block(struct inode *inode, sector_t block,
 	map_bh(bh_result, inode->i_sb, disk_off);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- befs_get_block() for inode %lu, block %ld, "
 		   "disk address %lu", inode->i_ino, block, disk_off);
+=======
+	befs_debug(sb, "<--- %s for inode %lu, block %ld, disk address %lu",
+		  __func__, (unsigned long)inode->i_ino, (long)block,
+		  (unsigned long)disk_off);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s for inode %lu, block %ld, disk address %lu",
 		  __func__, (unsigned long)inode->i_ino, (long)block,
@@ -223,8 +266,13 @@ befs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
 	const char *name = dentry->d_name.name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_lookup() "
 		   "name %s inode %ld", dentry->d_name.name, dir->i_ino);
+=======
+	befs_debug(sb, "---> %s name %s inode %ld", __func__,
+		   dentry->d_name.name, dir->i_ino);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s name %s inode %ld", __func__,
 		   dentry->d_name.name, dir->i_ino);
@@ -236,7 +284,11 @@ befs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
 		    befs_nls2utf(sb, name, strlen(name), &utfname, &utfnamelen);
 		if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			befs_debug(sb, "<--- befs_lookup() ERROR");
+=======
+			befs_debug(sb, "<--- %s ERROR", __func__);
+>>>>>>> v3.18
 =======
 			befs_debug(sb, "<--- %s ERROR", __func__);
 >>>>>>> v3.18
@@ -251,7 +303,11 @@ befs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
 
 	if (ret == BEFS_BT_NOT_FOUND) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_debug(sb, "<--- befs_lookup() %s not found",
+=======
+		befs_debug(sb, "<--- %s %s not found", __func__,
+>>>>>>> v3.18
 =======
 		befs_debug(sb, "<--- %s %s not found", __func__,
 >>>>>>> v3.18
@@ -260,7 +316,11 @@ befs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
 
 	} else if (ret != BEFS_OK || offset == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_warning(sb, "<--- befs_lookup() Error");
+=======
+		befs_warning(sb, "<--- %s Error", __func__);
+>>>>>>> v3.18
 =======
 		befs_warning(sb, "<--- %s Error", __func__);
 >>>>>>> v3.18
@@ -274,7 +334,11 @@ befs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
 	d_add(dentry, inode);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- befs_lookup()");
+=======
+	befs_debug(sb, "<--- %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s", __func__);
 >>>>>>> v3.18
@@ -284,9 +348,15 @@ befs_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 befs_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
+=======
+befs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 befs_readdir(struct file *file, struct dir_context *ctx)
 {
@@ -299,6 +369,7 @@ befs_readdir(struct file *file, struct dir_context *ctx)
 	size_t keysize;
 	unsigned char d_type;
 	char keybuf[BEFS_NAME_LEN + 1];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char *nlsname;
 	int nlsnamelen;
@@ -314,6 +385,8 @@ befs_readdir(struct file *file, struct dir_context *ctx)
 	if (result == BEFS_ERR) {
 		befs_debug(sb, "<--- befs_readdir() ERROR");
 =======
+=======
+>>>>>>> v3.18
 	const char *dirname = file->f_path.dentry->d_name.name;
 
 	befs_debug(sb, "---> %s name %s, inode %ld, ctx->pos %lld",
@@ -325,6 +398,9 @@ more:
 
 	if (result == BEFS_ERR) {
 		befs_debug(sb, "<--- %s ERROR", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		befs_error(sb, "IO error reading %s (inode %lu)",
 			   dirname, inode->i_ino);
@@ -332,17 +408,23 @@ more:
 
 	} else if (result == BEFS_BT_END) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_debug(sb, "<--- befs_readdir() END");
 		return 0;
 
 	} else if (result == BEFS_BT_EMPTY) {
 		befs_debug(sb, "<--- befs_readdir() Empty directory");
 =======
+=======
+>>>>>>> v3.18
 		befs_debug(sb, "<--- %s END", __func__);
 		return 0;
 
 	} else if (result == BEFS_BT_EMPTY) {
 		befs_debug(sb, "<--- %s Empty directory", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	}
@@ -351,6 +433,7 @@ more:
 
 	/* Convert to NLS */
 	if (BEFS_SB(sb)->nls) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		result =
 		    befs_utf2nls(sb, keybuf, keysize, &nlsname, &nlsnamelen);
@@ -371,6 +454,8 @@ more:
 
 	befs_debug(sb, "<--- befs_readdir() filp->f_pos %Ld", filp->f_pos);
 =======
+=======
+>>>>>>> v3.18
 		char *nlsname;
 		int nlsnamelen;
 		result =
@@ -394,6 +479,9 @@ more:
 	goto more;
 
 	befs_debug(sb, "<--- %s pos %lld", __func__, ctx->pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -439,17 +527,23 @@ static struct inode *befs_iget(struct super_block *sb, unsigned long ino)
 	long ret = -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_read_inode() " "inode = %lu", ino);
 
 	inode = iget_locked(sb, ino);
 	if (IS_ERR(inode))
 		return inode;
 =======
+=======
+>>>>>>> v3.18
 	befs_debug(sb, "---> %s inode = %lu", __func__, ino);
 
 	inode = iget_locked(sb, ino);
 	if (!inode)
 		return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(inode->i_state & I_NEW))
 		return inode;
@@ -519,9 +613,14 @@ static struct inode *befs_iget(struct super_block *sb, unsigned long ino)
 		inode->i_size = 0;
 		inode->i_blocks = befs_sb->block_size / VFS_BLOCK_SIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		strncpy(befs_ino->i_data.symlink, raw_inode->data.symlink,
 			BEFS_SYMLINK_LEN - 1);
 		befs_ino->i_data.symlink[BEFS_SYMLINK_LEN - 1] = '\0';
+=======
+		strlcpy(befs_ino->i_data.symlink, raw_inode->data.symlink,
+			BEFS_SYMLINK_LEN);
+>>>>>>> v3.18
 =======
 		strlcpy(befs_ino->i_data.symlink, raw_inode->data.symlink,
 			BEFS_SYMLINK_LEN);
@@ -547,12 +646,18 @@ static struct inode *befs_iget(struct super_block *sb, unsigned long ino)
 		inode->i_fop = &befs_dir_operations;
 	} else if (S_ISLNK(inode->i_mode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		inode->i_op = &befs_symlink_inode_operations;
 =======
+=======
+>>>>>>> v3.18
 		if (befs_ino->i_flags & BEFS_LONG_SYMLINK)
 			inode->i_op = &befs_symlink_inode_operations;
 		else
 			inode->i_op = &befs_fast_symlink_inode_operations;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		befs_error(sb, "Inode %lu is not a regular file, "
@@ -563,7 +668,11 @@ static struct inode *befs_iget(struct super_block *sb, unsigned long ino)
 
 	brelse(bh);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- befs_read_inode()");
+=======
+	befs_debug(sb, "<--- %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s", __func__);
 >>>>>>> v3.18
@@ -576,7 +685,11 @@ static struct inode *befs_iget(struct super_block *sb, unsigned long ino)
       unacquire_none:
 	iget_failed(inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- befs_read_inode() - Bad inode");
+=======
+	befs_debug(sb, "<--- %s - Bad inode", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s - Bad inode", __func__);
 >>>>>>> v3.18
@@ -588,7 +701,11 @@ static struct inode *befs_iget(struct super_block *sb, unsigned long ino)
  * Taken from NFS implementation by Al Viro.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
+=======
+static int __init
+>>>>>>> v3.18
 =======
 static int __init
 >>>>>>> v3.18
@@ -601,11 +718,17 @@ befs_init_inodecache(void)
 					      init_once);
 	if (befs_inode_cachep == NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "befs_init_inodecache: "
 		       "Couldn't initialize inode slabcache\n");
 		return -ENOMEM;
 	}
 
+=======
+		pr_err("%s: Couldn't initialize inode slabcache\n", __func__);
+		return -ENOMEM;
+	}
+>>>>>>> v3.18
 =======
 		pr_err("%s: Couldn't initialize inode slabcache\n", __func__);
 		return -ENOMEM;
@@ -638,6 +761,7 @@ static void *
 befs_follow_link(struct dentry *dentry, struct nameidata *nd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_inode_info *befs_ino = BEFS_I(dentry->d_inode);
 	char *link;
 
@@ -668,6 +792,8 @@ befs_follow_link(struct dentry *dentry, struct nameidata *nd)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	struct super_block *sb = dentry->d_sb;
 	befs_inode_info *befs_ino = BEFS_I(dentry->d_inode);
 	befs_data_stream *data = &befs_ino->i_data.ds;
@@ -691,11 +817,15 @@ befs_follow_link(struct dentry *dentry, struct nameidata *nd)
 			link[len - 1] = '\0';
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nd_set_link(nd, link);
 	return NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void befs_put_link(struct dentry *dentry, struct nameidata *nd, void *p)
 {
@@ -706,6 +836,8 @@ static void befs_put_link(struct dentry *dentry, struct nameidata *nd, void *p)
 			kfree(link);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 static void *
 befs_fast_follow_link(struct dentry *dentry, struct nameidata *nd)
@@ -713,6 +845,9 @@ befs_fast_follow_link(struct dentry *dentry, struct nameidata *nd)
 	befs_inode_info *befs_ino = BEFS_I(dentry->d_inode);
 	nd_set_link(nd, befs_ino->i_data.symlink);
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -740,15 +875,21 @@ befs_utf2nls(struct super_block *sb, const char *in,
 	int maxlen = in_len + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> utf2nls()");
 
 	if (!nls) {
 		befs_error(sb, "befs_utf2nls called with no NLS table loaded");
 =======
+=======
+>>>>>>> v3.18
 	befs_debug(sb, "---> %s", __func__);
 
 	if (!nls) {
 		befs_error(sb, "%s called with no NLS table loaded", __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -756,7 +897,11 @@ befs_utf2nls(struct super_block *sb, const char *in,
 	*out = result = kmalloc(maxlen, GFP_NOFS);
 	if (!*out) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_error(sb, "befs_utf2nls() cannot allocate memory");
+=======
+		befs_error(sb, "%s cannot allocate memory", __func__);
+>>>>>>> v3.18
 =======
 		befs_error(sb, "%s cannot allocate memory", __func__);
 >>>>>>> v3.18
@@ -782,7 +927,11 @@ befs_utf2nls(struct super_block *sb, const char *in,
 	*out_len = o;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- utf2nls()");
+=======
+	befs_debug(sb, "<--- %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s", __func__);
 >>>>>>> v3.18
@@ -793,7 +942,11 @@ befs_utf2nls(struct super_block *sb, const char *in,
 	befs_error(sb, "Name using character set %s contains a character that "
 		   "cannot be converted to unicode.", nls->charset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- utf2nls()");
+=======
+	befs_debug(sb, "<--- %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s", __func__);
 >>>>>>> v3.18
@@ -804,6 +957,7 @@ befs_utf2nls(struct super_block *sb, const char *in,
 /**
  * befs_nls2utf - Convert NLS string to utf8 encodeing
  * @sb: Superblock
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @src: Input string buffer in NLS format
  * @srclen: Length of input string in bytes
@@ -821,6 +975,8 @@ befs_utf2nls(struct super_block *sb, const char *in,
  * On success, the return value is the number of utf8 characters written to
  * the output buffer @dest.
 =======
+=======
+>>>>>>> v3.18
  * @in: Input string buffer in NLS format
  * @in_len: Length of input string in bytes
  * @out: The output string in UTF-8 format
@@ -836,6 +992,9 @@ befs_utf2nls(struct super_block *sb, const char *in,
  *
  * On success, the return value is the number of utf8 characters written to
  * the output buffer @out.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  
  * On Failure, a negative number coresponding to the error code is returned.
@@ -856,16 +1015,22 @@ befs_nls2utf(struct super_block *sb, const char *in,
 	int maxlen = (3 * in_len) + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> nls2utf()\n");
 
 	if (!nls) {
 		befs_error(sb, "befs_nls2utf called with no NLS table loaded.");
 =======
+=======
+>>>>>>> v3.18
 	befs_debug(sb, "---> %s\n", __func__);
 
 	if (!nls) {
 		befs_error(sb, "%s called with no NLS table loaded.",
 			   __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -873,7 +1038,11 @@ befs_nls2utf(struct super_block *sb, const char *in,
 	*out = result = kmalloc(maxlen, GFP_NOFS);
 	if (!*out) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		befs_error(sb, "befs_nls2utf() cannot allocate memory");
+=======
+		befs_error(sb, "%s cannot allocate memory", __func__);
+>>>>>>> v3.18
 =======
 		befs_error(sb, "%s cannot allocate memory", __func__);
 >>>>>>> v3.18
@@ -898,7 +1067,11 @@ befs_nls2utf(struct super_block *sb, const char *in,
 	*out_len = o;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- nls2utf()");
+=======
+	befs_debug(sb, "<--- %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s", __func__);
 >>>>>>> v3.18
@@ -909,7 +1082,11 @@ befs_nls2utf(struct super_block *sb, const char *in,
 	befs_error(sb, "Name using charecter set %s contains a charecter that "
 		   "cannot be converted to unicode.", nls->charset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- nls2utf()");
+=======
+	befs_debug(sb, "<--- %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s", __func__);
 >>>>>>> v3.18
@@ -968,8 +1145,13 @@ parse_options(char *options, befs_mount_options * opts)
 				uid = make_kuid(current_user_ns(), option);
 			if (!uid_valid(uid)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "BeFS: Invalid uid %d, "
 						"using default\n", option);
+=======
+				pr_err("Invalid uid %d, "
+				       "using default\n", option);
+>>>>>>> v3.18
 =======
 				pr_err("Invalid uid %d, "
 				       "using default\n", option);
@@ -987,8 +1169,13 @@ parse_options(char *options, befs_mount_options * opts)
 				gid = make_kgid(current_user_ns(), option);
 			if (!gid_valid(gid)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "BeFS: Invalid gid %d, "
 						"using default\n", option);
+=======
+				pr_err("Invalid gid %d, "
+				       "using default\n", option);
+>>>>>>> v3.18
 =======
 				pr_err("Invalid gid %d, "
 				       "using default\n", option);
@@ -1003,8 +1190,13 @@ parse_options(char *options, befs_mount_options * opts)
 			opts->iocharset = match_strdup(&args[0]);
 			if (!opts->iocharset) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "BeFS: allocation failure for "
 						"iocharset string\n");
+=======
+				pr_err("allocation failure for "
+				       "iocharset string\n");
+>>>>>>> v3.18
 =======
 				pr_err("allocation failure for "
 				       "iocharset string\n");
@@ -1017,8 +1209,13 @@ parse_options(char *options, befs_mount_options * opts)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "BeFS: Unrecognized mount option \"%s\" "
 					"or missing value\n", p);
+=======
+			pr_err("Unrecognized mount option \"%s\" "
+			       "or missing value\n", p);
+>>>>>>> v3.18
 =======
 			pr_err("Unrecognized mount option \"%s\" "
 			       "or missing value\n", p);
@@ -1064,10 +1261,16 @@ befs_fill_super(struct super_block *sb, void *data, int silent)
 	save_mount_options(sb, data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sb->s_fs_info = kmalloc(sizeof (*befs_sb), GFP_KERNEL);
 	if (sb->s_fs_info == NULL) {
 		printk(KERN_ERR
 		       "BeFS(%s): Unable to allocate memory for private "
+=======
+	sb->s_fs_info = kzalloc(sizeof(*befs_sb), GFP_KERNEL);
+	if (sb->s_fs_info == NULL) {
+		pr_err("(%s): Unable to allocate memory for private "
+>>>>>>> v3.18
 =======
 	sb->s_fs_info = kzalloc(sizeof(*befs_sb), GFP_KERNEL);
 	if (sb->s_fs_info == NULL) {
@@ -1078,7 +1281,10 @@ befs_fill_super(struct super_block *sb, void *data, int silent)
 	}
 	befs_sb = BEFS_SB(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(befs_sb, 0, sizeof(befs_sb_info));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1088,9 +1294,14 @@ befs_fill_super(struct super_block *sb, void *data, int silent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_fill_super()");
 
 #ifndef CONFIG_BEFS_RW
+=======
+	befs_debug(sb, "---> %s", __func__);
+
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s", __func__);
 
@@ -1101,7 +1312,10 @@ befs_fill_super(struct super_block *sb, void *data, int silent)
 		sb->s_flags |= MS_RDONLY;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif				/* CONFIG_BEFS_RW */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1133,7 +1347,12 @@ befs_fill_super(struct super_block *sb, void *data, int silent)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (befs_load_sb(sb, disk_sb) != BEFS_OK)
+=======
+	if ((befs_load_sb(sb, disk_sb) != BEFS_OK) ||
+	    (befs_check_sb(sb) != BEFS_OK))
+>>>>>>> v3.18
 =======
 	if ((befs_load_sb(sb, disk_sb) != BEFS_OK) ||
 	    (befs_check_sb(sb) != BEFS_OK))
@@ -1145,11 +1364,16 @@ befs_fill_super(struct super_block *sb, void *data, int silent)
 	brelse(bh);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (befs_check_sb(sb) != BEFS_OK)
 		goto unacquire_priv_sbp;
 
 	if( befs_sb->num_blocks > ~((sector_t)0) ) {
 		befs_error(sb, "blocks count: %Lu "
+=======
+	if( befs_sb->num_blocks > ~((sector_t)0) ) {
+		befs_error(sb, "blocks count: %llu "
+>>>>>>> v3.18
 =======
 	if( befs_sb->num_blocks > ~((sector_t)0) ) {
 		befs_error(sb, "blocks count: %llu "
@@ -1213,6 +1437,10 @@ static int
 befs_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -1228,7 +1456,11 @@ befs_statfs(struct dentry *dentry, struct kstatfs *buf)
 	u64 id = huge_encode_dev(sb->s_bdev->bd_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "---> befs_statfs()");
+=======
+	befs_debug(sb, "---> %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "---> %s", __func__);
 >>>>>>> v3.18
@@ -1245,7 +1477,11 @@ befs_statfs(struct dentry *dentry, struct kstatfs *buf)
 	buf->f_namelen = BEFS_NAME_LEN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	befs_debug(sb, "<--- befs_statfs()");
+=======
+	befs_debug(sb, "<--- %s", __func__);
+>>>>>>> v3.18
 =======
 	befs_debug(sb, "<--- %s", __func__);
 >>>>>>> v3.18
@@ -1275,7 +1511,11 @@ init_befs_fs(void)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "BeFS version: %s\n", BEFS_VERSION);
+=======
+	pr_info("version: %s\n", BEFS_VERSION);
+>>>>>>> v3.18
 =======
 	pr_info("version: %s\n", BEFS_VERSION);
 >>>>>>> v3.18

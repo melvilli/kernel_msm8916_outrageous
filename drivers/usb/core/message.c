@@ -7,7 +7,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/mm.h>
@@ -123,9 +126,12 @@ static int usb_internal_control_msg(struct usb_device *usb_dev,
  * waits for the message to complete, or timeout.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If successful, it returns the number of bytes transferred, otherwise a
  * negative error number.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Don't use this function from within an interrupt context, like a bottom half
@@ -135,6 +141,12 @@ static int usb_internal_control_msg(struct usb_device *usb_dev,
  * method can wait for it to complete.  Since you don't have a handle on the
  * URB used, you can't cancel the request.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: If successful, the number of bytes transferred. Otherwise, a negative
+ * error number.
+>>>>>>> v3.18
 =======
  *
  * Return: If successful, the number of bytes transferred. Otherwise, a negative
@@ -183,9 +195,12 @@ EXPORT_SYMBOL_GPL(usb_control_msg);
  * waits for the message to complete, or timeout.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If successful, it returns 0, otherwise a negative error number.  The number
  * of actual bytes transferred will be stored in the actual_length paramater.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Don't use this function from within an interrupt context, like a bottom half
@@ -195,11 +210,17 @@ EXPORT_SYMBOL_GPL(usb_control_msg);
  * complete.  Since you don't have a handle on the URB used, you can't cancel
  * the request.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * Return:
  * If successful, 0. Otherwise a negative error number. The number of actual
  * bytes transferred will be stored in the @actual_length parameter.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int usb_interrupt_msg(struct usb_device *usb_dev, unsigned int pipe,
@@ -226,9 +247,12 @@ EXPORT_SYMBOL_GPL(usb_interrupt_msg);
  * and waits for the message to complete, or timeout.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If successful, it returns 0, otherwise a negative error number.  The number
  * of actual bytes transferred will be stored in the actual_length paramater.
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * Don't use this function from within an interrupt context, like a bottom half
@@ -243,12 +267,18 @@ EXPORT_SYMBOL_GPL(usb_interrupt_msg);
  * interrupt endpoints.  We will take the liberty of creating an interrupt URB
  * (with the default interval) if the target is an interrupt endpoint.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * Return:
  * If successful, 0. Otherwise a negative error number. The number of actual
  * bytes transferred will be stored in the @actual_length parameter.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int usb_bulk_msg(struct usb_device *usb_dev, unsigned int pipe,
@@ -286,7 +316,11 @@ static void sg_clean(struct usb_sg_request *io)
 	if (io->urbs) {
 		while (io->entries--)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			usb_free_urb(io->urbs [io->entries]);
+=======
+			usb_free_urb(io->urbs[io->entries]);
+>>>>>>> v3.18
 =======
 			usb_free_urb(io->urbs[io->entries]);
 >>>>>>> v3.18
@@ -338,15 +372,21 @@ static void sg_complete(struct urb *urb)
 		spin_unlock(&io->lock);
 		for (i = 0, found = 0; i < io->entries; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!io->urbs [i] || !io->urbs [i]->dev)
 				continue;
 			if (found) {
 				retval = usb_unlink_urb(io->urbs [i]);
 =======
+=======
+>>>>>>> v3.18
 			if (!io->urbs[i] || !io->urbs[i]->dev)
 				continue;
 			if (found) {
 				retval = usb_unlink_urb(io->urbs[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (retval != -EINPROGRESS &&
 				    retval != -ENODEV &&
@@ -356,7 +396,11 @@ static void sg_complete(struct urb *urb)
 						"%s, unlink --> %d\n",
 						__func__, retval);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (urb == io->urbs [i])
+=======
+			} else if (urb == io->urbs[i])
+>>>>>>> v3.18
 =======
 			} else if (urb == io->urbs[i])
 >>>>>>> v3.18
@@ -390,9 +434,15 @@ static void sg_complete(struct urb *urb)
  * @mem_flags: SLAB_* flags affecting memory allocations in this call
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero for success, else a negative errno value.  This initializes a
  * scatter/gather request, allocating resources such as I/O mappings and urb
  * memory (except maybe memory used by USB controller drivers).
+=======
+ * This initializes a scatter/gather request, allocating resources such as
+ * I/O mappings and urb memory (except maybe memory used by USB controller
+ * drivers).
+>>>>>>> v3.18
 =======
  * This initializes a scatter/gather request, allocating resources such as
  * I/O mappings and urb memory (except maybe memory used by USB controller
@@ -406,6 +456,11 @@ static void sg_complete(struct urb *urb)
  * The request may be canceled with usb_sg_cancel(), either before or after
  * usb_sg_wait() is called.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: Zero for success, else a negative errno value.
+>>>>>>> v3.18
 =======
  *
  * Return: Zero for success, else a negative errno value.
@@ -439,7 +494,11 @@ int usb_sg_init(struct usb_sg_request *io, struct usb_device *dev,
 
 	/* initialize all the urbs we'll use */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	io->urbs = kmalloc(io->entries * sizeof *io->urbs, mem_flags);
+=======
+	io->urbs = kmalloc(io->entries * sizeof(*io->urbs), mem_flags);
+>>>>>>> v3.18
 =======
 	io->urbs = kmalloc(io->entries * sizeof(*io->urbs), mem_flags);
 >>>>>>> v3.18
@@ -575,9 +634,15 @@ void usb_sg_wait(struct usb_sg_request *io)
 
 		io->urbs[i]->dev = io->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		retval = usb_submit_urb(io->urbs [i], GFP_ATOMIC);
 
 		/* after we submit, let completions or cancelations fire;
+=======
+		retval = usb_submit_urb(io->urbs[i], GFP_ATOMIC);
+
+		/* after we submit, let completions or cancellations fire;
+>>>>>>> v3.18
 =======
 		retval = usb_submit_urb(io->urbs[i], GFP_ATOMIC);
 
@@ -656,9 +721,15 @@ void usb_sg_cancel(struct usb_sg_request *io)
 			int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!io->urbs [i]->dev)
 				continue;
 			retval = usb_unlink_urb(io->urbs [i]);
+=======
+			if (!io->urbs[i]->dev)
+				continue;
+			retval = usb_unlink_urb(io->urbs[i]);
+>>>>>>> v3.18
 =======
 			if (!io->urbs[i]->dev)
 				continue;
@@ -699,7 +770,11 @@ EXPORT_SYMBOL_GPL(usb_sg_cancel);
  * This call is synchronous, and may not be used in an interrupt context.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns the number of bytes received on success, or else the status code
+=======
+ * Return: The number of bytes received on success, or else the status code
+>>>>>>> v3.18
 =======
  * Return: The number of bytes received on success, or else the status code
 >>>>>>> v3.18
@@ -751,7 +826,11 @@ EXPORT_SYMBOL_GPL(usb_get_descriptor);
  * This call is synchronous, and may not be used in an interrupt context.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns the number of bytes received on success, or else the status code
+=======
+ * Return: The number of bytes received on success, or else the status code
+>>>>>>> v3.18
 =======
  * Return: The number of bytes received on success, or else the status code
 >>>>>>> v3.18
@@ -850,9 +929,13 @@ static int usb_get_langid(struct usb_device *dev, unsigned char *tbuf)
 		dev->have_langid = 1;
 		dev_err(&dev->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"string descriptor 0 malformed (err = %d), "
 			"defaulting to 0x%04x\n",
 				err, dev->string_langid);
+=======
+			"language id specifier not provided by device, defaulting to English\n");
+>>>>>>> v3.18
 =======
 			"language id specifier not provided by device, defaulting to English\n");
 >>>>>>> v3.18
@@ -893,7 +976,11 @@ static int usb_get_langid(struct usb_device *dev, unsigned char *tbuf)
  * This call is synchronous, and may not be used in an interrupt context.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns length of the string (>= 0) or usb_control_msg status (< 0).
+=======
+ * Return: length of the string (>= 0) or usb_control_msg status (< 0).
+>>>>>>> v3.18
 =======
  * Return: length of the string (>= 0) or usb_control_msg status (< 0).
 >>>>>>> v3.18
@@ -945,8 +1032,13 @@ EXPORT_SYMBOL_GPL(usb_string);
  * @index: the descriptor index
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns a pointer to a kmalloc'ed buffer containing the descriptor string,
  * or NULL if the index is 0 or the string could not be read.
+=======
+ * Return: A pointer to a kmalloc'ed buffer containing the descriptor string,
+ * or %NULL if the index is 0 or the string could not be read.
+>>>>>>> v3.18
 =======
  * Return: A pointer to a kmalloc'ed buffer containing the descriptor string,
  * or %NULL if the index is 0 or the string could not be read.
@@ -991,7 +1083,11 @@ char *usb_cache_string(struct usb_device *udev, int index)
  * This call is synchronous, and may not be used in an interrupt context.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns the number of bytes received on success, or else the status code
+=======
+ * Return: The number of bytes received on success, or else the status code
+>>>>>>> v3.18
 =======
  * Return: The number of bytes received on success, or else the status code
 >>>>>>> v3.18
@@ -1035,8 +1131,13 @@ int usb_get_device_descriptor(struct usb_device *dev, unsigned int size)
  * This call is synchronous, and may not be used in an interrupt context.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns the number of bytes received on success, or else the status code
  * returned by the underlying usb_control_msg() call.
+=======
+ * Returns 0 and the status value in *@data (in host byte order) on success,
+ * or else the status code from the underlying usb_control_msg() call.
+>>>>>>> v3.18
 =======
  * Returns 0 and the status value in *@data (in host byte order) on success,
  * or else the status code from the underlying usb_control_msg() call.
@@ -1046,7 +1147,11 @@ int usb_get_status(struct usb_device *dev, int type, int target, void *data)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 *status = kmalloc(sizeof(*status), GFP_KERNEL);
+=======
+	__le16 *status = kmalloc(sizeof(*status), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	__le16 *status = kmalloc(sizeof(*status), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1059,14 +1164,20 @@ int usb_get_status(struct usb_device *dev, int type, int target, void *data)
 		sizeof(*status), USB_CTRL_GET_TIMEOUT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*(u16 *)data = *status;
 =======
+=======
+>>>>>>> v3.18
 	if (ret == 2) {
 		*(u16 *) data = le16_to_cpu(*status);
 		ret = 0;
 	} else if (ret >= 0) {
 		ret = -EIO;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(status);
 	return ret;
@@ -1094,7 +1205,11 @@ EXPORT_SYMBOL_GPL(usb_get_status);
  * This call is synchronous, and may not be used in an interrupt context.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero on success, or else the status code returned by the
+=======
+ * Return: Zero on success, or else the status code returned by the
+>>>>>>> v3.18
 =======
  * Return: Zero on success, or else the status code returned by the
 >>>>>>> v3.18
@@ -1295,15 +1410,21 @@ void usb_disable_device(struct usb_device *dev, int skip_ep0)
 			dev->actconfig->interface[i] = NULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usb_unlocked_disable_lpm(dev);
 		usb_disable_ltm(dev);
 =======
+=======
+>>>>>>> v3.18
 
 		if (dev->usb2_hw_lpm_enabled == 1)
 			usb_set_usb2_hardware_lpm(dev, 0);
 		usb_unlocked_disable_lpm(dev);
 		usb_disable_ltm(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev->actconfig = NULL;
 		if (dev->state == USB_STATE_CONFIGURED)
@@ -1404,7 +1525,11 @@ void usb_enable_interface(struct usb_device *dev,
  * (perhaps forced by unlinking).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero on success, or else the status code returned by the
+=======
+ * Return: Zero on success, or else the status code returned by the
+>>>>>>> v3.18
 =======
  * Return: Zero on success, or else the status code returned by the
 >>>>>>> v3.18
@@ -1416,8 +1541,12 @@ int usb_set_interface(struct usb_device *dev, int interface, int alternate)
 	struct usb_host_interface *alt;
 	struct usb_hcd *hcd = bus_to_hcd(dev->bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	int manual = 0;
+=======
+	int i, ret, manual = 0;
+>>>>>>> v3.18
 =======
 	int i, ret, manual = 0;
 >>>>>>> v3.18
@@ -1456,11 +1585,17 @@ int usb_set_interface(struct usb_device *dev, int interface, int alternate)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Changing alt-setting also frees any allocated streams */
 	for (i = 0; i < iface->cur_altsetting->desc.bNumEndpoints; i++)
 		iface->cur_altsetting->endpoint[i].streams = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = usb_hcd_alloc_bandwidth(dev, NULL, iface->cur_altsetting, alt);
 	if (ret < 0) {
@@ -1573,7 +1708,11 @@ EXPORT_SYMBOL_GPL(usb_set_interface);
  * The caller must own the device lock.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns zero on success, else a negative error code.
+=======
+ * Return: Zero on success, else a negative error code.
+>>>>>>> v3.18
 =======
  * Return: Zero on success, else a negative error code.
 >>>>>>> v3.18
@@ -1994,9 +2133,12 @@ free_interfaces:
 	kfree(new_interfaces);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->actconfig = cp;
 	if (cp)
 		usb_notify_config_device(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = usb_control_msg(dev, usb_sndctrlpipe(dev, 0),
@@ -2014,6 +2156,7 @@ free_interfaces:
 			cp->interface[i] = NULL;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->actconfig = cp = NULL;
 	}
 
@@ -2022,6 +2165,8 @@ free_interfaces:
 	if (!cp) {
 		usb_notify_config_device(dev);
 =======
+=======
+>>>>>>> v3.18
 		cp = NULL;
 	}
 
@@ -2029,6 +2174,9 @@ free_interfaces:
 	mutex_unlock(hcd->bandwidth_mutex);
 
 	if (!cp) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		usb_set_device_state(dev, USB_STATE_ADDRESS);
 
@@ -2038,8 +2186,11 @@ free_interfaces:
 	}
 	usb_set_device_state(dev, USB_STATE_CONFIGURED);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->parent && hcd->driver->udev_enum_done)
 		hcd->driver->udev_enum_done(hcd);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2079,6 +2230,10 @@ free_interfaces:
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(usb_set_configuration);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(usb_set_configuration);
 >>>>>>> v3.18
@@ -2144,7 +2299,11 @@ static void cancel_async_set_config(struct usb_device *udev)
  * submit the change-config request.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns 0 if the request was successfully queued, error code otherwise.
+=======
+ * Return: 0 if the request was successfully queued, error code otherwise.
+>>>>>>> v3.18
 =======
  * Return: 0 if the request was successfully queued, error code otherwise.
 >>>>>>> v3.18

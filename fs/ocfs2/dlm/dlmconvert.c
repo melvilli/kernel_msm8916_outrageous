@@ -124,7 +124,10 @@ static enum dlm_status __dlmconvert_master(struct dlm_ctxt *dlm,
 {
 	enum dlm_status status = DLM_NORMAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dlm_lock *tmplock=NULL;
@@ -189,8 +192,12 @@ static enum dlm_status __dlmconvert_master(struct dlm_ctxt *dlm,
 	/* upconvert from here on */
 	status = DLM_NORMAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each(iter, &res->granted) {
 		tmplock = list_entry(iter, struct dlm_lock, list);
+=======
+	list_for_each_entry(tmplock, &res->granted, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(tmplock, &res->granted, list) {
 >>>>>>> v3.18
@@ -201,8 +208,12 @@ static enum dlm_status __dlmconvert_master(struct dlm_ctxt *dlm,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each(iter, &res->converting) {
 		tmplock = list_entry(iter, struct dlm_lock, list);
+=======
+	list_for_each_entry(tmplock, &res->converting, list) {
+>>>>>>> v3.18
 =======
 	list_for_each_entry(tmplock, &res->converting, list) {
 >>>>>>> v3.18
@@ -302,6 +313,7 @@ enum dlm_status dlmconvert_remote(struct dlm_ctxt *dlm,
 		goto bail;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (lock->ml.type == type && lock->ml.convert_type == LKM_IVMODE) {
 		mlog(0, "last convert request returned DLM_RECOVERING, but "
@@ -315,6 +327,8 @@ enum dlm_status dlmconvert_remote(struct dlm_ctxt *dlm,
 		goto bail;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	res->state |= DLM_LOCK_RES_IN_PROGRESS;
@@ -346,10 +360,15 @@ enum dlm_status dlmconvert_remote(struct dlm_ctxt *dlm,
 	spin_lock(&res->spinlock);
 	res->state &= ~DLM_LOCK_RES_IN_PROGRESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* if it failed, move it back to granted queue.
 	 * if master returns DLM_NORMAL and then down before sending ast,
 	 * it may have already been moved to granted queue, reset to
 	 * DLM_RECOVERING and retry convert */
+=======
+	lock->convert_pending = 0;
+	/* if it failed, move it back to granted queue */
+>>>>>>> v3.18
 =======
 	lock->convert_pending = 0;
 	/* if it failed, move it back to granted queue */
@@ -359,6 +378,7 @@ enum dlm_status dlmconvert_remote(struct dlm_ctxt *dlm,
 			dlm_error(status);
 		dlm_revert_pending_convert(res, lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (!lock->convert_pending) {
 		mlog(0, "%s: res %.*s, owner died and lock has been moved back "
 				"to granted list, retry convert.\n",
@@ -367,6 +387,9 @@ enum dlm_status dlmconvert_remote(struct dlm_ctxt *dlm,
 	}
 
 	lock->convert_pending = 0;
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -470,8 +493,13 @@ int dlm_convert_lock_handler(struct o2net_msg *msg, u32 len, void *data,
 	struct dlm_convert_lock *cnv = (struct dlm_convert_lock *)msg->buf;
 	struct dlm_lock_resource *res = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head *iter;
 	struct dlm_lock *lock = NULL;
+=======
+	struct dlm_lock *lock = NULL;
+	struct dlm_lock *tmp_lock;
+>>>>>>> v3.18
 =======
 	struct dlm_lock *lock = NULL;
 	struct dlm_lock *tmp_lock;
@@ -522,6 +550,7 @@ int dlm_convert_lock_handler(struct o2net_msg *msg, u32 len, void *data,
 		goto leave;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each(iter, &res->granted) {
 		lock = list_entry(iter, struct dlm_lock, list);
 		if (lock->ml.cookie == cnv->cookie &&
@@ -531,6 +560,8 @@ int dlm_convert_lock_handler(struct o2net_msg *msg, u32 len, void *data,
 		}
 		lock = NULL;
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(tmp_lock, &res->granted, list) {
 		if (tmp_lock->ml.cookie == cnv->cookie &&
 		    tmp_lock->ml.node == cnv->node_idx) {
@@ -538,6 +569,9 @@ int dlm_convert_lock_handler(struct o2net_msg *msg, u32 len, void *data,
 			dlm_lock_get(lock);
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_unlock(&res->spinlock);

@@ -73,14 +73,20 @@ n32_syscall_trace_entry:
 	move	s0, t2
 	move	a0, sp
 <<<<<<< HEAD
+<<<<<<< HEAD
 	jal	syscall_trace_enter
 
 =======
+=======
+>>>>>>> v3.18
 	daddiu	a1, v0, __NR_N32_Linux
 	jal	syscall_trace_enter
 
 	bltz	v0, 2f			# seccomp failed? Skip syscall
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	move	t0, s0
 	RESTORE_STATIC
@@ -103,7 +109,11 @@ n32_syscall_trace_entry:
 1:	sd	v0, PT_R2(sp)		# result
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	j	syscall_exit
+=======
+2:	j	syscall_exit
+>>>>>>> v3.18
 =======
 2:	j	syscall_exit
 >>>>>>> v3.18
@@ -116,6 +126,10 @@ not_n32_scall:
 	END(handle_sysn32)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.type	sysn32_call_table, @object
+>>>>>>> v3.18
 =======
 	.type	sysn32_call_table, @object
 >>>>>>> v3.18
@@ -175,7 +189,11 @@ EXPORT(sysn32_call_table)
 	PTR	sys_socketpair
 	PTR	compat_sys_setsockopt
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	sys_getsockopt
+=======
+	PTR	compat_sys_getsockopt
+>>>>>>> v3.18
 =======
 	PTR	compat_sys_getsockopt
 >>>>>>> v3.18
@@ -356,9 +374,15 @@ EXPORT(sysn32_call_table)
 	PTR	sys_tgkill
 	PTR	compat_sys_utimes		/* 6230 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	sys_ni_syscall			/* sys_mbind */
 	PTR	sys_ni_syscall			/* sys_get_mempolicy */
 	PTR	sys_ni_syscall			/* sys_set_mempolicy */
+=======
+	PTR	compat_sys_mbind
+	PTR	compat_sys_get_mempolicy
+	PTR	compat_sys_set_mempolicy
+>>>>>>> v3.18
 =======
 	PTR	compat_sys_mbind
 	PTR	compat_sys_get_mempolicy
@@ -376,7 +400,11 @@ EXPORT(sysn32_call_table)
 	PTR	sys_add_key
 	PTR	sys_request_key
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	compat_sys_keyctl		/* 6245 */
+=======
+	PTR	sys_keyctl			/* 6245 */
+>>>>>>> v3.18
 =======
 	PTR	sys_keyctl			/* 6245 */
 >>>>>>> v3.18
@@ -385,7 +413,11 @@ EXPORT(sysn32_call_table)
 	PTR	sys_inotify_add_watch
 	PTR	sys_inotify_rm_watch
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	sys_migrate_pages		/* 6250 */
+=======
+	PTR	compat_sys_migrate_pages	/* 6250 */
+>>>>>>> v3.18
 =======
 	PTR	compat_sys_migrate_pages	/* 6250 */
 >>>>>>> v3.18
@@ -410,7 +442,11 @@ EXPORT(sysn32_call_table)
 	PTR	sys_tee
 	PTR	compat_sys_vmsplice		/* 6270 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PTR	sys_move_pages
+=======
+	PTR	compat_sys_move_pages
+>>>>>>> v3.18
 =======
 	PTR	compat_sys_move_pages
 >>>>>>> v3.18
@@ -456,7 +492,10 @@ EXPORT(sysn32_call_table)
 	PTR	sys_kcmp
 	PTR	sys_finit_module
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	PTR	sys_sched_setattr
 	PTR	sys_sched_getattr
 	PTR	sys_renameat2			/* 6315 */
@@ -464,5 +503,8 @@ EXPORT(sysn32_call_table)
 	PTR	sys_getrandom
 	PTR	sys_memfd_create
 	PTR	sys_bpf
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.size	sysn32_call_table,.-sysn32_call_table

@@ -20,6 +20,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/delay.h>
 >>>>>>> v3.18
@@ -444,7 +448,10 @@ static int isif_validate_df_csc_params(struct vpfe_isif_df_csc *df_csc)
 	struct vpfe_isif_color_space_conv *csc;
 	int err = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int csc_df_en;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -454,7 +461,10 @@ static int isif_validate_df_csc_params(struct vpfe_isif_df_csc *df_csc)
 		csc = &df_csc->csc;
 		if (csc->en) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			csc_df_en = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			for (i = 0; i < VPFE_ISIF_CSC_NUM_COEFF; i++)
@@ -929,7 +939,11 @@ isif_config_dfc(struct vpfe_isif_device *isif, struct vpfe_isif_dfc *vdfc)
 
 	isif_write(isif->isif_cfg.base_addr, 0x6, DFCMEMCTL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0 ; i < vdfc->num_vdefects; i++) {
+=======
+	for (i = 0; i < vdfc->num_vdefects; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < vdfc->num_vdefects; i++) {
 >>>>>>> v3.18
@@ -1765,15 +1779,21 @@ void vpfe_isif_unregister_entities(struct vpfe_isif_device *isif)
 {
 	vpfe_video_unregister(&isif->video_out);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* cleanup entity */
 	media_entity_cleanup(&isif->subdev.entity);
 	/* unregister subdev */
 	v4l2_device_unregister_subdev(&isif->subdev);
 =======
+=======
+>>>>>>> v3.18
 	/* unregister subdev */
 	v4l2_device_unregister_subdev(&isif->subdev);
 	/* cleanup entity */
 	media_entity_cleanup(&isif->subdev.entity);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

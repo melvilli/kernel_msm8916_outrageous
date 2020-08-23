@@ -180,15 +180,21 @@ u32 c4iw_get_qpid(struct c4iw_rdev *rdev, struct c4iw_dev_ucontext *uctx)
 	} else {
 		qid = c4iw_get_resource(&rdev->resource.qid_table);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!qid)
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 		if (!qid) {
 			mutex_lock(&rdev->stats.lock);
 			rdev->stats.qid.fail++;
 			mutex_unlock(&rdev->stats.lock);
 			goto out;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_lock(&rdev->stats.lock);
 		rdev->stats.qid.cur += rdev->qpmask + 1;
@@ -332,8 +338,13 @@ u32 c4iw_rqtpool_alloc(struct c4iw_rdev *rdev, int size)
 	PDBG("%s addr 0x%x size %d\n", __func__, (u32)addr, size << 6);
 	if (!addr)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk_ratelimited(KERN_WARNING MOD "%s: Out of RQT memory\n",
 		       pci_name(rdev->lldi.pdev));
+=======
+		pr_warn_ratelimited(MOD "%s: Out of RQT memory\n",
+				    pci_name(rdev->lldi.pdev));
+>>>>>>> v3.18
 =======
 		pr_warn_ratelimited(MOD "%s: Out of RQT memory\n",
 				    pci_name(rdev->lldi.pdev));

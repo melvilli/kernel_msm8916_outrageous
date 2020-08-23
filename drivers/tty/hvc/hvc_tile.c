@@ -19,10 +19,13 @@
 #include <linux/err.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/moduleparam.h>
 #include <linux/types.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/moduleparam.h>
@@ -32,16 +35,22 @@
 #include <asm/setup.h>
 #include <arch/sim_def.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <hv/hypervisor.h>
 
 #include "hvc_console.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hvc_tile_put_chars(uint32_t vt, const char *buf, int count)
 {
 	return hv_console_write((HV_VirtAddr)buf, count);
 =======
+=======
+>>>>>>> v3.18
 static int use_sim_console;
 static int __init sim_console(char *str)
 {
@@ -69,6 +78,9 @@ int tile_console_write(const char *buf, int count)
 static int hvc_tile_put_chars(uint32_t vt, const char *buf, int count)
 {
 	return tile_console_write(buf, count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -87,6 +99,7 @@ static int hvc_tile_get_chars(uint32_t vt, char *buf, int count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct hv_ops hvc_tile_get_put_ops = {
 	.get_chars = hvc_tile_get_chars,
 	.put_chars = hvc_tile_put_chars,
@@ -99,6 +112,8 @@ static int __init hvc_tile_console_init(void)
 	add_preferred_console("hvc", 0, NULL);
 	disable_early_printk();
 =======
+=======
+>>>>>>> v3.18
 #ifdef __tilegx__
 /*
  * IRQ based callbacks.
@@ -212,6 +227,9 @@ static int __init hvc_tile_console_init(void)
 {
 	hvc_instantiate(0, 0, &hvc_tile_get_put_ops);
 	add_preferred_console("hvc", 0, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -220,10 +238,13 @@ console_initcall(hvc_tile_console_init);
 static int __init hvc_tile_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hvc_struct *s;
 	s = hvc_alloc(0, 0, &hvc_tile_get_put_ops, 128);
 	return IS_ERR(s) ? PTR_ERR(s) : 0;
 =======
+=======
+>>>>>>> v3.18
 #ifndef __tilegx__
 	struct hvc_struct *hp;
 	hp = hvc_alloc(0, 0, &hvc_tile_get_put_ops, 128);
@@ -232,6 +253,9 @@ static int __init hvc_tile_init(void)
 	platform_device_register(&hvc_tile_pdev);
 	return platform_driver_register(&hvc_tile_driver);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 device_initcall(hvc_tile_init);

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -109,8 +113,13 @@ acpi_ns_walk_namespace(acpi_object_type type,
 		       u32 max_depth,
 		       u32 flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       acpi_walk_callback pre_order_visit,
 		       acpi_walk_callback post_order_visit,
+=======
+		       acpi_walk_callback descending_callback,
+		       acpi_walk_callback ascending_callback,
+>>>>>>> v3.18
 =======
 		       acpi_walk_callback descending_callback,
 		       acpi_walk_callback ascending_callback,
@@ -223,13 +232,19 @@ acpi_ns_dump_objects(acpi_object_type type,
 		     u32 max_depth,
 		     acpi_owner_id owner_id, acpi_handle start_handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void
 acpi_ns_dump_object_paths(acpi_object_type type,
 			  u8 display_type,
 			  u32 max_depth,
 			  acpi_owner_id owner_id, acpi_handle start_handle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* ACPI_FUTURE_USAGE */
 
@@ -241,6 +256,7 @@ acpi_status acpi_ns_evaluate(struct acpi_evaluate_info *info);
 void acpi_ns_exec_module_code_list(void);
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * nspredef - Support for predefined/reserved names
  */
@@ -259,6 +275,8 @@ acpi_ns_check_parameter_count(char *pathname,
 acpi_status
 acpi_ns_check_object_type(struct acpi_predefined_data *data,
 =======
+=======
+>>>>>>> v3.18
  * nsarguments - Argument count/type checking for predefined/reserved names
  */
 void
@@ -286,6 +304,9 @@ acpi_ns_check_return_value(struct acpi_namespace_node *node,
 
 acpi_status
 acpi_ns_check_object_type(struct acpi_evaluate_info *info,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			  union acpi_operand_object **return_object_ptr,
 			  u32 expected_btypes, u32 package_index);
@@ -295,7 +316,11 @@ acpi_ns_check_object_type(struct acpi_evaluate_info *info,
  */
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_check_package(struct acpi_predefined_data *data,
+=======
+acpi_ns_check_package(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_check_package(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -361,7 +386,11 @@ acpi_ns_get_attached_data(struct acpi_namespace_node *node,
  */
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_simple_repair(struct acpi_predefined_data *data,
+=======
+acpi_ns_simple_repair(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -371,7 +400,11 @@ acpi_ns_simple_repair(struct acpi_evaluate_info *info,
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_wrap_with_package(struct acpi_predefined_data *data,
+=======
+acpi_ns_wrap_with_package(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_wrap_with_package(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -380,7 +413,11 @@ acpi_ns_wrap_with_package(struct acpi_evaluate_info *info,
 
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_repair_null_element(struct acpi_predefined_data *data,
+=======
+acpi_ns_repair_null_element(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_repair_null_element(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -390,7 +427,11 @@ acpi_ns_repair_null_element(struct acpi_evaluate_info *info,
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_remove_null_elements(struct acpi_predefined_data *data,
+=======
+acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
 >>>>>>> v3.18
@@ -403,7 +444,11 @@ acpi_ns_remove_null_elements(struct acpi_evaluate_info *info,
  */
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_ns_complex_repairs(struct acpi_predefined_data *data,
+=======
+acpi_ns_complex_repairs(struct acpi_evaluate_info *info,
+>>>>>>> v3.18
 =======
 acpi_ns_complex_repairs(struct acpi_evaluate_info *info,
 >>>>>>> v3.18

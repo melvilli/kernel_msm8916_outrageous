@@ -161,7 +161,11 @@ static irqreturn_t omap_mpu_timer1_interrupt(int irq, void *dev_id)
 static struct irqaction omap_mpu_timer1_irq = {
 	.name		= "mpu_timer1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -186,7 +190,11 @@ static __init void omap_init_mpu_timer(unsigned long rate)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace omap_mpu_read_sched_clock(void)
+=======
+static u64 notrace omap_mpu_read_sched_clock(void)
+>>>>>>> v3.18
 =======
 static u64 notrace omap_mpu_read_sched_clock(void)
 >>>>>>> v3.18
@@ -202,7 +210,11 @@ static void __init omap_init_clocksource(unsigned long rate)
 
 	omap_mpu_timer_start(1, ~0, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(omap_mpu_read_sched_clock, 32, rate);
+=======
+	sched_clock_register(omap_mpu_read_sched_clock, 32, rate);
+>>>>>>> v3.18
 =======
 	sched_clock_register(omap_mpu_read_sched_clock, 32, rate);
 >>>>>>> v3.18

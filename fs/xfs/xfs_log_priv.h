@@ -23,6 +23,7 @@ struct xlog;
 struct xlog_ticket;
 struct xfs_mount;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Macros, structures, prototypes for internal log manager use.
@@ -71,6 +72,8 @@ static inline uint xlog_get_cycle(char *ptr)
 
 #ifdef __KERNEL__
 =======
+=======
+>>>>>>> v3.18
 struct xfs_log_callback;
 
 /*
@@ -81,6 +84,9 @@ struct xfs_log_callback;
 #define XLOG_IO_ERROR		0x8	/* log hit an I/O error, and being
 					   shutdown */
 #define XLOG_TAIL_WARN		0x10	/* log tail verify warning issued */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -115,6 +121,7 @@ static inline uint xlog_get_client_id(__be32 i)
 #define XLOG_STATE_ALL	     0x7FFF /* All possible valid flags */
 #define XLOG_STATE_NOTUSED   0x8000 /* This IC log not being used */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __KERNEL__ */
 
 /*
@@ -141,6 +148,10 @@ static inline uint xlog_get_client_id(__be32 i)
 
 /*
 >>>>>>> v3.18
+=======
+
+/*
+>>>>>>> v3.18
  * Flags to log ticket
  */
 #define XLOG_TIC_INITED		0x1	/* has been initialized */
@@ -150,6 +161,7 @@ static inline uint xlog_get_client_id(__be32 i)
 	{ XLOG_TIC_INITED,	"XLOG_TIC_INITED" }, \
 	{ XLOG_TIC_PERM_RESERV,	"XLOG_TIC_PERM_RESERV" }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif	/* __KERNEL__ */
 
@@ -167,6 +179,8 @@ static inline uint xlog_get_client_id(__be32 i)
 typedef __uint32_t xlog_tid_t;
 
 #ifdef __KERNEL__
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -245,7 +259,10 @@ typedef __uint32_t xlog_tid_t;
 #define XLOG_COVER_OPS		5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Ticket reservation region accounting */ 
@@ -282,6 +299,7 @@ typedef struct xlog_ticket {
 	xlog_res_t	   t_res_arr[XLOG_TIC_LEN_MAX];  /* array of res : 8 * 15 */ 
 } xlog_ticket_t;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 
@@ -343,6 +361,8 @@ typedef union xlog_in_core2 {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * - A log record header is 512 bytes.  There is plenty of room to grow the
  *	xlog_rec_header_t into the reserved space.
@@ -388,8 +408,13 @@ typedef struct xlog_in_core {
 	/* Callback structures need their own cacheline */
 	spinlock_t		ic_callback_lock ____cacheline_aligned_in_smp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_log_callback_t	*ic_callback;
 	xfs_log_callback_t	**ic_callback_tail;
+=======
+	struct xfs_log_callback	*ic_callback;
+	struct xfs_log_callback	**ic_callback_tail;
+>>>>>>> v3.18
 =======
 	struct xfs_log_callback	*ic_callback;
 	struct xfs_log_callback	**ic_callback_tail;
@@ -420,7 +445,11 @@ struct xfs_cil_ctx {
 	struct list_head	busy_extents;	/* busy extents in chkpt */
 	struct xfs_log_vec	*lv_chain;	/* logvecs being pushed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_log_callback_t	log_cb;		/* completion callback hook. */
+=======
+	struct xfs_log_callback	log_cb;		/* completion callback hook. */
+>>>>>>> v3.18
 =======
 	struct xfs_log_callback	log_cb;		/* completion callback hook. */
 >>>>>>> v3.18
@@ -448,23 +477,33 @@ struct xfs_cil {
 	struct list_head	xc_cil;
 	spinlock_t		xc_cil_lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfs_cil_ctx	*xc_ctx;
 	struct rw_semaphore	xc_ctx_lock;
 =======
+=======
+>>>>>>> v3.18
 
 	struct rw_semaphore	xc_ctx_lock ____cacheline_aligned_in_smp;
 	struct xfs_cil_ctx	*xc_ctx;
 
 	spinlock_t		xc_push_lock ____cacheline_aligned_in_smp;
 	xfs_lsn_t		xc_push_seq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head	xc_committing;
 	wait_queue_head_t	xc_commit_wait;
 	xfs_lsn_t		xc_current_sequence;
 	struct work_struct	xc_push_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_lsn_t		xc_push_seq;
 };
+=======
+} ____cacheline_aligned_in_smp;
+>>>>>>> v3.18
 =======
 } ____cacheline_aligned_in_smp;
 >>>>>>> v3.18
@@ -584,6 +623,11 @@ struct xlog {
 	struct xlog_grant_head	l_write_head;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct xfs_kobj		l_kobj;
+
+>>>>>>> v3.18
 =======
 	struct xfs_kobj		l_kobj;
 
@@ -699,6 +743,7 @@ xlog_assign_grant_head(atomic64_t *head, int cycle, int space)
  * Committed Item List interfaces
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 xlog_cil_init(struct xlog *log);
 void
@@ -706,10 +751,15 @@ xlog_cil_init_post_recovery(struct xlog *log);
 void
 xlog_cil_destroy(struct xlog *log);
 =======
+=======
+>>>>>>> v3.18
 int	xlog_cil_init(struct xlog *log);
 void	xlog_cil_init_post_recovery(struct xlog *log);
 void	xlog_cil_destroy(struct xlog *log);
 bool	xlog_cil_empty(struct xlog *log);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -748,7 +798,10 @@ static inline void xlog_wait(wait_queue_head_t *wq, spinlock_t *lock)
 	remove_wait_queue(wq, &wait);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __KERNEL__ */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

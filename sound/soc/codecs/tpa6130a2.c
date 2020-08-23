@@ -31,6 +31,11 @@
 #include <sound/soc.h>
 #include <sound/tlv.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_gpio.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_gpio.h>
@@ -61,7 +66,12 @@ static int tpa6130a2_i2c_read(int reg)
 	int val;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!tpa6130a2_client))
 		return -EINVAL;
@@ -88,7 +98,12 @@ static int tpa6130a2_i2c_write(int reg, u8 value)
 	int val = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!tpa6130a2_client))
 		return -EINVAL;
@@ -114,7 +129,12 @@ static u8 tpa6130a2_read(int reg)
 	struct tpa6130a2_data *data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return 0;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!tpa6130a2_client))
 		return 0;
@@ -130,7 +150,12 @@ static int tpa6130a2_initialize(void)
 	int i, ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!tpa6130a2_client))
 		return -EINVAL;
@@ -153,7 +178,12 @@ static int tpa6130a2_power(u8 power)
 	int	ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!tpa6130a2_client))
 		return -EINVAL;
@@ -224,7 +254,12 @@ static int tpa6130a2_get_volsw(struct snd_kcontrol *kcontrol,
 	unsigned int invert = mc->invert;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!tpa6130a2_client))
 		return -EINVAL;
@@ -259,7 +294,12 @@ static int tpa6130a2_put_volsw(struct snd_kcontrol *kcontrol,
 	unsigned int val_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(tpa6130a2_client == NULL);
+=======
+	if (WARN_ON(!tpa6130a2_client))
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 	if (WARN_ON(!tpa6130a2_client))
 		return -EINVAL;
@@ -405,7 +445,12 @@ static int tpa6130a2_probe(struct i2c_client *client,
 	struct device *dev;
 	struct tpa6130a2_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tpa6130a2_platform_data *pdata;
+=======
+	struct tpa6130a2_platform_data *pdata = client->dev.platform_data;
+	struct device_node *np = client->dev.of_node;
+>>>>>>> v3.18
 =======
 	struct tpa6130a2_platform_data *pdata = client->dev.platform_data;
 	struct device_node *np = client->dev.of_node;
@@ -416,8 +461,11 @@ static int tpa6130a2_probe(struct i2c_client *client,
 	dev = &client->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (client->dev.platform_data == NULL) {
 =======
+=======
+>>>>>>> v3.18
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -427,12 +475,16 @@ static int tpa6130a2_probe(struct i2c_client *client,
 	} else if (np) {
 		data->power_gpio = of_get_named_gpio(np, "power-gpio", 0);
 	} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(dev, "Platform data not set\n");
 		dump_stack();
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(*data), GFP_KERNEL);
 	if (data == NULL) {
@@ -442,13 +494,18 @@ static int tpa6130a2_probe(struct i2c_client *client,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	tpa6130a2_client = client;
 
 	i2c_set_clientdata(tpa6130a2_client, data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = client->dev.platform_data;
 	data->power_gpio = pdata->power_gpio;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	data->id = id->driver_data;
@@ -530,7 +587,10 @@ static const struct i2c_device_id tpa6130a2_id[] = {
 MODULE_DEVICE_TABLE(i2c, tpa6130a2_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_OF)
 static const struct of_device_id tpa6130a2_of_match[] = {
 	{ .compatible = "ti,tpa6130a2", },
@@ -540,12 +600,19 @@ static const struct of_device_id tpa6130a2_of_match[] = {
 MODULE_DEVICE_TABLE(of, tpa6130a2_of_match);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct i2c_driver tpa6130a2_i2c_driver = {
 	.driver = {
 		.name = "tpa6130a2",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = of_match_ptr(tpa6130a2_of_match),
+>>>>>>> v3.18
 =======
 		.of_match_table = of_match_ptr(tpa6130a2_of_match),
 >>>>>>> v3.18

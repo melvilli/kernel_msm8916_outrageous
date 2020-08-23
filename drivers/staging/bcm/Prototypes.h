@@ -4,6 +4,7 @@
 VOID LinkControlResponseMessage(struct bcm_mini_adapter *Adapter, PUCHAR pucBuffer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 VOID StatisticsResponse(struct bcm_mini_adapter *Adapter,PVOID pvBuffer);
 
 VOID IdleModeResponse(struct bcm_mini_adapter *Adapter,PUINT puiBuffer);
@@ -12,6 +13,8 @@ int control_packet_handler	(struct bcm_mini_adapter *Adapter);
 
 VOID DeleteAllClassifiersForSF(struct bcm_mini_adapter *Adapter,UINT uiSearchRuleIndex);
 =======
+=======
+>>>>>>> v3.18
 VOID StatisticsResponse(struct bcm_mini_adapter *Adapter, PVOID pvBuffer);
 
 VOID IdleModeResponse(struct bcm_mini_adapter *Adapter, PUINT puiBuffer);
@@ -19,6 +22,9 @@ VOID IdleModeResponse(struct bcm_mini_adapter *Adapter, PUINT puiBuffer);
 int control_packet_handler(struct bcm_mini_adapter *Adapter);
 
 VOID DeleteAllClassifiersForSF(struct bcm_mini_adapter *Adapter, UINT uiSearchRuleIndex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 VOID flush_all_queues(struct bcm_mini_adapter *Adapter);
@@ -40,6 +46,7 @@ VOID flush_all_queues(struct bcm_mini_adapter *Adapter);
 VOID PruneQueueAllSF(struct bcm_mini_adapter *Adapter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 INT SearchSfid(struct bcm_mini_adapter *Adapter,UINT uiSfid);
 
 USHORT ClassifyPacket(struct bcm_mini_adapter *Adapter,struct sk_buff* skb);
@@ -53,6 +60,8 @@ INT SetupNextSend(struct bcm_mini_adapter *Adapter, /**<Logical Adapter*/
 					struct sk_buff *Packet, /**<data buffer*/
 					USHORT Vcid)	;
 =======
+=======
+>>>>>>> v3.18
 INT SearchSfid(struct bcm_mini_adapter *Adapter, UINT uiSfid);
 
 USHORT ClassifyPacket(struct bcm_mini_adapter *Adapter, struct sk_buff *skb);
@@ -66,6 +75,9 @@ bool MatchProtocol(struct bcm_classifier_rule *pstClassifierRule, UCHAR ucProtoc
 INT SetupNextSend(struct bcm_mini_adapter *Adapter, /**<Logical Adapter*/
 					struct sk_buff *Packet, /**<data buffer*/
 					USHORT Vcid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 VOID LinkMessage(struct bcm_mini_adapter *Adapter);
@@ -77,8 +89,13 @@ INT SendControlPacket(struct bcm_mini_adapter *Adapter, /**<Logical Adapter*/
 							);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int register_networkdev(struct bcm_mini_adapter *Adapter);
+=======
+int register_networkdev(struct bcm_mini_adapter *Adapter);
+
+>>>>>>> v3.18
 =======
 int register_networkdev(struct bcm_mini_adapter *Adapter);
 
@@ -94,6 +111,7 @@ INT FreeAdapterDsxBuffer(struct bcm_mini_adapter *Adapter);
 int tx_pkt_handler(struct bcm_mini_adapter *Adapter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  reset_card_proc(struct bcm_mini_adapter *Adapter );
 
 int run_card_proc(struct bcm_mini_adapter *Adapter );
@@ -102,12 +120,17 @@ int InitCardAndDownloadFirmware(struct bcm_mini_adapter *ps_adapter);
 
 
 =======
+=======
+>>>>>>> v3.18
 int reset_card_proc(struct bcm_mini_adapter *Adapter);
 
 int run_card_proc(struct bcm_mini_adapter *Adapter);
 
 int InitCardAndDownloadFirmware(struct bcm_mini_adapter *ps_adapter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 INT ReadMacAddressFromNVM(struct bcm_mini_adapter *Adapter);
 
@@ -119,6 +142,7 @@ int rdm(struct bcm_mini_adapter *Adapter, UINT uiAddress, PCHAR pucBuff, size_t 
 
 int wrm(struct bcm_mini_adapter *Adapter, UINT uiAddress, PCHAR pucBuff, size_t size);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int wrmalt (struct bcm_mini_adapter *Adapter, UINT uiAddress, unsigned int *pucBuff, size_t sSize);
 
@@ -132,6 +156,8 @@ void SendIdleModeResponse(struct bcm_mini_adapter *Adapter);
 int  ProcessGetHostMibs(struct bcm_mini_adapter *Adapter, struct bcm_host_stats_mibs *buf);
 void GetDroppedAppCntrlPktMibs(struct bcm_host_stats_mibs *ioBuffer, struct bcm_tarang_data *pTarang);
 =======
+=======
+>>>>>>> v3.18
 int wrmalt(struct bcm_mini_adapter *Adapter, UINT uiAddress, unsigned int *pucBuff, size_t sSize);
 
 int rdmalt(struct bcm_mini_adapter *Adapter, UINT uiAddress, unsigned int *pucBuff, size_t sSize);
@@ -144,6 +170,9 @@ int ProcessGetHostMibs(struct bcm_mini_adapter *Adapter, struct bcm_host_stats_m
 
 void GetDroppedAppCntrlPktMibs(struct bcm_host_stats_mibs *ioBuffer, struct bcm_tarang_data *pTarang);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void beceem_parse_target_struct(struct bcm_mini_adapter *Adapter);
 
@@ -156,6 +185,7 @@ VOID ResetCounters(struct bcm_mini_adapter *Adapter);
 
 int InitLedSettings(struct bcm_mini_adapter *Adapter);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct bcm_classifier_rule *GetFragIPClsEntry(struct bcm_mini_adapter *Adapter,USHORT usIpIdentification,ULONG SrcIP);
 
@@ -177,6 +207,8 @@ INT flushAllAppQ(VOID);
 
 
 =======
+=======
+>>>>>>> v3.18
 struct bcm_classifier_rule *GetFragIPClsEntry(struct bcm_mini_adapter *Adapter, USHORT usIpIdentification, ULONG SrcIP);
 
 void AddFragIPClsEntry(struct bcm_mini_adapter *Adapter, struct bcm_fragmented_packet_info *psFragPktInfo);
@@ -193,6 +225,9 @@ void flush_queue(struct bcm_mini_adapter *Adapter, UINT iQIndex);
 
 INT flushAllAppQ(VOID);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 INT BeceemEEPROMBulkRead(
 	struct bcm_mini_adapter *Adapter,
@@ -200,6 +235,7 @@ INT BeceemEEPROMBulkRead(
 	UINT uiOffset,
 	UINT uiNumBytes);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -209,10 +245,15 @@ INT PropagateCalParamsFromFlashToMemory(struct bcm_mini_adapter *Adapter);
 
 
 =======
+=======
+>>>>>>> v3.18
 INT WriteBeceemEEPROM(struct bcm_mini_adapter *Adapter, UINT uiEEPROMOffset, UINT uiData);
 
 INT PropagateCalParamsFromFlashToMemory(struct bcm_mini_adapter *Adapter);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 INT BeceemEEPROMBulkWrite(
 	struct bcm_mini_adapter *Adapter,
@@ -220,11 +261,17 @@ INT BeceemEEPROMBulkWrite(
 	UINT uiOffset,
 	UINT uiNumBytes,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BOOLEAN bVerify);
 
 
 INT ReadBeceemEEPROM(struct bcm_mini_adapter *Adapter,UINT dwAddress, UINT *pdwData);
 
+=======
+	bool bVerify);
+
+INT ReadBeceemEEPROM(struct bcm_mini_adapter *Adapter, UINT dwAddress, UINT *pdwData);
+>>>>>>> v3.18
 =======
 	bool bVerify);
 
@@ -243,6 +290,7 @@ INT BeceemNVMWrite(
 	UINT uiOffset,
 	UINT uiNumBytes,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BOOLEAN bVerify);
 
 
@@ -251,6 +299,8 @@ INT BcmInitNVM(struct bcm_mini_adapter *Adapter);
 INT BcmUpdateSectorSize(struct bcm_mini_adapter *Adapter,UINT uiSectorSize);
 BOOLEAN IsSectionExistInFlash(struct bcm_mini_adapter *Adapter, enum bcm_flash2x_section_val section);
 =======
+=======
+>>>>>>> v3.18
 	bool bVerify);
 
 INT BcmInitNVM(struct bcm_mini_adapter *Adapter);
@@ -258,6 +308,9 @@ INT BcmInitNVM(struct bcm_mini_adapter *Adapter);
 INT BcmUpdateSectorSize(struct bcm_mini_adapter *Adapter, UINT uiSectorSize);
 
 bool IsSectionExistInFlash(struct bcm_mini_adapter *Adapter, enum bcm_flash2x_section_val section);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 INT BcmGetFlash2xSectionalBitMap(struct bcm_mini_adapter *Adapter, struct bcm_flash2x_bitmap *psFlash2xBitMap);
@@ -281,6 +334,7 @@ INT BcmGetSectionValStartOffset(struct bcm_mini_adapter *Adapter, enum bcm_flash
 
 INT BcmSetActiveSection(struct bcm_mini_adapter *Adapter, enum bcm_flash2x_section_val eFlash2xSectVal);
 <<<<<<< HEAD
+<<<<<<< HEAD
 INT BcmAllocFlashCSStructure(struct bcm_mini_adapter *psAdapter);
 INT BcmDeAllocFlashCSStructure(struct bcm_mini_adapter *psAdapter);
 
@@ -291,6 +345,8 @@ INT	validateFlash2xReadWrite(struct bcm_mini_adapter *Adapter, struct bcm_flash2
 INT IsFlash2x(struct bcm_mini_adapter *Adapter);
 INT	BcmCopySection(struct bcm_mini_adapter *Adapter,
 =======
+=======
+>>>>>>> v3.18
 
 INT BcmAllocFlashCSStructure(struct bcm_mini_adapter *psAdapter);
 
@@ -307,12 +363,16 @@ INT validateFlash2xReadWrite(struct bcm_mini_adapter *Adapter, struct bcm_flash2
 INT IsFlash2x(struct bcm_mini_adapter *Adapter);
 
 INT BcmCopySection(struct bcm_mini_adapter *Adapter,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						enum bcm_flash2x_section_val SrcSection,
 						enum bcm_flash2x_section_val DstSection,
 						UINT offset,
 						UINT numOfBytes);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 BOOLEAN IsNonCDLessDevice(struct bcm_mini_adapter *Adapter);
@@ -338,6 +398,8 @@ BOOLEAN IsReqGpioIsLedInNVM(struct bcm_mini_adapter *Adapter, UINT gpios);
 
 
 =======
+=======
+>>>>>>> v3.18
 bool IsNonCDLessDevice(struct bcm_mini_adapter *Adapter);
 
 VOID OverrideServiceFlowParams(struct bcm_mini_adapter *Adapter, PUINT puiBuffer);
@@ -356,4 +418,7 @@ VOID putUsbSuspend(struct work_struct *work);
 bool IsReqGpioIsLedInNVM(struct bcm_mini_adapter *Adapter, UINT gpios);
 
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

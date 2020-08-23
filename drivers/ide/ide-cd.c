@@ -1757,7 +1757,11 @@ static int ide_cd_probe(ide_drive_t *drive)
 	info->dev.parent = &drive->gendev;
 	info->dev.release = ide_cd_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&info->dev, dev_name(&drive->gendev));
+=======
+	dev_set_name(&info->dev, "%s", dev_name(&drive->gendev));
+>>>>>>> v3.18
 =======
 	dev_set_name(&info->dev, "%s", dev_name(&drive->gendev));
 >>>>>>> v3.18

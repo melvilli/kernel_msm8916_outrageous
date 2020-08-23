@@ -58,7 +58,10 @@ void ufs_free_inode (struct inode * inode)
 	struct super_block * sb;
 	struct ufs_sb_private_info * uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_first * usb1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ufs_cg_private_info * ucpi;
@@ -71,6 +74,7 @@ void ufs_free_inode (struct inode * inode)
 	sb = inode->i_sb;
 	uspi = UFS_SB(sb)->s_uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first(uspi);
 	
 	ino = inode->i_ino;
@@ -81,6 +85,8 @@ void ufs_free_inode (struct inode * inode)
 		ufs_warning(sb, "ufs_free_inode", "reserved inode or nonexistent inode %u\n", ino);
 		mutex_unlock(&UFS_SB(sb)->s_lock);
 =======
+=======
+>>>>>>> v3.18
 	
 	ino = inode->i_ino;
 
@@ -89,6 +95,9 @@ void ufs_free_inode (struct inode * inode)
 	if (!((ino > 1) && (ino < (uspi->s_ncg * uspi->s_ipg )))) {
 		ufs_warning(sb, "ufs_free_inode", "reserved inode or nonexistent inode %u\n", ino);
 		unlock_ufs(sb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}
@@ -98,7 +107,11 @@ void ufs_free_inode (struct inode * inode)
 	ucpi = ufs_load_cylinder (sb, cg);
 	if (!ucpi) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+		unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 		unlock_ufs(sb);
 >>>>>>> v3.18
@@ -136,7 +149,11 @@ void ufs_free_inode (struct inode * inode)
 	
 	ufs_mark_sb_dirty(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+	unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 >>>>>>> v3.18
@@ -198,7 +215,10 @@ struct inode *ufs_new_inode(struct inode *dir, umode_t mode)
 	struct ufs_sb_info * sbi;
 	struct ufs_sb_private_info * uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_first * usb1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ufs_cg_private_info * ucpi;
@@ -221,9 +241,14 @@ struct inode *ufs_new_inode(struct inode *dir, umode_t mode)
 	sbi = UFS_SB(sb);
 	uspi = sbi->s_uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first(uspi);
 
 	mutex_lock(&sbi->s_lock);
+=======
+
+	lock_ufs(sb);
+>>>>>>> v3.18
 =======
 
 	lock_ufs(sb);
@@ -333,12 +358,18 @@ cg_found:
 	ufsi->i_dir_start_lookup = 0;
 	memset(&ufsi->i_u1, 0, sizeof(ufsi->i_u1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	insert_inode_hash(inode);
 =======
+=======
+>>>>>>> v3.18
 	if (insert_inode_locked(inode) < 0) {
 		err = -EIO;
 		goto failed;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mark_inode_dirty(inode);
 
@@ -370,8 +401,12 @@ cg_found:
 		brelse(bh);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mutex_unlock(&sbi->s_lock);
+=======
+	unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 >>>>>>> v3.18
@@ -382,8 +417,14 @@ cg_found:
 
 fail_remove_inode:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&sbi->s_lock);
 	clear_nlink(inode);
+=======
+	unlock_ufs(sb);
+	clear_nlink(inode);
+	unlock_new_inode(inode);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 	clear_nlink(inode);
@@ -394,7 +435,11 @@ fail_remove_inode:
 	return ERR_PTR(err);
 failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&sbi->s_lock);
+=======
+	unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 >>>>>>> v3.18

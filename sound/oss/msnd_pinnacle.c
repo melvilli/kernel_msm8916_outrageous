@@ -665,6 +665,7 @@ static long dev_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 static void dsp_write_flush(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(dev.mode & FMODE_WRITE) || !test_bit(F_WRITING, &dev.flags))
 		return;
 	set_bit(F_WRITEFLUSH, &dev.flags);
@@ -672,6 +673,8 @@ static void dsp_write_flush(void)
 		&dev.writeflush,
 		get_play_delay_jiffies(dev.DAPF.len));
 =======
+=======
+>>>>>>> v3.18
 	int timeout = get_play_delay_jiffies(dev.DAPF.len);
 
 	if (!(dev.mode & FMODE_WRITE) || !test_bit(F_WRITING, &dev.flags))
@@ -681,6 +684,9 @@ static void dsp_write_flush(void)
 		dev.writeflush,
 		!test_bit(F_WRITEFLUSH, &dev.flags),
 		timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	clear_bit(F_WRITEFLUSH, &dev.flags);
 	if (!signal_pending(current)) {
@@ -910,6 +916,10 @@ static int dsp_read(char __user *buf, size_t len)
 	int count = len;
 	char *page = (char *)__get_free_page(GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int timeout = get_rec_delay_jiffies(DAR_BUFF_SIZE);
+>>>>>>> v3.18
 =======
 	int timeout = get_rec_delay_jiffies(DAR_BUFF_SIZE);
 >>>>>>> v3.18
@@ -953,17 +963,23 @@ static int dsp_read(char __user *buf, size_t len)
 		if (count > 0) {
 			set_bit(F_READBLOCK, &dev.flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!interruptible_sleep_on_timeout(
 				&dev.readblock,
 				get_rec_delay_jiffies(DAR_BUFF_SIZE)))
 				clear_bit(F_READING, &dev.flags);
 			clear_bit(F_READBLOCK, &dev.flags);
 =======
+=======
+>>>>>>> v3.18
 			if (wait_event_interruptible_timeout(
 					dev.readblock,
 					test_bit(F_READBLOCK, &dev.flags),
 					timeout) <= 0)
 				clear_bit(F_READING, &dev.flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (signal_pending(current)) {
 				free_page((unsigned long)page);
@@ -980,6 +996,10 @@ static int dsp_write(const char __user *buf, size_t len)
 	int count = len;
 	char *page = (char *)__get_free_page(GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int timeout = get_play_delay_jiffies(DAP_BUFF_SIZE);
+>>>>>>> v3.18
 =======
 	int timeout = get_play_delay_jiffies(DAP_BUFF_SIZE);
 >>>>>>> v3.18
@@ -1024,15 +1044,21 @@ static int dsp_write(const char __user *buf, size_t len)
 		if (count > 0) {
 			set_bit(F_WRITEBLOCK, &dev.flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on_timeout(
 				&dev.writeblock,
 				get_play_delay_jiffies(DAP_BUFF_SIZE));
 			clear_bit(F_WRITEBLOCK, &dev.flags);
 =======
+=======
+>>>>>>> v3.18
 			wait_event_interruptible_timeout(
 				dev.writeblock,
 				test_bit(F_WRITEBLOCK, &dev.flags),
 				timeout);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (signal_pending(current)) {
 				free_page((unsigned long)page);
@@ -1080,7 +1106,11 @@ static __inline__ void eval_dsp_msg(register WORD wMessage)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(F_WRITEBLOCK, &dev.flags))
+=======
+		if (test_and_clear_bit(F_WRITEBLOCK, &dev.flags))
+>>>>>>> v3.18
 =======
 		if (test_and_clear_bit(F_WRITEBLOCK, &dev.flags))
 >>>>>>> v3.18
@@ -1095,7 +1125,11 @@ static __inline__ void eval_dsp_msg(register WORD wMessage)
 		pack_DARQ_to_DARF(dev.last_recbank);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (test_bit(F_READBLOCK, &dev.flags))
+=======
+		if (test_and_clear_bit(F_READBLOCK, &dev.flags))
+>>>>>>> v3.18
 =======
 		if (test_and_clear_bit(F_READBLOCK, &dev.flags))
 >>>>>>> v3.18

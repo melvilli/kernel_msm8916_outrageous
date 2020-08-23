@@ -21,6 +21,7 @@
 #define DA8XX_NUM_UARTS	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init da8xx_uart_clk_enable(void)
 {
 	int i;
@@ -28,6 +29,8 @@ static void __init da8xx_uart_clk_enable(void)
 		davinci_serial_setup_clk(i, NULL);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct of_device_id da8xx_irq_match[] __initdata = {
@@ -43,7 +46,11 @@ static void __init da8xx_init_irq(void)
 static struct of_dev_auxdata da850_auxdata_lookup[] __initdata = {
 	OF_DEV_AUXDATA("ti,davinci-i2c", 0x01c22000, "i2c_davinci.1", NULL),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OF_DEV_AUXDATA("ti,davinci-wdt", 0x01c21000, "watchdog", NULL),
+=======
+	OF_DEV_AUXDATA("ti,davinci-wdt", 0x01c21000, "davinci-wdt", NULL),
+>>>>>>> v3.18
 =======
 	OF_DEV_AUXDATA("ti,davinci-wdt", 0x01c21000, "davinci-wdt", NULL),
 >>>>>>> v3.18
@@ -55,7 +62,10 @@ static struct of_dev_auxdata da850_auxdata_lookup[] __initdata = {
 	OF_DEV_AUXDATA("ti,da850-ecap", 0x01f08000, "ecap", NULL),
 	OF_DEV_AUXDATA("ti,da830-spi", 0x01f0e000, "spi_davinci.1", NULL),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	OF_DEV_AUXDATA("ns16550a", 0x01c42000, "serial8250.0", NULL),
 	OF_DEV_AUXDATA("ns16550a", 0x01d0c000, "serial8250.1", NULL),
 	OF_DEV_AUXDATA("ns16550a", 0x01d0d000, "serial8250.2", NULL),
@@ -63,6 +73,9 @@ static struct of_dev_auxdata da850_auxdata_lookup[] __initdata = {
 	OF_DEV_AUXDATA("ti,davinci-dm6467-emac", 0x01e20000, "davinci_emac.1",
 		       NULL),
 	OF_DEV_AUXDATA("ti,da830-mcasp-audio", 0x01d00000, "davinci-mcasp.0", NULL),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{}
 };
@@ -75,7 +88,10 @@ static void __init da850_init_machine(void)
 			     da850_auxdata_lookup, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	da8xx_uart_clk_enable();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

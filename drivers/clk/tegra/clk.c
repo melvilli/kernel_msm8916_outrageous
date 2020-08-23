@@ -19,10 +19,13 @@
 #include <linux/of.h>
 #include <linux/clk/tegra.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "clk.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/reset-controller.h>
 
 #include <soc/tegra/fuse.h>
@@ -68,13 +71,19 @@
 #define RST_DEVICES_SET_X		0x290
 #define RST_DEVICES_CLR_X		0x294
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Global data of Tegra CPU CAR ops */
 static struct tegra_cpu_car_ops dummy_car_ops;
 struct tegra_cpu_car_ops *tegra_cpu_car_ops = &dummy_car_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int *periph_clk_enb_refcnt;
 static int periph_banks;
 static struct clk **clks;
@@ -196,6 +205,9 @@ struct clk ** __init tegra_clk_init(void __iomem *regs, int num, int banks)
 	return clks;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init tegra_init_dup_clks(struct tegra_clk_duplicate *dup_list,
 				struct clk *clks[], int clk_max)
@@ -217,9 +229,12 @@ void __init tegra_init_from_table(struct tegra_clk_init_table *tbl,
 	for (; tbl->clk_id < clk_max; tbl++) {
 		clk = clks[tbl->clk_id];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (IS_ERR_OR_NULL(clk))
 			return;
 =======
+=======
+>>>>>>> v3.18
 		if (IS_ERR_OR_NULL(clk)) {
 			pr_err("%s: invalid entry %ld in clks array for id %d\n",
 			       __func__, PTR_ERR(clk), tbl->clk_id);
@@ -227,6 +242,9 @@ void __init tegra_init_from_table(struct tegra_clk_init_table *tbl,
 
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (tbl->parent_id < clk_max) {
@@ -257,6 +275,7 @@ void __init tegra_init_from_table(struct tegra_clk_init_table *tbl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id tegra_dt_clk_match[] = {
 	{ .compatible = "nvidia,tegra20-car", .data = tegra20_clock_init },
 	{ .compatible = "nvidia,tegra30-car", .data = tegra30_clock_init },
@@ -268,6 +287,8 @@ void __init tegra_clocks_init(void)
 {
 	of_clk_init(tegra_dt_clk_match);
 =======
+=======
+>>>>>>> v3.18
 static struct reset_control_ops rst_ops = {
 	.assert = tegra_clk_rst_assert,
 	.deassert = tegra_clk_rst_deassert,
@@ -324,6 +345,9 @@ struct clk ** __init tegra_lookup_dt_id(int clk_id,
 		return &clks[tegra_clk[clk_id].dt_id];
 	else
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

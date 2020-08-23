@@ -6,7 +6,10 @@ Required properties:
 - reg : Should contain AUDMUX registers location and length
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 An initial configuration can be setup using child nodes.
 
 Required properties of optional child nodes:
@@ -16,6 +19,9 @@ Required properties of optional child nodes:
   imx31-audmux and above, it is a list of tuples <ptcr pdcr>. For
   imx21-audmux it is a list of pcr values.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

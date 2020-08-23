@@ -188,7 +188,10 @@ struct platform_suspend_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct platform_freeze_ops {
 	int (*begin)(void);
 	int (*prepare)(void);
@@ -196,6 +199,9 @@ struct platform_freeze_ops {
 	void (*end)(void);
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_SUSPEND
 /**
@@ -205,6 +211,10 @@ struct platform_freeze_ops {
 extern void suspend_set_ops(const struct platform_suspend_ops *ops);
 extern int suspend_valid_only_mem(suspend_state_t state);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void freeze_set_ops(const struct platform_freeze_ops *ops);
+>>>>>>> v3.18
 =======
 extern void freeze_set_ops(const struct platform_freeze_ops *ops);
 >>>>>>> v3.18
@@ -235,6 +245,10 @@ extern int pm_suspend(suspend_state_t state);
 static inline void suspend_set_ops(const struct platform_suspend_ops *ops) {}
 static inline int pm_suspend(suspend_state_t state) { return -ENOSYS; }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void freeze_set_ops(const struct platform_freeze_ops *ops) {}
+>>>>>>> v3.18
 =======
 static inline void freeze_set_ops(const struct platform_freeze_ops *ops) {}
 >>>>>>> v3.18
@@ -339,6 +353,12 @@ extern void hibernation_set_ops(const struct platform_hibernation_ops *ops);
 extern int hibernate(void);
 extern bool system_entering_hibernation(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern bool hibernation_available(void);
+asmlinkage int swsusp_save(void);
+extern struct pbe *restore_pblist;
+>>>>>>> v3.18
 =======
 extern bool hibernation_available(void);
 asmlinkage int swsusp_save(void);
@@ -355,6 +375,10 @@ static inline void hibernation_set_ops(const struct platform_hibernation_ops *op
 static inline int hibernate(void) { return -ENOSYS; }
 static inline bool system_entering_hibernation(void) { return false; }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline bool hibernation_available(void) { return false; }
+>>>>>>> v3.18
 =======
 static inline bool hibernation_available(void) { return false; }
 >>>>>>> v3.18
@@ -389,16 +413,22 @@ extern bool events_check_enabled;
 
 extern bool pm_wakeup_pending(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool pm_get_wakeup_count(unsigned int *count, bool block);
 extern bool pm_save_wakeup_count(unsigned int count);
 extern void pm_wakep_autosleep_enabled(bool set);
 =======
+=======
+>>>>>>> v3.18
 extern void pm_system_wakeup(void);
 extern void pm_wakeup_clear(void);
 extern bool pm_get_wakeup_count(unsigned int *count, bool block);
 extern bool pm_save_wakeup_count(unsigned int count);
 extern void pm_wakep_autosleep_enabled(bool set);
 extern void pm_print_active_wakeup_sources(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void lock_system_sleep(void)
@@ -444,6 +474,11 @@ static inline int unregister_pm_notifier(struct notifier_block *nb)
 
 static inline bool pm_wakeup_pending(void) { return false; }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static inline void pm_system_wakeup(void) {}
+static inline void pm_wakeup_clear(void) {}
+>>>>>>> v3.18
 =======
 static inline void pm_system_wakeup(void) {}
 static inline void pm_wakeup_clear(void) {}

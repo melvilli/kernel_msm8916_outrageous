@@ -147,9 +147,13 @@ nouveau_handle_create(struct nouveau_object *parent, u32 _parent, u32 _handle,
 
 	hprintk(handle, TRACE, "created\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	*phandle = handle;
 
+=======
+	*phandle = handle;
+>>>>>>> v3.18
 =======
 	*phandle = handle;
 >>>>>>> v3.18
@@ -229,7 +233,10 @@ nouveau_handle_put(struct nouveau_handle *handle)
 		nouveau_namedb_put(handle);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int
 nouveau_handle_new(struct nouveau_object *client, u32 _parent, u32 _handle,
@@ -343,4 +350,7 @@ nouveau_handle_del(struct nouveau_object *client, u32 _parent, u32 _handle)
 	nouveau_object_ref(NULL, &parent);
 	return handle ? 0 : -EINVAL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

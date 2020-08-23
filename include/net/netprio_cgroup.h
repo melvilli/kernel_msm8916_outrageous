@@ -14,6 +14,10 @@
 #ifndef _NETPRIO_CGROUP_H
 #define _NETPRIO_CGROUP_H
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -22,8 +26,12 @@
 #include <linux/rcupdate.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if IS_ENABLED(CONFIG_NETPRIO_CGROUP)
+=======
+#if IS_ENABLED(CONFIG_CGROUP_NET_PRIO)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_CGROUP_NET_PRIO)
 >>>>>>> v3.18
@@ -33,6 +41,7 @@ struct netprio_map {
 	u32 priomap[];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct cgroup_netprio_state {
 	struct cgroup_subsys_state css;
@@ -44,6 +53,9 @@ extern void sock_update_netprioidx(struct sock *sk);
 =======
 void sock_update_netprioidx(struct sock *sk);
 >>>>>>> v3.18
+=======
+void sock_update_netprioidx(struct sock *sk);
+>>>>>>> v3.18
 
 static inline u32 task_netprioidx(struct task_struct *p)
 {
@@ -52,7 +64,11 @@ static inline u32 task_netprioidx(struct task_struct *p)
 
 	rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	css = task_subsys_state(p, net_prio_subsys_id);
+=======
+	css = task_css(p, net_prio_cgrp_id);
+>>>>>>> v3.18
 =======
 	css = task_css(p, net_prio_cgrp_id);
 >>>>>>> v3.18
@@ -60,6 +76,7 @@ static inline u32 task_netprioidx(struct task_struct *p)
 	rcu_read_unlock();
 	return idx;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #elif IS_MODULE(CONFIG_NETPRIO_CGROUP)
@@ -83,6 +100,9 @@ static inline u32 task_netprioidx(struct task_struct *p)
 =======
 #else /* !CONFIG_CGROUP_NET_PRIO */
 >>>>>>> v3.18
+=======
+#else /* !CONFIG_CGROUP_NET_PRIO */
+>>>>>>> v3.18
 static inline u32 task_netprioidx(struct task_struct *p)
 {
 	return 0;
@@ -91,8 +111,12 @@ static inline u32 task_netprioidx(struct task_struct *p)
 #define sock_update_netprioidx(sk)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_NETPRIO_CGROUP */
 
+=======
+#endif /* CONFIG_CGROUP_NET_PRIO */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_CGROUP_NET_PRIO */
 >>>>>>> v3.18

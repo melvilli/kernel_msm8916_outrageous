@@ -78,7 +78,11 @@ struct arizona_micbias {
 	unsigned int ext_cap:1;    /** External capacitor fitted */
 	unsigned int discharge:1;  /** Actively discharge */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int fast_start:1; /** Enable aggressive startup ramp rate */
+=======
+	unsigned int soft_start:1; /** Disable aggressive startup ramp rate */
+>>>>>>> v3.18
 =======
 	unsigned int soft_start:1; /** Disable aggressive startup ramp rate */
 >>>>>>> v3.18
@@ -132,6 +136,12 @@ struct arizona_pdata {
 	bool jd_gpio5_nopull;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/** set to true if jackdet contact opens on insert */
+	bool jd_invert;
+
+>>>>>>> v3.18
 =======
 	/** set to true if jackdet contact opens on insert */
 	bool jd_invert;

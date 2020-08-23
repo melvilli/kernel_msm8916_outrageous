@@ -67,8 +67,13 @@ static const size_t max_zpage_size = PAGE_SIZE / 4 * 3;
 enum zram_pageflags {
 	/* Page consists entirely of zeros */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ZRAM_ZERO = ZRAM_FLAG_SHIFT,
 	ZRAM_ACCESS,	/* page is now accessed */
+=======
+	ZRAM_ZERO = ZRAM_FLAG_SHIFT + 1,
+	ZRAM_ACCESS,	/* page in now accessed */
+>>>>>>> v3.18
 =======
 	ZRAM_ZERO = ZRAM_FLAG_SHIFT + 1,
 	ZRAM_ACCESS,	/* page in now accessed */
@@ -90,7 +95,10 @@ struct zram_stats {
 	atomic64_t num_reads;	/* failed + successful */
 	atomic64_t num_writes;	/* --do-- */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic64_t num_migrated;	/* no. of migrated object */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	atomic64_t failed_reads;	/* can happen when memory is too low */
@@ -109,6 +117,7 @@ struct zram_meta {
 
 struct zram {
 	struct zram_meta *meta;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct zcomp *comp;
 	struct gendisk *disk;
@@ -130,6 +139,8 @@ struct zram {
 	 */
 	u64 disksize;	/* bytes */
 =======
+=======
+>>>>>>> v3.18
 	struct request_queue *queue;
 	struct gendisk *disk;
 	struct zcomp *comp;
@@ -148,6 +159,9 @@ struct zram {
 	 */
 	unsigned long limit_pages;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char compressor[10];
 };

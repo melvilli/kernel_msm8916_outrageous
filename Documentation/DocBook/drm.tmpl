@@ -30,7 +30,10 @@
 	</affiliation>
       </author>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       <author>
 	<firstname>Daniel</firstname>
 	<surname>Vetter</surname>
@@ -42,20 +45,29 @@
 	  </address>
 	</affiliation>
       </author>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     </authorgroup>
 
     <copyright>
       <year>2008-2009</year>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <year>2012</year>
       <holder>Intel Corporation</holder>
 =======
+=======
+>>>>>>> v3.18
       <year>2013-2014</year>
       <holder>Intel Corporation</holder>
     </copyright>
     <copyright>
       <year>2012</year>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       <holder>Laurent Pinchart</holder>
     </copyright>
@@ -83,8 +95,11 @@
 <toc></toc>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   <!-- Introduction -->
 =======
+=======
+>>>>>>> v3.18
 <part id="drmCore">
   <title>DRM Core</title>
   <partintro>
@@ -94,6 +109,9 @@
       exposed by DRM drivers.
     </para>
   </partintro>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   <chapter id="drmIntroduction">
@@ -155,13 +173,19 @@
     </para>
     <para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       Newer drivers that no longer require a <structname>drm_bus</structname>
       structure can alternatively use the low-level device initialization and
       registration functions such as <function>drm_dev_alloc()</function> and
       <function>drm_dev_register()</function> directly.
     </para>
     <para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       The <structname>drm_driver</structname> structure contains static
       information that describes the driver and features it supports, and
@@ -200,6 +224,7 @@
           </varlistentry>
           <varlistentry>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <term>DRIVER_USE_MTRR</term>
             <listitem><para>
               Driver uses MTRR interface for mapping memory, the DRM core will
@@ -207,6 +232,8 @@
             </para></listitem>
           </varlistentry>
           <varlistentry>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
             <term>DRIVER_PCI_DMA</term>
@@ -232,6 +259,7 @@
           <varlistentry>
             <term>DRIVER_HAVE_IRQ</term><term>DRIVER_IRQ_SHARED</term>
             <listitem><para>
+<<<<<<< HEAD
 <<<<<<< HEAD
               DRIVER_HAVE_IRQ indicates whether the driver has an IRQ handler. The
               DRM core will automatically register an interrupt handler when the
@@ -264,6 +292,8 @@
           </varlistentry>
           <varlistentry>
 =======
+=======
+>>>>>>> v3.18
               DRIVER_HAVE_IRQ indicates whether the driver has an IRQ handler
               managed by the DRM Core. The core will support simple IRQ handler
               installation when the flag is set. The installation process is
@@ -273,6 +303,9 @@
             </para></listitem>
           </varlistentry>
           <varlistentry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
             <term>DRIVER_GEM</term>
             <listitem><para>
@@ -292,13 +325,19 @@
             </para></listitem>
           </varlistentry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
           <varlistentry>
             <term>DRIVER_RENDER</term>
             <listitem><para>
               Driver supports dedicated render nodes.
             </para></listitem>
           </varlistentry>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
         </variablelist>
       </sect3>
@@ -350,7 +389,10 @@ char *date;</synopsis>
     </sect2>
     <sect2>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       <title>Device Registration</title>
       <para>
         A number of functions are provided to help with device registration.
@@ -380,14 +422,22 @@ char *date;</synopsis>
 !Edrivers/gpu/drm/drm_drv.c
     </sect2>
     <sect2>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       <title>Driver Load</title>
       <para>
         The <methodname>load</methodname> method is the driver and device
         initialization entry point. The method is responsible for allocating and
 <<<<<<< HEAD
+<<<<<<< HEAD
         initializing driver private data, specifying supported performance
         counters, performing resource allocation and mapping (e.g. acquiring
+=======
+	initializing driver private data, performing resource allocation and
+	mapping (e.g. acquiring
+>>>>>>> v3.18
 =======
 	initializing driver private data, performing resource allocation and
 	mapping (e.g. acquiring
@@ -422,7 +472,11 @@ char *date;</synopsis>
       </para>
       <sect3>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <title>Driver Private &amp; Performance Counters</title>
+=======
+        <title>Driver Private Data</title>
+>>>>>>> v3.18
 =======
         <title>Driver Private Data</title>
 >>>>>>> v3.18
@@ -438,6 +492,7 @@ char *date;</synopsis>
           set to NULL when the driver is unloaded.
         </para>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <para>
           DRM supports several counters which were used for rough performance
           characterization. This stat counter system is deprecated and should not
@@ -448,6 +503,8 @@ char *date;</synopsis>
         </para>
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
       </sect3>
       <sect3 id="drm-irq-registration">
         <title>IRQ Registration</title>
@@ -455,6 +512,7 @@ char *date;</synopsis>
           The DRM core tries to facilitate IRQ handler registration and
           unregistration by providing <function>drm_irq_install</function> and
           <function>drm_irq_uninstall</function> functions. Those functions only
+<<<<<<< HEAD
 <<<<<<< HEAD
           support a single interrupt per device.
         </para>
@@ -501,6 +559,8 @@ char *date;</synopsis>
           by calling <function>free_irq</function>.
         </para>
 =======
+=======
+>>>>>>> v3.18
           support a single interrupt per device, devices that use more than one
           IRQs need to be handled manually.
         </para>
@@ -558,6 +618,9 @@ char *date;</synopsis>
 	    unregistering the IRQs.
           </para>
         </sect4>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       </sect3>
       <sect3>
@@ -606,7 +669,11 @@ char *date;</synopsis>
       (TTM) and Graphics Execution Manager (GEM). TTM was the first DRM memory
       manager to be developed and tried to be a one-size-fits-them all
 <<<<<<< HEAD
+<<<<<<< HEAD
       solution. It provides a single userspace API to accomodate the need of
+=======
+      solution. It provides a single userspace API to accommodate the need of
+>>>>>>> v3.18
 =======
       solution. It provides a single userspace API to accommodate the need of
 >>>>>>> v3.18
@@ -622,7 +689,11 @@ char *date;</synopsis>
       identified common code between drivers and created a support library to
       share it. GEM has simpler initialization and execution requirements than
 <<<<<<< HEAD
+<<<<<<< HEAD
       TTM, but has no video RAM management capabitilies and is thus limited to
+=======
+      TTM, but has no video RAM management capabilities and is thus limited to
+>>>>>>> v3.18
 =======
       TTM, but has no video RAM management capabilities and is thus limited to
 >>>>>>> v3.18
@@ -878,6 +949,7 @@ char *date;</synopsis>
           driver-specific support.
         </para>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <para>
           Similar to global names, GEM file descriptors are also used to share GEM
           objects across processes. They offer additional security: as file
@@ -928,6 +1000,8 @@ char *date;</synopsis>
 !Pdrivers/gpu/drm/drm_prime.c PRIME Helpers
         </sect4>
 =======
+=======
+>>>>>>> v3.18
 	<para>
 	  GEM also supports buffer sharing with dma-buf file descriptors through
 	  PRIME. GEM-based drivers must use the provided helpers functions to
@@ -938,6 +1012,9 @@ char *date;</synopsis>
 	  for legacy userspace. Furthermore PRIME also allows cross-device
 	  buffer sharing since it is based on dma-bufs.
 	</para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       </sect3>
       <sect3 id="drm-gem-objects-mapping">
@@ -1024,6 +1101,7 @@ char *date;</synopsis>
       </sect3>
       <sect3>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <title>Dumb GEM Objects</title>
         <para>
           The GEM API doesn't standardize GEM objects creation and leaves it to
@@ -1082,6 +1160,8 @@ char *date;</synopsis>
       <sect3>
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
         <title>Memory Coherency</title>
         <para>
           When mapped to the device or used in a command buffer, backing pages
@@ -1121,8 +1201,11 @@ char *date;</synopsis>
         </para>
       </sect3>
 <<<<<<< HEAD
+<<<<<<< HEAD
     </sect2>
 =======
+=======
+>>>>>>> v3.18
       <sect3>
         <title>GEM Function Reference</title>
 !Edrivers/gpu/drm/drm_gem.c
@@ -1216,6 +1299,9 @@ struct drm_gem_object * (*gem_prime_import)(struct drm_device *dev,
 !Edrivers/gpu/drm/drm_mm.c
 !Iinclude/drm/drm_mm.h
       </sect2>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   </sect1>
 
@@ -1246,12 +1332,18 @@ int max_width, max_height;</synopsis>
     </itemizedlist>
     <sect2>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       <title>Display Modes Function Reference</title>
 !Iinclude/drm/drm_modes.h
 !Edrivers/gpu/drm/drm_modes.c
     </sect2>
     <sect2>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       <title>Frame Buffer Creation</title>
       <synopsis>struct drm_framebuffer *(*fb_create)(struct drm_device *dev,
@@ -1269,15 +1361,21 @@ int max_width, max_height;</synopsis>
         operations. When creating a frame buffer applications pass a memory
         handle (or a list of memory handles for multi-planar formats) through
 <<<<<<< HEAD
+<<<<<<< HEAD
         the <parameter>drm_mode_fb_cmd2</parameter> argument. This document
         assumes that the driver uses GEM, those handles thus reference GEM
         objects.
 =======
+=======
+>>>>>>> v3.18
 	the <parameter>drm_mode_fb_cmd2</parameter> argument. For drivers using
 	GEM as their userspace buffer management interface this would be a GEM
 	handle.  Drivers are however free to use their own backing storage object
 	handles, e.g. vmwgfx directly exposes special TTM handles to userspace
 	and so expects TTM handles in the create ioctl and not GEM handles.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       </para>
       <para>
@@ -1301,7 +1399,11 @@ int max_width, max_height;</synopsis>
 
       <para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	The initailization of the new framebuffer instance is finalized with a
+=======
+	The initialization of the new framebuffer instance is finalized with a
+>>>>>>> v3.18
 =======
 	The initialization of the new framebuffer instance is finalized with a
 >>>>>>> v3.18
@@ -1355,7 +1457,11 @@ int max_width, max_height;</synopsis>
 	The lifetime of a drm framebuffer is controlled with a reference count,
 	drivers can grab additional references with
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<function>drm_framebuffer_reference</function> </para> and drop them
+=======
+	<function>drm_framebuffer_reference</function>and drop them
+>>>>>>> v3.18
 =======
 	<function>drm_framebuffer_reference</function>and drop them
 >>>>>>> v3.18
@@ -1367,7 +1473,10 @@ int max_width, max_height;</synopsis>
 	unload time with
 	<function>drm_framebuffer_unregister_private</function>.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       </para>
     </sect2>
     <sect2>
@@ -1434,6 +1543,9 @@ int max_width, max_height;</synopsis>
 	attempted on some ARM embedded platforms. Such drivers really must have
 	a hardware-specific ioctl to allocate suitable buffer objects.
       </para>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     </sect2>
     <sect2>
@@ -1496,7 +1608,11 @@ int max_width, max_height;</synopsis>
         </para>
       </sect3>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <sect3>
+=======
+      <sect3 id="drm-kms-crtcops">
+>>>>>>> v3.18
 =======
       <sect3 id="drm-kms-crtcops">
 >>>>>>> v3.18
@@ -1520,14 +1636,20 @@ int max_width, max_height;</synopsis>
           </para>
           <note><para>
 <<<<<<< HEAD
+<<<<<<< HEAD
             FIXME: How should set_config interact with DPMS? If the CRTC is
             suspended, should it be resumed?
 =======
+=======
+>>>>>>> v3.18
 	    Note that the drm core has no notion of restoring the mode setting
 	    state after resume, since all resume handling is in the full
 	    responsibility of the driver. The common mode setting helper library
 	    though provides a helper which can be used for this:
 	    <function>drm_helper_resume_force_mode</function>.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
           </para></note>
         </sect4>
@@ -1551,7 +1673,11 @@ int max_width, max_height;</synopsis>
           <para>
             The <methodname>page_flip</methodname> operation schedules a page flip.
 <<<<<<< HEAD
+<<<<<<< HEAD
             Once any pending rendering targetting the new frame buffer has
+=======
+            Once any pending rendering targeting the new frame buffer has
+>>>>>>> v3.18
 =======
             Once any pending rendering targeting the new frame buffer has
 >>>>>>> v3.18
@@ -1615,7 +1741,10 @@ int max_width, max_height;</synopsis>
           <itemizedlist>
             <listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
               <synopsis>void (*set_property)(struct drm_crtc *crtc,
                      struct drm_property *property, uint64_t value);</synopsis>
               <para>
@@ -1625,6 +1754,9 @@ int max_width, max_height;</synopsis>
               </para>
             </listitem>
             <listitem>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
               <synopsis>void (*gamma_set)(struct drm_crtc *crtc, u16 *r, u16 *g, u16 *b,
                         uint32_t start, uint32_t size);</synopsis>
@@ -1653,6 +1785,7 @@ int max_width, max_height;</synopsis>
 	with or overlayed on top of a CRTC.
       </para>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <sect3>
         <title>Plane Initialization</title>
         <para>
@@ -1663,6 +1796,8 @@ int max_width, max_height;</synopsis>
           of the CRTCs that can be associated with the plane, a pointer to the
           plane functions and a list of format supported formats.
 =======
+=======
+>>>>>>> v3.18
       <para>
       The DRM core recognizes three types of planes:
       <itemizedlist>
@@ -1704,6 +1839,9 @@ int max_width, max_height;</synopsis>
           primary planes may make use of the helper functions described in
           <xref linkend="drm-kms-planehelpers"/> to create and register a
           primary plane with standard capabilities.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
         </para>
       </sect3>
@@ -1820,7 +1958,10 @@ int max_width, max_height;</synopsis>
             </para>
           </listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
           <listitem>
             <synopsis>void (*set_property)(struct drm_plane *plane,
                      struct drm_property *property, uint64_t value);</synopsis>
@@ -1830,6 +1971,9 @@ int max_width, max_height;</synopsis>
               for more information about properties.
             </para>
           </listitem>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
         </itemizedlist>
       </sect3>
@@ -1915,7 +2059,11 @@ int max_width, max_height;</synopsis>
           <function>drm_connector_init</function> with a pointer to the connector
           functions and a connector type, and exposed through sysfs with a call to
 <<<<<<< HEAD
+<<<<<<< HEAD
           <function>drm_sysfs_connector_add</function>.
+=======
+          <function>drm_connector_register</function>.
+>>>>>>> v3.18
 =======
           <function>drm_connector_register</function>.
 >>>>>>> v3.18
@@ -2045,7 +2193,10 @@ int max_width, max_height;</synopsis>
           <itemizedlist>
             <listitem>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
               <synopsis>void (*set_property)(struct drm_connector *connector,
                      struct drm_property *property, uint64_t value);</synopsis>
               <para>
@@ -2055,6 +2206,9 @@ int max_width, max_height;</synopsis>
               </para>
             </listitem>
             <listitem>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
               <synopsis>void (*destroy)(struct drm_connector *connector);</synopsis>
               <para>
@@ -2080,7 +2234,11 @@ int max_width, max_height;</synopsis>
 	(<function>drm_connector_cleanup</function>). Furthermore, connectors
 	that have been added to sysfs must be removed by a call to
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<function>drm_sysfs_connector_remove</function> before calling
+=======
+	<function>drm_connector_unregister</function> before calling
+>>>>>>> v3.18
 =======
 	<function>drm_connector_unregister</function> before calling
 >>>>>>> v3.18
@@ -2129,7 +2287,11 @@ void intel_crt_init(struct drm_device *dev)
 	drm_connector_helper_add(connector, &intel_crt_connector_helper_funcs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18
@@ -2147,13 +2309,19 @@ void intel_crt_init(struct drm_device *dev)
 !Edrivers/gpu/drm/drm_crtc.c
     </sect2>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     <sect2>
       <title>KMS Locking</title>
 !Pdrivers/gpu/drm/drm_modeset_lock.c kms locking
 !Iinclude/drm/drm_modeset_lock.h
 !Edrivers/gpu/drm/drm_modeset_lock.c
     </sect2>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   </sect1>
 
@@ -2163,7 +2331,11 @@ void intel_crt_init(struct drm_device *dev)
     <title>Mode Setting Helper Functions</title>
     <para>
 <<<<<<< HEAD
+<<<<<<< HEAD
       The CRTC, encoder and connector functions provided by the drivers
+=======
+      The plane, CRTC, encoder and connector functions provided by the drivers
+>>>>>>> v3.18
 =======
       The plane, CRTC, encoder and connector functions provided by the drivers
 >>>>>>> v3.18
@@ -2175,8 +2347,13 @@ void intel_crt_init(struct drm_device *dev)
     <para>
       The DRM core contains one mid-layer implementation. The mid-layer provides
 <<<<<<< HEAD
+<<<<<<< HEAD
       implementations of several CRTC, encoder and connector functions (called
       from the top of the mid-layer) that pre-process requests and call
+=======
+      implementations of several plane, CRTC, encoder and connector functions
+      (called from the top of the mid-layer) that pre-process requests and call
+>>>>>>> v3.18
 =======
       implementations of several plane, CRTC, encoder and connector functions
       (called from the top of the mid-layer) that pre-process requests and call
@@ -2269,8 +2446,13 @@ void intel_crt_init(struct drm_device *dev)
             The function filters out modes larger than
             <parameter>max_width</parameter> and <parameter>max_height</parameter>
 <<<<<<< HEAD
+<<<<<<< HEAD
             if specified. It then calls the connector
             <methodname>mode_valid</methodname> helper operation for  each mode in
+=======
+            if specified. It then calls the optional connector
+            <methodname>mode_valid</methodname> helper operation for each mode in
+>>>>>>> v3.18
 =======
             if specified. It then calls the optional connector
             <methodname>mode_valid</methodname> helper operation for each mode in
@@ -2362,10 +2544,13 @@ void intel_crt_init(struct drm_device *dev)
                        const struct drm_display_mode *mode,
                        struct drm_display_mode *adjusted_mode);</synopsis>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <note><para>
             FIXME: The mode argument be const, but the i915 driver modifies
             mode-&gt;clock in <function>intel_dp_mode_fixup</function>.
           </para></note>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
           <para>
@@ -2631,7 +2816,11 @@ void intel_crt_init(struct drm_device *dev)
             <structfield>width_mm</structfield> and
             <structfield>height_mm</structfield> fields if they haven't been set
 <<<<<<< HEAD
+<<<<<<< HEAD
             already (for instance at initilization time when a fixed-size panel is
+=======
+            already (for instance at initialization time when a fixed-size panel is
+>>>>>>> v3.18
 =======
             already (for instance at initialization time when a fixed-size panel is
 >>>>>>> v3.18
@@ -2647,7 +2836,11 @@ void intel_crt_init(struct drm_device *dev)
             Verify whether a mode is valid for the connector. Return MODE_OK for
             supported modes and one of the enum drm_mode_status values (MODE_*)
 <<<<<<< HEAD
+<<<<<<< HEAD
             for unsupported modes. This operation is mandatory.
+=======
+            for unsupported modes. This operation is optional.
+>>>>>>> v3.18
 =======
             for unsupported modes. This operation is optional.
 >>>>>>> v3.18
@@ -2673,12 +2866,18 @@ void intel_crt_init(struct drm_device *dev)
     </sect2>
     <sect2>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       <title>Output Probing Helper Functions Reference</title>
 !Pdrivers/gpu/drm/drm_probe_helper.c output probing helper overview
 !Edrivers/gpu/drm/drm_probe_helper.c
     </sect2>
     <sect2>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       <title>fbdev Helper Functions Reference</title>
 !Pdrivers/gpu/drm/drm_fb_helper.c fbdev helpers
@@ -2693,10 +2892,13 @@ void intel_crt_init(struct drm_device *dev)
     </sect2>
     <sect2>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <title>EDID Helper Functions Reference</title>
 !Edrivers/gpu/drm/drm_edid.c
     </sect2>
 =======
+=======
+>>>>>>> v3.18
       <title>Display Port MST Helper Functions Reference</title>
 !Pdrivers/gpu/drm/drm_dp_mst_topology.c dp mst helper
 !Iinclude/drm/drm_dp_mst_helper.h
@@ -3679,6 +3881,9 @@ void intel_crt_init(struct drm_device *dev)
 	</tbody>
 	</table>
     </sect2>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   </sect1>
 
@@ -3747,7 +3952,10 @@ void (*disable_vblank) (struct drm_device *dev, int crtc);</synopsis>
       module parameter or the <varname>drm_vblank_offdelay</varname> global
       variable and expressed in milliseconds. Its default value is 5000 ms.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
       Zero means never disable, and a negative value means disable immediately.
       Drivers may override the behaviour by setting the
       <structname>drm_device</structname>
@@ -3755,6 +3963,9 @@ void (*disable_vblank) (struct drm_device *dev, int crtc);</synopsis>
       causes vblank interrupts to be disabled immediately regardless of the
       drm_vblank_offdelay value. The flag should only be set if there's a
       properly working hardware vblank counter present.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     </para>
     <para>
@@ -3768,12 +3979,18 @@ void (*disable_vblank) (struct drm_device *dev, int crtc);</synopsis>
       <methodname>unload</methodname> operation handler.
     </para>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     <sect2>
       <title>Vertical Blanking and Interrupt Handling Functions Reference</title>
 !Edrivers/gpu/drm/drm_irq.c
 !Finclude/drm/drmP.h drm_crtc_vblank_waitqueue
     </sect2>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   </sect1>
 
@@ -3793,6 +4010,7 @@ void (*postclose) (struct drm_device *, struct drm_file *);</synopsis>
       <para>
         The <methodname>firstopen</methodname> method is called by the DRM core
 <<<<<<< HEAD
+<<<<<<< HEAD
 	when an application opens a device that has no other opened file handle.
 	Similarly the <methodname>lastclose</methodname> method is called when
 	the last application holding a file handle opened on the device closes
@@ -3806,6 +4024,8 @@ void (*postclose) (struct drm_device *, struct drm_file *);</synopsis>
 	at module unload time or, for hot-pluggable devices, when the device is
 	unplugged. The <methodname>firstopen</methodname> and
 =======
+=======
+>>>>>>> v3.18
 	for legacy UMS (User Mode Setting) drivers only when an application
 	opens a device that has no other opened file handle. UMS drivers can
 	implement it to acquire device resources. KMS drivers can't use the
@@ -3818,6 +4038,9 @@ void (*postclose) (struct drm_device *, struct drm_file *);</synopsis>
 	it, for both UMS and KMS drivers. Additionally, the method is also
 	called at module unload time or, for hot-pluggable devices, when the
 	device is unplugged. The <methodname>firstopen</methodname> and
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	<methodname>lastclose</methodname> calls can thus be unbalanced.
       </para>
@@ -3848,14 +4071,20 @@ void (*postclose) (struct drm_device *, struct drm_file *);</synopsis>
         The <methodname>lastclose</methodname> method should restore CRTC and
 	plane properties to default value, so that a subsequent open of the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device will not inherit state from the previous user.
 =======
+=======
+>>>>>>> v3.18
 	device will not inherit state from the previous user. It can also be
 	used to execute delayed power switching state changes, e.g. in
 	conjunction with the vga-switcheroo infrastructure. Beyond that KMS
 	drivers should not do any further cleanup. Only legacy UMS drivers might
 	need to clean up device state so that the vga console or an independent
 	fbdev driver could take over.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
       </para>
     </sect2>
@@ -3893,7 +4122,10 @@ void (*postclose) (struct drm_device *, struct drm_file *);</synopsis>
 	.poll = drm_poll,
 	.read = drm_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.llseek = no_llseek,
@@ -3966,6 +4198,7 @@ int num_ioctls;</synopsis>
     </sect2>
   </sect1>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   <sect1>
     <title>Command submission &amp; fencing</title>
@@ -4003,6 +4236,8 @@ int (*resume) (struct drm_device *);</synopsis>
       These functions are deprecated and should not be used.
     </para>
 =======
+=======
+>>>>>>> v3.18
   <sect1>
     <title>Legacy Support Code</title>
     <para>
@@ -4041,6 +4276,9 @@ int (*resume) (struct drm_device *);</synopsis>
 	These functions are deprecated and should not be used.
       </para>
     </sect2>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   </sect1>
   </chapter>
@@ -4096,7 +4334,10 @@ int (*resume) (struct drm_device *);</synopsis>
     </para>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
   <!-- External: render nodes -->
 
     <sect1>
@@ -4160,6 +4401,9 @@ int (*resume) (struct drm_device *);</synopsis>
       </para>
     </sect1>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   <!-- External: vblank handling -->
 
@@ -4183,6 +4427,7 @@ int (*resume) (struct drm_device *);</synopsis>
             <listitem>
               <para>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 This should be called by application level drivers before and
                 after mode setting, since on many devices the vertical blank
                 counter is reset at that time.  Internally, the DRM snapshots
@@ -4190,25 +4435,34 @@ int (*resume) (struct drm_device *);</synopsis>
                 _DRM_PRE_MODESET command, so that the counter won't go backwards
                 (which is dealt with when _DRM_POST_MODESET is used).
 =======
+=======
+>>>>>>> v3.18
 		This was only used for user-mode-settind drivers around
 		modesetting changes to allow the kernel to update the vblank
 		interrupt after mode setting, since on many devices the vertical
 		blank counter is reset to 0 at some point during modeset. Modern
 		drivers should not call this any more since with kernel mode
 		setting it is a no-op.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
               </para>
             </listitem>
           </varlistentry>
         </variablelist>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!--!Edrivers/char/drm/drm_irq.c-->
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
       </para>
     </sect1>
 
   </chapter>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
   <!-- API reference -->
@@ -4222,6 +4476,8 @@ int (*resume) (struct drm_device *);</synopsis>
   </appendix>
 
 =======
+=======
+>>>>>>> v3.18
 </part>
 <part id="drmDrivers">
   <title>DRM Drivers</title>
@@ -4391,5 +4647,8 @@ int (*resume) (struct drm_device *);</synopsis>
     </sect1>
   </chapter>
 </part>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 </book>

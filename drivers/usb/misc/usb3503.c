@@ -19,6 +19,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -31,6 +35,10 @@
 #include <linux/platform_device.h>
 #include <linux/platform_data/usb3503.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -51,9 +59,12 @@
 
 #define USB3503_PDS		0x0a
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB3503_PORT1		(1 << 1)
 #define USB3503_PORT2		(1 << 2)
 #define USB3503_PORT3		(1 << 3)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -64,6 +75,7 @@
 #define USB3503_CFGP		0xee
 #define USB3503_CLKSUSP		(1 << 7)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct usb3503 {
 	enum usb3503_mode	mode;
@@ -96,6 +108,8 @@ static int usb3503_set_bits(struct i2c_client *client, char reg, char req)
 	if (err < 0)
 		return err;
 =======
+=======
+>>>>>>> v3.18
 #define USB3503_RESET		0xff
 
 struct usb3503 {
@@ -121,6 +135,7 @@ static int usb3503_reset(struct usb3503 *hub, int state)
 	/* Wait T_HUBINIT == 4ms for hub logic to stabilize */
 	if (state)
 		usleep_range(4000, 10000);
+<<<<<<< HEAD
 >>>>>>> v3.18
 
 	return 0;
@@ -152,10 +167,13 @@ static int usb3503_reset(int gpio_reset, int state)
 	 */
 	if (state)
 		msleep(100);
+=======
+>>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static int usb3503_switch_mode(struct usb3503 *hub, enum usb3503_mode mode)
 {
 	struct i2c_client *i2c = hub->client;
@@ -212,6 +230,8 @@ static int usb3503_switch_mode(struct usb3503 *hub, enum usb3503_mode mode)
 	default:
 		dev_err(&i2c->dev, "unknown mode is request\n");
 =======
+=======
+>>>>>>> v3.18
 static int usb3503_connect(struct usb3503 *hub)
 {
 	struct device *dev = hub->dev;
@@ -285,11 +305,15 @@ static int usb3503_switch_mode(struct usb3503 *hub, enum usb3503_mode mode)
 
 	default:
 		dev_err(dev, "unknown mode is requested\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -EINVAL;
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_hubmode:
 	return err;
@@ -314,6 +338,8 @@ static int usb3503_probe(struct i2c_client *i2c, const struct i2c_device_id *id)
 
 	if (pdata) {
 =======
+=======
+>>>>>>> v3.18
 	return err;
 }
 
@@ -336,12 +362,16 @@ static int usb3503_probe(struct usb3503 *hub)
 
 	if (pdata) {
 		hub->port_off_mask	= pdata->port_off_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hub->gpio_intn		= pdata->gpio_intn;
 		hub->gpio_connect	= pdata->gpio_connect;
 		hub->gpio_reset		= pdata->gpio_reset;
 		hub->mode		= pdata->initial_mode;
 	} else if (np) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hub->gpio_intn	= of_get_named_gpio(np, "connect-gpios", 0);
 		if (hub->gpio_intn == -EPROBE_DEFER)
@@ -351,6 +381,8 @@ static int usb3503_probe(struct usb3503 *hub)
 			return -EPROBE_DEFER;
 		hub->gpio_reset	= of_get_named_gpio(np, "reset-gpios", 0);
 =======
+=======
+>>>>>>> v3.18
 		struct clk *clk;
 		hub->port_off_mask = 0;
 
@@ -421,6 +453,9 @@ static int usb3503_probe(struct usb3503 *hub)
 		if (hub->gpio_connect == -EPROBE_DEFER)
 			return -EPROBE_DEFER;
 		hub->gpio_reset = of_get_named_gpio(np, "reset-gpios", 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (hub->gpio_reset == -EPROBE_DEFER)
 			return -EPROBE_DEFER;
@@ -428,6 +463,7 @@ static int usb3503_probe(struct usb3503 *hub)
 		hub->mode = mode;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (gpio_is_valid(hub->gpio_intn)) {
 		err = gpio_request_one(hub->gpio_intn,
@@ -438,6 +474,8 @@ static int usb3503_probe(struct usb3503 *hub)
 					hub->gpio_intn, err);
 			goto err_out;
 =======
+=======
+>>>>>>> v3.18
 	if (hub->port_off_mask && !hub->regmap)
 		dev_err(dev, "Ports disabled with no control interface\n");
 
@@ -451,11 +489,15 @@ static int usb3503_probe(struct usb3503 *hub)
 				"unable to request GPIO %d as interrupt pin (%d)\n",
 				hub->gpio_intn, err);
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	if (gpio_is_valid(hub->gpio_connect)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = gpio_request_one(hub->gpio_connect,
 				GPIOF_OUT_INIT_HIGH, "usb3503 connect");
@@ -465,6 +507,8 @@ static int usb3503_probe(struct usb3503 *hub)
 					hub->gpio_connect, err);
 			goto err_gpio_connect;
 =======
+=======
+>>>>>>> v3.18
 		err = devm_gpio_request_one(dev, hub->gpio_connect,
 				GPIOF_OUT_INIT_LOW, "usb3503 connect");
 		if (err) {
@@ -472,11 +516,15 @@ static int usb3503_probe(struct usb3503 *hub)
 				"unable to request GPIO %d as connect pin (%d)\n",
 				hub->gpio_connect, err);
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	if (gpio_is_valid(hub->gpio_reset)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = gpio_request_one(hub->gpio_reset,
 				GPIOF_OUT_INIT_LOW, "usb3503 reset");
@@ -486,6 +534,8 @@ static int usb3503_probe(struct usb3503 *hub)
 					hub->gpio_reset, err);
 			goto err_gpio_reset;
 =======
+=======
+>>>>>>> v3.18
 		err = devm_gpio_request_one(dev, hub->gpio_reset,
 				GPIOF_OUT_INIT_LOW, "usb3503 reset");
 		if (err) {
@@ -493,12 +543,16 @@ static int usb3503_probe(struct usb3503 *hub)
 				"unable to request GPIO %d as reset pin (%d)\n",
 				hub->gpio_reset, err);
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	usb3503_switch_mode(hub, hub->mode);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_info(&i2c->dev, "%s: probed on  %s mode\n", __func__,
 			(hub->mode == USB3503_MODE_HUB) ? "hub" : "standby");
@@ -530,6 +584,8 @@ static int usb3503_remove(struct i2c_client *i2c)
 
 	kfree(hub);
 =======
+=======
+>>>>>>> v3.18
 	dev_info(dev, "%s: probed in %s mode\n", __func__,
 			(hub->mode == USB3503_MODE_HUB) ? "hub" : "standby");
 
@@ -584,13 +640,19 @@ static int usb3503_i2c_suspend(struct device *dev)
 
 	if (hub->clk)
 		clk_disable_unprepare(hub->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int usb3503_i2c_resume(struct device *dev)
 {
 	struct i2c_client *client = to_i2c_client(dev);
@@ -608,6 +670,9 @@ static int usb3503_i2c_resume(struct device *dev)
 static SIMPLE_DEV_PM_OPS(usb3503_i2c_pm_ops, usb3503_i2c_suspend,
 		usb3503_i2c_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct i2c_device_id usb3503_id[] = {
 	{ USB3503_I2C_NAME, 0 },
@@ -619,6 +684,10 @@ MODULE_DEVICE_TABLE(i2c, usb3503_id);
 static const struct of_device_id usb3503_of_match[] = {
 	{ .compatible = "smsc,usb3503", },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .compatible = "smsc,usb3503a", },
+>>>>>>> v3.18
 =======
 	{ .compatible = "smsc,usb3503a", },
 >>>>>>> v3.18
@@ -627,6 +696,7 @@ static const struct of_device_id usb3503_of_match[] = {
 MODULE_DEVICE_TABLE(of, usb3503_of_match);
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct i2c_driver usb3503_driver = {
 	.driver = {
@@ -640,6 +710,8 @@ static struct i2c_driver usb3503_driver = {
 
 module_i2c_driver(usb3503_driver);
 =======
+=======
+>>>>>>> v3.18
 static struct i2c_driver usb3503_i2c_driver = {
 	.driver = {
 		.name = USB3503_I2C_NAME,
@@ -682,6 +754,9 @@ static void __exit usb3503_exit(void)
 	i2c_del_driver(&usb3503_i2c_driver);
 }
 module_exit(usb3503_exit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_AUTHOR("Dongjin Kim <tobetter@gmail.com>");

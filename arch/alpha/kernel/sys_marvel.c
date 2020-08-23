@@ -23,7 +23,10 @@
 #include <asm/tlbflush.h>
 #include <asm/vga.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/rtc.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -321,8 +324,14 @@ marvel_init_irq(void)
 
 static int 
 <<<<<<< HEAD
+<<<<<<< HEAD
 marvel_map_irq(struct pci_dev *dev, u8 slot, u8 pin)
 {
+=======
+marvel_map_irq(const struct pci_dev *cdev, u8 slot, u8 pin)
+{
+	struct pci_dev *dev = (struct pci_dev *)cdev;
+>>>>>>> v3.18
 =======
 marvel_map_irq(const struct pci_dev *cdev, u8 slot, u8 pin)
 {
@@ -409,6 +418,7 @@ marvel_init_rtc(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct marvel_rtc_time {
 	struct rtc_time *time;
 	int retval;
@@ -462,6 +472,8 @@ marvel_set_rtc_time(struct rtc_time *time)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void
 marvel_smp_callin(void)
 {
@@ -504,8 +516,12 @@ struct alpha_machine_vector marvel_ev7_mv __initmv = {
 	DO_EV7_MMU,
 	.rtc_port		= 0x70,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rtc_get_time		= marvel_get_rtc_time,
 	.rtc_set_time		= marvel_set_rtc_time,
+=======
+	.rtc_boot_cpu_only	= 1,
+>>>>>>> v3.18
 =======
 	.rtc_boot_cpu_only	= 1,
 >>>>>>> v3.18

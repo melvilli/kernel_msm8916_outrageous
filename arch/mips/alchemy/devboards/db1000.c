@@ -20,6 +20,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk.h>
 >>>>>>> v3.18
@@ -45,6 +49,7 @@
 
 #define F_SWAPPED (bcsr_read(BCSR_STATUS) & BCSR_STATUS_DB1000_SWAPBOOT)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct pci_dev;
 
@@ -83,6 +88,8 @@ void __init board_setup(void)
 
 
 =======
+=======
+>>>>>>> v3.18
 const char *get_system_type(void);
 
 int __init db1000_board_setup(void)
@@ -104,6 +111,9 @@ int __init db1000_board_setup(void)
 	return -ENODEV;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int db1500_map_pci_irq(const struct pci_dev *d, u8 slot, u8 pin)
 {
@@ -143,6 +153,7 @@ static struct platform_device db1500_pci_host_dev = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init db1500_pci_init(void)
 {
 	int id = BCSR_WHOAMI_BOARD(bcsr_read(BCSR_WHOAMI));
@@ -155,10 +166,15 @@ static int __init db1500_pci_init(void)
 arch_initcall(db1500_pci_init);
 
 =======
+=======
+>>>>>>> v3.18
 int __init db1500_pci_setup(void)
 {
 	return platform_device_register(&db1500_pci_host_dev);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct resource au1100_lcd_resources[] = {
@@ -549,7 +565,11 @@ static struct platform_device *db1100_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init db1000_dev_init(void)
+=======
+int __init db1000_dev_setup(void)
+>>>>>>> v3.18
 =======
 int __init db1000_dev_setup(void)
 >>>>>>> v3.18
@@ -558,6 +578,10 @@ int __init db1000_dev_setup(void)
 	int c0, c1, d0, d1, s0, s1, flashsize = 32,  twosocks = 1;
 	unsigned long pfc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct clk *c, *p;
+>>>>>>> v3.18
 =======
 	struct clk *c, *p;
 >>>>>>> v3.18
@@ -578,6 +602,7 @@ int __init db1000_dev_setup(void)
 		s1 = AU1100_GPIO4_INT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpio_direction_input(19);	/* sd0 cd# */
 		gpio_direction_input(20);	/* sd1 cd# */
 		gpio_direction_input(21);	/* touch pendown# */
@@ -592,6 +617,8 @@ int __init db1000_dev_setup(void)
 		__raw_writel(pfc, (void __iomem *)SYS_PINFUNC);
 		wmb();
 =======
+=======
+>>>>>>> v3.18
 		gpio_request(19, "sd0_cd");
 		gpio_request(20, "sd1_cd");
 		gpio_direction_input(19);	/* sd0 cd# */
@@ -601,13 +628,19 @@ int __init db1000_dev_setup(void)
 		pfc = alchemy_rdsys(AU1000_SYS_PINFUNC);
 		pfc |= (1 << 0);	/* SSI0 pins as GPIOs */
 		alchemy_wrsys(pfc, AU1000_SYS_PINFUNC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		spi_register_board_info(db1100_spi_info,
 					ARRAY_SIZE(db1100_spi_info));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* link LCD clock to AUXPLL */
 		p = clk_get(NULL, "auxpll_clk");
 		c = clk_get(NULL, "lcd_intclk");
@@ -620,6 +653,9 @@ int __init db1000_dev_setup(void)
 		if (!IS_ERR(p))
 			clk_put(p);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		platform_add_devices(db1100_devs, ARRAY_SIZE(db1100_devs));
 		platform_device_register(&db1100_spi_dev);
@@ -697,6 +733,9 @@ int __init db1000_dev_setup(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 device_initcall(db1000_dev_init);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

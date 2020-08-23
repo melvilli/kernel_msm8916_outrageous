@@ -16,6 +16,11 @@
  */
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/context_tracking.h>
+#include <linux/elf.h>
+>>>>>>> v3.18
 =======
 #include <linux/context_tracking.h>
 #include <linux/elf.h>
@@ -26,12 +31,15 @@
 #include <linux/errno.h>
 #include <linux/ptrace.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/smp.h>
 #include <linux/user.h>
 #include <linux/security.h>
 #include <linux/audit.h>
 #include <linux/seccomp.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/regset.h>
 #include <linux/smp.h>
 #include <linux/security.h>
@@ -39,6 +47,9 @@
 #include <linux/audit.h>
 #include <linux/seccomp.h>
 #include <linux/ftrace.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <asm/byteorder.h>
@@ -50,6 +61,10 @@
 #include <asm/pgtable.h>
 #include <asm/page.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/syscall.h>
+>>>>>>> v3.18
 =======
 #include <asm/syscall.h>
 >>>>>>> v3.18
@@ -58,6 +73,12 @@
 #include <asm/reg.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CREATE_TRACE_POINTS
+#include <trace/events/syscalls.h>
+
+>>>>>>> v3.18
 =======
 #define CREATE_TRACE_POINTS
 #include <trace/events/syscalls.h>
@@ -80,7 +101,11 @@ void ptrace_disable(struct task_struct *child)
  * Registers are sign extended to fill the available space.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ptrace_getregs(struct task_struct *child, __s64 __user *data)
+=======
+int ptrace_getregs(struct task_struct *child, struct user_pt_regs __user *data)
+>>>>>>> v3.18
 =======
 int ptrace_getregs(struct task_struct *child, struct user_pt_regs __user *data)
 >>>>>>> v3.18
@@ -95,6 +120,7 @@ int ptrace_getregs(struct task_struct *child, struct user_pt_regs __user *data)
 
 	for (i = 0; i < 32; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__put_user((long)regs->regs[i], data + i);
 	__put_user((long)regs->lo, data + EF_LO - EF_R0);
 	__put_user((long)regs->hi, data + EF_HI - EF_R0);
@@ -103,6 +129,8 @@ int ptrace_getregs(struct task_struct *child, struct user_pt_regs __user *data)
 	__put_user((long)regs->cp0_status, data + EF_CP0_STATUS - EF_R0);
 	__put_user((long)regs->cp0_cause, data + EF_CP0_CAUSE - EF_R0);
 =======
+=======
+>>>>>>> v3.18
 		__put_user((long)regs->regs[i], (__s64 __user *)&data->regs[i]);
 	__put_user((long)regs->lo, (__s64 __user *)&data->lo);
 	__put_user((long)regs->hi, (__s64 __user *)&data->hi);
@@ -110,6 +138,9 @@ int ptrace_getregs(struct task_struct *child, struct user_pt_regs __user *data)
 	__put_user((long)regs->cp0_badvaddr, (__s64 __user *)&data->cp0_badvaddr);
 	__put_user((long)regs->cp0_status, (__s64 __user *)&data->cp0_status);
 	__put_user((long)regs->cp0_cause, (__s64 __user *)&data->cp0_cause);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -121,7 +152,11 @@ int ptrace_getregs(struct task_struct *child, struct user_pt_regs __user *data)
  * (according to endianness) will be used.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ptrace_setregs(struct task_struct *child, __s64 __user *data)
+=======
+int ptrace_setregs(struct task_struct *child, struct user_pt_regs __user *data)
+>>>>>>> v3.18
 =======
 int ptrace_setregs(struct task_struct *child, struct user_pt_regs __user *data)
 >>>>>>> v3.18
@@ -136,15 +171,21 @@ int ptrace_setregs(struct task_struct *child, struct user_pt_regs __user *data)
 
 	for (i = 0; i < 32; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__get_user(regs->regs[i], data + i);
 	__get_user(regs->lo, data + EF_LO - EF_R0);
 	__get_user(regs->hi, data + EF_HI - EF_R0);
 	__get_user(regs->cp0_epc, data + EF_CP0_EPC - EF_R0);
 =======
+=======
+>>>>>>> v3.18
 		__get_user(regs->regs[i], (__s64 __user *)&data->regs[i]);
 	__get_user(regs->lo, (__s64 __user *)&data->lo);
 	__get_user(regs->hi, (__s64 __user *)&data->hi);
 	__get_user(regs->cp0_epc, (__s64 __user *)&data->cp0_epc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* badvaddr, status, and cause may not be written.  */
@@ -156,7 +197,10 @@ int ptrace_getfpregs(struct task_struct *child, __u32 __user *data)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int tmp;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -165,14 +209,20 @@ int ptrace_getfpregs(struct task_struct *child, __u32 __user *data)
 
 	if (tsk_used_math(child)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fpureg_t *fregs = get_fpu_regs(child);
 		for (i = 0; i < 32; i++)
 			__put_user(fregs[i], i + (__u64 __user *) data);
 =======
+=======
+>>>>>>> v3.18
 		union fpureg *fregs = get_fpu_regs(child);
 		for (i = 0; i < 32; i++)
 			__put_user(get_fpr64(&fregs[i], 0),
 				   i + (__u64 __user *)data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		for (i = 0; i < 32; i++)
@@ -180,6 +230,7 @@ int ptrace_getfpregs(struct task_struct *child, __u32 __user *data)
 	}
 
 	__put_user(child->thread.fpu.fcr31, data + 64);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	preempt_disable();
@@ -207,6 +258,9 @@ int ptrace_getfpregs(struct task_struct *child, __u32 __user *data)
 =======
 	__put_user(boot_cpu_data.fpu_id, data + 65);
 >>>>>>> v3.18
+=======
+	__put_user(boot_cpu_data.fpu_id, data + 65);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -214,7 +268,12 @@ int ptrace_getfpregs(struct task_struct *child, __u32 __user *data)
 int ptrace_setfpregs(struct task_struct *child, __u32 __user *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fpureg_t *fregs;
+=======
+	union fpureg *fregs;
+	u64 fpr_val;
+>>>>>>> v3.18
 =======
 	union fpureg *fregs;
 	u64 fpr_val;
@@ -227,13 +286,19 @@ int ptrace_setfpregs(struct task_struct *child, __u32 __user *data)
 	fregs = get_fpu_regs(child);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 32; i++)
 		__get_user(fregs[i], i + (__u64 __user *) data);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < 32; i++) {
 		__get_user(fpr_val, i + (__u64 __user *)data);
 		set_fpr64(&fregs[i], 0, fpr_val);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	__get_user(child->thread.fpu.fcr31, data + 64);
@@ -251,7 +316,11 @@ int ptrace_get_watch_regs(struct task_struct *child,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_has_watch || current_cpu_data.watch_reg_use_cnt == 0)
+=======
+	if (!cpu_has_watch || boot_cpu_data.watch_reg_use_cnt == 0)
+>>>>>>> v3.18
 =======
 	if (!cpu_has_watch || boot_cpu_data.watch_reg_use_cnt == 0)
 >>>>>>> v3.18
@@ -269,9 +338,15 @@ int ptrace_get_watch_regs(struct task_struct *child,
 
 	__put_user(style, &addr->style);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__put_user(current_cpu_data.watch_reg_use_cnt,
 		   &addr->WATCH_STYLE.num_valid);
 	for (i = 0; i < current_cpu_data.watch_reg_use_cnt; i++) {
+=======
+	__put_user(boot_cpu_data.watch_reg_use_cnt,
+		   &addr->WATCH_STYLE.num_valid);
+	for (i = 0; i < boot_cpu_data.watch_reg_use_cnt; i++) {
+>>>>>>> v3.18
 =======
 	__put_user(boot_cpu_data.watch_reg_use_cnt,
 		   &addr->WATCH_STYLE.num_valid);
@@ -282,7 +357,11 @@ int ptrace_get_watch_regs(struct task_struct *child,
 		__put_user(child->thread.watch.mips3264.watchhi[i] & 0xfff,
 			   &addr->WATCH_STYLE.watchhi[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__put_user(current_cpu_data.watch_reg_masks[i],
+=======
+		__put_user(boot_cpu_data.watch_reg_masks[i],
+>>>>>>> v3.18
 =======
 		__put_user(boot_cpu_data.watch_reg_masks[i],
 >>>>>>> v3.18
@@ -306,7 +385,11 @@ int ptrace_set_watch_regs(struct task_struct *child,
 	u16 ht[NUM_WATCH_REGS];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cpu_has_watch || current_cpu_data.watch_reg_use_cnt == 0)
+=======
+	if (!cpu_has_watch || boot_cpu_data.watch_reg_use_cnt == 0)
+>>>>>>> v3.18
 =======
 	if (!cpu_has_watch || boot_cpu_data.watch_reg_use_cnt == 0)
 >>>>>>> v3.18
@@ -315,7 +398,11 @@ int ptrace_set_watch_regs(struct task_struct *child,
 		return -EIO;
 	/* Check the values. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < current_cpu_data.watch_reg_use_cnt; i++) {
+=======
+	for (i = 0; i < boot_cpu_data.watch_reg_use_cnt; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < boot_cpu_data.watch_reg_use_cnt; i++) {
 >>>>>>> v3.18
@@ -338,7 +425,11 @@ int ptrace_set_watch_regs(struct task_struct *child,
 	}
 	/* Install them. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < current_cpu_data.watch_reg_use_cnt; i++) {
+=======
+	for (i = 0; i < boot_cpu_data.watch_reg_use_cnt; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < boot_cpu_data.watch_reg_use_cnt; i++) {
 >>>>>>> v3.18
@@ -358,7 +449,10 @@ int ptrace_set_watch_regs(struct task_struct *child,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* regset get/set implementations */
 
 #if defined(CONFIG_32BIT) || defined(CONFIG_MIPS32_O32)
@@ -651,6 +745,9 @@ const struct user_regset_view *task_user_regset_view(struct task_struct *task)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 long arch_ptrace(struct task_struct *child, long request,
 		 unsigned long addr, unsigned long data)
@@ -671,6 +768,10 @@ long arch_ptrace(struct task_struct *child, long request,
 	case PTRACE_PEEKUSR: {
 		struct pt_regs *regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		union fpureg *fregs;
+>>>>>>> v3.18
 =======
 		union fpureg *fregs;
 >>>>>>> v3.18
@@ -685,11 +786,14 @@ long arch_ptrace(struct task_struct *child, long request,
 			break;
 		case FPR_BASE ... FPR_BASE + 31:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (tsk_used_math(child)) {
 				fpureg_t *fregs = get_fpu_regs(child);
 
 #ifdef CONFIG_32BIT
 =======
+=======
+>>>>>>> v3.18
 			if (!tsk_used_math(child)) {
 				/* FP not yet used */
 				tmp = -1;
@@ -699,12 +803,16 @@ long arch_ptrace(struct task_struct *child, long request,
 
 #ifdef CONFIG_32BIT
 			if (test_thread_flag(TIF_32BIT_FPREGS)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/*
 				 * The odd registers are actually the high
 				 * order bits of the values stored in the even
 				 * registers - unless we're using r2k_switch.S.
 				 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 				if (addr & 1)
 					tmp = (unsigned long) (fregs[((addr & ~1) - 32)] >> 32);
@@ -718,12 +826,17 @@ long arch_ptrace(struct task_struct *child, long request,
 				tmp = -1;	/* FP not yet used  */
 			}
 =======
+=======
+>>>>>>> v3.18
 				tmp = get_fpr32(&fregs[(addr & ~1) - FPR_BASE],
 						addr & 1);
 				break;
 			}
 #endif
 			tmp = get_fpr32(&fregs[addr - FPR_BASE], 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case PC:
@@ -749,6 +862,7 @@ long arch_ptrace(struct task_struct *child, long request,
 		case FPC_CSR:
 			tmp = child->thread.fpu.fcr31;
 			break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case FPC_EIR: { /* implementation / version register */
 			unsigned int flags;
@@ -789,10 +903,15 @@ long arch_ptrace(struct task_struct *child, long request,
 			break;
 		}
 =======
+=======
+>>>>>>> v3.18
 		case FPC_EIR:
 			/* implementation / version register */
 			tmp = boot_cpu_data.fpu_id;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case DSP_BASE ... DSP_BASE + 5: {
 			dspreg_t *dregs;
@@ -840,7 +959,11 @@ long arch_ptrace(struct task_struct *child, long request,
 			break;
 		case FPR_BASE ... FPR_BASE + 31: {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			fpureg_t *fregs = get_fpu_regs(child);
+=======
+			union fpureg *fregs = get_fpu_regs(child);
+>>>>>>> v3.18
 =======
 			union fpureg *fregs = get_fpu_regs(child);
 >>>>>>> v3.18
@@ -852,6 +975,7 @@ long arch_ptrace(struct task_struct *child, long request,
 				child->thread.fpu.fcr31 = 0;
 			}
 #ifdef CONFIG_32BIT
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/*
 			 * The odd registers are actually the high order bits
@@ -870,6 +994,8 @@ long arch_ptrace(struct task_struct *child, long request,
 			fregs[addr - FPR_BASE] = data;
 #endif
 =======
+=======
+>>>>>>> v3.18
 			if (test_thread_flag(TIF_32BIT_FPREGS)) {
 				/*
 				 * The odd registers are actually the high
@@ -882,6 +1008,9 @@ long arch_ptrace(struct task_struct *child, long request,
 			}
 #endif
 			set_fpr64(&fregs[addr - FPR_BASE], 0, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		}
@@ -966,6 +1095,7 @@ long arch_ptrace(struct task_struct *child, long request,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int audit_arch(void)
 {
 	int arch = EM_MIPS;
@@ -980,10 +1110,13 @@ static inline int audit_arch(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Notification of system call entry/exit
  * - triggered by current->work.syscall_trace
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 asmlinkage void syscall_trace_enter(struct pt_regs *regs)
 {
@@ -1016,6 +1149,8 @@ out:
 			    regs->regs[4], regs->regs[5],
 			    regs->regs[6], regs->regs[7]);
 =======
+=======
+>>>>>>> v3.18
 asmlinkage long syscall_trace_enter(struct pt_regs *regs, long syscall)
 {
 	long ret = 0;
@@ -1034,6 +1169,9 @@ asmlinkage long syscall_trace_enter(struct pt_regs *regs, long syscall)
 	audit_syscall_entry(syscall, regs->regs[4], regs->regs[5],
 			    regs->regs[6], regs->regs[7]);
 	return syscall;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1043,6 +1181,7 @@ asmlinkage long syscall_trace_enter(struct pt_regs *regs, long syscall)
  */
 asmlinkage void syscall_trace_leave(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	audit_syscall_exit(regs);
 
@@ -1067,6 +1206,8 @@ asmlinkage void syscall_trace_leave(struct pt_regs *regs)
 		current->exit_code = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
         /*
 	 * We may come here right after calling schedule_user()
 	 * or do_notify_resume(), in which case we can be in RCU
@@ -1083,5 +1224,8 @@ asmlinkage void syscall_trace_leave(struct pt_regs *regs)
 		tracehook_report_syscall_exit(regs, 0);
 
 	user_enter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

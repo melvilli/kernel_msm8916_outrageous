@@ -15,6 +15,10 @@
 #include <linux/module.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -57,10 +61,13 @@ static struct stmpe_client_info i2c_ci = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 stmpe_i2c_probe(struct i2c_client *i2c, const struct i2c_device_id *id)
 {
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id stmpe_of_match[] = {
 	{ .compatible = "st,stmpe610", .data = (void *)STMPE610, },
 	{ .compatible = "st,stmpe801", .data = (void *)STMPE801, },
@@ -79,6 +86,9 @@ stmpe_i2c_probe(struct i2c_client *i2c, const struct i2c_device_id *id)
 	enum stmpe_partnum partnum;
 	const struct of_device_id *of_id;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_ci.data = (void *)id;
 	i2c_ci.irq = i2c->irq;
@@ -86,8 +96,11 @@ stmpe_i2c_probe(struct i2c_client *i2c, const struct i2c_device_id *id)
 	i2c_ci.dev = &i2c->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return stmpe_probe(&i2c_ci, id->driver_data);
 =======
+=======
+>>>>>>> v3.18
 	of_id = of_match_device(stmpe_of_match, &i2c->dev);
 	if (!of_id) {
 		/*
@@ -100,6 +113,9 @@ stmpe_i2c_probe(struct i2c_client *i2c, const struct i2c_device_id *id)
 		partnum = (enum stmpe_partnum)of_id->data;
 
 	return stmpe_probe(&i2c_ci, partnum);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -130,6 +146,10 @@ static struct i2c_driver stmpe_i2c_driver = {
 		.pm = &stmpe_dev_pm_ops,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = stmpe_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = stmpe_of_match,
 >>>>>>> v3.18

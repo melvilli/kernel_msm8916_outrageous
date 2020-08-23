@@ -1,8 +1,11 @@
 ccflags-y := -DSRCTREE='"$(srctree)"' -DOBJTREE='"$(objtree)"'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_GCOV_KERNEL) := base.o fs.o gcc_3_4.o
 =======
+=======
+>>>>>>> v3.18
 # if-lt
 # Usage VAR := $(call if-lt, $(a), $(b))
 # Returns 1 if (a < b)
@@ -34,4 +37,7 @@ ifeq ($(call if-lt, $(cc-ver), 0407),1)
 else
   obj-$(CONFIG_GCOV_KERNEL) += gcc_4_7.o
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

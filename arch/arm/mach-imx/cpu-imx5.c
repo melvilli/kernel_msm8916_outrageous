@@ -17,6 +17,11 @@
 #include <linux/module.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_address.h>
@@ -30,11 +35,14 @@ static int mx5_cpu_rev = -1;
 #define IIM_SREV 0x24
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int get_mx51_srev(void)
 {
 	void __iomem *iim_base = MX51_IO_ADDRESS(MX51_IIM_BASE_ADDR);
 	u32 rev = readl(iim_base + IIM_SREV) & 0xff;
 =======
+=======
+>>>>>>> v3.18
 static u32 imx5_read_srev_reg(const char *compat)
 {
 	void __iomem *iim_base;
@@ -55,6 +63,9 @@ static u32 imx5_read_srev_reg(const char *compat)
 static int get_mx51_srev(void)
 {
 	u32 rev = imx5_read_srev_reg("fsl,imx51-iim");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (rev) {
@@ -106,8 +117,12 @@ int __init mx51_neon_fixup(void)
 static int get_mx53_srev(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void __iomem *iim_base = MX51_IO_ADDRESS(MX53_IIM_BASE_ADDR);
 	u32 rev = readl(iim_base + IIM_SREV) & 0xff;
+=======
+	u32 rev = imx5_read_srev_reg("fsl,imx53-iim");
+>>>>>>> v3.18
 =======
 	u32 rev = imx5_read_srev_reg("fsl,imx53-iim");
 >>>>>>> v3.18

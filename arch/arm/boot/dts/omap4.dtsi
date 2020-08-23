@@ -7,6 +7,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Carveout for multimedia usecases
  * It should be the last 48MB of the first 512MB memory part
@@ -17,11 +18,16 @@
 
 /include/ "skeleton.dtsi"
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/pinctrl/omap.h>
 
 #include "skeleton.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -30,11 +36,17 @@
 
 	aliases {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		i2c0 = &i2c1;
 		i2c1 = &i2c2;
 		i2c2 = &i2c3;
 		i2c3 = &i2c4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		serial0 = &uart1;
 		serial1 = &uart2;
@@ -44,6 +56,7 @@
 
 	cpus {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cpu@0 {
 			compatible = "arm,cortex-a9";
 			next-level-cache = <&L2>;
@@ -52,6 +65,8 @@
 			compatible = "arm,cortex-a9";
 			next-level-cache = <&L2>;
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
@@ -71,6 +86,9 @@
 			device_type = "cpu";
 			next-level-cache = <&L2>;
 			reg = <0x1>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -91,6 +109,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	local-timer@0x48240600 {
 		compatible = "arm,cortex-a9-twd-timer";
 		reg = <0x48240600 0x20>;
@@ -100,6 +119,8 @@
 	/*
 	 * The soc node represents the soc top level view. It is uses for IPs
 =======
+=======
+>>>>>>> v3.18
 	local-timer@48240600 {
 		compatible = "arm,cortex-a9-twd-timer";
 		clocks = <&mpu_periphclk>;
@@ -109,6 +130,9 @@
 
 	/*
 	 * The soc node represents the soc top level view. It is used for IPs
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * that are not memory mapped in the MPU view or for the MPU itself.
 	 */
@@ -118,6 +142,10 @@
 			compatible = "ti,omap4-mpu";
 			ti,hwmods = "mpu";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			sram = <&ocmcram>;
+>>>>>>> v3.18
 =======
 			sram = <&ocmcram>;
 >>>>>>> v3.18
@@ -138,7 +166,11 @@
 	 * XXX: Use a flat representation of the OMAP4 interconnect.
 	 * The real OMAP interconnect network is quite complex.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Since that will not bring real advantage to represent that in DT for
+=======
+	 * Since it will not bring real advantage to represent that in DT for
+>>>>>>> v3.18
 =======
 	 * Since it will not bring real advantage to represent that in DT for
 >>>>>>> v3.18
@@ -155,9 +187,12 @@
 		      <0x44800000 0x2000>,
 		      <0x45000000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		interrupts = <0 9 0x4>,
 			     <0 10 0x4>;
 =======
+=======
+>>>>>>> v3.18
 		interrupts = <GIC_SPI 9 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 10 IRQ_TYPE_LEVEL_HIGH>;
 
@@ -213,6 +248,9 @@
 			scrm_clockdomains: clockdomains {
 			};
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		counter32k: counter@4a304000 {
@@ -227,6 +265,11 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			#interrupt-cells = <1>;
+			interrupt-controller;
+>>>>>>> v3.18
 =======
 			#interrupt-cells = <1>;
 			interrupt-controller;
@@ -240,6 +283,11 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			#interrupt-cells = <1>;
+			interrupt-controller;
+>>>>>>> v3.18
 =======
 			#interrupt-cells = <1>;
 			interrupt-controller;
@@ -249,6 +297,7 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sdma: dma-controller@4a056000 {
 			compatible = "ti,omap4430-sdma";
 			reg = <0x4a056000 0x1000>;
@@ -257,6 +306,8 @@
 				     <0 14 0x4>,
 				     <0 15 0x4>;
 =======
+=======
+>>>>>>> v3.18
 		omap4_padconf_global: tisyscon@4a1005a0 {
 			compatible = "syscon";
 			reg = <0x4a1005a0 0x170>;
@@ -285,6 +336,9 @@
 				     <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 15 IRQ_TYPE_LEVEL_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			#dma-cells = <1>;
 			#dma-channels = <32>;
@@ -295,7 +349,11 @@
 			compatible = "ti,omap4-gpio";
 			reg = <0x4a310000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 29 0x4>;
+=======
+			interrupts = <GIC_SPI 29 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 29 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -311,7 +369,11 @@
 			compatible = "ti,omap4-gpio";
 			reg = <0x48055000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 30 0x4>;
+=======
+			interrupts = <GIC_SPI 30 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 30 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -326,7 +388,11 @@
 			compatible = "ti,omap4-gpio";
 			reg = <0x48057000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 31 0x4>;
+=======
+			interrupts = <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -341,7 +407,11 @@
 			compatible = "ti,omap4-gpio";
 			reg = <0x48059000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 32 0x4>;
+=======
+			interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -356,7 +426,11 @@
 			compatible = "ti,omap4-gpio";
 			reg = <0x4805b000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 33 0x4>;
+=======
+			interrupts = <GIC_SPI 33 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 33 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -371,7 +445,11 @@
 			compatible = "ti,omap4-gpio";
 			reg = <0x4805d000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 34 0x4>;
+=======
+			interrupts = <GIC_SPI 34 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 34 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -388,11 +466,14 @@
 			#address-cells = <2>;
 			#size-cells = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 20 0x4>;
 			gpmc,num-cs = <8>;
 			gpmc,num-waitpins = <4>;
 			ti,hwmods = "gpmc";
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <GIC_SPI 20 IRQ_TYPE_LEVEL_HIGH>;
 			gpmc,num-cs = <8>;
 			gpmc,num-waitpins = <4>;
@@ -400,6 +481,9 @@
 			ti,no-idle-on-init;
 			clocks = <&l3_div_ck>;
 			clock-names = "fck";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -407,7 +491,11 @@
 			compatible = "ti,omap4-uart";
 			reg = <0x4806a000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 72 0x4>;
+=======
+			interrupts = <GIC_SPI 72 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 72 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -419,7 +507,11 @@
 			compatible = "ti,omap4-uart";
 			reg = <0x4806c000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 73 0x4>;
+=======
+			interrupts-extended = <&gic GIC_SPI 73 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts-extended = <&gic GIC_SPI 73 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -431,7 +523,11 @@
 			compatible = "ti,omap4-uart";
 			reg = <0x48020000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 74 0x4>;
+=======
+			interrupts-extended = <&gic GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts-extended = <&gic GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -443,7 +539,11 @@
 			compatible = "ti,omap4-uart";
 			reg = <0x4806e000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 70 0x4>;
+=======
+			interrupts-extended = <&gic GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts-extended = <&gic GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -452,11 +552,14 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		i2c1: i2c@48070000 {
 			compatible = "ti,omap4-i2c";
 			reg = <0x48070000 0x100>;
 			interrupts = <0 56 0x4>;
 =======
+=======
+>>>>>>> v3.18
 		hwspinlock: spinlock@4a0f6000 {
 			compatible = "ti,omap4-hwspinlock";
 			reg = <0x4a0f6000 0x1000>;
@@ -468,6 +571,9 @@
 			compatible = "ti,omap4-i2c";
 			reg = <0x48070000 0x100>;
 			interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -478,7 +584,11 @@
 			compatible = "ti,omap4-i2c";
 			reg = <0x48072000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 57 0x4>;
+=======
+			interrupts = <GIC_SPI 57 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 57 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -491,7 +601,11 @@
 			compatible = "ti,omap4-i2c";
 			reg = <0x48060000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 61 0x4>;
+=======
+			interrupts = <GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -504,7 +618,11 @@
 			compatible = "ti,omap4-i2c";
 			reg = <0x48350000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 62 0x4>;
+=======
+			interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -517,7 +635,11 @@
 			compatible = "ti,omap4-mcspi";
 			reg = <0x48098000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 65 0x4>;
+=======
+			interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -541,7 +663,11 @@
 			compatible = "ti,omap4-mcspi";
 			reg = <0x4809a000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 66 0x4>;
+=======
+			interrupts = <GIC_SPI 66 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 66 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -560,7 +686,11 @@
 			compatible = "ti,omap4-mcspi";
 			reg = <0x480b8000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 91 0x4>;
+=======
+			interrupts = <GIC_SPI 91 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 91 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -576,7 +706,11 @@
 			compatible = "ti,omap4-mcspi";
 			reg = <0x480ba000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 48 0x4>;
+=======
+			interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -592,7 +726,11 @@
 			compatible = "ti,omap4-hsmmc";
 			reg = <0x4809c000 0x400>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 83 0x4>;
+=======
+			interrupts = <GIC_SPI 83 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 83 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -602,6 +740,10 @@
 			dmas = <&sdma 61>, <&sdma 62>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			pbias-supply = <&pbias_mmc_reg>;
+>>>>>>> v3.18
 =======
 			pbias-supply = <&pbias_mmc_reg>;
 >>>>>>> v3.18
@@ -611,7 +753,11 @@
 			compatible = "ti,omap4-hsmmc";
 			reg = <0x480b4000 0x400>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 86 0x4>;
+=======
+			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -625,7 +771,11 @@
 			compatible = "ti,omap4-hsmmc";
 			reg = <0x480ad000 0x400>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 94 0x4>;
+=======
+			interrupts = <GIC_SPI 94 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 94 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -639,7 +789,11 @@
 			compatible = "ti,omap4-hsmmc";
 			reg = <0x480d1000 0x400>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 96 0x4>;
+=======
+			interrupts = <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -653,7 +807,11 @@
 			compatible = "ti,omap4-hsmmc";
 			reg = <0x480d5000 0x400>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 59 0x4>;
+=======
+			interrupts = <GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -664,11 +822,14 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		wdt2: wdt@4a314000 {
 			compatible = "ti,omap4-wdt", "ti,omap3-wdt";
 			reg = <0x4a314000 0x80>;
 			interrupts = <0 80 0x4>;
 =======
+=======
+>>>>>>> v3.18
 		mmu_dsp: mmu@4a066000 {
 			compatible = "ti,omap4-iommu";
 			reg = <0x4a066000 0x100>;
@@ -688,6 +849,9 @@
 			compatible = "ti,omap4-wdt", "ti,omap3-wdt";
 			reg = <0x4a314000 0x80>;
 			interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ti,hwmods = "wd_timer2";
 		};
@@ -698,7 +862,11 @@
 			      <0x49032000 0x7f>; /* L3 Interconnect */
 			reg-names = "mpu", "dma";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 112 0x4>;
+=======
+			interrupts = <GIC_SPI 112 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 112 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -707,6 +875,10 @@
 			       <&sdma 66>;
 			dma-names = "up_link", "dn_link";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -718,16 +890,22 @@
 			      <0x4902e000 0x7f>; /* L3 Interconnect */
 			reg-names = "mpu", "dma";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 114 0x4>;
 			ti,hwmods = "dmic";
 			dmas = <&sdma 67>;
 			dma-names = "up_link";
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <GIC_SPI 114 IRQ_TYPE_LEVEL_HIGH>;
 			ti,hwmods = "dmic";
 			dmas = <&sdma 67>;
 			dma-names = "up_link";
 			status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -737,7 +915,11 @@
 			      <0x49022000 0xff>; /* L3 Interconnect */
 			reg-names = "mpu", "dma";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 17 0x4>;
+=======
+			interrupts = <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -748,6 +930,10 @@
 			       <&sdma 34>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -759,7 +945,11 @@
 			      <0x49024000 0xff>; /* L3 Interconnect */
 			reg-names = "mpu", "dma";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 22 0x4>;
+=======
+			interrupts = <GIC_SPI 22 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 22 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -770,6 +960,10 @@
 			       <&sdma 18>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -781,7 +975,11 @@
 			      <0x49026000 0xff>; /* L3 Interconnect */
 			reg-names = "mpu", "dma";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 23 0x4>;
+=======
+			interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -792,6 +990,10 @@
 			       <&sdma 20>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -802,7 +1004,11 @@
 			reg = <0x48096000 0xff>; /* L4 Interconnect */
 			reg-names = "mpu";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 16 0x4>;
+=======
+			interrupts = <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -813,6 +1019,10 @@
 			       <&sdma 32>;
 			dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			status = "disabled";
+>>>>>>> v3.18
 =======
 			status = "disabled";
 >>>>>>> v3.18
@@ -822,7 +1032,11 @@
 			compatible = "ti,omap4-keypad";
 			reg = <0x4a31c000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 120 0x4>;
+=======
+			interrupts = <GIC_SPI 120 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 120 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -831,12 +1045,15 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		emif1: emif@4c000000 {
 			compatible = "ti,emif-4d";
 			reg = <0x4c000000 0x100>;
 			interrupts = <0 110 0x4>;
 			ti,hwmods = "emif1";
 =======
+=======
+>>>>>>> v3.18
 		dmm@4e000000 {
 			compatible = "ti,omap4-dmm";
 			reg = <0x4e000000 0x800>;
@@ -850,6 +1067,9 @@
 			interrupts = <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH>;
 			ti,hwmods = "emif1";
 			ti,no-idle-on-init;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			phy-type = <1>;
 			hw-caps-read-idle-ctrl;
@@ -861,8 +1081,14 @@
 			compatible = "ti,emif-4d";
 			reg = <0x4d000000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 111 0x4>;
 			ti,hwmods = "emif2";
+=======
+			interrupts = <GIC_SPI 111 IRQ_TYPE_LEVEL_HIGH>;
+			ti,hwmods = "emif2";
+			ti,no-idle-on-init;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 111 IRQ_TYPE_LEVEL_HIGH>;
 			ti,hwmods = "emif2";
@@ -885,8 +1111,11 @@
 				compatible = "ti,omap-usb2";
 				reg = <0x4a0ad080 0x58>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ctrl-module = <&omap_control_usb>;
 =======
+=======
+>>>>>>> v3.18
 				ctrl-module = <&omap_control_usb2phy>;
 				clocks = <&usb_phy_cm_clk32k>;
 				clock-names = "wkupclk";
@@ -908,6 +1137,9 @@
 			mbox_dsp: mbox_dsp {
 				ti,mbox-tx = <3 0 0>;
 				ti,mbox-rx = <2 0 0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 		};
@@ -916,7 +1148,11 @@
 			compatible = "ti,omap3430-timer";
 			reg = <0x4a318000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 37 0x4>;
+=======
+			interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -928,7 +1164,11 @@
 			compatible = "ti,omap3430-timer";
 			reg = <0x48032000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 38 0x4>;
+=======
+			interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -939,7 +1179,11 @@
 			compatible = "ti,omap4430-timer";
 			reg = <0x48034000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 39 0x4>;
+=======
+			interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -950,7 +1194,11 @@
 			compatible = "ti,omap4430-timer";
 			reg = <0x48036000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 40 0x4>;
+=======
+			interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -962,7 +1210,11 @@
 			reg = <0x40138000 0x80>,
 			      <0x49038000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 41 0x4>;
+=======
+			interrupts = <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -975,7 +1227,11 @@
 			reg = <0x4013a000 0x80>,
 			      <0x4903a000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 42 0x4>;
+=======
+			interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -988,7 +1244,11 @@
 			reg = <0x4013c000 0x80>,
 			      <0x4903c000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 43 0x4>;
+=======
+			interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1001,7 +1261,11 @@
 			reg = <0x4013e000 0x80>,
 			      <0x4903e000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 44 0x4>;
+=======
+			interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1014,7 +1278,11 @@
 			compatible = "ti,omap4430-timer";
 			reg = <0x4803e000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 45 0x4>;
+=======
+			interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1026,7 +1294,11 @@
 			compatible = "ti,omap3430-timer";
 			reg = <0x48086000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 46 0x4>;
+=======
+			interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1038,7 +1310,11 @@
 			compatible = "ti,omap4430-timer";
 			reg = <0x48088000 0x80>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 47 0x4>;
+=======
+			interrupts = <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1050,7 +1326,11 @@
 			compatible = "ti,usbhs-tll";
 			reg = <0x4a062000 0x1000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <0 78 0x4>;
+=======
+			interrupts = <GIC_SPI 78 IRQ_TYPE_LEVEL_HIGH>;
+>>>>>>> v3.18
 =======
 			interrupts = <GIC_SPI 78 IRQ_TYPE_LEVEL_HIGH>;
 >>>>>>> v3.18
@@ -1064,6 +1344,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 			ranges;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 			usbhsohci: ohci@4a064800 {
@@ -1088,6 +1369,8 @@
 			reg-names = "control_dev_conf", "otghs_control";
 			ti,type = <1>;
 =======
+=======
+>>>>>>> v3.18
 			clocks = <&init_60m_fclk>,
 				 <&xclk60mhsp1_ck>,
 				 <&xclk60mhsp2_ck>;
@@ -1120,12 +1403,16 @@
 			compatible = "ti,control-phy-otghs";
 			reg = <0x4a00233c 0x4>;
 			reg-names = "otghs_control";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
 		usb_otg_hs: usb_otg_hs@4a0ab000 {
 			compatible = "ti,omap4-musb";
 			reg = <0x4a0ab000 0x7ff>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			interrupts = <0 92 0x4>, <0 93 0x4>;
 			interrupt-names = "mc", "dma";
@@ -1139,6 +1426,8 @@
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 			interrupts = <GIC_SPI 92 IRQ_TYPE_LEVEL_HIGH>, <GIC_SPI 93 IRQ_TYPE_LEVEL_HIGH>;
 			interrupt-names = "mc", "dma";
 			ti,hwmods = "usb_otg_hs";
@@ -1279,4 +1568,7 @@
 };
 
 /include/ "omap44xx-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -16,6 +16,7 @@
 #include <asm/vdso.h>
 #include <asm/page.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 unsigned int __read_mostly vdso_enabled = 1;
 
@@ -111,6 +112,8 @@ static int __init init_vdso(void)
 	for (i = 0; i < npages; i++)
 		vdsox32_pages[i] = virt_to_page(vdsox32_start + i*PAGE_SIZE);
 =======
+=======
+>>>>>>> v3.18
 #include <asm/hpet.h>
 
 #if defined(CONFIG_X86_64)
@@ -141,12 +144,16 @@ static int __init init_vdso(void)
 
 #ifdef CONFIG_X86_X32_ABI
 	init_vdso_image(&vdso_image_x32);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 	return 0;
 }
 subsys_initcall(init_vdso);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct linux_binprm;
@@ -213,6 +220,8 @@ static int setup_additional_pages(struct linux_binprm *bprm,
 	addr = vdso_addr(mm->start_stack, size);
 	addr = get_unmapped_area(NULL, addr, size, 0, 0);
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 struct linux_binprm;
@@ -275,12 +284,16 @@ static int map_vdso(const struct vdso_image *image, bool calculate_addr)
 
 	addr = get_unmapped_area(NULL, addr,
 				 image->size - image->sym_vvar_start, 0, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR_VALUE(addr)) {
 		ret = addr;
 		goto up_fail;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	current->mm->context.vdso = (void *)addr;
 
@@ -295,6 +308,8 @@ static int map_vdso(const struct vdso_image *image, bool calculate_addr)
 
 up_fail:
 =======
+=======
+>>>>>>> v3.18
 	text_start = addr - image->sym_vvar_start;
 	current->mm->context.vdso = (void __user *)text_start;
 
@@ -351,11 +366,15 @@ up_fail:
 	if (ret)
 		current->mm->context.vdso = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	up_write(&mm->mmap_sem);
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
 {
@@ -378,6 +397,8 @@ static __init int vdso_setup(char *s)
 }
 __setup("vdso=", vdso_setup);
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_X86_32) || defined(CONFIG_COMPAT)
 static int load_vdso32(void)
 {
@@ -439,4 +460,7 @@ static __init int vdso_setup(char *s)
 }
 __setup("vdso=", vdso_setup);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

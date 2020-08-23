@@ -70,7 +70,12 @@ config SPI_ATH79
 config SPI_ATMEL
 	tristate "Atmel SPI Controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (ARCH_AT91 || AVR32)
+=======
+	depends on HAS_DMA
+	depends on (ARCH_AT91 || AVR32 || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 	depends on (ARCH_AT91 || AVR32 || COMPILE_TEST)
@@ -82,7 +87,11 @@ config SPI_ATMEL
 config SPI_BCM2835
 	tristate "BCM2835 SPI controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_BCM2835
+=======
+	depends on ARCH_BCM2835 || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_BCM2835 || COMPILE_TEST
 >>>>>>> v3.18
@@ -97,11 +106,14 @@ config SPI_BCM2835
 config SPI_BFIN5XX
 	tristate "SPI controller driver for ADI Blackfin5xx"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on BLACKFIN
 	help
 	  This is the SPI controller master driver for Blackfin 5xx processor.
 
 =======
+=======
+>>>>>>> v3.18
 	depends on BLACKFIN && !BF60x
 	help
 	  This is the SPI controller master driver for Blackfin 5xx processor.
@@ -113,6 +125,9 @@ config SPI_ADI_V3
 	  This is the SPI controller v3 master driver
 	  found on Blackfin 60x processor.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SPI_BFIN_SPORT
 	tristate "SPI bus via Blackfin SPORT"
@@ -129,7 +144,10 @@ config SPI_AU1550
 	  PSC SPI controller found on Au1550, Au1200 and Au1300 series.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SPI_BCM53XX
 	tristate "Broadcom BCM53xx SPI controller"
 	depends on ARCH_BCM_5301X
@@ -138,6 +156,9 @@ config SPI_BCM53XX
 	help
           Enable support for the SPI controller on Broadcom BCM53xx ARM SoCs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SPI_BCM63XX
 	tristate "Broadcom BCM63xx SPI controller"
@@ -146,7 +167,10 @@ config SPI_BCM63XX
           Enable support for the SPI controller on the Broadcom BCM63xx SoCs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SPI_BCM63XX_HSSPI
 	tristate "Broadcom BCM63XX HS SPI controller driver"
 	depends on BCM63XX || COMPILE_TEST
@@ -154,6 +178,9 @@ config SPI_BCM63XX_HSSPI
 	  This enables support for the High Speed SPI controller present on
 	  newer Broadcom BCM63XX SoCs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SPI_BITBANG
 	tristate "Utilities for Bitbanging SPI masters"
@@ -179,10 +206,13 @@ config SPI_BUTTERFLY
 	  This same cable can be used to flash new firmware.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SPI_CLPS711X
 	tristate "CLPS711X host SPI controller"
 	depends on ARCH_CLPS711X
 =======
+=======
+>>>>>>> v3.18
 config SPI_CADENCE
 	tristate "Cadence SPI controller"
 	depends on ARM
@@ -193,6 +223,9 @@ config SPI_CADENCE
 config SPI_CLPS711X
 	tristate "CLPS711X host SPI controller"
 	depends on ARCH_CLPS711X || COMPILE_TEST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This enables dedicated general purpose SPI/Microwire1-compatible
@@ -208,6 +241,7 @@ config SPI_COLDFIRE_QSPI
 config SPI_DAVINCI
 	tristate "Texas Instruments DaVinci/DA8x/OMAP-L/AM1x SoC SPI controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_DAVINCI
 	select SPI_BITBANG
 	select TI_EDMA
@@ -218,6 +252,8 @@ config SPI_EP93XX
 	tristate "Cirrus Logic EP93xx SPI controller"
 	depends on ARCH_EP93XX
 =======
+=======
+>>>>>>> v3.18
 	depends on ARCH_DAVINCI || ARCH_KEYSTONE
 	select SPI_BITBANG
 	help
@@ -234,6 +270,9 @@ config SPI_EP93XX
 	tristate "Cirrus Logic EP93xx SPI controller"
 	depends on HAS_DMA
 	depends on ARCH_EP93XX || COMPILE_TEST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This enables using the Cirrus EP93xx SPI controller in master
@@ -267,9 +306,14 @@ config SPI_GPIO
 config SPI_IMX
 	tristate "Freescale i.MX SPI controllers"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_MXC
 	select SPI_BITBANG
 	default m if IMX_HAVE_PLATFORM_SPI_IMX
+=======
+	depends on ARCH_MXC || COMPILE_TEST
+	select SPI_BITBANG
+>>>>>>> v3.18
 =======
 	depends on ARCH_MXC || COMPILE_TEST
 	select SPI_BITBANG
@@ -329,7 +373,10 @@ config SPI_FSL_SPI
 	  master mode.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SPI_FSL_DSPI
 	tristate "Freescale DSPI controller"
 	select SPI_BITBANG
@@ -339,6 +386,9 @@ config SPI_FSL_DSPI
 	  This enables support for the Freescale DSPI controller in master
 	  mode. VF610 platform uses the controller.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SPI_FSL_ESPI
 	bool "Freescale eSPI controller"
@@ -359,7 +409,11 @@ config SPI_OC_TINY
 config SPI_OCTEON
 	tristate "Cavium OCTEON SPI controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on CPU_CAVIUM_OCTEON
+=======
+	depends on CAVIUM_OCTEON_SOC
+>>>>>>> v3.18
 =======
 	depends on CAVIUM_OCTEON_SOC
 >>>>>>> v3.18
@@ -377,7 +431,13 @@ config SPI_OMAP_UWIRE
 config SPI_OMAP24XX
 	tristate "McSPI driver for OMAP"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_OMAP2PLUS
+=======
+	depends on HAS_DMA
+	depends on ARM || ARM64 || AVR32 || HEXAGON || MIPS || SUPERH
+	depends on ARCH_OMAP2PLUS || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on HAS_DMA
 	depends on ARM || ARM64 || AVR32 || HEXAGON || MIPS || SUPERH
@@ -388,10 +448,13 @@ config SPI_OMAP24XX
 	  (McSPI) modules.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SPI_OMAP_100K
 	tristate "OMAP SPI 100K"
 	depends on ARCH_OMAP850 || ARCH_OMAP730
 =======
+=======
+>>>>>>> v3.18
 config SPI_TI_QSPI
 	tristate "DRA7xxx QSPI controller support"
 	depends on ARCH_OMAP2PLUS || COMPILE_TEST
@@ -403,6 +466,9 @@ config SPI_TI_QSPI
 config SPI_OMAP_100K
 	tristate "OMAP SPI 100K"
 	depends on ARCH_OMAP850 || ARCH_OMAP730 || COMPILE_TEST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  OMAP SPI 100K master controller for omap7xx boards.
@@ -410,7 +476,11 @@ config SPI_OMAP_100K
 config SPI_ORION
 	tristate "Orion SPI master"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PLAT_ORION
+=======
+	depends on PLAT_ORION || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on PLAT_ORION || COMPILE_TEST
 >>>>>>> v3.18
@@ -458,6 +528,7 @@ config SPI_PXA2XX
 
 config SPI_PXA2XX_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def_tristate SPI_PXA2XX && PCI
 
 config SPI_RSPI
@@ -466,6 +537,8 @@ config SPI_RSPI
 	help
 	  SPI driver for Renesas RSPI blocks.
 =======
+=======
+>>>>>>> v3.18
 	def_tristate SPI_PXA2XX && PCI && COMMON_CLK
 
 config SPI_ROCKCHIP
@@ -498,6 +571,9 @@ config SPI_QUP
 
 	  This driver can also be built as a module.  If so, the module
 	  will be called spi_qup.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config SPI_S3C24XX
@@ -521,8 +597,13 @@ config SPI_S3C24XX_FIQ
 config SPI_S3C64XX
 	tristate "Samsung S3C64XX series type SPI"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (ARCH_S3C24XX || ARCH_S3C64XX || ARCH_S5P64X0 || ARCH_EXYNOS)
 	select S3C64XX_DMA if ARCH_S3C64XX
+=======
+	depends on PLAT_SAMSUNG
+	select S3C64XX_PL080 if ARCH_S3C64XX
+>>>>>>> v3.18
 =======
 	depends on PLAT_SAMSUNG
 	select S3C64XX_PL080 if ARCH_S3C64XX
@@ -539,8 +620,13 @@ config SPI_SC18IS602
 config SPI_SH_MSIOF
 	tristate "SuperH MSIOF SPI controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (SUPERH || ARCH_SHMOBILE) && HAVE_CLK
 	select SPI_BITBANG
+=======
+	depends on HAVE_CLK && HAS_DMA
+	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on HAVE_CLK && HAS_DMA
 	depends on SUPERH || ARCH_SHMOBILE || COMPILE_TEST
@@ -551,7 +637,11 @@ config SPI_SH_MSIOF
 config SPI_SH
 	tristate "SuperH SPI controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SUPERH
+=======
+	depends on SUPERH || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on SUPERH || COMPILE_TEST
 >>>>>>> v3.18
@@ -568,7 +658,11 @@ config SPI_SH_SCI
 config SPI_SH_HSPI
 	tristate "SuperH HSPI controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_SHMOBILE
+=======
+	depends on ARCH_SHMOBILE || COMPILE_TEST
+>>>>>>> v3.18
 =======
 	depends on ARCH_SHMOBILE || COMPILE_TEST
 >>>>>>> v3.18
@@ -578,7 +672,11 @@ config SPI_SH_HSPI
 config SPI_SIRF
 	tristate "CSR SiRFprimaII SPI controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_PRIMA2
+=======
+	depends on SIRF_DMA
+>>>>>>> v3.18
 =======
 	depends on SIRF_DMA
 >>>>>>> v3.18
@@ -587,7 +685,10 @@ config SPI_SIRF
 	  SPI driver for CSR SiRFprimaII SoCs
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SPI_SUN4I
 	tristate "Allwinner A10 SoCs SPI controller"
 	depends on ARCH_SUNXI || COMPILE_TEST
@@ -601,6 +702,9 @@ config SPI_SUN6I
 	help
 	  This enables using the SPI controller on the Allwinner A31 SoCs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SPI_MXS
 	tristate "Freescale MXS SPI controller"
@@ -612,7 +716,12 @@ config SPI_MXS
 config SPI_TEGRA114
 	tristate "NVIDIA Tegra114 SPI Controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_TEGRA && TEGRA20_APB_DMA
+=======
+	depends on (ARCH_TEGRA && TEGRA20_APB_DMA) || COMPILE_TEST
+	depends on RESET_CONTROLLER && HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on (ARCH_TEGRA && TEGRA20_APB_DMA) || COMPILE_TEST
 	depends on RESET_CONTROLLER && HAS_DMA
@@ -625,7 +734,12 @@ config SPI_TEGRA114
 config SPI_TEGRA20_SFLASH
 	tristate "Nvidia Tegra20 Serial flash Controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_TEGRA
+=======
+	depends on ARCH_TEGRA || COMPILE_TEST
+	depends on RESET_CONTROLLER
+>>>>>>> v3.18
 =======
 	depends on ARCH_TEGRA || COMPILE_TEST
 	depends on RESET_CONTROLLER
@@ -637,6 +751,7 @@ config SPI_TEGRA20_SFLASH
 
 config SPI_TEGRA20_SLINK
 	tristate "Nvidia Tegra20/Tegra30 SLINK Controller"
+<<<<<<< HEAD
 <<<<<<< HEAD
 	depends on ARCH_TEGRA && TEGRA20_APB_DMA
 	help
@@ -653,6 +768,8 @@ config SPI_TOPCLIFF_PCH
 	tristate "Intel EG20T PCH/LAPIS Semicon IOH(ML7213/ML7223/ML7831) SPI"
 	depends on PCI
 =======
+=======
+>>>>>>> v3.18
 	depends on (ARCH_TEGRA && TEGRA20_APB_DMA) || COMPILE_TEST
 	depends on RESET_CONTROLLER && HAS_DMA
 	help
@@ -661,6 +778,9 @@ config SPI_TOPCLIFF_PCH
 config SPI_TOPCLIFF_PCH
 	tristate "Intel EG20T PCH/LAPIS Semicon IOH(ML7213/ML7223/ML7831) SPI"
 	depends on PCI && (X86_32 || COMPILE_TEST)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  SPI driver for the Topcliff PCH (Platform Controller Hub) SPI bus
@@ -672,7 +792,11 @@ config SPI_TOPCLIFF_PCH
 config SPI_TXX9
 	tristate "Toshiba TXx9 SPI controller"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on GPIOLIB && CPU_TX49XX
+=======
+	depends on GPIOLIB && (CPU_TX49XX || COMPILE_TEST)
+>>>>>>> v3.18
 =======
 	depends on GPIOLIB && (CPU_TX49XX || COMPILE_TEST)
 >>>>>>> v3.18
@@ -698,6 +822,7 @@ config SPI_XILINX
 
 	  Or for the DS570, see "XPS Serial Peripheral Interface (SPI) (v2.00b)"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SPI_NUC900
 	tristate "Nuvoton NUC900 series SPI"
@@ -727,6 +852,8 @@ config SPI_QUP
 	  This driver can also be built as a module.  If so, the module
 	  will be called spi_qsd.
 =======
+=======
+>>>>>>> v3.18
 config SPI_XTENSA_XTFPGA
 	tristate "Xtensa SPI controller for xtfpga"
 	depends on (XTENSA && XTENSA_PLATFORM_XTFPGA) || COMPILE_TEST
@@ -747,6 +874,9 @@ config SPI_NUC900
 	help
 	  SPI driver for Nuvoton NUC900 series ARM SoCs
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #
 # Add new SPI master controllers in alphabetical order above this line
@@ -763,7 +893,11 @@ config SPI_DW_PCI
 
 config SPI_DW_MID_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "DMA support for DW SPI controller on Intel Moorestown platform"
+=======
+	bool "DMA support for DW SPI controller on Intel MID platform"
+>>>>>>> v3.18
 =======
 	bool "DMA support for DW SPI controller on Intel MID platform"
 >>>>>>> v3.18
@@ -772,7 +906,11 @@ config SPI_DW_MID_DMA
 config SPI_DW_MMIO
 	tristate "Memory-mapped io interface driver for DW SPI core"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SPI_DESIGNWARE && HAVE_CLK
+=======
+	depends on SPI_DESIGNWARE
+>>>>>>> v3.18
 =======
 	depends on SPI_DESIGNWARE
 >>>>>>> v3.18

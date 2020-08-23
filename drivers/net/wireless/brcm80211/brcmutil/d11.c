@@ -22,6 +22,7 @@
 #include <brcmu_d11.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void brcmu_d11n_encchspec(struct brcmu_chan *ch)
 {
 	ch->chspec = ch->chnum & BRCMU_CHSPEC_CH_MASK;
@@ -36,6 +37,8 @@ static void brcmu_d11n_encchspec(struct brcmu_chan *ch)
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
 static u16 d11n_sb(enum brcmu_chan_sb sb)
 {
 	switch (sb) {
@@ -76,6 +79,9 @@ static void brcmu_d11n_encchspec(struct brcmu_chan *ch)
 			0, d11n_sb(ch->sb));
 	brcmu_maskset16(&ch->chspec, BRCMU_CHSPEC_D11N_BW_MASK,
 			0, d11n_bw(ch->bw));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ch->chnum <= CH_MAX_2G_CHANNEL)
@@ -84,6 +90,7 @@ static void brcmu_d11n_encchspec(struct brcmu_chan *ch)
 		ch->chspec |= BRCMU_CHSPEC_D11N_BND_5G;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void brcmu_d11ac_encchspec(struct brcmu_chan *ch)
 {
@@ -103,6 +110,8 @@ static void brcmu_d11ac_encchspec(struct brcmu_chan *ch)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 static u16 d11ac_bw(enum brcmu_chan_bw bw)
 {
 	switch (bw) {
@@ -131,6 +140,9 @@ static void brcmu_d11ac_encchspec(struct brcmu_chan *ch)
 			0, d11ac_bw(ch->bw));
 
 	ch->chspec &= ~BRCMU_CHSPEC_D11AC_BND_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ch->chnum <= CH_MAX_2G_CHANNEL)
 		ch->chspec |= BRCMU_CHSPEC_D11AC_BND_2G;
@@ -148,6 +160,10 @@ static void brcmu_d11n_decchspec(struct brcmu_chan *ch)
 	case BRCMU_CHSPEC_D11N_BW_20:
 		ch->bw = BRCMU_CHAN_BW_20;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ch->sb = BRCMU_CHAN_SB_NONE;
+>>>>>>> v3.18
 =======
 		ch->sb = BRCMU_CHAN_SB_NONE;
 >>>>>>> v3.18
@@ -191,6 +207,10 @@ static void brcmu_d11ac_decchspec(struct brcmu_chan *ch)
 	case BRCMU_CHSPEC_D11AC_BW_20:
 		ch->bw = BRCMU_CHAN_BW_20;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		ch->sb = BRCMU_CHAN_SB_NONE;
+>>>>>>> v3.18
 =======
 		ch->sb = BRCMU_CHAN_SB_NONE;
 >>>>>>> v3.18
@@ -211,7 +231,10 @@ static void brcmu_d11ac_decchspec(struct brcmu_chan *ch)
 	case BRCMU_CHSPEC_D11AC_BW_80:
 		ch->bw = BRCMU_CHAN_BW_80;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		ch->sb = brcmu_maskget16(ch->chspec, BRCMU_CHSPEC_D11AC_SB_MASK,
 					 BRCMU_CHSPEC_D11AC_SB_SHIFT);
 		switch (ch->sb) {
@@ -231,6 +254,9 @@ static void brcmu_d11ac_decchspec(struct brcmu_chan *ch)
 			WARN_ON_ONCE(1);
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case BRCMU_CHSPEC_D11AC_BW_8080:

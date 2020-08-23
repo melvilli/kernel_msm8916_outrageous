@@ -26,16 +26,22 @@
 
 #include <subdev/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/bar.h>
 #include <subdev/fb.h>
 #include <subdev/vm.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/fb.h>
 #include <subdev/vm.h>
 
 #include "priv.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nv50_bar_priv {
 	struct nouveau_bar base;
@@ -62,7 +68,10 @@ nv50_bar_kmap(struct nouveau_bar *bar, struct nouveau_mem *mem,
 
 	nouveau_vm_map(vma, mem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv50_vm_flush_engine(nv_subdev(bar), 6);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -81,7 +90,10 @@ nv50_bar_umap(struct nouveau_bar *bar, struct nouveau_mem *mem,
 
 	nouveau_vm_map(vma, mem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv50_vm_flush_engine(nv_subdev(bar), 6);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -92,7 +104,10 @@ nv50_bar_unmap(struct nouveau_bar *bar, struct nouveau_vma *vma)
 {
 	nouveau_vm_unmap(vma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv50_vm_flush_engine(nv_subdev(bar), 6);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nouveau_vm_put(vma);
@@ -159,7 +174,11 @@ nv50_bar_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	/* BAR3 */
 	start = 0x0100000000ULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	limit = start + pci_resource_len(device->pdev, 3);
+=======
+	limit = start + nv_device_resource_len(device, 3);
+>>>>>>> v3.18
 =======
 	limit = start + nv_device_resource_len(device, 3);
 >>>>>>> v3.18
@@ -169,6 +188,11 @@ nv50_bar_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_inc(&vm->engref[NVDEV_SUBDEV_BAR]);
+
+>>>>>>> v3.18
 =======
 	atomic_inc(&vm->engref[NVDEV_SUBDEV_BAR]);
 
@@ -200,7 +224,11 @@ nv50_bar_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	/* BAR1 */
 	start = 0x0000000000ULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	limit = start + pci_resource_len(device->pdev, 1);
+=======
+	limit = start + nv_device_resource_len(device, 1);
+>>>>>>> v3.18
 =======
 	limit = start + nv_device_resource_len(device, 1);
 >>>>>>> v3.18
@@ -210,6 +238,11 @@ nv50_bar_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_inc(&vm->engref[NVDEV_SUBDEV_BAR]);
+
+>>>>>>> v3.18
 =======
 	atomic_inc(&vm->engref[NVDEV_SUBDEV_BAR]);
 
@@ -265,7 +298,11 @@ nv50_bar_init(struct nouveau_object *object)
 {
 	struct nv50_bar_priv *priv = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+	int ret, i;
+>>>>>>> v3.18
 =======
 	int ret, i;
 >>>>>>> v3.18
@@ -277,13 +314,19 @@ nv50_bar_init(struct nouveau_object *object)
 	nv_mask(priv, 0x000200, 0x00000100, 0x00000000);
 	nv_mask(priv, 0x000200, 0x00000100, 0x00000100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nv50_vm_flush_engine(nv_subdev(priv), 6);
 =======
+=======
+>>>>>>> v3.18
 	nv_wr32(priv, 0x100c80, 0x00060001);
 	if (!nv_wait(priv, 0x100c80, 0x00000001, 0x00000000)) {
 		nv_error(priv, "vm flush timeout\n");
 		return -EBUSY;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nv_wr32(priv, 0x001704, 0x00000000 | priv->mem->addr >> 12);
@@ -291,6 +334,11 @@ nv50_bar_init(struct nouveau_object *object)
 	nv_wr32(priv, 0x001708, 0x80000000 | priv->bar1->node->offset >> 4);
 	nv_wr32(priv, 0x00170c, 0x80000000 | priv->bar3->node->offset >> 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	for (i = 0; i < 8; i++)
+		nv_wr32(priv, 0x001900 + (i * 4), 0x00000000);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < 8; i++)
 		nv_wr32(priv, 0x001900 + (i * 4), 0x00000000);

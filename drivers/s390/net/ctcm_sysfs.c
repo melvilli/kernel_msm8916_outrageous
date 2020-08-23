@@ -35,8 +35,14 @@ static ssize_t ctcm_buffer_write(struct device *dev,
 {
 	struct net_device *ndev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int bs1;
 	struct ctcm_priv *priv = dev_get_drvdata(dev);
+=======
+	unsigned int bs1;
+	struct ctcm_priv *priv = dev_get_drvdata(dev);
+	int rc;
+>>>>>>> v3.18
 =======
 	unsigned int bs1;
 	struct ctcm_priv *priv = dev_get_drvdata(dev);
@@ -50,7 +56,13 @@ static ssize_t ctcm_buffer_write(struct device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sscanf(buf, "%u", &bs1);
+=======
+	rc = sscanf(buf, "%u", &bs1);
+	if (rc != 1)
+		goto einval;
+>>>>>>> v3.18
 =======
 	rc = sscanf(buf, "%u", &bs1);
 	if (rc != 1)
@@ -156,7 +168,11 @@ static ssize_t ctcm_proto_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int value;
+=======
+	int value, rc;
+>>>>>>> v3.18
 =======
 	int value, rc;
 >>>>>>> v3.18
@@ -165,8 +181,14 @@ static ssize_t ctcm_proto_store(struct device *dev,
 	if (!priv)
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sscanf(buf, "%u", &value);
 	if (!((value == CTCM_PROTO_S390)  ||
+=======
+	rc = sscanf(buf, "%d", &value);
+	if ((rc != 1) ||
+	    !((value == CTCM_PROTO_S390)  ||
+>>>>>>> v3.18
 =======
 	rc = sscanf(buf, "%d", &value);
 	if ((rc != 1) ||

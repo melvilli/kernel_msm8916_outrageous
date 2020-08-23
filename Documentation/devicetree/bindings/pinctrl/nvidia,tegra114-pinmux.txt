@@ -81,7 +81,10 @@ Valid values for pin and group names are:
     gmh, owr, uda.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Valid values for nvidia,functions are:
 
   blink, cec, cldvfs, clk12, cpu, dap, dap1, dap2, dev3, displaya,
@@ -93,6 +96,9 @@ Valid values for nvidia,functions are:
   spi4, spi5, spi6, sysclk, trace, uarta, uartb, uartc, uartd, ulpi,
   usb, vgp1, vgp2, vgp3, vgp4, vgp5, vgp6, vi, vi_alt1, vi_alt3
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

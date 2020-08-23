@@ -33,6 +33,7 @@ static int ar9002_hw_init_mode_regs(struct ath_hw *ah)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ah->config.pcie_clock_req)
 		INIT_INI_ARRAY(&ah->iniPcieSerdes,
 			   ar9280PciePhy_clkreq_off_L1_9280);
@@ -43,6 +44,10 @@ static int ar9002_hw_init_mode_regs(struct ath_hw *ah)
 		INIT_INI_ARRAY(&ah->iniPcieSerdesWow,
 			       ar9280PciePhy_awow);
 #endif
+=======
+	INIT_INI_ARRAY(&ah->iniPcieSerdes,
+		       ar9280PciePhy_clkreq_always_on_L1_9280);
+>>>>>>> v3.18
 =======
 	INIT_INI_ARRAY(&ah->iniPcieSerdes,
 		       ar9280PciePhy_clkreq_always_on_L1_9280);
@@ -279,6 +284,7 @@ static void ar9002_hw_configpcipowersave(struct ath_hw *ah,
 				val |= AR_WA_D3_L1_DISABLE;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (((AR_SREV_9285(ah) ||
 			      AR_SREV_9271(ah) ||
 			      AR_SREV_9287(ah)) &&
@@ -287,12 +293,17 @@ static void ar9002_hw_configpcipowersave(struct ath_hw *ah,
 			     (AR9280_WA_DEFAULT & AR_WA_D3_L1_DISABLE))) {
 				val |= AR_WA_D3_L1_DISABLE;
 =======
+=======
+>>>>>>> v3.18
 			if (AR_SREV_9285(ah) || AR_SREV_9271(ah) || AR_SREV_9287(ah)) {
 				if (AR9285_WA_DEFAULT & AR_WA_D3_L1_DISABLE)
 					val |= AR_WA_D3_L1_DISABLE;
 			} else if (AR_SREV_9280(ah)) {
 				if (AR9280_WA_DEFAULT & AR_WA_D3_L1_DISABLE)
 					val |= AR_WA_D3_L1_DISABLE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -316,6 +327,7 @@ static void ar9002_hw_configpcipowersave(struct ath_hw *ah,
 		if (ah->config.pcie_waen) {
 			val = ah->config.pcie_waen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!power_off)
 				val &= (~AR_WA_D3_L1_DISABLE);
 		} else {
@@ -328,12 +340,17 @@ static void ar9002_hw_configpcipowersave(struct ath_hw *ah,
 			}
 			else if (AR_SREV_9280(ah)) {
 =======
+=======
+>>>>>>> v3.18
 			val &= (~AR_WA_D3_L1_DISABLE);
 		} else {
 			if (AR_SREV_9285(ah) || AR_SREV_9271(ah) || AR_SREV_9287(ah)) {
 				val = AR9285_WA_DEFAULT;
 				val &= (~AR_WA_D3_L1_DISABLE);
 			} else if (AR_SREV_9280(ah)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/*
 				 * For AR9280 chips, bit 22 of 0x4004
@@ -341,8 +358,12 @@ static void ar9002_hw_configpcipowersave(struct ath_hw *ah,
 				 */
 				val = AR9280_WA_DEFAULT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (!power_off)
 					val &= (~AR_WA_D3_L1_DISABLE);
+=======
+				val &= (~AR_WA_D3_L1_DISABLE);
+>>>>>>> v3.18
 =======
 				val &= (~AR_WA_D3_L1_DISABLE);
 >>>>>>> v3.18
@@ -426,7 +447,10 @@ void ar9002_hw_enable_async_fifo(struct ath_hw *ah)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ar9002_hw_init_hang_checks(struct ath_hw *ah)
 {
 	if (AR_SREV_9100(ah) || AR_SREV_9160(ah)) {
@@ -441,6 +465,9 @@ static void ar9002_hw_init_hang_checks(struct ath_hw *ah)
 		ah->config.hw_hang_checks |= HW_MAC_HANG;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Sets up the AR5008/AR9001/AR9002 hardware familiy callbacks */
 int ar9002_hw_attach_ops(struct ath_hw *ah)
@@ -455,6 +482,10 @@ int ar9002_hw_attach_ops(struct ath_hw *ah)
 
 	priv_ops->init_mode_gain_regs = ar9002_hw_init_mode_gain_regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv_ops->init_hang_checks = ar9002_hw_init_hang_checks;
+>>>>>>> v3.18
 =======
 	priv_ops->init_hang_checks = ar9002_hw_init_hang_checks;
 >>>>>>> v3.18
@@ -479,6 +510,7 @@ void ar9002_hw_load_ani_reg(struct ath_hw *ah, struct ath9k_channel *chan)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (chan->chanmode) {
 	case CHANNEL_A:
 	case CHANNEL_A_HT20:
@@ -502,10 +534,15 @@ void ar9002_hw_load_ani_reg(struct ath_hw *ah, struct ath9k_channel *chan)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (IS_CHAN_5GHZ(chan))
 		modesIndex = IS_CHAN_HT40(chan) ? 2 : 1;
 	else
 		modesIndex = IS_CHAN_HT40(chan) ? 3 : 4;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ENABLE_REGWRITE_BUFFER(ah);

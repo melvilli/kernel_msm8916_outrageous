@@ -22,11 +22,14 @@
 #include <os.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ignore_sigwinch_sig(void)
 {
 	signal(SIGWINCH, SIG_IGN);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int start_io_thread(unsigned long sp, int *fd_out)

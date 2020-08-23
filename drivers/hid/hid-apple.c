@@ -47,7 +47,11 @@ MODULE_PARM_DESC(iso_layout, "Enable/Disable hardcoded ISO-layout of the keyboar
 		"(0 = disabled, [1] = enabled)");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int swap_opt_cmd = 0;
+=======
+static unsigned int swap_opt_cmd;
+>>>>>>> v3.18
 =======
 static unsigned int swap_opt_cmd;
 >>>>>>> v3.18
@@ -376,7 +380,11 @@ static int apple_probe(struct hid_device *hdev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	asc = kzalloc(sizeof(*asc), GFP_KERNEL);
+=======
+	asc = devm_kzalloc(&hdev->dev, sizeof(*asc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	asc = devm_kzalloc(&hdev->dev, sizeof(*asc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -393,7 +401,11 @@ static int apple_probe(struct hid_device *hdev,
 	if (ret) {
 		hid_err(hdev, "parse failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -407,6 +419,7 @@ static int apple_probe(struct hid_device *hdev,
 	ret = hid_hw_start(hdev, connect_mask);
 	if (ret) {
 		hid_err(hdev, "hw start failed\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_free;
 	}
@@ -422,10 +435,15 @@ static void apple_remove(struct hid_device *hdev)
 	hid_hw_stop(hdev);
 	kfree(hid_get_drvdata(hdev));
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -498,6 +516,12 @@ static const struct hid_device_id apple_devices[] = {
 				USB_DEVICE_ID_APPLE_ALU_WIRELESS_2011_ANSI),
 		.driver_data = APPLE_NUMLOCK_EMULATION | APPLE_HAS_FN },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_APPLE,
+				USB_DEVICE_ID_APPLE_ALU_WIRELESS_2011_JIS),
+		.driver_data = APPLE_NUMLOCK_EMULATION | APPLE_HAS_FN },
+>>>>>>> v3.18
 =======
 	{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_APPLE,
 				USB_DEVICE_ID_APPLE_ALU_WIRELESS_2011_JIS),
@@ -599,7 +623,10 @@ static struct hid_driver apple_driver = {
 	.report_fixup = apple_report_fixup,
 	.probe = apple_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = apple_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.event = apple_event,

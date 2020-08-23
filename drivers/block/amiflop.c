@@ -344,7 +344,11 @@ static int fd_motor_on(int nr)
 		fd_select(nr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(motor_on_completion);
+=======
+		reinit_completion(&motor_on_completion);
+>>>>>>> v3.18
 =======
 		reinit_completion(&motor_on_completion);
 >>>>>>> v3.18
@@ -1411,7 +1415,11 @@ next_segment:
 		track = block / (floppy->dtype->sects * floppy->type->sect_mult);
 		sector = block % (floppy->dtype->sects * floppy->type->sect_mult);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data = rq->buffer + 512 * cnt;
+=======
+		data = bio_data(rq->bio) + 512 * cnt;
+>>>>>>> v3.18
 =======
 		data = bio_data(rq->bio) + 512 * cnt;
 >>>>>>> v3.18

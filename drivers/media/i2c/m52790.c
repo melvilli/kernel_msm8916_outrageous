@@ -30,7 +30,10 @@
 #include <media/m52790.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -87,12 +90,16 @@ static int m52790_g_register(struct v4l2_subdev *sd, struct v4l2_dbg_register *r
 {
 	struct m52790_state *state = to_state(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -107,12 +114,16 @@ static int m52790_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_regis
 {
 	struct m52790_state *state = to_state(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 
 	if (!v4l2_chip_match_i2c_client(client, &reg->match))
 		return -EINVAL;
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -126,6 +137,7 @@ static int m52790_s_register(struct v4l2_subdev *sd, const struct v4l2_dbg_regis
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int m52790_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
@@ -133,6 +145,8 @@ static int m52790_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_iden
 	return v4l2_chip_ident_i2c_client(client, chip, V4L2_IDENT_M52790, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int m52790_log_status(struct v4l2_subdev *sd)
@@ -151,7 +165,10 @@ static int m52790_log_status(struct v4l2_subdev *sd)
 static const struct v4l2_subdev_core_ops m52790_core_ops = {
 	.log_status = m52790_log_status,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = m52790_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -192,7 +209,11 @@ static int m52790_probe(struct i2c_client *client,
 			client->addr << 1, client->adapter->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	state = kzalloc(sizeof(struct m52790_state), GFP_KERNEL);
+=======
+	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	state = devm_kzalloc(&client->dev, sizeof(*state), GFP_KERNEL);
 >>>>>>> v3.18
@@ -213,7 +234,10 @@ static int m52790_remove(struct i2c_client *client)
 
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(to_state(sd));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

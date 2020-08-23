@@ -5,6 +5,9 @@ bootpImage
 uImage
 *.dtb
 <<<<<<< HEAD
+<<<<<<< HEAD
 zImage-dtb
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -30,7 +30,11 @@ Charger Manager supports the following:
 	we may need to monitor the battery health by looking at the ambient or
 	battery temperature. We can accomplish this by waking up the system
 <<<<<<< HEAD
+<<<<<<< HEAD
 	periodically. However, such a method wakes up devices unncessary for
+=======
+	periodically. However, such a method wakes up devices unnecessarily for
+>>>>>>> v3.18
 =======
 	periodically. However, such a method wakes up devices unnecessarily for
 >>>>>>> v3.18

@@ -18,8 +18,11 @@ obj-$(CONFIG_RADIO_ZOLTRIX) += radio-zoltrix.o
 obj-$(CONFIG_RADIO_GEMTEK) += radio-gemtek.o
 obj-$(CONFIG_RADIO_TRUST) += radio-trust.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_I2C_SI4713) += si4713-i2c.o
 obj-$(CONFIG_RADIO_SI4713) += radio-si4713.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_RADIO_SI476X) += radio-si476x.o
@@ -27,6 +30,10 @@ obj-$(CONFIG_RADIO_MIROPCM20) += radio-miropcm20.o
 obj-$(CONFIG_USB_DSBR) += dsbr100.o
 obj-$(CONFIG_RADIO_SI470X) += si470x/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_RADIO_SI4713) += si4713/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_RADIO_SI4713) += si4713/
 >>>>>>> v3.18
@@ -40,9 +47,14 @@ obj-$(CONFIG_RADIO_TIMBERDALE) += radio-timb.o
 obj-$(CONFIG_RADIO_WL1273) += radio-wl1273.o
 obj-$(CONFIG_RADIO_WL128X) += wl128x/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_RADIO_IRIS) += radio-iris.o
 obj-$(CONFIG_RADIO_IRIS_TRANSPORT) += radio-iris-transport.o
 obj-$(CONFIG_RADIO_SILABS) += silabs/
+=======
+obj-$(CONFIG_RADIO_TEA575X) += tea575x.o
+obj-$(CONFIG_USB_RAREMONO) += radio-raremono.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_RADIO_TEA575X) += tea575x.o
 obj-$(CONFIG_USB_RAREMONO) += radio-raremono.o

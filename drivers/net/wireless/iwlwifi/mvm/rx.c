@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -71,7 +81,10 @@
  *****************************************************************************/
 #include "iwl-trans.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "mvm.h"
@@ -91,7 +104,10 @@ int iwl_mvm_rx_rx_phy_cmd(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	memcpy(&mvm->last_phy_info, pkt->data, sizeof(mvm->last_phy_info));
 	mvm->ampdu_ref++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_IWLWIFI_DEBUGFS
 	if (mvm->last_phy_info.phy_flags & cpu_to_le16(RX_RES_PHY_FLAGS_AGG)) {
@@ -101,6 +117,9 @@ int iwl_mvm_rx_rx_phy_cmd(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -146,6 +165,7 @@ static void iwl_mvm_pass_packet_to_mac80211(struct iwl_mvm *mvm,
 
 	memcpy(IEEE80211_SKB_RXCB(skb), stats, sizeof(*stats));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ieee80211_rx_ni(mvm->hw, skb);
 }
@@ -194,6 +214,8 @@ static int iwl_mvm_calc_rssi(struct iwl_mvm *mvm,
 
 	return max_rssi_dbm;
 =======
+=======
+>>>>>>> v3.18
 	ieee80211_rx(mvm->hw, skb);
 }
 
@@ -234,6 +256,9 @@ static void iwl_mvm_get_signal_strength(struct iwl_mvm *mvm,
 	rx_status->chain_signal[0] = energy_a;
 	rx_status->chain_signal[1] = energy_b;
 	rx_status->chain_signal[2] = energy_c;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -285,13 +310,19 @@ static u32 iwl_mvm_set_mac80211_rx_flag(struct iwl_mvm *mvm,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case RX_MPDU_RES_STATUS_SEC_EXT_ENC:
 		if (!(rx_pkt_status & RX_MPDU_RES_STATUS_MIC_OK))
 			return -1;
 		stats->flag |= RX_FLAG_DECRYPTED;
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		IWL_ERR(mvm, "Unhandled alg: 0x%x\n", rx_pkt_status);
@@ -314,6 +345,10 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	struct iwl_rx_phy_info *phy_info;
 	struct iwl_rx_mpdu_res_start *rx_res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee80211_sta *sta;
+>>>>>>> v3.18
 =======
 	struct ieee80211_sta *sta;
 >>>>>>> v3.18
@@ -347,11 +382,14 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(rx_pkt_status & RX_MPDU_RES_STATUS_CRC_OK) ||
 	    !(rx_pkt_status & RX_MPDU_RES_STATUS_OVERRUN_OK)) {
 		IWL_DEBUG_RX(mvm, "Bad CRC or FIFO: 0x%08X.\n", rx_pkt_status);
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Keep packets with CRC errors (and with overrun) for monitor mode
 	 * (otherwise the firmware discards them) but mark them as bad.
@@ -360,6 +398,9 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	    !(rx_pkt_status & RX_MPDU_RES_STATUS_OVERRUN_OK)) {
 		IWL_DEBUG_RX(mvm, "Bad CRC or FIFO: 0x%08X.\n", rx_pkt_status);
 		rx_status.flag |= RX_FLAG_FAILED_FCS_CRC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -382,8 +423,12 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	/*rx_status.flag |= RX_FLAG_MACTIME_MPDU;*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Find max signal strength (dBm) among 3 antenna/receiver chains */
 	rx_status.signal = iwl_mvm_calc_rssi(mvm, phy_info);
+=======
+	iwl_mvm_get_signal_strength(mvm, phy_info, &rx_status);
+>>>>>>> v3.18
 =======
 	iwl_mvm_get_signal_strength(mvm, phy_info, &rx_status);
 >>>>>>> v3.18
@@ -391,6 +436,7 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	IWL_DEBUG_STATS_LIMIT(mvm, "Rssi %d, TSF %llu\n", rx_status.signal,
 			      (unsigned long long)rx_status.mactime);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * "antenna number"
@@ -409,6 +455,8 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 				RX_RES_PHY_FLAGS_ANTENNA)
 				>> RX_RES_PHY_FLAGS_ANTENNA_POS;
 =======
+=======
+>>>>>>> v3.18
 	rcu_read_lock();
 	/*
 	 * We have tx blocked stations (with CS bit). If we heard frames from
@@ -431,6 +479,9 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	}
 
 	rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set the preamble flag if appropriate */
@@ -456,15 +507,21 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 		break;
 	case RATE_MCS_CHAN_WIDTH_80:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rx_status.flag |= RX_FLAG_80MHZ;
 		break;
 	case RATE_MCS_CHAN_WIDTH_160:
 		rx_status.flag |= RX_FLAG_160MHZ;
 =======
+=======
+>>>>>>> v3.18
 		rx_status.vht_flag |= RX_VHT_FLAG_80MHZ;
 		break;
 	case RATE_MCS_CHAN_WIDTH_160:
 		rx_status.vht_flag |= RX_VHT_FLAG_160MHZ;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -473,11 +530,14 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	if (rate_n_flags & RATE_HT_MCS_GF_MSK)
 		rx_status.flag |= RX_FLAG_HT_GF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rate_n_flags & RATE_MCS_HT_MSK) {
 		rx_status.flag |= RX_FLAG_HT;
 		rx_status.rate_idx = rate_n_flags & RATE_HT_MCS_INDEX_MSK;
 	} else if (rate_n_flags & RATE_MCS_VHT_MSK) {
 =======
+=======
+>>>>>>> v3.18
 	if (rate_n_flags & RATE_MCS_LDPC_MSK)
 		rx_status.flag |= RX_FLAG_LDPC;
 	if (rate_n_flags & RATE_MCS_HT_MSK) {
@@ -489,6 +549,9 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	} else if (rate_n_flags & RATE_MCS_VHT_MSK) {
 		u8 stbc = (rate_n_flags & RATE_MCS_VHT_STBC_MSK) >>
 				RATE_MCS_STBC_POS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rx_status.vht_nss =
 			((rate_n_flags & RATE_VHT_MCS_NSS_MSK) >>
@@ -496,6 +559,12 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 		rx_status.rate_idx = rate_n_flags & RATE_VHT_MCS_RATE_CODE_MSK;
 		rx_status.flag |= RX_FLAG_VHT;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rx_status.flag |= stbc << RX_FLAG_STBC_SHIFT;
+		if (rate_n_flags & RATE_MCS_BF_MSK)
+			rx_status.vht_flag |= RX_VHT_FLAG_BF;
+>>>>>>> v3.18
 =======
 		rx_status.flag |= stbc << RX_FLAG_STBC_SHIFT;
 		if (rate_n_flags & RATE_MCS_BF_MSK)
@@ -508,18 +577,27 @@ int iwl_mvm_rx_rx_mpdu(struct iwl_mvm *mvm, struct iwl_rx_cmd_buffer *rxb,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IWLWIFI_DEBUGFS
 	iwl_mvm_update_frame_stats(mvm, &mvm->drv_rx_stats, rate_n_flags,
 				   rx_status.flag & RX_FLAG_AMPDU_DETAILS);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iwl_mvm_pass_packet_to_mac80211(mvm, hdr, len, ampdu_status,
 					rxb, &rx_status);
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static void iwl_mvm_update_rx_statistics(struct iwl_mvm *mvm,
 					 struct iwl_notif_statistics *stats)
@@ -654,4 +732,7 @@ update:
 					    &data);
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

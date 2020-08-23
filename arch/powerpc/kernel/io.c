@@ -26,6 +26,12 @@
 #include <asm/bug.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* See definition in io.h */
+bool isa_io_special;
+
+>>>>>>> v3.18
 =======
 /* See definition in io.h */
 bool isa_io_special;

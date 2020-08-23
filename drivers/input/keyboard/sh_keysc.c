@@ -13,7 +13,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -175,7 +178,11 @@ static int sh_keysc_probe(struct platform_device *pdev)
 	int irq, error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev->dev.platform_data) {
+=======
+	if (!dev_get_platdata(&pdev->dev)) {
+>>>>>>> v3.18
 =======
 	if (!dev_get_platdata(&pdev->dev)) {
 >>>>>>> v3.18
@@ -206,7 +213,11 @@ static int sh_keysc_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, priv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&priv->pdata, pdev->dev.platform_data, sizeof(priv->pdata));
+=======
+	memcpy(&priv->pdata, dev_get_platdata(&pdev->dev), sizeof(priv->pdata));
+>>>>>>> v3.18
 =======
 	memcpy(&priv->pdata, dev_get_platdata(&pdev->dev), sizeof(priv->pdata));
 >>>>>>> v3.18
@@ -278,7 +289,10 @@ static int sh_keysc_probe(struct platform_device *pdev)
 	iounmap(priv->iomem_base);
  err1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(priv);
@@ -300,7 +314,10 @@ static int sh_keysc_remove(struct platform_device *pdev)
 	pm_runtime_disable(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(priv);

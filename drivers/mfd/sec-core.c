@@ -18,6 +18,10 @@
 #include <linux/slab.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -29,11 +33,14 @@
 #include <linux/mfd/samsung/core.h>
 #include <linux/mfd/samsung/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mfd/samsung/rtc.h>
 #include <linux/regmap.h>
 
 static struct mfd_cell s5m8751_devs[] = {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mfd/samsung/s2mpa01.h>
 #include <linux/mfd/samsung/s2mps11.h>
 #include <linux/mfd/samsung/s2mps14.h>
@@ -44,6 +51,9 @@ static struct mfd_cell s5m8751_devs[] = {
 #include <linux/regmap.h>
 
 static const struct mfd_cell s5m8751_devs[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.name = "s5m8751-pmic",
@@ -55,7 +65,11 @@ static const struct mfd_cell s5m8751_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell s5m8763_devs[] = {
+=======
+static const struct mfd_cell s5m8763_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell s5m8763_devs[] = {
 >>>>>>> v3.18
@@ -69,7 +83,11 @@ static const struct mfd_cell s5m8763_devs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell s5m8767_devs[] = {
+=======
+static const struct mfd_cell s5m8767_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell s5m8767_devs[] = {
 >>>>>>> v3.18
@@ -77,6 +95,7 @@ static const struct mfd_cell s5m8767_devs[] = {
 		.name = "s5m8767-pmic",
 	}, {
 		.name = "s5m-rtc",
+<<<<<<< HEAD
 <<<<<<< HEAD
 	},
 };
@@ -132,6 +151,8 @@ static struct regmap_config sec_regmap_config = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	}, {
 		.name = "s5m8767-clk",
 		.of_compatible = "samsung,s5m8767-clk",
@@ -302,6 +323,9 @@ static const struct regmap_config s5m8767_regmap_config = {
 	.volatile_reg = s2mps11_volatile,
 	.cache_type = REGCACHE_FLAT,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_OF
@@ -338,17 +362,23 @@ static struct sec_platform_data *sec_pmic_i2c_parse_dt_pdata(
 					struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 #endif
 
 static inline int sec_i2c_get_driver_data(struct i2c_client *i2c,
 =======
+=======
+>>>>>>> v3.18
 	return NULL;
 }
 #endif
 
 static inline unsigned long sec_i2c_get_driver_data(struct i2c_client *i2c,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						const struct i2c_device_id *id)
 {
@@ -356,18 +386,24 @@ static inline unsigned long sec_i2c_get_driver_data(struct i2c_client *i2c,
 	if (i2c->dev.of_node) {
 		const struct of_device_id *match;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		match = of_match_node(sec_dt_match, i2c->dev.of_node);
 		return (int)match->data;
 	}
 #endif
 	return (int)id->driver_data;
 =======
+=======
+>>>>>>> v3.18
 
 		match = of_match_node(sec_dt_match, i2c->dev.of_node);
 		return (unsigned long)match->data;
 	}
 #endif
 	return id->driver_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -375,16 +411,22 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sec_platform_data *pdata = i2c->dev.platform_data;
 	struct sec_pmic_dev *sec_pmic;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	struct sec_platform_data *pdata = dev_get_platdata(&i2c->dev);
 	const struct regmap_config *regmap;
 	const struct mfd_cell *sec_devs;
 	struct sec_pmic_dev *sec_pmic;
 	unsigned long device_type;
 	int ret, num_sec_devs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sec_pmic = devm_kzalloc(&i2c->dev, sizeof(struct sec_pmic_dev),
@@ -397,7 +439,11 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 	sec_pmic->i2c = i2c;
 	sec_pmic->irq = i2c->irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sec_pmic->type = sec_i2c_get_driver_data(i2c, id);
+=======
+	device_type = sec_i2c_get_driver_data(i2c, id);
+>>>>>>> v3.18
 =======
 	device_type = sec_i2c_get_driver_data(i2c, id);
 >>>>>>> v3.18
@@ -409,7 +455,11 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 			return ret;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pdata->device_type = sec_pmic->type;
+=======
+		pdata->device_type = device_type;
+>>>>>>> v3.18
 =======
 		pdata->device_type = device_type;
 >>>>>>> v3.18
@@ -423,10 +473,13 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sec_pmic->regmap = devm_regmap_init_i2c(i2c, &sec_regmap_config);
 	if (IS_ERR(sec_pmic->regmap)) {
 		ret = PTR_ERR(sec_pmic->regmap);
 =======
+=======
+>>>>>>> v3.18
 	switch (sec_pmic->device_type) {
 	case S2MPA01:
 		regmap = &s2mpa01_regmap_config;
@@ -454,12 +507,16 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 	sec_pmic->regmap_pmic = devm_regmap_init_i2c(i2c, regmap);
 	if (IS_ERR(sec_pmic->regmap_pmic)) {
 		ret = PTR_ERR(sec_pmic->regmap_pmic);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(&i2c->dev, "Failed to allocate register map: %d\n",
 			ret);
 		return ret;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sec_pmic->rtc = i2c_new_dummy(i2c->adapter, RTC_I2C_ADDR);
 	if (!sec_pmic->rtc) {
@@ -468,6 +525,8 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 	}
 	i2c_set_clientdata(sec_pmic->rtc, sec_pmic);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (pdata && pdata->cfg_pmic_irq)
@@ -479,6 +538,7 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 
 	switch (sec_pmic->device_type) {
 	case S5M8751X:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = mfd_add_devices(sec_pmic->dev, -1, s5m8751_devs,
 				      ARRAY_SIZE(s5m8751_devs), NULL, 0, NULL);
@@ -495,6 +555,8 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 		ret = mfd_add_devices(sec_pmic->dev, -1, s2mps11_devs,
 				      ARRAY_SIZE(s2mps11_devs), NULL, 0, NULL);
 =======
+=======
+>>>>>>> v3.18
 		sec_devs = s5m8751_devs;
 		num_sec_devs = ARRAY_SIZE(s5m8751_devs);
 		break;
@@ -521,12 +583,16 @@ static int sec_pmic_probe(struct i2c_client *i2c,
 	case S2MPU02:
 		sec_devs = s2mpu02_devs;
 		num_sec_devs = ARRAY_SIZE(s2mpu02_devs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
 		/* If this happens the probe function is problem */
 		BUG();
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (ret < 0)
@@ -539,6 +605,8 @@ err:
 	sec_irq_exit(sec_pmic);
 	i2c_unregister_device(sec_pmic->rtc);
 =======
+=======
+>>>>>>> v3.18
 	ret = mfd_add_devices(sec_pmic->dev, -1, sec_devs, num_sec_devs, NULL,
 			      0, NULL);
 	if (ret)
@@ -550,6 +618,9 @@ err:
 
 err_mfd:
 	sec_irq_exit(sec_pmic);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -561,11 +632,14 @@ static int sec_pmic_remove(struct i2c_client *i2c)
 	mfd_remove_devices(sec_pmic->dev);
 	sec_irq_exit(sec_pmic);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_unregister_device(sec_pmic->rtc);
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -615,6 +689,9 @@ static int sec_pmic_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(sec_pmic_pm_ops, sec_pmic_suspend, sec_pmic_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct i2c_device_id sec_pmic_id[] = {
 	{ "sec_pmic", 0 },
@@ -627,6 +704,10 @@ static struct i2c_driver sec_pmic_driver = {
 		   .name = "sec_pmic",
 		   .owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		   .pm = &sec_pmic_pm_ops,
+>>>>>>> v3.18
 =======
 		   .pm = &sec_pmic_pm_ops,
 >>>>>>> v3.18

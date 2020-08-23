@@ -36,7 +36,10 @@
  * PCI device IDs.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_VENDOR_ID_VMWARE            0x15AD
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCI_DEVICE_ID_VMWARE_SVGA2      0x0405
@@ -173,8 +176,11 @@ enum {
    SVGA_REG_GMRS_MAX_PAGES = 46,    /* Maximum number of 4KB pages for all GMRs */
    SVGA_REG_MEMORY_SIZE = 47,       /* Total dedicated device memory excluding FIFO */
 <<<<<<< HEAD
+<<<<<<< HEAD
    SVGA_REG_TOP = 48,               /* Must be 1 more than the last register */
 =======
+=======
+>>>>>>> v3.18
    SVGA_REG_COMMAND_LOW = 48,       /* Lower 32 bits and submits commands */
    SVGA_REG_COMMAND_HIGH = 49,      /* Upper 32 bits of command buffer PA */
    SVGA_REG_MAX_PRIMARY_BOUNDING_BOX_MEM = 50,   /* Max primary memory */
@@ -186,6 +192,9 @@ enum {
    SVGA_REG_SCREENTARGET_MAX_HEIGHT = 56,
    SVGA_REG_MOB_MAX_SIZE = 57,
    SVGA_REG_TOP = 58,               /* Must be 1 more than the last register */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
    SVGA_PALETTE_BASE = 1024,        /* Base of SVGA color map */
@@ -449,12 +458,18 @@ struct SVGASignedPoint {
 #define SVGA_CAP_GMR2               0x00400000
 #define SVGA_CAP_SCREEN_OBJECT_2    0x00800000
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #define SVGA_CAP_COMMAND_BUFFERS    0x01000000
 #define SVGA_CAP_DEAD1              0x02000000
 #define SVGA_CAP_CMD_BUFFERS_2      0x04000000
 #define SVGA_CAP_GBOBJECTS          0x08000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*

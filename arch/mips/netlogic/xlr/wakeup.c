@@ -33,7 +33,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -53,16 +56,22 @@
 #include <asm/netlogic/xlr/pic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __cpuinit xlr_wakeup_secondary_cpus(void)
 {
 	struct nlm_soc_info *nodep;
 	unsigned int i, j, boot_cpu;
 =======
+=======
+>>>>>>> v3.18
 int xlr_wakeup_secondary_cpus(void)
 {
 	struct nlm_soc_info *nodep;
 	unsigned int i, j, boot_cpu;
 	volatile u32 *cpu_ready = nlm_get_boot_data(BOOT_CPU_READY);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -81,9 +90,15 @@ int xlr_wakeup_secondary_cpus(void)
 	/* Fill up the coremask early */
 	nodep->coremask = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 1; i < NLM_CORES_PER_NODE; i++) {
 		for (j = 1000000; j > 0; j--) {
 			if (nlm_cpu_ready[i * NLM_THREADS_PER_CORE])
+=======
+	for (i = 1; i < nlm_cores_per_node(); i++) {
+		for (j = 1000000; j > 0; j--) {
+			if (cpu_ready[i * NLM_THREADS_PER_CORE])
+>>>>>>> v3.18
 =======
 	for (i = 1; i < nlm_cores_per_node(); i++) {
 		for (j = 1000000; j > 0; j--) {

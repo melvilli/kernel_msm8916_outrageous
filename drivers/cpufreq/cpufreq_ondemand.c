@@ -171,14 +171,20 @@ static void od_check_cpu(int cpu, unsigned int load)
 	} else {
 		/* Calculate the next frequency proportional to load */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		unsigned int freq_next;
 		freq_next = load * policy->cpuinfo.max_freq / 100;
 =======
+=======
+>>>>>>> v3.18
 		unsigned int freq_next, min_f, max_f;
 
 		min_f = policy->cpuinfo.min_freq;
 		max_f = policy->cpuinfo.max_freq;
 		freq_next = min_f + load * (max_f - min_f) / 100;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* No longer fully busy, reset rate_mult */
@@ -187,7 +193,11 @@ static void od_check_cpu(int cpu, unsigned int load)
 		if (!od_tuners->powersave_bias) {
 			__cpufreq_driver_target(policy, freq_next,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					CPUFREQ_RELATION_L);
+=======
+					CPUFREQ_RELATION_C);
+>>>>>>> v3.18
 =======
 					CPUFREQ_RELATION_C);
 >>>>>>> v3.18
@@ -197,7 +207,11 @@ static void od_check_cpu(int cpu, unsigned int load)
 		freq_next = od_ops.powersave_bias_target(policy, freq_next,
 					CPUFREQ_RELATION_L);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__cpufreq_driver_target(policy, freq_next, CPUFREQ_RELATION_L);
+=======
+		__cpufreq_driver_target(policy, freq_next, CPUFREQ_RELATION_C);
+>>>>>>> v3.18
 =======
 		__cpufreq_driver_target(policy, freq_next, CPUFREQ_RELATION_C);
 >>>>>>> v3.18
@@ -272,7 +286,10 @@ static void update_sampling_rate(struct dbs_data *dbs_data,
 			dbs_data->min_sampling_rate);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_online_cpus();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for_each_online_cpu(cpu) {
@@ -313,7 +330,10 @@ static void update_sampling_rate(struct dbs_data *dbs_data,
 		mutex_unlock(&dbs_info->cdbs.timer_mutex);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_online_cpus();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

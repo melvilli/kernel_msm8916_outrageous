@@ -212,6 +212,10 @@ static int ems_pcmcia_add_card(struct pcmcia_device *pdev, unsigned long base)
 		priv->priv = card;
 		SET_NETDEV_DEV(dev, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev->dev_id = i;
+>>>>>>> v3.18
 =======
 		dev->dev_id = i;
 >>>>>>> v3.18

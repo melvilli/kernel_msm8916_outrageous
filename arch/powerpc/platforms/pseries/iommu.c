@@ -31,7 +31,10 @@
 #include <linux/memblock.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sched.h>	/* for show_stack */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/string.h>
@@ -52,6 +55,7 @@
 #include <asm/udbg.h>
 #include <asm/mmzone.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "plpar_wrappers.h"
 
@@ -59,11 +63,16 @@
 static void tce_invalidate_pSeries_sw(struct iommu_table *tbl,
 				      u64 *startp, u64 *endp)
 =======
+=======
+>>>>>>> v3.18
 #include <asm/plpar_wrappers.h>
 
 
 static void tce_invalidate_pSeries_sw(struct iommu_table *tbl,
 				      __be64 *startp, __be64 *endp)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u64 __iomem *invalidate = (u64 __iomem *)tbl->it_index;
@@ -99,7 +108,11 @@ static int tce_build_pSeries(struct iommu_table *tbl, long index,
 {
 	u64 proto_tce;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *tcep, *tces;
+=======
+	__be64 *tcep, *tces;
+>>>>>>> v3.18
 =======
 	__be64 *tcep, *tces;
 >>>>>>> v3.18
@@ -111,7 +124,11 @@ static int tce_build_pSeries(struct iommu_table *tbl, long index,
 		proto_tce |= TCE_PCI_WRITE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tces = tcep = ((u64 *)tbl->it_base) + index;
+=======
+	tces = tcep = ((__be64 *)tbl->it_base) + index;
+>>>>>>> v3.18
 =======
 	tces = tcep = ((__be64 *)tbl->it_base) + index;
 >>>>>>> v3.18
@@ -120,7 +137,11 @@ static int tce_build_pSeries(struct iommu_table *tbl, long index,
 		/* can't move this out since we might cross MEMBLOCK boundary */
 		rpn = __pa(uaddr) >> TCE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*tcep = proto_tce | (rpn & TCE_RPN_MASK) << TCE_RPN_SHIFT;
+=======
+		*tcep = cpu_to_be64(proto_tce | (rpn & TCE_RPN_MASK) << TCE_RPN_SHIFT);
+>>>>>>> v3.18
 =======
 		*tcep = cpu_to_be64(proto_tce | (rpn & TCE_RPN_MASK) << TCE_RPN_SHIFT);
 >>>>>>> v3.18
@@ -138,9 +159,15 @@ static int tce_build_pSeries(struct iommu_table *tbl, long index,
 static void tce_free_pSeries(struct iommu_table *tbl, long index, long npages)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *tcep, *tces;
 
 	tces = tcep = ((u64 *)tbl->it_base) + index;
+=======
+	__be64 *tcep, *tces;
+
+	tces = tcep = ((__be64 *)tbl->it_base) + index;
+>>>>>>> v3.18
 =======
 	__be64 *tcep, *tces;
 
@@ -157,17 +184,23 @@ static void tce_free_pSeries(struct iommu_table *tbl, long index, long npages)
 static unsigned long tce_get_pseries(struct iommu_table *tbl, long index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *tcep;
 
 	tcep = ((u64 *)tbl->it_base) + index;
 
 	return *tcep;
 =======
+=======
+>>>>>>> v3.18
 	__be64 *tcep;
 
 	tcep = ((__be64 *)tbl->it_base) + index;
 
 	return be64_to_cpu(*tcep);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -207,7 +240,11 @@ static int tce_build_pSeriesLP(struct iommu_table *tbl, long tcenum,
 			printk("\ttcenum  = 0x%llx\n", (u64)tcenum);
 			printk("\ttce val = 0x%llx\n", tce );
 <<<<<<< HEAD
+<<<<<<< HEAD
 			show_stack(current, (unsigned long *)__get_SP());
+=======
+			dump_stack();
+>>>>>>> v3.18
 =======
 			dump_stack();
 >>>>>>> v3.18
@@ -220,7 +257,11 @@ static int tce_build_pSeriesLP(struct iommu_table *tbl, long tcenum,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PER_CPU(u64 *, tce_page);
+=======
+static DEFINE_PER_CPU(__be64 *, tce_page);
+>>>>>>> v3.18
 =======
 static DEFINE_PER_CPU(__be64 *, tce_page);
 >>>>>>> v3.18
@@ -233,7 +274,11 @@ static int tce_buildmulti_pSeriesLP(struct iommu_table *tbl, long tcenum,
 	u64 rc = 0;
 	u64 proto_tce;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *tcep;
+=======
+	__be64 *tcep;
+>>>>>>> v3.18
 =======
 	__be64 *tcep;
 >>>>>>> v3.18
@@ -257,7 +302,11 @@ static int tce_buildmulti_pSeriesLP(struct iommu_table *tbl, long tcenum,
 	 */
 	if (!tcep) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcep = (u64 *)__get_free_page(GFP_ATOMIC);
+=======
+		tcep = (__be64 *)__get_free_page(GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		tcep = (__be64 *)__get_free_page(GFP_ATOMIC);
 >>>>>>> v3.18
@@ -285,7 +334,11 @@ static int tce_buildmulti_pSeriesLP(struct iommu_table *tbl, long tcenum,
 
 		for (l = 0; l < limit; l++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tcep[l] = proto_tce | (rpn & TCE_RPN_MASK) << TCE_RPN_SHIFT;
+=======
+			tcep[l] = cpu_to_be64(proto_tce | (rpn & TCE_RPN_MASK) << TCE_RPN_SHIFT);
+>>>>>>> v3.18
 =======
 			tcep[l] = cpu_to_be64(proto_tce | (rpn & TCE_RPN_MASK) << TCE_RPN_SHIFT);
 >>>>>>> v3.18
@@ -316,7 +369,11 @@ static int tce_buildmulti_pSeriesLP(struct iommu_table *tbl, long tcenum,
 		printk("\tnpages  = 0x%llx\n", (u64)npages);
 		printk("\ttce[0] val = 0x%llx\n", tcep[0]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		show_stack(current, (unsigned long *)__get_SP());
+=======
+		dump_stack();
+>>>>>>> v3.18
 =======
 		dump_stack();
 >>>>>>> v3.18
@@ -336,7 +393,11 @@ static void tce_free_pSeriesLP(struct iommu_table *tbl, long tcenum, long npages
 			printk("\tindex   = 0x%llx\n", (u64)tbl->it_index);
 			printk("\ttcenum  = 0x%llx\n", (u64)tcenum);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			show_stack(current, (unsigned long *)__get_SP());
+=======
+			dump_stack();
+>>>>>>> v3.18
 =======
 			dump_stack();
 >>>>>>> v3.18
@@ -359,7 +420,11 @@ static void tce_freemulti_pSeriesLP(struct iommu_table *tbl, long tcenum, long n
 		printk("\tindex   = 0x%llx\n", (u64)tbl->it_index);
 		printk("\tnpages  = 0x%llx\n", (u64)npages);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		show_stack(current, (unsigned long *)__get_SP());
+=======
+		dump_stack();
+>>>>>>> v3.18
 =======
 		dump_stack();
 >>>>>>> v3.18
@@ -378,7 +443,11 @@ static unsigned long tce_get_pSeriesLP(struct iommu_table *tbl, long tcenum)
 		printk("\tindex   = 0x%llx\n", (u64)tbl->it_index);
 		printk("\ttcenum  = 0x%llx\n", (u64)tcenum);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		show_stack(current, (unsigned long *)__get_SP());
+=======
+		dump_stack();
+>>>>>>> v3.18
 =======
 		dump_stack();
 >>>>>>> v3.18
@@ -467,7 +536,12 @@ static int tce_setrange_multi_pSeriesLP(unsigned long start_pfn,
 {
 	const struct dynamic_dma_window_prop *maprange = arg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 *tcep, tce_size, num_tce, dma_offset, next, proto_tce, liobn;
+=======
+	u64 tce_size, num_tce, dma_offset, next, proto_tce, liobn;
+	__be64 *tcep;
+>>>>>>> v3.18
 =======
 	u64 tce_size, num_tce, dma_offset, next, proto_tce, liobn;
 	__be64 *tcep;
@@ -481,7 +555,11 @@ static int tce_setrange_multi_pSeriesLP(unsigned long start_pfn,
 
 	if (!tcep) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tcep = (u64 *)__get_free_page(GFP_ATOMIC);
+=======
+		tcep = (__be64 *)__get_free_page(GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 		tcep = (__be64 *)__get_free_page(GFP_ATOMIC);
 >>>>>>> v3.18
@@ -519,7 +597,11 @@ static int tce_setrange_multi_pSeriesLP(unsigned long start_pfn,
 
 		for (l = 0; l < limit; l++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tcep[l] = proto_tce | next;
+=======
+			tcep[l] = cpu_to_be64(proto_tce | next);
+>>>>>>> v3.18
 =======
 			tcep[l] = cpu_to_be64(proto_tce | next);
 >>>>>>> v3.18
@@ -573,14 +655,20 @@ static void iommu_table_setparms(struct pci_controller *phb,
 
 	tbl->it_busno = phb->bus->number;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Units of tce entries */
 	tbl->it_offset = phb->dma_window_base_cur >> IOMMU_PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	tbl->it_page_shift = IOMMU_PAGE_SHIFT_4K;
 
 	/* Units of tce entries */
 	tbl->it_offset = phb->dma_window_base_cur >> tbl->it_page_shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Test if we are going over 2GB of DMA space */
@@ -593,7 +681,11 @@ static void iommu_table_setparms(struct pci_controller *phb,
 
 	/* Set the tce table size - measured in entries */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tbl->it_size = phb->dma_window_size >> IOMMU_PAGE_SHIFT;
+=======
+	tbl->it_size = phb->dma_window_size >> tbl->it_page_shift;
+>>>>>>> v3.18
 =======
 	tbl->it_size = phb->dma_window_size >> tbl->it_page_shift;
 >>>>>>> v3.18
@@ -628,7 +720,11 @@ static void iommu_table_setparms_lpar(struct pci_controller *phb,
 				      struct device_node *dn,
 				      struct iommu_table *tbl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      const void *dma_window)
+=======
+				      const __be32 *dma_window)
+>>>>>>> v3.18
 =======
 				      const __be32 *dma_window)
 >>>>>>> v3.18
@@ -639,18 +735,24 @@ static void iommu_table_setparms_lpar(struct pci_controller *phb,
 
 	tbl->it_busno = phb->bus->number;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tbl->it_base   = 0;
 	tbl->it_blocksize  = 16;
 	tbl->it_type = TCE_PCI;
 	tbl->it_offset = offset >> IOMMU_PAGE_SHIFT;
 	tbl->it_size = size >> IOMMU_PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 	tbl->it_page_shift = IOMMU_PAGE_SHIFT_4K;
 	tbl->it_base   = 0;
 	tbl->it_blocksize  = 16;
 	tbl->it_type = TCE_PCI;
 	tbl->it_offset = offset >> tbl->it_page_shift;
 	tbl->it_size = size >> tbl->it_page_shift;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -725,6 +827,10 @@ static void pci_dma_bus_setup_pSeries(struct pci_bus *bus)
 	iommu_table_setparms(pci->phb, dn, tbl);
 	pci->iommu_table = iommu_init_table(tbl, pci->phb->node);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iommu_register_group(tbl, pci_domain_nr(bus), 0);
+>>>>>>> v3.18
 =======
 	iommu_register_group(tbl, pci_domain_nr(bus), 0);
 >>>>>>> v3.18
@@ -744,7 +850,11 @@ static void pci_dma_bus_setup_pSeriesLP(struct pci_bus *bus)
 	struct device_node *dn, *pdn;
 	struct pci_dn *ppci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const void *dma_window = NULL;
+=======
+	const __be32 *dma_window = NULL;
+>>>>>>> v3.18
 =======
 	const __be32 *dma_window = NULL;
 >>>>>>> v3.18
@@ -777,6 +887,10 @@ static void pci_dma_bus_setup_pSeriesLP(struct pci_bus *bus)
 		iommu_table_setparms_lpar(ppci->phb, pdn, tbl, dma_window);
 		ppci->iommu_table = iommu_init_table(tbl, ppci->phb->node);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		iommu_register_group(tbl, pci_domain_nr(bus), 0);
+>>>>>>> v3.18
 =======
 		iommu_register_group(tbl, pci_domain_nr(bus), 0);
 >>>>>>> v3.18
@@ -807,7 +921,13 @@ static void pci_dma_dev_setup_pSeries(struct pci_dev *dev)
 		iommu_table_setparms(phb, dn, tbl);
 		PCI_DN(dn)->iommu_table = iommu_init_table(tbl, phb->node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_iommu_table_base(&dev->dev, PCI_DN(dn)->iommu_table);
+=======
+		iommu_register_group(tbl, pci_domain_nr(phb->bus), 0);
+		set_iommu_table_base_and_group(&dev->dev,
+					       PCI_DN(dn)->iommu_table);
+>>>>>>> v3.18
 =======
 		iommu_register_group(tbl, pci_domain_nr(phb->bus), 0);
 		set_iommu_table_base_and_group(&dev->dev,
@@ -825,7 +945,12 @@ static void pci_dma_dev_setup_pSeries(struct pci_dev *dev)
 
 	if (dn && PCI_DN(dn))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_iommu_table_base(&dev->dev, PCI_DN(dn)->iommu_table);
+=======
+		set_iommu_table_base_and_group(&dev->dev,
+					       PCI_DN(dn)->iommu_table);
+>>>>>>> v3.18
 =======
 		set_iommu_table_base_and_group(&dev->dev,
 					       PCI_DN(dn)->iommu_table);
@@ -847,6 +972,7 @@ static int __init disable_ddw_setup(char *str)
 
 early_param("disable_ddw", disable_ddw_setup);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline void __remove_ddw(struct device_node *np, const u32 *ddw_avail, u64 liobn)
 {
@@ -873,6 +999,8 @@ static void remove_ddw(struct device_node *np)
 
 	ddw_avail = of_get_property(np, "ibm,ddw-applicable", &len);
 =======
+=======
+>>>>>>> v3.18
 static void remove_ddw(struct device_node *np, bool remove_prop)
 {
 	struct dynamic_dma_window_prop *dwp;
@@ -884,13 +1012,20 @@ static void remove_ddw(struct device_node *np, bool remove_prop)
 	ret = of_property_read_u32_array(np, "ibm,ddw-applicable",
 					 &ddw_avail[0], 3);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	win64 = of_find_property(np, DIRECT64_PROPNAME, NULL);
 	if (!win64)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ddw_avail || len < 3 * sizeof(u32) || win64->length < sizeof(*dwp))
+=======
+	if (ret || win64->length < sizeof(*dwp))
+>>>>>>> v3.18
 =======
 	if (ret || win64->length < sizeof(*dwp))
 >>>>>>> v3.18
@@ -910,11 +1045,14 @@ static void remove_ddw(struct device_node *np, bool remove_prop)
 			 np->full_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__remove_ddw(np, ddw_avail, liobn);
 
 delprop:
 	ret = of_remove_property(np, win64);
 =======
+=======
+>>>>>>> v3.18
 	ret = rtas_call(ddw_avail[2], 1, 1, NULL, liobn);
 	if (ret)
 		pr_warning("%s: failed to remove direct window: rtas returned "
@@ -928,6 +1066,9 @@ delprop:
 delprop:
 	if (remove_prop)
 		ret = of_remove_property(np, win64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret)
 		pr_warning("%s: failed to remove direct window property: %d\n",
@@ -946,7 +1087,11 @@ static u64 find_existing_ddw(struct device_node *pdn)
 		if (window->device == pdn) {
 			direct64 = window->prop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dma_addr = direct64->dma_base;
+=======
+			dma_addr = be64_to_cpu(direct64->dma_base);
+>>>>>>> v3.18
 =======
 			dma_addr = be64_to_cpu(direct64->dma_base);
 >>>>>>> v3.18
@@ -958,6 +1103,7 @@ static u64 find_existing_ddw(struct device_node *pdn)
 	return dma_addr;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __restore_default_window(struct eeh_dev *edev,
 						u32 ddw_restore_token)
@@ -991,18 +1137,24 @@ static int find_existing_ddw_windows(void)
 	const struct dynamic_dma_window_prop *direct64;
 	const u32 *ddw_extensions;
 =======
+=======
+>>>>>>> v3.18
 static int find_existing_ddw_windows(void)
 {
 	int len;
 	struct device_node *pdn;
 	struct direct_window *window;
 	const struct dynamic_dma_window_prop *direct64;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!firmware_has_feature(FW_FEATURE_LPAR))
 		return 0;
 
 	for_each_node_with_property(pdn, DIRECT64_PROPNAME) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		direct64 = of_get_property(pdn, DIRECT64_PROPNAME, NULL);
 		if (!direct64)
@@ -1031,6 +1183,8 @@ static int find_existing_ddw_windows(void)
 			__restore_default_window(of_node_to_eeh_dev(pdn),
 							ddw_extensions[1]);
 =======
+=======
+>>>>>>> v3.18
 		direct64 = of_get_property(pdn, DIRECT64_PROPNAME, &len);
 		if (!direct64)
 			continue;
@@ -1047,6 +1201,9 @@ static int find_existing_ddw_windows(void)
 		spin_lock(&direct_window_list_lock);
 		list_add(&window->list, &direct_window_list);
 		spin_unlock(&direct_window_list_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1058,8 +1215,12 @@ static int query_ddw(struct pci_dev *dev, const u32 *ddw_avail,
 			struct ddw_query_response *query)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *dn;
 	struct pci_dn *pdn;
+=======
+	struct eeh_dev *edev;
+>>>>>>> v3.18
 =======
 	struct eeh_dev *edev;
 >>>>>>> v3.18
@@ -1074,16 +1235,22 @@ static int query_ddw(struct pci_dev *dev, const u32 *ddw_avail,
 	 * dma-window property
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dn = pci_device_to_OF_node(dev);
 	pdn = PCI_DN(dn);
 	buid = pdn->phb->buid;
 	cfg_addr = ((pdn->busno << 16) | (pdn->devfn << 8));
 =======
+=======
+>>>>>>> v3.18
 	edev = pci_dev_to_eeh_dev(dev);
 	cfg_addr = edev->config_addr;
 	if (edev->pe_config_addr)
 		cfg_addr = edev->pe_config_addr;
 	buid = edev->phb->buid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = rtas_call(ddw_avail[0], 3, 5, (u32 *)query,
@@ -1099,8 +1266,12 @@ static int create_ddw(struct pci_dev *dev, const u32 *ddw_avail,
 			int window_shift)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *dn;
 	struct pci_dn *pdn;
+=======
+	struct eeh_dev *edev;
+>>>>>>> v3.18
 =======
 	struct eeh_dev *edev;
 >>>>>>> v3.18
@@ -1115,6 +1286,7 @@ static int create_ddw(struct pci_dev *dev, const u32 *ddw_avail,
 	 * dma-window property
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dn = pci_device_to_OF_node(dev);
 	pdn = PCI_DN(dn);
 	buid = pdn->phb->buid;
@@ -1125,6 +1297,8 @@ static int create_ddw(struct pci_dev *dev, const u32 *ddw_avail,
 		ret = rtas_call(ddw_avail[1], 5, 4, (u32 *)create, cfg_addr,
 				BUID_HI(buid), BUID_LO(buid), page_shift, window_shift);
 =======
+=======
+>>>>>>> v3.18
 	edev = pci_dev_to_eeh_dev(dev);
 	cfg_addr = edev->config_addr;
 	if (edev->pe_config_addr)
@@ -1136,6 +1310,9 @@ static int create_ddw(struct pci_dev *dev, const u32 *ddw_avail,
 		ret = rtas_call(ddw_avail[1], 5, 4, (u32 *)create,
 				cfg_addr, BUID_HI(buid), BUID_LO(buid),
 				page_shift, window_shift);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (rtas_busy_delay(ret));
 	dev_info(&dev->dev,
@@ -1148,12 +1325,15 @@ static int create_ddw(struct pci_dev *dev, const u32 *ddw_avail,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void restore_default_window(struct pci_dev *dev,
 					u32 ddw_restore_token)
 {
 	__restore_default_window(pci_dev_to_eeh_dev(dev), ddw_restore_token);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct failed_ddw_pdn {
@@ -1183,6 +1363,7 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 	u64 dma_addr, max_addr;
 	struct device_node *dn;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u32 *uninitialized_var(ddw_avail);
 	const u32 *uninitialized_var(ddw_extensions);
 	u32 ddw_restore_token = 0;
@@ -1192,10 +1373,15 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 	const void *dma_window = NULL;
 	unsigned long liobn, offset, size;
 =======
+=======
+>>>>>>> v3.18
 	u32 ddw_avail[3];
 	struct direct_window *window;
 	struct property *win64;
 	struct dynamic_dma_window_prop *ddwprop;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct failed_ddw_pdn *fpdn;
 
@@ -1225,6 +1411,7 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 	 * for the given node in that order.
 	 * the property is actually in the parent, not the PE
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ddw_avail = of_get_property(pdn, "ibm,ddw-applicable", &len);
 	if (!ddw_avail || len < 3 * sizeof(u32))
@@ -1265,12 +1452,17 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 
 	/*
 =======
+=======
+>>>>>>> v3.18
 	ret = of_property_read_u32_array(pdn, "ibm,ddw-applicable",
 					 &ddw_avail[0], 3);
 	if (ret)
 		goto out_failed;
 
        /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Query if there is a second window of size to map the
 	 * whole partition.  Query returns number of windows, largest
@@ -1281,7 +1473,11 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 	ret = query_ddw(dev, ddw_avail, &query);
 	if (ret != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_restore_window;
+=======
+		goto out_failed;
+>>>>>>> v3.18
 =======
 		goto out_failed;
 >>>>>>> v3.18
@@ -1294,7 +1490,11 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 		 */
 		dev_dbg(&dev->dev, "no free dynamic windows");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_restore_window;
+=======
+		goto out_failed;
+>>>>>>> v3.18
 =======
 		goto out_failed;
 >>>>>>> v3.18
@@ -1309,7 +1509,11 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 		dev_dbg(&dev->dev, "no supported direct page size in mask %x",
 			  query.page_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_restore_window;
+=======
+		goto out_failed;
+>>>>>>> v3.18
 =======
 		goto out_failed;
 >>>>>>> v3.18
@@ -1322,7 +1526,11 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 			  "%llu-sized pages\n", max_addr,  query.largest_available_block,
 			  1ULL << page_shift);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_restore_window;
+=======
+		goto out_failed;
+>>>>>>> v3.18
 =======
 		goto out_failed;
 >>>>>>> v3.18
@@ -1333,7 +1541,11 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 		dev_info(&dev->dev,
 			"couldn't allocate property for 64bit dma window\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_restore_window;
+=======
+		goto out_failed;
+>>>>>>> v3.18
 =======
 		goto out_failed;
 >>>>>>> v3.18
@@ -1353,7 +1565,12 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 
 	ddwprop->liobn = cpu_to_be32(create.liobn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ddwprop->dma_base = cpu_to_be64(of_read_number(&create.addr_hi, 2));
+=======
+	ddwprop->dma_base = cpu_to_be64(((u64)create.addr_hi << 32) |
+			create.addr_lo);
+>>>>>>> v3.18
 =======
 	ddwprop->dma_base = cpu_to_be64(((u64)create.addr_hi << 32) |
 			create.addr_lo);
@@ -1390,7 +1607,11 @@ static u64 enable_ddw(struct pci_dev *dev, struct device_node *pdn)
 	spin_unlock(&direct_window_list_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_addr = of_read_number(&create.addr_hi, 2);
+=======
+	dma_addr = be64_to_cpu(ddwprop->dma_base);
+>>>>>>> v3.18
 =======
 	dma_addr = be64_to_cpu(ddwprop->dma_base);
 >>>>>>> v3.18
@@ -1401,7 +1622,11 @@ out_free_window:
 
 out_clear_window:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	remove_ddw(pdn);
+=======
+	remove_ddw(pdn, true);
+>>>>>>> v3.18
 =======
 	remove_ddw(pdn, true);
 >>>>>>> v3.18
@@ -1412,9 +1637,13 @@ out_free_prop:
 	kfree(win64);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_restore_window:
 	if (ddw_restore_token)
 		restore_default_window(dev, ddw_restore_token);
+=======
+out_failed:
+>>>>>>> v3.18
 =======
 out_failed:
 >>>>>>> v3.18
@@ -1435,7 +1664,11 @@ static void pci_dma_dev_setup_pSeriesLP(struct pci_dev *dev)
 	struct device_node *pdn, *dn;
 	struct iommu_table *tbl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const void *dma_window = NULL;
+=======
+	const __be32 *dma_window = NULL;
+>>>>>>> v3.18
 =======
 	const __be32 *dma_window = NULL;
 >>>>>>> v3.18
@@ -1474,6 +1707,10 @@ static void pci_dma_dev_setup_pSeriesLP(struct pci_dev *dev)
 		iommu_table_setparms_lpar(pci->phb, pdn, tbl, dma_window);
 		pci->iommu_table = iommu_init_table(tbl, pci->phb->node);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		iommu_register_group(tbl, pci_domain_nr(pci->phb->bus), 0);
+>>>>>>> v3.18
 =======
 		iommu_register_group(tbl, pci_domain_nr(pci->phb->bus), 0);
 >>>>>>> v3.18
@@ -1483,7 +1720,11 @@ static void pci_dma_dev_setup_pSeriesLP(struct pci_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_iommu_table_base(&dev->dev, pci->iommu_table);
+=======
+	set_iommu_table_base_and_group(&dev->dev, pci->iommu_table);
+>>>>>>> v3.18
 =======
 	set_iommu_table_base_and_group(&dev->dev, pci->iommu_table);
 >>>>>>> v3.18
@@ -1495,7 +1736,11 @@ static int dma_set_mask_pSeriesLP(struct device *dev, u64 dma_mask)
 	struct device_node *pdn, *dn;
 	struct pci_dev *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const void *dma_window = NULL;
+=======
+	const __be32 *dma_window = NULL;
+>>>>>>> v3.18
 =======
 	const __be32 *dma_window = NULL;
 >>>>>>> v3.18
@@ -1636,8 +1881,11 @@ static int iommu_reconfig_notifier(struct notifier_block *nb, unsigned long acti
 	switch (action) {
 	case OF_RECONFIG_DETACH_NODE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		remove_ddw(np);
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Removing the property will invoke the reconfig
 		 * notifier again, which causes dead-lock on the
@@ -1646,6 +1894,9 @@ static int iommu_reconfig_notifier(struct notifier_block *nb, unsigned long acti
 		 * the device node.
 		 */
 		remove_ddw(np, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (pci && pci->iommu_table)
 			iommu_free_table(pci->iommu_table, np->full_name);

@@ -1,14 +1,20 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _BNX2FC_H_
 #define _BNX2FC_H_
 /* bnx2fc.h: Broadcom NetXtreme II Linux FCoE offload driver.
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
 =======
+=======
+>>>>>>> v3.18
 /* bnx2fc.h: QLogic NetXtreme II Linux FCoE offload driver.
  *
  * Copyright (c) 2008 - 2013 Broadcom Corporation
  * Copyright (c) 2014, QLogic Corporation
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,6 +25,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef _BNX2FC_H_
+#define _BNX2FC_H_
+>>>>>>> v3.18
 =======
 #ifndef _BNX2FC_H_
 #define _BNX2FC_H_
@@ -77,7 +88,11 @@
 
 #define BNX2FC_NAME		"bnx2fc"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BNX2FC_VERSION		"1.0.14"
+=======
+#define BNX2FC_VERSION		"2.4.2"
+>>>>>>> v3.18
 =======
 #define BNX2FC_VERSION		"2.4.2"
 >>>>>>> v3.18
@@ -122,7 +137,11 @@
 #define BNX2FC_XFERQ_WQE_SIZE		(sizeof(struct fcoe_xfrqe))
 #define BNX2FC_CONFQ_WQE_SIZE		(sizeof(struct fcoe_confqe))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BNX2FC_5771X_DB_PAGE_SIZE	128
+=======
+#define BNX2X_DB_SHIFT			3
+>>>>>>> v3.18
 =======
 #define BNX2X_DB_SHIFT			3
 >>>>>>> v3.18
@@ -388,6 +407,10 @@ struct bnx2fc_rport {
 	u32 flush_in_prog;
 	unsigned long timestamp;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long retry_delay_timestamp;
+>>>>>>> v3.18
 =======
 	unsigned long retry_delay_timestamp;
 >>>>>>> v3.18

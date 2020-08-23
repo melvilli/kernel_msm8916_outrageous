@@ -15,7 +15,10 @@
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <bcm47xx_nvram.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -27,11 +30,14 @@
  * Set it big enough to allow detecting partition and reading important data.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BCM47XXPART_BYTES_TO_READ	0x404
 
 /* Magics */
 #define BOARD_DATA_MAGIC		0x5246504D	/* MPFR */
 =======
+=======
+>>>>>>> v3.18
 #define BCM47XXPART_BYTES_TO_READ	0x4e8
 
 /* Magics */
@@ -40,6 +46,9 @@
 #define CFE_MAGIC			0x43464531	/* 1EFC */
 #define FACTORY_MAGIC			0x59544346	/* FCTY */
 #define NVRAM_HEADER			0x48534C46	/* FLSH */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define POT_MAGIC1			0x54544f50	/* POTT */
 #define POT_MAGIC2			0x504f		/* OP */
@@ -47,6 +56,10 @@
 #define ML_MAGIC2			0x26594131
 #define TRX_MAGIC			0x30524448
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SQSH_MAGIC			0x71736873	/* shsq */
+>>>>>>> v3.18
 =======
 #define SQSH_MAGIC			0x71736873	/* shsq */
 >>>>>>> v3.18
@@ -90,8 +103,11 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 	parts = kzalloc(sizeof(struct mtd_partition) * BCM47XXPART_MAX_PARTS,
 			GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = kzalloc(BCM47XXPART_BYTES_TO_READ, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	if (!parts)
 		return -ENOMEM;
 
@@ -100,6 +116,9 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 		kfree(parts);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Parse block by block looking for magics */
@@ -110,7 +129,11 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (curr_part > BCM47XXPART_MAX_PARTS) {
+=======
+		if (curr_part >= BCM47XXPART_MAX_PARTS) {
+>>>>>>> v3.18
 =======
 		if (curr_part >= BCM47XXPART_MAX_PARTS) {
 >>>>>>> v3.18
@@ -127,8 +150,14 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* CFE has small NVRAM at 0x400 */
 		if (buf[0x400 / 4] == NVRAM_HEADER) {
+=======
+		/* Magic or small NVRAM at 0x400 */
+		if ((buf[0x4e0 / 4] == CFE_MAGIC && buf[0x4e4 / 4] == CFE_MAGIC) ||
+		    (buf[0x400 / 4] == NVRAM_HEADER)) {
+>>>>>>> v3.18
 =======
 		/* Magic or small NVRAM at 0x400 */
 		if ((buf[0x4e0 / 4] == CFE_MAGIC && buf[0x4e4 / 4] == CFE_MAGIC) ||
@@ -150,7 +179,10 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Found on Huawei E970 */
 		if (buf[0x000 / 4] == FACTORY_MAGIC) {
 			bcm47xxpart_add_part(&parts[curr_part++], "factory",
@@ -158,6 +190,9 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 			continue;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* POT(TOP) */
 		if (buf[0x000 / 4] == POT_MAGIC1 &&
@@ -178,12 +213,18 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 		/* TRX */
 		if (buf[0x000 / 4] == TRX_MAGIC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (BCM47XXPART_MAX_PARTS - curr_part < 4) {
 				pr_warn("Not enough partitions left to register trx, scanning stopped!\n");
 				break;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			trx = (struct trx_header *)buf;
 
@@ -217,11 +258,14 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 			last_trx_part = curr_part - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* Jump to the end of TRX */
 			offset = roundup(offset + trx->length, blocksize);
 			/* Next loop iteration will increase the offset */
 			offset -= blocksize;
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * We have whole TRX scanned, skip to the next part. Use
 			 * roundown (not roundup), as the loop will increase
@@ -261,6 +305,9 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 		if (buf[0x000 / 4] == BOARD_DATA_MAGIC2) {
 			bcm47xxpart_add_part(&parts[curr_part++], "board_data",
 					     offset, MTD_WRITEABLE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
@@ -269,7 +316,11 @@ static int bcm47xxpart_parse(struct mtd_info *master,
 	/* Look for NVRAM at the end of the last block. */
 	for (i = 0; i < ARRAY_SIZE(possible_nvram_sizes); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (curr_part > BCM47XXPART_MAX_PARTS) {
+=======
+		if (curr_part >= BCM47XXPART_MAX_PARTS) {
+>>>>>>> v3.18
 =======
 		if (curr_part >= BCM47XXPART_MAX_PARTS) {
 >>>>>>> v3.18
@@ -322,7 +373,12 @@ static struct mtd_part_parser bcm47xxpart_mtd_parser = {
 static int __init bcm47xxpart_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return register_mtd_parser(&bcm47xxpart_mtd_parser);
+=======
+	register_mtd_parser(&bcm47xxpart_mtd_parser);
+	return 0;
+>>>>>>> v3.18
 =======
 	register_mtd_parser(&bcm47xxpart_mtd_parser);
 	return 0;

@@ -2,8 +2,14 @@
  * Lager board support
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2013  Renesas Solutions Corp.
  * Copyright (C) 2013  Magnus Damm
+=======
+ * Copyright (C) 2013-2014  Renesas Solutions Corp.
+ * Copyright (C) 2013  Magnus Damm
+ * Copyright (C) 2014  Cogent Embedded, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013-2014  Renesas Solutions Corp.
  * Copyright (C) 2013  Magnus Damm
@@ -25,6 +31,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/irqchip.h>
 #include <linux/kernel.h>
@@ -42,6 +49,8 @@ static void __init lager_add_standard_devices(void)
 
 static const char *lager_boards_compat_dt[] __initdata = {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/gpio.h>
 #include <linux/gpio_keys.h>
 #include <linux/i2c.h>
@@ -897,6 +906,9 @@ static void __init lager_init(void)
 }
 
 static const char * const lager_boards_compat_dt[] __initconst = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	"renesas,lager",
 	NULL,
@@ -904,16 +916,22 @@ static const char * const lager_boards_compat_dt[] __initconst = {
 
 DT_MACHINE_START(LAGER_DT, "lager")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	= irqchip_init,
 	.init_time	= r8a7790_timer_init,
 	.init_machine	= lager_add_standard_devices,
 =======
+=======
+>>>>>>> v3.18
 	.smp		= smp_ops(r8a7790_smp_ops),
 	.init_early	= shmobile_init_delay,
 	.init_time	= rcar_gen2_timer_init,
 	.init_machine	= lager_init,
 	.init_late	= shmobile_init_late,
 	.reserve	= rcar_gen2_reserve,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dt_compat	= lager_boards_compat_dt,
 MACHINE_END

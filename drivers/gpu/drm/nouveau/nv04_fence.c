@@ -23,8 +23,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <engine/fifo.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"
@@ -47,7 +50,11 @@ nv04_fence_emit(struct nouveau_fence *fence)
 	if (ret == 0) {
 		BEGIN_NV04(chan, NvSubSw, 0x0150, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OUT_RING  (chan, fence->sequence);
+=======
+		OUT_RING  (chan, fence->base.seqno);
+>>>>>>> v3.18
 =======
 		OUT_RING  (chan, fence->base.seqno);
 >>>>>>> v3.18
@@ -67,7 +74,11 @@ static u32
 nv04_fence_read(struct nouveau_channel *chan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_fifo_chan *fifo = (void *)chan->object;
+=======
+	struct nouveau_fifo_chan *fifo = nvkm_fifo_chan(chan);;
+>>>>>>> v3.18
 =======
 	struct nouveau_fifo_chan *fifo = nvkm_fifo_chan(chan);;
 >>>>>>> v3.18
@@ -81,7 +92,11 @@ nv04_fence_context_del(struct nouveau_channel *chan)
 	nouveau_fence_context_del(&fctx->base);
 	chan->fence = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(fctx);
+=======
+	nouveau_fence_context_free(&fctx->base);
+>>>>>>> v3.18
 =======
 	nouveau_fence_context_free(&fctx->base);
 >>>>>>> v3.18
@@ -93,7 +108,11 @@ nv04_fence_context_new(struct nouveau_channel *chan)
 	struct nv04_fence_chan *fctx = kzalloc(sizeof(*fctx), GFP_KERNEL);
 	if (fctx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nouveau_fence_context_new(&fctx->base);
+=======
+		nouveau_fence_context_new(chan, &fctx->base);
+>>>>>>> v3.18
 =======
 		nouveau_fence_context_new(chan, &fctx->base);
 >>>>>>> v3.18
@@ -127,6 +146,11 @@ nv04_fence_create(struct nouveau_drm *drm)
 	priv->base.context_new = nv04_fence_context_new;
 	priv->base.context_del = nv04_fence_context_del;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->base.contexts = 15;
+	priv->base.context_base = fence_context_alloc(priv->base.contexts);
+>>>>>>> v3.18
 =======
 	priv->base.contexts = 15;
 	priv->base.context_base = fence_context_alloc(priv->base.contexts);

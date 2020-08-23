@@ -134,7 +134,10 @@ struct ip_beet_phdr {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* index values for the variables in ipv4_devconf */
 enum
 {
@@ -171,5 +174,8 @@ enum
 
 #define IPV4_DEVCONF_MAX (__IPV4_DEVCONF_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _UAPI_LINUX_IP_H */

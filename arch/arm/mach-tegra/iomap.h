@@ -20,6 +20,10 @@
 #define __MACH_TEGRA_IOMAP_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/pgtable.h>
+>>>>>>> v3.18
 =======
 #include <asm/pgtable.h>
 >>>>>>> v3.18
@@ -28,6 +32,7 @@
 #define TEGRA_IRAM_BASE			0x40000000
 #define TEGRA_IRAM_SIZE			SZ_256K
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define TEGRA_HOST1X_BASE		0x50000000
 #define TEGRA_HOST1X_SIZE		0x24000
@@ -66,12 +71,17 @@
 #define TEGRA_RES_SEMA_SIZE		SZ_4K
 
 =======
+=======
+>>>>>>> v3.18
 #define TEGRA_ARM_PERIF_BASE		0x50040000
 #define TEGRA_ARM_PERIF_SIZE		SZ_8K
 
 #define TEGRA_ARM_INT_DIST_BASE		0x50041000
 #define TEGRA_ARM_INT_DIST_SIZE		SZ_4K
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TEGRA_PRIMARY_ICTLR_BASE	0x60004000
 #define TEGRA_PRIMARY_ICTLR_SIZE	SZ_64
@@ -110,6 +120,7 @@
 #define TEGRA_FLOW_CTRL_SIZE		20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TEGRA_AHB_DMA_BASE		0x60008000
 #define TEGRA_AHB_DMA_SIZE		SZ_4K
 
@@ -139,12 +150,18 @@
 #define TEGRA_SB_SIZE			256
 
 >>>>>>> v3.18
+=======
+#define TEGRA_SB_BASE			0x6000C200
+#define TEGRA_SB_SIZE			256
+
+>>>>>>> v3.18
 #define TEGRA_EXCEPTION_VECTORS_BASE    0x6000F000
 #define TEGRA_EXCEPTION_VECTORS_SIZE    SZ_4K
 
 #define TEGRA_APB_MISC_BASE		0x70000000
 #define TEGRA_APB_MISC_SIZE		SZ_4K
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define TEGRA_APB_MISC_DAS_BASE		0x70000c00
 #define TEGRA_APB_MISC_DAS_SIZE		SZ_128
@@ -163,6 +180,8 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define TEGRA_UARTA_BASE		0x70006000
 #define TEGRA_UARTA_SIZE		SZ_64
 
@@ -178,6 +197,7 @@
 #define TEGRA_UARTE_BASE		0x70006400
 #define TEGRA_UARTE_SIZE		SZ_256
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define TEGRA_NAND_BASE			0x70008000
 #define TEGRA_NAND_SIZE			SZ_256
@@ -256,12 +276,18 @@
 #define TEGRA_PMC_SIZE			SZ_256
 
 >>>>>>> v3.18
+=======
+#define TEGRA_PMC_BASE			0x7000E400
+#define TEGRA_PMC_SIZE			SZ_256
+
+>>>>>>> v3.18
 #define TEGRA_EMC_BASE			0x7000F400
 #define TEGRA_EMC_SIZE			SZ_1K
 
 #define TEGRA_FUSE_BASE			0x7000F800
 #define TEGRA_FUSE_SIZE			SZ_1K
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define TEGRA_KFUSE_BASE		0x7000FC00
 #define TEGRA_KFUSE_SIZE		SZ_1K
@@ -281,6 +307,8 @@
 #define TEGRA_SDMMC4_BASE		0xC8000600
 #define TEGRA_SDMMC4_SIZE		SZ_512
 =======
+=======
+>>>>>>> v3.18
 #define TEGRA_EMC0_BASE			0x7001A000
 #define TEGRA_EMC0_SIZE			SZ_2K
 
@@ -292,6 +320,9 @@
 
 #define TEGRA_CSITE_BASE		0x70040000
 #define TEGRA_CSITE_SIZE		SZ_256K
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* On TEGRA, many peripherals are very closely packed in
@@ -299,10 +330,16 @@
  * at the start of each).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * We will just map the first 1MB of each window (to minimize
  * pt entries needed) and provide a macro to transform physical
  * io addresses to an appropriate void __iomem *.
  *
+=======
+ * We will just map the first MMU section of each window (to minimize
+ * pt entries needed) and provide a macro to transform physical
+ * io addresses to an appropriate void __iomem *.
+>>>>>>> v3.18
 =======
  * We will just map the first MMU section of each window (to minimize
  * pt entries needed) and provide a macro to transform physical
@@ -315,8 +352,13 @@
 #define IO_IRAM_SIZE	SZ_256K
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IO_CPU_PHYS     0x50040000
 #define IO_CPU_VIRT     IOMEM(0xFE000000)
+=======
+#define IO_CPU_PHYS	0x50040000
+#define IO_CPU_VIRT	IOMEM(0xFE440000)
+>>>>>>> v3.18
 =======
 #define IO_CPU_PHYS	0x50040000
 #define IO_CPU_VIRT	IOMEM(0xFE440000)
@@ -325,6 +367,7 @@
 
 #define IO_PPSB_PHYS	0x60000000
 #define IO_PPSB_VIRT	IOMEM(0xFE200000)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IO_PPSB_SIZE	SZ_1M
 
@@ -335,11 +378,16 @@
 #define TEGRA_PCIE_BASE		0x80000000
 #define TEGRA_PCIE_IO_BASE	(TEGRA_PCIE_BASE + SZ_4M)
 =======
+=======
+>>>>>>> v3.18
 #define IO_PPSB_SIZE	SECTION_SIZE
 
 #define IO_APB_PHYS	0x70000000
 #define IO_APB_VIRT	IOMEM(0xFE000000)
 #define IO_APB_SIZE	SECTION_SIZE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define IO_TO_VIRT_BETWEEN(p, st, sz)	((p) >= (st) && (p) < ((st) + (sz)))

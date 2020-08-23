@@ -554,7 +554,11 @@ static void dmi_sysfs_entry_release(struct kobject *kobj)
 {
 	struct dmi_sysfs_entry *entry = to_entry(kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_bin_file(&entry->kobj, &dmi_entry_raw_attr);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -690,6 +694,10 @@ static void __exit dmi_sysfs_exit(void)
 	cleanup_entry_list();
 	kset_unregister(dmi_kset);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kobject_del(dmi_kobj);
+>>>>>>> v3.18
 =======
 	kobject_del(dmi_kobj);
 >>>>>>> v3.18

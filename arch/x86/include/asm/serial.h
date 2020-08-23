@@ -7,6 +7,7 @@
  * It'd be nice if someone built a serial card with a 24.576 MHz
  * clock, since the 16550A is capable of handling a top speed of 1.5
 <<<<<<< HEAD
+<<<<<<< HEAD
  * megabits/second; but this requires the faster clock.
  */
 #define BASE_BAUD ( 1843200 / 16 )
@@ -27,6 +28,8 @@
 	{ 0, BASE_BAUD, 0x3E8, 4, STD_COM_FLAGS },	/* ttyS2 */	\
 	{ 0, BASE_BAUD, 0x2E8, 3, STD_COM4_FLAGS },	/* ttyS3 */
 =======
+=======
+>>>>>>> v3.18
  * megabits/second; but this requires a faster clock.
  */
 #define BASE_BAUD (1843200/16)
@@ -46,6 +49,9 @@
 	{ .uart = 0,	BASE_BAUD,	0x2F8,	3,	STD_COMX_FLAGS	}, /* ttyS1 */	\
 	{ .uart = 0,	BASE_BAUD,	0x3E8,	4,	STD_COMX_FLAGS	}, /* ttyS2 */	\
 	{ .uart = 0,	BASE_BAUD,	0x2E8,	3,	STD_COM4_FLAGS	}, /* ttyS3 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_X86_SERIAL_H */

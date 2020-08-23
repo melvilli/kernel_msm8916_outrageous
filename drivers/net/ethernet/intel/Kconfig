@@ -21,7 +21,10 @@ config E100
 	tristate "Intel(R) PRO/100+ support"
 	depends on PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -225,6 +228,7 @@ config IXGBE_DCB
 
 config IXGBEVF
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Intel(R) 82599 Virtual Function Ethernet support"
 	depends on PCI_MSI
 	---help---
@@ -232,12 +236,17 @@ config IXGBEVF
 	  information on how to identify your adapter, go to the Adapter &
 	  Driver ID Guide at:
 =======
+=======
+>>>>>>> v3.18
 	tristate "Intel(R) 10GbE PCI Express Virtual Function Ethernet support"
 	depends on PCI_MSI
 	---help---
 	  This driver supports Intel(R) PCI Express virtual functions for the
 	  Intel(R) ixgbe driver.  For more information on how to identify your
 	  adapter, go to the Adapter & Driver ID Guide at:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  <http://support.intel.com/support/network/sb/CS-008441.htm>
@@ -255,7 +264,10 @@ config IXGBEVF
 	  for this driver to work correctly.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config I40E
 	tristate "Intel(R) Ethernet Controller XL710 Family support"
 	select PTP_1588_CLOCK
@@ -346,5 +358,8 @@ config FM10K_VXLAN
 	  Say Y here if you want to use Virtual eXtensible Local Area Network
 	  (VXLAN) in the driver.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # NET_VENDOR_INTEL

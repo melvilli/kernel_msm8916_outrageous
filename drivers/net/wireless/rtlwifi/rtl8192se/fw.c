@@ -113,6 +113,7 @@ static u8 _rtl92s_firmware_header_map_rftype(struct ieee80211_hw *hw)
 	case RF_1T1R:
 		return 0x11;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case RF_1T2R:
 		return 0x12;
@@ -121,10 +122,15 @@ static u8 _rtl92s_firmware_header_map_rftype(struct ieee80211_hw *hw)
 		return 0x22;
 		break;
 =======
+=======
+>>>>>>> v3.18
 	case RF_1T2R:
 		return 0x12;
 	case RF_2T2R:
 		return 0x22;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		RT_TRACE(rtlpriv, COMP_INIT, DBG_EMERG, "Unknown RF type(%x)\n",
@@ -446,7 +452,10 @@ int rtl92s_download_fw(struct ieee80211_hw *hw)
 				 "Unexpected Download step!!\n");
 			goto fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}

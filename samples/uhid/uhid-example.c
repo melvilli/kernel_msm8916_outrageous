@@ -2,7 +2,11 @@
  * UHID Example
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2012 David Herrmann <dh.herrmann@googlemail.com>
+=======
+ * Copyright (c) 2012-2013 David Herrmann <dh.herrmann@gmail.com>
+>>>>>>> v3.18
 =======
  * Copyright (c) 2012-2013 David Herrmann <dh.herrmann@gmail.com>
 >>>>>>> v3.18
@@ -13,7 +17,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* UHID Example
+=======
+/*
+ * UHID Example
+>>>>>>> v3.18
 =======
 /*
  * UHID Example
@@ -32,12 +41,18 @@
  *   f: Move wheel down
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Additionally to 3 button mouse, 3 keyboard LEDs are also supported (LED_NUML,
  * LED_CAPSL and LED_SCROLLL). The device doesn't generate any related keyboard
  * events, though. You need to manually write the EV_LED/LED_XY/1 activation
  * input event to the evdev device to see it being sent to this device.
  *
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * If uhid is not available as /dev/uhid, then you can pass a different path as
  * first argument.
@@ -59,18 +74,24 @@
 #include <linux/uhid.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* HID Report Desciptor
  * We emulate a basic 3 button mouse with wheel. This is the report-descriptor
  * as the kernel will parse it:
  *
  * INPUT[INPUT]
 =======
+=======
+>>>>>>> v3.18
 /*
  * HID Report Desciptor
  * We emulate a basic 3 button mouse with wheel and 3 keyboard LEDs. This is
  * the report-descriptor as the kernel will parse it:
  *
  * INPUT(1)[INPUT]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *   Field(0)
  *     Physical(GenericDesktop.Pointer)
@@ -99,7 +120,10 @@
  *     Report Offset(8)
  *     Flags( Variable Relative )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * OUTPUT(2)[OUTPUT]
  *   Field(0)
  *     Application(GenericDesktop.Keyboard)
@@ -113,6 +137,9 @@
  *     Report Count(3)
  *     Report Offset(0)
  *     Flags( Variable Absolute )
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This is the mapping that we expect:
@@ -123,6 +150,12 @@
  *   GenericDesktop.Y ---> Relative.Y
  *   GenericDesktop.Wheel ---> Relative.Wheel
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *   LED.NumLock ---> LED.NumLock
+ *   LED.CapsLock ---> LED.CapsLock
+ *   LED.ScrollLock ---> LED.ScrollLock
+>>>>>>> v3.18
 =======
  *   LED.NumLock ---> LED.NumLock
  *   LED.CapsLock ---> LED.CapsLock
@@ -135,6 +168,7 @@
 
 static unsigned char rdesc[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	0x05, 0x01, 0x09, 0x02, 0xa1, 0x01, 0x09, 0x01,
 	0xa1, 0x00, 0x05, 0x09, 0x19, 0x01, 0x29, 0x03,
 	0x15, 0x00, 0x25, 0x01, 0x95, 0x03, 0x75, 0x01,
@@ -143,6 +177,8 @@ static unsigned char rdesc[] = {
 	0x15, 0x80, 0x25, 0x7f, 0x75, 0x08, 0x95, 0x03,
 	0x81, 0x06, 0xc0, 0xc0,
 =======
+=======
+>>>>>>> v3.18
 	0x05, 0x01,	/* USAGE_PAGE (Generic Desktop) */
 	0x09, 0x02,	/* USAGE (Mouse) */
 	0xa1, 0x01,	/* COLLECTION (Application) */
@@ -187,6 +223,9 @@ static unsigned char rdesc[] = {
 	0x75, 0x05,		/* REPORT_SIZE (5) */
 	0x91, 0x01,		/* Output (Cnst,Var,Abs) */
 	0xc0,		/* END_COLLECTION */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -236,7 +275,10 @@ static void destroy(int fd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This parses raw output reports sent by the kernel to the device. A normal
  * uhid program shouldn't do this but instead just forward the raw report.
  * However, for ducomentational purposes, we try to detect LED events here and
@@ -258,6 +300,9 @@ static void handle_output(struct uhid_event *ev)
 		ev->u.output.data[1]);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int event(int fd)
 {
@@ -294,6 +339,10 @@ static int event(int fd)
 	case UHID_OUTPUT:
 		fprintf(stderr, "UHID_OUTPUT from uhid-dev\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		handle_output(&ev);
+>>>>>>> v3.18
 =======
 		handle_output(&ev);
 >>>>>>> v3.18
@@ -322,6 +371,7 @@ static int send_event(int fd)
 	memset(&ev, 0, sizeof(ev));
 	ev.type = UHID_INPUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ev.u.input.size = 4;
 
 	if (btn1_down)
@@ -335,6 +385,8 @@ static int send_event(int fd)
 	ev.u.input.data[2] = abs_ver;
 	ev.u.input.data[3] = wheel;
 =======
+=======
+>>>>>>> v3.18
 	ev.u.input.size = 5;
 
 	ev.u.input.data[0] = 0x1;
@@ -348,6 +400,9 @@ static int send_event(int fd)
 	ev.u.input.data[2] = abs_hor;
 	ev.u.input.data[3] = abs_ver;
 	ev.u.input.data[4] = wheel;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return uhid_write(fd, &ev);

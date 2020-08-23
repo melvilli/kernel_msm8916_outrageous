@@ -209,7 +209,11 @@ static int si470x_set_chan(struct si470x_device *radio, unsigned short chan)
 {
 	int retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool timed_out = 0;
+=======
+	bool timed_out = false;
+>>>>>>> v3.18
 =======
 	bool timed_out = false;
 >>>>>>> v3.18
@@ -223,7 +227,11 @@ static int si470x_set_chan(struct si470x_device *radio, unsigned short chan)
 
 	/* wait till tune operation has completed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(radio->completion);
+=======
+	reinit_completion(&radio->completion);
+>>>>>>> v3.18
 =======
 	reinit_completion(&radio->completion);
 >>>>>>> v3.18
@@ -263,7 +271,11 @@ static unsigned int si470x_get_step(struct si470x_device *radio)
 	default:
 		return 50 * 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18
@@ -313,7 +325,11 @@ static int si470x_set_seek(struct si470x_device *radio,
 	int band, retval;
 	unsigned int freq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool timed_out = 0;
+=======
+	bool timed_out = false;
+>>>>>>> v3.18
 =======
 	bool timed_out = false;
 >>>>>>> v3.18
@@ -358,7 +374,11 @@ static int si470x_set_seek(struct si470x_device *radio,
 
 	/* wait till tune operation has completed */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(radio->completion);
+=======
+	reinit_completion(&radio->completion);
+>>>>>>> v3.18
 =======
 	reinit_completion(&radio->completion);
 >>>>>>> v3.18

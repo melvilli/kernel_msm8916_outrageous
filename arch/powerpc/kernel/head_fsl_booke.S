@@ -66,6 +66,7 @@ _ENTRY(_start);
 
 	/* Translate device tree address to physical, save in r30/r31 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfmsr	r16
 	mfspr	r17,SPRN_PID
 	rlwinm	r17,r17,16,0x3fff0000	/* turn PID into MAS6[SPID] */
@@ -89,13 +90,21 @@ _ENTRY(_start);
 	mr	r30,r3
 	mr	r31,r4
 >>>>>>> v3.18
+=======
+	bl	get_phys_addr
+	mr	r30,r3
+	mr	r31,r4
+>>>>>>> v3.18
 
 	li	r25,0			/* phys kernel start (low) */
 	li	r24,0			/* CPU number */
 	li	r23,0			/* phys kernel start (high) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RELOCATABLE
 	LOAD_REG_ADDR_PIC(r3, _stext)	/* Get our current runtime base */
 
@@ -160,6 +169,9 @@ _ENTRY(_start);
 	beq	set_ivor
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* We try to not make any assumptions about how the boot loader
  * setup or used the TLBs.  We invalidate all mappings from the
@@ -187,6 +199,10 @@ _ENTRY(__early_start)
 #undef ENTRY_MAPPING_BOOT_SETUP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+set_ivor:
+>>>>>>> v3.18
 =======
 set_ivor:
 >>>>>>> v3.18
@@ -244,8 +260,12 @@ set_ivor:
 	 * to the secondary_start code if so
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lis	r24, boot_cpuid@h
 	ori	r24, r24, boot_cpuid@l
+=======
+	LOAD_REG_ADDR_PIC(r24, boot_cpuid)
+>>>>>>> v3.18
 =======
 	LOAD_REG_ADDR_PIC(r24, boot_cpuid)
 >>>>>>> v3.18
@@ -279,7 +299,10 @@ set_ivor:
 	bl	early_init
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RELOCATABLE
 	mr	r3,r30
 	mr	r4,r31
@@ -292,6 +315,9 @@ set_ivor:
 	bl	relocate_init
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_MEMSTART
 	lis	r3,kernstart_addr@ha
@@ -649,6 +675,10 @@ END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 	b	InstructionStorage
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Define SPE handlers for e200 and e500v2 */
+>>>>>>> v3.18
 =======
 /* Define SPE handlers for e200 and e500v2 */
 >>>>>>> v3.18
@@ -662,6 +692,7 @@ END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 1:	addi	r3,r1,STACK_FRAME_OVERHEAD
 	EXC_XFER_EE_LITE(0x2010, KernelSPE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 	EXCEPTION(0x2020, SPE_UNAVAIL, SPEUnavailable, \
 		  unknown_exception, EXC_XFER_EE)
@@ -672,6 +703,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 	EXCEPTION(0x2030, SPE_FP_DATA, SPEFloatingPointData, \
 		  SPEFloatingPointException, EXC_XFER_EE);
 =======
+=======
+>>>>>>> v3.18
 #elif defined(CONFIG_SPE_POSSIBLE)
 	EXCEPTION(0x2020, SPE_UNAVAIL, SPEUnavailable, \
 		  unknown_exception, EXC_XFER_EE)
@@ -681,11 +714,15 @@ END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 #ifdef CONFIG_SPE
 	EXCEPTION(0x2030, SPE_FP_DATA, SPEFloatingPointData,
 		  SPEFloatingPointException, EXC_XFER_EE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* SPE Floating Point Round */
 	EXCEPTION(0x2050, SPE_FP_ROUND, SPEFloatingPointRound, \
 		  SPEFloatingPointRoundException, EXC_XFER_EE)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 	EXCEPTION(0x2040, SPE_FP_DATA, SPEFloatingPointData, \
@@ -694,6 +731,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 		  unknown_exception, EXC_XFER_EE)
 #endif /* CONFIG_SPE */
 =======
+=======
+>>>>>>> v3.18
 #elif defined(CONFIG_SPE_POSSIBLE)
 	EXCEPTION(0x2040, SPE_FP_DATA, SPEFloatingPointData,
 		  unknown_exception, EXC_XFER_EE)
@@ -701,6 +740,9 @@ END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 		  unknown_exception, EXC_XFER_EE)
 #endif /* CONFIG_SPE_POSSIBLE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Performance Monitor */
@@ -979,10 +1021,13 @@ KernelSPE:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Global functions
  */
 
 =======
+=======
+>>>>>>> v3.18
  * Translate the effec addr in r3 to phys addr. The phys addr will be put
  * into r3(higher 32bit) and r4(lower 32bit)
  */
@@ -1014,6 +1059,9 @@ get_phys_addr:
  */
 
 #ifdef CONFIG_E200
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Adjust or setup IVORs for e200 */
 _GLOBAL(__setup_e200_ivors)
@@ -1028,12 +1076,18 @@ _GLOBAL(__setup_e200_ivors)
 	sync
 	blr
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_E500
 #ifndef CONFIG_PPC_E500MC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Adjust or setup IVORs for e500v1/v2 */
 _GLOBAL(__setup_e500_ivors)
@@ -1050,7 +1104,11 @@ _GLOBAL(__setup_e500_ivors)
 	sync
 	blr
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#else
+>>>>>>> v3.18
 =======
 #else
 >>>>>>> v3.18
@@ -1080,6 +1138,11 @@ _GLOBAL(__setup_ehv_ivors)
 	sync
 	blr
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PPC_E500MC */
+#endif /* CONFIG_E500 */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC_E500MC */
 #endif /* CONFIG_E500 */
@@ -1121,6 +1184,7 @@ _GLOBAL(giveup_spe)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * extern void giveup_fpu(struct task_struct *prev)
  *
  * Not all FSL Book-E cores have an FPU
@@ -1131,6 +1195,8 @@ _GLOBAL(giveup_fpu)
 #endif
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * extern void abort(void)
@@ -1243,6 +1309,7 @@ _GLOBAL(__flush_disable_L1)
 	.globl __secondary_start
 __secondary_start:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lis	r3,__secondary_hold_acknowledge@h
 	ori	r3,r3,__secondary_hold_acknowledge@l
 	stw	r24,0(r3)
@@ -1257,6 +1324,8 @@ __secondary_start:
 	li	r26,0		/* r26 safe? */
 
 =======
+=======
+>>>>>>> v3.18
 	LOAD_REG_ADDR_PIC(r3, tlbcam_index)
 	lwz	r3,0(r3)
 	mtctr	r3
@@ -1264,6 +1333,9 @@ __secondary_start:
 
 	bl	switch_to_as1
 	mr	r27,r3		/* tlb entry */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Load each CAM entry */
 1:	mr	r3,r26
@@ -1271,7 +1343,10 @@ __secondary_start:
 	addi	r26,r26,1
 	bdnz	1b
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	mr	r3,r27		/* tlb entry */
 	LOAD_REG_ADDR_PIC(r4, memstart_addr)
 	lwz	r4,0(r4)
@@ -1290,6 +1365,9 @@ __secondary_start:
 	li	r3,0
 	mr	r4,r24		/* Why? */
 	bl	call_setup_cpu
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* get current_thread_info and current */
@@ -1328,7 +1406,10 @@ __secondary_hold_acknowledge:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Create a tlb entry with the same effective and physical address as
  * the tlb entry used by the current running code. But set the TS to 1.
  * Then switch to the address space 1. It will return with the r3 set to
@@ -1435,6 +1516,9 @@ _GLOBAL(restore_to_as0)
 	bl	_start
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * We put a few things here that have to be page-aligned. This stuff
  * goes at the beginning of the data segment, which is page-aligned.

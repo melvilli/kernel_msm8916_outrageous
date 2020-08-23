@@ -21,6 +21,10 @@
 
 #include "ath.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "trace.h"
+>>>>>>> v3.18
 =======
 #include "trace.h"
 >>>>>>> v3.18
@@ -64,7 +68,10 @@ struct sk_buff *ath_rxbuf_alloc(struct ath_common *common,
 EXPORT_SYMBOL(ath_rxbuf_alloc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 bool ath_is_mybeacon(struct ath_common *common, struct ieee80211_hdr *hdr)
 {
 	return ieee80211_is_beacon(hdr->frame_control) &&
@@ -73,6 +80,9 @@ bool ath_is_mybeacon(struct ath_common *common, struct ieee80211_hdr *hdr)
 }
 EXPORT_SYMBOL(ath_is_mybeacon);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ath_printk(const char *level, const struct ath_common* common,
 		const char *fmt, ...)
@@ -86,12 +96,15 @@ void ath_printk(const char *level, const struct ath_common* common,
 	vaf.va = &args;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (common && common->hw && common->hw->wiphy)
 		printk("%sath: %s: %pV",
 		       level, wiphy_name(common->hw->wiphy), &vaf);
 	else
 		printk("%sath: %pV", level, &vaf);
 =======
+=======
+>>>>>>> v3.18
 	if (common && common->hw && common->hw->wiphy) {
 		printk("%sath: %s: %pV",
 		       level, wiphy_name(common->hw->wiphy), &vaf);
@@ -99,6 +112,9 @@ void ath_printk(const char *level, const struct ath_common* common,
 	} else {
 		printk("%sath: %pV", level, &vaf);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	va_end(args);

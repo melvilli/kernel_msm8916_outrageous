@@ -31,8 +31,12 @@
 #include <linux/hardirq.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/dynamic_debug.h>
+>>>>>>> v3.18
 =======
 #include <linux/dynamic_debug.h>
 >>>>>>> v3.18
@@ -106,10 +110,13 @@ acpi_extract_package(union acpi_object *package,
 		union acpi_object *element = &(package->package.elements[i]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!element) {
 			return AE_BAD_DATA;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		switch (element->type) {
@@ -129,7 +136,11 @@ acpi_extract_package(union acpi_object *package,
 			default:
 				printk(KERN_WARNING PREFIX "Invalid package element"
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      " [%d]: got number, expecing"
+=======
+					      " [%d]: got number, expecting"
+>>>>>>> v3.18
 =======
 					      " [%d]: got number, expecting"
 >>>>>>> v3.18
@@ -160,8 +171,11 @@ acpi_extract_package(union acpi_object *package,
 				printk(KERN_WARNING PREFIX "Invalid package element"
 					      " [%d] got string/buffer,"
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      " expecing [%c]\n",
 =======
+=======
+>>>>>>> v3.18
 					      " expecting [%c]\n",
 					      i, format_string[i]);
 				return AE_BAD_DATA;
@@ -178,6 +192,9 @@ acpi_extract_package(union acpi_object *package,
 				printk(KERN_WARNING PREFIX "Invalid package element"
 					      " [%d] got reference,"
 					      " expecting [%c]\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					      i, format_string[i]);
 				return AE_BAD_DATA;
@@ -200,12 +217,15 @@ acpi_extract_package(union acpi_object *package,
 	 * Validate output buffer.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (buffer->length < size_required) {
 		buffer->length = size_required;
 		return AE_BUFFER_OVERFLOW;
 	} else if (buffer->length != size_required || !buffer->pointer) {
 		return AE_BAD_PARAMETER;
 =======
+=======
+>>>>>>> v3.18
 	if (buffer->length == ACPI_ALLOCATE_BUFFER) {
 		buffer->pointer = ACPI_ALLOCATE_ZEROED(size_required);
 		if (!buffer->pointer)
@@ -219,6 +239,9 @@ acpi_extract_package(union acpi_object *package,
 			   !buffer->pointer) {
 			return AE_BAD_PARAMETER;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -291,8 +314,11 @@ acpi_extract_package(union acpi_object *package,
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 		case ACPI_TYPE_LOCAL_REFERENCE:
 			switch (format_string[i]) {
 			case 'R':
@@ -305,6 +331,9 @@ acpi_extract_package(union acpi_object *package,
 				break;
 			}
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case ACPI_TYPE_PACKAGE:
 			/* TBD: handle nested packages... */
@@ -481,7 +510,11 @@ EXPORT_SYMBOL(acpi_get_physical_device_location);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * acpi_evaluate_hotplug_ost: Evaluate _OST for hotplug operations
+=======
+ * acpi_evaluate_ost: Evaluate _OST for hotplug operations
+>>>>>>> v3.18
 =======
  * acpi_evaluate_ost: Evaluate _OST for hotplug operations
 >>>>>>> v3.18
@@ -496,10 +529,16 @@ EXPORT_SYMBOL(acpi_get_physical_device_location);
  */
 acpi_status
 <<<<<<< HEAD
+<<<<<<< HEAD
 acpi_evaluate_hotplug_ost(acpi_handle handle, u32 source_event,
 		u32 status_code, struct acpi_buffer *status_buf)
 {
 #ifdef ACPI_HOTPLUG_OST
+=======
+acpi_evaluate_ost(acpi_handle handle, u32 source_event, u32 status_code,
+		  struct acpi_buffer *status_buf)
+{
+>>>>>>> v3.18
 =======
 acpi_evaluate_ost(acpi_handle handle, u32 source_event, u32 status_code,
 		  struct acpi_buffer *status_buf)
@@ -512,7 +551,10 @@ acpi_evaluate_ost(acpi_handle handle, u32 source_event, u32 status_code,
 	};
 	struct acpi_object_list arg_list = {3, params};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	acpi_status status;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -527,6 +569,7 @@ acpi_evaluate_ost(acpi_handle handle, u32 source_event, u32 status_code,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_evaluate_object(handle, "_OST", &arg_list, NULL);
 	return status;
 #else
@@ -535,6 +578,8 @@ acpi_evaluate_ost(acpi_handle handle, u32 source_event, u32 status_code,
 }
 EXPORT_SYMBOL(acpi_evaluate_hotplug_ost);
 =======
+=======
+>>>>>>> v3.18
 	return acpi_evaluate_object(handle, "_OST", &arg_list, NULL);
 }
 EXPORT_SYMBOL(acpi_evaluate_ost);
@@ -556,6 +601,9 @@ static char *acpi_handle_path(acpi_handle handle)
 		return NULL;
 	return buffer.pointer;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -572,10 +620,13 @@ acpi_handle_printk(const char *level, acpi_handle handle, const char *fmt, ...)
 	struct va_format vaf;
 	va_list args;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct acpi_buffer buffer = {
 		.length = ACPI_ALLOCATE_BUFFER,
 		.pointer = NULL
 	};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	const char *path;
@@ -584,6 +635,7 @@ acpi_handle_printk(const char *level, acpi_handle handle, const char *fmt, ...)
 	vaf.fmt = fmt;
 	vaf.va = &args;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (in_interrupt() ||
 	    acpi_get_name(handle, ACPI_FULL_PATHNAME, &buffer) != AE_OK)
@@ -598,6 +650,8 @@ acpi_handle_printk(const char *level, acpi_handle handle, const char *fmt, ...)
 }
 EXPORT_SYMBOL(acpi_handle_printk);
 =======
+=======
+>>>>>>> v3.18
 	path = acpi_handle_path(handle);
 	printk("%sACPI: %s: %pV", level, path ? path : "<n/a>" , &vaf);
 
@@ -801,4 +855,7 @@ bool acpi_check_dsm(acpi_handle handle, const u8 *uuid, int rev, u64 funcs)
 	return false;
 }
 EXPORT_SYMBOL(acpi_check_dsm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

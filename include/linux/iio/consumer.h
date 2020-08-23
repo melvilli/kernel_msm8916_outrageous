@@ -78,7 +78,11 @@ struct iio_cb_buffer;
  */
 struct iio_cb_buffer *iio_channel_get_all_cb(struct device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     int (*cb)(u8 *data,
+=======
+					     int (*cb)(const void *data,
+>>>>>>> v3.18
 =======
 					     int (*cb)(const void *data,
 >>>>>>> v3.18
@@ -128,7 +132,10 @@ int iio_read_channel_raw(struct iio_channel *chan,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * iio_read_channel_average_raw() - read from a given channel
  * @chan:		The channel being queried.
  * @val:		Value read back.
@@ -142,6 +149,9 @@ int iio_read_channel_raw(struct iio_channel *chan,
 int iio_read_channel_average_raw(struct iio_channel *chan, int *val);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * iio_read_channel_processed() - read processed value from a given channel
  * @chan:		The channel being queried.

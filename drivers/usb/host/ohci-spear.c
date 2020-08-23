@@ -12,6 +12,7 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/signal.h>
 #include <linux/platform_device.h>
 #include <linux/clk.h>
@@ -92,6 +93,8 @@ static const struct hc_driver ohci_spear_hc_driver = {
 	.start_port_reset	= ohci_start_port_reset,
 };
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/dma-mapping.h>
 #include <linux/io.h>
@@ -115,20 +118,29 @@ struct spear_ohci {
 #define to_spear_ohci(hcd)     (struct spear_ohci *)(hcd_to_ohci(hcd)->priv)
 
 static struct hc_driver __read_mostly ohci_spear_hc_driver;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int spear_ohci_hcd_drv_probe(struct platform_device *pdev)
 {
 	const struct hc_driver *driver = &ohci_spear_hc_driver;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd *hcd = NULL;
 	struct clk *usbh_clk;
 	struct spear_ohci *ohci_p;
 =======
+=======
+>>>>>>> v3.18
 	struct ohci_hcd *ohci;
 	struct usb_hcd *hcd = NULL;
 	struct clk *usbh_clk;
 	struct spear_ohci *sohci_p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct resource *res;
 	int retval, irq;
@@ -145,10 +157,16 @@ static int spear_ohci_hcd_drv_probe(struct platform_device *pdev)
 	 * Once we have dma capability bindings this can go away.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev->dev.dma_mask)
 		pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
 	if (!pdev->dev.coherent_dma_mask)
 		pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	retval = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+	if (retval)
+		goto fail;
+>>>>>>> v3.18
 =======
 	retval = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
 	if (retval)
@@ -177,6 +195,7 @@ static int spear_ohci_hcd_drv_probe(struct platform_device *pdev)
 	hcd->rsrc_start = pdev->resource[0].start;
 	hcd->rsrc_len = resource_size(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, hcd->rsrc_start, hcd->rsrc_len,
 				hcd_name)) {
 		dev_dbg(&pdev->dev, "request_mem_region failed\n");
@@ -202,6 +221,8 @@ static int spear_ohci_hcd_drv_probe(struct platform_device *pdev)
 
 	spear_stop_ohci(ohci_p);
 =======
+=======
+>>>>>>> v3.18
 
 	hcd->regs = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(hcd->regs)) {
@@ -223,6 +244,9 @@ static int spear_ohci_hcd_drv_probe(struct platform_device *pdev)
 	}
 
 	clk_disable_unprepare(sohci_p->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_put_hcd:
 	usb_put_hcd(hcd);
@@ -236,6 +260,7 @@ static int spear_ohci_hcd_drv_remove(struct platform_device *pdev)
 {
 	struct usb_hcd *hcd = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spear_ohci *ohci_p = to_spear_ohci(hcd);
 
 	usb_remove_hcd(hcd);
@@ -246,6 +271,8 @@ static int spear_ohci_hcd_drv_remove(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct spear_ohci *sohci_p = to_spear_ohci(hcd);
 
 	usb_remove_hcd(hcd);
@@ -253,11 +280,15 @@ static int spear_ohci_hcd_drv_remove(struct platform_device *pdev)
 		clk_disable_unprepare(sohci_p->clk);
 
 	usb_put_hcd(hcd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 #if defined(CONFIG_PM)
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int spear_ohci_hcd_drv_suspend(struct platform_device *dev,
 		pm_message_t message)
@@ -266,6 +297,8 @@ static int spear_ohci_hcd_drv_suspend(struct platform_device *dev,
 	struct ohci_hcd	*ohci = hcd_to_ohci(hcd);
 	struct spear_ohci *ohci_p = to_spear_ohci(hcd);
 =======
+=======
+>>>>>>> v3.18
 static int spear_ohci_hcd_drv_suspend(struct platform_device *pdev,
 		pm_message_t message)
 {
@@ -274,6 +307,9 @@ static int spear_ohci_hcd_drv_suspend(struct platform_device *pdev,
 	struct spear_ohci *sohci_p = to_spear_ohci(hcd);
 	bool do_wakeup = device_may_wakeup(&pdev->dev);
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (time_before(jiffies, ohci->next_statechange))
@@ -281,9 +317,12 @@ static int spear_ohci_hcd_drv_suspend(struct platform_device *pdev,
 	ohci->next_statechange = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spear_stop_ohci(ohci_p);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = ohci_suspend(hcd, do_wakeup);
 	if (ret)
 		return ret;
@@ -291,6 +330,9 @@ static int spear_ohci_hcd_drv_suspend(struct platform_device *pdev,
 	clk_disable_unprepare(sohci_p->clk);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -299,7 +341,11 @@ static int spear_ohci_hcd_drv_resume(struct platform_device *dev)
 	struct usb_hcd *hcd = platform_get_drvdata(dev);
 	struct ohci_hcd	*ohci = hcd_to_ohci(hcd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spear_ohci *ohci_p = to_spear_ohci(hcd);
+=======
+	struct spear_ohci *sohci_p = to_spear_ohci(hcd);
+>>>>>>> v3.18
 =======
 	struct spear_ohci *sohci_p = to_spear_ohci(hcd);
 >>>>>>> v3.18
@@ -309,7 +355,11 @@ static int spear_ohci_hcd_drv_resume(struct platform_device *dev)
 	ohci->next_statechange = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spear_start_ohci(ohci_p);
+=======
+	clk_prepare_enable(sohci_p->clk);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(sohci_p->clk);
 >>>>>>> v3.18
@@ -319,7 +369,11 @@ static int spear_ohci_hcd_drv_resume(struct platform_device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id spear_ohci_id_table[] = {
+=======
+static const struct of_device_id spear_ohci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id spear_ohci_id_table[] = {
 >>>>>>> v3.18
@@ -339,11 +393,14 @@ static struct platform_driver spear_ohci_hcd_driver = {
 		.owner = THIS_MODULE,
 		.name = "spear-ohci",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(spear_ohci_id_table),
 	},
 };
 
 =======
+=======
+>>>>>>> v3.18
 		.of_match_table = spear_ohci_id_table,
 	},
 };
@@ -372,5 +429,8 @@ module_exit(ohci_spear_cleanup);
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_AUTHOR("Deepak Sikri");
 MODULE_LICENSE("GPL v2");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_ALIAS("platform:spear-ohci");

@@ -45,6 +45,10 @@ struct clp_fh_list_entry {
 
 #define CLP_UTIL_STR_LEN	64
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CLP_PFIP_NR_SEGMENTS	4
+>>>>>>> v3.18
 =======
 #define CLP_PFIP_NR_SEGMENTS	4
 >>>>>>> v3.18
@@ -90,7 +94,11 @@ struct clp_rsp_query_pci {
 	u32 fmt			:  4;	/* cmd request block format */
 	u32			: 28;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 reserved1;
+=======
+	u64			: 64;
+>>>>>>> v3.18
 =======
 	u64			: 64;
 >>>>>>> v3.18
@@ -103,11 +111,14 @@ struct clp_rsp_query_pci {
 	u16 pchid;
 	u32 bar[PCI_BAR_COUNT];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 reserved2;
 	u64 sdma;			/* start dma as */
 	u64 edma;			/* end dma as */
 	u64 reserved3[6];
 =======
+=======
+>>>>>>> v3.18
 	u8 pfip[CLP_PFIP_NR_SEGMENTS];	/* pci function internal path */
 	u32			: 24;
 	u8 pft;				/* pci function type */
@@ -115,6 +126,9 @@ struct clp_rsp_query_pci {
 	u64 edma;			/* end dma as */
 	u32 reserved[11];
 	u32 uid;			/* user defined id */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 util_str[CLP_UTIL_STR_LEN];	/* utility string */
 } __packed;

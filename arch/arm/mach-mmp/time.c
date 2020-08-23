@@ -40,13 +40,19 @@
 #include "clock.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_MMP2
 #define MMP_CLOCK_FREQ		6500000
 #else
 #define MMP_CLOCK_FREQ		3250000
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TIMERS_VIRT_BASE	TIMERS1_VIRT_BASE
 
@@ -71,7 +77,11 @@ static inline uint32_t timer_read(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace mmp_read_sched_clock(void)
+=======
+static u64 notrace mmp_read_sched_clock(void)
+>>>>>>> v3.18
 =======
 static u64 notrace mmp_read_sched_clock(void)
 >>>>>>> v3.18
@@ -200,7 +210,11 @@ static void __init timer_config(void)
 static struct irqaction timer_irq = {
 	.name		= "timer",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -213,7 +227,11 @@ void __init timer_init(int irq)
 	timer_config();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(mmp_read_sched_clock, 32, CLOCK_TICK_RATE);
+=======
+	sched_clock_register(mmp_read_sched_clock, 32, MMP_CLOCK_FREQ);
+>>>>>>> v3.18
 =======
 	sched_clock_register(mmp_read_sched_clock, 32, MMP_CLOCK_FREQ);
 >>>>>>> v3.18
@@ -223,8 +241,13 @@ void __init timer_init(int irq)
 	setup_irq(irq, &timer_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clocksource_register_hz(&cksrc, CLOCK_TICK_RATE);
 	clockevents_config_and_register(&ckevt, CLOCK_TICK_RATE,
+=======
+	clocksource_register_hz(&cksrc, MMP_CLOCK_FREQ);
+	clockevents_config_and_register(&ckevt, MMP_CLOCK_FREQ,
+>>>>>>> v3.18
 =======
 	clocksource_register_hz(&cksrc, MMP_CLOCK_FREQ);
 	clockevents_config_and_register(&ckevt, MMP_CLOCK_FREQ,

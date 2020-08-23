@@ -58,6 +58,10 @@
 #include <linux/bitops.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/byteorder.h>
+>>>>>>> v3.18
 =======
 #include <asm/byteorder.h>
 >>>>>>> v3.18
@@ -683,6 +687,10 @@ static int a2065_init_one(struct zorro_dev *z,
 	unsigned long mem_start = board + A2065_RAM;
 	struct resource *r1, *r2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 serial;
+>>>>>>> v3.18
 =======
 	u32 serial;
 >>>>>>> v3.18
@@ -711,6 +719,10 @@ static int a2065_init_one(struct zorro_dev *z,
 	r2->name = dev->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	serial = be32_to_cpu(z->rom.er_SerialNumber);
+>>>>>>> v3.18
 =======
 	serial = be32_to_cpu(z->rom.er_SerialNumber);
 >>>>>>> v3.18
@@ -723,17 +735,23 @@ static int a2065_init_one(struct zorro_dev *z,
 		dev->dev_addr[2] = 0x9f;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_addr[3] = (z->rom.er_SerialNumber >> 16) & 0xff;
 	dev->dev_addr[4] = (z->rom.er_SerialNumber >> 8) & 0xff;
 	dev->dev_addr[5] = z->rom.er_SerialNumber & 0xff;
 	dev->base_addr = ZTWO_VADDR(base_addr);
 	dev->mem_start = ZTWO_VADDR(mem_start);
 =======
+=======
+>>>>>>> v3.18
 	dev->dev_addr[3] = (serial >> 16) & 0xff;
 	dev->dev_addr[4] = (serial >> 8) & 0xff;
 	dev->dev_addr[5] = serial & 0xff;
 	dev->base_addr = (unsigned long)ZTWO_VADDR(base_addr);
 	dev->mem_start = (unsigned long)ZTWO_VADDR(mem_start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->mem_end = dev->mem_start + A2065_RAM_SIZE;
 

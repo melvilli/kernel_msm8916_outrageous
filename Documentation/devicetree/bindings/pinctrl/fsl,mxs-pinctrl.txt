@@ -60,6 +60,7 @@ Required subnode-properties:
 Optional subnode-properties:
 - fsl,drive-strength: Integer.
 <<<<<<< HEAD
+<<<<<<< HEAD
     0: 4 mA
     1: 8 mA
     2: 12 mA
@@ -71,6 +72,8 @@ Optional subnode-properties:
     0: Disable the internal pull-up
     1: Enable the internal pull-up
 =======
+=======
+>>>>>>> v3.18
     0: MXS_DRIVE_4mA
     1: MXS_DRIVE_8mA
     2: MXS_DRIVE_12mA
@@ -81,6 +84,9 @@ Optional subnode-properties:
 - fsl,pull-up: Integer.
     0: MXS_PULL_DISABLE - Disable the internal pull-up
     1: MXS_PULL_ENABLE  - Enable the internal pull-up
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Note that when enabling the pull-up, the internal pad keeper gets disabled.
@@ -98,6 +104,7 @@ pinctrl@80018000 {
 	mmc0_8bit_pins_a: mmc0-8bit@0 {
 		reg = <0>;
 		fsl,pinmux-ids = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 			0x2000 0x2010 0x2020 0x2030
 			0x2040 0x2050 0x2060 0x2070
@@ -117,6 +124,8 @@ pinctrl@80018000 {
 		fsl,drive-strength = <2>;
 		fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 			MX28_PAD_SSP0_DATA0__SSP0_D0
 			MX28_PAD_SSP0_DATA1__SSP0_D1
 			MX28_PAD_SSP0_DATA2__SSP0_D2
@@ -143,6 +152,9 @@ pinctrl@80018000 {
 		fsl,pinmux-ids = <MX28_PAD_SSP0_SCK__SSP0_SCK>;
 		fsl,drive-strength = <MXS_DRIVE_12mA>;
 		fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };
@@ -154,6 +166,7 @@ adjusting the configuration for pins card-detection and clock from what group
 node mmc0-8bit defines.  Only the configuration properties to be adjusted need
 to be listed in the config nodes.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Valid values for i.MX28 pinmux-id:
 
@@ -964,8 +977,13 @@ MX23_PAD_EMI_CKE__GPIO_2_29			0x21d3
 MX23_PAD_EMI_RASN__GPIO_2_30			0x21e3
 MX23_PAD_EMI_WEN__GPIO_2_31			0x21f3
 =======
+=======
+>>>>>>> v3.18
 Valid values for i.MX28/i.MX23 pinmux-id are defined in
 arch/arm/boot/dts/imx28-pinfunc.h and arch/arm/boot/dts/imx23-pinfunc.h.
 The definitions for the padconfig properties can be found in
 arch/arm/boot/dts/mxs-pinfunc.h.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

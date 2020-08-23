@@ -102,6 +102,10 @@ struct wdm_device {
 	int			werr;
 	int			rerr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int                     resp_count;
+>>>>>>> v3.18
 =======
 	int                     resp_count;
 >>>>>>> v3.18
@@ -249,7 +253,11 @@ static void wdm_int_callback(struct urb *urb)
 		dev_dbg(&desc->intf->dev,
 			"NOTIFY_RESPONSE_AVAILABLE received: index %d len %d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			le16_to_cpu(dr->wIndex), le16_to_cpu(dr->wLength));
+=======
+			dr->wIndex, dr->wLength);
+>>>>>>> v3.18
 =======
 			dr->wIndex, dr->wLength);
 >>>>>>> v3.18
@@ -262,20 +270,30 @@ static void wdm_int_callback(struct urb *urb)
 			dr->wValue ? "connected to" : "disconnected from");
 		goto exit;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case USB_CDC_NOTIFY_SPEED_CHANGE:
 		dev_dbg(&desc->intf->dev, "SPEED_CHANGE received (len %u)",
 			urb->actual_length);
 		goto exit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		clear_bit(WDM_POLL_RUNNING, &desc->flags);
 		dev_err(&desc->intf->dev,
 			"unknown notification %d received: index %d len %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dr->bNotificationType,
 			le16_to_cpu(dr->wIndex),
 			le16_to_cpu(dr->wLength));
+=======
+			dr->bNotificationType, dr->wIndex, dr->wLength);
+>>>>>>> v3.18
 =======
 			dr->bNotificationType, dr->wIndex, dr->wLength);
 >>>>>>> v3.18
@@ -284,9 +302,15 @@ static void wdm_int_callback(struct urb *urb)
 
 	spin_lock(&desc->iuspin);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clear_bit(WDM_READ, &desc->flags);
 	responding = test_and_set_bit(WDM_RESPONDING, &desc->flags);
 	if (!responding && !test_bit(WDM_DISCONNECTING, &desc->flags)
+=======
+	responding = test_and_set_bit(WDM_RESPONDING, &desc->flags);
+	if (!desc->resp_count++ && !responding
+		&& !test_bit(WDM_DISCONNECTING, &desc->flags)
+>>>>>>> v3.18
 =======
 	responding = test_and_set_bit(WDM_RESPONDING, &desc->flags);
 	if (!desc->resp_count++ && !responding
@@ -431,7 +455,11 @@ static ssize_t wdm_write
 	req->bRequest = USB_CDC_SEND_ENCAPSULATED_COMMAND;
 	req->wValue = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->wIndex = desc->inum; /* already converted */
+=======
+	req->wIndex = desc->inum;
+>>>>>>> v3.18
 =======
 	req->wIndex = desc->inum;
 >>>>>>> v3.18
@@ -449,7 +477,11 @@ static ssize_t wdm_write
 	} else {
 		dev_dbg(&desc->intf->dev, "Tx URB has been submitted index=%d",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			le16_to_cpu(req->wIndex));
+=======
+			req->wIndex);
+>>>>>>> v3.18
 =======
 			req->wIndex);
 >>>>>>> v3.18
@@ -463,7 +495,10 @@ outnl:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * clear WDM_READ flag and possibly submit the read urb if resp_count
  * is non-zero.
@@ -496,6 +531,9 @@ out:
 	return rv;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t wdm_read
 (struct file *file, char __user *buffer, size_t count, loff_t *ppos)
@@ -569,13 +607,19 @@ retry:
 		if (!desc->reslength) { /* zero length read */
 			dev_dbg(&desc->intf->dev, "%s: zero length - clearing WDM_READ\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clear_bit(WDM_READ, &desc->flags);
 			spin_unlock_irq(&desc->iuspin);
 =======
+=======
+>>>>>>> v3.18
 			rv = clear_wdm_read_flag(desc);
 			spin_unlock_irq(&desc->iuspin);
 			if (rv < 0)
 				goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto retry;
 		}
@@ -600,10 +644,15 @@ retry:
 	/* in case we had outstanding data */
 	if (!desc->length)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clear_bit(WDM_READ, &desc->flags);
 
 	spin_unlock_irq(&desc->iuspin);
 
+=======
+		clear_wdm_read_flag(desc);
+	spin_unlock_irq(&desc->iuspin);
+>>>>>>> v3.18
 =======
 		clear_wdm_read_flag(desc);
 	spin_unlock_irq(&desc->iuspin);
@@ -718,6 +767,12 @@ static int wdm_release(struct inode *inode, struct file *file)
 			dev_dbg(&desc->intf->dev, "wdm_release: cleanup");
 			kill_urbs(desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			spin_lock_irq(&desc->iuspin);
+			desc->resp_count = 0;
+			spin_unlock_irq(&desc->iuspin);
+>>>>>>> v3.18
 =======
 			spin_lock_irq(&desc->iuspin);
 			desc->resp_count = 0;
@@ -869,7 +924,11 @@ static int wdm_create(struct usb_interface *intf, struct usb_endpoint_descriptor
 	desc->irq->bRequest = USB_CDC_GET_ENCAPSULATED_RESPONSE;
 	desc->irq->wValue = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	desc->irq->wIndex = desc->inum; /* already converted */
+=======
+	desc->irq->wIndex = desc->inum;
+>>>>>>> v3.18
 =======
 	desc->irq->wIndex = desc->inum;
 >>>>>>> v3.18

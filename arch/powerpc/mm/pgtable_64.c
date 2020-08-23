@@ -34,7 +34,10 @@
 #include <linux/stddef.h>
 #include <linux/vmalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/bootmem.h>
@@ -59,6 +62,12 @@
 #include "mmu_decl.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CREATE_TRACE_POINTS
+#include <trace/events/thp.h>
+
+>>>>>>> v3.18
 =======
 #define CREATE_TRACE_POINTS
 #include <trace/events/thp.h>
@@ -79,7 +88,11 @@ unsigned long ioremap_bot = IOREMAP_BASE;
 
 #ifdef CONFIG_PPC_MMU_NOHASH
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *early_alloc_pgtable(unsigned long size)
+=======
+static __ref void *early_alloc_pgtable(unsigned long size)
+>>>>>>> v3.18
 =======
 static __ref void *early_alloc_pgtable(unsigned long size)
 >>>>>>> v3.18
@@ -167,7 +180,10 @@ int map_kernel_page(unsigned long ea, unsigned long pa, int flags)
 #endif /* !CONFIG_PPC_MMU_NOHASH */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_BOOK3E_64
 	/*
@@ -180,6 +196,9 @@ int map_kernel_page(unsigned long ea, unsigned long pa, int flags)
 #else
 	smp_wmb();
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -367,7 +386,10 @@ EXPORT_SYMBOL(__iounmap);
 EXPORT_SYMBOL(__iounmap_at);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * For hugepage we have pfn in the pmd, we use PTE_RPN_SHIFT bits for flags
  * For PTE page, we have a PTE_FRAG_SIZE (4K) aligned virtual address.
@@ -381,6 +403,9 @@ struct page *pmd_page(pmd_t pmd)
 	return virt_to_page(pmd_page_vaddr(pmd));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_64K_PAGES
 static pte_t *get_from_cache(struct mm_struct *mm)
@@ -410,11 +435,17 @@ static pte_t *__alloc_for_cache(struct mm_struct *mm, int kernel)
 	if (!page)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!kernel && !pgtable_page_ctor(page)) {
 		__free_page(page);
 		return NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = page_address(page);
@@ -431,9 +462,12 @@ static pte_t *__alloc_for_cache(struct mm_struct *mm, int kernel)
 	spin_unlock(&mm->page_table_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!kernel)
 		pgtable_page_ctor(page);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return (pte_t *)ret;
@@ -510,7 +544,10 @@ void pgtable_free_tlb(struct mmu_gather *tlb, void *table, int shift)
 #endif
 #endif /* CONFIG_PPC_64K_PAGES */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 
@@ -930,4 +967,7 @@ int has_transparent_hugepage(void)
 	return 1;
 }
 #endif /* CONFIG_TRANSPARENT_HUGEPAGE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

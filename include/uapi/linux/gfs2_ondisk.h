@@ -21,7 +21,11 @@
 #define GFS2_MOUNT_LOCK		0
 #define GFS2_LIVE_LOCK		1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GFS2_TRANS_LOCK		2
+=======
+#define GFS2_FREEZE_LOCK	2
+>>>>>>> v3.18
 =======
 #define GFS2_FREEZE_LOCK	2
 >>>>>>> v3.18
@@ -309,8 +313,11 @@ struct gfs2_dirent {
 	__be16 de_name_len;
 	__be16 de_type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 __pad[14];
 =======
+=======
+>>>>>>> v3.18
 	union {
 		__u8 __pad[14];
 		struct {
@@ -318,6 +325,9 @@ struct gfs2_dirent {
 			__u8 pad2[12];
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -334,8 +344,11 @@ struct gfs2_leaf {
 	__be64 lf_next;			/* Next leaf, if overflow */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 lf_reserved[64];
 =======
+=======
+>>>>>>> v3.18
 	union {
 		__u8 lf_reserved[64];
 		struct {
@@ -346,6 +359,9 @@ struct gfs2_leaf {
 			__u8 lf_reserved2[40];
 		};
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -366,9 +382,15 @@ struct gfs2_leaf {
  * have either a single block containing the extended attribute headers
  * or a single indirect block pointing to blocks containing the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * extended attribure headers.
  *
  * The maximim size of the data part of an extended attribute is 64k
+=======
+ * extended attribute headers.
+ *
+ * The maximum size of the data part of an extended attribute is 64k
+>>>>>>> v3.18
 =======
  * extended attribute headers.
  *

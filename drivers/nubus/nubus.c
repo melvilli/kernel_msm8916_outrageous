@@ -474,7 +474,11 @@ static struct nubus_dev* __init
 		dir.base += 1;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18
@@ -573,7 +577,11 @@ static int __init nubus_get_vidnames(struct nubus_board* board,
 	printk(KERN_INFO "    video modes supported:\n");
 	nubus_get_subdir(parent, &dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18
@@ -638,7 +646,11 @@ static int __init nubus_get_vendorinfo(struct nubus_board* board,
 	printk(KERN_INFO "    vendor info:\n");
 	nubus_get_subdir(parent, &dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18
@@ -667,7 +679,11 @@ static int __init nubus_get_board_resource(struct nubus_board* board, int slot,
 	
 	nubus_get_subdir(parent, &dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18
@@ -770,7 +786,11 @@ static void __init nubus_find_rom_dir(struct nubus_board* board)
 		goto badrom;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18
@@ -779,7 +799,11 @@ static void __init nubus_find_rom_dir(struct nubus_board* board)
 	if (nubus_readdir(&dir, &ent) == -1) 
 		goto badrom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18
@@ -790,7 +814,11 @@ static void __init nubus_find_rom_dir(struct nubus_board* board)
 	if (nubus_readdir(&dir, &ent) == -1) 
 		goto badrom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18
@@ -809,7 +837,11 @@ static void __init nubus_find_rom_dir(struct nubus_board* board)
 	if (nubus_readdir(&dir, &ent) == -1)
 		goto badrom;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10)
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG)
 >>>>>>> v3.18
@@ -849,7 +881,11 @@ static struct nubus_board* __init nubus_add_board(int slot, int bytelanes)
 
 	/* Dump the format block for debugging purposes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (console_loglevel >= 10) {
+=======
+	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG) {
+>>>>>>> v3.18
 =======
 	if (console_loglevel >= CONSOLE_LOGLEVEL_DEBUG) {
 >>>>>>> v3.18

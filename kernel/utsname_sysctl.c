@@ -18,7 +18,11 @@
 #ifdef CONFIG_PROC_SYSCTL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void *get_uts(ctl_table *table, int write)
+=======
+static void *get_uts(struct ctl_table *table, int write)
+>>>>>>> v3.18
 =======
 static void *get_uts(struct ctl_table *table, int write)
 >>>>>>> v3.18
@@ -37,7 +41,11 @@ static void *get_uts(struct ctl_table *table, int write)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void put_uts(ctl_table *table, int write, void *which)
+=======
+static void put_uts(struct ctl_table *table, int write, void *which)
+>>>>>>> v3.18
 =======
 static void put_uts(struct ctl_table *table, int write, void *which)
 >>>>>>> v3.18
@@ -53,7 +61,11 @@ static void put_uts(struct ctl_table *table, int write, void *which)
  *	to observe. Should this be in kernel/sys.c ????
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_do_uts_string(ctl_table *table, int write,
+=======
+static int proc_do_uts_string(struct ctl_table *table, int write,
+>>>>>>> v3.18
 =======
 static int proc_do_uts_string(struct ctl_table *table, int write,
 >>>>>>> v3.18
@@ -64,7 +76,11 @@ static int proc_do_uts_string(struct ctl_table *table, int write,
 	memcpy(&uts_table, table, sizeof(uts_table));
 	uts_table.data = get_uts(table, write);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = proc_dostring(&uts_table,write,buffer,lenp, ppos);
+=======
+	r = proc_dostring(&uts_table, write, buffer, lenp, ppos);
+>>>>>>> v3.18
 =======
 	r = proc_dostring(&uts_table, write, buffer, lenp, ppos);
 >>>>>>> v3.18
@@ -152,7 +168,11 @@ static int __init utsname_sysctl_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __initcall(utsname_sysctl_init);
+=======
+device_initcall(utsname_sysctl_init);
+>>>>>>> v3.18
 =======
 device_initcall(utsname_sysctl_init);
 >>>>>>> v3.18

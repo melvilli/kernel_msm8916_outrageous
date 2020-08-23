@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /dts-v1/;
 /include/ "imx28.dtsi"
 =======
+=======
+>>>>>>> v3.18
 /*
  * Copyright 2012 Shawn Guo <shawn.guo@linaro.org>
  * Copyright 2013 Lothar Waßmann <LW@KARO-electronics.de>
@@ -17,12 +20,16 @@
 /dts-v1/;
 #include "imx28.dtsi"
 #include <dt-bindings/gpio/gpio.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
 	model = "Ka-Ro electronics TX28 module";
 	compatible = "karo,tx28", "fsl,imx28";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memory {
 		reg = <0x40000000 0x08000000>;
@@ -123,6 +130,8 @@
 			label = "Heartbeat";
 			gpios = <&gpio4 10 0>;
 =======
+=======
+>>>>>>> v3.18
 	aliases {
 		can0 = &can0;
 		can1 = &can1;
@@ -252,6 +261,9 @@
 		user_led: user {
 			label = "Heartbeat";
 			gpios = <&gpio4 10 GPIO_ACTIVE_HIGH>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			linux,default-trigger = "heartbeat";
 		};
@@ -260,11 +272,14 @@
 	backlight {
 		compatible = "pwm-backlight";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pwms = <&pwm 0 5000000>;
 		brightness-levels = <0 4 8 16 32 64 128 255>;
 		default-brightness-level = <6>;
 	};
 =======
+=======
+>>>>>>> v3.18
 		pwms = <&pwm 0 500000>;
 		/*
 		 * a silly way to create a 1:1 relationship between the
@@ -831,5 +846,8 @@
 	pinctrl-0 = <&tx28_usbphy1_pins>;
 	phy_type = "utmi";
 	status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

@@ -40,6 +40,7 @@
  **********************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .macro tlb_prolog_bolted intnum addr
 	mtspr	SPRN_SPRG_GEN_SCRATCH,r13
 	mfspr	r13,SPRN_SPRG_PACA
@@ -47,6 +48,8 @@
 	mfcr	r10
 	std	r11,PACA_EXTLB+EX_TLB_R11(r13)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Note that, unlike non-bolted handlers, TLB_EXFRAME is not
  * modified by the TLB miss handlers themselves, since the TLB miss
@@ -64,6 +67,9 @@
 
 	mfcr	r10
 	std	r11,EX_TLB_R11(r12)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_KVM_BOOKE_HV
 BEGIN_FTR_SECTION
@@ -71,6 +77,7 @@ BEGIN_FTR_SECTION
 END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 #endif
 	DO_KVM	\intnum, SPRN_SRR1
+<<<<<<< HEAD
 <<<<<<< HEAD
 	std	r16,PACA_EXTLB+EX_TLB_R16(r13)
 	mfspr	r16,\addr		/* get faulting address */
@@ -92,6 +99,8 @@ END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 	ld	r16,PACA_EXTLB+EX_TLB_R16(r13)
 	mfspr	r13,SPRN_SPRG_GEN_SCRATCH
 =======
+=======
+>>>>>>> v3.18
 	std	r16,EX_TLB_R16(r12)
 	mfspr	r16,\addr		/* get faulting address */
 	std	r14,EX_TLB_R14(r12)
@@ -112,6 +121,9 @@ END_FTR_SECTION_IFSET(CPU_FTR_EMB_HV)
 	TLB_MISS_RESTORE_STATS
 	ld	r16,EX_TLB_R16(r12)
 	mfspr	r12,SPRN_SPRG_GEN_SCRATCH
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 .endm
 
@@ -180,7 +192,11 @@ BEGIN_MMU_FTR_SECTION
 	PPC_TLBSRX_DOT(0,R16)
 	ldx	r14,r14,r15		/* grab pgd entry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	beq	normal_tlb_miss_done	/* tlb exists already, bail */
+=======
+	beq	tlb_miss_done_bolted	/* tlb exists already, bail */
+>>>>>>> v3.18
 =======
 	beq	tlb_miss_done_bolted	/* tlb exists already, bail */
 >>>>>>> v3.18
@@ -240,6 +256,10 @@ ALT_MMU_FTR_SECTION_END_IFSET(MMU_FTR_USE_TLBRSRV)
 	tlbwe
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+tlb_miss_done_bolted:
+>>>>>>> v3.18
 =======
 tlb_miss_done_bolted:
 >>>>>>> v3.18
@@ -291,7 +311,10 @@ itlb_miss_fault_bolted:
 	b	itlb_miss_kernel_bolted
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_FSL_BOOK3E
 /*
  * TLB miss handling for e6500 and derivatives, using hardware tablewalk.
@@ -516,6 +539,9 @@ itlb_miss_fault_e6500:
 	b	exc_instruction_storage_book3e
 #endif /* CONFIG_PPC_FSL_BOOK3E */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**********************************************************************
  *                                                                    *
@@ -1197,7 +1223,12 @@ tlb_load_linear:
 	ld	r11,linear_map_top@got(r11)
 	ld	r10,0(r11)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cmpld	cr0,r10,r16
+=======
+	tovirt(10,10)
+	cmpld	cr0,r16,r10
+>>>>>>> v3.18
 =======
 	tovirt(10,10)
 	cmpld	cr0,r16,r10

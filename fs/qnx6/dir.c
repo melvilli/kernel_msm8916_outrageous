@@ -66,8 +66,13 @@ static struct qnx6_long_filename *qnx6_longname(struct super_block *sb,
 static int qnx6_dir_longfilename(struct inode *inode,
 			struct qnx6_long_dir_entry *de,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			void *dirent, loff_t pos,
 			unsigned de_inode, filldir_t filldir)
+=======
+			struct dir_context *ctx,
+			unsigned de_inode)
+>>>>>>> v3.18
 =======
 			struct dir_context *ctx,
 			unsigned de_inode)
@@ -83,8 +88,12 @@ static int qnx6_dir_longfilename(struct inode *inode,
 		/* error - long filename entries always have size 0xff
 		   in direntry */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "qnx6: invalid direntry size (%i).\n",
 				de->de_size);
+=======
+		pr_err("invalid direntry size (%i).\n", de->de_size);
+>>>>>>> v3.18
 =======
 		pr_err("invalid direntry size (%i).\n", de->de_size);
 >>>>>>> v3.18
@@ -93,7 +102,11 @@ static int qnx6_dir_longfilename(struct inode *inode,
 	lf = qnx6_longname(s, de, &page);
 	if (IS_ERR(lf)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "qnx6:Error reading longname\n");
+=======
+		pr_err("Error reading longname\n");
+>>>>>>> v3.18
 =======
 		pr_err("Error reading longname\n");
 >>>>>>> v3.18
@@ -104,8 +117,13 @@ static int qnx6_dir_longfilename(struct inode *inode,
 
 	if (lf_size > QNX6_LONG_NAME_MAX) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		QNX6DEBUG((KERN_INFO "file %s\n", lf->lf_fname));
 		printk(KERN_ERR "qnx6:Filename too long (%i)\n", lf_size);
+=======
+		pr_debug("file %s\n", lf->lf_fname);
+		pr_err("Filename too long (%i)\n", lf_size);
+>>>>>>> v3.18
 =======
 		pr_debug("file %s\n", lf->lf_fname);
 		pr_err("Filename too long (%i)\n", lf_size);
@@ -119,6 +137,7 @@ static int qnx6_dir_longfilename(struct inode *inode,
 	if (!test_opt(s, MMI_FS) && fs32_to_cpu(sbi, de->de_checksum) !=
 			qnx6_lfile_checksum(lf->lf_fname, lf_size))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "qnx6: long filename checksum error.\n");
 
 	QNX6DEBUG((KERN_INFO "qnx6_readdir:%.*s inode:%u\n",
@@ -126,11 +145,16 @@ static int qnx6_dir_longfilename(struct inode *inode,
 	if (filldir(dirent, lf->lf_fname, lf_size, pos, de_inode,
 			DT_UNKNOWN) < 0) {
 =======
+=======
+>>>>>>> v3.18
 		pr_info("long filename checksum error.\n");
 
 	pr_debug("qnx6_readdir:%.*s inode:%u\n",
 		 lf_size, lf->lf_fname, de_inode);
 	if (!dir_emit(ctx, lf->lf_fname, lf_size, de_inode, DT_UNKNOWN)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		qnx6_put_page(page);
 		return 0;
@@ -142,6 +166,7 @@ static int qnx6_dir_longfilename(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qnx6_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
@@ -149,12 +174,17 @@ static int qnx6_readdir(struct file *filp, void *dirent, filldir_t filldir)
 	struct qnx6_sb_info *sbi = QNX6_SB(s);
 	loff_t pos = filp->f_pos & ~(QNX6_DIR_ENTRY_SIZE - 1);
 =======
+=======
+>>>>>>> v3.18
 static int qnx6_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *inode = file_inode(file);
 	struct super_block *s = inode->i_sb;
 	struct qnx6_sb_info *sbi = QNX6_SB(s);
 	loff_t pos = ctx->pos & ~(QNX6_DIR_ENTRY_SIZE - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long npages = dir_pages(inode);
 	unsigned long n = pos >> PAGE_CACHE_SHIFT;
@@ -162,7 +192,12 @@ static int qnx6_readdir(struct file *file, struct dir_context *ctx)
 	bool done = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (filp->f_pos >= inode->i_size)
+=======
+	ctx->pos = pos;
+	if (ctx->pos >= inode->i_size)
+>>>>>>> v3.18
 =======
 	ctx->pos = pos;
 	if (ctx->pos >= inode->i_size)
@@ -177,6 +212,7 @@ static int qnx6_readdir(struct file *file, struct dir_context *ctx)
 
 		if (IS_ERR(page)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "qnx6_readdir: read failed\n");
 			filp->f_pos = (n + 1) << PAGE_CACHE_SHIFT;
 			return PTR_ERR(page);
@@ -184,12 +220,17 @@ static int qnx6_readdir(struct file *file, struct dir_context *ctx)
 		de = ((struct qnx6_dir_entry *)page_address(page)) + start;
 		for (; i < limit; i++, de++, pos += QNX6_DIR_ENTRY_SIZE) {
 =======
+=======
+>>>>>>> v3.18
 			pr_err("%s(): read failed\n", __func__);
 			ctx->pos = (n + 1) << PAGE_CACHE_SHIFT;
 			return PTR_ERR(page);
 		}
 		de = ((struct qnx6_dir_entry *)page_address(page)) + start;
 		for (; i < limit; i++, de++, ctx->pos += QNX6_DIR_ENTRY_SIZE) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			int size = de->de_size;
 			u32 no_inode = fs32_to_cpu(sbi, de->de_inode);
@@ -204,8 +245,12 @@ static int qnx6_readdir(struct file *file, struct dir_context *ctx)
 				if (!qnx6_dir_longfilename(inode,
 					(struct qnx6_long_dir_entry *)de,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					dirent, pos, no_inode,
 					filldir)) {
+=======
+					ctx, no_inode)) {
+>>>>>>> v3.18
 =======
 					ctx, no_inode)) {
 >>>>>>> v3.18
@@ -214,6 +259,7 @@ static int qnx6_readdir(struct file *file, struct dir_context *ctx)
 				}
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				QNX6DEBUG((KERN_INFO "qnx6_readdir:%.*s"
 				   " inode:%u\n", size, de->de_fname,
 							no_inode));
@@ -221,11 +267,16 @@ static int qnx6_readdir(struct file *file, struct dir_context *ctx)
 				      pos, no_inode, DT_UNKNOWN)
 					< 0) {
 =======
+=======
+>>>>>>> v3.18
 				pr_debug("%s():%.*s inode:%u\n",
 					 __func__, size, de->de_fname,
 					 no_inode);
 				if (!dir_emit(ctx, de->de_fname, size,
 				      no_inode, DT_UNKNOWN)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					done = true;
 					break;
@@ -235,7 +286,10 @@ static int qnx6_readdir(struct file *file, struct dir_context *ctx)
 		qnx6_put_page(page);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	filp->f_pos = pos;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -327,8 +381,12 @@ unsigned qnx6_find_entry(int len, struct inode *dir, const char *name,
 						goto found;
 				} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk(KERN_ERR "qnx6: undefined "
 						"filename size in inode.\n");
+=======
+					pr_err("undefined filename size in inode.\n");
+>>>>>>> v3.18
 =======
 					pr_err("undefined filename size in inode.\n");
 >>>>>>> v3.18
@@ -351,7 +409,11 @@ const struct file_operations qnx6_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= qnx6_readdir,
+=======
+	.iterate	= qnx6_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= qnx6_readdir,
 >>>>>>> v3.18

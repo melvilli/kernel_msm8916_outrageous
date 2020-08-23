@@ -28,7 +28,11 @@
 #include <linux/slab.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -513,8 +517,13 @@ int venus_pioctl(struct super_block *sb, struct CodaFid *fid,
      
         /* get the data out of user space */
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ( copy_from_user((char*)inp + (long)inp->coda_ioctl.data,
 			    data->vi.in, data->vi.in_size) ) {
+=======
+	if (copy_from_user((char *)inp + (long)inp->coda_ioctl.data,
+			   data->vi.in, data->vi.in_size)) {
+>>>>>>> v3.18
 =======
 	if (copy_from_user((char *)inp + (long)inp->coda_ioctl.data,
 			   data->vi.in, data->vi.in_size)) {
@@ -528,8 +537,13 @@ int venus_pioctl(struct super_block *sb, struct CodaFid *fid,
 
         if (error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	        printk("coda_pioctl: Venus returns: %d for %s\n", 
 		       error, coda_f2s(fid));
+=======
+		pr_warn("%s: Venus returns: %d for %s\n",
+			__func__, error, coda_f2s(fid));
+>>>>>>> v3.18
 =======
 		pr_warn("%s: Venus returns: %d for %s\n",
 			__func__, error, coda_f2s(fid));
@@ -690,7 +704,11 @@ static int coda_upcall(struct venus_comm *vcp,
 
 	if (!vcp->vc_inuse) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_NOTICE "coda: Venus dead, not sending upcall\n");
+=======
+		pr_notice("Venus dead, not sending upcall\n");
+>>>>>>> v3.18
 =======
 		pr_notice("Venus dead, not sending upcall\n");
 >>>>>>> v3.18
@@ -744,7 +762,11 @@ static int coda_upcall(struct venus_comm *vcp,
 	error = -EINTR;
 	if ((req->uc_flags & CODA_REQ_ABORT) || !signal_pending(current)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "coda: Unexpected interruption.\n");
+=======
+		pr_warn("Unexpected interruption.\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Unexpected interruption.\n");
 >>>>>>> v3.18
@@ -758,7 +780,11 @@ static int coda_upcall(struct venus_comm *vcp,
 	/* Venus saw the upcall, make sure we can send interrupt signal */
 	if (!vcp->vc_inuse) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "coda: Venus dead, not sending signal.\n");
+=======
+		pr_info("Venus dead, not sending signal.\n");
+>>>>>>> v3.18
 =======
 		pr_info("Venus dead, not sending signal.\n");
 >>>>>>> v3.18

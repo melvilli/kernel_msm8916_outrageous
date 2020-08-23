@@ -189,6 +189,10 @@ static void r592_host_reset(struct r592_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -200,6 +204,10 @@ static void r592_clear_interrupts(struct r592_device *dev)
 	r592_clear_reg_mask(dev, R592_REG_MSC, IRQ_ALL_EN_MASK);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -299,7 +307,11 @@ static int r592_transfer_fifo_dma(struct r592_device *dev)
 
 	dev->dma_error = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(dev->dma_done);
+=======
+	reinit_completion(&dev->dma_done);
+>>>>>>> v3.18
 =======
 	reinit_completion(&dev->dma_done);
 >>>>>>> v3.18
@@ -897,6 +909,7 @@ static struct pci_driver r852_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __init int r592_module_init(void)
 {
 	return pci_register_driver(&r852_pci_driver);
@@ -909,6 +922,9 @@ static void __exit r592_module_exit(void)
 
 module_init(r592_module_init);
 module_exit(r592_module_exit);
+=======
+module_pci_driver(r852_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(r852_pci_driver);
 >>>>>>> v3.18

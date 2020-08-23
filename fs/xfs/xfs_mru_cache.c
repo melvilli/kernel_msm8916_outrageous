@@ -101,6 +101,7 @@
  * an infinite loop in the code.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct xfs_mru_cache_elem
 {
 	struct list_head list_node;
@@ -110,6 +111,8 @@ typedef struct xfs_mru_cache_elem
 
 static kmem_zone_t		*xfs_mru_elem_zone;
 =======
+=======
+>>>>>>> v3.18
 struct xfs_mru_cache {
 	struct radix_tree_root	store;     /* Core storage data structure.  */
 	struct list_head	*lists;    /* Array of lists, one per grp.  */
@@ -124,6 +127,9 @@ struct xfs_mru_cache {
 	unsigned int		queued;	   /* work has been queued */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct workqueue_struct	*xfs_mru_reap_wq;
 
@@ -147,6 +153,7 @@ static struct workqueue_struct	*xfs_mru_reap_wq;
 STATIC unsigned long
 _xfs_mru_cache_migrate(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t	*mru,
 	unsigned long	now)
 {
@@ -154,12 +161,17 @@ _xfs_mru_cache_migrate(
 	unsigned int	migrated = 0;
 	struct list_head *lru_list;
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_mru_cache	*mru,
 	unsigned long		now)
 {
 	unsigned int		grp;
 	unsigned int		migrated = 0;
 	struct list_head	*lru_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Nothing to do if the data store is empty. */
@@ -220,17 +232,23 @@ _xfs_mru_cache_migrate(
 STATIC void
 _xfs_mru_cache_list_insert(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t		*mru,
 	xfs_mru_cache_elem_t	*elem)
 {
 	unsigned int	grp = 0;
 	unsigned long	now = jiffies;
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_mru_cache	*mru,
 	struct xfs_mru_cache_elem *elem)
 {
 	unsigned int		grp = 0;
 	unsigned long		now = jiffies;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -266,15 +284,21 @@ _xfs_mru_cache_list_insert(
 STATIC void
 _xfs_mru_cache_clear_reap_list(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t		*mru) __releases(mru->lock) __acquires(mru->lock)
 
 {
 	xfs_mru_cache_elem_t	*elem, *next;
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_mru_cache	*mru)
 		__releases(mru->lock) __acquires(mru->lock)
 {
 	struct xfs_mru_cache_elem *elem, *next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct list_head	tmp;
 
@@ -294,6 +318,7 @@ _xfs_mru_cache_clear_reap_list(
 
 	list_for_each_entry_safe(elem, next, &tmp, list_node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Remove the element from the reap list. */
 		list_del_init(&elem->list_node);
@@ -303,6 +328,10 @@ _xfs_mru_cache_clear_reap_list(
 
 		/* Free the element structure. */
 		kmem_zone_free(xfs_mru_elem_zone, elem);
+=======
+		list_del_init(&elem->list_node);
+		mru->free_func(elem);
+>>>>>>> v3.18
 =======
 		list_del_init(&elem->list_node);
 		mru->free_func(elem);
@@ -324,7 +353,12 @@ _xfs_mru_cache_reap(
 	struct work_struct	*work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t		*mru = container_of(work, xfs_mru_cache_t, work.work);
+=======
+	struct xfs_mru_cache	*mru =
+		container_of(work, struct xfs_mru_cache, work.work);
+>>>>>>> v3.18
 =======
 	struct xfs_mru_cache	*mru =
 		container_of(work, struct xfs_mru_cache, work.work);
@@ -356,6 +390,7 @@ int
 xfs_mru_cache_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_elem_zone = kmem_zone_init(sizeof(xfs_mru_cache_elem_t),
 	                                 "xfs_mru_cache_elem");
 	if (!xfs_mru_elem_zone)
@@ -372,11 +407,16 @@ xfs_mru_cache_init(void)
  out:
 	return -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 	xfs_mru_reap_wq = alloc_workqueue("xfs_mru_cache",
 				WQ_MEM_RECLAIM|WQ_FREEZABLE, 1);
 	if (!xfs_mru_reap_wq)
 		return -ENOMEM;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -385,7 +425,10 @@ xfs_mru_cache_uninit(void)
 {
 	destroy_workqueue(xfs_mru_reap_wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmem_zone_destroy(xfs_mru_elem_zone);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -399,7 +442,11 @@ xfs_mru_cache_uninit(void)
 int
 xfs_mru_cache_create(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t		**mrup,
+=======
+	struct xfs_mru_cache	**mrup,
+>>>>>>> v3.18
 =======
 	struct xfs_mru_cache	**mrup,
 >>>>>>> v3.18
@@ -408,9 +455,15 @@ xfs_mru_cache_create(
 	xfs_mru_cache_free_func_t free_func)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t	*mru = NULL;
 	int		err = 0, grp;
 	unsigned int	grp_time;
+=======
+	struct xfs_mru_cache	*mru = NULL;
+	int			err = 0, grp;
+	unsigned int		grp_time;
+>>>>>>> v3.18
 =======
 	struct xfs_mru_cache	*mru = NULL;
 	int			err = 0, grp;
@@ -422,6 +475,7 @@ xfs_mru_cache_create(
 
 	if (!mrup || !grp_count || !lifetime_ms || !free_func)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return EINVAL;
 
 	if (!(grp_time = msecs_to_jiffies(lifetime_ms) / grp_count))
@@ -430,6 +484,8 @@ xfs_mru_cache_create(
 	if (!(mru = kmem_zalloc(sizeof(*mru), KM_SLEEP)))
 		return ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 
 	if (!(grp_time = msecs_to_jiffies(lifetime_ms) / grp_count))
@@ -437,6 +493,9 @@ xfs_mru_cache_create(
 
 	if (!(mru = kmem_zalloc(sizeof(*mru), KM_SLEEP)))
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* An extra list is needed to avoid reaping up to a grp_time early. */
@@ -445,7 +504,11 @@ xfs_mru_cache_create(
 
 	if (!mru->lists) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = ENOMEM;
+=======
+		err = -ENOMEM;
+>>>>>>> v3.18
 =======
 		err = -ENOMEM;
 >>>>>>> v3.18
@@ -487,7 +550,11 @@ exit:
 static void
 xfs_mru_cache_flush(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t		*mru)
+=======
+	struct xfs_mru_cache	*mru)
+>>>>>>> v3.18
 =======
 	struct xfs_mru_cache	*mru)
 >>>>>>> v3.18
@@ -511,7 +578,11 @@ xfs_mru_cache_flush(
 void
 xfs_mru_cache_destroy(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t		*mru)
+=======
+	struct xfs_mru_cache	*mru)
+>>>>>>> v3.18
 =======
 	struct xfs_mru_cache	*mru)
 >>>>>>> v3.18
@@ -532,6 +603,7 @@ xfs_mru_cache_destroy(
  */
 int
 xfs_mru_cache_insert(
+<<<<<<< HEAD
 <<<<<<< HEAD
 	xfs_mru_cache_t	*mru,
 	unsigned long	key,
@@ -566,6 +638,8 @@ xfs_mru_cache_insert(
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_mru_cache	*mru,
 	unsigned long		key,
 	struct xfs_mru_cache_elem *elem)
@@ -590,6 +664,9 @@ xfs_mru_cache_insert(
 	spin_unlock(&mru->lock);
 
 	return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -600,6 +677,7 @@ xfs_mru_cache_insert(
  * function will return a NULL pointer.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *
 xfs_mru_cache_remove(
 	xfs_mru_cache_t	*mru,
@@ -608,12 +686,17 @@ xfs_mru_cache_remove(
 	xfs_mru_cache_elem_t *elem;
 	void		*value = NULL;
 =======
+=======
+>>>>>>> v3.18
 struct xfs_mru_cache_elem *
 xfs_mru_cache_remove(
 	struct xfs_mru_cache	*mru,
 	unsigned long		key)
 {
 	struct xfs_mru_cache_elem *elem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ASSERT(mru && mru->lists);
@@ -622,6 +705,7 @@ xfs_mru_cache_remove(
 
 	spin_lock(&mru->lock);
 	elem = radix_tree_delete(&mru->store, key);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (elem) {
 		value = elem->value;
@@ -635,11 +719,16 @@ xfs_mru_cache_remove(
 
 	return value;
 =======
+=======
+>>>>>>> v3.18
 	if (elem)
 		list_del(&elem->list_node);
 	spin_unlock(&mru->lock);
 
 	return elem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -650,6 +739,7 @@ xfs_mru_cache_remove(
 void
 xfs_mru_cache_delete(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t	*mru,
 	unsigned long	key)
 {
@@ -658,6 +748,8 @@ xfs_mru_cache_delete(
 	if (value)
 		mru->free_func(key, value);
 =======
+=======
+>>>>>>> v3.18
 	struct xfs_mru_cache	*mru,
 	unsigned long		key)
 {
@@ -666,6 +758,9 @@ xfs_mru_cache_delete(
 	elem = xfs_mru_cache_remove(mru, key);
 	if (elem)
 		mru->free_func(elem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -690,6 +785,7 @@ xfs_mru_cache_delete(
  * not release the lock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *
 xfs_mru_cache_lookup(
 	xfs_mru_cache_t	*mru,
@@ -697,12 +793,17 @@ xfs_mru_cache_lookup(
 {
 	xfs_mru_cache_elem_t *elem;
 =======
+=======
+>>>>>>> v3.18
 struct xfs_mru_cache_elem *
 xfs_mru_cache_lookup(
 	struct xfs_mru_cache	*mru,
 	unsigned long		key)
 {
 	struct xfs_mru_cache_elem *elem;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ASSERT(mru && mru->lists);
@@ -719,7 +820,11 @@ xfs_mru_cache_lookup(
 		spin_unlock(&mru->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return elem ? elem->value : NULL;
+=======
+	return elem;
+>>>>>>> v3.18
 =======
 	return elem;
 >>>>>>> v3.18
@@ -733,7 +838,12 @@ xfs_mru_cache_lookup(
 void
 xfs_mru_cache_done(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_mru_cache_t	*mru) __releases(mru->lock)
+=======
+	struct xfs_mru_cache	*mru)
+		__releases(mru->lock)
+>>>>>>> v3.18
 =======
 	struct xfs_mru_cache	*mru)
 		__releases(mru->lock)

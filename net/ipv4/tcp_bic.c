@@ -18,7 +18,10 @@
 #include <net/tcp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define BICTCP_BETA_SCALE    1024	/* Scale factor beta calculation
@@ -50,16 +53,22 @@ module_param(smooth_part, int, 0644);
 MODULE_PARM_DESC(smooth_part, "log(B/(B*Smin))/log(B/(B-1))+B, # of RTT from Wmax-B to Wmax");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* BIC TCP Parameters */
 struct bictcp {
 	u32	cnt;		/* increase cwnd by 1 after ACKs */
 	u32 	last_max_cwnd;	/* last maximum snd_cwnd */
 =======
+=======
+>>>>>>> v3.18
 /* BIC TCP Parameters */
 struct bictcp {
 	u32	cnt;		/* increase cwnd by 1 after ACKs */
 	u32	last_max_cwnd;	/* last maximum snd_cwnd */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	loss_cwnd;	/* congestion window at last loss */
 	u32	last_cwnd;	/* the last snd_cwnd */
@@ -114,7 +123,11 @@ static inline void bictcp_update(struct bictcp *ca, u32 cwnd)
 	/* binary increase */
 	if (cwnd < ca->last_max_cwnd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__u32 	dist = (ca->last_max_cwnd - cwnd)
+=======
+		__u32	dist = (ca->last_max_cwnd - cwnd)
+>>>>>>> v3.18
 =======
 		__u32	dist = (ca->last_max_cwnd - cwnd)
 >>>>>>> v3.18
@@ -155,7 +168,11 @@ static inline void bictcp_update(struct bictcp *ca, u32 cwnd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 in_flight)
+=======
+static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
+>>>>>>> v3.18
 =======
 static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 >>>>>>> v3.18
@@ -164,24 +181,33 @@ static void bictcp_cong_avoid(struct sock *sk, u32 ack, u32 acked)
 	struct bictcp *ca = inet_csk_ca(sk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tcp_is_cwnd_limited(sk, in_flight))
 		return;
 
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 		tcp_slow_start(tp);
 =======
+=======
+>>>>>>> v3.18
 	if (!tcp_is_cwnd_limited(sk))
 		return;
 
 	if (tp->snd_cwnd <= tp->snd_ssthresh)
 		tcp_slow_start(tp, acked);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else {
 		bictcp_update(ca, tp->snd_cwnd);
 		tcp_cong_avoid_ai(tp, ca->cnt);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -207,7 +233,10 @@ static u32 bictcp_recalc_ssthresh(struct sock *sk)
 	ca->loss_cwnd = tp->snd_cwnd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (tp->snd_cwnd <= low_window)
@@ -221,6 +250,10 @@ static u32 bictcp_undo_cwnd(struct sock *sk)
 	const struct tcp_sock *tp = tcp_sk(sk);
 	const struct bictcp *ca = inet_csk_ca(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -243,6 +276,10 @@ static void bictcp_acked(struct sock *sk, u32 cnt, s32 rtt)
 	if (icsk->icsk_ca_state == TCP_CA_Open) {
 		struct bictcp *ca = inet_csk_ca(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -252,7 +289,10 @@ static void bictcp_acked(struct sock *sk, u32 cnt, s32 rtt)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct tcp_congestion_ops bictcp __read_mostly = {

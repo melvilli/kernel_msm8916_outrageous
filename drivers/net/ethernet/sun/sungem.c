@@ -25,7 +25,10 @@
 #include <linux/string.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/errno.h>
@@ -90,7 +93,11 @@ MODULE_LICENSE("GPL");
 #define GEM_MODULE_NAME	"gem"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(gem_pci_tbl) = {
+=======
+static const struct pci_device_id gem_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id gem_pci_tbl[] = {
 >>>>>>> v3.18
@@ -124,7 +131,11 @@ static const struct pci_device_id gem_pci_tbl[] = {
 MODULE_DEVICE_TABLE(pci, gem_pci_tbl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16 __phy_read(struct gem *gp, int phy_addr, int reg)
+=======
+static u16 __sungem_phy_read(struct gem *gp, int phy_addr, int reg)
+>>>>>>> v3.18
 =======
 static u16 __sungem_phy_read(struct gem *gp, int phy_addr, int reg)
 >>>>>>> v3.18
@@ -154,6 +165,7 @@ static u16 __sungem_phy_read(struct gem *gp, int phy_addr, int reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int _phy_read(struct net_device *dev, int mii_id, int reg)
 {
 	struct gem *gp = netdev_priv(dev);
@@ -167,6 +179,8 @@ static inline u16 phy_read(struct gem *gp, int reg)
 
 static void __phy_write(struct gem *gp, int phy_addr, int reg, u16 val)
 =======
+=======
+>>>>>>> v3.18
 static inline int _sungem_phy_read(struct net_device *dev, int mii_id, int reg)
 {
 	struct gem *gp = netdev_priv(dev);
@@ -179,6 +193,9 @@ static inline u16 sungem_phy_read(struct gem *gp, int reg)
 }
 
 static void __sungem_phy_write(struct gem *gp, int phy_addr, int reg, u16 val)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 cmd;
@@ -202,6 +219,7 @@ static void __sungem_phy_write(struct gem *gp, int phy_addr, int reg, u16 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void _phy_write(struct net_device *dev, int mii_id, int reg, int val)
 {
 	struct gem *gp = netdev_priv(dev);
@@ -212,6 +230,8 @@ static inline void phy_write(struct gem *gp, int reg, u16 val)
 {
 	__phy_write(gp, gp->mii_phy_addr, reg, val);
 =======
+=======
+>>>>>>> v3.18
 static inline void _sungem_phy_write(struct net_device *dev, int mii_id, int reg, int val)
 {
 	struct gem *gp = netdev_priv(dev);
@@ -221,6 +241,9 @@ static inline void _sungem_phy_write(struct net_device *dev, int mii_id, int reg
 static inline void sungem_phy_write(struct gem *gp, int reg, u16 val)
 {
 	__sungem_phy_write(gp, gp->mii_phy_addr, reg, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -728,7 +751,11 @@ static __inline__ void gem_tx(struct net_device *dev, struct gem *gp, u32 gem_st
 
 		dev->stats.tx_packets++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_consume_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_consume_skb_any(skb);
 >>>>>>> v3.18
@@ -1731,9 +1758,15 @@ static void gem_init_phy(struct gem *gp)
 			 * we do an additional reset here
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			phy_write(gp, MII_BMCR, BMCR_RESET);
 			msleep(20);
 			if (phy_read(gp, MII_BMCR) != 0xffff)
+=======
+			sungem_phy_write(gp, MII_BMCR, BMCR_RESET);
+			msleep(20);
+			if (sungem_phy_read(gp, MII_BMCR) != 0xffff)
+>>>>>>> v3.18
 =======
 			sungem_phy_write(gp, MII_BMCR, BMCR_RESET);
 			msleep(20);
@@ -2062,7 +2095,11 @@ static int gem_check_invariants(struct gem *gp)
 		for (i = 0; i < 32; i++) {
 			gp->mii_phy_addr = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (phy_read(gp, MII_BMCR) != 0xffff)
+=======
+			if (sungem_phy_read(gp, MII_BMCR) != 0xffff)
+>>>>>>> v3.18
 =======
 			if (sungem_phy_read(gp, MII_BMCR) != 0xffff)
 >>>>>>> v3.18
@@ -2750,7 +2787,11 @@ static int gem_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 
 	case SIOCGMIIREG:		/* Read MII PHY register. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->val_out = __phy_read(gp, data->phy_id & 0x1f,
+=======
+		data->val_out = __sungem_phy_read(gp, data->phy_id & 0x1f,
+>>>>>>> v3.18
 =======
 		data->val_out = __sungem_phy_read(gp, data->phy_id & 0x1f,
 >>>>>>> v3.18
@@ -2760,7 +2801,11 @@ static int gem_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 
 	case SIOCSMIIREG:		/* Write MII PHY register. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__phy_write(gp, data->phy_id & 0x1f, data->reg_num & 0x1f,
+=======
+		__sungem_phy_write(gp, data->phy_id & 0x1f, data->reg_num & 0x1f,
+>>>>>>> v3.18
 =======
 		__sungem_phy_write(gp, data->phy_id & 0x1f, data->reg_num & 0x1f,
 >>>>>>> v3.18
@@ -2840,7 +2885,11 @@ static int gem_get_device_address(struct gem *gp)
 #endif
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(dev->dev_addr, addr, 6);
+=======
+	memcpy(dev->dev_addr, addr, ETH_ALEN);
+>>>>>>> v3.18
 =======
 	memcpy(dev->dev_addr, addr, ETH_ALEN);
 >>>>>>> v3.18
@@ -2871,8 +2920,11 @@ static void gem_remove_one(struct pci_dev *pdev)
 		pci_release_regions(pdev);
 		free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -3004,8 +3056,13 @@ static int gem_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	/* Fill up the mii_phy structure (even if we won't use it) */
 	gp->phy_mii.dev = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gp->phy_mii.mdio_read = _phy_read;
 	gp->phy_mii.mdio_write = _phy_write;
+=======
+	gp->phy_mii.mdio_read = _sungem_phy_read;
+	gp->phy_mii.mdio_write = _sungem_phy_write;
+>>>>>>> v3.18
 =======
 	gp->phy_mii.mdio_read = _sungem_phy_read;
 	gp->phy_mii.mdio_write = _sungem_phy_write;
@@ -3101,6 +3158,7 @@ static struct pci_driver gem_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init gem_init(void)
 {
 	return pci_register_driver(&gem_driver);
@@ -3113,6 +3171,9 @@ static void __exit gem_cleanup(void)
 
 module_init(gem_init);
 module_exit(gem_cleanup);
+=======
+module_pci_driver(gem_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(gem_driver);
 >>>>>>> v3.18

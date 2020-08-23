@@ -29,10 +29,16 @@
  * uart1 or sata.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * If optional mpp_get/_set functions are set these are used to get/set
  * a specific mode. Otherwise it is assumed that the mpp control is based
  * on 4-bit groups in subsequent registers. The optional mpp_gpio_req/_dir
  * functions can be used to allow pin settings with varying gpio pins.
+=======
+ * The mpp_get/_set functions are mandatory and are used to get/set a
+ * specific mode. The optional mpp_gpio_req/_dir functions can be used
+ * to allow pin settings with varying gpio pins.
+>>>>>>> v3.18
 =======
  * The mpp_get/_set functions are mandatory and are used to get/set a
  * specific mode. The optional mpp_gpio_req/_dir functions can be used
@@ -45,15 +51,21 @@ struct mvebu_mpp_ctrl {
 	u8 npins;
 	unsigned *pins;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*mpp_get)(struct mvebu_mpp_ctrl *ctrl, unsigned long *config);
 	int (*mpp_set)(struct mvebu_mpp_ctrl *ctrl, unsigned long config);
 	int (*mpp_gpio_req)(struct mvebu_mpp_ctrl *ctrl, u8 pid);
 	int (*mpp_gpio_dir)(struct mvebu_mpp_ctrl *ctrl, u8 pid, bool input);
 =======
+=======
+>>>>>>> v3.18
 	int (*mpp_get)(unsigned pid, unsigned long *config);
 	int (*mpp_set)(unsigned pid, unsigned long config);
 	int (*mpp_gpio_req)(unsigned pid);
 	int (*mpp_gpio_dir)(unsigned pid, bool input);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -128,6 +140,7 @@ struct mvebu_pinctrl_soc_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MPP_REG_CTRL(_idl, _idh)				\
 	{							\
 		.name = NULL,					\
@@ -140,6 +153,8 @@ struct mvebu_pinctrl_soc_info {
 		.mpp_gpio_dir = NULL,				\
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define MPP_FUNC_CTRL(_idl, _idh, _name, _func)			\
@@ -203,7 +218,10 @@ struct mvebu_pinctrl_soc_info {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define MVEBU_MPPS_PER_REG	8
 #define MVEBU_MPP_BITS		4
 #define MVEBU_MPP_MASK		0xf
@@ -232,6 +250,9 @@ static inline int default_mpp_ctrl_set(void __iomem *base, unsigned int pid,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mvebu_pinctrl_probe(struct platform_device *pdev);
 int mvebu_pinctrl_remove(struct platform_device *pdev);

@@ -31,7 +31,10 @@
 #include <linux/compiler.h>
 #include <linux/sort.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dma-mapping.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -77,12 +80,18 @@ __setup("fpe=", fpe_setup);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void paging_init(const struct machine_desc *desc);
 =======
+=======
+>>>>>>> v3.18
 extern void init_default_cache_policy(unsigned long);
 extern void paging_init(const struct machine_desc *desc);
 extern void early_paging_init(const struct machine_desc *,
 			      struct proc_info_list *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void sanity_check_meminfo(void);
 extern enum reboot_mode reboot_mode;
@@ -110,6 +119,7 @@ unsigned int elf_hwcap __read_mostly;
 EXPORT_SYMBOL(elf_hwcap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int boot_reason;
 EXPORT_SYMBOL(boot_reason);
 
@@ -118,6 +128,11 @@ EXPORT_SYMBOL(cold_boot);
 
 char* (*arch_read_hardware_id)(void);
 EXPORT_SYMBOL(arch_read_hardware_id);
+=======
+unsigned int elf_hwcap2 __read_mostly;
+EXPORT_SYMBOL(elf_hwcap2);
+
+>>>>>>> v3.18
 =======
 unsigned int elf_hwcap2 __read_mostly;
 EXPORT_SYMBOL(elf_hwcap2);
@@ -153,16 +168,22 @@ struct stack {
 	u32 abt[3];
 	u32 und[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } ____cacheline_aligned;
 
 static struct stack stacks[NR_CPUS];
 =======
+=======
+>>>>>>> v3.18
 	u32 fiq[3];
 } ____cacheline_aligned;
 
 #ifndef CONFIG_CPU_V7M
 static struct stack stacks[NR_CPUS];
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 char elf_platform[ELF_PLATFORM_SIZE];
@@ -243,7 +264,11 @@ static const char *proc_arch[] = {
 	"6TEJ",
 	"7",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"?(11)",
+=======
+	"7M",
+>>>>>>> v3.18
 =======
 	"7M",
 >>>>>>> v3.18
@@ -256,13 +281,19 @@ static const char *proc_arch[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_V7M
 static int __get_cpu_architecture(void)
 {
 	return CPU_ARCH_ARMv7M;
 }
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __get_cpu_architecture(void)
 {
@@ -297,6 +328,10 @@ static int __get_cpu_architecture(void)
 	return cpu_arch;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -346,7 +381,13 @@ static void __init cacheid_init(void)
 	unsigned int arch = cpu_architecture();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (arch >= CPU_ARCH_ARMv6) {
+=======
+	if (arch == CPU_ARCH_ARMv7M) {
+		cacheid = 0;
+	} else if (arch >= CPU_ARCH_ARMv6) {
+>>>>>>> v3.18
 =======
 	if (arch == CPU_ARCH_ARMv7M) {
 		cacheid = 0;
@@ -379,7 +420,11 @@ static void __init cacheid_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("CPU: %s data cache, %s instruction cache\n",
+=======
+	pr_info("CPU: %s data cache, %s instruction cache\n",
+>>>>>>> v3.18
 =======
 	pr_info("CPU: %s data cache, %s instruction cache\n",
 >>>>>>> v3.18
@@ -418,7 +463,11 @@ void __init early_print(const char *str, ...)
 static void __init cpuid_init_hwcaps(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int divide_instrs;
+=======
+	unsigned int divide_instrs, vmsa;
+>>>>>>> v3.18
 =======
 	unsigned int divide_instrs, vmsa;
 >>>>>>> v3.18
@@ -435,6 +484,7 @@ static void __init cpuid_init_hwcaps(void)
 		elf_hwcap |= HWCAP_IDIVT;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static void __init feat_v6_fixup(void)
@@ -444,6 +494,8 @@ static void __init feat_v6_fixup(void)
 	if ((id & 0xff0f0000) != 0x41070000)
 		return;
 =======
+=======
+>>>>>>> v3.18
 
 	/* LPAE implies atomic ldrd/strd instructions */
 	vmsa = (read_cpuid_ext(CPUID_EXT_MMFR0) & 0xf) >> 0;
@@ -455,6 +507,9 @@ static void __init elf_hwcap_fixup(void)
 {
 	unsigned id = read_cpuid_id();
 	unsigned sync_prim;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -462,9 +517,12 @@ static void __init elf_hwcap_fixup(void)
 	 * see also kuser_get_tls_init.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((((id >> 4) & 0xfff) == 0xb36) && (((id >> 20) & 3) == 0))
 		elf_hwcap &= ~HWCAP_TLS;
 =======
+=======
+>>>>>>> v3.18
 	if (read_cpuid_part() == ARM_CPU_PART_ARM1136 &&
 	    ((id >> 20) & 3) == 0) {
 		elf_hwcap &= ~HWCAP_TLS;
@@ -484,6 +542,9 @@ static void __init elf_hwcap_fixup(void)
 		    ((read_cpuid_ext(CPUID_EXT_ISAR4) >> 20) & 0x0f);
 	if (sync_prim >= 0x13)
 		elf_hwcap &= ~HWCAP_SWP;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -495,6 +556,10 @@ static void __init elf_hwcap_fixup(void)
 void notrace cpu_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_CPU_V7M
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_CPU_V7M
 >>>>>>> v3.18
@@ -503,7 +568,11 @@ void notrace cpu_init(void)
 
 	if (cpu >= NR_CPUS) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_CRIT "CPU%u: bad primary CPU number\n", cpu);
+=======
+		pr_crit("CPU%u: bad primary CPU number\n", cpu);
+>>>>>>> v3.18
 =======
 		pr_crit("CPU%u: bad primary CPU number\n", cpu);
 >>>>>>> v3.18
@@ -542,12 +611,18 @@ void notrace cpu_init(void)
 	"add	r14, %0, %6\n\t"
 	"mov	sp, r14\n\t"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"msr	cpsr_c, %7"
 =======
+=======
+>>>>>>> v3.18
 	"msr	cpsr_c, %7\n\t"
 	"add	r14, %0, %8\n\t"
 	"mov	sp, r14\n\t"
 	"msr	cpsr_c, %9"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    :
 	    : "r" (stk),
@@ -558,14 +633,20 @@ void notrace cpu_init(void)
 	      PLC (PSR_F_BIT | PSR_I_BIT | UND_MODE),
 	      "I" (offsetof(struct stack, und[0])),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      PLC (PSR_F_BIT | PSR_I_BIT | SVC_MODE)
 	    : "r14");
 =======
+=======
+>>>>>>> v3.18
 	      PLC (PSR_F_BIT | PSR_I_BIT | FIQ_MODE),
 	      "I" (offsetof(struct stack, fiq[0])),
 	      PLC (PSR_F_BIT | PSR_I_BIT | SVC_MODE)
 	    : "r14");
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -582,8 +663,11 @@ void __init smp_setup_processor_id(void)
 		cpu_logical_map(i) = i == cpu ? 0 : i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "Booting Linux on physical CPU 0x%x\n", mpidr);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * clear __my_cpu_offset on boot CPU to avoid hang caused by
 	 * using percpu variable early, for example, lockdep will
@@ -592,6 +676,9 @@ void __init smp_setup_processor_id(void)
 	set_my_cpu_offset(0);
 
 	pr_info("Booting Linux on physical CPU 0x%x\n", mpidr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -673,8 +760,13 @@ static void __init setup_processor(void)
 	list = lookup_processor_type(read_cpuid_id());
 	if (!list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("CPU configuration botched (ID %08x), unable "
 		       "to continue.\n", read_cpuid_id());
+=======
+		pr_err("CPU configuration botched (ID %08x), unable to continue.\n",
+		       read_cpuid_id());
+>>>>>>> v3.18
 =======
 		pr_err("CPU configuration botched (ID %08x), unable to continue.\n",
 		       read_cpuid_id());
@@ -699,9 +791,15 @@ static void __init setup_processor(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("CPU: %s [%08x] revision %d (ARMv%s), cr=%08lx\n",
 	       cpu_name, read_cpuid_id(), read_cpuid_id() & 15,
 	       proc_arch[cpu_architecture()], cr_alignment);
+=======
+	pr_info("CPU: %s [%08x] revision %d (ARMv%s), cr=%08lx\n",
+		cpu_name, read_cpuid_id(), read_cpuid_id() & 15,
+		proc_arch[cpu_architecture()], get_cr());
+>>>>>>> v3.18
 =======
 	pr_info("CPU: %s [%08x] revision %d (ARMv%s), cr=%08lx\n",
 		cpu_name, read_cpuid_id(), read_cpuid_id() & 15,
@@ -720,15 +818,21 @@ static void __init setup_processor(void)
 	elf_hwcap &= ~(HWCAP_THUMB | HWCAP_IDIVT);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	feat_v6_fixup();
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MMU
 	init_default_cache_policy(list->__cpu_mm_mmu_flags);
 #endif
 	erratum_a15_798181_init();
 
 	elf_hwcap_fixup();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cacheid_init();
@@ -750,7 +854,11 @@ void __init dump_machine_table(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init arm_add_memory(phys_addr_t start, phys_addr_t size)
+=======
+int __init arm_add_memory(u64 start, u64 size)
+>>>>>>> v3.18
 =======
 int __init arm_add_memory(u64 start, u64 size)
 >>>>>>> v3.18
@@ -767,8 +875,13 @@ int __init arm_add_memory(u64 start, u64 size)
 #ifndef CONFIG_ARCH_PHYS_ADDR_T_64BIT
 	if (aligned_start > ULONG_MAX) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_CRIT "Ignoring memory at 0x%08llx outside "
 		       "32-bit physical address space\n", (long long)start);
+=======
+		pr_crit("Ignoring memory at 0x%08llx outside 32-bit physical address space\n",
+			(long long)start);
+>>>>>>> v3.18
 =======
 		pr_crit("Ignoring memory at 0x%08llx outside 32-bit physical address space\n",
 			(long long)start);
@@ -778,8 +891,13 @@ int __init arm_add_memory(u64 start, u64 size)
 
 	if (aligned_start + size > ULONG_MAX) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_CRIT "Truncating memory at 0x%08llx to fit in "
 			"32-bit physical address space\n", (long long)start);
+=======
+		pr_crit("Truncating memory at 0x%08llx to fit in 32-bit physical address space\n",
+			(long long)start);
+>>>>>>> v3.18
 =======
 		pr_crit("Truncating memory at 0x%08llx to fit in 32-bit physical address space\n",
 			(long long)start);
@@ -808,6 +926,10 @@ int __init arm_add_memory(u64 start, u64 size)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	start = aligned_start;
+>>>>>>> v3.18
 =======
 	start = aligned_start;
 >>>>>>> v3.18
@@ -833,8 +955,13 @@ static int __init early_mem(char *p)
 {
 	static int usermem __initdata = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_addr_t size;
 	phys_addr_t start;
+=======
+	u64 size;
+	u64 start;
+>>>>>>> v3.18
 =======
 	u64 size;
 	u64 start;
@@ -875,7 +1002,11 @@ static void __init request_standard_resources(const struct machine_desc *mdesc)
 
 	for_each_memblock(memory, region) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		res = alloc_bootmem_low(sizeof(*res));
+=======
+		res = memblock_virt_alloc(sizeof(*res), 0);
+>>>>>>> v3.18
 =======
 		res = memblock_virt_alloc(sizeof(*res), 0);
 >>>>>>> v3.18
@@ -979,6 +1110,7 @@ static void __init reserve_crashkernel(void)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = reserve_bootmem(crash_base, crash_size, BOOTMEM_EXCLUSIVE);
 	if (ret < 0) {
 		printk(KERN_WARNING "crashkernel reservation failed - "
@@ -992,6 +1124,8 @@ static void __init reserve_crashkernel(void)
 	       (unsigned long)(crash_base >> 20),
 	       (unsigned long)(total_mem >> 20));
 =======
+=======
+>>>>>>> v3.18
 	ret = memblock_reserve(crash_base, crash_size);
 	if (ret < 0) {
 		pr_warn("crashkernel reservation failed - memory is in use (0x%lx)\n",
@@ -1003,6 +1137,9 @@ static void __init reserve_crashkernel(void)
 		(unsigned long)(crash_size >> 20),
 		(unsigned long)(crash_base >> 20),
 		(unsigned long)(total_mem >> 20));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	crashk_res.start = crash_base;
@@ -1017,6 +1154,11 @@ void __init hyp_mode_check(void)
 {
 #ifdef CONFIG_ARM_VIRT_EXT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_boot_mode();
+
+>>>>>>> v3.18
 =======
 	sync_boot_mode();
 
@@ -1034,8 +1176,11 @@ void __init hyp_mode_check(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init __weak init_random_pool(void) { }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init setup_arch(char **cmdline_p)
@@ -1050,8 +1195,11 @@ void __init setup_arch(char **cmdline_p)
 	machine_name = mdesc->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_dma_zone(mdesc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mdesc->reboot_mode != REBOOT_HARD)
@@ -1069,7 +1217,12 @@ void __init setup_arch(char **cmdline_p)
 	parse_early_param();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* XXX argh */
+=======
+	early_paging_init(mdesc, lookup_processor_type(read_cpuid_id()));
+	setup_dma_zone(mdesc);
+>>>>>>> v3.18
 =======
 	early_paging_init(mdesc, lookup_processor_type(read_cpuid_id()));
 	setup_dma_zone(mdesc);
@@ -1086,6 +1239,7 @@ void __init setup_arch(char **cmdline_p)
 	unflatten_device_tree();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psci_init();
 #ifdef CONFIG_SMP
 	if (is_smp()) {
@@ -1096,6 +1250,8 @@ void __init setup_arch(char **cmdline_p)
 		smp_init_cpus();
 		arm_dt_init_cpu_maps();
 =======
+=======
+>>>>>>> v3.18
 	arm_dt_init_cpu_maps();
 	psci_init();
 #ifdef CONFIG_SMP
@@ -1107,6 +1263,9 @@ void __init setup_arch(char **cmdline_p)
 				smp_set_ops(mdesc->smp);
 		}
 		smp_init_cpus();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		smp_build_mpidr_hash();
 	}
@@ -1132,8 +1291,11 @@ void __init setup_arch(char **cmdline_p)
 	if (mdesc->init_early)
 		mdesc->init_early();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	init_random_pool();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1193,7 +1355,10 @@ static const char *hwcap_str[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const char *hwcap2_str[] = {
 	"aes",
 	"pmull",
@@ -1203,6 +1368,9 @@ static const char *hwcap2_str[] = {
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int c_show(struct seq_file *m, void *v)
 {
@@ -1210,7 +1378,11 @@ static int c_show(struct seq_file *m, void *v)
 	u32 cpuid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_present_cpu(i) {
+=======
+	for_each_online_cpu(i) {
+>>>>>>> v3.18
 =======
 	for_each_online_cpu(i) {
 >>>>>>> v3.18
@@ -1225,6 +1397,7 @@ static int c_show(struct seq_file *m, void *v)
 			   cpu_name, cpuid & 15, elf_platform);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SMP)
 		seq_printf(m, "BogoMIPS\t: %lu.%02lu\n",
 			   per_cpu(cpu_data, i).loops_per_jiffy / (500000UL/HZ),
@@ -1236,6 +1409,8 @@ static int c_show(struct seq_file *m, void *v)
 #endif
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		/* dump out the processor features */
 		seq_puts(m, "Features\t: ");
 
@@ -1244,11 +1419,17 @@ static int c_show(struct seq_file *m, void *v)
 				seq_printf(m, "%s ", hwcap_str[j]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		for (j = 0; hwcap2_str[j]; j++)
 			if (elf_hwcap2 & (1 << j))
 				seq_printf(m, "%s ", hwcap2_str[j]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		seq_printf(m, "\nCPU implementer\t: 0x%02x\n", cpuid >> 24);
 		seq_printf(m, "CPU architecture: %s\n",
@@ -1274,6 +1455,7 @@ static int c_show(struct seq_file *m, void *v)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!arch_read_hardware_id)
 		seq_printf(m, "Hardware\t: %s\n", machine_name);
 	else
@@ -1284,10 +1466,15 @@ static int c_show(struct seq_file *m, void *v)
 	seq_printf(m, "Processor\t: %s rev %d (%s)\n",
 		   cpu_name, read_cpuid_id() & 15, elf_platform);
 =======
+=======
+>>>>>>> v3.18
 	seq_printf(m, "Hardware\t: %s\n", machine_name);
 	seq_printf(m, "Revision\t: %04x\n", system_rev);
 	seq_printf(m, "Serial\t\t: %08x%08x\n",
 		   system_serial_high, system_serial_low);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1315,11 +1502,14 @@ const struct seq_operations cpuinfo_op = {
 	.show	= c_show
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void arch_setup_pdev_archdata(struct platform_device *pdev)
 {
 	pdev->archdata.dma_mask = DMA_BIT_MASK(32);
 	pdev->dev.dma_mask = &pdev->archdata.dma_mask;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

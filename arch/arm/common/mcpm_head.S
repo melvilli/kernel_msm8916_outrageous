@@ -16,6 +16,10 @@
 #include <linux/linkage.h>
 #include <asm/mcpm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -37,17 +41,23 @@
 	bl	printascii
 	mov	r0, r9
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	printhex8
 	adr	r0, 1903b
 	bl	printascii
 	mov	r0, r10
 	bl	printhex8
 =======
+=======
+>>>>>>> v3.18
 	bl	printhex2
 	adr	r0, 1903b
 	bl	printascii
 	mov	r0, r10
 	bl	printhex2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	adr	r0, 1904b
 	bl	printascii
@@ -60,6 +70,10 @@
 ENTRY(mcpm_entry_point)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ ARM_BE8(setend        be)
+>>>>>>> v3.18
 =======
  ARM_BE8(setend        be)
 >>>>>>> v3.18
@@ -88,7 +102,12 @@ ENTRY(mcpm_entry_point)
 	 */
 	adr	r5, 3f
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ldmia	r5, {r6, r7, r8, r11}
+=======
+	ldmia	r5, {r0, r6, r7, r8, r11}
+	add	r0, r5, r0			@ r0 = mcpm_entry_early_pokes
+>>>>>>> v3.18
 =======
 	ldmia	r5, {r0, r6, r7, r8, r11}
 	add	r0, r5, r0			@ r0 = mcpm_entry_early_pokes
@@ -99,13 +118,19 @@ ENTRY(mcpm_entry_point)
 	add	r11, r5, r11			@ r11 = first_man_locks
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	@ Perform an early poke, if any
 	add	r0, r0, r4, lsl #3
 	ldmia	r0, {r0, r1}
 	teq	r0, #0
 	strne	r1, [r0]
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov	r0, #MCPM_SYNC_CLUSTER_SIZE
 	mla	r8, r0, r10, r8			@ r8 = sync cluster base
@@ -182,7 +207,11 @@ mcpm_setup_leave:
 	mov	r0, #INBOUND_NOT_COMING_UP
 	strb	r0, [r8, #MCPM_SYNC_CLUSTER_INBOUND]
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	st
+>>>>>>> v3.18
 =======
 	dsb	st
 >>>>>>> v3.18
@@ -230,7 +259,12 @@ mcpm_entry_gated:
 	.align	2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 3:	.word	mcpm_entry_vectors - .
+=======
+3:	.word	mcpm_entry_early_pokes - .
+	.word	mcpm_entry_vectors - 3b
+>>>>>>> v3.18
 =======
 3:	.word	mcpm_entry_early_pokes - .
 	.word	mcpm_entry_vectors - 3b
@@ -254,11 +288,17 @@ ENTRY(mcpm_entry_vectors)
 	.space	4 * MAX_NR_CLUSTERS * MAX_CPUS_PER_CLUSTER
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.type	mcpm_entry_early_pokes, #object
 ENTRY(mcpm_entry_early_pokes)
 	.space	8 * MAX_NR_CLUSTERS * MAX_CPUS_PER_CLUSTER
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.type	mcpm_power_up_setup_phys, #object
 ENTRY(mcpm_power_up_setup_phys)

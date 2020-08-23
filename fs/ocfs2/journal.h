@@ -201,7 +201,10 @@ void ocfs2_complete_quota_recovery(struct ocfs2_super *osb);
 static inline void ocfs2_start_checkpoint(struct ocfs2_super *osb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&osb->needs_checkpoint, 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	wake_up(&osb->checkpoint_event);
@@ -263,7 +266,10 @@ int			     ocfs2_commit_trans(struct ocfs2_super *osb,
 						handle_t *handle);
 int			     ocfs2_extend_trans(handle_t *handle, int nblocks);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int			     ocfs2_allocate_extend_trans(handle_t *handle,
 						int thresh);
 
@@ -275,6 +281,9 @@ int			     ocfs2_allocate_extend_trans(handle_t *handle,
  * optimistically as we go.
  */
 #define OCFS2_MAX_TRANS_DATA	64U
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -532,8 +541,12 @@ static inline int ocfs2_calc_dxi_expand_credits(struct super_block *sb)
  */
 static inline int ocfs2_calc_extend_credits(struct super_block *sb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    struct ocfs2_extent_list *root_el,
 					    u32 bits_wanted)
+=======
+					    struct ocfs2_extent_list *root_el)
+>>>>>>> v3.18
 =======
 					    struct ocfs2_extent_list *root_el)
 >>>>>>> v3.18
@@ -639,7 +652,10 @@ static inline int ocfs2_begin_ordered_truncate(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void ocfs2_update_inode_fsync_trans(handle_t *handle,
 						  struct inode *inode,
 						  int datasync)
@@ -651,5 +667,8 @@ static inline void ocfs2_update_inode_fsync_trans(handle_t *handle,
 		oi->i_datasync_tid = handle->h_transaction->t_tid;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* OCFS2_JOURNAL_H */

@@ -49,10 +49,14 @@ static int __init imxXX_add_mxc_rnga(void)
 		ret = ERR_PTR(-ENODEV);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(ret))
 		return PTR_ERR(ret);
 
 	return 0;
+=======
+	return PTR_ERR_OR_ZERO(ret);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(ret);
 >>>>>>> v3.18

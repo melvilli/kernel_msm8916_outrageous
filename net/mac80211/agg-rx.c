@@ -53,7 +53,11 @@ static void ieee80211_free_tid_rx(struct rcu_head *h)
 
 	for (i = 0; i < tid_rx->buf_size; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(tid_rx->reorder_buf[i]);
+=======
+		__skb_queue_purge(&tid_rx->reorder_buf[i]);
+>>>>>>> v3.18
 =======
 		__skb_queue_purge(&tid_rx->reorder_buf[i]);
 >>>>>>> v3.18
@@ -229,6 +233,7 @@ static void ieee80211_send_addba_resp(struct ieee80211_sub_if_data *sdata, u8 *d
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_process_addba_request(struct ieee80211_local *local,
 				     struct sta_info *sta,
 				     struct ieee80211_mgmt *mgmt,
@@ -252,6 +257,8 @@ void ieee80211_process_addba_request(struct ieee80211_local *local,
 
 	status = WLAN_STATUS_REQUEST_DECLINED;
 =======
+=======
+>>>>>>> v3.18
 void __ieee80211_start_rx_ba_session(struct sta_info *sta,
 				     u8 dialog_token, u16 timeout,
 				     u16 start_seq_num, u16 ba_policy, u16 tid,
@@ -261,6 +268,9 @@ void __ieee80211_start_rx_ba_session(struct sta_info *sta,
 	struct tid_ampdu_rx *tid_agg_rx;
 	int i, ret = -EOPNOTSUPP;
 	u16 status = WLAN_STATUS_REQUEST_DECLINED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (test_sta_flag(sta, WLAN_STA_BLOCK_BA)) {
@@ -281,7 +291,11 @@ void __ieee80211_start_rx_ba_session(struct sta_info *sta,
 		ht_dbg_ratelimited(sta->sdata,
 				   "AddBA Req with bad params from %pM on tid %u. policy %d, buffer size %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   mgmt->sa, tid, ba_policy, buf_size);
+=======
+				   sta->sta.addr, tid, ba_policy, buf_size);
+>>>>>>> v3.18
 =======
 				   sta->sta.addr, tid, ba_policy, buf_size);
 >>>>>>> v3.18
@@ -302,7 +316,11 @@ void __ieee80211_start_rx_ba_session(struct sta_info *sta,
 		ht_dbg_ratelimited(sta->sdata,
 				   "unexpected AddBA Req from %pM on tid %u\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   mgmt->sa, tid);
+=======
+				   sta->sta.addr, tid);
+>>>>>>> v3.18
 =======
 				   sta->sta.addr, tid);
 >>>>>>> v3.18
@@ -315,7 +333,11 @@ void __ieee80211_start_rx_ba_session(struct sta_info *sta,
 
 	/* prepare A-MPDU MLME for Rx aggregation */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tid_agg_rx = kzalloc(sizeof(*tid_agg_rx), GFP_KERNEL);
+=======
+	tid_agg_rx = kmalloc(sizeof(struct tid_ampdu_rx), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	tid_agg_rx = kmalloc(sizeof(struct tid_ampdu_rx), GFP_KERNEL);
 >>>>>>> v3.18
@@ -337,7 +359,11 @@ void __ieee80211_start_rx_ba_session(struct sta_info *sta,
 	/* prepare reordering buffer */
 	tid_agg_rx->reorder_buf =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kcalloc(buf_size, sizeof(struct sk_buff *), GFP_KERNEL);
+=======
+		kcalloc(buf_size, sizeof(struct sk_buff_head), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		kcalloc(buf_size, sizeof(struct sk_buff_head), GFP_KERNEL);
 >>>>>>> v3.18
@@ -351,6 +377,12 @@ void __ieee80211_start_rx_ba_session(struct sta_info *sta,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	for (i = 0; i < buf_size; i++)
+		__skb_queue_head_init(&tid_agg_rx->reorder_buf[i]);
+
+>>>>>>> v3.18
 =======
 	for (i = 0; i < buf_size; i++)
 		__skb_queue_head_init(&tid_agg_rx->reorder_buf[i]);
@@ -375,6 +407,10 @@ void __ieee80211_start_rx_ba_session(struct sta_info *sta,
 	tid_agg_rx->timeout = timeout;
 	tid_agg_rx->stored_mpdu_num = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tid_agg_rx->auto_seq = auto_seq;
+>>>>>>> v3.18
 =======
 	tid_agg_rx->auto_seq = auto_seq;
 >>>>>>> v3.18
@@ -393,10 +429,13 @@ end:
 
 end_no_lock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ieee80211_send_addba_resp(sta->sdata, sta->sta.addr, tid,
 				  dialog_token, status, 1, buf_size, timeout);
 }
 =======
+=======
+>>>>>>> v3.18
 	if (tx)
 		ieee80211_send_addba_resp(sta->sdata, sta->sta.addr, tid,
 					  dialog_token, status, 1, buf_size,
@@ -468,4 +507,7 @@ void ieee80211_stop_rx_ba_session_offl(struct ieee80211_vif *vif,
 	ieee80211_queue_work(&local->hw, &sdata->work);
 }
 EXPORT_SYMBOL(ieee80211_stop_rx_ba_session_offl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

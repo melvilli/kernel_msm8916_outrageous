@@ -82,10 +82,16 @@ static int spear_ehci_hcd_drv_probe(struct platform_device *pdev)
 	 * Once we have dma capability bindings this can go away.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev->dev.dma_mask)
 		pdev->dev.dma_mask = &pdev->dev.coherent_dma_mask;
 	if (!pdev->dev.coherent_dma_mask)
 		pdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
+=======
+	retval = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+	if (retval)
+		goto fail;
+>>>>>>> v3.18
 =======
 	retval = dma_coerce_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
 	if (retval)
@@ -114,6 +120,7 @@ static int spear_ehci_hcd_drv_probe(struct platform_device *pdev)
 	hcd->rsrc_start = res->start;
 	hcd->rsrc_len = resource_size(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, hcd->rsrc_start, hcd->rsrc_len,
 				driver->description)) {
 		retval = -EBUSY;
@@ -124,6 +131,11 @@ static int spear_ehci_hcd_drv_probe(struct platform_device *pdev)
 	if (hcd->regs == NULL) {
 		dev_dbg(&pdev->dev, "error mapping memory\n");
 		retval = -ENOMEM;
+=======
+	hcd->regs = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(hcd->regs)) {
+		retval = PTR_ERR(hcd->regs);
+>>>>>>> v3.18
 =======
 	hcd->regs = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(hcd->regs)) {
@@ -144,6 +156,10 @@ static int spear_ehci_hcd_drv_probe(struct platform_device *pdev)
 		goto err_stop_ehci;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -165,10 +181,13 @@ static int spear_ehci_hcd_drv_remove(struct platform_device *pdev)
 	struct spear_ehci *sehci = to_spear_ehci(hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!hcd)
 		return 0;
 	if (in_interrupt())
 		BUG();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb_remove_hcd(hcd);
@@ -181,7 +200,11 @@ static int spear_ehci_hcd_drv_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id spear_ehci_id_table[] = {
+=======
+static const struct of_device_id spear_ehci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id spear_ehci_id_table[] = {
 >>>>>>> v3.18
@@ -198,7 +221,11 @@ static struct platform_driver spear_ehci_hcd_driver = {
 		.bus = &platform_bus_type,
 		.pm = &ehci_spear_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(spear_ehci_id_table),
+=======
+		.of_match_table = spear_ehci_id_table,
+>>>>>>> v3.18
 =======
 		.of_match_table = spear_ehci_id_table,
 >>>>>>> v3.18

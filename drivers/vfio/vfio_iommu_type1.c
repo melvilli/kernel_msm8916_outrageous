@@ -31,7 +31,11 @@
 #include <linux/module.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>		/* pci_bus_type */
+=======
+#include <linux/rbtree.h>
+>>>>>>> v3.18
 =======
 #include <linux/rbtree.h>
 >>>>>>> v3.18
@@ -52,6 +56,7 @@ MODULE_PARM_DESC(allow_unsafe_interrupts,
 		 "Enable VFIO IOMMU support for on platforms without interrupt remapping support.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct vfio_iommu {
 	struct iommu_domain	*domain;
 	struct mutex		lock;
@@ -66,6 +71,8 @@ struct vfio_dma {
 	unsigned long		vaddr;		/* Process virtual addr */
 	long			npage;		/* Number of pages */
 =======
+=======
+>>>>>>> v3.18
 static bool disable_hugepages;
 module_param_named(disable_hugepages,
 		   disable_hugepages, bool, S_IRUGO | S_IWUSR);
@@ -92,6 +99,9 @@ struct vfio_dma {
 	dma_addr_t		iova;		/* Device address */
 	unsigned long		vaddr;		/* Process virtual addr */
 	size_t			size;		/* Map size (bytes) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int			prot;		/* IOMMU_READ/WRITE */
 };
@@ -107,8 +117,11 @@ struct vfio_group {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NPAGE_TO_SIZE(npage)	((size_t)(npage) << PAGE_SHIFT)
 =======
+=======
+>>>>>>> v3.18
 static struct vfio_dma *vfio_find_dma(struct vfio_iommu *iommu,
 				      dma_addr_t start, size_t size)
 {
@@ -151,6 +164,9 @@ static void vfio_unlink_dma(struct vfio_iommu *iommu, struct vfio_dma *old)
 {
 	rb_erase(&old->node, &iommu->dma_list);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct vwork {
@@ -179,8 +195,13 @@ static void vfio_lock_acct(long npage)
 	struct mm_struct *mm;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!current->mm)
 		return; /* process exited */
+=======
+	if (!current->mm || !npage)
+		return; /* process exited or nothing to do */
+>>>>>>> v3.18
 =======
 	if (!current->mm || !npage)
 		return; /* process exited or nothing to do */
@@ -257,6 +278,7 @@ static int put_pfn(unsigned long pfn, int prot)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Unmap DMA region */
 static long __vfio_dma_do_unmap(struct vfio_iommu *iommu, dma_addr_t iova,
 			     long npage, int prot)
@@ -286,6 +308,8 @@ static void vfio_dma_unmap(struct vfio_iommu *iommu, dma_addr_t iova,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int vaddr_get_pfn(unsigned long vaddr, int prot, unsigned long *pfn)
 {
 	struct page *page[1];
@@ -312,6 +336,7 @@ static int vaddr_get_pfn(unsigned long vaddr, int prot, unsigned long *pfn)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Map DMA region */
 static int __vfio_dma_map(struct vfio_iommu *iommu, dma_addr_t iova,
@@ -460,6 +485,8 @@ static long vfio_remove_dma_overlap(struct vfio_iommu *iommu, dma_addr_t start,
 	list_add(&split->next, &iommu->dma_list);
 	return size >> PAGE_SHIFT;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Attempt to pin pages.  We really don't want to track all the pfns and
  * the iommu can only map chunks of consecutive pfns anyway, so get the
@@ -597,12 +624,16 @@ static unsigned long vfio_pgsize_bitmap(struct vfio_iommu *iommu)
 	mutex_unlock(&iommu->lock);
 
 	return bitmap;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int vfio_dma_do_unmap(struct vfio_iommu *iommu,
 			     struct vfio_iommu_type1_dma_unmap *unmap)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	long ret = 0, npage = unmap->size >> PAGE_SHIFT;
 	struct vfio_dma *dma, *tmp;
@@ -617,6 +648,8 @@ static int vfio_dma_do_unmap(struct vfio_iommu *iommu,
 
 	/* XXX We still break these down into PAGE_SIZE */
 =======
+=======
+>>>>>>> v3.18
 	uint64_t mask;
 	struct vfio_dma *dma;
 	size_t unmapped = 0;
@@ -629,11 +662,15 @@ static int vfio_dma_do_unmap(struct vfio_iommu *iommu,
 	if (!unmap->size || unmap->size & mask)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	WARN_ON(mask & PAGE_MASK);
 
 	mutex_lock(&iommu->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry_safe(dma, tmp, &iommu->dma_list, next) {
 		if (ranges_overlap(dma->iova, NPAGE_TO_SIZE(dma->npage),
@@ -649,6 +686,8 @@ static int vfio_dma_do_unmap(struct vfio_iommu *iommu,
 	mutex_unlock(&iommu->lock);
 	return ret > 0 ? 0 : (int)ret;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * vfio-iommu-type1 (v1) - User mappings were coalesced together to
 	 * avoid tracking individual mappings.  This means that the granularity
@@ -758,12 +797,16 @@ unwind:
 		iommu_unmap(d->domain, iova, npage << PAGE_SHIFT);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int vfio_dma_do_map(struct vfio_iommu *iommu,
 			   struct vfio_iommu_type1_dma_map *map)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vfio_dma *dma, *pdma = NULL;
 	dma_addr_t iova = map->iova;
@@ -775,6 +818,8 @@ static int vfio_dma_do_map(struct vfio_iommu *iommu,
 
 	mask = ((uint64_t)1 << __ffs(iommu->domain->ops->pgsize_bitmap)) - 1;
 =======
+=======
+>>>>>>> v3.18
 	dma_addr_t iova = map->iova;
 	unsigned long vaddr = map->vaddr;
 	size_t size = map->size;
@@ -791,6 +836,9 @@ static int vfio_dma_do_map(struct vfio_iommu *iommu,
 	mask = ((uint64_t)1 << __ffs(vfio_pgsize_bitmap(iommu))) - 1;
 
 	WARN_ON(mask & PAGE_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* READ/WRITE from device perspective */
@@ -799,6 +847,7 @@ static int vfio_dma_do_map(struct vfio_iommu *iommu,
 	if (map->flags & VFIO_DMA_MAP_FLAG_READ)
 		prot |= IOMMU_READ;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!prot)
 		return -EINVAL; /* No READ/WRITE? */
@@ -824,17 +873,23 @@ static int vfio_dma_do_map(struct vfio_iommu *iommu,
 	npage = size >> PAGE_SHIFT;
 	if (!npage)
 =======
+=======
+>>>>>>> v3.18
 	if (!prot || !size || (size | iova | vaddr) & mask)
 		return -EINVAL;
 
 	/* Don't allow IOVA or virtual address wrap */
 	if (iova + size - 1 < iova || vaddr + size - 1 < vaddr)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 
 	mutex_lock(&iommu->lock);
 
 	if (vfio_find_dma(iommu, iova, size)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = -EBUSY;
 		goto out_lock;
@@ -912,6 +967,8 @@ out_lock:
 	mutex_unlock(&iommu->lock);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		mutex_unlock(&iommu->lock);
 		return -EEXIST;
 	}
@@ -1017,6 +1074,9 @@ static int vfio_iommu_replay(struct vfio_iommu *iommu,
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1024,6 +1084,7 @@ static int vfio_iommu_type1_attach_group(void *iommu_data,
 					 struct iommu_group *iommu_group)
 {
 	struct vfio_iommu *iommu = iommu_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vfio_group *group, *tmp;
 	int ret;
@@ -1039,6 +1100,8 @@ static int vfio_iommu_type1_attach_group(void *iommu_data,
 			mutex_unlock(&iommu->lock);
 			kfree(group);
 =======
+=======
+>>>>>>> v3.18
 	struct vfio_group *group, *g;
 	struct vfio_domain *domain, *d;
 	struct bus_type *bus = NULL;
@@ -1052,11 +1115,15 @@ static int vfio_iommu_type1_attach_group(void *iommu_data,
 				continue;
 
 			mutex_unlock(&iommu->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -EINVAL;
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * TODO: Domain have capabilities that might change as we add
@@ -1074,6 +1141,8 @@ static int vfio_iommu_type1_attach_group(void *iommu_data,
 	group->iommu_group = iommu_group;
 	list_add(&group->next, &iommu->group_list);
 =======
+=======
+>>>>>>> v3.18
 	group = kzalloc(sizeof(*group), GFP_KERNEL);
 	domain = kzalloc(sizeof(*domain), GFP_KERNEL);
 	if (!group || !domain) {
@@ -1152,13 +1221,19 @@ static int vfio_iommu_type1_attach_group(void *iommu_data,
 		goto out_detach;
 
 	list_add(&domain->next, &iommu->domain_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&iommu->lock);
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 out_detach:
 	iommu_detach_group(domain->domain, iommu_group);
@@ -1177,6 +1252,9 @@ static void vfio_iommu_unmap_unpin_all(struct vfio_iommu *iommu)
 
 	while ((node = rb_first(&iommu->dma_list)))
 		vfio_remove_dma(iommu, rb_entry(node, struct vfio_dma, node));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1185,6 +1263,10 @@ static void vfio_iommu_type1_detach_group(void *iommu_data,
 {
 	struct vfio_iommu *iommu = iommu_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct vfio_domain *domain;
+>>>>>>> v3.18
 =======
 	struct vfio_domain *domain;
 >>>>>>> v3.18
@@ -1192,6 +1274,7 @@ static void vfio_iommu_type1_detach_group(void *iommu_data,
 
 	mutex_lock(&iommu->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry(group, &iommu->group_list, next) {
 		if (group->iommu_group == iommu_group) {
@@ -1203,6 +1286,8 @@ static void vfio_iommu_type1_detach_group(void *iommu_data,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(domain, &iommu->domain_list, next) {
 		list_for_each_entry(group, &domain->group_list, next) {
 			if (group->iommu_group != iommu_group)
@@ -1228,6 +1313,9 @@ static void vfio_iommu_type1_detach_group(void *iommu_data,
 	}
 
 done:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&iommu->lock);
 }
@@ -1237,15 +1325,19 @@ static void *vfio_iommu_type1_open(unsigned long arg)
 	struct vfio_iommu *iommu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (arg != VFIO_TYPE1_IOMMU)
 		return ERR_PTR(-EINVAL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iommu = kzalloc(sizeof(*iommu), GFP_KERNEL);
 	if (!iommu)
 		return ERR_PTR(-ENOMEM);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	INIT_LIST_HEAD(&iommu->group_list);
 	INIT_LIST_HEAD(&iommu->dma_list);
@@ -1275,6 +1367,8 @@ static void *vfio_iommu_type1_open(unsigned long arg)
 		return ERR_PTR(-EPERM);
 	}
 =======
+=======
+>>>>>>> v3.18
 	switch (arg) {
 	case VFIO_TYPE1_IOMMU:
 		break;
@@ -1291,6 +1385,9 @@ static void *vfio_iommu_type1_open(unsigned long arg)
 	INIT_LIST_HEAD(&iommu->domain_list);
 	iommu->dma_list = RB_ROOT;
 	mutex_init(&iommu->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return iommu;
@@ -1299,6 +1396,7 @@ static void *vfio_iommu_type1_open(unsigned long arg)
 static void vfio_iommu_type1_release(void *iommu_data)
 {
 	struct vfio_iommu *iommu = iommu_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct vfio_group *group, *group_tmp;
 	struct vfio_dma *dma, *dma_tmp;
@@ -1321,6 +1419,8 @@ static void vfio_iommu_type1_release(void *iommu_data)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	struct vfio_domain *domain, *domain_tmp;
 	struct vfio_group *group, *group_tmp;
 
@@ -1359,6 +1459,9 @@ static int vfio_domains_have_iommu_cache(struct vfio_iommu *iommu)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static long vfio_iommu_type1_ioctl(void *iommu_data,
 				   unsigned int cmd, unsigned long arg)
@@ -1370,8 +1473,11 @@ static long vfio_iommu_type1_ioctl(void *iommu_data,
 		switch (arg) {
 		case VFIO_TYPE1_IOMMU:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 1;
 =======
+=======
+>>>>>>> v3.18
 		case VFIO_TYPE1v2_IOMMU:
 		case VFIO_TYPE1_NESTING_IOMMU:
 			return 1;
@@ -1379,6 +1485,9 @@ static long vfio_iommu_type1_ioctl(void *iommu_data,
 			if (!iommu)
 				return 0;
 			return vfio_domains_have_iommu_cache(iommu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		default:
 			return 0;
@@ -1397,7 +1506,11 @@ static long vfio_iommu_type1_ioctl(void *iommu_data,
 		info.flags = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		info.iova_pgsizes = iommu->domain->ops->pgsize_bitmap;
+=======
+		info.iova_pgsizes = vfio_pgsize_bitmap(iommu);
+>>>>>>> v3.18
 =======
 		info.iova_pgsizes = vfio_pgsize_bitmap(iommu);
 >>>>>>> v3.18
@@ -1422,6 +1535,10 @@ static long vfio_iommu_type1_ioctl(void *iommu_data,
 	} else if (cmd == VFIO_IOMMU_UNMAP_DMA) {
 		struct vfio_iommu_type1_dma_unmap unmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		long ret;
+>>>>>>> v3.18
 =======
 		long ret;
 >>>>>>> v3.18
@@ -1435,13 +1552,19 @@ static long vfio_iommu_type1_ioctl(void *iommu_data,
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return vfio_dma_do_unmap(iommu, &unmap);
 =======
+=======
+>>>>>>> v3.18
 		ret = vfio_dma_do_unmap(iommu, &unmap);
 		if (ret)
 			return ret;
 
 		return copy_to_user((void __user *)arg, &unmap, minsz);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1461,9 +1584,12 @@ static const struct vfio_iommu_driver_ops vfio_iommu_driver_ops_type1 = {
 static int __init vfio_iommu_type1_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!iommu_present(&pci_bus_type))
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return vfio_register_iommu_driver(&vfio_iommu_driver_ops_type1);

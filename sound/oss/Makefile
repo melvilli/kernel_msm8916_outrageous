@@ -25,7 +25,10 @@ obj-$(CONFIG_SOUND_WAVEARTIST)	+= waveartist.o
 obj-$(CONFIG_SOUND_MSNDCLAS)	+= msnd.o msnd_classic.o
 obj-$(CONFIG_SOUND_MSNDPIN)	+= msnd.o msnd_pinnacle.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SOUND_VWSND)	+= vwsnd.o
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_SOUND_BCM_CS4297A)	+= swarm_cs4297a.o

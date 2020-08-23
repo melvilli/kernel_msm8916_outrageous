@@ -697,7 +697,10 @@ static struct videobuf_queue *get_queue(struct file *file)
 	default:
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -715,7 +718,10 @@ static int get_resource(struct file *file)
 	default:
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -819,7 +825,10 @@ video_read(struct file *file, char __user *data, size_t count, loff_t *ppos)
 	default:
 		BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1363,6 +1372,7 @@ static int vidioc_s_frequency (struct file *file, void *priv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vidioc_g_chip_ident(struct file *file, void *priv,
 				struct v4l2_dbg_chip_ident *chip)
 {
@@ -1375,6 +1385,8 @@ static int vidioc_g_chip_ident(struct file *file, void *priv,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 static int vidioc_g_register (struct file *file, void *fh,
 				struct v4l2_dbg_register *reg)
@@ -1382,10 +1394,15 @@ static int vidioc_g_register (struct file *file, void *fh,
 	struct cx88_core *core = ((struct cx8800_fh*)fh)->dev->core;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!v4l2_chip_match_host(&reg->match))
 		return -EINVAL;
 	/* cx2388x has a 24-bit register space */
 	reg->val = cx_read(reg->reg & 0xffffff);
+=======
+	/* cx2388x has a 24-bit register space */
+	reg->val = cx_read(reg->reg & 0xfffffc);
+>>>>>>> v3.18
 =======
 	/* cx2388x has a 24-bit register space */
 	reg->val = cx_read(reg->reg & 0xfffffc);
@@ -1400,9 +1417,13 @@ static int vidioc_s_register (struct file *file, void *fh,
 	struct cx88_core *core = ((struct cx8800_fh*)fh)->dev->core;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!v4l2_chip_match_host(&reg->match))
 		return -EINVAL;
 	cx_write(reg->reg & 0xffffff, reg->val);
+=======
+	cx_write(reg->reg & 0xfffffc, reg->val);
+>>>>>>> v3.18
 =======
 	cx_write(reg->reg & 0xfffffc, reg->val);
 >>>>>>> v3.18
@@ -1600,7 +1621,10 @@ static const struct v4l2_ioctl_ops video_ioctl_ops = {
 	.vidioc_subscribe_event      = v4l2_ctrl_subscribe_event,
 	.vidioc_unsubscribe_event    = v4l2_event_unsubscribe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident  = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1637,7 +1661,10 @@ static const struct v4l2_ioctl_ops vbi_ioctl_ops = {
 	.vidioc_g_frequency   = vidioc_g_frequency,
 	.vidioc_s_frequency   = vidioc_s_frequency,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident  = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1671,7 +1698,10 @@ static const struct v4l2_ioctl_ops radio_ioctl_ops = {
 	.vidioc_subscribe_event      = v4l2_ctrl_subscribe_event,
 	.vidioc_unsubscribe_event    = v4l2_event_unsubscribe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.vidioc_g_chip_ident  = vidioc_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1786,7 +1816,11 @@ static int cx8800_initdev(struct pci_dev *pci_dev,
 	/* get irq */
 	err = request_irq(pci_dev->irq, cx8800_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  IRQF_SHARED | IRQF_DISABLED, core->name, dev);
+=======
+			  IRQF_SHARED, core->name, dev);
+>>>>>>> v3.18
 =======
 			  IRQF_SHARED, core->name, dev);
 >>>>>>> v3.18
@@ -1829,7 +1863,11 @@ static int cx8800_initdev(struct pci_dev *pci_dev,
 	/* load and configure helper modules */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (core->board.audio_chip == V4L2_IDENT_WM8775) {
+=======
+	if (core->board.audio_chip == CX88_AUDIO_WM8775) {
+>>>>>>> v3.18
 =======
 	if (core->board.audio_chip == CX88_AUDIO_WM8775) {
 >>>>>>> v3.18
@@ -1854,7 +1892,11 @@ static int cx8800_initdev(struct pci_dev *pci_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (core->board.audio_chip == V4L2_IDENT_TVAUDIO) {
+=======
+	if (core->board.audio_chip == CX88_AUDIO_TVAUDIO) {
+>>>>>>> v3.18
 =======
 	if (core->board.audio_chip == CX88_AUDIO_TVAUDIO) {
 >>>>>>> v3.18
@@ -1982,7 +2024,10 @@ static void cx8800_finidev(struct pci_dev *pci_dev)
 	free_irq(pci_dev->irq, dev);
 	cx8800_unregister_video(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2102,6 +2147,7 @@ static struct pci_driver cx8800_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init cx8800_init(void)
 {
 	printk(KERN_INFO "cx88/0: cx2388x v4l2 driver version %s loaded\n",
@@ -2116,6 +2162,9 @@ static void __exit cx8800_fini(void)
 
 module_init(cx8800_init);
 module_exit(cx8800_fini);
+=======
+module_pci_driver(cx8800_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(cx8800_pci_driver);
 >>>>>>> v3.18

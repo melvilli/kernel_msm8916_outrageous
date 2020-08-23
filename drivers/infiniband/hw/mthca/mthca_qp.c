@@ -861,7 +861,12 @@ int mthca_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr, int attr_mask,
 	new_state = attr_mask & IB_QP_STATE ? attr->qp_state : cur_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ib_modify_qp_is_ok(cur_state, new_state, ibqp->qp_type, attr_mask)) {
+=======
+	if (!ib_modify_qp_is_ok(cur_state, new_state, ibqp->qp_type, attr_mask,
+				IB_LINK_LAYER_UNSPECIFIED)) {
+>>>>>>> v3.18
 =======
 	if (!ib_modify_qp_is_ok(cur_state, new_state, ibqp->qp_type, attr_mask,
 				IB_LINK_LAYER_UNSPECIFIED)) {

@@ -483,7 +483,11 @@ static int isl29028_probe(struct i2c_client *client,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*chip));
+=======
+	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*chip));
 >>>>>>> v3.18
@@ -503,7 +507,11 @@ static int isl29028_probe(struct i2c_client *client,
 		ret = PTR_ERR(chip->regmap);
 		dev_err(chip->dev, "regmap initialization failed: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_iio_free;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -513,7 +521,11 @@ static int isl29028_probe(struct i2c_client *client,
 	if (ret < 0) {
 		dev_err(chip->dev, "chip initialization failed: %d\n", ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_iio_free;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -530,6 +542,7 @@ static int isl29028_probe(struct i2c_client *client,
 		dev_err(chip->dev, "iio registration fails with error %d\n",
 			ret);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto exit_iio_free;
 	}
 	return 0;
@@ -537,6 +550,11 @@ static int isl29028_probe(struct i2c_client *client,
 exit_iio_free:
 	iio_device_free(indio_dev);
 	return ret;
+=======
+		return ret;
+	}
+	return 0;
+>>>>>>> v3.18
 =======
 		return ret;
 	}
@@ -550,7 +568,10 @@ static int isl29028_remove(struct i2c_client *client)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

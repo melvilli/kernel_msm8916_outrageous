@@ -10,10 +10,13 @@
 #include <net/genetlink.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Netlink family structure for quota */
 static struct genl_family quota_genl_family = {
 	.id = GENL_ID_GENERATE,
 =======
+=======
+>>>>>>> v3.18
 static const struct genl_multicast_group quota_mcgrps[] = {
 	{ .name = "events", },
 };
@@ -27,12 +30,20 @@ static struct genl_family quota_genl_family = {
 	 * static ID for this group to make dealing with that easier.
 	 */
 	.id = GENL_ID_VFS_DQUOT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.hdrsize = 0,
 	.name = "VFS_DQUOT",
 	.version = 1,
 	.maxattr = QUOTA_NL_A_MAX,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.mcgrps = quota_mcgrps,
+	.n_mcgrps = ARRAY_SIZE(quota_mcgrps),
+>>>>>>> v3.18
 =======
 	.mcgrps = quota_mcgrps,
 	.n_mcgrps = ARRAY_SIZE(quota_mcgrps),
@@ -42,8 +53,12 @@ static struct genl_family quota_genl_family = {
 /**
  * quota_send_warning - Send warning to userspace about exceeded quota
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @type: The quota type: USRQQUOTA, GRPQUOTA,...
  * @id: The user or group id of the quota that was exceeded
+=======
+ * @qid: The kernel internal quota identifier.
+>>>>>>> v3.18
 =======
  * @qid: The kernel internal quota identifier.
 >>>>>>> v3.18
@@ -104,7 +119,11 @@ void quota_send_warning(struct kqid qid, dev_t dev,
 	genlmsg_end(skb, msg_head);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	genlmsg_multicast(skb, 0, quota_genl_family.id, GFP_NOFS);
+=======
+	genlmsg_multicast(&quota_genl_family, skb, 0, 0, GFP_NOFS);
+>>>>>>> v3.18
 =======
 	genlmsg_multicast(&quota_genl_family, skb, 0, 0, GFP_NOFS);
 >>>>>>> v3.18

@@ -13,6 +13,7 @@
 #define __ARM_PERF_EVENT_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * The ARMv7 CPU PMU supports up to 32 event counters.
  */
@@ -22,6 +23,8 @@
 #define C(_x)				PERF_COUNT_HW_CACHE_##_x
 #define CACHE_OP_UNSUPPORTED		0xFFFF
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_HW_PERF_EVENTS

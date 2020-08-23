@@ -53,7 +53,11 @@ struct bug_entry {
 
 #ifndef HAVE_ARCH_BUG_ON
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BUG_ON(condition) do { if (unlikely(condition)) BUG(); } while(0)
+=======
+#define BUG_ON(condition) do { if (unlikely(condition)) BUG(); } while (0)
+>>>>>>> v3.18
 =======
 #define BUG_ON(condition) do { if (unlikely(condition)) BUG(); } while (0)
 >>>>>>> v3.18
@@ -111,6 +115,7 @@ extern void warn_slowpath_null(const char *file, const int line);
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* !CONFIG_BUG */
 #ifndef HAVE_ARCH_BUG
 #define BUG() do {} while(0)
@@ -138,6 +143,8 @@ extern void warn_slowpath_null(const char *file, const int line);
 
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define WARN_ON_ONCE(condition)	({				\
@@ -171,7 +178,10 @@ extern void warn_slowpath_null(const char *file, const int line);
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else /* !CONFIG_BUG */
 #ifndef HAVE_ARCH_BUG
 #define BUG() do {} while (1)
@@ -203,6 +213,9 @@ extern void warn_slowpath_null(const char *file, const int line);
 
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * WARN_ON_SMP() is for cases that the warning is either

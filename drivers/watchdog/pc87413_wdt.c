@@ -513,9 +513,14 @@ static int __init pc87413_init(void)
 
 	ret = register_reboot_notifier(&pc87413_notifier);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret != 0) {
 		pr_err("cannot register reboot notifier (err=%d)\n", ret);
 	}
+=======
+	if (ret != 0)
+		pr_err("cannot register reboot notifier (err=%d)\n", ret);
+>>>>>>> v3.18
 =======
 	if (ret != 0)
 		pr_err("cannot register reboot notifier (err=%d)\n", ret);
@@ -581,6 +586,7 @@ module_init(pc87413_init);
 module_exit(pc87413_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Sven Anders <anders@anduras.de>, "
 		"Marcus Junker <junker@anduras.de>,");
 MODULE_DESCRIPTION("PC87413 WDT driver");
@@ -589,11 +595,16 @@ MODULE_LICENSE("GPL");
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
 
 =======
+=======
+>>>>>>> v3.18
 MODULE_AUTHOR("Sven Anders <anders@anduras.de>");
 MODULE_AUTHOR("Marcus Junker <junker@anduras.de>");
 MODULE_DESCRIPTION("PC87413 WDT driver");
 MODULE_LICENSE("GPL");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 module_param(io, int, 0);
 MODULE_PARM_DESC(io, MODNAME " I/O port (default: "

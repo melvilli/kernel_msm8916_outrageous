@@ -21,6 +21,10 @@
 #include <linux/crypto.h>
 #include <linux/vmalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mm.h>
+>>>>>>> v3.18
 =======
 #include <linux/mm.h>
 >>>>>>> v3.18
@@ -35,12 +39,18 @@ static int lzo_init(struct crypto_tfm *tfm)
 	struct lzo_ctx *ctx = crypto_tfm_ctx(tfm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx->lzo_comp_mem = vmalloc(LZO1X_MEM_COMPRESS);
 =======
+=======
+>>>>>>> v3.18
 	ctx->lzo_comp_mem = kmalloc(LZO1X_MEM_COMPRESS,
 				    GFP_KERNEL | __GFP_NOWARN | __GFP_REPEAT);
 	if (!ctx->lzo_comp_mem)
 		ctx->lzo_comp_mem = vmalloc(LZO1X_MEM_COMPRESS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ctx->lzo_comp_mem)
 		return -ENOMEM;
@@ -53,7 +63,11 @@ static void lzo_exit(struct crypto_tfm *tfm)
 	struct lzo_ctx *ctx = crypto_tfm_ctx(tfm);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vfree(ctx->lzo_comp_mem);
+=======
+	kvfree(ctx->lzo_comp_mem);
+>>>>>>> v3.18
 =======
 	kvfree(ctx->lzo_comp_mem);
 >>>>>>> v3.18
@@ -119,6 +133,9 @@ module_exit(lzo_mod_fini);
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("LZO Compression Algorithm");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("lzo");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

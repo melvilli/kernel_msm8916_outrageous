@@ -36,6 +36,10 @@
 #include "common.h"
 #include "devices-imx25.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -170,7 +174,10 @@ MACHINE_START(EUKREA_CPUIMX25SD, "Eukrea CPUIMX25")
 	.init_early = imx25_init_early,
 	.init_irq = mx25_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx25_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time = eukrea_cpuimx25_timer_init,

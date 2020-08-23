@@ -10,6 +10,11 @@
 #define __ASM_MACH_IP28_CPU_FEATURE_OVERRIDES_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/cpu.h>
 

@@ -7,11 +7,17 @@
 #include <asm/acpi.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ACPI_PROCESSOR_CLASS		"processor"
 #define ACPI_PROCESSOR_DEVICE_NAME	"Processor"
 #define ACPI_PROCESSOR_DEVICE_HID	"ACPI0007"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ACPI_PROCESSOR_BUSY_METRIC	10
 
@@ -57,7 +63,11 @@ struct acpi_power_register {
 	u8 access_size;
 	u64 address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -91,7 +101,11 @@ struct acpi_psd_package {
 	u64 coord_type;
 	u64 num_processors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -105,7 +119,11 @@ struct acpi_pct_register {
 	u8 reserved;
 	u64 address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -140,7 +158,11 @@ struct acpi_tsd_package {
 	u64 coord_type;
 	u64 num_processors;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -154,7 +176,11 @@ struct acpi_ptc_register {
 	u8 reserved;
 	u64 address;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__ ((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -223,6 +249,10 @@ struct acpi_processor {
 	acpi_handle handle;
 	u32 acpi_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 apic_id;
+>>>>>>> v3.18
 =======
 	u32 apic_id;
 >>>>>>> v3.18
@@ -239,6 +269,10 @@ struct acpi_processor {
 	struct acpi_processor_limit limit;
 	struct thermal_cooling_device *cdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device *dev; /* Processor device. */
+>>>>>>> v3.18
 =======
 	struct device *dev; /* Processor device. */
 >>>>>>> v3.18
@@ -255,7 +289,10 @@ struct acpi_processor_errata {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void acpi_processor_load_module(struct acpi_processor *pr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int acpi_processor_preregister_performance(struct
@@ -348,6 +385,11 @@ static inline int acpi_processor_get_bios_limit(int cpu, unsigned int *limit)
 /* in processor_core.c */
 void acpi_processor_set_pdc(acpi_handle handle);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int acpi_get_apicid(acpi_handle, int type, u32 acpi_id);
+int acpi_map_cpuid(int apic_id, u32 acpi_id);
+>>>>>>> v3.18
 =======
 int acpi_get_apicid(acpi_handle, int type, u32 acpi_id);
 int acpi_map_cpuid(int apic_id, u32 acpi_id);

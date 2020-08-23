@@ -15,7 +15,10 @@
  */
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -110,7 +113,10 @@
 
 #define XGMAC_ADDR_AE		0x80000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XGMAC_MAX_FILTER_ADDR	31
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -360,11 +366,17 @@ struct xgmac_extra_stats {
 	unsigned long rx_watchdog;
 	unsigned long rx_da_filter_fail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long rx_sa_filter_fail;
 	unsigned long rx_payload_error;
 	unsigned long rx_ip_header_error;
 	/* Tx/Rx IRQ errors */
 	unsigned long tx_undeflow;
+=======
+	unsigned long rx_payload_error;
+	unsigned long rx_ip_header_error;
+	/* Tx/Rx IRQ errors */
+>>>>>>> v3.18
 =======
 	unsigned long rx_payload_error;
 	unsigned long rx_ip_header_error;
@@ -399,6 +411,10 @@ struct xgmac_priv {
 	struct napi_struct napi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int max_macs;
+>>>>>>> v3.18
 =======
 	int max_macs;
 >>>>>>> v3.18
@@ -410,6 +426,10 @@ struct xgmac_priv {
 	char tx_pause;
 	int wolopts;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct tx_timeout_work;
+>>>>>>> v3.18
 =======
 	struct work_struct tx_timeout_work;
 >>>>>>> v3.18
@@ -430,6 +450,12 @@ struct xgmac_priv {
 #define dma_ring_cnt(h, t, s)	CIRC_CNT(h, t, s)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define tx_dma_ring_space(p) \
+	dma_ring_space((p)->tx_head, (p)->tx_tail, DMA_TX_RING_SZ)
+
+>>>>>>> v3.18
 =======
 #define tx_dma_ring_space(p) \
 	dma_ring_space((p)->tx_head, (p)->tx_tail, DMA_TX_RING_SZ)
@@ -448,7 +474,11 @@ static inline void desc_set_buf_len(struct xgmac_dma_desc *p, u32 buf_sz)
 static inline int desc_get_buf_len(struct xgmac_dma_desc *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 len = cpu_to_le32(p->flags);
+=======
+	u32 len = le32_to_cpu(p->buf_size);
+>>>>>>> v3.18
 =======
 	u32 len = le32_to_cpu(p->buf_size);
 >>>>>>> v3.18
@@ -495,7 +525,10 @@ static inline void desc_set_tx_owner(struct xgmac_dma_desc *p, u32 flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void desc_clear_tx_owner(struct xgmac_dma_desc *p)
 {
 	u32 tmpflags = le32_to_cpu(p->flags);
@@ -503,6 +536,9 @@ static inline void desc_clear_tx_owner(struct xgmac_dma_desc *p)
 	p->flags = cpu_to_le32(tmpflags);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int desc_get_tx_ls(struct xgmac_dma_desc *p)
 {
@@ -510,12 +546,18 @@ static inline int desc_get_tx_ls(struct xgmac_dma_desc *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int desc_get_tx_fs(struct xgmac_dma_desc *p)
 {
 	return le32_to_cpu(p->flags) & TXDESC_FIRST_SEG;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline u32 desc_get_buf_addr(struct xgmac_dma_desc *p)
 {
@@ -658,11 +700,14 @@ static void xgmac_set_mac_addr(void __iomem *ioaddr, unsigned char *addr,
 	u32 data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = (addr[5] << 8) | addr[4] | (num ? XGMAC_ADDR_AE : 0);
 	writel(data, ioaddr + XGMAC_ADDR_HIGH(num));
 	data = (addr[3] << 24) | (addr[2] << 16) | (addr[1] << 8) | addr[0];
 	writel(data, ioaddr + XGMAC_ADDR_LOW(num));
 =======
+=======
+>>>>>>> v3.18
 	if (addr) {
 		data = (addr[5] << 8) | addr[4] | (num ? XGMAC_ADDR_AE : 0);
 		writel(data, ioaddr + XGMAC_ADDR_HIGH(num));
@@ -672,6 +717,9 @@ static void xgmac_set_mac_addr(void __iomem *ioaddr, unsigned char *addr,
 		writel(0, ioaddr + XGMAC_ADDR_HIGH(num));
 		writel(0, ioaddr + XGMAC_ADDR_LOW(num));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -744,10 +792,13 @@ static void xgmac_rx_refill(struct xgmac_priv *priv)
 				break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			priv->rx_skbuff[entry] = skb;
 			paddr = dma_map_single(priv->device, skb->data,
 					       bufsz, DMA_FROM_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 			paddr = dma_map_single(priv->device, skb->data,
 					       priv->dma_buf_sz - NET_IP_ALIGN,
 					       DMA_FROM_DEVICE);
@@ -756,6 +807,9 @@ static void xgmac_rx_refill(struct xgmac_priv *priv)
 				break;
 			}
 			priv->rx_skbuff[entry] = skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			desc_set_buf_addr(p, paddr, priv->dma_buf_sz);
 		}
@@ -854,7 +908,12 @@ static void xgmac_free_rx_skbufs(struct xgmac_priv *priv)
 
 	for (i = 0; i < DMA_RX_RING_SZ; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (priv->rx_skbuff[i] == NULL)
+=======
+		struct sk_buff *skb = priv->rx_skbuff[i];
+		if (skb == NULL)
+>>>>>>> v3.18
 =======
 		struct sk_buff *skb = priv->rx_skbuff[i];
 		if (skb == NULL)
@@ -864,8 +923,13 @@ static void xgmac_free_rx_skbufs(struct xgmac_priv *priv)
 		p = priv->dma_rx + i;
 		dma_unmap_single(priv->device, desc_get_buf_addr(p),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 priv->dma_buf_sz, DMA_FROM_DEVICE);
 		dev_kfree_skb_any(priv->rx_skbuff[i]);
+=======
+				 priv->dma_buf_sz - NET_IP_ALIGN, DMA_FROM_DEVICE);
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 				 priv->dma_buf_sz - NET_IP_ALIGN, DMA_FROM_DEVICE);
 		dev_kfree_skb_any(skb);
@@ -877,7 +941,11 @@ static void xgmac_free_rx_skbufs(struct xgmac_priv *priv)
 static void xgmac_free_tx_skbufs(struct xgmac_priv *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, f;
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -892,6 +960,7 @@ static void xgmac_free_tx_skbufs(struct xgmac_priv *priv)
 
 		p = priv->dma_tx + i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_unmap_single(priv->device, desc_get_buf_addr(p),
 				 desc_get_buf_len(p), DMA_TO_DEVICE);
 
@@ -903,6 +972,8 @@ static void xgmac_free_tx_skbufs(struct xgmac_priv *priv)
 
 		dev_kfree_skb_any(priv->tx_skbuff[i]);
 =======
+=======
+>>>>>>> v3.18
 		if (desc_get_tx_fs(p))
 			dma_unmap_single(priv->device, desc_get_buf_addr(p),
 					 desc_get_buf_len(p), DMA_TO_DEVICE);
@@ -912,6 +983,9 @@ static void xgmac_free_tx_skbufs(struct xgmac_priv *priv)
 
 		if (desc_get_tx_ls(p))
 			dev_kfree_skb_any(priv->tx_skbuff[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		priv->tx_skbuff[i] = NULL;
 	}
@@ -950,8 +1024,11 @@ static void xgmac_free_dma_desc_rings(struct xgmac_priv *priv)
 static void xgmac_tx_complete(struct xgmac_priv *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	while (dma_ring_cnt(priv->tx_head, priv->tx_tail, DMA_TX_RING_SZ)) {
@@ -963,6 +1040,7 @@ static void xgmac_tx_complete(struct xgmac_priv *priv)
 		if (desc_get_owner(p))
 			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Verify tx error by looking at the last segment */
 		if (desc_get_tx_ls(p))
@@ -1014,6 +1092,8 @@ static void xgmac_tx_err(struct xgmac_priv *priv)
 	writel(0, priv->base + XGMAC_DMA_INTR_ENA);
 
 =======
+=======
+>>>>>>> v3.18
 		netdev_dbg(priv->dev, "tx ring: curr %d, dirty %d\n",
 			priv->tx_head, priv->tx_tail);
 
@@ -1053,6 +1133,9 @@ static void xgmac_tx_timeout_work(struct work_struct *work)
 
 	netif_tx_lock(priv->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	reg = readl(priv->base + XGMAC_DMA_CONTROL);
 	writel(reg & ~DMA_CONTROL_ST, priv->base + XGMAC_DMA_CONTROL);
@@ -1070,10 +1153,13 @@ static void xgmac_tx_timeout_work(struct work_struct *work)
 	writel(DMA_STATUS_TU | DMA_STATUS_TPS | DMA_STATUS_NIS | DMA_STATUS_AIS,
 		priv->base + XGMAC_DMA_STATUS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(inten, priv->base + XGMAC_DMA_INTR_ENA);
 
 	netif_wake_queue(priv->dev);
 =======
+=======
+>>>>>>> v3.18
 
 	netif_tx_unlock(priv->dev);
 	netif_wake_queue(priv->dev);
@@ -1083,6 +1169,9 @@ static void xgmac_tx_timeout_work(struct work_struct *work)
 	/* Enable interrupts */
 	writel(DMA_INTR_DEFAULT_MASK, priv->base + XGMAC_DMA_STATUS);
 	writel(DMA_INTR_DEFAULT_MASK, priv->base + XGMAC_DMA_INTR_ENA);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1112,9 +1201,13 @@ static int xgmac_hw_init(struct net_device *dev)
 	writel(value, ioaddr + XGMAC_DMA_BUS_MODE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Enable interrupts */
 	writel(DMA_INTR_DEFAULT_MASK, ioaddr + XGMAC_DMA_STATUS);
 	writel(DMA_INTR_DEFAULT_MASK, ioaddr + XGMAC_DMA_INTR_ENA);
+=======
+	writel(0, ioaddr + XGMAC_DMA_INTR_ENA);
+>>>>>>> v3.18
 =======
 	writel(0, ioaddr + XGMAC_DMA_INTR_ENA);
 >>>>>>> v3.18
@@ -1186,11 +1279,17 @@ static int xgmac_open(struct net_device *dev)
 	netif_start_queue(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Enable interrupts */
 	writel(DMA_INTR_DEFAULT_MASK, ioaddr + XGMAC_DMA_STATUS);
 	writel(DMA_INTR_DEFAULT_MASK, ioaddr + XGMAC_DMA_INTR_ENA);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1206,8 +1305,11 @@ static int xgmac_stop(struct net_device *dev)
 	struct xgmac_priv *priv = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netif_stop_queue(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (readl(priv->base + XGMAC_DMA_INTR_ENA))
@@ -1216,6 +1318,11 @@ static int xgmac_stop(struct net_device *dev)
 	writel(0, priv->base + XGMAC_DMA_INTR_ENA);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	netif_tx_disable(dev);
+
+>>>>>>> v3.18
 =======
 	netif_tx_disable(dev);
 
@@ -1260,8 +1367,13 @@ static netdev_tx_t xgmac_xmit(struct sk_buff *skb, struct net_device *dev)
 	paddr = dma_map_single(priv->device, skb->data, len, DMA_TO_DEVICE);
 	if (dma_mapping_error(priv->device, paddr)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
 		return -EIO;
+=======
+		dev_kfree_skb_any(skb);
+		return NETDEV_TX_OK;
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 		return NETDEV_TX_OK;
@@ -1278,6 +1390,7 @@ static netdev_tx_t xgmac_xmit(struct sk_buff *skb, struct net_device *dev)
 		paddr = skb_frag_dma_map(priv->device, frag, 0, len,
 					 DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dma_mapping_error(priv->device, paddr)) {
 			dev_kfree_skb(skb);
 			return -EIO;
@@ -1287,12 +1400,17 @@ static netdev_tx_t xgmac_xmit(struct sk_buff *skb, struct net_device *dev)
 		desc = priv->dma_tx + entry;
 		priv->tx_skbuff[entry] = NULL;
 =======
+=======
+>>>>>>> v3.18
 		if (dma_mapping_error(priv->device, paddr))
 			goto dma_err;
 
 		entry = dma_ring_incr(entry, DMA_TX_RING_SZ);
 		desc = priv->dma_tx + entry;
 		priv->tx_skbuff[entry] = skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		desc_set_buf_addr_and_size(desc, paddr, len);
@@ -1312,6 +1430,7 @@ static netdev_tx_t xgmac_xmit(struct sk_buff *skb, struct net_device *dev)
 	desc_set_tx_owner(first, desc_flags | TXDESC_FIRST_SEG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->tx_head = dma_ring_incr(entry, DMA_TX_RING_SZ);
 
 	writel(1, priv->base + XGMAC_DMA_TX_POLL);
@@ -1320,6 +1439,8 @@ static netdev_tx_t xgmac_xmit(struct sk_buff *skb, struct net_device *dev)
 		netif_stop_queue(dev);
 
 =======
+=======
+>>>>>>> v3.18
 	writel(1, priv->base + XGMAC_DMA_TX_POLL);
 
 	priv->tx_head = dma_ring_incr(entry, DMA_TX_RING_SZ);
@@ -1349,6 +1470,9 @@ dma_err:
 	dma_unmap_single(priv->device, desc_get_buf_addr(desc),
 			 desc_get_buf_len(desc), DMA_TO_DEVICE);
 	dev_kfree_skb_any(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NETDEV_TX_OK;
 }
@@ -1394,7 +1518,11 @@ static int xgmac_rx(struct xgmac_priv *priv, int limit)
 		skb_put(skb, frame_len);
 		dma_unmap_single(priv->device, desc_get_buf_addr(p),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 frame_len, DMA_FROM_DEVICE);
+=======
+				 priv->dma_buf_sz - NET_IP_ALIGN, DMA_FROM_DEVICE);
+>>>>>>> v3.18
 =======
 				 priv->dma_buf_sz - NET_IP_ALIGN, DMA_FROM_DEVICE);
 >>>>>>> v3.18
@@ -1449,9 +1577,13 @@ static void xgmac_tx_timeout(struct net_device *dev)
 {
 	struct xgmac_priv *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Clear Tx resources and restart transmitting again */
 	xgmac_tx_err(priv);
+=======
+	schedule_work(&priv->tx_timeout_work);
+>>>>>>> v3.18
 =======
 	schedule_work(&priv->tx_timeout_work);
 >>>>>>> v3.18
@@ -1481,6 +1613,7 @@ static void xgmac_set_rx_mode(struct net_device *dev)
 		 netdev_mc_count(dev), netdev_uc_count(dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->flags & IFF_PROMISC) {
 		writel(XGMAC_FRAME_FILTER_PR, ioaddr + XGMAC_FRAME_FILTER);
 		return;
@@ -1490,12 +1623,17 @@ static void xgmac_set_rx_mode(struct net_device *dev)
 
 	if (netdev_uc_count(dev) > XGMAC_MAX_FILTER_ADDR) {
 =======
+=======
+>>>>>>> v3.18
 	if (dev->flags & IFF_PROMISC)
 		value |= XGMAC_FRAME_FILTER_PR;
 
 	memset(hash_filter, 0, sizeof(hash_filter));
 
 	if (netdev_uc_count(dev) > priv->max_macs) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		use_hash = true;
 		value |= XGMAC_FRAME_FILTER_HUC | XGMAC_FRAME_FILTER_HPF;
@@ -1520,15 +1658,21 @@ static void xgmac_set_rx_mode(struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((netdev_mc_count(dev) + reg - 1) > XGMAC_MAX_FILTER_ADDR) {
 		use_hash = true;
 		value |= XGMAC_FRAME_FILTER_HMC | XGMAC_FRAME_FILTER_HPF;
 =======
+=======
+>>>>>>> v3.18
 	if ((netdev_mc_count(dev) + reg - 1) > priv->max_macs) {
 		use_hash = true;
 		value |= XGMAC_FRAME_FILTER_HMC | XGMAC_FRAME_FILTER_HPF;
 	} else {
 		use_hash = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	netdev_for_each_mc_addr(ha, dev) {
@@ -1547,6 +1691,11 @@ static void xgmac_set_rx_mode(struct net_device *dev)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	for (i = reg; i <= priv->max_macs; i++)
+		xgmac_set_mac_addr(ioaddr, NULL, i);
+>>>>>>> v3.18
 =======
 	for (i = reg; i <= priv->max_macs; i++)
 		xgmac_set_mac_addr(ioaddr, NULL, i);
@@ -1580,11 +1729,16 @@ static int xgmac_change_mtu(struct net_device *dev, int new_mtu)
 
 	old_mtu = dev->mtu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->mtu = new_mtu;
 
 	/* return early if the buffer sizes will not change */
 	if (old_mtu <= ETH_DATA_LEN && new_mtu <= ETH_DATA_LEN)
 		return 0;
+=======
+
+	/* return early if the buffer sizes will not change */
+>>>>>>> v3.18
 =======
 
 	/* return early if the buffer sizes will not change */
@@ -1597,8 +1751,14 @@ static int xgmac_change_mtu(struct net_device *dev, int new_mtu)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Bring the interface down and then back up */
 	xgmac_stop(dev);
+=======
+	/* Bring interface down, change mtu and bring interface back up */
+	xgmac_stop(dev);
+	dev->mtu = new_mtu;
+>>>>>>> v3.18
 =======
 	/* Bring interface down, change mtu and bring interface back up */
 	xgmac_stop(dev);
@@ -1627,7 +1787,10 @@ static irqreturn_t xgmac_interrupt(int irq, void *dev_id)
 {
 	u32 intr_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool tx_err = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct net_device *dev = (struct net_device *)dev_id;
@@ -1660,7 +1823,11 @@ static irqreturn_t xgmac_interrupt(int irq, void *dev_id)
 			netdev_err(priv->dev, "transmit process stopped\n");
 			x->tx_process_stopped++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tx_err = true;
+=======
+			schedule_work(&priv->tx_timeout_work);
+>>>>>>> v3.18
 =======
 			schedule_work(&priv->tx_timeout_work);
 >>>>>>> v3.18
@@ -1669,11 +1836,15 @@ static irqreturn_t xgmac_interrupt(int irq, void *dev_id)
 			netdev_err(priv->dev, "fatal bus error\n");
 			x->fatal_bus_error++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tx_err = true;
 		}
 
 		if (tx_err)
 			xgmac_tx_err(priv);
+=======
+		}
+>>>>>>> v3.18
 =======
 		}
 >>>>>>> v3.18
@@ -1841,7 +2012,10 @@ static const struct xgmac_stats xgmac_gstrings_stats[] = {
 	XGMAC_STAT(rx_ip_header_error),
 	XGMAC_STAT(rx_da_filter_fail),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	XGMAC_STAT(rx_sa_filter_fail),
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	XGMAC_STAT(fatal_bus_error),
@@ -1979,15 +2153,21 @@ static int xgmac_probe(struct platform_device *pdev)
 	priv = netdev_priv(ndev);
 	platform_set_drvdata(pdev, ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(ndev);
 	ndev->netdev_ops = &xgmac_netdev_ops;
 	SET_ETHTOOL_OPS(ndev, &xgmac_ethtool_ops);
 	spin_lock_init(&priv->stats_lock);
 =======
+=======
+>>>>>>> v3.18
 	ndev->netdev_ops = &xgmac_netdev_ops;
 	ndev->ethtool_ops = &xgmac_ethtool_ops;
 	spin_lock_init(&priv->stats_lock);
 	INIT_WORK(&priv->tx_timeout_work, xgmac_tx_timeout_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	priv->device = &pdev->dev;
@@ -2006,7 +2186,10 @@ static int xgmac_probe(struct platform_device *pdev)
 	netdev_info(ndev, "h/w version is 0x%x\n", uid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Figure out how many valid mac address filter registers we have */
 	writel(1, priv->base + XGMAC_ADDR_HIGH(31));
 	if (readl(priv->base + XGMAC_ADDR_HIGH(31)) == 1)
@@ -2014,6 +2197,9 @@ static int xgmac_probe(struct platform_device *pdev)
 	else
 		priv->max_macs = 7;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(0, priv->base + XGMAC_DMA_INTR_ENA);
 	ndev->irq = platform_get_irq(pdev, 0);
@@ -2051,7 +2237,11 @@ static int xgmac_probe(struct platform_device *pdev)
 		priv->wolopts = WAKE_MAGIC;	/* Magic Frame as default */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ndev->hw_features = NETIF_F_SG | NETIF_F_FRAGLIST | NETIF_F_HIGHDMA;
+=======
+	ndev->hw_features = NETIF_F_SG | NETIF_F_HIGHDMA;
+>>>>>>> v3.18
 =======
 	ndev->hw_features = NETIF_F_SG | NETIF_F_HIGHDMA;
 >>>>>>> v3.18
@@ -2086,7 +2276,10 @@ err_io:
 err_alloc:
 	release_mem_region(res->start, resource_size(res));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -2112,7 +2305,10 @@ static int xgmac_remove(struct platform_device *pdev)
 	free_irq(priv->pmt_irq, ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unregister_netdev(ndev);

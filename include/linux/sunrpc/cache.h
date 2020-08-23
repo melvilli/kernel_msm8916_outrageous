@@ -58,6 +58,10 @@ struct cache_head {
 #define	CACHE_NEGATIVE	1	/* Negative entry - there is no match for the key */
 #define	CACHE_PENDING	2	/* An upcall has been sent but no reply received yet*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	CACHE_CLEANED	3	/* Entry has been cleaned from cache */
+>>>>>>> v3.18
 =======
 #define	CACHE_CLEANED	3	/* Entry has been cleaned from cache */
 >>>>>>> v3.18
@@ -153,7 +157,10 @@ struct cache_deferred_req {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * timestamps kept in the cache are expressed in seconds
  * since boot.  This is the best for measuring differences in
@@ -172,6 +179,9 @@ static inline time_t convert_to_wallclock(time_t sinceboot)
 	getboottime(&boot);
 	return boot.tv_sec + sinceboot;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern const struct file_operations cache_file_operations_pipefs;
@@ -207,6 +217,7 @@ static inline void cache_put(struct cache_head *h, struct cache_detail *cd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int cache_valid(struct cache_head *h)
 {
 	/* If an item has been unhashed pending removal when
@@ -217,10 +228,15 @@ static inline int cache_valid(struct cache_head *h)
 	 */
 	return (h->expiry_time != 0 && test_bit(CACHE_VALID, &h->flags));
 =======
+=======
+>>>>>>> v3.18
 static inline int cache_is_expired(struct cache_detail *detail, struct cache_head *h)
 {
 	return  (h->expiry_time < seconds_since_boot()) ||
 		(detail->flush_time > h->last_refresh);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -283,6 +299,7 @@ static inline int get_uint(char **bpp, unsigned int *anint)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * timestamps kept in the cache are expressed in seconds
  * since boot.  This is the best for measuring differences in
@@ -301,6 +318,8 @@ static inline time_t convert_to_wallclock(time_t sinceboot)
 	getboottime(&boot);
 	return boot.tv_sec + sinceboot;
 =======
+=======
+>>>>>>> v3.18
 static inline int get_time(char **bpp, time_t *time)
 {
 	char buf[50];
@@ -317,21 +336,30 @@ static inline int get_time(char **bpp, time_t *time)
 
 	*time = (time_t)ll;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline time_t get_expiry(char **bpp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rv;
 	struct timespec boot;
 
 	if (get_int(bpp, &rv))
 =======
+=======
+>>>>>>> v3.18
 	time_t rv;
 	struct timespec boot;
 
 	if (get_time(bpp, &rv))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 	if (rv < 0)

@@ -778,7 +778,12 @@ isdn_readbchan(int di, int channel, u_char *buf, u_char *fp, int len, wait_queue
 	if (skb_queue_empty(&dev->drv[di]->rpqueue[channel])) {
 		if (sleep)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on(sleep);
+=======
+			wait_event_interruptible(*sleep,
+				!skb_queue_empty(&dev->drv[di]->rpqueue[channel]));
+>>>>>>> v3.18
 =======
 			wait_event_interruptible(*sleep,
 				!skb_queue_empty(&dev->drv[di]->rpqueue[channel]));
@@ -1078,7 +1083,12 @@ isdn_read(struct file *file, char __user *buf, size_t count, loff_t *off)
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on(&(dev->info_waitq));
+=======
+			wait_event_interruptible(dev->info_waitq,
+						 file->private_data);
+>>>>>>> v3.18
 =======
 			wait_event_interruptible(dev->info_waitq,
 						 file->private_data);
@@ -1139,7 +1149,12 @@ isdn_read(struct file *file, char __user *buf, size_t count, loff_t *off)
 				goto out;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interruptible_sleep_on(&(dev->drv[drvidx]->st_waitq));
+=======
+			wait_event_interruptible(dev->drv[drvidx]->st_waitq,
+						 dev->drv[drvidx]->stavail);
+>>>>>>> v3.18
 =======
 			wait_event_interruptible(dev->drv[drvidx]->st_waitq,
 						 dev->drv[drvidx]->stavail);
@@ -1204,8 +1219,13 @@ isdn_write(struct file *file, const char __user *buf, size_t count, loff_t *off)
 		}
 		chidx = isdn_minor2chan(minor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while ((retval = isdn_writebuf_stub(drvidx, chidx, buf, count)) == 0)
 			interruptible_sleep_on(&dev->drv[drvidx]->snd_waitq[chidx]);
+=======
+		wait_event_interruptible(dev->drv[drvidx]->snd_waitq[chidx],
+			(retval = isdn_writebuf_stub(drvidx, chidx, buf, count)));
+>>>>>>> v3.18
 =======
 		wait_event_interruptible(dev->drv[drvidx]->snd_waitq[chidx],
 			(retval = isdn_writebuf_stub(drvidx, chidx, buf, count)));
@@ -2399,7 +2419,11 @@ static void __exit isdn_exit(void)
 	isdn_tty_exit();
 	unregister_chrdev(ISDN_MAJOR, "isdn");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	del_timer(&dev->timer);
+=======
+	del_timer_sync(&dev->timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&dev->timer);
 >>>>>>> v3.18

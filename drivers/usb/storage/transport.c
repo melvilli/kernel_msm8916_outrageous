@@ -920,6 +920,7 @@ int usb_stor_CB_transport(struct scsi_cmnd *srb, struct us_data *us)
 	/* COMMAND STAGE */
 	/* let's send the command via the control pipe */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Command is sometime (f.e. after scsi_eh_prep_cmnd) on the stack.
 	 * Stack may be vmallocated.  So no DMA for us.  Make a copy.
@@ -930,10 +931,15 @@ int usb_stor_CB_transport(struct scsi_cmnd *srb, struct us_data *us)
 				      USB_TYPE_CLASS | USB_RECIP_INTERFACE, 0, 
 				      us->ifnum, us->iobuf, srb->cmd_len);
 =======
+=======
+>>>>>>> v3.18
 	result = usb_stor_ctrl_transfer(us, us->send_ctrl_pipe,
 				      US_CBI_ADSC, 
 				      USB_TYPE_CLASS | USB_RECIP_INTERFACE, 0, 
 				      us->ifnum, srb->cmnd, srb->cmd_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* check the return code for the command */

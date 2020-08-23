@@ -18,6 +18,10 @@
 
 struct vt_struct;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct uni_pagedir;
+>>>>>>> v3.18
 =======
 struct uni_pagedir;
 >>>>>>> v3.18
@@ -109,8 +113,13 @@ struct vc_data {
 	unsigned int	vc_bell_duration;	/* Console bell duration */
 	struct vc_data **vc_display_fg;		/* [!] Ptr to var holding fg console for this display */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	vc_uni_pagedir;
 	unsigned long	*vc_uni_pagedir_loc;  /* [!] Location of uni_pagedir variable for this console */
+=======
+	struct uni_pagedir *vc_uni_pagedir;
+	struct uni_pagedir **vc_uni_pagedir_loc; /* [!] Location of uni_pagedir variable for this console */
+>>>>>>> v3.18
 =======
 	struct uni_pagedir *vc_uni_pagedir;
 	struct uni_pagedir **vc_uni_pagedir_loc; /* [!] Location of uni_pagedir variable for this console */

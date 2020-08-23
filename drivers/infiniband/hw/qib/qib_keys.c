@@ -87,10 +87,13 @@ int qib_alloc_lkey(struct qib_mregion *mr, int dma_region)
 	 */
 	rkt->gen++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * bits are capped in qib_verbs.c to insure enough bits
 	 * for generation number
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mr->lkey = (r << (32 - ib_qib_lkey_table_size)) |

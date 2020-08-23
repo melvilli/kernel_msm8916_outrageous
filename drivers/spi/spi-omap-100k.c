@@ -71,10 +71,13 @@
 #define SPI_STATUS_RD                   (1UL << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WRITE 0
 #define READ  1
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* use PIO for small transfers, avoiding DMA setup/teardown overhead and
@@ -87,6 +90,7 @@
 
 struct omap1_spi100k {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct work_struct      work;
 
 	/* lock protects queue and registers */
@@ -95,15 +99,20 @@ struct omap1_spi100k {
 	struct spi_master       *master;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	struct clk              *ick;
 	struct clk              *fck;
 
 	/* Virtual base address of the controller */
 	void __iomem            *base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* State of the SPI */
 	unsigned int		state;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -114,6 +123,7 @@ struct omap1_spi100k_cs {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct workqueue_struct *omap1_spi100k_wq;
 
 #define MOD_REG_BIT(val, mask, set) do { \
@@ -123,6 +133,8 @@ static struct workqueue_struct *omap1_spi100k_wq;
 		val &= ~mask; \
 } while (0)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void spi100k_enable_clock(struct spi_master *master)
@@ -159,7 +171,11 @@ static void spi100k_write_data(struct spi_master *master, int len, int data)
 
 	spi100k_enable_clock(master);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writew( data , spi100k->base + SPI_TX_MSB);
+=======
+	writew(data , spi100k->base + SPI_TX_MSB);
+>>>>>>> v3.18
 =======
 	writew(data , spi100k->base + SPI_TX_MSB);
 >>>>>>> v3.18
@@ -171,7 +187,12 @@ static void spi100k_write_data(struct spi_master *master, int len, int data)
 
 	/* Wait for bit ack send change */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while((readw(spi100k->base + SPI_STATUS) & SPI_STATUS_WE) != SPI_STATUS_WE);
+=======
+	while ((readw(spi100k->base + SPI_STATUS) & SPI_STATUS_WE) != SPI_STATUS_WE)
+		;
+>>>>>>> v3.18
 =======
 	while ((readw(spi100k->base + SPI_STATUS) & SPI_STATUS_WE) != SPI_STATUS_WE)
 		;
@@ -184,7 +205,11 @@ static void spi100k_write_data(struct spi_master *master, int len, int data)
 static int spi100k_read_data(struct spi_master *master, int len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dataH,dataL;
+=======
+	int dataH, dataL;
+>>>>>>> v3.18
 =======
 	int dataH, dataL;
 >>>>>>> v3.18
@@ -201,7 +226,12 @@ static int spi100k_read_data(struct spi_master *master, int len)
 	       spi100k->base + SPI_CTRL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while((readw(spi100k->base + SPI_STATUS) & SPI_STATUS_RD) != SPI_STATUS_RD);
+=======
+	while ((readw(spi100k->base + SPI_STATUS) & SPI_STATUS_RD) != SPI_STATUS_RD)
+		;
+>>>>>>> v3.18
 =======
 	while ((readw(spi100k->base + SPI_STATUS) & SPI_STATUS_RD) != SPI_STATUS_RD)
 		;
@@ -242,7 +272,10 @@ static unsigned
 omap1_spi100k_txrx_pio(struct spi_device *spi, struct spi_transfer *xfer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap1_spi100k    *spi100k;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct omap1_spi100k_cs *cs = spi->controller_state;
@@ -250,7 +283,10 @@ omap1_spi100k_txrx_pio(struct spi_device *spi, struct spi_transfer *xfer)
 	int                     word_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi100k = spi_master_get_devdata(spi->master);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	count = xfer->len;
@@ -265,7 +301,11 @@ omap1_spi100k_txrx_pio(struct spi_device *spi, struct spi_transfer *xfer)
 		tx = xfer->tx_buf;
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			c-=1;
+=======
+			c -= 1;
+>>>>>>> v3.18
 =======
 			c -= 1;
 >>>>>>> v3.18
@@ -274,7 +314,11 @@ omap1_spi100k_txrx_pio(struct spi_device *spi, struct spi_transfer *xfer)
 			if (xfer->rx_buf != NULL)
 				*rx++ = spi100k_read_data(spi->master, word_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} while(c);
+=======
+		} while (c);
+>>>>>>> v3.18
 =======
 		} while (c);
 >>>>>>> v3.18
@@ -286,6 +330,7 @@ omap1_spi100k_txrx_pio(struct spi_device *spi, struct spi_transfer *xfer)
 		tx = xfer->tx_buf;
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			c-=2;
 			if (xfer->tx_buf != NULL)
 				spi100k_write_data(spi->master,word_len, *tx++);
@@ -293,12 +338,17 @@ omap1_spi100k_txrx_pio(struct spi_device *spi, struct spi_transfer *xfer)
 				*rx++ = spi100k_read_data(spi->master,word_len);
 		} while(c);
 =======
+=======
+>>>>>>> v3.18
 			c -= 2;
 			if (xfer->tx_buf != NULL)
 				spi100k_write_data(spi->master, word_len, *tx++);
 			if (xfer->rx_buf != NULL)
 				*rx++ = spi100k_read_data(spi->master, word_len);
 		} while (c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else if (word_len <= 32) {
 		u32             *rx;
@@ -308,6 +358,7 @@ omap1_spi100k_txrx_pio(struct spi_device *spi, struct spi_transfer *xfer)
 		tx = xfer->tx_buf;
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			c-=4;
 			if (xfer->tx_buf != NULL)
 				spi100k_write_data(spi->master,word_len, *tx);
@@ -315,12 +366,17 @@ omap1_spi100k_txrx_pio(struct spi_device *spi, struct spi_transfer *xfer)
 				*rx = spi100k_read_data(spi->master,word_len);
 		} while(c);
 =======
+=======
+>>>>>>> v3.18
 			c -= 4;
 			if (xfer->tx_buf != NULL)
 				spi100k_write_data(spi->master, word_len, *tx);
 			if (xfer->rx_buf != NULL)
 				*rx = spi100k_read_data(spi->master, word_len);
 		} while (c);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return count - c;
@@ -361,6 +417,7 @@ static int omap1_spi100k_setup(struct spi_device *spi)
 	struct omap1_spi100k_cs *cs = spi->controller_state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spi->bits_per_word < 4 || spi->bits_per_word > 32) {
 		 dev_dbg(&spi->dev, "setup: unsupported %d bit words\n",
 			spi->bits_per_word);
@@ -372,10 +429,15 @@ static int omap1_spi100k_setup(struct spi_device *spi)
 	if (!cs) {
 		cs = kzalloc(sizeof *cs, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	spi100k = spi_master_get_devdata(spi->master);
 
 	if (!cs) {
 		cs = devm_kzalloc(&spi->dev, sizeof(*cs), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!cs)
 			return -ENOMEM;
@@ -386,6 +448,7 @@ static int omap1_spi100k_setup(struct spi_device *spi)
 	spi100k_open(spi->master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(spi100k->ick);
 	clk_enable(spi100k->fck);
 
@@ -394,6 +457,8 @@ static int omap1_spi100k_setup(struct spi_device *spi)
 	clk_disable(spi100k->ick);
 	clk_disable(spi100k->fck);
 =======
+=======
+>>>>>>> v3.18
 	clk_prepare_enable(spi100k->ick);
 	clk_prepare_enable(spi100k->fck);
 
@@ -401,11 +466,15 @@ static int omap1_spi100k_setup(struct spi_device *spi)
 
 	clk_disable_unprepare(spi100k->ick);
 	clk_disable_unprepare(spi100k->fck);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void omap1_spi100k_work(struct work_struct *work)
 {
@@ -564,6 +633,8 @@ static int omap1_spi100k_transfer(struct spi_device *spi, struct spi_message *m)
 static int omap1_spi100k_reset(struct omap1_spi100k *spi100k)
 {
 =======
+=======
+>>>>>>> v3.18
 static int omap1_spi100k_prepare_hardware(struct spi_master *master)
 {
 	struct omap1_spi100k *spi100k = spi_master_get_devdata(master);
@@ -649,6 +720,9 @@ static int omap1_spi100k_unprepare_hardware(struct spi_master *master)
 	clk_disable_unprepare(spi100k->ick);
 	clk_disable_unprepare(spi100k->fck);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -663,7 +737,11 @@ static int omap1_spi100k_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	master = spi_alloc_master(&pdev->dev, sizeof *spi100k);
+=======
+	master = spi_alloc_master(&pdev->dev, sizeof(*spi100k));
+>>>>>>> v3.18
 =======
 	master = spi_alloc_master(&pdev->dev, sizeof(*spi100k));
 >>>>>>> v3.18
@@ -673,6 +751,7 @@ static int omap1_spi100k_probe(struct platform_device *pdev)
 	}
 
 	if (pdev->id != -1)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	       master->bus_num = pdev->id;
 
@@ -687,6 +766,8 @@ static int omap1_spi100k_probe(struct platform_device *pdev)
 	spi100k = spi_master_get_devdata(master);
 	spi100k->master = master;
 =======
+=======
+>>>>>>> v3.18
 		master->bus_num = pdev->id;
 
 	master->setup = omap1_spi100k_setup;
@@ -701,6 +782,9 @@ static int omap1_spi100k_probe(struct platform_device *pdev)
 	master->max_speed_hz = OMAP1_SPI100K_MAX_FREQ;
 
 	spi100k = spi_master_get_devdata(master);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -708,6 +792,7 @@ static int omap1_spi100k_probe(struct platform_device *pdev)
 	 * You should allocate this with ioremap() before initializing
 	 * the SPI.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spi100k->base = (void __iomem *) pdev->dev.platform_data;
 
@@ -746,6 +831,8 @@ err2:
 	clk_put(spi100k->ick);
 err1:
 =======
+=======
+>>>>>>> v3.18
 	spi100k->base = (void __iomem *)dev_get_platdata(&pdev->dev);
 
 	spi100k->ick = devm_clk_get(&pdev->dev, "ick");
@@ -769,11 +856,15 @@ err1:
 	return status;
 
 err:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spi_master_put(master);
 	return status;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int omap1_spi100k_remove(struct platform_device *pdev)
 {
@@ -816,11 +907,14 @@ static int omap1_spi100k_remove(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver omap1_spi100k_driver = {
 	.driver = {
 		.name		= "omap1_spi100k",
 		.owner		= THIS_MODULE,
 	},
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.remove		= omap1_spi100k_remove,
 };
@@ -847,16 +941,24 @@ static void __exit omap1_spi100k_exit(void)
 module_init(omap1_spi100k_init);
 module_exit(omap1_spi100k_exit);
 =======
+=======
+>>>>>>> v3.18
 	.probe		= omap1_spi100k_probe,
 };
 
 module_platform_driver(omap1_spi100k_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("OMAP7xx SPI 100k controller driver");
 MODULE_AUTHOR("Fabrice Crohas <fcrohas@gmail.com>");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

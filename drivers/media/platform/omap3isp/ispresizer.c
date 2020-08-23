@@ -13,6 +13,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,6 +24,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -210,7 +213,11 @@ static void resizer_set_bilinear(struct isp_res_device *res,
  * resizer_set_ycpos - Luminance and chrominance order
  * @res: Device context.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @order: order type.
+=======
+ * @pixelcode: pixel code.
+>>>>>>> v3.18
 =======
  * @pixelcode: pixel code.
 >>>>>>> v3.18
@@ -247,7 +254,11 @@ static void resizer_set_phase(struct isp_res_device *res, u32 h_phase,
 {
 	struct isp_device *isp = to_isp_device(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rgval = 0;
+=======
+	u32 rgval;
+>>>>>>> v3.18
 =======
 	u32 rgval;
 >>>>>>> v3.18
@@ -287,7 +298,11 @@ static void resizer_set_luma(struct isp_res_device *res,
 {
 	struct isp_device *isp = to_isp_device(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rgval = 0;
+=======
+	u32 rgval;
+>>>>>>> v3.18
 =======
 	u32 rgval;
 >>>>>>> v3.18
@@ -338,7 +353,11 @@ static void resizer_set_ratio(struct isp_res_device *res,
 	struct isp_device *isp = to_isp_device(res);
 	const u16 *h_filter, *v_filter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rgval = 0;
+=======
+	u32 rgval;
+>>>>>>> v3.18
 =======
 	u32 rgval;
 >>>>>>> v3.18
@@ -385,9 +404,14 @@ static void resizer_set_output_size(struct isp_res_device *res,
 {
 	struct isp_device *isp = to_isp_device(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rgval = 0;
 
 	dev_dbg(isp->dev, "Output size[w/h]: %dx%d\n", width, height);
+=======
+	u32 rgval;
+
+>>>>>>> v3.18
 =======
 	u32 rgval;
 
@@ -434,7 +458,11 @@ static void resizer_set_start(struct isp_res_device *res, u32 left, u32 top)
 {
 	struct isp_device *isp = to_isp_device(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rgval = 0;
+=======
+	u32 rgval;
+>>>>>>> v3.18
 =======
 	u32 rgval;
 >>>>>>> v3.18
@@ -458,9 +486,13 @@ static void resizer_set_input_size(struct isp_res_device *res,
 {
 	struct isp_device *isp = to_isp_device(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rgval = 0;
 
 	dev_dbg(isp->dev, "Input size[w/h]: %dx%d\n", width, height);
+=======
+	u32 rgval;
+>>>>>>> v3.18
 =======
 	u32 rgval;
 >>>>>>> v3.18
@@ -951,8 +983,13 @@ static void resizer_calc_ratios(struct isp_res_device *res,
  * resizer_set_crop_params - Setup hardware with cropping parameters
  * @res : resizer private structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @crop_rect : current crop rectangle
  * @ratio : resizer ratios
+=======
+ * @input : format on sink pad
+ * @output : format on source pad
+>>>>>>> v3.18
 =======
  * @input : format on sink pad
  * @output : format on source pad
@@ -1078,7 +1115,11 @@ static void resizer_isr_buffer(struct isp_res_device *res)
 	buffer = omap3isp_video_buffer_next(&res->video_out);
 	if (buffer != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		resizer_set_outaddr(res, buffer->isp_addr);
+=======
+		resizer_set_outaddr(res, buffer->dma);
+>>>>>>> v3.18
 =======
 		resizer_set_outaddr(res, buffer->dma);
 >>>>>>> v3.18
@@ -1091,7 +1132,11 @@ static void resizer_isr_buffer(struct isp_res_device *res)
 		buffer = omap3isp_video_buffer_next(&res->video_in);
 		if (buffer != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			resizer_set_inaddr(res, buffer->isp_addr);
+=======
+			resizer_set_inaddr(res, buffer->dma);
+>>>>>>> v3.18
 =======
 			resizer_set_inaddr(res, buffer->dma);
 >>>>>>> v3.18
@@ -1121,6 +1166,10 @@ void omap3isp_resizer_isr(struct isp_res_device *res)
 {
 	struct v4l2_mbus_framefmt *informat, *outformat;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -1129,6 +1178,11 @@ void omap3isp_resizer_isr(struct isp_res_device *res)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_irqsave(&res->lock, flags);
+
+>>>>>>> v3.18
 =======
 	spin_lock_irqsave(&res->lock, flags);
 
@@ -1143,6 +1197,11 @@ void omap3isp_resizer_isr(struct isp_res_device *res)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&res->lock, flags);
+
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&res->lock, flags);
 
@@ -1161,7 +1220,11 @@ static int resizer_video_queue(struct isp_video *video,
 
 	if (video->type == V4L2_BUF_TYPE_VIDEO_OUTPUT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		resizer_set_inaddr(res, buffer->isp_addr);
+=======
+		resizer_set_inaddr(res, buffer->dma);
+>>>>>>> v3.18
 =======
 		resizer_set_inaddr(res, buffer->dma);
 >>>>>>> v3.18
@@ -1180,7 +1243,11 @@ static int resizer_video_queue(struct isp_video *video,
 	 */
 	if (video->type == V4L2_BUF_TYPE_VIDEO_CAPTURE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		resizer_set_outaddr(res, buffer->isp_addr);
+=======
+		resizer_set_outaddr(res, buffer->dma);
+>>>>>>> v3.18
 =======
 		resizer_set_outaddr(res, buffer->dma);
 >>>>>>> v3.18
@@ -1358,13 +1425,19 @@ static int resizer_set_selection(struct v4l2_subdev *sd,
 	struct isp_res_device *res = v4l2_get_subdevdata(sd);
 	struct isp_device *isp = to_isp_device(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_mbus_framefmt *format_sink, *format_source;
 	struct resizer_ratio ratio;
 =======
+=======
+>>>>>>> v3.18
 	const struct v4l2_mbus_framefmt *format_sink;
 	struct v4l2_mbus_framefmt format_source;
 	struct resizer_ratio ratio;
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sel->target != V4L2_SEL_TGT_CROP ||
@@ -1373,6 +1446,7 @@ static int resizer_set_selection(struct v4l2_subdev *sd,
 
 	format_sink = __resizer_get_format(res, fh, RESZ_PAD_SINK,
 					   sel->which);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	format_source = __resizer_get_format(res, fh, RESZ_PAD_SOURCE,
 					     sel->which);
@@ -1385,6 +1459,8 @@ static int resizer_set_selection(struct v4l2_subdev *sd,
 		format_sink->width, format_sink->height,
 		format_source->width, format_source->height);
 =======
+=======
+>>>>>>> v3.18
 	format_source = *__resizer_get_format(res, fh, RESZ_PAD_SOURCE,
 					      sel->which);
 
@@ -1393,6 +1469,9 @@ static int resizer_set_selection(struct v4l2_subdev *sd,
 		format_sink->width, format_sink->height,
 		sel->r.left, sel->r.top, sel->r.width, sel->r.height,
 		format_source.width, format_source.height);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Clamp the crop rectangle to the bounds, and then mangle it further to
@@ -1404,6 +1483,7 @@ static int resizer_set_selection(struct v4l2_subdev *sd,
 	 * stored the mangled rectangle.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	resizer_try_crop(format_sink, format_source, &sel->r);
 	*__resizer_get_crop(res, fh, sel->which) = sel->r;
 	resizer_calc_ratios(res, &sel->r, format_source, &ratio);
@@ -1411,6 +1491,8 @@ static int resizer_set_selection(struct v4l2_subdev *sd,
 	if (sel->which == V4L2_SUBDEV_FORMAT_TRY)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	resizer_try_crop(format_sink, &format_source, &sel->r);
 	*__resizer_get_crop(res, fh, sel->which) = sel->r;
 	resizer_calc_ratios(res, &sel->r, &format_source, &ratio);
@@ -1435,11 +1517,15 @@ static int resizer_set_selection(struct v4l2_subdev *sd,
 
 	*__resizer_get_format(res, fh, RESZ_PAD_SOURCE, sel->which) =
 		format_source;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	res->ratio = ratio;
 	res->crop.active = sel->r;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * set_selection can be called while streaming is on. In this case the
@@ -1449,11 +1535,16 @@ static int resizer_set_selection(struct v4l2_subdev *sd,
 		res->applycrop = 1;
 
 =======
+=======
+>>>>>>> v3.18
 	if (res->state != ISP_PIPELINE_STREAM_STOPPED)
 		res->applycrop = 1;
 
 	spin_unlock_irqrestore(&res->lock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1653,7 +1744,10 @@ static int resizer_set_format(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int resizer_link_validate(struct v4l2_subdev *sd,
 				 struct media_link *link,
 				 struct v4l2_subdev_format *source_fmt,
@@ -1668,6 +1762,9 @@ static int resizer_link_validate(struct v4l2_subdev *sd,
 						 source_fmt, sink_fmt);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * resizer_init_formats - Initialize formats on all pads
@@ -1708,6 +1805,10 @@ static const struct v4l2_subdev_pad_ops resizer_v4l2_pad_ops = {
 	.get_selection = resizer_get_selection,
 	.set_selection = resizer_set_selection,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.link_validate = resizer_link_validate,
+>>>>>>> v3.18
 =======
 	.link_validate = resizer_link_validate,
 >>>>>>> v3.18
@@ -1843,7 +1944,12 @@ static int resizer_init_entities(struct isp_res_device *res)
 	sd->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pads[RESZ_PAD_SINK].flags = MEDIA_PAD_FL_SINK;
+=======
+	pads[RESZ_PAD_SINK].flags = MEDIA_PAD_FL_SINK
+				    | MEDIA_PAD_FL_MUST_CONNECT;
+>>>>>>> v3.18
 =======
 	pads[RESZ_PAD_SINK].flags = MEDIA_PAD_FL_SINK
 				    | MEDIA_PAD_FL_MUST_CONNECT;
@@ -1912,6 +2018,11 @@ int omap3isp_resizer_init(struct isp_device *isp)
 	init_waitqueue_head(&res->wait);
 	atomic_set(&res->stopping, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&res->lock);
+
+>>>>>>> v3.18
 =======
 	spin_lock_init(&res->lock);
 

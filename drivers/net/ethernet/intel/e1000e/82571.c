@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel PRO/1000 Linux driver
@@ -27,6 +28,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel PRO/1000 Linux driver
  * Copyright(c) 1999 - 2014 Intel Corporation.
  *
@@ -47,6 +50,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* 82571EB Gigabit Ethernet Controller
@@ -101,6 +107,7 @@ static s32 e1000_init_phy_params_82571(struct e1000_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy->addr			 = 1;
 	phy->autoneg_mask		 = AUTONEG_ADVERTISE_SPEED_DEFAULT;
 	phy->reset_delay_us		 = 100;
@@ -108,17 +115,23 @@ static s32 e1000_init_phy_params_82571(struct e1000_hw *hw)
 	phy->ops.power_up		 = e1000_power_up_phy_copper;
 	phy->ops.power_down		 = e1000_power_down_phy_copper_82571;
 =======
+=======
+>>>>>>> v3.18
 	phy->addr = 1;
 	phy->autoneg_mask = AUTONEG_ADVERTISE_SPEED_DEFAULT;
 	phy->reset_delay_us = 100;
 
 	phy->ops.power_up = e1000_power_up_phy_copper;
 	phy->ops.power_down = e1000_power_down_phy_copper_82571;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	switch (hw->mac.type) {
 	case e1000_82571:
 	case e1000_82572:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		phy->type		 = e1000_phy_igp_2;
 		break;
@@ -129,6 +142,8 @@ static s32 e1000_init_phy_params_82571(struct e1000_hw *hw)
 	case e1000_82583:
 		phy->type		 = e1000_phy_bm;
 =======
+=======
+>>>>>>> v3.18
 		phy->type = e1000_phy_igp_2;
 		break;
 	case e1000_82573:
@@ -137,6 +152,9 @@ static s32 e1000_init_phy_params_82571(struct e1000_hw *hw)
 	case e1000_82574:
 	case e1000_82583:
 		phy->type = e1000_phy_bm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		phy->ops.acquire = e1000_get_hw_semaphore_82574;
 		phy->ops.release = e1000_put_hw_semaphore_82574;
@@ -146,7 +164,10 @@ static s32 e1000_init_phy_params_82571(struct e1000_hw *hw)
 	default:
 		return -E1000_ERR_PHY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -240,7 +261,11 @@ static s32 e1000_init_nvm_params_82571(struct e1000_hw *hw)
 		if (size > 14)
 			size = 14;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nvm->word_size	= 1 << size;
+=======
+		nvm->word_size = 1 << size;
+>>>>>>> v3.18
 =======
 		nvm->word_size = 1 << size;
 >>>>>>> v3.18
@@ -390,7 +415,11 @@ static s32 e1000_get_variants_82571(struct e1000_adapter *adapter)
 {
 	struct e1000_hw *hw = &adapter->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static int global_quad_port_a; /* global port a indication */
+=======
+	static int global_quad_port_a;	/* global port a indication */
+>>>>>>> v3.18
 =======
 	static int global_quad_port_a;	/* global port a indication */
 >>>>>>> v3.18
@@ -484,7 +513,10 @@ static s32 e1000_get_phy_id_82571(struct e1000_hw *hw)
 	case e1000_82573:
 		return e1000e_get_phy_id(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case e1000_82574:
@@ -505,7 +537,10 @@ static s32 e1000_get_phy_id_82571(struct e1000_hw *hw)
 	default:
 		return -E1000_ERR_PHY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1064,8 +1099,11 @@ static s32 e1000_reset_hw_82571(struct e1000_hw *hw)
 		break;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret_val)
 		e_dbg("Cannot acquire MDIO ownership\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1077,10 +1115,13 @@ static s32 e1000_reset_hw_82571(struct e1000_hw *hw)
 	/* Must release MDIO ownership and mutex after MAC reset. */
 	switch (hw->mac.type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case e1000_82574:
 	case e1000_82583:
 		e1000_put_hw_semaphore_82574(hw);
 =======
+=======
+>>>>>>> v3.18
 	case e1000_82573:
 		/* Release mutex only if the hw semaphore is acquired */
 		if (!ret_val)
@@ -1091,6 +1132,9 @@ static s32 e1000_reset_hw_82571(struct e1000_hw *hw)
 		/* Release mutex only if the hw semaphore is acquired */
 		if (!ret_val)
 			e1000_put_hw_semaphore_82574(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -1255,7 +1299,11 @@ static void e1000_initialize_hw_bits_82571(struct e1000_hw *hw)
 	/* Transmit Arbitration Control 0 */
 	reg = er32(TARC(0));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reg &= ~(0xF << 27); /* 30:27 */
+=======
+	reg &= ~(0xF << 27);	/* 30:27 */
+>>>>>>> v3.18
 =======
 	reg &= ~(0xF << 27);	/* 30:27 */
 >>>>>>> v3.18
@@ -1471,7 +1519,11 @@ bool e1000_check_phy_82574(struct e1000_hw *hw)
 	if (ret_val)
 		return false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (receive_errors == E1000_RECEIVE_ERROR_MAX)  {
+=======
+	if (receive_errors == E1000_RECEIVE_ERROR_MAX) {
+>>>>>>> v3.18
 =======
 	if (receive_errors == E1000_RECEIVE_ERROR_MAX) {
 >>>>>>> v3.18
@@ -1545,7 +1597,10 @@ static s32 e1000_setup_copper_link_82571(struct e1000_hw *hw)
 	default:
 		return -E1000_ERR_PHY;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1986,6 +2041,10 @@ static const struct e1000_mac_operations e82571_mac_ops = {
 	.read_mac_addr		= e1000_read_mac_addr_82571,
 	.rar_set		= e1000e_rar_set_generic,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.rar_get_count		= e1000e_rar_get_count_generic,
+>>>>>>> v3.18
 =======
 	.rar_get_count		= e1000e_rar_get_count_generic,
 >>>>>>> v3.18
@@ -2149,6 +2208,10 @@ const struct e1000_info e1000_82583_info = {
 				  | FLAG_HAS_CTRLEXT_ON_LOAD,
 	.flags2			= FLAG2_DISABLE_ASPM_L0S
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				  | FLAG2_DISABLE_ASPM_L1
+>>>>>>> v3.18
 =======
 				  | FLAG2_DISABLE_ASPM_L1
 >>>>>>> v3.18

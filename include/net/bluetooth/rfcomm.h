@@ -174,7 +174,11 @@ struct rfcomm_dlc {
 	struct timer_list     timer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t    lock;
+=======
+	struct mutex  lock;
+>>>>>>> v3.18
 =======
 	struct mutex  lock;
 >>>>>>> v3.18
@@ -243,6 +247,7 @@ int  rfcomm_dlc_open(struct rfcomm_dlc *d, bdaddr_t *src, bdaddr_t *dst,
 int  rfcomm_dlc_close(struct rfcomm_dlc *d, int reason);
 int  rfcomm_dlc_send(struct rfcomm_dlc *d, struct sk_buff *skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int  rfcomm_dlc_set_modem_status(struct rfcomm_dlc *d, u8 v24_sig);
 int  rfcomm_dlc_get_modem_status(struct rfcomm_dlc *d, u8 *v24_sig);
 void rfcomm_dlc_accept(struct rfcomm_dlc *d);
@@ -250,6 +255,8 @@ void rfcomm_dlc_accept(struct rfcomm_dlc *d);
 #define rfcomm_dlc_lock(d)     spin_lock(&d->lock)
 #define rfcomm_dlc_unlock(d)   spin_unlock(&d->lock)
 =======
+=======
+>>>>>>> v3.18
 void rfcomm_dlc_send_noerror(struct rfcomm_dlc *d, struct sk_buff *skb);
 int  rfcomm_dlc_set_modem_status(struct rfcomm_dlc *d, u8 v24_sig);
 int  rfcomm_dlc_get_modem_status(struct rfcomm_dlc *d, u8 *v24_sig);
@@ -258,6 +265,9 @@ struct rfcomm_dlc *rfcomm_dlc_exists(bdaddr_t *src, bdaddr_t *dst, u8 channel);
 
 #define rfcomm_dlc_lock(d)     mutex_lock(&d->lock)
 #define rfcomm_dlc_unlock(d)   mutex_unlock(&d->lock)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void rfcomm_dlc_hold(struct rfcomm_dlc *d)
@@ -272,8 +282,13 @@ static inline void rfcomm_dlc_put(struct rfcomm_dlc *d)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __rfcomm_dlc_throttle(struct rfcomm_dlc *d);
 extern void __rfcomm_dlc_unthrottle(struct rfcomm_dlc *d);
+=======
+void __rfcomm_dlc_throttle(struct rfcomm_dlc *d);
+void __rfcomm_dlc_unthrottle(struct rfcomm_dlc *d);
+>>>>>>> v3.18
 =======
 void __rfcomm_dlc_throttle(struct rfcomm_dlc *d);
 void __rfcomm_dlc_unthrottle(struct rfcomm_dlc *d);
@@ -316,6 +331,10 @@ struct rfcomm_conninfo {
 #define RFCOMM_LM_RELIABLE	0x0010
 #define RFCOMM_LM_SECURE	0x0020
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RFCOMM_LM_FIPS		0x0040
+>>>>>>> v3.18
 =======
 #define RFCOMM_LM_FIPS		0x0040
 >>>>>>> v3.18
@@ -325,6 +344,11 @@ struct rfcomm_conninfo {
 struct rfcomm_pinfo {
 	struct bt_sock bt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bdaddr_t src;
+	bdaddr_t dst;
+>>>>>>> v3.18
 =======
 	bdaddr_t src;
 	bdaddr_t dst;
@@ -351,6 +375,10 @@ int  rfcomm_connect_ind(struct rfcomm_session *s, u8 channel,
 #define RFCOMMSTEALDLC		_IOW('R', 220, int)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* rfcomm_dev.flags bit definitions */
+>>>>>>> v3.18
 =======
 /* rfcomm_dev.flags bit definitions */
 >>>>>>> v3.18
@@ -359,13 +387,19 @@ int  rfcomm_connect_ind(struct rfcomm_session *s, u8 channel,
 #define RFCOMM_HANGUP_NOW     2
 #define RFCOMM_TTY_ATTACHED   3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RFCOMM_TTY_RELEASED   4
 =======
+=======
+>>>>>>> v3.18
 #define RFCOMM_DEFUNCT_BIT4   4	  /* don't reuse this bit - userspace visible */
 
 /* rfcomm_dev.status bit definitions */
 #define RFCOMM_DEV_RELEASED   0
 #define RFCOMM_TTY_OWNED      1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct rfcomm_dev_req {

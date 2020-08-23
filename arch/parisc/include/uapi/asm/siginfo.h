@@ -2,10 +2,13 @@
 #define _PARISC_SIGINFO_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(__LP64__)
 #define __ARCH_SI_PREAMBLE_SIZE   (4 * sizeof(int))
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <asm-generic/siginfo.h>

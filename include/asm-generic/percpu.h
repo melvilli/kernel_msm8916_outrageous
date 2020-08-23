@@ -37,6 +37,7 @@ extern unsigned long __per_cpu_offset[NR_CPUS];
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Add a offset to a pointer but keep the pointer as is.
  *
  * Only S390 provides its own means of moving the pointer.
@@ -122,6 +123,8 @@ extern void setup_per_cpu_areas(void);
 #ifndef PER_CPU_DEF_ATTRIBUTES
 #define PER_CPU_DEF_ATTRIBUTES
 =======
+=======
+>>>>>>> v3.18
  * Arch may define arch_raw_cpu_ptr() to provide more efficient address
  * translations for raw_cpu_ptr().
  */
@@ -501,6 +504,9 @@ do {									\
 #ifndef this_cpu_cmpxchg_double_8
 #define this_cpu_cmpxchg_double_8(pcp1, pcp2, oval1, oval2, nval1, nval2) \
 	this_cpu_generic_cmpxchg_double(pcp1, pcp2, oval1, oval2, nval1, nval2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

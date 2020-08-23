@@ -25,7 +25,11 @@ menuconfig ACPI
 
 	  The project home page for the Linux ACPI subsystem is here:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  <http://www.lesswatts.org/projects/acpi/>
+=======
+	  <https://01.org/linux-acpi>
+>>>>>>> v3.18
 =======
 	  <https://01.org/linux-acpi>
 >>>>>>> v3.18
@@ -36,6 +40,7 @@ menuconfig ACPI
 	  <http://acpica.org/>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  ACPI is an open industry specification co-developed by
 	  Hewlett-Packard, Intel, Microsoft, Phoenix, and Toshiba.
 	  The specification is available at:
@@ -44,6 +49,8 @@ menuconfig ACPI
 if ACPI
 
 =======
+=======
+>>>>>>> v3.18
 	  ACPI is an open industry specification originally co-developed by
 	  Hewlett-Packard, Intel, Microsoft, Phoenix, and Toshiba. Currently,
 	  it is developed by the ACPI Specification Working Group (ASWG) under
@@ -61,12 +68,16 @@ config ACPI_LEGACY_TABLES_LOOKUP
 config ARCH_MIGHT_HAVE_ACPI_PDC
 	bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config ACPI_SLEEP
 	bool
 	depends on SUSPEND || HIBERNATION
 	default y
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ACPI_PROCFS
 	bool "Deprecated /proc/acpi files"
@@ -83,6 +94,8 @@ config ACPI_PROCFS
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ACPI_PROCFS_POWER
 	bool "Deprecated power /proc/acpi directories"
 	depends on PROC_FS
@@ -97,7 +110,11 @@ config ACPI_PROCFS_POWER
 	  and functions, which do not yet exist in /sys
 	  This option, together with the proc directories, will be
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  deleted in 2.6.39.
+=======
+	  deleted in the future.
+>>>>>>> v3.18
 =======
 	  deleted in the future.
 >>>>>>> v3.18
@@ -123,6 +140,7 @@ config ACPI_EC_DEBUGFS
 	  and can be used to identify ACPI code or EC firmware bugs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ACPI_PROC_EVENT
 	bool "Deprecated /proc/acpi/event support"
 	depends on PROC_FS
@@ -141,6 +159,8 @@ config ACPI_PROC_EVENT
 	  Say Y here to retain the old behaviour.  Say N if your
 	  user-space is newer than kernel 2.6.23 (September 2007).
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ACPI_AC
@@ -176,9 +196,15 @@ config ACPI_BUTTON
 	help
 	  This driver handles events on the power, sleep, and lid buttons.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  A daemon reads /proc/acpi/event and perform user-defined actions
 	  such as shutting down the system.  This is necessary for
 	  software-controlled poweroff.
+=======
+	  A daemon reads events from input devices or via netlink and
+	  performs user-defined actions such as shutting down the system.
+	  This is necessary for software-controlled poweroff.
+>>>>>>> v3.18
 =======
 	  A daemon reads events from input devices or via netlink and
 	  performs user-defined actions such as shutting down the system.
@@ -191,7 +217,11 @@ config ACPI_BUTTON
 config ACPI_VIDEO
 	tristate "Video"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86 && BACKLIGHT_CLASS_DEVICE && VIDEO_OUTPUT_CONTROL
+=======
+	depends on X86 && BACKLIGHT_CLASS_DEVICE
+>>>>>>> v3.18
 =======
 	depends on X86 && BACKLIGHT_CLASS_DEVICE
 >>>>>>> v3.18
@@ -210,7 +240,11 @@ config ACPI_VIDEO
 config ACPI_FAN
 	tristate "Fan"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select THERMAL
+=======
+	depends on THERMAL
+>>>>>>> v3.18
 =======
 	depends on THERMAL
 >>>>>>> v3.18
@@ -229,12 +263,15 @@ config ACPI_DOCK
 	  drive bays such as the IBM Ultrabay and the Dell Module Bay.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ACPI_I2C
 	def_tristate I2C
 	depends on I2C
 	help
 	  ACPI I2C enumeration support.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ACPI_PROCESSOR
@@ -251,14 +288,20 @@ config ACPI_PROCESSOR
 	  To compile this driver as a module, choose M here:
 	  the module will be called processor.
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ACPI_IPMI
 	tristate "IPMI"
 	depends on IPMI_SI && IPMI_HANDLER
 =======
+=======
+>>>>>>> v3.18
 
 config ACPI_IPMI
 	tristate "IPMI"
 	depends on IPMI_SI
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default n
 	help
@@ -334,6 +377,7 @@ config ACPI_INITRD_TABLE_OVERRIDE
 	  See Documentation/acpi/initrd_table_override.txt for details
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ACPI_BLACKLIST_YEAR
 	int "Disable ACPI for systems before Jan 1st this year" if X86_32
 	default 0
@@ -345,6 +389,8 @@ config ACPI_BLACKLIST_YEAR
 	  Enter 0 to disable this mechanism and allow ACPI to
 	  run by default no matter what the year.  (default)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ACPI_DEBUG
@@ -456,9 +502,12 @@ config ACPI_BGRT
 	  /sys/firmware/acpi/bgrt/ .
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/acpi/apei/Kconfig"
 
 =======
+=======
+>>>>>>> v3.18
 config ACPI_REDUCED_HARDWARE_ONLY
 	bool "Hardware-reduced ACPI support only" if EXPERT
 	def_bool n
@@ -496,5 +545,8 @@ config ACPI_EXTLOG
 	  driver adds support for that functionality with corresponding
 	  tracepoint which carries that information to userspace.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif	# ACPI

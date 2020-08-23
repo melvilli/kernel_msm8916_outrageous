@@ -20,7 +20,10 @@
 #include <linux/gpio.h>
 #include <linux/regmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/delay.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/uaccess.h>
@@ -233,6 +236,10 @@ err_i2c:
 
 static struct regulator_ops lp8755_buck_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.map_voltage = regulator_map_voltage_linear,
+>>>>>>> v3.18
 =======
 	.map_voltage = regulator_map_voltage_linear,
 >>>>>>> v3.18
@@ -347,7 +354,12 @@ static int lp8755_regulator_init(struct lp8755_chip *pchip)
 		rconfig.of_node = pchip->dev->of_node;
 		pchip->rdev[buck_num] =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    regulator_register(&lp8755_regulators[buck_num], &rconfig);
+=======
+		    devm_regulator_register(pchip->dev,
+				    &lp8755_regulators[buck_num], &rconfig);
+>>>>>>> v3.18
 =======
 		    devm_regulator_register(pchip->dev,
 				    &lp8755_regulators[buck_num], &rconfig);
@@ -358,7 +370,11 @@ static int lp8755_regulator_init(struct lp8755_chip *pchip)
 			dev_err(pchip->dev, "regulator init failed: buck %d\n",
 				buck_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err_buck;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -367,11 +383,14 @@ static int lp8755_regulator_init(struct lp8755_chip *pchip)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err_buck:
 	for (icnt = 0; icnt < LP8755_BUCK_MAX; icnt++)
 		regulator_unregister(pchip->rdev[icnt]);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -470,7 +489,11 @@ static int lp8755_probe(struct i2c_client *client,
 	int ret, icnt;
 	struct lp8755_chip *pchip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lp8755_platform_data *pdata = client->dev.platform_data;
+=======
+	struct lp8755_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct lp8755_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -514,7 +537,11 @@ static int lp8755_probe(struct i2c_client *client,
 	if (ret < 0) {
 		dev_err(&client->dev, "fail to initialize regulators\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_regulator;
+=======
+		goto err;
+>>>>>>> v3.18
 =======
 		goto err;
 >>>>>>> v3.18
@@ -525,7 +552,11 @@ static int lp8755_probe(struct i2c_client *client,
 	if (ret < 0) {
 		dev_err(&client->dev, "fail to irq config\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_irq;
+=======
+		goto err;
+>>>>>>> v3.18
 =======
 		goto err;
 >>>>>>> v3.18
@@ -534,11 +565,15 @@ static int lp8755_probe(struct i2c_client *client,
 	return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_irq:
 	for (icnt = 0; icnt < mphase_buck[pchip->mphase].nreg; icnt++)
 		regulator_unregister(pchip->rdev[icnt]);
 
 err_regulator:
+=======
+err:
+>>>>>>> v3.18
 =======
 err:
 >>>>>>> v3.18
@@ -555,9 +590,12 @@ static int lp8755_remove(struct i2c_client *client)
 	struct lp8755_chip *pchip = i2c_get_clientdata(client);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (icnt = 0; icnt < mphase_buck[pchip->mphase].nreg; icnt++)
 		regulator_unregister(pchip->rdev[icnt]);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (icnt = 0; icnt < LP8755_BUCK_MAX; icnt++)

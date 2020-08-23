@@ -15,6 +15,10 @@
 #include <linux/err.h>
 #include <linux/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/phy_fixed.h>
+>>>>>>> v3.18
 =======
 #include <linux/phy_fixed.h>
 >>>>>>> v3.18
@@ -27,7 +31,10 @@ MODULE_AUTHOR("Grant Likely <grant.likely@secretlab.ca>");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Extract the clause 22 phy ID from the compatible string of the form
  * ethernet-phy-idAAAA.BBBB */
 static int of_get_phy_id(struct device_node *device, u32 *phy_id)
@@ -114,6 +121,9 @@ static int of_mdio_parse_addr(struct device *dev, const struct device_node *np)
 	return addr;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * of_mdiobus_register - Register mii_bus and create PHYs from the device tree
@@ -126,6 +136,7 @@ static int of_mdio_parse_addr(struct device *dev, const struct device_node *np)
 int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct phy_device *phy;
 	struct device_node *child;
 	const __be32 *paddr;
@@ -133,10 +144,15 @@ int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 	bool is_c45, scanphys = false;
 	int rc, i, len;
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *child;
 	const __be32 *paddr;
 	bool scanphys = false;
 	int addr, rc, i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Mask out all PHYs from auto probing.  Instead the PHYs listed in
@@ -157,6 +173,7 @@ int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 
 	/* Loop over the child nodes and register a phy_device for each one */
 	for_each_available_child_of_node(np, child) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* A PHY must have a reg property in the range [0-31] */
 		paddr = of_get_property(child, "reg", &len);
@@ -207,6 +224,8 @@ int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 		dev_dbg(&mdio->dev, "registered phy %s at address %i\n",
 			child->name, addr);
 =======
+=======
+>>>>>>> v3.18
 		addr = of_mdio_parse_addr(&mdio->dev, child);
 		if (addr < 0) {
 			scanphys = true;
@@ -216,6 +235,9 @@ int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 		rc = of_mdiobus_register_phy(mdio, child, addr);
 		if (rc)
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -226,6 +248,7 @@ int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 	for_each_available_child_of_node(np, child) {
 		/* Skip PHYs with reg property set */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		paddr = of_get_property(child, "reg", &len);
 		if (paddr)
 			continue;
@@ -234,10 +257,15 @@ int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 						 "ethernet-phy-ieee802.3-c45");
 
 =======
+=======
+>>>>>>> v3.18
 		paddr = of_get_property(child, "reg", NULL);
 		if (paddr)
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		for (addr = 0; addr < PHY_MAX_ADDR; addr++) {
 			/* skip already registered PHYs */
@@ -248,6 +276,7 @@ int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 			dev_info(&mdio->dev, "scan phy %s at address %i\n",
 				 child->name, addr);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			phy = get_phy_device(mdio, addr, is_c45);
 			if (!phy || IS_ERR(phy))
@@ -277,6 +306,11 @@ int of_mdiobus_register(struct mii_bus *mdio, struct device_node *np)
 			dev_info(&mdio->dev, "registered phy %s at address %i\n",
 				 child->name, addr);
 			break;
+=======
+			rc = of_mdiobus_register_phy(mdio, child, addr);
+			if (rc)
+				continue;
+>>>>>>> v3.18
 =======
 			rc = of_mdiobus_register_phy(mdio, child, addr);
 			if (rc)
@@ -332,6 +366,11 @@ struct phy_device *of_phy_connect(struct net_device *dev,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	phy->dev_flags = flags;
+
+>>>>>>> v3.18
 =======
 	phy->dev_flags = flags;
 
@@ -341,6 +380,7 @@ struct phy_device *of_phy_connect(struct net_device *dev,
 EXPORT_SYMBOL(of_phy_connect);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * of_phy_connect_fixed_link - Parse fixed-link property and return a dummy phy
  * @dev: pointer to net_device claiming the phy
@@ -379,6 +419,8 @@ struct phy_device *of_phy_connect_fixed_link(struct net_device *dev,
 }
 EXPORT_SYMBOL(of_phy_connect_fixed_link);
 =======
+=======
+>>>>>>> v3.18
  * of_phy_attach - Attach to a PHY without starting the state machine
  * @dev: pointer to net_device claiming the phy
  * @phy_np: Node pointer for the PHY
@@ -468,4 +510,7 @@ int of_phy_register_fixed_link(struct device_node *np)
 }
 EXPORT_SYMBOL(of_phy_register_fixed_link);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

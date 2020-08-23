@@ -106,8 +106,11 @@
 #define AK4671_SAR_ADC_CONTROL			0x5a
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AK4671_CACHEREGNUM			(AK4671_SAR_ADC_CONTROL + 1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Bitfield Definitions */

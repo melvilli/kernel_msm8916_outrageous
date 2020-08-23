@@ -17,6 +17,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/spinlock.h>
 #include <linux/io.h>
@@ -40,6 +41,8 @@
 #include "fuse.h"
 #include "pmc.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk/tegra.h>
 #include <linux/cpumask.h>
 #include <linux/cpu_pm.h>
@@ -66,14 +69,20 @@
 #include "iomap.h"
 #include "pm.h"
 #include "reset.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "sleep.h"
 
 #ifdef CONFIG_PM_SLEEP
 static DEFINE_SPINLOCK(tegra_lp2_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void (*tegra_tear_down_cpu)(void);
 =======
+=======
+>>>>>>> v3.18
 static u32 iram_save_size;
 static void *iram_save_addr;
 struct tegra_lp1_iram tegra_lp1_iram;
@@ -98,6 +107,9 @@ static void tegra_tear_down_cpu_init(void)
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -148,8 +160,14 @@ static void suspend_cpu_complex(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tegra_clear_cpu_in_lp2(int phy_cpu_id)
 {
+=======
+void tegra_clear_cpu_in_lp2(void)
+{
+	int phy_cpu_id = cpu_logical_map(smp_processor_id());
+>>>>>>> v3.18
 =======
 void tegra_clear_cpu_in_lp2(void)
 {
@@ -166,8 +184,14 @@ void tegra_clear_cpu_in_lp2(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool tegra_set_cpu_in_lp2(int phy_cpu_id)
 {
+=======
+bool tegra_set_cpu_in_lp2(void)
+{
+	int phy_cpu_id = cpu_logical_map(smp_processor_id());
+>>>>>>> v3.18
 =======
 bool tegra_set_cpu_in_lp2(void)
 {
@@ -185,7 +209,11 @@ bool tegra_set_cpu_in_lp2(void)
 	if ((phy_cpu_id == 0) && cpumask_equal(cpu_lp2_mask, cpu_online_mask))
 		last_cpu = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (tegra_chip_id == TEGRA20 && phy_cpu_id == 1)
+=======
+	else if (tegra_get_chip_id() == TEGRA20 && phy_cpu_id == 1)
+>>>>>>> v3.18
 =======
 	else if (tegra_get_chip_id() == TEGRA20 && phy_cpu_id == 1)
 >>>>>>> v3.18
@@ -212,10 +240,13 @@ static int tegra_sleep_cpu(unsigned long v2p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void tegra_idle_lp2_last(void)
 {
 	tegra_pmc_pm_set(TEGRA_SUSPEND_LP2);
 =======
+=======
+>>>>>>> v3.18
 static void tegra_pm_set(enum tegra_suspend_mode mode)
 {
 	u32 value;
@@ -239,6 +270,9 @@ static void tegra_pm_set(enum tegra_suspend_mode mode)
 void tegra_idle_lp2_last(void)
 {
 	tegra_pm_set(TEGRA_SUSPEND_LP2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cpu_cluster_pm_enter();
@@ -254,6 +288,7 @@ enum tegra_suspend_mode tegra_pm_validate_suspend_mode(
 				enum tegra_suspend_mode mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Tegra114 didn't support any suspending mode yet. */
 	if (tegra_chip_id == TEGRA114)
 		return TEGRA_SUSPEND_NONE;
@@ -264,18 +299,26 @@ enum tegra_suspend_mode tegra_pm_validate_suspend_mode(
 	if (mode > TEGRA_SUSPEND_LP2)
 		return TEGRA_SUSPEND_LP2;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The Tegra devices support suspending to LP1 or lower currently.
 	 */
 	if (mode > TEGRA_SUSPEND_LP1)
 		return TEGRA_SUSPEND_LP1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return mode;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int tegra_sleep_core(unsigned long v2p)
 {
 	setup_mm_for_reboot();
@@ -370,6 +413,9 @@ static void tegra_suspend_exit_lp1(void)
 	*(u32 *)tegra_cpu_lp1_mask = 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char *lp_state[TEGRA_MAX_SUSPEND_MODE] = {
 	[TEGRA_SUSPEND_NONE] = "none",
@@ -379,7 +425,11 @@ static const char *lp_state[TEGRA_MAX_SUSPEND_MODE] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit tegra_suspend_enter(suspend_state_t state)
+=======
+static int tegra_suspend_enter(suspend_state_t state)
+>>>>>>> v3.18
 =======
 static int tegra_suspend_enter(suspend_state_t state)
 >>>>>>> v3.18
@@ -393,7 +443,11 @@ static int tegra_suspend_enter(suspend_state_t state)
 	pr_info("Entering suspend state %s\n", lp_state[mode]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_pmc_pm_set(mode);
+=======
+	tegra_pm_set(mode);
+>>>>>>> v3.18
 =======
 	tegra_pm_set(mode);
 >>>>>>> v3.18
@@ -403,14 +457,20 @@ static int tegra_suspend_enter(suspend_state_t state)
 	suspend_cpu_complex();
 	switch (mode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case TEGRA_SUSPEND_LP2:
 		tegra_set_cpu_in_lp2(0);
 =======
+=======
+>>>>>>> v3.18
 	case TEGRA_SUSPEND_LP1:
 		tegra_suspend_enter_lp1();
 		break;
 	case TEGRA_SUSPEND_LP2:
 		tegra_set_cpu_in_lp2();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -418,12 +478,15 @@ static int tegra_suspend_enter(suspend_state_t state)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_suspend(PHYS_OFFSET - PAGE_OFFSET, &tegra_sleep_cpu);
 
 	switch (mode) {
 	case TEGRA_SUSPEND_LP2:
 		tegra_clear_cpu_in_lp2(0);
 =======
+=======
+>>>>>>> v3.18
 	cpu_suspend(PHYS_OFFSET - PAGE_OFFSET, tegra_sleep_func);
 
 	switch (mode) {
@@ -432,6 +495,9 @@ static int tegra_suspend_enter(suspend_state_t state)
 		break;
 	case TEGRA_SUSPEND_LP2:
 		tegra_clear_cpu_in_lp2();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -452,11 +518,14 @@ static const struct platform_suspend_ops tegra_suspend_ops = {
 void __init tegra_init_suspend(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tegra_pmc_get_suspend_mode() == TEGRA_SUSPEND_NONE)
 		return;
 
 	tegra_pmc_suspend_init();
 =======
+=======
+>>>>>>> v3.18
 	enum tegra_suspend_mode mode = tegra_pmc_get_suspend_mode();
 
 	if (mode == TEGRA_SUSPEND_NONE)
@@ -485,6 +554,9 @@ void __init tegra_init_suspend(void)
 	default:
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	suspend_set_ops(&tegra_suspend_ops);

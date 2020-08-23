@@ -20,7 +20,11 @@
 #include <net/pkt_cls.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int em_ipset_change(struct tcf_proto *tp, void *data, int data_len,
+=======
+static int em_ipset_change(struct net *net, void *data, int data_len,
+>>>>>>> v3.18
 =======
 static int em_ipset_change(struct net *net, void *data, int data_len,
 >>>>>>> v3.18
@@ -33,7 +37,11 @@ static int em_ipset_change(struct net *net, void *data, int data_len,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	index = ip_set_nfnl_get_byindex(set->index);
+=======
+	index = ip_set_nfnl_get_byindex(net, set->index);
+>>>>>>> v3.18
 =======
 	index = ip_set_nfnl_get_byindex(net, set->index);
 >>>>>>> v3.18
@@ -46,6 +54,7 @@ static int em_ipset_change(struct net *net, void *data, int data_len,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ip_set_nfnl_put(index);
 	return -ENOMEM;
 }
@@ -56,6 +65,8 @@ static void em_ipset_destroy(struct tcf_proto *p, struct tcf_ematch *em)
 	if (set) {
 		ip_set_nfnl_put(set->index);
 =======
+=======
+>>>>>>> v3.18
 	ip_set_nfnl_put(net, index);
 	return -ENOMEM;
 }
@@ -65,6 +76,9 @@ static void em_ipset_destroy(struct tcf_ematch *em)
 	const struct xt_set_info *set = (const void *) em->data;
 	if (set) {
 		ip_set_nfnl_put(em->net, set->index);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree((void *) em->data);
 	}

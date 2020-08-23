@@ -143,7 +143,10 @@ static inline unsigned int cpumask_any_but(const struct cpumask *mask,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int cpumask_set_cpu_local_first(int i, int numa_node, cpumask_t *dstp)
 {
 	set_bit(0, cpumask_bits(dstp));
@@ -151,6 +154,9 @@ static inline int cpumask_set_cpu_local_first(int i, int numa_node, cpumask_t *d
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define for_each_cpu(cpu, mask)			\
 	for ((cpu) = 0; (cpu) < 1; (cpu)++, (void)mask)
@@ -203,6 +209,10 @@ static inline unsigned int cpumask_next_zero(int n, const struct cpumask *srcp)
 int cpumask_next_and(int n, const struct cpumask *, const struct cpumask *);
 int cpumask_any_but(const struct cpumask *mask, unsigned int cpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int cpumask_set_cpu_local_first(int i, int numa_node, cpumask_t *dstp);
+>>>>>>> v3.18
 =======
 int cpumask_set_cpu_local_first(int i, int numa_node, cpumask_t *dstp);
 >>>>>>> v3.18
@@ -615,7 +625,11 @@ static inline int cpumask_parse(const char *buf, struct cpumask *dstp)
 {
 	char *nl = strchr(buf, '\n');
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len = nl ? nl - buf : strlen(buf);
+=======
+	unsigned int len = nl ? (unsigned int)(nl - buf) : strlen(buf);
+>>>>>>> v3.18
 =======
 	unsigned int len = nl ? (unsigned int)(nl - buf) : strlen(buf);
 >>>>>>> v3.18
@@ -677,7 +691,10 @@ static inline size_t cpumask_size(void)
  * This code makes NR_CPUS length memcopy and brings to a memory corruption.
  * cpumask_copy() provide safe copy functionality.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * Note that there is another evil here: If you define a cpumask_var_t
  * as a percpu variable then the way to obtain the address of the cpumask
@@ -685,12 +702,20 @@ static inline size_t cpumask_size(void)
  * used. Please use this_cpu_cpumask_var_t in those cases. The direct use
  * of this_cpu_ptr() or this_cpu_read() will lead to failures when the
  * other type of cpumask_var_t implementation is configured.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #ifdef CONFIG_CPUMASK_OFFSTACK
 typedef struct cpumask *cpumask_var_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define this_cpu_cpumask_var_ptr(x) this_cpu_read(x)
+
+>>>>>>> v3.18
 =======
 #define this_cpu_cpumask_var_ptr(x) this_cpu_read(x)
 
@@ -707,6 +732,11 @@ void free_bootmem_cpumask_var(cpumask_var_t mask);
 typedef struct cpumask cpumask_var_t[1];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define this_cpu_cpumask_var_ptr(x) this_cpu_ptr(x)
+
+>>>>>>> v3.18
 =======
 #define this_cpu_cpumask_var_ptr(x) this_cpu_ptr(x)
 

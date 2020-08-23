@@ -41,6 +41,10 @@
 #include "nfsd.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NFSD4_MAX_SEC_LABEL_LEN	2048
+>>>>>>> v3.18
 =======
 #define NFSD4_MAX_SEC_LABEL_LEN	2048
 >>>>>>> v3.18
@@ -59,16 +63,22 @@ struct nfsd4_compound_state {
 	struct svc_fh		save_fh;
 	struct nfs4_stateowner	*replay_owner;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For sessions DRC */
 	struct nfsd4_session	*session;
 	struct nfsd4_slot	*slot;
 	__be32			*datap;
 =======
+=======
+>>>>>>> v3.18
 	struct nfs4_client	*clp;
 	/* For sessions DRC */
 	struct nfsd4_session	*session;
 	struct nfsd4_slot	*slot;
 	int			data_offset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	size_t			iovlen;
 	u32			minorversion;
@@ -119,8 +129,13 @@ struct nfsd4_create {
 	union {                             /* request */
 		struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 namelen;
 			char *name;
+=======
+			u32 datalen;
+			char *data;
+>>>>>>> v3.18
 =======
 			u32 datalen;
 			char *data;
@@ -136,14 +151,20 @@ struct nfsd4_create {
 	struct nfsd4_change_info  cr_cinfo; /* response */
 	struct nfs4_acl *cr_acl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 #define cr_linklen	u.link.namelen
 #define cr_linkname	u.link.name
 =======
+=======
+>>>>>>> v3.18
 	struct xdr_netobj cr_label;
 };
 #define cr_datalen	u.link.datalen
 #define cr_data		u.link.data
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define cr_specdata1	u.dev.specdata1
 #define cr_specdata2	u.dev.specdata2
@@ -251,7 +272,11 @@ struct nfsd4_open {
 	u32		op_createmode;      /* request */
 	u32		op_bmval[3];        /* request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iattr	iattr;              /* UNCHECKED4, GUARDED4, EXCLUSIVE4_1 */
+=======
+	struct iattr	op_iattr;           /* UNCHECKED4, GUARDED4, EXCLUSIVE4_1 */
+>>>>>>> v3.18
 =======
 	struct iattr	op_iattr;           /* UNCHECKED4, GUARDED4, EXCLUSIVE4_1 */
 >>>>>>> v3.18
@@ -275,8 +300,13 @@ struct nfsd4_open {
 	struct nfs4_ol_stateid *op_stp;	    /* used during processing */
 	struct nfs4_acl *op_acl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 #define op_iattr	iattr
+=======
+	struct xdr_netobj op_label;
+};
+>>>>>>> v3.18
 =======
 	struct xdr_netobj op_label;
 };
@@ -319,9 +349,14 @@ struct nfsd4_readdir {
 
 	struct readdir_cd	common;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be32 *		buffer;
 	int			buflen;
 	__be32 *		offset;
+=======
+	struct xdr_stream	*xdr;
+	int			cookie_offset;
+>>>>>>> v3.18
 =======
 	struct xdr_stream	*xdr;
 	int			cookie_offset;
@@ -369,6 +404,10 @@ struct nfsd4_setattr {
 	struct iattr	sa_iattr;           /* request */
 	struct nfs4_acl *sa_acl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct xdr_netobj sa_label;
+>>>>>>> v3.18
 =======
 	struct xdr_netobj sa_label;
 >>>>>>> v3.18
@@ -413,7 +452,10 @@ struct nfsd4_test_stateid {
 struct nfsd4_free_stateid {
 	stateid_t	fr_stateid;         /* request */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be32		fr_status;          /* response */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -472,7 +514,10 @@ struct nfsd4_reclaim_complete {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct nfsd4_seek {
 	/* request */
 	stateid_t	seek_stateid;
@@ -484,6 +529,9 @@ struct nfsd4_seek {
 	loff_t		seek_pos;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfsd4_op {
 	int					opnum;
@@ -531,6 +579,12 @@ struct nfsd4_op {
 		struct nfsd4_test_stateid	test_stateid;
 		struct nfsd4_free_stateid	free_stateid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		/* NFSv4.2 */
+		struct nfsd4_seek		seek;
+>>>>>>> v3.18
 =======
 
 		/* NFSv4.2 */
@@ -543,7 +597,10 @@ struct nfsd4_op {
 bool nfsd4_cache_this_op(struct nfsd4_op *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Memory needed just for the duration of processing one compound:
  */
@@ -552,6 +609,9 @@ struct svcxdr_tmpbuf {
 	char buf[];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nfsd4_compoundargs {
 	/* scratch variables for XDR decode */
@@ -562,11 +622,15 @@ struct nfsd4_compoundargs {
 	__be32				tmp[8];
 	__be32 *			tmpp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tmpbuf {
 		struct tmpbuf *next;
 		void (*release)(const void *);
 		void *buf;
 	}				*to_free;
+=======
+	struct svcxdr_tmpbuf		*to_free;
+>>>>>>> v3.18
 =======
 	struct svcxdr_tmpbuf		*to_free;
 >>>>>>> v3.18
@@ -585,9 +649,13 @@ struct nfsd4_compoundargs {
 struct nfsd4_compoundres {
 	/* scratch variables for XDR encode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be32 *			p;
 	__be32 *			end;
 	struct xdr_buf *		xbuf;
+=======
+	struct xdr_stream		xdr;
+>>>>>>> v3.18
 =======
 	struct xdr_stream		xdr;
 >>>>>>> v3.18
@@ -621,6 +689,12 @@ static inline bool nfsd4_last_compound_op(struct svc_rqst *rqstp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int nfsd4_max_reply(struct svc_rqst *rqstp, struct nfsd4_op *op);
+void warn_on_nonidempotent_op(struct nfsd4_op *op);
+
+>>>>>>> v3.18
 =======
 int nfsd4_max_reply(struct svc_rqst *rqstp, struct nfsd4_op *op);
 void warn_on_nonidempotent_op(struct nfsd4_op *op);
@@ -652,16 +726,22 @@ int nfs4svc_encode_compoundres(struct svc_rqst *, __be32 *,
 __be32 nfsd4_check_resp_size(struct nfsd4_compoundres *, u32);
 void nfsd4_encode_operation(struct nfsd4_compoundres *, struct nfsd4_op *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nfsd4_encode_replay(struct nfsd4_compoundres *resp, struct nfsd4_op *op);
 __be32 nfsd4_encode_fattr(struct svc_fh *fhp, struct svc_export *exp,
 		       struct dentry *dentry, __be32 **buffer, int countp,
 		       u32 *bmval, struct svc_rqst *, int ignore_crossmnt);
 =======
+=======
+>>>>>>> v3.18
 void nfsd4_encode_replay(struct xdr_stream *xdr, struct nfsd4_op *op);
 __be32 nfsd4_encode_fattr_to_buf(__be32 **p, int words,
 		struct svc_fh *fhp, struct svc_export *exp,
 		struct dentry *dentry,
 		u32 *bmval, struct svc_rqst *, int ignore_crossmnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern __be32 nfsd4_setclientid(struct svc_rqst *rqstp,
 		struct nfsd4_compound_state *,
@@ -670,9 +750,12 @@ extern __be32 nfsd4_setclientid_confirm(struct svc_rqst *rqstp,
 		struct nfsd4_compound_state *,
 		struct nfsd4_setclientid_confirm *setclientid_confirm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void nfsd4_store_cache_entry(struct nfsd4_compoundres *resp);
 extern __be32 nfsd4_replay_cache_entry(struct nfsd4_compoundres *resp,
 		struct nfsd4_sequence *seq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern __be32 nfsd4_exchange_id(struct svc_rqst *rqstp,
@@ -686,6 +769,10 @@ extern __be32 nfsd4_sequence(struct svc_rqst *,
 		struct nfsd4_compound_state *,
 		struct nfsd4_sequence *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void nfsd4_sequence_done(struct nfsd4_compoundres *resp);
+>>>>>>> v3.18
 =======
 extern void nfsd4_sequence_done(struct nfsd4_compoundres *resp);
 >>>>>>> v3.18
@@ -699,7 +786,13 @@ extern __be32 nfsd4_process_open1(struct nfsd4_compound_state *,
 extern __be32 nfsd4_process_open2(struct svc_rqst *rqstp,
 		struct svc_fh *current_fh, struct nfsd4_open *open);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void nfsd4_cleanup_open_state(struct nfsd4_open *open, __be32 status);
+=======
+extern void nfsd4_cstate_clear_replay(struct nfsd4_compound_state *cstate);
+extern void nfsd4_cleanup_open_state(struct nfsd4_compound_state *cstate,
+		struct nfsd4_open *open, __be32 status);
+>>>>>>> v3.18
 =======
 extern void nfsd4_cstate_clear_replay(struct nfsd4_compound_state *cstate);
 extern void nfsd4_cleanup_open_state(struct nfsd4_compound_state *cstate,
@@ -736,6 +829,10 @@ extern __be32 nfsd4_free_stateid(struct svc_rqst *rqstp,
 		struct nfsd4_compound_state *, struct nfsd4_free_stateid *free_stateid);
 extern void nfsd4_bump_seqid(struct nfsd4_compound_state *, __be32 nfserr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

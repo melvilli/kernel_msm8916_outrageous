@@ -335,8 +335,12 @@ int hfsplus_asc2uni(struct super_block *sb,
  * if the appropriate bits are (un)set on the superblock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfsplus_hash_dentry(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *str)
+=======
+int hfsplus_hash_dentry(const struct dentry *dentry, struct qstr *str)
+>>>>>>> v3.18
 =======
 int hfsplus_hash_dentry(const struct dentry *dentry, struct qstr *str)
 >>>>>>> v3.18
@@ -391,9 +395,13 @@ int hfsplus_hash_dentry(const struct dentry *dentry, struct qstr *str)
  * if the appropriate bits are (un)set on the superblock.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int hfsplus_compare_dentry(const struct dentry *parent,
 		const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+int hfsplus_compare_dentry(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 int hfsplus_compare_dentry(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18

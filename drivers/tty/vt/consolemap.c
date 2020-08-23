@@ -180,7 +180,10 @@ struct uni_pagedir {
 	unsigned char	*inverse_translations[4];
 	u16		*inverse_trans_unicode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int		readonly;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -266,7 +269,11 @@ u16 inverse_translate(struct vc_data *conp, int glyph, int use_unicode)
 	if (glyph < 0 || glyph >= MAX_GLYPH)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (!(p = (struct uni_pagedir *)*conp->vc_uni_pagedir_loc))
+=======
+	else if (!(p = *conp->vc_uni_pagedir_loc))
+>>>>>>> v3.18
 =======
 	else if (!(p = *conp->vc_uni_pagedir_loc))
 >>>>>>> v3.18
@@ -295,7 +302,11 @@ static void update_user_maps(void)
 		if (!vc_cons_allocated(i))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = (struct uni_pagedir *)*vc_cons[i].d->vc_uni_pagedir_loc;
+=======
+		p = *vc_cons[i].d->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 		p = *vc_cons[i].d->vc_uni_pagedir_loc;
 >>>>>>> v3.18
@@ -430,15 +441,21 @@ void con_free_unimap(struct vc_data *vc)
 	struct uni_pagedir *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = (struct uni_pagedir *)*vc->vc_uni_pagedir_loc;
 	if (!p)
 		return;
 	*vc->vc_uni_pagedir_loc = 0;
 =======
+=======
+>>>>>>> v3.18
 	p = *vc->vc_uni_pagedir_loc;
 	if (!p)
 		return;
 	*vc->vc_uni_pagedir_loc = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (--p->refcount)
 		return;
@@ -455,7 +472,11 @@ static int con_unify_unimap(struct vc_data *conp, struct uni_pagedir *p)
 		if (!vc_cons_allocated(i))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		q = (struct uni_pagedir *)*vc_cons[i].d->vc_uni_pagedir_loc;
+=======
+		q = *vc_cons[i].d->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 		q = *vc_cons[i].d->vc_uni_pagedir_loc;
 >>>>>>> v3.18
@@ -482,7 +503,11 @@ static int con_unify_unimap(struct vc_data *conp, struct uni_pagedir *p)
 		if (j == 32) {
 			q->refcount++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*conp->vc_uni_pagedir_loc = (unsigned long)q;
+=======
+			*conp->vc_uni_pagedir_loc = q;
+>>>>>>> v3.18
 =======
 			*conp->vc_uni_pagedir_loc = q;
 >>>>>>> v3.18
@@ -527,10 +552,14 @@ static int con_do_clear_unimap(struct vc_data *vc, struct unimapinit *ui)
 	struct uni_pagedir *p, *q;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = (struct uni_pagedir *)*vc->vc_uni_pagedir_loc;
 	if (p && p->readonly)
 		return -EIO;
 
+=======
+	p = *vc->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 	p = *vc->vc_uni_pagedir_loc;
 >>>>>>> v3.18
@@ -543,7 +572,11 @@ static int con_do_clear_unimap(struct vc_data *vc, struct unimapinit *ui)
 		}
 		q->refcount=1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*vc->vc_uni_pagedir_loc = (unsigned long)q;
+=======
+		*vc->vc_uni_pagedir_loc = q;
+>>>>>>> v3.18
 =======
 		*vc->vc_uni_pagedir_loc = q;
 >>>>>>> v3.18
@@ -571,6 +604,7 @@ int con_set_unimap(struct vc_data *vc, ushort ct, struct unipair __user *list)
 	struct uni_pagedir *p, *q;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	console_lock();
 
 	/* Save original vc_unipagdir_loc in case we allocate a new one */
@@ -584,6 +618,8 @@ int con_set_unimap(struct vc_data *vc, ushort ct, struct unipair __user *list)
 		console_unlock();
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!ct)
 		return 0;
 
@@ -596,6 +632,9 @@ int con_set_unimap(struct vc_data *vc, ushort ct, struct unipair __user *list)
 		err = -EINVAL;
 
 		goto out_unlock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	
@@ -614,7 +653,11 @@ int con_set_unimap(struct vc_data *vc, ushort ct, struct unipair __user *list)
 		 * a new uni_pagedir for this vc.  Re: p != q
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		q = (struct uni_pagedir *)*vc->vc_uni_pagedir_loc;
+=======
+		q = *vc->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 		q = *vc->vc_uni_pagedir_loc;
 >>>>>>> v3.18
@@ -640,7 +683,11 @@ int con_set_unimap(struct vc_data *vc, ushort ct, struct unipair __user *list)
 					if (err1) {
 						p->refcount++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 						*vc->vc_uni_pagedir_loc = (unsigned long)p;
+=======
+						*vc->vc_uni_pagedir_loc = p;
+>>>>>>> v3.18
 =======
 						*vc->vc_uni_pagedir_loc = p;
 >>>>>>> v3.18
@@ -691,6 +738,10 @@ int con_set_unimap(struct vc_data *vc, ushort ct, struct unipair __user *list)
 	set_inverse_trans_unicode(vc, p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_unlock:
+>>>>>>> v3.18
 =======
 out_unlock:
 >>>>>>> v3.18
@@ -717,7 +768,11 @@ int con_set_default_unimap(struct vc_data *vc)
 
 	if (dflt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = (struct uni_pagedir *)*vc->vc_uni_pagedir_loc;
+=======
+		p = *vc->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 		p = *vc->vc_uni_pagedir_loc;
 >>>>>>> v3.18
@@ -726,7 +781,11 @@ int con_set_default_unimap(struct vc_data *vc)
 
 		dflt->refcount++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*vc->vc_uni_pagedir_loc = (unsigned long)dflt;
+=======
+		*vc->vc_uni_pagedir_loc = dflt;
+>>>>>>> v3.18
 =======
 		*vc->vc_uni_pagedir_loc = dflt;
 >>>>>>> v3.18
@@ -744,7 +803,11 @@ int con_set_default_unimap(struct vc_data *vc)
 		return err;
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = (struct uni_pagedir *)*vc->vc_uni_pagedir_loc;
+=======
+	p = *vc->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 	p = *vc->vc_uni_pagedir_loc;
 >>>>>>> v3.18
@@ -759,7 +822,11 @@ int con_set_default_unimap(struct vc_data *vc)
 			
 	if (con_unify_unimap(vc, p)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dflt = (struct uni_pagedir *)*vc->vc_uni_pagedir_loc;
+=======
+		dflt = *vc->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 		dflt = *vc->vc_uni_pagedir_loc;
 >>>>>>> v3.18
@@ -791,9 +858,15 @@ int con_copy_unimap(struct vc_data *dst_vc, struct vc_data *src_vc)
 		return 0;
 	con_free_unimap(dst_vc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q = (struct uni_pagedir *)*src_vc->vc_uni_pagedir_loc;
 	q->refcount++;
 	*dst_vc->vc_uni_pagedir_loc = (long)q;
+=======
+	q = *src_vc->vc_uni_pagedir_loc;
+	q->refcount++;
+	*dst_vc->vc_uni_pagedir_loc = q;
+>>>>>>> v3.18
 =======
 	q = *src_vc->vc_uni_pagedir_loc;
 	q->refcount++;
@@ -821,7 +894,11 @@ int con_get_unimap(struct vc_data *vc, ushort ct, ushort __user *uct, struct uni
 	ect = 0;
 	if (*vc->vc_uni_pagedir_loc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p = (struct uni_pagedir *)*vc->vc_uni_pagedir_loc;
+=======
+		p = *vc->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 		p = *vc->vc_uni_pagedir_loc;
 >>>>>>> v3.18
@@ -898,7 +975,11 @@ conv_uni_to_pc(struct vc_data *conp, long ucs)
 		return -3;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p = (struct uni_pagedir *)*conp->vc_uni_pagedir_loc;  
+=======
+	p = *conp->vc_uni_pagedir_loc;
+>>>>>>> v3.18
 =======
 	p = *conp->vc_uni_pagedir_loc;
 >>>>>>> v3.18

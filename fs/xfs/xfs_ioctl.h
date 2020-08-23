@@ -28,11 +28,17 @@ xfs_ioc_space(
 	xfs_flock64_t		*bf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int
 xfs_ioc_swapext(
 	xfs_swapext_t	*sxp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int
 xfs_find_handle(
@@ -90,12 +96,18 @@ xfs_file_compat_ioctl(
 	unsigned long		arg);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int
 xfs_set_dmattrs(
 	struct xfs_inode	*ip,
 	u_int			evmask,
 	u_int16_t		state);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

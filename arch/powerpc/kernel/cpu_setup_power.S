@@ -30,7 +30,11 @@ _GLOBAL(__setup_cpu_power7)
 	mfspr	r3,SPRN_LPCR
 	bl	__init_LPCR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	__init_TLB
+=======
+	bl	__init_tlb_power7
+>>>>>>> v3.18
 =======
 	bl	__init_tlb_power7
 >>>>>>> v3.18
@@ -47,7 +51,11 @@ _GLOBAL(__restore_cpu_power7)
 	mfspr	r3,SPRN_LPCR
 	bl	__init_LPCR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	__init_TLB
+=======
+	bl	__init_tlb_power7
+>>>>>>> v3.18
 =======
 	bl	__init_tlb_power7
 >>>>>>> v3.18
@@ -65,15 +73,21 @@ _GLOBAL(__setup_cpu_power8)
 	mtspr	SPRN_LPID,r0
 	mfspr	r3,SPRN_LPCR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oris	r3, r3, LPCR_AIL_3@h
 	bl	__init_LPCR
 	bl	__init_HFSCR
 	bl	__init_TLB
 =======
+=======
+>>>>>>> v3.18
 	ori	r3, r3, LPCR_PECEDH
 	bl	__init_LPCR
 	bl	__init_HFSCR
 	bl	__init_tlb_power8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bl	__init_PMU_HV
 	mtlr	r11
@@ -91,15 +105,21 @@ _GLOBAL(__restore_cpu_power8)
 	mtspr	SPRN_LPID,r0
 	mfspr   r3,SPRN_LPCR
 <<<<<<< HEAD
+<<<<<<< HEAD
 	oris	r3, r3, LPCR_AIL_3@h
 	bl	__init_LPCR
 	bl	__init_HFSCR
 	bl	__init_TLB
 =======
+=======
+>>>>>>> v3.18
 	ori	r3, r3, LPCR_PECEDH
 	bl	__init_LPCR
 	bl	__init_HFSCR
 	bl	__init_tlb_power8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bl	__init_PMU_HV
 	mtlr	r11
@@ -157,6 +177,7 @@ __init_HFSCR:
 	blr
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __init_TLB:
 	/*
 	 * Clear the TLB using the "IS 3" form of tlbiel instruction
@@ -167,6 +188,8 @@ __init_TLB:
 	mtctr	r6
 	li	r7,0xc00	/* IS field = 0b11 */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Clear the TLB using the specified IS form of tlbiel instruction
  * (invalidate by congruence class). P7 has 128 CCs., P8 has 512.
@@ -192,6 +215,9 @@ _GLOBAL(__flush_tlb_power8)
 	li	r6,512
 	mtctr	r6
 	mr	r7,r3		/* IS field */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ptesync
 2:	tlbiel	r7

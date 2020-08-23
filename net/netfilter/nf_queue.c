@@ -53,7 +53,11 @@ void nf_queue_entry_release_refs(struct nf_queue_entry *entry)
 	if (entry->outdev)
 		dev_put(entry->outdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ bool nf_queue_entry_get_refs(struct nf_queue_entry *entry)
 	if (entry->outdev)
 		dev_hold(entry->outdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BRIDGE_NETFILTER
+=======
+#if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_BRIDGE_NETFILTER)
 >>>>>>> v3.18

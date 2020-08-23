@@ -100,7 +100,10 @@ config ASP834x
 	bool "Analogue & Micro ASP 834x"
 	select PPC_MPC834x
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select REDBOOT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help

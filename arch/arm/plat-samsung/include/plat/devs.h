@@ -26,9 +26,12 @@ struct s3c24xx_uart_resources {
 extern struct s3c24xx_uart_resources s3c2410_uart_resources[];
 extern struct s3c24xx_uart_resources s3c64xx_uart_resources[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct s3c24xx_uart_resources s5p_uart_resources[];
 extern struct s3c24xx_uart_resources exynos4_uart_resources[];
 extern struct s3c24xx_uart_resources exynos5_uart_resources[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -78,6 +81,7 @@ extern struct platform_device s3c_device_usb_hsotg;
 extern struct platform_device s3c_device_usb_hsudc;
 extern struct platform_device s3c_device_wdt;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct platform_device s5p_device_ehci;
 extern struct platform_device s5p_device_fimc0;
@@ -138,6 +142,11 @@ extern struct platform_device exynos4_device_spdif;
 
 extern struct platform_device samsung_asoc_idma;
 extern struct platform_device samsung_device_keypad;
+=======
+extern struct platform_device samsung_asoc_idma;
+extern struct platform_device samsung_device_keypad;
+extern struct platform_device samsung_device_pwm;
+>>>>>>> v3.18
 =======
 extern struct platform_device samsung_asoc_idma;
 extern struct platform_device samsung_device_keypad;

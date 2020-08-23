@@ -111,9 +111,15 @@ static int isl6271a_probe(struct i2c_client *i2c,
 {
 	struct regulator_config config = { };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct regulator_init_data *init_data	= i2c->dev.platform_data;
 	struct isl_pmic *pmic;
 	int err, i;
+=======
+	struct regulator_init_data *init_data	= dev_get_platdata(&i2c->dev);
+	struct isl_pmic *pmic;
+	int i;
+>>>>>>> v3.18
 =======
 	struct regulator_init_data *init_data	= dev_get_platdata(&i2c->dev);
 	struct isl_pmic *pmic;
@@ -137,6 +143,7 @@ static int isl6271a_probe(struct i2c_client *i2c,
 			config.init_data = init_data;
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			config.init_data = 0;
 		config.driver_data = pmic;
 
@@ -146,6 +153,8 @@ static int isl6271a_probe(struct i2c_client *i2c,
 			err = PTR_ERR(pmic->rdev[i]);
 			goto error;
 =======
+=======
+>>>>>>> v3.18
 			config.init_data = NULL;
 		config.driver_data = pmic;
 
@@ -154,6 +163,9 @@ static int isl6271a_probe(struct i2c_client *i2c,
 		if (IS_ERR(pmic->rdev[i])) {
 			dev_err(&i2c->dev, "failed to register %s\n", id->name);
 			return PTR_ERR(pmic->rdev[i]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -161,6 +173,7 @@ static int isl6271a_probe(struct i2c_client *i2c,
 	i2c_set_clientdata(i2c, pmic);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 error:
@@ -179,6 +192,8 @@ static int isl6271a_remove(struct i2c_client *i2c)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id isl6271a_id[] = {
@@ -195,7 +210,10 @@ static struct i2c_driver isl6271a_i2c_driver = {
 	},
 	.probe = isl6271a_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = isl6271a_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = isl6271a_id,

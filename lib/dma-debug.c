@@ -54,7 +54,10 @@ enum map_err_types {
 #define DMA_DEBUG_STACKTRACE_ENTRIES 5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct dma_debug_entry - track a dma_map* or dma_alloc_coherent mapping
  * @list: node on pre-allocated free_entries list
@@ -69,13 +72,21 @@ enum map_err_types {
  * @map_err_type: track whether dma_mapping_error() was checked
  * @stacktrace: support backtraces when a violation is detected
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct dma_debug_entry {
 	struct list_head list;
 	struct device    *dev;
 	int              type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_addr_t      paddr;
+=======
+	unsigned long	 pfn;
+	size_t		 offset;
+>>>>>>> v3.18
 =======
 	unsigned long	 pfn;
 	size_t		 offset;
@@ -395,12 +406,18 @@ static void hash_bucket_del(struct dma_debug_entry *entry)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long long phys_addr(struct dma_debug_entry *entry)
 {
 	return page_to_phys(pfn_to_page(entry->pfn)) + entry->offset;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Dump mapping entries for debugging purposes
@@ -420,9 +437,15 @@ void debug_dma_dump_mappings(struct device *dev)
 			if (!dev || dev == entry->dev) {
 				dev_info(entry->dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 "%s idx %d P=%Lx D=%Lx L=%Lx %s %s\n",
 					 type2name[entry->type], idx,
 					 (unsigned long long)entry->paddr,
+=======
+					 "%s idx %d P=%Lx N=%lx D=%Lx L=%Lx %s %s\n",
+					 type2name[entry->type], idx,
+					 phys_addr(entry), entry->pfn,
+>>>>>>> v3.18
 =======
 					 "%s idx %d P=%Lx N=%lx D=%Lx L=%Lx %s %s\n",
 					 type2name[entry->type], idx,
@@ -441,7 +464,10 @@ EXPORT_SYMBOL(debug_dma_dump_mappings);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * For each mapping (initial cacheline in the case of
  * dma_alloc_coherent/dma_map_page, initial cacheline in each page of a
  * scatterlist, or the cacheline specified in dma_map_single) insert
@@ -612,6 +638,9 @@ void debug_dma_assert_idle(struct page *page)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Wrapper function for adding an entry to the hash.
  * This function takes care of locking itself.
@@ -621,6 +650,10 @@ static void add_dma_entry(struct dma_debug_entry *entry)
 	struct hash_bucket *bucket;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int rc;
+>>>>>>> v3.18
 =======
 	int rc;
 >>>>>>> v3.18
@@ -629,7 +662,10 @@ static void add_dma_entry(struct dma_debug_entry *entry)
 	hash_bucket_add(bucket, entry);
 	put_hash_bucket(bucket, &flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	rc = active_cacheline_insert(entry);
 	if (rc == -ENOMEM) {
@@ -640,6 +676,9 @@ static void add_dma_entry(struct dma_debug_entry *entry)
 	/* TODO: report -EEXIST errors here as overlapping mappings are
 	 * not supported by the DMA API
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -672,9 +711,15 @@ static struct dma_debug_entry *dma_entry_alloc(void)
 
 	if (list_empty(&free_entries)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		global_disable = true;
 		spin_unlock_irqrestore(&free_entries_lock, flags);
 		pr_err("DMA-API: debugging out of memory - disabling\n");
+=======
+		pr_err("DMA-API: debugging out of memory - disabling\n");
+		global_disable = true;
+		spin_unlock_irqrestore(&free_entries_lock, flags);
+>>>>>>> v3.18
 =======
 		pr_err("DMA-API: debugging out of memory - disabling\n");
 		global_disable = true;
@@ -702,6 +747,11 @@ static void dma_entry_free(struct dma_debug_entry *entry)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	active_cacheline_remove(entry);
+
+>>>>>>> v3.18
 =======
 	active_cacheline_remove(entry);
 
@@ -1133,7 +1183,11 @@ static void check_unmap(struct dma_debug_entry *ref)
 			   type2name[entry->type], type2name[ref->type]);
 	} else if ((entry->type == dma_debug_coherent) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   (ref->paddr != entry->paddr)) {
+=======
+		   (phys_addr(ref) != phys_addr(entry))) {
+>>>>>>> v3.18
 =======
 		   (phys_addr(ref) != phys_addr(entry))) {
 >>>>>>> v3.18
@@ -1144,8 +1198,13 @@ static void check_unmap(struct dma_debug_entry *ref)
 			   "[cpu free address=0x%016llx]",
 			   ref->dev_addr, ref->size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   (unsigned long long)entry->paddr,
 			   (unsigned long long)ref->paddr);
+=======
+			   phys_addr(entry),
+			   phys_addr(ref));
+>>>>>>> v3.18
 =======
 			   phys_addr(entry),
 			   phys_addr(ref));
@@ -1193,7 +1252,11 @@ static void check_for_stack(struct device *dev, void *addr)
 {
 	if (object_is_on_stack(addr))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err_printk(dev, NULL, "DMA-API: device driver maps memory from"
+=======
+		err_printk(dev, NULL, "DMA-API: device driver maps memory from "
+>>>>>>> v3.18
 =======
 		err_printk(dev, NULL, "DMA-API: device driver maps memory from "
 >>>>>>> v3.18
@@ -1213,7 +1276,11 @@ static inline bool overlap(void *addr, unsigned long len, void *start, void *end
 static void check_for_illegal_area(struct device *dev, void *addr, unsigned long len)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (overlap(addr, len, _stext, _etext) ||
+=======
+	if (overlap(addr, len, _text, _etext) ||
+>>>>>>> v3.18
 =======
 	if (overlap(addr, len, _text, _etext) ||
 >>>>>>> v3.18
@@ -1307,7 +1374,12 @@ void debug_dma_map_page(struct device *dev, struct page *page, size_t offset,
 	entry->dev       = dev;
 	entry->type      = dma_debug_page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry->paddr     = page_to_phys(page) + offset;
+=======
+	entry->pfn	 = page_to_pfn(page);
+	entry->offset	 = offset,
+>>>>>>> v3.18
 =======
 	entry->pfn	 = page_to_pfn(page);
 	entry->offset	 = offset,
@@ -1408,7 +1480,12 @@ void debug_dma_map_sg(struct device *dev, struct scatterlist *sg,
 		entry->type           = dma_debug_sg;
 		entry->dev            = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry->paddr          = sg_phys(s);
+=======
+		entry->pfn	      = page_to_pfn(sg_page(s));
+		entry->offset	      = s->offset,
+>>>>>>> v3.18
 =======
 		entry->pfn	      = page_to_pfn(sg_page(s));
 		entry->offset	      = s->offset,
@@ -1463,7 +1540,12 @@ void debug_dma_unmap_sg(struct device *dev, struct scatterlist *sglist,
 			.type           = dma_debug_sg,
 			.dev            = dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.paddr          = sg_phys(s),
+=======
+			.pfn		= page_to_pfn(sg_page(s)),
+			.offset		= s->offset,
+>>>>>>> v3.18
 =======
 			.pfn		= page_to_pfn(sg_page(s)),
 			.offset		= s->offset,
@@ -1503,7 +1585,12 @@ void debug_dma_alloc_coherent(struct device *dev, size_t size,
 	entry->type      = dma_debug_coherent;
 	entry->dev       = dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry->paddr     = virt_to_phys(virt);
+=======
+	entry->pfn	 = page_to_pfn(virt_to_page(virt));
+	entry->offset	 = (size_t) virt & PAGE_MASK;
+>>>>>>> v3.18
 =======
 	entry->pfn	 = page_to_pfn(virt_to_page(virt));
 	entry->offset	 = (size_t) virt & PAGE_MASK;
@@ -1523,7 +1610,12 @@ void debug_dma_free_coherent(struct device *dev, size_t size,
 		.type           = dma_debug_coherent,
 		.dev            = dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.paddr          = virt_to_phys(virt),
+=======
+		.pfn		= page_to_pfn(virt_to_page(virt)),
+		.offset		= (size_t) virt & PAGE_MASK,
+>>>>>>> v3.18
 =======
 		.pfn		= page_to_pfn(virt_to_page(virt)),
 		.offset		= (size_t) virt & PAGE_MASK,
@@ -1636,7 +1728,12 @@ void debug_dma_sync_sg_for_cpu(struct device *dev, struct scatterlist *sg,
 			.type           = dma_debug_sg,
 			.dev            = dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.paddr          = sg_phys(s),
+=======
+			.pfn		= page_to_pfn(sg_page(s)),
+			.offset		= s->offset,
+>>>>>>> v3.18
 =======
 			.pfn		= page_to_pfn(sg_page(s)),
 			.offset		= s->offset,
@@ -1673,7 +1770,12 @@ void debug_dma_sync_sg_for_device(struct device *dev, struct scatterlist *sg,
 			.type           = dma_debug_sg,
 			.dev            = dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.paddr          = sg_phys(s),
+=======
+			.pfn		= page_to_pfn(sg_page(s)),
+			.offset		= s->offset,
+>>>>>>> v3.18
 =======
 			.pfn		= page_to_pfn(sg_page(s)),
 			.offset		= s->offset,

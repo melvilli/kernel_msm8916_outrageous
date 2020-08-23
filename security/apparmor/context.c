@@ -70,7 +70,10 @@ void aa_dup_task_context(struct aa_task_cxt *new, const struct aa_task_cxt *old)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * aa_get_task_profile - Get another task's profile
  * @task: task to query  (NOT NULL)
  *
@@ -88,6 +91,9 @@ struct aa_profile *aa_get_task_profile(struct task_struct *task)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * aa_replace_current_profile - replace the current tasks profiles
  * @profile: new profile  (NOT NULL)
@@ -97,7 +103,11 @@ struct aa_profile *aa_get_task_profile(struct task_struct *task)
 int aa_replace_current_profile(struct aa_profile *profile)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aa_task_cxt *cxt = current_cred()->security;
+=======
+	struct aa_task_cxt *cxt = current_cxt();
+>>>>>>> v3.18
 =======
 	struct aa_task_cxt *cxt = current_cxt();
 >>>>>>> v3.18
@@ -111,6 +121,7 @@ int aa_replace_current_profile(struct aa_profile *profile)
 	if (!new)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cxt = new->security;
 	if (unconfined(profile) || (cxt->profile->ns != profile->ns)) {
@@ -128,6 +139,8 @@ int aa_replace_current_profile(struct aa_profile *profile)
 	 * @profile valid, so make sure to get its reference before dropping
 	 * the reference on cxt->profile */
 =======
+=======
+>>>>>>> v3.18
 	cxt = cred_cxt(new);
 	if (unconfined(profile) || (cxt->profile->ns != profile->ns))
 		/* if switching to unconfined or a different profile namespace
@@ -139,6 +152,9 @@ int aa_replace_current_profile(struct aa_profile *profile)
 	 * is possible that cxt->profile->replacedby->profile is the reference
 	 * keeping @profile valid, so make sure to get its reference before
 	 * dropping the reference on cxt->profile */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	aa_get_profile(profile);
 	aa_put_profile(cxt->profile);
@@ -162,7 +178,11 @@ int aa_set_current_onexec(struct aa_profile *profile)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cxt = new->security;
+=======
+	cxt = cred_cxt(new);
+>>>>>>> v3.18
 =======
 	cxt = cred_cxt(new);
 >>>>>>> v3.18
@@ -193,7 +213,11 @@ int aa_set_current_hat(struct aa_profile *profile, u64 token)
 	BUG_ON(!profile);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cxt = new->security;
+=======
+	cxt = cred_cxt(new);
+>>>>>>> v3.18
 =======
 	cxt = cred_cxt(new);
 >>>>>>> v3.18
@@ -209,7 +233,11 @@ int aa_set_current_hat(struct aa_profile *profile, u64 token)
 		return -EACCES;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cxt->profile = aa_get_profile(aa_newest_version(profile));
+=======
+	cxt->profile = aa_get_newest_profile(profile);
+>>>>>>> v3.18
 =======
 	cxt->profile = aa_get_newest_profile(profile);
 >>>>>>> v3.18
@@ -238,7 +266,11 @@ int aa_restore_previous_profile(u64 token)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cxt = new->security;
+=======
+	cxt = cred_cxt(new);
+>>>>>>> v3.18
 =======
 	cxt = cred_cxt(new);
 >>>>>>> v3.18
@@ -254,6 +286,7 @@ int aa_restore_previous_profile(u64 token)
 
 	aa_put_profile(cxt->profile);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cxt->profile = aa_newest_version(cxt->previous);
 	BUG_ON(!cxt->profile);
 	if (unlikely(cxt->profile != cxt->previous)) {
@@ -266,10 +299,15 @@ int aa_restore_previous_profile(u64 token)
 	aa_put_profile(cxt->onexec);
 	cxt->onexec = NULL;
 =======
+=======
+>>>>>>> v3.18
 	cxt->profile = aa_get_newest_profile(cxt->previous);
 	BUG_ON(!cxt->profile);
 	/* clear exec && prev information when restoring to previous context */
 	aa_clear_task_cxt_trans(cxt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	commit_creds(new);

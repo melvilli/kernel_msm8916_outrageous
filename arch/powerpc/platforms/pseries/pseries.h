@@ -57,6 +57,7 @@ extern void hvc_vio_init_early(void);
 extern void dlpar_free_cc_nodes(struct device_node *);
 extern void dlpar_free_cc_property(struct property *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct device_node *dlpar_configure_connector(u32);
 extern int dlpar_attach_node(struct device_node *);
 extern int dlpar_detach_node(struct device_node *);
@@ -65,17 +66,27 @@ extern int dlpar_detach_node(struct device_node *);
 DECLARE_PER_CPU(long, smt_snooze_delay);
 
 =======
+=======
+>>>>>>> v3.18
 extern struct device_node *dlpar_configure_connector(__be32,
 						struct device_node *);
 extern int dlpar_attach_node(struct device_node *);
 extern int dlpar_detach_node(struct device_node *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* PCI root bridge prepare function override for pseries */
 struct pci_host_bridge;
 int pseries_root_bridge_prepare(struct pci_host_bridge *bridge);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned long pseries_memory_block_size(void);
+
+>>>>>>> v3.18
 =======
 unsigned long pseries_memory_block_size(void);
 

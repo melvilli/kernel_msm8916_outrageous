@@ -8,6 +8,10 @@
 #include <linux/uaccess.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -21,12 +25,15 @@ debug_info_t *qdio_dbf_error;
 static struct dentry *debugfs_root;
 #define QDIO_DEBUGFS_NAME_LEN	10
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void qdio_allocate_dbf(struct qdio_initialize *init_data,
 		       struct qdio_irq *irq_ptr)
 {
 	char text[20];
 =======
+=======
+>>>>>>> v3.18
 #define QDIO_DBF_NAME_LEN	20
 
 struct qdio_dbf_entry {
@@ -72,6 +79,9 @@ int qdio_allocate_dbf(struct qdio_initialize *init_data,
 {
 	char text[QDIO_DBF_NAME_LEN];
 	struct qdio_dbf_entry *new_entry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	DBF_EVENT("qfmt:%1d", init_data->q_format);
@@ -91,12 +101,15 @@ int qdio_allocate_dbf(struct qdio_initialize *init_data,
 
 	/* allocate trace view for the interface */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(text, 20, "qdio_%s", dev_name(&init_data->cdev->dev));
 	irq_ptr->debug_area = debug_register(text, 2, 1, 16);
 	debug_register_view(irq_ptr->debug_area, &debug_hex_ascii_view);
 	debug_set_level(irq_ptr->debug_area, DBF_WARN);
 	DBF_DEV_EVENT(DBF_ERR, irq_ptr, "dbf created");
 =======
+=======
+>>>>>>> v3.18
 	snprintf(text, QDIO_DBF_NAME_LEN, "qdio_%s",
 					dev_name(&init_data->cdev->dev));
 	irq_ptr->debug_area = qdio_get_dbf_entry(text);
@@ -125,6 +138,9 @@ int qdio_allocate_dbf(struct qdio_initialize *init_data,
 		mutex_unlock(&qdio_dbf_list_mutex);
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -384,6 +400,10 @@ int __init qdio_debug_init(void)
 void qdio_debug_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	qdio_clear_dbf_list();
+>>>>>>> v3.18
 =======
 	qdio_clear_dbf_list();
 >>>>>>> v3.18

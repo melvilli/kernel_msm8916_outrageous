@@ -159,7 +159,11 @@ static inline int simple_feature_tweak(struct device_node *node, int type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_POWER4
+=======
+#ifndef CONFIG_PPC64
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_PPC64
 >>>>>>> v3.18
@@ -1323,7 +1327,11 @@ intrepid_aack_delay_enable(struct device_node *node, long param, long value)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_POWER4 */
+=======
+#endif /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC64 */
 >>>>>>> v3.18
@@ -1347,7 +1355,11 @@ core99_write_gpio(struct device_node *node, long param, long value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_POWER4
+=======
+#ifdef CONFIG_PPC64
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC64
 >>>>>>> v3.18
@@ -1563,9 +1575,15 @@ void g5_phy_disable_cpu1(void)
 		UN_OUT(U3_API_PHY_CONFIG_1, 0);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_POWER4 */
 
 #ifndef CONFIG_POWER4
+=======
+#endif /* CONFIG_PPC64 */
+
+#ifndef CONFIG_PPC64
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC64 */
 
@@ -1883,7 +1901,11 @@ core99_sleep_state(struct device_node *node, long param, long value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_POWER4 */
+=======
+#endif /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC64 */
 >>>>>>> v3.18
@@ -1929,7 +1951,11 @@ static struct feature_table_entry any_features[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_POWER4
+=======
+#ifndef CONFIG_PPC64
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_PPC64
 >>>>>>> v3.18
@@ -2083,7 +2109,11 @@ static struct feature_table_entry intrepid_features[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* CONFIG_POWER4 */
+=======
+#else /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #else /* CONFIG_PPC64 */
 >>>>>>> v3.18
@@ -2105,15 +2135,21 @@ static struct feature_table_entry g5_features[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_POWER4 */
 
 static struct pmac_mb_def pmac_mb_defs[] = {
 #ifndef CONFIG_POWER4
 =======
+=======
+>>>>>>> v3.18
 #endif /* CONFIG_PPC64 */
 
 static struct pmac_mb_def pmac_mb_defs[] = {
 #ifndef CONFIG_PPC64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Desktops
@@ -2380,7 +2416,11 @@ static struct pmac_mb_def pmac_mb_defs[] = {
 		PMAC_MB_MAY_SLEEP | PMAC_MB_HAS_FW_POWER | PMAC_MB_MOBILE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* CONFIG_POWER4 */
+=======
+#else /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #else /* CONFIG_PPC64 */
 >>>>>>> v3.18
@@ -2415,7 +2455,11 @@ static struct pmac_mb_def pmac_mb_defs[] = {
 	},
 #endif /* CONFIG_PPC64 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_POWER4 */
+=======
+#endif /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC64 */
 >>>>>>> v3.18
@@ -2487,7 +2531,11 @@ static int __init probe_motherboard(void)
 	/* Fallback to selection depending on mac-io chip type */
 	switch(macio->type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_POWER4
+=======
+#ifndef CONFIG_PPC64
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_PPC64
 >>>>>>> v3.18
@@ -2525,7 +2573,11 @@ static int __init probe_motherboard(void)
 		pmac_mb.features = intrepid_features;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* CONFIG_POWER4 */
+=======
+#else /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #else /* CONFIG_PPC64 */
 >>>>>>> v3.18
@@ -2540,7 +2592,11 @@ static int __init probe_motherboard(void)
 		pmac_mb.features = g5_features;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_POWER4 */
+=======
+#endif /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC64 */
 >>>>>>> v3.18
@@ -2550,7 +2606,11 @@ static int __init probe_motherboard(void)
 	}
 found:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_POWER4
+=======
+#ifndef CONFIG_PPC64
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_PPC64
 >>>>>>> v3.18
@@ -2608,9 +2668,15 @@ found:
 	powersave_lowspeed = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else /* CONFIG_POWER4 */
 	powersave_nap = 1;
 #endif  /* CONFIG_POWER4 */
+=======
+#else /* CONFIG_PPC64 */
+	powersave_nap = 1;
+#endif  /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #else /* CONFIG_PPC64 */
 	powersave_nap = 1;
@@ -2854,7 +2920,11 @@ set_initial_features(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_POWER4
+=======
+#ifdef CONFIG_PPC64
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC64
 >>>>>>> v3.18
@@ -2877,12 +2947,18 @@ set_initial_features(void)
 		 * later on after PCI probe
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		np = of_find_node_by_name(NULL, "ethernet");
 		while(np) {
 			if (of_device_is_compatible(np, "K2-GMAC"))
 				g5_gmac_enable(np, 0, 1);
 			np = of_find_node_by_name(np, "ethernet");
 		}
+=======
+		for_each_node_by_name(np, "ethernet")
+			if (of_device_is_compatible(np, "K2-GMAC"))
+				g5_gmac_enable(np, 0, 1);
+>>>>>>> v3.18
 =======
 		for_each_node_by_name(np, "ethernet")
 			if (of_device_is_compatible(np, "K2-GMAC"))
@@ -2895,8 +2971,12 @@ set_initial_features(void)
 		 * on the external PCI. The code below works though.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		np = of_find_node_by_name(NULL, "firewire");
 		while(np) {
+=======
+		for_each_node_by_name(np, "firewire") {
+>>>>>>> v3.18
 =======
 		for_each_node_by_name(np, "firewire") {
 >>>>>>> v3.18
@@ -2905,10 +2985,16 @@ set_initial_features(void)
 				g5_fw_enable(np, 0, 1);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			np = of_find_node_by_name(np, "firewire");
 		}
 	}
 #else /* CONFIG_POWER4 */
+=======
+		}
+	}
+#else /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 		}
 	}
@@ -2922,8 +3008,12 @@ set_initial_features(void)
 		 * later on after PCI probe
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		np = of_find_node_by_name(NULL, "ethernet");
 		while(np) {
+=======
+		for_each_node_by_name(np, "ethernet") {
+>>>>>>> v3.18
 =======
 		for_each_node_by_name(np, "ethernet") {
 >>>>>>> v3.18
@@ -2932,7 +3022,10 @@ set_initial_features(void)
 			    && of_device_is_compatible(np, "gmac"))
 				core99_gmac_enable(np, 0, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			np = of_find_node_by_name(np, "ethernet");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -2943,8 +3036,12 @@ set_initial_features(void)
 		 * on the external PCI. The code below works though.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		np = of_find_node_by_name(NULL, "firewire");
 		while(np) {
+=======
+		for_each_node_by_name(np, "firewire") {
+>>>>>>> v3.18
 =======
 		for_each_node_by_name(np, "firewire") {
 >>>>>>> v3.18
@@ -2957,7 +3054,10 @@ set_initial_features(void)
 				core99_firewire_enable(np, 0, 1);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			np = of_find_node_by_name(np, "firewire");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -2965,7 +3065,11 @@ set_initial_features(void)
 		/* Enable ATA-100 before PCI probe. */
 		np = of_find_node_by_name(NULL, "ata-6");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while(np) {
+=======
+		for_each_node_by_name(np, "ata-6") {
+>>>>>>> v3.18
 =======
 		for_each_node_by_name(np, "ata-6") {
 >>>>>>> v3.18
@@ -2975,7 +3079,10 @@ set_initial_features(void)
 				core99_ata100_enable(np, 1);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			np = of_find_node_by_name(np, "ata-6");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -3004,7 +3111,11 @@ set_initial_features(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_POWER4 */
+=======
+#endif /* CONFIG_PPC64 */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PPC64 */
 >>>>>>> v3.18

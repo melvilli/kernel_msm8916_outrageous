@@ -1084,7 +1084,11 @@ static int wm2200_mixer_values[] = {
 #define WM2200_MUX_CTL_DECL(name) \
 	const struct snd_kcontrol_new name##_mux =	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SOC_DAPM_VALUE_ENUM("Route", name##_enum)
+=======
+		SOC_DAPM_ENUM("Route", name##_enum)
+>>>>>>> v3.18
 =======
 		SOC_DAPM_ENUM("Route", name##_enum)
 >>>>>>> v3.18
@@ -1118,16 +1122,22 @@ static const char *wm2200_rxanc_input_sel_texts[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm2200_rxanc_input_sel =
 	SOC_ENUM_SINGLE(WM2200_RXANC_SRC,
 			WM2200_IN_RXANC_SEL_SHIFT,
 			ARRAY_SIZE(wm2200_rxanc_input_sel_texts),
 			wm2200_rxanc_input_sel_texts);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(wm2200_rxanc_input_sel,
 			    WM2200_RXANC_SRC,
 			    WM2200_IN_RXANC_SEL_SHIFT,
 			    wm2200_rxanc_input_sel_texts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm2200_snd_controls[] = {
@@ -1220,7 +1230,11 @@ WM2200_MIXER_ENUMS(LHPF2, WM2200_LHPF2MIX_INPUT_1_SOURCE);
 
 #define WM2200_MUX(name, ctrl) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SND_SOC_DAPM_VALUE_MUX(name, SND_SOC_NOPM, 0, 0, ctrl)
+=======
+	SND_SOC_DAPM_MUX(name, SND_SOC_NOPM, 0, 0, ctrl)
+>>>>>>> v3.18
 =======
 	SND_SOC_DAPM_MUX(name, SND_SOC_NOPM, 0, 0, ctrl)
 >>>>>>> v3.18
@@ -1304,16 +1318,22 @@ static const char *wm2200_aec_loopback_texts[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm2200_aec_loopback =
 	SOC_ENUM_SINGLE(WM2200_DAC_AEC_CONTROL_1,
 			WM2200_AEC_LOOPBACK_SRC_SHIFT,
 			ARRAY_SIZE(wm2200_aec_loopback_texts),
 			wm2200_aec_loopback_texts);
 =======
+=======
+>>>>>>> v3.18
 static SOC_ENUM_SINGLE_DECL(wm2200_aec_loopback,
 			    WM2200_DAC_AEC_CONTROL_1,
 			    WM2200_AEC_LOOPBACK_SRC_SHIFT,
 			    wm2200_aec_loopback_texts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static const struct snd_kcontrol_new wm2200_aec_loopback_mux =
@@ -1579,6 +1599,7 @@ static int wm2200_probe(struct snd_soc_codec *codec)
 
 	wm2200->codec = codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = wm2200->regmap;
 	codec->dapm.bias_level = SND_SOC_BIAS_OFF;
 
@@ -1588,6 +1609,10 @@ static int wm2200_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+	codec->dapm.bias_level = SND_SOC_BIAS_OFF;
+
+>>>>>>> v3.18
 =======
 	codec->dapm.bias_level = SND_SOC_BIAS_OFF;
 

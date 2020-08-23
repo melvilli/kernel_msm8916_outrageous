@@ -93,9 +93,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char enabled[] = "enabled";
 static const char disabled[] = "disabled";
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 const char power_group_name[] = "power";
@@ -210,7 +213,11 @@ static ssize_t autosuspend_delay_ms_store(struct device *dev,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtol(buf, 10, &delay) != 0 || delay != (int) delay)
+=======
+	if (kstrtol(buf, 10, &delay) != 0 || delay != (int) delay)
+>>>>>>> v3.18
 =======
 	if (kstrtol(buf, 10, &delay) != 0 || delay != (int) delay)
 >>>>>>> v3.18
@@ -226,6 +233,7 @@ static DEVICE_ATTR(autosuspend_delay_ms, 0644, autosuspend_delay_ms_show,
 		autosuspend_delay_ms_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t pm_qos_latency_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
 {
@@ -236,6 +244,8 @@ static ssize_t pm_qos_latency_store(struct device *dev,
 				    struct device_attribute *attr,
 				    const char *buf, size_t n)
 =======
+=======
+>>>>>>> v3.18
 static ssize_t pm_qos_resume_latency_show(struct device *dev,
 					  struct device_attribute *attr,
 					  char *buf)
@@ -246,6 +256,9 @@ static ssize_t pm_qos_resume_latency_show(struct device *dev,
 static ssize_t pm_qos_resume_latency_store(struct device *dev,
 					   struct device_attribute *attr,
 					   const char *buf, size_t n)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	s32 value;
@@ -258,7 +271,12 @@ static ssize_t pm_qos_resume_latency_store(struct device *dev,
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = dev_pm_qos_update_request(dev->power.qos->latency_req, value);
+=======
+	ret = dev_pm_qos_update_request(dev->power.qos->resume_latency_req,
+					value);
+>>>>>>> v3.18
 =======
 	ret = dev_pm_qos_update_request(dev->power.qos->resume_latency_req,
 					value);
@@ -268,8 +286,11 @@ static ssize_t pm_qos_resume_latency_store(struct device *dev,
 
 static DEVICE_ATTR(pm_qos_resume_latency_us, 0644,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   pm_qos_latency_show, pm_qos_latency_store);
 =======
+=======
+>>>>>>> v3.18
 		   pm_qos_resume_latency_show, pm_qos_resume_latency_store);
 
 static ssize_t pm_qos_latency_tolerance_show(struct device *dev,
@@ -305,6 +326,9 @@ static ssize_t pm_qos_latency_tolerance_store(struct device *dev,
 
 static DEVICE_ATTR(pm_qos_latency_tolerance_us, 0644,
 		   pm_qos_latency_tolerance_show, pm_qos_latency_tolerance_store);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t pm_qos_no_power_off_show(struct device *dev,
@@ -364,6 +388,12 @@ static DEVICE_ATTR(pm_qos_remote_wakeup, 0644,
 
 #ifdef CONFIG_PM_SLEEP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static const char _enabled[] = "enabled";
+static const char _disabled[] = "disabled";
+
+>>>>>>> v3.18
 =======
 static const char _enabled[] = "enabled";
 static const char _disabled[] = "disabled";
@@ -374,7 +404,11 @@ wake_show(struct device * dev, struct device_attribute *attr, char * buf)
 {
 	return sprintf(buf, "%s\n", device_can_wakeup(dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		? (device_may_wakeup(dev) ? enabled : disabled)
+=======
+		? (device_may_wakeup(dev) ? _enabled : _disabled)
+>>>>>>> v3.18
 =======
 		? (device_may_wakeup(dev) ? _enabled : _disabled)
 >>>>>>> v3.18
@@ -395,17 +429,23 @@ wake_store(struct device * dev, struct device_attribute *attr,
 	if (cp)
 		len = cp - buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len == sizeof enabled - 1
 			&& strncmp(buf, enabled, sizeof enabled - 1) == 0)
 		device_set_wakeup_enable(dev, 1);
 	else if (len == sizeof disabled - 1
 			&& strncmp(buf, disabled, sizeof disabled - 1) == 0)
 =======
+=======
+>>>>>>> v3.18
 	if (len == sizeof _enabled - 1
 			&& strncmp(buf, _enabled, sizeof _enabled - 1) == 0)
 		device_set_wakeup_enable(dev, 1);
 	else if (len == sizeof _disabled - 1
 			&& strncmp(buf, _disabled, sizeof _disabled - 1) == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device_set_wakeup_enable(dev, 0);
 	else
@@ -616,7 +656,12 @@ static ssize_t async_show(struct device *dev, struct device_attribute *attr,
 {
 	return sprintf(buf, "%s\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			device_async_suspend_enabled(dev) ? enabled : disabled);
+=======
+			device_async_suspend_enabled(dev) ?
+				_enabled : _disabled);
+>>>>>>> v3.18
 =======
 			device_async_suspend_enabled(dev) ?
 				_enabled : _disabled);
@@ -633,14 +678,20 @@ static ssize_t async_store(struct device *dev, struct device_attribute *attr,
 	if (cp)
 		len = cp - buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len == sizeof enabled - 1 && strncmp(buf, enabled, len) == 0)
 		device_enable_async_suspend(dev);
 	else if (len == sizeof disabled - 1 && strncmp(buf, disabled, len) == 0)
 =======
+=======
+>>>>>>> v3.18
 	if (len == sizeof _enabled - 1 && strncmp(buf, _enabled, len) == 0)
 		device_enable_async_suspend(dev);
 	else if (len == sizeof _disabled - 1 &&
 		 strncmp(buf, _disabled, len) == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		device_disable_async_suspend(dev);
 	else
@@ -712,7 +763,11 @@ static struct attribute_group pm_runtime_attr_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *pm_qos_latency_attrs[] = {
+=======
+static struct attribute *pm_qos_resume_latency_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *pm_qos_resume_latency_attrs[] = {
 >>>>>>> v3.18
@@ -722,10 +777,13 @@ static struct attribute *pm_qos_resume_latency_attrs[] = {
 	NULL,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute_group pm_qos_latency_attr_group = {
 	.name	= power_group_name,
 	.attrs	= pm_qos_latency_attrs,
 =======
+=======
+>>>>>>> v3.18
 static struct attribute_group pm_qos_resume_latency_attr_group = {
 	.name	= power_group_name,
 	.attrs	= pm_qos_resume_latency_attrs,
@@ -740,6 +798,9 @@ static struct attribute *pm_qos_latency_tolerance_attrs[] = {
 static struct attribute_group pm_qos_latency_tolerance_attr_group = {
 	.name	= power_group_name,
 	.attrs	= pm_qos_latency_tolerance_attrs,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -769,6 +830,7 @@ int dpm_sysfs_add(struct device *dev)
 			goto err_out;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (device_can_wakeup(dev)) {
 		rc = sysfs_merge_group(&dev->kobj, &pm_wakeup_attr_group);
@@ -782,6 +844,8 @@ int dpm_sysfs_add(struct device *dev)
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	if (device_can_wakeup(dev)) {
 		rc = sysfs_merge_group(&dev->kobj, &pm_wakeup_attr_group);
 		if (rc)
@@ -799,6 +863,9 @@ int dpm_sysfs_add(struct device *dev)
 	sysfs_unmerge_group(&dev->kobj, &pm_wakeup_attr_group);
  err_runtime:
 	sysfs_unmerge_group(&dev->kobj, &pm_runtime_attr_group);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  err_out:
 	sysfs_remove_group(&dev->kobj, &pm_attr_group);
@@ -816,6 +883,7 @@ void wakeup_sysfs_remove(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int pm_qos_sysfs_add_latency(struct device *dev)
 {
 	return sysfs_merge_group(&dev->kobj, &pm_qos_latency_attr_group);
@@ -825,6 +893,8 @@ void pm_qos_sysfs_remove_latency(struct device *dev)
 {
 	sysfs_unmerge_group(&dev->kobj, &pm_qos_latency_attr_group);
 =======
+=======
+>>>>>>> v3.18
 int pm_qos_sysfs_add_resume_latency(struct device *dev)
 {
 	return sysfs_merge_group(&dev->kobj, &pm_qos_resume_latency_attr_group);
@@ -833,6 +903,9 @@ int pm_qos_sysfs_add_resume_latency(struct device *dev)
 void pm_qos_sysfs_remove_resume_latency(struct device *dev)
 {
 	sysfs_unmerge_group(&dev->kobj, &pm_qos_resume_latency_attr_group);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -854,6 +927,10 @@ void rpm_sysfs_remove(struct device *dev)
 void dpm_sysfs_remove(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sysfs_unmerge_group(&dev->kobj, &pm_qos_latency_tolerance_attr_group);
+>>>>>>> v3.18
 =======
 	sysfs_unmerge_group(&dev->kobj, &pm_qos_latency_tolerance_attr_group);
 >>>>>>> v3.18

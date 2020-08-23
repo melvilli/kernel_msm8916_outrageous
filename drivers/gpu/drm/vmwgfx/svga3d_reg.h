@@ -35,6 +35,11 @@
 #include "svga_reg.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+typedef uint32 PPN;
+typedef __le64 PPN64;
+>>>>>>> v3.18
 =======
 typedef uint32 PPN;
 typedef __le64 PPN64;
@@ -77,6 +82,12 @@ typedef uint32 SVGA3dBool; /* 32-bit Bool definition */
 #define SVGA3D_MAX_SURFACE_IDS                  (32 * 1024)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SVGA3D_NUM_TEXTURE_UNITS                32
+#define SVGA3D_NUM_LIGHTS                       8
+
+>>>>>>> v3.18
 =======
 #define SVGA3D_NUM_TEXTURE_UNITS                32
 #define SVGA3D_NUM_LIGHTS                       8
@@ -93,6 +104,10 @@ typedef uint32 SVGA3dBool; /* 32-bit Bool definition */
 
 typedef enum SVGA3dSurfaceFormat {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+   SVGA3D_FORMAT_MIN                   = 0,
+>>>>>>> v3.18
 =======
    SVGA3D_FORMAT_MIN                   = 0,
 >>>>>>> v3.18
@@ -150,12 +165,15 @@ typedef enum SVGA3dSurfaceFormat {
    SVGA3D_RG_S23E8                     = 36,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    /*
     * Any surface can be used as a buffer object, but SVGA3D_BUFFER is
     * the most efficient format to use when creating new surfaces
     * expressly for index or vertex data.
     */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
    SVGA3D_BUFFER                       = 37,
@@ -178,9 +196,12 @@ typedef enum SVGA3dSurfaceFormat {
    SVGA3D_AYUV                         = 45,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    SVGA3D_BC4_UNORM                    = 108,
    SVGA3D_BC5_UNORM                    = 111,
 =======
+=======
+>>>>>>> v3.18
    SVGA3D_R32G32B32A32_TYPELESS        = 46,
    SVGA3D_R32G32B32A32_FLOAT           = 25,
    SVGA3D_R32G32B32A32_UINT            = 47,
@@ -274,6 +295,9 @@ typedef enum SVGA3dSurfaceFormat {
    SVGA3D_B8G8R8A8_UNORM_SRGB          = 115,
    SVGA3D_B8G8R8X8_TYPELESS            = 116,
    SVGA3D_B8G8R8X8_UNORM_SRGB          = 117,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
    /* Advanced D3D9 depth formats. */
@@ -282,12 +306,18 @@ typedef enum SVGA3dSurfaceFormat {
    SVGA3D_Z_D24S8_INT                  = 120,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    SVGA3D_FORMAT_MAX
 =======
+=======
+>>>>>>> v3.18
    /* Planar video formats. */
    SVGA3D_YV12                         = 121,
 
    SVGA3D_FORMAT_MAX                   = 122,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } SVGA3dSurfaceFormat;
 
@@ -1079,12 +1109,15 @@ typedef enum {
 
 typedef enum {
 <<<<<<< HEAD
+<<<<<<< HEAD
    SVGA3D_SHADERTYPE_VS                         = 1,
    SVGA3D_SHADERTYPE_PS                         = 2,
    SVGA3D_SHADERTYPE_MAX
 } SVGA3dShaderType;
 
 =======
+=======
+>>>>>>> v3.18
    SVGA3D_SHADERTYPE_INVALID                    = 0,
    SVGA3D_SHADERTYPE_MIN                        = 1,
    SVGA3D_SHADERTYPE_VS                         = 1,
@@ -1095,12 +1128,19 @@ typedef enum {
 
 #define SVGA3D_NUM_SHADERTYPE (SVGA3D_SHADERTYPE_MAX - SVGA3D_SHADERTYPE_MIN)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef enum {
    SVGA3D_CONST_TYPE_FLOAT                      = 0,
    SVGA3D_CONST_TYPE_INT                        = 1,
    SVGA3D_CONST_TYPE_BOOL                       = 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+   SVGA3D_CONST_TYPE_MAX
+>>>>>>> v3.18
 =======
    SVGA3D_CONST_TYPE_MAX
 >>>>>>> v3.18
@@ -1195,10 +1235,13 @@ typedef enum {
 #define SVGA_3D_CMD_ACTIVATE_SURFACE       SVGA_3D_CMD_BASE + 40
 #define SVGA_3D_CMD_DEACTIVATE_SURFACE     SVGA_3D_CMD_BASE + 41
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SVGA_3D_CMD_MAX                    SVGA_3D_CMD_BASE + 42
 
 #define SVGA_3D_CMD_FUTURE_MAX             2000
 =======
+=======
+>>>>>>> v3.18
 #define SVGA_3D_CMD_SCREEN_DMA               1082
 #define SVGA_3D_CMD_SET_UNITY_SURFACE_COOKIE 1083
 #define SVGA_3D_CMD_OPEN_CONTEXT_SURFACE     1084
@@ -1277,6 +1320,9 @@ typedef enum {
 
 #define SVGA_3D_CMD_MAX                      1142
 #define SVGA_3D_CMD_FUTURE_MAX               3000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -1970,7 +2016,10 @@ struct {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Guest-backed surface definitions.
  */
 
@@ -2472,6 +2521,9 @@ struct {
 SVGA3dCmdUpdateGBScreenTarget;  /* SVGA_3D_CMD_UPDATE_GB_SCREENTARGET */
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Capability query index.
  *
@@ -2603,11 +2655,14 @@ typedef enum {
 
    /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     * Don't add new caps into the previous section; the values in this
     * enumeration must not change. You can put new values right before
     * SVGA3D_DEVCAP_MAX.
     */
 =======
+=======
+>>>>>>> v3.18
     * Deprecated.
     */
    SVGA3D_DEVCAP_VGPU10                            = 84,
@@ -2643,6 +2698,9 @@ typedef enum {
     */
    SVGA3D_DEVCAP_SCREENTARGETS                     = 93,
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    SVGA3D_DEVCAP_MAX                                  /* This must be the last index. */
 } SVGA3dDevCapIndex;
@@ -2655,7 +2713,10 @@ typedef union {
 } SVGA3dDevCapResult;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 typedef enum {
    SVGA3DCAPS_RECORD_UNKNOWN        = 0,
    SVGA3DCAPS_RECORD_DEVCAPS_MIN    = 0x100,
@@ -2680,5 +2741,8 @@ SVGA3dCapsRecord;
 
 typedef uint32 SVGA3dCapPair[2];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _SVGA3D_REG_H_ */

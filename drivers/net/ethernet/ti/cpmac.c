@@ -18,7 +18,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -72,6 +75,7 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 #define CPMAC_RX_TEARDOWN		0x0018
 #define CPMAC_MBP			0x0100
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define MBP_RXPASSCRC			0x40000000
 # define MBP_RXQOS			0x20000000
 # define MBP_RXNOCHAIN			0x10000000
@@ -85,6 +89,8 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 # define MBP_RXMCAST			0x00000020
 # define MBP_MCASTCHAN(channel)		((channel) & 0x7)
 =======
+=======
+>>>>>>> v3.18
 #define MBP_RXPASSCRC			0x40000000
 #define MBP_RXQOS			0x20000000
 #define MBP_RXNOCHAIN			0x10000000
@@ -97,12 +103,16 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 #define MBP_BCASTCHAN(channel)		(((channel) & 0x7) << 8)
 #define MBP_RXMCAST			0x00000020
 #define MBP_MCASTCHAN(channel)		((channel) & 0x7)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CPMAC_UNICAST_ENABLE		0x0104
 #define CPMAC_UNICAST_CLEAR		0x0108
 #define CPMAC_MAX_LENGTH		0x010c
 #define CPMAC_BUFFER_OFFSET		0x0110
 #define CPMAC_MAC_CONTROL		0x0160
+<<<<<<< HEAD
 <<<<<<< HEAD
 # define MAC_TXPTYPE			0x00000200
 # define MAC_TXPACE			0x00000040
@@ -124,6 +134,8 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 # define MAC_INT_RX			0x00020000
 # define MAC_INT_TX			0x00010000
 =======
+=======
+>>>>>>> v3.18
 #define MAC_TXPTYPE			0x00000200
 #define MAC_TXPACE			0x00000040
 #define MAC_MII				0x00000020
@@ -143,6 +155,9 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 #define MAC_INT_HOST			0x00040000
 #define MAC_INT_RX			0x00020000
 #define MAC_INT_TX			0x00010000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CPMAC_MAC_EOI_VECTOR		0x0184
 #define CPMAC_RX_INT_ENABLE		0x0198
@@ -160,8 +175,13 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 #define CPMAC_RX_ACK(channel)		(0x0660 + (channel) * 4)
 #define CPMAC_REG_END			0x0680
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Rx/Tx statistics
+=======
+
+/* Rx/Tx statistics
+>>>>>>> v3.18
 =======
 
 /* Rx/Tx statistics
@@ -204,6 +224,7 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 #define CPMAC_MDIO_VERSION		0x0000
 #define CPMAC_MDIO_CONTROL		0x0004
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define MDIOC_IDLE			0x80000000
 # define MDIOC_ENABLE			0x40000000
 # define MDIOC_PREAMBLE			0x00100000
@@ -223,6 +244,8 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 # define PHYSEL_LINKSEL			0x00000040
 # define PHYSEL_LINKINT			0x00000020
 =======
+=======
+>>>>>>> v3.18
 #define MDIOC_IDLE			0x80000000
 #define MDIOC_ENABLE			0x40000000
 #define MDIOC_PREAMBLE			0x00100000
@@ -241,6 +264,9 @@ MODULE_PARM_DESC(dumb_switch, "Assume switch is not connected to MDIO bus");
 #define CPMAC_MDIO_PHYSEL(channel)	(0x0084 + (channel) * 8)
 #define PHYSEL_LINKSEL			0x00000040
 #define PHYSEL_LINKINT			0x00000020
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct cpmac_desc {
@@ -292,6 +318,7 @@ static void cpmac_dump_regs(struct net_device *dev)
 	int i;
 	struct cpmac_priv *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < CPMAC_REG_END; i += 4) {
 		if (i % 16 == 0) {
 			if (i)
@@ -299,12 +326,17 @@ static void cpmac_dump_regs(struct net_device *dev)
 			printk(KERN_DEBUG "%s: reg[%p]:", dev->name,
 			       priv->regs + i);
 =======
+=======
+>>>>>>> v3.18
 
 	for (i = 0; i < CPMAC_REG_END; i += 4) {
 		if (i % 16 == 0) {
 			if (i)
 				printk("\n");
 			printk("%s: reg[%p]:", dev->name, priv->regs + i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		printk(" %08x", cpmac_read(priv->regs, i));
@@ -316,7 +348,12 @@ static void cpmac_dump_desc(struct net_device *dev, struct cpmac_desc *desc)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "%s: desc[%p]:", dev->name, desc);
+=======
+
+	printk("%s: desc[%p]:", dev->name, desc);
+>>>>>>> v3.18
 =======
 
 	printk("%s: desc[%p]:", dev->name, desc);
@@ -331,6 +368,10 @@ static void cpmac_dump_all_desc(struct net_device *dev)
 	struct cpmac_priv *priv = netdev_priv(dev);
 	struct cpmac_desc *dump = priv->rx_head;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -344,6 +385,7 @@ static void cpmac_dump_skb(struct net_device *dev, struct sk_buff *skb)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_DEBUG "%s: skb 0x%p, len=%d\n", dev->name, skb, skb->len);
 	for (i = 0; i < skb->len; i++) {
 		if (i % 16 == 0) {
@@ -352,6 +394,8 @@ static void cpmac_dump_skb(struct net_device *dev, struct sk_buff *skb)
 			printk(KERN_DEBUG "%s: data[%p]:", dev->name,
 			       skb->data + i);
 =======
+=======
+>>>>>>> v3.18
 
 	printk("%s: skb 0x%p, len=%d\n", dev->name, skb, skb->len);
 	for (i = 0; i < skb->len; i++) {
@@ -359,6 +403,9 @@ static void cpmac_dump_skb(struct net_device *dev, struct sk_buff *skb)
 			if (i)
 				printk("\n");
 			printk("%s: data[%p]:", dev->name, skb->data + i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		printk(" %02x", ((u8 *)skb->data)[i]);
@@ -377,6 +424,10 @@ static int cpmac_mdio_read(struct mii_bus *bus, int phy_id, int reg)
 	while ((val = cpmac_read(bus->priv, CPMAC_MDIO_ACCESS(0))) & MDIO_BUSY)
 		cpu_relax();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -391,6 +442,10 @@ static int cpmac_mdio_write(struct mii_bus *bus, int phy_id,
 	cpmac_write(bus->priv, CPMAC_MDIO_ACCESS(0), MDIO_BUSY | MDIO_WRITE |
 		    MDIO_REG(reg) | MDIO_PHY(phy_id) | MDIO_DATA(val));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -404,7 +459,11 @@ static int cpmac_mdio_reset(struct mii_bus *bus)
 	cpmac_clk = clk_get(&bus->dev, "cpmac");
 	if (IS_ERR(cpmac_clk)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "unable to get cpmac clock\n");
+=======
+		pr_err("unable to get cpmac clock\n");
+>>>>>>> v3.18
 =======
 		pr_err("unable to get cpmac clock\n");
 >>>>>>> v3.18
@@ -414,6 +473,10 @@ static int cpmac_mdio_reset(struct mii_bus *bus)
 	cpmac_write(bus->priv, CPMAC_MDIO_CONTROL, MDIOC_ENABLE |
 		    MDIOC_CLKDIV(clk_get_rate(cpmac_clk) / 2200000 - 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -424,6 +487,7 @@ static int mii_irqs[PHY_MAX_ADDR] = { PHY_POLL, };
 
 static struct mii_bus *cpmac_mii;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cpmac_config(struct net_device *dev, struct ifmap *map)
 {
@@ -438,6 +502,8 @@ static int cpmac_config(struct net_device *dev, struct ifmap *map)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void cpmac_set_multicast_list(struct net_device *dev)
@@ -459,8 +525,12 @@ static void cpmac_set_multicast_list(struct net_device *dev)
 			cpmac_write(priv->regs, CPMAC_MAC_HASH_HI, 0xffffffff);
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/*
 			 * cpmac uses some strange mac address hashing
+=======
+			/* cpmac uses some strange mac address hashing
+>>>>>>> v3.18
 =======
 			/* cpmac uses some strange mac address hashing
 >>>>>>> v3.18
@@ -501,8 +571,13 @@ static struct sk_buff *cpmac_rx_one(struct cpmac_priv *priv,
 	if (unlikely(!desc->datalen)) {
 		if (netif_msg_rx_err(priv) && net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: rx: spurious interrupt\n",
 			       priv->dev->name);
+=======
+			netdev_warn(priv->dev, "rx: spurious interrupt\n");
+
+>>>>>>> v3.18
 =======
 			netdev_warn(priv->dev, "rx: spurious interrupt\n");
 
@@ -527,8 +602,12 @@ static struct sk_buff *cpmac_rx_one(struct cpmac_priv *priv,
 		desc->hw_data = (u32)desc->data_mapping;
 		if (unlikely(netif_msg_pktdata(priv))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "%s: received packet:\n",
 			       priv->dev->name);
+=======
+			netdev_dbg(priv->dev, "received packet:\n");
+>>>>>>> v3.18
 =======
 			netdev_dbg(priv->dev, "received packet:\n");
 >>>>>>> v3.18
@@ -537,9 +616,15 @@ static struct sk_buff *cpmac_rx_one(struct cpmac_priv *priv,
 	} else {
 		if (netif_msg_rx_err(priv) && net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       "%s: low on skbs, dropping packet\n",
 			       priv->dev->name);
+=======
+			netdev_warn(priv->dev,
+				    "low on skbs, dropping packet\n");
+
+>>>>>>> v3.18
 =======
 			netdev_warn(priv->dev,
 				    "low on skbs, dropping packet\n");
@@ -565,8 +650,13 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 	if (unlikely(!priv->rx_head)) {
 		if (netif_msg_rx_err(priv) && net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: rx: polling, but no queue\n",
 			       priv->dev->name);
+=======
+			netdev_warn(priv->dev, "rx: polling, but no queue\n");
+
+>>>>>>> v3.18
 =======
 			netdev_warn(priv->dev, "rx: polling, but no queue\n");
 
@@ -584,6 +674,7 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 		if ((desc->dataflags & CPMAC_EOQ) != 0) {
 			/* The last update to eoq->hw_next didn't happen
 <<<<<<< HEAD
+<<<<<<< HEAD
 			* soon enough, and the receiver stopped here.
 			*Remember this descriptor so we can restart
 			* the receiver after freeing some space.
@@ -594,6 +685,8 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 						" duplicate EOQ: %p and %p\n",
 						priv->dev->name, restart, desc);
 =======
+=======
+>>>>>>> v3.18
 			 * soon enough, and the receiver stopped here.
 			 * Remember this descriptor so we can restart
 			 * the receiver after freeing some space.
@@ -603,6 +696,9 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 					netdev_err(priv->dev, "poll found a"
 						   " duplicate EOQ: %p and %p\n",
 						   restart, desc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto fatal_error;
 			}
@@ -621,7 +717,12 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 	if (desc != priv->rx_head) {
 		/* We freed some buffers, but not the whole ring,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * add what we did free to the rx list */
+=======
+		 * add what we did free to the rx list
+		 */
+>>>>>>> v3.18
 =======
 		 * add what we did free to the rx list
 		 */
@@ -633,16 +734,22 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 	/* Optimization: If we did not actually process an EOQ (perhaps because
 	 * of quota limits), check to see if the tail of the queue has EOQ set.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	* We should immediately restart in that case so that the receiver can
 	* restart and run in parallel with more packet processing.
 	* This lets us handle slightly larger bursts before running
 	* out of ring space (assuming dev->weight < ring_size) */
 =======
+=======
+>>>>>>> v3.18
 	 * We should immediately restart in that case so that the receiver can
 	 * restart and run in parallel with more packet processing.
 	 * This lets us handle slightly larger bursts before running
 	 * out of ring space (assuming dev->weight < ring_size)
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!restart &&
@@ -651,8 +758,13 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 	     (priv->rx_head->dataflags & CPMAC_OWN) != 0) {
 		/* reset EOQ so the poll loop (above) doesn't try to
 <<<<<<< HEAD
+<<<<<<< HEAD
 		* restart this when it eventually gets to this descriptor.
 		*/
+=======
+		 * restart this when it eventually gets to this descriptor.
+		 */
+>>>>>>> v3.18
 =======
 		 * restart this when it eventually gets to this descriptor.
 		 */
@@ -666,6 +778,7 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 		priv->dev->stats.rx_fifo_errors++;
 		if (netif_msg_rx_err(priv) && net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: rx dma ring overrun\n",
 			       priv->dev->name);
 
@@ -676,6 +789,8 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 					"not free: %p\n",
 					priv->dev->name, restart);
 =======
+=======
+>>>>>>> v3.18
 			netdev_warn(priv->dev, "rx dma ring overrun\n");
 
 		if (unlikely((restart->dataflags & CPMAC_OWN) == 0)) {
@@ -683,6 +798,9 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 				netdev_err(priv->dev, "cpmac_poll is trying "
 					"to restart rx from a descriptor "
 					"that's not free: %p\n", restart);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto fatal_error;
 		}
@@ -694,18 +812,24 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 	spin_unlock(&priv->rx_lock);
 	if (unlikely(netif_msg_rx_status(priv)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: poll processed %d packets\n",
 		       priv->dev->name, received);
 	if (processed == 0) {
 		/* we ran out of packets to read,
 		 * revert to interrupt-driven mode */
 =======
+=======
+>>>>>>> v3.18
 		netdev_dbg(priv->dev, "poll processed %d packets\n", received);
 
 	if (processed == 0) {
 		/* we ran out of packets to read,
 		 * revert to interrupt-driven mode
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		napi_complete(napi);
 		cpmac_write(priv->regs, CPMAC_RX_INT_ENABLE, 1);
@@ -716,6 +840,7 @@ static int cpmac_poll(struct napi_struct *napi, int budget)
 
 fatal_error:
 	/* Something went horribly wrong.
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Reset hardware to try to recover rather than wedging. */
 
@@ -728,6 +853,8 @@ fatal_error:
 			cpmac_read(priv->regs, CPMAC_RX_PTR(0)),
 			cpmac_read(priv->regs, CPMAC_RX_ACK(0)));
 =======
+=======
+>>>>>>> v3.18
 	 * Reset hardware to try to recover rather than wedging.
 	 */
 	if (netif_msg_drv(priv)) {
@@ -737,6 +864,9 @@ fatal_error:
 		netdev_dbg(priv->dev, "RX_PTR(0)=0x%08x RX_ACK(0)=0x%08x\n",
 			   cpmac_read(priv->regs, CPMAC_RX_PTR(0)),
 			   cpmac_read(priv->regs, CPMAC_RX_ACK(0)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -750,6 +880,10 @@ fatal_error:
 	if (!schedule_work(&priv->reset_work))
 		atomic_dec(&priv->reset_pending);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -760,8 +894,12 @@ fatal_error:
 static int cpmac_start_xmit(struct sk_buff *skb, struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int queue;
 	unsigned int len;
+=======
+	int queue, len;
+>>>>>>> v3.18
 =======
 	int queue, len;
 >>>>>>> v3.18
@@ -775,7 +913,11 @@ static int cpmac_start_xmit(struct sk_buff *skb, struct net_device *dev)
 		return NETDEV_TX_OK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	len = max_t(unsigned int, skb->len, ETH_ZLEN);
+=======
+	len = max(skb->len, ETH_ZLEN);
+>>>>>>> v3.18
 =======
 	len = max(skb->len, ETH_ZLEN);
 >>>>>>> v3.18
@@ -786,8 +928,13 @@ static int cpmac_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	if (unlikely(desc->dataflags & CPMAC_OWN)) {
 		if (netif_msg_tx_err(priv) && net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "%s: tx dma ring full\n",
 			       dev->name);
+=======
+			netdev_warn(dev, "tx dma ring full\n");
+
+>>>>>>> v3.18
 =======
 			netdev_warn(dev, "tx dma ring full\n");
 
@@ -806,8 +953,12 @@ static int cpmac_start_xmit(struct sk_buff *skb, struct net_device *dev)
 	desc->buflen = len;
 	if (unlikely(netif_msg_tx_queued(priv)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: sending 0x%p, len=%d\n", dev->name, skb,
 		       skb->len);
+=======
+		netdev_dbg(dev, "sending 0x%p, len=%d\n", skb, skb->len);
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, "sending 0x%p, len=%d\n", skb, skb->len);
 >>>>>>> v3.18
@@ -837,8 +988,13 @@ static void cpmac_end_xmit(struct net_device *dev, int queue)
 
 		if (unlikely(netif_msg_tx_done(priv)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "%s: sent 0x%p, len=%d\n", dev->name,
 			       desc->skb, desc->skb->len);
+=======
+			netdev_dbg(dev, "sent 0x%p, len=%d\n",
+				   desc->skb, desc->skb->len);
+>>>>>>> v3.18
 =======
 			netdev_dbg(dev, "sent 0x%p, len=%d\n",
 				   desc->skb, desc->skb->len);
@@ -851,8 +1007,12 @@ static void cpmac_end_xmit(struct net_device *dev, int queue)
 	} else {
 		if (netif_msg_tx_err(priv) && net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING
 			       "%s: end_xmit: spurious interrupt\n", dev->name);
+=======
+			netdev_warn(dev, "end_xmit: spurious interrupt\n");
+>>>>>>> v3.18
 =======
 			netdev_warn(dev, "end_xmit: spurious interrupt\n");
 >>>>>>> v3.18
@@ -866,7 +1026,11 @@ static void cpmac_hw_stop(struct net_device *dev)
 	int i;
 	struct cpmac_priv *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plat_cpmac_data *pdata = priv->pdev->dev.platform_data;
+=======
+	struct plat_cpmac_data *pdata = dev_get_platdata(&priv->pdev->dev);
+>>>>>>> v3.18
 =======
 	struct plat_cpmac_data *pdata = dev_get_platdata(&priv->pdev->dev);
 >>>>>>> v3.18
@@ -893,7 +1057,11 @@ static void cpmac_hw_start(struct net_device *dev)
 	int i;
 	struct cpmac_priv *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct plat_cpmac_data *pdata = priv->pdev->dev.platform_data;
+=======
+	struct plat_cpmac_data *pdata = dev_get_platdata(&priv->pdev->dev);
+>>>>>>> v3.18
 =======
 	struct plat_cpmac_data *pdata = dev_get_platdata(&priv->pdev->dev);
 >>>>>>> v3.18
@@ -939,6 +1107,10 @@ static void cpmac_clear_rx(struct net_device *dev)
 	struct cpmac_desc *desc;
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -949,8 +1121,12 @@ static void cpmac_clear_rx(struct net_device *dev)
 		if ((desc->dataflags & CPMAC_OWN) == 0) {
 			if (netif_msg_rx_err(priv) && net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_WARNING "%s: packet dropped\n",
 				       dev->name);
+=======
+				netdev_warn(dev, "packet dropped\n");
+>>>>>>> v3.18
 =======
 				netdev_warn(dev, "packet dropped\n");
 >>>>>>> v3.18
@@ -970,6 +1146,10 @@ static void cpmac_clear_tx(struct net_device *dev)
 	struct cpmac_priv *priv = netdev_priv(dev);
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1015,6 +1195,7 @@ static void cpmac_check_status(struct net_device *dev)
 		if (netif_msg_drv(priv) && net_ratelimit()) {
 			/* Can't find any documentation on what these
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 *error codes actually are. So just log them and hope..
 			 */
 			if (rx_code)
@@ -1026,6 +1207,8 @@ static void cpmac_check_status(struct net_device *dev)
 				     "channel %d (macstatus %08x), resetting\n",
 				     dev->name, tx_code, tx_channel, macstatus);
 =======
+=======
+>>>>>>> v3.18
 			 * error codes actually are. So just log them and hope..
 			 */
 			if (rx_code)
@@ -1036,6 +1219,9 @@ static void cpmac_check_status(struct net_device *dev)
 				netdev_warn(dev, "host error %d on tx "
 					"channel %d (macstatus %08x), resetting\n",
 					tx_code, tx_channel, macstatus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1062,8 +1248,12 @@ static irqreturn_t cpmac_irq(int irq, void *dev_id)
 
 	if (unlikely(netif_msg_intr(priv)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG "%s: interrupt status: 0x%08x\n", dev->name,
 		       status);
+=======
+		netdev_dbg(dev, "interrupt status: 0x%08x\n", status);
+>>>>>>> v3.18
 =======
 		netdev_dbg(dev, "interrupt status: 0x%08x\n", status);
 >>>>>>> v3.18
@@ -1096,7 +1286,11 @@ static void cpmac_tx_timeout(struct net_device *dev)
 	spin_unlock(&priv->lock);
 	if (netif_msg_tx_err(priv) && net_ratelimit())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "%s: transmit timeout\n", dev->name);
+=======
+		netdev_warn(dev, "transmit timeout\n");
+>>>>>>> v3.18
 =======
 		netdev_warn(dev, "transmit timeout\n");
 >>>>>>> v3.18
@@ -1114,6 +1308,10 @@ static int cpmac_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 {
 	struct cpmac_priv *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1173,6 +1371,10 @@ static int cpmac_set_ringparam(struct net_device *dev,
 		return -EBUSY;
 	priv->ring_size = ring->rx_pending;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1244,8 +1446,13 @@ static int cpmac_open(struct net_device *dev)
 	if (!request_mem_region(mem->start, resource_size(mem), dev->name)) {
 		if (netif_msg_drv(priv))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s: failed to request registers\n",
 			       dev->name);
+=======
+			netdev_err(dev, "failed to request registers\n");
+
+>>>>>>> v3.18
 =======
 			netdev_err(dev, "failed to request registers\n");
 
@@ -1258,8 +1465,13 @@ static int cpmac_open(struct net_device *dev)
 	if (!priv->regs) {
 		if (netif_msg_drv(priv))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s: failed to remap registers\n",
 			       dev->name);
+=======
+			netdev_err(dev, "failed to remap registers\n");
+
+>>>>>>> v3.18
 =======
 			netdev_err(dev, "failed to remap registers\n");
 
@@ -1306,8 +1518,13 @@ static int cpmac_open(struct net_device *dev)
 	if (res) {
 		if (netif_msg_drv(priv))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s: failed to obtain irq\n",
 			       dev->name);
+=======
+			netdev_err(dev, "failed to obtain irq\n");
+
+>>>>>>> v3.18
 =======
 			netdev_err(dev, "failed to obtain irq\n");
 
@@ -1385,6 +1602,10 @@ static int cpmac_stop(struct net_device *dev)
 			  (CPMAC_QUEUES + priv->ring_size),
 			  priv->desc_ring, priv->dma_ring);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1399,7 +1620,10 @@ static const struct net_device_ops cpmac_netdev_ops = {
 	.ndo_set_rx_mode	= cpmac_set_multicast_list,
 	.ndo_do_ioctl		= cpmac_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ndo_set_config		= cpmac_config,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.ndo_change_mtu		= eth_change_mtu,
@@ -1419,7 +1643,11 @@ static int cpmac_probe(struct platform_device *pdev)
 	struct plat_cpmac_data *pdata;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1441,16 +1669,22 @@ static int cpmac_probe(struct platform_device *pdev)
 	if (phy_id == PHY_MAX_ADDR) {
 		dev_err(&pdev->dev, "no PHY present, falling back "
 <<<<<<< HEAD
+<<<<<<< HEAD
 					"to switch on MDIO bus 0\n");
 		strncpy(mdio_bus_id, "fixed-0", MII_BUS_ID_SIZE); /* fixed phys bus */
 		phy_id = pdev->id;
 	}
 =======
+=======
+>>>>>>> v3.18
 			"to switch on MDIO bus 0\n");
 		strncpy(mdio_bus_id, "fixed-0", MII_BUS_ID_SIZE); /* fixed phys bus */
 		phy_id = pdev->id;
 	}
 	mdio_bus_id[sizeof(mdio_bus_id) - 1] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev = alloc_etherdev_mq(sizeof(*priv), CPMAC_QUEUES);
@@ -1465,7 +1699,11 @@ static int cpmac_probe(struct platform_device *pdev)
 	if (!mem) {
 		rc = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail;
+=======
+		goto out;
+>>>>>>> v3.18
 =======
 		goto out;
 >>>>>>> v3.18
@@ -1494,23 +1732,33 @@ static int cpmac_probe(struct platform_device *pdev)
 	if (IS_ERR(priv->phy)) {
 		if (netif_msg_drv(priv))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s: Could not attach to PHY\n",
 			       dev->name);
 		rc = PTR_ERR(priv->phy);
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 			dev_err(&pdev->dev, "Could not attach to PHY\n");
 
 		rc = PTR_ERR(priv->phy);
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	rc = register_netdev(dev);
 	if (rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cpmac: error %i registering device %s\n", rc,
 		       dev->name);
+=======
+		dev_err(&pdev->dev, "Could not register net device\n");
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "Could not register net device\n");
 >>>>>>> v3.18
@@ -1519,23 +1767,33 @@ static int cpmac_probe(struct platform_device *pdev)
 
 	if (netif_msg_probe(priv)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO
 		       "cpmac: device %s (regs: %p, irq: %d, phy: %s, "
 		       "mac: %pM)\n", dev->name, (void *)mem->start, dev->irq,
 		       priv->phy_name, dev->dev_addr);
 	}
 =======
+=======
+>>>>>>> v3.18
 		dev_info(&pdev->dev, "regs: %p, irq: %d, phy: %s, "
 			 "mac: %pM\n", (void *)mem->start, dev->irq,
 			 priv->phy_name, dev->dev_addr);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
 fail:
 	free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -1546,27 +1804,39 @@ static int cpmac_remove(struct platform_device *pdev)
 {
 	struct net_device *dev = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unregister_netdev(dev);
 	free_netdev(dev);
 =======
+=======
+>>>>>>> v3.18
 
 	unregister_netdev(dev);
 	free_netdev(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static struct platform_driver cpmac_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.driver.name = "cpmac",
 	.driver.owner = THIS_MODULE,
 	.probe = cpmac_probe,
 =======
+=======
+>>>>>>> v3.18
 	.driver = {
 		.name 	= "cpmac",
 	},
 	.probe 	= cpmac_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.remove = cpmac_remove,
 };
@@ -1590,7 +1860,11 @@ int cpmac_init(void)
 
 	if (!cpmac_mii->priv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "Can't ioremap mdio registers\n");
+=======
+		pr_err("Can't ioremap mdio registers\n");
+>>>>>>> v3.18
 =======
 		pr_err("Can't ioremap mdio registers\n");
 >>>>>>> v3.18
@@ -1599,7 +1873,11 @@ int cpmac_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FIXME: unhardcode gpio&reset bits */
+=======
+#warning FIXME: unhardcode gpio&reset bits
+>>>>>>> v3.18
 =======
 #warning FIXME: unhardcode gpio&reset bits
 >>>>>>> v3.18

@@ -27,6 +27,11 @@
 #define __SAVAGE_DRV_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_legacy.h>
+
+>>>>>>> v3.18
 =======
 #include <drm/drm_legacy.h>
 
@@ -110,7 +115,11 @@ enum savage_family {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct drm_ioctl_desc savage_ioctls[];
+=======
+extern const struct drm_ioctl_desc savage_ioctls[];
+>>>>>>> v3.18
 =======
 extern const struct drm_ioctl_desc savage_ioctls[];
 >>>>>>> v3.18
@@ -170,10 +179,14 @@ typedef struct drm_savage_private {
 	drm_local_map_t fake_dma;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct {
 		int handle;
 		unsigned long base, size;
 	} mtrr[3];
+=======
+	int mtrr_handles[3];
+>>>>>>> v3.18
 =======
 	int mtrr_handles[3];
 >>>>>>> v3.18

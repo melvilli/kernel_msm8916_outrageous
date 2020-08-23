@@ -15,6 +15,7 @@
 #include "sh_pfc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPU_32_PORT5(fn, pfx, sfx)				\
 	PORT_1(fn, pfx##0, sfx), PORT_1(fn, pfx##1, sfx),	\
 	PORT_1(fn, pfx##2, sfx), PORT_1(fn, pfx##3, sfx),	\
@@ -50,6 +51,8 @@
 #define PINMUX_IPSR_MODSEL_DATA(ipsr, fn, ms) PINMUX_DATA(fn##_MARK, FN_##ms, \
 							  FN_##ipsr, FN_##fn)
 =======
+=======
+>>>>>>> v3.18
 #define PORT_GP_12(bank, fn, sfx)					\
 	PORT_GP_1(bank, 0, fn, sfx),  PORT_GP_1(bank, 1, fn, sfx),	\
 	PORT_GP_1(bank, 2, fn, sfx),  PORT_GP_1(bank, 3, fn, sfx),	\
@@ -74,6 +77,9 @@
 #define _GP_INDT(bank, pin, name, sfx)		name##_DATA
 #define GP_INOUTSEL(bank)	PORT_GP_32_REV(bank, _GP_INOUTSEL, unused)
 #define GP_INDT(bank)		PORT_GP_32_REV(bank, _GP_INDT, unused)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -620,7 +626,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const pinmux_enum_t pinmux_data[] = {
+=======
+static const u16 pinmux_data[] = {
+>>>>>>> v3.18
 =======
 static const u16 pinmux_data[] = {
 >>>>>>> v3.18
@@ -1399,7 +1409,11 @@ static const u16 pinmux_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sh_pfc_pin pinmux_pins[] = {
+=======
+static const struct sh_pfc_pin pinmux_pins[] = {
+>>>>>>> v3.18
 =======
 static const struct sh_pfc_pin pinmux_pins[] = {
 >>>>>>> v3.18

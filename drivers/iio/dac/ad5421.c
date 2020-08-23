@@ -76,7 +76,11 @@ struct ad5421_state {
 	 */
 	union {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 d32;
+=======
+		__be32 d32;
+>>>>>>> v3.18
 =======
 		__be32 d32;
 >>>>>>> v3.18
@@ -85,7 +89,10 @@ struct ad5421_state {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct iio_event_spec ad5421_current_event[] = {
 	{
 		.type = IIO_EV_TYPE_THRESH,
@@ -109,6 +116,9 @@ static const struct iio_event_spec ad5421_temp_event[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct iio_chan_spec ad5421_channels[] = {
 	{
@@ -122,10 +132,13 @@ static const struct iio_chan_spec ad5421_channels[] = {
 		.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE) |
 			BIT(IIO_CHAN_INFO_OFFSET),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.scan_type = IIO_ST('u', 16, 16, 0),
 		.event_mask = IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_RISING) |
 			IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_FALLING),
 =======
+=======
+>>>>>>> v3.18
 		.scan_type = {
 			.sign = 'u',
 			.realbits = 16,
@@ -133,13 +146,21 @@ static const struct iio_chan_spec ad5421_channels[] = {
 		},
 		.event_spec = ad5421_current_event,
 		.num_event_specs = ARRAY_SIZE(ad5421_current_event),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
 		.type = IIO_TEMP,
 		.channel = -1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.event_mask = IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_RISING),
+=======
+		.event_spec = ad5421_temp_event,
+		.num_event_specs = ARRAY_SIZE(ad5421_temp_event),
+>>>>>>> v3.18
 =======
 		.event_spec = ad5421_temp_event,
 		.num_event_specs = ARRAY_SIZE(ad5421_temp_event),
@@ -327,6 +348,7 @@ static inline unsigned int ad5421_get_offset(struct ad5421_state *st)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned int ad5421_get_scale(struct ad5421_state *st)
 {
 	unsigned int min, max;
@@ -337,11 +359,17 @@ static inline unsigned int ad5421_get_scale(struct ad5421_state *st)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int ad5421_read_raw(struct iio_dev *indio_dev,
 	struct iio_chan_spec const *chan, int *val, int *val2, long m)
 {
 	struct ad5421_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int min, max;
+>>>>>>> v3.18
 =======
 	unsigned int min, max;
 >>>>>>> v3.18
@@ -359,14 +387,20 @@ static int ad5421_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*val = 0;
 		*val2 = ad5421_get_scale(st);
 		return IIO_VAL_INT_PLUS_MICRO;
 =======
+=======
+>>>>>>> v3.18
 		ad5421_get_current_min_max(st, &min, &max);
 		*val = max - min;
 		*val2 = (1 << 16) * 1000;
 		return IIO_VAL_FRACTIONAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IIO_CHAN_INFO_OFFSET:
 		*val = ad5421_get_offset(st);
@@ -419,7 +453,12 @@ static int ad5421_write_raw(struct iio_dev *indio_dev,
 
 static int ad5421_write_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 event_code, int state)
+=======
+	const struct iio_chan_spec *chan, enum iio_event_type type,
+	enum iio_event_direction dir, int state)
+>>>>>>> v3.18
 =======
 	const struct iio_chan_spec *chan, enum iio_event_type type,
 	enum iio_event_direction dir, int state)
@@ -429,10 +468,16 @@ static int ad5421_write_event_config(struct iio_dev *indio_dev,
 	unsigned int mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (IIO_EVENT_CODE_EXTRACT_CHAN_TYPE(event_code)) {
 	case IIO_CURRENT:
 		if (IIO_EVENT_CODE_EXTRACT_DIR(event_code) ==
 			IIO_EV_DIR_RISING)
+=======
+	switch (chan->type) {
+	case IIO_CURRENT:
+		if (dir == IIO_EV_DIR_RISING)
+>>>>>>> v3.18
 =======
 	switch (chan->type) {
 	case IIO_CURRENT:
@@ -461,7 +506,12 @@ static int ad5421_write_event_config(struct iio_dev *indio_dev,
 
 static int ad5421_read_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 event_code)
+=======
+	const struct iio_chan_spec *chan, enum iio_event_type type,
+	enum iio_event_direction dir)
+>>>>>>> v3.18
 =======
 	const struct iio_chan_spec *chan, enum iio_event_type type,
 	enum iio_event_direction dir)
@@ -471,10 +521,16 @@ static int ad5421_read_event_config(struct iio_dev *indio_dev,
 	unsigned int mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (IIO_EVENT_CODE_EXTRACT_CHAN_TYPE(event_code)) {
 	case IIO_CURRENT:
 		if (IIO_EVENT_CODE_EXTRACT_DIR(event_code) ==
 			IIO_EV_DIR_RISING)
+=======
+	switch (chan->type) {
+	case IIO_CURRENT:
+		if (dir == IIO_EV_DIR_RISING)
+>>>>>>> v3.18
 =======
 	switch (chan->type) {
 	case IIO_CURRENT:
@@ -495,6 +551,7 @@ static int ad5421_read_event_config(struct iio_dev *indio_dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ad5421_read_event_value(struct iio_dev *indio_dev, u64 event_code,
 	int *val)
 {
@@ -502,6 +559,8 @@ static int ad5421_read_event_value(struct iio_dev *indio_dev, u64 event_code,
 
 	switch (IIO_EVENT_CODE_EXTRACT_CHAN_TYPE(event_code)) {
 =======
+=======
+>>>>>>> v3.18
 static int ad5421_read_event_value(struct iio_dev *indio_dev,
 	const struct iio_chan_spec *chan, enum iio_event_type type,
 	enum iio_event_direction dir, enum iio_event_info info, int *val,
@@ -510,6 +569,9 @@ static int ad5421_read_event_value(struct iio_dev *indio_dev,
 	int ret;
 
 	switch (chan->type) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IIO_CURRENT:
 		ret = ad5421_read(indio_dev, AD5421_REG_DAC_DATA);
@@ -525,7 +587,11 @@ static int ad5421_read_event_value(struct iio_dev *indio_dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return IIO_VAL_INT;
+>>>>>>> v3.18
 =======
 	return IIO_VAL_INT;
 >>>>>>> v3.18
@@ -548,7 +614,11 @@ static int ad5421_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 >>>>>>> v3.18
@@ -585,7 +655,11 @@ static int ad5421_probe(struct spi_device *spi)
 
 	if (spi->irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_threaded_irq(spi->irq,
+=======
+		ret = devm_request_threaded_irq(&spi->dev, spi->irq,
+>>>>>>> v3.18
 =======
 		ret = devm_request_threaded_irq(&spi->dev, spi->irq,
 >>>>>>> v3.18
@@ -595,6 +669,7 @@ static int ad5421_probe(struct spi_device *spi)
 					   "ad5421 fault",
 					   indio_dev);
 		if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			goto error_free;
 	}
@@ -627,10 +702,15 @@ static int ad5421_remove(struct spi_device *spi)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 			return ret;
 	}
 
 	return devm_iio_device_register(&spi->dev, indio_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -641,7 +721,10 @@ static struct spi_driver ad5421_driver = {
 	},
 	.probe = ad5421_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ad5421_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

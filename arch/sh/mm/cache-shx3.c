@@ -20,7 +20,11 @@ void __init shx3_cache_init(void)
 	unsigned int ccr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccr = __raw_readl(CCR);
+=======
+	ccr = __raw_readl(SH_CCR);
+>>>>>>> v3.18
 =======
 	ccr = __raw_readl(SH_CCR);
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ void __init shx3_cache_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel_uncached(ccr, CCR);
+=======
+	writel_uncached(ccr, SH_CCR);
+>>>>>>> v3.18
 =======
 	writel_uncached(ccr, SH_CCR);
 >>>>>>> v3.18

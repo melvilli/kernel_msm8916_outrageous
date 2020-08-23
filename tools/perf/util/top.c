@@ -24,6 +24,7 @@
 size_t perf_top__header_snprintf(struct perf_top *top, char *bf, size_t size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	float samples_per_sec = top->samples / top->delay_secs;
 	float ksamples_per_sec = top->kernel_samples / top->delay_secs;
 	float esamples_percent = (100.0 * top->exact_samples) / top->samples;
@@ -39,6 +40,8 @@ size_t perf_top__header_snprintf(struct perf_top *top, char *bf, size_t size)
 					samples_per_sec)),
 				esamples_percent);
 =======
+=======
+>>>>>>> v3.18
 	float samples_per_sec;
 	float ksamples_per_sec;
 	float esamples_percent;
@@ -64,6 +67,9 @@ size_t perf_top__header_snprintf(struct perf_top *top, char *bf, size_t size)
 			       "   PerfTop:%8.0f irqs/sec  kernel:%4.1f%%"
 			       "  exact: %4.1f%% [", samples_per_sec,
 			       ksamples_percent, esamples_percent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		float us_samples_per_sec = top->us_samples / top->delay_secs;

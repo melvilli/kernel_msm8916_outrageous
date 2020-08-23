@@ -612,7 +612,10 @@ bail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t show_logged_errs(struct device *device,
 				struct device_attribute *attr, char *buf)
 {
@@ -635,6 +638,9 @@ static ssize_t show_logged_errs(struct device *device,
 	return count;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Dump tempsense regs. in decimal, to ease shell-scripts.
@@ -683,6 +689,10 @@ static DEVICE_ATTR(nfreectxts, S_IRUGO, show_nfreectxts, NULL);
 static DEVICE_ATTR(serial, S_IRUGO, show_serial, NULL);
 static DEVICE_ATTR(boardversion, S_IRUGO, show_boardversion, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(logged_errors, S_IRUGO, show_logged_errs, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(logged_errors, S_IRUGO, show_logged_errs, NULL);
 >>>>>>> v3.18
@@ -700,6 +710,10 @@ static struct device_attribute *qib_attributes[] = {
 	&dev_attr_serial,
 	&dev_attr_boardversion,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&dev_attr_logged_errors,
+>>>>>>> v3.18
 =======
 	&dev_attr_logged_errors,
 >>>>>>> v3.18

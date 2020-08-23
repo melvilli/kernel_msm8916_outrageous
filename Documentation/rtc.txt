@@ -154,14 +154,20 @@ time:		 RTC-provided time
 wakealarm:	 The time at which the clock will generate a system wakeup
 		 event. This is a one shot wakeup event, so must be reset
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 after wake if a daily wakeup is required. Format is either
 		 seconds since the epoch or, if there's a leading +, seconds
 		 in the future.
 =======
+=======
+>>>>>>> v3.18
 		 after wake if a daily wakeup is required. Format is seconds since
 		 the epoch by default, or if there's a leading +, seconds in the
 		 future, or if there is a leading +=, seconds ahead of the current
 		 alarm.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 IOCTL INTERFACE

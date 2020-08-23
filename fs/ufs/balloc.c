@@ -25,7 +25,11 @@
 #define INVBLOCK ((u64)-1L)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 ufs_add_fragments(struct inode *, u64, unsigned, unsigned, int *);
+=======
+static u64 ufs_add_fragments(struct inode *, u64, unsigned, unsigned);
+>>>>>>> v3.18
 =======
 static u64 ufs_add_fragments(struct inode *, u64, unsigned, unsigned);
 >>>>>>> v3.18
@@ -43,7 +47,10 @@ void ufs_free_fragments(struct inode *inode, u64 fragment, unsigned count)
 	struct super_block * sb;
 	struct ufs_sb_private_info * uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_first * usb1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ufs_cg_private_info * ucpi;
@@ -54,7 +61,10 @@ void ufs_free_fragments(struct inode *inode, u64 fragment, unsigned count)
 	sb = inode->i_sb;
 	uspi = UFS_SB(sb)->s_uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first(uspi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	
@@ -65,7 +75,11 @@ void ufs_free_fragments(struct inode *inode, u64 fragment, unsigned count)
 		ufs_error (sb, "ufs_free_fragments", "internal error");
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&UFS_SB(sb)->s_lock);
+=======
+	lock_ufs(sb);
+>>>>>>> v3.18
 =======
 	lock_ufs(sb);
 >>>>>>> v3.18
@@ -133,7 +147,11 @@ void ufs_free_fragments(struct inode *inode, u64 fragment, unsigned count)
 	ufs_mark_sb_dirty(sb);
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+	unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 >>>>>>> v3.18
@@ -142,7 +160,11 @@ void ufs_free_fragments(struct inode *inode, u64 fragment, unsigned count)
 
 failed:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+	unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 >>>>>>> v3.18
@@ -158,7 +180,10 @@ void ufs_free_blocks(struct inode *inode, u64 fragment, unsigned count)
 	struct super_block * sb;
 	struct ufs_sb_private_info * uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_first * usb1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ufs_cg_private_info * ucpi;
@@ -169,7 +194,10 @@ void ufs_free_blocks(struct inode *inode, u64 fragment, unsigned count)
 	sb = inode->i_sb;
 	uspi = UFS_SB(sb)->s_uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first(uspi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -184,7 +212,11 @@ void ufs_free_blocks(struct inode *inode, u64 fragment, unsigned count)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&UFS_SB(sb)->s_lock);
+=======
+	lock_ufs(sb);
+>>>>>>> v3.18
 =======
 	lock_ufs(sb);
 >>>>>>> v3.18
@@ -248,7 +280,11 @@ do_more:
 
 	ufs_mark_sb_dirty(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+	unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 >>>>>>> v3.18
@@ -257,7 +293,11 @@ do_more:
 
 failed_unlock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+	unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 >>>>>>> v3.18
@@ -402,7 +442,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 	*err = -ENOSPC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&UFS_SB(sb)->s_lock);
+=======
+	lock_ufs(sb);
+>>>>>>> v3.18
 =======
 	lock_ufs(sb);
 >>>>>>> v3.18
@@ -427,7 +471,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 				  (unsigned long long)fragment,
 				  (unsigned long long)tmp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+			unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 			unlock_ufs(sb);
 >>>>>>> v3.18
@@ -436,7 +484,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 		if (fragment < UFS_I(inode)->i_lastfrag) {
 			UFSD("EXIT (ALREADY ALLOCATED)\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+			unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 			unlock_ufs(sb);
 >>>>>>> v3.18
@@ -447,7 +499,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 		if (tmp) {
 			UFSD("EXIT (ALREADY ALLOCATED)\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+			unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 			unlock_ufs(sb);
 >>>>>>> v3.18
@@ -460,7 +516,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 	 */
 	if (!capable(CAP_SYS_RESOURCE) && ufs_freespace(uspi, UFS_MINFREE) <= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+		unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 		unlock_ufs(sb);
 >>>>>>> v3.18
@@ -489,7 +549,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 					newcount - oldcount, locked_page != NULL);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+		unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 		unlock_ufs(sb);
 >>>>>>> v3.18
@@ -501,7 +565,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 	 * resize block
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = ufs_add_fragments (inode, tmp, oldcount, newcount, err);
+=======
+	result = ufs_add_fragments(inode, tmp, oldcount, newcount);
+>>>>>>> v3.18
 =======
 	result = ufs_add_fragments(inode, tmp, oldcount, newcount);
 >>>>>>> v3.18
@@ -512,7 +580,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 		ufs_clear_frags(inode, result + oldcount, newcount - oldcount,
 				locked_page != NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+		unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 		unlock_ufs(sb);
 >>>>>>> v3.18
@@ -554,7 +626,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 		UFS_I(inode)->i_lastfrag = max(UFS_I(inode)->i_lastfrag,
 						fragment + count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+		unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 		unlock_ufs(sb);
 >>>>>>> v3.18
@@ -566,7 +642,11 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&UFS_SB(sb)->s_lock);
+=======
+	unlock_ufs(sb);
+>>>>>>> v3.18
 =======
 	unlock_ufs(sb);
 >>>>>>> v3.18
@@ -576,16 +656,22 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
 
 static u64 ufs_add_fragments(struct inode *inode, u64 fragment,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     unsigned oldcount, unsigned newcount, int *err)
 {
 	struct super_block * sb;
 	struct ufs_sb_private_info * uspi;
 	struct ufs_super_block_first * usb1;
 =======
+=======
+>>>>>>> v3.18
 			     unsigned oldcount, unsigned newcount)
 {
 	struct super_block * sb;
 	struct ufs_sb_private_info * uspi;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct ufs_cg_private_info * ucpi;
 	struct ufs_cylinder_group * ucg;
@@ -597,7 +683,10 @@ static u64 ufs_add_fragments(struct inode *inode, u64 fragment,
 	sb = inode->i_sb;
 	uspi = UFS_SB(sb)->s_uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first (uspi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	count = newcount - oldcount;
@@ -668,7 +757,10 @@ static u64 ufs_alloc_fragments(struct inode *inode, unsigned cgno,
 	struct super_block * sb;
 	struct ufs_sb_private_info * uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_first * usb1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ufs_cg_private_info * ucpi;
@@ -682,7 +774,10 @@ static u64 ufs_alloc_fragments(struct inode *inode, unsigned cgno,
 	sb = inode->i_sb;
 	uspi = UFS_SB(sb)->s_uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first(uspi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	oldcg = cgno;
@@ -787,7 +882,10 @@ static u64 ufs_alloccg_block(struct inode *inode,
 	struct super_block * sb;
 	struct ufs_sb_private_info * uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_first * usb1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ufs_cylinder_group * ucg;
@@ -798,7 +896,10 @@ static u64 ufs_alloccg_block(struct inode *inode,
 	sb = inode->i_sb;
 	uspi = UFS_SB(sb)->s_uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first(uspi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ucg = ubh_get_ucg(UCPI_UBH(ucpi));
@@ -897,8 +998,11 @@ static u64 ufs_bitmap_search(struct super_block *sb,
 	};
 	struct ufs_sb_private_info *uspi = UFS_SB(sb)->s_uspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ufs_super_block_first *usb1;
 	struct ufs_cylinder_group *ucg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned start, length, loc;
@@ -909,9 +1013,12 @@ static u64 ufs_bitmap_search(struct super_block *sb,
 	     (unsigned long long)goal, count);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb1 = ubh_get_usb_first (uspi);
 	ucg = ubh_get_ucg(UCPI_UBH(ucpi));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (goal)

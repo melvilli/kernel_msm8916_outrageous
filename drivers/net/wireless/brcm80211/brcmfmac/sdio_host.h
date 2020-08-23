@@ -19,6 +19,11 @@
 
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/firmware.h>
+#include "firmware.h"
+>>>>>>> v3.18
 =======
 #include <linux/firmware.h>
 #include "firmware.h"
@@ -78,6 +83,7 @@
 /* sprom indirect access addr byte 0 */
 #define SBSDIO_SPROM_ADDR_LOW		0x10004
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* sprom indirect access addr byte 0 */
 #define SBSDIO_SPROM_ADDR_HIGH		0x10005
 /* xtal_pu (gpio) output */
@@ -85,12 +91,17 @@
 /* xtal_pu (gpio) enable */
 #define SBSDIO_CHIP_CTRL_EN		0x10007
 =======
+=======
+>>>>>>> v3.18
 /* gpio select */
 #define SBSDIO_GPIO_SELECT		0x10005
 /* gpio output */
 #define SBSDIO_GPIO_OUT			0x10006
 /* gpio enable */
 #define SBSDIO_GPIO_EN			0x10007
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* rev < 7, watermark for sdio device */
 #define SBSDIO_WATERMARK		0x10008
@@ -179,6 +190,7 @@ struct brcmf_sdio_dev {
 	struct sdio_func *func[SDIO_MAX_FUNCS];
 	u8 num_funcs;			/* Supported funcs on client */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 func_cis_ptr[SDIOD_MAX_IOFUNCS];
 	u32 sbwad;			/* Save backplane window address */
 	void *bus;
@@ -187,10 +199,15 @@ struct brcmf_sdio_dev {
 	wait_queue_head_t request_word_wait;
 	wait_queue_head_t request_chain_wait;
 =======
+=======
+>>>>>>> v3.18
 	u32 sbwad;			/* Save backplane window address */
 	struct brcmf_sdio *bus;
 	atomic_t suspend;		/* suspend flag */
 	wait_queue_head_t request_word_wait;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wait_queue_head_t request_buffer_wait;
 	struct device *dev;
@@ -200,6 +217,7 @@ struct brcmf_sdio_dev {
 	bool irq_en;			/* irq enable flags */
 	spinlock_t irq_en_lock;
 	bool irq_wake;			/* irq wake enable flags */
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -221,6 +239,8 @@ extern int brcmf_sdio_regrw_helper(struct brcmf_sdio_dev *sdiodev, u32 addr,
  *   fn:       function number
  *   addr:     backplane address (i.e. >= regsva from attach)
 =======
+=======
+>>>>>>> v3.18
 	bool sg_support;
 	uint max_request_size;
 	ushort max_segment_count;
@@ -334,6 +354,9 @@ void brcmf_sdiod_regwl(struct brcmf_sdio_dev *sdiodev, u32 addr, u32 data,
 
 /* Buffer transfer to/from device (client) core via cmd53.
  *   fn:       function number
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *   flags:    backplane width, address increment, sync/async
  *   buf:      pointer to memory data buffer
@@ -344,6 +367,7 @@ void brcmf_sdiod_regwl(struct brcmf_sdio_dev *sdiodev, u32 addr, u32 data,
  * Returns 0 or error code.
  * NOTE: Async operation is not currently supported.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int
 brcmf_sdcard_send_pkt(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
@@ -362,6 +386,8 @@ extern int
 brcmf_sdcard_recv_chain(struct brcmf_sdio_dev *sdiodev, u32 addr, uint fn,
 			uint flags, struct sk_buff_head *pktq);
 =======
+=======
+>>>>>>> v3.18
 int brcmf_sdiod_send_pkt(struct brcmf_sdio_dev *sdiodev,
 			 struct sk_buff_head *pktq);
 int brcmf_sdiod_send_buf(struct brcmf_sdio_dev *sdiodev, u8 *buf, uint nbytes);
@@ -370,6 +396,9 @@ int brcmf_sdiod_recv_pkt(struct brcmf_sdio_dev *sdiodev, struct sk_buff *pkt);
 int brcmf_sdiod_recv_buf(struct brcmf_sdio_dev *sdiodev, u8 *buf, uint nbytes);
 int brcmf_sdiod_recv_chain(struct brcmf_sdio_dev *sdiodev,
 			   struct sk_buff_head *pktq, uint totlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Flags bits */
@@ -379,8 +408,11 @@ int brcmf_sdiod_recv_chain(struct brcmf_sdio_dev *sdiodev,
 /* Fixed address (FIFO) (vs. incrementing address) */
 #define SDIO_REQ_FIXED	0x2
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Async request (vs. sync request) */
 #define SDIO_REQ_ASYNC	0x4
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -391,6 +423,7 @@ int brcmf_sdiod_recv_chain(struct brcmf_sdio_dev *sdiodev,
  *   nbytes:   number of bytes to transfer to/from buf
  * Returns 0 or error code.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int brcmf_sdcard_rwdata(struct brcmf_sdio_dev *sdiodev, uint rw,
 			       u32 addr, u8 *buf, uint nbytes);
@@ -444,6 +477,8 @@ extern void brcmf_sdbrcm_isr(void *arg);
 
 extern void brcmf_sdbrcm_wd_timer(struct brcmf_sdio *bus, uint wdtick);
 =======
+=======
+>>>>>>> v3.18
 int brcmf_sdiod_ramrw(struct brcmf_sdio_dev *sdiodev, bool write, u32 address,
 		      u8 *data, uint size);
 
@@ -456,5 +491,8 @@ void brcmf_sdio_isr(struct brcmf_sdio *bus);
 
 void brcmf_sdio_wd_timer(struct brcmf_sdio *bus, uint wdtick);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* _BRCM_SDH_H_ */

@@ -35,12 +35,15 @@
 #include <linux/freezer.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_sb.h"
 #include "xfs_log.h"
 #include "xfs_ag.h"
 #include "xfs_mount.h"
 #include "xfs_trace.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
 #include "xfs_sb.h"
@@ -48,6 +51,9 @@
 #include "xfs_mount.h"
 #include "xfs_trace.h"
 #include "xfs_log.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static kmem_zone_t *xfs_buf_zone;
@@ -90,6 +96,7 @@ xfs_buf_vmap_len(
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xfs_buf_lru_add - add a buffer to the LRU.
  *
@@ -141,6 +148,8 @@ xfs_buf_lru_del(
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * When we mark a buffer stale, we remove the buffer from the LRU and clear the
  * b_lru_ref count so that the buffer is freed immediately when the buffer
  * reference count falls to zero. If the buffer is already on the LRU, we need
@@ -164,6 +173,7 @@ xfs_buf_stale(
 	bp->b_flags &= ~_XBF_DELWRI_Q;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_set(&(bp)->b_lru_ref, 0);
 	if (!list_empty(&bp->b_lru)) {
 		struct xfs_buftarg *btp = bp->b_target;
@@ -179,6 +189,8 @@ xfs_buf_stale(
 	}
 	ASSERT(atomic_read(&bp->b_hold) >= 1);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&bp->b_lock);
 	atomic_set(&bp->b_lru_ref, 0);
 	if (!(bp->b_state & XFS_BSTATE_DISPOSE) &&
@@ -187,6 +199,9 @@ xfs_buf_stale(
 
 	ASSERT(atomic_read(&bp->b_hold) >= 1);
 	spin_unlock(&bp->b_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -207,7 +222,11 @@ xfs_buf_get_maps(
 				KM_NOFS);
 	if (!bp->b_maps)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ENOMEM;
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -256,6 +275,10 @@ _xfs_buf_alloc(
 	RB_CLEAR_NODE(&bp->b_rbnode);
 	sema_init(&bp->b_sema, 0); /* held, no waiters */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&bp->b_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&bp->b_lock);
 >>>>>>> v3.18
@@ -300,8 +323,12 @@ STATIC int
 _xfs_buf_get_pages(
 	xfs_buf_t		*bp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			page_count,
 	xfs_buf_flags_t		flags)
+=======
+	int			page_count)
+>>>>>>> v3.18
 =======
 	int			page_count)
 >>>>>>> v3.18
@@ -340,7 +367,11 @@ _xfs_buf_free_pages(
  *
  * 	The modification state of any associated pages is left unchanged.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	The buffer most not be on any hash - use xfs_buf_rele instead for
+=======
+ * 	The buffer must not be on any hash - use xfs_buf_rele instead for
+>>>>>>> v3.18
 =======
  * 	The buffer must not be on any hash - use xfs_buf_rele instead for
 >>>>>>> v3.18
@@ -422,7 +453,11 @@ use_alloc_page:
 								>> PAGE_SHIFT;
 	page_count = end - start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = _xfs_buf_get_pages(bp, page_count, flags);
+=======
+	error = _xfs_buf_get_pages(bp, page_count);
+>>>>>>> v3.18
 =======
 	error = _xfs_buf_get_pages(bp, page_count);
 >>>>>>> v3.18
@@ -441,7 +476,11 @@ retry:
 			if (flags & XBF_READ_AHEAD) {
 				bp->b_page_count = i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				error = ENOMEM;
+=======
+				error = -ENOMEM;
+>>>>>>> v3.18
 =======
 				error = -ENOMEM;
 >>>>>>> v3.18
@@ -477,7 +516,10 @@ out_free_pages:
 	for (i = 0; i < bp->b_page_count; i++)
 		__free_page(bp->b_pages[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bp->b_flags &= ~_XBF_PAGES;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return error;
@@ -500,8 +542,11 @@ _xfs_buf_map_pages(
 	} else {
 		int retried = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 		unsigned noio_flag;
 
 		/*
@@ -513,6 +558,9 @@ _xfs_buf_map_pages(
 		 * potentially deadlocking.
 		 */
 		noio_flag = memalloc_noio_save();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		do {
 			bp->b_addr = vm_map_ram(bp->b_pages, bp->b_page_count,
@@ -522,6 +570,10 @@ _xfs_buf_map_pages(
 			vm_unmap_aliases();
 		} while (retried++ <= 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		memalloc_noio_restore(noio_flag);
+>>>>>>> v3.18
 =======
 		memalloc_noio_restore(noio_flag);
 >>>>>>> v3.18
@@ -567,8 +619,13 @@ _xfs_buf_find(
 
 	/* Check for IOs smaller than the sector size / not sector aligned */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ASSERT(!(numbytes < (1 << btp->bt_sshift)));
 	ASSERT(!(BBTOB(blkno) & (xfs_off_t)btp->bt_smask));
+=======
+	ASSERT(!(numbytes < btp->bt_meta_sectorsize));
+	ASSERT(!(BBTOB(blkno) & (xfs_off_t)btp->bt_meta_sectormask));
+>>>>>>> v3.18
 =======
 	ASSERT(!(numbytes < btp->bt_meta_sectorsize));
 	ASSERT(!(BBTOB(blkno) & (xfs_off_t)btp->bt_meta_sectormask));
@@ -582,7 +639,11 @@ _xfs_buf_find(
 	if (blkno >= eofs) {
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * XXX (dgc): we should really be returning EFSCORRUPTED here,
+=======
+		 * XXX (dgc): we should really be returning -EFSCORRUPTED here,
+>>>>>>> v3.18
 =======
 		 * XXX (dgc): we should really be returning -EFSCORRUPTED here,
 >>>>>>> v3.18
@@ -722,7 +783,11 @@ found:
 		if (unlikely(error)) {
 			xfs_warn(target->bt_mount,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"%s: failed to map pages\n", __func__);
+=======
+				"%s: failed to map pagesn", __func__);
+>>>>>>> v3.18
 =======
 				"%s: failed to map pagesn", __func__);
 >>>>>>> v3.18
@@ -748,16 +813,22 @@ _xfs_buf_read(
 	bp->b_flags |= flags & (XBF_READ | XBF_ASYNC | XBF_READ_AHEAD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfs_buf_iorequest(bp);
 	if (flags & XBF_ASYNC)
 		return 0;
 	return xfs_buf_iowait(bp);
 =======
+=======
+>>>>>>> v3.18
 	if (flags & XBF_ASYNC) {
 		xfs_buf_submit(bp);
 		return 0;
 	}
 	return xfs_buf_submit_wait(bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -820,7 +891,11 @@ xfs_buf_readahead_map(
  * buffer containing the disk contents or nothing.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xfs_buf *
+=======
+int
+>>>>>>> v3.18
 =======
 int
 >>>>>>> v3.18
@@ -830,6 +905,10 @@ xfs_buf_read_uncached(
 	size_t			numblks,
 	int			flags,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct xfs_buf		**bpp,
+>>>>>>> v3.18
 =======
 	struct xfs_buf		**bpp,
 >>>>>>> v3.18
@@ -837,6 +916,7 @@ xfs_buf_read_uncached(
 {
 	struct xfs_buf		*bp;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bp = xfs_buf_get_uncached(target, numblks, flags);
 	if (!bp)
@@ -846,6 +926,8 @@ xfs_buf_read_uncached(
 	ASSERT(bp->b_map_count == 1);
 	bp->b_bn = daddr;
 =======
+=======
+>>>>>>> v3.18
 	*bpp = NULL;
 
 	bp = xfs_buf_get_uncached(target, numblks, flags);
@@ -855,16 +937,22 @@ xfs_buf_read_uncached(
 	/* set up the buffer for a read IO */
 	ASSERT(bp->b_map_count == 1);
 	bp->b_bn = XFS_BUF_DADDR_NULL;  /* always null for uncached buffers */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	bp->b_maps[0].bm_bn = daddr;
 	bp->b_flags |= XBF_READ;
 	bp->b_ops = ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xfsbdstrat(target->bt_mount, bp);
 	xfs_buf_iowait(bp);
 	return bp;
 =======
+=======
+>>>>>>> v3.18
 	xfs_buf_submit_wait(bp);
 	if (bp->b_error) {
 		int	error = bp->b_error;
@@ -874,6 +962,9 @@ xfs_buf_read_uncached(
 
 	*bpp = bp;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -938,7 +1029,11 @@ xfs_buf_associate_memory(
 	bp->b_addr = mem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rval = _xfs_buf_get_pages(bp, page_count, 0);
+=======
+	rval = _xfs_buf_get_pages(bp, page_count);
+>>>>>>> v3.18
 =======
 	rval = _xfs_buf_get_pages(bp, page_count);
 >>>>>>> v3.18
@@ -975,7 +1070,11 @@ xfs_buf_get_uncached(
 
 	page_count = PAGE_ALIGN(numblks << BBSHIFT) >> PAGE_SHIFT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = _xfs_buf_get_pages(bp, page_count, 0);
+=======
+	error = _xfs_buf_get_pages(bp, page_count);
+>>>>>>> v3.18
 =======
 	error = _xfs_buf_get_pages(bp, page_count);
 >>>>>>> v3.18
@@ -993,7 +1092,11 @@ xfs_buf_get_uncached(
 	if (unlikely(error)) {
 		xfs_warn(target->bt_mount,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"%s: failed to map pages\n", __func__);
+=======
+			"%s: failed to map pages", __func__);
+>>>>>>> v3.18
 =======
 			"%s: failed to map pages", __func__);
 >>>>>>> v3.18
@@ -1052,6 +1155,7 @@ xfs_buf_rele(
 	ASSERT(atomic_read(&bp->b_hold) > 0);
 	if (atomic_dec_and_lock(&bp->b_hold, &pag->pag_buf_lock)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!(bp->b_flags & XBF_STALE) &&
 			   atomic_read(&bp->b_lru_ref)) {
 			xfs_buf_lru_add(bp);
@@ -1059,6 +1163,8 @@ xfs_buf_rele(
 		} else {
 			xfs_buf_lru_del(bp);
 =======
+=======
+>>>>>>> v3.18
 		spin_lock(&bp->b_lock);
 		if (!(bp->b_flags & XBF_STALE) && atomic_read(&bp->b_lru_ref)) {
 			/*
@@ -1086,6 +1192,9 @@ xfs_buf_rele(
 			}
 			spin_unlock(&bp->b_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ASSERT(!(bp->b_flags & _XBF_DELWRI_Q));
 			rb_erase(&bp->b_rbnode, &pag->pag_buf_tree);
@@ -1180,6 +1289,7 @@ xfs_buf_wait_unpin(
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC void
 xfs_buf_iodone_work(
 	struct work_struct	*work)
@@ -1194,6 +1304,8 @@ xfs_buf_iodone_work(
 	if (read && bp->b_ops && !bp->b_error && (bp->b_flags & XBF_DONE))
 		bp->b_ops->verify_read(bp);
 =======
+=======
+>>>>>>> v3.18
 void
 xfs_buf_ioend(
 	struct xfs_buf	*bp)
@@ -1219,12 +1331,16 @@ xfs_buf_ioend(
 
 	if (!bp->b_error)
 		bp->b_flags |= XBF_DONE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (bp->b_iodone)
 		(*(bp->b_iodone))(bp);
 	else if (bp->b_flags & XBF_ASYNC)
 		xfs_buf_relse(bp);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	else {
 		ASSERT(read && bp->b_ops);
@@ -1256,6 +1372,8 @@ xfs_buf_ioend(
 		complete(&bp->b_iowait);
 	}
 =======
+=======
+>>>>>>> v3.18
 	else
 		complete(&bp->b_iowait);
 }
@@ -1276,6 +1394,9 @@ xfs_buf_ioend_async(
 {
 	INIT_WORK(&bp->b_iodone_work, xfs_buf_ioend_work);
 	queue_work(xfslogd_workqueue, &bp->b_iodone_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1285,8 +1406,13 @@ xfs_buf_ioerror(
 	int			error)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ASSERT(error >= 0 && error <= 0xffff);
 	bp->b_error = (unsigned short)error;
+=======
+	ASSERT(error <= 0 && error >= -1000);
+	bp->b_error = error;
+>>>>>>> v3.18
 =======
 	ASSERT(error <= 0 && error >= -1000);
 	bp->b_error = error;
@@ -1301,6 +1427,7 @@ xfs_buf_ioerror_alert(
 {
 	xfs_alert(bp->b_target->bt_mount,
 "metadata I/O error: block 0x%llx (\"%s\") error %d numblks %d",
+<<<<<<< HEAD
 <<<<<<< HEAD
 		(__uint64_t)XFS_BUF_ADDR(bp), func, bp->b_error, bp->b_length);
 }
@@ -1396,6 +1523,9 @@ xfs_bdstrat_cb(
 =======
 		(__uint64_t)XFS_BUF_ADDR(bp), func, -bp->b_error, bp->b_length);
 >>>>>>> v3.18
+=======
+		(__uint64_t)XFS_BUF_ADDR(bp), func, -bp->b_error, bp->b_length);
+>>>>>>> v3.18
 }
 
 int
@@ -1408,16 +1538,22 @@ xfs_bwrite(
 
 	bp->b_flags |= XBF_WRITE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bp->b_flags &= ~(XBF_ASYNC | XBF_READ | _XBF_DELWRI_Q);
 
 	xfs_bdstrat_cb(bp);
 
 	error = xfs_buf_iowait(bp);
 =======
+=======
+>>>>>>> v3.18
 	bp->b_flags &= ~(XBF_ASYNC | XBF_READ | _XBF_DELWRI_Q |
 			 XBF_WRITE_FAIL | XBF_DONE);
 
 	error = xfs_buf_submit_wait(bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (error) {
 		xfs_force_shutdown(bp->b_target->bt_mount,
@@ -1426,6 +1562,7 @@ xfs_bwrite(
 	return error;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Wrapper around bdstrat so that we can stop data from going to disk in case
@@ -1457,6 +1594,8 @@ _xfs_buf_ioend(
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 STATIC void
 xfs_buf_bio_end_io(
 	struct bio		*bio,
@@ -1469,22 +1608,33 @@ xfs_buf_bio_end_io(
 	 * buffers that require multiple bios to complete.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!bp->b_error)
 		xfs_buf_ioerror(bp, -error);
 =======
+=======
+>>>>>>> v3.18
 	if (error) {
 		spin_lock(&bp->b_lock);
 		if (!bp->b_io_error)
 			bp->b_io_error = error;
 		spin_unlock(&bp->b_lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!bp->b_error && xfs_buf_is_vmapped(bp) && (bp->b_flags & XBF_READ))
 		invalidate_kernel_vmap_range(bp->b_addr, xfs_buf_vmap_len(bp));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_xfs_buf_ioend(bp, 1);
+=======
+	if (atomic_dec_and_test(&bp->b_io_remaining) == 1)
+		xfs_buf_ioend_async(bp);
+>>>>>>> v3.18
 =======
 	if (atomic_dec_and_test(&bp->b_io_remaining) == 1)
 		xfs_buf_ioend_async(bp);
@@ -1535,7 +1685,11 @@ next_chunk:
 	bio = bio_alloc(GFP_NOIO, nr_pages);
 	bio->bi_bdev = bp->b_target->bt_bdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio->bi_sector = sector;
+=======
+	bio->bi_iter.bi_sector = sector;
+>>>>>>> v3.18
 =======
 	bio->bi_iter.bi_sector = sector;
 >>>>>>> v3.18
@@ -1561,7 +1715,11 @@ next_chunk:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(bio->bi_size)) {
+=======
+	if (likely(bio->bi_iter.bi_size)) {
+>>>>>>> v3.18
 =======
 	if (likely(bio->bi_iter.bi_size)) {
 >>>>>>> v3.18
@@ -1576,15 +1734,21 @@ next_chunk:
 		/*
 		 * This is guaranteed not to be the last io reference count
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * because the caller (xfs_buf_iorequest) holds a count itself.
 		 */
 		atomic_dec(&bp->b_io_remaining);
 		xfs_buf_ioerror(bp, EIO);
 =======
+=======
+>>>>>>> v3.18
 		 * because the caller (xfs_buf_submit) holds a count itself.
 		 */
 		atomic_dec(&bp->b_io_remaining);
 		xfs_buf_ioerror(bp, -EIO);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bio_put(bio);
 	}
@@ -1630,7 +1794,10 @@ _xfs_buf_ioapply(
 				return;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if (bp->b_bn != XFS_BUF_DADDR_NULL) {
 			struct xfs_mount *mp = bp->b_target->bt_mount;
 
@@ -1645,6 +1812,9 @@ _xfs_buf_ioapply(
 				xfs_hex_dump(bp->b_addr, 64);
 				dump_stack();
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else if (bp->b_flags & XBF_READ_AHEAD) {
@@ -1675,6 +1845,7 @@ _xfs_buf_ioapply(
 	blk_finish_plug(&plug);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void
 xfs_buf_iorequest(
@@ -1716,6 +1887,8 @@ xfs_buf_iowait(
 	trace_xfs_buf_iowait_done(bp, _RET_IP_);
 	return bp->b_error;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Asynchronous IO submission path. This transfers the buffer lock ownership and
  * the current reference to the IO. It is not safe to reference the buffer after
@@ -1841,6 +2014,9 @@ xfs_buf_submit_wait(
 	 */
 	xfs_buf_rele(bp);
 	return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1911,7 +2087,10 @@ xfs_buf_iomove(
  * while freeing all the buffers only held by the LRU.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static enum lru_status
 xfs_buftarg_wait_rele(
 	struct list_head	*item,
@@ -1941,11 +2120,15 @@ xfs_buftarg_wait_rele(
 	return LRU_REMOVED;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void
 xfs_wait_buftarg(
 	struct xfs_buftarg	*btp)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct xfs_buf		*bp;
 
@@ -1975,6 +2158,8 @@ restart:
 int
 xfs_buftarg_shrink(
 =======
+=======
+>>>>>>> v3.18
 	LIST_HEAD(dispose);
 	int loop = 0;
 
@@ -2033,12 +2218,16 @@ xfs_buftarg_isolate(
 
 static unsigned long
 xfs_buftarg_shrink_scan(
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct shrinker		*shrink,
 	struct shrink_control	*sc)
 {
 	struct xfs_buftarg	*btp = container_of(shrink,
 					struct xfs_buftarg, bt_shrinker);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct xfs_buf		*bp;
 	int nr_to_scan = sc->nr_to_scan;
@@ -2076,6 +2265,8 @@ xfs_buftarg_shrink_scan(
 
 	while (!list_empty(&dispose)) {
 =======
+=======
+>>>>>>> v3.18
 	LIST_HEAD(dispose);
 	unsigned long		freed;
 	unsigned long		nr_to_scan = sc->nr_to_scan;
@@ -2085,6 +2276,9 @@ xfs_buftarg_shrink_scan(
 
 	while (!list_empty(&dispose)) {
 		struct xfs_buf *bp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bp = list_first_entry(&dispose, struct xfs_buf, b_lru);
 		list_del_init(&bp->b_lru);
@@ -2092,8 +2286,11 @@ xfs_buftarg_shrink_scan(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return btp->bt_lru_nr;
 =======
+=======
+>>>>>>> v3.18
 	return freed;
 }
 
@@ -2105,6 +2302,9 @@ xfs_buftarg_shrink_count(
 	struct xfs_buftarg	*btp = container_of(shrink,
 					struct xfs_buftarg, bt_shrinker);
 	return list_lru_count_node(&btp->bt_lru, sc->nid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2115,6 +2315,10 @@ xfs_free_buftarg(
 {
 	unregister_shrinker(&btp->bt_shrinker);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	list_lru_destroy(&btp->bt_lru);
+>>>>>>> v3.18
 =======
 	list_lru_destroy(&btp->bt_lru);
 >>>>>>> v3.18
@@ -2125,6 +2329,7 @@ xfs_free_buftarg(
 	kmem_free(btp);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 STATIC int
 xfs_setsize_buftarg_flags(
@@ -2137,6 +2342,8 @@ xfs_setsize_buftarg_flags(
 	btp->bt_sshift = ffs(sectorsize) - 1;
 	btp->bt_smask = sectorsize - 1;
 =======
+=======
+>>>>>>> v3.18
 int
 xfs_setsize_buftarg(
 	xfs_buftarg_t		*btp,
@@ -2145,6 +2352,9 @@ xfs_setsize_buftarg(
 	/* Set up metadata sector size info */
 	btp->bt_meta_sectorsize = sectorsize;
 	btp->bt_meta_sectormask = sectorsize - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (set_blocksize(btp->bt_bdev, sectorsize)) {
@@ -2154,12 +2364,15 @@ xfs_setsize_buftarg(
 
 		xfs_warn(btp->bt_mount,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"Cannot set_blocksize to %u on device %s\n",
 			sectorsize, name);
 		return EINVAL;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 			"Cannot set_blocksize to %u on device %s",
 			sectorsize, name);
 		return -EINVAL;
@@ -2169,15 +2382,24 @@ xfs_setsize_buftarg(
 	btp->bt_logical_sectorsize = bdev_logical_block_size(btp->bt_bdev);
 	btp->bt_logical_sectormask = bdev_logical_block_size(btp->bt_bdev) - 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	When allocating the initial buffer target we have not yet
  *	read in the superblock, so don't know what sized sectors
  *	are being used is at this early stage.  Play safe.
+=======
+ * When allocating the initial buffer target we have not yet
+ * read in the superblock, so don't know what sized sectors
+ * are being used at this early stage.  Play safe.
+>>>>>>> v3.18
 =======
  * When allocating the initial buffer target we have not yet
  * read in the superblock, so don't know what sized sectors
@@ -2189,6 +2411,7 @@ xfs_setsize_buftarg_early(
 	xfs_buftarg_t		*btp,
 	struct block_device	*bdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return xfs_setsize_buftarg_flags(btp,
 			PAGE_SIZE, bdev_logical_block_size(bdev), 0);
@@ -2204,15 +2427,22 @@ xfs_setsize_buftarg(
 =======
 	return xfs_setsize_buftarg(btp, bdev_logical_block_size(bdev));
 >>>>>>> v3.18
+=======
+	return xfs_setsize_buftarg(btp, bdev_logical_block_size(bdev));
+>>>>>>> v3.18
 }
 
 xfs_buftarg_t *
 xfs_alloc_buftarg(
 	struct xfs_mount	*mp,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct block_device	*bdev,
 	int			external,
 	const char		*fsname)
+=======
+	struct block_device	*bdev)
+>>>>>>> v3.18
 =======
 	struct block_device	*bdev)
 >>>>>>> v3.18
@@ -2226,6 +2456,7 @@ xfs_alloc_buftarg(
 	btp->bt_bdev = bdev;
 	btp->bt_bdi = blk_get_backing_dev_info(bdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!btp->bt_bdi)
 		goto error;
 
@@ -2236,6 +2467,8 @@ xfs_alloc_buftarg(
 	btp->bt_shrinker.shrink = xfs_buftarg_shrink;
 	btp->bt_shrinker.seeks = DEFAULT_SEEKS;
 =======
+=======
+>>>>>>> v3.18
 
 	if (xfs_setsize_buftarg_early(btp, bdev))
 		goto error;
@@ -2247,6 +2480,9 @@ xfs_alloc_buftarg(
 	btp->bt_shrinker.scan_objects = xfs_buftarg_shrink_scan;
 	btp->bt_shrinker.seeks = DEFAULT_SEEKS;
 	btp->bt_shrinker.flags = SHRINKER_NUMA_AWARE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	register_shrinker(&btp->bt_shrinker);
 	return btp;
@@ -2370,6 +2606,7 @@ __xfs_buf_delwri_submit(
 	blk_start_plug(&plug);
 	list_for_each_entry_safe(bp, n, io_list, b_list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bp->b_flags &= ~(_XBF_DELWRI_Q | XBF_ASYNC);
 		bp->b_flags |= XBF_WRITE;
 
@@ -2379,6 +2616,8 @@ __xfs_buf_delwri_submit(
 		}
 		xfs_bdstrat_cb(bp);
 =======
+=======
+>>>>>>> v3.18
 		bp->b_flags &= ~(_XBF_DELWRI_Q | XBF_ASYNC | XBF_WRITE_FAIL);
 		bp->b_flags |= XBF_WRITE | XBF_ASYNC;
 
@@ -2393,6 +2632,9 @@ __xfs_buf_delwri_submit(
 			list_del_init(&bp->b_list);
 
 		xfs_buf_submit(bp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	blk_finish_plug(&plug);
@@ -2441,12 +2683,18 @@ xfs_buf_delwri_submit(
 
 		list_del_init(&bp->b_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error2 = xfs_buf_iowait(bp);
 =======
+=======
+>>>>>>> v3.18
 
 		/* locking the buffer will wait for async IO completion. */
 		xfs_buf_lock(bp);
 		error2 = bp->b_error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		xfs_buf_relse(bp);
 		if (!error)
@@ -2466,7 +2714,11 @@ xfs_buf_init(void)
 
 	xfslogd_workqueue = alloc_workqueue("xfslogd",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					WQ_MEM_RECLAIM | WQ_HIGHPRI, 1);
+=======
+				WQ_MEM_RECLAIM | WQ_HIGHPRI | WQ_FREEZABLE, 1);
+>>>>>>> v3.18
 =======
 				WQ_MEM_RECLAIM | WQ_HIGHPRI | WQ_FREEZABLE, 1);
 >>>>>>> v3.18

@@ -96,8 +96,12 @@ static int xtsonic_open(struct net_device *dev)
 	int retval;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = request_irq(dev->irq, sonic_interrupt, IRQF_DISABLED,
 				"sonic", dev);
+=======
+	retval = request_irq(dev->irq, sonic_interrupt, 0, "sonic", dev);
+>>>>>>> v3.18
 =======
 	retval = request_irq(dev->irq, sonic_interrupt, 0, "sonic", dev);
 >>>>>>> v3.18
@@ -270,6 +274,10 @@ int xtsonic_probe(struct platform_device *pdev)
 	lp = netdev_priv(dev);
 	lp->device = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_set_drvdata(pdev, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, dev);
 >>>>>>> v3.18

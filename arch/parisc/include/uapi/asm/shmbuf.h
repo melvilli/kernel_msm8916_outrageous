@@ -2,6 +2,11 @@
 #define _PARISC_SHMBUF_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/bitsperlong.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/bitsperlong.h>
 
@@ -19,6 +24,7 @@
 struct shmid64_ds {
 	struct ipc64_perm	shm_perm;	/* operation perms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef CONFIG_64BIT
 	unsigned int		__pad1;
 #endif
@@ -33,6 +39,8 @@ struct shmid64_ds {
 	__kernel_time_t		shm_ctime;	/* last change time */
 #ifndef CONFIG_64BIT
 =======
+=======
+>>>>>>> v3.18
 #if __BITS_PER_LONG != 64
 	unsigned int		__pad1;
 #endif
@@ -46,6 +54,9 @@ struct shmid64_ds {
 #endif
 	__kernel_time_t		shm_ctime;	/* last change time */
 #if __BITS_PER_LONG != 64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int		__pad4;
 #endif

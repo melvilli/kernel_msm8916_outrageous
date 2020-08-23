@@ -19,10 +19,13 @@ obj-y += dac/
 obj-y += gyro/
 obj-y += frequency/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y += imu/
 obj-y += light/
 obj-y += magnetometer/
 =======
+=======
+>>>>>>> v3.18
 obj-y += humidity/
 obj-y += imu/
 obj-y += light/
@@ -32,4 +35,7 @@ obj-y += pressure/
 obj-y += proximity/
 obj-y += temperature/
 obj-y += trigger/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

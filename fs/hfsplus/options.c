@@ -76,7 +76,11 @@ int hfsplus_parse_options_remount(char *input, int *force)
 
 	if (!input)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		return 1;
+>>>>>>> v3.18
 =======
 		return 1;
 >>>>>>> v3.18
@@ -178,9 +182,14 @@ int hfsplus_parse_options(char *input, struct hfsplus_sb_info *sbi)
 				sbi->nls = load_nls(p);
 			if (!sbi->nls) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_err("unable to load "
 						"nls mapping \"%s\"\n",
 					p);
+=======
+				pr_err("unable to load nls mapping \"%s\"\n",
+				       p);
+>>>>>>> v3.18
 =======
 				pr_err("unable to load nls mapping \"%s\"\n",
 				       p);
@@ -242,9 +251,15 @@ int hfsplus_show_options(struct seq_file *seq, struct dentry *root)
 		seq_printf(seq, ",nls=%s", sbi->nls->charset);
 	if (test_bit(HFSPLUS_SB_NODECOMPOSE, &sbi->flags))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(seq, ",nodecompose");
 	if (test_bit(HFSPLUS_SB_NOBARRIER, &sbi->flags))
 		seq_printf(seq, ",nobarrier");
+=======
+		seq_puts(seq, ",nodecompose");
+	if (test_bit(HFSPLUS_SB_NOBARRIER, &sbi->flags))
+		seq_puts(seq, ",nobarrier");
+>>>>>>> v3.18
 =======
 		seq_puts(seq, ",nodecompose");
 	if (test_bit(HFSPLUS_SB_NOBARRIER, &sbi->flags))

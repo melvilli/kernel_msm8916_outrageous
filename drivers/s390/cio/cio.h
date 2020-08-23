@@ -103,6 +103,11 @@ struct subchannel {
 } __attribute__ ((aligned(8)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+DECLARE_PER_CPU(struct irb, cio_irb);
+
+>>>>>>> v3.18
 =======
 DECLARE_PER_CPU(struct irb, cio_irb);
 
@@ -127,9 +132,12 @@ int cio_tm_start_key(struct subchannel *sch, struct tcw *tcw, u8 lpm, u8 key);
 int cio_tm_intrg(struct subchannel *sch);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_adapter_IO(u8 isc);
 void do_IRQ(struct pt_regs *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Use with care. */

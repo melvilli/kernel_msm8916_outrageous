@@ -87,7 +87,11 @@ static int mc33880_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = spi->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -120,7 +124,11 @@ static int mc33880_probe(struct spi_device *spi)
 	mc->chip.base = pdata->base;
 	mc->chip.ngpio = PIN_NUMBER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mc->chip.can_sleep = 1;
+=======
+	mc->chip.can_sleep = true;
+>>>>>>> v3.18
 =======
 	mc->chip.can_sleep = true;
 >>>>>>> v3.18
@@ -151,7 +159,10 @@ static int mc33880_probe(struct spi_device *spi)
 
 exit_destroy:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_destroy(&mc->lock);
@@ -162,7 +173,10 @@ static int mc33880_remove(struct spi_device *spi)
 {
 	struct mc33880 *mc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -170,6 +184,7 @@ static int mc33880_remove(struct spi_device *spi)
 	if (mc == NULL)
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spi_set_drvdata(spi, NULL);
 
@@ -182,10 +197,15 @@ static int mc33880_remove(struct spi_device *spi)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	gpiochip_remove(&mc->chip);
 	mutex_destroy(&mc->lock);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

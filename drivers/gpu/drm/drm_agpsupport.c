@@ -35,6 +35,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "drm_legacy.h"
+>>>>>>> v3.18
 =======
 #include "drm_legacy.h"
 >>>>>>> v3.18
@@ -58,7 +62,11 @@
 int drm_agp_info(struct drm_device *dev, struct drm_agp_info *info)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_AGP_KERN *kern;
+=======
+	struct agp_kern_info *kern;
+>>>>>>> v3.18
 =======
 	struct agp_kern_info *kern;
 >>>>>>> v3.18
@@ -207,7 +215,11 @@ int drm_agp_alloc(struct drm_device *dev, struct drm_agp_buffer *request)
 {
 	struct drm_agp_mem *entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_AGP_MEM *memory;
+=======
+	struct agp_memory *memory;
+>>>>>>> v3.18
 =======
 	struct agp_memory *memory;
 >>>>>>> v3.18
@@ -217,11 +229,17 @@ int drm_agp_alloc(struct drm_device *dev, struct drm_agp_buffer *request)
 	if (!dev->agp || !dev->agp->acquired)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(entry = kmalloc(sizeof(*entry), GFP_KERNEL)))
 		return -ENOMEM;
 
 	memset(entry, 0, sizeof(*entry));
 
+=======
+	if (!(entry = kzalloc(sizeof(*entry), GFP_KERNEL)))
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!(entry = kzalloc(sizeof(*entry), GFP_KERNEL)))
 		return -ENOMEM;
@@ -412,6 +430,12 @@ int drm_agp_free_ioctl(struct drm_device *dev, void *data,
  * via the inter_module_* functions. Creates and initializes a drm_agp_head
  * structure.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Note that final cleanup of the kmalloced structure is directly done in
+ * drm_pci_agp_destroy.
+>>>>>>> v3.18
 =======
  *
  * Note that final cleanup of the kmalloced structure is directly done in
@@ -423,9 +447,14 @@ struct drm_agp_head *drm_agp_init(struct drm_device *dev)
 	struct drm_agp_head *head = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(head = kmalloc(sizeof(*head), GFP_KERNEL)))
 		return NULL;
 	memset((void *)head, 0, sizeof(*head));
+=======
+	if (!(head = kzalloc(sizeof(*head), GFP_KERNEL)))
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!(head = kzalloc(sizeof(*head), GFP_KERNEL)))
 		return NULL;
@@ -454,7 +483,10 @@ struct drm_agp_head *drm_agp_init(struct drm_device *dev)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * drm_agp_clear - Clear AGP resource list
  * @dev: DRM device
  *
@@ -491,6 +523,9 @@ void drm_agp_clear(struct drm_device *dev)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Binds a collection of pages into AGP memory at the given offset, returning
  * the AGP memory structure containing them.
@@ -499,7 +534,11 @@ void drm_agp_clear(struct drm_device *dev)
  * caller to handle that.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 DRM_AGP_MEM *
+=======
+struct agp_memory *
+>>>>>>> v3.18
 =======
 struct agp_memory *
 >>>>>>> v3.18
@@ -510,7 +549,11 @@ drm_agp_bind_pages(struct drm_device *dev,
 		   u32 type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_AGP_MEM *mem;
+=======
+	struct agp_memory *mem;
+>>>>>>> v3.18
 =======
 	struct agp_memory *mem;
 >>>>>>> v3.18

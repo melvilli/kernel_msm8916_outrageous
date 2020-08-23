@@ -1,7 +1,11 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -87,6 +91,7 @@ static const struct iwl_base_params iwl6000_base_params = {
 	.shadow_ram_support = true,
 	.led_compensation = 51,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.adv_thermal_throttle = true,
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_THRESHOLD_DEF,
@@ -95,10 +100,15 @@ static const struct iwl_base_params iwl6000_base_params = {
 	.max_event_log_size = 512,
 	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
 =======
+=======
+>>>>>>> v3.18
 	.wd_timeout = IWL_DEF_WD_TIMEOUT,
 	.max_event_log_size = 512,
 	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
 	.scd_chain_ext_wa = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -110,6 +120,7 @@ static const struct iwl_base_params iwl6050_base_params = {
 	.shadow_ram_support = true,
 	.led_compensation = 51,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.adv_thermal_throttle = true,
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_THRESHOLD_DEF,
@@ -118,10 +129,15 @@ static const struct iwl_base_params iwl6050_base_params = {
 	.max_event_log_size = 1024,
 	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
 =======
+=======
+>>>>>>> v3.18
 	.wd_timeout = IWL_DEF_WD_TIMEOUT,
 	.max_event_log_size = 1024,
 	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
 	.scd_chain_ext_wa = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -133,6 +149,7 @@ static const struct iwl_base_params iwl6000_g2_base_params = {
 	.shadow_ram_support = true,
 	.led_compensation = 57,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.adv_thermal_throttle = true,
 	.support_ct_kill_exit = true,
 	.plcp_delta_threshold = IWL_MAX_PLCP_ERR_THRESHOLD_DEF,
@@ -141,10 +158,15 @@ static const struct iwl_base_params iwl6000_g2_base_params = {
 	.max_event_log_size = 512,
 	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
 =======
+=======
+>>>>>>> v3.18
 	.wd_timeout = IWL_LONG_WD_TIMEOUT,
 	.max_event_log_size = 512,
 	.shadow_reg_enable = false, /* TODO: fix bugs using this feature */
 	.scd_chain_ext_wa = true,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -155,6 +177,7 @@ static const struct iwl_ht_params iwl6000_ht_params = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct iwl_bt_params iwl6000_bt_params = {
 	/* Due to bluetooth, we transmit 2.4 GHz probes only on antenna A */
 	.advanced_bt_coexist = true,
@@ -164,6 +187,8 @@ static const struct iwl_bt_params iwl6000_bt_params = {
 	.bt_sco_disable = true,
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct iwl_eeprom_params iwl6000_eeprom_params = {
@@ -192,7 +217,10 @@ static const struct iwl_eeprom_params iwl6000_eeprom_params = {
 	.base_params = &iwl6000_g2_base_params,			\
 	.eeprom_params = &iwl6000_eeprom_params,		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.need_temp_offset_calib = true,				\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.led_mode = IWL_LED_RF_STATE
@@ -249,11 +277,16 @@ const struct iwl_cfg iwl6005_2agn_mow2_cfg = {
 	.nvm_calib_ver = EEPROM_6030_TX_POWER_VERSION,	\
 	.base_params = &iwl6000_g2_base_params,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.bt_params = &iwl6000_bt_params,			\
 	.eeprom_params = &iwl6000_eeprom_params,		\
 	.need_temp_offset_calib = true,				\
 	.led_mode = IWL_LED_RF_STATE,				\
 	.adv_pm = true						\
+=======
+	.eeprom_params = &iwl6000_eeprom_params,		\
+	.led_mode = IWL_LED_RF_STATE
+>>>>>>> v3.18
 =======
 	.eeprom_params = &iwl6000_eeprom_params,		\
 	.led_mode = IWL_LED_RF_STATE
@@ -293,11 +326,16 @@ const struct iwl_cfg iwl6030_2bg_cfg = {
 	.nvm_calib_ver = EEPROM_6030_TX_POWER_VERSION,	\
 	.base_params = &iwl6000_g2_base_params,			\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.bt_params = &iwl6000_bt_params,			\
 	.eeprom_params = &iwl6000_eeprom_params,		\
 	.need_temp_offset_calib = true,				\
 	.led_mode = IWL_LED_RF_STATE,				\
 	.adv_pm = true
+=======
+	.eeprom_params = &iwl6000_eeprom_params,		\
+	.led_mode = IWL_LED_RF_STATE
+>>>>>>> v3.18
 =======
 	.eeprom_params = &iwl6000_eeprom_params,		\
 	.led_mode = IWL_LED_RF_STATE

@@ -180,7 +180,10 @@ static int generate_pat(u8                   *iv,
 	struct nx_sg *nx_outsg = nx_ctx->out_sg;
 	unsigned int iauth_len = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vio_pfo_op *op = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u8 tmp[16], *b1 = NULL, *b0 = NULL, *result = NULL;
@@ -190,7 +193,10 @@ static int generate_pat(u8                   *iv,
 	memset(iv + 15 - iv[0], 0, iv[0] + 1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* page 78 of nx_wb.pdf has,
 	 * Note: RFC3610 allows the AAD data to be up to 2^64 -1 bytes
 	 * in length. If a full message is used, the AES CCA implementation
@@ -205,6 +211,9 @@ static int generate_pat(u8                   *iv,
 	 * greater than 2^32.
 	 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!req->assoclen) {
 		b0 = nx_ctx->csbcpb->cpb.aes_ccm.in_pat_or_b0;
@@ -216,8 +225,11 @@ static int generate_pat(u8                   *iv,
 		b1 = nx_ctx->priv.ccm.iauth_tag;
 		iauth_len = req->assoclen;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	} else if (req->assoclen <= 65280) {
 		/* if associated data is less than (2^16 - 2^8), we construct
 		 * B1 differently and feed in the associated data to a CCA
@@ -258,6 +270,9 @@ static int generate_pat(u8                   *iv,
 	if (!req->assoclen) {
 		return rc;
 	} else if (req->assoclen <= 14) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		nx_insg = nx_build_sg_list(nx_insg, b1, 16, nx_ctx->ap->sglen);
 		nx_outsg = nx_build_sg_list(nx_outsg, tmp, 16,
@@ -273,6 +288,7 @@ static int generate_pat(u8                   *iv,
 		NX_CPB_FDM(nx_ctx->csbcpb) |= NX_FDM_ENDE_ENCRYPT;
 		NX_CPB_FDM(nx_ctx->csbcpb) |= NX_FDM_INTERMEDIATE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		op = &nx_ctx->op;
 		result = nx_ctx->csbcpb->cpb.aes_ccm.out_pat_or_mac;
@@ -325,6 +341,8 @@ static int generate_pat(u8                   *iv,
 	}
 done:
 =======
+=======
+>>>>>>> v3.18
 		result = nx_ctx->csbcpb->cpb.aes_ccm.out_pat_or_mac;
 
 		rc = nx_hcall_sync(nx_ctx, &nx_ctx->op,
@@ -393,6 +411,9 @@ done:
 
 	memcpy(out, result, AES_BLOCK_SIZE);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
@@ -406,17 +427,23 @@ static int ccm_nx_decrypt(struct aead_request   *req,
 	unsigned int authsize = crypto_aead_authsize(crypto_aead_reqtfm(req));
 	struct nx_ccm_priv *priv = &nx_ctx->priv.ccm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = -1;
 
 	if (nbytes > nx_ctx->ap->databytelen)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long irq_flags;
 	unsigned int processed = 0, to_process;
 	u32 max_sg_len;
 	int rc = -1;
 
 	spin_lock_irqsave(&nx_ctx->lock, irq_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	nbytes -= authsize;
@@ -431,6 +458,7 @@ static int ccm_nx_decrypt(struct aead_request   *req,
 	if (rc)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = nx_build_sg_lists(nx_ctx, desc, req->dst, req->src, nbytes,
 			       csbcpb->cpb.aes_ccm.iv_or_ctr);
@@ -449,6 +477,8 @@ static int ccm_nx_decrypt(struct aead_request   *req,
 	atomic64_add(csbcpb->csb.processed_byte_count,
 		     &(nx_ctx->stats->aes_bytes));
 =======
+=======
+>>>>>>> v3.18
 	/* page_limit: number of sg entries that fit on one page */
 	max_sg_len = min_t(u32, nx_driver.of.max_sg_len/sizeof(struct nx_sg),
 			   nx_ctx->ap->sglen);
@@ -499,12 +529,19 @@ static int ccm_nx_decrypt(struct aead_request   *req,
 
 		processed += to_process;
 	} while (processed < nbytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = memcmp(csbcpb->cpb.aes_ccm.out_pat_or_mac, priv->oauth_tag,
 		    authsize) ? -EBADMSG : 0;
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
 >>>>>>> v3.18
@@ -519,17 +556,23 @@ static int ccm_nx_encrypt(struct aead_request   *req,
 	unsigned int nbytes = req->cryptlen;
 	unsigned int authsize = crypto_aead_authsize(crypto_aead_reqtfm(req));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = -1;
 
 	if (nbytes > nx_ctx->ap->databytelen)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long irq_flags;
 	unsigned int processed = 0, to_process;
 	u32 max_sg_len;
 	int rc = -1;
 
 	spin_lock_irqsave(&nx_ctx->lock, irq_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rc = generate_pat(desc->info, req, nx_ctx, authsize, nbytes,
@@ -537,6 +580,7 @@ static int ccm_nx_encrypt(struct aead_request   *req,
 	if (rc)
 		goto out;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = nx_build_sg_lists(nx_ctx, desc, req->dst, req->src, nbytes,
 			       csbcpb->cpb.aes_ccm.iv_or_ctr);
@@ -555,6 +599,8 @@ static int ccm_nx_encrypt(struct aead_request   *req,
 	atomic64_add(csbcpb->csb.processed_byte_count,
 		     &(nx_ctx->stats->aes_bytes));
 =======
+=======
+>>>>>>> v3.18
 	/* page_limit: number of sg entries that fit on one page */
 	max_sg_len = min_t(u32, nx_driver.of.max_sg_len/sizeof(struct nx_sg),
 			   nx_ctx->ap->sglen);
@@ -605,6 +651,9 @@ static int ccm_nx_encrypt(struct aead_request   *req,
 		processed += to_process;
 
 	} while (processed < nbytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* copy out the auth tag */
@@ -612,7 +661,13 @@ static int ccm_nx_encrypt(struct aead_request   *req,
 				 req->dst, nbytes, authsize,
 				 SCATTERWALK_TO_SG);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+
+out:
+	spin_unlock_irqrestore(&nx_ctx->lock, irq_flags);
+>>>>>>> v3.18
 =======
 
 out:

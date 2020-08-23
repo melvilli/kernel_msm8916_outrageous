@@ -72,6 +72,7 @@ static inline void local_tick_enable(unsigned long long comp)
 typedef unsigned long long cycles_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline unsigned long long get_tod_clock(void)
 {
 	unsigned long long clk;
@@ -91,6 +92,8 @@ static inline void get_tod_clock_ext(char *clk)
 
 static inline unsigned long long get_tod_clock_xt(void)
 =======
+=======
+>>>>>>> v3.18
 static inline void get_tod_clock_ext(char clk[16])
 {
 	typedef struct { char _[sizeof(clk)]; } addrtype;
@@ -99,6 +102,9 @@ static inline void get_tod_clock_ext(char clk[16])
 }
 
 static inline unsigned long long get_tod_clock(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned char clk[16];
@@ -107,7 +113,10 @@ static inline unsigned long long get_tod_clock(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long long get_tod_clock_fast(void)
 {
 #ifdef CONFIG_HAVE_MARCH_Z9_109_FEATURES
@@ -120,6 +129,9 @@ static inline unsigned long long get_tod_clock_fast(void)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline cycles_t get_cycles(void)
 {
@@ -152,7 +164,11 @@ extern u64 sched_clock_base_cc;
 static inline unsigned long long get_tod_clock_monotonic(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return get_tod_clock_xt() - sched_clock_base_cc;
+=======
+	return get_tod_clock() - sched_clock_base_cc;
+>>>>>>> v3.18
 =======
 	return get_tod_clock() - sched_clock_base_cc;
 >>>>>>> v3.18

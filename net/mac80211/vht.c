@@ -130,11 +130,14 @@ ieee80211_vht_cap_ie_to_sta_vht_cap(struct ieee80211_sub_if_data *sdata,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* A VHT STA must support 40 MHz */
 	if (!(sta->sta.ht_cap.cap & IEEE80211_HT_CAP_SUP_WIDTH_20_40))
 		return;
 
 =======
+=======
+>>>>>>> v3.18
 	/* don't support VHT for TDLS peers for now */
 	if (test_sta_flag(sta, WLAN_STA_TDLS_PEER))
 		return;
@@ -146,6 +149,9 @@ ieee80211_vht_cap_ie_to_sta_vht_cap(struct ieee80211_sub_if_data *sdata,
 	 * capability bit when operating in 20 MHz.
 	 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vht_cap->vht_supported = true;
 
@@ -197,6 +203,7 @@ ieee80211_vht_cap_ie_to_sta_vht_cap(struct ieee80211_sub_if_data *sdata,
 
 	/* remaining ones */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (own_cap.cap & IEEE80211_VHT_CAP_SU_BEAMFORMEE_CAPABLE) {
 		vht_cap->cap |= cap_info &
 				(IEEE80211_VHT_CAP_SU_BEAMFORMER_CAPABLE |
@@ -208,6 +215,8 @@ ieee80211_vht_cap_ie_to_sta_vht_cap(struct ieee80211_sub_if_data *sdata,
 		vht_cap->cap |= cap_info &
 				IEEE80211_VHT_CAP_SU_BEAMFORMEE_CAPABLE;
 =======
+=======
+>>>>>>> v3.18
 	if (own_cap.cap & IEEE80211_VHT_CAP_SU_BEAMFORMEE_CAPABLE)
 		vht_cap->cap |= cap_info &
 				(IEEE80211_VHT_CAP_SU_BEAMFORMER_CAPABLE |
@@ -217,6 +226,9 @@ ieee80211_vht_cap_ie_to_sta_vht_cap(struct ieee80211_sub_if_data *sdata,
 		vht_cap->cap |= cap_info &
 				(IEEE80211_VHT_CAP_SU_BEAMFORMEE_CAPABLE |
 				 IEEE80211_VHT_CAP_BEAMFORMEE_STS_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (own_cap.cap & IEEE80211_VHT_CAP_MU_BEAMFORMER_CAPABLE)
@@ -377,9 +389,15 @@ void ieee80211_sta_set_rx_nss(struct sta_info *sta)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ieee80211_vht_handle_opmode(struct ieee80211_sub_if_data *sdata,
 				 struct sta_info *sta, u8 opmode,
 				 enum ieee80211_band band, bool nss_only)
+=======
+u32 __ieee80211_vht_handle_opmode(struct ieee80211_sub_if_data *sdata,
+				  struct sta_info *sta, u8 opmode,
+				  enum ieee80211_band band, bool nss_only)
+>>>>>>> v3.18
 =======
 u32 __ieee80211_vht_handle_opmode(struct ieee80211_sub_if_data *sdata,
 				  struct sta_info *sta, u8 opmode,
@@ -397,7 +415,11 @@ u32 __ieee80211_vht_handle_opmode(struct ieee80211_sub_if_data *sdata,
 	/* ignore - no support for BF yet */
 	if (opmode & IEEE80211_OPMODE_NOTIF_RX_NSS_TYPE_BF)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -413,7 +435,11 @@ u32 __ieee80211_vht_handle_opmode(struct ieee80211_sub_if_data *sdata,
 
 	if (nss_only)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto change;
+=======
+		return changed;
+>>>>>>> v3.18
 =======
 		return changed;
 >>>>>>> v3.18
@@ -437,12 +463,15 @@ u32 __ieee80211_vht_handle_opmode(struct ieee80211_sub_if_data *sdata,
 	if (new_bw != sta->sta.bandwidth) {
 		sta->sta.bandwidth = new_bw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		changed |= IEEE80211_RC_NSS_CHANGED;
 	}
 
  change:
 	if (changed)
 =======
+=======
+>>>>>>> v3.18
 		changed |= IEEE80211_RC_BW_CHANGED;
 	}
 
@@ -460,6 +489,9 @@ void ieee80211_vht_handle_opmode(struct ieee80211_sub_if_data *sdata,
 						    band, nss_only);
 
 	if (changed > 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rate_control_rate_update(local, sband, sta, changed);
 }

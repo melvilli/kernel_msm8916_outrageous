@@ -33,6 +33,10 @@
 #define MSGTYPE06_VARIANT_DEFAULT	0
 #define MSGTYPE06_VARIANT_NORNG		1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MSGTYPE06_VARIANT_EP11		2
+>>>>>>> v3.18
 =======
 #define MSGTYPE06_VARIANT_EP11		2
 >>>>>>> v3.18
@@ -104,6 +108,10 @@ struct type86_hdr {
 
 #define TYPE86_RSP_CODE 0x86
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TYPE87_RSP_CODE 0x87
+>>>>>>> v3.18
 =======
 #define TYPE87_RSP_CODE 0x87
 >>>>>>> v3.18

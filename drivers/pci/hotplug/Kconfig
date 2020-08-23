@@ -4,8 +4,13 @@
 
 menuconfig HOTPLUG_PCI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Support for PCI Hotplug"
 	depends on PCI && HOTPLUG && SYSFS
+=======
+	bool "Support for PCI Hotplug"
+	depends on PCI && SYSFS
+>>>>>>> v3.18
 =======
 	bool "Support for PCI Hotplug"
 	depends on PCI && SYSFS
@@ -16,9 +21,12 @@ menuconfig HOTPLUG_PCI
 	  powered up and running.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  To compile this driver as a module, choose M here: the
 	  module will be called pci_hotplug.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	  When in doubt, say N.
@@ -145,8 +153,13 @@ config HOTPLUG_PCI_RPA_DLPAR
 	  To compile this driver as a module, choose M here: the
 	  module will be called rpadlpar_io.
 <<<<<<< HEAD
+<<<<<<< HEAD
  
  	  When in doubt, say N.
+=======
+
+	  When in doubt, say N.
+>>>>>>> v3.18
 =======
 
 	  When in doubt, say N.
@@ -163,7 +176,11 @@ config HOTPLUG_PCI_SGI
 
 config HOTPLUG_PCI_S390
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "System z PCI Hotplug Support"
+=======
+	bool "System z PCI Hotplug Support"
+>>>>>>> v3.18
 =======
 	bool "System z PCI Hotplug Support"
 >>>>>>> v3.18

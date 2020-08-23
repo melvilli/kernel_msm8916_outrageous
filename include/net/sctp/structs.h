@@ -20,6 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -31,12 +32,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email addresses:
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -56,9 +62,12 @@
  *    Anup Pemmaiah	    <pemmaiah@cc.usu.edu>
  *    Kevin Gao             <kevin.gao@intel.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -67,7 +76,11 @@
 #define __sctp_structs_h__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/time.h>		/* We get struct timespec.    */
+=======
+#include <linux/ktime.h>
+>>>>>>> v3.18
 =======
 #include <linux/ktime.h>
 >>>>>>> v3.18
@@ -136,6 +149,7 @@ struct sctp_hashbucket {
 /* The SCTP globals structure. */
 extern struct sctp_globals {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The following variables are implementation specific.	 */
 
 	/* Default initialization values to be applied to new associations. */
@@ -144,12 +158,15 @@ extern struct sctp_globals {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* This is a list of groups of functions for each address
 	 * family that we support.
 	 */
 	struct list_head address_families;
 
 	/* This is the hash of all endpoints. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ep_hashsize;
 	struct sctp_hashbucket *ep_hashtable;
@@ -163,6 +180,8 @@ extern struct sctp_globals {
 	struct sctp_bind_hashbucket *port_hashtable;
 
 =======
+=======
+>>>>>>> v3.18
 	struct sctp_hashbucket *ep_hashtable;
 	/* This is the hash of all associations. */
 	struct sctp_hashbucket *assoc_hashtable;
@@ -178,6 +197,9 @@ extern struct sctp_globals {
 	__u16 max_instreams;
 	__u16 max_outstreams;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Flag to indicate whether computing and verifying checksum
 	 * is disabled. */
@@ -254,7 +276,13 @@ struct sctp_sock {
 	struct sctp_event_subscribe subscribe;
 	struct sctp_assocparams assocparams;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int user_frag;
+=======
+
+	int user_frag;
+
+>>>>>>> v3.18
 =======
 
 	int user_frag;
@@ -268,6 +296,11 @@ struct sctp_sock {
 	__u32 adaptation_ind;
 	__u32 pd_point;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u8 recvrcvinfo;
+	__u8 recvnxtinfo;
+>>>>>>> v3.18
 =======
 	__u8 recvrcvinfo;
 	__u8 recvnxtinfo;
@@ -277,10 +310,13 @@ struct sctp_sock {
 	/* Receive to here while partial delivery is in effect. */
 	struct sk_buff_head pd_lobby;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* These must be the last fields, as they will skipped on copies,
 	 * like on accept and peeloff operations
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct list_head auto_asconf_list;
@@ -340,7 +376,11 @@ struct sctp_cookie {
 
 	/* When does this cookie expire? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timeval expiration;
+=======
+	ktime_t expiration;
+>>>>>>> v3.18
 =======
 	ktime_t expiration;
 >>>>>>> v3.18
@@ -530,10 +570,13 @@ struct sctp_af {
 	void		(*from_sk)	(union sctp_addr *,
 					 struct sock *sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void		(*to_sk_saddr)	(union sctp_addr *,
 					 struct sock *sk);
 	void		(*to_sk_daddr)	(union sctp_addr *,
 					 struct sock *sk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void		(*from_addr_param) (union sctp_addr *,
@@ -577,7 +620,13 @@ struct sctp_pf {
 	struct sock *(*create_accept_sk) (struct sock *sk,
 					  struct sctp_association *asoc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*addr_v4map) (struct sctp_sock *, union sctp_addr *);
+=======
+	int (*addr_to_user)(struct sctp_sock *sk, union sctp_addr *addr);
+	void (*to_sk_saddr)(union sctp_addr *, struct sock *sk);
+	void (*to_sk_daddr)(union sctp_addr *, struct sock *sk);
+>>>>>>> v3.18
 =======
 	int (*addr_to_user)(struct sctp_sock *sk, union sctp_addr *addr);
 	void (*to_sk_saddr)(union sctp_addr *, struct sock *sk);
@@ -706,6 +755,10 @@ struct sctp_chunk {
 #define SCTP_DONT_FRTX 0x2
 	__u16	rtt_in_progress:1,	/* This chunk used for RTT calc? */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		resent:1,		/* Has this chunk ever been resent. */
+>>>>>>> v3.18
 =======
 		resent:1,		/* Has this chunk ever been resent. */
 >>>>>>> v3.18
@@ -730,7 +783,10 @@ int sctp_user_addto_chunk(struct sctp_chunk *chunk, int off, int len,
 void sctp_chunk_free(struct sctp_chunk *);
 void  *sctp_addto_chunk(struct sctp_chunk *, int len, const void *data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void  *sctp_addto_chunk_fixed(struct sctp_chunk *, int len, const void *data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct sctp_chunk *sctp_chunkify(struct sk_buff *,
@@ -858,6 +914,10 @@ struct sctp_transport {
 	/* Has this transport moved the ctsn since we last sacked */
 	__u32 sack_generation;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 dst_cookie;
+>>>>>>> v3.18
 =======
 	u32 dst_cookie;
 >>>>>>> v3.18
@@ -926,15 +986,21 @@ struct sctp_transport {
 	__u32 sackfreq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* When was the last time (in jiffies) that we heard from this
 	 * transport?  We use this to pick new active and retran paths.
 	 */
 	unsigned long last_time_heard;
 =======
+=======
+>>>>>>> v3.18
 	/* When was the last time that we heard from this transport? We use
 	 * this to pick new active and retran paths.
 	 */
 	ktime_t last_time_heard;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Last time(in jiffies) when cwnd is reduced due to the congestion
@@ -1139,9 +1205,12 @@ struct sctp_outq {
 	/* Corked? */
 	char cork;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Is this structure empty?  */
 	char empty;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1459,12 +1528,15 @@ struct sctp_association {
 	/* This is all information about our peer.  */
 	struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* rwnd
 		 *
 		 * Peer Rwnd   : Current calculated value of the peer's rwnd.
 		 */
 		__u32 rwnd;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* transport_addr_list
@@ -1485,13 +1557,19 @@ struct sctp_association {
 		struct list_head transport_addr_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* rwnd
 		 *
 		 * Peer Rwnd   : Current calculated value of the peer's rwnd.
 		 */
 		__u32 rwnd;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* transport_count
 		 *
@@ -1576,7 +1654,10 @@ struct sctp_association {
 		struct sctp_tsnmap tsn_map;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* This mask is used to disable sending the ASCONF chunk
 		 * with specified parameter to peer.
 		 */
@@ -1591,6 +1672,9 @@ struct sctp_association {
 			prsctp_capable:1,   /* Can peer do PR-SCTP? */
 			auth_capable:1;     /* Is peer doing SCTP-AUTH? */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Ack State   : This flag indicates if the next received
 		 *             : packet is to be responded to with a
@@ -1606,6 +1690,7 @@ struct sctp_association {
 		__u32	sack_cnt;
 		__u32	sack_generation;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* These are capabilities which our peer advertised.  */
 		__u8	ecn_capable:1,	    /* Can peer do ECN? */
@@ -1627,11 +1712,16 @@ struct sctp_association {
 		int cookie_len;
 		void *cookie;
 =======
+=======
+>>>>>>> v3.18
 		__u32   adaptation_ind;	 /* Adaptation Code point. */
 
 		struct sctp_inithdr_host i;
 		void *cookie;
 		int cookie_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* ADDIP Section 4.2 Upon reception of an ASCONF Chunk.
@@ -1665,9 +1755,12 @@ struct sctp_association {
 	sctp_state_t state;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The cookie life I award for any cookie.  */
 	struct timeval cookie_life;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Overall     : The overall association error count.
@@ -1676,6 +1769,12 @@ struct sctp_association {
 	int overall_error_count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* The cookie life I award for any cookie.  */
+	ktime_t cookie_life;
+
+>>>>>>> v3.18
 =======
 	/* The cookie life I award for any cookie.  */
 	ktime_t cookie_life;
@@ -1736,10 +1835,16 @@ struct sctp_association {
 	__u32 param_flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* SACK delay timeout */
 	unsigned long sackdelay;
 	__u32 sackfreq;
 
+=======
+	__u32 sackfreq;
+	/* SACK delay timeout */
+	unsigned long sackdelay;
+>>>>>>> v3.18
 =======
 	__u32 sackfreq;
 	/* SACK delay timeout */
@@ -1753,6 +1858,7 @@ struct sctp_association {
 	struct sctp_transport *shutdown_last_sent_to;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* How many times have we resent a SHUTDOWN */
 	int shutdown_retries;
 
@@ -1760,12 +1866,17 @@ struct sctp_association {
 	struct sctp_transport *init_last_sent_to;
 
 =======
+=======
+>>>>>>> v3.18
 	/* Transport to which INIT chunk was last sent.  */
 	struct sctp_transport *init_last_sent_to;
 
 	/* How many times have we resent a SHUTDOWN */
 	int shutdown_retries;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Next TSN    : The next TSN number to be assigned to a new
 	 *	       : DATA chunk.  This is sent in the INIT or INIT
@@ -1885,12 +1996,15 @@ struct sctp_association {
 	int numduptsns;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Number of seconds of idle time before an association is closed.
 	 * In the association context, this is really used as a boolean
 	 * since the real timeout is stored in the timeouts array
 	 */
 	__u32 autoclose;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* These are to support
@@ -1981,8 +2095,13 @@ struct sctp_association {
 	 */
 	__u32 addip_serial;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union sctp_addr *asconf_addr_del_pending;
 	int src_out_of_asoc_ok;
+=======
+	int src_out_of_asoc_ok;
+	union sctp_addr *asconf_addr_del_pending;
+>>>>>>> v3.18
 =======
 	int src_out_of_asoc_ok;
 	union sctp_addr *asconf_addr_del_pending;
@@ -2096,7 +2215,12 @@ struct sctp_chunk *sctp_get_ecne_prepend(struct sctp_association *asoc);
 typedef struct sctp_cmsgs {
 	struct sctp_initmsg *init;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sctp_sndrcvinfo *info;
+=======
+	struct sctp_sndrcvinfo *srinfo;
+	struct sctp_sndinfo *sinfo;
+>>>>>>> v3.18
 =======
 	struct sctp_sndrcvinfo *srinfo;
 	struct sctp_sndinfo *sinfo;

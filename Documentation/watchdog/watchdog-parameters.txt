@@ -151,6 +151,11 @@ nowayout: Disable watchdog shutdown on close
 it87_wdt:
 nogameport: Forbid the activation of game port, default=0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nocir: Forbid the use of CIR (workaround for some buggy setups); set to 1 if
+system resets despite watchdog daemon running, default=0
+>>>>>>> v3.18
 =======
 nocir: Forbid the use of CIR (workaround for some buggy setups); set to 1 if
 system resets despite watchdog daemon running, default=0
@@ -200,6 +205,7 @@ nowayout: Watchdog cannot be stopped once started
 	(default=kernel config parameter)
 -------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 mpcore_wdt:
 mpcore_margin: MPcore timer margin in seconds.
 	(0 < mpcore_margin < 65536, default=60)
@@ -208,6 +214,8 @@ nowayout: Watchdog cannot be stopped once started
 mpcore_noboot: MPcore watchdog action, set to 1 to ignore reboots,
 	0 to reboot (default=0
 -------------------------------------------------
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 mv64x60_wdt:
@@ -342,12 +350,18 @@ stmp3xxx_wdt:
 heartbeat: Watchdog heartbeat period in seconds from 1 to 4194304, default 19
 -------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 tegra_wdt:
 heartbeat: Watchdog heartbeats in seconds. (default = 120)
 nowayout: Watchdog cannot be stopped once started
 	(default=kernel config parameter)
 -------------------------------------------------
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ts72xx_wdt:
 timeout: Watchdog timeout in seconds. (1 <= timeout <= 8, default=8)

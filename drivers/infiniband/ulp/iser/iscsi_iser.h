@@ -9,7 +9,11 @@
  * Copyright (c) 2004, 2005, 2006 Voltaire, Inc. All rights reserved.
  * Copyright (c) 2005, 2006 Cisco Systems.  All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2013 Mellanox Technologies. All rights reserved.
+=======
+ * Copyright (c) 2013-2014 Mellanox Technologies. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2013-2014 Mellanox Technologies. All rights reserved.
 >>>>>>> v3.18
@@ -51,6 +55,11 @@
 #include <scsi/libiscsi.h>
 #include <scsi/scsi_transport_iscsi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <scsi/scsi_cmnd.h>
+#include <scsi/scsi_device.h>
+>>>>>>> v3.18
 =======
 #include <scsi/scsi_cmnd.h>
 #include <scsi/scsi_device.h>
@@ -77,6 +86,7 @@
 #define DRV_NAME	"iser"
 #define PFX		DRV_NAME ": "
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRV_VER		"1.1"
 
 #define iser_dbg(fmt, arg...)				\
@@ -85,6 +95,8 @@
 			printk(KERN_DEBUG PFX "%s:" fmt,\
 				__func__ , ## arg);	\
 =======
+=======
+>>>>>>> v3.18
 #define DRV_VER		"1.4.8"
 
 #define iser_dbg(fmt, arg...)				 \
@@ -92,14 +104,22 @@
 		if (iser_debug_level > 2)		 \
 			printk(KERN_DEBUG PFX "%s: " fmt,\
 				__func__ , ## arg);	 \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} while (0)
 
 #define iser_warn(fmt, arg...)				\
 	do {						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (iser_debug_level > 1)		\
 			pr_warn(PFX "%s:" fmt,          \
+=======
+		if (iser_debug_level > 0)		\
+			pr_warn(PFX "%s: " fmt,		\
+>>>>>>> v3.18
 =======
 		if (iser_debug_level > 0)		\
 			pr_warn(PFX "%s: " fmt,		\
@@ -110,8 +130,13 @@
 #define iser_info(fmt, arg...)				\
 	do {						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (iser_debug_level > 0)		\
 			pr_info(PFX "%s:" fmt,          \
+=======
+		if (iser_debug_level > 1)		\
+			pr_info(PFX "%s: " fmt,		\
+>>>>>>> v3.18
 =======
 		if (iser_debug_level > 1)		\
 			pr_info(PFX "%s: " fmt,		\
@@ -122,7 +147,11 @@
 #define iser_err(fmt, arg...)				\
 	do {						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR PFX "%s:" fmt,          \
+=======
+		printk(KERN_ERR PFX "%s: " fmt,		\
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR PFX "%s: " fmt,		\
 >>>>>>> v3.18
@@ -133,11 +162,14 @@
 #define SIZE_4K	(1ULL << SHIFT_4K)
 #define MASK_4K	(~(SIZE_4K-1))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 					/* support up to 512KB in one RDMA */
 #define ISCSI_ISER_SG_TABLESIZE         (0x80000 >> SHIFT_4K)
 #define ISER_DEF_CMD_PER_LUN		ISCSI_DEF_XMIT_CMDS_MAX
 =======
+=======
+>>>>>>> v3.18
 					/* support up to 512KB in one RDMA */
 #define ISCSI_ISER_SG_TABLESIZE         (0x80000 >> SHIFT_4K)
 #define ISER_DEF_XMIT_CMDS_DEFAULT		512
@@ -147,6 +179,9 @@
 	#define ISER_DEF_XMIT_CMDS_MAX		ISER_DEF_XMIT_CMDS_DEFAULT
 #endif
 #define ISER_DEF_CMD_PER_LUN		ISER_DEF_XMIT_CMDS_MAX
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* QP settings */
@@ -157,9 +192,15 @@
 					   * SCSI_TMFUNC(2), LOGOUT(1) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ISER_QP_MAX_RECV_DTOS		(ISCSI_DEF_XMIT_CMDS_MAX)
 
 #define ISER_MIN_POSTED_RX		(ISCSI_DEF_XMIT_CMDS_MAX >> 2)
+=======
+#define ISER_QP_MAX_RECV_DTOS		(ISER_DEF_XMIT_CMDS_MAX)
+
+#define ISER_MIN_POSTED_RX		(ISER_DEF_XMIT_CMDS_MAX >> 2)
+>>>>>>> v3.18
 =======
 #define ISER_QP_MAX_RECV_DTOS		(ISER_DEF_XMIT_CMDS_MAX)
 
@@ -175,7 +216,11 @@
 #define ISER_INFLIGHT_DATAOUTS		8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ISER_QP_MAX_REQ_DTOS		(ISCSI_DEF_XMIT_CMDS_MAX *    \
+=======
+#define ISER_QP_MAX_REQ_DTOS		(ISER_DEF_XMIT_CMDS_MAX *    \
+>>>>>>> v3.18
 =======
 #define ISER_QP_MAX_REQ_DTOS		(ISER_DEF_XMIT_CMDS_MAX *    \
 >>>>>>> v3.18
@@ -184,7 +229,10 @@
 					ISER_MAX_RX_MISC_PDUS)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Max registration work requests per command */
 #define ISER_MAX_REG_WR_PER_CMD		5
 
@@ -197,11 +245,15 @@
 #define ISER_WC_BATCH_COUNT   16
 #define ISER_SIGNAL_CMD_COUNT 32
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ISER_VER			0x10
 #define ISER_WSV			0x08
 #define ISER_RSV			0x04
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct iser_hdr {
 	u8      flags;
@@ -210,6 +262,8 @@ struct iser_hdr {
 	__be64  write_va;
 	__be32  read_stag;  /* read rkey */
 =======
+=======
+>>>>>>> v3.18
 #define ISER_FASTREG_LI_WRID		0xffffffffffffffffULL
 #define ISER_BEACON_WRID		0xfffffffffffffffeULL
 
@@ -229,6 +283,9 @@ struct iser_hdr {
 	__be32  write_stag;
 	__be64  write_va;
 	__be32  read_stag;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__be64  read_va;
 } __attribute__((packed));
@@ -253,7 +310,11 @@ struct iser_cm_hdr {
 #define ISER_OBJECT_NAME_SIZE		    64
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum iser_ib_conn_state {
+=======
+enum iser_conn_state {
+>>>>>>> v3.18
 =======
 enum iser_conn_state {
 >>>>>>> v3.18
@@ -278,6 +339,7 @@ enum iser_data_dir {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iser_data_buf {
 	void               *buf;      /* pointer to the sg list               */
 	unsigned int       size;      /* num entries of this sg               */
@@ -288,6 +350,8 @@ struct iser_data_buf {
 	struct scatterlist sg_single; /* SG-ified clone of a non SG SC or     *
 				       * unaligned SG                         */
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct iser_data_buf - iSER data buffer
  *
@@ -307,11 +371,15 @@ struct iser_data_buf {
 	unsigned int       dma_nents;
 	char               *copy_buf;
 	struct scatterlist sg_single;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
   };
 
 /* fwd declarations */
 struct iser_device;
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct iser_cq_desc;
 struct iscsi_iser_conn;
@@ -319,6 +387,8 @@ struct iscsi_iser_task;
 struct iscsi_endpoint;
 
 =======
+=======
+>>>>>>> v3.18
 struct iscsi_iser_task;
 struct iscsi_endpoint;
 
@@ -332,6 +402,9 @@ struct iscsi_endpoint;
  * @mem_h:        pointer to registration context (FMR/Fastreg)
  * @is_mr:        indicates weather we registered the buffer
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct iser_mem_reg {
 	u32  lkey;
@@ -339,6 +412,7 @@ struct iser_mem_reg {
 	u64  va;
 	u64  len;
 	void *mem_h;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int  is_fmr;
 };
@@ -349,6 +423,8 @@ struct iser_regd_buf {
 	struct iser_device      *device;    /* device->device for dma_unmap    */
 	enum dma_data_direction direction;  /* direction for dma_unmap	       */
 =======
+=======
+>>>>>>> v3.18
 	int  is_mr;
 };
 
@@ -366,6 +442,9 @@ struct iser_regd_buf {
 	void                    *virt_addr;
 	struct iser_device      *device;
 	enum dma_data_direction direction;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int            data_size;
 };
@@ -377,7 +456,10 @@ enum iser_desc_type {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct iser_tx_desc - iSER TX descriptor (for send wr_id)
  *
@@ -390,6 +472,9 @@ enum iser_desc_type {
  *                 unsolicited data-out or control
  * @num_sge:       number sges used on this TX task
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct iser_tx_desc {
 	struct iser_hdr              iser_header;
@@ -397,8 +482,11 @@ struct iser_tx_desc {
 	enum   iser_desc_type        type;
 	u64		             dma_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* sg[0] points to iser/iscsi headers, sg[1] optionally points to either
 	of immediate data, unsolicited data-out or control (login,text) */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ib_sge		     tx_sg[2];
@@ -408,7 +496,10 @@ struct iser_tx_desc {
 #define ISER_RX_PAD_SIZE	(256 - (ISER_RX_PAYLOAD_SIZE + \
 					sizeof(u64) + sizeof(struct ib_sge)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct iser_rx_desc - iSER RX descriptor (for recv wr_id)
  *
@@ -419,6 +510,9 @@ struct iser_tx_desc {
  * @rx_sg:         ib_sge of receive buffer
  * @pad:           for sense data TODO: Modify to maximum sense length supported
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct iser_rx_desc {
 	struct iser_hdr              iser_header;
@@ -431,6 +525,7 @@ struct iser_rx_desc {
 
 #define ISER_MAX_CQ 4
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct iser_device {
 	struct ib_device             *ib_device;
@@ -465,6 +560,8 @@ struct iser_conn {
 						     * maps serialized as tx is*/
 	struct list_head	     conn_list;       /* entry in ig conn list */
 =======
+=======
+>>>>>>> v3.18
 struct iser_conn;
 struct ib_conn;
 struct iscsi_iser_task;
@@ -654,6 +751,9 @@ struct iser_conn {
 	struct completion	     ib_completion;
 	struct completion	     up_completion;
 	struct list_head	     conn_list;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	char  			     *login_buf;
@@ -661,6 +761,7 @@ struct iser_conn {
 	u64			     login_req_dma, login_resp_dma;
 	unsigned int 		     rx_desc_head;
 	struct iser_rx_desc	     *rx_descs;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ib_recv_wr	     rx_wr[ISER_MIN_POSTED_RX];
 };
@@ -680,6 +781,8 @@ struct iscsi_iser_task {
 	struct iser_data_buf         data[ISER_DIRS_NUM];     /* orig. data des*/
 	struct iser_data_buf         data_copy[ISER_DIRS_NUM];/* contig. copy  */
 =======
+=======
+>>>>>>> v3.18
 	u32                          num_rx_descs;
 };
 
@@ -710,6 +813,9 @@ struct iscsi_iser_task {
 	struct iser_data_buf         data_copy[ISER_DIRS_NUM];
 	struct iser_data_buf         prot[ISER_DIRS_NUM];
 	struct iser_data_buf         prot_copy[ISER_DIRS_NUM];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -720,6 +826,7 @@ struct iser_page_vec {
 	int data_size;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct iser_cq_desc {
 	struct iser_device           *device;
@@ -733,6 +840,8 @@ struct iser_global {
 	struct list_head  connlist;		/* all iSER IB connections */
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct iser_global: iSER global context
  *
@@ -747,6 +856,9 @@ struct iser_global {
 	struct list_head  device_list;
 	struct mutex      connlist_mutex;
 	struct list_head  connlist;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct kmem_cache *desc_cache;
 };
@@ -754,9 +866,14 @@ struct iser_global {
 extern struct iser_global ig;
 extern int iser_debug_level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* allocate connection resources needed for rdma functionality */
 int iser_conn_set_full_featured_mode(struct iscsi_conn *conn);
+=======
+extern bool iser_pi_enable;
+extern int iser_pi_guard;
+>>>>>>> v3.18
 =======
 extern bool iser_pi_enable;
 extern int iser_pi_guard;
@@ -773,6 +890,7 @@ int iser_send_data_out(struct iscsi_conn *conn,
 		       struct iscsi_data *hdr);
 
 void iscsi_iser_recv(struct iscsi_conn *conn,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		     struct iscsi_hdr       *hdr,
 		     char                   *rx_data,
@@ -792,6 +910,8 @@ void iser_rcv_completion(struct iser_rx_desc *desc,
 
 void iser_snd_completion(struct iser_tx_desc *desc, struct iser_conn *ib_conn);
 =======
+=======
+>>>>>>> v3.18
 		     struct iscsi_hdr *hdr,
 		     char *rx_data,
 		     int rx_data_len);
@@ -810,12 +930,16 @@ void iser_rcv_completion(struct iser_rx_desc *desc,
 
 void iser_snd_completion(struct iser_tx_desc *desc,
 			 struct ib_conn *ib_conn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void iser_task_rdma_init(struct iscsi_iser_task *task);
 
 void iser_task_rdma_finalize(struct iscsi_iser_task *task);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void iser_free_rx_descriptors(struct iser_conn *ib_conn);
 
@@ -850,6 +974,8 @@ int  iser_initialize_task_headers(struct iscsi_task *task,
 			struct iser_tx_desc *tx_desc);
 int iser_alloc_rx_descriptors(struct iser_conn *ib_conn);
 =======
+=======
+>>>>>>> v3.18
 void iser_free_rx_descriptors(struct iser_conn *iser_conn);
 
 void iser_finalize_rdma_unaligned_sg(struct iscsi_iser_task *iser_task,
@@ -898,5 +1024,8 @@ int iser_create_fastreg_pool(struct ib_conn *ib_conn, unsigned cmds_max);
 void iser_free_fastreg_pool(struct ib_conn *ib_conn);
 u8 iser_check_task_pi_status(struct iscsi_iser_task *iser_task,
 			     enum iser_data_dir cmd_dir, sector_t *sector);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

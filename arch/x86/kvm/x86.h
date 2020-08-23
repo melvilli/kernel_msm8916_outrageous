@@ -48,7 +48,10 @@ static inline int is_long_mode(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool is_64_bit_mode(struct kvm_vcpu *vcpu)
 {
 	int cs_db, cs_l;
@@ -59,6 +62,9 @@ static inline bool is_64_bit_mode(struct kvm_vcpu *vcpu)
 	return cs_l;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool mmu_is_nested(struct kvm_vcpu *vcpu)
 {
@@ -132,7 +138,10 @@ static inline bool vcpu_match_mmio_gpa(struct kvm_vcpu *vcpu, gpa_t gpa)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long kvm_register_readl(struct kvm_vcpu *vcpu,
 					       enum kvm_reg reg)
 {
@@ -150,6 +159,9 @@ static inline void kvm_register_writel(struct kvm_vcpu *vcpu,
 	return kvm_register_write(vcpu, reg, val);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void kvm_before_handle_nmi(struct kvm_vcpu *vcpu);
 void kvm_after_handle_nmi(struct kvm_vcpu *vcpu);
@@ -166,9 +178,12 @@ int kvm_write_guest_virt_system(struct x86_emulate_ctxt *ctxt,
 	struct x86_exception *exception);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u64 host_xcr0;
 
 =======
+=======
+>>>>>>> v3.18
 bool kvm_mtrr_valid(struct kvm_vcpu *vcpu, u32 msr, u64 data);
 
 #define KVM_SUPPORTED_XCR0     (XSTATE_FP | XSTATE_SSE | XSTATE_YMM \
@@ -177,6 +192,9 @@ extern u64 host_xcr0;
 
 extern u64 kvm_supported_xcr0(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern unsigned int min_timer_period_us;
 

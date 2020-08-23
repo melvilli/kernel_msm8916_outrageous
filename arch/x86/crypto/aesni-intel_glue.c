@@ -35,7 +35,11 @@
 #include <asm/i387.h>
 #include <asm/crypto/aes.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/crypto/ablk_helper.h>
+=======
+#include <crypto/ablk_helper.h>
+>>>>>>> v3.18
 =======
 #include <crypto/ablk_helper.h>
 >>>>>>> v3.18
@@ -106,8 +110,11 @@ int crypto_fpu_init(void);
 void crypto_fpu_exit(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
 =======
+=======
+>>>>>>> v3.18
 #define AVX_GEN2_OPTSIZE 640
 #define AVX_GEN4_OPTSIZE 4096
 
@@ -115,6 +122,9 @@ void crypto_fpu_exit(void);
 
 static void (*aesni_ctr_enc_tfm)(struct crypto_aes_ctx *ctx, u8 *out,
 			      const u8 *in, unsigned int len, u8 *iv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 asmlinkage void aesni_ctr_enc(struct crypto_aes_ctx *ctx, u8 *out,
 			      const u8 *in, unsigned int len, u8 *iv);
@@ -165,7 +175,10 @@ asmlinkage void aesni_gcm_dec(void *ctx, u8 *out,
 			u8 *auth_tag, unsigned long auth_tag_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_AS_AVX
 asmlinkage void aes_ctr_enc_128_avx_by8(const u8 *in, u8 *iv,
@@ -289,6 +302,9 @@ static void (*aesni_gcm_dec_tfm)(void *ctx, u8 *out,
 			u8 *hash_subkey, const u8 *aad, unsigned long aad_len,
 			u8 *auth_tag, unsigned long auth_tag_len);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct
 aesni_rfc4106_gcm_ctx *aesni_rfc4106_gcm_ctx_get(struct crypto_aead *tfm)
@@ -493,7 +509,10 @@ static void ctr_crypt_final(struct crypto_aes_ctx *ctx,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_AS_AVX
 static void aesni_ctr_enc_avx_tfm(struct crypto_aes_ctx *ctx, u8 *out,
 			      const u8 *in, unsigned int len, u8 *iv)
@@ -513,6 +532,9 @@ static void aesni_ctr_enc_avx_tfm(struct crypto_aes_ctx *ctx, u8 *out,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ctr_crypt(struct blkcipher_desc *desc,
 		     struct scatterlist *dst, struct scatterlist *src,
@@ -529,8 +551,13 @@ static int ctr_crypt(struct blkcipher_desc *desc,
 	kernel_fpu_begin();
 	while ((nbytes = walk.nbytes) >= AES_BLOCK_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		aesni_ctr_enc(ctx, walk.dst.virt.addr, walk.src.virt.addr,
 			      nbytes & AES_BLOCK_MASK, walk.iv);
+=======
+		aesni_ctr_enc_tfm(ctx, walk.dst.virt.addr, walk.src.virt.addr,
+				  nbytes & AES_BLOCK_MASK, walk.iv);
+>>>>>>> v3.18
 =======
 		aesni_ctr_enc_tfm(ctx, walk.dst.virt.addr, walk.src.virt.addr,
 				  nbytes & AES_BLOCK_MASK, walk.iv);
@@ -1083,7 +1110,11 @@ static int __driver_rfc4106_encrypt(struct aead_request *req)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aesni_gcm_enc(aes_ctx, dst, src, (unsigned long)req->cryptlen, iv,
+=======
+	aesni_gcm_enc_tfm(aes_ctx, dst, src, (unsigned long)req->cryptlen, iv,
+>>>>>>> v3.18
 =======
 	aesni_gcm_enc_tfm(aes_ctx, dst, src, (unsigned long)req->cryptlen, iv,
 >>>>>>> v3.18
@@ -1161,7 +1192,11 @@ static int __driver_rfc4106_decrypt(struct aead_request *req)
 		if (!src)
 			return -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		assoc = (src + req->cryptlen);
+=======
+		assoc = (src + req->cryptlen + auth_tag_len);
+>>>>>>> v3.18
 =======
 		assoc = (src + req->cryptlen + auth_tag_len);
 >>>>>>> v3.18
@@ -1172,7 +1207,11 @@ static int __driver_rfc4106_decrypt(struct aead_request *req)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	aesni_gcm_dec(aes_ctx, dst, src, tempCipherLen, iv,
+=======
+	aesni_gcm_dec_tfm(aes_ctx, dst, src, tempCipherLen, iv,
+>>>>>>> v3.18
 =======
 	aesni_gcm_dec_tfm(aes_ctx, dst, src, tempCipherLen, iv,
 >>>>>>> v3.18
@@ -1181,7 +1220,11 @@ static int __driver_rfc4106_decrypt(struct aead_request *req)
 
 	/* Compare generated tag with passed in tag. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = memcmp(src + tempCipherLen, authTag, auth_tag_len) ?
+=======
+	retval = crypto_memneq(src + tempCipherLen, authTag, auth_tag_len) ?
+>>>>>>> v3.18
 =======
 	retval = crypto_memneq(src + tempCipherLen, authTag, auth_tag_len) ?
 >>>>>>> v3.18
@@ -1198,7 +1241,11 @@ static int __driver_rfc4106_decrypt(struct aead_request *req)
 		scatterwalk_done(&assoc_sg_walk, 0, 0);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scatterwalk_map_and_copy(dst, req->dst, 0, tempCipherLen, 1);
+=======
+		scatterwalk_map_and_copy(dst, req->dst, 0, req->cryptlen, 1);
+>>>>>>> v3.18
 =======
 		scatterwalk_map_and_copy(dst, req->dst, 0, req->cryptlen, 1);
 >>>>>>> v3.18
@@ -1541,7 +1588,10 @@ static int __init aesni_init(void)
 	if (!x86_match_cpu(aesni_cpu_id))
 		return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_64
 #ifdef CONFIG_AS_AVX2
 	if (boot_cpu_has(X86_FEATURE_AVX2)) {
@@ -1571,6 +1621,9 @@ static int __init aesni_init(void)
 	}
 #endif
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = crypto_fpu_init();
@@ -1593,7 +1646,11 @@ module_exit(aesni_exit);
 MODULE_DESCRIPTION("Rijndael (AES) Cipher Algorithm, Intel AES-NI instructions optimized");
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("aes");
+=======
+MODULE_ALIAS("aes");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("aes");
 >>>>>>> v3.18

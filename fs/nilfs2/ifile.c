@@ -161,7 +161,10 @@ int nilfs_ifile_get_inode_block(struct inode *ifile, ino_t ino,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * nilfs_ifile_count_free_inodes - calculate free inodes count
  * @ifile: ifile inode
  * @nmaxinodes: current maximum of available inodes count [out]
@@ -184,6 +187,9 @@ int nilfs_ifile_count_free_inodes(struct inode *ifile,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * nilfs_ifile_read - read or get ifile inode
  * @sb: super block instance

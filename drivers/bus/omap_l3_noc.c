@@ -1,8 +1,14 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * OMAP4XXX L3 Interconnect error handling driver
  *
  * Copyright (C) 2011 Texas Corporation
+=======
+ * OMAP L3 Interconnect error handling driver
+ *
+ * Copyright (C) 2011-2014 Texas Instruments Incorporated - http://www.ti.com/
+>>>>>>> v3.18
 =======
  * OMAP L3 Interconnect error handling driver
  *
@@ -12,6 +18,7 @@
  *	Sricharan <r.sricharan@ti.com>
  *
  * This program is free software; you can redistribute it and/or modify
+<<<<<<< HEAD
 <<<<<<< HEAD
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -34,6 +41,8 @@
 #include <linux/interrupt.h>
 #include <linux/kernel.h>
 =======
+=======
+>>>>>>> v3.18
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  *
@@ -50,11 +59,15 @@
 #include <linux/of_device.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/slab.h>
 
 #include "omap_l3_noc.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * Interrupt Handler for L3 error detection.
@@ -65,6 +78,8 @@
  *
  * Two Types of errors :
 =======
+=======
+>>>>>>> v3.18
 /**
  * l3_handle_target() - Handle Target specific parse and reporting
  * @l3:		pointer to l3 struct
@@ -79,6 +94,9 @@
  *	6) Clear the source if known.
  *
  * This handles two types of errors:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	1) Custom errors in L3 :
  *		Target like DMM/FW/EMIF generates SRESP=ERR error
@@ -96,6 +114,7 @@
  *	secure software and hence need not be implemented here.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t l3_interrupt_handler(int irq, void *_l3)
 {
 
@@ -106,6 +125,8 @@ static irqreturn_t l3_interrupt_handler(int irq, void *_l3)
 	void __iomem *base, *l3_targ_base;
 	char *target_name, *master_name = "UN IDENTIFIED";
 =======
+=======
+>>>>>>> v3.18
 static int l3_handle_target(struct omap_l3 *l3, void __iomem *base,
 			    struct l3_flagmux_data *flag_mux, int err_src)
 {
@@ -223,13 +244,20 @@ static irqreturn_t l3_interrupt_handler(int irq, void *_l3)
 	u32 err_reg, mask_val;
 	void __iomem *base, *mask_reg;
 	struct l3_flagmux_data *flag_mux;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Get the Type of interrupt */
 	inttype = irq == l3->app_irq ? L3_APPLICATION_ERROR : L3_DEBUG_ERROR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < L3_MODULES; i++) {
+=======
+	for (i = 0; i < l3->num_modules; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < l3->num_modules; i++) {
 >>>>>>> v3.18
@@ -239,15 +267,21 @@ static irqreturn_t l3_interrupt_handler(int irq, void *_l3)
 		 */
 		base = l3->l3_base[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err_reg = __raw_readl(base + l3_flagmux[i] +
 					+ L3_FLAGMUX_REGERR0 + (inttype << 3));
 =======
+=======
+>>>>>>> v3.18
 		flag_mux = l3->l3_flagmux[i];
 		err_reg = readl_relaxed(base + flag_mux->offset +
 					L3_FLAGMUX_REGERR0 + (inttype << 3));
 
 		err_reg &= ~(inttype ? flag_mux->mask_app_bits :
 				flag_mux->mask_dbg_bits);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Get the corresponding error and analyse */
@@ -255,6 +289,7 @@ static irqreturn_t l3_interrupt_handler(int irq, void *_l3)
 			/* Identify the source from control status register */
 			err_src = __ffs(err_reg);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			/* Read the stderrlog_main_source from clk domain */
 			l3_targ_base = base + *(l3_targ[i] + err_src);
@@ -300,6 +335,8 @@ static irqreturn_t l3_interrupt_handler(int irq, void *_l3)
 		/* Error found so break the for loop */
 		break;
 =======
+=======
+>>>>>>> v3.18
 			ret = l3_handle_target(l3, base, flag_mux, err_src);
 
 			/*
@@ -329,12 +366,16 @@ static irqreturn_t l3_interrupt_handler(int irq, void *_l3)
 
 			/* Error found so break the for loop */
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 	return IRQ_HANDLED;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int omap4_l3_probe(struct platform_device *pdev)
 {
@@ -388,6 +429,8 @@ static int omap4_l3_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto err2;
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id l3_noc_match[] = {
 	{.compatible = "ti,omap4-l3-noc", .data = &omap_l3_data},
 	{.compatible = "ti,dra7-l3-noc", .data = &dra_l3_data},
@@ -433,6 +476,9 @@ static int omap_l3_probe(struct platform_device *pdev)
 			return PTR_ERR(l3->l3_base[i]);
 		}
 		res_idx++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -440,6 +486,7 @@ static int omap_l3_probe(struct platform_device *pdev)
 	 * Setup interrupt Handlers
 	 */
 	l3->debug_irq = platform_get_irq(pdev, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = request_irq(l3->debug_irq,
 			l3_interrupt_handler,
@@ -521,6 +568,8 @@ static void __exit omap4_l3_exit(void)
 }
 module_exit(omap4_l3_exit);
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_request_irq(l3->dev, l3->debug_irq, l3_interrupt_handler,
 			       IRQF_DISABLED, "l3-dbg-irq", l3);
 	if (ret) {
@@ -558,4 +607,7 @@ static void __exit omap_l3_exit(void)
 	platform_driver_unregister(&omap_l3_driver);
 }
 module_exit(omap_l3_exit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -151,7 +151,11 @@ config MTD_BCM63XX_PARTS
 config MTD_BCM47XX_PARTS
 	tristate "BCM47XX partitioning support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on BCM47XX
+=======
+	depends on BCM47XX || ARCH_BCM_5301X
+>>>>>>> v3.18
 =======
 	depends on BCM47XX || ARCH_BCM_5301X
 >>>>>>> v3.18
@@ -162,16 +166,22 @@ config MTD_BCM47XX_PARTS
 comment "User Modules And Translation Layers"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MTD_BLKDEVS
 	tristate "Common interface to block layer for MTD 'translation layers'"
 	depends on BLOCK
 	default n
 =======
+=======
+>>>>>>> v3.18
 #
 # MTD block device support is select'ed if needed
 #
 config MTD_BLKDEVS
 	tristate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MTD_BLOCK
@@ -321,6 +331,7 @@ config MTD_SWAP
 	  OOB.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MTD_LAZYECCSTATS
 	bool "MTD Lazy ECC Stats collection support"
 	default y
@@ -332,6 +343,8 @@ config MTD_LAZYECCSTATS
 	  This can significantly decrease boot times depending on the size of
 	  the partition.  If unsure, say 'N'.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "drivers/mtd/chips/Kconfig"
@@ -347,6 +360,11 @@ source "drivers/mtd/onenand/Kconfig"
 source "drivers/mtd/lpddr/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "drivers/mtd/spi-nor/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "drivers/mtd/spi-nor/Kconfig"
 

@@ -93,7 +93,11 @@ static int toonie_init_codec(struct aoa_codec *codec)
 		return -ENOTCONN;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (aoa_snd_device_new(SNDRV_DEV_LOWLEVEL, toonie, &ops)) {
+=======
+	if (aoa_snd_device_new(SNDRV_DEV_CODEC, toonie, &ops)) {
+>>>>>>> v3.18
 =======
 	if (aoa_snd_device_new(SNDRV_DEV_CODEC, toonie, &ops)) {
 >>>>>>> v3.18

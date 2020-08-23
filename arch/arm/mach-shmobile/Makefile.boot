@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 __ZRELADDR	:= $(shell /bin/bash -c 'printf "0x%08x" \
 		     $$[$(CONFIG_MEMORY_START) + 0x8000]')
 
 =======
+=======
+>>>>>>> v3.18
 # per-board load address for uImage
 loadaddr-y	:=
 loadaddr-$(CONFIG_MACH_APE6EVM) += 0x40008000
@@ -18,6 +21,9 @@ loadaddr-$(CONFIG_MACH_MACKEREL) += 0x40008000
 loadaddr-$(CONFIG_MACH_MARZEN) += 0x60008000
 
 __ZRELADDR	:= $(sort $(loadaddr-y))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
    zreladdr-y   += $(__ZRELADDR)
 

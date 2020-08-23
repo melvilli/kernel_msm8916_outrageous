@@ -24,6 +24,7 @@ menu "Common Clock Framework"
 	depends on COMMON_CLK
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config COMMON_CLK_DEBUG
 	bool "DebugFS representation of clock tree"
 	select DEBUG_FS
@@ -36,6 +37,8 @@ config COMMON_CLK_DEBUG
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config COMMON_CLK_WM831X
 	tristate "Clock driver for WM831x/2x PMICs"
 	depends on MFD_WM831X
@@ -43,6 +46,7 @@ config COMMON_CLK_WM831X
           Supports the clocking subsystem of the WM831x/2x series of
 	  PMICs from Wolfson Microlectronics.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config COMMON_CLK_VERSATILE
 	bool "Clock driver for ARM Reference designs"
@@ -53,15 +57,21 @@ config COMMON_CLK_VERSATILE
 	  - RealView PB1176, EB, PB11MP and PBX
 	  - Versatile Express
 =======
+=======
+>>>>>>> v3.18
 source "drivers/clk/versatile/Kconfig"
 
 config COMMON_CLK_MAX_GEN
         bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config COMMON_CLK_MAX77686
 	tristate "Clock driver for Maxim 77686 MFD"
 	depends on MFD_MAX77686
+<<<<<<< HEAD
 <<<<<<< HEAD
 	---help---
 	  This driver supports Maxim 77686 crystal oscillator clock. 
@@ -71,6 +81,8 @@ config COMMON_CLK_SI5351
 	depends on I2C
 	depends on OF
 =======
+=======
+>>>>>>> v3.18
 	select COMMON_CLK_MAX_GEN
 	---help---
 	  This driver supports Maxim 77686 crystal oscillator clock. 
@@ -94,6 +106,9 @@ config COMMON_CLK_RK808
 config COMMON_CLK_SI5351
 	tristate "Clock driver for SiLabs 5351A/B/C"
 	depends on I2C
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select REGMAP_I2C
 	select RATIONAL
@@ -102,7 +117,10 @@ config COMMON_CLK_SI5351
 	  generators.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config COMMON_CLK_SI570
 	tristate "Clock driver for SiLabs 570 and compatible devices"
 	depends on I2C
@@ -121,6 +139,9 @@ config COMMON_CLK_S2MPS11
 	  clock. These multi-function devices have two (S2MPS14) or three
 	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CLK_TWL6040
 	tristate "External McPDM functional clock from twl6040"
@@ -139,11 +160,14 @@ config COMMON_CLK_AXI_CLKGEN
 	  FPGAs. It is commonly used in Analog Devices' reference designs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endmenu
 
 source "drivers/clk/mvebu/Kconfig"
 source "drivers/clk/qcom/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 config CLK_PPC_CORENET
 	bool "Clock driver for PowerPC corenet platforms"
 	depends on PPC_E500MC && OF
@@ -185,4 +209,7 @@ source "drivers/clk/bcm/Kconfig"
 source "drivers/clk/mvebu/Kconfig"
 
 source "drivers/clk/samsung/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

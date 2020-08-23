@@ -3,6 +3,7 @@
 
 /* DPCD Receiver Capabilities */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DPCD_RC00                                                       0x00000
 #define DPCD_RC00_DPCD_REV                                                 0xff
 #define DPCD_RC01                                                       0x00001
@@ -17,6 +18,8 @@
 #define DPCD_LC00                                                       0x00100
 #define DPCD_LC00_LINK_BW_SET                                              0xff
 =======
+=======
+>>>>>>> v3.18
 #define DPCD_RC00_DPCD_REV                                              0x00000
 #define DPCD_RC01_MAX_LINK_RATE                                         0x00001
 #define DPCD_RC02                                                       0x00002
@@ -29,6 +32,9 @@
 
 /* DPCD Link Configuration */
 #define DPCD_LC00_LINK_BW_SET                                           0x00100
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DPCD_LC01                                                       0x00101
 #define DPCD_LC01_ENHANCED_FRAME_EN                                        0x80
@@ -41,7 +47,10 @@
 #define DPCD_LC03_MAX_SWING_REACHED                                        0x04
 #define DPCD_LC03_VOLTAGE_SWING_SET                                        0x03
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DPCD_LC0F                                                       0x0010f
 #define DPCD_LC0F_LANE1_MAX_POST_CURSOR2_REACHED                           0x40
 #define DPCD_LC0F_LANE1_POST_CURSOR2_SET                                   0x30
@@ -52,6 +61,9 @@
 #define DPCD_LC10_LANE3_POST_CURSOR2_SET                                   0x30
 #define DPCD_LC10_LANE2_MAX_POST_CURSOR2_REACHED                           0x04
 #define DPCD_LC10_LANE2_POST_CURSOR2_SET                                   0x03
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* DPCD Link/Sink Status */
@@ -84,6 +96,7 @@
 #define DPCD_LS07_LANE2_PRE_EMPHASIS                                       0x0c
 #define DPCD_LS07_LANE2_VOLTAGE_SWING                                      0x03
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 struct nouveau_disp;
 struct dcb_output;
@@ -104,6 +117,8 @@ extern const struct nouveau_dp_func nv50_pior_dp_func;
 int nouveau_dp_train(struct nouveau_disp *, const struct nouveau_dp_func *,
 		     struct dcb_output *, int, u32);
 =======
+=======
+>>>>>>> v3.18
 #define DPCD_LS0C                                                       0x0020c
 #define DPCD_LS0C_LANE3_POST_CURSOR2                                       0xc0
 #define DPCD_LS0C_LANE2_POST_CURSOR2                                       0x30
@@ -111,6 +126,9 @@ int nouveau_dp_train(struct nouveau_disp *, const struct nouveau_dp_func *,
 #define DPCD_LS0C_LANE0_POST_CURSOR2                                       0x03
 
 void nouveau_dp_train(struct work_struct *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

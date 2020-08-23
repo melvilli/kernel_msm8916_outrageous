@@ -93,7 +93,11 @@ static struct kvmppc_sid_map *find_sid_vsid(struct kvm_vcpu *vcpu, u64 gvsid)
 	u16 sid_map_mask;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vcpu->arch.shared->msr & MSR_PR)
+=======
+	if (kvmppc_get_msr(vcpu) & MSR_PR)
+>>>>>>> v3.18
 =======
 	if (kvmppc_get_msr(vcpu) & MSR_PR)
 >>>>>>> v3.18
@@ -143,7 +147,12 @@ static u32 *kvmppc_mmu_get_pteg(struct kvm_vcpu *vcpu, u32 vsid, u32 eaddr,
 extern char etext[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte)
+=======
+int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
+			bool iswrite)
+>>>>>>> v3.18
 =======
 int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 			bool iswrite)
@@ -162,6 +171,7 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 	struct hpte_cache *pte;
 	int r = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Get host physical address for gpa */
 	hpaddr = kvmppc_gfn_to_pfn(vcpu, orig_pte->raddr >> PAGE_SHIFT);
@@ -169,6 +179,8 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 		printk(KERN_INFO "Couldn't get guest page for gfn %lx!\n",
 				 orig_pte->eaddr);
 =======
+=======
+>>>>>>> v3.18
 	bool writable;
 
 	/* Get host physical address for gpa */
@@ -176,6 +188,9 @@ int kvmppc_mmu_map_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *orig_pte,
 	if (is_error_noslot_pfn(hpaddr)) {
 		printk(KERN_INFO "Couldn't get guest page for gpa %lx!\n",
 				 orig_pte->raddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		r = -EINVAL;
 		goto out;
@@ -224,7 +239,11 @@ next_pteg:
 	pteg1 = hpaddr | PTE_M | PTE_R | PTE_C;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (orig_pte->may_write) {
+=======
+	if (orig_pte->may_write && writable) {
+>>>>>>> v3.18
 =======
 	if (orig_pte->may_write && writable) {
 >>>>>>> v3.18
@@ -264,12 +283,18 @@ next_pteg:
 
 	pte = kvmppc_mmu_hpte_cache_next(vcpu);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!pte) {
 		kvm_release_pfn_clean(hpaddr >> PAGE_SHIFT);
 		r = -EAGAIN;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dprintk_mmu("KVM: %c%c Map 0x%llx: [%lx] 0x%llx (0x%llx) -> %lx\n",
@@ -291,12 +316,18 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void kvmppc_mmu_unmap_page(struct kvm_vcpu *vcpu, struct kvmppc_pte *pte)
 {
 	kvmppc_mmu_pte_vflush(vcpu, pte->vpage, 0xfffffffffULL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct kvmppc_sid_map *create_sid_map(struct kvm_vcpu *vcpu, u64 gvsid)
 {
@@ -306,7 +337,11 @@ static struct kvmppc_sid_map *create_sid_map(struct kvm_vcpu *vcpu, u64 gvsid)
 	static int backwards_map = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vcpu->arch.shared->msr & MSR_PR)
+=======
+	if (kvmppc_get_msr(vcpu) & MSR_PR)
+>>>>>>> v3.18
 =======
 	if (kvmppc_get_msr(vcpu) & MSR_PR)
 >>>>>>> v3.18
@@ -385,7 +420,11 @@ void kvmppc_mmu_flush_segments(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_mmu_destroy(struct kvm_vcpu *vcpu)
+=======
+void kvmppc_mmu_destroy_pr(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 void kvmppc_mmu_destroy_pr(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18

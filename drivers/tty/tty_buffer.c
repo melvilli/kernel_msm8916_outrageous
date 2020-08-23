@@ -12,7 +12,10 @@
 #include <linux/slab.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/wait.h>
@@ -22,8 +25,11 @@
 #include <linux/ratelimit.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TTY_MAX_BUF 131072
 =======
+=======
+>>>>>>> v3.18
 
 #define MIN_TTYB_SIZE	256
 #define TTYB_ALIGN_MASK	255
@@ -112,6 +118,9 @@ static void tty_buffer_reset(struct tty_buffer *p, size_t size)
 	p->flags = 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  *	tty_buffer_free_all		-	free buffers used by a tty
@@ -120,8 +129,11 @@ static void tty_buffer_reset(struct tty_buffer *p, size_t size)
  *	Remove all the buffers pending on a tty whether queued with data
  *	or in the free ring. Must be called when the tty is no longer in use
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *	Locking: none
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -129,6 +141,7 @@ static void tty_buffer_reset(struct tty_buffer *p, size_t size)
 void tty_buffer_free_all(struct tty_port *port)
 {
 	struct tty_bufhead *buf = &port->buf;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tty_buffer *thead;
 
@@ -143,6 +156,8 @@ void tty_buffer_free_all(struct tty_port *port)
 	buf->tail = NULL;
 	buf->memory_used = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct tty_buffer *p, *next;
 	struct llist_node *llist;
 
@@ -160,6 +175,9 @@ void tty_buffer_free_all(struct tty_port *port)
 	buf->tail = &buf->sentinel;
 
 	atomic_set(&buf->mem_used, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -170,25 +188,34 @@ void tty_buffer_free_all(struct tty_port *port)
  *
  *	Allocate a new tty buffer to hold the desired number of characters.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Return NULL if out of memory or the allocation would exceed the
  *	per device queue
  *
  *	Locking: Caller must hold tty->buf.lock
 =======
+=======
+>>>>>>> v3.18
  *	We round our buffers off in 256 character chunks to get better
  *	allocation behaviour.
  *	Return NULL if out of memory or the allocation would exceed the
  *	per device queue
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
 static struct tty_buffer *tty_buffer_alloc(struct tty_port *port, size_t size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct tty_buffer *p;
 
 	if (port->buf.memory_used + size > TTY_MAX_BUF)
 =======
+=======
+>>>>>>> v3.18
 	struct llist_node *free;
 	struct tty_buffer *p;
 
@@ -206,11 +233,15 @@ static struct tty_buffer *tty_buffer_alloc(struct tty_port *port, size_t size)
 	/* Should possibly check if this fails for the largest buffer we
 	   have queued and recycle that ? */
 	if (atomic_read(&port->buf.mem_used) > port->buf.mem_limit)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return NULL;
 	p = kmalloc(sizeof(struct tty_buffer) + 2 * size, GFP_ATOMIC);
 	if (p == NULL)
 		return NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	p->used = 0;
 	p->size = size;
@@ -221,10 +252,15 @@ static struct tty_buffer *tty_buffer_alloc(struct tty_port *port, size_t size)
 	p->flag_buf_ptr = (unsigned char *)p->char_buf_ptr + size;
 	port->buf.memory_used += size;
 =======
+=======
+>>>>>>> v3.18
 
 found:
 	tty_buffer_reset(p, size);
 	atomic_add(size, &port->buf.mem_used);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return p;
 }
@@ -237,8 +273,11 @@ found:
  *	Free a tty buffer, or add it to the free list according to our
  *	internal strategy
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *	Locking: Caller must hold tty->buf.lock
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -248,6 +287,7 @@ static void tty_buffer_free(struct tty_port *port, struct tty_buffer *b)
 	struct tty_bufhead *buf = &port->buf;
 
 	/* Dumb strategy for now - should keep some stats */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buf->memory_used -= b->size;
 	WARN_ON(buf->memory_used < 0);
@@ -285,12 +325,17 @@ static void __tty_buffer_flush(struct tty_port *port)
 	WARN_ON(buf->head != buf->tail);
 	buf->head->read = buf->head->commit;
 =======
+=======
+>>>>>>> v3.18
 	WARN_ON(atomic_sub_return(b->size, &buf->mem_used) < 0);
 
 	if (b->size > MIN_TTYB_SIZE)
 		kfree(b);
 	else if (b->size > 0)
 		llist_add(&b->free, &buf->free);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -299,16 +344,22 @@ static void __tty_buffer_flush(struct tty_port *port)
  *	@tty: tty to flush
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	flush all the buffers containing receive data. If the buffer is
  *	being processed by flush_to_ldisc then we defer the processing
  *	to that function
  *
  *	Locking: none
 =======
+=======
+>>>>>>> v3.18
  *	flush all the buffers containing receive data.
  *
  *	Locking: takes buffer lock to ensure single-threaded flip buffer
  *		 'consumer'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -316,6 +367,7 @@ void tty_buffer_flush(struct tty_struct *tty)
 {
 	struct tty_port *port = tty->port;
 	struct tty_bufhead *buf = &port->buf;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long flags;
 
@@ -370,6 +422,8 @@ static struct tty_buffer *tty_buffer_find(struct tty_port *port, size_t size)
 	   have queued and recycle that ? */
 }
 =======
+=======
+>>>>>>> v3.18
 	struct tty_buffer *next;
 
 	atomic_inc(&buf->priority);
@@ -384,12 +438,19 @@ static struct tty_buffer *tty_buffer_find(struct tty_port *port, size_t size)
 	mutex_unlock(&buf->lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  *	tty_buffer_request_room		-	grow tty buffer if needed
  *	@tty: tty structure
  *	@size: size desired
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	@flags: buffer flags if new buffer allocated (default = 0)
+>>>>>>> v3.18
 =======
  *	@flags: buffer flags if new buffer allocated (default = 0)
 >>>>>>> v3.18
@@ -397,6 +458,7 @@ static struct tty_buffer *tty_buffer_find(struct tty_port *port, size_t size)
  *	Make at least size bytes of linear space available for the tty
  *	buffer. If we fail return the size we managed to find.
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  *	Locking: Takes port->buf.lock
  */
@@ -432,6 +494,8 @@ int tty_buffer_request_room(struct tty_port *port, size_t size)
 	return size;
 }
 =======
+=======
+>>>>>>> v3.18
  *	Will change over to a new buffer if the current buffer is encoded as
  *	TTY_NORMAL (so has no flags buffer) and the new buffer requires
  *	a flags buffer.
@@ -474,6 +538,9 @@ int tty_buffer_request_room(struct tty_port *port, size_t size)
 {
 	return __tty_buffer_request_room(port, size, 0);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL_GPL(tty_buffer_request_room);
 
@@ -487,8 +554,11 @@ EXPORT_SYMBOL_GPL(tty_buffer_request_room);
  *	Queue a series of bytes to the tty buffering. All the characters
  *	passed are marked with the supplied flag. Returns the number added.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *	Locking: Called functions may take port->buf.lock
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -500,6 +570,7 @@ int tty_insert_flip_string_fixed_flag(struct tty_port *port,
 	do {
 		int goal = min_t(size_t, size - copied, TTY_BUFFER_PAGE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int space = tty_buffer_request_room(port, goal);
 		struct tty_buffer *tb = port->buf.tail;
 		/* If there is no space then tb may be NULL */
@@ -509,6 +580,8 @@ int tty_insert_flip_string_fixed_flag(struct tty_port *port,
 		memcpy(tb->char_buf_ptr + tb->used, chars, space);
 		memset(tb->flag_buf_ptr + tb->used, flag, space);
 =======
+=======
+>>>>>>> v3.18
 		int flags = (flag == TTY_NORMAL) ? TTYB_NORMAL : 0;
 		int space = __tty_buffer_request_room(port, goal, flags);
 		struct tty_buffer *tb = port->buf.tail;
@@ -517,6 +590,9 @@ int tty_insert_flip_string_fixed_flag(struct tty_port *port,
 		memcpy(char_buf_ptr(tb, tb->used), chars, space);
 		if (~tb->flags & TTYB_NORMAL)
 			memset(flag_buf_ptr(tb, tb->used), flag, space);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tb->used += space;
 		copied += space;
@@ -539,8 +615,11 @@ EXPORT_SYMBOL(tty_insert_flip_string_fixed_flag);
  *	the flags array indicates the status of the character. Returns the
  *	number added.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *	Locking: Called functions may take port->buf.lock
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -554,6 +633,7 @@ int tty_insert_flip_string_flags(struct tty_port *port,
 		int space = tty_buffer_request_room(port, goal);
 		struct tty_buffer *tb = port->buf.tail;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* If there is no space then tb may be NULL */
 		if (unlikely(space == 0)) {
 			break;
@@ -561,10 +641,15 @@ int tty_insert_flip_string_flags(struct tty_port *port,
 		memcpy(tb->char_buf_ptr + tb->used, chars, space);
 		memcpy(tb->flag_buf_ptr + tb->used, flags, space);
 =======
+=======
+>>>>>>> v3.18
 		if (unlikely(space == 0))
 			break;
 		memcpy(char_buf_ptr(tb, tb->used), chars, space);
 		memcpy(flag_buf_ptr(tb, tb->used), flags, space);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tb->used += space;
 		copied += space;
@@ -585,10 +670,13 @@ EXPORT_SYMBOL(tty_insert_flip_string_flags);
  *	ldisc side of the queue. It then schedules those characters for
  *	processing by the line discipline.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Note that this function can only be used when the low_latency flag
  *	is unset. Otherwise the workqueue won't be flushed.
  *
  *	Locking: Takes port->buf.lock
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -597,6 +685,7 @@ void tty_schedule_flip(struct tty_port *port)
 {
 	struct tty_bufhead *buf = &port->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 	WARN_ON(port->low_latency);
 
@@ -604,6 +693,10 @@ void tty_schedule_flip(struct tty_port *port)
 	if (buf->tail != NULL)
 		buf->tail->commit = buf->tail->used;
 	spin_unlock_irqrestore(&buf->lock, flags);
+=======
+
+	buf->tail->commit = buf->tail->used;
+>>>>>>> v3.18
 =======
 
 	buf->tail->commit = buf->tail->used;
@@ -624,8 +717,11 @@ EXPORT_SYMBOL(tty_schedule_flip);
  *	that need their own block copy routines into the buffer. There is no
  *	guarantee the buffer is a DMA target!
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *	Locking: May call functions taking port->buf.lock
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -634,18 +730,24 @@ int tty_prepare_flip_string(struct tty_port *port, unsigned char **chars,
 		size_t size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int space = tty_buffer_request_room(port, size);
 	if (likely(space)) {
 		struct tty_buffer *tb = port->buf.tail;
 		*chars = tb->char_buf_ptr + tb->used;
 		memset(tb->flag_buf_ptr + tb->used, TTY_NORMAL, space);
 =======
+=======
+>>>>>>> v3.18
 	int space = __tty_buffer_request_room(port, size, TTYB_NORMAL);
 	if (likely(space)) {
 		struct tty_buffer *tb = port->buf.tail;
 		*chars = char_buf_ptr(tb, tb->used);
 		if (~tb->flags & TTYB_NORMAL)
 			memset(flag_buf_ptr(tb, tb->used), TTY_NORMAL, space);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tb->used += space;
 	}
@@ -653,6 +755,7 @@ int tty_prepare_flip_string(struct tty_port *port, unsigned char **chars,
 }
 EXPORT_SYMBOL_GPL(tty_prepare_flip_string);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  *	tty_prepare_flip_string_flags	-	make room for characters
@@ -686,6 +789,8 @@ EXPORT_SYMBOL_GPL(tty_prepare_flip_string_flags);
 
 
 =======
+=======
+>>>>>>> v3.18
 
 static int
 receive_buf(struct tty_struct *tty, struct tty_buffer *head, int count)
@@ -707,6 +812,9 @@ receive_buf(struct tty_struct *tty, struct tty_buffer *head, int count)
 	head->read += count;
 	return count;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -717,14 +825,20 @@ receive_buf(struct tty_struct *tty, struct tty_buffer *head, int count)
  *	from the buffer chain to the line discipline.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Locking: holds tty->buf.lock to guard buffer list. Drops the lock
  *	while invoking the line discipline receive_buf method. The
  *	receive_buf method is single threaded for each tty instance.
 =======
+=======
+>>>>>>> v3.18
  *	The receive_buf method is single threaded for each tty instance.
  *
  *	Locking: takes buffer lock to ensure single-threaded flip buffer
  *		 'consumer'
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -734,7 +848,10 @@ static void flush_to_ldisc(struct work_struct *work)
 	struct tty_bufhead *buf = &port->buf;
 	struct tty_struct *tty;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long 	flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct tty_ldisc *disc;
@@ -747,6 +864,7 @@ static void flush_to_ldisc(struct work_struct *work)
 	if (disc == NULL)
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irqsave(&buf->lock, flags);
 
@@ -792,6 +910,8 @@ static void flush_to_ldisc(struct work_struct *work)
 
 	spin_unlock_irqrestore(&buf->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&buf->lock);
 
 	while (1) {
@@ -824,6 +944,9 @@ static void flush_to_ldisc(struct work_struct *work)
 	}
 
 	mutex_unlock(&buf->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tty_ldisc_deref(disc);
@@ -840,8 +963,12 @@ static void flush_to_ldisc(struct work_struct *work)
 void tty_flush_to_ldisc(struct tty_struct *tty)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tty->port->low_latency)
 		flush_work(&tty->port->buf.work);
+=======
+	flush_work(&tty->port->buf.work);
+>>>>>>> v3.18
 =======
 	flush_work(&tty->port->buf.work);
 >>>>>>> v3.18
@@ -852,6 +979,7 @@ void tty_flush_to_ldisc(struct tty_struct *tty)
  *	@port: tty port to push
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	Queue a push of the terminal flip buffers to the line discipline. This
  *	function must not be called from IRQ context if port->low_latency is
  *	set.
@@ -861,16 +989,22 @@ void tty_flush_to_ldisc(struct tty_struct *tty)
  *
  *	Locking: tty buffer lock. Driver locks in low latency mode.
 =======
+=======
+>>>>>>> v3.18
  *	Queue a push of the terminal flip buffers to the line discipline.
  *	Can be called from IRQ/atomic context.
  *
  *	In the event of the queue being busy for flipping the work will be
  *	held off and retried later.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
 void tty_flip_buffer_push(struct tty_port *port)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct tty_bufhead *buf = &port->buf;
 	unsigned long flags;
@@ -887,6 +1021,9 @@ void tty_flip_buffer_push(struct tty_port *port)
 =======
 	tty_schedule_flip(port);
 >>>>>>> v3.18
+=======
+	tty_schedule_flip(port);
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(tty_flip_buffer_push);
 
@@ -897,8 +1034,11 @@ EXPORT_SYMBOL(tty_flip_buffer_push);
  *	Set up the initial state of the buffer management for a tty device.
  *	Must be called before the other tty buffer functions are used.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *	Locking: none
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -907,6 +1047,7 @@ void tty_buffer_init(struct tty_port *port)
 {
 	struct tty_bufhead *buf = &port->buf;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_init(&buf->lock);
 	buf->head = NULL;
@@ -917,6 +1058,8 @@ void tty_buffer_init(struct tty_port *port)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	mutex_init(&buf->lock);
 	tty_buffer_reset(&buf->sentinel, 0);
 	buf->head = &buf->sentinel;
@@ -944,4 +1087,7 @@ int tty_buffer_set_limit(struct tty_port *port, int limit)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(tty_buffer_set_limit);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

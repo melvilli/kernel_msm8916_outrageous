@@ -46,6 +46,7 @@ MODULE_AUTHOR("Sebastian Witt <se.witt@gmx.net>");
 static const unsigned short normal_i2c[] = { 0x37, 0x4e, I2C_CLIENT_END };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int atxp1_probe(struct i2c_client *client,
 		       const struct i2c_device_id *id);
 static int atxp1_remove(struct i2c_client *client);
@@ -76,6 +77,10 @@ struct atxp1_data {
 struct atxp1_data {
 	struct i2c_client *client;
 >>>>>>> v3.18
+=======
+struct atxp1_data {
+	struct i2c_client *client;
+>>>>>>> v3.18
 	struct mutex update_lock;
 	unsigned long last_updated;
 	u8 valid;
@@ -91,11 +96,16 @@ struct atxp1_data {
 static struct atxp1_data *atxp1_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client;
 	struct atxp1_data *data;
 
 	client = to_i2c_client(dev);
 	data = i2c_get_clientdata(client);
+=======
+	struct atxp1_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct atxp1_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -140,8 +150,13 @@ static ssize_t atxp1_storevcore(struct device *dev,
 				const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct atxp1_data *data;
 	struct i2c_client *client;
+=======
+	struct atxp1_data *data = atxp1_update_device(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct atxp1_data *data = atxp1_update_device(dev);
 	struct i2c_client *client = data->client;
@@ -151,9 +166,12 @@ static ssize_t atxp1_storevcore(struct device *dev,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	client = to_i2c_client(dev);
 	data = atxp1_update_device(dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = kstrtoul(buf, 10, &vcore);
@@ -166,10 +184,16 @@ static ssize_t atxp1_storevcore(struct device *dev,
 	/* Calculate VID */
 	vid = vid_to_reg(vcore, data->vrm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (vid < 0) {
 		dev_err(dev, "VID calculation failed.\n");
 		return -1;
+=======
+	if (vid < 0) {
+		dev_err(dev, "VID calculation failed.\n");
+		return vid;
+>>>>>>> v3.18
 =======
 	if (vid < 0) {
 		dev_err(dev, "VID calculation failed.\n");
@@ -234,6 +258,7 @@ static ssize_t atxp1_storegpio1(struct device *dev,
 				size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct atxp1_data *data;
 	struct i2c_client *client;
 	unsigned long value;
@@ -243,11 +268,16 @@ static ssize_t atxp1_storegpio1(struct device *dev,
 	data = atxp1_update_device(dev);
 
 =======
+=======
+>>>>>>> v3.18
 	struct atxp1_data *data = atxp1_update_device(dev);
 	struct i2c_client *client = data->client;
 	unsigned long value;
 	int err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = kstrtoul(buf, 16, &value);
 	if (err)
@@ -292,7 +322,11 @@ static ssize_t atxp1_storegpio2(struct device *dev,
 {
 	struct atxp1_data *data = atxp1_update_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client = data->client;
 >>>>>>> v3.18
@@ -322,7 +356,11 @@ static ssize_t atxp1_storegpio2(struct device *dev,
 static DEVICE_ATTR(gpio2, S_IRUGO | S_IWUSR, atxp1_showgpio2, atxp1_storegpio2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *atxp1_attributes[] = {
+=======
+static struct attribute *atxp1_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *atxp1_attrs[] = {
 >>>>>>> v3.18
@@ -332,11 +370,15 @@ static struct attribute *atxp1_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct attribute_group atxp1_group = {
 	.attrs = atxp1_attributes,
 };
 
+=======
+ATTRIBUTE_GROUPS(atxp1);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(atxp1);
 >>>>>>> v3.18
@@ -384,6 +426,7 @@ static int atxp1_detect(struct i2c_client *new_client,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int atxp1_probe(struct i2c_client *new_client,
 		       const struct i2c_device_id *id)
 {
@@ -393,6 +436,8 @@ static int atxp1_probe(struct i2c_client *new_client,
 	data = devm_kzalloc(&new_client->dev, sizeof(struct atxp1_data),
 			    GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 static int atxp1_probe(struct i2c_client *client,
 		       const struct i2c_device_id *id)
 {
@@ -401,6 +446,9 @@ static int atxp1_probe(struct i2c_client *client,
 	struct device *hwmon_dev;
 
 	data = devm_kzalloc(dev, sizeof(struct atxp1_data), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!data)
 		return -ENOMEM;
@@ -408,6 +456,7 @@ static int atxp1_probe(struct i2c_client *client,
 	/* Get VRM */
 	data->vrm = vid_which_vrm();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	i2c_set_clientdata(new_client, data);
 	data->valid = 0;
@@ -444,6 +493,8 @@ static int atxp1_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	data->client = client;
 	mutex_init(&data->update_lock);
 
@@ -473,6 +524,9 @@ static struct i2c_driver atxp1_driver = {
 	.id_table	= atxp1_id,
 	.detect		= atxp1_detect,
 	.address_list	= normal_i2c,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

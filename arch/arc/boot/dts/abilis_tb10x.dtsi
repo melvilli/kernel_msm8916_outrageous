@@ -20,10 +20,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* interrupt specifiers
  * --------------------
  * 0: rising, 1: low, 2: high, 3: falling,
  */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -70,9 +73,14 @@
 
 		iomux: iomux@FF10601c {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			#address-cells = <1>;
 			#size-cells = <1>;
 			compatible = "abilis,tb10x-iomux";
+=======
+			compatible = "abilis,tb10x-iomux";
+			#gpio-range-cells = <3>;
+>>>>>>> v3.18
 =======
 			compatible = "abilis,tb10x-iomux";
 			#gpio-range-cells = <3>;
@@ -87,7 +95,11 @@
 		};
 		tb10x_ictl: pic@fe002000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			compatible = "abilis,tb10x_ictl";
+=======
+			compatible = "abilis,tb10x-ictl";
+>>>>>>> v3.18
 =======
 			compatible = "abilis,tb10x-ictl";
 >>>>>>> v3.18
@@ -104,7 +116,11 @@
 			reg = <0xFF100000 0x100>;
 			clock-frequency = <166666666>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <25 1>;
+=======
+			interrupts = <25 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <25 8>;
 >>>>>>> v3.18
@@ -117,7 +133,11 @@
 			reg = <0xFE100000 0x1058>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <6 1>;
+=======
+			interrupts = <6 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <6 8>;
 >>>>>>> v3.18
@@ -130,7 +150,11 @@
 			reg = <0xFE000000 0x400>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <14 1>;
+=======
+			interrupts = <14 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <14 8>;
 >>>>>>> v3.18
@@ -153,7 +177,11 @@
 			reg = <0xFF120000 0x1000>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <12 1>;
+=======
+			interrupts = <12 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <12 8>;
 >>>>>>> v3.18
@@ -166,7 +194,11 @@
 			reg = <0xFF121000 0x1000>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <12 1>;
+=======
+			interrupts = <12 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <12 8>;
 >>>>>>> v3.18
@@ -179,7 +211,11 @@
 			reg = <0xFF122000 0x1000>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <12 1>;
+=======
+			interrupts = <12 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <12 8>;
 >>>>>>> v3.18
@@ -192,7 +228,11 @@
 			reg = <0xFF123000 0x1000>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <12 1>;
+=======
+			interrupts = <12 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <12 8>;
 >>>>>>> v3.18
@@ -205,7 +245,11 @@
 			reg = <0xFF124000 0x1000>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <12 1>;
+=======
+			interrupts = <12 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <12 8>;
 >>>>>>> v3.18
@@ -221,7 +265,11 @@
 			reg = <0xFE010000 0x20>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <26 1>;
+=======
+			interrupts = <26 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <26 8>;
 >>>>>>> v3.18
@@ -236,7 +284,11 @@
 			reg = <0xFE011000 0x20>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <10 1>;
+=======
+			interrupts = <10 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <10 8>;
 >>>>>>> v3.18
@@ -248,7 +300,11 @@
 			reg = <0xff316000 0x400>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <17 1>;
+=======
+			interrupts = <17 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <17 8>;
 >>>>>>> v3.18
@@ -270,7 +326,11 @@
 					"a6it_int_force";
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <20 1>, <19 1>;
+=======
+			interrupts = <20 2>, <19 2>;
+>>>>>>> v3.18
 =======
 			interrupts = <20 2>, <19 2>;
 >>>>>>> v3.18
@@ -300,7 +360,11 @@
 			reg = <0xff319000 0x1000>;
 			interrupt-parent = <&tb10x_ictl>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <16 1>;
+=======
+			interrupts = <16 8>;
+>>>>>>> v3.18
 =======
 			interrupts = <16 8>;
 >>>>>>> v3.18

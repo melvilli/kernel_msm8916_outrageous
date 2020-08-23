@@ -3,6 +3,10 @@
 
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ftrace.h>
+>>>>>>> v3.18
 =======
 #include <linux/ftrace.h>
 >>>>>>> v3.18
@@ -20,9 +24,15 @@ extern int ncpus_probed;
 /* setup_64.c */
 struct seq_file;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void cpucap_info(struct seq_file *);
 
 static inline unsigned long kimage_addr_to_ra(const char *p)
+=======
+void cpucap_info(struct seq_file *);
+
+static inline unsigned long kimage_addr_to_ra(const void *p)
+>>>>>>> v3.18
 =======
 void cpucap_info(struct seq_file *);
 
@@ -34,7 +44,10 @@ static inline unsigned long kimage_addr_to_ra(const void *p)
 	return kern_base + (val - KERNBASE);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /* sys_sparc_64.c */
 asmlinkage long sys_kern_features(void);
@@ -71,11 +84,15 @@ extern unsigned sparc32_write_class[];
 extern unsigned sparc32_read_class[];
 extern unsigned sparc32_signal_class[];
 int sparc32_classify_syscall(unsigned syscall);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 #ifdef CONFIG_SPARC32
 /* setup_32.c */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void sparc32_start_kernel(struct linux_romvec *rp);
 
@@ -86,6 +103,8 @@ extern void cpu_probe(void);
 extern void handle_hw_divzero(struct pt_regs *regs, unsigned long pc,
                               unsigned long npc, unsigned long psr);
 =======
+=======
+>>>>>>> v3.18
 struct linux_romvec;
 void sparc32_start_kernel(struct linux_romvec *rp);
 
@@ -95,12 +114,16 @@ void cpu_probe(void);
 /* traps_32.c */
 void handle_hw_divzero(struct pt_regs *regs, unsigned long pc,
                        unsigned long npc, unsigned long psr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* irq_32.c */
 extern struct irqaction static_irqaction[];
 extern int static_irq_count;
 extern spinlock_t irq_action_lock;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void unexpected_irq(int irq, void *dev_id, struct pt_regs * regs);
 extern void init_IRQ(void);
@@ -110,6 +133,8 @@ extern void sun4m_init_IRQ(void);
 extern void sun4m_unmask_profile_irq(void);
 extern void sun4m_clear_profile_irq(int cpu);
 =======
+=======
+>>>>>>> v3.18
 void unexpected_irq(int irq, void *dev_id, struct pt_regs * regs);
 void init_IRQ(void);
 
@@ -117,23 +142,33 @@ void init_IRQ(void);
 void sun4m_init_IRQ(void);
 void sun4m_unmask_profile_irq(void);
 void sun4m_clear_profile_irq(int cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* sun4m_smp.c */
 void sun4m_cpu_pre_starting(void *arg);
 void sun4m_cpu_pre_online(void *arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __init smp4m_boot_cpus(void);
 int smp4m_boot_one_cpu(int i, struct task_struct *idle);
 void __init smp4m_smp_done(void);
 void smp4m_cross_call_irq(void);
 void smp4m_percpu_timer_interrupt(struct pt_regs *regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* sun4d_irq.c */
 extern spinlock_t sun4d_imsk_lock;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void sun4d_init_IRQ(void);
 extern int sun4d_request_irq(unsigned int irq,
@@ -144,6 +179,8 @@ extern int show_sun4d_interrupts(struct seq_file *, void *);
 extern void sun4d_distribute_irqs(void);
 extern void sun4d_free_irq(unsigned int irq, void *dev_id);
 =======
+=======
+>>>>>>> v3.18
 void sun4d_init_IRQ(void);
 int sun4d_request_irq(unsigned int irq,
                       irq_handler_t handler,
@@ -152,24 +189,38 @@ int sun4d_request_irq(unsigned int irq,
 int show_sun4d_interrupts(struct seq_file *, void *);
 void sun4d_distribute_irqs(void);
 void sun4d_free_irq(unsigned int irq, void *dev_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* sun4d_smp.c */
 void sun4d_cpu_pre_starting(void *arg);
 void sun4d_cpu_pre_online(void *arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __init smp4d_boot_cpus(void);
 int smp4d_boot_one_cpu(int i, struct task_struct *idle);
 void __init smp4d_smp_done(void);
 void smp4d_cross_call_irq(void);
 void smp4d_percpu_timer_interrupt(struct pt_regs *regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* leon_smp.c */
 void leon_cpu_pre_starting(void *arg);
 void leon_cpu_pre_online(void *arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void leonsmp_ipi_interrupt(void);
+void leon_cross_call_irq(void);
+>>>>>>> v3.18
 =======
 void leonsmp_ipi_interrupt(void);
 void leon_cross_call_irq(void);
@@ -193,7 +244,11 @@ extern unsigned int smp4d_ticker[];
 extern unsigned int patchme_maybe_smp_msg[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void floppy_hardint(void);
+=======
+void floppy_hardint(void);
+>>>>>>> v3.18
 =======
 void floppy_hardint(void);
 >>>>>>> v3.18
@@ -203,7 +258,10 @@ extern unsigned long sun4m_cpu_startup;
 extern unsigned long sun4d_cpu_startup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* process_32.c */
 asmlinkage int sparc_do_fork(unsigned long clone_flags,
                              unsigned long stack_start,
@@ -240,6 +298,9 @@ void pcic_nmi(unsigned int pend, struct pt_regs *regs);
 /* time_32.c */
 void __init time_init(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* CONFIG_SPARC32 */
 #endif /* CONFIG_SPARC32 */

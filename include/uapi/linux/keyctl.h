@@ -57,6 +57,10 @@
 #define KEYCTL_INSTANTIATE_IOV		20	/* instantiate a partially constructed key */
 #define KEYCTL_INVALIDATE		21	/* invalidate a key */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define KEYCTL_GET_PERSISTENT		22	/* get a user's persistent keyring */
+>>>>>>> v3.18
 =======
 #define KEYCTL_GET_PERSISTENT		22	/* get a user's persistent keyring */
 >>>>>>> v3.18

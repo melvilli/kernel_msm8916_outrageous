@@ -21,6 +21,7 @@
 #include <linux/export.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/dma-mapping.h>
 #include <linux/dma-contiguous.h>
 #include <linux/mm.h>
@@ -59,6 +60,8 @@ static int __init early_coherent_pool(char *p)
 {
 	atomic_pool.size = memparse(p, &p);
 =======
+=======
+>>>>>>> v3.18
 #include <linux/genalloc.h>
 #include <linux/dma-mapping.h>
 #include <linux/dma-contiguous.h>
@@ -86,6 +89,9 @@ static size_t atomic_pool_size = DEFAULT_DMA_COHERENT_POOL_SIZE;
 static int __init early_coherent_pool(char *p)
 {
 	atomic_pool_size = memparse(p, &p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -93,6 +99,7 @@ early_param("coherent_pool", early_coherent_pool);
 
 static void *__alloc_from_pool(size_t size, struct page **ret_page)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dma_pool *pool = &atomic_pool;
 	unsigned int count = PAGE_ALIGN(size) >> PAGE_SHIFT;
@@ -103,15 +110,21 @@ static void *__alloc_from_pool(size_t size, struct page **ret_page)
 
 	if (!pool->vaddr) {
 =======
+=======
+>>>>>>> v3.18
 	unsigned long val;
 	void *ptr = NULL;
 
 	if (!atomic_pool) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		WARN(1, "coherent pool not initialised!\n");
 		return NULL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Align the region allocation - allocations from pool are rather
@@ -135,6 +148,8 @@ static void *__alloc_from_pool(size_t size, struct page **ret_page)
 	}
 	spin_unlock_irqrestore(&pool->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	val = gen_pool_alloc(atomic_pool, size);
 	if (val) {
 		phys_addr_t phys = gen_pool_virt_to_phys(atomic_pool, val);
@@ -142,6 +157,9 @@ static void *__alloc_from_pool(size_t size, struct page **ret_page)
 		*ret_page = phys_to_page(phys);
 		ptr = (void *)val;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ptr;
@@ -149,6 +167,7 @@ static void *__alloc_from_pool(size_t size, struct page **ret_page)
 
 static bool __in_atomic_pool(void *start, size_t size)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dma_pool *pool = &atomic_pool;
 	void *end = start + size;
@@ -168,10 +187,14 @@ static bool __in_atomic_pool(void *start, size_t size)
 =======
 	return addr_in_gen_pool(atomic_pool, (unsigned long)start, size);
 >>>>>>> v3.18
+=======
+	return addr_in_gen_pool(atomic_pool, (unsigned long)start, size);
+>>>>>>> v3.18
 }
 
 static int __free_from_pool(void *start, size_t size)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct dma_pool *pool = &atomic_pool;
 	unsigned long pageno, count;
@@ -187,15 +210,21 @@ static int __free_from_pool(void *start, size_t size)
 	bitmap_clear(pool->bitmap, pageno, count);
 	spin_unlock_irqrestore(&pool->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	if (!__in_atomic_pool(start, size))
 		return 0;
 
 	gen_pool_free(atomic_pool, (unsigned long)start, size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __dma_update_pte(pte_t *pte, pgtable_t token, unsigned long addr,
 			    void *data)
@@ -242,6 +271,11 @@ static void *__dma_alloc_coherent(struct device *dev, size_t size,
 				  dma_addr_t *dma_handle, gfp_t flags,
 				  struct dma_attrs *attrs)
 >>>>>>> v3.18
+=======
+static void *__dma_alloc_coherent(struct device *dev, size_t size,
+				  dma_addr_t *dma_handle, gfp_t flags,
+				  struct dma_attrs *attrs)
+>>>>>>> v3.18
 {
 	if (dev == NULL) {
 		WARN_ONCE(1, "Use an actual device structure for DMA allocation\n");
@@ -251,6 +285,7 @@ static void *__dma_alloc_coherent(struct device *dev, size_t size,
 	if (IS_ENABLED(CONFIG_ZONE_DMA) &&
 	    dev->coherent_dma_mask <= DMA_BIT_MASK(32))
 		flags |= GFP_DMA;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (!(flags & __GFP_WAIT)) {
@@ -288,6 +323,8 @@ static void *__dma_alloc_coherent(struct device *dev, size_t size,
 		*dma_handle = phys_to_dma(dev, __pfn_to_phys(pfn));
 		return addr;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ENABLED(CONFIG_DMA_CMA) && (flags & __GFP_WAIT)) {
 		struct page *page;
 
@@ -299,6 +336,9 @@ static void *__dma_alloc_coherent(struct device *dev, size_t size,
 
 		*dma_handle = phys_to_dma(dev, page_to_phys(page));
 		return page_address(page);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		return swiotlb_alloc_coherent(dev, size, dma_handle, flags);
@@ -306,11 +346,14 @@ static void *__dma_alloc_coherent(struct device *dev, size_t size,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arm64_swiotlb_free_coherent(struct device *dev, size_t size,
 					void *vaddr, dma_addr_t dma_handle,
 					struct dma_attrs *attrs)
 {
 =======
+=======
+>>>>>>> v3.18
 static void __dma_free_coherent(struct device *dev, size_t size,
 				void *vaddr, dma_addr_t dma_handle,
 				struct dma_attrs *attrs)
@@ -318,12 +361,16 @@ static void __dma_free_coherent(struct device *dev, size_t size,
 	bool freed;
 	phys_addr_t paddr = dma_to_phys(dev, dma_handle);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dev == NULL) {
 		WARN_ONCE(1, "Use an actual device structure for DMA allocation\n");
 		return;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	size = PAGE_ALIGN(size);
 
@@ -429,6 +476,8 @@ static dma_addr_t arm64_swiotlb_map_page(struct device *dev,
 					 enum dma_data_direction dir,
 					 struct dma_attrs *attrs)
 =======
+=======
+>>>>>>> v3.18
 	freed = dma_release_from_contiguous(dev,
 					phys_to_page(paddr),
 					size >> PAGE_SHIFT);
@@ -497,6 +546,9 @@ static dma_addr_t __swiotlb_map_page(struct device *dev, struct page *page,
 				     unsigned long offset, size_t size,
 				     enum dma_data_direction dir,
 				     struct dma_attrs *attrs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	dma_addr_t dev_addr;
@@ -509,9 +561,15 @@ static dma_addr_t __swiotlb_map_page(struct device *dev, struct page *page,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arm64_swiotlb_unmap_page(struct device *dev, dma_addr_t dev_addr,
 				     size_t size, enum dma_data_direction dir,
 				     struct dma_attrs *attrs)
+=======
+static void __swiotlb_unmap_page(struct device *dev, dma_addr_t dev_addr,
+				 size_t size, enum dma_data_direction dir,
+				 struct dma_attrs *attrs)
+>>>>>>> v3.18
 =======
 static void __swiotlb_unmap_page(struct device *dev, dma_addr_t dev_addr,
 				 size_t size, enum dma_data_direction dir,
@@ -523,10 +581,16 @@ static void __swiotlb_unmap_page(struct device *dev, dma_addr_t dev_addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int arm64_swiotlb_map_sg_attrs(struct device *dev,
 				      struct scatterlist *sgl, int nelems,
 				      enum dma_data_direction dir,
 				      struct dma_attrs *attrs)
+=======
+static int __swiotlb_map_sg_attrs(struct device *dev, struct scatterlist *sgl,
+				  int nelems, enum dma_data_direction dir,
+				  struct dma_attrs *attrs)
+>>>>>>> v3.18
 =======
 static int __swiotlb_map_sg_attrs(struct device *dev, struct scatterlist *sgl,
 				  int nelems, enum dma_data_direction dir,
@@ -545,15 +609,21 @@ static int __swiotlb_map_sg_attrs(struct device *dev, struct scatterlist *sgl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arm64_swiotlb_unmap_sg_attrs(struct device *dev,
 					 struct scatterlist *sgl, int nelems,
 					 enum dma_data_direction dir,
 					 struct dma_attrs *attrs)
 =======
+=======
+>>>>>>> v3.18
 static void __swiotlb_unmap_sg_attrs(struct device *dev,
 				     struct scatterlist *sgl, int nelems,
 				     enum dma_data_direction dir,
 				     struct dma_attrs *attrs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct scatterlist *sg;
@@ -566,10 +636,16 @@ static void __swiotlb_unmap_sg_attrs(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arm64_swiotlb_sync_single_for_cpu(struct device *dev,
 					      dma_addr_t dev_addr,
 					      size_t size,
 					      enum dma_data_direction dir)
+=======
+static void __swiotlb_sync_single_for_cpu(struct device *dev,
+					  dma_addr_t dev_addr, size_t size,
+					  enum dma_data_direction dir)
+>>>>>>> v3.18
 =======
 static void __swiotlb_sync_single_for_cpu(struct device *dev,
 					  dma_addr_t dev_addr, size_t size,
@@ -581,10 +657,16 @@ static void __swiotlb_sync_single_for_cpu(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arm64_swiotlb_sync_single_for_device(struct device *dev,
 						 dma_addr_t dev_addr,
 						 size_t size,
 						 enum dma_data_direction dir)
+=======
+static void __swiotlb_sync_single_for_device(struct device *dev,
+					     dma_addr_t dev_addr, size_t size,
+					     enum dma_data_direction dir)
+>>>>>>> v3.18
 =======
 static void __swiotlb_sync_single_for_device(struct device *dev,
 					     dma_addr_t dev_addr, size_t size,
@@ -596,9 +678,15 @@ static void __swiotlb_sync_single_for_device(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arm64_swiotlb_sync_sg_for_cpu(struct device *dev,
 					  struct scatterlist *sgl, int nelems,
 					  enum dma_data_direction dir)
+=======
+static void __swiotlb_sync_sg_for_cpu(struct device *dev,
+				      struct scatterlist *sgl, int nelems,
+				      enum dma_data_direction dir)
+>>>>>>> v3.18
 =======
 static void __swiotlb_sync_sg_for_cpu(struct device *dev,
 				      struct scatterlist *sgl, int nelems,
@@ -615,10 +703,16 @@ static void __swiotlb_sync_sg_for_cpu(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arm64_swiotlb_sync_sg_for_device(struct device *dev,
 					     struct scatterlist *sgl,
 					     int nelems,
 					     enum dma_data_direction dir)
+=======
+static void __swiotlb_sync_sg_for_device(struct device *dev,
+					 struct scatterlist *sgl, int nelems,
+					 enum dma_data_direction dir)
+>>>>>>> v3.18
 =======
 static void __swiotlb_sync_sg_for_device(struct device *dev,
 					 struct scatterlist *sgl, int nelems,
@@ -635,9 +729,15 @@ static void __swiotlb_sync_sg_for_device(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int arm64_swiotlb_mmap(struct device *dev, struct vm_area_struct *vma,
 		 void *cpu_addr, dma_addr_t dma_addr, size_t size,
 		 struct dma_attrs *attrs)
+=======
+/* vma->vm_page_prot must be set appropriately before calling this function */
+static int __dma_common_mmap(struct device *dev, struct vm_area_struct *vma,
+			     void *cpu_addr, dma_addr_t dma_addr, size_t size)
+>>>>>>> v3.18
 =======
 /* vma->vm_page_prot must be set appropriately before calling this function */
 static int __dma_common_mmap(struct device *dev, struct vm_area_struct *vma,
@@ -652,8 +752,11 @@ static int __dma_common_mmap(struct device *dev, struct vm_area_struct *vma,
 	unsigned long off = vma->vm_pgoff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vma->vm_page_prot = __get_dma_pgprot(vma->vm_page_prot, attrs);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (dma_mmap_from_coherent(dev, vma, cpu_addr, size, &ret))
@@ -669,6 +772,7 @@ static int __dma_common_mmap(struct device *dev, struct vm_area_struct *vma,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void *arm64_dma_remap(struct device *dev, void *cpu_addr,
 			dma_addr_t handle, size_t size,
@@ -739,6 +843,8 @@ const struct dma_map_ops coherent_swiotlb_dma_ops = {
 	.alloc = arm64_swiotlb_alloc_coherent,
 	.free = arm64_swiotlb_free_coherent,
 =======
+=======
+>>>>>>> v3.18
 static int __swiotlb_mmap_noncoherent(struct device *dev,
 		struct vm_area_struct *vma,
 		void *cpu_addr, dma_addr_t dma_addr, size_t size,
@@ -778,6 +884,9 @@ struct dma_map_ops coherent_swiotlb_dma_ops = {
 	.alloc = __dma_alloc_coherent,
 	.free = __dma_free_coherent,
 	.mmap = __swiotlb_mmap_coherent,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.map_page = swiotlb_map_page,
 	.unmap_page = swiotlb_unmap_page,
@@ -789,6 +898,7 @@ struct dma_map_ops coherent_swiotlb_dma_ops = {
 	.sync_sg_for_device = swiotlb_sync_sg_for_device,
 	.dma_supported = swiotlb_dma_supported,
 	.mapping_error = swiotlb_dma_mapping_error,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.remap = arm64_dma_remap,
 	.unremap = arm64_dma_unremap,
@@ -1828,6 +1938,8 @@ EXPORT_SYMBOL(arm_iommu_detach_device);
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 };
 EXPORT_SYMBOL(coherent_swiotlb_dma_ops);
 
@@ -1922,4 +2034,7 @@ static int __init dma_debug_do_init(void)
 	return 0;
 }
 fs_initcall(dma_debug_do_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

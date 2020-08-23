@@ -112,7 +112,11 @@ void ieee80211_aes_cmac(struct crypto_cipher *tfm, const u8 *aad,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct crypto_cipher * ieee80211_aes_cmac_key_setup(const u8 key[])
+=======
+struct crypto_cipher *ieee80211_aes_cmac_key_setup(const u8 key[])
+>>>>>>> v3.18
 =======
 struct crypto_cipher *ieee80211_aes_cmac_key_setup(const u8 key[])
 >>>>>>> v3.18

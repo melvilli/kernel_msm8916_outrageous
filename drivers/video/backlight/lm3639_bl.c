@@ -77,11 +77,14 @@ static int lm3639_chip_init(struct lm3639_chip_data *pchip)
 
 	/* output pins config. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdata->init_brt_led)
 		reg_val = pdata->fled_pins | pdata->bled_pins;
 	else
 		reg_val = pdata->fled_pins | pdata->bled_pins | 0x01;
 =======
+=======
+>>>>>>> v3.18
 	if (!pdata->init_brt_led) {
 		reg_val = pdata->fled_pins;
 		reg_val |= pdata->bled_pins;
@@ -89,6 +92,9 @@ static int lm3639_chip_init(struct lm3639_chip_data *pchip)
 		reg_val = pdata->fled_pins;
 		reg_val |= pdata->bled_pins | 0x01;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = regmap_update_bits(pchip->regmap, REG_ENABLE, 0x79, reg_val);
@@ -262,7 +268,10 @@ static void lm3639_torch_brightness_set(struct led_classdev *cdev,
 out:
 	dev_err(pchip->dev, "i2c failed to access register\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -304,7 +313,10 @@ static void lm3639_flash_brightness_set(struct led_classdev *cdev,
 out:
 	dev_err(pchip->dev, "i2c failed to access register\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -321,7 +333,11 @@ static int lm3639_probe(struct i2c_client *client,
 	int ret;
 	struct lm3639_chip_data *pchip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lm3639_platform_data *pdata = client->dev.platform_data;
+=======
+	struct lm3639_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct lm3639_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -367,8 +383,14 @@ static int lm3639_probe(struct i2c_client *client,
 	props.max_brightness = pdata->max_brt_led;
 	pchip->bled =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    backlight_device_register("lm3639_bled", pchip->dev, pchip,
 				      &lm3639_bled_ops, &props);
+=======
+	    devm_backlight_device_register(pchip->dev, "lm3639_bled",
+					   pchip->dev, pchip, &lm3639_bled_ops,
+					   &props);
+>>>>>>> v3.18
 =======
 	    devm_backlight_device_register(pchip->dev, "lm3639_bled",
 					   pchip->dev, pchip, &lm3639_bled_ops,
@@ -384,7 +406,11 @@ static int lm3639_probe(struct i2c_client *client,
 	if (ret < 0) {
 		dev_err(&client->dev, "failed : add sysfs entries\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_bled_mode;
+=======
+		goto err_out;
+>>>>>>> v3.18
 =======
 		goto err_out;
 >>>>>>> v3.18
@@ -419,8 +445,11 @@ err_torch:
 err_flash:
 	device_remove_file(&(pchip->bled->dev), &dev_attr_bled_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 err_bled_mode:
 	backlight_device_unregister(pchip->bled);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_out:
@@ -438,10 +467,15 @@ static int lm3639_remove(struct i2c_client *client)
 	if (&pchip->cdev_flash)
 		led_classdev_unregister(&pchip->cdev_flash);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pchip->bled) {
 		device_remove_file(&(pchip->bled->dev), &dev_attr_bled_mode);
 		backlight_device_unregister(pchip->bled);
 	}
+=======
+	if (pchip->bled)
+		device_remove_file(&(pchip->bled->dev), &dev_attr_bled_mode);
+>>>>>>> v3.18
 =======
 	if (pchip->bled)
 		device_remove_file(&(pchip->bled->dev), &dev_attr_bled_mode);
@@ -468,8 +502,13 @@ module_i2c_driver(lm3639_i2c_driver);
 
 MODULE_DESCRIPTION("Texas Instruments Backlight+Flash LED driver for LM3639");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Daniel Jeong <daniel.jeong@ti.com>");
 MODULE_AUTHOR("G.Shark Jeong <gshark.jeong@gmail.com>");
+=======
+MODULE_AUTHOR("Daniel Jeong <gshark.jeong@gmail.com>");
+MODULE_AUTHOR("Ldd Mlp <ldd-mlp@list.ti.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Daniel Jeong <gshark.jeong@gmail.com>");
 MODULE_AUTHOR("Ldd Mlp <ldd-mlp@list.ti.com>");

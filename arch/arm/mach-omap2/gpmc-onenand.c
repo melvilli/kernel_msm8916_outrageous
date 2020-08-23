@@ -273,10 +273,13 @@ static int omap2_onenand_setup_async(void __iomem *onenand_base)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpmc_onenand_data->of_node)
 		gpmc_read_settings_dt(gpmc_onenand_data->of_node,
 				      &onenand_async);
 =======
+=======
+>>>>>>> v3.18
 	if (gpmc_onenand_data->of_node) {
 		gpmc_read_settings_dt(gpmc_onenand_data->of_node,
 				      &onenand_async);
@@ -290,6 +293,9 @@ static int omap2_onenand_setup_async(void __iomem *onenand_base)
 			onenand_async.sync_write = false;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	omap2_onenand_set_async_mode(onenand_base);

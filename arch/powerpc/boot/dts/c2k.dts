@@ -74,7 +74,10 @@
 			reg = <0x2000 4>;
 			PHY0: ethernet-phy@0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				interrupts = <76>;	/* GPP 12 */
@@ -83,7 +86,10 @@
 			};
 			PHY1: ethernet-phy@1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				interrupts = <76>;	/* GPP 12 */
@@ -92,7 +98,10 @@
 			};
 			PHY2: ethernet-phy@2 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				interrupts = <76>;	/* GPP 12 */
@@ -184,7 +193,10 @@
 
 		MPSC0: mpsc@8000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			device_type = "serial";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			compatible = "marvell,mv64360-mpsc";
@@ -202,7 +214,10 @@
 
 		MPSC1: mpsc@9000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			device_type = "serial";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			compatible = "marvell,mv64360-mpsc";

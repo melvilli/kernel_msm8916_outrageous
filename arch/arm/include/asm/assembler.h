@@ -34,8 +34,13 @@
  */
 #ifndef __ARMEB__
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pull            lsr
 #define push            lsl
+=======
+#define lspull          lsr
+#define lspush          lsl
+>>>>>>> v3.18
 =======
 #define lspull          lsr
 #define lspush          lsl
@@ -50,8 +55,13 @@
 #define put_byte_3	lsl #24
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pull            lsl
 #define push            lsr
+=======
+#define lspull          lsl
+#define lspush          lsr
+>>>>>>> v3.18
 =======
 #define lspull          lsl
 #define lspush          lsr
@@ -67,7 +77,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Select code for any configuration running in BE8 mode */
 #ifdef CONFIG_CPU_ENDIAN_BE8
 #define ARM_BE8(code...) code
@@ -75,6 +88,9 @@
 #define ARM_BE8(code...)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Data preload for architectures that support it
@@ -160,13 +176,19 @@
  */
 	.macro	save_and_disable_irqs, oldcpsr
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mrs	\oldcpsr, cpsr
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_V7M
 	mrs	\oldcpsr, primask
 #else
 	mrs	\oldcpsr, cpsr
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	disable_irq
 	.endm
@@ -182,13 +204,19 @@
  */
 	.macro	restore_irqs_notrace, oldcpsr
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msr	cpsr_c, \oldcpsr
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_V7M
 	msr	primask, \oldcpsr
 #else
 	msr	cpsr_c, \oldcpsr
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endm
 
@@ -209,7 +237,10 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Increment/decrement the preempt count.
  */
@@ -241,6 +272,9 @@
 	.endm
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define USER(x...)				\
 9999:	x;					\
@@ -313,8 +347,11 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_THUMB2_KERNEL
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_V7M)
 	/*
 	 * setmode is used to assert to be in svc mode during boot. For v7-M
@@ -323,6 +360,9 @@
 	.macro	setmode, mode, reg
 	.endm
 #elif defined(CONFIG_THUMB2_KERNEL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.macro	setmode, mode, reg
 	mov	\reg, #\mode
@@ -343,7 +383,11 @@
  */
 .macro safe_svcmode_maskall reg:req
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if __LINUX_ARM_ARCH__ >= 6
+=======
+#if __LINUX_ARM_ARCH__ >= 6 && !defined(CONFIG_CPU_V7M)
+>>>>>>> v3.18
 =======
 #if __LINUX_ARM_ARCH__ >= 6 && !defined(CONFIG_CPU_V7M)
 >>>>>>> v3.18
@@ -460,7 +504,10 @@ THUMB(	orr	\reg , \reg , #PSR_T_BIT	)
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.irp	c,,eq,ne,cs,cc,mi,pl,vs,vc,hi,ls,ge,lt,gt,le,hs,lo
 	.macro	ret\c, reg
 #if __LINUX_ARM_ARCH__ < 6
@@ -482,5 +529,8 @@ THUMB(	orr	\reg , \reg , #PSR_T_BIT	)
 #endif
 	.endm
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __ASM_ASSEMBLER_H__ */

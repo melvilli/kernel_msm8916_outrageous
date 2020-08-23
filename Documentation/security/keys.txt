@@ -866,6 +866,7 @@ encountered:
      keyrings. There are three functions for dealing with these:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	key_ref_t make_key_ref(const struct key *key,
 			       unsigned long possession);
 
@@ -876,6 +877,8 @@ encountered:
      The first function constructs a key reference from a key pointer and
      possession information (which must be 0 or 1 and not any other value).
 =======
+=======
+>>>>>>> v3.18
 	key_ref_t make_key_ref(const struct key *key, bool possession);
 
 	struct key *key_ref_to_ptr(const key_ref_t key_ref);
@@ -884,6 +887,9 @@ encountered:
 
      The first function constructs a key reference from a key pointer and
      possession information (which must be true or false).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
      The second function retrieves the key pointer from a reference and the
@@ -901,17 +907,23 @@ payload contents" for more information.
 
     This is used to request a key or keyring with a description that matches
 <<<<<<< HEAD
+<<<<<<< HEAD
     the description specified according to the key type's match function. This
     permits approximate matching to occur. If callout_string is not NULL, then
     /sbin/request-key will be invoked in an attempt to obtain the key from
     userspace. In that case, callout_string will be passed as an argument to
     the program.
 =======
+=======
+>>>>>>> v3.18
     the description specified according to the key type's match_preparse()
     method. This permits approximate matching to occur. If callout_string is
     not NULL, then /sbin/request-key will be invoked in an attempt to obtain
     the key from userspace. In that case, callout_string will be passed as an
     argument to the program.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     Should the function fail error ENOKEY, EKEYEXPIRED or EKEYREVOKED will be
@@ -981,6 +993,7 @@ payload contents" for more information.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 (*) Extra references can be made to a key by calling the following function:
 
 	struct key *key_get(struct key *key);
@@ -990,6 +1003,8 @@ payload contents" for more information.
     is NULL or CONFIG_KEYS is not set then the key will not be dereferenced and
     no increment will take place.
 =======
+=======
+>>>>>>> v3.18
 (*) Extra references can be made to a key by calling one of the following
     functions:
 
@@ -1001,6 +1016,9 @@ payload contents" for more information.
 
     In the case of key_get(), if the pointer is NULL or CONFIG_KEYS is not set
     then the key will not be dereferenced and no increment will take place.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -1182,6 +1200,10 @@ The structure has a number of fields, some of which are mandatory:
 		size_t		datalen;
 		size_t		quotalen;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		time_t		expiry;
+>>>>>>> v3.18
 =======
 		time_t		expiry;
 >>>>>>> v3.18
@@ -1190,7 +1212,12 @@ The structure has a number of fields, some of which are mandatory:
      Before calling the method, the caller will fill in data and datalen with
      the payload blob parameters; quotalen will be filled in with the default
 <<<<<<< HEAD
+<<<<<<< HEAD
      quota size from the key type and the rest will be cleared.
+=======
+     quota size from the key type; expiry will be set to TIME_T_MAX and the
+     rest will be cleared.
+>>>>>>> v3.18
 =======
      quota size from the key type; expiry will be set to TIME_T_MAX and the
      rest will be cleared.
@@ -1202,6 +1229,7 @@ The structure has a number of fields, some of which are mandatory:
 
      The method can attach anything it likes to type_data[] and payload.  These
 <<<<<<< HEAD
+<<<<<<< HEAD
      are merely passed along to the instantiate() or update() operations.
 
      The method should return 0 if success ful or a negative error code
@@ -1209,6 +1237,8 @@ The structure has a number of fields, some of which are mandatory:
 
      
 =======
+=======
+>>>>>>> v3.18
      are merely passed along to the instantiate() or update() operations.  If
      set, the expiry time will be applied to the key if it is instantiated from
      this data.
@@ -1217,6 +1247,9 @@ The structure has a number of fields, some of which are mandatory:
      otherwise.
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  (*) void (*free_preparse)(struct key_preparsed_payload *prep);
 
@@ -1224,7 +1257,13 @@ The structure has a number of fields, some of which are mandatory:
      otherwise it is unused.  It cleans up anything attached to the
      description, type_data and payload fields of the key_preparsed_payload
 <<<<<<< HEAD
+<<<<<<< HEAD
      struct as filled in by the preparse() method.
+=======
+     struct as filled in by the preparse() method.  It will always be called
+     after preparse() returns successfully, even if instantiate() or update()
+     succeed.
+>>>>>>> v3.18
 =======
      struct as filled in by the preparse() method.  It will always be called
      after preparse() returns successfully, even if instantiate() or update()
@@ -1277,6 +1316,7 @@ The structure has a number of fields, some of which are mandatory:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  (*) int (*match)(const struct key *key, const void *desc);
 
      This method is called to match a key against a description. It should
@@ -1288,6 +1328,8 @@ The structure has a number of fields, some of which are mandatory:
 
      It is not safe to sleep in this method; the caller may hold spinlocks.
 =======
+=======
+>>>>>>> v3.18
  (*) int (*match_preparse)(struct key_match_data *match_data);
 
      This method is optional.  It is called when a key search is about to be
@@ -1337,6 +1379,9 @@ The structure has a number of fields, some of which are mandatory:
 
      This method is optional.  If given, it called to clean up
      match_data->preparsed after a successful call to match_preparse().
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

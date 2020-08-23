@@ -84,6 +84,7 @@ static inline unsigned int avr32_get_chip_revision(struct avr32_cpuinfo *cpu)
 extern struct avr32_cpuinfo boot_cpu_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SMP
 extern struct avr32_cpuinfo cpu_data[];
 #define current_cpu_data cpu_data[smp_processor_id()]
@@ -91,6 +92,10 @@ extern struct avr32_cpuinfo cpu_data[];
 #define cpu_data (&boot_cpu_data)
 #define current_cpu_data boot_cpu_data
 #endif
+=======
+/* No SMP support so far */
+#define current_cpu_data boot_cpu_data
+>>>>>>> v3.18
 =======
 /* No SMP support so far */
 #define current_cpu_data boot_cpu_data
@@ -103,6 +108,10 @@ extern struct avr32_cpuinfo cpu_data[];
 
 #define cpu_relax()		barrier()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency()        cpu_relax()
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency()        cpu_relax()
 >>>>>>> v3.18

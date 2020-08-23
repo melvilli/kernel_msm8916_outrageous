@@ -18,7 +18,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -68,7 +71,11 @@ static struct _intel_private {
 	struct pci_dev *bridge_dev;
 	u8 __iomem *registers;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_addr_t gtt_bus_addr;
+=======
+	phys_addr_t gtt_phys_addr;
+>>>>>>> v3.18
 =======
 	phys_addr_t gtt_phys_addr;
 >>>>>>> v3.18
@@ -102,6 +109,10 @@ static struct _intel_private {
 #define HAS_PGTBL_EN	intel_private.driver->has_pgtbl_enable
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_AGP_INTEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_AGP_INTEL)
 >>>>>>> v3.18
@@ -180,6 +191,10 @@ static void i8xx_destroy_pages(struct page *page)
 	atomic_dec(&agp_bridge->current_memory_agp);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -188,7 +203,11 @@ static void i8xx_destroy_pages(struct page *page)
 static int i810_setup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg_addr;
+=======
+	phys_addr_t reg_addr;
+>>>>>>> v3.18
 =======
 	phys_addr_t reg_addr;
 >>>>>>> v3.18
@@ -201,8 +220,12 @@ static int i810_setup(void)
 	intel_private.i81x_gtt_table = gtt_table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_read_config_dword(intel_private.pcidev, I810_MMADDR, &reg_addr);
 	reg_addr &= 0xfff80000;
+=======
+	reg_addr = pci_resource_start(intel_private.pcidev, I810_MMADR_BAR);
+>>>>>>> v3.18
 =======
 	reg_addr = pci_resource_start(intel_private.pcidev, I810_MMADR_BAR);
 >>>>>>> v3.18
@@ -215,7 +238,11 @@ static int i810_setup(void)
 	       intel_private.registers+I810_PGETBL_CTL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_private.gtt_bus_addr = reg_addr + I810_PTE_BASE;
+=======
+	intel_private.gtt_phys_addr = reg_addr + I810_PTE_BASE;
+>>>>>>> v3.18
 =======
 	intel_private.gtt_phys_addr = reg_addr + I810_PTE_BASE;
 >>>>>>> v3.18
@@ -237,6 +264,10 @@ static void i810_cleanup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_AGP_INTEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_AGP_INTEL)
 >>>>>>> v3.18
@@ -321,6 +352,10 @@ static void intel_i810_free_by_type(struct agp_memory *curr)
 	kfree(curr);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -619,7 +654,11 @@ static inline int needs_ilk_vtd_wa(void)
 	 * was loaded first.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((gpu_devid == PCI_DEVICE_ID_INTEL_IRONLAKE_D_IG ||
+=======
+	if ((gpu_devid == PCI_DEVICE_ID_INTEL_IRONLAKE_M_HB ||
+>>>>>>> v3.18
 =======
 	if ((gpu_devid == PCI_DEVICE_ID_INTEL_IRONLAKE_M_HB ||
 >>>>>>> v3.18
@@ -648,9 +687,14 @@ static bool intel_gtt_can_wc(void)
 static int intel_gtt_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 gma_addr;
 	u32 gtt_map_size;
 	int ret;
+=======
+	u32 gtt_map_size;
+	int ret, bar;
+>>>>>>> v3.18
 =======
 	u32 gtt_map_size;
 	int ret, bar;
@@ -681,15 +725,21 @@ static int intel_gtt_init(void)
 	intel_private.gtt = NULL;
 	if (intel_gtt_can_wc())
 <<<<<<< HEAD
+<<<<<<< HEAD
 		intel_private.gtt = ioremap_wc(intel_private.gtt_bus_addr,
 					       gtt_map_size);
 	if (intel_private.gtt == NULL)
 		intel_private.gtt = ioremap(intel_private.gtt_bus_addr,
 =======
+=======
+>>>>>>> v3.18
 		intel_private.gtt = ioremap_wc(intel_private.gtt_phys_addr,
 					       gtt_map_size);
 	if (intel_private.gtt == NULL)
 		intel_private.gtt = ioremap(intel_private.gtt_phys_addr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					    gtt_map_size);
 	if (intel_private.gtt == NULL) {
@@ -699,7 +749,13 @@ static int intel_gtt_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	global_cache_flush();   /* FIXME: ? */
+=======
+#if IS_ENABLED(CONFIG_AGP_INTEL)
+	global_cache_flush();   /* FIXME: ? */
+#endif
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_AGP_INTEL)
 	global_cache_flush();   /* FIXME: ? */
@@ -718,6 +774,7 @@ static int intel_gtt_init(void)
 
 	if (INTEL_GTT_GEN <= 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_read_config_dword(intel_private.pcidev, I810_GMADDR,
 				      &gma_addr);
 	else
@@ -730,6 +787,8 @@ static int intel_gtt_init(void)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		bar = I810_GMADR_BAR;
 	else
 		bar = I915_GMADR_BAR;
@@ -739,6 +798,9 @@ static int intel_gtt_init(void)
 }
 
 #if IS_ENABLED(CONFIG_AGP_INTEL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int intel_fake_agp_fetch_size(void)
 {
@@ -759,6 +821,10 @@ static int intel_fake_agp_fetch_size(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -861,10 +927,16 @@ EXPORT_SYMBOL(intel_enable_gtt);
 static int i830_setup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg_addr;
 
 	pci_read_config_dword(intel_private.pcidev, I810_MMADDR, &reg_addr);
 	reg_addr &= 0xfff80000;
+=======
+	phys_addr_t reg_addr;
+
+	reg_addr = pci_resource_start(intel_private.pcidev, I810_MMADR_BAR);
+>>>>>>> v3.18
 =======
 	phys_addr_t reg_addr;
 
@@ -876,7 +948,11 @@ static int i830_setup(void)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_private.gtt_bus_addr = reg_addr + I810_PTE_BASE;
+=======
+	intel_private.gtt_phys_addr = reg_addr + I810_PTE_BASE;
+>>>>>>> v3.18
 =======
 	intel_private.gtt_phys_addr = reg_addr + I810_PTE_BASE;
 >>>>>>> v3.18
@@ -885,6 +961,10 @@ static int i830_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_AGP_INTEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_AGP_INTEL)
 >>>>>>> v3.18
@@ -913,6 +993,10 @@ static int intel_fake_agp_configure(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -955,6 +1039,10 @@ void intel_gtt_insert_sg_entries(struct sg_table *st,
 EXPORT_SYMBOL(intel_gtt_insert_sg_entries);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_AGP_INTEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_AGP_INTEL)
 >>>>>>> v3.18
@@ -1024,6 +1112,10 @@ out_err:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1041,6 +1133,10 @@ void intel_gtt_clear_range(unsigned int first_entry, unsigned int num_entries)
 EXPORT_SYMBOL(intel_gtt_clear_range);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_AGP_INTEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_AGP_INTEL)
 >>>>>>> v3.18
@@ -1086,6 +1182,10 @@ static struct agp_memory *intel_fake_agp_alloc_by_type(size_t pg_count,
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1216,6 +1316,7 @@ static void i965_write_entry(dma_addr_t addr,
 static int i9xx_setup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 reg_addr, gtt_addr;
 	int size = KB(512);
 
@@ -1223,10 +1324,15 @@ static int i9xx_setup(void)
 
 	reg_addr &= 0xfff80000;
 =======
+=======
+>>>>>>> v3.18
 	phys_addr_t reg_addr;
 	int size = KB(512);
 
 	reg_addr = pci_resource_start(intel_private.pcidev, I915_MMADR_BAR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	intel_private.registers = ioremap(reg_addr, size);
@@ -1235,6 +1341,7 @@ static int i9xx_setup(void)
 
 	switch (INTEL_GTT_GEN) {
 	case 3:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pci_read_config_dword(intel_private.pcidev,
 				      I915_PTEADDR, &gtt_addr);
@@ -1246,6 +1353,8 @@ static int i9xx_setup(void)
 	default:
 		intel_private.gtt_bus_addr = reg_addr + KB(512);
 =======
+=======
+>>>>>>> v3.18
 		intel_private.gtt_phys_addr =
 			pci_resource_start(intel_private.pcidev, I915_PTE_BAR);
 		break;
@@ -1254,6 +1363,9 @@ static int i9xx_setup(void)
 		break;
 	default:
 		intel_private.gtt_phys_addr = reg_addr + KB(512);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -1264,6 +1376,10 @@ static int i9xx_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_AGP_INTEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_AGP_INTEL)
 >>>>>>> v3.18
@@ -1289,6 +1405,10 @@ static const struct agp_bridge_driver intel_fake_agp_driver = {
 	.agp_destroy_pages      = agp_generic_destroy_pages,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1510,6 +1630,10 @@ int intel_gmch_probe(struct pci_dev *bridge_pdev, struct pci_dev *gpu_pdev,
 	intel_private.refcount++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_AGP_INTEL)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_AGP_INTEL)
 >>>>>>> v3.18
@@ -1519,6 +1643,10 @@ int intel_gmch_probe(struct pci_dev *bridge_pdev, struct pci_dev *gpu_pdev,
 		bridge->dev = bridge_pdev;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

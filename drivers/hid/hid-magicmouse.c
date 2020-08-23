@@ -37,7 +37,11 @@ static unsigned int scroll_speed = 32;
 static int param_set_scroll_speed(const char *val, struct kernel_param *kp) {
 	unsigned long speed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!val || strict_strtoul(val, 0, &speed) || speed > 63)
+=======
+	if (!val || kstrtoul(val, 0, &speed) || speed > 63)
+>>>>>>> v3.18
 =======
 	if (!val || kstrtoul(val, 0, &speed) || speed > 63)
 >>>>>>> v3.18
@@ -476,7 +480,11 @@ static int magicmouse_input_mapping(struct hid_device *hdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int magicmouse_input_configured(struct hid_device *hdev,
+=======
+static void magicmouse_input_configured(struct hid_device *hdev,
+>>>>>>> v3.18
 =======
 static void magicmouse_input_configured(struct hid_device *hdev,
 >>>>>>> v3.18
@@ -492,7 +500,10 @@ static void magicmouse_input_configured(struct hid_device *hdev,
 		msc->input = NULL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -507,7 +518,11 @@ static int magicmouse_probe(struct hid_device *hdev,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msc = kzalloc(sizeof(*msc), GFP_KERNEL);
+=======
+	msc = devm_kzalloc(&hdev->dev, sizeof(*msc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	msc = devm_kzalloc(&hdev->dev, sizeof(*msc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -525,7 +540,11 @@ static int magicmouse_probe(struct hid_device *hdev,
 	if (ret) {
 		hid_err(hdev, "magicmouse hid parse failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -535,7 +554,11 @@ static int magicmouse_probe(struct hid_device *hdev,
 	if (ret) {
 		hid_err(hdev, "magicmouse hw start failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -573,8 +596,13 @@ static int magicmouse_probe(struct hid_device *hdev,
 	 * Thus the super-ugly hacky success check below.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = hdev->hid_output_raw_report(hdev, feature, sizeof(feature),
 			HID_FEATURE_REPORT);
+=======
+	ret = hid_hw_raw_request(hdev, feature[0], feature, sizeof(feature),
+				HID_FEATURE_REPORT, HID_REQ_SET_REPORT);
+>>>>>>> v3.18
 =======
 	ret = hid_hw_raw_request(hdev, feature[0], feature, sizeof(feature),
 				HID_FEATURE_REPORT, HID_REQ_SET_REPORT);
@@ -587,6 +615,7 @@ static int magicmouse_probe(struct hid_device *hdev,
 	return 0;
 err_stop_hw:
 	hid_hw_stop(hdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_free:
 	kfree(msc);
@@ -606,6 +635,11 @@ static void magicmouse_remove(struct hid_device *hdev)
 }
 
 >>>>>>> v3.18
+=======
+	return ret;
+}
+
+>>>>>>> v3.18
 static const struct hid_device_id magic_mice[] = {
 	{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_APPLE,
 		USB_DEVICE_ID_APPLE_MAGICMOUSE), .driver_data = 0 },
@@ -620,7 +654,10 @@ static struct hid_driver magicmouse_driver = {
 	.id_table = magic_mice,
 	.probe = magicmouse_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = magicmouse_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.raw_event = magicmouse_raw_event,

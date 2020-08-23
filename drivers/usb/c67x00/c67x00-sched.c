@@ -145,8 +145,11 @@ struct c67x00_urb_priv {
 /* -------------------------------------------------------------------------- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DEBUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -170,6 +173,7 @@ static void dbg_td(struct c67x00_hcd *c67x00, struct c67x00_td *td, char *msg)
 	dev_dbg(dev, "residue:        0x%02x\n", td->residue);
 	dev_dbg(dev, "next_td_addr: 0x%04x\n", td_next_td_addr(td));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(dev, "data:");
 	print_hex_dump(KERN_DEBUG, "", DUMP_PREFIX_OFFSET, 16, 1,
 		       td->data, td_length(td), 1);
@@ -180,6 +184,10 @@ static inline void
 dbg_td(struct c67x00_hcd *c67x00, struct c67x00_td *td, char *msg) { }
 
 #endif				/* DEBUG */
+=======
+	dev_dbg(dev, "data: %*ph\n", td_length(td), td->data);
+}
+>>>>>>> v3.18
 =======
 	dev_dbg(dev, "data: %*ph\n", td_length(td), td->data);
 }
@@ -353,7 +361,11 @@ void c67x00_endpoint_disable(struct usb_hcd *hcd, struct usb_host_endpoint *ep)
 		 * somebody was waiting for that completion.  The timeout and
 		 * while loop handle such cases, but this might be improved */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		INIT_COMPLETION(c67x00->endpoint_disable);
+=======
+		reinit_completion(&c67x00->endpoint_disable);
+>>>>>>> v3.18
 =======
 		reinit_completion(&c67x00->endpoint_disable);
 >>>>>>> v3.18
@@ -385,7 +397,10 @@ int c67x00_urb_enqueue(struct usb_hcd *hcd,
 	int port = get_root_port(urb->dev)-1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Allocate and initialize urb private data */
 	urbp = kzalloc(sizeof(*urbp), mem_flags);
 	if (!urbp) {
@@ -393,6 +408,9 @@ int c67x00_urb_enqueue(struct usb_hcd *hcd,
 		goto err_urbp;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&c67x00->lock, flags);
 
@@ -407,6 +425,7 @@ int c67x00_urb_enqueue(struct usb_hcd *hcd,
 		goto err_not_linked;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Allocate and initialize urb private data */
 	urbp = kzalloc(sizeof(*urbp), mem_flags);
 	if (!urbp) {
@@ -414,6 +433,8 @@ int c67x00_urb_enqueue(struct usb_hcd *hcd,
 		goto err_urbp;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&urbp->hep_node);
@@ -479,17 +500,23 @@ int c67x00_urb_enqueue(struct usb_hcd *hcd,
 
 err_epdata:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(urbp);
 err_urbp:
 	usb_hcd_unlink_urb_from_ep(hcd, urb);
 err_not_linked:
 	spin_unlock_irqrestore(&c67x00->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	usb_hcd_unlink_urb_from_ep(hcd, urb);
 err_not_linked:
 	spin_unlock_irqrestore(&c67x00->lock, flags);
 	kfree(urbp);
 err_urbp:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -814,7 +841,12 @@ static int c67x00_add_iso_urb(struct c67x00_hcd *c67x00, struct urb *urb)
 				       urbp->cnt);
 		if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "create failed: %d\n", ret);
+=======
+			dev_dbg(c67x00_hcd_dev(c67x00), "create failed: %d\n",
+				ret);
+>>>>>>> v3.18
 =======
 			dev_dbg(c67x00_hcd_dev(c67x00), "create failed: %d\n",
 				ret);

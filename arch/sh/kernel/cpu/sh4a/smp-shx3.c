@@ -125,7 +125,11 @@ static void shx3_update_boot_vector(unsigned int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit
+=======
+static int
+>>>>>>> v3.18
 =======
 static int
 >>>>>>> v3.18
@@ -148,17 +152,23 @@ shx3_cpu_callback(struct notifier_block *nfb, unsigned long action, void *hcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata shx3_cpu_notifier = {
 	.notifier_call		= shx3_cpu_callback,
 };
 
 static int __cpuinit register_shx3_cpu_notifier(void)
 =======
+=======
+>>>>>>> v3.18
 static struct notifier_block shx3_cpu_notifier = {
 	.notifier_call		= shx3_cpu_callback,
 };
 
 static int register_shx3_cpu_notifier(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	register_hotcpu_notifier(&shx3_cpu_notifier);

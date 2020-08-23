@@ -177,7 +177,11 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("CRC32c (Castagnoli), sparc64 crc32c opcode accelerated");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("crc32c");
+=======
+MODULE_ALIAS("crc32c");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("crc32c");
 >>>>>>> v3.18

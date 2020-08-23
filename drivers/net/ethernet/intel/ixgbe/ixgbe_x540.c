@@ -2,7 +2,11 @@
 
   Intel 10 Gigabit PCI Express Linux driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -41,6 +49,7 @@
 #include "ixgbe_phy.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IXGBE_X540_MAX_TX_QUEUES 128
 #define IXGBE_X540_MAX_RX_QUEUES 128
 #define IXGBE_X540_RAR_ENTRIES   128
@@ -48,12 +57,17 @@
 #define IXGBE_X540_VFT_TBL_SIZE  128
 #define IXGBE_X540_RX_PB_SIZE	 384
 =======
+=======
+>>>>>>> v3.18
 #define IXGBE_X540_MAX_TX_QUEUES	128
 #define IXGBE_X540_MAX_RX_QUEUES	128
 #define IXGBE_X540_RAR_ENTRIES		128
 #define IXGBE_X540_MC_TBL_SIZE		128
 #define IXGBE_X540_VFT_TBL_SIZE		128
 #define IXGBE_X540_RX_PB_SIZE		384
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static s32 ixgbe_update_flash_X540(struct ixgbe_hw *hw);
@@ -79,6 +93,10 @@ static s32 ixgbe_get_invariants_X540(struct ixgbe_hw *hw)
 	mac->vft_size = IXGBE_X540_VFT_TBL_SIZE;
 	mac->num_rar_entries = IXGBE_X540_RAR_ENTRIES;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mac->rx_pb_size = IXGBE_X540_RX_PB_SIZE;
+>>>>>>> v3.18
 =======
 	mac->rx_pb_size = IXGBE_X540_RX_PB_SIZE;
 >>>>>>> v3.18
@@ -101,7 +119,11 @@ static s32 ixgbe_setup_mac_link_X540(struct ixgbe_hw *hw,
 {
 	return hw->phy.ops.setup_link_speed(hw, speed,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                                    autoneg_wait_to_complete);
+=======
+					    autoneg_wait_to_complete);
+>>>>>>> v3.18
 =======
 					    autoneg_wait_to_complete);
 >>>>>>> v3.18
@@ -123,8 +145,13 @@ static s32 ixgbe_reset_hw_X540(struct ixgbe_hw *hw)
 	/* Call adapter stop to disable tx/rx and clear interrupts */
 	status = hw->mac.ops.stop_adapter(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status != 0)
 		goto reset_hw_out;
+=======
+	if (status)
+		return status;
+>>>>>>> v3.18
 =======
 	if (status)
 		return status;
@@ -184,7 +211,11 @@ mac_reset_top:
 	if (is_valid_ether_addr(hw->mac.san_addr)) {
 		hw->mac.ops.set_rar(hw, hw->mac.num_rar_entries - 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		                    hw->mac.san_addr, 0, IXGBE_RAH_AV);
+=======
+				    hw->mac.san_addr, 0, IXGBE_RAH_AV);
+>>>>>>> v3.18
 =======
 				    hw->mac.san_addr, 0, IXGBE_RAH_AV);
 >>>>>>> v3.18
@@ -199,9 +230,14 @@ mac_reset_top:
 	/* Store the alternative WWNN/WWPN prefix */
 	hw->mac.ops.get_wwn_prefix(hw, &hw->mac.wwnn_prefix,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                           &hw->mac.wwpn_prefix);
 
 reset_hw_out:
+=======
+				   &hw->mac.wwpn_prefix);
+
+>>>>>>> v3.18
 =======
 				   &hw->mac.wwpn_prefix);
 
@@ -219,6 +255,7 @@ reset_hw_out:
  **/
 static s32 ixgbe_start_hw_X540(struct ixgbe_hw *hw)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s32 ret_val = 0;
 
@@ -256,6 +293,8 @@ static u32 ixgbe_get_supported_physical_layer_X540(struct ixgbe_hw *hw)
 
 	return physical_layer;
 =======
+=======
+>>>>>>> v3.18
 	s32 ret_val;
 
 	ret_val = ixgbe_start_hw_generic(hw);
@@ -263,6 +302,9 @@ static u32 ixgbe_get_supported_physical_layer_X540(struct ixgbe_hw *hw)
 		return ret_val;
 
 	return ixgbe_start_hw_gen2(hw);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -286,9 +328,15 @@ static s32 ixgbe_init_eeprom_params_X540(struct ixgbe_hw *hw)
 		eec = IXGBE_READ_REG(hw, IXGBE_EEC);
 		eeprom_size = (u16)((eec & IXGBE_EEC_SIZE) >>
 <<<<<<< HEAD
+<<<<<<< HEAD
 		                    IXGBE_EEC_SIZE_SHIFT);
 		eeprom->word_size = 1 << (eeprom_size +
 		                          IXGBE_EEPROM_WORD_SIZE_SHIFT);
+=======
+				    IXGBE_EEC_SIZE_SHIFT);
+		eeprom->word_size = 1 << (eeprom_size +
+					  IXGBE_EEPROM_WORD_SIZE_SHIFT);
+>>>>>>> v3.18
 =======
 				    IXGBE_EEC_SIZE_SHIFT);
 		eeprom->word_size = 1 << (eeprom_size +
@@ -313,6 +361,7 @@ static s32 ixgbe_init_eeprom_params_X540(struct ixgbe_hw *hw)
 static s32 ixgbe_read_eerd_X540(struct ixgbe_hw *hw, u16 offset, u16 *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM) ==
@@ -321,12 +370,17 @@ static s32 ixgbe_read_eerd_X540(struct ixgbe_hw *hw, u16 offset, u16 *data)
 	else
 		status = IXGBE_ERR_SWFW_SYNC;
 =======
+=======
+>>>>>>> v3.18
 	s32 status;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM))
 		return IXGBE_ERR_SWFW_SYNC;
 
 	status = ixgbe_read_eerd_generic(hw, offset, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_EEP_SM);
@@ -346,6 +400,7 @@ static s32 ixgbe_read_eerd_buffer_X540(struct ixgbe_hw *hw,
 				       u16 offset, u16 words, u16 *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM) ==
@@ -355,12 +410,17 @@ static s32 ixgbe_read_eerd_buffer_X540(struct ixgbe_hw *hw,
 	else
 		status = IXGBE_ERR_SWFW_SYNC;
 =======
+=======
+>>>>>>> v3.18
 	s32 status;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM))
 		return IXGBE_ERR_SWFW_SYNC;
 
 	status = ixgbe_read_eerd_buffer_generic(hw, offset, words, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_EEP_SM);
@@ -378,6 +438,7 @@ static s32 ixgbe_read_eerd_buffer_X540(struct ixgbe_hw *hw,
 static s32 ixgbe_write_eewr_X540(struct ixgbe_hw *hw, u16 offset, u16 data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM) == 0)
@@ -385,12 +446,17 @@ static s32 ixgbe_write_eewr_X540(struct ixgbe_hw *hw, u16 offset, u16 data)
 	else
 		status = IXGBE_ERR_SWFW_SYNC;
 =======
+=======
+>>>>>>> v3.18
 	s32 status;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM))
 		return IXGBE_ERR_SWFW_SYNC;
 
 	status = ixgbe_write_eewr_generic(hw, offset, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_EEP_SM);
@@ -410,6 +476,7 @@ static s32 ixgbe_write_eewr_buffer_X540(struct ixgbe_hw *hw,
 					u16 offset, u16 words, u16 *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = 0;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM) ==
@@ -419,12 +486,17 @@ static s32 ixgbe_write_eewr_buffer_X540(struct ixgbe_hw *hw,
 	else
 		status = IXGBE_ERR_SWFW_SYNC;
 =======
+=======
+>>>>>>> v3.18
 	s32 status;
 
 	if (hw->mac.ops.acquire_swfw_sync(hw, IXGBE_GSSR_EEP_SM))
 		return IXGBE_ERR_SWFW_SYNC;
 
 	status = ixgbe_write_eewr_buffer_generic(hw, offset, words, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_EEP_SM);
@@ -521,8 +593,12 @@ static s32 ixgbe_validate_eeprom_checksum_X540(struct ixgbe_hw *hw,
 	u16 read_checksum = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Read the first word from the EEPROM. If this times out or fails, do
+=======
+	/* Read the first word from the EEPROM. If this times out or fails, do
+>>>>>>> v3.18
 =======
 	/* Read the first word from the EEPROM. If this times out or fails, do
 >>>>>>> v3.18
@@ -530,6 +606,7 @@ static s32 ixgbe_validate_eeprom_checksum_X540(struct ixgbe_hw *hw,
 	 * EEPROM read fails
 	 */
 	status = hw->eeprom.ops.read(hw, 0, &checksum);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (status != 0) {
@@ -564,6 +641,8 @@ static s32 ixgbe_validate_eeprom_checksum_X540(struct ixgbe_hw *hw,
 	hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_EEP_SM);
 out:
 =======
+=======
+>>>>>>> v3.18
 	if (status) {
 		hw_dbg(hw, "EEPROM read failed\n");
 		return status;
@@ -590,6 +669,9 @@ out:
 	if (read_checksum != checksum)
 		return IXGBE_ERR_EEPROM_CHECKSUM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -608,8 +690,12 @@ static s32 ixgbe_update_eeprom_checksum_X540(struct ixgbe_hw *hw)
 	u16 checksum;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Read the first word from the EEPROM. If this times out or fails, do
+=======
+	/* Read the first word from the EEPROM. If this times out or fails, do
+>>>>>>> v3.18
 =======
 	/* Read the first word from the EEPROM. If this times out or fails, do
 >>>>>>> v3.18
@@ -617,6 +703,7 @@ static s32 ixgbe_update_eeprom_checksum_X540(struct ixgbe_hw *hw)
 	 * EEPROM read fails
 	 */
 	status = hw->eeprom.ops.read(hw, 0, &checksum);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (status != 0)
@@ -641,6 +728,8 @@ static s32 ixgbe_update_eeprom_checksum_X540(struct ixgbe_hw *hw)
 	hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_EEP_SM);
 
 =======
+=======
+>>>>>>> v3.18
 	if (status) {
 		hw_dbg(hw, "EEPROM read failed\n");
 		return status;
@@ -659,6 +748,9 @@ static s32 ixgbe_update_eeprom_checksum_X540(struct ixgbe_hw *hw)
 		status = ixgbe_update_flash_X540(hw);
 
 	hw->mac.ops.release_swfw_sync(hw, IXGBE_GSSR_EEP_SM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -674,7 +766,11 @@ static s32 ixgbe_update_flash_X540(struct ixgbe_hw *hw)
 {
 	u32 flup;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = IXGBE_ERR_EEPROM;
+=======
+	s32 status;
+>>>>>>> v3.18
 =======
 	s32 status;
 >>>>>>> v3.18
@@ -683,7 +779,11 @@ static s32 ixgbe_update_flash_X540(struct ixgbe_hw *hw)
 	if (status == IXGBE_ERR_EEPROM) {
 		hw_dbg(hw, "Flash update time out\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return status;
+>>>>>>> v3.18
 =======
 		return status;
 >>>>>>> v3.18
@@ -713,7 +813,11 @@ static s32 ixgbe_update_flash_X540(struct ixgbe_hw *hw)
 			hw_dbg(hw, "Flash update time out\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -732,6 +836,7 @@ static s32 ixgbe_poll_flash_update_done_X540(struct ixgbe_hw *hw)
 	u32 i;
 	u32 reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 status = IXGBE_ERR_EEPROM;
 
 	for (i = 0; i < IXGBE_FLUDONE_ATTEMPTS; i++) {
@@ -744,6 +849,8 @@ static s32 ixgbe_poll_flash_update_done_X540(struct ixgbe_hw *hw)
 	}
 	return status;
 =======
+=======
+>>>>>>> v3.18
 
 	for (i = 0; i < IXGBE_FLUDONE_ATTEMPTS; i++) {
 		reg = IXGBE_READ_REG(hw, IXGBE_EEC);
@@ -752,6 +859,9 @@ static s32 ixgbe_poll_flash_update_done_X540(struct ixgbe_hw *hw)
 		udelay(5);
 	}
 	return IXGBE_ERR_EEPROM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -848,6 +958,7 @@ static void ixgbe_release_swfw_sync_X540(struct ixgbe_hw *hw, u16 mask)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ixgbe_get_nvm_semaphore - Get hardware semaphore
  * @hw: pointer to hardware structure
  *
@@ -857,6 +968,8 @@ static s32 ixgbe_get_swfw_sync_semaphore(struct ixgbe_hw *hw)
 {
 	s32 status = IXGBE_ERR_EEPROM;
 =======
+=======
+>>>>>>> v3.18
  * ixgbe_get_swfw_sync_semaphore - Get hardware semaphore
  * @hw: pointer to hardware structure
  *
@@ -864,6 +977,9 @@ static s32 ixgbe_get_swfw_sync_semaphore(struct ixgbe_hw *hw)
  */
 static s32 ixgbe_get_swfw_sync_semaphore(struct ixgbe_hw *hw)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 timeout = 2000;
 	u32 i;
@@ -871,6 +987,7 @@ static s32 ixgbe_get_swfw_sync_semaphore(struct ixgbe_hw *hw)
 
 	/* Get SMBI software semaphore between device drivers first */
 	for (i = 0; i < timeout; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/*
 		 * If the SMBI bit is 0 when we read it, then the bit will be
@@ -900,6 +1017,8 @@ static s32 ixgbe_get_swfw_sync_semaphore(struct ixgbe_hw *hw)
 
 	return status;
 =======
+=======
+>>>>>>> v3.18
 		/* If the SMBI bit is 0 when we read it, then the bit will be
 		 * set and we have the semaphore
 		 */
@@ -925,6 +1044,9 @@ static s32 ixgbe_get_swfw_sync_semaphore(struct ixgbe_hw *hw)
 	}
 
 	return IXGBE_ERR_EEPROM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1022,8 +1144,11 @@ static struct ixgbe_mac_operations mac_ops_X540 = {
 	.clear_hw_cntrs         = &ixgbe_clear_hw_cntrs_generic,
 	.get_media_type         = &ixgbe_get_media_type_X540,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_supported_physical_layer =
                                   &ixgbe_get_supported_physical_layer_X540,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.enable_rx_dma          = &ixgbe_enable_rx_dma_generic,
@@ -1068,7 +1193,12 @@ static struct ixgbe_mac_operations mac_ops_X540 = {
 	.get_thermal_sensor_data = NULL,
 	.init_thermal_sensor_thresh = NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mng_fw_enabled		= NULL,
+=======
+	.prot_autoc_read	= &prot_autoc_read_generic,
+	.prot_autoc_write	= &prot_autoc_write_generic,
+>>>>>>> v3.18
 =======
 	.prot_autoc_read	= &prot_autoc_read_generic,
 	.prot_autoc_write	= &prot_autoc_write_generic,

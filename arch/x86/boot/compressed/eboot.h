@@ -11,7 +11,10 @@
 
 #define DESC_TYPE_CODE_DATA	(1 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EFI_READ_CHUNK_SIZE	(1024 * 1024)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -42,7 +45,10 @@ struct efi_graphics_output_mode_info {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct efi_graphics_output_protocol_mode_32 {
 	u32 max_mode;
 	u32 mode;
@@ -61,6 +67,9 @@ struct efi_graphics_output_protocol_mode_64 {
 	u64 frame_buffer_size;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct efi_graphics_output_protocol_mode {
 	u32 max_mode;
@@ -72,7 +81,10 @@ struct efi_graphics_output_protocol_mode {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct efi_graphics_output_protocol_32 {
 	u32 query_mode;
 	u32 set_mode;
@@ -87,6 +99,9 @@ struct efi_graphics_output_protocol_64 {
 	u64 mode;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct efi_graphics_output_protocol {
 	void *query_mode;
@@ -96,7 +111,10 @@ struct efi_graphics_output_protocol {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct efi_uga_draw_protocol_32 {
 	u32 get_mode;
 	u32 set_mode;
@@ -109,6 +127,9 @@ struct efi_uga_draw_protocol_64 {
 	u64 blt;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct efi_uga_draw_protocol {
 	void *get_mode;
@@ -117,7 +138,10 @@ struct efi_uga_draw_protocol {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct efi_config {
 	u64 image_handle;
 	u64 table;
@@ -134,5 +158,8 @@ struct efi_config {
 	bool is64;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* BOOT_COMPRESSED_EBOOT_H */

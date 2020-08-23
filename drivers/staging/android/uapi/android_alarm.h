@@ -28,7 +28,10 @@ enum android_alarm_type {
 	ANDROID_ALARM_SYSTEMTIME,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ANDROID_ALARM_RTC_POWEROFF_WAKEUP,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ANDROID_ALARM_TYPE_COUNT,
@@ -46,8 +49,11 @@ enum android_alarm_return_flags {
 				1U << ANDROID_ALARM_ELAPSED_REALTIME,
 	ANDROID_ALARM_SYSTEMTIME_MASK = 1U << ANDROID_ALARM_SYSTEMTIME,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ANDROID_ALARM_RTC_POWEROFF_WAKEUP_MASK =
 				1U << ANDROID_ALARM_RTC_POWEROFF_WAKEUP,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ANDROID_ALARM_TIME_CHANGE_MASK = 1U << 16

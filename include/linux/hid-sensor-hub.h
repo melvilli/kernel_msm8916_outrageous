@@ -22,6 +22,11 @@
 #include <linux/hid.h>
 #include <linux/hid-sensor-ids.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/iio/iio.h>
+#include <linux/iio/trigger.h>
+>>>>>>> v3.18
 =======
 #include <linux/iio/iio.h>
 #include <linux/iio/trigger.h>
@@ -46,6 +51,11 @@ struct hid_sensor_hub_attribute_info {
 	s32 unit_expo;
 	s32 size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s32 logical_minimum;
+	s32 logical_maximum;
+>>>>>>> v3.18
 =======
 	s32 logical_minimum;
 	s32 logical_maximum;
@@ -58,6 +68,11 @@ struct hid_sensor_hub_attribute_info {
  * @vendor_id:		Vendor id of hub device.
  * @product_id:		Product id of hub device.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @start_collection_index: Starting index for a phy type collection
+ * @end_collection_index: Last index for a phy type collection
+>>>>>>> v3.18
 =======
  * @start_collection_index: Starting index for a phy type collection
  * @end_collection_index: Last index for a phy type collection
@@ -68,6 +83,11 @@ struct hid_sensor_hub_device {
 	u32 vendor_id;
 	u32 product_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int start_collection_index;
+	int end_collection_index;
+>>>>>>> v3.18
 =======
 	int start_collection_index;
 	int end_collection_index;
@@ -95,7 +115,10 @@ struct hid_sensor_hub_callbacks {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
 * sensor_hub_device_open() - Open hub device
 * @hsdev:	Hub device instance.
@@ -112,6 +135,9 @@ int sensor_hub_device_open(struct hid_sensor_hub_device *hsdev);
 */
 void sensor_hub_device_close(struct hid_sensor_hub_device *hsdev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Registration functions */
 
@@ -205,7 +231,12 @@ struct hid_sensor_common {
 	struct platform_device *pdev;
 	unsigned usage_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool data_ready;
+=======
+	atomic_t data_ready;
+	struct iio_trigger *trigger;
+>>>>>>> v3.18
 =======
 	atomic_t data_ready;
 	struct iio_trigger *trigger;
@@ -217,7 +248,11 @@ struct hid_sensor_common {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*Convert from hid unit expo to regular exponent*/
+=======
+/* Convert from hid unit expo to regular exponent */
+>>>>>>> v3.18
 =======
 /* Convert from hid unit expo to regular exponent */
 >>>>>>> v3.18
@@ -244,7 +279,10 @@ int hid_sensor_read_samp_freq_value(struct hid_sensor_common *st,
 					int *val1, int *val2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int hid_sensor_get_usage_index(struct hid_sensor_hub_device *hsdev,
 				u32 report_id, int field_index, u32 usage_id);
 
@@ -254,5 +292,8 @@ int hid_sensor_format_scale(u32 usage_id,
 
 s32 hid_sensor_read_poll_value(struct hid_sensor_common *st);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

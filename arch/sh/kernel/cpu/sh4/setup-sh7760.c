@@ -129,6 +129,7 @@ static DECLARE_INTC_DESC(intc_desc_irq, "sh7760-irq", vectors_irq, groups,
 
 static struct plat_sci_port scif0_platform_data = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mapbase	= 0xfe600000,
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -145,6 +146,8 @@ static struct platform_device scif0_device = {
 	.name		= "sh-sci",
 	.id		= 0,
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -164,6 +167,9 @@ static struct platform_device scif0_device = {
 	.id		= 0,
 	.resource	= scif0_resources,
 	.num_resources	= ARRAY_SIZE(scif0_resources),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dev		= {
 		.platform_data	= &scif0_platform_data,
@@ -171,6 +177,7 @@ static struct platform_device scif0_device = {
 };
 
 static struct plat_sci_port scif1_platform_data = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.mapbase	= 0xfe610000,
 	.flags		= UPF_BOOT_AUTOCONF,
@@ -188,6 +195,8 @@ static struct platform_device scif1_device = {
 	.name		= "sh-sci",
 	.id		= 1,
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.type		= PORT_SCIF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
@@ -207,6 +216,9 @@ static struct platform_device scif1_device = {
 	.id		= 1,
 	.resource	= scif1_resources,
 	.num_resources	= ARRAY_SIZE(scif1_resources),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dev		= {
 		.platform_data	= &scif1_platform_data,
@@ -214,6 +226,7 @@ static struct platform_device scif1_device = {
 };
 
 static struct plat_sci_port scif2_platform_data = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.mapbase	= 0xfe620000,
 	.flags		= UPF_BOOT_AUTOCONF,
@@ -231,6 +244,8 @@ static struct platform_device scif2_device = {
 	.name		= "sh-sci",
 	.id		= 2,
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCIF,
@@ -250,6 +265,9 @@ static struct platform_device scif2_device = {
 	.id		= 2,
 	.resource	= scif2_resources,
 	.num_resources	= ARRAY_SIZE(scif2_resources),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dev		= {
 		.platform_data	= &scif2_platform_data,
@@ -257,6 +275,7 @@ static struct platform_device scif2_device = {
 };
 
 static struct plat_sci_port scif3_platform_data = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.mapbase	= 0xfe480000,
 	.flags		= UPF_BOOT_AUTOCONF,
@@ -273,6 +292,8 @@ static struct platform_device scif3_device = {
 	.name		= "sh-sci",
 	.id		= 3,
 =======
+=======
+>>>>>>> v3.18
 	.flags		= UPF_BOOT_AUTOCONF,
 	.scscr		= SCSCR_RE | SCSCR_TE | SCSCR_REIE,
 	.type		= PORT_SCI,
@@ -291,6 +312,9 @@ static struct platform_device scif3_device = {
 	.id		= 3,
 	.resource	= scif3_resources,
 	.num_resources	= ARRAY_SIZE(scif3_resources),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dev		= {
 		.platform_data	= &scif3_platform_data,
@@ -298,6 +322,7 @@ static struct platform_device scif3_device = {
 };
 
 static struct sh_timer_config tmu0_platform_data = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.channel_offset = 0x04,
 	.timer_bit = 0,
@@ -319,6 +344,8 @@ static struct resource tmu0_resources[] = {
 static struct platform_device tmu0_device = {
 	.name		= "sh_tmu",
 =======
+=======
+>>>>>>> v3.18
 	.channels_mask = 7,
 };
 
@@ -331,6 +358,9 @@ static struct resource tmu0_resources[] = {
 
 static struct platform_device tmu0_device = {
 	.name		= "sh-tmu",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id		= 0,
 	.dev = {
@@ -340,6 +370,7 @@ static struct platform_device tmu0_device = {
 	.num_resources	= ARRAY_SIZE(tmu0_resources),
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sh_timer_config tmu1_platform_data = {
 	.channel_offset = 0x10,
@@ -398,6 +429,8 @@ static struct platform_device tmu2_device = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 static struct platform_device *sh7760_devices[] __initdata = {
 	&scif0_device,
@@ -406,8 +439,11 @@ static struct platform_device *sh7760_devices[] __initdata = {
 	&scif3_device,
 	&tmu0_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&tmu1_device,
 	&tmu2_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -426,8 +462,11 @@ static struct platform_device *sh7760_early_devices[] __initdata = {
 	&scif3_device,
 	&tmu0_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	&tmu1_device,
 	&tmu2_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

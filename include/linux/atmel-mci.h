@@ -2,6 +2,11 @@
 #define __LINUX_ATMEL_MCI_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/types.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/types.h>
 

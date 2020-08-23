@@ -13,8 +13,13 @@
 /* pull in the relevant register and map files. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/map.h>
 #include <plat/regs-serial.h>
+=======
+#include <linux/serial_s3c.h>
+#include <mach/map.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 #include <mach/map.h>

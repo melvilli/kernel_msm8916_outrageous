@@ -2,7 +2,11 @@
 #define _PERF_DWARF_REGS_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef DWARF_SUPPORT
+=======
+#ifdef HAVE_DWARF_SUPPORT
+>>>>>>> v3.18
 =======
 #ifdef HAVE_DWARF_SUPPORT
 >>>>>>> v3.18

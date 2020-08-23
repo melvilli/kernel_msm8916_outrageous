@@ -1349,6 +1349,7 @@ struct il_rx_mpdu_res_start {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * security overhead sizes
  */
 #define WEP_IV_LEN 4
@@ -1357,6 +1358,8 @@ struct il_rx_mpdu_res_start {
 #define TKIP_ICV_LEN 4
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * C_TX = 0x1c (command)
@@ -2282,7 +2285,12 @@ struct il_spectrum_notification {
 #define IL_POWER_VEC_SIZE 5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IL_POWER_DRIVER_ALLOW_SLEEP_MSK	cpu_to_le16(BIT(0))
+=======
+#define IL_POWER_DRIVER_ALLOW_SLEEP_MSK		cpu_to_le16(BIT(0))
+#define IL_POWER_SLEEP_OVER_DTIM_MSK		cpu_to_le16(BIT(2))
+>>>>>>> v3.18
 =======
 #define IL_POWER_DRIVER_ALLOW_SLEEP_MSK		cpu_to_le16(BIT(0))
 #define IL_POWER_SLEEP_OVER_DTIM_MSK		cpu_to_le16(BIT(2))

@@ -1170,8 +1170,13 @@ static int snd_sscape_probe(struct device *pdev, unsigned int dev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_card_create(index[dev], id[dev], THIS_MODULE,
 			      sizeof(struct soundscape), &card);
+=======
+	ret = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
+			   sizeof(struct soundscape), &card);
+>>>>>>> v3.18
 =======
 	ret = snd_card_new(pdev, index[dev], id[dev], THIS_MODULE,
 			   sizeof(struct soundscape), &card);
@@ -1184,7 +1189,10 @@ static int snd_sscape_probe(struct device *pdev, unsigned int dev)
 
 	dma[dev] &= 0x03;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1209,7 +1217,10 @@ static int snd_sscape_remove(struct device *devptr, unsigned int dev)
 {
 	snd_card_free(dev_get_drvdata(devptr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(devptr, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1272,8 +1283,14 @@ static int sscape_pnp_detect(struct pnp_card_link *pcard,
 	 * of detecting our hardware ...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_card_create(index[idx], id[idx], THIS_MODULE,
 			      sizeof(struct soundscape), &card);
+=======
+	ret = snd_card_new(&pcard->card->dev,
+			   index[idx], id[idx], THIS_MODULE,
+			   sizeof(struct soundscape), &card);
+>>>>>>> v3.18
 =======
 	ret = snd_card_new(&pcard->card->dev,
 			   index[idx], id[idx], THIS_MODULE,
@@ -1307,7 +1324,10 @@ static int sscape_pnp_detect(struct pnp_card_link *pcard,
 		dma2[idx] = pnp_dma(dev, 1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pcard->card->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

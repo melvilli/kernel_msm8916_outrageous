@@ -5,7 +5,11 @@
  * agnostic related functions.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * (c) Copyright 2003-2012 RisingTide Systems LLC.
+=======
+ * (c) Copyright 2003-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2003-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -52,6 +56,12 @@
 #include "target_core_ua.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+DEFINE_MUTEX(g_device_mutex);
+LIST_HEAD(g_device_list);
+
+>>>>>>> v3.18
 =======
 DEFINE_MUTEX(g_device_mutex);
 LIST_HEAD(g_device_list);
@@ -100,6 +110,12 @@ transport_lookup_cmd_lun(struct se_cmd *se_cmd, u32 unpacked_lun)
 		se_cmd->orig_fe_lun = unpacked_lun;
 		se_cmd->se_cmd_flags |= SCF_SE_LUN_CMD;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		percpu_ref_get(&se_lun->lun_ref);
+		se_cmd->lun_ref_active = true;
+>>>>>>> v3.18
 =======
 
 		percpu_ref_get(&se_lun->lun_ref);
@@ -133,6 +149,12 @@ transport_lookup_cmd_lun(struct se_cmd *se_cmd, u32 unpacked_lun)
 		se_cmd->orig_fe_lun = 0;
 		se_cmd->se_cmd_flags |= SCF_SE_LUN_CMD;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+		percpu_ref_get(&se_lun->lun_ref);
+		se_cmd->lun_ref_active = true;
+>>>>>>> v3.18
 =======
 
 		percpu_ref_get(&se_lun->lun_ref);
@@ -143,6 +165,7 @@ transport_lookup_cmd_lun(struct se_cmd *se_cmd, u32 unpacked_lun)
 	/* Directly associate cmd with se_dev */
 	se_cmd->se_dev = se_lun->lun_se_dev;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* TODO: get rid of this and use atomics for stats */
 	dev = se_lun->lun_se_dev;
@@ -158,12 +181,17 @@ transport_lookup_cmd_lun(struct se_cmd *se_cmd, u32 unpacked_lun)
 	list_add_tail(&se_cmd->se_lun_node, &se_lun->lun_cmd_list);
 	spin_unlock_irqrestore(&se_lun->lun_cmd_lock, flags);
 =======
+=======
+>>>>>>> v3.18
 	dev = se_lun->lun_se_dev;
 	atomic_long_inc(&dev->num_cmds);
 	if (se_cmd->data_direction == DMA_TO_DEVICE)
 		atomic_long_add(se_cmd->data_length, &dev->write_bytes);
 	else if (se_cmd->data_direction == DMA_FROM_DEVICE)
 		atomic_long_add(se_cmd->data_length, &dev->read_bytes);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -254,8 +282,12 @@ struct se_dev_entry *core_get_se_deve_from_rtpi(
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		atomic_inc(&deve->pr_ref_count);
 		smp_mb__after_atomic();
+=======
+		atomic_inc_mb(&deve->pr_ref_count);
+>>>>>>> v3.18
 =======
 		atomic_inc_mb(&deve->pr_ref_count);
 >>>>>>> v3.18
@@ -347,7 +379,11 @@ int core_enable_device_list_for_node(
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Check if the call is handling demo mode -> explict LUN ACL
+=======
+	 * Check if the call is handling demo mode -> explicit LUN ACL
+>>>>>>> v3.18
 =======
 	 * Check if the call is handling demo mode -> explicit LUN ACL
 >>>>>>> v3.18
@@ -358,7 +394,11 @@ int core_enable_device_list_for_node(
 		if (deve->se_lun_acl != NULL) {
 			pr_err("struct se_dev_entry->se_lun_acl"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       " already set for demo mode -> explict"
+=======
+			       " already set for demo mode -> explicit"
+>>>>>>> v3.18
 =======
 			       " already set for demo mode -> explicit"
 >>>>>>> v3.18
@@ -370,7 +410,11 @@ int core_enable_device_list_for_node(
 			pr_err("struct se_dev_entry->se_lun does"
 			       " match passed struct se_lun for demo mode"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       " -> explict LUN ACL transition\n");
+=======
+			       " -> explicit LUN ACL transition\n");
+>>>>>>> v3.18
 =======
 			       " -> explicit LUN ACL transition\n");
 >>>>>>> v3.18
@@ -939,7 +983,10 @@ int se_dev_set_emulate_tpws(struct se_device *dev, int flag)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int se_dev_set_emulate_caw(struct se_device *dev, int flag)
 {
 	if (flag != 0 && flag != 1) {
@@ -1054,6 +1101,9 @@ int se_dev_set_pi_prot_format(struct se_device *dev, int flag)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int se_dev_set_enforce_pr_isids(struct se_device *dev, int flag)
 {
@@ -1068,7 +1118,10 @@ int se_dev_set_enforce_pr_isids(struct se_device *dev, int flag)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int se_dev_set_force_pr_aptpl(struct se_device *dev, int flag)
 {
 	if ((flag != 0) && (flag != 1)) {
@@ -1086,6 +1139,9 @@ int se_dev_set_force_pr_aptpl(struct se_device *dev, int flag)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int se_dev_set_is_nonrot(struct se_device *dev, int flag)
 {
@@ -1222,15 +1278,21 @@ int se_dev_set_optimal_sectors(struct se_device *dev, u32 optimal_sectors)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (optimal_sectors > dev->dev_attrib.hw_max_sectors) {
 		pr_err("dev[%p]: Passed optimal_sectors %u cannot be"
 			" greater than hw_max_sectors: %u\n", dev,
 			optimal_sectors, dev->dev_attrib.hw_max_sectors);
 =======
+=======
+>>>>>>> v3.18
 	if (optimal_sectors > dev->dev_attrib.fabric_max_sectors) {
 		pr_err("dev[%p]: Passed optimal_sectors %u cannot be"
 			" greater than fabric_max_sectors: %u\n", dev,
 			optimal_sectors, dev->dev_attrib.fabric_max_sectors);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	}
@@ -1282,6 +1344,7 @@ struct se_lun *core_dev_add_lun(
 	struct se_portal_group *tpg,
 	struct se_device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 lun)
 {
 	struct se_lun *lun_p;
@@ -1293,6 +1356,8 @@ struct se_lun *core_dev_add_lun(
 
 	rc = core_tpg_post_addlun(tpg, lun_p,
 =======
+=======
+>>>>>>> v3.18
 	u32 unpacked_lun)
 {
 	struct se_lun *lun;
@@ -1303,6 +1368,9 @@ struct se_lun *core_dev_add_lun(
 		return lun;
 
 	rc = core_tpg_add_lun(tpg, lun,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				TRANSPORT_LUNFLAGS_READ_WRITE, dev);
 	if (rc < 0)
@@ -1311,7 +1379,11 @@ struct se_lun *core_dev_add_lun(
 	pr_debug("%s_TPG[%u]_LUN[%u] - Activated %s Logical Unit from"
 		" CORE HBA: %u\n", tpg->se_tpg_tfo->get_fabric_name(),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tpg->se_tpg_tfo->tpg_get_tag(tpg), lun_p->unpacked_lun,
+=======
+		tpg->se_tpg_tfo->tpg_get_tag(tpg), lun->unpacked_lun,
+>>>>>>> v3.18
 =======
 		tpg->se_tpg_tfo->tpg_get_tag(tpg), lun->unpacked_lun,
 >>>>>>> v3.18
@@ -1336,7 +1408,11 @@ struct se_lun *core_dev_add_lun(
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return lun_p;
+=======
+	return lun;
+>>>>>>> v3.18
 =======
 	return lun;
 >>>>>>> v3.18
@@ -1346,6 +1422,7 @@ struct se_lun *core_dev_add_lun(
  *
  *
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 int core_dev_del_lun(
 	struct se_portal_group *tpg,
@@ -1366,6 +1443,8 @@ int core_dev_del_lun(
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 void core_dev_del_lun(
 	struct se_portal_group *tpg,
 	struct se_lun *lun)
@@ -1376,6 +1455,9 @@ void core_dev_del_lun(
 		tpg->se_tpg_tfo->get_fabric_name());
 
 	core_tpg_remove_lun(tpg, lun);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1506,8 +1588,12 @@ int core_dev_add_initiator_node_lun_acl(
 	spin_lock(&lun->lun_acl_lock);
 	list_add_tail(&lacl->lacl_list, &lun->lun_acl_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_inc(&lun->lun_acl_count);
 	smp_mb__after_atomic();
+=======
+	atomic_inc_mb(&lun->lun_acl_count);
+>>>>>>> v3.18
 =======
 	atomic_inc_mb(&lun->lun_acl_count);
 >>>>>>> v3.18
@@ -1545,8 +1631,12 @@ int core_dev_del_initiator_node_lun_acl(
 	spin_lock(&lun->lun_acl_lock);
 	list_del(&lacl->lacl_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_dec(&lun->lun_acl_count);
 	smp_mb__after_atomic();
+=======
+	atomic_dec_mb(&lun->lun_acl_count);
+>>>>>>> v3.18
 =======
 	atomic_dec_mb(&lun->lun_acl_count);
 >>>>>>> v3.18
@@ -1619,6 +1709,10 @@ struct se_device *target_alloc_device(struct se_hba *hba, const char *name)
 {
 	struct se_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct se_lun *xcopy_lun;
+>>>>>>> v3.18
 =======
 	struct se_lun *xcopy_lun;
 >>>>>>> v3.18
@@ -1631,6 +1725,10 @@ struct se_device *target_alloc_device(struct se_hba *hba, const char *name)
 	dev->se_hba = hba;
 	dev->transport = hba->transport;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->prot_length = sizeof(struct se_dif_v1_tuple);
+>>>>>>> v3.18
 =======
 	dev->prot_length = sizeof(struct se_dif_v1_tuple);
 >>>>>>> v3.18
@@ -1642,7 +1740,11 @@ struct se_device *target_alloc_device(struct se_hba *hba, const char *name)
 	INIT_LIST_HEAD(&dev->state_list);
 	INIT_LIST_HEAD(&dev->qf_cmd_list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&dev->stats_lock);
+=======
+	INIT_LIST_HEAD(&dev->g_dev_node);
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&dev->g_dev_node);
 >>>>>>> v3.18
@@ -1653,6 +1755,10 @@ struct se_device *target_alloc_device(struct se_hba *hba, const char *name)
 	spin_lock_init(&dev->se_tmr_lock);
 	spin_lock_init(&dev->qf_cmd_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sema_init(&dev->caw_sem, 1);
+>>>>>>> v3.18
 =======
 	sema_init(&dev->caw_sem, 1);
 >>>>>>> v3.18
@@ -1666,8 +1772,14 @@ struct se_device *target_alloc_device(struct se_hba *hba, const char *name)
 	INIT_LIST_HEAD(&dev->t10_alua.tg_pt_gps_list);
 	spin_lock_init(&dev->t10_alua.tg_pt_gps_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dev->t10_pr.pr_aptpl_buf_len = PR_APTPL_BUF_LEN;
+=======
+	INIT_LIST_HEAD(&dev->t10_alua.lba_map_list);
+	spin_lock_init(&dev->t10_alua.lba_map_lock);
+
+>>>>>>> v3.18
 =======
 	INIT_LIST_HEAD(&dev->t10_alua.lba_map_list);
 	spin_lock_init(&dev->t10_alua.lba_map_lock);
@@ -1687,13 +1799,19 @@ struct se_device *target_alloc_device(struct se_hba *hba, const char *name)
 	dev->dev_attrib.emulate_tpu = DA_EMULATE_TPU;
 	dev->dev_attrib.emulate_tpws = DA_EMULATE_TPWS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_attrib.enforce_pr_isids = DA_ENFORCE_PR_ISIDS;
 =======
+=======
+>>>>>>> v3.18
 	dev->dev_attrib.emulate_caw = DA_EMULATE_CAW;
 	dev->dev_attrib.emulate_3pc = DA_EMULATE_3PC;
 	dev->dev_attrib.pi_prot_type = TARGET_DIF_TYPE0_PROT;
 	dev->dev_attrib.enforce_pr_isids = DA_ENFORCE_PR_ISIDS;
 	dev->dev_attrib.force_pr_aptpl = DA_FORCE_PR_APTPL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->dev_attrib.is_nonrot = DA_IS_NONROT;
 	dev->dev_attrib.emulate_rest_reord = DA_EMULATE_REST_REORD;
@@ -1706,7 +1824,10 @@ struct se_device *target_alloc_device(struct se_hba *hba, const char *name)
 	dev->dev_attrib.max_write_same_len = DA_MAX_WRITE_SAME_LEN;
 	dev->dev_attrib.fabric_max_sectors = DA_FABRIC_MAX_SECTORS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	dev->dev_attrib.optimal_sectors = DA_FABRIC_MAX_SECTORS;
 
 	xcopy_lun = &dev->xcopy_lun;
@@ -1716,6 +1837,9 @@ struct se_device *target_alloc_device(struct se_hba *hba, const char *name)
 	spin_lock_init(&xcopy_lun->lun_acl_lock);
 	spin_lock_init(&xcopy_lun->lun_sep_lock);
 	init_completion(&xcopy_lun->lun_ref_comp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return dev;
@@ -1750,7 +1874,10 @@ int target_configure_device(struct se_device *dev)
 		se_dev_align_max_sectors(dev->dev_attrib.hw_max_sectors,
 					 dev->dev_attrib.hw_block_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->dev_attrib.optimal_sectors = dev->dev_attrib.hw_max_sectors;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1797,12 +1924,18 @@ int target_configure_device(struct se_device *dev)
 	hba->dev_count++;
 	spin_unlock(&hba->device_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_lock(&g_device_mutex);
 	list_add_tail(&dev->g_dev_node, &g_device_list);
 	mutex_unlock(&g_device_mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1823,11 +1956,17 @@ void target_free_device(struct se_device *dev)
 		destroy_workqueue(dev->tmr_wq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		mutex_lock(&g_device_mutex);
 		list_del(&dev->g_dev_node);
 		mutex_unlock(&g_device_mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock(&hba->device_lock);
 		hba->dev_count--;
@@ -1836,10 +1975,13 @@ void target_free_device(struct se_device *dev)
 
 	core_alua_free_lu_gp_mem(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	core_scsi3_free_all_registrations(dev);
 	se_release_vpd_for_dev(dev);
 
 =======
+=======
+>>>>>>> v3.18
 	core_alua_set_lba_map(dev, NULL, 0, 0);
 	core_scsi3_free_all_registrations(dev);
 	se_release_vpd_for_dev(dev);
@@ -1847,6 +1989,9 @@ void target_free_device(struct se_device *dev)
 	if (dev->transport->free_prot)
 		dev->transport->free_prot(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->transport->free_device(dev);
 }
@@ -1856,7 +2001,11 @@ int core_dev_setup_virtual_lun0(void)
 	struct se_hba *hba;
 	struct se_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char buf[16];
+=======
+	char buf[] = "rd_pages=8,rd_nullio=1";
+>>>>>>> v3.18
 =======
 	char buf[] = "rd_pages=8,rd_nullio=1";
 >>>>>>> v3.18
@@ -1873,8 +2022,11 @@ int core_dev_setup_virtual_lun0(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buf, 0, 16);
 	sprintf(buf, "rd_pages=8");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hba->transport->set_configfs_dev_params(dev, buf, sizeof(buf));

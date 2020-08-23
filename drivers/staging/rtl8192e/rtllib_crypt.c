@@ -184,7 +184,11 @@ EXPORT_SYMBOL(rtllib_get_crypto_ops);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void * rtllib_crypt_null_init(int keyidx) { return (void *) 1; }
+=======
+static void *rtllib_crypt_null_init(int keyidx) { return (void *) 1; }
+>>>>>>> v3.18
 =======
 static void *rtllib_crypt_null_init(int keyidx) { return (void *) 1; }
 >>>>>>> v3.18

@@ -99,7 +99,11 @@ int omap2_select_table_rate(struct clk_hw *hw, unsigned long rate,
 			    unsigned long parent_rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 cur_rate, done_rate, bypass = 0, tmp;
+=======
+	u32 cur_rate, done_rate, bypass = 0;
+>>>>>>> v3.18
 =======
 	u32 cur_rate, done_rate, bypass = 0;
 >>>>>>> v3.18
@@ -146,6 +150,7 @@ int omap2_select_table_rate(struct clk_hw *hw, unsigned long rate,
 			done_rate = CORE_CLK_SRC_DPLL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* MPU divider */
 		omap2_cm_write_mod_reg(prcm->cm_clksel_mpu, MPU_MOD, CM_CLKSEL);
 
@@ -164,11 +169,16 @@ int omap2_select_table_rate(struct clk_hw *hw, unsigned long rate,
 			omap2_cm_write_mod_reg(prcm->cm_clksel_mdm,
 					 OMAP2430_MDM_MOD, CM_CLKSEL);
 =======
+=======
+>>>>>>> v3.18
 		omap2xxx_cm_set_mod_dividers(prcm->cm_clksel_mpu,
 					     prcm->cm_clksel_dsp,
 					     prcm->cm_clksel_gfx,
 					     prcm->cm_clksel1_core,
 					     prcm->cm_clksel_mdm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* x2 to enter omap2xxx_sdrc_init_params() */
@@ -233,7 +243,10 @@ void omap2xxx_clkt_vps_late_init(void)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_OF
 #include <linux/clk-provider.h>
@@ -287,4 +300,7 @@ cleanup:
 	kfree(lookup);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

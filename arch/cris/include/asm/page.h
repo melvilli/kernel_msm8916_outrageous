@@ -52,7 +52,10 @@ typedef struct page *pgtable_t;
 
 #define virt_to_page(kaddr)    (mem_map + (((unsigned long)(kaddr) - PAGE_OFFSET) >> PAGE_SHIFT))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VALID_PAGE(page)       (((page) - mem_map) < max_mapnr)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define virt_addr_valid(kaddr)	pfn_valid((unsigned)(kaddr) >> PAGE_SHIFT)

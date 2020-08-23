@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -634,6 +638,10 @@ static union acpi_parse_object *acpi_ps_get_next_field(struct acpi_parse_state
 				switch (opcode) {
 				case AML_BYTE_OP:	/* AML_BYTEDATA_ARG */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -644,6 +652,10 @@ static union acpi_parse_object *acpi_ps_get_next_field(struct acpi_parse_state
 
 				case AML_WORD_OP:	/* AML_WORDDATA_ARG */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -654,6 +666,10 @@ static union acpi_parse_object *acpi_ps_get_next_field(struct acpi_parse_state
 
 				case AML_DWORD_OP:	/* AML_DWORDATA_ARG */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -664,6 +680,10 @@ static union acpi_parse_object *acpi_ps_get_next_field(struct acpi_parse_state
 
 				default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

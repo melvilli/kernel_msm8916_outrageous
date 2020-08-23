@@ -11,6 +11,7 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "exynos5440.dtsi"
 
 / {
@@ -20,6 +21,8 @@
 	chosen {
 		bootargs = "root=/dev/sda2 rw rootwait ignore_loglevel early_printk no_console_suspend mem=2048M@0x80000000 console=ttySAC0,115200";
 =======
+=======
+>>>>>>> v3.18
 #include "exynos5440.dtsi"
 
 / {
@@ -28,6 +31,9 @@
 
 	chosen {
 		bootargs = "root=/dev/sda2 rw rootwait ignore_loglevel earlyprintk no_console_suspend mem=2048M@0x80000000 mem=6144M@0x100000000 console=ttySAC0,115200";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 

@@ -11,7 +11,11 @@ config X86_INTEL_PSTATE
           the scaling driver and governor for Sandy bridge processors.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  When this driver is enabled it will become the perferred
+=======
+	  When this driver is enabled it will become the preferred
+>>>>>>> v3.18
 =======
 	  When this driver is enabled it will become the preferred
 >>>>>>> v3.18
@@ -57,7 +61,11 @@ config X86_ACPI_CPUFREQ_CPB
 	  The powernow-k8 driver used to provide a sysfs knob called "cpb"
 	  to disable the Core Performance Boosting feature of AMD CPUs. This
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  file has now been superseeded by the more generic "boost" entry.
+=======
+	  file has now been superseded by the more generic "boost" entry.
+>>>>>>> v3.18
 =======
 	  file has now been superseded by the more generic "boost" entry.
 >>>>>>> v3.18
@@ -138,7 +146,11 @@ config X86_AMD_FREQ_SENSITIVITY
 	  This adds AMD-specific powersave bias function to the ondemand
 	  governor, which allows it to make more power-conscious frequency
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  change decisions based on feedback from hardware (availble on AMD
+=======
+	  change decisions based on feedback from hardware (available on AMD
+>>>>>>> v3.18
 =======
 	  change decisions based on feedback from hardware (available on AMD
 >>>>>>> v3.18

@@ -65,6 +65,7 @@ int gnttab_resume(void);
 int gnttab_grant_foreign_access(domid_t domid, unsigned long frame,
 				int readonly);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gnttab_grant_foreign_access_subpage(domid_t domid, unsigned long frame,
 					int flags, unsigned page_off,
 					unsigned length);
@@ -83,6 +84,8 @@ bool gnttab_subpage_grants_available(void);
  * are, and false if they're not.
  */
 bool gnttab_trans_grants_available(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -132,6 +135,7 @@ void gnttab_cancel_free_callback(struct gnttab_free_callback *callback);
 void gnttab_grant_foreign_access_ref(grant_ref_t ref, domid_t domid,
 				     unsigned long frame, int readonly);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gnttab_grant_foreign_access_subpage_ref(grant_ref_t ref, domid_t domid,
 					    unsigned long frame, int flags,
 					    unsigned page_off,
@@ -139,6 +143,8 @@ int gnttab_grant_foreign_access_subpage_ref(grant_ref_t ref, domid_t domid,
 int gnttab_grant_foreign_access_trans_ref(grant_ref_t ref, domid_t domid,
 					  int flags, domid_t trans_domid,
 					  grant_ref_t trans_gref);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -177,6 +183,7 @@ gnttab_set_unmap_op(struct gnttab_unmap_grant_ref *unmap, phys_addr_t addr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int arch_gnttab_map_shared(xen_pfn_t *frames, unsigned long nr_gframes,
 			   unsigned long max_nr_gframes,
 			   void **__shared);
@@ -188,6 +195,8 @@ void arch_gnttab_unmap(void *shared, unsigned long nr_gframes);
 extern unsigned long xen_hvm_resume_frames;
 unsigned int gnttab_max_grant_frames(void);
 =======
+=======
+>>>>>>> v3.18
 int arch_gnttab_init(unsigned long nr_shared);
 int arch_gnttab_map_shared(xen_pfn_t *frames, unsigned long nr_gframes,
 			   unsigned long max_nr_gframes,
@@ -203,6 +212,9 @@ extern struct grant_frames xen_auto_xlat_grant_frames;
 unsigned int gnttab_max_grant_frames(void);
 int gnttab_setup_auto_xlat_frames(phys_addr_t addr);
 void gnttab_free_auto_xlat_frames(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define gnttab_map_vaddr(map) ((void *)(map.host_virt_addr))

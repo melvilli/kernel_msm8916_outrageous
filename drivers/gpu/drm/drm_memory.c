@@ -37,9 +37,12 @@
 #include <linux/export.h>
 #include <drm/drmP.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if __OS_HAS_AGP
 =======
+=======
+>>>>>>> v3.18
 #include "drm_legacy.h"
 
 #if __OS_HAS_AGP
@@ -54,6 +57,9 @@
 # endif
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void *agp_remap(unsigned long offset, unsigned long size,
 		       struct drm_device * dev)
@@ -100,6 +106,7 @@ static void *agp_remap(unsigned long offset, unsigned long size,
 
 /** Wrapper around agp_free_memory() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_free_agp(DRM_AGP_MEM * handle, int pages)
 {
 	agp_free_memory(handle);
@@ -109,6 +116,8 @@ EXPORT_SYMBOL(drm_free_agp);
 /** Wrapper around agp_bind_memory() */
 int drm_bind_agp(DRM_AGP_MEM * handle, unsigned int start)
 =======
+=======
+>>>>>>> v3.18
 void drm_free_agp(struct agp_memory * handle, int pages)
 {
 	agp_free_memory(handle);
@@ -116,6 +125,9 @@ void drm_free_agp(struct agp_memory * handle, int pages)
 
 /** Wrapper around agp_bind_memory() */
 int drm_bind_agp(struct agp_memory * handle, unsigned int start)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return agp_bind_memory(handle, start);
@@ -123,16 +135,22 @@ int drm_bind_agp(struct agp_memory * handle, unsigned int start)
 
 /** Wrapper around agp_unbind_memory() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int drm_unbind_agp(DRM_AGP_MEM * handle)
 {
 	return agp_unbind_memory(handle);
 }
 EXPORT_SYMBOL(drm_unbind_agp);
 =======
+=======
+>>>>>>> v3.18
 int drm_unbind_agp(struct agp_memory * handle)
 {
 	return agp_unbind_memory(handle);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else  /*  __OS_HAS_AGP  */
@@ -145,10 +163,16 @@ static inline void *agp_remap(unsigned long offset, unsigned long size,
 #endif				/* agp */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void drm_core_ioremap(struct drm_local_map *map, struct drm_device *dev)
 {
 	if (drm_core_has_AGP(dev) &&
 	    dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+=======
+void drm_legacy_ioremap(struct drm_local_map *map, struct drm_device *dev)
+{
+	if (dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+>>>>>>> v3.18
 =======
 void drm_legacy_ioremap(struct drm_local_map *map, struct drm_device *dev)
 {
@@ -159,6 +183,7 @@ void drm_legacy_ioremap(struct drm_local_map *map, struct drm_device *dev)
 		map->handle = ioremap(map->offset, map->size);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_core_ioremap);
 
 void drm_core_ioremap_wc(struct drm_local_map *map, struct drm_device *dev)
@@ -166,20 +191,31 @@ void drm_core_ioremap_wc(struct drm_local_map *map, struct drm_device *dev)
 	if (drm_core_has_AGP(dev) &&
 	    dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(drm_legacy_ioremap);
 
 void drm_legacy_ioremap_wc(struct drm_local_map *map, struct drm_device *dev)
 {
 	if (dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		map->handle = agp_remap(map->offset, map->size, dev);
 	else
 		map->handle = ioremap_wc(map->offset, map->size);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_core_ioremap_wc);
 
 void drm_core_ioremapfree(struct drm_local_map *map, struct drm_device *dev)
+=======
+EXPORT_SYMBOL(drm_legacy_ioremap_wc);
+
+void drm_legacy_ioremapfree(struct drm_local_map *map, struct drm_device *dev)
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(drm_legacy_ioremap_wc);
 
@@ -190,8 +226,12 @@ void drm_legacy_ioremapfree(struct drm_local_map *map, struct drm_device *dev)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (drm_core_has_AGP(dev) &&
 	    dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+=======
+	if (dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
+>>>>>>> v3.18
 =======
 	if (dev->agp && dev->agp->cant_use_aperture && map->type == _DRM_AGP)
 >>>>>>> v3.18
@@ -200,7 +240,11 @@ void drm_legacy_ioremapfree(struct drm_local_map *map, struct drm_device *dev)
 		iounmap(map->handle);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(drm_core_ioremapfree);
+=======
+EXPORT_SYMBOL(drm_legacy_ioremapfree);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(drm_legacy_ioremapfree);
 >>>>>>> v3.18

@@ -121,6 +121,10 @@ static irqreturn_t cpm_error_interrupt(int irq, void *dev)
 static struct irqaction cpm_error_irqaction = {
 	.handler = cpm_error_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.flags = IRQF_NO_THREAD,
+>>>>>>> v3.18
 =======
 	.flags = IRQF_NO_THREAD,
 >>>>>>> v3.18

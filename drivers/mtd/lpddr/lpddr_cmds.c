@@ -56,10 +56,15 @@ struct mtd_info *lpddr_cmdset(struct map_info *map)
 
 	mtd = kzalloc(sizeof(*mtd), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!mtd) {
 		printk(KERN_ERR "Failed to allocate memory for MTD device\n");
 		return NULL;
 	}
+=======
+	if (!mtd)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!mtd)
 		return NULL;
@@ -394,7 +399,11 @@ static void put_chip(struct map_info *map, struct flchip *chip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int do_write_buffer(struct map_info *map, struct flchip *chip,
+=======
+static int do_write_buffer(struct map_info *map, struct flchip *chip,
+>>>>>>> v3.18
 =======
 static int do_write_buffer(struct map_info *map, struct flchip *chip,
 >>>>>>> v3.18
@@ -479,7 +488,11 @@ static int do_write_buffer(struct map_info *map, struct flchip *chip,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int do_erase_oneblock(struct mtd_info *mtd, loff_t adr)
+=======
+static int do_erase_oneblock(struct mtd_info *mtd, loff_t adr)
+>>>>>>> v3.18
 =======
 static int do_erase_oneblock(struct mtd_info *mtd, loff_t adr)
 >>>>>>> v3.18
@@ -717,7 +730,11 @@ static int lpddr_erase(struct mtd_info *mtd, struct erase_info *instr)
 #define DO_XXLOCK_LOCK		1
 #define DO_XXLOCK_UNLOCK	2
 <<<<<<< HEAD
+<<<<<<< HEAD
 int do_xxlock(struct mtd_info *mtd, loff_t adr, uint32_t len, int thunk)
+=======
+static int do_xxlock(struct mtd_info *mtd, loff_t adr, uint32_t len, int thunk)
+>>>>>>> v3.18
 =======
 static int do_xxlock(struct mtd_info *mtd, loff_t adr, uint32_t len, int thunk)
 >>>>>>> v3.18
@@ -766,6 +783,7 @@ static int lpddr_unlock(struct mtd_info *mtd, loff_t ofs, uint64_t len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int word_program(struct map_info *map, loff_t adr, uint32_t curval)
 {
     int ret;
@@ -794,6 +812,8 @@ out:	put_chip(map, chip);
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

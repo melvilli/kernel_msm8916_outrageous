@@ -1004,8 +1004,14 @@ int nes_init_cqp(struct nes_device *nesdev)
 			sizeof(struct nes_hw_cqp_qp_context);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nesdev->cqp_vbase = pci_alloc_consistent(nesdev->pcidev, nesdev->cqp_mem_size,
 			&nesdev->cqp_pbase);
+=======
+	nesdev->cqp_vbase = pci_zalloc_consistent(nesdev->pcidev,
+						  nesdev->cqp_mem_size,
+						  &nesdev->cqp_pbase);
+>>>>>>> v3.18
 =======
 	nesdev->cqp_vbase = pci_zalloc_consistent(nesdev->pcidev,
 						  nesdev->cqp_mem_size,
@@ -1016,7 +1022,10 @@ int nes_init_cqp(struct nes_device *nesdev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(nesdev->cqp_vbase, 0, nesdev->cqp_mem_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1701,8 +1710,14 @@ int nes_init_nic_qp(struct nes_device *nesdev, struct net_device *netdev)
 			sizeof(struct nes_hw_nic_qp_context);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nesvnic->nic_vbase = pci_alloc_consistent(nesdev->pcidev, nesvnic->nic_mem_size,
 			&nesvnic->nic_pbase);
+=======
+	nesvnic->nic_vbase = pci_zalloc_consistent(nesdev->pcidev,
+						   nesvnic->nic_mem_size,
+						   &nesvnic->nic_pbase);
+>>>>>>> v3.18
 =======
 	nesvnic->nic_vbase = pci_zalloc_consistent(nesdev->pcidev,
 						   nesvnic->nic_mem_size,
@@ -1713,7 +1728,10 @@ int nes_init_nic_qp(struct nes_device *nesdev, struct net_device *netdev)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(nesvnic->nic_vbase, 0, nesvnic->nic_mem_size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	nes_debug(NES_DBG_INIT, "Allocated NIC QP structures at %p (phys = %016lX), size = %u.\n",
@@ -3589,15 +3607,21 @@ static void nes_process_iwarp_aeqe(struct nes_device *nesdev,
 	iwarp_state = (aeq_info & NES_AEQE_IWARP_STATE_MASK) >> NES_AEQE_IWARP_STATE_SHIFT;
 	nes_debug(NES_DBG_AEQ, "aeid = 0x%04X, qp-cq id = %d, aeqe = %p,"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			" Tcp state = %d, iWARP state = %d\n",
 			async_event_id,
 			le32_to_cpu(aeqe->aeqe_words[NES_AEQE_COMP_QP_CQ_ID_IDX]), aeqe,
 			tcp_state, iwarp_state);
 =======
+=======
+>>>>>>> v3.18
 			" Tcp state = %s, iWARP state = %s\n",
 			async_event_id,
 			le32_to_cpu(aeqe->aeqe_words[NES_AEQE_COMP_QP_CQ_ID_IDX]), aeqe,
 			nes_tcp_state_str[tcp_state], nes_iwarp_state_str[iwarp_state]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	aeqe_cq_id = le32_to_cpu(aeqe->aeqe_words[NES_AEQE_COMP_QP_CQ_ID_IDX]);

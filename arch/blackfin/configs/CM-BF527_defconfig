@@ -96,7 +96,10 @@ CONFIG_BFIN_WDT=y
 CONFIG_USB=m
 CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_USB_DEVICE_CLASS is not set

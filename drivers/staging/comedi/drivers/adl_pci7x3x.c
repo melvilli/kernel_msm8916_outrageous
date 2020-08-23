@@ -20,10 +20,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -52,6 +55,10 @@ Configuration Options: not applicable, uses comedi PCI auto config
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -123,6 +130,7 @@ static int adl_pci7x3x_do_insn_bits(struct comedi_device *dev,
 {
 	unsigned long reg = (unsigned long)s->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -150,10 +158,15 @@ static int adl_pci7x3x_do_insn_bits(struct comedi_device *dev,
 	 * outputs have been updated.
 	 */
 =======
+=======
+>>>>>>> v3.18
 
 	if (comedi_dio_update_state(s, data))
 		outl(s->state, dev->iobase + reg);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data[1] = s->state;
 
@@ -279,9 +292,12 @@ static int adl_pci7x3x_auto_attach(struct comedi_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s attached (%d inputs/%d outputs)\n",
 		dev->board_name, board->di_nchan, board->do_nchan);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -292,7 +308,11 @@ static struct comedi_driver adl_pci7x3x_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= adl_pci7x3x_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= comedi_pci_disable,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pci_detach,
 >>>>>>> v3.18
@@ -306,7 +326,11 @@ static int adl_pci7x3x_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(adl_pci7x3x_pci_table) = {
+=======
+static const struct pci_device_id adl_pci7x3x_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id adl_pci7x3x_pci_table[] = {
 >>>>>>> v3.18

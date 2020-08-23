@@ -119,8 +119,14 @@ static int ot200_backlight_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register(dev_name(&pdev->dev), &pdev->dev, data,
 					&ot200_backlight_ops, &props);
+=======
+	bl = devm_backlight_device_register(&pdev->dev, dev_name(&pdev->dev),
+					&pdev->dev, data, &ot200_backlight_ops,
+					&props);
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev, dev_name(&pdev->dev),
 					&pdev->dev, data, &ot200_backlight_ops,
@@ -144,10 +150,13 @@ error_devm_kzalloc:
 static int ot200_backlight_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct backlight_device *bl = platform_get_drvdata(pdev);
 
 	backlight_device_unregister(bl);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* on module unload set brightness to 100% */
@@ -165,7 +174,10 @@ static struct platform_driver ot200_backlight_driver = {
 	.driver		= {
 		.name	= "ot200-backlight",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	},

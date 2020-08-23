@@ -229,6 +229,7 @@ bool init_firmware(struct net_device *dev)
 	bool			rt_status = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	*firmware_img_buf[3] = { &Rtl8192PciEFwBootArray[0],
 					 &Rtl8192PciEFwMainArray[0],
 					 &Rtl8192PciEFwDataArray[0]};
@@ -236,6 +237,8 @@ bool init_firmware(struct net_device *dev)
 	u32	firmware_img_len[3] = { sizeof(Rtl8192PciEFwBootArray),
 					sizeof(Rtl8192PciEFwMainArray),
 					sizeof(Rtl8192PciEFwDataArray)};
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u32	file_length = 0;
@@ -260,6 +263,7 @@ bool init_firmware(struct net_device *dev)
 			 " firmware state\n");
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	priv->firmware_source = FW_SOURCE_IMG_FILE;
 	for (init_step = starting_state; init_step <= FW_INIT_STEP2_DATA;
@@ -335,6 +339,8 @@ bool init_firmware(struct net_device *dev)
 		rt_status = fw_download_code(dev, mapped_file, file_length);
 		if (rt_status != true) {
 =======
+=======
+>>>>>>> v3.18
 	for (init_step = starting_state; init_step <= FW_INIT_STEP2_DATA;
 	     init_step++) {
 		if (rst_opt == OPT_SYSTEM_RESET) {
@@ -387,6 +393,9 @@ bool init_firmware(struct net_device *dev)
 
 		rt_status = fw_download_code(dev, mapped_file, file_length);
 		if (!rt_status) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto download_firmware_fail;
 		}

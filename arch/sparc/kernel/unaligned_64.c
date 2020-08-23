@@ -22,9 +22,12 @@
 #include <linux/perf_event.h>
 #include <linux/ratelimit.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/fpumacro.h>
 #include <asm/cacheflush.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/context_tracking.h>
 #include <asm/fpumacro.h>
 #include <asm/cacheflush.h>
@@ -32,6 +35,9 @@
 
 #include "entry.h"
 #include "kernel.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum direction {
@@ -435,9 +441,12 @@ int handle_popc(u32 insn, struct pt_regs *regs)
 extern void do_fpother(struct pt_regs *regs);
 extern void do_privact(struct pt_regs *regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void spitfire_data_access_exception(struct pt_regs *regs,
 					   unsigned long sfsr,
 					   unsigned long sfar);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void sun4v_data_access_exception(struct pt_regs *regs,
@@ -598,6 +607,10 @@ void handle_ld_nf(u32 insn, struct pt_regs *regs)
 void handle_lddfmna(struct pt_regs *regs, unsigned long sfar, unsigned long sfsr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -656,21 +669,31 @@ daex:
 		else
 			spitfire_data_access_exception(regs, sfsr, sfar);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
 	}
 	advance(regs);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	}
 	advance(regs);
 out:
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void handle_stdfmna(struct pt_regs *regs, unsigned long sfar, unsigned long sfsr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum ctx_state prev_state = exception_enter();
+>>>>>>> v3.18
 =======
 	enum ctx_state prev_state = exception_enter();
 >>>>>>> v3.18
@@ -716,14 +739,20 @@ daex:
 		else
 			spitfire_data_access_exception(regs, sfsr, sfar);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
 	}
 	advance(regs);
 =======
+=======
+>>>>>>> v3.18
 		goto out;
 	}
 	advance(regs);
 out:
 	exception_exit(prev_state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

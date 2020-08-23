@@ -63,7 +63,11 @@ static int  __init add_rtc(void)
 					     &res[0], num_res);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return PTR_RET(pd);
+=======
+	return PTR_ERR_OR_ZERO(pd);
+>>>>>>> v3.18
 =======
 	return PTR_ERR_OR_ZERO(pd);
 >>>>>>> v3.18

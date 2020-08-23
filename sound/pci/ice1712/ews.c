@@ -164,7 +164,12 @@ static int snd_ice1712_ews88mt_chip_select(struct snd_ice1712 *ice, int chip_mas
      __error:
 	snd_i2c_unlock(ice->i2c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "AK4524 chip select failed, check cable to the front module\n");
+=======
+	dev_err(ice->card->dev,
+		"AK4524 chip select failed, check cable to the front module\n");
+>>>>>>> v3.18
 =======
 	dev_err(ice->card->dev,
 		"AK4524 chip select failed, check cable to the front module\n");
@@ -180,7 +185,11 @@ static void ews88mt_ak4524_lock(struct snd_akm4xxx *ak, int chip)
 	/* assert AK4524 CS */
 	if (snd_ice1712_ews88mt_chip_select(ice, ~(1 << chip) & 0x0f) < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "fatal error (ews88mt chip select)\n");
+=======
+		dev_err(ice->card->dev, "fatal error (ews88mt chip select)\n");
+>>>>>>> v3.18
 =======
 		dev_err(ice->card->dev, "fatal error (ews88mt chip select)\n");
 >>>>>>> v3.18
@@ -466,7 +475,11 @@ static int snd_ice1712_ews_init(struct snd_ice1712 *ice)
 	/* create i2c */
 	if ((err = snd_i2c_bus_create(ice->card, "ICE1712 GPIO 1", NULL, &ice->i2c)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "unable to create I2C bus\n");
+=======
+		dev_err(ice->card->dev, "unable to create I2C bus\n");
+>>>>>>> v3.18
 =======
 		dev_err(ice->card->dev, "unable to create I2C bus\n");
 >>>>>>> v3.18
@@ -483,7 +496,12 @@ static int snd_ice1712_ews_init(struct snd_ice1712 *ice)
 					    &spec->i2cdevs[EWS_I2C_6FIRE]);
 		if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "PCF9554 initialization failed\n");
+=======
+			dev_err(ice->card->dev,
+				"PCF9554 initialization failed\n");
+>>>>>>> v3.18
 =======
 			dev_err(ice->card->dev,
 				"PCF9554 initialization failed\n");
@@ -853,7 +871,11 @@ static int snd_ice1712_6fire_read_pca(struct snd_ice1712 *ice, unsigned char reg
 	if (snd_i2c_readbytes(spec->i2cdevs[EWS_I2C_6FIRE], &byte, 1) != 1) {
 		snd_i2c_unlock(ice->i2c);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "cannot read pca\n");
+=======
+		dev_err(ice->card->dev, "cannot read pca\n");
+>>>>>>> v3.18
 =======
 		dev_err(ice->card->dev, "cannot read pca\n");
 >>>>>>> v3.18

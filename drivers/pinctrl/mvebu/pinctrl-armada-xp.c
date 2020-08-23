@@ -15,12 +15,18 @@
  * perspective, the mv78230 has 49 MPP pins. The mv78260 and mv78460
  * both have 67 MPP pins (more GPIOs and address lines for the memory
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bus mainly).
 =======
+=======
+>>>>>>> v3.18
  * bus mainly). The only difference between the mv78260 and the
  * mv78460 in terms of pin muxing is the addition of two functions on
  * pins 43 and 56 to access the VDD of the CPU2 and 3 (mv78260 has two
  * cores, mv78460 has four cores).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -38,7 +44,10 @@
 #include "pinctrl-mvebu.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __iomem *mpp_base;
 
 static int armada_xp_mpp_ctrl_get(unsigned pid, unsigned long *config)
@@ -51,6 +60,9 @@ static int armada_xp_mpp_ctrl_set(unsigned pid, unsigned long config)
 	return default_mpp_ctrl_set(mpp_base, pid, config);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum armada_xp_variant {
 	V_MV78230	= BIT(0),
@@ -179,6 +191,10 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x1, "sata1", "prsnt",    V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		 MPP_VAR_FUNCTION(0x2, "nf", "bootcs-re",   V_MV78230_PLUS),
+>>>>>>> v3.18
 =======
 		 MPP_VAR_FUNCTION(0x2, "nf", "bootcs-re",   V_MV78230_PLUS),
 >>>>>>> v3.18
@@ -188,6 +204,10 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x1, "sata0", "prsnt",    V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		 MPP_VAR_FUNCTION(0x2, "nf", "bootcs-we",   V_MV78230_PLUS),
+>>>>>>> v3.18
 =======
 		 MPP_VAR_FUNCTION(0x2, "nf", "bootcs-we",   V_MV78230_PLUS),
 >>>>>>> v3.18
@@ -197,7 +217,12 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x3, "tdm", "fsync",      V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 MPP_VAR_FUNCTION(0x4, "lcd", "clk",        V_MV78230_PLUS)),
+=======
+		 MPP_VAR_FUNCTION(0x4, "lcd", "clk",        V_MV78230_PLUS),
+		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu1-pd",    V_MV78230_PLUS)),
+>>>>>>> v3.18
 =======
 		 MPP_VAR_FUNCTION(0x4, "lcd", "clk",        V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu1-pd",    V_MV78230_PLUS)),
@@ -217,7 +242,12 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x1, "ptp", "clk",        V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x3, "tdm", "int0",       V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 MPP_VAR_FUNCTION(0x4, "lcd", "ref-clk",    V_MV78230_PLUS)),
+=======
+		 MPP_VAR_FUNCTION(0x4, "lcd", "ref-clk",    V_MV78230_PLUS),
+		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu0-pd",    V_MV78230_PLUS)),
+>>>>>>> v3.18
 =======
 		 MPP_VAR_FUNCTION(0x4, "lcd", "ref-clk",    V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu0-pd",    V_MV78230_PLUS)),
@@ -230,12 +260,15 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x1, "sd0", "cmd",        V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 MPP_VAR_FUNCTION(0x3, "tdm", "int2",       V_MV78230_PLUS)),
 	MPP_MODE(32,
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x1, "sd0", "d0",         V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x3, "tdm", "int3",       V_MV78230_PLUS)),
 =======
+=======
+>>>>>>> v3.18
 		 MPP_VAR_FUNCTION(0x3, "tdm", "int2",       V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu0-pd",    V_MV78230_PLUS)),
 	MPP_MODE(32,
@@ -243,6 +276,9 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x1, "sd0", "d0",         V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x3, "tdm", "int3",       V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu1-pd",    V_MV78230_PLUS)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(33,
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78230_PLUS),
@@ -276,6 +312,10 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x1, "spi", "cs1",        V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x2, "uart2", "cts",      V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		 MPP_VAR_FUNCTION(0x3, "vdd", "cpu1-pd",    V_MV78230_PLUS),
+>>>>>>> v3.18
 =======
 		 MPP_VAR_FUNCTION(0x3, "vdd", "cpu1-pd",    V_MV78230_PLUS),
 >>>>>>> v3.18
@@ -294,7 +334,12 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x2, "uart0", "cts",      V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x3, "tdm", "int7",       V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 MPP_VAR_FUNCTION(0x4, "tdm-1", "timer",    V_MV78230_PLUS)),
+=======
+		 MPP_VAR_FUNCTION(0x4, "tdm-1", "timer",    V_MV78230_PLUS),
+		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu0-pd",    V_MV78230_PLUS)),
+>>>>>>> v3.18
 =======
 		 MPP_VAR_FUNCTION(0x4, "tdm-1", "timer",    V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu0-pd",    V_MV78230_PLUS)),
@@ -305,7 +350,12 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x2, "uart0", "rts",      V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x3, "spi", "cs3",        V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 MPP_VAR_FUNCTION(0x4, "pcie", "rstout",    V_MV78230_PLUS)),
+=======
+		 MPP_VAR_FUNCTION(0x4, "pcie", "rstout",    V_MV78230_PLUS),
+		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu2-3-pd",  V_MV78460)),
+>>>>>>> v3.18
 =======
 		 MPP_VAR_FUNCTION(0x4, "pcie", "rstout",    V_MV78230_PLUS),
 		 MPP_VAR_FUNCTION(0x5, "vdd", "cpu2-3-pd",  V_MV78460)),
@@ -339,7 +389,11 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 	MPP_MODE(48,
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78230_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 MPP_VAR_FUNCTION(0x1, "dev", "clkout",     V_MV78230_PLUS),
+=======
+		 MPP_VAR_FUNCTION(0x1, "tclk", NULL,        V_MV78230_PLUS),
+>>>>>>> v3.18
 =======
 		 MPP_VAR_FUNCTION(0x1, "tclk", NULL,        V_MV78230_PLUS),
 >>>>>>> v3.18
@@ -365,6 +419,7 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 	MPP_MODE(55,
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78260_PLUS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 MPP_VAR_FUNCTION(0x1, "dev", "ad20",       V_MV78260_PLUS)),
 	MPP_MODE(56,
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78260_PLUS),
@@ -373,6 +428,8 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78260_PLUS),
 		 MPP_VAR_FUNCTION(0x1, "dev", "ad22",       V_MV78260_PLUS)),
 =======
+=======
+>>>>>>> v3.18
 		 MPP_VAR_FUNCTION(0x1, "dev", "ad20",       V_MV78260_PLUS),
 		 MPP_VAR_FUNCTION(0x2, "vdd", "cpu0-pd",    V_MV78260_PLUS)),
 	MPP_MODE(56,
@@ -383,6 +440,9 @@ static struct mvebu_mpp_mode armada_xp_mpp_modes[] = {
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78260_PLUS),
 		 MPP_VAR_FUNCTION(0x1, "dev", "ad22",       V_MV78260_PLUS),
 		 MPP_VAR_FUNCTION(0x2, "vdd", "cpu2-3-pd",  V_MV78460)),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MPP_MODE(58,
 		 MPP_VAR_FUNCTION(0x0, "gpio", NULL,        V_MV78260_PLUS),
@@ -433,7 +493,11 @@ static struct of_device_id armada_xp_pinctrl_of_match[] = {
 
 static struct mvebu_mpp_ctrl mv78230_mpp_controls[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MPP_REG_CTRL(0, 48),
+=======
+	MPP_FUNC_CTRL(0, 48, NULL, armada_xp_mpp_ctrl),
+>>>>>>> v3.18
 =======
 	MPP_FUNC_CTRL(0, 48, NULL, armada_xp_mpp_ctrl),
 >>>>>>> v3.18
@@ -446,7 +510,11 @@ static struct pinctrl_gpio_range mv78230_mpp_gpio_ranges[] = {
 
 static struct mvebu_mpp_ctrl mv78260_mpp_controls[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MPP_REG_CTRL(0, 66),
+=======
+	MPP_FUNC_CTRL(0, 66, NULL, armada_xp_mpp_ctrl),
+>>>>>>> v3.18
 =======
 	MPP_FUNC_CTRL(0, 66, NULL, armada_xp_mpp_ctrl),
 >>>>>>> v3.18
@@ -460,7 +528,11 @@ static struct pinctrl_gpio_range mv78260_mpp_gpio_ranges[] = {
 
 static struct mvebu_mpp_ctrl mv78460_mpp_controls[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MPP_REG_CTRL(0, 66),
+=======
+	MPP_FUNC_CTRL(0, 66, NULL, armada_xp_mpp_ctrl),
+>>>>>>> v3.18
 =======
 	MPP_FUNC_CTRL(0, 66, NULL, armada_xp_mpp_ctrl),
 >>>>>>> v3.18
@@ -478,6 +550,10 @@ static int armada_xp_pinctrl_probe(struct platform_device *pdev)
 	const struct of_device_id *match =
 		of_match_device(armada_xp_pinctrl_of_match, &pdev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct resource *res;
+>>>>>>> v3.18
 =======
 	struct resource *res;
 >>>>>>> v3.18
@@ -486,12 +562,18 @@ static int armada_xp_pinctrl_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	mpp_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(mpp_base))
 		return PTR_ERR(mpp_base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	soc->variant = (unsigned) match->data & 0xff;
 
@@ -546,7 +628,11 @@ static struct platform_driver armada_xp_pinctrl_driver = {
 		.name = "armada-xp-pinctrl",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(armada_xp_pinctrl_of_match),
+=======
+		.of_match_table = armada_xp_pinctrl_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = armada_xp_pinctrl_of_match,
 >>>>>>> v3.18

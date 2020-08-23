@@ -430,7 +430,11 @@ found:
 			e->state = neigh->nud_state & NUD_CONNECTED ?
 			    L2T_STATE_VALID : L2T_STATE_STALE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (memcmp(e->dmac, neigh->ha, 6))
+=======
+			if (!ether_addr_equal(e->dmac, neigh->ha))
+>>>>>>> v3.18
 =======
 			if (!ether_addr_equal(e->dmac, neigh->ha))
 >>>>>>> v3.18

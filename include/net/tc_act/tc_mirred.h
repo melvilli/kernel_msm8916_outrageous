@@ -12,8 +12,13 @@ struct tcf_mirred {
 	struct list_head	tcfm_list;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define to_mirred(pc) \
 	container_of(pc, struct tcf_mirred, common)
+=======
+#define to_mirred(a) \
+	container_of(a->priv, struct tcf_mirred, common)
+>>>>>>> v3.18
 =======
 #define to_mirred(a) \
 	container_of(a->priv, struct tcf_mirred, common)

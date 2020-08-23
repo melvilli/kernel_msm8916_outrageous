@@ -1,8 +1,13 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood.dtsi"
 /include/ "kirkwood-6282.dtsi"
+=======
+#include "kirkwood.dtsi"
+#include "kirkwood-6282.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood.dtsi"
 #include "kirkwood-6282.dtsi"
@@ -20,6 +25,10 @@
 	chosen {
 		bootargs = "console=ttyS0,115200n8 earlyprintk";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		stdout-path = &uart0;
+>>>>>>> v3.18
 =======
 		stdout-path = &uart0;
 >>>>>>> v3.18
@@ -27,6 +36,7 @@
 
 	ocp@f1000000 {
 		serial@12000 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			status = "ok";
 		};
@@ -69,11 +79,16 @@
 				reg = <0x2214000 0x1dec000>;
 			};
 =======
+=======
+>>>>>>> v3.18
 			status = "okay";
 		};
 
 		serial@12100 {
 			status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -87,7 +102,11 @@
 
 			s35390a: s35390a@30 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				compatible = "s35390a";
+=======
+				compatible = "sii,s35390a";
+>>>>>>> v3.18
 =======
 				compatible = "sii,s35390a";
 >>>>>>> v3.18
@@ -95,6 +114,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		pinctrl: pinctrl@10000 {
 			pinctrl-0 = < &pmx_nand &pmx_uart0
@@ -107,6 +127,10 @@
 				&pmx_gpio_6 &pmx_gpio_7
 				&pmx_led_red &pmx_led_green
 				&pmx_led_yellow >;
+=======
+		pinctrl: pin-controller@10000 {
+			pinctrl-0 = <&pmx_dip_switches &pmx_gpio_header>;
+>>>>>>> v3.18
 =======
 		pinctrl: pin-controller@10000 {
 			pinctrl-0 = <&pmx_dip_switches &pmx_gpio_header>;
@@ -130,6 +154,7 @@
 				marvell,function = "sysrst";
 			};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			pmx_dip_sw0: pmx-dip-sw0 {
 				marvell,pins = "mpp20";
@@ -189,6 +214,8 @@
 			pmx_gpio_7: pmx-gpio-7 {
 				marvell,pins = "mpp31";
 =======
+=======
+>>>>>>> v3.18
 			pmx_dip_switches: pmx-dip-switches {
 				marvell,pins = "mpp20", "mpp21", "mpp22", "mpp23";
 				marvell,function = "gpio";
@@ -197,6 +224,9 @@
 			pmx_gpio_header: pmx-gpio-header {
 				marvell,pins = "mpp24", "mpp25", "mpp26", "mpp27",
 					       "mpp28", "mpp29", "mpp30", "mpp31";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				marvell,function = "gpio";
 			};
@@ -211,6 +241,7 @@
 				marvell,function = "gpio";
 			};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			pmx_led_red: pmx-led-red {
 				marvell,pins = "mpp41";
@@ -228,6 +259,10 @@
 			pmx_leds: pmx-leds {
 				marvell,pins = "mpp41", "mpp42", "mpp43";
 >>>>>>> v3.18
+=======
+			pmx_leds: pmx-leds {
+				marvell,pins = "mpp41", "mpp42", "mpp43";
+>>>>>>> v3.18
 				marvell,function = "gpio";
 			};
 		};
@@ -236,24 +271,34 @@
 	gpio-leds {
 		compatible = "gpio-leds";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		led-red {
 			label = "obsa6:red:stat";
 			gpios = <&gpio1 9 1>;
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-0 = <&pmx_leds>;
 		pinctrl-names = "default";
 
 		led-red {
 			label = "obsa6:red:stat";
 			gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
 		led-green {
 			label = "obsa6:green:stat";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 10 1>;
+=======
+			gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -262,10 +307,13 @@
 		led-yellow {
 			label = "obsa6:yellow:stat";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&gpio1 11 1>;
 		};
         };
 =======
+=======
+>>>>>>> v3.18
 			gpios = <&gpio1 11 GPIO_ACTIVE_LOW>;
 		};
         };
@@ -333,5 +381,8 @@
 	ethernet0-port@0 {
 		phy-handle = <&ethphy0>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

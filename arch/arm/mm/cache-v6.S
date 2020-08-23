@@ -52,7 +52,11 @@ ENTRY(v6_flush_icache_all)
 	mcr	p15, 0, r0, c7, c5, 0		@ invalidate I-cache
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -78,7 +82,11 @@ ENTRY(v6_flush_kern_cache_all)
 	mcr	p15, 0, r0, c7, c15, 0		@ Cache clean+invalidate
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -107,7 +115,11 @@ ENTRY(v6_flush_user_cache_all)
  */
 ENTRY(v6_flush_user_cache_range)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -163,7 +175,11 @@ ENTRY(v6_coherent_user_range)
 	mcr	p15, 0, r0, c7, c5, 6		@ invalidate BTB
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -175,7 +191,11 @@ ENTRY(v6_coherent_user_range)
 9001:
 	mov	r0, #-EFAULT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -209,7 +229,11 @@ ENTRY(v6_flush_kern_dcache_area)
 	mcr	p15, 0, r0, c7, c10, 4
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -264,7 +288,11 @@ v6_dma_inv_range:
 	mov	r0, #0
 	mcr	p15, 0, r0, c7, c10, 4		@ drain write buffer
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -291,7 +319,11 @@ v6_dma_clean_range:
 	mov	r0, #0
 	mcr	p15, 0, r0, c7, c10, 4		@ drain write buffer
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -303,11 +335,14 @@ v6_dma_clean_range:
  */
 ENTRY(v6_dma_flush_range)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_CACHE_FLUSH_RANGE_LIMIT
 	sub	r2, r1, r0
 	cmp	r2, #CONFIG_CACHE_FLUSH_RANGE_LIMIT
 	bhi	v6_dma_flush_dcache_all
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_DMA_CACHE_RWFO
@@ -331,6 +366,7 @@ ENTRY(v6_dma_flush_range)
 	mov	r0, #0
 	mcr	p15, 0, r0, c7, c10, 4		@ drain write buffer
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
 
 #ifdef CONFIG_CACHE_FLUSH_RANGE_LIMIT
@@ -344,6 +380,9 @@ v6_dma_flush_dcache_all:
 	mcr	p15, 0, r0, c7, c10, 4		@ drain write buffer
 	mov	pc, lr
 #endif
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -380,7 +419,11 @@ ENTRY(v6_dma_unmap_area)
 	bne	v6_dma_inv_range
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

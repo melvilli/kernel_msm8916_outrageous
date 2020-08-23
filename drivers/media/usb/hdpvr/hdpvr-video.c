@@ -25,6 +25,10 @@
 #include <media/v4l2-dev.h>
 #include <media/v4l2-common.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-dv-timings.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-dv-timings.h>
 >>>>>>> v3.18
@@ -282,6 +286,7 @@ static int hdpvr_start_streaming(struct hdpvr_device *dev)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hdpvr_video_info *vidinf;
 
 	if (dev->status == STATUS_STREAMING)
@@ -321,6 +326,8 @@ static int hdpvr_start_streaming(struct hdpvr_device *dev)
 		 "no video signal at input %d\n", dev->options.video_input);
 	return -EAGAIN;
 =======
+=======
+>>>>>>> v3.18
 	struct hdpvr_video_info vidinf;
 
 	if (dev->status == STATUS_STREAMING)
@@ -365,6 +372,9 @@ static int hdpvr_start_streaming(struct hdpvr_device *dev)
 			"streaming started\n");
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -658,6 +668,7 @@ static int vidioc_querystd(struct file *file, void *_fh, v4l2_std_id *a)
 {
 	struct hdpvr_device *dev = video_drvdata(file);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hdpvr_video_info *vid_info;
 	struct hdpvr_fh *fh = _fh;
 
@@ -675,6 +686,8 @@ static int vidioc_querystd(struct file *file, void *_fh, v4l2_std_id *a)
 	kfree(vid_info);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct hdpvr_video_info vid_info;
 	struct hdpvr_fh *fh = _fh;
 	int ret;
@@ -689,6 +702,9 @@ static int vidioc_querystd(struct file *file, void *_fh, v4l2_std_id *a)
 			V4L2_STD_525_60 : V4L2_STD_625_50;
 	}
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -706,7 +722,11 @@ static int vidioc_s_dv_timings(struct file *file, void *_fh,
 		return -EBUSY;
 	for (i = 0; i < ARRAY_SIZE(hdpvr_dv_timings); i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (v4l_match_dv_timings(timings, hdpvr_dv_timings + i, 0))
+=======
+		if (v4l2_match_dv_timings(timings, hdpvr_dv_timings + i, 0))
+>>>>>>> v3.18
 =======
 		if (v4l2_match_dv_timings(timings, hdpvr_dv_timings + i, 0))
 >>>>>>> v3.18
@@ -738,7 +758,11 @@ static int vidioc_query_dv_timings(struct file *file, void *_fh,
 	struct hdpvr_device *dev = video_drvdata(file);
 	struct hdpvr_fh *fh = _fh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hdpvr_video_info *vid_info;
+=======
+	struct hdpvr_video_info vid_info;
+>>>>>>> v3.18
 =======
 	struct hdpvr_video_info vid_info;
 >>>>>>> v3.18
@@ -750,17 +774,23 @@ static int vidioc_query_dv_timings(struct file *file, void *_fh,
 	if (dev->options.video_input)
 		return -ENODATA;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vid_info = get_video_info(dev);
 	if (vid_info == NULL)
 		return -ENOLCK;
 	interlaced = vid_info->fps <= 30;
 =======
+=======
+>>>>>>> v3.18
 	ret = get_video_info(dev, &vid_info);
 	if (ret)
 		return ret;
 	if (!vid_info.valid)
 		return -ENOLCK;
 	interlaced = vid_info.fps <= 30;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(hdpvr_dv_timings); i++) {
 		const struct v4l2_bt_timings *bt = &hdpvr_dv_timings[i].bt;
@@ -768,6 +798,7 @@ static int vidioc_query_dv_timings(struct file *file, void *_fh,
 		unsigned vsize;
 		unsigned fps;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hsize = bt->hfrontporch + bt->hsync + bt->hbackporch + bt->width;
 		vsize = bt->vfrontporch + bt->vsync + bt->vbackporch +
@@ -779,6 +810,8 @@ static int vidioc_query_dv_timings(struct file *file, void *_fh,
 		    bt->interlaced != interlaced ||
 		    (fps != vid_info->fps && fps + 1 != vid_info->fps))
 =======
+=======
+>>>>>>> v3.18
 		hsize = V4L2_DV_BT_FRAME_WIDTH(bt);
 		vsize = V4L2_DV_BT_FRAME_HEIGHT(bt);
 		fps = (unsigned)bt->pixelclock / (hsize * vsize);
@@ -786,6 +819,9 @@ static int vidioc_query_dv_timings(struct file *file, void *_fh,
 		    bt->height != vid_info.height ||
 		    bt->interlaced != interlaced ||
 		    (fps != vid_info.fps && fps + 1 != vid_info.fps))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		*timings = hdpvr_dv_timings[i];
@@ -794,7 +830,11 @@ static int vidioc_query_dv_timings(struct file *file, void *_fh,
 	if (i == ARRAY_SIZE(hdpvr_dv_timings))
 		ret = -ERANGE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(vid_info);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1088,6 +1128,10 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *_fh,
 	struct hdpvr_device *dev = video_drvdata(file);
 	struct hdpvr_fh *fh = _fh;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -1104,6 +1148,7 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *_fh,
 	 */
 	if (fh->legacy_mode) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct hdpvr_video_info *vid_info;
 
 		vid_info = get_video_info(dev);
@@ -1113,6 +1158,8 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *_fh,
 		f->fmt.pix.height = vid_info->height;
 		kfree(vid_info);
 =======
+=======
+>>>>>>> v3.18
 		struct hdpvr_video_info vid_info;
 
 		ret = get_video_info(dev, &vid_info);
@@ -1122,6 +1169,9 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *_fh,
 			return -EFAULT;
 		f->fmt.pix.width = vid_info.width;
 		f->fmt.pix.height = vid_info.height;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		f->fmt.pix.width = dev->width;
@@ -1131,7 +1181,10 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *_fh,
 	f->fmt.pix.sizeimage	= dev->bulk_in_size;
 	f->fmt.pix.bytesperline	= 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	f->fmt.pix.priv		= 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (f->fmt.pix.width == 720) {
@@ -1141,7 +1194,11 @@ static int vidioc_g_fmt_vid_cap(struct file *file, void *_fh,
 	} else {
 		/* HDTV formats */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		f->fmt.pix.colorspace = V4L2_COLORSPACE_SMPTE240M;
+=======
+		f->fmt.pix.colorspace = V4L2_COLORSPACE_REC709;
+>>>>>>> v3.18
 =======
 		f->fmt.pix.colorspace = V4L2_COLORSPACE_REC709;
 >>>>>>> v3.18
@@ -1356,7 +1413,10 @@ int hdpvr_register_videodev(struct hdpvr_device *dev, struct device *parent,
 	dev->video_dev->v4l2_dev = &dev->v4l2_dev;
 	video_set_drvdata(dev->video_dev, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &dev->video_dev->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

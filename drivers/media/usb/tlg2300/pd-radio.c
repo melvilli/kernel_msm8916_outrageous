@@ -328,7 +328,10 @@ int poseidon_fm_init(struct poseidon *p)
 	vfd->v4l2_dev = &p->v4l2_dev;
 	vfd->ctrl_handler = hdl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &vfd->flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(vfd, p);

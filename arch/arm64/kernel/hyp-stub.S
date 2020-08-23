@@ -20,6 +20,10 @@
 #include <linux/init.h>
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/irqchip/arm-gic-v3.h>
+>>>>>>> v3.18
 =======
 #include <linux/irqchip/arm-gic-v3.h>
 >>>>>>> v3.18

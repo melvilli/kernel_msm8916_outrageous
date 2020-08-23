@@ -2,8 +2,14 @@
  * Bock-W board support
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2013  Renesas Solutions Corp.
  * Copyright (C) 2013  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+=======
+ * Copyright (C) 2013-2014  Renesas Solutions Corp.
+ * Copyright (C) 2013  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+ * Copyright (C) 2013-2014  Cogent Embedded, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013-2014  Renesas Solutions Corp.
  * Copyright (C) 2013  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
@@ -25,6 +31,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/smsc911x.h>
 #include <mach/common.h>
@@ -34,6 +41,8 @@
 
 static struct smsc911x_platform_config smsc911x_data = {
 =======
+=======
+>>>>>>> v3.18
 #include <linux/mfd/tmio.h>
 #include <linux/mmc/host.h>
 #include <linux/mmc/sh_mobile_sdhi.h>
@@ -140,6 +149,9 @@ static struct regulator_consumer_supply fixed3v3_power_consumers[] = {
 };
 
 static struct smsc911x_platform_config smsc911x_data __initdata = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.irq_polarity	= SMSC911X_IRQ_POLARITY_ACTIVE_LOW,
 	.irq_type	= SMSC911X_IRQ_TYPE_PUSH_PULL,
@@ -148,7 +160,11 @@ static struct smsc911x_platform_config smsc911x_data __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct resource smsc911x_resources[] = {
+=======
+static struct resource smsc911x_resources[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct resource smsc911x_resources[] __initdata = {
 >>>>>>> v3.18
@@ -157,11 +173,14 @@ static struct resource smsc911x_resources[] __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IRQ0MR	0x30
 static void __init bockw_init(void)
 {
 	void __iomem *fpga;
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_USB_RENESAS_USBHS_UDC)
 /*
  * When USB1 is Func
@@ -636,6 +655,9 @@ static void __init bockw_init(void)
 	struct clk *clk;
 	struct platform_device *pdev;
 	int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	r8a7778_clock_init();
@@ -643,8 +665,11 @@ static void __init bockw_init(void)
 	r8a7778_add_standard_devices();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fpga = ioremap_nocache(0x18200000, SZ_1M);
 =======
+=======
+>>>>>>> v3.18
 	platform_device_register_full(&ether_info);
 
 	platform_device_register_full(&vin0_info);
@@ -685,6 +710,9 @@ static void __init bockw_init(void)
 
 	/* for SMSC */
 	fpga = ioremap_nocache(FPGA, SZ_1M);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (fpga) {
 		/*
@@ -698,6 +726,7 @@ static void __init bockw_init(void)
 		val &= ~(1 << 4); /* enable SMSC911x */
 		iowrite16(val, fpga + IRQ0MR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iounmap(fpga);
 
 		platform_device_register_resndata(
@@ -706,6 +735,8 @@ static void __init bockw_init(void)
 			&smsc911x_data, sizeof(smsc911x_data));
 	}
 =======
+=======
+>>>>>>> v3.18
 
 		platform_device_register_resndata(
 			NULL, "smsc911x", -1,
@@ -765,6 +796,9 @@ static void __init bockw_init_late(void)
 {
 	r8a7778_init_late();
 	ADD_USB_FUNC_DEVICE_IF_POSSIBLE();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -775,16 +809,22 @@ static const char *bockw_boards_compat_dt[] __initdata = {
 
 DT_MACHINE_START(BOCKW_DT, "bockw")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_early	= r8a7778_init_delay,
 	.init_irq	= r8a7778_init_irq_dt,
 	.init_machine	= bockw_init,
 	.init_time	= shmobile_timer_init,
 	.dt_compat	= bockw_boards_compat_dt,
 =======
+=======
+>>>>>>> v3.18
 	.init_early	= shmobile_init_delay,
 	.init_irq	= r8a7778_init_irq_dt,
 	.init_machine	= bockw_init,
 	.dt_compat	= bockw_boards_compat_dt,
 	.init_late      = bockw_init_late,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MACHINE_END

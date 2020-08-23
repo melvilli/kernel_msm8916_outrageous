@@ -19,6 +19,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <mach/r8a7740.h>
 #include <mach/irqs.h>
@@ -31,6 +32,8 @@
 	PORT_10(fn, pfx##20, sfx),					\
 	PORT_1(fn, pfx##210, sfx),	PORT_1(fn, pfx##211, sfx)
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/kernel.h>
 #include <linux/pinctrl/pinconf-generic.h>
@@ -63,6 +66,9 @@ static const unsigned int intc_irq##irq##_##idx##_pins[] = {		\
 static const unsigned int intc_irq##irq##_##idx##_mux[] = {		\
 	IRQ##irq##_PORT##pin##_MARK,					\
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum {
@@ -79,6 +85,7 @@ enum {
 	PINMUX_INPUT_END,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* PORT0_IN_PU -> PORT211_IN_PU */
 	PINMUX_INPUT_PULLUP_BEGIN,
 	PORT_ALL(IN_PU),
@@ -89,6 +96,8 @@ enum {
 	PORT_ALL(IN_PD),
 	PINMUX_INPUT_PULLDOWN_END,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* PORT0_OUT -> PORT211_OUT */
@@ -300,8 +309,11 @@ enum {
 
 	/* LCD0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LCDC0_SELECT_MARK,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	LCD0_D0_MARK,	LCD0_D1_MARK,	LCD0_D2_MARK,	LCD0_D3_MARK,
@@ -327,8 +339,11 @@ enum {
 
 	/* LCD1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	LCDC1_SELECT_MARK,
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	LCD1_D0_MARK,	LCD1_D1_MARK,	LCD1_D2_MARK,	LCD1_D3_MARK,
@@ -622,6 +637,7 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const pinmux_enum_t pinmux_data[] = {
 	/* specify valid pin states for each pin in GPIO mode */
 
@@ -753,6 +769,10 @@ static const pinmux_enum_t pinmux_data[] = {
 	PORT_DATA_IO_PU_PD(208),	PORT_DATA_IO_PD(209),
 
 	PORT_DATA_IO_PD(210),		PORT_DATA_IO_PD(211),
+=======
+static const u16 pinmux_data[] = {
+	PINMUX_DATA_ALL(),
+>>>>>>> v3.18
 =======
 static const u16 pinmux_data[] = {
 	PINMUX_DATA_ALL(),
@@ -1036,7 +1056,11 @@ static const u16 pinmux_data[] = {
 
 	/* Port58 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PINMUX_DATA(LCD0_D0_MARK,		PORT58_FN1),
+=======
+	PINMUX_DATA(LCD0_D0_MARK,		PORT58_FN1,	MSEL3CR_6_0),
+>>>>>>> v3.18
 =======
 	PINMUX_DATA(LCD0_D0_MARK,		PORT58_FN1,	MSEL3CR_6_0),
 >>>>>>> v3.18
@@ -1687,10 +1711,13 @@ static const u16 pinmux_data[] = {
 	PINMUX_DATA(HDMI_CEC_MARK,		PORT211_FN1),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* LCDC select */
 	PINMUX_DATA(LCDC0_SELECT_MARK,				MSEL3CR_6_0),
 	PINMUX_DATA(LCDC1_SELECT_MARK,				MSEL3CR_6_1),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* SDENC */
@@ -1711,10 +1738,13 @@ static const u16 pinmux_data[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct sh_pfc_pin pinmux_pins[] = {
 	GPIO_PORT_ALL(),
 };
 =======
+=======
+>>>>>>> v3.18
 #define __I		(SH_PFC_PIN_CFG_INPUT)
 #define __O		(SH_PFC_PIN_CFG_OUTPUT)
 #define __IO		(SH_PFC_PIN_CFG_INPUT | SH_PFC_PIN_CFG_OUTPUT)
@@ -2267,6 +2297,9 @@ IRQC_PINS_MUX(30, 0, 49);
 IRQC_PINS_MUX(30, 1, 171);
 IRQC_PINS_MUX(31, 0, 41);
 IRQC_PINS_MUX(31, 1, 167);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* - LCD0 ------------------------------------------------------------------- */
@@ -2542,7 +2575,10 @@ static const unsigned int mmc0_ctrl_1_mux[] = {
 	MMC1_CMD_PORT104_MARK, MMC1_CLK_PORT103_MARK,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* - SCIFA0 ----------------------------------------------------------------- */
 static const unsigned int scifa0_data_pins[] = {
 	/* RXD, TXD */
@@ -2797,6 +2833,9 @@ static const unsigned int scifb_ctrl_1_pins[] = {
 static const unsigned int scifb_ctrl_1_mux[] = {
 	SCIFB_RTS_PORT172_MARK, SCIFB_CTS_PORT173_MARK,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* - SDHI0 ------------------------------------------------------------------ */
 static const unsigned int sdhi0_data1_pins[] = {
@@ -2921,9 +2960,12 @@ static const unsigned int sdhi2_wp_1_mux[] = {
 	SDHI2_WP_PORT25_MARK,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct sh_pfc_pin_group pinmux_groups[] = {
 =======
+=======
+>>>>>>> v3.18
 /* - TPU0 ------------------------------------------------------------------- */
 static const unsigned int tpu0_to0_pins[] = {
 	/* TO */
@@ -3059,6 +3101,9 @@ static const struct sh_pfc_pin_group pinmux_groups[] = {
 	SH_PFC_PIN_GROUP(intc_irq30_1),
 	SH_PFC_PIN_GROUP(intc_irq31_0),
 	SH_PFC_PIN_GROUP(intc_irq31_1),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SH_PFC_PIN_GROUP(lcd0_data8),
 	SH_PFC_PIN_GROUP(lcd0_data9),
@@ -3091,7 +3136,10 @@ static const struct sh_pfc_pin_group pinmux_groups[] = {
 	SH_PFC_PIN_GROUP(mmc0_data8_1),
 	SH_PFC_PIN_GROUP(mmc0_ctrl_1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	SH_PFC_PIN_GROUP(scifa0_data),
 	SH_PFC_PIN_GROUP(scifa0_clk),
 	SH_PFC_PIN_GROUP(scifa0_ctrl),
@@ -3127,6 +3175,9 @@ static const struct sh_pfc_pin_group pinmux_groups[] = {
 	SH_PFC_PIN_GROUP(scifb_data_1),
 	SH_PFC_PIN_GROUP(scifb_clk_1),
 	SH_PFC_PIN_GROUP(scifb_ctrl_1),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SH_PFC_PIN_GROUP(sdhi0_data1),
 	SH_PFC_PIN_GROUP(sdhi0_data4),
@@ -3146,7 +3197,10 @@ static const struct sh_pfc_pin_group pinmux_groups[] = {
 	SH_PFC_PIN_GROUP(sdhi2_cd_1),
 	SH_PFC_PIN_GROUP(sdhi2_wp_1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	SH_PFC_PIN_GROUP(tpu0_to0),
 	SH_PFC_PIN_GROUP(tpu0_to1),
 	SH_PFC_PIN_GROUP(tpu0_to2_0),
@@ -3273,6 +3327,9 @@ static const char * const intc_groups[] = {
 	"intc_irq30_1",
 	"intc_irq31_0",
 	"intc_irq31_1",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -3316,7 +3373,10 @@ static const char * const mmc0_groups[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const char * const scifa0_groups[] = {
 	"scifa0_data",
 	"scifa0_clk",
@@ -3379,6 +3439,9 @@ static const char * const scifb_groups[] = {
 	"scifb_ctrl_1",
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const char * const sdhi0_groups[] = {
 	"sdhi0_data1",
@@ -3406,6 +3469,7 @@ static const char * const sdhi2_groups[] = {
 	"sdhi2_wp_1",
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct sh_pfc_function pinmux_functions[] = {
 	SH_PFC_FUNCTION(lcd0),
@@ -3813,6 +3877,8 @@ static const struct pinmux_func pinmux_func_gpios[] = {
 	GPIO_FN(TRACEAUD_FROM_LCDC0),
 	GPIO_FN(TRACEAUD_FROM_MEMC),
 =======
+=======
+>>>>>>> v3.18
 static const char * const tpu0_groups[] = {
 	"tpu0_to0",
 	"tpu0_to1",
@@ -3846,6 +3912,9 @@ static const struct sh_pfc_function pinmux_functions[] = {
 	SH_PFC_FUNCTION(sdhi1),
 	SH_PFC_FUNCTION(sdhi2),
 	SH_PFC_FUNCTION(tpu0),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -4269,6 +4338,7 @@ static const struct pinmux_data_reg pinmux_data_regs[] = {
 
 static const struct pinmux_irq pinmux_irqs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PINMUX_IRQ(irq_pin(0), GPIO_PORT2,   GPIO_PORT13),	/* IRQ0A */
 	PINMUX_IRQ(irq_pin(1), GPIO_PORT20),		/* IRQ1A */
 	PINMUX_IRQ(irq_pin(2), GPIO_PORT11,  GPIO_PORT12),	/* IRQ2A */
@@ -4302,6 +4372,8 @@ static const struct pinmux_irq pinmux_irqs[] = {
 	PINMUX_IRQ(irq_pin(30), GPIO_PORT49,  GPIO_PORT171),/* IRQ30A */
 	PINMUX_IRQ(irq_pin(31), GPIO_PORT41,  GPIO_PORT167),/* IRQ31A */
 =======
+=======
+>>>>>>> v3.18
 	PINMUX_IRQ(irq_pin(0), 2,   13),	/* IRQ0A */
 	PINMUX_IRQ(irq_pin(1), 20),		/* IRQ1A */
 	PINMUX_IRQ(irq_pin(2), 11,  12),	/* IRQ2A */
@@ -4402,11 +4474,15 @@ static void r8a7740_pinmux_set_bias(struct sh_pfc *pfc, unsigned int pin,
 static const struct sh_pfc_soc_operations r8a7740_pfc_ops = {
 	.get_bias = r8a7740_pinmux_get_bias,
 	.set_bias = r8a7740_pinmux_set_bias,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 const struct sh_pfc_soc_info r8a7740_pinmux_info = {
 	.name		= "r8a7740_pfc",
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.input		= { PINMUX_INPUT_BEGIN,
 			    PINMUX_INPUT_END },
@@ -4415,10 +4491,15 @@ const struct sh_pfc_soc_info r8a7740_pinmux_info = {
 	.input_pd	= { PINMUX_INPUT_PULLDOWN_BEGIN,
 			    PINMUX_INPUT_PULLDOWN_END },
 =======
+=======
+>>>>>>> v3.18
 	.ops		= &r8a7740_pfc_ops,
 
 	.input		= { PINMUX_INPUT_BEGIN,
 			    PINMUX_INPUT_END },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.output		= { PINMUX_OUTPUT_BEGIN,
 			    PINMUX_OUTPUT_END },
@@ -4433,9 +4514,12 @@ const struct sh_pfc_soc_info r8a7740_pinmux_info = {
 	.nr_functions	= ARRAY_SIZE(pinmux_functions),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.func_gpios	= pinmux_func_gpios,
 	.nr_func_gpios	= ARRAY_SIZE(pinmux_func_gpios),
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.cfg_regs	= pinmux_config_regs,

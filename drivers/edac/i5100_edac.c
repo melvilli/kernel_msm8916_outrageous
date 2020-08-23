@@ -870,6 +870,7 @@ static void i5100_init_csrows(struct mem_ctl_info *mci)
 
 		dimm->nr_pages = npages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (npages) {
 			dimm->grain = 32;
 			dimm->dtype = (priv->mtr[chan][rank].width == 4) ?
@@ -881,6 +882,8 @@ static void i5100_init_csrows(struct mem_ctl_info *mci)
 				i5100_rank_to_slot(mci, chan, rank));
 		}
 =======
+=======
+>>>>>>> v3.18
 		dimm->grain = 32;
 		dimm->dtype = (priv->mtr[chan][rank].width == 4) ?
 				DEV_X4 : DEV_X8;
@@ -888,6 +891,9 @@ static void i5100_init_csrows(struct mem_ctl_info *mci)
 		dimm->edac_mode = EDAC_SECDED;
 		snprintf(dimm->label, sizeof(dimm->label), "DIMM%u",
 			 i5100_rank_to_slot(mci, chan, rank));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		edac_dbg(2, "dimm channel %d, rank %d, size %ld\n",
@@ -1224,7 +1230,11 @@ static void i5100_remove_one(struct pci_dev *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(i5100_pci_tbl) = {
+=======
+static const struct pci_device_id i5100_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id i5100_pci_tbl[] = {
 >>>>>>> v3.18

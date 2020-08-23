@@ -432,7 +432,11 @@ static int cumanascsi2_probe(struct expansion_card *ec,
 
 	ret = request_irq(ec->irq, cumanascsi_2_intr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  IRQF_DISABLED, "cumanascsi2", info);
+=======
+			  0, "cumanascsi2", info);
+>>>>>>> v3.18
 =======
 			  0, "cumanascsi2", info);
 >>>>>>> v3.18

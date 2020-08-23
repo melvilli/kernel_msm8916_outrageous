@@ -617,6 +617,7 @@ struct brcms_bss_cfg {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int brcms_c_txfifo(struct brcms_c_info *wlc, uint fifo,
 			   struct sk_buff *p);
 extern int brcms_b_xmtfifo_sz_get(struct brcms_hardware *wlc_hw, uint fifo,
@@ -679,6 +680,8 @@ extern void brcms_b_band_stf_ss_set(struct brcms_hardware *wlc_hw,
 				    u8 stf_mode);
 extern void brcms_c_init_scb(struct scb *scb);
 =======
+=======
+>>>>>>> v3.18
 int brcms_c_txfifo(struct brcms_c_info *wlc, uint fifo, struct sk_buff *p);
 int brcms_b_xmtfifo_sz_get(struct brcms_hardware *wlc_hw, uint fifo,
 			   uint *blocks);
@@ -728,6 +731,9 @@ void brcms_b_core_phypll_ctl(struct brcms_hardware *wlc_hw, bool on);
 void brcms_b_txant_set(struct brcms_hardware *wlc_hw, u16 phytxant);
 void brcms_b_band_stf_ss_set(struct brcms_hardware *wlc_hw, u8 stf_mode);
 void brcms_c_init_scb(struct scb *scb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCM_MAIN_H_ */

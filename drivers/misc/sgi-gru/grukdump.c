@@ -140,14 +140,20 @@ static int gru_dump_context(struct gru_state *gru, int ctxnum,
 	ubuf += sizeof(hdr);
 	ubufcch = ubuf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gru_user_copy_handle(&ubuf, cch))
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 	if (gru_user_copy_handle(&ubuf, cch)) {
 		if (cch_locked)
 			unlock_cch_handle(cch);
 		return -EFAULT;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (cch_locked)
 		ubufcch->delresp = 0;
@@ -184,6 +190,7 @@ static int gru_dump_context(struct gru_state *gru, int ctxnum,
 	hdr.dsrcnt = dsrcnt;
 	hdr.cch_locked = cch_locked;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ret && copy_to_user((void __user *)uhdr, &hdr, sizeof(hdr)))
 		ret = -EFAULT;
 
@@ -193,10 +200,15 @@ fail:
 	unlock_cch_handle(cch);
 	return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 	if (copy_to_user(uhdr, &hdr, sizeof(hdr)))
 		return -EFAULT;
 
 	return bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

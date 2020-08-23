@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2010, 2014 The Linux Foundation. All rights reserved.
+>>>>>>> v3.18
 =======
 /* Copyright (c) 2010, 2014 The Linux Foundation. All rights reserved.
 >>>>>>> v3.18
@@ -26,7 +30,10 @@ static inline u32 __dcc_getstatus(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline char __dcc_getchar(void)

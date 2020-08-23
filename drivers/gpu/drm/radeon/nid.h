@@ -129,6 +129,10 @@
 #define		WRITE_PROTECTION_FAULT_ENABLE_INTERRUPT		(1 << 18)
 #define		WRITE_PROTECTION_FAULT_ENABLE_DEFAULT		(1 << 19)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define		PAGE_TABLE_BLOCK_SIZE(x)			(((x) & 0xF) << 24)
+>>>>>>> v3.18
 =======
 #define		PAGE_TABLE_BLOCK_SIZE(x)			(((x) & 0xF) << 24)
 >>>>>>> v3.18
@@ -138,7 +142,10 @@
 #define VM_INVALIDATE_REQUEST				0x1478
 #define VM_INVALIDATE_RESPONSE				0x147c
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define	VM_CONTEXT1_PROTECTION_FAULT_ADDR		0x14FC
 #define	VM_CONTEXT1_PROTECTION_FAULT_STATUS		0x14DC
 #define		PROTECTIONS_MASK			(0xf << 0)
@@ -155,6 +162,9 @@
 #define		MEMORY_CLIENT_RW_SHIFT			24
 #define		FAULT_VMID_MASK				(0x7 << 25)
 #define		FAULT_VMID_SHIFT			25
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define VM_CONTEXT0_PROTECTION_FAULT_DEFAULT_ADDR	0x1518
 #define VM_CONTEXT1_PROTECTION_FAULT_DEFAULT_ADDR	0x151c
@@ -513,7 +523,10 @@
 #       define CACHE_FLUSH_AND_INV_EVENT                        (0x16 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* TN SMU registers */
 #define	TN_CURRENT_GNB_TEMP				0x1F390
 
@@ -1079,6 +1092,9 @@
 #       define TARGET_LINK_SPEED_MASK                     (0xf << 0)
 #       define SELECTABLE_DEEMPHASIS                      (1 << 6)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * UVD

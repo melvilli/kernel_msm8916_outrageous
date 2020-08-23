@@ -106,13 +106,19 @@ extern bool epapr_paravirt_enabled;
 extern u32 epapr_hypercall_start[];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_EPAPR_PARAVIRT
 int __init epapr_paravirt_early_init(void);
 #else
 static inline int epapr_paravirt_early_init(void) { return 0; }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * We use "uintptr_t" to define a register because it's guaranteed to be a
@@ -464,7 +470,10 @@ static inline unsigned int ev_idle(void)
 	return r3;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_EPAPR_PARAVIRT
 static inline unsigned long epapr_hypercall(unsigned long *in,
@@ -576,6 +585,9 @@ static inline long epapr_hypercall4(unsigned int nr, unsigned long p1,
 	in[3] = p4;
 	return epapr_hypercall(in, out, nr);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* !__ASSEMBLY__ */
 #endif /* _EPAPR_HCALLS_H */

@@ -13,6 +13,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,6 +26,8 @@
  * 02110-1301 USA
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  */
 
 #include <linux/module.h>
@@ -34,7 +37,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/omap-iommu.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -213,7 +219,12 @@ static int ccdc_lsc_validate_config(struct isp_ccdc_device *ccdc,
  * @ccdc: Pointer to ISP CCDC device.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ccdc_lsc_program_table(struct isp_ccdc_device *ccdc, u32 addr)
+=======
+static void ccdc_lsc_program_table(struct isp_ccdc_device *ccdc,
+				   dma_addr_t addr)
+>>>>>>> v3.18
 =======
 static void ccdc_lsc_program_table(struct isp_ccdc_device *ccdc,
 				   dma_addr_t addr)
@@ -305,7 +316,11 @@ static int __ccdc_lsc_enable(struct isp_ccdc_device *ccdc, int enable)
 				    ISPCCDC_LSC_CONFIG, ISPCCDC_LSC_ENABLE);
 			ccdc->lsc.state = LSC_STATE_STOPPED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_warn(to_device(ccdc), "LSC prefecth timeout\n");
+=======
+			dev_warn(to_device(ccdc), "LSC prefetch timeout\n");
+>>>>>>> v3.18
 =======
 			dev_warn(to_device(ccdc), "LSC prefetch timeout\n");
 >>>>>>> v3.18
@@ -349,7 +364,11 @@ static int __ccdc_lsc_configure(struct isp_ccdc_device *ccdc,
 
 	ccdc_lsc_setup_regs(ccdc, &req->config);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccdc_lsc_program_table(ccdc, req->table);
+=======
+	ccdc_lsc_program_table(ccdc, req->table.dma);
+>>>>>>> v3.18
 =======
 	ccdc_lsc_program_table(ccdc, req->table.dma);
 >>>>>>> v3.18
@@ -388,18 +407,24 @@ static void ccdc_lsc_free_request(struct isp_ccdc_device *ccdc,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (req->iovm)
 		dma_unmap_sg(isp->dev, req->iovm->sgt->sgl,
 			     req->iovm->sgt->nents, DMA_TO_DEVICE);
 	if (req->table)
 		omap_iommu_vfree(isp->domain, isp->dev, req->table);
 =======
+=======
+>>>>>>> v3.18
 	if (req->table.addr) {
 		sg_free_table(&req->table.sgt);
 		dma_free_coherent(isp->dev, req->config.size, req->table.addr,
 				  req->table.dma);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(req);
 }
@@ -445,7 +470,10 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
 	struct ispccdc_lsc_config_req *req;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *table;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 update;
@@ -476,6 +504,7 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
 		req->enable = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		req->table = omap_iommu_vmalloc(isp->domain, isp->dev, 0,
 					req->config.size, IOMMU_FLAG);
 		if (IS_ERR_VALUE(req->table)) {
@@ -487,15 +516,21 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
 		req->iovm = omap_find_iovm_area(isp->dev, req->table);
 		if (req->iovm == NULL) {
 =======
+=======
+>>>>>>> v3.18
 		req->table.addr = dma_alloc_coherent(isp->dev, req->config.size,
 						     &req->table.dma,
 						     GFP_KERNEL);
 		if (req->table.addr == NULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -ENOMEM;
 			goto done;
 		}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!dma_map_sg(isp->dev, req->iovm->sgt->sgl,
 				req->iovm->sgt->nents, DMA_TO_DEVICE)) {
@@ -510,6 +545,8 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
 		table = omap_da_to_va(isp->dev, req->table);
 		if (copy_from_user(table, config->lsc, req->config.size)) {
 =======
+=======
+>>>>>>> v3.18
 		ret = dma_get_sgtable(isp->dev, &req->table.sgt,
 				      req->table.addr, req->table.dma,
 				      req->config.size);
@@ -521,14 +558,22 @@ static int ccdc_lsc_config(struct isp_ccdc_device *ccdc,
 
 		if (copy_from_user(req->table.addr, config->lsc,
 				   req->config.size)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -EFAULT;
 			goto done;
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_sync_sg_for_device(isp->dev, req->iovm->sgt->sgl,
 				       req->iovm->sgt->nents, DMA_TO_DEVICE);
+=======
+		dma_sync_sg_for_device(isp->dev, req->table.sgt.sgl,
+				       req->table.sgt.nents, DMA_TO_DEVICE);
+>>>>>>> v3.18
 =======
 		dma_sync_sg_for_device(isp->dev, req->table.sgt.sgl,
 				       req->table.sgt.nents, DMA_TO_DEVICE);
@@ -556,6 +601,7 @@ static inline int ccdc_lsc_is_configured(struct isp_ccdc_device *ccdc)
 {
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	spin_lock_irqsave(&ccdc->lsc.req_lock, flags);
 	if (ccdc->lsc.active) {
@@ -565,6 +611,8 @@ static inline int ccdc_lsc_is_configured(struct isp_ccdc_device *ccdc)
 	spin_unlock_irqrestore(&ccdc->lsc.req_lock, flags);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	spin_lock_irqsave(&ccdc->lsc.req_lock, flags);
@@ -572,6 +620,9 @@ static inline int ccdc_lsc_is_configured(struct isp_ccdc_device *ccdc)
 	spin_unlock_irqrestore(&ccdc->lsc.req_lock, flags);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -652,7 +703,11 @@ static void ccdc_configure_fpc(struct isp_ccdc_device *ccdc)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isp_reg_writel(isp, ccdc->fpc.fpcaddr, OMAP3_ISP_IOMEM_CCDC,
+=======
+	isp_reg_writel(isp, ccdc->fpc.dma, OMAP3_ISP_IOMEM_CCDC,
+>>>>>>> v3.18
 =======
 	isp_reg_writel(isp, ccdc->fpc.dma, OMAP3_ISP_IOMEM_CCDC,
 >>>>>>> v3.18
@@ -746,7 +801,11 @@ static void ccdc_config_imgattr(struct isp_ccdc_device *ccdc, u32 colptn)
  * ccdc_config - Set CCDC configuration from userspace
  * @ccdc: Pointer to ISP CCDC device.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @userspace_add: Structure containing CCDC configuration sent from userspace.
+=======
+ * @ccdc_struct: Structure containing CCDC configuration sent from userspace.
+>>>>>>> v3.18
 =======
  * @ccdc_struct: Structure containing CCDC configuration sent from userspace.
 >>>>>>> v3.18
@@ -800,8 +859,14 @@ static int ccdc_config(struct isp_ccdc_device *ccdc,
 
 	if (OMAP3ISP_CCDC_FPC & ccdc_struct->update) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 table_old = 0;
 		u32 table_new;
+=======
+		struct omap3isp_ccdc_fpc fpc;
+		struct ispccdc_fpc fpc_old = { .addr = NULL, };
+		struct ispccdc_fpc fpc_new;
+>>>>>>> v3.18
 =======
 		struct omap3isp_ccdc_fpc fpc;
 		struct ispccdc_fpc fpc_old = { .addr = NULL, };
@@ -815,6 +880,7 @@ static int ccdc_config(struct isp_ccdc_device *ccdc,
 		ccdc->fpc_en = !!(OMAP3ISP_CCDC_FPC & ccdc_struct->flag);
 
 		if (ccdc->fpc_en) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (copy_from_user(&ccdc->fpc, ccdc_struct->fpc,
 					   sizeof(ccdc->fpc)))
@@ -846,6 +912,8 @@ static int ccdc_config(struct isp_ccdc_device *ccdc,
 		if (table_old != 0)
 			omap_iommu_vfree(isp->domain, isp->dev, table_old);
 =======
+=======
+>>>>>>> v3.18
 			if (copy_from_user(&fpc, ccdc_struct->fpc, sizeof(fpc)))
 				return -EFAULT;
 
@@ -879,6 +947,9 @@ static int ccdc_config(struct isp_ccdc_device *ccdc,
 		if (fpc_old.addr != NULL)
 			dma_free_coherent(isp->dev, fpc_old.fpnum * 4,
 					  fpc_old.addr, fpc_old.dma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -911,7 +982,11 @@ static void ccdc_apply_controls(struct isp_ccdc_device *ccdc)
 /*
  * omap3isp_ccdc_restore_context - Restore values of the CCDC module registers
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: Pointer to ISP device
+=======
+ * @isp: Pointer to ISP device
+>>>>>>> v3.18
 =======
  * @isp: Pointer to ISP device
 >>>>>>> v3.18
@@ -942,6 +1017,7 @@ static void ccdc_config_vp(struct isp_ccdc_device *ccdc)
 	struct isp_device *isp = to_isp_device(ccdc);
 	const struct isp_format_info *info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long l3_ick = pipe->l3_ick;
 	unsigned int max_div = isp->revision == ISP_REVISION_15_0 ? 64 : 8;
 	unsigned int div = 0;
@@ -950,6 +1026,8 @@ static void ccdc_config_vp(struct isp_ccdc_device *ccdc)
 	fmtcfg_vp = isp_reg_readl(isp, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_FMTCFG)
 		  & ~(ISPCCDC_FMTCFG_VPIN_MASK | ISPCCDC_FMTCFG_VPIF_FRQ_MASK);
 =======
+=======
+>>>>>>> v3.18
 	struct v4l2_mbus_framefmt *format;
 	unsigned long l3_ick = pipe->l3_ick;
 	unsigned int max_div = isp->revision == ISP_REVISION_15_0 ? 64 : 8;
@@ -976,6 +1054,9 @@ static void ccdc_config_vp(struct isp_ccdc_device *ccdc)
 	isp_reg_writel(isp, (format->width << ISPCCDC_VP_OUT_HORZ_NUM_SHIFT) |
 		       (format->height << ISPCCDC_VP_OUT_VERT_NUM_SHIFT),
 		       OMAP3_ISP_IOMEM_CCDC, ISPCCDC_VP_OUT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	info = omap3isp_video_format_info(ccdc->formats[CCDC_PAD_SINK].code);
@@ -983,6 +1064,7 @@ static void ccdc_config_vp(struct isp_ccdc_device *ccdc)
 	switch (info->width) {
 	case 8:
 	case 10:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		fmtcfg_vp |= ISPCCDC_FMTCFG_VPIN_9_0;
 		break;
@@ -995,6 +1077,8 @@ static void ccdc_config_vp(struct isp_ccdc_device *ccdc)
 	case 13:
 		fmtcfg_vp |= ISPCCDC_FMTCFG_VPIN_12_3;
 =======
+=======
+>>>>>>> v3.18
 		fmtcfg |= ISPCCDC_FMTCFG_VPIN_9_0;
 		break;
 	case 11:
@@ -1005,6 +1089,9 @@ static void ccdc_config_vp(struct isp_ccdc_device *ccdc)
 		break;
 	case 13:
 		fmtcfg |= ISPCCDC_FMTCFG_VPIN_12_3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -1015,6 +1102,7 @@ static void ccdc_config_vp(struct isp_ccdc_device *ccdc)
 		div = l3_ick / pipe->external_rate;
 
 	div = clamp(div, 2U, max_div);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	fmtcfg_vp |= (div - 2) << ISPCCDC_FMTCFG_VPIF_FRQ_SHIFT;
 
@@ -1039,11 +1127,17 @@ static void ccdc_enable_vp(struct isp_ccdc_device *ccdc, u8 enable)
 
 	isp_reg_writel(isp, fmtcfg, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_FMTCFG);
 >>>>>>> v3.18
+=======
+	fmtcfg |= (div - 2) << ISPCCDC_FMTCFG_VPIF_FRQ_SHIFT;
+
+	isp_reg_writel(isp, fmtcfg, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_FMTCFG);
+>>>>>>> v3.18
 }
 
 /*
  * ccdc_config_outlineoffset - Configure memory saving output line offset
  * @ccdc: Pointer to ISP CCDC device.
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @offset: Address offset to start a new line. Must be twice the
  *          Output width and aligned on 32 byte boundary
@@ -1092,6 +1186,8 @@ static void ccdc_config_outlineoffset(struct isp_ccdc_device *ccdc,
 		break;
 	}
 =======
+=======
+>>>>>>> v3.18
  * @bpl: Number of bytes per line when stored in memory.
  * @field: Field order when storing interlaced formats in memory.
  *
@@ -1137,6 +1233,9 @@ static void ccdc_config_outlineoffset(struct isp_ccdc_device *ccdc,
 	}
 
 	isp_reg_writel(isp, sdofst, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_SDOFST);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1201,11 +1300,14 @@ static void ccdc_config_sync_if(struct isp_ccdc_device *ccdc,
 	if (format->code == V4L2_MBUS_FMT_YUYV8_2X8 ||
 	    format->code == V4L2_MBUS_FMT_UYVY8_2X8) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* The bridge is enabled for YUV8 formats. Configure the input
 		 * mode accordingly.
 		 */
 		syn_mode |= ISPCCDC_SYN_MODE_INPMOD_YCBCR16;
 =======
+=======
+>>>>>>> v3.18
 		/* According to the OMAP3 TRM the input mode only affects SYNC
 		 * mode, enabling BT.656 mode should take precedence. However,
 		 * in practice setting the input mode to YCbCr data on 8 bits
@@ -1216,6 +1318,9 @@ static void ccdc_config_sync_if(struct isp_ccdc_device *ccdc,
 			syn_mode |= ISPCCDC_SYN_MODE_INPMOD_YCBCR8;
 		else
 			syn_mode |= ISPCCDC_SYN_MODE_INPMOD_YCBCR16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1241,10 +1346,13 @@ static void ccdc_config_sync_if(struct isp_ccdc_device *ccdc,
 		syn_mode |= ISPCCDC_SYN_MODE_HDPOL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata && pdata->vs_pol)
 		syn_mode |= ISPCCDC_SYN_MODE_VDPOL;
 
 =======
+=======
+>>>>>>> v3.18
 	/* The polarity of the vertical sync signal output by the BT.656
 	 * decoder is not documented and seems to be active low.
 	 */
@@ -1254,6 +1362,9 @@ static void ccdc_config_sync_if(struct isp_ccdc_device *ccdc,
 	if (pdata && pdata->fld_pol)
 		syn_mode |= ISPCCDC_SYN_MODE_FLDPOL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	isp_reg_writel(isp, syn_mode, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_SYN_MODE);
 
@@ -1268,9 +1379,12 @@ static void ccdc_config_sync_if(struct isp_ccdc_device *ccdc,
 			    ISPCCDC_CFG_Y8POS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isp_reg_clr(isp, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_REC656IF,
 		    ISPCCDC_REC656IF_R656ON);
 =======
+=======
+>>>>>>> v3.18
 	/* Enable or disable BT.656 mode, including error correction for the
 	 * synchronization codes.
 	 */
@@ -1281,6 +1395,9 @@ static void ccdc_config_sync_if(struct isp_ccdc_device *ccdc,
 		isp_reg_clr(isp, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_REC656IF,
 			    ISPCCDC_REC656IF_R656ON | ISPCCDC_REC656IF_ECCFVH);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1373,6 +1490,7 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	unsigned int bridge;
 	unsigned int shift;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 syn_mode;
 	u32 ccdc_pattern;
 
@@ -1385,6 +1503,8 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	/* Compute the lane shifter shift value and enable the bridge when the
 	 * input format is YUV.
 =======
+=======
+>>>>>>> v3.18
 	unsigned int nph;
 	unsigned int sph;
 	u32 syn_mode;
@@ -1412,6 +1532,9 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 
 	/* Compute the lane shifter shift value and enable the bridge when the
 	 * input format is a non-BT.656 YUV variant.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 */
 	fmt_src.pad = pad->index;
@@ -1422,6 +1545,7 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fmt_info = omap3isp_video_format_info
 		(isp->isp_ccdc.formats[CCDC_PAD_SINK].code);
 	depth_out = fmt_info->width;
@@ -1429,6 +1553,8 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 
 	if (fmt_info->code == V4L2_MBUS_FMT_YUYV8_2X8)
 =======
+=======
+>>>>>>> v3.18
 	fmt_info = omap3isp_video_format_info(format->code);
 	depth_out = fmt_info->width;
 	shift = depth_in - depth_out;
@@ -1436,6 +1562,9 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	if (ccdc->bt656)
 		bridge = ISPCTRL_PAR_BRIDGE_DISABLE;
 	else if (fmt_info->code == V4L2_MBUS_FMT_YUYV8_2X8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bridge = ISPCTRL_PAR_BRIDGE_LENDIAN;
 	else if (fmt_info->code == V4L2_MBUS_FMT_UYVY8_2X8)
@@ -1446,6 +1575,10 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	omap3isp_configure_bridge(isp, ccdc->input, pdata, shift, bridge);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Configure the sync interface. */
+>>>>>>> v3.18
 =======
 	/* Configure the sync interface. */
 >>>>>>> v3.18
@@ -1469,9 +1602,12 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 		syn_mode &= ~ISPCCDC_SYN_MODE_SDR2RSZ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* CCDC_PAD_SINK */
 	format = &ccdc->formats[CCDC_PAD_SINK];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Mosaic filter */
@@ -1507,11 +1643,14 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	crop = &ccdc->crop;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isp_reg_writel(isp, (crop->left << ISPCCDC_HORZ_INFO_SPH_SHIFT) |
 		       ((crop->width - 1) << ISPCCDC_HORZ_INFO_NPH_SHIFT),
 		       OMAP3_ISP_IOMEM_CCDC, ISPCCDC_HORZ_INFO);
 	isp_reg_writel(isp, crop->top << ISPCCDC_VERT_START_SLV0_SHIFT,
 =======
+=======
+>>>>>>> v3.18
 	/* The horizontal coordinates are expressed in pixel clock cycles. We
 	 * need two cycles per pixel in BT.656 mode, and one cycle per pixel in
 	 * SYNC mode regardless of the format as the bridge is enabled for YUV
@@ -1530,6 +1669,9 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 		       OMAP3_ISP_IOMEM_CCDC, ISPCCDC_HORZ_INFO);
 	isp_reg_writel(isp, (crop->top << ISPCCDC_VERT_START_SLV0_SHIFT) |
 		       (crop->top << ISPCCDC_VERT_START_SLV1_SHIFT),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       OMAP3_ISP_IOMEM_CCDC, ISPCCDC_VERT_START);
 	isp_reg_writel(isp, (crop->height - 1)
@@ -1537,8 +1679,11 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 		       OMAP3_ISP_IOMEM_CCDC, ISPCCDC_VERT_LINES);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccdc_config_outlineoffset(ccdc, ccdc->video_out.bpl_value, 0, 0);
 =======
+=======
+>>>>>>> v3.18
 	ccdc_config_outlineoffset(ccdc, ccdc->video_out.bpl_value,
 				  format->field);
 
@@ -1550,6 +1695,9 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	    (format->field == V4L2_FIELD_INTERLACED_TB ||
 	     format->field == V4L2_FIELD_INTERLACED_BT))
 		syn_mode |= ISPCCDC_SYN_MODE_FLDMODE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* The CCDC outputs data in UYVY order by default. Swap bytes to get
@@ -1563,14 +1711,20 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 			    ISPCCDC_CFG_BSWD);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Use PACK8 mode for 1byte per pixel formats. */
 	if (omap3isp_video_format_info(format->code)->width <= 8)
 =======
+=======
+>>>>>>> v3.18
 	/* Use PACK8 mode for 1byte per pixel formats. Check for BT.656 mode
 	 * explicitly as the driver reports 1X16 instead of 2X8 at the OF pad
 	 * for simplicity.
 	 */
 	if (omap3isp_video_format_info(format->code)->width <= 8 || ccdc->bt656)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		syn_mode |= ISPCCDC_SYN_MODE_PACK8;
 	else
@@ -1579,6 +1733,7 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	isp_reg_writel(isp, syn_mode, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_SYN_MODE);
 
 	/* CCDC_PAD_SOURCE_VP */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	format = &ccdc->formats[CCDC_PAD_SOURCE_VP];
 
@@ -1592,6 +1747,9 @@ static void ccdc_configure(struct isp_ccdc_device *ccdc)
 	isp_reg_writel(isp, (format->width << ISPCCDC_VP_OUT_HORZ_NUM_SHIFT) |
 		       (format->height << ISPCCDC_VP_OUT_VERT_NUM_SHIFT),
 		       OMAP3_ISP_IOMEM_CCDC, ISPCCDC_VP_OUT);
+=======
+	ccdc_config_vp(ccdc);
+>>>>>>> v3.18
 =======
 	ccdc_config_vp(ccdc);
 >>>>>>> v3.18
@@ -1629,6 +1787,11 @@ static void __ccdc_enable(struct isp_ccdc_device *ccdc, int enable)
 	isp_reg_clr_set(isp, OMAP3_ISP_IOMEM_CCDC, ISPCCDC_PCR,
 			ISPCCDC_PCR_EN, enable ? ISPCCDC_PCR_EN : 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ccdc->running = enable;
+>>>>>>> v3.18
 =======
 
 	ccdc->running = enable;
@@ -1644,6 +1807,11 @@ static int ccdc_disable(struct isp_ccdc_device *ccdc)
 	if (ccdc->state == ISP_PIPELINE_STREAM_CONTINUOUS)
 		ccdc->stopping = CCDC_STOP_REQUEST;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!ccdc->running)
+		ccdc->stopping = CCDC_STOP_FINISHED;
+>>>>>>> v3.18
 =======
 	if (!ccdc->running)
 		ccdc->stopping = CCDC_STOP_FINISHED;
@@ -1731,7 +1899,11 @@ static int ccdc_sbl_wait_idle(struct isp_ccdc_device *ccdc,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* __ccdc_handle_stopping - Handle CCDC and/or LSC stopping sequence
+=======
+/* ccdc_handle_stopping - Handle CCDC and/or LSC stopping sequence
+>>>>>>> v3.18
 =======
 /* ccdc_handle_stopping - Handle CCDC and/or LSC stopping sequence
 >>>>>>> v3.18
@@ -1742,7 +1914,11 @@ static int ccdc_sbl_wait_idle(struct isp_ccdc_device *ccdc,
  * zero otherwise.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __ccdc_handle_stopping(struct isp_ccdc_device *ccdc, u32 event)
+=======
+static int ccdc_handle_stopping(struct isp_ccdc_device *ccdc, u32 event)
+>>>>>>> v3.18
 =======
 static int ccdc_handle_stopping(struct isp_ccdc_device *ccdc, u32 event)
 >>>>>>> v3.18
@@ -1828,7 +2004,11 @@ static void ccdc_lsc_isr(struct isp_ccdc_device *ccdc, u32 events)
 		ccdc->lsc.state = LSC_STATE_STOPPED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__ccdc_handle_stopping(ccdc, CCDC_EVENT_LSC_DONE))
+=======
+	if (ccdc_handle_stopping(ccdc, CCDC_EVENT_LSC_DONE))
+>>>>>>> v3.18
 =======
 	if (ccdc_handle_stopping(ccdc, CCDC_EVENT_LSC_DONE))
 >>>>>>> v3.18
@@ -1860,7 +2040,10 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Check whether the CCDC has captured all fields necessary to complete the
  * buffer.
@@ -1909,6 +2092,9 @@ static bool ccdc_has_all_fields(struct isp_ccdc_device *ccdc)
 	return true;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ccdc_isr_buffer(struct isp_ccdc_device *ccdc)
 {
@@ -1916,7 +2102,10 @@ static int ccdc_isr_buffer(struct isp_ccdc_device *ccdc)
 	struct isp_device *isp = to_isp_device(ccdc);
 	struct isp_buffer *buffer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int restart = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1928,7 +2117,11 @@ static int ccdc_isr_buffer(struct isp_ccdc_device *ccdc)
 	 */
 	if (list_empty(&ccdc->video_out.dmaqueue))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto done;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -1938,6 +2131,7 @@ static int ccdc_isr_buffer(struct isp_ccdc_device *ccdc)
 	 * address has been set in ccdc_video_queue.
 	 */
 	if (ccdc->state == ISP_PIPELINE_STREAM_CONTINUOUS && ccdc->underrun) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		restart = 1;
 		ccdc->underrun = 0;
@@ -1955,6 +2149,8 @@ static int ccdc_isr_buffer(struct isp_ccdc_device *ccdc)
 		restart = 1;
 	}
 =======
+=======
+>>>>>>> v3.18
 		ccdc->underrun = 0;
 		return 1;
 	}
@@ -1973,6 +2169,9 @@ static int ccdc_isr_buffer(struct isp_ccdc_device *ccdc)
 	buffer = omap3isp_video_buffer_next(&ccdc->video_out);
 	if (buffer != NULL)
 		ccdc_set_outaddr(ccdc, buffer->dma);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pipe->state |= ISP_PIPELINE_IDLE_OUTPUT;
@@ -1983,8 +2182,12 @@ static int ccdc_isr_buffer(struct isp_ccdc_device *ccdc)
 					ISP_PIPELINE_STREAM_SINGLESHOT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 done:
 	return restart;
+=======
+	return buffer != NULL;
+>>>>>>> v3.18
 =======
 	return buffer != NULL;
 >>>>>>> v3.18
@@ -2002,7 +2205,10 @@ static void ccdc_vd0_isr(struct isp_ccdc_device *ccdc)
 	int restart = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* In BT.656 mode the CCDC doesn't generate an HS/VS interrupt. We thus
 	 * need to increment the frame counter here.
 	 */
@@ -2029,13 +2235,21 @@ static void ccdc_vd0_isr(struct isp_ccdc_device *ccdc)
 		spin_unlock_irqrestore(&ccdc->lock, flags);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ccdc->output & CCDC_OUTPUT_MEMORY)
 		restart = ccdc_isr_buffer(ccdc);
 
 	spin_lock_irqsave(&ccdc->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__ccdc_handle_stopping(ccdc, CCDC_EVENT_VD0)) {
+=======
+
+	if (ccdc_handle_stopping(ccdc, CCDC_EVENT_VD0)) {
+>>>>>>> v3.18
 =======
 
 	if (ccdc_handle_stopping(ccdc, CCDC_EVENT_VD0)) {
@@ -2061,7 +2275,10 @@ static void ccdc_vd1_isr(struct isp_ccdc_device *ccdc)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* In BT.656 mode the synchronization signals are generated by the CCDC
 	 * from the embedded sync codes. The VD0 and VD1 interrupts are thus
 	 * only triggered when the CCDC is enabled, unlike external sync mode
@@ -2074,6 +2291,9 @@ static void ccdc_vd1_isr(struct isp_ccdc_device *ccdc)
 	if (ccdc->bt656)
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&ccdc->lsc.req_lock, flags);
 
@@ -2105,7 +2325,11 @@ static void ccdc_vd1_isr(struct isp_ccdc_device *ccdc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (__ccdc_handle_stopping(ccdc, CCDC_EVENT_VD1))
+=======
+	if (ccdc_handle_stopping(ccdc, CCDC_EVENT_VD1))
+>>>>>>> v3.18
 =======
 	if (ccdc_handle_stopping(ccdc, CCDC_EVENT_VD1))
 >>>>>>> v3.18
@@ -2164,6 +2388,11 @@ static int ccdc_video_queue(struct isp_video *video, struct isp_buffer *buffer)
 {
 	struct isp_ccdc_device *ccdc = &video->isp->isp_ccdc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+	bool restart = false;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 	bool restart = false;
@@ -2173,6 +2402,7 @@ static int ccdc_video_queue(struct isp_video *video, struct isp_buffer *buffer)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ccdc_set_outaddr(ccdc, buffer->isp_addr);
 
 	/* We now have a buffer queued on the output, restart the pipeline
@@ -2181,6 +2411,8 @@ static int ccdc_video_queue(struct isp_video *video, struct isp_buffer *buffer)
 	 */
 	ccdc->underrun = 1;
 =======
+=======
+>>>>>>> v3.18
 	ccdc_set_outaddr(ccdc, buffer->dma);
 
 	/* We now have a buffer queued on the output, restart the pipeline
@@ -2199,6 +2431,9 @@ static int ccdc_video_queue(struct isp_video *video, struct isp_buffer *buffer)
 
 	if (restart)
 		ccdc_enable(ccdc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -2287,11 +2522,14 @@ static int ccdc_set_stream(struct v4l2_subdev *sd, int enable)
 		ccdc_configure(ccdc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* TODO: Don't configure the video port if all of its output
 		 * links are inactive.
 		 */
 		ccdc_config_vp(ccdc);
 		ccdc_enable_vp(ccdc, 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		ccdc_print_status(ccdc);
@@ -2367,6 +2605,10 @@ ccdc_try_format(struct isp_ccdc_device *ccdc, struct v4l2_subdev_fh *fh,
 	unsigned int height = fmt->height;
 	struct v4l2_rect *crop;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum v4l2_field field;
+>>>>>>> v3.18
 =======
 	enum v4l2_field field;
 >>>>>>> v3.18
@@ -2387,23 +2629,32 @@ ccdc_try_format(struct isp_ccdc_device *ccdc, struct v4l2_subdev_fh *fh,
 		fmt->width = clamp_t(u32, width, 32, 4096);
 		fmt->height = clamp_t(u32, height, 32, 4096);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Default to progressive field order. */
 		if (fmt->field == V4L2_FIELD_ANY)
 			fmt->field = V4L2_FIELD_NONE;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
 	case CCDC_PAD_SOURCE_OF:
 		pixelcode = fmt->code;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*fmt = *__ccdc_get_format(ccdc, fh, CCDC_PAD_SINK, which);
 
 		/* YUV formats are converted from 2X8 to 1X16 by the bridge and
 		 * can be byte-swapped.
 =======
+=======
+>>>>>>> v3.18
 		field = fmt->field;
 		*fmt = *__ccdc_get_format(ccdc, fh, CCDC_PAD_SINK, which);
 
@@ -2413,6 +2664,9 @@ ccdc_try_format(struct isp_ccdc_device *ccdc, struct v4l2_subdev_fh *fh,
 		 * let's pretend the conversion always occurs. The CCDC will be
 		 * configured to pack bytes in BT.656, hiding the inaccuracy.
 		 * In all cases bytes can be swapped.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 */
 		if (fmt->code == V4L2_MBUS_FMT_YUYV8_2X8 ||
@@ -2435,7 +2689,10 @@ ccdc_try_format(struct isp_ccdc_device *ccdc, struct v4l2_subdev_fh *fh,
 		fmt->width = crop->width;
 		fmt->height = crop->height;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* When input format is interlaced with alternating fields the
 		 * CCDC can interleave the fields.
@@ -2447,6 +2704,9 @@ ccdc_try_format(struct isp_ccdc_device *ccdc, struct v4l2_subdev_fh *fh,
 			fmt->height *= 2;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -2476,7 +2736,10 @@ ccdc_try_format(struct isp_ccdc_device *ccdc, struct v4l2_subdev_fh *fh,
 	 */
 	fmt->colorspace = V4L2_COLORSPACE_SRGB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fmt->field = V4L2_FIELD_NONE;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -3062,7 +3325,12 @@ static int ccdc_init_entities(struct isp_ccdc_device *ccdc)
 	sd->flags |= V4L2_SUBDEV_FL_HAS_EVENTS | V4L2_SUBDEV_FL_HAS_DEVNODE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pads[CCDC_PAD_SINK].flags = MEDIA_PAD_FL_SINK;
+=======
+	pads[CCDC_PAD_SINK].flags = MEDIA_PAD_FL_SINK
+				    | MEDIA_PAD_FL_MUST_CONNECT;
+>>>>>>> v3.18
 =======
 	pads[CCDC_PAD_SINK].flags = MEDIA_PAD_FL_SINK
 				    | MEDIA_PAD_FL_MUST_CONNECT;
@@ -3105,7 +3373,11 @@ error_video:
 /*
  * omap3isp_ccdc_init - CCDC module initialization.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: Device pointer specific to the OMAP3 ISP.
+=======
+ * @isp: Device pointer specific to the OMAP3 ISP.
+>>>>>>> v3.18
 =======
  * @isp: Device pointer specific to the OMAP3 ISP.
 >>>>>>> v3.18
@@ -3148,7 +3420,11 @@ int omap3isp_ccdc_init(struct isp_device *isp)
 /*
  * omap3isp_ccdc_cleanup - CCDC module cleanup.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: Device pointer specific to the OMAP3 ISP.
+=======
+ * @isp: Device pointer specific to the OMAP3 ISP.
+>>>>>>> v3.18
 =======
  * @isp: Device pointer specific to the OMAP3 ISP.
 >>>>>>> v3.18
@@ -3168,8 +3444,14 @@ void omap3isp_ccdc_cleanup(struct isp_device *isp)
 	ccdc_lsc_free_queue(ccdc, &ccdc->lsc.free_queue);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ccdc->fpc.fpcaddr != 0)
 		omap_iommu_vfree(isp->domain, isp->dev, ccdc->fpc.fpcaddr);
+=======
+	if (ccdc->fpc.addr != NULL)
+		dma_free_coherent(isp->dev, ccdc->fpc.fpnum * 4, ccdc->fpc.addr,
+				  ccdc->fpc.dma);
+>>>>>>> v3.18
 =======
 	if (ccdc->fpc.addr != NULL)
 		dma_free_coherent(isp->dev, ccdc->fpc.fpnum * 4, ccdc->fpc.addr,

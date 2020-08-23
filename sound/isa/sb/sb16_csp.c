@@ -209,6 +209,10 @@ static int snd_sb_csp_ioctl(struct snd_hwdep * hw, struct file *file, unsigned i
 		/* get information */
 	case SNDRV_SB_CSP_IOCTL_INFO:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		memset(&info, 0, sizeof(info));
+>>>>>>> v3.18
 =======
 		memset(&info, 0, sizeof(info));
 >>>>>>> v3.18

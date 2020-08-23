@@ -2,6 +2,10 @@ config M68K
 	bool
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select ARCH_MIGHT_HAVE_PC_PARPORT if ISA
+>>>>>>> v3.18
 =======
 	select ARCH_MIGHT_HAVE_PC_PARPORT if ISA
 >>>>>>> v3.18
@@ -15,6 +19,10 @@ config M68K
 	select ARCH_HAVE_NMI_SAFE_CMPXCHG if RMW_INSNS
 	select GENERIC_CPU_DEVICES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GENERIC_IOMAP
+>>>>>>> v3.18
 =======
 	select GENERIC_IOMAP
 >>>>>>> v3.18
@@ -81,7 +89,10 @@ config MMU
 	bool "MMU-based Paged Memory Management Support"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select GENERIC_IOMAP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -99,7 +110,10 @@ config MMU_SUN3
 	depends on MMU && !MMU_MOTOROLA && !MMU_COLDFIRE
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config KEXEC
 	bool "kexec system call"
 	depends on M68KCLASSIC
@@ -124,6 +138,9 @@ config BOOTINFO_PROC
 	  Say Y to export the bootinfo used to boot the kernel in a
 	  "bootinfo" file in procfs.  This is useful with kexec.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 menu "Platform setup"
 

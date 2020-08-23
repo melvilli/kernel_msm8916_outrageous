@@ -12,6 +12,10 @@
 #include <linux/securebits.h>
 #include <linux/seqlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/rbtree.h>
+>>>>>>> v3.18
 =======
 #include <linux/rbtree.h>
 >>>>>>> v3.18
@@ -37,15 +41,21 @@ extern struct fs_struct init_fs;
 
 #ifdef CONFIG_CPUSETS
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INIT_CPUSET_SEQ							\
 	.mems_allowed_seq = SEQCNT_ZERO,
 #else
 #define INIT_CPUSET_SEQ
 =======
+=======
+>>>>>>> v3.18
 #define INIT_CPUSET_SEQ(tsk)							\
 	.mems_allowed_seq = SEQCNT_ZERO(tsk.mems_allowed_seq),
 #else
 #define INIT_CPUSET_SEQ(tsk)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -108,7 +118,11 @@ extern struct group_info init_groups;
 #define INIT_IDS \
 	.loginuid = INVALID_UID, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.sessionid = -1,
+=======
+	.sessionid = (unsigned int)-1,
+>>>>>>> v3.18
 =======
 	.sessionid = (unsigned int)-1,
 >>>>>>> v3.18
@@ -117,12 +131,15 @@ extern struct group_info init_groups;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_RCU_BOOST
 #define INIT_TASK_RCU_BOOST()						\
 	.rcu_boost_mutex = NULL,
 #else
 #define INIT_TASK_RCU_BOOST()
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_TREE_PREEMPT_RCU
@@ -135,6 +152,7 @@ extern struct group_info init_groups;
 #define INIT_TASK_RCU_PREEMPT(tsk)					\
 	.rcu_read_lock_nesting = 0,					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rcu_read_unlock_special = 0,					\
 	.rcu_node_entry = LIST_HEAD_INIT(tsk.rcu_node_entry),		\
 	INIT_TASK_RCU_TREE_PREEMPT()					\
@@ -143,6 +161,8 @@ extern struct group_info init_groups;
 #define INIT_TASK_RCU_PREEMPT(tsk)
 #endif
 =======
+=======
+>>>>>>> v3.18
 	.rcu_read_unlock_special.s = 0,					\
 	.rcu_node_entry = LIST_HEAD_INIT(tsk.rcu_node_entry),		\
 	INIT_TASK_RCU_TREE_PREEMPT()
@@ -158,6 +178,9 @@ extern struct group_info init_groups;
 #else
 #define INIT_TASK_RCU_TASKS(tsk)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct cred init_cred;
@@ -192,7 +215,10 @@ extern struct task_group root_task_group;
 #define INIT_TASK_COMM "swapper"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_RT_MUTEXES
 # define INIT_RT_MUTEXES(tsk)						\
 	.pi_waiters = RB_ROOT,						\
@@ -201,6 +227,9 @@ extern struct task_group root_task_group;
 # define INIT_RT_MUTEXES(tsk)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *  INIT_TASK is used to set up the first task table, touch at
@@ -270,7 +299,13 @@ extern struct task_group root_task_group;
 	INIT_TRACE_RECURSION						\
 	INIT_TASK_RCU_PREEMPT(tsk)					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_CPUSET_SEQ							\
+=======
+	INIT_TASK_RCU_TASKS(tsk)					\
+	INIT_CPUSET_SEQ(tsk)						\
+	INIT_RT_MUTEXES(tsk)						\
+>>>>>>> v3.18
 =======
 	INIT_TASK_RCU_TASKS(tsk)					\
 	INIT_CPUSET_SEQ(tsk)						\

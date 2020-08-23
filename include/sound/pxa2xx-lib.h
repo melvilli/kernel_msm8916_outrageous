@@ -7,6 +7,7 @@
 /* PCM */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct pxa2xx_pcm_dma_params {
 	char *name;			/* stream identifier */
 	u32 dcmd;			/* DMA descriptor dcmd field */
@@ -14,6 +15,8 @@ struct pxa2xx_pcm_dma_params {
 	u32 dev_addr;			/* device physical address for DMA */
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int __pxa2xx_pcm_hw_params(struct snd_pcm_substream *substream,

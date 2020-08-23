@@ -38,7 +38,10 @@ struct xen_pcibk_device {
 	unsigned long flags;
 	struct work_struct op_work;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xen_pci_op op;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

@@ -112,7 +112,11 @@ static int is_elf_fdpic(struct elfhdr *hdr, struct file *file)
 	if (!elf_check_arch(hdr) || !elf_check_fdpic(hdr))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!file->f_op || !file->f_op->mmap)
+=======
+	if (!file->f_op->mmap)
+>>>>>>> v3.18
 =======
 	if (!file->f_op->mmap)
 >>>>>>> v3.18
@@ -322,8 +326,13 @@ static int load_elf_fdpic_binary(struct linux_binprm *bprm)
 
 	/* there's now no turning back... the old userspace image is dead,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * defunct, deceased, etc. after this point we have to exit via
 	 * error_kill */
+=======
+	 * defunct, deceased, etc.
+	 */
+>>>>>>> v3.18
 =======
 	 * defunct, deceased, etc.
 	 */
@@ -353,10 +362,15 @@ static int load_elf_fdpic_binary(struct linux_binprm *bprm)
 	retval = setup_arg_pages(bprm, current->mm->start_stack,
 				 executable_stack);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (retval < 0) {
 		send_sig(SIGKILL, current, 0);
 		goto error_kill;
 	}
+=======
+	if (retval < 0)
+		goto error;
+>>>>>>> v3.18
 =======
 	if (retval < 0)
 		goto error;
@@ -368,7 +382,11 @@ static int load_elf_fdpic_binary(struct linux_binprm *bprm)
 				    "executable");
 	if (retval < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_kill;
+=======
+		goto error;
+>>>>>>> v3.18
 =======
 		goto error;
 >>>>>>> v3.18
@@ -379,7 +397,11 @@ static int load_elf_fdpic_binary(struct linux_binprm *bprm)
 		if (retval < 0) {
 			printk(KERN_ERR "Unable to load interpreter\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto error_kill;
+=======
+			goto error;
+>>>>>>> v3.18
 =======
 			goto error;
 >>>>>>> v3.18
@@ -420,7 +442,11 @@ static int load_elf_fdpic_binary(struct linux_binprm *bprm)
 		retval = current->mm->start_brk;
 		current->mm->start_brk = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_kill;
+=======
+		goto error;
+>>>>>>> v3.18
 =======
 		goto error;
 >>>>>>> v3.18
@@ -437,7 +463,11 @@ static int load_elf_fdpic_binary(struct linux_binprm *bprm)
 	if (create_elf_fdpic_tables(bprm, current->mm,
 				    &exec_params, &interp_params) < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_kill;
+=======
+		goto error;
+>>>>>>> v3.18
 =======
 		goto error;
 >>>>>>> v3.18
@@ -480,12 +510,15 @@ error:
 	kfree(interp_params.loadmap);
 	return retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* unrecoverable error - kill the process */
 error_kill:
 	send_sig(SIGSEGV, current, 0);
 	goto error;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1301,6 +1334,7 @@ static int notesize(struct memelfnote *en)
 /* #define DEBUG */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DUMP_WRITE(addr, nr, foffset)	\
 	do { if (!dump_write(file, (addr), (nr))) return 0; *foffset += (nr); } while(0)
 
@@ -1316,12 +1350,16 @@ static int writenote(struct memelfnote *men, struct file *file,
 =======
 static int writenote(struct memelfnote *men, struct coredump_params *cprm)
 >>>>>>> v3.18
+=======
+static int writenote(struct memelfnote *men, struct coredump_params *cprm)
+>>>>>>> v3.18
 {
 	struct elf_note en;
 	en.n_namesz = strlen(men->name) + 1;
 	en.n_descsz = men->datasz;
 	en.n_type = men->type;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	DUMP_WRITE(&en, sizeof(en), foffset);
 	DUMP_WRITE(men->name, en.n_namesz, foffset);
@@ -1335,10 +1373,15 @@ static int writenote(struct memelfnote *men, struct coredump_params *cprm)
 }
 #undef DUMP_WRITE
 =======
+=======
+>>>>>>> v3.18
 	return dump_emit(cprm, &en, sizeof(en)) &&
 		dump_emit(cprm, men->name, en.n_namesz) && dump_align(cprm, 4) &&
 		dump_emit(cprm, men->data, men->datasz) && dump_align(cprm, 4);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void fill_elf_fdpic_header(struct elfhdr *elf, int segs)
@@ -1545,6 +1588,7 @@ static void fill_extnum_info(struct elfhdr *elf, struct elf_shdr *shdr4extnum,
  * dump the segments for an MMU process
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMU
 static int elf_fdpic_dump_segments(struct file *file, size_t *size,
 			   unsigned long *limit, unsigned long mm_flags)
@@ -1556,10 +1600,16 @@ static bool elf_fdpic_dump_segments(struct coredump_params *cprm)
 {
 	struct vm_area_struct *vma;
 >>>>>>> v3.18
+=======
+static bool elf_fdpic_dump_segments(struct coredump_params *cprm)
+{
+	struct vm_area_struct *vma;
+>>>>>>> v3.18
 
 	for (vma = current->mm->mmap; vma; vma = vma->vm_next) {
 		unsigned long addr;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!maydump(vma, mm_flags))
 			continue;
@@ -1612,6 +1662,8 @@ static int elf_fdpic_dump_segments(struct file *file, size_t *size,
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 		if (!maydump(vma, cprm->mm_flags))
 			continue;
 
@@ -1639,6 +1691,9 @@ static int elf_fdpic_dump_segments(struct file *file, size_t *size,
 	}
 	return true;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static size_t elf_core_vma_data_size(unsigned long mm_flags)
@@ -1666,16 +1721,22 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 	mm_segment_t fs;
 	int segs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t size = 0;
 	int i;
 	struct vm_area_struct *vma;
 	struct elfhdr *elf = NULL;
 	loff_t offset = 0, dataoff, foffset;
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	struct vm_area_struct *vma;
 	struct elfhdr *elf = NULL;
 	loff_t offset = 0, dataoff;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int numnote;
 	struct memelfnote *notes = NULL;
@@ -1694,6 +1755,11 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 	Elf_Half e_phnum;
 	elf_addr_t e_shoff;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct core_thread *ct;
+	struct elf_thread_status *tmp;
+>>>>>>> v3.18
 =======
 	struct core_thread *ct;
 	struct elf_thread_status *tmp;
@@ -1734,6 +1800,7 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cprm->siginfo->si_signo) {
 		struct core_thread *ct;
 		struct elf_thread_status *tmp;
@@ -1757,6 +1824,8 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 			thread_status_size += sz;
 		}
 =======
+=======
+>>>>>>> v3.18
 	for (ct = current->mm->core_state->dumper.next;
 					ct; ct = ct->next) {
 		tmp = kzalloc(sizeof(*tmp), GFP_KERNEL);
@@ -1774,6 +1843,9 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 		tmp = list_entry(t, struct elf_thread_status, list);
 		sz = elf_dump_thread_status(cprm->siginfo->si_signo, tmp);
 		thread_status_size += sz;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1833,7 +1905,10 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 	offset += sizeof(*elf);				/* Elf header */
 	offset += segs * sizeof(struct elf_phdr);	/* Program headers */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	foffset = offset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1871,6 +1946,7 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 	offset = dataoff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size += sizeof(*elf);
 	if (size > cprm->limit || !dump_write(cprm->file, elf, sizeof(*elf)))
 		goto end_coredump;
@@ -1879,10 +1955,15 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 	if (size > cprm->limit
 	    || !dump_write(cprm->file, phdr4note, sizeof(*phdr4note)))
 =======
+=======
+>>>>>>> v3.18
 	if (!dump_emit(cprm, elf, sizeof(*elf)))
 		goto end_coredump;
 
 	if (!dump_emit(cprm, phdr4note, sizeof(*phdr4note)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto end_coredump;
 
@@ -1908,6 +1989,7 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 		phdr.p_align = ELF_EXEC_PAGESIZE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		size += sizeof(phdr);
 		if (size > cprm->limit
 		    || !dump_write(cprm->file, &phdr, sizeof(phdr)))
@@ -1916,18 +1998,27 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 
 	if (!elf_core_write_extra_phdrs(cprm->file, offset, &size, cprm->limit))
 =======
+=======
+>>>>>>> v3.18
 		if (!dump_emit(cprm, &phdr, sizeof(phdr)))
 			goto end_coredump;
 	}
 
 	if (!elf_core_write_extra_phdrs(cprm, offset))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto end_coredump;
 
  	/* write out the notes section */
 	for (i = 0; i < numnote; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!writenote(notes + i, cprm->file, &foffset))
+=======
+		if (!writenote(notes + i, cprm))
+>>>>>>> v3.18
 =======
 		if (!writenote(notes + i, cprm))
 >>>>>>> v3.18
@@ -1939,6 +2030,7 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 				list_entry(t, struct elf_thread_status, list);
 
 		for (i = 0; i < tmp->num_notes; i++)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (!writenote(&tmp->notes[i], cprm->file, &foffset))
 				goto end_coredump;
@@ -1960,6 +2052,8 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 		    || !dump_write(cprm->file, shdr4extnum,
 				   sizeof(*shdr4extnum)))
 =======
+=======
+>>>>>>> v3.18
 			if (!writenote(&tmp->notes[i], cprm))
 				goto end_coredump;
 	}
@@ -1975,6 +2069,9 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 
 	if (e_phnum == PN_XNUM) {
 		if (!dump_emit(cprm, shdr4extnum, sizeof(*shdr4extnum)))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			goto end_coredump;
 	}

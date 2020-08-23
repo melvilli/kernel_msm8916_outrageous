@@ -7,6 +7,10 @@
  */
 #include <linux/irqdesc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kernel_stat.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel_stat.h>
 >>>>>>> v3.18
@@ -37,7 +41,11 @@ enum {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Bit masks for desc->state
+=======
+ * Bit masks for desc->core_internal_state__do_not_mess_with_it
+>>>>>>> v3.18
 =======
  * Bit masks for desc->core_internal_state__do_not_mess_with_it
 >>>>>>> v3.18
@@ -71,8 +79,13 @@ enum {
 extern int __irq_set_trigger(struct irq_desc *desc, unsigned int irq,
 		unsigned long flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __disable_irq(struct irq_desc *desc, unsigned int irq, bool susp);
 extern void __enable_irq(struct irq_desc *desc, unsigned int irq, bool resume);
+=======
+extern void __disable_irq(struct irq_desc *desc, unsigned int irq);
+extern void __enable_irq(struct irq_desc *desc, unsigned int irq);
+>>>>>>> v3.18
 =======
 extern void __disable_irq(struct irq_desc *desc, unsigned int irq);
 extern void __enable_irq(struct irq_desc *desc, unsigned int irq);
@@ -87,7 +100,10 @@ extern void irq_percpu_disable(struct irq_desc *desc, unsigned int cpu);
 extern void mask_irq(struct irq_desc *desc);
 extern void unmask_irq(struct irq_desc *desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void unmask_threaded_irq(struct irq_desc *desc);
 
 #ifdef CONFIG_SPARSE_IRQ
@@ -95,6 +111,9 @@ static inline void irq_mark_irq(unsigned int irq) { }
 #else
 extern void irq_mark_irq(unsigned int irq);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern void init_kstat_irqs(struct irq_desc *desc, int node, int nr);
@@ -106,6 +125,10 @@ irqreturn_t handle_irq_event(struct irq_desc *desc);
 void check_irq_resend(struct irq_desc *desc, unsigned int irq);
 bool irq_wait_for_poll(struct irq_desc *desc);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void __irq_wake_thread(struct irq_desc *desc, struct irqaction *action);
+>>>>>>> v3.18
 =======
 void __irq_wake_thread(struct irq_desc *desc, struct irqaction *action);
 >>>>>>> v3.18
@@ -207,7 +230,10 @@ static inline bool irqd_has_set(struct irq_data *d, unsigned int mask)
 	return d->state_use_accessors & mask;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static inline void kstat_incr_irqs_this_cpu(unsigned int irq, struct irq_desc *desc)
 {
@@ -226,4 +252,7 @@ irq_pm_install_action(struct irq_desc *desc, struct irqaction *action) { }
 static inline void
 irq_pm_remove_action(struct irq_desc *desc, struct irqaction *action) { }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

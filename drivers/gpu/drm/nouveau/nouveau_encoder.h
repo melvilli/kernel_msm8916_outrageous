@@ -47,6 +47,10 @@ struct nouveau_encoder {
 	 * actually programmed on the hw, not the proposed crtc */
 	struct drm_crtc *crtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 ctrl;
+>>>>>>> v3.18
 =======
 	u32 ctrl;
 >>>>>>> v3.18
@@ -89,9 +93,13 @@ get_slave_funcs(struct drm_encoder *enc)
 
 /* nouveau_dp.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool nouveau_dp_detect(struct drm_encoder *);
 void nouveau_dp_dpms(struct drm_encoder *, int mode, u32 datarate,
 		     struct nouveau_object *);
+=======
+int nouveau_dp_detect(struct nouveau_encoder *);
+>>>>>>> v3.18
 =======
 int nouveau_dp_detect(struct nouveau_encoder *);
 >>>>>>> v3.18

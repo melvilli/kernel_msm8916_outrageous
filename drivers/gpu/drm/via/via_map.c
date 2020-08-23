@@ -32,7 +32,11 @@ static int via_do_init_map(struct drm_device *dev, drm_via_init_t *init)
 	DRM_DEBUG("\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->sarea = drm_getsarea(dev);
+=======
+	dev_priv->sarea = drm_legacy_getsarea(dev);
+>>>>>>> v3.18
 =======
 	dev_priv->sarea = drm_legacy_getsarea(dev);
 >>>>>>> v3.18
@@ -44,7 +48,11 @@ static int via_do_init_map(struct drm_device *dev, drm_via_init_t *init)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->fb = drm_core_findmap(dev, init->fb_offset);
+=======
+	dev_priv->fb = drm_legacy_findmap(dev, init->fb_offset);
+>>>>>>> v3.18
 =======
 	dev_priv->fb = drm_legacy_findmap(dev, init->fb_offset);
 >>>>>>> v3.18
@@ -55,7 +63,11 @@ static int via_do_init_map(struct drm_device *dev, drm_via_init_t *init)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_priv->mmio = drm_core_findmap(dev, init->mmio_offset);
+=======
+	dev_priv->mmio = drm_legacy_findmap(dev, init->mmio_offset);
+>>>>>>> v3.18
 =======
 	dev_priv->mmio = drm_legacy_findmap(dev, init->mmio_offset);
 >>>>>>> v3.18

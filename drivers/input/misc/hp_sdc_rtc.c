@@ -181,12 +181,18 @@ static int64_t hp_sdc_rtc_read_i8042timer (uint8_t loadcmd, int numreg)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hp_sdc_enqueue_transaction(&t)) return -1;
 =======
+=======
+>>>>>>> v3.18
 	if (hp_sdc_enqueue_transaction(&t)) {
 		up(&i8042tregs);
 		return -1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	
 	/* Sleep until results come back. */

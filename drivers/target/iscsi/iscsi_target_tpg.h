@@ -6,10 +6,16 @@ extern int iscsit_load_discovery_tpg(void);
 extern void iscsit_release_discovery_tpg(void);
 extern struct iscsi_portal_group *iscsit_get_tpg_from_np(struct iscsi_tiqn *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct iscsi_np *);
 extern int iscsit_get_tpg(struct iscsi_portal_group *);
 extern void iscsit_put_tpg(struct iscsi_portal_group *);
 extern void iscsit_clear_tpg_np_login_threads(struct iscsi_portal_group *);
+=======
+			struct iscsi_np *, struct iscsi_tpg_np **);
+extern int iscsit_get_tpg(struct iscsi_portal_group *);
+extern void iscsit_put_tpg(struct iscsi_portal_group *);
+>>>>>>> v3.18
 =======
 			struct iscsi_np *, struct iscsi_tpg_np **);
 extern int iscsit_get_tpg(struct iscsi_portal_group *);
@@ -44,6 +50,12 @@ extern int iscsit_ta_cache_dynamic_acls(struct iscsi_portal_group *, u32);
 extern int iscsit_ta_demo_mode_write_protect(struct iscsi_portal_group *, u32);
 extern int iscsit_ta_prod_mode_write_protect(struct iscsi_portal_group *, u32);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int iscsit_ta_demo_mode_discovery(struct iscsi_portal_group *, u32);
+extern int iscsit_ta_default_erl(struct iscsi_portal_group *, u32);
+extern int iscsit_ta_t10_pi(struct iscsi_portal_group *, u32);
+>>>>>>> v3.18
 =======
 extern int iscsit_ta_demo_mode_discovery(struct iscsi_portal_group *, u32);
 extern int iscsit_ta_default_erl(struct iscsi_portal_group *, u32);

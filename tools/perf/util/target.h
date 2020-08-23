@@ -5,7 +5,11 @@
 #include <sys/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct perf_target {
+=======
+struct target {
+>>>>>>> v3.18
 =======
 struct target {
 >>>>>>> v3.18
@@ -17,17 +21,23 @@ struct target {
 	bool	     system_wide;
 	bool	     uses_mmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 enum perf_target_errno {
 	PERF_ERRNO_TARGET__SUCCESS		= 0,
 =======
+=======
+>>>>>>> v3.18
 	bool	     default_per_cpu;
 	bool	     per_thread;
 };
 
 enum target_errno {
 	TARGET_ERRNO__SUCCESS		= 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -37,6 +47,7 @@ enum target_errno {
 	 *
 	 * http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/errno.h.html
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__PERF_ERRNO_TARGET__START		= -10000,
 
@@ -63,6 +74,8 @@ int perf_target__strerror(struct perf_target *target, int errnum, char *buf,
 
 static inline bool perf_target__has_task(struct perf_target *target)
 =======
+=======
+>>>>>>> v3.18
 	__TARGET_ERRNO__START		= -10000,
 
 	/* for target__validate() */
@@ -86,13 +99,20 @@ enum target_errno target__parse_uid(struct target *target);
 int target__strerror(struct target *target, int errnum, char *buf, size_t buflen);
 
 static inline bool target__has_task(struct target *target)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return target->tid || target->pid || target->uid_str;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool perf_target__has_cpu(struct perf_target *target)
+=======
+static inline bool target__has_cpu(struct target *target)
+>>>>>>> v3.18
 =======
 static inline bool target__has_cpu(struct target *target)
 >>>>>>> v3.18
@@ -101,10 +121,13 @@ static inline bool target__has_cpu(struct target *target)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool perf_target__none(struct perf_target *target)
 {
 	return !perf_target__has_task(target) && !perf_target__has_cpu(target);
 =======
+=======
+>>>>>>> v3.18
 static inline bool target__none(struct target *target)
 {
 	return !target__has_task(target) && !target__has_cpu(target);
@@ -121,6 +144,9 @@ static inline bool target__uses_dummy_map(struct target *target)
 		use_dummy = true;
 
 	return use_dummy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

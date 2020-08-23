@@ -16,6 +16,7 @@
 #include "ip6_offload.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcp_v6_gso_send_check(struct sk_buff *skb)
 {
 	const struct ipv6hdr *ipv6h;
@@ -65,6 +66,8 @@ flush:
 		skb->ip_summed = CHECKSUM_UNNECESSARY;
 		break;
 =======
+=======
+>>>>>>> v3.18
 static struct sk_buff **tcp6_gro_receive(struct sk_buff **head,
 					 struct sk_buff *skb)
 {
@@ -74,6 +77,9 @@ static struct sk_buff **tcp6_gro_receive(struct sk_buff **head,
 				      ip6_gro_compute_pseudo)) {
 		NAPI_GRO_CB(skb)->flush = 1;
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -81,7 +87,11 @@ static struct sk_buff **tcp6_gro_receive(struct sk_buff **head,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcp6_gro_complete(struct sk_buff *skb)
+=======
+static int tcp6_gro_complete(struct sk_buff *skb, int thoff)
+>>>>>>> v3.18
 =======
 static int tcp6_gro_complete(struct sk_buff *skb, int thoff)
 >>>>>>> v3.18
@@ -90,9 +100,15 @@ static int tcp6_gro_complete(struct sk_buff *skb, int thoff)
 	struct tcphdr *th = tcp_hdr(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	th->check = ~tcp_v6_check(skb->len - skb_transport_offset(skb),
 				  &iph->saddr, &iph->daddr, 0);
 	skb_shinfo(skb)->gso_type = SKB_GSO_TCPV6;
+=======
+	th->check = ~tcp_v6_check(skb->len - thoff, &iph->saddr,
+				  &iph->daddr, 0);
+	skb_shinfo(skb)->gso_type |= SKB_GSO_TCPV6;
+>>>>>>> v3.18
 =======
 	th->check = ~tcp_v6_check(skb->len - thoff, &iph->saddr,
 				  &iph->daddr, 0);
@@ -103,11 +119,14 @@ static int tcp6_gro_complete(struct sk_buff *skb, int thoff)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct net_offload tcpv6_offload = {
 	.callbacks = {
 		.gso_send_check	=	tcp_v6_gso_send_check,
 		.gso_segment	=	tcp_tso_segment,
 =======
+=======
+>>>>>>> v3.18
 struct sk_buff *tcp6_gso_segment(struct sk_buff *skb,
 				 netdev_features_t features)
 {
@@ -134,6 +153,9 @@ struct sk_buff *tcp6_gso_segment(struct sk_buff *skb,
 static const struct net_offload tcpv6_offload = {
 	.callbacks = {
 		.gso_segment	=	tcp6_gso_segment,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.gro_receive	=	tcp6_gro_receive,
 		.gro_complete	=	tcp6_gro_complete,

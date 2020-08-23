@@ -28,7 +28,10 @@
 #define UARTn_FRAME_DATABITS__MASK	0x000f
 #define UARTn_FRAME_DATABITS(n)		((n) - 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UARTn_FRAME_PARITY__MASK	0x0300
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define UARTn_FRAME_PARITY_NONE		0x0000
@@ -190,11 +193,14 @@ static void efm32_uart_stop_rx(struct uart_port *port)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void efm32_uart_enable_ms(struct uart_port *port)
 {
 	/* no handshake lines, no modem status interrupts */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void efm32_uart_break_ctl(struct uart_port *port, int ctl)
@@ -276,15 +282,21 @@ static irqreturn_t efm32_uart_rxirq(int irq, void *data)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(tport);
 
 	spin_unlock(&port->lock);
 
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&port->lock);
 
 	tty_flip_buffer_push(tport);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return handled;
 }
@@ -422,7 +434,11 @@ static void efm32_uart_set_termios(struct uart_port *port,
 		port->read_status_mask |=
 			UARTn_RXDATAX_FERR | UARTn_RXDATAX_PERR;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new->c_iflag & (BRKINT | PARMRK))
+=======
+	if (new->c_iflag & (IGNBRK | BRKINT | PARMRK))
+>>>>>>> v3.18
 =======
 	if (new->c_iflag & (IGNBRK | BRKINT | PARMRK))
 >>>>>>> v3.18
@@ -518,7 +534,10 @@ static struct uart_ops efm32_uart_pops = {
 	.start_tx = efm32_uart_start_tx,
 	.stop_rx = efm32_uart_stop_rx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.enable_ms = efm32_uart_enable_ms,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.break_ctl = efm32_uart_break_ctl,
@@ -600,6 +619,7 @@ static void efm32_uart_console_get_options(struct efm32_uart_port *efm_port,
 
 	frame = efm32_uart_read32(efm_port, UARTn_FRAME);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (frame & UARTn_FRAME_PARITY__MASK) {
 	case UARTn_FRAME_PARITY_ODD:
 		*parity = 'o';
@@ -611,12 +631,17 @@ static void efm32_uart_console_get_options(struct efm32_uart_port *efm_port,
 		*parity = 'n';
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (frame & UARTn_FRAME_PARITY_ODD)
 		*parity = 'o';
 	else if (frame & UARTn_FRAME_PARITY_EVEN)
 		*parity = 'e';
 	else
 		*parity = 'n';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*bits = (frame & UARTn_FRAME_DATABITS__MASK) -
@@ -706,8 +731,11 @@ static int efm32_uart_probe_dt(struct platform_device *pdev,
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = of_property_read_u32(np, "location", &location);
 =======
+=======
+>>>>>>> v3.18
 	ret = of_property_read_u32(np, "energymicro,location", &location);
 
 	if (ret)
@@ -718,6 +746,9 @@ static int efm32_uart_probe_dt(struct platform_device *pdev,
 		/* fall back to old and (wrongly) generic property "location" */
 		ret = of_property_read_u32(np, "location", &location);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!ret) {
 		if (location > 5) {
@@ -746,6 +777,10 @@ static int efm32_uart_probe(struct platform_device *pdev)
 	struct efm32_uart_port *efm_port;
 	struct resource *res;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int line;
+>>>>>>> v3.18
 =======
 	unsigned int line;
 >>>>>>> v3.18
@@ -802,12 +837,15 @@ static int efm32_uart_probe(struct platform_device *pdev)
 		if (pdata)
 			efm_port->pdata = *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	if (efm_port->port.line >= 0 &&
 			efm_port->port.line < ARRAY_SIZE(efm32_uart_ports))
 		efm32_uart_ports[efm_port->port.line] = efm_port;
 =======
+=======
+>>>>>>> v3.18
 	} else if (ret < 0)
 		goto err_probe_dt;
 
@@ -815,6 +853,9 @@ static int efm32_uart_probe(struct platform_device *pdev)
 
 	if (line >= 0 && line < ARRAY_SIZE(efm32_uart_ports))
 		efm32_uart_ports[line] = efm_port;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = uart_add_one_port(&efm32_uart_reg, &efm_port->port);
@@ -822,8 +863,14 @@ static int efm32_uart_probe(struct platform_device *pdev)
 		dev_dbg(&pdev->dev, "failed to add port: %d\n", ret);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pdev->id >= 0 && pdev->id < ARRAY_SIZE(efm32_uart_ports))
 			efm32_uart_ports[pdev->id] = NULL;
+=======
+		if (line >= 0 && line < ARRAY_SIZE(efm32_uart_ports))
+			efm32_uart_ports[line] = NULL;
+err_probe_dt:
+>>>>>>> v3.18
 =======
 		if (line >= 0 && line < ARRAY_SIZE(efm32_uart_ports))
 			efm32_uart_ports[line] = NULL;
@@ -845,6 +892,7 @@ static int efm32_uart_remove(struct platform_device *pdev)
 {
 	struct efm32_uart_port *efm_port = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	platform_set_drvdata(pdev, NULL);
 
@@ -853,12 +901,17 @@ static int efm32_uart_remove(struct platform_device *pdev)
 	if (pdev->id >= 0 && pdev->id < ARRAY_SIZE(efm32_uart_ports))
 		efm32_uart_ports[pdev->id] = NULL;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int line = efm_port->port.line;
 
 	uart_remove_one_port(&efm32_uart_reg, &efm_port->port);
 
 	if (line >= 0 && line < ARRAY_SIZE(efm32_uart_ports))
 		efm32_uart_ports[line] = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(efm_port);
@@ -867,14 +920,20 @@ static int efm32_uart_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id efm32_uart_dt_ids[] = {
 	{
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id efm32_uart_dt_ids[] = {
 	{
 		.compatible = "energymicro,efm32-uart",
 	}, {
 		/* doesn't follow the "vendor,device" scheme, don't use */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.compatible = "efm32,uart",
 	}, {
@@ -918,6 +977,10 @@ static void __exit efm32_uart_exit(void)
 	uart_unregister_driver(&efm32_uart_reg);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+module_exit(efm32_uart_exit);
+>>>>>>> v3.18
 =======
 module_exit(efm32_uart_exit);
 >>>>>>> v3.18

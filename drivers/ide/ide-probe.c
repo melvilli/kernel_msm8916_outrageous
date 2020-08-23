@@ -546,7 +546,11 @@ static int ide_register_port(ide_hwif_t *hwif)
 
 	/* register with global device tree */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_name(&hwif->gendev, hwif->name);
+=======
+	dev_set_name(&hwif->gendev, "%s", hwif->name);
+>>>>>>> v3.18
 =======
 	dev_set_name(&hwif->gendev, "%s", hwif->name);
 >>>>>>> v3.18
@@ -564,7 +568,11 @@ static int ide_register_port(ide_hwif_t *hwif)
 
 	hwif->portdev = device_create(ide_port_class, &hwif->gendev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      MKDEV(0, 0), hwif, hwif->name);
+=======
+				      MKDEV(0, 0), hwif, "%s", hwif->name);
+>>>>>>> v3.18
 =======
 				      MKDEV(0, 0), hwif, "%s", hwif->name);
 >>>>>>> v3.18
@@ -862,8 +870,14 @@ static int init_irq (ide_hwif_t *hwif)
 		irq_handler = ide_intr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(hwif->irq, irq_handler, sa, hwif->name, hwif))
 		goto out_up;
+=======
+	if (!host->get_lock)
+		if (request_irq(hwif->irq, irq_handler, sa, hwif->name, hwif))
+			goto out_up;
+>>>>>>> v3.18
 =======
 	if (!host->get_lock)
 		if (request_irq(hwif->irq, irq_handler, sa, hwif->name, hwif))
@@ -1548,7 +1562,12 @@ static void ide_unregister(ide_hwif_t *hwif)
 	ide_proc_unregister_port(hwif);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_irq(hwif->irq, hwif);
+=======
+	if (!hwif->host->get_lock)
+		free_irq(hwif->irq, hwif);
+>>>>>>> v3.18
 =======
 	if (!hwif->host->get_lock)
 		free_irq(hwif->irq, hwif);

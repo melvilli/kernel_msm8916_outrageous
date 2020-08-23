@@ -394,7 +394,11 @@ static inline void pasemi_pcmcia_init(void)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id pasemi_bus_ids[] = {
+=======
+static const struct of_device_id pasemi_bus_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id pasemi_bus_ids[] = {
 >>>>>>> v3.18

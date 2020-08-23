@@ -25,6 +25,10 @@
 struct isp1704_charger_data {
 	void		(*set_power)(bool on);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int		enable_gpio;
+>>>>>>> v3.18
 =======
 	int		enable_gpio;
 >>>>>>> v3.18

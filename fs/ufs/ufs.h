@@ -2,13 +2,19 @@
 #define _UFS_UFS_H 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef pr_fmt
 #undef pr_fmt
 #endif
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define UFS_MAX_GROUP_LOADED 8
 #define UFS_CGNO_EMPTY ((unsigned)-1)
@@ -34,7 +40,10 @@ struct ufs_sb_info {
 	struct delayed_work sync_work; /* FS sync delayed work */
 	spinlock_t work_lock; /* protects sync_work and work_queued */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex s_lock;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -85,9 +94,15 @@ struct ufs_inode_info {
 #ifdef CONFIG_UFS_DEBUG
 #	define UFSD(f, a...)	{					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk ("UFSD (%s, %d): %s:",				\
 			__FILE__, __LINE__, __func__);		\
 		printk (f, ## a);					\
+=======
+		pr_debug("UFSD (%s, %d): %s:",				\
+			__FILE__, __LINE__, __func__);		\
+		pr_debug(f, ## a);					\
+>>>>>>> v3.18
 =======
 		pr_debug("UFSD (%s, %d): %s:",				\
 			__FILE__, __LINE__, __func__);		\

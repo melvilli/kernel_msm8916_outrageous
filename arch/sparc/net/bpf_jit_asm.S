@@ -7,6 +7,10 @@
 #define SCRATCH_OFF	STACK_BIAS + 128
 #define BE_PTR(label)	be,pn %xcc, label
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SIGN_EXTEND(reg)	sra reg, 0, reg
+>>>>>>> v3.18
 =======
 #define SIGN_EXTEND(reg)	sra reg, 0, reg
 >>>>>>> v3.18
@@ -15,6 +19,10 @@
 #define SCRATCH_OFF	72
 #define BE_PTR(label)	be label
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SIGN_EXTEND(reg)
+>>>>>>> v3.18
 =======
 #define SIGN_EXTEND(reg)
 >>>>>>> v3.18
@@ -144,6 +152,10 @@ bpf_slow_path_byte_msh:
 	mov	%i0, %o0;				\
 	mov	r_OFF, %o1;				\
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SIGN_EXTEND(%o1);				\
+>>>>>>> v3.18
 =======
 	SIGN_EXTEND(%o1);				\
 >>>>>>> v3.18

@@ -17,6 +17,7 @@
 #include <asm/pgalloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long page_table_shareable(struct vm_area_struct *svma,
 				struct vm_area_struct *vma,
 				unsigned long addr, pgoff_t idx)
@@ -182,6 +183,8 @@ pte_t *huge_pte_offset(struct mm_struct *mm, unsigned long addr)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #if 0	/* This is just for testing */
 struct page *
 follow_huge_addr(struct mm_struct *mm, unsigned long address, int write)
@@ -225,11 +228,14 @@ follow_huge_pmd(struct mm_struct *mm, unsigned long address,
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int pmd_huge_support(void)
 {
 	return 0;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else
@@ -249,6 +255,7 @@ int pud_huge(pud_t pud)
 {
 	return !!(pud_val(pud) & _PAGE_PSE);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 struct page *
@@ -289,6 +296,11 @@ int pmd_huge_support(void)
 
 #ifdef CONFIG_HUGETLB_PAGE
 >>>>>>> v3.18
+=======
+#endif
+
+#ifdef CONFIG_HUGETLB_PAGE
+>>>>>>> v3.18
 static unsigned long hugetlb_get_unmapped_area_bottomup(struct file *file,
 		unsigned long addr, unsigned long len,
 		unsigned long pgoff, unsigned long flags)
@@ -299,7 +311,11 @@ static unsigned long hugetlb_get_unmapped_area_bottomup(struct file *file,
 	info.flags = 0;
 	info.length = len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info.low_limit = TASK_UNMAPPED_BASE;
+=======
+	info.low_limit = current->mm->mmap_legacy_base;
+>>>>>>> v3.18
 =======
 	info.low_limit = current->mm->mmap_legacy_base;
 >>>>>>> v3.18
@@ -366,7 +382,11 @@ hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
 		vma = find_vma(mm, addr);
 		if (TASK_SIZE - len >= addr &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (!vma || addr + len <= vm_start_gap(vma)))
+=======
+		    (!vma || addr + len <= vma->vm_start))
+>>>>>>> v3.18
 =======
 		    (!vma || addr + len <= vma->vm_start))
 >>>>>>> v3.18
@@ -380,8 +400,12 @@ hugetlb_get_unmapped_area(struct file *file, unsigned long addr,
 				pgoff, flags);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #endif /*HAVE_ARCH_HUGETLB_UNMAPPED_AREA*/
+=======
+#endif /* CONFIG_HUGETLB_PAGE */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_HUGETLB_PAGE */
 >>>>>>> v3.18

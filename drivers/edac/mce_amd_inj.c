@@ -44,7 +44,11 @@ static ssize_t edac_inject_##reg##_store(struct kobject *kobj,		\
 	unsigned long value;						\
 									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(data, 16, &value);				\
+=======
+	ret = kstrtoul(data, 16, &value);				\
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(data, 16, &value);				\
 >>>>>>> v3.18
@@ -88,7 +92,11 @@ static ssize_t edac_inject_bank_store(struct kobject *kobj,
 	unsigned long value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(data, 10, &value);
+=======
+	ret = kstrtoul(data, 10, &value);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(data, 10, &value);
 >>>>>>> v3.18

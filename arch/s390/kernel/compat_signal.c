@@ -37,8 +37,13 @@ typedef struct
 	_sigregs32 sregs;
 	int signo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 gprs_high[NUM_GPRS];
 	__u8 retcode[S390_SYSCALL_SIZE];
+=======
+	_sigregs_ext32 sregs_ext;
+	__u16 svc_insn;		/* Offset of svc_insn is NOT fixed! */
+>>>>>>> v3.18
 =======
 	_sigregs_ext32 sregs_ext;
 	__u16 svc_insn;		/* Offset of svc_insn is NOT fixed! */
@@ -49,10 +54,16 @@ typedef struct
 {
 	__u8 callee_used_stack[__SIGNAL_FRAMESIZE32];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 retcode[S390_SYSCALL_SIZE];
 	compat_siginfo_t info;
 	struct ucontext32 uc;
 	__u32 gprs_high[NUM_GPRS];
+=======
+	__u16 svc_insn;
+	compat_siginfo_t info;
+	struct ucontext32 uc;
+>>>>>>> v3.18
 =======
 	__u16 svc_insn;
 	compat_siginfo_t info;
@@ -111,7 +122,11 @@ int copy_siginfo_to_user32(compat_siginfo_t __user *to, const siginfo_t *from)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
+=======
+	return err ? -EFAULT : 0;
+>>>>>>> v3.18
 =======
 	return err ? -EFAULT : 0;
 >>>>>>> v3.18
@@ -164,8 +179,11 @@ int copy_siginfo_from_user32(siginfo_t *to, compat_siginfo_t __user *from)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return err;
 =======
+=======
+>>>>>>> v3.18
 	return err ? -EFAULT : 0;
 }
 
@@ -199,11 +217,15 @@ static void load_sigregs(void)
 		restore_vx_regs(current->thread.vxrs);
 	} else
 		restore_fp_regs(current->thread.fp_regs.fprs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int save_sigregs32(struct pt_regs *regs, _sigregs32 __user *sregs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	_s390_regs_common32 regs32;
 	int err, i;
@@ -224,6 +246,8 @@ static int save_sigregs32(struct pt_regs *regs, _sigregs32 __user *sregs)
 	return __copy_to_user(&sregs->fpregs, &current->thread.fp_regs,
 			      sizeof(_s390_fp_regs32));
 =======
+=======
+>>>>>>> v3.18
 	_sigregs32 user_sregs;
 	int i;
 
@@ -241,14 +265,22 @@ static int save_sigregs32(struct pt_regs *regs, _sigregs32 __user *sregs)
 	if (__copy_to_user(sregs, &user_sregs, sizeof(_sigregs32)))
 		return -EFAULT;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int restore_sigregs32(struct pt_regs *regs,_sigregs32 __user *sregs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_s390_regs_common32 regs32;
 	int err, i;
+=======
+	_sigregs32 user_sregs;
+	int i;
+>>>>>>> v3.18
 =======
 	_sigregs32 user_sregs;
 	int i;
@@ -257,6 +289,7 @@ static int restore_sigregs32(struct pt_regs *regs,_sigregs32 __user *sregs)
 	/* Alwys make any pending restarted system call return -EINTR */
 	current_thread_info()->restart_block.fn = do_no_restart_syscall;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = __copy_from_user(&regs32, &sregs->regs, sizeof(regs32));
 	if (err)
@@ -311,6 +344,8 @@ static int restore_sigregs_gprs_high(struct pt_regs *regs, __u32 __user *uregs)
 
 asmlinkage long sys32_sigreturn(void)
 =======
+=======
+>>>>>>> v3.18
 	if (__copy_from_user(&user_sregs, &sregs->regs, sizeof(user_sregs)))
 		return -EFAULT;
 
@@ -400,6 +435,9 @@ static int restore_sigregs_ext32(struct pt_regs *regs,
 }
 
 COMPAT_SYSCALL_DEFINE0(sigreturn)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct pt_regs *regs = task_pt_regs(current);
@@ -412,8 +450,14 @@ COMPAT_SYSCALL_DEFINE0(sigreturn)
 	if (restore_sigregs32(regs, &frame->sregs))
 		goto badframe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (restore_sigregs_gprs_high(regs, frame->gprs_high))
 		goto badframe;
+=======
+	if (restore_sigregs_ext32(regs, &frame->sregs_ext))
+		goto badframe;
+	load_sigregs();
+>>>>>>> v3.18
 =======
 	if (restore_sigregs_ext32(regs, &frame->sregs_ext))
 		goto badframe;
@@ -426,7 +470,11 @@ badframe:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long sys32_rt_sigreturn(void)
+=======
+COMPAT_SYSCALL_DEFINE0(rt_sigreturn)
+>>>>>>> v3.18
 =======
 COMPAT_SYSCALL_DEFINE0(rt_sigreturn)
 >>>>>>> v3.18
@@ -439,6 +487,7 @@ COMPAT_SYSCALL_DEFINE0(rt_sigreturn)
 		goto badframe;
 	set_current_blocked(&set);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (restore_sigregs32(regs, &frame->uc.uc_mcontext))
 		goto badframe;
 	if (restore_sigregs_gprs_high(regs, frame->gprs_high))
@@ -446,6 +495,8 @@ COMPAT_SYSCALL_DEFINE0(rt_sigreturn)
 	if (compat_restore_altstack(&frame->uc.uc_stack))
 		goto badframe; 
 =======
+=======
+>>>>>>> v3.18
 	if (compat_restore_altstack(&frame->uc.uc_stack))
 		goto badframe;
 	if (restore_sigregs32(regs, &frame->uc.uc_mcontext))
@@ -453,6 +504,9 @@ COMPAT_SYSCALL_DEFINE0(rt_sigreturn)
 	if (restore_sigregs_ext32(regs, &frame->uc.uc_mcontext_ext))
 		goto badframe;
 	load_sigregs();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return regs->gprs[2];
 badframe:
@@ -500,6 +554,7 @@ static inline int map_signal(int sig)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_frame32(int sig, struct k_sigaction *ka,
 			sigset_t *set, struct pt_regs * regs)
 {
@@ -541,6 +596,8 @@ static int setup_frame32(int sig, struct k_sigaction *ka,
 		(regs->psw.mask & ~PSW_MASK_ASC);
 	regs->psw.addr = (__force __u64) ka->sa.sa_handler;
 =======
+=======
+>>>>>>> v3.18
 static int setup_frame32(struct ksignal *ksig, sigset_t *set,
 			 struct pt_regs *regs)
 {
@@ -609,6 +666,9 @@ static int setup_frame32(struct ksignal *ksig, sigset_t *set,
 		(PSW_USER_BITS & PSW_MASK_ASC) |
 		(regs->psw.mask & ~PSW_MASK_ASC);
 	regs->psw.addr = (__force __u64) ksig->ka.sa.sa_handler;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	regs->gprs[2] = map_signal(sig);
@@ -624,6 +684,7 @@ static int setup_frame32(struct ksignal *ksig, sigset_t *set,
 		regs->gprs[6] = task_thread_info(current)->last_break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Place signal number on stack to allow backtrace from handler.  */
 	if (__put_user(regs->gprs[2], (int __force __user *) &frame->signo))
@@ -681,6 +742,8 @@ static int setup_rt_frame32(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	regs->gprs[2] = map_signal(sig);
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -752,16 +815,22 @@ static int setup_rt_frame32(struct ksignal *ksig, sigset_t *set,
 	regs->psw.addr = (__u64 __force) ksig->ka.sa.sa_handler;
 
 	regs->gprs[2] = map_signal(ksig->sig);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	regs->gprs[3] = (__force __u64) &frame->info;
 	regs->gprs[4] = (__force __u64) &frame->uc;
 	regs->gprs[5] = task_thread_info(current)->last_break;
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 give_sigsegv:
 	force_sigsegv(sig, current);
 	return -EFAULT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -771,8 +840,13 @@ give_sigsegv:
  */	
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void handle_signal32(unsigned long sig, struct k_sigaction *ka,
 		    siginfo_t *info, sigset_t *oldset, struct pt_regs *regs)
+=======
+void handle_signal32(struct ksignal *ksig, sigset_t *oldset,
+		     struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void handle_signal32(struct ksignal *ksig, sigset_t *oldset,
 		     struct pt_regs *regs)
@@ -781,6 +855,7 @@ void handle_signal32(struct ksignal *ksig, sigset_t *oldset,
 	int ret;
 
 	/* Set up the stack frame */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ka->sa.sa_flags & SA_SIGINFO)
 		ret = setup_rt_frame32(sig, ka, info, oldset, regs);
@@ -791,12 +866,17 @@ void handle_signal32(struct ksignal *ksig, sigset_t *oldset,
 	signal_delivered(sig, info, ka, regs,
 				 test_thread_flag(TIF_SINGLE_STEP));
 =======
+=======
+>>>>>>> v3.18
 	if (ksig->ka.sa.sa_flags & SA_SIGINFO)
 		ret = setup_rt_frame32(ksig, oldset, regs);
 	else
 		ret = setup_frame32(ksig, oldset, regs);
 
 	signal_setup_done(ret, ksig, test_thread_flag(TIF_SINGLE_STEP));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

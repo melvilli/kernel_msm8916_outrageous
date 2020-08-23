@@ -37,8 +37,11 @@ struct nouveau_fbdev {
 	struct list_head fbdev_list;
 	struct drm_device *dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int saved_flags;
 =======
+=======
+>>>>>>> v3.18
 	struct work_struct work;
 	unsigned int saved_flags;
 	struct nvif_object surf2d;
@@ -48,6 +51,9 @@ struct nouveau_fbdev {
 	struct nvif_object gdi;
 	struct nvif_object blit;
 	struct nvif_object twod;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -74,12 +80,15 @@ int nouveau_fbcon_init(struct drm_device *dev);
 void nouveau_fbcon_fini(struct drm_device *dev);
 void nouveau_fbcon_set_suspend(struct drm_device *dev, int state);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nouveau_fbcon_zfill_all(struct drm_device *dev);
 void nouveau_fbcon_save_disable_accel(struct drm_device *dev);
 void nouveau_fbcon_restore_accel(struct drm_device *dev);
 
 void nouveau_fbcon_output_poll_changed(struct drm_device *dev);
 =======
+=======
+>>>>>>> v3.18
 void nouveau_fbcon_accel_save_disable(struct drm_device *dev);
 void nouveau_fbcon_accel_restore(struct drm_device *dev);
 
@@ -87,6 +96,9 @@ void nouveau_fbcon_output_poll_changed(struct drm_device *dev);
 
 extern int nouveau_nofbaccel;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __NV50_FBCON_H__ */
 

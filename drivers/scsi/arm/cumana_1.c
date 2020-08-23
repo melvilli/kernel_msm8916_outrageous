@@ -37,9 +37,12 @@
 	void __iomem *dma
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BOARD_NORMAL	0
 #define BOARD_NCR53C400	1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "../NCR5380.h"
@@ -266,7 +269,11 @@ static int cumanascsi1_probe(struct expansion_card *ec,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(host->irq, cumanascsi_intr, IRQF_DISABLED,
+=======
+	ret = request_irq(host->irq, cumanascsi_intr, 0,
+>>>>>>> v3.18
 =======
 	ret = request_irq(host->irq, cumanascsi_intr, 0,
 >>>>>>> v3.18

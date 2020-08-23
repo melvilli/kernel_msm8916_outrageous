@@ -24,7 +24,11 @@
 #include "ath9k.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ath_pci_id_table) = {
+=======
+static const struct pci_device_id ath_pci_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ath_pci_id_table[] = {
 >>>>>>> v3.18
@@ -34,7 +38,10 @@ static const struct pci_device_id ath_pci_id_table[] = {
 	{ PCI_VDEVICE(ATHEROS, 0x0029) }, /* PCI   */
 	{ PCI_VDEVICE(ATHEROS, 0x002A) }, /* PCI-E */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_ATHEROS,
 			 0x002A,
@@ -89,11 +96,15 @@ static const struct pci_device_id ath_pci_id_table[] = {
 			 0x2C37),
 	  .driver_data = ATH9K_PCI_BT_ANT_DIV },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ PCI_VDEVICE(ATHEROS, 0x002B) }, /* PCI-E */
 	{ PCI_VDEVICE(ATHEROS, 0x002C) }, /* PCI-E 802.11n bonded out */
 	{ PCI_VDEVICE(ATHEROS, 0x002D) }, /* PCI   */
 	{ PCI_VDEVICE(ATHEROS, 0x002E) }, /* PCI-E */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ PCI_VDEVICE(ATHEROS, 0x0030) }, /* PCI-E  AR9300 */
 	{ PCI_VDEVICE(ATHEROS, 0x0032) }, /* PCI-E  AR9485 */
@@ -102,6 +113,8 @@ static const struct pci_device_id ath_pci_id_table[] = {
 	{ PCI_VDEVICE(ATHEROS, 0x0037) }, /* PCI-E  AR1111/AR9485 */
 	{ PCI_VDEVICE(ATHEROS, 0x0036) }, /* PCI-E  AR9565 */
 =======
+=======
+>>>>>>> v3.18
 
 	/* Killer Wireless (3x3) */
 	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_ATHEROS,
@@ -673,6 +686,9 @@ static const struct pci_device_id ath_pci_id_table[] = {
 	{ PCI_VDEVICE(ATHEROS, 0x0036),
 	  .driver_data = ATH9K_PCI_BT_ANT_DIV },
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0 }
 };
@@ -703,7 +719,11 @@ static bool ath_pci_eeprom_read(struct ath_common *common, u32 off, u16 *data)
 	struct ath9k_platform_data *pdata = sc->dev->platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata) {
+=======
+	if (pdata && !pdata->use_eeprom) {
+>>>>>>> v3.18
 =======
 	if (pdata && !pdata->use_eeprom) {
 >>>>>>> v3.18
@@ -769,7 +789,10 @@ static void ath_pci_aspm_init(struct ath_common *common)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * 0x70c - Ack Frequency Register.
 	 *
@@ -786,6 +809,9 @@ static void ath_pci_aspm_init(struct ath_common *common)
 	if (AR_SREV_9462(ah))
 		pci_read_config_dword(pdev, 0x70c, &ah->config.aspm_l1_fix);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pcie_capability_read_word(parent, PCI_EXP_LNKCTL, &aspm);
 	if (aspm & (PCI_EXP_LNKCTL_ASPM_L0S | PCI_EXP_LNKCTL_ASPM_L1)) {
@@ -867,6 +893,10 @@ static int ath_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ath9k_fill_chanctx_ops();
+>>>>>>> v3.18
 =======
 	ath9k_fill_chanctx_ops();
 >>>>>>> v3.18
@@ -884,9 +914,13 @@ static int ath_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	sc->dev = &pdev->dev;
 	sc->mem = pcim_iomap_table(pdev)[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Will be cleared in ath9k_start() */
 	set_bit(SC_OP_INVALID, &sc->sc_flags);
+=======
+	sc->driver_data = id->driver_data;
+>>>>>>> v3.18
 =======
 	sc->driver_data = id->driver_data;
 >>>>>>> v3.18
@@ -948,6 +982,10 @@ static int ath_pci_suspend(struct device *device)
 	ath9k_stop_btcoex(sc);
 	ath9k_hw_disable(sc->sc_ah);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	del_timer_sync(&sc->sleep_timer);
+>>>>>>> v3.18
 =======
 	del_timer_sync(&sc->sleep_timer);
 >>>>>>> v3.18

@@ -12,6 +12,10 @@
 #include <linux/percpu.h>
 #include <linux/timex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/static_key.h>
+>>>>>>> v3.18
 =======
 #include <linux/static_key.h>
 >>>>>>> v3.18
@@ -25,7 +29,10 @@
 #include <asm/nmi.h>
 #include <asm/x86_init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/geode.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -46,8 +53,11 @@ static int __read_mostly tsc_unstable;
 static int __read_mostly tsc_disabled = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tsc_clocksource_reliable;
 =======
+=======
+>>>>>>> v3.18
 static struct static_key __use_tsc = STATIC_KEY_INIT;
 
 int tsc_clocksource_reliable;
@@ -279,6 +289,9 @@ done:
 	sched_clock_idle_wakeup_event(0);
 	local_irq_restore(flags);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Scheduler clock - returns current time in nanosec units.
@@ -286,7 +299,11 @@ done:
 u64 native_sched_clock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 this_offset;
+=======
+	u64 tsc_now;
+>>>>>>> v3.18
 =======
 	u64 tsc_now;
 >>>>>>> v3.18
@@ -300,7 +317,11 @@ u64 native_sched_clock(void)
 	 *   can achieve it. )
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(tsc_disabled)) {
+=======
+	if (!static_key_false(&__use_tsc)) {
+>>>>>>> v3.18
 =======
 	if (!static_key_false(&__use_tsc)) {
 >>>>>>> v3.18
@@ -310,15 +331,21 @@ u64 native_sched_clock(void)
 
 	/* read the Time Stamp Counter: */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdtscll(this_offset);
 
 	/* return the value in ns */
 	return __cycles_2_ns(this_offset);
 =======
+=======
+>>>>>>> v3.18
 	rdtscll(tsc_now);
 
 	/* return the value in ns */
 	return cycles_2_ns(tsc_now);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -347,13 +374,19 @@ int check_tsc_unstable(void)
 EXPORT_SYMBOL_GPL(check_tsc_unstable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int check_tsc_disabled(void)
 {
 	return tsc_disabled;
 }
 EXPORT_SYMBOL_GPL(check_tsc_disabled);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_X86_TSC
 int __init notsc_setup(char *str)
@@ -647,7 +680,11 @@ static unsigned long quick_pit_calibrate(void)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("Fast TSC calibration failed\n");
+=======
+	pr_err("Fast TSC calibration failed\n");
+>>>>>>> v3.18
 =======
 	pr_err("Fast TSC calibration failed\n");
 >>>>>>> v3.18
@@ -684,7 +721,10 @@ unsigned long native_calibrate_tsc(void)
 	int hpet = is_hpet_enabled(), i, loopmin;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Calibrate TSC using MSR for Intel Atom SoCs */
 	local_irq_save(flags);
 	fast_calibrate = try_msr_calibrate_tsc();
@@ -692,6 +732,9 @@ unsigned long native_calibrate_tsc(void)
 	if (fast_calibrate)
 		return fast_calibrate;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	local_irq_save(flags);
 	fast_calibrate = quick_pit_calibrate();
@@ -864,6 +907,7 @@ EXPORT_SYMBOL(recalibrate_cpu_khz);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Accelerators for sched_clock()
  * convert from cycles(64bits) => nanoseconds (64bits)
  *  basic equation:
@@ -916,12 +960,18 @@ static void set_cyc2ns_scale(unsigned long cpu_khz, int cpu)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static unsigned long long cyc2ns_suspend;
 
 void tsc_save_sched_clock_state(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sched_clock_stable)
+=======
+	if (!sched_clock_stable())
+>>>>>>> v3.18
 =======
 	if (!sched_clock_stable())
 >>>>>>> v3.18
@@ -945,7 +995,11 @@ void tsc_restore_sched_clock_state(void)
 	int cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!sched_clock_stable)
+=======
+	if (!sched_clock_stable())
+>>>>>>> v3.18
 =======
 	if (!sched_clock_stable())
 >>>>>>> v3.18
@@ -954,12 +1008,15 @@ void tsc_restore_sched_clock_state(void)
 	local_irq_save(flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__this_cpu_write(cyc2ns_offset, 0);
 	offset = cyc2ns_suspend - sched_clock();
 
 	for_each_possible_cpu(cpu)
 		per_cpu(cyc2ns_offset, cpu) = offset;
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We're comming out of suspend, there's no concurrency yet; don't
 	 * bother being nice about the RCU stuff, just write to both
@@ -975,6 +1032,9 @@ void tsc_restore_sched_clock_state(void)
 		per_cpu(cyc2ns.data[0].cyc2ns_offset, cpu) = offset;
 		per_cpu(cyc2ns.data[1].cyc2ns_offset, cpu) = offset;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	local_irq_restore(flags);
@@ -1019,8 +1079,12 @@ static int time_cpufreq_notifier(struct notifier_block *nb, unsigned long val,
 	}
 	if ((val == CPUFREQ_PRECHANGE  && freq->old < freq->new) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(val == CPUFREQ_POSTCHANGE && freq->old > freq->new) ||
 			(val == CPUFREQ_RESUMECHANGE)) {
+=======
+			(val == CPUFREQ_POSTCHANGE && freq->old > freq->new)) {
+>>>>>>> v3.18
 =======
 			(val == CPUFREQ_POSTCHANGE && freq->old > freq->new)) {
 >>>>>>> v3.18
@@ -1030,9 +1094,15 @@ static int time_cpufreq_notifier(struct notifier_block *nb, unsigned long val,
 		if (!(freq->flags & CPUFREQ_CONST_LOOPS))
 			mark_tsc_unstable("cpufreq changes");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	set_cyc2ns_scale(tsc_khz, freq->cpu);
+=======
+
+		set_cyc2ns_scale(tsc_khz, freq->cpu);
+	}
+>>>>>>> v3.18
 =======
 
 		set_cyc2ns_scale(tsc_khz, freq->cpu);
@@ -1067,7 +1137,11 @@ static struct clocksource clocksource_tsc;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * We compare the TSC to the cycle_last value in the clocksource
+=======
+ * We used to compare the TSC to the cycle_last value in the clocksource
+>>>>>>> v3.18
 =======
  * We used to compare the TSC to the cycle_last value in the clocksource
 >>>>>>> v3.18
@@ -1080,6 +1154,7 @@ static struct clocksource clocksource_tsc;
  * due to the unsigned delta calculation of the time keeping core
  * code, which is necessary to support wrapping clocksources like pm
  * timer.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 static cycle_t read_tsc(struct clocksource *cs)
@@ -1097,6 +1172,8 @@ static void resume_tsc(struct clocksource *cs)
 }
 
 =======
+=======
+>>>>>>> v3.18
  *
  * This sanity check is now done in the core timekeeping code.
  * checking the result of read_tsc() - cycle_last for being negative.
@@ -1110,11 +1187,15 @@ static cycle_t read_tsc(struct clocksource *cs)
 /*
  * .mask MUST be CLOCKSOURCE_MASK(64). See comment above read_tsc()
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clocksource clocksource_tsc = {
 	.name                   = "tsc",
 	.rating                 = 300,
 	.read                   = read_tsc,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.resume			= resume_tsc,
 	.mask                   = CLOCKSOURCE_MASK(64),
@@ -1129,6 +1210,12 @@ static struct clocksource clocksource_tsc = {
 				  CLOCK_SOURCE_MUST_VERIFY,
 	.archdata               = { .vclock_mode = VCLOCK_TSC },
 >>>>>>> v3.18
+=======
+	.mask                   = CLOCKSOURCE_MASK(64),
+	.flags                  = CLOCK_SOURCE_IS_CONTINUOUS |
+				  CLOCK_SOURCE_MUST_VERIFY,
+	.archdata               = { .vclock_mode = VCLOCK_TSC },
+>>>>>>> v3.18
 };
 
 void mark_tsc_unstable(char *reason)
@@ -1136,7 +1223,11 @@ void mark_tsc_unstable(char *reason)
 	if (!tsc_unstable) {
 		tsc_unstable = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sched_clock_stable = 0;
+=======
+		clear_sched_clock_stable();
+>>>>>>> v3.18
 =======
 		clear_sched_clock_stable();
 >>>>>>> v3.18
@@ -1157,6 +1248,7 @@ EXPORT_SYMBOL_GPL(mark_tsc_unstable);
 static void __init check_system_tsc_reliable(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_MGEODEGX1) || defined(CONFIG_MGEODE_LX) || defined(CONFIG_X86_GENERIC)
 	if (is_geode_lx()) {
 		/* RTSC counts during suspend */
@@ -1169,6 +1261,8 @@ static void __init check_system_tsc_reliable(void)
 			tsc_clocksource_reliable = 1;
 	}
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MGEODE_LX
 	/* RTSC counts during suspend */
 #define RTSC_SUSP 0x100
@@ -1178,6 +1272,9 @@ static void __init check_system_tsc_reliable(void)
 	/* Geode_LX - the OLPC CPU has a very reliable TSC */
 	if (res_low & RTSC_SUSP)
 		tsc_clocksource_reliable = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	if (boot_cpu_has(X86_FEATURE_TSC_RELIABLE))
@@ -1189,7 +1286,11 @@ static void __init check_system_tsc_reliable(void)
  * over all CPUs.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 __cpuinit int unsynchronized_tsc(void)
+=======
+int unsynchronized_tsc(void)
+>>>>>>> v3.18
 =======
 int unsynchronized_tsc(void)
 >>>>>>> v3.18
@@ -1361,13 +1462,19 @@ void __init tsc_init(void)
 	 * up if their speed diverges)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_possible_cpu(cpu)
 		set_cyc2ns_scale(cpu_khz, cpu);
 =======
+=======
+>>>>>>> v3.18
 	for_each_possible_cpu(cpu) {
 		cyc2ns_init(cpu);
 		set_cyc2ns_scale(cpu_khz, cpu);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (tsc_disabled > 0)
@@ -1375,7 +1482,13 @@ void __init tsc_init(void)
 
 	/* now allow native_sched_clock() to use rdtsc */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tsc_disabled = 0;
+=======
+
+	tsc_disabled = 0;
+	static_key_slow_inc(&__use_tsc);
+>>>>>>> v3.18
 =======
 
 	tsc_disabled = 0;
@@ -1405,7 +1518,11 @@ void __init tsc_init(void)
  * cpus in the socket - this should be a safe assumption.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __cpuinit calibrate_delay_is_known(void)
+=======
+unsigned long calibrate_delay_is_known(void)
+>>>>>>> v3.18
 =======
 unsigned long calibrate_delay_is_known(void)
 >>>>>>> v3.18

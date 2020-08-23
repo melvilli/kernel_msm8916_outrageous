@@ -37,6 +37,10 @@
 #include <linux/notifier.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "common.h"
+>>>>>>> v3.18
 =======
 #include "common.h"
 >>>>>>> v3.18
@@ -60,7 +64,11 @@ static void _add_clkdev(struct omap_device *od, const char *clk_alias,
 	r = clk_get_sys(dev_name(&od->pdev->dev), clk_alias);
 	if (!IS_ERR(r)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_warn(&od->pdev->dev,
+=======
+		dev_dbg(&od->pdev->dev,
+>>>>>>> v3.18
 =======
 		dev_dbg(&od->pdev->dev,
 >>>>>>> v3.18
@@ -138,6 +146,10 @@ static int omap_device_build_from_dt(struct platform_device *pdev)
 	const char *oh_name;
 	int oh_cnt, i, ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool device_active = false;
+>>>>>>> v3.18
 =======
 	bool device_active = false;
 >>>>>>> v3.18
@@ -165,17 +177,23 @@ static int omap_device_build_from_dt(struct platform_device *pdev)
 		}
 		hwmods[i] = oh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	od = omap_device_alloc(pdev, hwmods, oh_cnt);
 	if (!od) {
 =======
+=======
+>>>>>>> v3.18
 		if (oh->flags & HWMOD_INIT_NO_IDLE)
 			device_active = true;
 	}
 
 	od = omap_device_alloc(pdev, hwmods, oh_cnt);
 	if (IS_ERR(od)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(&pdev->dev, "Cannot allocate omap_device for :%s\n",
 			oh_name);
@@ -192,6 +210,7 @@ static int omap_device_build_from_dt(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_get_property(node, "ti,no_idle_on_suspend", NULL))
 		omap_device_disable_idle_on_suspend(pdev);
 
@@ -201,6 +220,8 @@ odbfd_exit1:
 	kfree(hwmods);
 odbfd_exit:
 =======
+=======
+>>>>>>> v3.18
 	pdev->dev.pm_domain = &omap_device_pm_domain;
 
 	if (device_active) {
@@ -215,6 +236,9 @@ odbfd_exit:
 	if (ret)
 		pdev->dev.pm_domain = &omap_device_fail_pm_domain;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -234,6 +258,10 @@ static int _omap_device_notifier_call(struct notifier_block *nb,
 		if (pdev->dev.of_node)
 			omap_device_build_from_dt(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		omap_auxdata_legacy_init(dev);
+>>>>>>> v3.18
 =======
 		omap_auxdata_legacy_init(dev);
 >>>>>>> v3.18
@@ -634,11 +662,14 @@ static int _od_runtime_suspend(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int _od_runtime_idle(struct device *dev)
 {
 	return pm_generic_runtime_idle(dev);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int _od_runtime_resume(struct device *dev)
@@ -650,7 +681,10 @@ static int _od_runtime_resume(struct device *dev)
 	return pm_generic_runtime_resume(dev);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int _od_fail_runtime_suspend(struct device *dev)
 {
@@ -664,6 +698,9 @@ static int _od_fail_runtime_resume(struct device *dev)
 	return -ENODEV;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -683,8 +720,13 @@ static int _od_suspend_noirq(struct device *dev)
 	if (!ret && !pm_runtime_status_suspended(dev)) {
 		if (pm_generic_runtime_suspend(dev) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(od->flags & OMAP_DEVICE_NO_IDLE_ON_SUSPEND))
 				omap_device_idle(pdev);
+=======
+			pm_runtime_set_suspended(dev);
+			omap_device_idle(pdev);
+>>>>>>> v3.18
 =======
 			pm_runtime_set_suspended(dev);
 			omap_device_idle(pdev);
@@ -702,12 +744,15 @@ static int _od_resume_noirq(struct device *dev)
 	struct omap_device *od = to_omap_device(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((od->flags & OMAP_DEVICE_SUSPENDED) &&
 	    !pm_runtime_status_suspended(dev)) {
 		od->flags &= ~OMAP_DEVICE_SUSPENDED;
 		if (!(od->flags & OMAP_DEVICE_NO_IDLE_ON_SUSPEND))
 			omap_device_enable(pdev);
 =======
+=======
+>>>>>>> v3.18
 	if (od->flags & OMAP_DEVICE_SUSPENDED) {
 		od->flags &= ~OMAP_DEVICE_SUSPENDED;
 		omap_device_enable(pdev);
@@ -720,6 +765,9 @@ static int _od_resume_noirq(struct device *dev)
 		 */
 		WARN(pm_runtime_set_active(dev),
 		     "Could not set %s runtime state active\n", dev_name(dev));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pm_generic_runtime_resume(dev);
 	}
@@ -732,11 +780,14 @@ static int _od_resume_noirq(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct dev_pm_domain omap_device_pm_domain = {
 	.ops = {
 		SET_RUNTIME_PM_OPS(_od_runtime_suspend, _od_runtime_resume,
 				   _od_runtime_idle)
 =======
+=======
+>>>>>>> v3.18
 struct dev_pm_domain omap_device_fail_pm_domain = {
 	.ops = {
 		SET_RUNTIME_PM_OPS(_od_fail_runtime_suspend,
@@ -748,6 +799,9 @@ struct dev_pm_domain omap_device_pm_domain = {
 	.ops = {
 		SET_RUNTIME_PM_OPS(_od_runtime_suspend, _od_runtime_resume,
 				   NULL)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		USE_PLATFORM_PM_SLEEP_OPS
 		.suspend_noirq = _od_suspend_noirq,
@@ -948,6 +1002,10 @@ static int __init omap_device_late_idle(struct device *dev, void *data)
 	struct platform_device *pdev = to_platform_device(dev);
 	struct omap_device *od = to_omap_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+>>>>>>> v3.18
 =======
 	int i;
 >>>>>>> v3.18
@@ -960,7 +1018,10 @@ static int __init omap_device_late_idle(struct device *dev, void *data)
 	 * idle it.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Some devices (like memory controllers) are always kept
@@ -970,6 +1031,9 @@ static int __init omap_device_late_idle(struct device *dev, void *data)
 		if (od->hwmods[i]->flags & HWMOD_INIT_NO_IDLE)
 			return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (od->_driver_status != BUS_NOTIFY_BOUND_DRIVER) {
 		if (od->_state == OMAP_DEVICE_STATE_ENABLED) {
@@ -986,11 +1050,17 @@ static int __init omap_device_late_init(void)
 {
 	bus_for_each_dev(&platform_bus_type, NULL, NULL, omap_device_late_idle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	WARN(!of_have_populated_dt(),
 		"legacy booting deprecated, please update to boot with .dts\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

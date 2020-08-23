@@ -15,6 +15,11 @@
 
 #include <linux/signal.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
@@ -119,9 +124,15 @@ static int ohci_hcd_ppc_of_probe(struct platform_device *op)
 	hcd->rsrc_len = resource_size(&res);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!request_mem_region(hcd->rsrc_start, hcd->rsrc_len, hcd_name)) {
 		printk(KERN_ERR "%s: request_mem_region failed\n", __FILE__);
 		rv = -EBUSY;
+=======
+	hcd->regs = devm_ioremap_resource(&op->dev, &res);
+	if (IS_ERR(hcd->regs)) {
+		rv = PTR_ERR(hcd->regs);
+>>>>>>> v3.18
 =======
 	hcd->regs = devm_ioremap_resource(&op->dev, &res);
 	if (IS_ERR(hcd->regs)) {
@@ -132,6 +143,7 @@ static int ohci_hcd_ppc_of_probe(struct platform_device *op)
 
 	irq = irq_of_parse_and_map(dn, 0);
 	if (irq == NO_IRQ) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk(KERN_ERR "%s: irq_of_parse_and_map failed\n", __FILE__);
 		rv = -EBUSY;
@@ -144,10 +156,15 @@ static int ohci_hcd_ppc_of_probe(struct platform_device *op)
 		rv = -ENOMEM;
 		goto err_ioremap;
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&op->dev, "%s: irq_of_parse_and_map failed\n",
 			__FILE__);
 		rv = -EBUSY;
 		goto err_rmr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -164,13 +181,19 @@ static int ohci_hcd_ppc_of_probe(struct platform_device *op)
 
 	rv = usb_add_hcd(hcd, irq, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rv == 0)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (rv == 0) {
 		device_wakeup_enable(hcd->self.controller);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* by now, 440epx is known to show usb_23 erratum */
@@ -198,11 +221,15 @@ static int ohci_hcd_ppc_of_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(hcd->regs);
 err_ioremap:
 	irq_dispose_mapping(irq);
 err_irq:
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
+=======
+	irq_dispose_mapping(irq);
+>>>>>>> v3.18
 =======
 	irq_dispose_mapping(irq);
 >>>>>>> v3.18
@@ -215,8 +242,12 @@ err_rmr:
 static int ohci_hcd_ppc_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
 	dev_set_drvdata(&op->dev, NULL);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct usb_hcd *hcd = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -226,9 +257,13 @@ static int ohci_hcd_ppc_of_remove(struct platform_device *op)
 	usb_remove_hcd(hcd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(hcd->regs);
 	irq_dispose_mapping(hcd->irq);
 	release_mem_region(hcd->rsrc_start, hcd->rsrc_len);
+=======
+	irq_dispose_mapping(hcd->irq);
+>>>>>>> v3.18
 =======
 	irq_dispose_mapping(hcd->irq);
 >>>>>>> v3.18
@@ -239,6 +274,7 @@ static int ohci_hcd_ppc_of_remove(struct platform_device *op)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ohci_hcd_ppc_of_shutdown(struct platform_device *op)
 {
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
@@ -248,6 +284,8 @@ static void ohci_hcd_ppc_of_shutdown(struct platform_device *op)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct of_device_id ohci_hcd_ppc_of_match[] = {
@@ -285,7 +323,11 @@ static struct platform_driver ohci_hcd_ppc_of_driver = {
 	.probe		= ohci_hcd_ppc_of_probe,
 	.remove		= ohci_hcd_ppc_of_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown 	= ohci_hcd_ppc_of_shutdown,
+=======
+	.shutdown	= usb_hcd_platform_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown	= usb_hcd_platform_shutdown,
 >>>>>>> v3.18

@@ -33,7 +33,10 @@
 #include <mach/hardware.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TIMER_FREQ		CLOCK_TICK_RATE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RTC_DEF_DIVIDER		(32768 - 1)
@@ -328,7 +331,11 @@ static int __init pxa_rtc_probe(struct platform_device *pdev)
 	u32 rttr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pxa_rtc = kzalloc(sizeof(struct pxa_rtc), GFP_KERNEL);
+=======
+	pxa_rtc = devm_kzalloc(dev, sizeof(*pxa_rtc), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	pxa_rtc = devm_kzalloc(dev, sizeof(*pxa_rtc), GFP_KERNEL);
 >>>>>>> v3.18
@@ -339,16 +346,22 @@ static int __init pxa_rtc_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, pxa_rtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = -ENXIO;
 	pxa_rtc->ress = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!pxa_rtc->ress) {
 		dev_err(dev, "No I/O memory resource defined\n");
 		goto err_ress;
 =======
+=======
+>>>>>>> v3.18
 	pxa_rtc->ress = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!pxa_rtc->ress) {
 		dev_err(dev, "No I/O memory resource defined\n");
 		return -ENXIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -356,7 +369,11 @@ static int __init pxa_rtc_probe(struct platform_device *pdev)
 	if (pxa_rtc->irq_1Hz < 0) {
 		dev_err(dev, "No 1Hz IRQ resource defined\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_ress;
+=======
+		return -ENXIO;
+>>>>>>> v3.18
 =======
 		return -ENXIO;
 >>>>>>> v3.18
@@ -364,6 +381,7 @@ static int __init pxa_rtc_probe(struct platform_device *pdev)
 	pxa_rtc->irq_Alrm = platform_get_irq(pdev, 1);
 	if (pxa_rtc->irq_Alrm < 0) {
 		dev_err(dev, "No alarm IRQ resource defined\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto err_ress;
 	}
@@ -375,6 +393,8 @@ static int __init pxa_rtc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Unable to map pxa RTC I/O memory\n");
 		goto err_map;
 =======
+=======
+>>>>>>> v3.18
 		return -ENXIO;
 	}
 	pxa_rtc_open(dev);
@@ -383,6 +403,9 @@ static int __init pxa_rtc_probe(struct platform_device *pdev)
 	if (!pxa_rtc->base) {
 		dev_err(dev, "Unable to map pxa RTC I/O memory\n");
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -400,6 +423,7 @@ static int __init pxa_rtc_probe(struct platform_device *pdev)
 	rtsr_clear_bits(pxa_rtc, RTSR_PIALE | RTSR_RDALE1 | RTSR_HZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pxa_rtc->rtc = rtc_device_register("pxa-rtc", &pdev->dev, &pxa_rtc_ops,
 					   THIS_MODULE);
 	ret = PTR_ERR(pxa_rtc->rtc);
@@ -407,18 +431,24 @@ static int __init pxa_rtc_probe(struct platform_device *pdev)
 		dev_err(dev, "Failed to register RTC device -> %d\n", ret);
 		goto err_rtc_reg;
 =======
+=======
+>>>>>>> v3.18
 	pxa_rtc->rtc = devm_rtc_device_register(&pdev->dev, "pxa-rtc",
 						&pxa_rtc_ops, THIS_MODULE);
 	if (IS_ERR(pxa_rtc->rtc)) {
 		ret = PTR_ERR(pxa_rtc->rtc);
 		dev_err(dev, "Failed to register RTC device -> %d\n", ret);
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	device_init_wakeup(dev, 1);
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err_rtc_reg:
@@ -429,10 +459,13 @@ err_map:
 	return ret;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static int __exit pxa_rtc_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pxa_rtc *pxa_rtc = platform_get_drvdata(pdev);
 
@@ -452,12 +485,21 @@ static int __exit pxa_rtc_remove(struct platform_device *pdev)
 
 	pxa_rtc_release(dev);
 >>>>>>> v3.18
+=======
+	struct device *dev = &pdev->dev;
+
+	pxa_rtc_release(dev);
+>>>>>>> v3.18
 	return 0;
 }
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id pxa_rtc_dt_ids[] = {
+=======
+static const struct of_device_id pxa_rtc_dt_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id pxa_rtc_dt_ids[] = {
 >>>>>>> v3.18

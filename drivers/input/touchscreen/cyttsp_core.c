@@ -85,7 +85,12 @@ static int ttsp_read_block_data(struct cyttsp *ts, u8 command,
 
 	for (tries = 0; tries < CY_NUM_RETRY; tries++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = ts->bus_ops->read(ts, command, length, buf);
+=======
+		error = ts->bus_ops->read(ts->dev, ts->xfer_buf, command,
+				length, buf);
+>>>>>>> v3.18
 =======
 		error = ts->bus_ops->read(ts->dev, ts->xfer_buf, command,
 				length, buf);
@@ -107,7 +112,12 @@ static int ttsp_write_block_data(struct cyttsp *ts, u8 command,
 
 	for (tries = 0; tries < CY_NUM_RETRY; tries++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = ts->bus_ops->write(ts, command, length, buf);
+=======
+		error = ts->bus_ops->write(ts->dev, ts->xfer_buf, command,
+				length, buf);
+>>>>>>> v3.18
 =======
 		error = ts->bus_ops->write(ts->dev, ts->xfer_buf, command,
 				length, buf);
@@ -251,7 +261,11 @@ static int cyttsp_soft_reset(struct cyttsp *ts)
 
 	/* wait for interrupt to set ready completion */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(ts->bl_ready);
+=======
+	reinit_completion(&ts->bl_ready);
+>>>>>>> v3.18
 =======
 	reinit_completion(&ts->bl_ready);
 >>>>>>> v3.18
@@ -547,7 +561,11 @@ struct cyttsp *cyttsp_probe(const struct cyttsp_bus_ops *bus_ops,
 			    struct device *dev, int irq, size_t xfer_buf_size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct cyttsp_platform_data *pdata = dev->platform_data;
+=======
+	const struct cyttsp_platform_data *pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	const struct cyttsp_platform_data *pdata = dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -570,7 +588,11 @@ struct cyttsp *cyttsp_probe(const struct cyttsp_bus_ops *bus_ops,
 	ts->dev = dev;
 	ts->input = input_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ts->pdata = dev->platform_data;
+=======
+	ts->pdata = dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	ts->pdata = dev_get_platdata(dev);
 >>>>>>> v3.18

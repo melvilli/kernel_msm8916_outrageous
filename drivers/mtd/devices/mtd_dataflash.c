@@ -11,7 +11,10 @@
 */
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -92,8 +95,11 @@ struct dataflash {
 	char			name[24];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		partitioned:1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned short		page_offset;	/* offset in flash address */
@@ -449,8 +455,13 @@ static int dataflash_write(struct mtd_info *mtd, loff_t to, size_t len,
 #ifdef CONFIG_MTD_DATAFLASH_OTP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dataflash_get_otp_info(struct mtd_info *mtd,
 		struct otp_info *info, size_t len)
+=======
+static int dataflash_get_otp_info(struct mtd_info *mtd, size_t len,
+				  size_t *retlen, struct otp_info *info)
+>>>>>>> v3.18
 =======
 static int dataflash_get_otp_info(struct mtd_info *mtd, size_t len,
 				  size_t *retlen, struct otp_info *info)
@@ -464,7 +475,12 @@ static int dataflash_get_otp_info(struct mtd_info *mtd, size_t len,
 	info->length = 64;
 	info->locked = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return sizeof(*info);
+=======
+	*retlen = sizeof(*info);
+	return 0;
+>>>>>>> v3.18
 =======
 	*retlen = sizeof(*info);
 	return 0;
@@ -561,6 +577,7 @@ static int dataflash_write_user_otp(struct mtd_info *mtd,
 	int			status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (len > 64)
 		return -EINVAL;
 
@@ -570,6 +587,8 @@ static int dataflash_write_user_otp(struct mtd_info *mtd,
 	if ((from + len) > 64)
 		return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 	if (from >= 64) {
 		/*
 		 * Attempting to write beyond the end of OTP memory,
@@ -582,6 +601,9 @@ static int dataflash_write_user_otp(struct mtd_info *mtd,
 	/* Truncate the write to fit into OTP memory. */
 	if ((from + len) > 64)
 		len = 64 - from;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* OUT: OP_WRITE_SECURITY, 3 zeroes, 64 data-or-zero bytes
@@ -654,7 +676,11 @@ static int add_dataflash_otp(struct spi_device *spi, char *name, int nr_pages,
 	struct mtd_info			*device;
 	struct mtd_part_parser_data	ppdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct flash_platform_data	*pdata = spi->dev.platform_data;
+=======
+	struct flash_platform_data	*pdata = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	struct flash_platform_data	*pdata = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -697,7 +723,11 @@ static int add_dataflash_otp(struct spi_device *spi, char *name, int nr_pages,
 			name, (long long)((device->size + 1023) >> 10),
 			pagesize, otp_tag);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&spi->dev, priv);
+=======
+	spi_set_drvdata(spi, priv);
+>>>>>>> v3.18
 =======
 	spi_set_drvdata(spi, priv);
 >>>>>>> v3.18
@@ -711,7 +741,10 @@ static int add_dataflash_otp(struct spi_device *spi, char *name, int nr_pages,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&spi->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(priv);
@@ -924,7 +957,11 @@ static int dataflash_probe(struct spi_device *spi)
 	/* obsolete AT45DB1282 not (yet?) supported */
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("%s: unsupported device (%x)\n", dev_name(&spi->dev),
+=======
+		dev_info(&spi->dev, "unsupported device (%x)\n",
+>>>>>>> v3.18
 =======
 		dev_info(&spi->dev, "unsupported device (%x)\n",
 >>>>>>> v3.18
@@ -942,7 +979,11 @@ static int dataflash_probe(struct spi_device *spi)
 static int dataflash_remove(struct spi_device *spi)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dataflash	*flash = dev_get_drvdata(&spi->dev);
+=======
+	struct dataflash	*flash = spi_get_drvdata(spi);
+>>>>>>> v3.18
 =======
 	struct dataflash	*flash = spi_get_drvdata(spi);
 >>>>>>> v3.18
@@ -952,10 +993,15 @@ static int dataflash_remove(struct spi_device *spi)
 
 	status = mtd_device_unregister(&flash->mtd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status == 0) {
 		dev_set_drvdata(&spi->dev, NULL);
 		kfree(flash);
 	}
+=======
+	if (status == 0)
+		kfree(flash);
+>>>>>>> v3.18
 =======
 	if (status == 0)
 		kfree(flash);

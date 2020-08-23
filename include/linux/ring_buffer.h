@@ -98,7 +98,11 @@ __ring_buffer_alloc(unsigned long size, unsigned flags, struct lock_class_key *k
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ring_buffer_wait(struct ring_buffer *buffer, int cpu);
+=======
+int ring_buffer_wait(struct ring_buffer *buffer, int cpu, bool full);
+>>>>>>> v3.18
 =======
 int ring_buffer_wait(struct ring_buffer *buffer, int cpu, bool full);
 >>>>>>> v3.18

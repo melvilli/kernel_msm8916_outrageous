@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Linux* Base Driver for Intel(R) Network Connection
 ==================================================
 
 Intel Gigabit Linux driver.
 Copyright(c) 1999 - 2010 Intel Corporation.
 =======
+=======
+>>>>>>> v3.18
 Linux* Base Driver for Intel(R) Ethernet Network Connection
 ===========================================================
 
 Intel Gigabit Linux driver.
 Copyright(c) 1999 - 2013 Intel Corporation.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Contents
@@ -64,7 +70,11 @@ Additional Configurations
 =========================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   Ethtool
+=======
+  ethtool
+>>>>>>> v3.18
 =======
   ethtool
 >>>>>>> v3.18

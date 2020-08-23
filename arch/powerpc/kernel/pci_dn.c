@@ -48,9 +48,14 @@ void *update_dn_pci_info(struct device_node *dn, void *data)
 {
 	struct pci_controller *phb = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const int *type =
 		of_get_property(dn, "ibm,pci-config-space-type", NULL);
 	const u32 *regs;
+=======
+	const __be32 *type = of_get_property(dn, "ibm,pci-config-space-type", NULL);
+	const __be32 *regs;
+>>>>>>> v3.18
 =======
 	const __be32 *type = of_get_property(dn, "ibm,pci-config-space-type", NULL);
 	const __be32 *regs;
@@ -69,6 +74,7 @@ void *update_dn_pci_info(struct device_node *dn, void *data)
 	regs = of_get_property(dn, "reg", NULL);
 	if (regs) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* First register entry is addr (00BBSS00)  */
 		pdn->busno = (regs[0] >> 16) & 0xff;
 		pdn->devfn = (regs[0] >> 8) & 0xff;
@@ -76,6 +82,8 @@ void *update_dn_pci_info(struct device_node *dn, void *data)
 
 	pdn->pci_ext_config_space = (type && *type == 1);
 =======
+=======
+>>>>>>> v3.18
 		u32 addr = of_read_number(regs, 1);
 
 		/* First register entry is addr (00BBSS00)  */
@@ -84,6 +92,9 @@ void *update_dn_pci_info(struct device_node *dn, void *data)
 	}
 
 	pdn->pci_ext_config_space = (type && of_read_number(type, 1) == 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return NULL;
 }
@@ -115,6 +126,7 @@ void *traverse_pci_devices(struct device_node *start, traverse_func pre,
 	/* We started with a phb, iterate all childs */
 	for (dn = start->child; dn; dn = nextdn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const u32 *classp;
 		u32 class;
 
@@ -122,6 +134,8 @@ void *traverse_pci_devices(struct device_node *start, traverse_func pre,
 		classp = of_get_property(dn, "class-code", NULL);
 		class = classp ? *classp : 0;
 =======
+=======
+>>>>>>> v3.18
 		const __be32 *classp;
 		u32 class = 0;
 
@@ -129,6 +143,9 @@ void *traverse_pci_devices(struct device_node *start, traverse_func pre,
 		classp = of_get_property(dn, "class-code", NULL);
 		if (classp)
 			class = of_read_number(classp, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (pre && ((ret = pre(dn, data)) != NULL))

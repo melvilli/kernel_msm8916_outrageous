@@ -17,6 +17,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clocksource.h>
 #include <linux/kernel.h>
 #include <linux/init.h>
@@ -81,6 +82,8 @@ static struct of_dev_auxdata tegra20_auxdata_lookup[] __initdata = {
 	{}
 };
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/clk/tegra.h>
 #include <linux/dma-mapping.h>
@@ -149,6 +152,9 @@ static void __init tegra_dt_init_irq(void)
 	irqchip_init();
 	tegra_legacy_irq_syscore_init();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __init tegra_dt_init(void)
@@ -165,8 +171,14 @@ static void __init tegra_dt_init(void)
 
 	soc_dev_attr->family = kasprintf(GFP_KERNEL, "Tegra");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc_dev_attr->revision = kasprintf(GFP_KERNEL, "%d", tegra_revision);
 	soc_dev_attr->soc_id = kasprintf(GFP_KERNEL, "%d", tegra_chip_id);
+=======
+	soc_dev_attr->revision = kasprintf(GFP_KERNEL, "%d",
+					   tegra_sku_info.revision);
+	soc_dev_attr->soc_id = kasprintf(GFP_KERNEL, "%u", tegra_get_chip_id());
+>>>>>>> v3.18
 =======
 	soc_dev_attr->revision = kasprintf(GFP_KERNEL, "%d",
 					   tegra_sku_info.revision);
@@ -189,6 +201,7 @@ static void __init tegra_dt_init(void)
 	 * devices
 	 */
 out:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	of_platform_populate(NULL, of_default_bus_match_table,
 				tegra20_auxdata_lookup, parent);
@@ -217,6 +230,9 @@ static void __init harmony_init(void)
 =======
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, parent);
 >>>>>>> v3.18
+=======
+	of_platform_populate(NULL, of_default_bus_match_table, NULL, parent);
+>>>>>>> v3.18
 }
 
 static void __init paz00_init(void)
@@ -230,8 +246,11 @@ static struct {
 	void (*init)(void);
 } board_init_funcs[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "compulab,trimslice", trimslice_init },
 	{ "nvidia,harmony", harmony_init },
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ "compal,paz00", paz00_init },
@@ -242,7 +261,12 @@ static void __init tegra_dt_init_late(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_init_late();
+=======
+	tegra_init_suspend();
+	tegra_cpuidle_init();
+>>>>>>> v3.18
 =======
 	tegra_init_suspend();
 	tegra_cpuidle_init();
@@ -258,6 +282,10 @@ static void __init tegra_dt_init_late(void)
 
 static const char * const tegra_dt_board_compat[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	"nvidia,tegra124",
+>>>>>>> v3.18
 =======
 	"nvidia,tegra124",
 >>>>>>> v3.18
@@ -269,6 +297,7 @@ static const char * const tegra_dt_board_compat[] = {
 
 DT_MACHINE_START(TEGRA_DT, "NVIDIA Tegra SoC (Flattened Device Tree)")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.map_io		= tegra_map_common_io,
 	.smp		= smp_ops(tegra_smp_ops),
 	.init_early	= tegra_init_early,
@@ -278,6 +307,8 @@ DT_MACHINE_START(TEGRA_DT, "NVIDIA Tegra SoC (Flattened Device Tree)")
 	.init_late	= tegra_dt_init_late,
 	.restart	= tegra_assert_system_reset,
 =======
+=======
+>>>>>>> v3.18
 	.l2c_aux_val	= 0x3c400001,
 	.l2c_aux_mask	= 0xc20fc3fe,
 	.smp		= smp_ops(tegra_smp_ops),
@@ -287,6 +318,9 @@ DT_MACHINE_START(TEGRA_DT, "NVIDIA Tegra SoC (Flattened Device Tree)")
 	.init_machine	= tegra_dt_init,
 	.init_late	= tegra_dt_init_late,
 	.restart	= tegra_pmc_restart,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.dt_compat	= tegra_dt_board_compat,
 MACHINE_END

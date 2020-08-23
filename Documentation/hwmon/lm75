@@ -43,8 +43,13 @@ Supported chips:
     Datasheet: Publicly available at the ST website
                http://www.st.com/internet/analog/product/121769.jsp
 <<<<<<< HEAD
+<<<<<<< HEAD
   * Texas Instruments TMP100, TMP101, TMP105, TMP75, TMP175, TMP275
     Prefixes: 'tmp100', 'tmp101', 'tmp105', 'tmp175', 'tmp75', 'tmp275'
+=======
+  * Texas Instruments TMP100, TMP101, TMP105, TMP112, TMP75, TMP175, TMP275
+    Prefixes: 'tmp100', 'tmp101', 'tmp105', 'tmp112', 'tmp175', 'tmp75', 'tmp275'
+>>>>>>> v3.18
 =======
   * Texas Instruments TMP100, TMP101, TMP105, TMP112, TMP75, TMP175, TMP275
     Prefixes: 'tmp100', 'tmp101', 'tmp105', 'tmp112', 'tmp175', 'tmp75', 'tmp275'
@@ -55,6 +60,10 @@ Supported chips:
                http://www.ti.com/product/tmp101
                http://www.ti.com/product/tmp105
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+               http://www.ti.com/product/tmp112
+>>>>>>> v3.18
 =======
                http://www.ti.com/product/tmp112
 >>>>>>> v3.18

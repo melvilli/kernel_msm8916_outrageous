@@ -52,7 +52,11 @@ struct machine_desc {
  * Current machine - only accessible during boot.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct machine_desc *machine_desc;
+=======
+extern const struct machine_desc *machine_desc;
+>>>>>>> v3.18
 =======
 extern const struct machine_desc *machine_desc;
 >>>>>>> v3.18
@@ -60,6 +64,7 @@ extern const struct machine_desc *machine_desc;
 /*
  * Machine type table - also only accessible during boot
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern struct machine_desc __arch_info_begin[], __arch_info_end[];
 #define for_each_machine_desc(p)			\
@@ -72,6 +77,9 @@ static inline struct machine_desc *default_machine_desc(void)
 		return NULL;
 	return __arch_info_end - 1;
 }
+=======
+extern const struct machine_desc __arch_info_begin[], __arch_info_end[];
+>>>>>>> v3.18
 =======
 extern const struct machine_desc __arch_info_begin[], __arch_info_end[];
 >>>>>>> v3.18
@@ -90,8 +98,12 @@ __attribute__((__section__(".arch.info.init"))) = {	\
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct machine_desc *setup_machine_fdt(void *dt);
 extern void __init copy_devtree(void);
+=======
+extern const struct machine_desc *setup_machine_fdt(void *dt);
+>>>>>>> v3.18
 =======
 extern const struct machine_desc *setup_machine_fdt(void *dt);
 >>>>>>> v3.18

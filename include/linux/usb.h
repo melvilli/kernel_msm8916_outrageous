@@ -58,6 +58,10 @@ struct ep_device;
  * @extralen: how many bytes of "extra" are valid
  * @enabled: URBs may be submitted to this endpoint
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @streams: number of USB-3 streams allocated on the endpoint
+>>>>>>> v3.18
 =======
  * @streams: number of USB-3 streams allocated on the endpoint
 >>>>>>> v3.18
@@ -76,6 +80,10 @@ struct usb_host_endpoint {
 	int extralen;
 	int enabled;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int streams;
+>>>>>>> v3.18
 =======
 	int streams;
 >>>>>>> v3.18
@@ -211,6 +219,11 @@ struct usb_interface *usb_get_intf(struct usb_interface *intf);
 void usb_put_intf(struct usb_interface *intf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Hard limit */
+#define USB_MAXENDPOINTS	30
+>>>>>>> v3.18
 =======
 /* Hard limit */
 #define USB_MAXENDPOINTS	30
@@ -219,6 +232,7 @@ void usb_put_intf(struct usb_interface *intf);
 #define USB_MAXINTERFACES	32
 #define USB_MAXIADS		(USB_MAXINTERFACES/2)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * USB Resume Timer: Every Host controller driver should drive the resume
@@ -246,6 +260,8 @@ void usb_put_intf(struct usb_interface *intf);
  */
 #define USB_RESUME_TIMEOUT	40 /* ms */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /**
@@ -380,6 +396,7 @@ struct usb_bus {
 					 * with the URB_SHORT_NOT_OK flag set.
 					 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned hnp_support:1;		/* OTG: HNP is supported on OTG port */
 	unsigned quick_hnp:1;		/* OTG: Indiacates if hnp is required
 					   irrespective of host_request flag
@@ -389,6 +406,9 @@ struct usb_bus {
 					 * B-device is disconnected.
 					 */
 	struct delayed_work hnp_polling;/* OTG: HNP polling work */
+=======
+	unsigned no_sg_constraint:1;	/* no sg constraint */
+>>>>>>> v3.18
 =======
 	unsigned no_sg_constraint:1;	/* no sg constraint */
 >>>>>>> v3.18
@@ -403,6 +423,11 @@ struct usb_bus {
 	struct list_head bus_list;	/* list of busses */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mutex usb_address0_mutex; /* unaddressed device mutex */
+
+>>>>>>> v3.18
 =======
 	struct mutex usb_address0_mutex; /* unaddressed device mutex */
 
@@ -423,6 +448,7 @@ struct usb_bus {
 	struct mon_bus *mon_bus;	/* non-null when associated */
 	int monitored;			/* non-zero when monitored */
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned skip_resume:1;		/* All USB devices are brought into full
 					 * power state after system resume. It
@@ -448,11 +474,16 @@ struct usb_bus {
  */
 #define USB_MAXCHILDREN		(31)
 =======
+=======
+>>>>>>> v3.18
 };
 
 struct usb_dev_state;
 
 /* ----------------------------------------------------------------------- */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct usb_tt;
@@ -472,7 +503,10 @@ enum usb_port_connect_type {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * USB 2.0 Link Power Management (LPM) parameters.
  */
 struct usb2_lpm_parameters {
@@ -489,6 +523,9 @@ struct usb2_lpm_parameters {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * USB 3.0 Link Power Management (LPM) parameters.
  *
@@ -565,7 +602,13 @@ struct usb3_lpm_parameters {
  * @lpm_capable: device supports LPM
  * @usb2_hw_lpm_capable: device can perform USB2 hardware LPM
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @usb2_hw_lpm_enabled: USB2 hardware LPM enabled
+=======
+ * @usb2_hw_lpm_besl_capable: device can perform USB2 hardware BESL LPM
+ * @usb2_hw_lpm_enabled: USB2 hardware LPM is enabled
+ * @usb2_hw_lpm_allowed: Userspace allows USB 2.0 LPM to be enabled
+>>>>>>> v3.18
 =======
  * @usb2_hw_lpm_besl_capable: device can perform USB2 hardware BESL LPM
  * @usb2_hw_lpm_enabled: USB2 hardware LPM is enabled
@@ -590,6 +633,10 @@ struct usb3_lpm_parameters {
  * @slot_id: Slot ID assigned by xHCI
  * @removable: Device can be physically removed from this port
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @l1_params: best effor service latency for USB2 L1 LPM state, and L1 timeout.
+>>>>>>> v3.18
 =======
  * @l1_params: best effor service latency for USB2 L1 LPM state, and L1 timeout.
 >>>>>>> v3.18
@@ -645,7 +692,13 @@ struct usb_device {
 	unsigned lpm_capable:1;
 	unsigned usb2_hw_lpm_capable:1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned usb2_hw_lpm_enabled:1;
+=======
+	unsigned usb2_hw_lpm_besl_capable:1;
+	unsigned usb2_hw_lpm_enabled:1;
+	unsigned usb2_hw_lpm_allowed:1;
+>>>>>>> v3.18
 =======
 	unsigned usb2_hw_lpm_besl_capable:1;
 	unsigned usb2_hw_lpm_enabled:1;
@@ -679,6 +732,10 @@ struct usb_device {
 	int slot_id;
 	enum usb_device_removable removable;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb2_lpm_parameters l1_params;
+>>>>>>> v3.18
 =======
 	struct usb2_lpm_parameters l1_params;
 >>>>>>> v3.18
@@ -792,12 +849,18 @@ static inline bool usb_device_supports_ltm(struct usb_device *udev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool usb_device_no_sg_constraint(struct usb_device *udev)
 {
 	return udev && udev->bus && udev->bus->no_sg_constraint;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*-------------------------------------------------------------------------*/
@@ -812,7 +875,11 @@ extern int usb_alloc_streams(struct usb_interface *interface,
 
 /* Reverts a group of bulk endpoints back to not using stream IDs. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void usb_free_streams(struct usb_interface *interface,
+=======
+extern int usb_free_streams(struct usb_interface *interface,
+>>>>>>> v3.18
 =======
 extern int usb_free_streams(struct usb_interface *interface,
 >>>>>>> v3.18
@@ -828,12 +895,18 @@ extern int usb_driver_claim_interface(struct usb_driver *driver,
  * @iface: the interface being checked
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns true (nonzero) iff the interface is claimed, else false (zero).
 =======
+=======
+>>>>>>> v3.18
  * Return: %true (nonzero) iff the interface is claimed, else %false
  * (zero).
  *
  * Note:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Callers must own the driver model's usb bus readlock.  So driver
  * probe() entries don't need extra locking, but other call contexts
@@ -853,6 +926,10 @@ extern int usb_match_one_id(struct usb_interface *interface,
 			    const struct usb_device_id *id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int usb_for_each_dev(void *data, int (*fn)(struct usb_device *, void *));
+>>>>>>> v3.18
 =======
 extern int usb_for_each_dev(void *data, int (*fn)(struct usb_device *, void *));
 >>>>>>> v3.18
@@ -868,12 +945,18 @@ extern struct usb_host_interface *usb_find_alt_setting(
 		unsigned int alt_num);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* port claiming functions */
 int usb_hub_claim_port(struct usb_device *hdev, unsigned port1,
 		struct usb_dev_state *owner);
 int usb_hub_release_port(struct usb_device *hdev, unsigned port1,
 		struct usb_dev_state *owner);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -883,8 +966,14 @@ int usb_hub_release_port(struct usb_device *hdev, unsigned port1,
  * @size: how big is "buf"?
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns length of the string (> 0) or negative if size was too small.
  *
+=======
+ * Return: Length of the string (> 0) or negative if size was too small.
+ *
+ * Note:
+>>>>>>> v3.18
 =======
  * Return: Length of the string (> 0) or negative if size was too small.
  *
@@ -1097,6 +1186,10 @@ struct usb_dynid {
 
 extern ssize_t usb_store_new_id(struct usb_dynids *dynids,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				const struct usb_device_id *id_table,
+>>>>>>> v3.18
 =======
 				const struct usb_device_id *id_table,
 >>>>>>> v3.18
@@ -1347,6 +1440,10 @@ struct usb_anchor {
 	wait_queue_head_t wait;
 	spinlock_t lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	atomic_t suspend_wakeups;
+>>>>>>> v3.18
 =======
 	atomic_t suspend_wakeups;
 >>>>>>> v3.18
@@ -1356,6 +1453,10 @@ struct usb_anchor {
 static inline void init_usb_anchor(struct usb_anchor *anchor)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	memset(anchor, 0, sizeof(*anchor));
+>>>>>>> v3.18
 =======
 	memset(anchor, 0, sizeof(*anchor));
 >>>>>>> v3.18
@@ -1403,7 +1504,13 @@ typedef void (*usb_complete_t)(struct urb *);
  *	which the host controller driver should use in preference to the
  *	transfer_buffer.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sg: scatter gather buffer list
+=======
+ * @sg: scatter gather buffer list, the buffer size of each element in
+ * 	the list (except the last) must be divisible by the endpoint's
+ * 	max packet size if no_sg_constraint isn't set in 'struct usb_bus'
+>>>>>>> v3.18
 =======
  * @sg: scatter gather buffer list, the buffer size of each element in
  * 	the list (except the last) must be divisible by the endpoint's
@@ -1591,7 +1698,10 @@ struct urb {
 	struct usb_iso_packet_descriptor iso_frame_desc[0];
 					/* (in) ISO ONLY */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *priv_data;		/* (in) additional private data */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -1700,11 +1810,14 @@ static inline void usb_fill_int_urb(struct urb *urb,
 	urb->complete = complete_fn;
 	urb->context = context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->speed == USB_SPEED_HIGH || dev->speed == USB_SPEED_SUPER)
 		urb->interval = 1 << (interval - 1);
 	else
 		urb->interval = interval;
 =======
+=======
+>>>>>>> v3.18
 
 	if (dev->speed == USB_SPEED_HIGH || dev->speed == USB_SPEED_SUPER) {
 		/* make sure interval is within allowed range */
@@ -1715,6 +1828,9 @@ static inline void usb_fill_int_urb(struct urb *urb,
 		urb->interval = interval;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	urb->start_frame = -1;
 }
@@ -1735,6 +1851,11 @@ extern void usb_poison_anchored_urbs(struct usb_anchor *anchor);
 extern void usb_unpoison_anchored_urbs(struct usb_anchor *anchor);
 extern void usb_unlink_anchored_urbs(struct usb_anchor *anchor);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern void usb_anchor_suspend_wakeups(struct usb_anchor *anchor);
+extern void usb_anchor_resume_wakeups(struct usb_anchor *anchor);
+>>>>>>> v3.18
 =======
 extern void usb_anchor_suspend_wakeups(struct usb_anchor *anchor);
 extern void usb_anchor_resume_wakeups(struct usb_anchor *anchor);
@@ -1754,7 +1875,11 @@ extern int usb_anchor_empty(struct usb_anchor *anchor);
  * @urb: URB to be checked
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns 1 if @urb describes an IN transfer (device-to-host),
+=======
+ * Return: 1 if @urb describes an IN transfer (device-to-host),
+>>>>>>> v3.18
 =======
  * Return: 1 if @urb describes an IN transfer (device-to-host),
 >>>>>>> v3.18
@@ -1770,7 +1895,11 @@ static inline int usb_urb_dir_in(struct urb *urb)
  * @urb: URB to be checked
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns 1 if @urb describes an OUT transfer (host-to-device),
+=======
+ * Return: 1 if @urb describes an OUT transfer (host-to-device),
+>>>>>>> v3.18
 =======
  * Return: 1 if @urb describes an OUT transfer (host-to-device),
 >>>>>>> v3.18
@@ -1833,11 +1962,17 @@ extern void usb_reset_endpoint(struct usb_device *dev, unsigned int epaddr);
 extern int usb_driver_set_configuration(struct usb_device *udev, int config);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* choose and set configuration for device */
 extern int usb_choose_configuration(struct usb_device *udev);
 extern int usb_set_configuration(struct usb_device *dev, int configuration);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * timeouts, in milliseconds, used for sending/receiving control messages
@@ -2013,6 +2148,7 @@ static inline int usb_translate_errors(int error_code)
 #define USB_BUS_ADD		0x0003
 #define USB_BUS_REMOVE		0x0004
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_DEVICE_CONFIG	0x0005
 
 #ifdef CONFIG_USB
@@ -2026,12 +2162,19 @@ static inline void usb_unregister_notify(struct notifier_block *nb) {}
 extern void usb_register_notify(struct notifier_block *nb);
 extern void usb_unregister_notify(struct notifier_block *nb);
 >>>>>>> v3.18
+=======
+extern void usb_register_notify(struct notifier_block *nb);
+extern void usb_unregister_notify(struct notifier_block *nb);
+>>>>>>> v3.18
 
 /* debugfs stuff */
 extern struct dentry *usb_debug_root;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* LED triggers */
 enum usb_led_event {
 	USB_LED_EVENT_HOST = 0,
@@ -2044,6 +2187,9 @@ extern void usb_led_activity(enum usb_led_event ev);
 static inline void usb_led_activity(enum usb_led_event ev) {}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif  /* __KERNEL__ */
 

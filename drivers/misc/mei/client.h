@@ -25,9 +25,12 @@
 #include "mei_dev.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mei_me_cl_by_uuid(const struct mei_device *dev, const uuid_le *cuuid);
 int mei_me_cl_by_id(struct mei_device *dev, u8 client_id);
 =======
+=======
+>>>>>>> v3.18
 struct mei_me_client *mei_me_cl_by_uuid(const struct mei_device *dev,
 					const uuid_le *cuuid);
 struct mei_me_client *mei_me_cl_by_id(struct mei_device *dev, u8 client_id);
@@ -37,6 +40,9 @@ struct mei_me_client *mei_me_cl_by_uuid_id(struct mei_device *dev,
 
 void mei_me_cl_remove(struct mei_device *dev,
 		      const uuid_le *uuid, u8 client_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -74,6 +80,7 @@ int mei_cl_flush_queues(struct mei_cl *cl);
 struct mei_cl_cb *mei_cl_find_read_cb(struct mei_cl *cl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * mei_cl_cmp_id - tells if file private data have same id
  *
@@ -104,6 +111,8 @@ int mei_cl_flow_ctrl_reduce(struct mei_cl *cl);
  *  MEI input output function prototype
  */
 =======
+=======
+>>>>>>> v3.18
 
 int mei_cl_flow_ctrl_creds(struct mei_cl *cl);
 
@@ -124,6 +133,9 @@ static inline bool mei_cl_is_transitioning(struct mei_cl *cl)
 		MEI_FILE_DISCONNECTING == cl->state;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bool mei_cl_is_other_connecting(struct mei_cl *cl);
 int mei_cl_disconnect(struct mei_cl *cl);
@@ -131,11 +143,17 @@ int mei_cl_connect(struct mei_cl *cl, struct file *file);
 int mei_cl_read_start(struct mei_cl *cl, size_t length);
 int mei_cl_write(struct mei_cl *cl, struct mei_cl_cb *cb, bool blocking);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int mei_cl_irq_write(struct mei_cl *cl, struct mei_cl_cb *cb,
 		     struct mei_cl_cb *cmpl_list);
 
 void mei_cl_complete(struct mei_cl *cl, struct mei_cl_cb *cb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void mei_host_client_init(struct work_struct *work);
@@ -144,10 +162,13 @@ void mei_host_client_init(struct work_struct *work);
 
 void mei_cl_all_disconnect(struct mei_device *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mei_cl_all_read_wakeup(struct mei_device *dev);
 void mei_cl_all_write_clear(struct mei_device *dev);
 
 =======
+=======
+>>>>>>> v3.18
 void mei_cl_all_wakeup(struct mei_device *dev);
 void mei_cl_all_write_clear(struct mei_device *dev);
 
@@ -160,5 +181,8 @@ void mei_cl_all_write_clear(struct mei_device *dev);
 #define cl_err(dev, cl, format, arg...) \
 	dev_err((dev)->dev, MEI_CL_FMT format, MEI_CL_PRM(cl), ##arg)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _MEI_CLIENT_H_ */

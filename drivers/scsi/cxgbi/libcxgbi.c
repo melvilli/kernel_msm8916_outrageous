@@ -25,11 +25,17 @@
 #include <net/dst.h>
 #include <net/route.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <net/ipv6.h>
 #include <net/ip6_route.h>
 #include <net/addrconf.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/inetdevice.h>	/* ip_dev_find */
 #include <linux/module.h>
@@ -61,6 +67,12 @@ static LIST_HEAD(cdev_list);
 static DEFINE_MUTEX(cdev_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static LIST_HEAD(cdev_rcu_list);
+static DEFINE_SPINLOCK(cdev_rcu_lock);
+
+>>>>>>> v3.18
 =======
 static LIST_HEAD(cdev_rcu_list);
 static DEFINE_SPINLOCK(cdev_rcu_lock);
@@ -152,11 +164,17 @@ struct cxgbi_device *cxgbi_device_register(unsigned int extra,
 	mutex_unlock(&cdev_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&cdev_rcu_lock);
 	list_add_tail_rcu(&cdev->rcu_node, &cdev_rcu_list);
 	spin_unlock(&cdev_rcu_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	log_debug(1 << CXGBI_DBG_DEV,
 		"cdev 0x%p, p# %u.\n", cdev, nports);
@@ -170,10 +188,13 @@ void cxgbi_device_unregister(struct cxgbi_device *cdev)
 		"cdev 0x%p, p# %u,%s.\n",
 		cdev, cdev->nports, cdev->nports ? cdev->ports[0]->name : "");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&cdev_mutex);
 	list_del(&cdev->list_head);
 	mutex_unlock(&cdev_mutex);
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_lock(&cdev_mutex);
 	list_del(&cdev->list_head);
@@ -184,6 +205,9 @@ void cxgbi_device_unregister(struct cxgbi_device *cdev)
 	spin_unlock(&cdev_rcu_lock);
 	synchronize_rcu();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cxgbi_device_destroy(cdev);
 }
@@ -197,12 +221,18 @@ void cxgbi_device_unregister_all(unsigned int flag)
 	list_for_each_entry_safe(cdev, tmp, &cdev_list, list_head) {
 		if ((cdev->flags & flag) == flag) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			log_debug(1 << CXGBI_DBG_DEV,
 				"cdev 0x%p, p# %u,%s.\n",
 				cdev, cdev->nports, cdev->nports ?
 				 cdev->ports[0]->name : "");
 			list_del(&cdev->list_head);
 			cxgbi_device_destroy(cdev);
+=======
+			mutex_unlock(&cdev_mutex);
+			cxgbi_device_unregister(cdev);
+			mutex_lock(&cdev_mutex);
+>>>>>>> v3.18
 =======
 			mutex_unlock(&cdev_mutex);
 			cxgbi_device_unregister(cdev);
@@ -227,6 +257,10 @@ struct cxgbi_device *cxgbi_device_find_by_lldev(void *lldev)
 	}
 	mutex_unlock(&cdev_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -237,8 +271,13 @@ struct cxgbi_device *cxgbi_device_find_by_lldev(void *lldev)
 EXPORT_SYMBOL_GPL(cxgbi_device_find_by_lldev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cxgbi_device *cxgbi_device_find_by_netdev(struct net_device *ndev,
 							int *port)
+=======
+struct cxgbi_device *cxgbi_device_find_by_netdev(struct net_device *ndev,
+						 int *port)
+>>>>>>> v3.18
 =======
 struct cxgbi_device *cxgbi_device_find_by_netdev(struct net_device *ndev,
 						 int *port)
@@ -273,7 +312,10 @@ struct cxgbi_device *cxgbi_device_find_by_netdev(struct net_device *ndev,
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(cxgbi_device_find_by_netdev);
 
 struct cxgbi_device *cxgbi_device_find_by_netdev_rcu(struct net_device *ndev,
@@ -343,6 +385,9 @@ static struct cxgbi_device *cxgbi_device_find_by_mac(struct net_device *ndev,
 	return NULL;
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void cxgbi_hbas_remove(struct cxgbi_device *cdev)
@@ -366,7 +411,11 @@ void cxgbi_hbas_remove(struct cxgbi_device *cdev)
 EXPORT_SYMBOL_GPL(cxgbi_hbas_remove);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cxgbi_hbas_add(struct cxgbi_device *cdev, unsigned int max_lun,
+=======
+int cxgbi_hbas_add(struct cxgbi_device *cdev, u64 max_lun,
+>>>>>>> v3.18
 =======
 int cxgbi_hbas_add(struct cxgbi_device *cdev, u64 max_lun,
 >>>>>>> v3.18
@@ -439,7 +488,10 @@ EXPORT_SYMBOL_GPL(cxgbi_hbas_add);
  *   responsible for keeping track of their port usage.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static struct cxgbi_sock *find_sock_on_port(struct cxgbi_device *cdev,
 					    unsigned char port_id)
@@ -469,6 +521,9 @@ static struct cxgbi_sock *find_sock_on_port(struct cxgbi_device *cdev,
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sock_get_port(struct cxgbi_sock *csk)
 {
@@ -477,6 +532,10 @@ static int sock_get_port(struct cxgbi_sock *csk)
 	unsigned int start;
 	int idx;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__be16 *port;
+>>>>>>> v3.18
 =======
 	__be16 *port;
 >>>>>>> v3.18
@@ -488,10 +547,13 @@ static int sock_get_port(struct cxgbi_sock *csk)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (csk->saddr.sin_port) {
 		pr_err("source port NON-ZERO %u.\n",
 			ntohs(csk->saddr.sin_port));
 =======
+=======
+>>>>>>> v3.18
 	if (csk->csk_family == AF_INET)
 		port = &csk->saddr.sin_port;
 	else /* ipv6 */
@@ -500,6 +562,9 @@ static int sock_get_port(struct cxgbi_sock *csk)
 	if (*port) {
 		pr_err("source port NON-ZERO %u.\n",
 			ntohs(*port));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EADDRINUSE;
 	}
@@ -519,8 +584,12 @@ static int sock_get_port(struct cxgbi_sock *csk)
 		if (!pmap->port_csk[idx]) {
 			pmap->used++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			csk->saddr.sin_port =
 				htons(pmap->sport_base + idx);
+=======
+			*port = htons(pmap->sport_base + idx);
+>>>>>>> v3.18
 =======
 			*port = htons(pmap->sport_base + idx);
 >>>>>>> v3.18
@@ -550,12 +619,15 @@ static void sock_put_port(struct cxgbi_sock *csk)
 	struct cxgbi_device *cdev = csk->cdev;
 	struct cxgbi_ports_map *pmap = &cdev->pmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (csk->saddr.sin_port) {
 		int idx = ntohs(csk->saddr.sin_port) - pmap->sport_base;
 
 		csk->saddr.sin_port = 0;
 =======
+=======
+>>>>>>> v3.18
 	__be16 *port;
 
 	if (csk->csk_family == AF_INET)
@@ -567,13 +639,20 @@ static void sock_put_port(struct cxgbi_sock *csk)
 		int idx = ntohs(*port) - pmap->sport_base;
 
 		*port = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (idx < 0 || idx >= pmap->max_connect) {
 			pr_err("cdev 0x%p, p#%u %s, port %u OOR.\n",
 				cdev, csk->port_id,
 				cdev->ports[csk->port_id]->name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ntohs(csk->saddr.sin_port));
+=======
+				ntohs(*port));
+>>>>>>> v3.18
 =======
 				ntohs(*port));
 >>>>>>> v3.18
@@ -673,6 +752,7 @@ static struct cxgbi_sock *cxgbi_check_route(struct sockaddr *dst_addr)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (daddr->sin_family != AF_INET) {
 		pr_info("address family 0x%x NOT supported.\n",
 			daddr->sin_family);
@@ -685,11 +765,16 @@ static struct cxgbi_sock *cxgbi_check_route(struct sockaddr *dst_addr)
 		pr_info("no route to ipv4 0x%x, port %u.\n",
 			daddr->sin_addr.s_addr, daddr->sin_port);
 =======
+=======
+>>>>>>> v3.18
 	rt = find_route_ipv4(&fl4, 0, daddr->sin_addr.s_addr, 0, daddr->sin_port, 0);
 	if (!rt) {
 		pr_info("no route to ipv4 0x%x, port %u.\n",
 			be32_to_cpu(daddr->sin_addr.s_addr),
 			be16_to_cpu(daddr->sin_port));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = -ENETUNREACH;
 		goto err_out;
@@ -739,16 +824,22 @@ static struct cxgbi_sock *cxgbi_check_route(struct sockaddr *dst_addr)
 	csk->mtu = mtu;
 	csk->dst = dst;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	csk->daddr.sin_addr.s_addr = daddr->sin_addr.s_addr;
 	csk->daddr.sin_port = daddr->sin_port;
 	csk->daddr.sin_family = daddr->sin_family;
 =======
+=======
+>>>>>>> v3.18
 
 	csk->csk_family = AF_INET;
 	csk->daddr.sin_addr.s_addr = daddr->sin_addr.s_addr;
 	csk->daddr.sin_port = daddr->sin_port;
 	csk->daddr.sin_family = daddr->sin_family;
 	csk->saddr.sin_family = daddr->sin_family;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	csk->saddr.sin_addr.s_addr = fl4.saddr;
 	neigh_release(n);
@@ -767,7 +858,10 @@ err_out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_IPV6)
 static struct rt6_info *find_route_ipv6(const struct in6_addr *saddr,
 					const struct in6_addr *daddr)
@@ -886,6 +980,9 @@ err_out:
 }
 #endif /* IS_ENABLED(CONFIG_IPV6) */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void cxgbi_sock_established(struct cxgbi_sock *csk, unsigned int snd_isn,
 			unsigned int opt)
@@ -908,7 +1005,11 @@ static void cxgbi_inform_iscsi_conn_closing(struct cxgbi_sock *csk)
 		if (csk->user_data)
 			iscsi_conn_failure(csk->user_data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					ISCSI_ERR_CONN_FAILED);
+=======
+					ISCSI_ERR_TCP_CONN_CLOSE);
+>>>>>>> v3.18
 =======
 					ISCSI_ERR_TCP_CONN_CLOSE);
 >>>>>>> v3.18
@@ -1001,6 +1102,7 @@ void cxgbi_sock_rcv_abort_rpl(struct cxgbi_sock *csk)
 	cxgbi_sock_get(csk);
 	spin_lock_bh(&csk->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cxgbi_sock_flag(csk, CTPF_ABORT_RPL_PENDING)) {
 		if (!cxgbi_sock_flag(csk, CTPF_ABORT_RPL_RCVD))
 			cxgbi_sock_set_flag(csk, CTPF_ABORT_RPL_RCVD);
@@ -1014,6 +1116,8 @@ void cxgbi_sock_rcv_abort_rpl(struct cxgbi_sock *csk)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	cxgbi_sock_set_flag(csk, CTPF_ABORT_RPL_RCVD);
 	if (cxgbi_sock_flag(csk, CTPF_ABORT_RPL_PENDING)) {
@@ -1024,6 +1128,9 @@ void cxgbi_sock_rcv_abort_rpl(struct cxgbi_sock *csk)
 		cxgbi_sock_closed(csk);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_bh(&csk->lock);
 	cxgbi_sock_put(csk);
@@ -1993,7 +2100,11 @@ static void csk_return_rx_credits(struct cxgbi_sock *csk, int copied)
 
 	log_debug(1 << CXGBI_DBG_PDU_RX,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"csk 0x%p,%u,0x%lu,%u, seq %u, wup %u, thre %u, %u.\n",
+=======
+		"csk 0x%p,%u,0x%lx,%u, seq %u, wup %u, thre %u, %u.\n",
+>>>>>>> v3.18
 =======
 		"csk 0x%p,%u,0x%lx,%u, seq %u, wup %u, thre %u, %u.\n",
 >>>>>>> v3.18
@@ -2547,7 +2658,10 @@ int cxgbi_set_conn_param(struct iscsi_cls_conn *cls_conn,
 EXPORT_SYMBOL_GPL(cxgbi_set_conn_param);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int csk_print_port(struct cxgbi_sock *csk, char *buf)
 {
 	int len;
@@ -2576,6 +2690,9 @@ static inline int csk_print_ip(struct cxgbi_sock *csk, char *buf)
 	return len;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int cxgbi_get_ep_param(struct iscsi_endpoint *ep, enum iscsi_param param,
 		       char *buf)
@@ -2793,6 +2910,7 @@ int cxgbi_get_host_param(struct Scsi_Host *shost, enum iscsi_host_param param,
 	case ISCSI_HOST_PARAM_IPADDRESS:
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__be32 addr;
 
 		addr = cxgbi_get_iscsi_ipv4(chba);
@@ -2800,6 +2918,8 @@ int cxgbi_get_host_param(struct Scsi_Host *shost, enum iscsi_host_param param,
 		log_debug(1 << CXGBI_DBG_ISCSI,
 			"hba %s, ipv4 %pI4.\n", chba->ndev->name, &addr);
 =======
+=======
+>>>>>>> v3.18
 		struct cxgbi_sock *csk = find_sock_on_port(chba->cdev,
 							   chba->port_id);
 		if (csk) {
@@ -2808,6 +2928,9 @@ int cxgbi_get_host_param(struct Scsi_Host *shost, enum iscsi_host_param param,
 		}
 		log_debug(1 << CXGBI_DBG_ISCSI,
 			  "hba %s, addr %s.\n", chba->ndev->name, buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	}
@@ -2842,8 +2965,11 @@ struct iscsi_endpoint *cxgbi_ep_connect(struct Scsi_Host *shost,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	csk = cxgbi_check_route(dst_addr);
 =======
+=======
+>>>>>>> v3.18
 	if (dst_addr->sa_family == AF_INET) {
 		csk = cxgbi_check_route(dst_addr);
 #if IS_ENABLED(CONFIG_IPV6)
@@ -2857,6 +2983,9 @@ struct iscsi_endpoint *cxgbi_ep_connect(struct Scsi_Host *shost,
 		return (struct iscsi_endpoint *)ERR_PTR(err);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(csk))
 		return (struct iscsi_endpoint *)csk;

@@ -3,6 +3,10 @@
 
 #include <asm/processor.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/alternative.h>
+>>>>>>> v3.18
 =======
 #include <asm/alternative.h>
 >>>>>>> v3.18
@@ -21,11 +25,14 @@ static inline bool kvm_check_and_clear_guest_paused(void)
 #endif /* CONFIG_KVM_GUEST */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* This instruction is vmcall.  On non-VT architectures, it will generate a
  * trap that we will then rewrite to the appropriate instruction.
  */
 #define KVM_HYPERCALL ".byte 0x0f,0x01,0xc1"
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DEBUG_RODATA
 #define KVM_HYPERCALL \
         ALTERNATIVE(".byte 0x0f,0x01,0xc1", ".byte 0x0f,0x01,0xd9", X86_FEATURE_VMMCALL)
@@ -35,6 +42,9 @@ static inline bool kvm_check_and_clear_guest_paused(void)
  */
 #define KVM_HYPERCALL ".byte 0x0f,0x01,0xc1"
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* For KVM hypercalls, a three-byte sequence of either the vmcall or the vmmcall
@@ -102,6 +112,7 @@ static inline long kvm_hypercall4(unsigned int nr, unsigned long p1,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool kvm_para_available(void)
 {
 	unsigned int eax, ebx, ecx, edx;
@@ -123,6 +134,8 @@ static inline bool kvm_para_available(void)
 
 	return false;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KVM_GUEST
 bool kvm_para_available(void);
 unsigned int kvm_arch_para_features(void);
@@ -148,11 +161,15 @@ static inline void kvm_spinlock_init(void)
 static inline bool kvm_para_available(void)
 {
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static inline unsigned int kvm_arch_para_features(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return cpuid_eax(KVM_CPUID_FEATURES);
 }
@@ -167,6 +184,11 @@ extern void kvm_disable_steal_time(void);
 #define kvm_guest_init() do { } while (0)
 #define kvm_async_pf_task_wait(T) do {} while(0)
 #define kvm_async_pf_task_wake(T) do {} while(0)
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 =======
 	return 0;
 }

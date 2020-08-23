@@ -22,6 +22,7 @@ menuconfig IPV6
 if IPV6
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IPV6_PRIVACY
 	bool "IPv6: Privacy Extensions (RFC 3041) support"
 	---help---
@@ -40,6 +41,8 @@ config IPV6_PRIVACY
 
 	  See <file:Documentation/networking/ip-sysctl.txt> for details.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config IPV6_ROUTER_PREF
@@ -157,7 +160,10 @@ config INET6_XFRM_MODE_ROUTEOPTIMIZATION
 	  Support for MIPv6 route optimization mode.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config IPV6_VTI
 tristate "Virtual (secure) IPv6: tunneling"
 	select IPV6_TUNNEL
@@ -170,6 +176,9 @@ tristate "Virtual (secure) IPv6: tunneling"
 	the notion of a secure tunnel for IPSEC and then use routing protocol
 	on top.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config IPV6_SIT
 	tristate "IPv6: IPv6-in-IPv4 tunnel (SIT driver)"

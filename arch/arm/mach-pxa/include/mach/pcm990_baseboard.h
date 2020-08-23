@@ -21,6 +21,10 @@
 
 #include <mach/pcm027.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "irqs.h" /* PXA_GPIO_TO_IRQ */
+>>>>>>> v3.18
 =======
 #include "irqs.h" /* PXA_GPIO_TO_IRQ */
 >>>>>>> v3.18

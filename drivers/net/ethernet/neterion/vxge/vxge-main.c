@@ -64,7 +64,11 @@ MODULE_DESCRIPTION("Neterion's X3100 Series 10GbE PCIe I/O"
 	"Virtualized Server Adapter");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(vxge_id_table) = {
+=======
+static const struct pci_device_id vxge_id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id vxge_id_table[] = {
 >>>>>>> v3.18
@@ -92,6 +96,10 @@ module_param_array(bw_percentage, uint, NULL, 0);
 
 static struct vxge_drv_config *driver_config;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static enum vxge_hw_status vxge_reset_all_vpaths(struct vxgedev *vdev);
+>>>>>>> v3.18
 =======
 static enum vxge_hw_status vxge_reset_all_vpaths(struct vxgedev *vdev);
 >>>>>>> v3.18
@@ -376,6 +384,12 @@ vxge_rx_1b_compl(struct __vxge_hw_ring *ringh, void *dtr,
 		ring->ndev->name, __func__, __LINE__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (ring->budget <= 0)
+		goto out;
+
+>>>>>>> v3.18
 =======
 	if (ring->budget <= 0)
 		goto out;
@@ -514,7 +528,10 @@ vxge_rx_1b_compl(struct __vxge_hw_ring *ringh, void *dtr,
 			skb_hwts = skb_hwtstamps(skb);
 			skb_hwts->hwtstamp = ns_to_ktime(ns);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb_hwts->syststamp.tv64 = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -525,7 +542,12 @@ vxge_rx_1b_compl(struct __vxge_hw_ring *ringh, void *dtr,
 		 */
 		if (ext_info.rth_value)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			skb->rxhash = ext_info.rth_value;
+=======
+			skb_set_hash(skb, ext_info.rth_value,
+				     PKT_HASH_TYPE_L3);
+>>>>>>> v3.18
 =======
 			skb_set_hash(skb, ext_info.rth_value,
 				     PKT_HASH_TYPE_L3);
@@ -546,6 +568,10 @@ vxge_rx_1b_compl(struct __vxge_hw_ring *ringh, void *dtr,
 		vxge_hw_ring_rxd_post_post_wmb(ringh, first_dtr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out:
+>>>>>>> v3.18
 =======
 out:
 >>>>>>> v3.18
@@ -751,9 +777,12 @@ static int vxge_learn_mac(struct vxgedev *vdev, u8 *mac_header)
 	enum vxge_hw_status status = VXGE_HW_OK;
 	struct vxge_vpath *vpath = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct __vxge_hw_device *hldev;
 
 	hldev = pci_get_drvdata(vdev->pdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -851,7 +880,11 @@ vxge_xmit(struct sk_buff *skb, struct net_device *dev)
 		vxge_debug_tx(VXGE_ERR,
 			"%s: Buffer has no data..", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -864,7 +897,11 @@ vxge_xmit(struct sk_buff *skb, struct net_device *dev)
 		vxge_debug_tx(VXGE_ERR,
 			"%s: vdev not initialized", dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_kfree_skb(skb);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -878,7 +915,11 @@ vxge_xmit(struct sk_buff *skb, struct net_device *dev)
 				"%s: Failed to store the mac address",
 				dev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_kfree_skb(skb);
+=======
+			dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 			dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -1029,7 +1070,11 @@ _exit1:
 _exit0:
 	netif_tx_stop_queue(fifo->txq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_kfree_skb(skb);
+=======
+	dev_kfree_skb_any(skb);
+>>>>>>> v3.18
 =======
 	dev_kfree_skb_any(skb);
 >>>>>>> v3.18
@@ -1475,7 +1520,11 @@ vxge_search_mac_addr_in_da_table(struct vxge_vpath *vpath, struct macInfo *mac)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (memcmp(mac->macaddr, macaddr, ETH_ALEN)) {
+=======
+	while (!ether_addr_equal(mac->macaddr, macaddr)) {
+>>>>>>> v3.18
 =======
 	while (!ether_addr_equal(mac->macaddr, macaddr)) {
 >>>>>>> v3.18
@@ -2020,7 +2069,11 @@ static enum vxge_hw_status vxge_rth_configure(struct vxgedev *vdev)
 
 /* reset vpaths */
 <<<<<<< HEAD
+<<<<<<< HEAD
 enum vxge_hw_status vxge_reset_all_vpaths(struct vxgedev *vdev)
+=======
+static enum vxge_hw_status vxge_reset_all_vpaths(struct vxgedev *vdev)
+>>>>>>> v3.18
 =======
 static enum vxge_hw_status vxge_reset_all_vpaths(struct vxgedev *vdev)
 >>>>>>> v3.18
@@ -2126,11 +2179,17 @@ static int vxge_open_vpaths(struct vxgedev *vdev)
 			vpath->fifo.ndev = vdev->ndev;
 			vpath->fifo.pdev = vdev->pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			u64_stats_init(&vpath->fifo.stats.syncp);
 			u64_stats_init(&vpath->ring.stats.syncp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (vdev->config.tx_steering_type)
 				vpath->fifo.txq =
@@ -2176,7 +2235,11 @@ static void adaptive_coalesce_tx_interrupts(struct vxge_fifo *fifo)
 {
 	fifo->interrupt_count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (jiffies > fifo->jiffies + HZ / 100) {
+=======
+	if (time_before(fifo->jiffies + HZ / 100, jiffies)) {
+>>>>>>> v3.18
 =======
 	if (time_before(fifo->jiffies + HZ / 100, jiffies)) {
 >>>>>>> v3.18
@@ -2208,7 +2271,11 @@ static void adaptive_coalesce_rx_interrupts(struct vxge_ring *ring)
 {
 	ring->interrupt_count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (jiffies > ring->jiffies + HZ / 100) {
+=======
+	if (time_before(ring->jiffies + HZ / 100, jiffies)) {
+>>>>>>> v3.18
 =======
 	if (time_before(ring->jiffies + HZ / 100, jiffies)) {
 >>>>>>> v3.18
@@ -2415,6 +2482,7 @@ start:
 	vdev->vxge_entries[j].in_use = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = pci_enable_msix(vdev->pdev, vdev->entries, vdev->intr_cnt);
 	if (ret > 0) {
 		vxge_debug_init(VXGE_ERR,
@@ -2422,6 +2490,8 @@ start:
 			VXGE_DRIVER_NAME, vdev->intr_cnt, ret);
 		if ((max_config_vpath != VXGE_USE_DEFAULT) || (ret < 3)) {
 =======
+=======
+>>>>>>> v3.18
 	ret = pci_enable_msix_range(vdev->pdev,
 				    vdev->entries, 3, vdev->intr_cnt);
 	if (ret < 0) {
@@ -2434,6 +2504,9 @@ start:
 			"%s: MSI-X enable failed for %d vectors, ret: %d",
 			VXGE_DRIVER_NAME, vdev->intr_cnt, ret);
 		if (max_config_vpath != VXGE_USE_DEFAULT) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			ret = -ENODEV;
 			goto enable_msix_failed;
@@ -2449,9 +2522,12 @@ start:
 		vdev->no_of_vpath = temp;
 		goto start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (ret < 0) {
 		ret = -ENODEV;
 		goto enable_msix_failed;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -2524,9 +2600,12 @@ static void vxge_rem_msix_isr(struct vxgedev *vdev)
 static void vxge_rem_isr(struct vxgedev *vdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct __vxge_hw_device *hldev;
 	hldev = pci_get_drvdata(vdev->pdev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PCI_MSI
@@ -3221,7 +3300,11 @@ vxge_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *net_stats)
 
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&rxstats->syncp);
+=======
+			start = u64_stats_fetch_begin_irq(&rxstats->syncp);
+>>>>>>> v3.18
 =======
 			start = u64_stats_fetch_begin_irq(&rxstats->syncp);
 >>>>>>> v3.18
@@ -3230,7 +3313,11 @@ vxge_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *net_stats)
 			multicast = rxstats->rx_mcast;
 			bytes     = rxstats->rx_bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} while (u64_stats_fetch_retry_bh(&rxstats->syncp, start));
+=======
+		} while (u64_stats_fetch_retry_irq(&rxstats->syncp, start));
+>>>>>>> v3.18
 =======
 		} while (u64_stats_fetch_retry_irq(&rxstats->syncp, start));
 >>>>>>> v3.18
@@ -3244,17 +3331,23 @@ vxge_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *net_stats)
 
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			start = u64_stats_fetch_begin_bh(&txstats->syncp);
 
 			packets = txstats->tx_frms;
 			bytes   = txstats->tx_bytes;
 		} while (u64_stats_fetch_retry_bh(&txstats->syncp, start));
 =======
+=======
+>>>>>>> v3.18
 			start = u64_stats_fetch_begin_irq(&txstats->syncp);
 
 			packets = txstats->tx_frms;
 			bytes   = txstats->tx_bytes;
 		} while (u64_stats_fetch_retry_irq(&txstats->syncp, start));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		net_stats->tx_packets += packets;
@@ -3291,7 +3384,11 @@ static enum vxge_hw_status vxge_timestamp_config(struct __vxge_hw_device *devh)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vxge_hwtstamp_ioctl(struct vxgedev *vdev, void __user *data)
+=======
+static int vxge_hwtstamp_set(struct vxgedev *vdev, void __user *data)
+>>>>>>> v3.18
 =======
 static int vxge_hwtstamp_set(struct vxgedev *vdev, void __user *data)
 >>>>>>> v3.18
@@ -3356,7 +3453,10 @@ static int vxge_hwtstamp_set(struct vxgedev *vdev, void __user *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vxge_hwtstamp_get(struct vxgedev *vdev, void __user *data)
 {
 	struct hwtstamp_config config;
@@ -3372,6 +3472,9 @@ static int vxge_hwtstamp_get(struct vxgedev *vdev, void __user *data)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * vxge_ioctl
@@ -3387,6 +3490,7 @@ static int vxge_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 {
 	struct vxgedev *vdev = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	switch (cmd) {
@@ -3401,6 +3505,8 @@ static int vxge_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 
 	switch (cmd) {
 	case SIOCSHWTSTAMP:
@@ -3410,6 +3516,9 @@ static int vxge_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 	default:
 		return -EOPNOTSUPP;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3584,7 +3693,11 @@ static int vxge_device_register(struct __vxge_hw_device *hldev,
 
 	vxge_debug_init(vxge_hw_device_trace_level_get(hldev),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"%s : checksuming enabled", __func__);
+=======
+		"%s : checksumming enabled", __func__);
+>>>>>>> v3.18
 =======
 		"%s : checksumming enabled", __func__);
 >>>>>>> v3.18
@@ -3664,7 +3777,11 @@ static void vxge_device_unregister(struct __vxge_hw_device *hldev)
 			     __func__, __LINE__);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(buf, dev->name, IFNAMSIZ);
+=======
+	strlcpy(buf, dev->name, IFNAMSIZ);
+>>>>>>> v3.18
 =======
 	strlcpy(buf, dev->name, IFNAMSIZ);
 >>>>>>> v3.18
@@ -4887,7 +5004,10 @@ _exit5:
 	vxge_device_unregister(hldev);
 _exit4:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vxge_hw_device_terminate(hldev);
@@ -4933,7 +5053,10 @@ static void vxge_remove(struct pci_dev *pdev)
 
 	vxge_device_unregister(hldev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Do not call pci_disable_sriov here, as it will break child devices */

@@ -16,7 +16,10 @@
 #include <linux/timer.h>
 #include <linux/workqueue.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of.h>
 #include <linux/phy.h>
 #include <linux/phy_fixed.h>
@@ -29,6 +32,9 @@ enum dsa_tag_protocol {
 	DSA_TAG_PROTO_EDSA,
 	DSA_TAG_PROTO_BRCM,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define DSA_MAX_SWITCHES	4
@@ -39,10 +45,13 @@ struct dsa_chip_data {
 	 * How to access the switch configuration registers.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device	*mii_bus;
 	int		sw_addr;
 
 =======
+=======
+>>>>>>> v3.18
 	struct device	*host_dev;
 	int		sw_addr;
 
@@ -52,6 +61,9 @@ struct dsa_chip_data {
 	 */
 	struct device_node *of_node;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * The names of the switch's ports.  Use "cpu" to
@@ -62,6 +74,10 @@ struct dsa_chip_data {
 	 */
 	char		*port_names[DSA_MAX_PORTS];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *port_dn[DSA_MAX_PORTS];
+>>>>>>> v3.18
 =======
 	struct device_node *port_dn[DSA_MAX_PORTS];
 >>>>>>> v3.18
@@ -91,6 +107,11 @@ struct dsa_platform_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct packet_type;
+
+>>>>>>> v3.18
 =======
 struct packet_type;
 
@@ -108,13 +129,19 @@ struct dsa_switch_tree {
 	 */
 	struct net_device	*master_netdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be16			tag_protocol;
 =======
+=======
+>>>>>>> v3.18
 	int			(*rcv)(struct sk_buff *skb,
 				       struct net_device *dev,
 				       struct packet_type *pt,
 				       struct net_device *orig_dev);
 	enum dsa_tag_protocol	tag_protocol;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -155,9 +182,15 @@ struct dsa_switch {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Reference to mii bus to use.
 	 */
 	struct mii_bus		*master_mii_bus;
+=======
+	 * Reference to host device to use.
+	 */
+	struct device		*master_dev;
+>>>>>>> v3.18
 =======
 	 * Reference to host device to use.
 	 */
@@ -170,6 +203,10 @@ struct dsa_switch {
 	u32			dsa_port_mask;
 	u32			phys_port_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			phys_mii_mask;
+>>>>>>> v3.18
 =======
 	u32			phys_mii_mask;
 >>>>>>> v3.18
@@ -202,7 +239,11 @@ struct dsa_switch_driver {
 	struct list_head	list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be16			tag_protocol;
+=======
+	enum dsa_tag_protocol	tag_protocol;
+>>>>>>> v3.18
 =======
 	enum dsa_tag_protocol	tag_protocol;
 >>>>>>> v3.18
@@ -212,14 +253,20 @@ struct dsa_switch_driver {
 	 * Probing and setup.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char	*(*probe)(struct mii_bus *bus, int sw_addr);
 	int	(*setup)(struct dsa_switch *ds);
 	int	(*set_addr)(struct dsa_switch *ds, u8 *addr);
 =======
+=======
+>>>>>>> v3.18
 	char	*(*probe)(struct device *host_dev, int sw_addr);
 	int	(*setup)(struct dsa_switch *ds);
 	int	(*set_addr)(struct dsa_switch *ds, u8 *addr);
 	u32	(*get_phy_flags)(struct dsa_switch *ds, int port);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -236,7 +283,10 @@ struct dsa_switch_driver {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	 * Link state adjustment (called from libphy)
 	 */
 	void	(*adjust_link)(struct dsa_switch *ds, int port,
@@ -245,6 +295,9 @@ struct dsa_switch_driver {
 				struct fixed_phy_status *st);
 
 	/*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * ethtool hardware statistics.
 	 */
@@ -253,7 +306,10 @@ struct dsa_switch_driver {
 				     int port, uint64_t *data);
 	int	(*get_sset_count)(struct dsa_switch *ds);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * ethtool Wake-on-LAN
@@ -285,11 +341,15 @@ struct dsa_switch_driver {
 			   struct ethtool_eee *e);
 	int	(*get_eee)(struct dsa_switch *ds, int port,
 			   struct ethtool_eee *e);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 void register_switch_driver(struct dsa_switch_driver *type);
 void unregister_switch_driver(struct dsa_switch_driver *type);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /*
@@ -310,6 +370,8 @@ static inline bool dsa_uses_trailer_tags(struct dsa_switch_tree *dst)
 }
 
 =======
+=======
+>>>>>>> v3.18
 struct mii_bus *dsa_host_dev_to_mii_bus(struct device *dev);
 
 static inline void *ds_to_priv(struct dsa_switch *ds)
@@ -321,5 +383,8 @@ static inline bool dsa_uses_tagged_protocol(struct dsa_switch_tree *dst)
 {
 	return dst->rcv != NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

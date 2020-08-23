@@ -44,7 +44,11 @@ static int max9768_get_gpio(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -60,7 +64,11 @@ static int max9768_set_gpio(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_codec *codec = snd_soc_kcontrol_codec(kcontrol);
 >>>>>>> v3.18
@@ -127,7 +135,10 @@ static const struct snd_kcontrol_new max9768_mute[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct snd_soc_dapm_widget max9768_dapm_widgets[] = {
 SND_SOC_DAPM_INPUT("IN"),
 
@@ -140,6 +151,9 @@ static const struct snd_soc_dapm_route max9768_dapm_routes[] = {
 	{ "OUT-", NULL, "IN" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int max9768_probe(struct snd_soc_codec *codec)
 {
@@ -147,11 +161,14 @@ static int max9768_probe(struct snd_soc_codec *codec)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	codec->control_data = max9768->regmap;
 	ret = snd_soc_codec_set_cache_io(codec, 2, 6, SND_SOC_REGMAP);
 	if (ret)
 		return ret;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (max9768->flags & MAX9768_FLAG_CLASSIC_PWM) {
@@ -175,11 +192,17 @@ static struct snd_soc_codec_driver max9768_codec_driver = {
 	.controls = max9768_volume,
 	.num_controls = ARRAY_SIZE(max9768_volume),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.dapm_widgets = max9768_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(max9768_dapm_widgets),
 	.dapm_routes = max9768_dapm_routes,
 	.num_dapm_routes = ARRAY_SIZE(max9768_dapm_routes),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

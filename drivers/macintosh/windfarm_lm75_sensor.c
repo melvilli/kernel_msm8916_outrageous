@@ -134,7 +134,11 @@ static int wf_lm75_probe(struct i2c_client *client,
 	lm->ds1775 = ds1775;
 	lm->i2c = client;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lm->sens.name = (char *)name; /* XXX fix constness in structure */
+=======
+	lm->sens.name = name;
+>>>>>>> v3.18
 =======
 	lm->sens.name = name;
 >>>>>>> v3.18

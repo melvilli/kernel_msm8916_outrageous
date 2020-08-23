@@ -27,6 +27,10 @@ config BCMA_HOST_PCI
 	bool "Support for BCMA on PCI-host bus"
 	depends on BCMA_HOST_PCI_POSSIBLE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	default y
+>>>>>>> v3.18
 =======
 	default y
 >>>>>>> v3.18
@@ -39,9 +43,12 @@ config BCMA_DRIVER_PCI_HOSTMODE
 
 config BCMA_HOST_SOC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool
 	depends on BCMA_DRIVER_MIPS
 =======
+=======
+>>>>>>> v3.18
 	bool "Support for BCMA in a SoC"
 	depends on BCMA
 	help
@@ -50,6 +57,9 @@ config BCMA_HOST_SOC
 	  BCM47XX line.
 
 	  If unsure, say N
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config BCMA_DRIVER_MIPS
@@ -84,6 +94,10 @@ config BCMA_DRIVER_GPIO
 	bool "BCMA GPIO driver"
 	depends on BCMA && GPIOLIB
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select IRQ_DOMAIN if BCMA_HOST_SOC
+>>>>>>> v3.18
 =======
 	select IRQ_DOMAIN if BCMA_HOST_SOC
 >>>>>>> v3.18

@@ -47,11 +47,14 @@ static inline int pte_file(pte_t pte) { return 0; }
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * These would be in other places but having them here reduces the diffs.
  */
 extern unsigned int kobjsize(const void *objp);
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * No page table caches to initialise.

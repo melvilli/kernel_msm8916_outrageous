@@ -74,12 +74,18 @@ You will need perl 5 and the following modules: Getopt::Long, Getopt::Std,
 File::Basename, and File::Find to build the kernel.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 BC
 --
 
 You will need bc to build kernels 3.10 and higher
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 System utilities
@@ -171,7 +177,11 @@ PCMCIAutils
 -----------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 PCMCIAutils replaces pcmcia-cs (see below). It properly sets up
+=======
+PCMCIAutils replaces pcmcia-cs. It properly sets up
+>>>>>>> v3.18
 =======
 PCMCIAutils replaces pcmcia-cs. It properly sets up
 >>>>>>> v3.18
@@ -180,6 +190,7 @@ for 16-bit PCMCIA devices if the kernel is modularized and the hotplug
 subsystem is used.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Pcmcia-cs
 ---------
 
@@ -187,6 +198,8 @@ PCMCIA (PC Card) support is now partially implemented in the main
 kernel source. The "pcmciautils" package (see above) replaces pcmcia-cs
 for newest kernels.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Quota-tools
@@ -212,6 +225,7 @@ as root before you can use this.  You'll probably also want to
 get the user-space microcode_ctl utility to use with this.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Powertweak
 ----------
 
@@ -219,6 +233,8 @@ If you are running v0.1.17 or earlier, you should upgrade to
 version v0.99.0 or higher. Running old versions may cause problems
 with programs using shared memory.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 udev
@@ -301,12 +317,18 @@ mcelog
 ------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 In Linux 2.6.31+ the i386 kernel needs to run the mcelog utility
 as a regular cronjob similar to the x86-64 kernel to process and log
 machine check events when CONFIG_X86_NEW_MCE is enabled. Machine check
 events are errors reported by the CPU. Processing them is strongly encouraged.
 All x86-64 kernels since 2.6.4 require the mcelog utility to
 process machine checks.
+=======
+On x86 kernels the mcelog utility is needed to process and log machine check
+events when CONFIG_X86_MCE is enabled. Machine check events are errors reported
+by the CPU. Processing them is strongly encouraged.
+>>>>>>> v3.18
 =======
 On x86 kernels the mcelog utility is needed to process and log machine check
 events when CONFIG_X86_MCE is enabled. Machine check events are errors reported
@@ -371,10 +393,13 @@ Pcmciautils
 o  <ftp://ftp.kernel.org/pub/linux/utils/kernel/pcmcia/>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Pcmcia-cs
 ---------
 o  <http://pcmcia-cs.sourceforge.net/>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 Quota-tools
@@ -384,7 +409,11 @@ o  <http://sourceforge.net/projects/linuxquota/>
 DocBook Stylesheets
 -------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 o  <http://nwalsh.com/docbook/dsssl/>
+=======
+o  <http://sourceforge.net/projects/docbook/files/docbook-dsssl/>
+>>>>>>> v3.18
 =======
 o  <http://sourceforge.net/projects/docbook/files/docbook-dsssl/>
 >>>>>>> v3.18
@@ -396,6 +425,7 @@ o  <http://cyberelk.net/tim/xmlto/>
 Intel P6 microcode
 ------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 o  <http://www.urbanmyth.org/microcode/>
 
 Powertweak
@@ -406,11 +436,16 @@ udev
 ----
 o <http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html>
 =======
+=======
+>>>>>>> v3.18
 o  <https://downloadcenter.intel.com/>
 
 udev
 ----
 o <http://www.freedesktop.org/software/systemd/man/udev.html>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 FUSE
@@ -420,7 +455,11 @@ o <http://sourceforge.net/projects/fuse>
 mcelog
 ------
 <<<<<<< HEAD
+<<<<<<< HEAD
 o <ftp://ftp.kernel.org/pub/linux/utils/cpu/mce/>
+=======
+o <http://www.mcelog.org/>
+>>>>>>> v3.18
 =======
 o <http://www.mcelog.org/>
 >>>>>>> v3.18

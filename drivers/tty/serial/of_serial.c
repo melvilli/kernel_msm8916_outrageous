@@ -10,7 +10,10 @@
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -163,7 +166,11 @@ static int of_platform_serial_probe(struct platform_device *ofdev)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info = kmalloc(sizeof(*info), GFP_KERNEL);
+=======
+	info = kzalloc(sizeof(*info), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	info = kzalloc(sizeof(*info), GFP_KERNEL);
 >>>>>>> v3.18
@@ -182,6 +189,10 @@ static int of_platform_serial_probe(struct platform_device *ofdev)
 		struct uart_8250_port port8250;
 		memset(&port8250, 0, sizeof(port8250));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		port.type = port_type;
+>>>>>>> v3.18
 =======
 		port.type = port_type;
 >>>>>>> v3.18
@@ -216,7 +227,11 @@ static int of_platform_serial_probe(struct platform_device *ofdev)
 	info->type = port_type;
 	info->line = ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&ofdev->dev, info);
+=======
+	platform_set_drvdata(ofdev, info);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(ofdev, info);
 >>>>>>> v3.18
@@ -233,7 +248,11 @@ out:
 static int of_platform_serial_remove(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_serial_info *info = dev_get_drvdata(&ofdev->dev);
+=======
+	struct of_serial_info *info = platform_get_drvdata(ofdev);
+>>>>>>> v3.18
 =======
 	struct of_serial_info *info = platform_get_drvdata(ofdev);
 >>>>>>> v3.18
@@ -282,6 +301,10 @@ static struct of_device_id of_platform_serial_table[] = {
 		.data = (void *)PORT_NWPSERIAL, },
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ .type = "serial",         .data = (void *)PORT_UNKNOWN, },
+>>>>>>> v3.18
 =======
 	{ .type = "serial",         .data = (void *)PORT_UNKNOWN, },
 >>>>>>> v3.18

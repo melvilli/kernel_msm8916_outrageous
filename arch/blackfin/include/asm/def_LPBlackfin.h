@@ -545,6 +545,10 @@ do { \
 #define PORT_PREF0_P		0x12	/* DAG0 Port Preference */
 #define PORT_PREF1_P		0x13	/* DAG1 Port Preference */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RDCHK			0x9	/* Enable L1 Parity Check */
+>>>>>>> v3.18
 =======
 #define RDCHK			0x9	/* Enable L1 Parity Check */
 >>>>>>> v3.18

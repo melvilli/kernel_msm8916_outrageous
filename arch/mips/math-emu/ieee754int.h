@@ -7,8 +7,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -22,6 +25,7 @@
  *
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
@@ -103,6 +107,8 @@
 	vc = IEEE754_CLASS_NORM;\
     }\
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 #ifndef __IEEE754INT_H
@@ -159,6 +165,9 @@ static inline int ieee754_setandtestcx(const unsigned int x)
 		vm |= SP_HIDDEN_BIT;					\
 		vc = IEEE754_CLASS_NORM;				\
 	}								\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #define EXPLODEXSP EXPLODESP(x, xc, xs, xe, xm)
@@ -166,6 +175,7 @@ static inline int ieee754_setandtestcx(const unsigned int x)
 
 
 #define COMPXDP \
+<<<<<<< HEAD
 <<<<<<< HEAD
 u64 xm; int xe; int xs __maybe_unused; int xc
 
@@ -196,6 +206,8 @@ u64 ym; int ye; int ys; int yc
 	vc = IEEE754_CLASS_NORM;\
     }\
 =======
+=======
+>>>>>>> v3.18
 	u64 xm; int xe; int xs __maybe_unused; int xc
 
 #define COMPYDP \
@@ -224,11 +236,15 @@ u64 ym; int ye; int ys; int yc
 		vm |= DP_HIDDEN_BIT;					\
 		vc = IEEE754_CLASS_NORM;				\
 	}								\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #define EXPLODEXDP EXPLODEDP(x, xc, xs, xe, xm)
 #define EXPLODEYDP EXPLODEDP(y, yc, ys, ye, ym)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FLUSHDP(v, vc, vs, ve, vm) \
 	if(vc==IEEE754_CLASS_DNORM) {\
@@ -251,6 +267,8 @@ u64 ym; int ye; int ys; int yc
 		v = ieee754sp_zero(vs);\
 	    }\
 =======
+=======
+>>>>>>> v3.18
 #define FLUSHDP(v, vc, vs, ve, vm)					\
 	if (vc==IEEE754_CLASS_DNORM) {					\
 		if (ieee754_csr.nod) {					\
@@ -271,6 +289,9 @@ u64 ym; int ye; int ys; int yc
 			vm = 0;						\
 			v = ieee754sp_zero(vs);				\
 		}							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -279,6 +300,11 @@ u64 ym; int ye; int ys; int yc
 #define FLUSHXSP FLUSHSP(x, xc, xs, xe, xm)
 #define FLUSHYSP FLUSHSP(y, yc, ys, ye, ym)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif /* __IEEE754INT_H  */
+>>>>>>> v3.18
 =======
 
 #endif /* __IEEE754INT_H  */

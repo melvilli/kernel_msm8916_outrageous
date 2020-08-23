@@ -48,7 +48,11 @@ BSS_STACK(4096);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static char cmdline[COMMAND_LINE_SIZE]
+=======
+static char cmdline[BOOT_COMMAND_LINE_SIZE]
+>>>>>>> v3.18
 =======
 static char cmdline[BOOT_COMMAND_LINE_SIZE]
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ static void prep_cmdline(void *chosen)
 {
 	if (cmdline[0] == '\0')
 <<<<<<< HEAD
+<<<<<<< HEAD
 		getprop(chosen, "bootargs", cmdline, COMMAND_LINE_SIZE-1);
+=======
+		getprop(chosen, "bootargs", cmdline, BOOT_COMMAND_LINE_SIZE-1);
+>>>>>>> v3.18
 =======
 		getprop(chosen, "bootargs", cmdline, BOOT_COMMAND_LINE_SIZE-1);
 >>>>>>> v3.18
@@ -128,7 +136,11 @@ void ps3_copy_vectors(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void platform_init(void)
+=======
+void platform_init(unsigned long null_check)
+>>>>>>> v3.18
 =======
 void platform_init(unsigned long null_check)
 >>>>>>> v3.18
@@ -138,6 +150,10 @@ void platform_init(unsigned long null_check)
 	unsigned long ft_addr;
 	u64 rm_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long val;
+>>>>>>> v3.18
 =======
 	unsigned long val;
 >>>>>>> v3.18
@@ -169,12 +185,18 @@ void platform_init(unsigned long null_check)
 	printf(" flat tree at 0x%lx\n\r", ft_addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	val = *(unsigned long *)0;
 
 	if (val != null_check)
 		printf("null check failed: %lx != %lx\n\r", val, null_check);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	((kernel_entry_t)0)(ft_addr, 0, NULL);
 

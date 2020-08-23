@@ -92,6 +92,7 @@ static int tile_rtc_probe(struct platform_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Device cleanup routine.
  */
@@ -104,6 +105,8 @@ static int tile_rtc_remove(struct platform_device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct platform_driver tile_rtc_platform_driver = {
 	.driver		= {
 		.name	= "rtc-tile",
@@ -111,7 +114,10 @@ static struct platform_driver tile_rtc_platform_driver = {
 	},
 	.probe		= tile_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= tile_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

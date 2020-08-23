@@ -65,7 +65,10 @@
 #include <linux/types.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -558,8 +561,13 @@ static int kingsun_probe(struct usb_interface *intf,
 
 free_mem:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (kingsun->out_buf) kfree(kingsun->out_buf);
 	if (kingsun->in_buf) kfree(kingsun->in_buf);
+=======
+	kfree(kingsun->out_buf);
+	kfree(kingsun->in_buf);
+>>>>>>> v3.18
 =======
 	kfree(kingsun->out_buf);
 	kfree(kingsun->in_buf);

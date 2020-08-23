@@ -191,6 +191,7 @@ static u8 lis3l02dq_axis_map[3][3] = {
 
 static int lis3l02dq_read_thresh(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 u64 e,
 				 int *val)
 {
@@ -203,6 +204,8 @@ static int lis3l02dq_write_thresh(struct iio_dev *indio_dev,
 {
 	u16 value = val;
 =======
+=======
+>>>>>>> v3.18
 				 const struct iio_chan_spec *chan,
 				 enum iio_event_type type,
 				 enum iio_event_direction dir,
@@ -226,6 +229,9 @@ static int lis3l02dq_write_thresh(struct iio_dev *indio_dev,
 {
 	u16 value = val;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return lis3l02dq_spi_write_reg_s16(indio_dev,
 					   LIS3L02DQ_REG_THS_L_ADDR,
@@ -242,6 +248,10 @@ static int lis3l02dq_write_raw(struct iio_dev *indio_dev,
 	u8 uval;
 	s8 sval;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -288,6 +298,11 @@ static int lis3l02dq_read_raw(struct iio_dev *indio_dev,
 		}
 		mutex_unlock(&indio_dev->mlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (ret < 0)
+			goto error_ret;
+>>>>>>> v3.18
 =======
 		if (ret < 0)
 			goto error_ret;
@@ -325,6 +340,10 @@ static ssize_t lis3l02dq_read_frequency(struct device *dev,
 	int ret, len = 0;
 	s8 t;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -541,10 +560,13 @@ static irqreturn_t lis3l02dq_event_handler(int irq, void *private)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LIS3L02DQ_EVENT_MASK					\
 	(IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_RISING) |	\
 	 IIO_EV_BIT(IIO_EV_TYPE_THRESH, IIO_EV_DIR_FALLING))
 =======
+=======
+>>>>>>> v3.18
 static const struct iio_event_spec lis3l02dq_event[] = {
 	{
 		.type = IIO_EV_TYPE_THRESH,
@@ -558,6 +580,9 @@ static const struct iio_event_spec lis3l02dq_event[] = {
 		.mask_shared_by_type = BIT(IIO_EV_INFO_VALUE),
 	}
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define LIS3L02DQ_CHAN(index, mod)				\
@@ -577,7 +602,12 @@ static const struct iio_event_spec lis3l02dq_event[] = {
 			.storagebits = 16,			\
 		},						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.event_mask = LIS3L02DQ_EVENT_MASK,		\
+=======
+		.event_spec = lis3l02dq_event,			\
+		.num_event_specs = ARRAY_SIZE(lis3l02dq_event),	\
+>>>>>>> v3.18
 =======
 		.event_spec = lis3l02dq_event,			\
 		.num_event_specs = ARRAY_SIZE(lis3l02dq_event),	\
@@ -594,7 +624,13 @@ static const struct iio_chan_spec lis3l02dq_channels[] = {
 
 static int lis3l02dq_read_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   u64 event_code)
+=======
+				       const struct iio_chan_spec *chan,
+				       enum iio_event_type type,
+				       enum iio_event_direction dir)
+>>>>>>> v3.18
 =======
 				       const struct iio_chan_spec *chan,
 				       enum iio_event_type type,
@@ -605,9 +641,14 @@ static int lis3l02dq_read_event_config(struct iio_dev *indio_dev,
 	u8 val;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mask = (1 << (IIO_EVENT_CODE_EXTRACT_MODIFIER(event_code)*2 +
 			 (IIO_EVENT_CODE_EXTRACT_DIR(event_code) ==
 			  IIO_EV_DIR_RISING)));
+=======
+	u8 mask = (1 << (chan->channel2*2 + (dir == IIO_EV_DIR_RISING)));
+
+>>>>>>> v3.18
 =======
 	u8 mask = (1 << (chan->channel2*2 + (dir == IIO_EV_DIR_RISING)));
 
@@ -657,7 +698,13 @@ error_ret:
 
 static int lis3l02dq_write_event_config(struct iio_dev *indio_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					u64 event_code,
+=======
+					const struct iio_chan_spec *chan,
+					enum iio_event_type type,
+					enum iio_event_direction dir,
+>>>>>>> v3.18
 =======
 					const struct iio_chan_spec *chan,
 					enum iio_event_type type,
@@ -670,9 +717,13 @@ static int lis3l02dq_write_event_config(struct iio_dev *indio_dev,
 	u8 currentlyset;
 	bool changed = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 mask = (1 << (IIO_EVENT_CODE_EXTRACT_MODIFIER(event_code)*2 +
 			 (IIO_EVENT_CODE_EXTRACT_DIR(event_code) ==
 			  IIO_EV_DIR_RISING)));
+=======
+	u8 mask = (1 << (chan->channel2*2 + (dir == IIO_EV_DIR_RISING)));
+>>>>>>> v3.18
 =======
 	u8 mask = (1 << (chan->channel2*2 + (dir == IIO_EV_DIR_RISING)));
 >>>>>>> v3.18
@@ -748,11 +799,17 @@ static int lis3l02dq_probe(struct spi_device *spi)
 	struct iio_dev *indio_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof *st);
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
 		goto error_ret;
 	}
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+	if (!indio_dev)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
@@ -776,7 +833,11 @@ static int lis3l02dq_probe(struct spi_device *spi)
 	ret = lis3l02dq_configure_buffer(indio_dev);
 	if (ret)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_free_dev;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -786,7 +847,11 @@ static int lis3l02dq_probe(struct spi_device *spi)
 				  ARRAY_SIZE(lis3l02dq_channels));
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "failed to initialize the buffer\n");
+=======
+		dev_err(&spi->dev, "failed to initialize the buffer\n");
+>>>>>>> v3.18
 =======
 		dev_err(&spi->dev, "failed to initialize the buffer\n");
 >>>>>>> v3.18
@@ -830,9 +895,12 @@ error_uninitialize_buffer:
 error_unreg_buffer_funcs:
 	lis3l02dq_unconfigure_buffer(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_dev:
 	iio_device_free(indio_dev);
 error_ret:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -883,8 +951,11 @@ static int lis3l02dq_remove(struct spi_device *spi)
 	lis3l02dq_unconfigure_buffer(indio_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -12,6 +12,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __USB_BOOT_H__
 #define __USB_BOOT_H__
 
@@ -22,6 +23,8 @@ extern int usb_emergency(struct usb_device *usbdev);
 
 #endif /* __USB_BOOT_H__ */
 =======
+=======
+>>>>>>> v3.18
 #ifndef __GDM72XX_USB_BOOT_H__
 #define __GDM72XX_USB_BOOT_H__
 
@@ -31,4 +34,7 @@ int usb_boot(struct usb_device *usbdev, u16 pid);
 int usb_emergency(struct usb_device *usbdev);
 
 #endif /* __GDM72XX_USB_BOOT_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

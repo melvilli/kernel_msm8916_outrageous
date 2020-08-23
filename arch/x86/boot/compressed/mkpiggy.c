@@ -37,12 +37,15 @@ int main(int argc, char *argv[])
 	long ilen;
 	unsigned long offs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FILE *f;
 
 	if (argc < 2) {
 		fprintf(stderr, "Usage: %s compressed_file\n", argv[0]);
 		return 1;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long run_size;
 	FILE *f = NULL;
 	int retval = 1;
@@ -51,6 +54,9 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Usage: %s compressed_file run_size\n",
 				argv[0]);
 		goto bail;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -60,7 +66,11 @@ int main(int argc, char *argv[])
 	if (!f) {
 		perror(argv[1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
+=======
+		goto bail;
+>>>>>>> v3.18
 =======
 		goto bail;
 >>>>>>> v3.18
@@ -74,7 +84,11 @@ int main(int argc, char *argv[])
 	if (fread(&olen, sizeof(olen), 1, f) != 1) {
 		perror(argv[1]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 1;
+=======
+		goto bail;
+>>>>>>> v3.18
 =======
 		goto bail;
 >>>>>>> v3.18
@@ -83,7 +97,10 @@ int main(int argc, char *argv[])
 	ilen = ftell(f);
 	olen = get_unaligned_le32(&olen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fclose(f);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -97,6 +114,10 @@ int main(int argc, char *argv[])
 	offs += 64*1024 + 128;	/* Add 64K + 128 bytes slack */
 	offs = (offs+4095) & ~4095; /* Round to a 4K boundary */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	run_size = atoi(argv[2]);
+>>>>>>> v3.18
 =======
 	run_size = atoi(argv[2]);
 >>>>>>> v3.18
@@ -112,6 +133,11 @@ int main(int argc, char *argv[])
 	printf(".globl z_extract_offset_negative\n");
 	printf("z_extract_offset_negative = -0x%lx\n", offs);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	printf(".globl z_run_size\n");
+	printf("z_run_size = %lu\n", run_size);
+>>>>>>> v3.18
 =======
 	printf(".globl z_run_size\n");
 	printf("z_run_size = %lu\n", run_size);
@@ -123,12 +149,18 @@ int main(int argc, char *argv[])
 	printf("input_data_end:\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	retval = 0;
 bail:
 	if (f)
 		fclose(f);
 	return retval;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

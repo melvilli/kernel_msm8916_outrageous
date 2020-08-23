@@ -1,7 +1,11 @@
 /* Driver for Realtek PCI-Express card reader
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2009 Realtek Semiconductor Corp. All rights reserved.
+=======
+ * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2009-2013 Realtek Semiconductor Corp. All rights reserved.
 >>>>>>> v3.18
@@ -22,10 +26,14 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 450, Shenhu Road, Suzhou Industry Park, Suzhou, China
  *
  *   Roger Tseng <rogerable@realtek.com>
  *   No. 2, Innovation Road II, Hsinchu Science Park, Hsinchu 300, Taiwan
+=======
+ *   Roger Tseng <rogerable@realtek.com>
+>>>>>>> v3.18
 =======
  *   Roger Tseng <rogerable@realtek.com>
 >>>>>>> v3.18
@@ -38,7 +46,10 @@
 #include "rtsx_pcr.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rts5227_fill_driving(struct rtsx_pcr *pcr, u8 voltage)
 {
 	u8 driving_3v3[4][3] = {
@@ -106,6 +117,9 @@ static void rts5227_force_power_down(struct rtsx_pcr *pcr, u8 pm_state)
 	rtsx_pci_write_register(pcr, FPDCTL, 0x03, 0x03);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rts5227_extra_init_hw(struct rtsx_pcr *pcr)
 {
@@ -116,6 +130,11 @@ static int rts5227_extra_init_hw(struct rtsx_pcr *pcr)
 	/* Configure GPIO as output */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, GPIO_CTL, 0x02, 0x02);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Reset ASPM state to default value */
+	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, ASPM_FORCE_CTL, 0x3F, 0);
+>>>>>>> v3.18
 =======
 	/* Reset ASPM state to default value */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, ASPM_FORCE_CTL, 0x3F, 0);
@@ -127,6 +146,7 @@ static int rts5227_extra_init_hw(struct rtsx_pcr *pcr)
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, OLT_LED_CTL, 0x0F, 0x02);
 	/* Configure LTR */
 	pcie_capability_read_word(pcr->pci, PCI_EXP_DEVCTL2, &cap);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cap & PCI_EXP_LTR_EN)
 		rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, LTR_CTL, 0xFF, 0xA3);
@@ -144,6 +164,8 @@ static int rts5227_extra_init_hw(struct rtsx_pcr *pcr)
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD,
 			SD30_DAT_DRIVE_SEL, 0xFF, 0x96);
 =======
+=======
+>>>>>>> v3.18
 	if (cap & PCI_EXP_DEVCTL2_LTR_EN)
 		rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, LTR_CTL, 0xFF, 0xA3);
 	/* Configure OBFF */
@@ -158,6 +180,9 @@ static int rts5227_extra_init_hw(struct rtsx_pcr *pcr)
 		rtsx_pci_add_cmd(pcr, WRITE_REG_CMD,
 				AUTOLOAD_CFG_BASE + 3, 0xB8, 0x88);
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, PM_CTRL3, 0x10, 0x00);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rtsx_pci_send_cmd(pcr, 100);
@@ -232,7 +257,10 @@ static int rts5227_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 drive_sel;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -241,7 +269,10 @@ static int rts5227_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 		if (err < 0)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drive_sel = 0x96;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else if (voltage == OUTPUT_1V8) {
@@ -252,7 +283,10 @@ static int rts5227_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 		if (err < 0)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		drive_sel = 0xB3;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -261,6 +295,7 @@ static int rts5227_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 
 	/* set pad drive */
 	rtsx_pci_init_cmd(pcr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SD30_CLK_DRIVE_SEL,
 			0xFF, drive_sel);
@@ -271,11 +306,18 @@ static int rts5227_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 =======
 	rts5227_fill_driving(pcr, voltage);
 >>>>>>> v3.18
+=======
+	rts5227_fill_driving(pcr, voltage);
+>>>>>>> v3.18
 	return rtsx_pci_send_cmd(pcr, 100);
 }
 
 static const struct pcr_ops rts5227_pcr_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fetch_vendor_settings = rts5227_fetch_vendor_settings,
+>>>>>>> v3.18
 =======
 	.fetch_vendor_settings = rts5227_fetch_vendor_settings,
 >>>>>>> v3.18
@@ -291,6 +333,10 @@ static const struct pcr_ops rts5227_pcr_ops = {
 	.cd_deglitch = NULL,
 	.conv_clk_and_div_n = NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.force_power_down = rts5227_force_power_down,
+>>>>>>> v3.18
 =======
 	.force_power_down = rts5227_force_power_down,
 >>>>>>> v3.18
@@ -349,7 +395,10 @@ void rts5227_init_params(struct rtsx_pcr *pcr)
 	pcr->ops = &rts5227_pcr_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pcr->flags = 0;
 	pcr->card_drive_sel = RTSX_CARD_DRIVE_DEFAULT;
 	pcr->sd30_drive_sel_1v8 = CFG_DRIVER_TYPE_B;
@@ -358,6 +407,9 @@ void rts5227_init_params(struct rtsx_pcr *pcr)
 	pcr->tx_initial_phase = SET_CLOCK_PHASE(27, 27, 15);
 	pcr->rx_initial_phase = SET_CLOCK_PHASE(30, 7, 7);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pcr->sd_pull_ctl_enable_tbl = rts5227_sd_pull_ctl_enable_tbl;
 	pcr->sd_pull_ctl_disable_tbl = rts5227_sd_pull_ctl_disable_tbl;

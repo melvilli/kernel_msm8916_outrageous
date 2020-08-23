@@ -8,7 +8,11 @@
 
 #include <asm/byteorder.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ozconfig.h"
+=======
+#include "ozdbg.h"
+>>>>>>> v3.18
 =======
 #include "ozdbg.h"
 >>>>>>> v3.18
@@ -16,6 +20,7 @@
 
 #define OZ_ALLOCATED_SPACE(__x)	(LL_RESERVED_SPACE(__x)+(__x)->needed_tailroom)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Converts millisecs to jiffies.
  */
@@ -35,6 +40,8 @@
 /* Maximun sizes of tx frames. */
 #define OZ_MAX_TX_SIZE		1514
 =======
+=======
+>>>>>>> v3.18
 /* Quantum in MS */
 #define OZ_QUANTUM		8
 /* Default timeouts.
@@ -43,6 +50,9 @@
 
 /* Maximun sizes of tx frames. */
 #define OZ_MAX_TX_SIZE		760
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Maximum number of uncompleted isoc frames that can be pending in network. */
@@ -53,6 +63,7 @@
 
 /* Application handler functions.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef int (*oz_app_init_fn_t)(void);
 typedef void (*oz_app_term_fn_t)(void);
@@ -73,6 +84,8 @@ struct oz_app_if {
 	oz_app_farewell_fn_t	farewell;
 	int			app_id;
 =======
+=======
+>>>>>>> v3.18
 struct oz_app_if {
 	int  (*init)(void);
 	void (*term)(void);
@@ -81,6 +94,9 @@ struct oz_app_if {
 	void (*rx)(struct oz_pd *pd, struct oz_elt *elt);
 	int  (*heartbeat)(struct oz_pd *pd);
 	void (*farewell)(struct oz_pd *pd, u8 ep_num, u8 *data, u8 len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -89,6 +105,7 @@ void oz_protocol_term(void);
 int oz_get_pd_list(struct oz_mac_addr *addr, int max_count);
 void oz_app_enable(int app_id, int enable);
 struct oz_pd *oz_pd_find(const u8 *mac_addr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 void oz_binding_add(char *net_dev);
 void oz_binding_remove(char *net_dev);
@@ -99,6 +116,8 @@ void oz_pd_request_heartbeat(struct oz_pd *pd);
 void oz_polling_lock_bh(void);
 void oz_polling_unlock_bh(void);
 =======
+=======
+>>>>>>> v3.18
 void oz_binding_add(const char *net_dev);
 void oz_binding_remove(const char *net_dev);
 void oz_timer_add(struct oz_pd *pd, int type, unsigned long due_time);
@@ -113,6 +132,9 @@ int oz_get_binding_list(char *buf, int max_if);
 
 extern struct kmem_cache *oz_elt_info_cache;
 extern struct kmem_cache *oz_tx_frame_cache;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _OZPROTO_H */

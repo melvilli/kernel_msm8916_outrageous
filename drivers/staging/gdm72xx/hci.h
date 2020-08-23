@@ -12,8 +12,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HCI_H_20080801
 #define HCI_H_20080801
+=======
+#ifndef __GDM72XX_HCI_H__
+#define __GDM72XX_HCI_H__
+>>>>>>> v3.18
 =======
 #ifndef __GDM72XX_HCI_H__
 #define __GDM72XX_HCI_H__
@@ -24,7 +29,11 @@
 #define HCI_MAX_PACKET		2048
 #define HCI_MAX_PARAM		(HCI_MAX_PACKET-HCI_HEADER_SIZE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HCI_MAX_TLV			32
+=======
+#define HCI_MAX_TLV		32
+>>>>>>> v3.18
 =======
 #define HCI_MAX_TLV		32
 >>>>>>> v3.18
@@ -32,6 +41,7 @@
 /* CMD-EVT */
 
 /* Category 0 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define WIMAX_RESET				0x0000
 #define WIMAX_SET_INFO			0x0001
@@ -41,6 +51,8 @@
 #define WIMAX_RADIO_ON			0x0006
 #define WIMAX_WIMAX_RESET		0x0007	/* Is this still here */
 =======
+=======
+>>>>>>> v3.18
 #define WIMAX_RESET		0x0000
 #define WIMAX_SET_INFO		0x0001
 #define WIMAX_GET_INFO		0x0002
@@ -48,6 +60,9 @@
 #define WIMAX_RADIO_OFF		0x0004
 #define WIMAX_RADIO_ON		0x0006
 #define WIMAX_WIMAX_RESET	0x0007	/* Is this still here */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Category 1 */
@@ -60,6 +75,7 @@
 #define WIMAX_MODE_CHANGE		0x8108
 #define WIMAX_HANDOVER			0x8109	/* obsolete */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define WIMAX_SCAN				0x010d
 #define WIMAX_SCAN_COMPLETE		0x810e
@@ -71,6 +87,8 @@
 #define WIMAX_ASSOC_START		0x8113
 #define WIMAX_ASSOC_COMPLETE	0x8114
 =======
+=======
+>>>>>>> v3.18
 #define WIMAX_SCAN			0x010d
 #define WIMAX_SCAN_COMPLETE		0x810e
 #define WIMAX_SCAN_RESULT		0x810f
@@ -79,11 +97,15 @@
 #define WIMAX_CONNECT_COMPLETE		0x8112
 #define WIMAX_ASSOC_START		0x8113
 #define WIMAX_ASSOC_COMPLETE		0x8114
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WIMAX_DISCONN_IND		0x8115
 #define WIMAX_ENTRY_IND			0x8116
 #define WIMAX_HO_START			0x8117
 #define WIMAX_HO_COMPLETE		0x8118
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define WIMAX_RADIO_STATE_IND	0x8119
 #define WIMAX_IP_RENEW_IND		0x811a
@@ -92,10 +114,15 @@
 #define WIMAX_DISCOVER_NSP_RESULT	0x811e
 
 =======
+=======
+>>>>>>> v3.18
 #define WIMAX_RADIO_STATE_IND		0x8119
 #define WIMAX_IP_RENEW_IND		0x811a
 #define WIMAX_DISCOVER_NSP		0x011d
 #define WIMAX_DISCOVER_NSP_RESULT	0x811e
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WIMAX_SDU_TX_FLOW		0x8125
 
@@ -108,6 +135,7 @@
 #define WIMAX_TX_SDU_AGGR	0x0205
 
 /* Category 3 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define WIMAX_DM_CMD				0x030a
 #define WIMAX_DM_RSP				0x830b
@@ -138,6 +166,8 @@
 #define W_SLEEP				5
 #define W_WAIT				6
 =======
+=======
+>>>>>>> v3.18
 #define WIMAX_DM_CMD		0x030a
 #define WIMAX_DM_RSP		0x830b
 
@@ -165,6 +195,9 @@
 #define W_IDLE		4
 #define W_SLEEP		5
 #define W_WAIT		6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define W_NET_ENTRY_RNG		0x80
@@ -181,6 +214,7 @@
 
 /* Scan Type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define W_SCAN_ALL_CHANNEL				0
 #define W_SCAN_ALL_SUBSCRIPTION			1
 #define W_SCAN_SPECIFIED_SUBSCRIPTION	2
@@ -188,21 +222,32 @@
 /*
  * TLV
 =======
+=======
+>>>>>>> v3.18
 #define W_SCAN_ALL_CHANNEL		0
 #define W_SCAN_ALL_SUBSCRIPTION		1
 #define W_SCAN_SPECIFIED_SUBSCRIPTION	2
 
 /* TLV
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * [31:31] indicates the type is composite.
  * [30:16] is the length of the type. 0 length means length is variable.
  * [15:0] is the actual type.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  */
 #define TLV_L(x)		(((x) >> 16) & 0xff)
 #define TLV_T(x)			((x) & 0xff)
+=======
+ */
+#define TLV_L(x)		(((x) >> 16) & 0xff)
+#define TLV_T(x)		((x) & 0xff)
+>>>>>>> v3.18
 =======
  */
 #define TLV_L(x)		(((x) >> 16) & 0xff)
@@ -223,7 +268,10 @@
 #define T_IMEI				(0x09	| (8 << 16))
 #define T_PID				(0x0a	| (12 << 16))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define T_CAPABILITY			(0x1a	| (4 << 16))
@@ -235,8 +283,12 @@
 
 /* HANDOVER */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define T_SCAN_INTERVAL		(0x20	| (1 << 16))
 
+=======
+#define T_SCAN_INTERVAL			(0x20	| (1 << 16))
+>>>>>>> v3.18
 =======
 #define T_SCAN_INTERVAL			(0x20	| (1 << 16))
 >>>>>>> v3.18
@@ -245,7 +297,10 @@
 /* SLEEP */
 #define T_TYPE1_ISW			(0x40	| (1 << 16))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define T_SLP_START_TO			(0x4a	| (2 << 16))
@@ -253,8 +308,12 @@
 /* IDLE */
 #define T_IDLE_MODE_TO			(0x50	| (2 << 16))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define T_IDLE_START_TO		(0x54	| (2 << 16))
+=======
+#define T_IDLE_START_TO			(0x54	| (2 << 16))
+>>>>>>> v3.18
 =======
 #define T_IDLE_START_TO			(0x54	| (2 << 16))
 >>>>>>> v3.18
@@ -276,7 +335,11 @@
 #define T_VENDOR_NAME			(0xa7	| (0 << 16))
 #define T_MOD_NAME			(0xa8	| (0 << 16))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define T_PACKET_FILTER		(0xa9	| (1 << 16))
+=======
+#define T_PACKET_FILTER			(0xa9	| (1 << 16))
+>>>>>>> v3.18
 =======
 #define T_PACKET_FILTER			(0xa9	| (1 << 16))
 >>>>>>> v3.18
@@ -309,6 +372,7 @@
 #define T_DUPLEX_MODE			(0xdb	| (4 << 16))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hci_s {
 	unsigned short cmd_evt;
 	unsigned short length;
@@ -317,6 +381,8 @@ struct hci_s {
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 /* T_CAPABILITY */
 #define T_CAPABILITY_MULTI_CS		(1 << 0)
 #define T_CAPABILITY_WIMAX		(1 << 1)
@@ -330,4 +396,7 @@ struct hci_s {
 } __packed;
 
 #endif /* __GDM72XX_HCI_H__ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -564,7 +564,11 @@ hostap_rx_frame_wds(local_info_t *local, struct ieee80211_hdr *hdr, u16 fc,
 	/* Possible WDS frame: either IEEE 802.11 compliant (if FromDS)
 	 * or own non-standard frame with 4th address after payload */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (memcmp(hdr->addr1, local->dev->dev_addr, ETH_ALEN) != 0 &&
+=======
+	if (!ether_addr_equal(hdr->addr1, local->dev->dev_addr) &&
+>>>>>>> v3.18
 =======
 	if (!ether_addr_equal(hdr->addr1, local->dev->dev_addr) &&
 >>>>>>> v3.18
@@ -627,6 +631,7 @@ static int hostap_is_eapol_frame(local_info_t *local, struct sk_buff *skb)
 	if ((fc & (IEEE80211_FCTL_TODS | IEEE80211_FCTL_FROMDS)) ==
 	    IEEE80211_FCTL_TODS &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN) == 0 &&
 	    memcmp(hdr->addr3, dev->dev_addr, ETH_ALEN) == 0) {
 		/* ToDS frame with own addr BSSID and DA */
@@ -634,12 +639,17 @@ static int hostap_is_eapol_frame(local_info_t *local, struct sk_buff *skb)
 		   IEEE80211_FCTL_FROMDS &&
 		   memcmp(hdr->addr1, dev->dev_addr, ETH_ALEN) == 0) {
 =======
+=======
+>>>>>>> v3.18
 	    ether_addr_equal(hdr->addr1, dev->dev_addr) &&
 	    ether_addr_equal(hdr->addr3, dev->dev_addr)) {
 		/* ToDS frame with own addr BSSID and DA */
 	} else if ((fc & (IEEE80211_FCTL_TODS | IEEE80211_FCTL_FROMDS)) ==
 		   IEEE80211_FCTL_FROMDS &&
 		   ether_addr_equal(hdr->addr1, dev->dev_addr)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* FromDS frame with own addr as DA */
 	} else

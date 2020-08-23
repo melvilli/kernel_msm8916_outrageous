@@ -811,7 +811,11 @@ asmlinkage void do_debug_interrupt(unsigned long code, struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit per_cpu_trap_init(void)
+=======
+void per_cpu_trap_init(void)
+>>>>>>> v3.18
 =======
 void per_cpu_trap_init(void)
 >>>>>>> v3.18

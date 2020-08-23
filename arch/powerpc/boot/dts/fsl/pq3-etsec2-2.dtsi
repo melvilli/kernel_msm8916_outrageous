@@ -50,7 +50,10 @@ ethernet@b2000 {
 	fsl,magic-packet;
 	local-mac-address = [ 00 00 00 00 00 00 ];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ranges;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

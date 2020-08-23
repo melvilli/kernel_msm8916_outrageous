@@ -1,7 +1,11 @@
 [config]
 command = record
 <<<<<<< HEAD
+<<<<<<< HEAD
 args    = -g dwarf -- kill >/dev/null 2>&1
+=======
+args    = --call-graph dwarf -- kill >/dev/null 2>&1
+>>>>>>> v3.18
 =======
 args    = --call-graph dwarf -- kill >/dev/null 2>&1
 >>>>>>> v3.18

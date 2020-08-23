@@ -1,7 +1,12 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2009-2011 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2009-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2009-2013 Solarflare Communications Inc.
@@ -27,7 +32,10 @@
 /* The Scheduler has started. */
 #define MC_FW_STATE_SCHED (8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* If this is set in MC_RESET_STATE_REG then it should be
  * possible to jump into IMEM without loading code from flash.
  * Unlike a warm boot, assume DMEM has been reloaded, so that
@@ -35,6 +43,9 @@
 #define MC_FW_TEPID_BOOT_OK (16)
 /* BIST state has been initialized */
 #define MC_FW_BIST_INIT_OK (128)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Siena MC shared memmory offsets */
@@ -55,6 +66,12 @@
 #define MC_STATUS_DWORD_ASSERT (0xdeaddead)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Check whether an mcfw version (in host order) belongs to a bootloader */
+#define MC_FW_VERSION_IS_BOOTLOADER(_v) (((_v) >> 16) == 0xb007)
+
+>>>>>>> v3.18
 =======
 /* Check whether an mcfw version (in host order) belongs to a bootloader */
 #define MC_FW_VERSION_IS_BOOTLOADER(_v) (((_v) >> 16) == 0xb007)
@@ -66,7 +83,11 @@
  * least every driver must support version 0 and MCDI_PCOL_VERSION
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCDI_PCOL_VERSION 1
+=======
+#define MCDI_PCOL_VERSION 2
+>>>>>>> v3.18
 =======
 #define MCDI_PCOL_VERSION 2
 >>>>>>> v3.18
@@ -76,7 +97,11 @@
 /* MCDI version 1
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Each MCDI request starts with an MCDI_HEADER, which is a 32byte
+=======
+ * Each MCDI request starts with an MCDI_HEADER, which is a 32bit
+>>>>>>> v3.18
 =======
  * Each MCDI request starts with an MCDI_HEADER, which is a 32bit
 >>>>>>> v3.18
@@ -117,15 +142,21 @@
 #define MCDI_HEADER_DATALEN_WIDTH 8
 #define MCDI_HEADER_SEQ_LBN 16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCDI_HEADER_RSVD_LBN 20
 #define MCDI_HEADER_RSVD_WIDTH 2
 #define MCDI_HEADER_SEQ_WIDTH 4
 =======
+=======
+>>>>>>> v3.18
 #define MCDI_HEADER_SEQ_WIDTH 4
 #define MCDI_HEADER_RSVD_LBN 20
 #define MCDI_HEADER_RSVD_WIDTH 1
 #define MCDI_HEADER_NOT_EPOCH_LBN 21
 #define MCDI_HEADER_NOT_EPOCH_WIDTH 1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MCDI_HEADER_ERROR_LBN 22
 #define MCDI_HEADER_ERROR_WIDTH 1
@@ -138,13 +169,19 @@
 
 /* Maximum number of payload bytes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MCDI_CTL_SDU_LEN_MAX 0xfc
 =======
+=======
+>>>>>>> v3.18
 #define MCDI_CTL_SDU_LEN_MAX_V1 0xfc
 #define MCDI_CTL_SDU_LEN_MAX_V2 0x400
 
 #define MCDI_CTL_SDU_LEN_MAX MCDI_CTL_SDU_LEN_MAX_V2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* The MC can generate events for two reasons:
@@ -191,6 +228,11 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Operation not permitted. */
+#define MC_CMD_ERR_EPERM 1
+>>>>>>> v3.18
 =======
 /* Operation not permitted. */
 #define MC_CMD_ERR_EPERM 1
@@ -200,28 +242,40 @@
 /* assert() has killed the MC */
 #define MC_CMD_ERR_EINTR 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* I/O failure */
 #define MC_CMD_ERR_EIO 5
 /* Try again */
 #define MC_CMD_ERR_EAGAIN 11
 /* Out of memory */
 #define MC_CMD_ERR_ENOMEM 12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Caller does not hold required locks */
 #define MC_CMD_ERR_EACCES 13
 /* Resource is currently unavailable (e.g. lock contention) */
 #define MC_CMD_ERR_EBUSY 16
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Invalid argument to target */
 #define MC_CMD_ERR_EINVAL 22
 =======
+=======
+>>>>>>> v3.18
 /* No such device */
 #define MC_CMD_ERR_ENODEV 19
 /* Invalid argument to target */
 #define MC_CMD_ERR_EINVAL 22
 /* Out of range */
 #define MC_CMD_ERR_ERANGE 34
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Non-recursive resource is already acquired */
 #define MC_CMD_ERR_EDEADLK 35
@@ -230,7 +284,10 @@
 /* Operation timed out */
 #define MC_CMD_ERR_ETIME 62
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Link has been severed */
 #define MC_CMD_ERR_ENOLINK 67
 /* Protocol error */
@@ -268,6 +325,9 @@
 #define MC_CMD_ERR_SLAVE_NOT_PRESENT 0x100a
 /* The datapath is disabled. */
 #define MC_CMD_ERR_DATAPATH_DISABLED 0x100b
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MC_CMD_ERR_CODE_OFST 0
@@ -287,15 +347,21 @@
 /* Vectors in the boot ROM */
 /* Point to the copycode entry point. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MC_BOOTROM_COPYCODE_VEC (0x7f4)
 /* Points to the recovery mode entry point. */
 #define MC_BOOTROM_NOFLASH_VEC (0x7f8)
 =======
+=======
+>>>>>>> v3.18
 #define SIENA_MC_BOOTROM_COPYCODE_VEC (0x800 - 3 * 0x4)
 #define HUNT_MC_BOOTROM_COPYCODE_VEC (0x8000 - 3 * 0x4)
 /* Points to the recovery mode entry point. */
 #define SIENA_MC_BOOTROM_NOFLASH_VEC (0x800 - 2 * 0x4)
 #define HUNT_MC_BOOTROM_NOFLASH_VEC (0x8000 - 2 * 0x4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* The command set exported by the boot ROM (MCDI v0) */
@@ -326,7 +392,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Version 2 adds an optional argument to error returns: the errno value
  * may be followed by the (0-based) number of the first argument that
  * could not be processed.
@@ -336,6 +405,9 @@
 /* No space */
 #define MC_CMD_ERR_ENOSPC 28
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* MCDI_EVENT structuredef */
 #define    MCDI_EVENT_LEN 8
@@ -344,11 +416,14 @@
 #define       MCDI_EVENT_LEVEL_LBN 33
 #define       MCDI_EVENT_LEVEL_WIDTH 3
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MCDI_EVENT_LEVEL_INFO  0x0 /* enum */
 #define          MCDI_EVENT_LEVEL_WARN 0x1 /* enum */
 #define          MCDI_EVENT_LEVEL_ERR 0x2 /* enum */
 #define          MCDI_EVENT_LEVEL_FATAL 0x3 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: Info. */
 #define          MCDI_EVENT_LEVEL_INFO  0x0
 /* enum: Warning. */
@@ -357,6 +432,9 @@
 #define          MCDI_EVENT_LEVEL_ERR 0x2
 /* enum: Fatal. */
 #define          MCDI_EVENT_LEVEL_FATAL 0x3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MCDI_EVENT_DATA_OFST 0
 #define        MCDI_EVENT_CMDDONE_SEQ_LBN 0
@@ -370,10 +448,13 @@
 #define        MCDI_EVENT_LINKCHANGE_SPEED_LBN 16
 #define        MCDI_EVENT_LINKCHANGE_SPEED_WIDTH 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MCDI_EVENT_LINKCHANGE_SPEED_100M  0x1 /* enum */
 #define          MCDI_EVENT_LINKCHANGE_SPEED_1G  0x2 /* enum */
 #define          MCDI_EVENT_LINKCHANGE_SPEED_10G  0x3 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: 100Mbs */
 #define          MCDI_EVENT_LINKCHANGE_SPEED_100M  0x1
 /* enum: 1Gbs */
@@ -382,6 +463,9 @@
 #define          MCDI_EVENT_LINKCHANGE_SPEED_10G  0x3
 /* enum: 40Gbs */
 #define          MCDI_EVENT_LINKCHANGE_SPEED_40G  0x4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define        MCDI_EVENT_LINKCHANGE_FCNTL_LBN 20
 #define        MCDI_EVENT_LINKCHANGE_FCNTL_WIDTH 4
@@ -398,7 +482,12 @@
 #define        MCDI_EVENT_FWALERT_REASON_LBN 0
 #define        MCDI_EVENT_FWALERT_REASON_WIDTH 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MCDI_EVENT_FWALERT_REASON_SRAM_ACCESS 0x1 /* enum */
+=======
+/* enum: SRAM Access. */
+#define          MCDI_EVENT_FWALERT_REASON_SRAM_ACCESS 0x1
+>>>>>>> v3.18
 =======
 /* enum: SRAM Access. */
 #define          MCDI_EVENT_FWALERT_REASON_SRAM_ACCESS 0x1
@@ -410,12 +499,15 @@
 #define        MCDI_EVENT_TX_ERR_TYPE_LBN 12
 #define        MCDI_EVENT_TX_ERR_TYPE_WIDTH 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MCDI_EVENT_TX_ERR_DL_FAIL 0x1 /* enum */
 #define          MCDI_EVENT_TX_ERR_NO_EOP 0x2 /* enum */
 #define          MCDI_EVENT_TX_ERR_2BIG 0x3 /* enum */
 #define        MCDI_EVENT_TX_ERR_INFO_LBN 16
 #define        MCDI_EVENT_TX_ERR_INFO_WIDTH 16
 =======
+=======
+>>>>>>> v3.18
 /* enum: Descriptor loader reported failure */
 #define          MCDI_EVENT_TX_ERR_DL_FAIL 0x1
 /* enum: Descriptor ring empty and no EOP seen for packet */
@@ -432,17 +524,23 @@
 #define        MCDI_EVENT_TX_ERR_INFO_WIDTH 16
 #define        MCDI_EVENT_TX_FLUSH_TO_DRIVER_LBN 12
 #define        MCDI_EVENT_TX_FLUSH_TO_DRIVER_WIDTH 1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define        MCDI_EVENT_TX_FLUSH_TXQ_LBN 0
 #define        MCDI_EVENT_TX_FLUSH_TXQ_WIDTH 12
 #define        MCDI_EVENT_PTP_ERR_TYPE_LBN 0
 #define        MCDI_EVENT_PTP_ERR_TYPE_WIDTH 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MCDI_EVENT_PTP_ERR_PLL_LOST 0x1 /* enum */
 #define          MCDI_EVENT_PTP_ERR_FILTER 0x2 /* enum */
 #define          MCDI_EVENT_PTP_ERR_FIFO 0x3 /* enum */
 #define          MCDI_EVENT_PTP_ERR_QUEUE 0x4 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: PLL lost lock */
 #define          MCDI_EVENT_PTP_ERR_PLL_LOST 0x1
 /* enum: Filter overflow (PDMA) */
@@ -491,6 +589,9 @@
 #define        MCDI_EVENT_RX_FLUSH_RXQ_WIDTH 12
 #define        MCDI_EVENT_MC_REBOOT_COUNT_LBN 0
 #define        MCDI_EVENT_MC_REBOOT_COUNT_WIDTH 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MCDI_EVENT_DATA_LBN 0
 #define       MCDI_EVENT_DATA_WIDTH 32
@@ -500,6 +601,7 @@
 #define       MCDI_EVENT_EV_CODE_WIDTH 4
 #define       MCDI_EVENT_CODE_LBN 44
 #define       MCDI_EVENT_CODE_WIDTH 8
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define          MCDI_EVENT_CODE_BADSSERT 0x1 /* enum */
 #define          MCDI_EVENT_CODE_PMNOTICE 0x2 /* enum */
@@ -517,6 +619,8 @@
 #define          MCDI_EVENT_CODE_PTP_FAULT  0xe /* enum */
 #define          MCDI_EVENT_CODE_PTP_PPS  0xf /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: Bad assert. */
 #define          MCDI_EVENT_CODE_BADSSERT 0x1
 /* enum: PM Notice. */
@@ -575,6 +679,9 @@
  * purposes.
  */
 #define          MCDI_EVENT_CODE_TESTGEN  0xfa
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MCDI_EVENT_CMDDONE_DATA_OFST 0
 #define       MCDI_EVENT_CMDDONE_DATA_LBN 0
@@ -592,6 +699,7 @@
 #define       MCDI_EVENT_TX_ERR_DATA_LBN 0
 #define       MCDI_EVENT_TX_ERR_DATA_WIDTH 32
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MCDI_EVENT_PTP_SECONDS_OFST 0
 #define       MCDI_EVENT_PTP_SECONDS_LBN 0
 #define       MCDI_EVENT_PTP_SECONDS_WIDTH 32
@@ -602,6 +710,8 @@
 #define       MCDI_EVENT_PTP_UUID_LBN 0
 #define       MCDI_EVENT_PTP_UUID_WIDTH 32
 =======
+=======
+>>>>>>> v3.18
 /* For CODE_PTP_RX, CODE_PTP_PPS and CODE_HW_PPS events the seconds field of
  * timestamp
  */
@@ -743,6 +853,9 @@
 #define       FCDI_EXTENDED_EVENT_PPS_TIMESTAMPS_MAXNUM 30
 #define       FCDI_EXTENDED_EVENT_PPS_TIMESTAMPS_LBN 64
 #define       FCDI_EXTENDED_EVENT_PPS_TIMESTAMPS_WIDTH 64
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -796,12 +909,15 @@
 /* MC_CMD_COPYCODE_IN msgrequest */
 #define    MC_CMD_COPYCODE_IN_LEN 16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_COPYCODE_IN_SRC_ADDR_OFST 0
 #define       MC_CMD_COPYCODE_IN_DEST_ADDR_OFST 4
 #define       MC_CMD_COPYCODE_IN_NUMWORDS_OFST 8
 #define       MC_CMD_COPYCODE_IN_JUMP_OFST 12
 #define          MC_CMD_COPYCODE_JUMP_NONE 0x1 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* Source address */
 #define       MC_CMD_COPYCODE_IN_SRC_ADDR_OFST 0
 /* enum: The main image should be entered via a copy of a single word from and
@@ -827,6 +943,9 @@
 #define       MC_CMD_COPYCODE_IN_JUMP_OFST 12
 /* enum: Control should return to the caller rather than jumping */
 #define          MC_CMD_COPYCODE_JUMP_NONE 0x1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MC_CMD_COPYCODE_OUT msgresponse */
@@ -836,6 +955,10 @@
 /***********************************/
 /* MC_CMD_SET_FUNC
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Select function for function-specific commands.
+>>>>>>> v3.18
 =======
  * Select function for function-specific commands.
 >>>>>>> v3.18
@@ -845,6 +968,10 @@
 /* MC_CMD_SET_FUNC_IN msgrequest */
 #define    MC_CMD_SET_FUNC_IN_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Set function */
+>>>>>>> v3.18
 =======
 /* Set function */
 >>>>>>> v3.18
@@ -857,6 +984,10 @@
 /***********************************/
 /* MC_CMD_GET_BOOT_STATUS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Get the instruction address from which the MC booted.
+>>>>>>> v3.18
 =======
  * Get the instruction address from which the MC booted.
 >>>>>>> v3.18
@@ -869,12 +1000,18 @@
 /* MC_CMD_GET_BOOT_STATUS_OUT msgresponse */
 #define    MC_CMD_GET_BOOT_STATUS_OUT_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_GET_BOOT_STATUS_OUT_BOOT_OFFSET_OFST 0
 =======
+=======
+>>>>>>> v3.18
 /* ?? */
 #define       MC_CMD_GET_BOOT_STATUS_OUT_BOOT_OFFSET_OFST 0
 /* enum: indicates that the MC wasn't flash booted */
 #define          MC_CMD_GET_BOOT_STATUS_OUT_BOOT_OFFSET_NULL  0xdeadbeef
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_GET_BOOT_STATUS_OUT_FLAGS_OFST 4
 #define        MC_CMD_GET_BOOT_STATUS_OUT_FLAGS_WATCHDOG_LBN 0
@@ -888,7 +1025,13 @@
 /***********************************/
 /* MC_CMD_GET_ASSERTS
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Get and clear any assertion status.
+=======
+ * Get (and optionally clear) the current assertion status. Only
+ * OUT.GLOBAL_FLAGS is guaranteed to exist in the completion payload. The other
+ * fields will only be present if OUT.GLOBAL_FLAGS != NO_FAILS
+>>>>>>> v3.18
 =======
  * Get (and optionally clear) the current assertion status. Only
  * OUT.GLOBAL_FLAGS is guaranteed to exist in the completion payload. The other
@@ -900,6 +1043,10 @@
 /* MC_CMD_GET_ASSERTS_IN msgrequest */
 #define    MC_CMD_GET_ASSERTS_IN_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Set to clear assertion */
+>>>>>>> v3.18
 =======
 /* Set to clear assertion */
 >>>>>>> v3.18
@@ -907,6 +1054,7 @@
 
 /* MC_CMD_GET_ASSERTS_OUT msgresponse */
 #define    MC_CMD_GET_ASSERTS_OUT_LEN 140
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define       MC_CMD_GET_ASSERTS_OUT_GLOBAL_FLAGS_OFST 0
 #define          MC_CMD_GET_ASSERTS_FLAGS_NO_FAILS 0x1 /* enum */
@@ -918,6 +1066,8 @@
 #define       MC_CMD_GET_ASSERTS_OUT_GP_REGS_OFFS_LEN 4
 #define       MC_CMD_GET_ASSERTS_OUT_GP_REGS_OFFS_NUM 31
 =======
+=======
+>>>>>>> v3.18
 /* Assertion status flag. */
 #define       MC_CMD_GET_ASSERTS_OUT_GLOBAL_FLAGS_OFST 0
 /* enum: No assertions have failed. */
@@ -937,6 +1087,9 @@
 #define       MC_CMD_GET_ASSERTS_OUT_GP_REGS_OFFS_LEN 4
 #define       MC_CMD_GET_ASSERTS_OUT_GP_REGS_OFFS_NUM 31
 /* Failing thread address */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_GET_ASSERTS_OUT_THREAD_OFFS_OFST 132
 #define       MC_CMD_GET_ASSERTS_OUT_RESERVED_OFST 136
@@ -951,16 +1104,22 @@
 /* MC_CMD_LOG_CTRL_IN msgrequest */
 #define    MC_CMD_LOG_CTRL_IN_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_LOG_CTRL_IN_LOG_DEST_OFST 0
 #define          MC_CMD_LOG_CTRL_IN_LOG_DEST_UART 0x1 /* enum */
 #define          MC_CMD_LOG_CTRL_IN_LOG_DEST_EVQ 0x2 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* Log destination */
 #define       MC_CMD_LOG_CTRL_IN_LOG_DEST_OFST 0
 /* enum: UART. */
 #define          MC_CMD_LOG_CTRL_IN_LOG_DEST_UART 0x1
 /* enum: Event queue. */
 #define          MC_CMD_LOG_CTRL_IN_LOG_DEST_EVQ 0x2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_LOG_CTRL_IN_LOG_DEST_EVQ_OFST 4
 
@@ -978,12 +1137,15 @@
 #define    MC_CMD_GET_VERSION_IN_LEN 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MC_CMD_GET_VERSION_V0_OUT msgresponse */
 #define    MC_CMD_GET_VERSION_V0_OUT_LEN 4
 #define       MC_CMD_GET_VERSION_OUT_FIRMWARE_OFST 0
 #define          MC_CMD_GET_VERSION_OUT_FIRMWARE_ANY 0xffffffff /* enum */
 #define          MC_CMD_GET_VERSION_OUT_FIRMWARE_BOOTROM 0xb0070000 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* MC_CMD_GET_VERSION_EXT_IN msgrequest: Asks for the extended version */
 #define    MC_CMD_GET_VERSION_EXT_IN_LEN 4
 /* placeholder, set to 0 */
@@ -998,6 +1160,9 @@
 #define          MC_CMD_GET_VERSION_OUT_FIRMWARE_SIENA_BOOTROM 0xb0070000
 /* enum: Bootrom version value for Huntington. */
 #define          MC_CMD_GET_VERSION_OUT_FIRMWARE_HUNT_BOOTROM 0xb0070001
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MC_CMD_GET_VERSION_OUT msgresponse */
@@ -1007,6 +1172,10 @@
 /*               MC_CMD_GET_VERSION_V0_OUT/MC_CMD_GET_VERSION_OUT_FIRMWARE */
 #define       MC_CMD_GET_VERSION_OUT_PCOL_OFST 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* 128bit mask of functions supported by the current firmware */
+>>>>>>> v3.18
 =======
 /* 128bit mask of functions supported by the current firmware */
 >>>>>>> v3.18
@@ -1017,6 +1186,7 @@
 #define       MC_CMD_GET_VERSION_OUT_VERSION_LO_OFST 24
 #define       MC_CMD_GET_VERSION_OUT_VERSION_HI_OFST 28
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /***********************************/
@@ -1059,6 +1229,8 @@
 /* MC_CMD_PUT_FPGAREG_OUT msgresponse */
 #define    MC_CMD_PUT_FPGAREG_OUT_LEN 0
 =======
+=======
+>>>>>>> v3.18
 /* MC_CMD_GET_VERSION_EXT_OUT msgresponse */
 #define    MC_CMD_GET_VERSION_EXT_OUT_LEN 48
 /*            MC_CMD_GET_VERSION_OUT_FIRMWARE_OFST 0 */
@@ -1075,6 +1247,9 @@
 /* extra info */
 #define       MC_CMD_GET_VERSION_EXT_OUT_EXTRA_OFST 32
 #define       MC_CMD_GET_VERSION_EXT_OUT_EXTRA_LEN 16
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -1086,6 +1261,7 @@
 
 /* MC_CMD_PTP_IN msgrequest */
 #define    MC_CMD_PTP_IN_LEN 1
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define       MC_CMD_PTP_IN_OP_OFST 0
 #define       MC_CMD_PTP_IN_OP_LEN 1
@@ -1102,6 +1278,8 @@
 #define          MC_CMD_PTP_OP_DEBUG 0xb /* enum */
 #define          MC_CMD_PTP_OP_MAX 0xc /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* PTP operation code */
 #define       MC_CMD_PTP_IN_OP_OFST 0
 #define       MC_CMD_PTP_IN_OP_LEN 1
@@ -1169,12 +1347,16 @@
 #define          MC_CMD_PTP_OP_MANFTEST_PPS 0x1a
 /* enum: Above this for future use. */
 #define          MC_CMD_PTP_OP_MAX 0x1b
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MC_CMD_PTP_IN_ENABLE msgrequest */
 #define    MC_CMD_PTP_IN_ENABLE_LEN 16
 #define       MC_CMD_PTP_IN_CMD_OFST 0
 #define       MC_CMD_PTP_IN_PERIPH_ID_OFST 4
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define       MC_CMD_PTP_IN_ENABLE_QUEUE_OFST 8
 #define       MC_CMD_PTP_IN_ENABLE_MODE_OFST 12
@@ -1184,6 +1366,8 @@
 #define          MC_CMD_PTP_MODE_V2_VLAN 0x3 /* enum */
 #define          MC_CMD_PTP_MODE_V2_ENHANCED 0x4 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* Event queue for PTP events */
 #define       MC_CMD_PTP_IN_ENABLE_QUEUE_OFST 8
 /* PTP timestamping mode */
@@ -1200,6 +1384,9 @@
 #define          MC_CMD_PTP_MODE_V2_ENHANCED 0x4
 /* enum: FCoE (seconds and microseconds) */
 #define          MC_CMD_PTP_MODE_FCOE 0x5
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MC_CMD_PTP_IN_DISABLE msgrequest */
@@ -1214,7 +1401,13 @@
 /*            MC_CMD_PTP_IN_CMD_OFST 0 */
 /*            MC_CMD_PTP_IN_PERIPH_ID_OFST 4 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PTP_IN_TRANSMIT_LENGTH_OFST 8
+=======
+/* Transmit packet length */
+#define       MC_CMD_PTP_IN_TRANSMIT_LENGTH_OFST 8
+/* Transmit packet data */
+>>>>>>> v3.18
 =======
 /* Transmit packet length */
 #define       MC_CMD_PTP_IN_TRANSMIT_LENGTH_OFST 8
@@ -1240,6 +1433,10 @@
 /*            MC_CMD_PTP_IN_CMD_OFST 0 */
 /*            MC_CMD_PTP_IN_PERIPH_ID_OFST 4 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Frequency adjustment 40 bit fixed point ns */
+>>>>>>> v3.18
 =======
 /* Frequency adjustment 40 bit fixed point ns */
 >>>>>>> v3.18
@@ -1248,10 +1445,13 @@
 #define       MC_CMD_PTP_IN_ADJUST_FREQ_LO_OFST 8
 #define       MC_CMD_PTP_IN_ADJUST_FREQ_HI_OFST 12
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MC_CMD_PTP_IN_ADJUST_BITS 0x28 /* enum */
 #define       MC_CMD_PTP_IN_ADJUST_SECONDS_OFST 16
 #define       MC_CMD_PTP_IN_ADJUST_NANOSECONDS_OFST 20
 =======
+=======
+>>>>>>> v3.18
 /* enum: Number of fractional bits in frequency adjustment */
 #define          MC_CMD_PTP_IN_ADJUST_BITS 0x28
 /* Time adjustment in seconds */
@@ -1262,6 +1462,9 @@
 #define       MC_CMD_PTP_IN_ADJUST_NANOSECONDS_OFST 20
 /* Time adjustment minor value */
 #define       MC_CMD_PTP_IN_ADJUST_MINOR_OFST 20
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MC_CMD_PTP_IN_SYNCHRONIZE msgrequest */
@@ -1269,13 +1472,19 @@
 /*            MC_CMD_PTP_IN_CMD_OFST 0 */
 /*            MC_CMD_PTP_IN_PERIPH_ID_OFST 4 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PTP_IN_SYNCHRONIZE_NUMTIMESETS_OFST 8
 =======
+=======
+>>>>>>> v3.18
 /* Number of time readings to capture */
 #define       MC_CMD_PTP_IN_SYNCHRONIZE_NUMTIMESETS_OFST 8
 /* Host address in which to write "synchronization started" indication (64
  * bits)
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_PTP_IN_SYNCHRONIZE_START_ADDR_OFST 12
 #define       MC_CMD_PTP_IN_SYNCHRONIZE_START_ADDR_LEN 8
@@ -1292,6 +1501,10 @@
 /*            MC_CMD_PTP_IN_CMD_OFST 0 */
 /*            MC_CMD_PTP_IN_PERIPH_ID_OFST 4 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Enable or disable packet testing */
+>>>>>>> v3.18
 =======
 /* Enable or disable packet testing */
 >>>>>>> v3.18
@@ -1301,6 +1514,10 @@
 #define    MC_CMD_PTP_IN_RESET_STATS_LEN 8
 /*            MC_CMD_PTP_IN_CMD_OFST 0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Reset PTP statistics */
+>>>>>>> v3.18
 =======
 /* Reset PTP statistics */
 >>>>>>> v3.18
@@ -1311,9 +1528,12 @@
 /*            MC_CMD_PTP_IN_CMD_OFST 0 */
 /*            MC_CMD_PTP_IN_PERIPH_ID_OFST 4 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PTP_IN_DEBUG_DEBUG_PARAM_OFST 8
 
 =======
+=======
+>>>>>>> v3.18
 /* Debug operations */
 #define       MC_CMD_PTP_IN_DEBUG_DEBUG_PARAM_OFST 8
 
@@ -1464,12 +1684,16 @@
 /* 1 to enable PPS test mode, 0 to disable and return result. */
 #define       MC_CMD_PTP_IN_MANFTEST_PPS_TEST_ENABLE_OFST 8
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* MC_CMD_PTP_OUT msgresponse */
 #define    MC_CMD_PTP_OUT_LEN 0
 
 /* MC_CMD_PTP_OUT_TRANSMIT msgresponse */
 #define    MC_CMD_PTP_OUT_TRANSMIT_LEN 8
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define       MC_CMD_PTP_OUT_TRANSMIT_SECONDS_OFST 0
 #define       MC_CMD_PTP_OUT_TRANSMIT_NANOSECONDS_OFST 4
@@ -1497,6 +1721,8 @@
 #define       MC_CMD_PTP_OUT_STATUS_STATS_PPS_OFF_MAX_OFST 52
 #define       MC_CMD_PTP_OUT_STATUS_STATS_PPS_OFF_LAST_OFST 56
 =======
+=======
+>>>>>>> v3.18
 /* Value of seconds timestamp */
 #define       MC_CMD_PTP_OUT_TRANSMIT_SECONDS_OFST 0
 /* Timestamp major value */
@@ -1556,6 +1782,9 @@
 /* Last offset of PPS pulse in nanoseconds (signed) */
 #define       MC_CMD_PTP_OUT_STATUS_STATS_PPS_OFF_LAST_OFST 56
 /* Mean offset of PPS pulse in nanoseconds (signed) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_PTP_OUT_STATUS_STATS_PPS_OFF_MEAN_OFST 60
 
@@ -1564,6 +1793,10 @@
 #define    MC_CMD_PTP_OUT_SYNCHRONIZE_LENMAX 240
 #define    MC_CMD_PTP_OUT_SYNCHRONIZE_LEN(num) (0+20*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* A set of host and NIC times */
+>>>>>>> v3.18
 =======
 /* A set of host and NIC times */
 >>>>>>> v3.18
@@ -1572,11 +1805,14 @@
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_TIMESET_MINNUM 1
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_TIMESET_MAXNUM 12
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_HOSTSTART_OFST 0
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_SECONDS_OFST 4
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_NANOSECONDS_OFST 8
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_HOSTEND_OFST 12
 =======
+=======
+>>>>>>> v3.18
 /* Host time immediately before NIC's hardware clock read */
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_HOSTSTART_OFST 0
 /* Value of seconds timestamp */
@@ -1590,11 +1826,15 @@
 /* Host time immediately after NIC's hardware clock read */
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_HOSTEND_OFST 12
 /* Number of nanoseconds waited after reading NIC's hardware clock */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_PTP_OUT_SYNCHRONIZE_WAITNS_OFST 16
 
 /* MC_CMD_PTP_OUT_MANFTEST_BASIC msgresponse */
 #define    MC_CMD_PTP_OUT_MANFTEST_BASIC_LEN 8
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define       MC_CMD_PTP_OUT_MANFTEST_BASIC_TEST_RESULT_OFST 0
 #define          MC_CMD_PTP_MANF_SUCCESS 0x0 /* enum */
@@ -1608,6 +1848,8 @@
 #define          MC_CMD_PTP_MANF_PACKET_ENOUGH 0x8 /* enum */
 #define          MC_CMD_PTP_MANF_GPIO_TRIGGER 0x9 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* Results of testing */
 #define       MC_CMD_PTP_OUT_MANFTEST_BASIC_TEST_RESULT_OFST 0
 /* enum: Successful test */
@@ -1641,17 +1883,23 @@
 /* enum: Failed to read time from PTP peripheral */
 #define          MC_CMD_PTP_MANF_CLOCK_READ 0xe
 /* Presence of external oscillator */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_PTP_OUT_MANFTEST_BASIC_TEST_EXTOSC_OFST 4
 
 /* MC_CMD_PTP_OUT_MANFTEST_PACKET msgresponse */
 #define    MC_CMD_PTP_OUT_MANFTEST_PACKET_LEN 12
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PTP_OUT_MANFTEST_PACKET_TEST_RESULT_OFST 0
 #define       MC_CMD_PTP_OUT_MANFTEST_PACKET_TEST_FPGACOUNT_OFST 4
 #define       MC_CMD_PTP_OUT_MANFTEST_PACKET_TEST_FILTERCOUNT_OFST 8
 
 =======
+=======
+>>>>>>> v3.18
 /* Results of testing */
 #define       MC_CMD_PTP_OUT_MANFTEST_PACKET_TEST_RESULT_OFST 0
 /* Number of packets received by FPGA */
@@ -1724,6 +1972,9 @@
 /*            Enum values, see field(s): */
 /*               MC_CMD_PTP_OUT_MANFTEST_BASIC/TEST_RESULT */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /***********************************/
@@ -1735,6 +1986,10 @@
 /* MC_CMD_CSR_READ32_IN msgrequest */
 #define    MC_CMD_CSR_READ32_IN_LEN 12
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Address */
+>>>>>>> v3.18
 =======
 /* Address */
 >>>>>>> v3.18
@@ -1747,6 +2002,10 @@
 #define    MC_CMD_CSR_READ32_OUT_LENMAX 252
 #define    MC_CMD_CSR_READ32_OUT_LEN(num) (0+4*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* The last dword is the status, not a value read */
+>>>>>>> v3.18
 =======
 /* The last dword is the status, not a value read */
 >>>>>>> v3.18
@@ -1767,6 +2026,10 @@
 #define    MC_CMD_CSR_WRITE32_IN_LENMAX 252
 #define    MC_CMD_CSR_WRITE32_IN_LEN(num) (8+4*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Address */
+>>>>>>> v3.18
 =======
 /* Address */
 >>>>>>> v3.18
@@ -1784,7 +2047,10 @@
 
 /***********************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* MC_CMD_HP
  * These commands are used for HP related features. They are grouped under one
  * MCDI command to avoid creating too many MCDI commands.
@@ -1827,6 +2093,9 @@
 
 
 /***********************************/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* MC_CMD_STACKINFO
  * Get stack information.
@@ -1841,6 +2110,10 @@
 #define    MC_CMD_STACKINFO_OUT_LENMAX 252
 #define    MC_CMD_STACKINFO_OUT_LEN(num) (0+12*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* (thread ptr, stack size, free space) for each thread in system */
+>>>>>>> v3.18
 =======
 /* (thread ptr, stack size, free space) for each thread in system */
 >>>>>>> v3.18
@@ -1859,6 +2132,7 @@
 /* MC_CMD_MDIO_READ_IN msgrequest */
 #define    MC_CMD_MDIO_READ_IN_LEN 16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_MDIO_READ_IN_BUS_OFST 0
 #define          MC_CMD_MDIO_BUS_INTERNAL 0x0 /* enum */
 #define          MC_CMD_MDIO_BUS_EXTERNAL 0x1 /* enum */
@@ -1866,6 +2140,8 @@
 #define       MC_CMD_MDIO_READ_IN_DEVAD_OFST 8
 #define          MC_CMD_MDIO_CLAUSE22 0x20 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* Bus number; there are two MDIO buses: one for the internal PHY, and one for
  * external devices.
  */
@@ -1883,16 +2159,22 @@
  */
 #define          MC_CMD_MDIO_CLAUSE22 0x20
 /* Address */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_MDIO_READ_IN_ADDR_OFST 12
 
 /* MC_CMD_MDIO_READ_OUT msgresponse */
 #define    MC_CMD_MDIO_READ_OUT_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_MDIO_READ_OUT_VALUE_OFST 0
 #define       MC_CMD_MDIO_READ_OUT_STATUS_OFST 4
 #define          MC_CMD_MDIO_STATUS_GOOD 0x8 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* Value */
 #define       MC_CMD_MDIO_READ_OUT_VALUE_OFST 0
 /* Status the MDIO commands return the raw status bits from the MDIO block. A
@@ -1901,6 +2183,9 @@
 #define       MC_CMD_MDIO_READ_OUT_STATUS_OFST 4
 /* enum: Good. */
 #define          MC_CMD_MDIO_STATUS_GOOD 0x8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -1913,6 +2198,7 @@
 /* MC_CMD_MDIO_WRITE_IN msgrequest */
 #define    MC_CMD_MDIO_WRITE_IN_LEN 20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_MDIO_WRITE_IN_BUS_OFST 0
 /*               MC_CMD_MDIO_BUS_INTERNAL 0x0 */
 /*               MC_CMD_MDIO_BUS_EXTERNAL 0x1 */
@@ -1921,6 +2207,8 @@
 /*               MC_CMD_MDIO_CLAUSE22 0x20 */
 #define       MC_CMD_MDIO_WRITE_IN_ADDR_OFST 12
 =======
+=======
+>>>>>>> v3.18
 /* Bus number; there are two MDIO buses: one for the internal PHY, and one for
  * external devices.
  */
@@ -1940,19 +2228,28 @@
 /* Address */
 #define       MC_CMD_MDIO_WRITE_IN_ADDR_OFST 12
 /* Value */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_MDIO_WRITE_IN_VALUE_OFST 16
 
 /* MC_CMD_MDIO_WRITE_OUT msgresponse */
 #define    MC_CMD_MDIO_WRITE_OUT_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_MDIO_WRITE_OUT_STATUS_OFST 0
 =======
+=======
+>>>>>>> v3.18
 /* Status; the MDIO commands return the raw status bits from the MDIO block. A
  * "good" transaction should have the DONE bit set and all other bits clear.
  */
 #define       MC_CMD_MDIO_WRITE_OUT_STATUS_OFST 0
 /* enum: Good. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*               MC_CMD_MDIO_STATUS_GOOD 0x8 */
 
@@ -1968,6 +2265,12 @@
 #define    MC_CMD_DBI_WRITE_IN_LENMAX 252
 #define    MC_CMD_DBI_WRITE_IN_LEN(num) (0+12*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Each write op consists of an address (offset 0), byte enable/VF/CS2 (offset
+ * 32) and value (offset 64). See MC_CMD_DBIWROP_TYPEDEF.
+ */
+>>>>>>> v3.18
 =======
 /* Each write op consists of an address (offset 0), byte enable/VF/CS2 (offset
  * 32) and value (offset 64). See MC_CMD_DBIWROP_TYPEDEF.
@@ -1987,10 +2290,13 @@
 #define       MC_CMD_DBIWROP_TYPEDEF_ADDRESS_LBN 0
 #define       MC_CMD_DBIWROP_TYPEDEF_ADDRESS_WIDTH 32
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_DBIWROP_TYPEDEF_BYTE_MASK_OFST 4
 #define       MC_CMD_DBIWROP_TYPEDEF_BYTE_MASK_LBN 32
 #define       MC_CMD_DBIWROP_TYPEDEF_BYTE_MASK_WIDTH 32
 =======
+=======
+>>>>>>> v3.18
 #define       MC_CMD_DBIWROP_TYPEDEF_PARMS_OFST 4
 #define        MC_CMD_DBIWROP_TYPEDEF_VF_NUM_LBN 16
 #define        MC_CMD_DBIWROP_TYPEDEF_VF_NUM_WIDTH 16
@@ -2000,6 +2306,9 @@
 #define        MC_CMD_DBIWROP_TYPEDEF_CS2_WIDTH 1
 #define       MC_CMD_DBIWROP_TYPEDEF_PARMS_LBN 32
 #define       MC_CMD_DBIWROP_TYPEDEF_PARMS_WIDTH 32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_DBIWROP_TYPEDEF_VALUE_OFST 8
 #define       MC_CMD_DBIWROP_TYPEDEF_VALUE_LBN 64
@@ -2009,7 +2318,12 @@
 /***********************************/
 /* MC_CMD_PORT_READ32
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Read a 32-bit register from the indirect port register map.
+=======
+ * Read a 32-bit register from the indirect port register map. The port to
+ * access is implied by the Shared memory channel used.
+>>>>>>> v3.18
 =======
  * Read a 32-bit register from the indirect port register map. The port to
  * access is implied by the Shared memory channel used.
@@ -2020,6 +2334,10 @@
 /* MC_CMD_PORT_READ32_IN msgrequest */
 #define    MC_CMD_PORT_READ32_IN_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Address */
+>>>>>>> v3.18
 =======
 /* Address */
 >>>>>>> v3.18
@@ -2028,7 +2346,13 @@
 /* MC_CMD_PORT_READ32_OUT msgresponse */
 #define    MC_CMD_PORT_READ32_OUT_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PORT_READ32_OUT_VALUE_OFST 0
+=======
+/* Value */
+#define       MC_CMD_PORT_READ32_OUT_VALUE_OFST 0
+/* Status */
+>>>>>>> v3.18
 =======
 /* Value */
 #define       MC_CMD_PORT_READ32_OUT_VALUE_OFST 0
@@ -2040,7 +2364,12 @@
 /***********************************/
 /* MC_CMD_PORT_WRITE32
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Write a 32-bit register to the indirect port register map.
+=======
+ * Write a 32-bit register to the indirect port register map. The port to
+ * access is implied by the Shared memory channel used.
+>>>>>>> v3.18
 =======
  * Write a 32-bit register to the indirect port register map. The port to
  * access is implied by the Shared memory channel used.
@@ -2051,7 +2380,13 @@
 /* MC_CMD_PORT_WRITE32_IN msgrequest */
 #define    MC_CMD_PORT_WRITE32_IN_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PORT_WRITE32_IN_ADDR_OFST 0
+=======
+/* Address */
+#define       MC_CMD_PORT_WRITE32_IN_ADDR_OFST 0
+/* Value */
+>>>>>>> v3.18
 =======
 /* Address */
 #define       MC_CMD_PORT_WRITE32_IN_ADDR_OFST 0
@@ -2062,6 +2397,10 @@
 /* MC_CMD_PORT_WRITE32_OUT msgresponse */
 #define    MC_CMD_PORT_WRITE32_OUT_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Status */
+>>>>>>> v3.18
 =======
 /* Status */
 >>>>>>> v3.18
@@ -2071,7 +2410,12 @@
 /***********************************/
 /* MC_CMD_PORT_READ128
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Read a 128-bit register from the indirect port register map.
+=======
+ * Read a 128-bit register from the indirect port register map. The port to
+ * access is implied by the Shared memory channel used.
+>>>>>>> v3.18
 =======
  * Read a 128-bit register from the indirect port register map. The port to
  * access is implied by the Shared memory channel used.
@@ -2082,6 +2426,10 @@
 /* MC_CMD_PORT_READ128_IN msgrequest */
 #define    MC_CMD_PORT_READ128_IN_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Address */
+>>>>>>> v3.18
 =======
 /* Address */
 >>>>>>> v3.18
@@ -2090,13 +2438,19 @@
 /* MC_CMD_PORT_READ128_OUT msgresponse */
 #define    MC_CMD_PORT_READ128_OUT_LEN 20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PORT_READ128_OUT_VALUE_OFST 0
 #define       MC_CMD_PORT_READ128_OUT_VALUE_LEN 16
 =======
+=======
+>>>>>>> v3.18
 /* Value */
 #define       MC_CMD_PORT_READ128_OUT_VALUE_OFST 0
 #define       MC_CMD_PORT_READ128_OUT_VALUE_LEN 16
 /* Status */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_PORT_READ128_OUT_STATUS_OFST 16
 
@@ -2104,7 +2458,12 @@
 /***********************************/
 /* MC_CMD_PORT_WRITE128
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Write a 128-bit register to the indirect port register map.
+=======
+ * Write a 128-bit register to the indirect port register map. The port to
+ * access is implied by the Shared memory channel used.
+>>>>>>> v3.18
 =======
  * Write a 128-bit register to the indirect port register map. The port to
  * access is implied by the Shared memory channel used.
@@ -2115,7 +2474,13 @@
 /* MC_CMD_PORT_WRITE128_IN msgrequest */
 #define    MC_CMD_PORT_WRITE128_IN_LEN 20
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PORT_WRITE128_IN_ADDR_OFST 0
+=======
+/* Address */
+#define       MC_CMD_PORT_WRITE128_IN_ADDR_OFST 0
+/* Value */
+>>>>>>> v3.18
 =======
 /* Address */
 #define       MC_CMD_PORT_WRITE128_IN_ADDR_OFST 0
@@ -2127,9 +2492,12 @@
 /* MC_CMD_PORT_WRITE128_OUT msgresponse */
 #define    MC_CMD_PORT_WRITE128_OUT_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PORT_WRITE128_OUT_STATUS_OFST 0
 
 =======
+=======
+>>>>>>> v3.18
 /* Status */
 #define       MC_CMD_PORT_WRITE128_OUT_STATUS_OFST 0
 
@@ -2159,6 +2527,9 @@
 #define       MC_CMD_CAPABILITIES_RESERVED_LBN 7
 #define       MC_CMD_CAPABILITIES_RESERVED_WIDTH 25
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /***********************************/
@@ -2178,6 +2549,7 @@
 #define       MC_CMD_GET_BOARD_CFG_OUT_BOARD_NAME_OFST 4
 #define       MC_CMD_GET_BOARD_CFG_OUT_BOARD_NAME_LEN 32
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_GET_BOARD_CFG_OUT_CAPABILITIES_PORT0_OFST 36
 #define          MC_CMD_CAPABILITIES_SMALL_BUF_TBL_LBN 0x0 /* enum */
 #define          MC_CMD_CAPABILITIES_SMALL_BUF_TBL_WIDTH 0x1 /* enum */
@@ -2191,10 +2563,15 @@
 /*            Enum values, see field(s): */
 /*               CAPABILITIES_PORT0 */
 =======
+=======
+>>>>>>> v3.18
 /* See MC_CMD_CAPABILITIES */
 #define       MC_CMD_GET_BOARD_CFG_OUT_CAPABILITIES_PORT0_OFST 36
 /* See MC_CMD_CAPABILITIES */
 #define       MC_CMD_GET_BOARD_CFG_OUT_CAPABILITIES_PORT1_OFST 40
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_GET_BOARD_CFG_OUT_MAC_ADDR_BASE_PORT0_OFST 44
 #define       MC_CMD_GET_BOARD_CFG_OUT_MAC_ADDR_BASE_PORT0_LEN 6
@@ -2205,12 +2582,18 @@
 #define       MC_CMD_GET_BOARD_CFG_OUT_MAC_STRIDE_PORT0_OFST 64
 #define       MC_CMD_GET_BOARD_CFG_OUT_MAC_STRIDE_PORT1_OFST 68
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* This field contains a 16-bit value for each of the types of NVRAM area. The
  * values are defined in the firmware/mc/platform/.c file for a specific board
  * type, but otherwise have no meaning to the MC; they are used by the driver
  * to manage selection of appropriate firmware updates.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_GET_BOARD_CFG_OUT_FW_SUBTYPE_LIST_OFST 72
 #define       MC_CMD_GET_BOARD_CFG_OUT_FW_SUBTYPE_LIST_LEN 2
@@ -2221,7 +2604,11 @@
 /***********************************/
 /* MC_CMD_DBI_READX
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Read DBI register(s).
+=======
+ * Read DBI register(s) -- extended functionality
+>>>>>>> v3.18
 =======
  * Read DBI register(s) -- extended functionality
 >>>>>>> v3.18
@@ -2233,6 +2620,10 @@
 #define    MC_CMD_DBI_READX_IN_LENMAX 248
 #define    MC_CMD_DBI_READX_IN_LEN(num) (0+8*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Each Read op consists of an address (offset 0), VF/CS2) */
+>>>>>>> v3.18
 =======
 /* Each Read op consists of an address (offset 0), VF/CS2) */
 >>>>>>> v3.18
@@ -2248,6 +2639,10 @@
 #define    MC_CMD_DBI_READX_OUT_LENMAX 252
 #define    MC_CMD_DBI_READX_OUT_LEN(num) (0+4*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Value */
+>>>>>>> v3.18
 =======
 /* Value */
 >>>>>>> v3.18
@@ -2257,7 +2652,10 @@
 #define       MC_CMD_DBI_READX_OUT_VALUE_MAXNUM 63
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* MC_CMD_DBIRDOP_TYPEDEF structuredef */
 #define    MC_CMD_DBIRDOP_TYPEDEF_LEN 8
 #define       MC_CMD_DBIRDOP_TYPEDEF_ADDRESS_OFST 0
@@ -2273,6 +2671,9 @@
 #define       MC_CMD_DBIRDOP_TYPEDEF_PARMS_LBN 32
 #define       MC_CMD_DBIRDOP_TYPEDEF_PARMS_WIDTH 32
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /***********************************/
@@ -2284,6 +2685,10 @@
 /* MC_CMD_SET_RAND_SEED_IN msgrequest */
 #define    MC_CMD_SET_RAND_SEED_IN_LEN 16
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Seed value. */
+>>>>>>> v3.18
 =======
 /* Seed value. */
 >>>>>>> v3.18
@@ -2297,7 +2702,11 @@
 /***********************************/
 /* MC_CMD_LTSSM_HIST
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Retrieve the history of the PCIE LTSSM.
+=======
+ * Retrieve the history of the LTSSM, if the build supports it.
+>>>>>>> v3.18
 =======
  * Retrieve the history of the LTSSM, if the build supports it.
 >>>>>>> v3.18
@@ -2312,6 +2721,10 @@
 #define    MC_CMD_LTSSM_HIST_OUT_LENMAX 252
 #define    MC_CMD_LTSSM_HIST_OUT_LEN(num) (0+4*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* variable number of LTSSM values, as bytes. The history is read-to-clear. */
+>>>>>>> v3.18
 =======
 /* variable number of LTSSM values, as bytes. The history is read-to-clear. */
 >>>>>>> v3.18
@@ -2324,19 +2737,26 @@
 /***********************************/
 /* MC_CMD_DRV_ATTACH
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Inform MCPU that this port is managed on the host.
 =======
+=======
+>>>>>>> v3.18
  * Inform MCPU that this port is managed on the host (i.e. driver active). For
  * Huntington, also request the preferred datapath firmware to use if possible
  * (it may not be possible for this request to be fulfilled; the driver must
  * issue a subsequent MC_CMD_GET_CAPABILITIES command to determine which
  * features are actually available). The FIRMWARE_ID field is ignored by older
  * platforms.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_DRV_ATTACH 0x1c
 
 /* MC_CMD_DRV_ATTACH_IN msgrequest */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define    MC_CMD_DRV_ATTACH_IN_LEN 8
 #define       MC_CMD_DRV_ATTACH_IN_NEW_STATE_OFST 0
@@ -2369,6 +2789,8 @@
 /* MC_CMD_NCSI_PROD_OUT msgresponse */
 #define    MC_CMD_NCSI_PROD_OUT_LEN 0
 =======
+=======
+>>>>>>> v3.18
 #define    MC_CMD_DRV_ATTACH_IN_LEN 12
 /* new state (0=detached, 1=attached) to set if UPDATE=1 */
 #define       MC_CMD_DRV_ATTACH_IN_NEW_STATE_OFST 0
@@ -2400,6 +2822,9 @@
 #define          MC_CMD_DRV_ATTACH_EXT_OUT_FLAG_LINKCTRL 0x1
 /* enum: The function can perform privileged operations */
 #define          MC_CMD_DRV_ATTACH_EXT_OUT_FLAG_TRUSTED 0x2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -2412,6 +2837,10 @@
 /* MC_CMD_SHMUART_IN msgrequest */
 #define    MC_CMD_SHMUART_IN_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* ??? */
+>>>>>>> v3.18
 =======
 /* ??? */
 >>>>>>> v3.18
@@ -2423,9 +2852,12 @@
 
 /***********************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MC_CMD_ENTITY_RESET
  * Generic per-port reset.
 =======
+=======
+>>>>>>> v3.18
 /* MC_CMD_PORT_RESET
  * Generic per-port reset. There is no equivalent for per-board reset. Locks
  * required: None; Return code: 0, ETIME. NOTE: This command is deprecated -
@@ -2445,6 +2877,9 @@
  * Generic per-resource reset. There is no equivalent for per-board reset.
  * Locks required: None; Return code: 0, ETIME. NOTE: This command is an
  * extended version of the deprecated MC_CMD_PORT_RESET with added fields.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_ENTITY_RESET 0x20
@@ -2452,6 +2887,12 @@
 /* MC_CMD_ENTITY_RESET_IN msgrequest */
 #define    MC_CMD_ENTITY_RESET_IN_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Optional flags field. Omitting this will perform a "legacy" reset action
+ * (TBD).
+ */
+>>>>>>> v3.18
 =======
 /* Optional flags field. Omitting this will perform a "legacy" reset action
  * (TBD).
@@ -2474,7 +2915,13 @@
 /* MC_CMD_PCIE_CREDITS_IN msgrequest */
 #define    MC_CMD_PCIE_CREDITS_IN_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_PCIE_CREDITS_IN_POLL_PERIOD_OFST 0
+=======
+/* poll period. 0 is disabled */
+#define       MC_CMD_PCIE_CREDITS_IN_POLL_PERIOD_OFST 0
+/* wipe statistics */
+>>>>>>> v3.18
 =======
 /* poll period. 0 is disabled */
 #define       MC_CMD_PCIE_CREDITS_IN_POLL_PERIOD_OFST 0
@@ -2541,7 +2988,11 @@
 /***********************************/
 /* MC_CMD_PUTS
 <<<<<<< HEAD
+<<<<<<< HEAD
  * puts(3) implementation over MCDI
+=======
+ * Copy the given ASCII string out onto UART and/or out of the network port.
+>>>>>>> v3.18
 =======
  * Copy the given ASCII string out onto UART and/or out of the network port.
 >>>>>>> v3.18
@@ -2571,7 +3022,12 @@
 /***********************************/
 /* MC_CMD_GET_PHY_CFG
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Report PHY configuration.
+=======
+ * Report PHY configuration. This guarantees to succeed even if the PHY is in a
+ * 'zombie' state. Locks required: None
+>>>>>>> v3.18
 =======
  * Report PHY configuration. This guarantees to succeed even if the PHY is in a
  * 'zombie' state. Locks required: None
@@ -2585,6 +3041,10 @@
 /* MC_CMD_GET_PHY_CFG_OUT msgresponse */
 #define    MC_CMD_GET_PHY_CFG_OUT_LEN 72
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* flags */
+>>>>>>> v3.18
 =======
 /* flags */
 >>>>>>> v3.18
@@ -2604,7 +3064,13 @@
 #define        MC_CMD_GET_PHY_CFG_OUT_BIST_LBN 6
 #define        MC_CMD_GET_PHY_CFG_OUT_BIST_WIDTH 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_GET_PHY_CFG_OUT_TYPE_OFST 4
+=======
+/* ?? */
+#define       MC_CMD_GET_PHY_CFG_OUT_TYPE_OFST 4
+/* Bitmask of supported capabilities */
+>>>>>>> v3.18
 =======
 /* ?? */
 #define       MC_CMD_GET_PHY_CFG_OUT_TYPE_OFST 4
@@ -2632,6 +3098,7 @@
 #define        MC_CMD_PHY_CAP_AN_LBN 10
 #define        MC_CMD_PHY_CAP_AN_WIDTH 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_GET_PHY_CFG_OUT_CHANNEL_OFST 12
 #define       MC_CMD_GET_PHY_CFG_OUT_PRT_OFST 16
 #define       MC_CMD_GET_PHY_CFG_OUT_STATS_MASK_OFST 20
@@ -2647,6 +3114,8 @@
 #define       MC_CMD_GET_PHY_CFG_OUT_MMD_MASK_OFST 48
 #define          MC_CMD_MMD_CLAUSE22 0x0 /* enum */
 =======
+=======
+>>>>>>> v3.18
 #define        MC_CMD_PHY_CAP_40000FDX_LBN 11
 #define        MC_CMD_PHY_CAP_40000FDX_WIDTH 1
 #define        MC_CMD_PHY_CAP_DDM_LBN 12
@@ -2679,6 +3148,9 @@
 #define       MC_CMD_GET_PHY_CFG_OUT_MMD_MASK_OFST 48
 /* enum: Native clause 22 */
 #define          MC_CMD_MMD_CLAUSE22 0x0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define          MC_CMD_MMD_CLAUSE45_PMAPMD 0x1 /* enum */
 #define          MC_CMD_MMD_CLAUSE45_WIS 0x2 /* enum */
@@ -2688,7 +3160,12 @@
 #define          MC_CMD_MMD_CLAUSE45_TC 0x6 /* enum */
 #define          MC_CMD_MMD_CLAUSE45_AN 0x7 /* enum */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MC_CMD_MMD_CLAUSE45_C22EXT 0x1d /* enum */
+=======
+/* enum: Clause22 proxied over clause45 by PHY. */
+#define          MC_CMD_MMD_CLAUSE45_C22EXT 0x1d
+>>>>>>> v3.18
 =======
 /* enum: Clause22 proxied over clause45 by PHY. */
 #define          MC_CMD_MMD_CLAUSE45_C22EXT 0x1d
@@ -2702,7 +3179,12 @@
 /***********************************/
 /* MC_CMD_START_BIST
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Start a BIST test on the PHY.
+=======
+ * Start a BIST test on the PHY. Locks required: PHY_LOCK if doing a PHY BIST
+ * Return code: 0, EINVAL, EACCES (if PHY_LOCK is not held)
+>>>>>>> v3.18
 =======
  * Start a BIST test on the PHY. Locks required: PHY_LOCK if doing a PHY BIST
  * Return code: 0, EINVAL, EACCES (if PHY_LOCK is not held)
@@ -2713,6 +3195,7 @@
 /* MC_CMD_START_BIST_IN msgrequest */
 #define    MC_CMD_START_BIST_IN_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_START_BIST_IN_TYPE_OFST 0
 #define          MC_CMD_PHY_BIST_CABLE_SHORT 0x1 /* enum */
 #define          MC_CMD_PHY_BIST_CABLE_LONG 0x2 /* enum */
@@ -2720,6 +3203,8 @@
 #define          MC_CMD_MC_LOOPBACK_BIST 0x4 /* enum */
 #define          MC_CMD_PHY_BIST 0x5 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* Type of test. */
 #define       MC_CMD_START_BIST_IN_TYPE_OFST 0
 /* enum: Run the PHY's short cable BIST. */
@@ -2738,6 +3223,9 @@
 #define          MC_CMD_PORT_MEM_BIST 0x7
 /* enum: Run register test. */
 #define          MC_CMD_REG_BIST 0x8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MC_CMD_START_BIST_OUT msgresponse */
@@ -2747,14 +3235,20 @@
 /***********************************/
 /* MC_CMD_POLL_BIST
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Poll for BIST completion.
 =======
+=======
+>>>>>>> v3.18
  * Poll for BIST completion. Returns a single status code, and optionally some
  * PHY specific bist output. The driver should only consume the BIST output
  * after validating OUTLEN and MC_CMD_GET_PHY_CFG.TYPE. If a driver can't
  * successfully parse the BIST output, it should still respect the pass/Fail in
  * OUT.RESULT. Locks required: PHY_LOCK if doing a PHY BIST. Return code: 0,
  * EACCES (if PHY_LOCK is not held).
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_POLL_BIST 0x26
@@ -2765,12 +3259,15 @@
 /* MC_CMD_POLL_BIST_OUT msgresponse */
 #define    MC_CMD_POLL_BIST_OUT_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_POLL_BIST_OUT_RESULT_OFST 0
 #define          MC_CMD_POLL_BIST_RUNNING 0x1 /* enum */
 #define          MC_CMD_POLL_BIST_PASSED 0x2 /* enum */
 #define          MC_CMD_POLL_BIST_FAILED 0x3 /* enum */
 #define          MC_CMD_POLL_BIST_TIMEOUT 0x4 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* result */
 #define       MC_CMD_POLL_BIST_OUT_RESULT_OFST 0
 /* enum: Running. */
@@ -2781,12 +3278,19 @@
 #define          MC_CMD_POLL_BIST_FAILED 0x3
 /* enum: Timed-out. */
 #define          MC_CMD_POLL_BIST_TIMEOUT 0x4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_POLL_BIST_OUT_PRIVATE_OFST 4
 
 /* MC_CMD_POLL_BIST_OUT_SFT9001 msgresponse */
 #define    MC_CMD_POLL_BIST_OUT_SFT9001_LEN 36
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* result */
+>>>>>>> v3.18
 =======
 /* result */
 >>>>>>> v3.18
@@ -2797,6 +3301,7 @@
 #define       MC_CMD_POLL_BIST_OUT_SFT9001_CABLE_LENGTH_B_OFST 8
 #define       MC_CMD_POLL_BIST_OUT_SFT9001_CABLE_LENGTH_C_OFST 12
 #define       MC_CMD_POLL_BIST_OUT_SFT9001_CABLE_LENGTH_D_OFST 16
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define       MC_CMD_POLL_BIST_OUT_SFT9001_CABLE_STATUS_A_OFST 20
 #define          MC_CMD_POLL_BIST_SFT9001_PAIR_OK 0x1 /* enum */
@@ -2811,6 +3316,8 @@
 /*            Enum values, see field(s): */
 /*               CABLE_STATUS_A */
 =======
+=======
+>>>>>>> v3.18
 /* Status of each channel A */
 #define       MC_CMD_POLL_BIST_OUT_SFT9001_CABLE_STATUS_A_OFST 20
 /* enum: Ok. */
@@ -2832,6 +3339,9 @@
 /*            Enum values, see field(s): */
 /*               CABLE_STATUS_A */
 /* Status of each channel D */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_POLL_BIST_OUT_SFT9001_CABLE_STATUS_D_OFST 32
 /*            Enum values, see field(s): */
@@ -2840,6 +3350,10 @@
 /* MC_CMD_POLL_BIST_OUT_MRSFP msgresponse */
 #define    MC_CMD_POLL_BIST_OUT_MRSFP_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* result */
+>>>>>>> v3.18
 =======
 /* result */
 >>>>>>> v3.18
@@ -2847,6 +3361,7 @@
 /*            Enum values, see field(s): */
 /*               MC_CMD_POLL_BIST_OUT/MC_CMD_POLL_BIST_OUT_RESULT */
 #define       MC_CMD_POLL_BIST_OUT_MRSFP_TEST_OFST 4
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define          MC_CMD_POLL_BIST_MRSFP_TEST_COMPLETE 0x0 /* enum */
 #define          MC_CMD_POLL_BIST_MRSFP_TEST_BUS_SWITCH_OFF_I2C_WRITE 0x1 /* enum */
@@ -2858,6 +3373,8 @@
 #define          MC_CMD_POLL_BIST_MRSFP_TEST_MODULE_ID_I2C_ACCESS 0x7 /* enum */
 #define          MC_CMD_POLL_BIST_MRSFP_TEST_MODULE_ID_SANE_VALUE 0x8 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: Complete. */
 #define          MC_CMD_POLL_BIST_MRSFP_TEST_COMPLETE 0x0
 /* enum: Bus switch off I2C write. */
@@ -2926,20 +3443,29 @@
 #define       MC_CMD_POLL_BIST_OUT_MEM_ECC_PARITY_OFST 28
 /* ECC fatal error mask */
 #define       MC_CMD_POLL_BIST_OUT_MEM_ECC_FATAL_OFST 32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /***********************************/
 /* MC_CMD_FLUSH_RX_QUEUES
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Flush receive queue(s).
 =======
+=======
+>>>>>>> v3.18
  * Flush receive queue(s). If SRIOV is enabled (via MC_CMD_SRIOV), then RXQ
  * flushes should be initiated via this MCDI operation, rather than via
  * directly writing FLUSH_CMD.
  *
  * The flush is completed (either done/fail) asynchronously (after this command
  * returns). The driver must still wait for flush done/failure events as usual.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_FLUSH_RX_QUEUES 0x27
@@ -2960,7 +3486,11 @@
 /***********************************/
 /* MC_CMD_GET_LOOPBACK_MODES
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Get port's loopback modes.
+=======
+ * Returns a bitmask of loopback modes available at each speed.
+>>>>>>> v3.18
 =======
  * Returns a bitmask of loopback modes available at each speed.
 >>>>>>> v3.18
@@ -2972,7 +3502,12 @@
 
 /* MC_CMD_GET_LOOPBACK_MODES_OUT msgresponse */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define    MC_CMD_GET_LOOPBACK_MODES_OUT_LEN 32
+=======
+#define    MC_CMD_GET_LOOPBACK_MODES_OUT_LEN 40
+/* Supported loopbacks. */
+>>>>>>> v3.18
 =======
 #define    MC_CMD_GET_LOOPBACK_MODES_OUT_LEN 40
 /* Supported loopbacks. */
@@ -2981,6 +3516,7 @@
 #define       MC_CMD_GET_LOOPBACK_MODES_OUT_100M_LEN 8
 #define       MC_CMD_GET_LOOPBACK_MODES_OUT_100M_LO_OFST 0
 #define       MC_CMD_GET_LOOPBACK_MODES_OUT_100M_HI_OFST 4
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define          MC_CMD_LOOPBACK_NONE  0x0 /* enum */
 #define          MC_CMD_LOOPBACK_DATA  0x1 /* enum */
@@ -3010,6 +3546,8 @@
 #define          MC_CMD_LOOPBACK_XFI_WS_FAR  0x19 /* enum */
 #define          MC_CMD_LOOPBACK_PHYXS_WS  0x1a /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: None. */
 #define          MC_CMD_LOOPBACK_NONE  0x0
 /* enum: Data. */
@@ -3083,6 +3621,9 @@
 /* enum: Near side of AOE Siena side port */
 #define          MC_CMD_LOOPBACK_AOE_INT_NEAR  0x23
 /* Supported loopbacks. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_GET_LOOPBACK_MODES_OUT_1G_OFST 8
 #define       MC_CMD_GET_LOOPBACK_MODES_OUT_1G_LEN 8
@@ -3091,6 +3632,10 @@
 /*            Enum values, see field(s): */
 /*               100M */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Supported loopbacks. */
+>>>>>>> v3.18
 =======
 /* Supported loopbacks. */
 >>>>>>> v3.18
@@ -3101,6 +3646,10 @@
 /*            Enum values, see field(s): */
 /*               100M */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Supported loopbacks. */
+>>>>>>> v3.18
 =======
 /* Supported loopbacks. */
 >>>>>>> v3.18
@@ -3111,7 +3660,10 @@
 /*            Enum values, see field(s): */
 /*               100M */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Supported loopbacks. */
 #define       MC_CMD_GET_LOOPBACK_MODES_OUT_40G_OFST 32
 #define       MC_CMD_GET_LOOPBACK_MODES_OUT_40G_LEN 8
@@ -3119,13 +3671,21 @@
 #define       MC_CMD_GET_LOOPBACK_MODES_OUT_40G_HI_OFST 36
 /*            Enum values, see field(s): */
 /*               100M */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /***********************************/
 /* MC_CMD_GET_LINK
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Read the unified MAC/PHY link state.
+=======
+ * Read the unified MAC/PHY link state. Locks required: None Return code: 0,
+ * ETIME.
+>>>>>>> v3.18
 =======
  * Read the unified MAC/PHY link state. Locks required: None Return code: 0,
  * ETIME.
@@ -3139,10 +3699,13 @@
 /* MC_CMD_GET_LINK_OUT msgresponse */
 #define    MC_CMD_GET_LINK_OUT_LEN 28
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_GET_LINK_OUT_CAP_OFST 0
 #define       MC_CMD_GET_LINK_OUT_LP_CAP_OFST 4
 #define       MC_CMD_GET_LINK_OUT_LINK_SPEED_OFST 8
 =======
+=======
+>>>>>>> v3.18
 /* near-side advertised capabilities */
 #define       MC_CMD_GET_LINK_OUT_CAP_OFST 0
 /* link-partner advertised capabilities */
@@ -3152,6 +3715,9 @@
  */
 #define       MC_CMD_GET_LINK_OUT_LINK_SPEED_OFST 8
 /* Current loopback setting. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_GET_LINK_OUT_LOOPBACK_MODE_OFST 12
 /*            Enum values, see field(s): */
@@ -3166,11 +3732,14 @@
 #define        MC_CMD_GET_LINK_OUT_PHY_LINK_LBN 3
 #define        MC_CMD_GET_LINK_OUT_PHY_LINK_WIDTH 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_GET_LINK_OUT_FCNTL_OFST 20
 #define          MC_CMD_FCNTL_OFF 0x0 /* enum */
 #define          MC_CMD_FCNTL_RESPOND 0x1 /* enum */
 #define          MC_CMD_FCNTL_BIDIR 0x2 /* enum */
 =======
+=======
+>>>>>>> v3.18
 #define        MC_CMD_GET_LINK_OUT_LINK_FAULT_RX_LBN 6
 #define        MC_CMD_GET_LINK_OUT_LINK_FAULT_RX_WIDTH 1
 #define        MC_CMD_GET_LINK_OUT_LINK_FAULT_TX_LBN 7
@@ -3183,6 +3752,9 @@
 #define          MC_CMD_FCNTL_RESPOND 0x1
 /* enum: Respond to and Issue flow control. */
 #define          MC_CMD_FCNTL_BIDIR 0x2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_GET_LINK_OUT_MAC_FAULT_OFST 24
 #define        MC_CMD_MAC_FAULT_XGMII_LOCAL_LBN 0
@@ -3198,7 +3770,12 @@
 /***********************************/
 /* MC_CMD_SET_LINK
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Write the unified MAC/PHY link configuration.
+=======
+ * Write the unified MAC/PHY link configuration. Locks required: None. Return
+ * code: 0, EINVAL, ETIME
+>>>>>>> v3.18
 =======
  * Write the unified MAC/PHY link configuration. Locks required: None. Return
  * code: 0, EINVAL, ETIME
@@ -3209,7 +3786,13 @@
 /* MC_CMD_SET_LINK_IN msgrequest */
 #define    MC_CMD_SET_LINK_IN_LEN 16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_SET_LINK_IN_CAP_OFST 0
+=======
+/* ??? */
+#define       MC_CMD_SET_LINK_IN_CAP_OFST 0
+/* Flags */
+>>>>>>> v3.18
 =======
 /* ??? */
 #define       MC_CMD_SET_LINK_IN_CAP_OFST 0
@@ -3223,10 +3806,13 @@
 #define        MC_CMD_SET_LINK_IN_TXDIS_LBN 2
 #define        MC_CMD_SET_LINK_IN_TXDIS_WIDTH 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_SET_LINK_IN_LOOPBACK_MODE_OFST 8
 /*            Enum values, see field(s): */
 /*               MC_CMD_GET_LOOPBACK_MODES/MC_CMD_GET_LOOPBACK_MODES_OUT/100M */
 =======
+=======
+>>>>>>> v3.18
 /* Loopback mode. */
 #define       MC_CMD_SET_LINK_IN_LOOPBACK_MODE_OFST 8
 /*            Enum values, see field(s): */
@@ -3234,6 +3820,9 @@
 /* A loopback speed of "0" is supported, and means (choose any available
  * speed).
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_SET_LINK_IN_LOOPBACK_SPEED_OFST 12
 
@@ -3244,7 +3833,11 @@
 /***********************************/
 /* MC_CMD_SET_ID_LED
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Set indentification LED state.
+=======
+ * Set identification LED state. Locks required: None. Return code: 0, EINVAL
+>>>>>>> v3.18
 =======
  * Set identification LED state. Locks required: None. Return code: 0, EINVAL
 >>>>>>> v3.18
@@ -3254,6 +3847,10 @@
 /* MC_CMD_SET_ID_LED_IN msgrequest */
 #define    MC_CMD_SET_ID_LED_IN_LEN 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Set LED state. */
+>>>>>>> v3.18
 =======
 /* Set LED state. */
 >>>>>>> v3.18
@@ -3269,7 +3866,11 @@
 /***********************************/
 /* MC_CMD_SET_MAC
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Set MAC configuration.
+=======
+ * Set MAC configuration. Locks required: None. Return code: 0, EINVAL
+>>>>>>> v3.18
 =======
  * Set MAC configuration. Locks required: None. Return code: 0, EINVAL
 >>>>>>> v3.18
@@ -3279,6 +3880,12 @@
 /* MC_CMD_SET_MAC_IN msgrequest */
 #define    MC_CMD_SET_MAC_IN_LEN 24
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* The MTU is the MTU programmed directly into the XMAC/GMAC (inclusive of
+ * EtherII, VLAN, bug16011 padding).
+ */
+>>>>>>> v3.18
 =======
 /* The MTU is the MTU programmed directly into the XMAC/GMAC (inclusive of
  * EtherII, VLAN, bug16011 padding).
@@ -3297,11 +3904,14 @@
 #define        MC_CMD_SET_MAC_IN_REJECT_BRDCST_WIDTH 1
 #define       MC_CMD_SET_MAC_IN_FCNTL_OFST 20
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*               MC_CMD_FCNTL_OFF 0x0 */
 /*               MC_CMD_FCNTL_RESPOND 0x1 */
 /*               MC_CMD_FCNTL_BIDIR 0x2 */
 #define          MC_CMD_FCNTL_AUTO 0x3 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: Flow control is off. */
 /*               MC_CMD_FCNTL_OFF 0x0 */
 /* enum: Respond to flow control. */
@@ -3310,6 +3920,9 @@
 /*               MC_CMD_FCNTL_BIDIR 0x2 */
 /* enum: Auto neg flow control. */
 #define          MC_CMD_FCNTL_AUTO 0x3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MC_CMD_SET_MAC_OUT msgresponse */
@@ -3319,14 +3932,20 @@
 /***********************************/
 /* MC_CMD_PHY_STATS
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Get generic PHY statistics.
 =======
+=======
+>>>>>>> v3.18
  * Get generic PHY statistics. This call returns the statistics for a generic
  * PHY in a sparse array (indexed by the enumerate). Each value is represented
  * by a 32bit number. If the DMA_ADDR is 0, then no DMA is performed, and the
  * statistics may be read from the message response. If DMA_ADDR != 0, then the
  * statistics are dmad to that (page-aligned location). Locks required: None.
  * Returns: 0, ETIME
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_PHY_STATS 0x2d
@@ -3334,6 +3953,10 @@
 /* MC_CMD_PHY_STATS_IN msgrequest */
 #define    MC_CMD_PHY_STATS_IN_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* ??? */
+>>>>>>> v3.18
 =======
 /* ??? */
 >>>>>>> v3.18
@@ -3350,6 +3973,7 @@
 #define       MC_CMD_PHY_STATS_OUT_NO_DMA_STATISTICS_OFST 0
 #define       MC_CMD_PHY_STATS_OUT_NO_DMA_STATISTICS_LEN 4
 #define       MC_CMD_PHY_STATS_OUT_NO_DMA_STATISTICS_NUM MC_CMD_PHY_NSTATS
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define          MC_CMD_OUI  0x0 /* enum */
 #define          MC_CMD_PMA_PMD_LINK_UP  0x1 /* enum */
@@ -3376,6 +4000,8 @@
 #define          MC_CMD_CL22_LINK_UP  0x16 /* enum */
 #define          MC_CMD_PHY_NSTATS  0x17 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: OUI. */
 #define          MC_CMD_OUI  0x0
 /* enum: PMA-PMD Link Up. */
@@ -3424,14 +4050,20 @@
 #define          MC_CMD_CL22_LINK_UP  0x16
 /* enum: (Last entry) */
 #define          MC_CMD_PHY_NSTATS  0x17
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /***********************************/
 /* MC_CMD_MAC_STATS
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Get generic MAC statistics.
 =======
+=======
+>>>>>>> v3.18
  * Get generic MAC statistics. This call returns unified statistics maintained
  * by the MC as it switches between the GMAC and XMAC. The MC will write out
  * all supported stats. The driver should zero initialise the buffer to
@@ -3439,6 +4071,9 @@
  * performed, and the statistics may be read from the message response. If
  * DMA_ADDR != 0, then the statistics are dmad to that (page-aligned location).
  * Locks required: None. Returns: 0, ETIME
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_MAC_STATS 0x2e
@@ -3446,6 +4081,10 @@
 /* MC_CMD_MAC_STATS_IN msgrequest */
 #define    MC_CMD_MAC_STATS_IN_LEN 16
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* ??? */
+>>>>>>> v3.18
 =======
 /* ??? */
 >>>>>>> v3.18
@@ -3541,9 +4180,12 @@
 #define          MC_CMD_MAC_RX_LANES23_DISP_ERR  0x3a /* enum */
 #define          MC_CMD_MAC_RX_MATCH_FAULT  0x3b /* enum */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MC_CMD_GMAC_DMABUF_START  0x40 /* enum */
 #define          MC_CMD_GMAC_DMABUF_END    0x5f /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: PM trunc_bb_overflow counter. Valid for EF10 with PM_AND_RXDP_COUNTERS
  * capability only.
  */
@@ -3596,6 +4238,9 @@
 #define          MC_CMD_GMAC_DMABUF_START  0x40
 /* enum: End of GMAC stats buffer space, for Siena only. */
 #define          MC_CMD_GMAC_DMABUF_END    0x5f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define          MC_CMD_MAC_GENERATION_END 0x60 /* enum */
 #define          MC_CMD_MAC_NSTATS  0x61 /* enum */
@@ -3621,6 +4266,10 @@
 /* MC_CMD_MEMCPY_RECORD_TYPEDEF structuredef */
 #define    MC_CMD_MEMCPY_RECORD_TYPEDEF_LEN 32
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* this is only used for the first record */
+>>>>>>> v3.18
 =======
 /* this is only used for the first record */
 >>>>>>> v3.18
@@ -3654,8 +4303,11 @@
 /***********************************/
 /* MC_CMD_MEMCPY
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Perform memory copy operation.
 =======
+=======
+>>>>>>> v3.18
  * DMA write data into (Rid,Addr), either by dma reading (Rid,Addr), or by data
  * embedded directly in the command.
  *
@@ -3673,6 +4325,9 @@
  * doesn't overlap the records.
  *
  * Returns: 0, EINVAL (invalid RID)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_MEMCPY 0x31
@@ -3682,6 +4337,10 @@
 #define    MC_CMD_MEMCPY_IN_LENMAX 224
 #define    MC_CMD_MEMCPY_IN_LEN(num) (0+32*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* see MC_CMD_MEMCPY_RECORD_TYPEDEF */
+>>>>>>> v3.18
 =======
 /* see MC_CMD_MEMCPY_RECORD_TYPEDEF */
 >>>>>>> v3.18
@@ -3706,6 +4365,7 @@
 #define          MC_CMD_FILTER_MODE_SIMPLE    0x0 /* enum */
 #define          MC_CMD_FILTER_MODE_STRUCTURED 0xffffffff /* enum */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_WOL_FILTER_SET_IN_WOL_TYPE_OFST 4
 #define          MC_CMD_WOL_TYPE_MAGIC      0x0 /* enum */
 #define          MC_CMD_WOL_TYPE_WIN_MAGIC 0x2 /* enum */
@@ -3715,6 +4375,8 @@
 #define          MC_CMD_WOL_TYPE_LINK       0x6 /* enum */
 #define          MC_CMD_WOL_TYPE_MAX        0x7 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* A type value of 1 is unused. */
 #define       MC_CMD_WOL_FILTER_SET_IN_WOL_TYPE_OFST 4
 /* enum: Magic */
@@ -3731,6 +4393,9 @@
 #define          MC_CMD_WOL_TYPE_LINK       0x6
 /* enum: (Above this for future use) */
 #define          MC_CMD_WOL_TYPE_MAX        0x7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_WOL_FILTER_SET_IN_DATA_OFST 8
 #define       MC_CMD_WOL_FILTER_SET_IN_DATA_LEN 4
@@ -3802,7 +4467,11 @@
 /***********************************/
 /* MC_CMD_WOL_FILTER_REMOVE
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Remove a WoL filter.
+=======
+ * Remove a WoL filter. Locks required: None. Returns: 0, EINVAL, ENOSYS
+>>>>>>> v3.18
 =======
  * Remove a WoL filter. Locks required: None. Returns: 0, EINVAL, ENOSYS
 >>>>>>> v3.18
@@ -3820,7 +4489,12 @@
 /***********************************/
 /* MC_CMD_WOL_FILTER_RESET
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Reset (i.e. remove all) WoL filters.
+=======
+ * Reset (i.e. remove all) WoL filters. Locks required: None. Returns: 0,
+ * ENOSYS
+>>>>>>> v3.18
 =======
  * Reset (i.e. remove all) WoL filters. Locks required: None. Returns: 0,
  * ENOSYS
@@ -3841,7 +4515,11 @@
 /***********************************/
 /* MC_CMD_SET_MCAST_HASH
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Set the MCASH hash value.
+=======
+ * Set the MCAST hash value without otherwise reconfiguring the MAC
+>>>>>>> v3.18
 =======
  * Set the MCAST hash value without otherwise reconfiguring the MAC
 >>>>>>> v3.18
@@ -3862,7 +4540,12 @@
 /***********************************/
 /* MC_CMD_NVRAM_TYPES
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Get virtual NVRAM partitions information.
+=======
+ * Return bitfield indicating available types of virtual NVRAM partitions.
+ * Locks required: none. Returns: 0
+>>>>>>> v3.18
 =======
  * Return bitfield indicating available types of virtual NVRAM partitions.
  * Locks required: none. Returns: 0
@@ -3875,6 +4558,7 @@
 
 /* MC_CMD_NVRAM_TYPES_OUT msgresponse */
 #define    MC_CMD_NVRAM_TYPES_OUT_LEN 4
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define       MC_CMD_NVRAM_TYPES_OUT_TYPES_OFST 0
 #define          MC_CMD_NVRAM_TYPE_DISABLED_CALLISTO 0x0 /* enum */
@@ -3892,6 +4576,8 @@
 #define          MC_CMD_NVRAM_TYPE_LOG 0xc /* enum */
 #define          MC_CMD_NVRAM_TYPE_FPGA 0xd /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* Bit mask of supported types. */
 #define       MC_CMD_NVRAM_TYPES_OUT_TYPES_OFST 0
 /* enum: Disabled callisto. */
@@ -3934,13 +4620,21 @@
 #define          MC_CMD_NVRAM_TYPE_LICENSE 0x12
 /* enum: FC Log. */
 #define          MC_CMD_NVRAM_TYPE_FC_LOG 0x13
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /***********************************/
 /* MC_CMD_NVRAM_INFO
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Read info about a virtual NVRAM partition.
+=======
+ * Read info about a virtual NVRAM partition. Locks required: none. Returns: 0,
+ * EINVAL (bad type).
+>>>>>>> v3.18
 =======
  * Read info about a virtual NVRAM partition. Locks required: none. Returns: 0,
  * EINVAL (bad type).
@@ -3965,11 +4659,17 @@
 #define        MC_CMD_NVRAM_INFO_OUT_PROTECTED_LBN 0
 #define        MC_CMD_NVRAM_INFO_OUT_PROTECTED_WIDTH 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define        MC_CMD_NVRAM_INFO_OUT_TLV_LBN 1
 #define        MC_CMD_NVRAM_INFO_OUT_TLV_WIDTH 1
 #define        MC_CMD_NVRAM_INFO_OUT_A_B_LBN 7
 #define        MC_CMD_NVRAM_INFO_OUT_A_B_WIDTH 1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_NVRAM_INFO_OUT_PHYSDEV_OFST 16
 #define       MC_CMD_NVRAM_INFO_OUT_PHYSADDR_OFST 20
@@ -3978,7 +4678,13 @@
 /***********************************/
 /* MC_CMD_NVRAM_UPDATE_START
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Start a group of update operations on a virtual NVRAM partition.
+=======
+ * Start a group of update operations on a virtual NVRAM partition. Locks
+ * required: PHY_LOCK if type==*PHY*. Returns: 0, EINVAL (bad type), EACCES (if
+ * PHY_LOCK required and not held).
+>>>>>>> v3.18
 =======
  * Start a group of update operations on a virtual NVRAM partition. Locks
  * required: PHY_LOCK if type==*PHY*. Returns: 0, EINVAL (bad type), EACCES (if
@@ -4000,7 +4706,13 @@
 /***********************************/
 /* MC_CMD_NVRAM_READ
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Read data from a virtual NVRAM partition.
+=======
+ * Read data from a virtual NVRAM partition. Locks required: PHY_LOCK if
+ * type==*PHY*. Returns: 0, EINVAL (bad type/offset/length), EACCES (if
+ * PHY_LOCK required and not held)
+>>>>>>> v3.18
 =======
  * Read data from a virtual NVRAM partition. Locks required: PHY_LOCK if
  * type==*PHY*. Returns: 0, EINVAL (bad type/offset/length), EACCES (if
@@ -4016,6 +4728,10 @@
 /*               MC_CMD_NVRAM_TYPES/MC_CMD_NVRAM_TYPES_OUT/TYPES */
 #define       MC_CMD_NVRAM_READ_IN_OFFSET_OFST 4
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* amount to read in bytes */
+>>>>>>> v3.18
 =======
 /* amount to read in bytes */
 >>>>>>> v3.18
@@ -4034,7 +4750,13 @@
 /***********************************/
 /* MC_CMD_NVRAM_WRITE
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Write data to a virtual NVRAM partition.
+=======
+ * Write data to a virtual NVRAM partition. Locks required: PHY_LOCK if
+ * type==*PHY*. Returns: 0, EINVAL (bad type/offset/length), EACCES (if
+ * PHY_LOCK required and not held)
+>>>>>>> v3.18
 =======
  * Write data to a virtual NVRAM partition. Locks required: PHY_LOCK if
  * type==*PHY*. Returns: 0, EINVAL (bad type/offset/length), EACCES (if
@@ -4064,7 +4786,13 @@
 /***********************************/
 /* MC_CMD_NVRAM_ERASE
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Erase sector(s) from a virtual NVRAM partition.
+=======
+ * Erase sector(s) from a virtual NVRAM partition. Locks required: PHY_LOCK if
+ * type==*PHY*. Returns: 0, EINVAL (bad type/offset/length), EACCES (if
+ * PHY_LOCK required and not held)
+>>>>>>> v3.18
 =======
  * Erase sector(s) from a virtual NVRAM partition. Locks required: PHY_LOCK if
  * type==*PHY*. Returns: 0, EINVAL (bad type/offset/length), EACCES (if
@@ -4088,7 +4816,13 @@
 /***********************************/
 /* MC_CMD_NVRAM_UPDATE_FINISH
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Finish a group of update operations on a virtual NVRAM partition.
+=======
+ * Finish a group of update operations on a virtual NVRAM partition. Locks
+ * required: PHY_LOCK if type==*PHY*. Returns: 0, EINVAL (bad
+ * type/offset/length), EACCES (if PHY_LOCK required and not held)
+>>>>>>> v3.18
 =======
  * Finish a group of update operations on a virtual NVRAM partition. Locks
  * required: PHY_LOCK if type==*PHY*. Returns: 0, EINVAL (bad
@@ -4112,7 +4846,10 @@
 /* MC_CMD_REBOOT
  * Reboot the MC.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * The AFTER_ASSERTION flag is intended to be used when the driver notices an
  * assertion failure (at which point it is expected to perform a complete tear
@@ -4127,6 +4864,9 @@
  *
  * Locks required: NONE Returns: Nothing. You get back a response with ERR=1,
  * DATALEN=0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_REBOOT 0x3d
@@ -4143,7 +4883,13 @@
 /***********************************/
 /* MC_CMD_SCHEDINFO
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Request scheduler info.
+=======
+ * Request scheduler info. Locks required: NONE. Returns: An array of
+ * (timeslice,maximum overrun), one for each thread, in ascending order of
+ * thread address.
+>>>>>>> v3.18
 =======
  * Request scheduler info. Locks required: NONE. Returns: An array of
  * (timeslice,maximum overrun), one for each thread, in ascending order of
@@ -4168,6 +4914,11 @@
 /***********************************/
 /* MC_CMD_REBOOT_MODE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Set the mode for the next MC reboot. Locks required: NONE. Sets the reboot
+ * mode to the specified value. Returns the old mode.
+>>>>>>> v3.18
 =======
  * Set the mode for the next MC reboot. Locks required: NONE. Sets the reboot
  * mode to the specified value. Returns the old mode.
@@ -4179,9 +4930,12 @@
 #define    MC_CMD_REBOOT_MODE_IN_LEN 4
 #define       MC_CMD_REBOOT_MODE_IN_VALUE_OFST 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MC_CMD_REBOOT_MODE_NORMAL 0x0 /* enum */
 #define          MC_CMD_REBOOT_MODE_SNAPPER 0x3 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: Normal. */
 #define          MC_CMD_REBOOT_MODE_NORMAL 0x0
 /* enum: Power-on Reset. */
@@ -4192,6 +4946,9 @@
 #define          MC_CMD_REBOOT_MODE_SNAPPER_POR 0x4
 #define        MC_CMD_REBOOT_MODE_IN_FAKE_LBN 7
 #define        MC_CMD_REBOOT_MODE_IN_FAKE_WIDTH 1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* MC_CMD_REBOOT_MODE_OUT msgresponse */
@@ -4203,7 +4960,10 @@
 /* MC_CMD_SENSOR_INFO
  * Returns information about every available sensor.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * Each sensor has a single (16bit) value, and a corresponding state. The
  * mapping between value and state is nominally determined by the MC, but may
@@ -4231,6 +4991,9 @@
  * 31 in the mask is set if another page exists.
  *
  * Locks required: None Returns: 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_SENSOR_INFO 0x41
@@ -4238,6 +5001,7 @@
 /* MC_CMD_SENSOR_INFO_IN msgrequest */
 #define    MC_CMD_SENSOR_INFO_IN_LEN 0
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* MC_CMD_SENSOR_INFO_OUT msgresponse */
 #define    MC_CMD_SENSOR_INFO_OUT_LENMIN 12
@@ -4260,6 +5024,8 @@
 #define          MC_CMD_SENSOR_IN_1V2A  0xd /* enum */
 #define          MC_CMD_SENSOR_IN_VREF  0xe /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* MC_CMD_SENSOR_INFO_EXT_IN msgrequest */
 #define    MC_CMD_SENSOR_INFO_EXT_IN_LEN 4
 /* Which page of sensors to report.
@@ -4368,16 +5134,22 @@
 /* enum: Hotpoint temperature: degC */
 #define          MC_CMD_SENSOR_HOTPOINT_TEMP  0x2d
 /* MC_CMD_SENSOR_INFO_ENTRY_TYPEDEF */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_SENSOR_ENTRY_OFST 4
 #define       MC_CMD_SENSOR_ENTRY_LEN 8
 #define       MC_CMD_SENSOR_ENTRY_LO_OFST 4
 #define       MC_CMD_SENSOR_ENTRY_HI_OFST 8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_SENSOR_ENTRY_MINNUM 1
 #define       MC_CMD_SENSOR_ENTRY_MAXNUM 31
 
 =======
+=======
+>>>>>>> v3.18
 #define       MC_CMD_SENSOR_ENTRY_MINNUM 0
 #define       MC_CMD_SENSOR_ENTRY_MAXNUM 31
 
@@ -4398,6 +5170,9 @@
 /*            MC_CMD_SENSOR_ENTRY_MINNUM 0 */
 /*            MC_CMD_SENSOR_ENTRY_MAXNUM 31 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* MC_CMD_SENSOR_INFO_ENTRY_TYPEDEF structuredef */
 #define    MC_CMD_SENSOR_INFO_ENTRY_TYPEDEF_LEN 8
@@ -4422,8 +5197,11 @@
 /***********************************/
 /* MC_CMD_READ_SENSORS
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns the current reading from each sensor.
 =======
+=======
+>>>>>>> v3.18
  * Returns the current reading from each sensor. DMAs an array of sensor
  * readings, in order of sensor type (but without gaps for unimplemented
  * sensors), into host memory. Each array element is a
@@ -4438,6 +5216,9 @@
  * driver is responsible for ensuring that it doesn't miss any events. The
  * board will function normally if all sensors are in STATE_OK or
  * STATE_WARNING. Otherwise the board should not be expected to function.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_READ_SENSORS 0x42
@@ -4445,6 +5226,10 @@
 /* MC_CMD_READ_SENSORS_IN msgrequest */
 #define    MC_CMD_READ_SENSORS_IN_LEN 8
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* DMA address of host buffer for sensor readings (must be 4Kbyte aligned). */
+>>>>>>> v3.18
 =======
 /* DMA address of host buffer for sensor readings (must be 4Kbyte aligned). */
 >>>>>>> v3.18
@@ -4454,12 +5239,15 @@
 #define       MC_CMD_READ_SENSORS_IN_DMA_ADDR_HI_OFST 4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MC_CMD_READ_SENSORS_OUT msgresponse */
 #define    MC_CMD_READ_SENSORS_OUT_LEN 0
 
 /* MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF structuredef */
 #define    MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_LEN 3
 =======
+=======
+>>>>>>> v3.18
 /* MC_CMD_READ_SENSORS_EXT_IN msgrequest */
 #define    MC_CMD_READ_SENSORS_EXT_IN_LEN 12
 /* DMA address of host buffer for sensor readings */
@@ -4478,6 +5266,9 @@
 
 /* MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF structuredef */
 #define    MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_LEN 4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_VALUE_OFST 0
 #define       MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_VALUE_LEN 2
@@ -4486,6 +5277,7 @@
 #define       MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_STATE_OFST 2
 #define       MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_STATE_LEN 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MC_CMD_SENSOR_STATE_OK  0x0 /* enum */
 #define          MC_CMD_SENSOR_STATE_WARNING  0x1 /* enum */
 #define          MC_CMD_SENSOR_STATE_FATAL  0x2 /* enum */
@@ -4493,6 +5285,8 @@
 #define       MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_STATE_LBN 16
 #define       MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_STATE_WIDTH 8
 =======
+=======
+>>>>>>> v3.18
 /* enum: Ok. */
 #define          MC_CMD_SENSOR_STATE_OK  0x0
 /* enum: Breached warning threshold. */
@@ -4511,13 +5305,22 @@
 /*               MC_CMD_SENSOR_INFO/MC_CMD_SENSOR_INFO_OUT/MASK */
 #define       MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_TYPE_LBN 24
 #define       MC_CMD_SENSOR_VALUE_ENTRY_TYPEDEF_TYPE_WIDTH 8
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /***********************************/
 /* MC_CMD_GET_PHY_STATE
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Report current state of PHY.
+=======
+ * Report current state of PHY. A 'zombie' PHY is a PHY that has failed to boot
+ * (e.g. due to missing or corrupted firmware). Locks required: None. Return
+ * code: 0
+>>>>>>> v3.18
 =======
  * Report current state of PHY. A 'zombie' PHY is a PHY that has failed to boot
  * (e.g. due to missing or corrupted firmware). Locks required: None. Return
@@ -4533,20 +5336,31 @@
 #define    MC_CMD_GET_PHY_STATE_OUT_LEN 4
 #define       MC_CMD_GET_PHY_STATE_OUT_STATE_OFST 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MC_CMD_PHY_STATE_OK 0x1 /* enum */
 #define          MC_CMD_PHY_STATE_ZOMBIE 0x2 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: Ok. */
 #define          MC_CMD_PHY_STATE_OK 0x1
 /* enum: Faulty. */
 #define          MC_CMD_PHY_STATE_ZOMBIE 0x2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /***********************************/
 /* MC_CMD_SETUP_8021QBB
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 802.1Qbb control.
+=======
+ * 802.1Qbb control. 8 Tx queues that map to priorities 0 - 7. Use all 1s to
+ * disable 802.Qbb for a given priority.
+>>>>>>> v3.18
 =======
  * 802.1Qbb control. 8 Tx queues that map to priorities 0 - 7. Use all 1s to
  * disable 802.Qbb for a given priority.
@@ -4566,7 +5380,11 @@
 /***********************************/
 /* MC_CMD_WOL_FILTER_GET
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Retrieve ID of any WoL filters.
+=======
+ * Retrieve ID of any WoL filters. Locks required: None. Returns: 0, ENOSYS
+>>>>>>> v3.18
 =======
  * Retrieve ID of any WoL filters. Locks required: None. Returns: 0, ENOSYS
 >>>>>>> v3.18
@@ -4584,7 +5402,12 @@
 /***********************************/
 /* MC_CMD_ADD_LIGHTSOUT_OFFLOAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Add a protocol offload to NIC for lights-out state.
+=======
+ * Add a protocol offload to NIC for lights-out state. Locks required: None.
+ * Returns: 0, ENOSYS
+>>>>>>> v3.18
 =======
  * Add a protocol offload to NIC for lights-out state. Locks required: None.
  * Returns: 0, ENOSYS
@@ -4629,7 +5452,12 @@
 /***********************************/
 /* MC_CMD_REMOVE_LIGHTSOUT_OFFLOAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Remove a protocol offload from NIC for lights-out state.
+=======
+ * Remove a protocol offload from NIC for lights-out state. Locks required:
+ * None. Returns: 0, ENOSYS
+>>>>>>> v3.18
 =======
  * Remove a protocol offload from NIC for lights-out state. Locks required:
  * None. Returns: 0, ENOSYS
@@ -4649,7 +5477,11 @@
 /***********************************/
 /* MC_CMD_MAC_RESET_RESTORE
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Restore MAC after block reset.
+=======
+ * Restore MAC after block reset. Locks required: None. Returns: 0.
+>>>>>>> v3.18
 =======
  * Restore MAC after block reset. Locks required: None. Returns: 0.
 >>>>>>> v3.18
@@ -4666,6 +5498,12 @@
 /***********************************/
 /* MC_CMD_TESTASSERT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Deliberately trigger an assert-detonation in the firmware for testing
+ * purposes (i.e. to allow tests that the driver copes gracefully). Locks
+ * required: None Returns: 0
+>>>>>>> v3.18
 =======
  * Deliberately trigger an assert-detonation in the firmware for testing
  * purposes (i.e. to allow tests that the driver copes gracefully). Locks
@@ -4684,13 +5522,19 @@
 /***********************************/
 /* MC_CMD_WORKAROUND
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Enable/Disable a given workaround.
 =======
+=======
+>>>>>>> v3.18
  * Enable/Disable a given workaround. The mcfw will return EINVAL if it doesn't
  * understand the given workaround number - which should not be treated as a
  * hard error by client code. This op does not imply any semantics about each
  * workaround, that's between the driver and the mcfw on a per-workaround
  * basis. Locks required: None. Returns: 0, EINVAL .
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_WORKAROUND 0x4a
@@ -4699,14 +5543,20 @@
 #define    MC_CMD_WORKAROUND_IN_LEN 8
 #define       MC_CMD_WORKAROUND_IN_TYPE_OFST 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MC_CMD_WORKAROUND_BUG17230 0x1 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: Bug 17230 work around. */
 #define          MC_CMD_WORKAROUND_BUG17230 0x1
 /* enum: Bug 35388 work around (unsafe EVQ writes). */
 #define          MC_CMD_WORKAROUND_BUG35388 0x2
 /* enum: Bug35017 workaround (A64 tables must be identity map) */
 #define          MC_CMD_WORKAROUND_BUG35017 0x3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_WORKAROUND_IN_ENABLED_OFST 4
 
@@ -4717,14 +5567,20 @@
 /***********************************/
 /* MC_CMD_GET_PHY_MEDIA_INFO
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Read media-specific data from PHY.
 =======
+=======
+>>>>>>> v3.18
  * Read media-specific data from PHY (e.g. SFP/SFP+ module ID information for
  * SFP+ PHYs). The 'media type' can be found via GET_PHY_CFG
  * (GET_PHY_CFG_OUT_MEDIA_TYPE); the valid 'page number' input values, and the
  * output data, are interpreted on a per-type basis. For SFP+: PAGE=0 or 1
  * returns a 128-byte block read from module I2C address 0xA0 offset 0 or 0x80.
  * Anything else: currently undefined. Locks required: None. Return code: 0.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define MC_CMD_GET_PHY_MEDIA_INFO 0x4b
@@ -4738,6 +5594,10 @@
 #define    MC_CMD_GET_PHY_MEDIA_INFO_OUT_LENMAX 252
 #define    MC_CMD_GET_PHY_MEDIA_INFO_OUT_LEN(num) (4+1*(num))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* in bytes */
+>>>>>>> v3.18
 =======
 /* in bytes */
 >>>>>>> v3.18
@@ -4751,7 +5611,12 @@
 /***********************************/
 /* MC_CMD_NVRAM_TEST
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Test a particular NVRAM partition.
+=======
+ * Test a particular NVRAM partition for valid contents (where "valid" depends
+ * on the type of partition).
+>>>>>>> v3.18
 =======
  * Test a particular NVRAM partition for valid contents (where "valid" depends
  * on the type of partition).
@@ -4769,23 +5634,35 @@
 #define    MC_CMD_NVRAM_TEST_OUT_LEN 4
 #define       MC_CMD_NVRAM_TEST_OUT_RESULT_OFST 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define          MC_CMD_NVRAM_TEST_PASS 0x0 /* enum */
 #define          MC_CMD_NVRAM_TEST_FAIL 0x1 /* enum */
 #define          MC_CMD_NVRAM_TEST_NOTSUPP 0x2 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* enum: Passed. */
 #define          MC_CMD_NVRAM_TEST_PASS 0x0
 /* enum: Failed. */
 #define          MC_CMD_NVRAM_TEST_FAIL 0x1
 /* enum: Not supported. */
 #define          MC_CMD_NVRAM_TEST_NOTSUPP 0x2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /***********************************/
 /* MC_CMD_MRSFP_TWEAK
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Read status and/or set parameters for the 'mrsfp' driver.
+=======
+ * Read status and/or set parameters for the 'mrsfp' driver in mr_rusty builds.
+ * I2C I/O expander bits are always read; if equaliser parameters are supplied,
+ * they are configured first. Locks required: None. Return code: 0, EINVAL.
+>>>>>>> v3.18
 =======
  * Read status and/or set parameters for the 'mrsfp' driver in mr_rusty builds.
  * I2C I/O expander bits are always read; if equaliser parameters are supplied,
@@ -4797,10 +5674,13 @@
 /* MC_CMD_MRSFP_TWEAK_IN_EQ_CONFIG msgrequest */
 #define    MC_CMD_MRSFP_TWEAK_IN_EQ_CONFIG_LEN 16
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_MRSFP_TWEAK_IN_EQ_CONFIG_TXEQ_LEVEL_OFST 0
 #define       MC_CMD_MRSFP_TWEAK_IN_EQ_CONFIG_TXEQ_DT_CFG_OFST 4
 #define       MC_CMD_MRSFP_TWEAK_IN_EQ_CONFIG_RXEQ_BOOST_OFST 8
 =======
+=======
+>>>>>>> v3.18
 /* 0-6 low->high de-emph. */
 #define       MC_CMD_MRSFP_TWEAK_IN_EQ_CONFIG_TXEQ_LEVEL_OFST 0
 /* 0-8 low->high ref.V */
@@ -4808,6 +5688,9 @@
 /* 0-8 0-8 low->high boost */
 #define       MC_CMD_MRSFP_TWEAK_IN_EQ_CONFIG_RXEQ_BOOST_OFST 8
 /* 0-8 low->high ref.V */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_MRSFP_TWEAK_IN_EQ_CONFIG_RXEQ_DT_CFG_OFST 12
 
@@ -4817,12 +5700,15 @@
 /* MC_CMD_MRSFP_TWEAK_OUT msgresponse */
 #define    MC_CMD_MRSFP_TWEAK_OUT_LEN 12
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_MRSFP_TWEAK_OUT_IOEXP_INPUTS_OFST 0
 #define       MC_CMD_MRSFP_TWEAK_OUT_IOEXP_OUTPUTS_OFST 4
 #define       MC_CMD_MRSFP_TWEAK_OUT_IOEXP_DIRECTION_OFST 8
 #define          MC_CMD_MRSFP_TWEAK_OUT_IOEXP_DIRECTION_OUT 0x0 /* enum */
 #define          MC_CMD_MRSFP_TWEAK_OUT_IOEXP_DIRECTION_IN 0x1 /* enum */
 =======
+=======
+>>>>>>> v3.18
 /* input bits */
 #define       MC_CMD_MRSFP_TWEAK_OUT_IOEXP_INPUTS_OFST 0
 /* output bits */
@@ -4833,13 +5719,22 @@
 #define          MC_CMD_MRSFP_TWEAK_OUT_IOEXP_DIRECTION_OUT 0x0
 /* enum: In. */
 #define          MC_CMD_MRSFP_TWEAK_OUT_IOEXP_DIRECTION_IN 0x1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 /***********************************/
 /* MC_CMD_SENSOR_SET_LIMS
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Adjusts the sensor limits.
+=======
+ * Adjusts the sensor limits. This is a warranty-voiding operation. Returns:
+ * ENOENT if the sensor specified does not exist, EINVAL if the limits are out
+ * of range.
+>>>>>>> v3.18
 =======
  * Adjusts the sensor limits. This is a warranty-voiding operation. Returns:
  * ENOENT if the sensor specified does not exist, EINVAL if the limits are out
@@ -4854,10 +5749,13 @@
 /*            Enum values, see field(s): */
 /*               MC_CMD_SENSOR_INFO/MC_CMD_SENSOR_INFO_OUT/MASK */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define       MC_CMD_SENSOR_SET_LIMS_IN_LOW0_OFST 4
 #define       MC_CMD_SENSOR_SET_LIMS_IN_HI0_OFST 8
 #define       MC_CMD_SENSOR_SET_LIMS_IN_LOW1_OFST 12
 =======
+=======
+>>>>>>> v3.18
 /* interpretation is is sensor-specific. */
 #define       MC_CMD_SENSOR_SET_LIMS_IN_LOW0_OFST 4
 /* interpretation is is sensor-specific. */
@@ -4865,6 +5763,9 @@
 /* interpretation is is sensor-specific. */
 #define       MC_CMD_SENSOR_SET_LIMS_IN_LOW1_OFST 12
 /* interpretation is is sensor-specific. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define       MC_CMD_SENSOR_SET_LIMS_IN_HI1_OFST 16
 
@@ -4888,10 +5789,13 @@
 #define       MC_CMD_GET_RESOURCE_LIMITS_OUT_TXQ_OFST 12
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MC_CMD_RESOURCE_SPECIFIER enum */
 #define          MC_CMD_RESOURCE_INSTANCE_ANY 0xffffffff /* enum */
 #define          MC_CMD_RESOURCE_INSTANCE_NONE 0xfffffffe /* enum */
 =======
+=======
+>>>>>>> v3.18
 
 /***********************************/
 /* MC_CMD_NVRAM_PARTITIONS
@@ -8912,6 +9816,9 @@
 #define          MC_CMD_GET_PORT_SNIFF_CONFIG_OUT_RX_MODE_RSS  0x1
 /* RSS context (for RX_MODE_RSS) */
 #define       MC_CMD_GET_PORT_SNIFF_CONFIG_OUT_RX_CONTEXT_OFST 12
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

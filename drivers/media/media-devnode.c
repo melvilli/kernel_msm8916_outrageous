@@ -193,7 +193,10 @@ static int media_release(struct inode *inode, struct file *filp)
 {
 	struct media_devnode *mdev = media_devnode_data(filp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -205,7 +208,11 @@ static int media_release(struct inode *inode, struct file *filp)
 	put_device(&mdev->dev);
 	filp->private_data = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -240,7 +247,12 @@ static const struct file_operations media_devnode_fops = {
  * freeing any data.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __must_check media_devnode_register(struct media_devnode *mdev)
+=======
+int __must_check media_devnode_register(struct media_devnode *mdev,
+					struct module *owner)
+>>>>>>> v3.18
 =======
 int __must_check media_devnode_register(struct media_devnode *mdev,
 					struct module *owner)
@@ -266,7 +278,11 @@ int __must_check media_devnode_register(struct media_devnode *mdev,
 	/* Part 2: Initialize and register the character device */
 	cdev_init(&mdev->cdev, &media_devnode_fops);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mdev->cdev.owner = mdev->fops->owner;
+=======
+	mdev->cdev.owner = owner;
+>>>>>>> v3.18
 =======
 	mdev->cdev.owner = owner;
 >>>>>>> v3.18

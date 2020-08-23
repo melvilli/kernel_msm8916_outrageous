@@ -9,7 +9,10 @@ obj-$(CONFIG_MEDIA_ALTERA_CI) += altera-ci.o
 
 ccflags-y += -Idrivers/media/i2c
 <<<<<<< HEAD
+<<<<<<< HEAD
 ccflags-y += -Idrivers/media/common
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ccflags-y += -Idrivers/media/tuners

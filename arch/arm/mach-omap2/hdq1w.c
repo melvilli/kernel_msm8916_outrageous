@@ -68,8 +68,13 @@ int omap_hdq1w_reset(struct omap_hwmod *oh)
 
 	if (c == MAX_MODULE_SOFTRESET_WAIT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("%s: %s: softreset failed (waited %d usec)\n",
 			   __func__, oh->name, MAX_MODULE_SOFTRESET_WAIT);
+=======
+		pr_warn("%s: %s: softreset failed (waited %d usec)\n",
+			__func__, oh->name, MAX_MODULE_SOFTRESET_WAIT);
+>>>>>>> v3.18
 =======
 		pr_warn("%s: %s: softreset failed (waited %d usec)\n",
 			__func__, oh->name, MAX_MODULE_SOFTRESET_WAIT);
@@ -82,6 +87,10 @@ int omap_hdq1w_reset(struct omap_hwmod *oh)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_OF
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_OF
 >>>>>>> v3.18
@@ -105,6 +114,10 @@ static int __init omap_init_hdq(void)
 }
 omap_arch_initcall(omap_init_hdq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

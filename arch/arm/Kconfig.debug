@@ -76,6 +76,7 @@ config DEBUG_USER
 	     16 - SIGBUS faults
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config FORCE_PAGES
 	bool "Force lowmem to be mapped with 4K pages"
         help
@@ -114,6 +115,8 @@ config KERNEL_TEXT_RDONLY
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 # These options are only for real kernel hackers who want to get their hands dirty.
 config DEBUG_LL
 	bool "Kernel low-level debugging functions (read help!)"
@@ -141,10 +144,13 @@ choice
 		depends on HAVE_AT91_DBGU1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEBUG_BCM2835
 		bool "Kernel low-level debugging on BCM2835 PL011 UART"
 		depends on ARCH_BCM2835
 =======
+=======
+>>>>>>> v3.18
 	config AT91_DEBUG_LL_DBGU2
 		bool "Kernel low-level debugging on sama5d4"
 		depends on HAVE_AT91_DBGU2
@@ -182,6 +188,9 @@ choice
 		help
 		  Say Y here if you want kernel low-level debugging support
 		  on Marvell Berlin SoC based platforms.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	config DEBUG_CLPS711X_UART1
@@ -202,6 +211,10 @@ choice
 		bool "Kernel Kernel low-level debugging on Cavium Networks CNS3xxx"
 		depends on ARCH_CNS3XXX
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -213,6 +226,10 @@ choice
 		bool "Kernel low-level debugging on DaVinci DA8XX using UART1"
 		depends on ARCH_DAVINCI_DA8XX
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -224,6 +241,10 @@ choice
 		bool "Kernel low-level debugging on DaVinci DA8XX using UART2"
 		depends on ARCH_DAVINCI_DA8XX
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -235,6 +256,10 @@ choice
 		bool "Kernel low-level debugging on DaVinci DMx using UART0"
 		depends on ARCH_DAVINCI_DMx
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -242,6 +267,7 @@ choice
 		  Say Y here if you want the debug print routines to direct
 		  their output to UART0 serial port on DaVinci DMx devices.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	config DEBUG_DAVINCI_TNETV107X_UART1
 		bool "Kernel low-level debugging on DaVinci TNETV107x using UART1"
@@ -251,6 +277,8 @@ choice
 		  their output to UART1 serial port on DaVinci TNETV107X
 		  devices.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	config DEBUG_ZYNQ_UART0
@@ -285,10 +313,13 @@ choice
 		  their output to the 8250 at PCI COM1.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEBUG_HIGHBANK_UART
 		bool "Kernel low-level debugging messages via Highbank UART"
 		depends on ARCH_HIGHBANK
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_HI3620_UART
 		bool "Hisilicon HI3620 Debug UART"
 		depends on ARCH_HI3xxx
@@ -309,13 +340,19 @@ choice
 		bool "Kernel low-level debugging messages via Highbank UART"
 		depends on ARCH_HIGHBANK
 		select DEBUG_UART_PL01X
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want the debug print routines to direct
 		  their output to the UART on Highbank based devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_HIP04_UART
 		bool "Hisilicon HiP04 Debug UART"
 		depends on ARCH_HIP04
@@ -332,6 +369,9 @@ choice
 		  Say Y here if you want kernel low-level debugging support
 		  on Hix5hd2 UART.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config DEBUG_IMX1_UART
 		bool "i.MX1 Debug UART"
@@ -344,6 +384,10 @@ choice
 		bool "i.MX23 Debug UART"
 		depends on SOC_IMX23
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_PL01X
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_PL01X
 >>>>>>> v3.18
@@ -369,6 +413,10 @@ choice
 		bool "i.MX28 Debug UART"
 		depends on SOC_IMX28
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_PL01X
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_PL01X
 >>>>>>> v3.18
@@ -391,7 +439,10 @@ choice
 		  on i.MX35.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_IMX50_UART
 		bool "i.MX50 Debug UART"
 		depends on SOC_IMX50
@@ -399,6 +450,9 @@ choice
 		  Say Y here if you want kernel low-level debugging support
 		  on i.MX50.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config DEBUG_IMX51_UART
 		bool "i.MX51 Debug UART"
@@ -422,10 +476,13 @@ choice
 		  on i.MX6Q/DL.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEBUG_MMP_UART2
 		bool "Kernel low-level debugging message via MMP UART2"
 		depends on ARCH_MMP
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_IMX6SL_UART
 		bool "i.MX6SL Debug UART"
 		depends on SOC_IMX6SL
@@ -467,6 +524,9 @@ choice
 		bool "Kernel low-level debugging message via MMP UART2"
 		depends on ARCH_MMP
 		select DEBUG_UART_8250
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want kernel low-level debugging support
@@ -476,6 +536,10 @@ choice
 		bool "Kernel low-level debugging message via MMP UART3"
 		depends on ARCH_MMP
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -484,10 +548,13 @@ choice
 		  on MMP UART3.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEBUG_MVEBU_UART
 		bool "Kernel low-level debugging messages via MVEBU UART"
 		depends on ARCH_MVEBU
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_MSM_UART
 		bool "Kernel low-level debugging messages via MSM UART"
 		depends on ARCH_MSM
@@ -546,16 +613,22 @@ choice
 		bool "Kernel low-level debugging messages via MVEBU UART (new bootloaders)"
 		depends on ARCH_MVEBU
 		select DEBUG_UART_8250
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want kernel low-level debugging support
 		  on MVEBU based platforms.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEBUG_NOMADIK_UART
 		bool "Kernel low-level debugging messages via NOMADIK UART"
 		depends on ARCH_NOMADIK
 =======
+=======
+>>>>>>> v3.18
 		  This option should be used with the new bootloaders
 		  that remap the internal registers at 0xf1000000.
 
@@ -574,11 +647,15 @@ choice
 		bool "Kernel low-level debugging messages via NOMADIK UART"
 		depends on ARCH_NOMADIK
 		select DEBUG_UART_PL01X
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want kernel low-level debugging support
 		  on NOMADIK based platforms.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	config DEBUG_OMAP2PLUS_UART
 		bool "Kernel low-level debugging messages via OMAP2PLUS UART"
@@ -587,6 +664,8 @@ choice
 		  Say Y here if you want kernel low-level debugging support
 		  on OMAP2PLUS based platforms.
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_NSPIRE_CLASSIC_UART
 		bool "Kernel low-level debugging via TI-NSPIRE 8250 UART"
 		depends on ARCH_NSPIRE
@@ -669,12 +748,19 @@ choice
 		bool "Kernel low-level debugging messages via Zoom2/3 UART"
 		depends on ARCH_OMAP2PLUS
 		select DEBUG_OMAP2PLUS_UART
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	config DEBUG_PICOXCELL_UART
 		depends on ARCH_PICOXCELL
 		bool "Use PicoXcell UART for low-level debug"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -686,6 +772,10 @@ choice
 		depends on ARCH_PXA
 		bool "Use PXA UART1 for low-level debug"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -697,6 +787,10 @@ choice
 		bool "RealView Default UART"
 		depends on ARCH_REALVIEW
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_PL01X
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_PL01X
 >>>>>>> v3.18
@@ -709,6 +803,10 @@ choice
 		bool "RealView PB1176 UART"
 		depends on MACH_REALVIEW_PB1176
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_PL01X
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_PL01X
 >>>>>>> v3.18
@@ -718,11 +816,14 @@ choice
 		  PB1176 platform.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEBUG_S3C_UART0
 		depends on PLAT_SAMSUNG
 		select DEBUG_EXYNOS_UART if ARCH_EXYNOS
 		bool "Use S3C UART 0 for low-level debug"
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_RK29_UART0
 		bool "Kernel low-level debugging messages via Rockchip RK29 UART0"
 		depends on ARCH_ROCKCHIP
@@ -793,12 +894,16 @@ choice
 		select DEBUG_S3C24XX_UART if ARCH_S3C24XX
 		select DEBUG_S5PV210_UART if ARCH_S5PV210
 		bool "Use Samsung S3C UART 0 for low-level debug"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want the debug print routines to direct
 		  their output to UART 0. The port must have been initialised
 		  by the boot-loader before use.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		  The uncompressor code port configuration is now handled
 		  by CONFIG_S3C_LOWLEVEL_UART_PORT.
@@ -808,18 +913,24 @@ choice
 		select DEBUG_EXYNOS_UART if ARCH_EXYNOS
 		bool "Use S3C UART 1 for low-level debug"
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_S3C_UART1
 		depends on PLAT_SAMSUNG
 		select DEBUG_EXYNOS_UART if ARCH_EXYNOS
 		select DEBUG_S3C24XX_UART if ARCH_S3C24XX
 		select DEBUG_S5PV210_UART if ARCH_S5PV210
 		bool "Use Samsung S3C UART 1 for low-level debug"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want the debug print routines to direct
 		  their output to UART 1. The port must have been initialised
 		  by the boot-loader before use.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		  The uncompressor code port configuration is now handled
 		  by CONFIG_S3C_LOWLEVEL_UART_PORT.
@@ -829,18 +940,24 @@ choice
 		select DEBUG_EXYNOS_UART if ARCH_EXYNOS
 		bool "Use S3C UART 2 for low-level debug"
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_S3C_UART2
 		depends on PLAT_SAMSUNG
 		select DEBUG_EXYNOS_UART if ARCH_EXYNOS
 		select DEBUG_S3C24XX_UART if ARCH_S3C24XX
 		select DEBUG_S5PV210_UART if ARCH_S5PV210
 		bool "Use Samsung S3C UART 2 for low-level debug"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want the debug print routines to direct
 		  their output to UART 2. The port must have been initialised
 		  by the boot-loader before use.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		  The uncompressor code port configuration is now handled
 		  by CONFIG_S3C_LOWLEVEL_UART_PORT.
@@ -850,11 +967,16 @@ choice
 		select DEBUG_EXYNOS_UART
 		bool "Use S3C UART 3 for low-level debug"
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_S3C_UART3
 		depends on PLAT_SAMSUNG && (ARCH_EXYNOS || ARCH_S5PV210)
 		select DEBUG_EXYNOS_UART if ARCH_EXYNOS
 		select DEBUG_S5PV210_UART if ARCH_S5PV210
 		bool "Use Samsung S3C UART 3 for low-level debug"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want the debug print routines to direct
@@ -862,9 +984,12 @@ choice
 		  by the boot-loader before use.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  The uncompressor code port configuration is now handled
 		  by CONFIG_S3C_LOWLEVEL_UART_PORT.
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_S3C2410_UART0
 		depends on ARCH_S3C24XX
 		select DEBUG_S3C2410_UART
@@ -891,12 +1016,19 @@ choice
 		  Say Y here if you want the debug print routines to direct
 		  their output to UART 2. The port must have been initialised
 		  by the boot-loader before use.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	config DEBUG_SOCFPGA_UART
 		depends on ARCH_SOCFPGA
 		bool "Use SOCFPGA UART for low-level debug"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -908,6 +1040,10 @@ choice
 		bool "Kernel low-level debugging messages via sunXi UART0"
 		depends on ARCH_SUNXI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -919,6 +1055,10 @@ choice
 		bool "Kernel low-level debugging messages via sunXi UART1"
 		depends on ARCH_SUNXI
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_8250
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_8250
 >>>>>>> v3.18
@@ -927,10 +1067,13 @@ choice
 		  on Allwinner A1X based platforms on the UART1.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config DEBUG_TEGRA_UART
 		depends on ARCH_TEGRA
 		bool "Use Tegra UART for low-level debug"
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_SUNXI_R_UART
 		bool "Kernel low-level debugging messages via sunXi R_UART"
 		depends on MACH_SUN6I || MACH_SUN8I
@@ -987,6 +1130,9 @@ choice
 		bool "Kernel low-level debugging messages via Tegra UART E"
 		depends on ARCH_TEGRA
 		select DEBUG_TEGRA_UART
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		help
 		  Say Y here if you want kernel low-level debugging support
@@ -1007,7 +1153,10 @@ choice
 		  their output to the uart1 port on SiRFmarco devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	config STIH41X_DEBUG_ASC2
 		bool "Use StiH415/416 ASC2 UART for low-level debug"
 		depends on ARCH_STI
@@ -1038,6 +1187,9 @@ choice
 		  Say Y here if you want the debug print routines to direct
 		  their output to the uart port on U300 devices.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config DEBUG_UX500_UART
 		depends on ARCH_U8500
@@ -1047,7 +1199,10 @@ choice
 		  on Ux500 based platforms.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_MT6589_UART0
 		bool "Mediatek mt6589 UART0"
 		depends on ARCH_MEDIATEK
@@ -1056,6 +1211,9 @@ choice
 		  Say Y here if you want kernel low-level debugging support
 		  for Mediatek mt6589 based platforms on UART0.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config DEBUG_VEXPRESS_UART0_DETECT
 		bool "Autodetect UART0 on Versatile Express Cortex-A core tiles"
@@ -1072,6 +1230,10 @@ choice
 		bool "Use PL011 UART0 at 0x10009000 (V2P-CA9 core tile)"
 		depends on ARCH_VEXPRESS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_PL01X
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_PL01X
 >>>>>>> v3.18
@@ -1083,6 +1245,10 @@ choice
 		bool "Use PL011 UART0 at 0x1c090000 (RS1 complaint tiles)"
 		depends on ARCH_VEXPRESS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		select DEBUG_UART_PL01X
+>>>>>>> v3.18
 =======
 		select DEBUG_UART_PL01X
 >>>>>>> v3.18
@@ -1092,7 +1258,10 @@ choice
 		  core tiles, FPGA-based SMMs and software models.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_VEXPRESS_UART0_CRX
 		bool "Use PL011 UART0 at 0xb0090000 (Cortex-R compliant tiles)"
 		depends on ARCH_VEXPRESS && !MMU
@@ -1101,6 +1270,9 @@ choice
 		  This option selects UART0 at 0xb0090000. This is appropriate for
 		  Cortex-R series tiles and SMMs, such as Cortex-R5 and Cortex-R7
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	config DEBUG_VT8500_UART0
 		bool "Use UART0 on VIA/Wondermedia SoCs"
@@ -1115,7 +1287,11 @@ choice
 		help
 		  Say Y here if your platform doesn't provide a UART option
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  below. This relies on your platform choosing the right UART
+=======
+		  above. This relies on your platform choosing the right UART
+>>>>>>> v3.18
 =======
 		  above. This relies on your platform choosing the right UART
 >>>>>>> v3.18
@@ -1150,7 +1326,10 @@ choice
 		  chapter 8 of DUI0203I_rvct_developer_guide.pdf from ARM Ltd.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	config DEBUG_LL_UART_8250
 		bool "Kernel low-level debugging via 8250 UART"
 		help
@@ -1191,6 +1370,9 @@ choice
 		  options; the platform specific options are deprecated
 		  and will be soon removed.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endchoice
 
@@ -1198,7 +1380,10 @@ config DEBUG_EXYNOS_UART
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DEBUG_S3C2410_UART
 	bool
 	select DEBUG_S3C24XX_UART
@@ -1213,6 +1398,9 @@ config DEBUG_OMAP2PLUS_UART
 	bool
 	depends on ARCH_OMAP2PLUS
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config DEBUG_IMX_UART_PORT
 	int "i.MX Debug UART Port Selection" if DEBUG_IMX1_UART || \
@@ -1221,16 +1409,22 @@ config DEBUG_IMX_UART_PORT
 						DEBUG_IMX31_UART || \
 						DEBUG_IMX35_UART || \
 <<<<<<< HEAD
+<<<<<<< HEAD
 						DEBUG_IMX51_UART || \
 						DEBUG_IMX53_UART || \
 						DEBUG_IMX6Q_UART
 =======
+=======
+>>>>>>> v3.18
 						DEBUG_IMX50_UART || \
 						DEBUG_IMX51_UART || \
 						DEBUG_IMX53_UART || \
 						DEBUG_IMX6Q_UART || \
 						DEBUG_IMX6SL_UART || \
 						DEBUG_IMX6SX_UART
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default 1
 	depends on ARCH_MXC
@@ -1238,6 +1432,7 @@ config DEBUG_IMX_UART_PORT
 	  Choose UART port on which kernel low-level debug messages
 	  should be output.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 choice
 	prompt "Low-level debug console UART"
@@ -1324,6 +1519,8 @@ config DEBUG_LL_INCLUDE
 	default "debug/exynos.S" if DEBUG_EXYNOS_UART
 	default "debug/highbank.S" if DEBUG_HIGHBANK_UART
 =======
+=======
+>>>>>>> v3.18
 config DEBUG_VF_UART_PORT
 	int "Vybrid Debug UART Port Selection" if DEBUG_VF_UART
 	default 1
@@ -1349,6 +1546,9 @@ config DEBUG_LL_INCLUDE
 	default "debug/pl01x.S" if DEBUG_LL_UART_PL01X || DEBUG_UART_PL01X
 	default "debug/exynos.S" if DEBUG_EXYNOS_UART
 	default "debug/efm32.S" if DEBUG_LL_UART_EFM32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default "debug/icedcc.S" if DEBUG_ICEDCC
 	default "debug/imx.S" if DEBUG_IMX1_UART || \
@@ -1356,6 +1556,7 @@ config DEBUG_LL_INCLUDE
 				 DEBUG_IMX21_IMX27_UART || \
 				 DEBUG_IMX31_UART || \
 				 DEBUG_IMX35_UART || \
+<<<<<<< HEAD
 <<<<<<< HEAD
 				 DEBUG_IMX51_UART || \
 				 DEBUG_IMX53_UART ||\
@@ -1388,6 +1589,8 @@ config UNCOMPRESS_INCLUDE
 	string
 	default "debug/uncompress.h" if ARCH_MULTIPLATFORM
 =======
+=======
+>>>>>>> v3.18
 				 DEBUG_IMX50_UART || \
 				 DEBUG_IMX51_UART || \
 				 DEBUG_IMX53_UART ||\
@@ -1622,6 +1825,9 @@ config UNCOMPRESS_INCLUDE
 	string
 	default "debug/uncompress.h" if ARCH_MULTIPLATFORM || ARCH_MSM || \
 					PLAT_SAMSUNG || ARCH_EFM32
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default "mach/uncompress.h"
 
@@ -1634,6 +1840,7 @@ config EARLY_PRINTK
 	  kernel parameters to enable this console.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config EARLY_PRINTK_DIRECT
 	bool "Early printk direct"
 	depends on DEBUG_LL
@@ -1642,6 +1849,8 @@ config EARLY_PRINTK_DIRECT
 	  kernel low-level debugging functions and EARLY_PRINTK is
 	  not early enough.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config OC_ETM

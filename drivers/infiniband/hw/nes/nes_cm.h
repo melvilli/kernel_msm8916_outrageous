@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2006 - 2011 Intel Corporation.  All rights reserved.
+=======
+ * Copyright (c) 2006 - 2014 Intel Corporation.  All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2006 - 2014 Intel Corporation.  All rights reserved.
 >>>>>>> v3.18
@@ -63,6 +67,11 @@
 #define IETF_RDMA0_READ         0x4000
 #define IETF_NO_IRD_ORD         0x3FFF
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NES_MAX_IRD		 0x40
+#define NES_MAX_ORD		 0x7F
+>>>>>>> v3.18
 =======
 #define NES_MAX_IRD		 0x40
 #define NES_MAX_ORD		 0x7F
@@ -301,8 +310,13 @@ struct nes_cm_listener {
 	struct nes_cm_core         *cm_core;
 	u8                         loc_mac[ETH_ALEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nes_addr_t                 loc_addr;
 	u16                        loc_port;
+=======
+	nes_addr_t                 loc_addr, mapped_loc_addr;
+	u16                        loc_port, mapped_loc_port;
+>>>>>>> v3.18
 =======
 	nes_addr_t                 loc_addr, mapped_loc_addr;
 	u16                        loc_port, mapped_loc_port;
@@ -321,7 +335,13 @@ struct nes_cm_listener {
 struct nes_cm_node {
 	nes_addr_t                loc_addr, rem_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16                       loc_port, rem_port;
+=======
+	nes_addr_t                mapped_loc_addr, mapped_rem_addr;
+	u16                       loc_port, rem_port;
+	u16                       mapped_loc_port, mapped_rem_port;
+>>>>>>> v3.18
 =======
 	nes_addr_t                mapped_loc_addr, mapped_rem_addr;
 	u16                       loc_port, rem_port;
@@ -354,6 +374,10 @@ struct nes_cm_node {
 	u16			  ird_size;
 	u16                       ord_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u16			  mpav2_ird_ord;
+>>>>>>> v3.18
 =======
 	u16			  mpav2_ird_ord;
 >>>>>>> v3.18
@@ -386,11 +410,17 @@ struct nes_cm_info {
 	nes_addr_t loc_addr;
 	nes_addr_t rem_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	u16 mapped_loc_port;
 	u16 mapped_rem_port;
 	nes_addr_t mapped_loc_addr;
 	nes_addr_t mapped_rem_addr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	enum nes_cm_conn_type  conn_type;

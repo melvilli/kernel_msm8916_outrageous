@@ -37,6 +37,10 @@ typedef struct scsi_cd {
 	unsigned int vendor;	/* vendor code, see sr_vendor.c         */
 	unsigned long ms_offset;	/* for reading multisession-CD's        */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned writeable : 1;
+>>>>>>> v3.18
 =======
 	unsigned writeable : 1;
 >>>>>>> v3.18
@@ -60,11 +64,17 @@ typedef struct scsi_cd {
 } Scsi_CD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define sr_printk(prefix, cd, fmt, a...) \
 	sdev_printk(prefix, (cd)->device, "[%s] " fmt, \
 		    (cd)->cdi.name, ##a)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int sr_do_ioctl(Scsi_CD *, struct packet_command *);
 

@@ -11,6 +11,10 @@
 #include "../../util/sort.h"
 #include "../../util/util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "../../util/top.h"
+>>>>>>> v3.18
 =======
 #include "../../util/top.h"
 >>>>>>> v3.18
@@ -22,6 +26,10 @@
 #include "../ui.h"
 #include "map.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "annotate.h"
+>>>>>>> v3.18
 =======
 #include "annotate.h"
 >>>>>>> v3.18
@@ -34,17 +42,24 @@ struct hist_browser {
 	int		     print_seq;
 	bool		     show_dso;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool		     has_symbols;
 =======
+=======
+>>>>>>> v3.18
 	bool		     show_headers;
 	float		     min_pcnt;
 	u64		     nr_non_filtered_entries;
 	u64		     nr_callchain_rows;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 extern void hist_browser__init_hpp(void);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int hists__browser_title(struct hists *hists, char *bf, size_t size,
 				const char *ev_name);
@@ -55,6 +70,8 @@ static void hist_browser__refresh_dimensions(struct hist_browser *browser)
 	browser->b.width = 3 + (hists__sort_list_width(browser->hists) +
 			     sizeof("[k]"));
 =======
+=======
+>>>>>>> v3.18
 static int hists__browser_title(struct hists *hists,
 				struct hist_browser_timer *hbt,
 				char *bf, size_t size);
@@ -116,15 +133,21 @@ static void hist_browser__gotorc(struct hist_browser *browser, int row, int colu
 	u16 header_offset = browser->show_headers ? 1 : 0;
 
 	ui_browser__gotorc(&browser->b, row + header_offset, column);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void hist_browser__reset(struct hist_browser *browser)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	browser->b.nr_entries = browser->hists->nr_entries;
 	hist_browser__refresh_dimensions(browser);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The hists__remove_entry_filter() already folds non-filtered
 	 * entries so we can assume it has 0 callchain rows.
@@ -134,6 +157,9 @@ static void hist_browser__reset(struct hist_browser *browser)
 	hist_browser__update_nr_entries(browser);
 	browser->b.nr_entries = hist_browser__nr_entries(browser);
 	hist_browser__refresh_dimensions(&browser->b);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ui_browser__reset_index(&browser->b);
 }
@@ -258,13 +284,19 @@ static void callchain_node__init_have_children(struct callchain_node *node)
 	struct callchain_list *chain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(chain, &node->val, list)
 		chain->ms.has_children = !RB_EMPTY_ROOT(&node->rb_root);
 =======
+=======
+>>>>>>> v3.18
 	if (!list_empty(&node->val)) {
 		chain = list_entry(node->val.prev, struct callchain_list, list);
 		chain->ms.has_children = !RB_EMPTY_ROOT(&node->rb_root);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	callchain_node__init_have_children_rb_tree(node);
@@ -296,7 +328,12 @@ static bool hist_browser__toggle_fold(struct hist_browser *browser)
 
 		hist_entry__init_have_children(he);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		browser->hists->nr_entries -= he->nr_rows;
+=======
+		browser->b.nr_entries -= he->nr_rows;
+		browser->nr_callchain_rows -= he->nr_rows;
+>>>>>>> v3.18
 =======
 		browser->b.nr_entries -= he->nr_rows;
 		browser->nr_callchain_rows -= he->nr_rows;
@@ -307,8 +344,14 @@ static bool hist_browser__toggle_fold(struct hist_browser *browser)
 		else
 			he->nr_rows = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		browser->hists->nr_entries += he->nr_rows;
 		browser->b.nr_entries = browser->hists->nr_entries;
+=======
+
+		browser->b.nr_entries += he->nr_rows;
+		browser->nr_callchain_rows += he->nr_rows;
+>>>>>>> v3.18
 =======
 
 		browser->b.nr_entries += he->nr_rows;
@@ -389,6 +432,7 @@ static void hist_entry__set_folding(struct hist_entry *he, bool unfold)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hists__set_folding(struct hists *hists, bool unfold)
 {
 	struct rb_node *nd;
@@ -400,6 +444,8 @@ static void hists__set_folding(struct hists *hists, bool unfold)
 		hist_entry__set_folding(he, unfold);
 		hists->nr_entries += 1 + he->nr_rows;
 =======
+=======
+>>>>>>> v3.18
 static void
 __hist_browser__set_folding(struct hist_browser *browser, bool unfold)
 {
@@ -412,6 +458,9 @@ __hist_browser__set_folding(struct hist_browser *browser, bool unfold)
 		struct hist_entry *he = rb_entry(nd, struct hist_entry, rb_node);
 		hist_entry__set_folding(he, unfold);
 		browser->nr_callchain_rows += he->nr_rows;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -419,13 +468,19 @@ __hist_browser__set_folding(struct hist_browser *browser, bool unfold)
 static void hist_browser__set_folding(struct hist_browser *browser, bool unfold)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hists__set_folding(browser->hists, unfold);
 	browser->b.nr_entries = browser->hists->nr_entries;
 =======
+=======
+>>>>>>> v3.18
 	browser->nr_callchain_rows = 0;
 	__hist_browser__set_folding(browser, unfold);
 
 	browser->b.nr_entries = hist_browser__nr_entries(browser);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Go to the start, we may be way after valid entries after a collapse */
 	ui_browser__reset_index(&browser->b);
@@ -441,7 +496,11 @@ static void ui_browser__warn_lost_events(struct ui_browser *browser)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hist_browser__run(struct hist_browser *browser, const char *ev_name,
+=======
+static int hist_browser__run(struct hist_browser *browser,
+>>>>>>> v3.18
 =======
 static int hist_browser__run(struct hist_browser *browser,
 >>>>>>> v3.18
@@ -453,10 +512,16 @@ static int hist_browser__run(struct hist_browser *browser,
 
 	browser->b.entries = &browser->hists->entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	browser->b.nr_entries = browser->hists->nr_entries;
 
 	hist_browser__refresh_dimensions(browser);
 	hists__browser_title(browser->hists, title, sizeof(title), ev_name);
+=======
+	browser->b.nr_entries = hist_browser__nr_entries(browser);
+
+	hists__browser_title(browser->hists, hbt, title, sizeof(title));
+>>>>>>> v3.18
 =======
 	browser->b.nr_entries = hist_browser__nr_entries(browser);
 
@@ -472,10 +537,13 @@ static int hist_browser__run(struct hist_browser *browser,
 
 		switch (key) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case K_TIMER:
 			hbt->timer(hbt->arg);
 			ui_browser__update_nr_entries(&browser->b, browser->hists->nr_entries);
 =======
+=======
+>>>>>>> v3.18
 		case K_TIMER: {
 			u64 nr_entries;
 			hbt->timer(hbt->arg);
@@ -485,6 +553,9 @@ static int hist_browser__run(struct hist_browser *browser,
 
 			nr_entries = hist_browser__nr_entries(browser);
 			ui_browser__update_nr_entries(&browser->b, nr_entries);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			if (browser->hists->stats.nr_lost_warned !=
@@ -495,15 +566,21 @@ static int hist_browser__run(struct hist_browser *browser,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hists__browser_title(browser->hists, title, sizeof(title), ev_name);
 			ui_browser__show_title(&browser->b, title);
 			continue;
 =======
+=======
+>>>>>>> v3.18
 			hists__browser_title(browser->hists,
 					     hbt, title, sizeof(title));
 			ui_browser__show_title(&browser->b, title);
 			continue;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 'D': { /* Debug */
 			static int seq;
@@ -511,15 +588,21 @@ static int hist_browser__run(struct hist_browser *browser,
 							struct hist_entry, rb_node);
 			ui_helpline__pop();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ui_helpline__fpush("%d: nr_ent=(%d,%d), height=%d, idx=%d, fve: idx=%d, row_off=%d, nrows=%d",
 					   seq++, browser->b.nr_entries,
 					   browser->hists->nr_entries,
 					   browser->b.height,
 =======
+=======
+>>>>>>> v3.18
 			ui_helpline__fpush("%d: nr_ent=(%d,%d), rows=%d, idx=%d, fve: idx=%d, row_off=%d, nrows=%d",
 					   seq++, browser->b.nr_entries,
 					   browser->hists->nr_entries,
 					   browser->b.rows,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					   browser->b.index,
 					   browser->b.top_idx,
@@ -535,11 +618,17 @@ static int hist_browser__run(struct hist_browser *browser,
 			hist_browser__set_folding(browser, true);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 'H':
 			browser->show_headers = !browser->show_headers;
 			hist_browser__update_rows(browser);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case K_ENTER:
 			if (hist_browser__toggle_fold(browser))
@@ -572,6 +661,7 @@ static char *callchain_list__sym_name(struct callchain_list *cl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LEVEL_OFFSET_STEP 3
 
 static int hist_browser__show_callchain_node_rb_tree(struct hist_browser *browser,
@@ -593,6 +683,8 @@ static int hist_browser__show_callchain_node_rb_tree(struct hist_browser *browse
 	remaining = new_total;
 	node = rb_first(&chain_node->rb_root);
 =======
+=======
+>>>>>>> v3.18
 struct callchain_print_arg {
 	/* for hists browser */
 	off_t	row_offset;
@@ -674,6 +766,9 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 	u64 new_total;
 
 	node = rb_first(root);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (node) {
 		struct callchain_node *child = rb_entry(node, struct callchain_node, rb_node);
@@ -684,6 +779,7 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 		int first = true;
 		int extra_offset = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		remaining -= cumul;
 
@@ -696,10 +792,16 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 			char bf[1024], *alloc_str;
 			const char *str;
 >>>>>>> v3.18
+=======
+		list_for_each_entry(chain, &child->val, list) {
+			char bf[1024], *alloc_str;
+			const char *str;
+>>>>>>> v3.18
 			bool was_first = first;
 
 			if (first)
 				first = false;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			else
 				extra_offset = LEVEL_OFFSET_STEP;
@@ -708,12 +810,17 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 			if (*row_offset != 0) {
 				--*row_offset;
 =======
+=======
+>>>>>>> v3.18
 			else if (level > 1)
 				extra_offset = LEVEL_OFFSET_STEP;
 
 			folded_sign = callchain_list__folded(chain);
 			if (arg->row_offset != 0) {
 				arg->row_offset--;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto do_next;
 			}
@@ -722,8 +829,14 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 			str = callchain_list__sym_name(chain, bf, sizeof(bf),
 						       browser->show_dso);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (was_first) {
 				double percent = cumul * 100.0 / new_total;
+=======
+
+			if (was_first && level > 1) {
+				double percent = cumul * 100.0 / total;
+>>>>>>> v3.18
 =======
 
 			if (was_first && level > 1) {
@@ -736,6 +849,7 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 					str = alloc_str;
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			color = HE_COLORSET_NORMAL;
 			width = browser->b.width - (offset + extra_offset + 2);
@@ -754,11 +868,16 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 
 			if (++row == browser->b.height)
 =======
+=======
+>>>>>>> v3.18
 			print(browser, chain, str, offset + extra_offset, row, arg);
 
 			free(alloc_str);
 
 			if (is_output_full(browser, ++row))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto out;
 do_next:
@@ -768,6 +887,7 @@ do_next:
 
 		if (folded_sign == '-') {
 			const int new_level = level + (extra_offset ? 2 : 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			row += hist_browser__show_callchain_node_rb_tree(browser, child, new_total,
 									 new_level, row, row_offset,
@@ -853,6 +973,8 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 			if (callchain_param.mode == CHAIN_GRAPH_REL)
 				new_total = child->children_hit;
@@ -868,6 +990,9 @@ static int hist_browser__show_callchain(struct hist_browser *browser,
 		node = next;
 	}
 out:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return row - first_row;
 }
@@ -878,6 +1003,7 @@ struct hpp_arg {
 	bool current_entry;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __hpp__color_callchain(struct hpp_arg *arg)
 {
@@ -973,6 +1099,8 @@ out:
 
 #define __HPP_COLOR_PERCENT_FN(_type, _field, _cb)			\
 =======
+=======
+>>>>>>> v3.18
 static int __hpp__slsmg_color_printf(struct perf_hpp *hpp, const char *fmt, ...)
 {
 	struct hpp_arg *arg = hpp->ptr;
@@ -995,12 +1123,16 @@ static int __hpp__slsmg_color_printf(struct perf_hpp *hpp, const char *fmt, ...)
 }
 
 #define __HPP_COLOR_PERCENT_FN(_type, _field)				\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u64 __hpp_get_##_field(struct hist_entry *he)			\
 {									\
 	return he->stat._field;						\
 }									\
 									\
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int hist_browser__hpp_color_##_type(struct perf_hpp *hpp,	\
 					   struct hist_entry *he)	\
@@ -1023,6 +1155,8 @@ void hist_browser__init_hpp(void)
 	perf_hpp__init();
 
 =======
+=======
+>>>>>>> v3.18
 static int								\
 hist_browser__hpp_color_##_type(struct perf_hpp_fmt *fmt,		\
 				struct perf_hpp *hpp,			\
@@ -1067,6 +1201,9 @@ __HPP_COLOR_ACC_PERCENT_FN(overhead_acc, period)
 
 void hist_browser__init_hpp(void)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	perf_hpp__format[PERF_HPP__OVERHEAD].color =
 				hist_browser__hpp_color_overhead;
@@ -1079,6 +1216,11 @@ void hist_browser__init_hpp(void)
 	perf_hpp__format[PERF_HPP__OVERHEAD_GUEST_US].color =
 				hist_browser__hpp_color_overhead_guest_us;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	perf_hpp__format[PERF_HPP__OVERHEAD_ACC].color =
+				hist_browser__hpp_color_overhead_acc;
+>>>>>>> v3.18
 =======
 	perf_hpp__format[PERF_HPP__OVERHEAD_ACC].color =
 				hist_browser__hpp_color_overhead_acc;
@@ -1111,7 +1253,11 @@ static int hist_browser__show_entry(struct hist_browser *browser,
 	if (row_offset == 0) {
 		struct hpp_arg arg = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.b 		= &browser->b,
+=======
+			.b		= &browser->b,
+>>>>>>> v3.18
 =======
 			.b		= &browser->b,
 >>>>>>> v3.18
@@ -1124,6 +1270,7 @@ static int hist_browser__show_entry(struct hist_browser *browser,
 			.ptr		= &arg,
 		};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ui_browser__gotorc(&browser->b, row, 0);
 
@@ -1139,6 +1286,8 @@ static int hist_browser__show_entry(struct hist_browser *browser,
 			} else {
 				width -= fmt->entry(&hpp, entry);
 =======
+=======
+>>>>>>> v3.18
 		hist_browser__gotorc(browser, row, 0);
 
 		perf_hpp__for_each_format(fmt) {
@@ -1168,6 +1317,9 @@ static int hist_browser__show_entry(struct hist_browser *browser,
 				width -= fmt->color(fmt, &hpp, entry);
 			} else {
 				width -= fmt->entry(fmt, &hpp, entry);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				slsmg_printf("%s", s);
 			}
@@ -1178,8 +1330,13 @@ static int hist_browser__show_entry(struct hist_browser *browser,
 			width += 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hist_entry__sort_snprintf(entry, s, sizeof(s), browser->hists);
 		slsmg_write_nstring(s, width);
+=======
+		slsmg_write_nstring("", width);
+
+>>>>>>> v3.18
 =======
 		slsmg_write_nstring("", width);
 
@@ -1190,12 +1347,15 @@ static int hist_browser__show_entry(struct hist_browser *browser,
 		--row_offset;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (folded_sign == '-' && row != browser->b.height) {
 		printed += hist_browser__show_callchain(browser, &entry->sorted_chain,
 							1, row, &row_offset,
 							&current_entry);
 		if (current_entry)
 =======
+=======
+>>>>>>> v3.18
 	if (folded_sign == '-' && row != browser->b.rows) {
 		u64 total = hists__total_period(entry->hists);
 		struct callchain_print_arg arg = {
@@ -1209,6 +1369,9 @@ static int hist_browser__show_entry(struct hist_browser *browser,
 					hist_browser__check_output_full);
 
 		if (arg.is_current_entry)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			browser->he_selection = entry;
 	}
@@ -1217,7 +1380,10 @@ static int hist_browser__show_entry(struct hist_browser *browser,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int advance_hpp_check(struct perf_hpp *hpp, int inc)
 {
 	advance_hpp(hpp, inc);
@@ -1265,6 +1431,9 @@ static void hist_browser__show_headers(struct hist_browser *browser)
 	slsmg_write_nstring(headers, browser->b.width + 1);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void ui_browser__hists_init_top(struct ui_browser *browser)
 {
@@ -1280,10 +1449,13 @@ static unsigned int hist_browser__refresh(struct ui_browser *browser)
 {
 	unsigned row = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node *nd;
 	struct hist_browser *hb = container_of(browser, struct hist_browser, b);
 
 =======
+=======
+>>>>>>> v3.18
 	u16 header_offset = 0;
 	struct rb_node *nd;
 	struct hist_browser *hb = container_of(browser, struct hist_browser, b);
@@ -1293,12 +1465,19 @@ static unsigned int hist_browser__refresh(struct ui_browser *browser)
 		header_offset = 1;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ui_browser__hists_init_top(browser);
 
 	for (nd = browser->top; nd; nd = rb_next(nd)) {
 		struct hist_entry *h = rb_entry(nd, struct hist_entry, rb_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		float percent;
+>>>>>>> v3.18
 =======
 		float percent;
 >>>>>>> v3.18
@@ -1306,6 +1485,7 @@ static unsigned int hist_browser__refresh(struct ui_browser *browser)
 		if (h->filtered)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		row += hist_browser__show_entry(hb, h, row);
 		if (row == browser->height)
@@ -1321,6 +1501,8 @@ static struct rb_node *hists__filter_entries(struct rb_node *nd)
 		struct hist_entry *h = rb_entry(nd, struct hist_entry, rb_node);
 		if (!h->filtered)
 =======
+=======
+>>>>>>> v3.18
 		percent = hist_entry__get_percent_limit(h);
 		if (percent < hb->min_pcnt)
 			continue;
@@ -1341,6 +1523,9 @@ static struct rb_node *hists__filter_entries(struct rb_node *nd,
 		float percent = hist_entry__get_percent_limit(h);
 
 		if (!h->filtered && percent >= min_pcnt)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return nd;
 
@@ -1351,12 +1536,15 @@ static struct rb_node *hists__filter_entries(struct rb_node *nd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct rb_node *hists__filter_prev_entries(struct rb_node *nd)
 {
 	while (nd != NULL) {
 		struct hist_entry *h = rb_entry(nd, struct hist_entry, rb_node);
 		if (!h->filtered)
 =======
+=======
+>>>>>>> v3.18
 static struct rb_node *hists__filter_prev_entries(struct rb_node *nd,
 						  float min_pcnt)
 {
@@ -1365,6 +1553,9 @@ static struct rb_node *hists__filter_prev_entries(struct rb_node *nd,
 		float percent = hist_entry__get_percent_limit(h);
 
 		if (!h->filtered && percent >= min_pcnt)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return nd;
 
@@ -1381,6 +1572,12 @@ static void ui_browser__hists_seek(struct ui_browser *browser,
 	struct rb_node *nd;
 	bool first = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct hist_browser *hb;
+
+	hb = container_of(browser, struct hist_browser, b);
+>>>>>>> v3.18
 =======
 	struct hist_browser *hb;
 
@@ -1395,7 +1592,12 @@ static void ui_browser__hists_seek(struct ui_browser *browser,
 	switch (whence) {
 	case SEEK_SET:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nd = hists__filter_entries(rb_first(browser->entries));
+=======
+		nd = hists__filter_entries(rb_first(browser->entries),
+					   hb->min_pcnt);
+>>>>>>> v3.18
 =======
 		nd = hists__filter_entries(rb_first(browser->entries),
 					   hb->min_pcnt);
@@ -1406,7 +1608,12 @@ static void ui_browser__hists_seek(struct ui_browser *browser,
 		goto do_offset;
 	case SEEK_END:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nd = hists__filter_prev_entries(rb_last(browser->entries));
+=======
+		nd = hists__filter_prev_entries(rb_last(browser->entries),
+						hb->min_pcnt);
+>>>>>>> v3.18
 =======
 		nd = hists__filter_prev_entries(rb_last(browser->entries),
 						hb->min_pcnt);
@@ -1454,7 +1661,11 @@ do_offset:
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nd = hists__filter_entries(rb_next(nd));
+=======
+			nd = hists__filter_entries(rb_next(nd), hb->min_pcnt);
+>>>>>>> v3.18
 =======
 			nd = hists__filter_entries(rb_next(nd), hb->min_pcnt);
 >>>>>>> v3.18
@@ -1491,7 +1702,12 @@ do_offset:
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nd = hists__filter_prev_entries(rb_prev(nd));
+=======
+			nd = hists__filter_prev_entries(rb_prev(nd),
+							hb->min_pcnt);
+>>>>>>> v3.18
 =======
 			nd = hists__filter_prev_entries(rb_prev(nd),
 							hb->min_pcnt);
@@ -1520,6 +1736,7 @@ do_offset:
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int hist_browser__fprintf_callchain_node_rb_tree(struct hist_browser *browser,
 							struct callchain_node *chain_node,
@@ -1629,6 +1846,8 @@ static int hist_browser__fprintf_callchain(struct hist_browser *browser,
 
 	return printed;
 =======
+=======
+>>>>>>> v3.18
 static int hist_browser__fprintf_callchain(struct hist_browser *browser,
 					   struct hist_entry *he, FILE *fp)
 {
@@ -1644,6 +1863,9 @@ static int hist_browser__fprintf_callchain(struct hist_browser *browser,
 				     hist_browser__fprintf_callchain_entry, &arg,
 				     hist_browser__check_dump_full);
 	return arg.printed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1652,10 +1874,13 @@ static int hist_browser__fprintf_entry(struct hist_browser *browser,
 {
 	char s[8192];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	double percent;
 	int printed = 0;
 	char folded_sign = ' ';
 =======
+=======
+>>>>>>> v3.18
 	int printed = 0;
 	char folded_sign = ' ';
 	struct perf_hpp hpp = {
@@ -1665,11 +1890,15 @@ static int hist_browser__fprintf_entry(struct hist_browser *browser,
 	struct perf_hpp_fmt *fmt;
 	bool first = true;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (symbol_conf.use_callchain)
 		folded_sign = hist_entry__folded(he);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hist_entry__sort_snprintf(he, s, sizeof(s), browser->hists);
 	percent = (he->stat.period * 100.0) / browser->hists->stats.total_period;
@@ -1690,6 +1919,8 @@ static int hist_browser__fprintf_entry(struct hist_browser *browser,
 	if (folded_sign == '-')
 		printed += hist_browser__fprintf_callchain(browser, &he->sorted_chain, 1, fp);
 =======
+=======
+>>>>>>> v3.18
 	if (symbol_conf.use_callchain)
 		printed += fprintf(fp, "%c ", folded_sign);
 
@@ -1710,6 +1941,9 @@ static int hist_browser__fprintf_entry(struct hist_browser *browser,
 
 	if (folded_sign == '-')
 		printed += hist_browser__fprintf_callchain(browser, he, fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return printed;
@@ -1718,7 +1952,12 @@ static int hist_browser__fprintf_entry(struct hist_browser *browser,
 static int hist_browser__fprintf(struct hist_browser *browser, FILE *fp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node *nd = hists__filter_entries(rb_first(browser->b.entries));
+=======
+	struct rb_node *nd = hists__filter_entries(rb_first(browser->b.entries),
+						   browser->min_pcnt);
+>>>>>>> v3.18
 =======
 	struct rb_node *nd = hists__filter_entries(rb_first(browser->b.entries),
 						   browser->min_pcnt);
@@ -1730,7 +1969,11 @@ static int hist_browser__fprintf(struct hist_browser *browser, FILE *fp)
 
 		printed += hist_browser__fprintf_entry(browser, h, fp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nd = hists__filter_entries(rb_next(nd));
+=======
+		nd = hists__filter_entries(rb_next(nd), browser->min_pcnt);
+>>>>>>> v3.18
 =======
 		nd = hists__filter_entries(rb_next(nd), browser->min_pcnt);
 >>>>>>> v3.18
@@ -1781,6 +2024,7 @@ static struct hist_browser *hist_browser__new(struct hists *hists)
 		browser->hists = hists;
 		browser->b.refresh = hist_browser__refresh;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		browser->b.seek = ui_browser__hists_seek;
 		browser->b.use_navkeypressed = true;
 		if (sort__branch_mode == 1)
@@ -1788,10 +2032,15 @@ static struct hist_browser *hist_browser__new(struct hists *hists)
 		else
 			browser->has_symbols = sort_sym.list.next != NULL;
 =======
+=======
+>>>>>>> v3.18
 		browser->b.refresh_dimensions = hist_browser__refresh_dimensions;
 		browser->b.seek = ui_browser__hists_seek;
 		browser->b.use_navkeypressed = true;
 		browser->show_headers = symbol_conf.show_hist_headers;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1814,9 +2063,12 @@ static struct thread *hist_browser__selected_thread(struct hist_browser *browser
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hists__browser_title(struct hists *hists, char *bf, size_t size,
 				const char *ev_name)
 =======
+=======
+>>>>>>> v3.18
 /* Check whether the browser is for 'top' or 'report' */
 static inline bool is_report_browser(void *timer)
 {
@@ -1826,6 +2078,9 @@ static inline bool is_report_browser(void *timer)
 static int hists__browser_title(struct hists *hists,
 				struct hist_browser_timer *hbt,
 				char *bf, size_t size)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char unit;
@@ -1836,10 +2091,13 @@ static int hists__browser_title(struct hists *hists,
 	u64 nr_events = hists->stats.total_period;
 	struct perf_evsel *evsel = hists_to_evsel(hists);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char buf[512];
 	size_t buflen = sizeof(buf);
 
 =======
+=======
+>>>>>>> v3.18
 	const char *ev_name = perf_evsel__name(evsel);
 	char buf[512];
 	size_t buflen = sizeof(buf);
@@ -1849,6 +2107,9 @@ static int hists__browser_title(struct hists *hists,
 		nr_events = hists->stats.total_non_filtered_period;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (perf_evsel__is_group_event(evsel)) {
 		struct perf_evsel *pos;
@@ -1858,9 +2119,12 @@ static int hists__browser_title(struct hists *hists,
 
 		for_each_group_member(pos, evsel) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nr_samples += pos->hists.stats.nr_events[PERF_RECORD_SAMPLE];
 			nr_events += pos->hists.stats.total_period;
 =======
+=======
+>>>>>>> v3.18
 			struct hists *pos_hists = evsel__hists(pos);
 
 			if (symbol_conf.filter_relative) {
@@ -1870,6 +2134,9 @@ static int hists__browser_title(struct hists *hists,
 				nr_samples += pos_hists->stats.nr_events[PERF_RECORD_SAMPLE];
 				nr_events += pos_hists->stats.total_period;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -1887,12 +2154,15 @@ static int hists__browser_title(struct hists *hists,
 		printed += scnprintf(bf + printed, size - printed,
 				    ", Thread: %s(%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    (thread->comm_set ? thread->comm : ""),
 				    thread->pid);
 	if (dso)
 		printed += scnprintf(bf + printed, size - printed,
 				    ", DSO: %s", dso->short_name);
 =======
+=======
+>>>>>>> v3.18
 				     (thread->comm_set ? thread__comm_str(thread) : ""),
 				    thread->tid);
 	if (dso)
@@ -1905,6 +2175,9 @@ static int hists__browser_title(struct hists *hists,
 			printed += scnprintf(bf + printed, size - printed, " [z]");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return printed;
 }
@@ -1913,6 +2186,7 @@ static inline void free_popup_options(char **options, int n)
 {
 	int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < n; ++i) {
 		free(options[i]);
@@ -1924,6 +2198,10 @@ static inline void free_popup_options(char **options, int n)
 static inline bool is_report_browser(void *timer)
 {
 	return timer == NULL;
+=======
+	for (i = 0; i < n; ++i)
+		zfree(&options[i]);
+>>>>>>> v3.18
 =======
 	for (i = 0; i < n; ++i)
 		zfree(&options[i]);
@@ -1981,7 +2259,11 @@ static int switch_data_file(void)
 			abs_path[nr_options] = strdup(path);
 			if (!abs_path[nr_options]) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				free(options[nr_options]);
+=======
+				zfree(&options[nr_options]);
+>>>>>>> v3.18
 =======
 				zfree(&options[nr_options]);
 >>>>>>> v3.18
@@ -2024,6 +2306,7 @@ close_file_and_continue:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 				    const char *helpline, const char *ev_name,
@@ -2033,6 +2316,8 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 {
 	struct hists *hists = &evsel->hists;
 =======
+=======
+>>>>>>> v3.18
 static void hist_browser__update_nr_entries(struct hist_browser *hb)
 {
 	u64 nr_entries = 0;
@@ -2059,6 +2344,9 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 				    struct perf_session_env *env)
 {
 	struct hists *hists = evsel__hists(evsel);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct hist_browser *browser = hist_browser__new(hists);
 	struct branch_info *bi;
@@ -2070,7 +2358,10 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 	char script_opt[64];
 	int delay_secs = hbt ? hbt->refresh : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct perf_hpp_fmt *fmt;
 
 #define HIST_BROWSER_HELP_COMMON					\
@@ -2105,18 +2396,27 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 	"V             Verbose (DSO names in callchains, etc)\n"
 	"z             Toggle zeroing of samples\n"
 	"/             Filter symbol by name";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (browser == NULL)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (min_pcnt) {
 		browser->min_pcnt = min_pcnt;
 		hist_browser__update_nr_entries(browser);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fstack = pstack__new(2);
 	if (fstack == NULL)
@@ -2127,13 +2427,19 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 	memset(options, 0, sizeof(options));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	perf_hpp__for_each_format(fmt)
 		perf_hpp__reset_width(fmt, hists);
 
 	if (symbol_conf.col_width_list_str)
 		perf_hpp__set_user_width(symbol_conf.col_width_list_str);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	while (1) {
 		const struct thread *thread = NULL;
@@ -2147,7 +2453,11 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 		nr_options = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key = hist_browser__run(browser, ev_name, hbt);
+=======
+		key = hist_browser__run(browser, hbt);
+>>>>>>> v3.18
 =======
 		key = hist_browser__run(browser, hbt);
 >>>>>>> v3.18
@@ -2168,7 +2478,11 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 			goto out_free_stack;
 		case 'a':
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!browser->has_symbols) {
+=======
+			if (!sort__has_sym) {
+>>>>>>> v3.18
 =======
 			if (!sort__has_sym) {
 >>>>>>> v3.18
@@ -2212,7 +2526,10 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 				goto do_data_switch;
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		case 'i':
 			/* env->arch is NULL for live-mode (i.e. perf top) */
 			if (env->arch)
@@ -2228,11 +2545,15 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 				top->zero = !top->zero;
 			}
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case K_F1:
 		case 'h':
 		case '?':
 			ui_browser__help_window(&browser->b,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					"h/?/F1        Show this window\n"
 					"UP/DOWN/PGUP\n"
@@ -2253,6 +2574,9 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 					"P             Print histograms to perf.hist.N\n"
 					"V             Verbose (DSO names in callchains, etc)\n"
 					"/             Filter symbol by name");
+=======
+				is_report_browser(hbt) ? report_help : top_help);
+>>>>>>> v3.18
 =======
 				is_report_browser(hbt) ? report_help : top_help);
 >>>>>>> v3.18
@@ -2293,15 +2617,21 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!browser->has_symbols)
 			goto add_exit_option;
 
 		if (sort__branch_mode == 1) {
 =======
+=======
+>>>>>>> v3.18
 		if (!sort__has_sym)
 			goto add_exit_option;
 
 		if (sort__mode == SORT_MODE__BRANCH) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			bi = browser->he_selection->branch_info;
 			if (browser->selection != NULL &&
@@ -2323,6 +2653,7 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 				annotate_t = nr_options++;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			if (browser->selection != NULL &&
 			    browser->selection->sym != NULL &&
@@ -2331,6 +2662,8 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 					 browser->selection->sym->name) > 0)
 				annotate = nr_options++;
 =======
+=======
+>>>>>>> v3.18
 			if (browser->selection != NULL &&
 			    browser->selection->sym != NULL &&
 			    !browser->selection->map->dso->annotate_warned) {
@@ -2343,6 +2676,9 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 						 browser->selection->sym->name) > 0)
 					annotate = nr_options++;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2350,8 +2686,13 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 		    asprintf(&options[nr_options], "Zoom %s %s(%d) thread",
 			     (browser->hists->thread_filter ? "out of" : "into"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     (thread->comm_set ? thread->comm : ""),
 			     thread->pid) > 0)
+=======
+			     (thread->comm_set ? thread__comm_str(thread) : ""),
+			     thread->tid) > 0)
+>>>>>>> v3.18
 =======
 			     (thread->comm_set ? thread__comm_str(thread) : ""),
 			     thread->tid) > 0)
@@ -2375,7 +2716,11 @@ static int perf_evsel__hists_browse(struct perf_evsel *evsel, int nr_events,
 
 			if (asprintf(&options[nr_options], "Run scripts for samples of thread [%s]",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				browser->he_selection->thread->comm) > 0)
+=======
+				     thread__comm_str(browser->he_selection->thread)) > 0)
+>>>>>>> v3.18
 =======
 				     thread__comm_str(browser->he_selection->thread)) > 0)
 >>>>>>> v3.18
@@ -2410,6 +2755,10 @@ retry_popup_menu:
 		if (choice == annotate || choice == annotate_t || choice == annotate_f) {
 			struct hist_entry *he;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			struct annotation *notes;
+>>>>>>> v3.18
 =======
 			struct annotation *notes;
 >>>>>>> v3.18
@@ -2437,11 +2786,17 @@ do_annotate:
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			notes = symbol__annotation(he->ms.sym);
 			if (!notes->src)
 				continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * Don't let this be freed, say, by hists__decay_entry.
@@ -2471,7 +2826,11 @@ zoom_out_dso:
 				ui_helpline__pop();
 				browser->hists->dso_filter = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sort_dso.elide = false;
+=======
+				perf_hpp__set_elide(HISTC_DSO, false);
+>>>>>>> v3.18
 =======
 				perf_hpp__set_elide(HISTC_DSO, false);
 >>>>>>> v3.18
@@ -2482,7 +2841,11 @@ zoom_out_dso:
 						   dso->kernel ? "the Kernel" : dso->short_name);
 				browser->hists->dso_filter = dso;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sort_dso.elide = true;
+=======
+				perf_hpp__set_elide(HISTC_DSO, true);
+>>>>>>> v3.18
 =======
 				perf_hpp__set_elide(HISTC_DSO, true);
 >>>>>>> v3.18
@@ -2498,6 +2861,7 @@ zoom_out_thread:
 				ui_helpline__pop();
 				browser->hists->thread_filter = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sort_thread.elide = false;
 			} else {
 				ui_helpline__fpush("To zoom out press <- or -> + \"Zoom out of %s(%d) thread\"",
@@ -2506,6 +2870,8 @@ zoom_out_thread:
 				browser->hists->thread_filter = thread;
 				sort_thread.elide = true;
 =======
+=======
+>>>>>>> v3.18
 				perf_hpp__set_elide(HISTC_THREAD, false);
 			} else {
 				ui_helpline__fpush("To zoom out press <- or -> + \"Zoom out of %s(%d) thread\"",
@@ -2513,6 +2879,9 @@ zoom_out_thread:
 						   thread->tid);
 				browser->hists->thread_filter = thread;
 				perf_hpp__set_elide(HISTC_THREAD, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				pstack__push(fstack, &browser->hists->thread_filter);
 			}
@@ -2527,7 +2896,11 @@ do_scripts:
 
 			if (choice == scripts_comm)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				sprintf(script_opt, " -c %s ", browser->he_selection->thread->comm);
+=======
+				sprintf(script_opt, " -c %s ", thread__comm_str(browser->he_selection->thread));
+>>>>>>> v3.18
 =======
 				sprintf(script_opt, " -c %s ", thread__comm_str(browser->he_selection->thread));
 >>>>>>> v3.18
@@ -2561,6 +2934,10 @@ struct perf_evsel_menu {
 	struct perf_evsel *selection;
 	bool lost_events, lost_events_warned;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	float min_pcnt;
+>>>>>>> v3.18
 =======
 	float min_pcnt;
 >>>>>>> v3.18
@@ -2574,8 +2951,14 @@ static void perf_evsel_menu__write(struct ui_browser *browser,
 						    struct perf_evsel_menu, b);
 	struct perf_evsel *evsel = list_entry(entry, struct perf_evsel, node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool current_entry = ui_browser__is_current_entry(browser, row);
 	unsigned long nr_events = evsel->hists.stats.nr_events[PERF_RECORD_SAMPLE];
+=======
+	struct hists *hists = evsel__hists(evsel);
+	bool current_entry = ui_browser__is_current_entry(browser, row);
+	unsigned long nr_events = hists->stats.nr_events[PERF_RECORD_SAMPLE];
+>>>>>>> v3.18
 =======
 	struct hists *hists = evsel__hists(evsel);
 	bool current_entry = ui_browser__is_current_entry(browser, row);
@@ -2596,7 +2979,12 @@ static void perf_evsel_menu__write(struct ui_browser *browser,
 
 		for_each_group_member(pos, evsel) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			nr_events += pos->hists.stats.nr_events[PERF_RECORD_SAMPLE];
+=======
+			struct hists *pos_hists = evsel__hists(pos);
+			nr_events += pos_hists->stats.nr_events[PERF_RECORD_SAMPLE];
+>>>>>>> v3.18
 =======
 			struct hists *pos_hists = evsel__hists(pos);
 			nr_events += pos_hists->stats.nr_events[PERF_RECORD_SAMPLE];
@@ -2610,7 +2998,11 @@ static void perf_evsel_menu__write(struct ui_browser *browser,
 	slsmg_printf("%s", bf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nr_events = evsel->hists.stats.nr_events[PERF_RECORD_LOST];
+=======
+	nr_events = hists->stats.nr_events[PERF_RECORD_LOST];
+>>>>>>> v3.18
 =======
 	nr_events = hists->stats.nr_events[PERF_RECORD_LOST];
 >>>>>>> v3.18
@@ -2637,7 +3029,11 @@ static int perf_evsel_menu__run(struct perf_evsel_menu *menu,
 	struct perf_evlist *evlist = menu->b.priv;
 	struct perf_evsel *pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *ev_name, *title = "Available samples";
+=======
+	const char *title = "Available samples";
+>>>>>>> v3.18
 =======
 	const char *title = "Available samples";
 >>>>>>> v3.18
@@ -2674,9 +3070,15 @@ browse_hists:
 			if (hbt)
 				hbt->timer(hbt->arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ev_name = perf_evsel__name(pos);
 			key = perf_evsel__hists_browse(pos, nr_events, help,
 						       ev_name, true, hbt,
+=======
+			key = perf_evsel__hists_browse(pos, nr_events, help,
+						       true, hbt,
+						       menu->min_pcnt,
+>>>>>>> v3.18
 =======
 			key = perf_evsel__hists_browse(pos, nr_events, help,
 						       true, hbt,
@@ -2688,6 +3090,7 @@ browse_hists:
 			case K_TAB:
 				if (pos->node.next == &evlist->entries)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					pos = list_entry(evlist->entries.next, struct perf_evsel, node);
 				else
 					pos = list_entry(pos->node.next, struct perf_evsel, node);
@@ -2698,6 +3101,8 @@ browse_hists:
 				else
 					pos = list_entry(pos->node.prev, struct perf_evsel, node);
 =======
+=======
+>>>>>>> v3.18
 					pos = perf_evlist__first(evlist);
 				else
 					pos = perf_evsel__next(pos);
@@ -2707,6 +3112,9 @@ browse_hists:
 					pos = perf_evlist__last(evlist);
 				else
 					pos = perf_evsel__prev(pos);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto browse_hists;
 			case K_ESC:
@@ -2742,7 +3150,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool filter_group_entries(struct ui_browser *self __maybe_unused,
+=======
+static bool filter_group_entries(struct ui_browser *browser __maybe_unused,
+>>>>>>> v3.18
 =======
 static bool filter_group_entries(struct ui_browser *browser __maybe_unused,
 >>>>>>> v3.18
@@ -2760,6 +3172,10 @@ static int __perf_evlist__tui_browse_hists(struct perf_evlist *evlist,
 					   int nr_entries, const char *help,
 					   struct hist_browser_timer *hbt,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					   float min_pcnt,
+>>>>>>> v3.18
 =======
 					   float min_pcnt,
 >>>>>>> v3.18
@@ -2777,6 +3193,10 @@ static int __perf_evlist__tui_browse_hists(struct perf_evlist *evlist,
 			.priv	    = evlist,
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.min_pcnt = min_pcnt,
+>>>>>>> v3.18
 =======
 		.min_pcnt = min_pcnt,
 >>>>>>> v3.18
@@ -2786,7 +3206,11 @@ static int __perf_evlist__tui_browse_hists(struct perf_evlist *evlist,
 	ui_helpline__push("Press ESC to exit");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(pos, &evlist->entries, node) {
+=======
+	evlist__for_each(evlist, pos) {
+>>>>>>> v3.18
 =======
 	evlist__for_each(evlist, pos) {
 >>>>>>> v3.18
@@ -2803,6 +3227,10 @@ static int __perf_evlist__tui_browse_hists(struct perf_evlist *evlist,
 int perf_evlist__tui_browse_hists(struct perf_evlist *evlist, const char *help,
 				  struct hist_browser_timer *hbt,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				  float min_pcnt,
+>>>>>>> v3.18
 =======
 				  float min_pcnt,
 >>>>>>> v3.18
@@ -2813,6 +3241,7 @@ int perf_evlist__tui_browse_hists(struct perf_evlist *evlist, const char *help,
 single_entry:
 	if (nr_entries == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct perf_evsel *first = list_entry(evlist->entries.next,
 						      struct perf_evsel, node);
 		const char *ev_name = perf_evsel__name(first);
@@ -2820,11 +3249,16 @@ single_entry:
 		return perf_evsel__hists_browse(first, nr_entries, help,
 						ev_name, false, hbt, env);
 =======
+=======
+>>>>>>> v3.18
 		struct perf_evsel *first = perf_evlist__first(evlist);
 
 		return perf_evsel__hists_browse(first, nr_entries, help,
 						false, hbt, min_pcnt,
 						env);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2833,14 +3267,20 @@ single_entry:
 
 		nr_entries = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_for_each_entry(pos, &evlist->entries, node)
 			if (perf_evsel__is_group_leader(pos))
 				nr_entries++;
 =======
+=======
+>>>>>>> v3.18
 		evlist__for_each(evlist, pos) {
 			if (perf_evsel__is_group_leader(pos))
 				nr_entries++;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (nr_entries == 1)
@@ -2849,7 +3289,11 @@ single_entry:
 
 	return __perf_evlist__tui_browse_hists(evlist, nr_entries, help,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					       hbt, env);
+=======
+					       hbt, min_pcnt, env);
+>>>>>>> v3.18
 =======
 					       hbt, min_pcnt, env);
 >>>>>>> v3.18

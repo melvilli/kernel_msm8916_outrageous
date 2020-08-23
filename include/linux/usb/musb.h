@@ -77,6 +77,12 @@ struct musb_hdrc_config {
 	unsigned	vendor_req:1 __deprecated; /* vendor registers required */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* need to explicitly de-assert the port reset after resume? */
+	unsigned	host_port_deassert_reset_at_resume:1;
+
+>>>>>>> v3.18
 =======
 	/* need to explicitly de-assert the port reset after resume? */
 	unsigned	host_port_deassert_reset_at_resume:1;
@@ -106,8 +112,11 @@ struct musb_hdrc_platform_data {
 	u8		mode;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8		has_mailbox:1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* for clk_get() */

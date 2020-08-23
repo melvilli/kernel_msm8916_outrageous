@@ -30,6 +30,10 @@
 #include <xen/interface/io/kbdif.h>
 #include <xen/xenbus.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <xen/platform_pci.h>
+>>>>>>> v3.18
 =======
 #include <xen/platform_pci.h>
 >>>>>>> v3.18
@@ -289,7 +293,11 @@ static int xenkbd_connect_backend(struct xenbus_device *dev,
 	xenbus_free_evtchn(dev, evtchn);
  error_grant:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gnttab_end_foreign_access_ref(info->gref, 0);
+=======
+	gnttab_end_foreign_access(info->gref, 0, 0UL);
+>>>>>>> v3.18
 =======
 	gnttab_end_foreign_access(info->gref, 0, 0UL);
 >>>>>>> v3.18
@@ -304,7 +312,11 @@ static void xenkbd_disconnect_backend(struct xenkbd_info *info)
 	info->irq = -1;
 	if (info->gref >= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gnttab_end_foreign_access_ref(info->gref, 0);
+=======
+		gnttab_end_foreign_access(info->gref, 0, 0UL);
+>>>>>>> v3.18
 =======
 		gnttab_end_foreign_access(info->gref, 0, 0UL);
 >>>>>>> v3.18
@@ -377,7 +389,12 @@ static const struct xenbus_device_id xenkbd_ids[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_XENBUS_DRIVER(xenkbd, ,
+=======
+static struct xenbus_driver xenkbd_driver = {
+	.ids = xenkbd_ids,
+>>>>>>> v3.18
 =======
 static struct xenbus_driver xenkbd_driver = {
 	.ids = xenkbd_ids,
@@ -387,7 +404,11 @@ static struct xenbus_driver xenkbd_driver = {
 	.resume = xenkbd_resume,
 	.otherend_changed = xenkbd_backend_changed,
 <<<<<<< HEAD
+<<<<<<< HEAD
 );
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -402,6 +423,12 @@ static int __init xenkbd_init(void)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!xen_has_pv_devices())
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!xen_has_pv_devices())
 		return -ENODEV;

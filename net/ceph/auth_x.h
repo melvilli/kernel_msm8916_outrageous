@@ -46,7 +46,11 @@ struct ceph_x_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int ceph_x_init(struct ceph_auth_client *ac);
+=======
+int ceph_x_init(struct ceph_auth_client *ac);
+>>>>>>> v3.18
 =======
 int ceph_x_init(struct ceph_auth_client *ac);
 >>>>>>> v3.18

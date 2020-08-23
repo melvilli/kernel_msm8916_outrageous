@@ -47,7 +47,11 @@ static void ca_midi_clear_rx(struct snd_ca_midi *midi)
 #ifdef CONFIG_SND_DEBUG
 	if (timeout <= 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ca_midi_clear_rx: timeout (status = 0x%x)\n",
+=======
+		pr_err("ca_midi_clear_rx: timeout (status = 0x%x)\n",
+>>>>>>> v3.18
 =======
 		pr_err("ca_midi_clear_rx: timeout (status = 0x%x)\n",
 >>>>>>> v3.18
@@ -118,7 +122,11 @@ static void ca_midi_cmd(struct snd_ca_midi *midi, unsigned char cmd, int ack)
 	spin_unlock_irqrestore(&midi->input_lock, flags);
 	if (!ok)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ca_midi_cmd: 0x%x failed at 0x%x (status = 0x%x, data = 0x%x)!!!\n",
+=======
+		pr_err("ca_midi_cmd: 0x%x failed at 0x%x (status = 0x%x, data = 0x%x)!!!\n",
+>>>>>>> v3.18
 =======
 		pr_err("ca_midi_cmd: 0x%x failed at 0x%x (status = 0x%x, data = 0x%x)!!!\n",
 >>>>>>> v3.18

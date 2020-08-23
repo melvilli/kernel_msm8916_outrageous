@@ -74,10 +74,15 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			device_type = "mdio";
 			compatible = "marvell,mv64360-mdio";
 			PHY0: ethernet-phy@1 {
 				device_type = "ethernet-phy";
+=======
+			compatible = "marvell,mv64360-mdio";
+			PHY0: ethernet-phy@1 {
+>>>>>>> v3.18
 =======
 			compatible = "marvell,mv64360-mdio";
 			PHY0: ethernet-phy@1 {
@@ -89,7 +94,10 @@
 			};
 			PHY1: ethernet-phy@3 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				compatible = "broadcom,bcm5421";
@@ -171,7 +179,10 @@
 
 		MPSC0: mpsc@8000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			device_type = "serial";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			compatible = "marvell,mv64360-mpsc";
@@ -189,7 +200,10 @@
 
 		MPSC1: mpsc@9000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			device_type = "serial";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			compatible = "marvell,mv64360-mpsc";

@@ -113,7 +113,11 @@ required reading:
     Other excellent descriptions of how to create patches properly are:
 	"The Perfect Patch"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		http://userweb.kernel.org/~akpm/stuff/tpp.txt
+=======
+		http://www.ozlabs.org/~akpm/stuff/tpp.txt
+>>>>>>> v3.18
 =======
 		http://www.ozlabs.org/~akpm/stuff/tpp.txt
 >>>>>>> v3.18
@@ -329,7 +333,10 @@ testing repository exists into which virtually all subsystem trees are
 pulled on an almost daily basis:
 	http://git.kernel.org/?p=linux/kernel/git/next/linux-next.git
 <<<<<<< HEAD
+<<<<<<< HEAD
 	http://linux.f-seidel.de/linux-next/pmwiki/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -587,7 +594,11 @@ For more details on what this should all look like, please see the
 ChangeLog section of the document:
   "The Perfect Patch"
 <<<<<<< HEAD
+<<<<<<< HEAD
       http://userweb.kernel.org/~akpm/stuff/tpp.txt
+=======
+      http://www.ozlabs.org/~akpm/stuff/tpp.txt
+>>>>>>> v3.18
 =======
       http://www.ozlabs.org/~akpm/stuff/tpp.txt
 >>>>>>> v3.18

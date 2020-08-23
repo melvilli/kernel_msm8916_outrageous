@@ -144,6 +144,10 @@ u8		Ignore_IRQ;	/* Not used */
 struct pci_dev	*pdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+unsigned long   last_reset;
+>>>>>>> v3.18
 =======
 unsigned long   last_reset;
 >>>>>>> v3.18

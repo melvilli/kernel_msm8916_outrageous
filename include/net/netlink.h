@@ -226,6 +226,7 @@ struct nl_info {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int		netlink_rcv_skb(struct sk_buff *skb,
 					int (*cb)(struct sk_buff *,
 						  struct nlmsghdr *));
@@ -265,6 +266,8 @@ extern int		nla_put_nohdr(struct sk_buff *skb, int attrlen,
 extern int		nla_append(struct sk_buff *skb, int attrlen,
 				   const void *data);
 =======
+=======
+>>>>>>> v3.18
 int netlink_rcv_skb(struct sk_buff *skb,
 		    int (*cb)(struct sk_buff *, struct nlmsghdr *));
 int nlmsg_notify(struct sock *sk, struct sk_buff *skb, u32 portid,
@@ -290,6 +293,9 @@ void __nla_put_nohdr(struct sk_buff *skb, int attrlen, const void *data);
 int nla_put(struct sk_buff *skb, int attrtype, int attrlen, const void *data);
 int nla_put_nohdr(struct sk_buff *skb, int attrlen, const void *data);
 int nla_append(struct sk_buff *skb, int attrlen, const void *data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**************************************************************************
@@ -473,7 +479,11 @@ static inline int nlmsg_report(const struct nlmsghdr *nlh)
  * nlmsg_put - Add a new netlink message to an skb
  * @skb: socket buffer to store message in
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @portid: netlink process id
+=======
+ * @portid: netlink PORTID of requesting application
+>>>>>>> v3.18
 =======
  * @portid: netlink PORTID of requesting application
 >>>>>>> v3.18
@@ -995,6 +1005,7 @@ static inline int nla_put_flag(struct sk_buff *skb, int attrtype)
  * @skb: socket buffer to add attribute to
  * @attrtype: attribute type
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @jiffies: number of msecs in jiffies
  */
 static inline int nla_put_msecs(struct sk_buff *skb, int attrtype,
@@ -1002,12 +1013,17 @@ static inline int nla_put_msecs(struct sk_buff *skb, int attrtype,
 {
 	u64 tmp = jiffies_to_msecs(jiffies);
 =======
+=======
+>>>>>>> v3.18
  * @njiffies: number of jiffies to convert to msecs
  */
 static inline int nla_put_msecs(struct sk_buff *skb, int attrtype,
 				unsigned long njiffies)
 {
 	u64 tmp = jiffies_to_msecs(njiffies);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return nla_put(skb, attrtype, sizeof(u64), &tmp);
 }

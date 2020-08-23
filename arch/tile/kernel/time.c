@@ -24,13 +24,19 @@
 #include <linux/delay.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/irq_regs.h>
 #include <asm/traps.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/timekeeper_internal.h>
 #include <asm/irq_regs.h>
 #include <asm/traps.h>
 #include <asm/vdso.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <hv/hypervisor.h>
 #include <arch/interrupts.h>
@@ -118,7 +124,10 @@ void __init time_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -170,9 +179,15 @@ static DEFINE_PER_CPU(struct clock_event_device, tile_timer) = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit setup_tile_timer(void)
 {
 	struct clock_event_device *evt = &__get_cpu_var(tile_timer);
+=======
+void setup_tile_timer(void)
+{
+	struct clock_event_device *evt = this_cpu_ptr(&tile_timer);
+>>>>>>> v3.18
 =======
 void setup_tile_timer(void)
 {
@@ -198,7 +213,11 @@ void do_timer_interrupt(struct pt_regs *regs, int fault_num)
 {
 	struct pt_regs *old_regs = set_irq_regs(regs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clock_event_device *evt = &__get_cpu_var(tile_timer);
+=======
+	struct clock_event_device *evt = this_cpu_ptr(&tile_timer);
+>>>>>>> v3.18
 =======
 	struct clock_event_device *evt = this_cpu_ptr(&tile_timer);
 >>>>>>> v3.18
@@ -214,7 +233,11 @@ void do_timer_interrupt(struct pt_regs *regs, int fault_num)
 
 	/* Track interrupt count. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__get_cpu_var(irq_stat).irq_timer_count++;
+=======
+	__this_cpu_inc(irq_stat.irq_timer_count);
+>>>>>>> v3.18
 =======
 	__this_cpu_inc(irq_stat.irq_timer_count);
 >>>>>>> v3.18
@@ -240,8 +263,13 @@ void do_timer_interrupt(struct pt_regs *regs, int fault_num)
 unsigned long long sched_clock(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mult_frac(get_cycles(),
 			 sched_clock_mult, 1ULL << SCHED_CLOCK_SHIFT);
+=======
+	return clocksource_cyc2ns(get_cycles(),
+				  sched_clock_mult, SCHED_CLOCK_SHIFT);
+>>>>>>> v3.18
 =======
 	return clocksource_cyc2ns(get_cycles(),
 				  sched_clock_mult, SCHED_CLOCK_SHIFT);
@@ -264,9 +292,12 @@ cycles_t ns2cycles(unsigned long nsecs)
 	 * clock frequency.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clock_event_device *dev = &__raw_get_cpu_var(tile_timer);
 	return ((u64)nsecs * dev->mult) >> dev->shift;
 =======
+=======
+>>>>>>> v3.18
 	struct clock_event_device *dev = raw_cpu_ptr(&tile_timer);
 
 	/*
@@ -329,5 +360,8 @@ void update_vsyscall(struct timekeeper *tk)
 	}
 
 	write_seqcount_end(&vdso_data->tb_seq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

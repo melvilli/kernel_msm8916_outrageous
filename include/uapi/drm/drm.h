@@ -37,7 +37,11 @@
 #define _DRM_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(__KERNEL__) || defined(_LINUX) || defined(__linux__)
+=======
+#if defined(__KERNEL__) || defined(__linux__)
+>>>>>>> v3.18
 =======
 #if defined(__KERNEL__) || defined(__linux__)
 >>>>>>> v3.18
@@ -186,7 +190,10 @@ enum drm_map_type {
 	_DRM_SCATTER_GATHER = 4,  /**< Scatter/gather memory for PCI DMA */
 	_DRM_CONSISTENT = 5,	  /**< Consistent memory for PCI DMA */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_DRM_GEM = 6,		  /**< GEM object */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -619,7 +626,10 @@ struct drm_gem_open {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define DRM_CAP_DUMB_BUFFER		0x1
 #define DRM_CAP_VBLANK_HIGH_CRTC	0x2
 #define DRM_CAP_DUMB_PREFERRED_DEPTH	0x3
@@ -641,6 +651,9 @@ struct drm_gem_open {
 #define DRM_CAP_CURSOR_WIDTH		0x8
 #define DRM_CAP_CURSOR_HEIGHT		0x9
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /** DRM_IOCTL_GET_CAP ioctl argument type */
 struct drm_get_cap {
@@ -649,7 +662,10 @@ struct drm_get_cap {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * DRM_CLIENT_CAP_STEREO_3D
  *
@@ -673,6 +689,9 @@ struct drm_set_client_cap {
 	__u64 value;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DRM_CLOEXEC O_CLOEXEC
 struct drm_prime_handle {
@@ -707,6 +726,10 @@ struct drm_prime_handle {
 #define DRM_IOCTL_GEM_OPEN		DRM_IOWR(0x0b, struct drm_gem_open)
 #define DRM_IOCTL_GET_CAP		DRM_IOWR(0x0c, struct drm_get_cap)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DRM_IOCTL_SET_CLIENT_CAP	DRM_IOW( 0x0d, struct drm_set_client_cap)
+>>>>>>> v3.18
 =======
 #define DRM_IOCTL_SET_CLIENT_CAP	DRM_IOW( 0x0d, struct drm_set_client_cap)
 >>>>>>> v3.18
@@ -794,16 +817,22 @@ struct drm_prime_handle {
 #define DRM_IOCTL_MODE_OBJ_GETPROPERTIES	DRM_IOWR(0xB9, struct drm_mode_obj_get_properties)
 #define DRM_IOCTL_MODE_OBJ_SETPROPERTY	DRM_IOWR(0xBA, struct drm_mode_obj_set_property)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * Device specific ioctls should only be in their respective headers
  * The device specific ioctl range is from 0x40 to 0x99.
 =======
+=======
+>>>>>>> v3.18
 #define DRM_IOCTL_MODE_CURSOR2		DRM_IOWR(0xBB, struct drm_mode_cursor2)
 
 /**
  * Device specific ioctls should only be in their respective headers
  * The device specific ioctl range is from 0x40 to 0x9f.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Generic IOCTLS restart at 0xA0.
  *
@@ -843,6 +872,7 @@ struct drm_event_vblank {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRM_CAP_DUMB_BUFFER 0x1
 #define DRM_CAP_VBLANK_HIGH_CRTC 0x2
 #define DRM_CAP_DUMB_PREFERRED_DEPTH 0x3
@@ -853,6 +883,8 @@ struct drm_event_vblank {
 #define DRM_PRIME_CAP_IMPORT 0x1
 #define DRM_PRIME_CAP_EXPORT 0x2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* typedef area */

@@ -15,7 +15,10 @@
 #define EXYNOS_DEV_ADDR_START	0x20000000
 #define EXYNOS_DEV_ADDR_SIZE	0x40000000
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EXYNOS_DEV_ADDR_ORDER	0x0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

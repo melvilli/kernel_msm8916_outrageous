@@ -26,16 +26,22 @@
 #include <mach/at91_matrix.h>
 #include <mach/at91sam9_smc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "board.h"
 #include "generic.h"
 
 =======
+=======
+>>>>>>> v3.18
 #include <mach/hardware.h>
 
 #include "board.h"
 #include "generic.h"
 #include "gpio.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* --------------------------------------------------------------------
@@ -474,7 +480,11 @@ void __init at91_add_device_spi(struct spi_board_info *devices, int nr_devices) 
 #if defined(CONFIG_FB_ATMEL) || defined(CONFIG_FB_ATMEL_MODULE)
 static u64 lcdc_dmamask = DMA_BIT_MASK(32);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct atmel_lcdfb_info lcdc_data;
+=======
+static struct atmel_lcdfb_pdata lcdc_data;
+>>>>>>> v3.18
 =======
 static struct atmel_lcdfb_pdata lcdc_data;
 >>>>>>> v3.18
@@ -511,7 +521,11 @@ static struct platform_device at91_lcdc_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data)
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
+>>>>>>> v3.18
 =======
 void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
 >>>>>>> v3.18
@@ -576,7 +590,11 @@ void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init at91_add_device_lcdc(struct atmel_lcdfb_info *data) {}
+=======
+void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data) {}
+>>>>>>> v3.18
 =======
 void __init at91_add_device_lcdc(struct atmel_lcdfb_pdata *data) {}
 >>>>>>> v3.18

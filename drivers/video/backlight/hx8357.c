@@ -72,7 +72,10 @@
 #define HX8357_SET_PANEL_RELATED	0xe9
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define HX8369_SET_DISPLAY_BRIGHTNESS		0x51
 #define HX8369_WRITE_CABC_DISPLAY_VALUE		0x53
 #define HX8369_WRITE_CABC_BRIGHT_CTRL		0x55
@@ -85,6 +88,9 @@
 #define HX8369_SET_GIP				0xd5
 #define HX8369_SET_GAMMA_CURVE_RELATED		0xe0
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct hx8357_data {
 	unsigned		im_pins[HX8357_NUM_IM_PINS];
@@ -92,6 +98,10 @@ struct hx8357_data {
 	struct spi_device	*spi;
 	int			state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			use_im_pins;
+>>>>>>> v3.18
 =======
 	bool			use_im_pins;
 >>>>>>> v3.18
@@ -163,7 +173,10 @@ static u8 hx8357_seq_display_mode[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u8 hx8369_seq_write_CABC_min_brightness[] = {
 	HX8369_WRITE_CABC_MIN_BRIGHTNESS, 0x00,
 };
@@ -219,6 +232,9 @@ static u8 hx8369_seq_gamma_curve_related[] = {
 	0x14, 0x16, 0x14, 0x14, 0x14, 0x1e,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int hx8357_spi_write_then_read(struct lcd_device *lcdev,
 				u8 *txbuf, u16 txlen,
@@ -297,11 +313,17 @@ static int hx8357_enter_standby(struct lcd_device *lcdev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The controller needs 120ms when entering in sleep mode before we can
 	 * send the command to go off sleep mode
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	msleep(120);
 
@@ -317,11 +339,17 @@ static int hx8357_exit_standby(struct lcd_device *lcdev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The controller needs 120ms when exiting from sleep mode before we
 	 * can send the command to enter in sleep mode
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	msleep(120);
 
@@ -332,6 +360,7 @@ static int hx8357_exit_standby(struct lcd_device *lcdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int hx8357_lcd_init(struct lcd_device *lcdev)
 {
@@ -350,6 +379,11 @@ static void hx8357_lcd_reset(struct lcd_device *lcdev)
 {
 	struct hx8357_data *lcd = lcd_get_data(lcdev);
 >>>>>>> v3.18
+=======
+static void hx8357_lcd_reset(struct lcd_device *lcdev)
+{
+	struct hx8357_data *lcd = lcd_get_data(lcdev);
+>>>>>>> v3.18
 
 	/* Reset the screen */
 	gpio_set_value(lcd->reset, 1);
@@ -358,8 +392,11 @@ static void hx8357_lcd_reset(struct lcd_device *lcdev)
 	usleep_range(10000, 12000);
 	gpio_set_value(lcd->reset, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msleep(120);
 =======
+=======
+>>>>>>> v3.18
 
 	/* The controller needs 120ms to recover from reset */
 	msleep(120);
@@ -379,6 +416,9 @@ static int hx8357_lcd_init(struct lcd_device *lcdev)
 		gpio_set_value_cansleep(lcd->im_pins[1], 0);
 		gpio_set_value_cansleep(lcd->im_pins[2], 1);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = hx8357_spi_write_array(lcdev, hx8357_seq_power,
@@ -461,6 +501,12 @@ static int hx8357_lcd_init(struct lcd_device *lcdev)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/*
+	 * The controller needs 120ms to fully recover from exiting sleep mode
+	 */
+>>>>>>> v3.18
 =======
 	/*
 	 * The controller needs 120ms to fully recover from exiting sleep mode
@@ -482,7 +528,10 @@ static int hx8357_lcd_init(struct lcd_device *lcdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int hx8369_lcd_init(struct lcd_device *lcdev)
 {
 	int ret;
@@ -573,6 +622,9 @@ static int hx8369_lcd_init(struct lcd_device *lcdev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define POWER_IS_ON(pwr)	((pwr) <= FB_BLANK_NORMAL)
 
@@ -607,7 +659,10 @@ static struct lcd_ops hx8357_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id hx8357_dt_ids[] = {
 	{
 		.compatible = "himax,hx8357",
@@ -621,11 +676,15 @@ static const struct of_device_id hx8357_dt_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, hx8357_dt_ids);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int hx8357_probe(struct spi_device *spi)
 {
 	struct lcd_device *lcdev;
 	struct hx8357_data *lcd;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i, ret;
 
@@ -635,12 +694,17 @@ static int hx8357_probe(struct spi_device *spi)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *match;
 	int i, ret;
 
 	lcd = devm_kzalloc(&spi->dev, sizeof(*lcd), GFP_KERNEL);
 	if (!lcd)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = spi_setup(spi);
@@ -652,11 +716,17 @@ static int hx8357_probe(struct spi_device *spi)
 	lcd->spi = spi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	match = of_match_device(hx8357_dt_ids, &spi->dev);
 	if (!match || !match->data)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lcd->reset = of_get_named_gpio(spi->dev.of_node, "gpios-reset", 0);
 	if (!gpio_is_valid(lcd->reset)) {
@@ -674,6 +744,7 @@ static int hx8357_probe(struct spi_device *spi)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < HX8357_NUM_IM_PINS; i++) {
 		lcd->im_pins[i] = of_get_named_gpio(spi->dev.of_node,
@@ -698,6 +769,8 @@ static int hx8357_probe(struct spi_device *spi)
 
 	lcdev = lcd_device_register("mxsfb", &spi->dev, lcd, &hx8357_ops);
 =======
+=======
+>>>>>>> v3.18
 	if (of_find_property(spi->dev.of_node, "im-gpios", NULL)) {
 		lcd->use_im_pins = 1;
 
@@ -728,6 +801,9 @@ static int hx8357_probe(struct spi_device *spi)
 
 	lcdev = devm_lcd_device_register(&spi->dev, "mxsfb", &spi->dev, lcd,
 					&hx8357_ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(lcdev)) {
 		ret = PTR_ERR(lcdev);
@@ -736,23 +812,30 @@ static int hx8357_probe(struct spi_device *spi)
 	spi_set_drvdata(spi, lcdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = hx8357_lcd_init(lcdev);
 	if (ret) {
 		dev_err(&spi->dev, "Couldn't initialize panel\n");
 		goto init_error;
 =======
+=======
+>>>>>>> v3.18
 	hx8357_lcd_reset(lcdev);
 
 	ret = ((int (*)(struct lcd_device *))match->data)(lcdev);
 	if (ret) {
 		dev_err(&spi->dev, "Couldn't initialize panel\n");
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	dev_info(&spi->dev, "Panel probed\n");
 
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 init_error:
@@ -781,6 +864,8 @@ static struct spi_driver hx8357_driver = {
 		.name = "hx8357",
 		.of_match_table = of_match_ptr(hx8357_dt_ids),
 =======
+=======
+>>>>>>> v3.18
 }
 
 static struct spi_driver hx8357_driver = {
@@ -788,6 +873,9 @@ static struct spi_driver hx8357_driver = {
 	.driver = {
 		.name = "hx8357",
 		.of_match_table = hx8357_dt_ids,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

@@ -58,12 +58,18 @@ __system_reset_overlay:
 
 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Save the value at addr zero for a null pointer write check later. */
 
 	li	r4, 0
 	lwz	r3, 0(r4)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Primary delays then goes to _zimage_start in wrapper. */
 

@@ -31,6 +31,7 @@
 #include <asm/system_misc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Low-level stepping controls. */
 #define DBG_MDSCR_SS		(1 << 0)
 #define DBG_SPSR_SS		(1 << 21)
@@ -40,6 +41,8 @@
 #define DBG_MDSCR_MDE		(1 << 15)
 #define DBG_MDSCR_MASK		~(DBG_MDSCR_KDE | DBG_MDSCR_MDE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Determine debug architecture. */
@@ -143,7 +146,11 @@ static void clear_os_lock(void *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit os_lock_notify(struct notifier_block *self,
+=======
+static int os_lock_notify(struct notifier_block *self,
+>>>>>>> v3.18
 =======
 static int os_lock_notify(struct notifier_block *self,
 >>>>>>> v3.18
@@ -156,17 +163,23 @@ static int os_lock_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata os_lock_nb = {
 	.notifier_call = os_lock_notify,
 };
 
 static int __cpuinit debug_monitors_init(void)
 =======
+=======
+>>>>>>> v3.18
 static struct notifier_block os_lock_nb = {
 	.notifier_call = os_lock_notify,
 };
 
 static int debug_monitors_init(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	cpu_notifier_register_begin();
@@ -331,6 +344,7 @@ static int brk_handler(unsigned long addr, unsigned int esr,
 	siginfo_t info;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (call_break_hook(regs, esr) == DBG_HOOK_HANDLED)
 		return 0;
 
@@ -346,6 +360,8 @@ static int brk_handler(unsigned long addr, unsigned int esr,
 
 	force_sig_info(SIGTRAP, &info, current);
 =======
+=======
+>>>>>>> v3.18
 	if (user_mode(regs)) {
 		info = (siginfo_t) {
 			.si_signo = SIGTRAP,
@@ -360,6 +376,9 @@ static int brk_handler(unsigned long addr, unsigned int esr,
 		return -EFAULT;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -461,10 +480,15 @@ int kernel_active_single_step(void)
 void user_enable_single_step(struct task_struct *task)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct thread_info *ti = task_thread_info(task);
 
 	if (!test_and_set_ti_thread_flag(ti, TIF_SINGLESTEP))
 		set_regs_spsr_ss(task_pt_regs(task));
+=======
+	set_ti_thread_flag(task_thread_info(task), TIF_SINGLESTEP);
+	set_regs_spsr_ss(task_pt_regs(task));
+>>>>>>> v3.18
 =======
 	set_ti_thread_flag(task_thread_info(task), TIF_SINGLESTEP);
 	set_regs_spsr_ss(task_pt_regs(task));

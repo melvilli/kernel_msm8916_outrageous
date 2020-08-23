@@ -3,11 +3,17 @@ config MAC802154
 	depends on IEEE802154
 	select CRC_CCITT
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	select CRYPTO_AUTHENC
 	select CRYPTO_CCM
 	select CRYPTO_CTR
 	select CRYPTO_AES
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This option enables the hardware independent IEEE 802.15.4

@@ -26,7 +26,11 @@
 #include <linux/slab.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-ctrls.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-ctrls.h>
 >>>>>>> v3.18
@@ -132,6 +136,10 @@
 struct saa7706h_state {
 	struct v4l2_subdev sd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_ctrl_handler hdl;
+>>>>>>> v3.18
 =======
 	struct v4l2_ctrl_handler hdl;
 >>>>>>> v3.18
@@ -326,6 +334,7 @@ static int saa7706h_mute(struct v4l2_subdev *sd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int saa7706h_queryctrl(struct v4l2_subdev *sd, struct v4l2_queryctrl *qc)
 {
 	switch (qc->id) {
@@ -344,6 +353,8 @@ static int saa7706h_g_ctrl(struct v4l2_subdev *sd, struct v4l2_control *ctrl)
 		ctrl->value = state->muted;
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 static int saa7706h_s_ctrl(struct v4l2_ctrl *ctrl)
 {
 	struct saa7706h_state *state =
@@ -354,6 +365,7 @@ static int saa7706h_s_ctrl(struct v4l2_ctrl *ctrl)
 		if (ctrl->val)
 			return saa7706h_mute(&state->sd);
 		return saa7706h_unmute(&state->sd);
+<<<<<<< HEAD
 >>>>>>> v3.18
 	}
 	return -EINVAL;
@@ -367,10 +379,13 @@ static int saa7706h_s_ctrl(struct v4l2_subdev *sd, struct v4l2_control *ctrl)
 		if (ctrl->value)
 			return saa7706h_mute(sd);
 		return saa7706h_unmute(sd);
+=======
+>>>>>>> v3.18
 	}
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
 static int saa7706h_g_chip_ident(struct v4l2_subdev *sd,
 	struct v4l2_dbg_chip_ident *chip)
 {
@@ -385,6 +400,8 @@ static const struct v4l2_subdev_core_ops saa7706h_core_ops = {
 	.g_ctrl = saa7706h_g_ctrl,
 	.s_ctrl = saa7706h_s_ctrl,
 =======
+=======
+>>>>>>> v3.18
 static const struct v4l2_ctrl_ops saa7706h_ctrl_ops = {
 	.s_ctrl = saa7706h_s_ctrl,
 };
@@ -397,6 +414,9 @@ static const struct v4l2_subdev_core_ops saa7706h_core_ops = {
 	.s_ctrl = v4l2_subdev_s_ctrl,
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -430,7 +450,10 @@ static int saa7706h_probe(struct i2c_client *client,
 	v4l2_i2c_subdev_init(sd, client, &saa7706h_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	v4l2_ctrl_handler_init(&state->hdl, 4);
 	v4l2_ctrl_new_std(&state->hdl, &saa7706h_ctrl_ops,
 			V4L2_CID_AUDIO_MUTE, 0, 1, 1, 1);
@@ -439,6 +462,9 @@ static int saa7706h_probe(struct i2c_client *client,
 	if (err)
 		goto err;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* check the rom versions */
 	err = saa7706h_get_reg16(sd, SAA7706H_DSP1_ROM_VER);
@@ -447,7 +473,10 @@ static int saa7706h_probe(struct i2c_client *client,
 	if (err != SUPPORTED_DSP1_ROM_VER)
 		v4l2_warn(sd, "Unknown DSP1 ROM code version: 0x%x\n", err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	state->muted = 1;
@@ -462,6 +491,10 @@ static int saa7706h_probe(struct i2c_client *client,
 err:
 	v4l2_device_unregister_subdev(sd);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	v4l2_ctrl_handler_free(&state->hdl);
+>>>>>>> v3.18
 =======
 	v4l2_ctrl_handler_free(&state->hdl);
 >>>>>>> v3.18
@@ -476,15 +509,21 @@ static int saa7706h_remove(struct i2c_client *client)
 {
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	saa7706h_mute(sd);
 	v4l2_device_unregister_subdev(sd);
 =======
+=======
+>>>>>>> v3.18
 	struct saa7706h_state *state = to_state(sd);
 
 	saa7706h_mute(sd);
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&state->hdl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(to_state(sd));
 	return 0;

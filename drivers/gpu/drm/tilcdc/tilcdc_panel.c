@@ -19,6 +19,10 @@
 #include <linux/pinctrl/consumer.h>
 #include <linux/backlight.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gpio/consumer.h>
+>>>>>>> v3.18
 =======
 #include <linux/gpio/consumer.h>
 >>>>>>> v3.18
@@ -34,6 +38,10 @@ struct panel_module {
 	struct display_timings *timings;
 	struct backlight_device *backlight;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct gpio_desc *enable_gpio;
+>>>>>>> v3.18
 =======
 	struct gpio_desc *enable_gpio;
 >>>>>>> v3.18
@@ -64,6 +72,7 @@ static void panel_encoder_dpms(struct drm_encoder *encoder, int mode)
 	struct panel_encoder *panel_encoder = to_panel_encoder(encoder);
 	struct backlight_device *backlight = panel_encoder->mod->backlight;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!backlight)
 		return;
@@ -72,6 +81,8 @@ static void panel_encoder_dpms(struct drm_encoder *encoder, int mode)
 				     ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;
 	backlight_update_status(backlight);
 =======
+=======
+>>>>>>> v3.18
 	struct gpio_desc *gpio = panel_encoder->mod->enable_gpio;
 
 	if (backlight) {
@@ -83,6 +94,9 @@ static void panel_encoder_dpms(struct drm_encoder *encoder, int mode)
 	if (gpio)
 		gpiod_set_value_cansleep(gpio,
 					 mode == DRM_MODE_DPMS_ON ? 1 : 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -174,7 +188,11 @@ static void panel_connector_destroy(struct drm_connector *connector)
 {
 	struct panel_connector *panel_connector = to_panel_connector(connector);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_remove(connector);
+=======
+	drm_connector_unregister(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_unregister(connector);
 >>>>>>> v3.18
@@ -275,7 +293,11 @@ static struct drm_connector *panel_connector_create(struct drm_device *dev,
 		goto fail;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_sysfs_connector_add(connector);
+=======
+	drm_connector_register(connector);
+>>>>>>> v3.18
 =======
 	drm_connector_register(connector);
 >>>>>>> v3.18
@@ -313,6 +335,7 @@ static int panel_modeset_init(struct tilcdc_module *mod, struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void panel_destroy(struct tilcdc_module *mod)
 {
 	struct panel_module *panel_mod = to_panel_module(mod);
@@ -328,6 +351,10 @@ static void panel_destroy(struct tilcdc_module *mod)
 static const struct tilcdc_module_ops panel_module_ops = {
 		.modeset_init = panel_modeset_init,
 		.destroy = panel_destroy,
+=======
+static const struct tilcdc_module_ops panel_module_ops = {
+		.modeset_init = panel_modeset_init,
+>>>>>>> v3.18
 =======
 static const struct tilcdc_module_ops panel_module_ops = {
 		.modeset_init = panel_modeset_init,
@@ -360,6 +387,10 @@ static struct tilcdc_panel_info *of_get_panel_info(struct device_node *np)
 	if (!info) {
 		pr_err("%s: allocation failed\n", __func__);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		of_node_put(info_np);
+>>>>>>> v3.18
 =======
 		of_node_put(info_np);
 >>>>>>> v3.18
@@ -384,18 +415,25 @@ static struct tilcdc_panel_info *of_get_panel_info(struct device_node *np)
 		pr_err("%s: error reading panel-info properties\n", __func__);
 		kfree(info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
 		of_node_put(info_np);
 		return NULL;
 	}
 	of_node_put(info_np);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return info;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct of_device_id panel_of_match[];
 
@@ -408,6 +446,8 @@ static int panel_probe(struct platform_device *pdev)
 	int ret = -EINVAL;
 
 =======
+=======
+>>>>>>> v3.18
 static int panel_probe(struct platform_device *pdev)
 {
 	struct device_node *bl_node, *node = pdev->dev.of_node;
@@ -415,6 +455,9 @@ static int panel_probe(struct platform_device *pdev)
 	struct tilcdc_module *mod;
 	struct pinctrl *pinctrl;
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* bail out early if no DT data: */
@@ -424,12 +467,15 @@ static int panel_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	panel_mod = kzalloc(sizeof(*panel_mod), GFP_KERNEL);
 	if (!panel_mod)
 		return -ENOMEM;
 
 	mod = &panel_mod->base;
 =======
+=======
+>>>>>>> v3.18
 	panel_mod = devm_kzalloc(&pdev->dev, sizeof(*panel_mod), GFP_KERNEL);
 	if (!panel_mod)
 		return -ENOMEM;
@@ -466,6 +512,9 @@ static int panel_probe(struct platform_device *pdev)
 
 	mod = &panel_mod->base;
 	pdev->dev.platform_data = mod;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	tilcdc_module_init(mod, "panel", &panel_module_ops);
@@ -475,23 +524,30 @@ static int panel_probe(struct platform_device *pdev)
 		dev_warn(&pdev->dev, "pins are not configured\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	panel_mod->timings = of_get_display_timings(node);
 	if (!panel_mod->timings) {
 		dev_err(&pdev->dev, "could not get panel timings\n");
 		goto fail;
 =======
+=======
+>>>>>>> v3.18
 	panel_mod->timings = of_get_display_timings(node);
 	if (!panel_mod->timings) {
 		dev_err(&pdev->dev, "could not get panel timings\n");
 		ret = -EINVAL;
 		goto fail_free;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	panel_mod->info = of_get_panel_info(node);
 	if (!panel_mod->info) {
 		dev_err(&pdev->dev, "could not get panel info\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto fail;
 	}
@@ -505,6 +561,8 @@ static int panel_probe(struct platform_device *pdev)
 fail:
 	panel_destroy(mod);
 =======
+=======
+>>>>>>> v3.18
 		ret = -EINVAL;
 		goto fail_timings;
 	}
@@ -522,6 +580,9 @@ fail_free:
 fail_backlight:
 	if (panel_mod->backlight)
 		put_device(&panel_mod->backlight->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -529,7 +590,10 @@ fail_backlight:
 static int panel_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct tilcdc_module *mod = dev_get_platdata(&pdev->dev);
 	struct panel_module *panel_mod = to_panel_module(mod);
 	struct backlight_device *backlight = panel_mod->backlight;
@@ -542,6 +606,9 @@ static int panel_remove(struct platform_device *pdev)
 	tilcdc_module_cleanup(mod);
 	kfree(panel_mod->info);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

@@ -8,11 +8,17 @@
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/segment.h>
 #include <asm/msr.h>
 #include <asm/processor-flags.h>
 #include <asm/page_types.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SAVE_XMM			\
@@ -41,6 +47,7 @@
 	mov %rsi, %cr0;			\
 	mov (%rsp), %rsp
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ENTRY(efi_call0)
 	SAVE_XMM
@@ -109,6 +116,8 @@ ENDPROC(efi_call5)
 
 ENTRY(efi_call6)
 =======
+=======
+>>>>>>> v3.18
 	/* stolen from gcc */
 	.macro FLUSH_TLB_ALL
 	movq %r15, efi_scratch(%rip)
@@ -145,6 +154,9 @@ ENTRY(efi_call6)
 	.endm
 
 ENTRY(efi_call)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SAVE_XMM
 	mov (%rsp), %rax
@@ -156,12 +168,15 @@ ENTRY(efi_call)
 	mov %rcx, %r8
 	mov %rsi, %rcx
 <<<<<<< HEAD
+<<<<<<< HEAD
 	call *%rdi
 	addq $48, %rsp
 	RESTORE_XMM
 	ret
 ENDPROC(efi_call6)
 =======
+=======
+>>>>>>> v3.18
 	SWITCH_PGT
 	call *%rdi
 	RESTORE_PGT
@@ -336,4 +351,7 @@ ENTRY(efi_scratch)
 	.fill 3,8,0
 	.byte 0
 	.quad 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

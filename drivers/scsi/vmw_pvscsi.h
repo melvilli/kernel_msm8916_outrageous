@@ -2,7 +2,11 @@
  * VMware PVSCSI header file
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2008-2009, VMware, Inc. All Rights Reserved.
+=======
+ * Copyright (C) 2008-2014, VMware, Inc. All Rights Reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2008-2014, VMware, Inc. All Rights Reserved.
 >>>>>>> v3.18
@@ -31,7 +35,11 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PVSCSI_DRIVER_VERSION_STRING   "1.0.2.0-k"
+=======
+#define PVSCSI_DRIVER_VERSION_STRING   "1.0.5.0-k"
+>>>>>>> v3.18
 =======
 #define PVSCSI_DRIVER_VERSION_STRING   "1.0.5.0-k"
 >>>>>>> v3.18
@@ -41,7 +49,10 @@
 #define MASK(n)        ((1 << (n)) - 1)        /* make an n-bit mask */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_VENDOR_ID_VMWARE		0x15AD
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PCI_DEVICE_ID_VMWARE_PVSCSI	0x07C0
@@ -129,8 +140,14 @@ enum PVSCSICommands {
 	PVSCSI_CMD_SETUP_MSG_RING    = 8,
 	PVSCSI_CMD_DEVICE_UNPLUG     = 9,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	PVSCSI_CMD_LAST              = 10  /* has to be last */
+=======
+	PVSCSI_CMD_SETUP_REQCALLTHRESHOLD     = 10,
+
+	PVSCSI_CMD_LAST              = 11  /* has to be last */
+>>>>>>> v3.18
 =======
 	PVSCSI_CMD_SETUP_REQCALLTHRESHOLD     = 10,
 
@@ -159,7 +176,10 @@ struct PVSCSICmdDescConfigCmd {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Command descriptor for PVSCSI_CMD_SETUP_REQCALLTHRESHOLD --
  */
@@ -168,6 +188,9 @@ struct PVSCSICmdDescSetupReqCall {
 	u32 enable;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum PVSCSIConfigPageType {
 	PVSCSI_CONFIG_PAGE_CONTROLLER = 0x1958,
@@ -290,7 +313,13 @@ struct PVSCSIRingsState {
 	u32	cmpNumEntriesLog2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	_pad[104];
+=======
+	u32	reqCallThreshold;
+
+	u8	_pad[100];
+>>>>>>> v3.18
 =======
 	u32	reqCallThreshold;
 

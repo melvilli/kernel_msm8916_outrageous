@@ -10,27 +10,38 @@
 #include "dm-cache-block-types.h"
 #include "dm-cache-policy-internal.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*----------------------------------------------------------------*/
 
 #define DM_CACHE_METADATA_BLOCK_SIZE 4096
 =======
+=======
+>>>>>>> v3.18
 #include "persistent-data/dm-space-map-metadata.h"
 
 /*----------------------------------------------------------------*/
 
 #define DM_CACHE_METADATA_BLOCK_SIZE DM_SM_METADATA_BLOCK_SIZE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* FIXME: remove this restriction */
 /*
  * The metadata device is currently limited in size.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * We have one block of index, which can hold 255 index entries.  Each
  * index entry contains allocation info about 16k metadata blocks.
  */
 #define DM_CACHE_METADATA_MAX_SECTORS (255 * (1 << 14) * (DM_CACHE_METADATA_BLOCK_SIZE / (1 << SECTOR_SHIFT)))
+=======
+ */
+#define DM_CACHE_METADATA_MAX_SECTORS DM_SM_METADATA_MAX_SECTORS
+>>>>>>> v3.18
 =======
  */
 #define DM_CACHE_METADATA_MAX_SECTORS DM_SM_METADATA_MAX_SECTORS
@@ -86,6 +97,7 @@ dm_cblock_t dm_cache_size(struct dm_cache_metadata *cmd);
 int dm_cache_discard_bitset_resize(struct dm_cache_metadata *cmd,
 				   sector_t discard_block_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   dm_dblock_t new_nr_entries);
 
 typedef int (*load_discard_fn)(void *context, sector_t discard_block_size,
@@ -95,6 +107,8 @@ int dm_cache_load_discards(struct dm_cache_metadata *cmd,
 
 int dm_cache_set_discard(struct dm_cache_metadata *cmd, dm_dblock_t dblock, bool discard);
 =======
+=======
+>>>>>>> v3.18
 				   dm_oblock_t new_nr_entries);
 
 typedef int (*load_discard_fn)(void *context, sector_t discard_block_size,
@@ -103,6 +117,9 @@ int dm_cache_load_discards(struct dm_cache_metadata *cmd,
 			   load_discard_fn fn, void *context);
 
 int dm_cache_set_discard(struct dm_cache_metadata *cmd, dm_oblock_t dblock, bool discard);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int dm_cache_remove_mapping(struct dm_cache_metadata *cmd, dm_cblock_t cblock);
@@ -153,6 +170,7 @@ void dm_cache_dump(struct dm_cache_metadata *cmd);
  * structures and fill in the hints in whatever order it wishes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int dm_cache_begin_hints(struct dm_cache_metadata *cmd, struct dm_cache_policy *p);
 
@@ -162,12 +180,17 @@ int dm_cache_begin_hints(struct dm_cache_metadata *cmd, struct dm_cache_policy *
 int dm_cache_save_hint(struct dm_cache_metadata *cmd,
 		       dm_cblock_t cblock, uint32_t hint);
 =======
+=======
+>>>>>>> v3.18
 int dm_cache_write_hints(struct dm_cache_metadata *cmd, struct dm_cache_policy *p);
 
 /*
  * Query method.  Are all the blocks in the cache clean?
  */
 int dm_cache_metadata_all_clean(struct dm_cache_metadata *cmd, bool *result);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*----------------------------------------------------------------*/

@@ -34,7 +34,12 @@
 
 /* Bits to mask out from a PMD to get to the PTE page */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PMD_MASKED_BITS		0x1ff
+=======
+/* PMDs point to PTE table fragments which are 4K aligned.  */
+#define PMD_MASKED_BITS		0xfff
+>>>>>>> v3.18
 =======
 /* PMDs point to PTE table fragments which are 4K aligned.  */
 #define PMD_MASKED_BITS		0xfff

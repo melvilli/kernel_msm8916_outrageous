@@ -75,6 +75,7 @@ static int dvb_device_open(struct inode *inode, struct file *file)
 	if (dvbdev && dvbdev->fops) {
 		int err = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const struct file_operations *old_fops;
 
 		file->private_data = dvbdev;
@@ -92,6 +93,8 @@ static int dvb_device_open(struct inode *inode, struct file *file)
 		}
 		fops_put(old_fops);
 =======
+=======
+>>>>>>> v3.18
 		const struct file_operations *new_fops;
 
 		new_fops = fops_get(dvbdev->fops);
@@ -101,6 +104,9 @@ static int dvb_device_open(struct inode *inode, struct file *file)
 		replace_fops(file, new_fops);
 		if (file->f_op->open)
 			err = file->f_op->open(inode,file);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		up_read(&minor_rwsem);
 		mutex_unlock(&dvbdev_mutex);

@@ -6,7 +6,11 @@ config NET_VENDOR_XILINX
 	bool "Xilinx devices"
 	default y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PPC || PPC32 || MICROBLAZE
+=======
+	depends on PPC || PPC32 || MICROBLAZE || ARCH_ZYNQ
+>>>>>>> v3.18
 =======
 	depends on PPC || PPC32 || MICROBLAZE || ARCH_ZYNQ
 >>>>>>> v3.18
@@ -25,7 +29,11 @@ if NET_VENDOR_XILINX
 config XILINX_EMACLITE
 	tristate "Xilinx 10/100 Ethernet Lite support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (PPC32 || MICROBLAZE)
+=======
+	depends on (PPC32 || MICROBLAZE || ARCH_ZYNQ)
+>>>>>>> v3.18
 =======
 	depends on (PPC32 || MICROBLAZE || ARCH_ZYNQ)
 >>>>>>> v3.18

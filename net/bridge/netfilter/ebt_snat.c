@@ -25,7 +25,11 @@ ebt_snat_tg(struct sk_buff *skb, const struct xt_action_param *par)
 		return EBT_DROP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(eth_hdr(skb)->h_source, info->mac, ETH_ALEN);
+=======
+	ether_addr_copy(eth_hdr(skb)->h_source, info->mac);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(eth_hdr(skb)->h_source, info->mac);
 >>>>>>> v3.18
@@ -40,7 +44,11 @@ ebt_snat_tg(struct sk_buff *skb, const struct xt_action_param *par)
 		if (ap->ar_hln != ETH_ALEN)
 			goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (skb_store_bits(skb, sizeof(_ah), info->mac,ETH_ALEN))
+=======
+		if (skb_store_bits(skb, sizeof(_ah), info->mac, ETH_ALEN))
+>>>>>>> v3.18
 =======
 		if (skb_store_bits(skb, sizeof(_ah), info->mac, ETH_ALEN))
 >>>>>>> v3.18

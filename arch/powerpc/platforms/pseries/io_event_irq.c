@@ -83,9 +83,15 @@ static struct pseries_io_event * ioei_find_event(struct rtas_error_log *elog)
 	 * No need to check event log version.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(elog->type != RTAS_TYPE_IO)) {
 		printk_once(KERN_WARNING "io_event_irq: Unexpected event type %d",
 			    elog->type);
+=======
+	if (unlikely(rtas_error_type(elog) != RTAS_TYPE_IO)) {
+		printk_once(KERN_WARNING"io_event_irq: Unexpected event type %d",
+			    rtas_error_type(elog));
+>>>>>>> v3.18
 =======
 	if (unlikely(rtas_error_type(elog) != RTAS_TYPE_IO)) {
 		printk_once(KERN_WARNING"io_event_irq: Unexpected event type %d",
@@ -122,7 +128,11 @@ static struct pseries_io_event * ioei_find_event(struct rtas_error_log *elog)
  *   event is reported with scope 0x00 (Not Applicatable) rather than
  *   0x3B (Torrent-hub). It is better to let the clients to identify
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   who owns the the event.
+=======
+ *   who owns the event.
+>>>>>>> v3.18
 =======
  *   who owns the event.
 >>>>>>> v3.18

@@ -3,7 +3,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -34,7 +38,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -90,7 +97,11 @@ int iwlagn_send_tx_power(struct iwl_priv *priv)
 		tx_ant_cfg_cmd = REPLY_TX_POWER_DBM_CMD;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return iwl_dvm_send_cmd_pdu(priv, tx_ant_cfg_cmd, CMD_SYNC,
+=======
+	return iwl_dvm_send_cmd_pdu(priv, tx_ant_cfg_cmd, 0,
+>>>>>>> v3.18
 =======
 	return iwl_dvm_send_cmd_pdu(priv, tx_ant_cfg_cmd, 0,
 >>>>>>> v3.18
@@ -154,7 +165,10 @@ int iwlagn_txfifo_flush(struct iwl_priv *priv, u32 scd_q_msk)
 		.id = REPLY_TXFIFO_FLUSH,
 		.len = { sizeof(struct iwl_txfifo_flush_cmd), },
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.data = { &flush_cmd, },
@@ -196,7 +210,11 @@ void iwlagn_dev_txfifo_flush(struct iwl_priv *priv)
 	}
 	IWL_DEBUG_INFO(priv, "wait transmit/flush all frames\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_trans_wait_tx_queue_empty(priv->trans);
+=======
+	iwl_trans_wait_tx_queue_empty(priv->trans, 0xffffffff);
+>>>>>>> v3.18
 =======
 	iwl_trans_wait_tx_queue_empty(priv->trans, 0xffffffff);
 >>>>>>> v3.18
@@ -273,7 +291,11 @@ void iwlagn_send_advance_bt_config(struct iwl_priv *priv)
 			sizeof(basic.bt3_lookup_table));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->bt_params) {
+=======
+	if (priv->lib->bt_params) {
+>>>>>>> v3.18
 =======
 	if (priv->lib->bt_params) {
 >>>>>>> v3.18
@@ -284,9 +306,15 @@ void iwlagn_send_advance_bt_config(struct iwl_priv *priv)
 		 * with correct data structure to avoid uCode assert
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (priv->cfg->bt_params->bt_session_2) {
 			bt_cmd_v2.prio_boost = cpu_to_le32(
 				priv->cfg->bt_params->bt_prio_boost);
+=======
+		if (priv->lib->bt_params->bt_session_2) {
+			bt_cmd_v2.prio_boost = cpu_to_le32(
+				priv->lib->bt_params->bt_prio_boost);
+>>>>>>> v3.18
 =======
 		if (priv->lib->bt_params->bt_session_2) {
 			bt_cmd_v2.prio_boost = cpu_to_le32(
@@ -297,9 +325,15 @@ void iwlagn_send_advance_bt_config(struct iwl_priv *priv)
 		} else {
 			/* older version only has 8 bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			WARN_ON(priv->cfg->bt_params->bt_prio_boost & ~0xFF);
 			bt_cmd_v1.prio_boost =
 				priv->cfg->bt_params->bt_prio_boost;
+=======
+			WARN_ON(priv->lib->bt_params->bt_prio_boost & ~0xFF);
+			bt_cmd_v1.prio_boost =
+				priv->lib->bt_params->bt_prio_boost;
+>>>>>>> v3.18
 =======
 			WARN_ON(priv->lib->bt_params->bt_prio_boost & ~0xFF);
 			bt_cmd_v1.prio_boost =
@@ -365,24 +399,34 @@ void iwlagn_send_advance_bt_config(struct iwl_priv *priv)
 		       "full concurrency" : "3-wire");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->bt_params->bt_session_2) {
 		memcpy(&bt_cmd_v2.basic, &basic,
 			sizeof(basic));
 		ret = iwl_dvm_send_cmd_pdu(priv, REPLY_BT_CONFIG,
 			CMD_SYNC, sizeof(bt_cmd_v2), &bt_cmd_v2);
 =======
+=======
+>>>>>>> v3.18
 	if (priv->lib->bt_params->bt_session_2) {
 		memcpy(&bt_cmd_v2.basic, &basic,
 			sizeof(basic));
 		ret = iwl_dvm_send_cmd_pdu(priv, REPLY_BT_CONFIG,
 			0, sizeof(bt_cmd_v2), &bt_cmd_v2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		memcpy(&bt_cmd_v1.basic, &basic,
 			sizeof(basic));
 		ret = iwl_dvm_send_cmd_pdu(priv, REPLY_BT_CONFIG,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			CMD_SYNC, sizeof(bt_cmd_v1), &bt_cmd_v1);
+=======
+			0, sizeof(bt_cmd_v1), &bt_cmd_v1);
+>>>>>>> v3.18
 =======
 			0, sizeof(bt_cmd_v1), &bt_cmd_v1);
 >>>>>>> v3.18
@@ -805,8 +849,13 @@ static bool is_single_rx_stream(struct iwl_priv *priv)
 static int iwl_get_active_rx_chain_count(struct iwl_priv *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->bt_params &&
 	    priv->cfg->bt_params->advanced_bt_coexist &&
+=======
+	if (priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist &&
+>>>>>>> v3.18
 =======
 	if (priv->lib->bt_params &&
 	    priv->lib->bt_params->advanced_bt_coexist &&
@@ -882,8 +931,13 @@ void iwlagn_set_rxon_chain(struct iwl_priv *priv, struct iwl_rxon_context *ctx)
 		active_chains = priv->nvm_data->valid_rx_ant;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->cfg->bt_params &&
 	    priv->cfg->bt_params->advanced_bt_coexist &&
+=======
+	if (priv->lib->bt_params &&
+	    priv->lib->bt_params->advanced_bt_coexist &&
+>>>>>>> v3.18
 =======
 	if (priv->lib->bt_params &&
 	    priv->lib->bt_params->advanced_bt_coexist &&
@@ -1080,7 +1134,11 @@ static void iwlagn_wowlan_program_keys(struct ieee80211_hw *hw,
 
 			ieee80211_get_key_rx_seq(key, i, &seq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			aes_sc[i].pn = cpu_to_le64(
+=======
+			aes_sc->pn = cpu_to_le64(
+>>>>>>> v3.18
 =======
 			aes_sc->pn = cpu_to_le64(
 >>>>>>> v3.18
@@ -1106,7 +1164,10 @@ int iwlagn_send_patterns(struct iwl_priv *priv,
 		.id = REPLY_WOWLAN_PATTERNS,
 		.dataflags[0] = IWL_HCMD_DFL_NOCOPY,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	};
@@ -1266,7 +1327,10 @@ int iwlagn_suspend(struct iwl_priv *priv, struct cfg80211_wowlan *wowlan)
 			struct iwl_host_cmd rsc_tsc_cmd = {
 				.id = REPLY_WOWLAN_TSC_RSC_PARAMS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				.flags = CMD_SYNC,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				.data[0] = key_data.rsc_tsc,
@@ -1283,7 +1347,11 @@ int iwlagn_suspend(struct iwl_priv *priv, struct cfg80211_wowlan *wowlan)
 			ret = iwl_dvm_send_cmd_pdu(priv,
 						 REPLY_WOWLAN_TKIP_PARAMS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 CMD_SYNC, sizeof(tkip_cmd),
+=======
+						 0, sizeof(tkip_cmd),
+>>>>>>> v3.18
 =======
 						 0, sizeof(tkip_cmd),
 >>>>>>> v3.18
@@ -1303,7 +1371,11 @@ int iwlagn_suspend(struct iwl_priv *priv, struct cfg80211_wowlan *wowlan)
 			ret = iwl_dvm_send_cmd_pdu(priv,
 						 REPLY_WOWLAN_KEK_KCK_MATERIAL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						 CMD_SYNC, sizeof(kek_kck_cmd),
+=======
+						 0, sizeof(kek_kck_cmd),
+>>>>>>> v3.18
 =======
 						 0, sizeof(kek_kck_cmd),
 >>>>>>> v3.18
@@ -1314,7 +1386,11 @@ int iwlagn_suspend(struct iwl_priv *priv, struct cfg80211_wowlan *wowlan)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_D3_CONFIG, CMD_SYNC,
+=======
+	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_D3_CONFIG, 0,
+>>>>>>> v3.18
 =======
 	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_D3_CONFIG, 0,
 >>>>>>> v3.18
@@ -1324,7 +1400,11 @@ int iwlagn_suspend(struct iwl_priv *priv, struct cfg80211_wowlan *wowlan)
 
 	ret = iwl_dvm_send_cmd_pdu(priv, REPLY_WOWLAN_WAKEUP_FILTER,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 CMD_SYNC, sizeof(wakeup_filter_cmd),
+=======
+				 0, sizeof(wakeup_filter_cmd),
+>>>>>>> v3.18
 =======
 				 0, sizeof(wakeup_filter_cmd),
 >>>>>>> v3.18
@@ -1371,12 +1451,15 @@ int iwl_dvm_send_cmd(struct iwl_priv *priv, struct iwl_host_cmd *cmd)
 		lockdep_assert_held(&priv->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->ucode_owner == IWL_OWNERSHIP_TM &&
 	    !(cmd->flags & CMD_ON_DEMAND)) {
 		IWL_DEBUG_HC(priv, "tm own the uCode, no regular hcmd send\n");
 		return -EIO;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return iwl_trans_send_cmd(priv->trans, cmd);

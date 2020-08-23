@@ -109,10 +109,15 @@ static long st_receive(void *priv_data, struct sk_buff *skb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->dev = (void *) lhst->hdev;
 
 	/* Forward skb to HCI core layer */
 	err = hci_recv_frame(skb);
+=======
+	/* Forward skb to HCI core layer */
+	err = hci_recv_frame(lhst->hdev, skb);
+>>>>>>> v3.18
 =======
 	/* Forward skb to HCI core layer */
 	err = hci_recv_frame(lhst->hdev, skb);
@@ -259,6 +264,7 @@ static int ti_st_close(struct hci_dev *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ti_st_send_frame(struct sk_buff *skb)
 {
 	struct hci_dev *hdev;
@@ -268,11 +274,16 @@ static int ti_st_send_frame(struct sk_buff *skb)
 	hdev = (struct hci_dev *)skb->dev;
 
 =======
+=======
+>>>>>>> v3.18
 static int ti_st_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 {
 	struct ti_st *hst;
 	long len;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!test_bit(HCI_RUNNING, &hdev->flags))
 		return -EBUSY;

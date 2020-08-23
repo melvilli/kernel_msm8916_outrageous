@@ -123,8 +123,13 @@ SYSCALL_DEFINE5(kcmp, pid_t, pid1, pid_t, pid2, int, type,
 	if (ret)
 		goto err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ptrace_may_access(task1, PTRACE_MODE_READ_REALCREDS) ||
 	    !ptrace_may_access(task2, PTRACE_MODE_READ_REALCREDS)) {
+=======
+	if (!ptrace_may_access(task1, PTRACE_MODE_READ) ||
+	    !ptrace_may_access(task2, PTRACE_MODE_READ)) {
+>>>>>>> v3.18
 =======
 	if (!ptrace_may_access(task1, PTRACE_MODE_READ) ||
 	    !ptrace_may_access(task2, PTRACE_MODE_READ)) {

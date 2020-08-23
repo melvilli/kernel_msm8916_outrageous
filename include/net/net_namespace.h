@@ -17,6 +17,10 @@
 #include <net/netns/ipv4.h>
 #include <net/netns/ipv6.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netns/ieee802154_6lowpan.h>
+>>>>>>> v3.18
 =======
 #include <net/netns/ieee802154_6lowpan.h>
 >>>>>>> v3.18
@@ -28,6 +32,10 @@
 #include <net/netns/conntrack.h>
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/netns/nftables.h>
+>>>>>>> v3.18
 =======
 #include <net/netns/nftables.h>
 >>>>>>> v3.18
@@ -84,6 +92,10 @@ struct net {
 	unsigned int		dev_base_seq;	/* protected by rtnl_mutex */
 	int			ifindex;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		dev_unreg_count;
+>>>>>>> v3.18
 =======
 	unsigned int		dev_unreg_count;
 >>>>>>> v3.18
@@ -102,6 +114,12 @@ struct net {
 	struct netns_ipv6	ipv6;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if IS_ENABLED(CONFIG_IEEE802154_6LOWPAN)
+	struct netns_ieee802154_lowpan	ieee802154_lowpan;
+#endif
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_IEEE802154_6LOWPAN)
 	struct netns_ieee802154_lowpan	ieee802154_lowpan;
@@ -120,6 +138,12 @@ struct net {
 	struct netns_ct		ct;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_NF_TABLES) || defined(CONFIG_NF_TABLES_MODULE)
+	struct netns_nftables	nft;
+#endif
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_NF_TABLES) || defined(CONFIG_NF_TABLES_MODULE)
 	struct netns_nftables	nft;
@@ -141,15 +165,21 @@ struct net {
 	struct netns_xfrm	xfrm;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct netns_ipvs	*ipvs;
 	struct sock		*diag_nlsk;
 	atomic_t		rt_genid;
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_IP_VS)
 	struct netns_ipvs	*ipvs;
 #endif
 	struct sock		*diag_nlsk;
 	atomic_t		fnhe_genid;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -160,8 +190,13 @@ extern struct net init_net;
 
 #ifdef CONFIG_NET_NS
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct net *copy_net_ns(unsigned long flags,
 	struct user_namespace *user_ns, struct net *old_net);
+=======
+struct net *copy_net_ns(unsigned long flags, struct user_namespace *user_ns,
+			struct net *old_net);
+>>>>>>> v3.18
 =======
 struct net *copy_net_ns(unsigned long flags, struct user_namespace *user_ns,
 			struct net *old_net);
@@ -183,12 +218,15 @@ static inline struct net *copy_net_ns(unsigned long flags,
 extern struct list_head net_namespace_list;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct net *get_net_ns_by_pid(pid_t pid);
 extern struct net *get_net_ns_by_fd(int pid);
 
 #ifdef CONFIG_NET_NS
 extern void __put_net(struct net *net);
 =======
+=======
+>>>>>>> v3.18
 struct net *get_net_ns_by_pid(pid_t pid);
 struct net *get_net_ns_by_fd(int pid);
 
@@ -202,6 +240,9 @@ void ipx_unregister_sysctl(void);
 
 #ifdef CONFIG_NET_NS
 void __put_net(struct net *net);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct net *get_net(struct net *net)
@@ -235,7 +276,11 @@ int net_eq(const struct net *net1, const struct net *net2)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void net_drop_ns(void *);
+=======
+void net_drop_ns(void *);
+>>>>>>> v3.18
 =======
 void net_drop_ns(void *);
 >>>>>>> v3.18
@@ -356,15 +401,21 @@ struct pernet_operations {
  * namespace cleanup.   So please don't get this wrong.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int register_pernet_subsys(struct pernet_operations *);
 extern void unregister_pernet_subsys(struct pernet_operations *);
 extern int register_pernet_device(struct pernet_operations *);
 extern void unregister_pernet_device(struct pernet_operations *);
 =======
+=======
+>>>>>>> v3.18
 int register_pernet_subsys(struct pernet_operations *);
 void unregister_pernet_subsys(struct pernet_operations *);
 int register_pernet_device(struct pernet_operations *);
 void unregister_pernet_device(struct pernet_operations *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct ctl_table;
@@ -372,15 +423,21 @@ struct ctl_table_header;
 
 #ifdef CONFIG_SYSCTL
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int net_sysctl_init(void);
 extern struct ctl_table_header *register_net_sysctl(struct net *net,
 	const char *path, struct ctl_table *table);
 extern void unregister_net_sysctl_table(struct ctl_table_header *header);
 =======
+=======
+>>>>>>> v3.18
 int net_sysctl_init(void);
 struct ctl_table_header *register_net_sysctl(struct net *net, const char *path,
 					     struct ctl_table *table);
 void unregister_net_sysctl_table(struct ctl_table_header *header);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int net_sysctl_init(void) { return 0; }
@@ -395,6 +452,7 @@ static inline void unregister_net_sysctl_table(struct ctl_table_header *header)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int rt_genid(struct net *net)
 {
 	return atomic_read(&net->rt_genid);
@@ -404,6 +462,8 @@ static inline void rt_genid_bump(struct net *net)
 {
 	atomic_inc(&net->rt_genid);
 =======
+=======
+>>>>>>> v3.18
 static inline int rt_genid_ipv4(struct net *net)
 {
 	return atomic_read(&net->ipv4.rt_genid);
@@ -444,6 +504,9 @@ static inline int fnhe_genid(struct net *net)
 static inline void fnhe_genid_bump(struct net *net)
 {
 	atomic_inc(&net->fnhe_genid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

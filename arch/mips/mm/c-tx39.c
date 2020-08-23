@@ -345,7 +345,11 @@ static __init void tx39_probe_cache(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit tx39_cache_init(void)
+=======
+void tx39_cache_init(void)
+>>>>>>> v3.18
 =======
 void tx39_cache_init(void)
 >>>>>>> v3.18

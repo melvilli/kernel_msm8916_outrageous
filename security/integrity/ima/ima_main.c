@@ -25,6 +25,10 @@
 #include <linux/xattr.h>
 #include <linux/ima.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/hash_info.h>
+>>>>>>> v3.18
 =======
 #include <crypto/hash_info.h>
 >>>>>>> v3.18
@@ -40,12 +44,15 @@ int ima_appraise;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 char *ima_hash = "sha1";
 static int __init hash_setup(char *str)
 {
 	if (strncmp(str, "md5", 3) == 0)
 		ima_hash = "md5";
 =======
+=======
+>>>>>>> v3.18
 int ima_hash_algo = HASH_ALGO_SHA1;
 static int hash_setup_done;
 
@@ -73,6 +80,9 @@ static int __init hash_setup(char *str)
 	}
 out:
 	hash_setup_done = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 1;
 }
@@ -82,6 +92,7 @@ __setup("ima_hash=", hash_setup);
  * ima_rdwr_violation_check
  *
  * Only invalidate the PCR for measured files:
+<<<<<<< HEAD
 <<<<<<< HEAD
  * 	- Opening a file for write when already open for read,
  *	  results in a time of measure, time of use (ToMToU) error.
@@ -134,6 +145,8 @@ out:
 				  "invalid_pcr", "open_writers");
 	kfree(pathbuf);
 =======
+=======
+>>>>>>> v3.18
  *	- Opening a file for write when already open for read,
  *	  results in a time of measure, time of use (ToMToU) error.
  *	- Opening a file for read when already open for write,
@@ -173,6 +186,9 @@ static void ima_rdwr_violation_check(struct file *file,
 	if (send_writers)
 		ima_add_violation(file, *pathname,
 				  "invalid_pcr", "open_writers");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -186,12 +202,15 @@ static void ima_check_last_writer(struct integrity_iint_cache *iint,
 
 	mutex_lock(&inode->i_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (atomic_read(&inode->i_writecount) == 1 &&
 	    iint->version != inode->i_version) {
 		iint->flags &= ~IMA_DONE_MASK;
 		if (iint->flags & IMA_APPRAISE)
 			ima_update_xattr(iint, file);
 =======
+=======
+>>>>>>> v3.18
 	if (atomic_read(&inode->i_writecount) == 1) {
 		if ((iint->version != inode->i_version) ||
 		    (iint->flags & IMA_NEW_FILE)) {
@@ -199,6 +218,9 @@ static void ima_check_last_writer(struct integrity_iint_cache *iint,
 			if (iint->flags & IMA_APPRAISE)
 				ima_update_xattr(iint, file);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	mutex_unlock(&inode->i_mutex);
@@ -226,6 +248,7 @@ void ima_file_free(struct file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int process_measurement(struct file *file, const char *filename,
 			       int mask, int function)
 {
@@ -237,6 +260,8 @@ static int process_measurement(struct file *file, const char *filename,
 
 	if (!ima_initialized || !S_ISREG(inode->i_mode))
 =======
+=======
+>>>>>>> v3.18
 static int process_measurement(struct file *file, int mask, int function,
 			       int opened)
 {
@@ -251,6 +276,9 @@ static int process_measurement(struct file *file, int mask, int function,
 	bool violation_check;
 
 	if (!ima_policy_flag || !S_ISREG(inode->i_mode))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 0;
 
@@ -260,7 +288,13 @@ static int process_measurement(struct file *file, int mask, int function,
 	 */
 	action = ima_get_action(inode, mask, function);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!action)
+=======
+	violation_check = ((function == FILE_CHECK || function == MMAP_CHECK) &&
+			   (ima_policy_flag & IMA_MEASURE));
+	if (!action && !violation_check)
+>>>>>>> v3.18
 =======
 	violation_check = ((function == FILE_CHECK || function == MMAP_CHECK) &&
 			   (ima_policy_flag & IMA_MEASURE));
@@ -272,6 +306,7 @@ static int process_measurement(struct file *file, int mask, int function,
 
 	/*  Is the appraise rule hook specific?  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_func = (action & IMA_FILE_APPRAISE) ? FILE_CHECK : function;
 
 	mutex_lock(&inode->i_mutex);
@@ -280,6 +315,8 @@ static int process_measurement(struct file *file, int mask, int function,
 	if (!iint)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (action & IMA_FILE_APPRAISE)
 		function = FILE_CHECK;
 
@@ -299,6 +336,9 @@ static int process_measurement(struct file *file, int mask, int function,
 			goto out_free;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Determine if already appraised/measured based on bitmask
@@ -312,6 +352,7 @@ static int process_measurement(struct file *file, int mask, int function,
 	/* Nothing to do, just return existing appraised status */
 	if (!action) {
 		if (must_appraise)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			rc = ima_get_cache_status(iint, _func);
 		goto out_digsig;
@@ -336,6 +377,8 @@ out_digsig:
 	if ((mask & MAY_WRITE) && (iint->flags & IMA_DIGSIG))
 		rc = -EACCES;
 =======
+=======
+>>>>>>> v3.18
 			rc = ima_get_cache_status(iint, function);
 		goto out_digsig;
 	}
@@ -370,6 +413,9 @@ out_digsig:
 	kfree(xattr_value);
 out_free:
 	kfree(pathbuf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	mutex_unlock(&inode->i_mutex);
@@ -393,7 +439,11 @@ int ima_file_mmap(struct file *file, unsigned long prot)
 {
 	if (file && (prot & PROT_EXEC))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return process_measurement(file, NULL, MAY_EXEC, MMAP_CHECK);
+=======
+		return process_measurement(file, MAY_EXEC, MMAP_CHECK, 0);
+>>>>>>> v3.18
 =======
 		return process_measurement(file, MAY_EXEC, MMAP_CHECK, 0);
 >>>>>>> v3.18
@@ -416,10 +466,14 @@ int ima_file_mmap(struct file *file, unsigned long prot)
 int ima_bprm_check(struct linux_binprm *bprm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return process_measurement(bprm->file,
 				 (strcmp(bprm->filename, bprm->interp) == 0) ?
 				 bprm->filename : bprm->interp,
 				 MAY_EXEC, BPRM_CHECK);
+=======
+	return process_measurement(bprm->file, MAY_EXEC, BPRM_CHECK, 0);
+>>>>>>> v3.18
 =======
 	return process_measurement(bprm->file, MAY_EXEC, BPRM_CHECK, 0);
 >>>>>>> v3.18
@@ -436,6 +490,7 @@ int ima_bprm_check(struct linux_binprm *bprm)
  * is in policy and IMA-appraisal is in enforcing mode, return -EACCES.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ima_file_check(struct file *file, int mask)
 {
 	ima_rdwr_violation_check(file);
@@ -443,11 +498,16 @@ int ima_file_check(struct file *file, int mask)
 				 mask & (MAY_READ | MAY_WRITE | MAY_EXEC),
 				 FILE_CHECK);
 =======
+=======
+>>>>>>> v3.18
 int ima_file_check(struct file *file, int mask, int opened)
 {
 	return process_measurement(file,
 				   mask & (MAY_READ | MAY_WRITE | MAY_EXEC),
 				   FILE_CHECK, opened);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(ima_file_check);
@@ -472,8 +532,11 @@ int ima_module_check(struct file *file)
 		return 0;	/* We rely on module signature checking */
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return process_measurement(file, NULL, MAY_EXEC, MODULE_CHECK);
 =======
+=======
+>>>>>>> v3.18
 	return process_measurement(file, MAY_EXEC, MODULE_CHECK, 0);
 }
 
@@ -486,6 +549,9 @@ int ima_fw_from_file(struct file *file, char *buf, size_t size)
 		return 0;
 	}
 	return process_measurement(file, MAY_EXEC, FIRMWARE_CHECK, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -494,16 +560,22 @@ static int __init init_ima(void)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = ima_init();
 	if (!error)
 		ima_initialized = 1;
 =======
+=======
+>>>>>>> v3.18
 	hash_setup(CONFIG_IMA_DEFAULT_HASH);
 	error = ima_init();
 	if (!error) {
 		ima_initialized = 1;
 		ima_update_policy_flag();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return error;
 }

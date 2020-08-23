@@ -155,9 +155,14 @@ void
 free_initmem (void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free_reserved_area((unsigned long)ia64_imva(__init_begin),
 			   (unsigned long)ia64_imva(__init_end),
 			   0, "unused kernel");
+=======
+	free_reserved_area(ia64_imva(__init_begin), ia64_imva(__init_end),
+			   -1, "unused kernel");
+>>>>>>> v3.18
 =======
 	free_reserved_area(ia64_imva(__init_begin), ia64_imva(__init_end),
 			   -1, "unused kernel");
@@ -285,7 +290,10 @@ setup_gate (void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct vm_area_struct gate_vma;
 
 static int __init gate_vma_init(void)
@@ -317,6 +325,9 @@ int in_gate_area(struct mm_struct *mm, unsigned long addr)
 	return in_gate_area_no_mm(addr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ia64_mmu_init(void *my_cpu_data)
 {
@@ -398,9 +409,13 @@ int vmemmap_find_next_valid_pfn(int node, int i)
 	end_address = (unsigned long) &vmem_map[pgdat->node_start_pfn + i];
 	end_address = PAGE_ALIGN(end_address);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	stop_address = (unsigned long) &vmem_map[
 		pgdat->node_start_pfn + pgdat->node_spanned_pages];
+=======
+	stop_address = (unsigned long) &vmem_map[pgdat_end_pfn(pgdat)];
+>>>>>>> v3.18
 =======
 	stop_address = (unsigned long) &vmem_map[pgdat_end_pfn(pgdat)];
 >>>>>>> v3.18
@@ -590,6 +605,7 @@ int __init register_active_ranges(u64 start, u64 len, int nid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init
 count_reserved_pages(u64 start, u64 end, void *arg)
 {
@@ -603,6 +619,8 @@ count_reserved_pages(u64 start, u64 end, void *arg)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int
@@ -644,8 +662,11 @@ void __init
 mem_init (void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long reserved_pages, codesize, datasize, initsize;
 	pg_data_t *pgdat;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
@@ -665,6 +686,7 @@ mem_init (void)
 
 #ifdef CONFIG_FLATMEM
 	BUG_ON(!mem_map);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	max_mapnr = max_low_pfn;
 #endif
@@ -688,12 +710,17 @@ mem_init (void)
 	       reserved_pages << (PAGE_SHIFT - 10), datasize >> 10, initsize >> 10);
 
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 	set_max_mapnr(max_low_pfn);
 	high_memory = __va(max_low_pfn * PAGE_SIZE);
 	free_all_bootmem();
 	mem_init_print_info(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -723,7 +750,12 @@ int arch_add_memory(int nid, u64 start, u64 size)
 	pgdat = NODE_DATA(nid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	zone = pgdat->node_zones + ZONE_NORMAL;
+=======
+	zone = pgdat->node_zones +
+		zone_for_memory(nid, start, size, ZONE_NORMAL);
+>>>>>>> v3.18
 =======
 	zone = pgdat->node_zones +
 		zone_for_memory(nid, start, size, ZONE_NORMAL);
@@ -781,7 +813,10 @@ per_linux32_init(void)
 
 __initcall(per_linux32_init);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * show_mem - give short summary of memory stats
@@ -830,4 +865,7 @@ void show_mem(unsigned int filter)
 	       quicklist_total_size());
 	printk(KERN_INFO "%ld free buffer pages\n", nr_free_buffer_pages());
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

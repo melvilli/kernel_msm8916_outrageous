@@ -174,6 +174,10 @@ int raw3270_start_irq(struct raw3270_view *, struct raw3270_request *);
 int raw3270_reset(struct raw3270_view *);
 struct raw3270_view *raw3270_view(struct raw3270_view *);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int raw3270_view_active(struct raw3270_view *);
+>>>>>>> v3.18
 =======
 int raw3270_view_active(struct raw3270_view *);
 >>>>>>> v3.18

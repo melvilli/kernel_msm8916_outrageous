@@ -58,6 +58,10 @@
 #include <net/net_namespace.h>
 #include <net/arp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/Space.h>
+>>>>>>> v3.18
 =======
 #include <net/Space.h>
 >>>>>>> v3.18
@@ -153,10 +157,13 @@ static int  emancipate( struct net_device * );
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __i386__
 #define ASM_CRC 1
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const char  version[] =
@@ -184,7 +191,11 @@ static u32	mac[  SBNI_MAX_NUM_CARDS ] __initdata;
 #ifndef MODULE
 typedef u32  iarr[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 static iarr __initdata *dest[5] = { &io, &irq, &baud, &rxl, &mac };
+=======
+static iarr *dest[5] __initdata = { &io, &irq, &baud, &rxl, &mac };
+>>>>>>> v3.18
 =======
 static iarr *dest[5] __initdata = { &io, &irq, &baud, &rxl, &mac };
 >>>>>>> v3.18
@@ -242,7 +253,12 @@ int __init sbni_probe(int unit)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = alloc_netdev(sizeof(struct net_local), "sbni", sbni_devsetup);
+=======
+	dev = alloc_netdev(sizeof(struct net_local), "sbni",
+			   NET_NAME_UNKNOWN, sbni_devsetup);
+>>>>>>> v3.18
 =======
 	dev = alloc_netdev(sizeof(struct net_local), "sbni",
 			   NET_NAME_UNKNOWN, sbni_devsetup);
@@ -1497,8 +1513,13 @@ int __init init_module( void )
 
 	while( num < SBNI_MAX_NUM_CARDS ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev = alloc_netdev(sizeof(struct net_local), 
 				   "sbni%d", sbni_devsetup);
+=======
+		dev = alloc_netdev(sizeof(struct net_local), "sbni%d",
+				   NET_NAME_UNKNOWN, sbni_devsetup);
+>>>>>>> v3.18
 =======
 		dev = alloc_netdev(sizeof(struct net_local), "sbni%d",
 				   NET_NAME_UNKNOWN, sbni_devsetup);
@@ -1572,6 +1593,7 @@ __setup( "sbni=", sbni_setup );
 
 /* -------------------------------------------------------------------------- */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef ASM_CRC
 
@@ -1657,6 +1679,8 @@ calc_crc32( u32  crc,  u8  *p,  u32  len )
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static u32
 calc_crc32( u32  crc,  u8  *p,  u32  len )
 {
@@ -1667,9 +1691,12 @@ calc_crc32( u32  crc,  u8  *p,  u32  len )
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* ASM_CRC */
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u32  crc32tab[] __attribute__ ((aligned(8))) = {

@@ -7,10 +7,16 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init omap4_panda_display_init(void);
 void __init omap4_panda_display_init_of(void);
 void __init omap_4430sdp_display_init(void);
 void __init omap_4430sdp_display_init_of(void);
+=======
+void __init omap4_panda_display_init_of(void);
+void __init omap_4430sdp_display_init_of(void);
+void __init omap3_igep2_display_init_of(void);
+>>>>>>> v3.18
 =======
 void __init omap4_panda_display_init_of(void);
 void __init omap_4430sdp_display_init_of(void);

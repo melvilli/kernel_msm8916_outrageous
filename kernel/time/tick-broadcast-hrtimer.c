@@ -83,7 +83,11 @@ static struct clock_event_device ce_broadcast_hrtimer = {
 	.max_delta_ns		= KTIME_MAX,
 	.min_delta_ticks	= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.max_delta_ticks	= KTIME_MAX,
+=======
+	.max_delta_ticks	= ULONG_MAX,
+>>>>>>> v3.18
 =======
 	.max_delta_ticks	= ULONG_MAX,
 >>>>>>> v3.18

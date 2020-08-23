@@ -1362,7 +1362,11 @@ static void cx25821_finidev(struct pci_dev *pci_dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cx25821_pci_tbl) = {
+=======
+static const struct pci_device_id cx25821_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cx25821_pci_tbl[] = {
 >>>>>>> v3.18

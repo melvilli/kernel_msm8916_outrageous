@@ -16,10 +16,13 @@
  *
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -27,6 +30,7 @@
 #include "cx23885.h"
 #include "cx23885-ioctl.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
 
@@ -116,6 +120,8 @@ static int cx23885_g_host_register(struct cx23885_dev *dev,
 	reg->size = 4;
 	reg->val = cx_read(reg->reg);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 int cx23885_g_chip_info(struct file *file, void *fh,
 			 struct v4l2_dbg_chip_info *chip)
@@ -131,6 +137,9 @@ int cx23885_g_chip_info(struct file *file, void *fh,
 	} else {
 		strlcpy(chip->name, dev->v4l2_dev.name, sizeof(chip->name));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -157,6 +166,7 @@ static int cx23417_g_register(struct cx23885_dev *dev,
 int cx23885_g_register(struct file *file, void *fh,
 		       struct v4l2_dbg_register *reg)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct cx23885_dev *dev = ((struct cx23885_fh *)fh)->dev;
 
@@ -187,6 +197,8 @@ static int cx23885_s_host_register(struct cx23885_dev *dev,
 
 	cx_write(reg->reg, reg->val);
 =======
+=======
+>>>>>>> v3.18
 	struct cx23885_dev *dev = video_drvdata(file);
 
 	if (reg->match.addr > 1)
@@ -199,6 +211,9 @@ static int cx23885_s_host_register(struct cx23885_dev *dev,
 
 	reg->size = 4;
 	reg->val = cx_read(reg->reg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -221,6 +236,7 @@ int cx23885_s_register(struct file *file, void *fh,
 		       const struct v4l2_dbg_register *reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct cx23885_dev *dev = ((struct cx23885_fh *)fh)->dev;
 
 	if (!capable(CAP_SYS_ADMIN))
@@ -240,6 +256,8 @@ int cx23885_s_register(struct file *file, void *fh,
 	/* FIXME - any error returns should not be ignored */
 	call_all(dev, core, s_register, reg);
 =======
+=======
+>>>>>>> v3.18
 	struct cx23885_dev *dev = video_drvdata(file);
 
 	if (reg->match.addr > 1)
@@ -251,6 +269,9 @@ int cx23885_s_register(struct file *file, void *fh,
 		return -EINVAL;
 
 	cx_write(reg->reg, reg->val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

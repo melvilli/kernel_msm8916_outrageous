@@ -89,6 +89,10 @@ static int bfin_i2s_hw_params(struct snd_pcm_substream *substream,
 		param.spctl |= 0x70;
 		sport->wdsize = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		break;
+>>>>>>> v3.18
 =======
 		break;
 >>>>>>> v3.18

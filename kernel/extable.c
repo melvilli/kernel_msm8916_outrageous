@@ -37,7 +37,11 @@ extern struct exception_table_entry __stop___ex_table[];
 
 /* Cleared by build time tools if the table is already sorted. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 __initdata main_extable_sort_needed = 1;
+=======
+u32 __initdata __visible main_extable_sort_needed = 1;
+>>>>>>> v3.18
 =======
 u32 __initdata __visible main_extable_sort_needed = 1;
 >>>>>>> v3.18
@@ -46,7 +50,11 @@ u32 __initdata __visible main_extable_sort_needed = 1;
 void __init sort_main_extable(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (main_extable_sort_needed) {
+=======
+	if (main_extable_sort_needed && __stop___ex_table > __start___ex_table) {
+>>>>>>> v3.18
 =======
 	if (main_extable_sort_needed && __stop___ex_table > __start___ex_table) {
 >>>>>>> v3.18
@@ -70,7 +78,11 @@ static inline int init_kernel_text(unsigned long addr)
 {
 	if (addr >= (unsigned long)_sinittext &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    addr <= (unsigned long)_einittext)
+=======
+	    addr < (unsigned long)_einittext)
+>>>>>>> v3.18
 =======
 	    addr < (unsigned long)_einittext)
 >>>>>>> v3.18
@@ -79,15 +91,21 @@ static inline int init_kernel_text(unsigned long addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int notrace core_kernel_text(unsigned long addr)
 {
 	if (addr >= (unsigned long)_stext &&
 	    addr <= (unsigned long)_etext)
 =======
+=======
+>>>>>>> v3.18
 int core_kernel_text(unsigned long addr)
 {
 	if (addr >= (unsigned long)_stext &&
 	    addr < (unsigned long)_etext)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return 1;
 

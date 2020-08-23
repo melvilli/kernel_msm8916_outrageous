@@ -198,7 +198,11 @@ ahd_dump_device_state(struct seq_file *m, struct scsi_device *sdev)
 	seq_printf(m, "\tChannel %c Target %d Lun %d Settings\n",
 		  sdev->sdev_target->channel + 'A',
 <<<<<<< HEAD
+<<<<<<< HEAD
 		  sdev->sdev_target->id, sdev->lun);
+=======
+		   sdev->sdev_target->id, (u8)sdev->lun);
+>>>>>>> v3.18
 =======
 		   sdev->sdev_target->id, (u8)sdev->lun);
 >>>>>>> v3.18

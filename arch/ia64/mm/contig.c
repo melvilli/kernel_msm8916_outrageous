@@ -32,6 +32,7 @@ static unsigned long max_gap;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * show_mem - give short summary of memory stats
  *
@@ -102,6 +103,8 @@ void show_mem(unsigned int filter)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* physical address where the bootmem map is located */
 unsigned long bootmap_start;
 
@@ -160,8 +163,12 @@ static void *cpu_data;
  * Allocate and setup per-cpu data areas.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void * __cpuinit
 per_cpu_init (void)
+=======
+void *per_cpu_init(void)
+>>>>>>> v3.18
 =======
 void *per_cpu_init(void)
 >>>>>>> v3.18
@@ -303,6 +310,7 @@ find_memory (void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int count_pages(u64 start, u64 end, void *arg)
 {
 	unsigned long *count = arg;
@@ -311,6 +319,8 @@ static int count_pages(u64 start, u64 end, void *arg)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -324,9 +334,12 @@ paging_init (void)
 	unsigned long max_zone_pfns[MAX_NR_ZONES];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages = 0;
 	efi_memmap_walk(count_pages, &num_physpages);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	memset(max_zone_pfns, 0, sizeof(max_zone_pfns));

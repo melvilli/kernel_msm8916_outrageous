@@ -24,6 +24,7 @@
 #define _PTP_CLASSIFY_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/if_ether.h>
 #include <linux/if_vlan.h>
 #include <linux/ip.h>
@@ -37,6 +38,10 @@
 #include <linux/ip.h>
 #include <linux/skbuff.h>
 >>>>>>> v3.18
+=======
+#include <linux/ip.h>
+#include <linux/skbuff.h>
+>>>>>>> v3.18
 
 #define PTP_CLASS_NONE  0x00 /* not a PTP event message */
 #define PTP_CLASS_V1    0x01 /* protocol version 1 */
@@ -46,17 +51,23 @@
 #define PTP_CLASS_IPV6  0x20 /* event in an IPV6 UDP packet */
 #define PTP_CLASS_L2    0x30 /* event in a L2 packet */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PTP_CLASS_VLAN  0x40 /* event in a VLAN tagged L2 packet */
 #define PTP_CLASS_PMASK 0xf0 /* mask for the packet type field */
 
 #define PTP_CLASS_V1_IPV4 (PTP_CLASS_V1 | PTP_CLASS_IPV4)
 #define PTP_CLASS_V1_IPV6 (PTP_CLASS_V1 | PTP_CLASS_IPV6) /*probably DNE*/
 =======
+=======
+>>>>>>> v3.18
 #define PTP_CLASS_PMASK 0x30 /* mask for the packet type field */
 #define PTP_CLASS_VLAN  0x40 /* event in a VLAN tagged packet */
 
 #define PTP_CLASS_V1_IPV4 (PTP_CLASS_V1 | PTP_CLASS_IPV4)
 #define PTP_CLASS_V1_IPV6 (PTP_CLASS_V1 | PTP_CLASS_IPV6) /* probably DNE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PTP_CLASS_V2_IPV4 (PTP_CLASS_V2 | PTP_CLASS_IPV4)
 #define PTP_CLASS_V2_IPV6 (PTP_CLASS_V2 | PTP_CLASS_IPV6)
@@ -67,6 +78,7 @@
 #define PTP_GEN_BIT 0x08 /* indicates general message, if set in message type */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OFF_ETYPE	12
 #define OFF_IHL		14
 #define OFF_FRAG	20
@@ -76,10 +88,13 @@
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #define OFF_PTP_SOURCE_UUID	22 /* PTPv1 only */
 #define OFF_PTP_SEQUENCE_ID	30
 #define OFF_PTP_CONTROL		32 /* PTPv1 only */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IPV4_HLEN(data) (((struct iphdr *)(data + OFF_IHL))->ihl << 2)
 
@@ -156,6 +171,8 @@ static inline int ptp_filter_init(struct sock_filter *f, int len)
 
 #endif
 =======
+=======
+>>>>>>> v3.18
 /* Below defines should actually be removed at some point in time. */
 #define IP6_HLEN	40
 #define UDP_HLEN	8
@@ -182,4 +199,7 @@ static inline void ptp_classifier_init(void)
 }
 #endif
 #endif /* _PTP_CLASSIFY_H_ */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

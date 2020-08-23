@@ -19,6 +19,10 @@
 #define SAMSUNG_I2S_RCLKSRC_1	1
 #define SAMSUNG_I2S_CDCLK		2
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SAMSUNG_I2S_OPCLK		3
+>>>>>>> v3.18
 =======
 #define SAMSUNG_I2S_OPCLK		3
 >>>>>>> v3.18

@@ -5,9 +5,12 @@
 
 obj-y				:= cpu.o irq.o time.o devices.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-m				:=
 obj-n				:=
 obj-				:=
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

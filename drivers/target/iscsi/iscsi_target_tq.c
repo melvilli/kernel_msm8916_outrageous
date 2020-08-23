@@ -2,9 +2,13 @@
  * This file contains the iSCSI Login Thread and Thread Queue functions.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -31,6 +35,7 @@
 #include "iscsi_target.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static LIST_HEAD(inactive_ts_list);
 static DEFINE_SPINLOCK(inactive_ts_lock);
 static DEFINE_SPINLOCK(ts_bitmap_lock);
@@ -42,6 +47,8 @@ static void iscsi_add_ts_to_inactive_list(struct iscsi_thread_set *ts)
 		return;
 	}
 =======
+=======
+>>>>>>> v3.18
 static LIST_HEAD(active_ts_list);
 static LIST_HEAD(inactive_ts_list);
 static DEFINE_SPINLOCK(active_ts_lock);
@@ -58,6 +65,9 @@ static void iscsi_add_ts_to_active_list(struct iscsi_thread_set *ts)
 
 static void iscsi_add_ts_to_inactive_list(struct iscsi_thread_set *ts)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock(&inactive_ts_lock);
 	list_add_tail(&ts->ts_list, &inactive_ts_list);
@@ -66,7 +76,10 @@ static void iscsi_add_ts_to_inactive_list(struct iscsi_thread_set *ts)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void iscsi_del_ts_from_active_list(struct iscsi_thread_set *ts)
 {
 	spin_lock(&active_ts_lock);
@@ -75,6 +88,9 @@ static void iscsi_del_ts_from_active_list(struct iscsi_thread_set *ts)
 	spin_unlock(&active_ts_lock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct iscsi_thread_set *iscsi_get_ts_from_inactive_list(void)
 {
@@ -89,7 +105,11 @@ static struct iscsi_thread_set *iscsi_get_ts_from_inactive_list(void)
 	ts = list_first_entry(&inactive_ts_list, struct iscsi_thread_set, ts_list);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_del_init(&ts->ts_list);
+=======
+	list_del(&ts->ts_list);
+>>>>>>> v3.18
 =======
 	list_del(&ts->ts_list);
 >>>>>>> v3.18
@@ -130,8 +150,11 @@ int iscsi_allocate_thread_sets(u32 thread_pair_count)
 		INIT_LIST_HEAD(&ts->ts_list);
 		spin_lock_init(&ts->ts_state_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		init_completion(&ts->rx_post_start_comp);
 		init_completion(&ts->tx_post_start_comp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		init_completion(&ts->rx_restart_comp);
@@ -139,6 +162,10 @@ int iscsi_allocate_thread_sets(u32 thread_pair_count)
 		init_completion(&ts->rx_start_comp);
 		init_completion(&ts->tx_start_comp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		sema_init(&ts->ts_activate_sem, 0);
+>>>>>>> v3.18
 =======
 		sema_init(&ts->ts_activate_sem, 0);
 >>>>>>> v3.18
@@ -171,6 +198,7 @@ int iscsi_allocate_thread_sets(u32 thread_pair_count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void iscsi_deallocate_thread_sets(void)
 {
 	u32 released_count = 0;
@@ -201,6 +229,8 @@ void iscsi_deallocate_thread_sets(void)
 		released_count++;
 		kfree(ts);
 =======
+=======
+>>>>>>> v3.18
 static void iscsi_deallocate_thread_one(struct iscsi_thread_set *ts)
 {
 	spin_lock_bh(&ts->ts_state_lock);
@@ -239,6 +269,9 @@ void iscsi_deallocate_thread_sets(void)
 
 		iscsi_deallocate_thread_one(ts);
 		released_count++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -259,6 +292,7 @@ static void iscsi_deallocate_extra_thread_sets(void)
 		if (!ts)
 			break;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		spin_lock_bh(&ts->ts_state_lock);
 		ts->status = ISCSI_THREAD_SET_DIE;
@@ -289,6 +323,8 @@ static void iscsi_deallocate_extra_thread_sets(void)
 			"\n", released_count, released_count * 2);
 	}
 =======
+=======
+>>>>>>> v3.18
 		iscsi_deallocate_thread_one(ts);
 		released_count++;
 	}
@@ -296,11 +332,15 @@ static void iscsi_deallocate_extra_thread_sets(void)
 	if (released_count)
 		pr_debug("Stopped %d thread set(s) (%d total threads)."
 			"\n", released_count, released_count * 2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void iscsi_activate_thread_set(struct iscsi_conn *conn, struct iscsi_thread_set *ts)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_bh(&ts->ts_state_lock);
 	conn->thread_set = ts;
@@ -314,6 +354,8 @@ void iscsi_activate_thread_set(struct iscsi_conn *conn, struct iscsi_thread_set 
 	complete(&ts->rx_start_comp);
 	wait_for_completion(&ts->rx_post_start_comp);
 =======
+=======
+>>>>>>> v3.18
 	iscsi_add_ts_to_active_list(ts);
 
 	spin_lock_bh(&ts->ts_state_lock);
@@ -326,11 +368,15 @@ void iscsi_activate_thread_set(struct iscsi_conn *conn, struct iscsi_thread_set 
 	complete(&ts->tx_start_comp);
 
 	down(&ts->ts_activate_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 struct iscsi_thread_set *iscsi_get_thread_set(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int allocate_ts = 0;
 	struct completion comp;
@@ -352,12 +398,17 @@ get_set:
 
 		allocate_ts++;
 =======
+=======
+>>>>>>> v3.18
 	struct iscsi_thread_set *ts;
 
 get_set:
 	ts = iscsi_get_ts_from_inactive_list();
 	if (!ts) {
 		iscsi_allocate_thread_sets(1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto get_set;
 	}
@@ -368,6 +419,10 @@ get_set:
 	init_completion(&ts->rx_restart_comp);
 	init_completion(&ts->tx_restart_comp);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sema_init(&ts->ts_activate_sem, 0);
+>>>>>>> v3.18
 =======
 	sema_init(&ts->ts_activate_sem, 0);
 >>>>>>> v3.18
@@ -509,7 +564,12 @@ static int iscsi_signal_thread_pre_handler(struct iscsi_thread_set *ts)
 {
 	spin_lock_bh(&ts->ts_state_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ts->status == ISCSI_THREAD_SET_DIE) || signal_pending(current)) {
+=======
+	if (ts->status == ISCSI_THREAD_SET_DIE || kthread_should_stop() ||
+	    signal_pending(current)) {
+>>>>>>> v3.18
 =======
 	if (ts->status == ISCSI_THREAD_SET_DIE || kthread_should_stop() ||
 	    signal_pending(current)) {
@@ -533,17 +593,23 @@ struct iscsi_conn *iscsi_rx_thread_pre_handler(struct iscsi_thread_set *ts)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_signals(current);
 
 	if (ts->delay_inactive && (--ts->thread_count == 0)) {
 		spin_unlock_bh(&ts->ts_state_lock);
 =======
+=======
+>>>>>>> v3.18
 	if (ts->status != ISCSI_THREAD_SET_DIE)
 		flush_signals(current);
 
 	if (ts->delay_inactive && (--ts->thread_count == 0)) {
 		spin_unlock_bh(&ts->ts_state_lock);
 		iscsi_del_ts_from_active_list(ts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!iscsit_global->in_shutdown)
@@ -568,6 +634,7 @@ sleep:
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ts->conn) {
 		pr_err("struct iscsi_thread_set->conn is NULL for"
 			" thread_id: %d, going back to sleep\n", ts->thread_id);
@@ -581,6 +648,8 @@ sleep:
 	complete(&ts->tx_start_comp);
 	wait_for_completion(&ts->tx_post_start_comp);
 =======
+=======
+>>>>>>> v3.18
 	iscsi_check_to_add_additional_sets();
 
 	spin_lock_bh(&ts->ts_state_lock);
@@ -594,6 +663,9 @@ sleep:
 	spin_unlock_bh(&ts->ts_state_lock);
 
 	up(&ts->ts_activate_sem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ts->conn;
@@ -610,17 +682,23 @@ struct iscsi_conn *iscsi_tx_thread_pre_handler(struct iscsi_thread_set *ts)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	flush_signals(current);
 
 	if (ts->delay_inactive && (--ts->thread_count == 0)) {
 		spin_unlock_bh(&ts->ts_state_lock);
 =======
+=======
+>>>>>>> v3.18
 	if (ts->status != ISCSI_THREAD_SET_DIE)
 		flush_signals(current);
 
 	if (ts->delay_inactive && (--ts->thread_count == 0)) {
 		spin_unlock_bh(&ts->ts_state_lock);
 		iscsi_del_ts_from_active_list(ts);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (!iscsit_global->in_shutdown)
@@ -644,6 +722,7 @@ sleep:
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ts->conn) {
 		pr_err("struct iscsi_thread_set->conn is NULL for "
 			" thread_id: %d, going back to sleep\n",
@@ -666,6 +745,8 @@ sleep:
 	spin_unlock_bh(&ts->ts_state_lock);
 
 =======
+=======
+>>>>>>> v3.18
 	iscsi_check_to_add_additional_sets();
 
 	spin_lock_bh(&ts->ts_state_lock);
@@ -680,6 +761,9 @@ sleep:
 
 	up(&ts->ts_activate_sem);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ts->conn;
 }

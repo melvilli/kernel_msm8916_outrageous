@@ -426,7 +426,10 @@ ip_vs_sync_buff_create_v0(struct netns_ipvs *ipvs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Check if connection is controlled by persistence */
 static inline bool in_persistence(struct ip_vs_conn *cp)
 {
@@ -437,6 +440,9 @@ static inline bool in_persistence(struct ip_vs_conn *cp)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Check if conn should be synced.
  * pkts: conn packets, use sysctl_sync_threshold to avoid packet check
@@ -461,6 +467,11 @@ static int ip_vs_sync_conn_needed(struct netns_ipvs *ipvs,
 	if (unlikely(cp->flags & IP_VS_CONN_F_TEMPLATE))
 		force = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (unlikely(sysctl_sync_persist_mode(ipvs) && in_persistence(cp)))
+		return 0;
+>>>>>>> v3.18
 =======
 	else if (unlikely(sysctl_sync_persist_mode(ipvs) && in_persistence(cp)))
 		return 0;
@@ -480,14 +491,20 @@ static int ip_vs_sync_conn_needed(struct netns_ipvs *ipvs,
 		if (!((1 << cp->state) &
 		      ((1 << IP_VS_SCTP_S_ESTABLISHED) |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       (1 << IP_VS_SCTP_S_CLOSED) |
 		       (1 << IP_VS_SCTP_S_SHUT_ACK_CLI) |
 		       (1 << IP_VS_SCTP_S_SHUT_ACK_SER))))
 =======
+=======
+>>>>>>> v3.18
 		       (1 << IP_VS_SCTP_S_SHUTDOWN_SENT) |
 		       (1 << IP_VS_SCTP_S_SHUTDOWN_RECEIVED) |
 		       (1 << IP_VS_SCTP_S_SHUTDOWN_ACK_SENT) |
 		       (1 << IP_VS_SCTP_S_CLOSED))))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return 0;
 		force = cp->state != cp->old_state;
@@ -625,7 +642,11 @@ static void ip_vs_sync_conn_v0(struct net *net, struct ip_vs_conn *cp,
 		else
 			pkts = sysctl_sync_threshold(ipvs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ip_vs_sync_conn(net, cp, pkts);
+=======
+		ip_vs_sync_conn(net, cp->control, pkts);
+>>>>>>> v3.18
 =======
 		ip_vs_sync_conn(net, cp->control, pkts);
 >>>>>>> v3.18
@@ -897,6 +918,7 @@ static void ip_vs_proc_conn(struct net *net, struct ip_vs_conn_param *param,
 		 */
 		rcu_read_lock();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dest = ip_vs_find_dest(net, type, daddr, dport, param->vaddr,
 				       param->vport, protocol, fwmark, flags);
 
@@ -911,6 +933,8 @@ static void ip_vs_proc_conn(struct net *net, struct ip_vs_conn_param *param,
 		if (!(flags & IP_VS_CONN_F_TEMPLATE))
 			kfree(param->pe_data);
 =======
+=======
+>>>>>>> v3.18
 		/* This function is only invoked by the synchronization
 		 * code. We do not currently support heterogeneous pools
 		 * with synchronization, so we can make the assumption that
@@ -928,6 +952,9 @@ static void ip_vs_proc_conn(struct net *net, struct ip_vs_conn_param *param,
 			IP_VS_DBG(2, "BACKUP, add new conn. failed\n");
 			return;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1203,7 +1230,10 @@ static inline int ip_vs_proc_sync_conn(struct net *net, __u8 *p, __u8 *msg_end)
 				);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ip_vs_pe_put(param.pe);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1680,6 +1710,7 @@ static int sync_thread_master(void *data)
 		}
 		while (ip_vs_send_sync_msg(tinfo->sock, sb->mesg) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int ret = 0;
 
 			__wait_event_interruptible(*sk_sleep(sk),
@@ -1687,12 +1718,17 @@ static int sync_thread_master(void *data)
 						   kthread_should_stop(),
 						   ret);
 =======
+=======
+>>>>>>> v3.18
 			/* (Ab)use interruptible sleep to avoid increasing
 			 * the load avg.
 			 */
 			__wait_event_interruptible(*sk_sleep(sk),
 						   sock_writeable(sk) ||
 						   kthread_should_stop());
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (unlikely(kthread_should_stop()))
 				goto done;

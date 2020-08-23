@@ -147,7 +147,11 @@ static netdev_tx_t rose_xmit(struct sk_buff *skb, struct net_device *dev)
 static const struct header_ops rose_header_ops = {
 	.create	= rose_header,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.rebuild= rose_rebuild_header,
+=======
+	.rebuild = rose_rebuild_header,
+>>>>>>> v3.18
 =======
 	.rebuild = rose_rebuild_header,
 >>>>>>> v3.18

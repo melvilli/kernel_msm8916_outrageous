@@ -65,8 +65,14 @@ struct pcie_port_property
   uint8_t allow_x8: 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /** Reserved. */
   uint8_t reserved: 1;
+=======
+  /** If true, this link is connected to a device which may or may not
+   *  be present. */
+  uint8_t removable: 1;
+>>>>>>> v3.18
 =======
   /** If true, this link is connected to a device which may or may not
    *  be present. */
@@ -174,6 +180,12 @@ struct pcie_trio_ports_property
 {
   struct pcie_port_property ports[TILEGX_TRIO_PCIES];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+  /** Set if this TRIO belongs to a Gx72 device. */
+  uint8_t is_gx72;
+>>>>>>> v3.18
 =======
 
   /** Set if this TRIO belongs to a Gx72 device. */

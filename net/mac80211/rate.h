@@ -22,7 +22,11 @@
 struct rate_control_ref {
 	struct ieee80211_local *local;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rate_control_ops *ops;
+=======
+	const struct rate_control_ops *ops;
+>>>>>>> v3.18
 =======
 	const struct rate_control_ops *ops;
 >>>>>>> v3.18
@@ -59,6 +63,11 @@ static inline void rate_control_rate_init(struct sta_info *sta)
 	struct ieee80211_chanctx_conf *chanctx_conf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ieee80211_sta_set_rx_nss(sta);
+
+>>>>>>> v3.18
 =======
 	ieee80211_sta_set_rx_nss(sta);
 
@@ -76,16 +85,22 @@ static inline void rate_control_rate_init(struct sta_info *sta)
 
 	sband = local->hw.wiphy->bands[chanctx_conf->def.chan->band];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rcu_read_unlock();
 
 	ieee80211_sta_set_rx_nss(sta);
 
 	ref->ops->rate_init(ref->priv, sband, ista, priv_sta);
 =======
+=======
+>>>>>>> v3.18
 
 	ref->ops->rate_init(ref->priv, sband, &chanctx_conf->def, ista,
 			    priv_sta);
 	rcu_read_unlock();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_sta_flag(sta, WLAN_STA_RATE_CONTROL);
 }
@@ -98,11 +113,14 @@ static inline void rate_control_rate_update(struct ieee80211_local *local,
 	struct ieee80211_sta *ista = &sta->sta;
 	void *priv_sta = sta->rate_ctrl_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (ref && ref->ops->rate_update)
 		ref->ops->rate_update(ref->priv, sband, ista,
 				      priv_sta, changed);
 =======
+=======
+>>>>>>> v3.18
 	struct ieee80211_chanctx_conf *chanctx_conf;
 
 	if (ref && ref->ops->rate_update) {
@@ -118,6 +136,9 @@ static inline void rate_control_rate_update(struct ieee80211_local *local,
 				      ista, priv_sta, changed);
 		rcu_read_unlock();
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	drv_sta_rc_update(local, sta->sdata, &sta->sta, changed);
 }
@@ -166,6 +187,7 @@ void rate_control_deinitialize(struct ieee80211_local *local);
 
 /* Rate control algorithms */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MAC80211_RC_PID
 extern int rc80211_pid_init(void);
 extern void rc80211_pid_exit(void);
@@ -187,6 +209,11 @@ extern void rc80211_minstrel_exit(void);
 int rc80211_minstrel_init(void);
 void rc80211_minstrel_exit(void);
 >>>>>>> v3.18
+=======
+#ifdef CONFIG_MAC80211_RC_MINSTREL
+int rc80211_minstrel_init(void);
+void rc80211_minstrel_exit(void);
+>>>>>>> v3.18
 #else
 static inline int rc80211_minstrel_init(void)
 {
@@ -199,8 +226,13 @@ static inline void rc80211_minstrel_exit(void)
 
 #ifdef CONFIG_MAC80211_RC_MINSTREL_HT
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int rc80211_minstrel_ht_init(void);
 extern void rc80211_minstrel_ht_exit(void);
+=======
+int rc80211_minstrel_ht_init(void);
+void rc80211_minstrel_ht_exit(void);
+>>>>>>> v3.18
 =======
 int rc80211_minstrel_ht_init(void);
 void rc80211_minstrel_ht_exit(void);

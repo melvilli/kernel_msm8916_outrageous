@@ -1,15 +1,21 @@
 #ifndef _ASM_X86_TIMER_H
 #define _ASM_X86_TIMER_H
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/pm.h>
 #include <linux/percpu.h>
 #include <linux/interrupt.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm.h>
 #include <linux/percpu.h>
 #include <linux/interrupt.h>
 #include <linux/math64.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define TICK_SIZE (tick_nsec / 1000)
@@ -19,6 +25,7 @@ extern int recalibrate_cpu_khz(void);
 
 extern int no_timer_check;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Accelerators for sched_clock()
  * convert from cycles(64bits) => nanoseconds (64bits)
@@ -84,6 +91,8 @@ static inline unsigned long long cycles_2_ns(unsigned long long cyc)
 	return ns;
 }
 =======
+=======
+>>>>>>> v3.18
 /*
  * We use the full linear equation: f(x) = a + b*x, in order to allow
  * a continuous function in the face of dynamic freq changes.
@@ -105,6 +114,9 @@ struct cyc2ns_data {
 
 extern struct cyc2ns_data *cyc2ns_read_begin(void);
 extern void cyc2ns_read_end(struct cyc2ns_data *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _ASM_X86_TIMER_H */

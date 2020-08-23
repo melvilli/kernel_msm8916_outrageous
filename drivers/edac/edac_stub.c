@@ -30,7 +30,10 @@ EXPORT_SYMBOL_GPL(edac_err_assert);
 static atomic_t edac_subsys_valid = ATOMIC_INIT(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int edac_report_status = EDAC_REPORTING_ENABLED;
 EXPORT_SYMBOL_GPL(edac_report_status);
 
@@ -50,6 +53,9 @@ static int __init edac_report_setup(char *str)
 }
 __setup("edac_report=", edac_report_setup);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * called to determine if there is an EDAC driver interested in

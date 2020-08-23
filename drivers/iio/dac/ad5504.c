@@ -16,6 +16,10 @@
 #include <linux/regulator/consumer.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bitops.h>
+>>>>>>> v3.18
 =======
 #include <linux/bitops.h>
 >>>>>>> v3.18
@@ -26,11 +30,17 @@
 #include <linux/iio/dac/ad5504.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AD5505_BITS			12
 #define AD5504_RES_MASK			((1 << (AD5505_BITS)) - 1)
 
 #define AD5504_CMD_READ			(1 << 15)
 #define AD5504_CMD_WRITE		(0 << 15)
+=======
+#define AD5504_RES_MASK			GENMASK(11, 0)
+#define AD5504_CMD_READ			BIT(15)
+#define AD5504_CMD_WRITE		0
+>>>>>>> v3.18
 =======
 #define AD5504_RES_MASK			GENMASK(11, 0)
 #define AD5504_CMD_READ			BIT(15)
@@ -53,7 +63,11 @@
 /**
  * struct ad5446_state - driver instance specific data
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @us:			spi_device
+=======
+ * @spi:			spi_device
+>>>>>>> v3.18
 =======
  * @spi:			spi_device
 >>>>>>> v3.18
@@ -62,8 +76,13 @@
  * @pwr_down_mask	power down mask
  * @pwr_down_mode	current power down mode
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
+=======
+ * @data:		transfer buffer
+ */
+>>>>>>> v3.18
 =======
  * @data:		transfer buffer
  */
@@ -75,6 +94,11 @@ struct ad5504_state {
 	unsigned			pwr_down_mask;
 	unsigned			pwr_down_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	__be16				data[2] ____cacheline_aligned;
+>>>>>>> v3.18
 =======
 
 	__be16				data[2] ____cacheline_aligned;
@@ -90,6 +114,7 @@ enum ad5504_supported_device_ids {
 	ID_AD5501,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ad5504_spi_write(struct spi_device *spi, u8 addr, u16 val)
 {
@@ -117,6 +142,8 @@ static int ad5504_spi_read(struct spi_device *spi, u8 addr)
 
 	return be16_to_cpu(val) & AD5504_RES_MASK;
 =======
+=======
+>>>>>>> v3.18
 static int ad5504_spi_write(struct ad5504_state *st, u8 addr, u16 val)
 {
 	st->data[0] = cpu_to_be16(AD5504_CMD_WRITE | AD5504_ADDR(addr) |
@@ -140,6 +167,9 @@ static int ad5504_spi_read(struct ad5504_state *st, u8 addr)
 		return ret;
 
 	return be16_to_cpu(st->data[1]) & AD5504_RES_MASK;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -151,7 +181,10 @@ static int ad5504_read_raw(struct iio_dev *indio_dev,
 {
 	struct ad5504_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long scale_uv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int ret;
@@ -159,7 +192,11 @@ static int ad5504_read_raw(struct iio_dev *indio_dev,
 	switch (m) {
 	case IIO_CHAN_INFO_RAW:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = ad5504_spi_read(st->spi, chan->address);
+=======
+		ret = ad5504_spi_read(st, chan->address);
+>>>>>>> v3.18
 =======
 		ret = ad5504_spi_read(st, chan->address);
 >>>>>>> v3.18
@@ -171,11 +208,17 @@ static int ad5504_read_raw(struct iio_dev *indio_dev,
 		return IIO_VAL_INT;
 	case IIO_CHAN_INFO_SCALE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		scale_uv = (st->vref_mv * 1000) >> chan->scan_type.realbits;
 		*val =  scale_uv / 1000;
 		*val2 = (scale_uv % 1000) * 1000;
 		return IIO_VAL_INT_PLUS_MICRO;
 
+=======
+		*val = st->vref_mv;
+		*val2 = chan->scan_type.realbits;
+		return IIO_VAL_FRACTIONAL_LOG2;
+>>>>>>> v3.18
 =======
 		*val = st->vref_mv;
 		*val2 = chan->scan_type.realbits;
@@ -193,7 +236,10 @@ static int ad5504_write_raw(struct iio_dev *indio_dev,
 {
 	struct ad5504_state *st = iio_priv(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -203,6 +249,7 @@ static int ad5504_write_raw(struct iio_dev *indio_dev,
 			return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ad5504_spi_write(st->spi, chan->address, val);
 	default:
 		ret = -EINVAL;
@@ -210,10 +257,15 @@ static int ad5504_write_raw(struct iio_dev *indio_dev,
 
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 		return ad5504_spi_write(st, chan->address, val);
 	default:
 		return -EINVAL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -274,7 +326,11 @@ static ssize_t ad5504_write_dac_powerdown(struct iio_dev *indio_dev,
 		st->pwr_down_mask &= ~(1 << chan->channel);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = ad5504_spi_write(st->spi, AD5504_ADDR_CTRL,
+=======
+	ret = ad5504_spi_write(st, AD5504_ADDR_CTRL,
+>>>>>>> v3.18
 =======
 	ret = ad5504_spi_write(st, AD5504_ADDR_CTRL,
 >>>>>>> v3.18
@@ -283,7 +339,11 @@ static ssize_t ad5504_write_dac_powerdown(struct iio_dev *indio_dev,
 
 	/* writes to the CTRL register must be followed by a NOOP */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ad5504_spi_write(st->spi, AD5504_ADDR_NOOP, 0);
+=======
+	ad5504_spi_write(st, AD5504_ADDR_NOOP, 0);
+>>>>>>> v3.18
 =======
 	ad5504_spi_write(st, AD5504_ADDR_NOOP, 0);
 >>>>>>> v3.18
@@ -330,13 +390,19 @@ static const struct iio_chan_spec_ext_info ad5504_ext_info[] = {
 		.read = ad5504_read_dac_powerdown,
 		.write = ad5504_write_dac_powerdown,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	},
 	IIO_ENUM("powerdown_mode", true, &ad5504_powerdown_mode_enum),
 =======
+=======
+>>>>>>> v3.18
 		.shared = IIO_SEPARATE,
 	},
 	IIO_ENUM("powerdown_mode", IIO_SHARED_BY_TYPE,
 		 &ad5504_powerdown_mode_enum),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	IIO_ENUM_AVAILABLE("powerdown_mode", &ad5504_powerdown_mode_enum),
 	{ },
@@ -351,13 +417,19 @@ static const struct iio_chan_spec_ext_info ad5504_ext_info[] = {
 	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
 	.address = AD5504_ADDR_DAC(_chan), \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', 12, 16, 0), \
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = { \
 		.sign = 'u', \
 		.realbits = 12, \
 		.storagebits = 16, \
 	}, \
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.ext_info = ad5504_ext_info, \
 }
@@ -378,6 +450,7 @@ static int ad5504_probe(struct spi_device *spi)
 	int ret, voltage_uv = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
 	if (indio_dev == NULL) {
 		ret = -ENOMEM;
@@ -389,6 +462,8 @@ static int ad5504_probe(struct spi_device *spi)
 		if (ret)
 			goto error_put_reg;
 =======
+=======
+>>>>>>> v3.18
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 	if (!indio_dev)
 		return -ENOMEM;
@@ -397,6 +472,9 @@ static int ad5504_probe(struct spi_device *spi)
 		ret = regulator_enable(reg);
 		if (ret)
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		ret = regulator_get_voltage(reg);
@@ -429,7 +507,11 @@ static int ad5504_probe(struct spi_device *spi)
 
 	if (spi->irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = request_threaded_irq(spi->irq,
+=======
+		ret = devm_request_threaded_irq(&spi->dev, spi->irq,
+>>>>>>> v3.18
 =======
 		ret = devm_request_threaded_irq(&spi->dev, spi->irq,
 >>>>>>> v3.18
@@ -444,6 +526,7 @@ static int ad5504_probe(struct spi_device *spi)
 
 	ret = iio_device_register(indio_dev);
 	if (ret)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_free_irq;
 
@@ -462,6 +545,8 @@ error_put_reg:
 	iio_device_free(indio_dev);
 error_ret:
 =======
+=======
+>>>>>>> v3.18
 		goto error_disable_reg;
 
 	return 0;
@@ -470,6 +555,9 @@ error_disable_reg:
 	if (!IS_ERR(reg))
 		regulator_disable(reg);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -481,6 +569,7 @@ static int ad5504_remove(struct spi_device *spi)
 
 	iio_device_unregister(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (spi->irq)
 		free_irq(spi->irq, indio_dev);
 
@@ -489,6 +578,11 @@ static int ad5504_remove(struct spi_device *spi)
 		regulator_put(st->reg);
 	}
 	iio_device_free(indio_dev);
+=======
+
+	if (!IS_ERR(st->reg))
+		regulator_disable(st->reg);
+>>>>>>> v3.18
 =======
 
 	if (!IS_ERR(st->reg))

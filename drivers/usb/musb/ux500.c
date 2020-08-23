@@ -22,15 +22,21 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/clk.h>
 #include <linux/err.h>
 #include <linux/io.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/err.h>
 #include <linux/io.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_device.h>
 #include <linux/usb/musb-ux500.h>
@@ -38,7 +44,10 @@
 #include "musb_core.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct musb_hdrc_config ux500_musb_hdrc_config = {
 	.multipoint	= true,
 	.dyn_fifo	= true,
@@ -46,6 +55,9 @@ static struct musb_hdrc_config ux500_musb_hdrc_config = {
 	.ram_bits	= 16,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ux500_glue {
 	struct device		*dev;
@@ -205,10 +217,13 @@ static const struct musb_platform_ops ux500_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ux500_probe(struct platform_device *pdev)
 {
 	struct musb_hdrc_platform_data	*pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 static struct musb_hdrc_platform_data *
 ux500_of_probe(struct platform_device *pdev, struct device_node *np)
 {
@@ -243,6 +258,9 @@ static int ux500_probe(struct platform_device *pdev)
 	struct resource musb_resources[2];
 	struct musb_hdrc_platform_data	*pdata = dev_get_platdata(&pdev->dev);
 	struct device_node		*np = pdev->dev.of_node;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct platform_device		*musb;
 	struct ux500_glue		*glue;
@@ -250,8 +268,11 @@ static int ux500_probe(struct platform_device *pdev)
 	int				ret = -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	glue = kzalloc(sizeof(*glue), GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	if (!pdata) {
 		if (np) {
 			pdata = ux500_of_probe(pdev, np);
@@ -266,6 +287,9 @@ static int ux500_probe(struct platform_device *pdev)
 	}
 
 	glue = devm_kzalloc(&pdev->dev, sizeof(*glue), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!glue) {
 		dev_err(&pdev->dev, "failed to allocate glue context\n");
@@ -276,6 +300,7 @@ static int ux500_probe(struct platform_device *pdev)
 	if (!musb) {
 		dev_err(&pdev->dev, "failed to allocate musb device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err1;
 	}
 
@@ -285,6 +310,8 @@ static int ux500_probe(struct platform_device *pdev)
 		ret = PTR_ERR(clk);
 		goto err3;
 =======
+=======
+>>>>>>> v3.18
 		goto err0;
 	}
 
@@ -293,6 +320,9 @@ static int ux500_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to get clock\n");
 		ret = PTR_ERR(clk);
 		goto err1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -300,17 +330,23 @@ static int ux500_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to enable clock\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err4;
 	}
 
 	musb->dev.parent		= &pdev->dev;
 	musb->dev.dma_mask		= pdev->dev.dma_mask;
 =======
+=======
+>>>>>>> v3.18
 		goto err1;
 	}
 
 	musb->dev.parent		= &pdev->dev;
 	musb->dev.dma_mask		= &pdev->dev.coherent_dma_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	musb->dev.coherent_dma_mask	= pdev->dev.coherent_dma_mask;
 
@@ -319,6 +355,7 @@ static int ux500_probe(struct platform_device *pdev)
 	glue->clk			= clk;
 
 	pdata->platform_ops		= &ux500_ops;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	platform_set_drvdata(pdev, glue);
@@ -329,6 +366,8 @@ static int ux500_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to add resources\n");
 		goto err5;
 =======
+=======
+>>>>>>> v3.18
 	pdata->config 			= &ux500_musb_hdrc_config;
 
 	platform_set_drvdata(pdev, glue);
@@ -351,6 +390,9 @@ static int ux500_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to add resources\n");
 		goto err2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -358,7 +400,11 @@ static int ux500_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to add platform_data\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err5;
+=======
+		goto err2;
+>>>>>>> v3.18
 =======
 		goto err2;
 >>>>>>> v3.18
@@ -368,7 +414,11 @@ static int ux500_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to register musb device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err5;
+=======
+		goto err2;
+>>>>>>> v3.18
 =======
 		goto err2;
 >>>>>>> v3.18
@@ -376,6 +426,7 @@ static int ux500_probe(struct platform_device *pdev)
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err5:
 	clk_disable_unprepare(clk);
@@ -389,11 +440,16 @@ err3:
 err1:
 	kfree(glue);
 =======
+=======
+>>>>>>> v3.18
 err2:
 	clk_disable_unprepare(clk);
 
 err1:
 	platform_device_put(musb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 err0:
@@ -407,8 +463,11 @@ static int ux500_remove(struct platform_device *pdev)
 	platform_device_unregister(glue->musb);
 	clk_disable_unprepare(glue->clk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(glue->clk);
 	kfree(glue);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -444,6 +503,7 @@ static int ux500_resume(struct device *dev)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static const struct dev_pm_ops ux500_pm_ops = {
 	.suspend	= ux500_suspend,
@@ -455,6 +515,8 @@ static const struct dev_pm_ops ux500_pm_ops = {
 #define DEV_PM_OPS	NULL
 #endif
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 static SIMPLE_DEV_PM_OPS(ux500_pm_ops, ux500_suspend, ux500_resume);
@@ -463,6 +525,9 @@ static const struct of_device_id ux500_match[] = {
         { .compatible = "stericsson,db8500-musb", },
         {}
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct platform_driver ux500_driver = {
@@ -471,7 +536,12 @@ static struct platform_driver ux500_driver = {
 	.driver		= {
 		.name	= "musb-ux500",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.pm	= DEV_PM_OPS,
+=======
+		.pm	= &ux500_pm_ops,
+		.of_match_table = ux500_match,
+>>>>>>> v3.18
 =======
 		.pm	= &ux500_pm_ops,
 		.of_match_table = ux500_match,

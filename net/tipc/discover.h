@@ -40,6 +40,7 @@
 struct tipc_link_req;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int tipc_disc_create(struct tipc_bearer *b_ptr, struct tipc_media_addr *dest,
 		     u32 dest_domain);
 void tipc_disc_delete(struct tipc_link_req *req);
@@ -47,12 +48,17 @@ void tipc_disc_add_dest(struct tipc_link_req *req);
 void tipc_disc_remove_dest(struct tipc_link_req *req);
 void tipc_disc_recv_msg(struct sk_buff *buf, struct tipc_bearer *b_ptr);
 =======
+=======
+>>>>>>> v3.18
 int tipc_disc_create(struct tipc_bearer *b_ptr, struct tipc_media_addr *dest);
 void tipc_disc_delete(struct tipc_link_req *req);
 void tipc_disc_reset(struct tipc_bearer *b_ptr);
 void tipc_disc_add_dest(struct tipc_link_req *req);
 void tipc_disc_remove_dest(struct tipc_link_req *req);
 void tipc_disc_rcv(struct sk_buff *buf, struct tipc_bearer *b_ptr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

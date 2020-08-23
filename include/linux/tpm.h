@@ -23,6 +23,11 @@
 #define __LINUX_TPM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TPM_DIGEST_SIZE 20	/* Max TPM v1.2 PCR size */
+
+>>>>>>> v3.18
 =======
 #define TPM_DIGEST_SIZE 20	/* Max TPM v1.2 PCR size */
 
@@ -33,7 +38,10 @@
 #define	TPM_ANY_NUM 0xFFFF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct tpm_chip;
 
 struct tpm_class_ops {
@@ -49,6 +57,9 @@ struct tpm_class_ops {
 
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if defined(CONFIG_TCG_TPM) || defined(CONFIG_TCG_TPM_MODULE)
 

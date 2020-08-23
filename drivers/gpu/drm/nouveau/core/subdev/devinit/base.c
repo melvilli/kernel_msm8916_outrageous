@@ -25,6 +25,7 @@
 #include <core/option.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/devinit.h>
 #include <subdev/bios.h>
 #include <subdev/bios/init.h>
@@ -48,6 +49,8 @@ nouveau_devinit_fini(struct nouveau_devinit *devinit, bool suspend)
 
 	return nouveau_subdev_fini(&devinit->base, suspend);
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/bios.h>
 #include <subdev/bios/init.h>
 #include <subdev/vga.h>
@@ -98,6 +101,9 @@ _nouveau_devinit_dtor(struct nouveau_object *object)
 	nv_lockvgac(devinit, true);
 
 	nouveau_subdev_destroy(&devinit->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -108,6 +114,10 @@ nouveau_devinit_create_(struct nouveau_object *parent,
 			int size, void **pobject)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nouveau_devinit_impl *impl = (void *)oclass;
+>>>>>>> v3.18
 =======
 	struct nouveau_devinit_impl *impl = (void *)oclass;
 >>>>>>> v3.18
@@ -123,6 +133,12 @@ nouveau_devinit_create_(struct nouveau_object *parent,
 
 	devinit->post = nouveau_boolopt(device->cfgopt, "NvForcePost", false);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	devinit->meminit = impl->meminit;
+	devinit->pll_set = impl->pll_set;
+	devinit->mmio    = impl->mmio;
+>>>>>>> v3.18
 =======
 	devinit->meminit = impl->meminit;
 	devinit->pll_set = impl->pll_set;

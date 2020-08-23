@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -189,7 +193,11 @@ acpi_ut_execute_SUB(struct acpi_namespace_node *device_node,
 	*return_id = sub;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -350,6 +358,10 @@ acpi_ut_execute_CID(struct acpi_namespace_node *device_node,
 		switch (cid_objects[i]->common.type) {
 		case ACPI_TYPE_INTEGER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -358,6 +370,10 @@ acpi_ut_execute_CID(struct acpi_namespace_node *device_node,
 
 		case ACPI_TYPE_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -366,6 +382,10 @@ acpi_ut_execute_CID(struct acpi_namespace_node *device_node,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

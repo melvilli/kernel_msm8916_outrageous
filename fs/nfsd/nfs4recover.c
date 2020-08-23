@@ -59,7 +59,11 @@ struct nfsd4_client_tracking_ops {
 	void (*remove)(struct nfs4_client *);
 	int (*check)(struct nfs4_client *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*grace_done)(struct nfsd_net *, time_t);
+=======
+	void (*grace_done)(struct nfsd_net *);
+>>>>>>> v3.18
 =======
 	void (*grace_done)(struct nfsd_net *);
 >>>>>>> v3.18
@@ -178,8 +182,11 @@ nfsd4_create_clid_dir(struct nfs4_client *clp)
 	struct nfsd_net *nn = net_generic(clp->net, nfsd_net_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("NFSD: nfsd4_create_clid_dir for \"%s\"\n", dname);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (test_and_set_bit(NFSD4_CLIENT_STABLE, &clp->cl_flags))
@@ -198,7 +205,11 @@ nfsd4_create_clid_dir(struct nfs4_client *clp)
 	status = mnt_want_write_file(nn->rec_file);
 	if (status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		goto out_creds;
+>>>>>>> v3.18
 =======
 		goto out_creds;
 >>>>>>> v3.18
@@ -242,6 +253,10 @@ out_unlock:
 	}
 	mnt_drop_write_file(nn->rec_file);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+out_creds:
+>>>>>>> v3.18
 =======
 out_creds:
 >>>>>>> v3.18
@@ -403,8 +418,13 @@ purge_old(struct dentry *parent, struct dentry *child, struct nfsd_net *nn)
 	status = vfs_rmdir(parent->d_inode, child);
 	if (status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("failed to remove client recovery directory %s\n",
 				child->d_name.name);
+=======
+		printk("failed to remove client recovery directory %pd\n",
+				child);
+>>>>>>> v3.18
 =======
 		printk("failed to remove client recovery directory %pd\n",
 				child);
@@ -415,7 +435,11 @@ purge_old(struct dentry *parent, struct dentry *child, struct nfsd_net *nn)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd4_recdir_purge_old(struct nfsd_net *nn, time_t boot_time)
+=======
+nfsd4_recdir_purge_old(struct nfsd_net *nn)
+>>>>>>> v3.18
 =======
 nfsd4_recdir_purge_old(struct nfsd_net *nn)
 >>>>>>> v3.18
@@ -437,7 +461,11 @@ out:
 	if (status)
 		printk("nfsd4: failed to purge old clients from recovery"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			" directory %s\n", nn->rec_file->f_path.dentry->d_name.name);
+=======
+			" directory %pD\n", nn->rec_file);
+>>>>>>> v3.18
 =======
 			" directory %pD\n", nn->rec_file);
 >>>>>>> v3.18
@@ -448,8 +476,13 @@ load_recdir(struct dentry *parent, struct dentry *child, struct nfsd_net *nn)
 {
 	if (child->d_name.len != HEXDIR_LEN - 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("nfsd4: illegal name %s in recovery directory\n",
 				child->d_name.name);
+=======
+		printk("nfsd4: illegal name %pd in recovery directory\n",
+				child);
+>>>>>>> v3.18
 =======
 		printk("nfsd4: illegal name %pd in recovery directory\n",
 				child);
@@ -473,7 +506,11 @@ nfsd4_recdir_load(struct net *net) {
 	if (status)
 		printk("nfsd4: failed loading clients from recovery"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			" directory %s\n", nn->rec_file->f_path.dentry->d_name.name);
+=======
+			" directory %pD\n", nn->rec_file);
+>>>>>>> v3.18
 =======
 			" directory %pD\n", nn->rec_file);
 >>>>>>> v3.18
@@ -519,7 +556,10 @@ nfsd4_init_recdir(struct net *net)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 nfsd4_shutdown_recdir(struct net *net)
 {
@@ -530,6 +570,9 @@ nfsd4_shutdown_recdir(struct net *net)
 	fput(nn->rec_file);
 	nn->rec_file = NULL;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int
@@ -565,11 +608,14 @@ nfsd4_load_reboot_recovery_data(struct net *net)
 
 	status = nfsd4_init_recdir(net);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!status)
 		status = nfsd4_recdir_load(net);
 	if (status)
 		printk(KERN_ERR "NFSD: Failure reading reboot recovery data\n");
 =======
+=======
+>>>>>>> v3.18
 	if (status)
 		return status;
 
@@ -577,6 +623,9 @@ nfsd4_load_reboot_recovery_data(struct net *net)
 	if (status)
 		nfsd4_shutdown_recdir(net);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status;
 }
@@ -609,6 +658,7 @@ err:
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd4_shutdown_recdir(struct nfsd_net *nn)
 {
 	if (!nn->rec_file)
@@ -620,13 +670,19 @@ nfsd4_shutdown_recdir(struct nfsd_net *nn)
 static void
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 nfsd4_legacy_tracking_exit(struct net *net)
 {
 	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
 
 	nfs4_release_reclaim(nn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nfsd4_shutdown_recdir(nn);
+=======
+	nfsd4_shutdown_recdir(net);
+>>>>>>> v3.18
 =======
 	nfsd4_shutdown_recdir(net);
 >>>>>>> v3.18
@@ -740,7 +796,10 @@ __cld_pipe_upcall(struct rpc_pipe *pipe, struct cld_msg *cmsg)
 
 	schedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_current_state(TASK_RUNNING);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1089,7 +1148,11 @@ nfsd4_cld_check(struct nfs4_client *clp)
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd4_cld_grace_done(struct nfsd_net *nn, time_t boot_time)
+=======
+nfsd4_cld_grace_done(struct nfsd_net *nn)
+>>>>>>> v3.18
 =======
 nfsd4_cld_grace_done(struct nfsd_net *nn)
 >>>>>>> v3.18
@@ -1106,7 +1169,11 @@ nfsd4_cld_grace_done(struct nfsd_net *nn)
 
 	cup->cu_msg.cm_cmd = Cld_GraceDone;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cup->cu_msg.cm_u.cm_gracetime = (int64_t)boot_time;
+=======
+	cup->cu_msg.cm_u.cm_gracetime = (int64_t)nn->boot_time;
+>>>>>>> v3.18
 =======
 	cup->cu_msg.cm_u.cm_gracetime = (int64_t)nn->boot_time;
 >>>>>>> v3.18
@@ -1143,6 +1210,11 @@ MODULE_PARM_DESC(cltrack_legacy_disable,
 #define LEGACY_TOPDIR_ENV_PREFIX "NFSDCLTRACK_LEGACY_TOPDIR="
 #define LEGACY_RECDIR_ENV_PREFIX "NFSDCLTRACK_LEGACY_RECDIR="
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define HAS_SESSION_ENV_PREFIX "NFSDCLTRACK_CLIENT_HAS_SESSION="
+#define GRACE_START_ENV_PREFIX "NFSDCLTRACK_GRACE_START="
+>>>>>>> v3.18
 =======
 #define HAS_SESSION_ENV_PREFIX "NFSDCLTRACK_CLIENT_HAS_SESSION="
 #define GRACE_START_ENV_PREFIX "NFSDCLTRACK_GRACE_START="
@@ -1212,11 +1284,14 @@ nfsd4_cltrack_legacy_recdir(const struct xdr_netobj *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 nfsd4_umh_cltrack_upcall(char *cmd, char *arg, char *legacy)
 {
 	char *envp[2];
 =======
+=======
+>>>>>>> v3.18
 static char *
 nfsd4_cltrack_client_has_session(struct nfs4_client *clp)
 {
@@ -1271,6 +1346,9 @@ static int
 nfsd4_umh_cltrack_upcall(char *cmd, char *arg, char *env0, char *env1)
 {
 	char *envp[3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char *argv[4];
 	int ret;
@@ -1283,17 +1361,23 @@ nfsd4_umh_cltrack_upcall(char *cmd, char *arg, char *env0, char *env1)
 	dprintk("%s: cmd: %s\n", __func__, cmd);
 	dprintk("%s: arg: %s\n", __func__, arg ? arg : "(null)");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("%s: legacy: %s\n", __func__, legacy ? legacy : "(null)");
 
 	envp[0] = legacy;
 	envp[1] = NULL;
 =======
+=======
+>>>>>>> v3.18
 	dprintk("%s: env0: %s\n", __func__, env0 ? env0 : "(null)");
 	dprintk("%s: env1: %s\n", __func__, env1 ? env1 : "(null)");
 
 	envp[0] = env0;
 	envp[1] = env1;
 	envp[2] = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	argv[0] = (char *)cltrack_prog;
@@ -1339,15 +1423,21 @@ bin_to_hex_dup(const unsigned char *src, int srclen)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd4_umh_cltrack_init(struct net __attribute__((unused)) *net)
 {
 =======
+=======
+>>>>>>> v3.18
 nfsd4_umh_cltrack_init(struct net *net)
 {
 	int ret;
 	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
 	char *grace_start = nfsd4_cltrack_grace_start(nn->boot_time);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* XXX: The usermode helper s not working in container yet. */
 	if (net != &init_net) {
@@ -1356,8 +1446,11 @@ nfsd4_umh_cltrack_init(struct net *net)
 		return -EINVAL;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nfsd4_umh_cltrack_upcall("init", NULL, NULL);
 =======
+=======
+>>>>>>> v3.18
 
 	ret = nfsd4_umh_cltrack_upcall("init", NULL, grace_start, NULL);
 	kfree(grace_start);
@@ -1378,6 +1471,9 @@ nfsd4_cltrack_upcall_unlock(struct nfs4_client *clp)
 	clear_bit(NFSD4_CLIENT_UPCALL_LOCK, &clp->cl_flags);
 	smp_mb__after_atomic();
 	wake_up_bit(&clp->cl_flags, NFSD4_CLIENT_UPCALL_LOCK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1385,8 +1481,11 @@ static void
 nfsd4_umh_cltrack_create(struct nfs4_client *clp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *hexid;
 =======
+=======
+>>>>>>> v3.18
 	char *hexid, *has_session, *grace_start;
 	struct nfsd_net *nn = net_generic(clp->net, nfsd_net_id);
 
@@ -1405,6 +1504,9 @@ nfsd4_umh_cltrack_create(struct nfs4_client *clp)
 	if (clp->cl_minorversion == 0 &&
 	    test_bit(NFSD4_CLIENT_STABLE, &clp->cl_flags))
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hexid = bin_to_hex_dup(clp->cl_name.data, clp->cl_name.len);
@@ -1413,8 +1515,11 @@ nfsd4_umh_cltrack_create(struct nfs4_client *clp)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nfsd4_umh_cltrack_upcall("create", hexid, NULL);
 =======
+=======
+>>>>>>> v3.18
 
 	has_session = nfsd4_cltrack_client_has_session(clp);
 	grace_start = nfsd4_cltrack_grace_start(nn->boot_time);
@@ -1426,6 +1531,9 @@ nfsd4_umh_cltrack_create(struct nfs4_client *clp)
 
 	kfree(has_session);
 	kfree(grace_start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(hexid);
 }
@@ -1436,6 +1544,12 @@ nfsd4_umh_cltrack_remove(struct nfs4_client *clp)
 	char *hexid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!test_bit(NFSD4_CLIENT_STABLE, &clp->cl_flags))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (!test_bit(NFSD4_CLIENT_STABLE, &clp->cl_flags))
 		return;
@@ -1447,8 +1561,11 @@ nfsd4_umh_cltrack_remove(struct nfs4_client *clp)
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nfsd4_umh_cltrack_upcall("remove", hexid, NULL);
 =======
+=======
+>>>>>>> v3.18
 
 	nfsd4_cltrack_upcall_lock(clp);
 	if (test_bit(NFSD4_CLIENT_STABLE, &clp->cl_flags) &&
@@ -1456,6 +1573,9 @@ nfsd4_umh_cltrack_remove(struct nfs4_client *clp)
 		clear_bit(NFSD4_CLIENT_STABLE, &clp->cl_flags);
 	nfsd4_cltrack_upcall_unlock(clp);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(hexid);
 }
@@ -1465,12 +1585,18 @@ nfsd4_umh_cltrack_check(struct nfs4_client *clp)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *hexid, *legacy;
 =======
+=======
+>>>>>>> v3.18
 	char *hexid, *has_session, *legacy;
 
 	if (test_bit(NFSD4_CLIENT_STABLE, &clp->cl_flags))
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hexid = bin_to_hex_dup(clp->cl_name.data, clp->cl_name.len);
@@ -1479,11 +1605,14 @@ nfsd4_umh_cltrack_check(struct nfs4_client *clp)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	legacy = nfsd4_cltrack_legacy_recdir(&clp->cl_name);
 	ret = nfsd4_umh_cltrack_upcall("check", hexid, legacy);
 	kfree(legacy);
 	kfree(hexid);
 =======
+=======
+>>>>>>> v3.18
 
 	has_session = nfsd4_cltrack_client_has_session(clp);
 	legacy = nfsd4_cltrack_legacy_recdir(&clp->cl_name);
@@ -1501,14 +1630,21 @@ nfsd4_umh_cltrack_check(struct nfs4_client *clp)
 	kfree(legacy);
 	kfree(hexid);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd4_umh_cltrack_grace_done(struct nfsd_net __attribute__((unused)) *nn,
 				time_t boot_time)
+=======
+nfsd4_umh_cltrack_grace_done(struct nfsd_net *nn)
+>>>>>>> v3.18
 =======
 nfsd4_umh_cltrack_grace_done(struct nfsd_net *nn)
 >>>>>>> v3.18
@@ -1517,9 +1653,15 @@ nfsd4_umh_cltrack_grace_done(struct nfsd_net *nn)
 	char timestr[22]; /* FIXME: better way to determine max size? */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(timestr, "%ld", boot_time);
 	legacy = nfsd4_cltrack_legacy_topdir();
 	nfsd4_umh_cltrack_upcall("gracedone", timestr, legacy);
+=======
+	sprintf(timestr, "%ld", nn->boot_time);
+	legacy = nfsd4_cltrack_legacy_topdir();
+	nfsd4_umh_cltrack_upcall("gracedone", timestr, legacy, NULL);
+>>>>>>> v3.18
 =======
 	sprintf(timestr, "%ld", nn->boot_time);
 	legacy = nfsd4_cltrack_legacy_topdir();
@@ -1628,15 +1770,21 @@ nfsd4_client_record_check(struct nfs4_client *clp)
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 nfsd4_record_grace_done(struct nfsd_net *nn, time_t boot_time)
 {
 	if (nn->client_tracking_ops)
 		nn->client_tracking_ops->grace_done(nn, boot_time);
 =======
+=======
+>>>>>>> v3.18
 nfsd4_record_grace_done(struct nfsd_net *nn)
 {
 	if (nn->client_tracking_ops)
 		nn->client_tracking_ops->grace_done(nn);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

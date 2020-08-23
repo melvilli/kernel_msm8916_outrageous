@@ -5,6 +5,10 @@
 #include <linux/cache.h>
 #include <asm/asm-offsets.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/syscall.h>
+>>>>>>> v3.18
 =======
 #include <asm/syscall.h>
 >>>>>>> v3.18
@@ -24,11 +28,17 @@
 #define __SYSCALL_64(nr, sym, compat) [nr] = sym,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef void (*sys_call_ptr_t)(void);
 
 extern void sys_ni_syscall(void);
 
 const sys_call_ptr_t sys_call_table[__NR_syscall_max+1] = {
+=======
+extern void sys_ni_syscall(void);
+
+asmlinkage const sys_call_ptr_t sys_call_table[__NR_syscall_max+1] = {
+>>>>>>> v3.18
 =======
 extern void sys_ni_syscall(void);
 

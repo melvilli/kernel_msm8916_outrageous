@@ -13,7 +13,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -27,6 +30,10 @@
 #include <linux/kfifo.h>
 #include <linux/spinlock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/iio/iio.h>
+>>>>>>> v3.18
 =======
 #include <linux/iio/iio.h>
 >>>>>>> v3.18
@@ -124,7 +131,11 @@ int inv_mpu6050_switch_engine(struct inv_mpu6050_state *st, bool en, u32 mask)
 
 	if (en) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Wait for output stablize */
+=======
+		/* Wait for output stabilize */
+>>>>>>> v3.18
 =======
 		/* Wait for output stabilize */
 >>>>>>> v3.18
@@ -676,6 +687,7 @@ static int inv_mpu_probe(struct i2c_client *client,
 
 	if (!i2c_check_functionality(client->adapter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					I2C_FUNC_SMBUS_READ_I2C_BLOCK |
 					I2C_FUNC_SMBUS_WRITE_I2C_BLOCK)) {
 		result = -ENOSYS;
@@ -691,6 +703,8 @@ static int inv_mpu_probe(struct i2c_client *client,
 	pdata = (struct inv_mpu6050_platform_data
 			*)dev_get_platdata(&client->dev);
 =======
+=======
+>>>>>>> v3.18
 		I2C_FUNC_SMBUS_I2C_BLOCK))
 		return -ENOSYS;
 
@@ -701,6 +715,9 @@ static int inv_mpu_probe(struct i2c_client *client,
 	st = iio_priv(indio_dev);
 	st->client = client;
 	pdata = dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pdata)
 		st->plat_data = *pdata;
@@ -708,7 +725,11 @@ static int inv_mpu_probe(struct i2c_client *client,
 	result = inv_check_and_setup_chip(st, id);
 	if (result)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
+=======
+		return result;
+>>>>>>> v3.18
 =======
 		return result;
 >>>>>>> v3.18
@@ -718,7 +739,11 @@ static int inv_mpu_probe(struct i2c_client *client,
 		dev_err(&client->dev,
 			"Could not initialize device.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
+=======
+		return result;
+>>>>>>> v3.18
 =======
 		return result;
 >>>>>>> v3.18
@@ -741,7 +766,11 @@ static int inv_mpu_probe(struct i2c_client *client,
 		dev_err(&st->client->dev, "configure buffer fail %d\n",
 				result);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_free;
+=======
+		return result;
+>>>>>>> v3.18
 =======
 		return result;
 >>>>>>> v3.18
@@ -767,10 +796,13 @@ out_remove_trigger:
 out_unreg_ring:
 	iio_triggered_buffer_cleanup(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free:
 	iio_device_free(indio_dev);
 out_no_free:
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return result;
@@ -785,7 +817,10 @@ static int inv_mpu_remove(struct i2c_client *client)
 	inv_mpu6050_remove_trigger(st);
 	iio_triggered_buffer_cleanup(indio_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -818,6 +853,10 @@ static SIMPLE_DEV_PM_OPS(inv_mpu_pmops, inv_mpu_suspend, inv_mpu_resume);
 static const struct i2c_device_id inv_mpu_id[] = {
 	{"mpu6050", INV_MPU6050},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"mpu6500", INV_MPU6500},
+>>>>>>> v3.18
 =======
 	{"mpu6500", INV_MPU6500},
 >>>>>>> v3.18

@@ -37,7 +37,10 @@
 #include <linux/slab.h>
 #include <media/v4l2-device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <media/v4l2-ctrls.h>
@@ -61,7 +64,10 @@ struct bt819 {
 
 	v4l2_std_id norm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ident;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int input;
@@ -224,6 +230,7 @@ static int bt819_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pstd)
 	int status = bt819_read(decoder, 0x00);
 	int res = V4L2_IN_ST_NO_SIGNAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	v4l2_std_id std;
 
 	if ((status & 0x80))
@@ -234,6 +241,8 @@ static int bt819_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pstd)
 	else
 		std = V4L2_STD_NTSC;
 =======
+=======
+>>>>>>> v3.18
 	v4l2_std_id std = pstd ? *pstd : V4L2_STD_ALL;
 
 	if ((status & 0x80))
@@ -245,6 +254,9 @@ static int bt819_status(struct v4l2_subdev *sd, u32 *pstatus, v4l2_std_id *pstd)
 		std &= V4L2_STD_PAL;
 	else
 		std &= V4L2_STD_NTSC;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (pstd)
 		*pstd = std;
@@ -394,6 +406,7 @@ static int bt819_s_ctrl(struct v4l2_ctrl *ctrl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bt819_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip)
 {
 	struct bt819 *decoder = to_bt819(sd);
@@ -404,6 +417,8 @@ static int bt819_g_chip_ident(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* ----------------------------------------------------------------------- */
 
 static const struct v4l2_ctrl_ops bt819_ctrl_ops = {
@@ -412,7 +427,10 @@ static const struct v4l2_ctrl_ops bt819_ctrl_ops = {
 
 static const struct v4l2_subdev_core_ops bt819_core_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident = bt819_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.g_ext_ctrls = v4l2_subdev_g_ext_ctrls,
@@ -423,15 +441,21 @@ static const struct v4l2_subdev_core_ops bt819_core_ops = {
 	.queryctrl = v4l2_subdev_queryctrl,
 	.querymenu = v4l2_subdev_querymenu,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.s_std = bt819_s_std,
 };
 
 static const struct v4l2_subdev_video_ops bt819_video_ops = {
 =======
+=======
+>>>>>>> v3.18
 };
 
 static const struct v4l2_subdev_video_ops bt819_video_ops = {
 	.s_std = bt819_s_std,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.s_routing = bt819_s_routing,
 	.s_stream = bt819_s_stream,
@@ -459,7 +483,11 @@ static int bt819_probe(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decoder = kzalloc(sizeof(struct bt819), GFP_KERNEL);
+=======
+	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	decoder = devm_kzalloc(&client->dev, sizeof(*decoder), GFP_KERNEL);
 >>>>>>> v3.18
@@ -473,6 +501,7 @@ static int bt819_probe(struct i2c_client *client,
 	case 0x70:
 		name = "bt819a";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		decoder->ident = V4L2_IDENT_BT819A;
 		break;
 	case 0x60:
@@ -483,12 +512,17 @@ static int bt819_probe(struct i2c_client *client,
 		name = "bt815a";
 		decoder->ident = V4L2_IDENT_BT815A;
 =======
+=======
+>>>>>>> v3.18
 		break;
 	case 0x60:
 		name = "bt817a";
 		break;
 	case 0x20:
 		name = "bt815a";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -523,7 +557,10 @@ static int bt819_probe(struct i2c_client *client,
 
 		v4l2_ctrl_handler_free(&decoder->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kfree(decoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		return err;
@@ -540,7 +577,10 @@ static int bt819_remove(struct i2c_client *client)
 	v4l2_device_unregister_subdev(sd);
 	v4l2_ctrl_handler_free(&decoder->hdl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(decoder);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

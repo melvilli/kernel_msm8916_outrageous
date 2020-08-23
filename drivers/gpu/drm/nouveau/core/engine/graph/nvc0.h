@@ -31,6 +31,12 @@
 #include <core/option.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <nvif/unpack.h>
+#include <nvif/class.h>
+
+>>>>>>> v3.18
 =======
 #include <nvif/unpack.h>
 #include <nvif/class.h>
@@ -41,6 +47,11 @@
 #include <subdev/bar.h>
 #include <subdev/timer.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <subdev/mc.h>
+#include <subdev/ltc.h>
+>>>>>>> v3.18
 =======
 #include <subdev/mc.h>
 #include <subdev/ltc.h>
@@ -50,13 +61,19 @@
 #include <engine/graph.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GPC_MAX 4
 #define TPC_MAX 32
 =======
+=======
+>>>>>>> v3.18
 #include "fuc/os.h"
 
 #define GPC_MAX 32
 #define TPC_MAX (GPC_MAX * 8)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define ROP_BCAST(r)      (0x408800 + (r))
@@ -64,6 +81,10 @@
 #define GPC_BCAST(r)      (0x418000 + (r))
 #define GPC_UNIT(t, r)    (0x500000 + (t) * 0x8000 + (r))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PPC_UNIT(t, m, r) (0x503000 + (t) * 0x8000 + (m) * 0x200 + (r))
+>>>>>>> v3.18
 =======
 #define PPC_UNIT(t, m, r) (0x503000 + (t) * 0x8000 + (m) * 0x200 + (r))
 >>>>>>> v3.18
@@ -80,7 +101,11 @@ struct nvc0_graph_mmio {
 	u32 data;
 	u32 shift;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 buffer;
+=======
+	int buffer;
+>>>>>>> v3.18
 =======
 	int buffer;
 >>>>>>> v3.18
@@ -92,7 +117,10 @@ struct nvc0_graph_fuc {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct nvc0_graph_zbc_color {
 	u32 format;
 	u32 ds[4];
@@ -105,6 +133,9 @@ struct nvc0_graph_zbc_depth {
 	u32 l2;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nvc0_graph_priv {
 	struct nouveau_graph base;
@@ -116,6 +147,12 @@ struct nvc0_graph_priv {
 	bool firmware;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nvc0_graph_zbc_color zbc_color[NOUVEAU_LTC_MAX_ZBC_CNT];
+	struct nvc0_graph_zbc_depth zbc_depth[NOUVEAU_LTC_MAX_ZBC_CNT];
+
+>>>>>>> v3.18
 =======
 	struct nvc0_graph_zbc_color zbc_color[NOUVEAU_LTC_MAX_ZBC_CNT];
 	struct nvc0_graph_zbc_depth zbc_depth[NOUVEAU_LTC_MAX_ZBC_CNT];
@@ -126,6 +163,11 @@ struct nvc0_graph_priv {
 	u8 tpc_nr[GPC_MAX];
 	u8 tpc_total;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 ppc_nr[GPC_MAX];
+	u8 ppc_tpc_nr[GPC_MAX][4];
+>>>>>>> v3.18
 =======
 	u8 ppc_nr[GPC_MAX];
 	u8 ppc_tpc_nr[GPC_MAX][4];
@@ -154,6 +196,7 @@ struct nvc0_graph_chan {
 	} data[4];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline u32
 nvc0_graph_class(void *obj)
@@ -225,6 +268,8 @@ void nvc0_graph_context_dtor(struct nouveau_object *);
 
 u64 nvc0_graph_units(struct nouveau_graph *);
 =======
+=======
+>>>>>>> v3.18
 int  nvc0_graph_context_ctor(struct nouveau_object *, struct nouveau_object *,
 			     struct nouveau_oclass *, void *, u32,
 			     struct nouveau_object **);
@@ -364,6 +409,9 @@ extern const struct nvc0_graph_init nvf0_graph_init_sm_0[];
 
 extern const struct nvc0_graph_init nv108_graph_init_gpc_unk_0[];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

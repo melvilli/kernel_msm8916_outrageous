@@ -594,14 +594,20 @@ static void rds_send_remove_from_sock(struct list_head *messages, int status)
 			}
 			rs = rm->m_rs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			sock_hold(rds_rs_to_sk(rs));
 		}
 =======
+=======
+>>>>>>> v3.18
 			if (rs)
 				sock_hold(rds_rs_to_sk(rs));
 		}
 		if (!rs)
 			goto unlock_and_drop;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_lock(&rs->rs_lock);
 
@@ -647,9 +653,12 @@ unlock_and_drop:
  * assigned the m_ack_seq yet - but that's fine as long as tcp_is_acked
  * checks the RDS_MSG_HAS_ACK_SEQ bit.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * XXX It's not clear to me how this is safely serialized with socket
  * destruction.  Maybe it should bail if it sees SOCK_DEAD.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -723,6 +732,12 @@ void rds_send_drop_to(struct rds_sock *rs, struct sockaddr_in *dest)
 		if (!test_and_clear_bit(RDS_MSG_ON_CONN, &rm->m_flags)) {
 			spin_unlock_irqrestore(&conn->c_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			spin_lock_irqsave(&rm->m_rs_lock, flags);
+			rm->m_rs = NULL;
+			spin_unlock_irqrestore(&rm->m_rs_lock, flags);
+>>>>>>> v3.18
 =======
 			spin_lock_irqsave(&rm->m_rs_lock, flags);
 			rm->m_rs = NULL;
@@ -940,7 +955,11 @@ int rds_sendmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg,
 	struct sock *sk = sock->sk;
 	struct rds_sock *rs = rds_sk_to_rs(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in *usin = (struct sockaddr_in *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_in *, usin, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_in *, usin, msg->msg_name);
 >>>>>>> v3.18
@@ -977,6 +996,7 @@ int rds_sendmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lock_sock(sk);
 	if (daddr == 0 || rs->rs_bound_addr == 0) {
 		release_sock(sk);
@@ -985,11 +1005,16 @@ int rds_sendmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg,
 	}
 	release_sock(sk);
 =======
+=======
+>>>>>>> v3.18
 	/* racing with another thread binding seems ok here */
 	if (daddr == 0 || rs->rs_bound_addr == 0) {
 		ret = -ENOTCONN; /* XXX not a great errno */
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* size of rm including all sgs */

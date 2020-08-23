@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -312,7 +316,10 @@ acpi_ex_resolve_operands(u16 opcode,
 		case ARGI_FIXED_TARGET:	/* No implicit conversion before store to target */
 		case ARGI_SIMPLE_TARGET:	/* Name, Local, or arg - no implicit conversion  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -334,7 +341,10 @@ acpi_ex_resolve_operands(u16 opcode,
 
 		case ARGI_DATAREFOBJ:	/* Store operator only */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -354,7 +364,13 @@ acpi_ex_resolve_operands(u16 opcode,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* All cases covered above */
+=======
+
+			/* All cases covered above */
+
+>>>>>>> v3.18
 =======
 
 			/* All cases covered above */
@@ -450,7 +466,10 @@ acpi_ex_resolve_operands(u16 opcode,
 
 		case ARGI_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -479,7 +498,10 @@ acpi_ex_resolve_operands(u16 opcode,
 
 		case ARGI_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/*
@@ -585,6 +607,10 @@ acpi_ex_resolve_operands(u16 opcode,
 
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -611,6 +637,10 @@ acpi_ex_resolve_operands(u16 opcode,
 
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -636,6 +666,10 @@ acpi_ex_resolve_operands(u16 opcode,
 
 			default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -717,7 +751,11 @@ acpi_ex_resolve_operands(u16 opcode,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	      next_operand:
+=======
+next_operand:
+>>>>>>> v3.18
 =======
 next_operand:
 >>>>>>> v3.18

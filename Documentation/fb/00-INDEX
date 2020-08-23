@@ -6,6 +6,11 @@ please mail me.
 00-INDEX
 	- this file.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+api.txt
+	- The frame buffer API between applications and buffer devices.
+>>>>>>> v3.18
 =======
 api.txt
 	- The frame buffer API between applications and buffer devices.
@@ -57,6 +62,11 @@ sh7760fb.txt
 sisfb.txt
 	- info on the framebuffer device driver for various SiS chips.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+sm501.txt
+	- info on the framebuffer device driver for sm501 videoframebuffer.
+>>>>>>> v3.18
 =======
 sm501.txt
 	- info on the framebuffer device driver for sm501 videoframebuffer.
@@ -68,6 +78,11 @@ tgafb.txt
 tridentfb.txt
 	info on the framebuffer driver for some Trident chip based cards.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+udlfb.txt
+	- Driver for DisplayLink USB 2.0 chips.
+>>>>>>> v3.18
 =======
 udlfb.txt
 	- Driver for DisplayLink USB 2.0 chips.

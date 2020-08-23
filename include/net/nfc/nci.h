@@ -3,6 +3,10 @@
  *  NFC Controller (NFCC) and a Device Host (DH).
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *  Copyright (C) 2014 Marvell International Ltd.
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2014 Marvell International Ltd.
 >>>>>>> v3.18
@@ -25,8 +29,12 @@
  *
  *  You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -75,7 +83,11 @@
 #define NCI_NFC_A_ACTIVE_POLL_MODE				0x03
 #define NCI_NFC_F_ACTIVE_POLL_MODE				0x05
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NCI_NFC_15693_PASSIVE_POLL_MODE				0x06
+=======
+#define NCI_NFC_V_PASSIVE_POLL_MODE				0x06
+>>>>>>> v3.18
 =======
 #define NCI_NFC_V_PASSIVE_POLL_MODE				0x06
 >>>>>>> v3.18
@@ -85,7 +97,10 @@
 #define NCI_NFC_A_ACTIVE_LISTEN_MODE				0x83
 #define NCI_NFC_F_ACTIVE_LISTEN_MODE				0x85
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NCI_NFC_15693_PASSIVE_LISTEN_MODE			0x86
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -94,7 +109,11 @@
 #define NCI_NFC_RF_TECHNOLOGY_B					0x01
 #define NCI_NFC_RF_TECHNOLOGY_F					0x02
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NCI_NFC_RF_TECHNOLOGY_15693				0x03
+=======
+#define NCI_NFC_RF_TECHNOLOGY_V					0x03
+>>>>>>> v3.18
 =======
 #define NCI_NFC_RF_TECHNOLOGY_V					0x03
 >>>>>>> v3.18
@@ -108,6 +127,10 @@
 #define NCI_NFC_BIT_RATE_3390					0x05
 #define NCI_NFC_BIT_RATE_6780					0x06
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NCI_NFC_BIT_RATE_26					0x20
+>>>>>>> v3.18
 =======
 #define NCI_NFC_BIT_RATE_26					0x20
 >>>>>>> v3.18
@@ -120,6 +143,10 @@
 #define NCI_RF_PROTOCOL_ISO_DEP					0x04
 #define NCI_RF_PROTOCOL_NFC_DEP					0x05
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define NCI_RF_PROTOCOL_T5T					0x06
+>>>>>>> v3.18
 =======
 #define NCI_RF_PROTOCOL_T5T					0x06
 >>>>>>> v3.18
@@ -194,11 +221,17 @@
 #define NCI_GID_PROPRIETARY					0xf
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* ----- NCI over SPI head/crc(tail) room needed for outgoing frames ----- */
 #define NCI_SPI_HDR_LEN						4
 #define NCI_SPI_CRC_LEN						2
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* ---- NCI Packet structures ---- */
 #define NCI_CTRL_HDR_SIZE					3
@@ -360,13 +393,19 @@ struct rf_tech_specific_params_nfcf_poll {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct rf_tech_specific_params_nfcv_poll {
 	__u8	res_flags;
 	__u8	dsfid;
 	__u8	uid[8];	/* 8 Bytes */
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct nci_rf_discover_ntf {
 	__u8	rf_discovery_id;
@@ -379,6 +418,10 @@ struct nci_rf_discover_ntf {
 		struct rf_tech_specific_params_nfcb_poll nfcb_poll;
 		struct rf_tech_specific_params_nfcf_poll nfcf_poll;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct rf_tech_specific_params_nfcv_poll nfcv_poll;
+>>>>>>> v3.18
 =======
 		struct rf_tech_specific_params_nfcv_poll nfcv_poll;
 >>>>>>> v3.18
@@ -417,6 +460,10 @@ struct nci_rf_intf_activated_ntf {
 		struct rf_tech_specific_params_nfcb_poll nfcb_poll;
 		struct rf_tech_specific_params_nfcf_poll nfcf_poll;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct rf_tech_specific_params_nfcv_poll nfcv_poll;
+>>>>>>> v3.18
 =======
 		struct rf_tech_specific_params_nfcv_poll nfcv_poll;
 >>>>>>> v3.18

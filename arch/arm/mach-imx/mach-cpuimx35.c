@@ -40,6 +40,10 @@
 #include "common.h"
 #include "devices-imx35.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ehci.h"
+>>>>>>> v3.18
 =======
 #include "ehci.h"
 >>>>>>> v3.18
@@ -58,7 +62,11 @@ static const struct imxi2c_platform_data
 
 #define TSC2007_IRQGPIO		IMX_GPIO_NR(3, 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tsc2007_get_pendown_state(void)
+=======
+static int tsc2007_get_pendown_state(struct device *dev)
+>>>>>>> v3.18
 =======
 static int tsc2007_get_pendown_state(struct device *dev)
 >>>>>>> v3.18
@@ -208,7 +216,10 @@ MACHINE_START(EUKREA_CPUIMX35SD, "Eukrea CPUIMX35")
 	.init_early = imx35_init_early,
 	.init_irq = mx35_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq = imx35_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	= eukrea_cpuimx35_timer_init,

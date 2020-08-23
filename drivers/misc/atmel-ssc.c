@@ -20,7 +20,10 @@
 
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -62,7 +65,11 @@ struct ssc_device *ssc_request(unsigned int ssc_num)
 	spin_unlock(&user_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(ssc->clk);
+=======
+	clk_prepare_enable(ssc->clk);
+>>>>>>> v3.18
 =======
 	clk_prepare_enable(ssc->clk);
 >>>>>>> v3.18
@@ -74,6 +81,7 @@ EXPORT_SYMBOL(ssc_request);
 void ssc_free(struct ssc_device *ssc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&user_lock);
 	if (ssc->user) {
 		ssc->user--;
@@ -83,6 +91,8 @@ void ssc_free(struct ssc_device *ssc)
 	}
 	spin_unlock(&user_lock);
 =======
+=======
+>>>>>>> v3.18
 	bool disable_clk = true;
 
 	spin_lock(&user_lock);
@@ -96,6 +106,9 @@ void ssc_free(struct ssc_device *ssc)
 
 	if (disable_clk)
 		clk_disable_unprepare(ssc->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(ssc_free);
@@ -103,19 +116,29 @@ EXPORT_SYMBOL(ssc_free);
 static struct atmel_ssc_platform_data at91rm9200_config = {
 	.use_dma = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.has_fslen_ext = 0,
 };
 
 static struct atmel_ssc_platform_data at91sam9rl_config = {
 	.use_dma = 0,
 	.has_fslen_ext = 1,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static struct atmel_ssc_platform_data at91sam9g45_config = {
 	.use_dma = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.has_fslen_ext = 1,
+>>>>>>> v3.18
 =======
 	.has_fslen_ext = 1,
 >>>>>>> v3.18
@@ -127,6 +150,12 @@ static const struct platform_device_id atmel_ssc_devtypes[] = {
 		.driver_data = (unsigned long) &at91rm9200_config,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.name = "at91sam9rl_ssc",
+		.driver_data = (unsigned long) &at91sam9rl_config,
+	}, {
+>>>>>>> v3.18
 =======
 		.name = "at91sam9rl_ssc",
 		.driver_data = (unsigned long) &at91sam9rl_config,
@@ -146,6 +175,12 @@ static const struct of_device_id atmel_ssc_dt_ids[] = {
 		.data = &at91rm9200_config,
 	}, {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.compatible = "atmel,at91sam9rl-ssc",
+		.data = &at91sam9rl_config,
+	}, {
+>>>>>>> v3.18
 =======
 		.compatible = "atmel,at91sam9rl-ssc",
 		.data = &at91sam9rl_config,
@@ -181,6 +216,7 @@ static int ssc_probe(struct platform_device *pdev)
 	struct ssc_device *ssc;
 	const struct atmel_ssc_platform_data *plat_dat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
 
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
@@ -188,6 +224,8 @@ static int ssc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to request pinctrl\n");
 		return PTR_ERR(pinctrl);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -205,13 +243,19 @@ static int ssc_probe(struct platform_device *pdev)
 	ssc->pdata = (struct atmel_ssc_platform_data *)plat_dat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pdev->dev.of_node) {
 		struct device_node *np = pdev->dev.of_node;
 		ssc->clk_from_rk_pin =
 			of_property_read_bool(np, "atmel,clk-from-rk-pin");
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	regs = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	ssc->regs = devm_ioremap_resource(&pdev->dev, regs);
@@ -228,15 +272,21 @@ static int ssc_probe(struct platform_device *pdev)
 
 	/* disable all interrupts */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_enable(ssc->clk);
 	ssc_writel(ssc->regs, IDR, -1);
 	ssc_readl(ssc->regs, SR);
 	clk_disable(ssc->clk);
 =======
+=======
+>>>>>>> v3.18
 	clk_prepare_enable(ssc->clk);
 	ssc_writel(ssc->regs, IDR, -1);
 	ssc_readl(ssc->regs, SR);
 	clk_disable_unprepare(ssc->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ssc->irq = platform_get_irq(pdev, 0);

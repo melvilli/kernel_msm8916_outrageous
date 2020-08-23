@@ -81,6 +81,7 @@ static int restore_usr_regs(struct pt_regs *regs, struct rt_sigframe __user *sf)
 
 	err = __copy_from_user(&set, &sf->uc.uc_sigmask, sizeof(set));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err |= __copy_from_user(regs, &(sf->uc.uc_mcontext.regs.scratch),
 				sizeof(sf->uc.uc_mcontext.regs.scratch));
 	if (err)
@@ -90,6 +91,8 @@ static int restore_usr_regs(struct pt_regs *regs, struct rt_sigframe __user *sf)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (!err)
 		set_current_blocked(&set);
 
@@ -97,6 +100,9 @@ static int restore_usr_regs(struct pt_regs *regs, struct rt_sigframe __user *sf)
 				sizeof(sf->uc.uc_mcontext.regs.scratch));
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -143,6 +149,7 @@ SYSCALL_DEFINE0(rt_sigreturn)
 	syscall_wont_restart(regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Ensure that sigreturn always returns to user mode (in case the
 	 * regs saved on user stack got fudged between save and sigreturn)
@@ -152,6 +159,8 @@ SYSCALL_DEFINE0(rt_sigreturn)
 	 */
 	regs->status32 |= STATUS_U_MASK;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return regs->r0;
@@ -165,6 +174,7 @@ badframe:
  * Determine which stack to use..
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __user *get_sigframe(struct k_sigaction *ka,
 					struct pt_regs *regs,
 					unsigned long framesize)
@@ -177,6 +187,8 @@ static inline void __user *get_sigframe(struct k_sigaction *ka,
 		sp = current->sas_ss_sp + current->sas_ss_size;
 
 =======
+=======
+>>>>>>> v3.18
 static inline void __user *get_sigframe(struct ksignal *ksig,
 					struct pt_regs *regs,
 					unsigned long framesize)
@@ -184,6 +196,9 @@ static inline void __user *get_sigframe(struct ksignal *ksig,
 	unsigned long sp = sigsp(regs->sp, ksig);
 	void __user *frame;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* No matter what happens, 'sp' must be word
 	 * aligned otherwise nasty things could happen
@@ -213,8 +228,12 @@ static inline int map_sig(int sig)
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 setup_rt_frame(int signo, struct k_sigaction *ka, siginfo_t *info,
 	       sigset_t *set, struct pt_regs *regs)
+=======
+setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -224,7 +243,11 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sf = get_sigframe(ka, regs, sizeof(struct rt_sigframe));
+=======
+	sf = get_sigframe(ksig, regs, sizeof(struct rt_sigframe));
+>>>>>>> v3.18
 =======
 	sf = get_sigframe(ksig, regs, sizeof(struct rt_sigframe));
 >>>>>>> v3.18
@@ -247,8 +270,13 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 	 *  #3: struct ucontext (completely populated)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(ka->sa.sa_flags & SA_SIGINFO)) {
 		err |= copy_siginfo_to_user(&sf->info, info);
+=======
+	if (unlikely(ksig->ka.sa.sa_flags & SA_SIGINFO)) {
+		err |= copy_siginfo_to_user(&sf->info, &ksig->info);
+>>>>>>> v3.18
 =======
 	if (unlikely(ksig->ka.sa.sa_flags & SA_SIGINFO)) {
 		err |= copy_siginfo_to_user(&sf->info, &ksig->info);
@@ -274,6 +302,7 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 
 	/* #1 arg to the user Signal handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regs->r0 = map_sig(signo);
 
 	/* setup PC of user space signal handler */
@@ -288,6 +317,8 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 
 	regs->blink = (unsigned long)ka->sa.sa_restorer;
 =======
+=======
+>>>>>>> v3.18
 	regs->r0 = map_sig(ksig->sig);
 
 	/* setup PC of user space signal handler */
@@ -298,6 +329,9 @@ setup_rt_frame(struct ksignal *ksig, sigset_t *set, struct pt_regs *regs)
 	 */
 	BUG_ON(!(ksig->ka.sa.sa_flags & SA_RESTORER));
 	regs->blink = (unsigned long)ksig->ka.sa.sa_restorer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* User Stack for signal handler will be above the frame just carved */
@@ -361,6 +395,7 @@ static void arc_restart_syscall(struct k_sigaction *ka, struct pt_regs *regs)
  */
 static void
 <<<<<<< HEAD
+<<<<<<< HEAD
 handle_signal(unsigned long sig, struct k_sigaction *ka, siginfo_t *info,
 	      struct pt_regs *regs)
 {
@@ -375,6 +410,8 @@ handle_signal(unsigned long sig, struct k_sigaction *ka, siginfo_t *info,
 	else
 		signal_delivered(sig, info, ka, regs, 0);
 =======
+=======
+>>>>>>> v3.18
 handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 {
 	sigset_t *oldset = sigmask_to_save();
@@ -384,11 +421,15 @@ handle_signal(struct ksignal *ksig, struct pt_regs *regs)
 	ret = setup_rt_frame(ksig, oldset, regs);
 
 	signal_setup_done(ret, ksig, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void do_signal(struct pt_regs *regs)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct k_sigaction ka;
 	siginfo_t info;
@@ -406,6 +447,8 @@ void do_signal(struct pt_regs *regs)
 		}
 		handle_signal(signr, &ka, &info, regs);
 =======
+=======
+>>>>>>> v3.18
 	struct ksignal ksig;
 	int restart_scall;
 
@@ -417,6 +460,9 @@ void do_signal(struct pt_regs *regs)
 			syscall_wont_restart(regs);	/* No more restarts */
 		}
 		handle_signal(&ksig, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return;
 	}

@@ -66,17 +66,23 @@ static long long INIT read_int(unsigned char *ptr, int size)
 
 struct rc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*fill)(void*, unsigned int);
 	uint8_t *ptr;
 	uint8_t *buffer;
 	uint8_t *buffer_end;
 	int buffer_size;
 =======
+=======
+>>>>>>> v3.18
 	long (*fill)(void*, unsigned long);
 	uint8_t *ptr;
 	uint8_t *buffer;
 	uint8_t *buffer_end;
 	long buffer_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t code;
 	uint32_t range;
@@ -91,7 +97,11 @@ struct rc {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int INIT nofill(void *buffer, unsigned int len)
+=======
+static long INIT nofill(void *buffer, unsigned long len)
+>>>>>>> v3.18
 =======
 static long INIT nofill(void *buffer, unsigned long len)
 >>>>>>> v3.18
@@ -112,8 +122,13 @@ static void INIT rc_read(struct rc *rc)
 /* Called once */
 static inline void INIT rc_init(struct rc *rc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       int (*fill)(void*, unsigned int),
 				       char *buffer, int buffer_size)
+=======
+				       long (*fill)(void*, unsigned long),
+				       char *buffer, long buffer_size)
+>>>>>>> v3.18
 =======
 				       long (*fill)(void*, unsigned long),
 				       char *buffer, long buffer_size)
@@ -298,7 +313,11 @@ struct writer {
 	int bufsize;
 	size_t global_pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int(*flush)(void*, unsigned int);
+=======
+	long (*flush)(void*, unsigned long);
+>>>>>>> v3.18
 =======
 	long (*flush)(void*, unsigned long);
 >>>>>>> v3.18
@@ -556,17 +575,23 @@ static inline int INIT process_bit1(struct writer *wr, struct rc *rc,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC inline int INIT unlzma(unsigned char *buf, int in_len,
 			      int(*fill)(void*, unsigned int),
 			      int(*flush)(void*, unsigned int),
 			      unsigned char *output,
 			      int *posp,
 =======
+=======
+>>>>>>> v3.18
 STATIC inline int INIT unlzma(unsigned char *buf, long in_len,
 			      long (*fill)(void*, unsigned long),
 			      long (*flush)(void*, unsigned long),
 			      unsigned char *output,
 			      long *posp,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      void(*error)(char *x)
 	)
@@ -697,17 +722,23 @@ exit_0:
 
 #ifdef PREBOOT
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC int INIT decompress(unsigned char *buf, int in_len,
 			      int(*fill)(void*, unsigned int),
 			      int(*flush)(void*, unsigned int),
 			      unsigned char *output,
 			      int *posp,
 =======
+=======
+>>>>>>> v3.18
 STATIC int INIT decompress(unsigned char *buf, long in_len,
 			      long (*fill)(void*, unsigned long),
 			      long (*flush)(void*, unsigned long),
 			      unsigned char *output,
 			      long *posp,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			      void(*error)(char *x)
 	)

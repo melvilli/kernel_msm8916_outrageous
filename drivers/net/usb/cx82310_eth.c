@@ -15,6 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -22,10 +23,15 @@
 #include <linux/module.h>
 #include <linux/init.h>
 =======
+=======
+>>>>>>> v3.18
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <linux/module.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
@@ -310,6 +316,7 @@ static const struct driver_info	cx82310_info = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define USB_DEVICE_CLASS(vend, prod, cl, sc, pr) \
 	.match_flags = USB_DEVICE_ID_MATCH_DEVICE | \
 		       USB_DEVICE_ID_MATCH_DEV_INFO, \
@@ -322,6 +329,11 @@ static const struct driver_info	cx82310_info = {
 static const struct usb_device_id products[] = {
 	{
 		USB_DEVICE_CLASS(0x0572, 0xcb01, 0xff, 0, 0),
+=======
+static const struct usb_device_id products[] = {
+	{
+		USB_DEVICE_AND_INTERFACE_INFO(0x0572, 0xcb01, 0xff, 0, 0),
+>>>>>>> v3.18
 =======
 static const struct usb_device_id products[] = {
 	{

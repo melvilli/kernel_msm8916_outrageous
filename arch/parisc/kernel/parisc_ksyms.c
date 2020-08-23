@@ -48,17 +48,23 @@ EXPORT_SYMBOL(lclear_user);
 EXPORT_SYMBOL(lstrnlen_user);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Global fixups - defined as int to avoid creation of function pointers */
 extern int fixup_get_user_skip_1;
 extern int fixup_get_user_skip_2;
 extern int fixup_put_user_skip_1;
 extern int fixup_put_user_skip_2;
 =======
+=======
+>>>>>>> v3.18
 /* Global fixups */
 extern void fixup_get_user_skip_1(void);
 extern void fixup_get_user_skip_2(void);
 extern void fixup_put_user_skip_1(void);
 extern void fixup_put_user_skip_2(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 EXPORT_SYMBOL(fixup_get_user_skip_1);
 EXPORT_SYMBOL(fixup_get_user_skip_2);

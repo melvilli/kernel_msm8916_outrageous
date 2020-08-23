@@ -20,6 +20,12 @@
 #define __USB_CORE_EHCI_PDRIVER_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct platform_device;
+struct usb_hcd;
+
+>>>>>>> v3.18
 =======
 struct platform_device;
 struct usb_hcd;
@@ -57,6 +63,10 @@ struct usb_ehci_pdata {
 	 * turn off everything else */
 	void (*power_suspend)(struct platform_device *pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*pre_setup)(struct usb_hcd *hcd);
+>>>>>>> v3.18
 =======
 	int (*pre_setup)(struct usb_hcd *hcd);
 >>>>>>> v3.18

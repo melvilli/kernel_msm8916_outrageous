@@ -27,13 +27,19 @@ struct sockaddr_ll {
 #define PACKET_OTHERHOST	3		/* To someone else 	*/
 #define PACKET_OUTGOING		4		/* Outgoing of any type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* These ones are invisible by user level */
 #define PACKET_LOOPBACK		5		/* MC/BRD frame looped back */
 =======
+=======
+>>>>>>> v3.18
 #define PACKET_LOOPBACK		5		/* MC/BRD frame looped back */
 #define PACKET_USER		6		/* To user space	*/
 #define PACKET_KERNEL		7		/* To kernel space	*/
 /* Unused, PACKET_FASTROUTE and PACKET_LOOPBACK are invisible to user space */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define PACKET_FASTROUTE	6		/* Fastrouted frame	*/
 
@@ -59,6 +65,10 @@ struct sockaddr_ll {
 #define PACKET_FANOUT			18
 #define PACKET_TX_HAS_OFF		19
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PACKET_QDISC_BYPASS		20
+>>>>>>> v3.18
 =======
 #define PACKET_QDISC_BYPASS		20
 >>>>>>> v3.18
@@ -68,6 +78,11 @@ struct sockaddr_ll {
 #define PACKET_FANOUT_CPU		2
 #define PACKET_FANOUT_ROLLOVER		3
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PACKET_FANOUT_RND		4
+#define PACKET_FANOUT_QM		5
+>>>>>>> v3.18
 =======
 #define PACKET_FANOUT_RND		4
 #define PACKET_FANOUT_QM		5
@@ -99,6 +114,7 @@ struct tpacket_auxdata {
 	__u16		tp_net;
 	__u16		tp_vlan_tci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16		tp_padding;
 };
 
@@ -111,6 +127,8 @@ struct tpacket_auxdata {
 #define TP_STATUS_VLAN_VALID	(1 << 4) /* auxdata has valid tp_vlan_tci */
 #define TP_STATUS_BLK_TMO	(1 << 5)
 =======
+=======
+>>>>>>> v3.18
 	__u16		tp_vlan_tpid;
 };
 
@@ -123,6 +141,9 @@ struct tpacket_auxdata {
 #define TP_STATUS_VLAN_VALID		(1 << 4) /* auxdata has valid tp_vlan_tci */
 #define TP_STATUS_BLK_TMO		(1 << 5)
 #define TP_STATUS_VLAN_TPID_VALID	(1 << 6) /* auxdata has valid tp_vlan_tpid */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Tx ring - header status */
@@ -134,7 +155,11 @@ struct tpacket_auxdata {
 /* Rx and Tx ring - header status */
 #define TP_STATUS_TS_SOFTWARE		(1 << 29)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TP_STATUS_TS_SYS_HARDWARE	(1 << 30)
+=======
+#define TP_STATUS_TS_SYS_HARDWARE	(1 << 30) /* deprecated, never set */
+>>>>>>> v3.18
 =======
 #define TP_STATUS_TS_SYS_HARDWARE	(1 << 30) /* deprecated, never set */
 >>>>>>> v3.18
@@ -167,7 +192,12 @@ struct tpacket2_hdr {
 	__u32		tp_nsec;
 	__u16		tp_vlan_tci;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u16		tp_padding;
+=======
+	__u16		tp_vlan_tpid;
+	__u8		tp_padding[4];
+>>>>>>> v3.18
 =======
 	__u16		tp_vlan_tpid;
 	__u8		tp_padding[4];
@@ -178,6 +208,11 @@ struct tpacket_hdr_variant1 {
 	__u32	tp_rxhash;
 	__u32	tp_vlan_tci;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u16	tp_vlan_tpid;
+	__u16	tp_padding;
+>>>>>>> v3.18
 =======
 	__u16	tp_vlan_tpid;
 	__u16	tp_padding;
@@ -198,6 +233,10 @@ struct tpacket3_hdr {
 		struct tpacket_hdr_variant1 hv1;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u8		tp_padding[8];
+>>>>>>> v3.18
 =======
 	__u8		tp_padding[8];
 >>>>>>> v3.18

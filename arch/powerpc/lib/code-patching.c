@@ -160,7 +160,10 @@ unsigned int translate_branch(const unsigned int *dest, const unsigned int *src)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PPC_BOOK3E_64
 void __patch_exception(int exc, unsigned long addr)
 {
@@ -176,6 +179,9 @@ void __patch_exception(int exc, unsigned long addr)
 	patch_branch(ibase + (exc / 4) + 1, addr, 0);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_CODE_PATCHING_SELFTEST

@@ -2,9 +2,13 @@
  * This file contains error recovery level one used by the iSCSI Target driver.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * \u00a9 Copyright 2007-2011 RisingTide Systems LLC.
  *
  * Licensed to the Linux Foundation under the General Public License (GPL) version 2.
+=======
+ * (c) Copyright 2007-2013 Datera, Inc.
+>>>>>>> v3.18
 =======
  * (c) Copyright 2007-2013 Datera, Inc.
 >>>>>>> v3.18
@@ -514,7 +518,13 @@ int iscsit_handle_status_snack(
 	int found_cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (conn->exp_statsn > begrun) {
+=======
+	if (!begrun) {
+		begrun = conn->exp_statsn;
+	} else if (conn->exp_statsn > begrun) {
+>>>>>>> v3.18
 =======
 	if (!begrun) {
 		begrun = conn->exp_statsn;

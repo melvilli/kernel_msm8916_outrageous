@@ -221,10 +221,13 @@ ltq_dma_init(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res)
 		panic("Failed to get dma resource");
 
 	/* remap dma register range */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ltq_dma_membase = devm_ioremap_resource(&pdev->dev, res);

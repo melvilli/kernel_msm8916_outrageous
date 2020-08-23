@@ -43,24 +43,33 @@ static __init inline int srat_disabled(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Callback for SLIT parsing */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Callback for SLIT parsing.  pxm_to_node() returns NUMA_NO_NODE for
  * I/O localities since SRAT does not list them.  I/O localities are
  * not supported at this point.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __init acpi_numa_slit_init(struct acpi_table_slit *slit)
 {
 	int i, j;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < slit->locality_count; i++)
 		for (j = 0; j < slit->locality_count; j++)
 			numa_set_distance(pxm_to_node(i), pxm_to_node(j),
 				slit->entry[slit->locality_count * i + j]);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < slit->locality_count; i++) {
 		const int from_node = pxm_to_node(i);
 
@@ -77,6 +86,9 @@ void __init acpi_numa_slit_init(struct acpi_table_slit *slit)
 				slit->entry[slit->locality_count * i + j]);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -174,6 +186,10 @@ acpi_numa_memory_affinity_init(struct acpi_srat_mem_affinity *ma)
 {
 	u64 start, end;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 hotpluggable;
+>>>>>>> v3.18
 =======
 	u32 hotpluggable;
 >>>>>>> v3.18
@@ -186,7 +202,12 @@ acpi_numa_memory_affinity_init(struct acpi_srat_mem_affinity *ma)
 	if ((ma->flags & ACPI_SRAT_MEM_ENABLED) == 0)
 		goto out_err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE) && !save_add_info())
+=======
+	hotpluggable = ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE;
+	if (hotpluggable && !save_add_info())
+>>>>>>> v3.18
 =======
 	hotpluggable = ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE;
 	if (hotpluggable && !save_add_info())
@@ -211,10 +232,13 @@ acpi_numa_memory_affinity_init(struct acpi_srat_mem_affinity *ma)
 	node_set(node, numa_nodes_parsed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_INFO "SRAT: Node %u PXM %u [mem %#010Lx-%#010Lx]\n",
 	       node, pxm,
 	       (unsigned long long) start, (unsigned long long) end - 1);
 =======
+=======
+>>>>>>> v3.18
 	pr_info("SRAT: Node %u PXM %u [mem %#010Lx-%#010Lx]%s\n",
 		node, pxm,
 		(unsigned long long) start, (unsigned long long) end - 1,
@@ -224,6 +248,9 @@ acpi_numa_memory_affinity_init(struct acpi_srat_mem_affinity *ma)
 	if (hotpluggable && memblock_mark_hotplug(start, ma->length))
 		pr_warn("SRAT: Failed to mark hotplug range [mem %#010Lx-%#010Lx] in memblock\n",
 			(unsigned long long)start, (unsigned long long)end - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;

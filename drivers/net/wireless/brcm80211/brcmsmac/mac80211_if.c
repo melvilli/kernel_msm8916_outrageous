@@ -126,6 +126,7 @@ static struct ieee80211_channel brcms_2ghz_chantable[] = {
 	CHAN2GHZ(11, 2462, IEEE80211_CHAN_NO_HT40PLUS),
 	CHAN2GHZ(12, 2467,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 IEEE80211_CHAN_PASSIVE_SCAN | IEEE80211_CHAN_NO_IBSS |
 		 IEEE80211_CHAN_NO_HT40PLUS),
 	CHAN2GHZ(13, 2472,
@@ -134,6 +135,8 @@ static struct ieee80211_channel brcms_2ghz_chantable[] = {
 	CHAN2GHZ(14, 2484,
 		 IEEE80211_CHAN_PASSIVE_SCAN | IEEE80211_CHAN_NO_IBSS |
 =======
+=======
+>>>>>>> v3.18
 		 IEEE80211_CHAN_NO_IR |
 		 IEEE80211_CHAN_NO_HT40PLUS),
 	CHAN2GHZ(13, 2472,
@@ -141,6 +144,9 @@ static struct ieee80211_channel brcms_2ghz_chantable[] = {
 		 IEEE80211_CHAN_NO_HT40PLUS),
 	CHAN2GHZ(14, 2484,
 		 IEEE80211_CHAN_NO_IR |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 IEEE80211_CHAN_NO_HT40PLUS | IEEE80211_CHAN_NO_HT40MINUS |
 		 IEEE80211_CHAN_NO_OFDM)
@@ -154,6 +160,7 @@ static struct ieee80211_channel brcms_5ghz_nphy_chantable[] = {
 	CHAN5GHZ(48, IEEE80211_CHAN_NO_HT40PLUS),
 	/* UNII-2 */
 	CHAN5GHZ(52,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 IEEE80211_CHAN_RADAR | IEEE80211_CHAN_NO_IBSS |
 		 IEEE80211_CHAN_PASSIVE_SCAN | IEEE80211_CHAN_NO_HT40MINUS),
@@ -201,6 +208,8 @@ static struct ieee80211_channel brcms_5ghz_nphy_chantable[] = {
 		 IEEE80211_CHAN_RADAR | IEEE80211_CHAN_NO_IBSS |
 		 IEEE80211_CHAN_PASSIVE_SCAN | IEEE80211_CHAN_NO_HT40PLUS |
 =======
+=======
+>>>>>>> v3.18
 		 IEEE80211_CHAN_RADAR |
 		 IEEE80211_CHAN_NO_IR | IEEE80211_CHAN_NO_HT40MINUS),
 	CHAN5GHZ(56,
@@ -246,6 +255,9 @@ static struct ieee80211_channel brcms_5ghz_nphy_chantable[] = {
 	CHAN5GHZ(140,
 		 IEEE80211_CHAN_RADAR |
 		 IEEE80211_CHAN_NO_IR | IEEE80211_CHAN_NO_HT40PLUS |
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 IEEE80211_CHAN_NO_HT40MINUS),
 	/* UNII-3 */
@@ -514,6 +526,11 @@ static int brcms_ops_start(struct ieee80211_hw *hw)
 		brcms_err(wl->wlc->hw->d11core, "%s: brcms_up() returned %d\n",
 			  __func__, err);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	bcma_core_pci_power_save(wl->wlc->hw->d11core->bus, true);
+>>>>>>> v3.18
 =======
 
 	bcma_core_pci_power_save(wl->wlc->hw->d11core->bus, true);
@@ -541,6 +558,11 @@ static void brcms_ops_stop(struct ieee80211_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bcma_core_pci_power_save(wl->wlc->hw->d11core->bus, false);
+
+>>>>>>> v3.18
 =======
 	bcma_core_pci_power_save(wl->wlc->hw->d11core->bus, false);
 
@@ -962,7 +984,12 @@ static bool brcms_tx_flush_completed(struct brcms_info *wl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void brcms_ops_flush(struct ieee80211_hw *hw, u32 queues, bool drop)
+=======
+static void brcms_ops_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			    u32 queues, bool drop)
+>>>>>>> v3.18
 =======
 static void brcms_ops_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 			    u32 queues, bool drop)
@@ -1139,7 +1166,10 @@ static int ieee_hw_init(struct ieee80211_hw *hw)
 
 	/* channel change time is dependent on chip and band  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hw->channel_change_time = 7 * 1000;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	hw->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION) |
@@ -1166,12 +1196,15 @@ static int ieee_hw_init(struct ieee80211_hw *hw)
  * regs is a host accessible memory address pointing to WL device registers.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * brcms_attach is not defined as static because in the case where no bus
  * is defined, wl_attach will never be called, and thus, gcc will issue
  * a warning that this function is defined but not used if we declare
  * it as static.
  *
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * is called in brcms_bcma_probe() context, therefore no locking required.

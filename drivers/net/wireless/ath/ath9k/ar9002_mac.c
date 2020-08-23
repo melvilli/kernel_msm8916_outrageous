@@ -30,7 +30,12 @@ static void ar9002_hw_set_desc_link(void *ds, u32 ds_link)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool ar9002_hw_get_isr(struct ath_hw *ah, enum ath9k_int *masked)
+=======
+static bool ar9002_hw_get_isr(struct ath_hw *ah, enum ath9k_int *masked,
+			      u32 *sync_cause_p)
+>>>>>>> v3.18
 =======
 static bool ar9002_hw_get_isr(struct ath_hw *ah, enum ath9k_int *masked,
 			      u32 *sync_cause_p)
@@ -176,7 +181,12 @@ static bool ar9002_hw_get_isr(struct ath_hw *ah, enum ath9k_int *masked,
 
 	if (sync_cause) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ath9k_debug_sync_cause(common, sync_cause);
+=======
+		if (sync_cause_p)
+			*sync_cause_p = sync_cause;
+>>>>>>> v3.18
 =======
 		if (sync_cause_p)
 			*sync_cause_p = sync_cause;
@@ -290,7 +300,11 @@ ar9002_set_txdesc(struct ath_hw *ah, void *ds, struct ath_tx_info *i)
 	ACCESS_ONCE(ads->ds_ctl0) = (i->pkt_len & AR_FrameLen)
 		| (i->flags & ATH9K_TXDESC_VMF ? AR_VirtMoreFrag : 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		| SM(i->txpower, AR_XmitPower)
+=======
+		| SM(i->txpower, AR_XmitPower0)
+>>>>>>> v3.18
 =======
 		| SM(i->txpower, AR_XmitPower0)
 >>>>>>> v3.18
@@ -319,11 +333,17 @@ ar9002_set_txdesc(struct ath_hw *ah, void *ds, struct ath_tx_info *i)
 		| set11nRateFlags(i->rates, 3)
 		| SM(i->rtscts_rate, AR_RTSCTSRate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	ACCESS_ONCE(ads->ds_ctl9) = SM(i->txpower, AR_XmitPower1);
 	ACCESS_ONCE(ads->ds_ctl10) = SM(i->txpower, AR_XmitPower2);
 	ACCESS_ONCE(ads->ds_ctl11) = SM(i->txpower, AR_XmitPower3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -400,7 +420,10 @@ static int ar9002_hw_proc_txdesc(struct ath_hw *ah, void *ds,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ar9002_hw_get_duration(struct ath_hw *ah, const void *ds, int index)
 {
 	struct ar5416_desc *ads = AR5416DESC(ds);
@@ -419,6 +442,9 @@ static int ar9002_hw_get_duration(struct ath_hw *ah, const void *ds, int index)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ath9k_hw_setuprxdesc(struct ath_hw *ah, struct ath_desc *ds,
 			  u32 size, u32 flags)
@@ -443,6 +469,10 @@ void ar9002_hw_attach_mac_ops(struct ath_hw *ah)
 	ops->set_txdesc = ar9002_set_txdesc;
 	ops->proc_txdesc = ar9002_hw_proc_txdesc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ops->get_duration = ar9002_hw_get_duration;
+>>>>>>> v3.18
 =======
 	ops->get_duration = ar9002_hw_get_duration;
 >>>>>>> v3.18

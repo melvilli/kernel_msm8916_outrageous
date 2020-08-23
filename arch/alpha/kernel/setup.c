@@ -116,6 +116,12 @@ unsigned long alpha_agpgart_size = DEFAULT_AGP_APER_SIZE;
 #ifdef CONFIG_ALPHA_GENERIC
 struct alpha_machine_vector alpha_mv;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+
+#ifndef alpha_using_srm
+>>>>>>> v3.18
 =======
 #endif
 
@@ -126,11 +132,17 @@ EXPORT_SYMBOL(alpha_using_srm);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef alpha_using_qemu
 int alpha_using_qemu;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct alpha_machine_vector *get_sysvec(unsigned long, unsigned long,
 					       unsigned long);
@@ -543,7 +555,11 @@ setup_arch(char **cmdline_p)
 			&alpha_panic_block);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ALPHA_GENERIC
+=======
+#ifndef alpha_using_srm
+>>>>>>> v3.18
 =======
 #ifndef alpha_using_srm
 >>>>>>> v3.18
@@ -552,11 +568,17 @@ setup_arch(char **cmdline_p)
 	alpha_using_srm = strncmp((const char *)hwrpb->ssn, "MILO", 4) != 0;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifndef alpha_using_qemu
 	/* Similarly, look for QEMU.  */
 	alpha_using_qemu = strstr((const char *)hwrpb->ssn, "QEMU") != 0;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* If we are using SRM, we want to allow callbacks
@@ -1232,6 +1254,10 @@ show_cpuinfo(struct seq_file *f, void *slot)
 	char *sysvariation_name;
 	int nr_processors;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long timer_freq;
+>>>>>>> v3.18
 =======
 	unsigned long timer_freq;
 >>>>>>> v3.18
@@ -1247,13 +1273,19 @@ show_cpuinfo(struct seq_file *f, void *slot)
 	nr_processors = get_nr_processors(cpu, hwrpb->nr_processors);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if CONFIG_HZ == 1024 || CONFIG_HZ == 1200
 	timer_freq = (100UL * hwrpb->intr_freq) / 4096;
 #else
 	timer_freq = 100UL * CONFIG_HZ;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	seq_printf(f, "cpu\t\t\t: Alpha\n"
 		      "cpu model\t\t: %s\n"
@@ -1281,8 +1313,12 @@ show_cpuinfo(struct seq_file *f, void *slot)
 		       est_cycle_freq ? : hwrpb->cycle_freq,
 		       est_cycle_freq ? "est." : "",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       hwrpb->intr_freq / 4096,
 		       (100 * hwrpb->intr_freq / 4096) % 100,
+=======
+		       timer_freq / 100, timer_freq % 100,
+>>>>>>> v3.18
 =======
 		       timer_freq / 100, timer_freq % 100,
 >>>>>>> v3.18

@@ -69,6 +69,11 @@ struct dyn_arch_ftrace {
 int ftrace_int3_handler(struct pt_regs *regs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FTRACE_GRAPH_TRAMP_ADDR FTRACE_GRAPH_ADDR
+
+>>>>>>> v3.18
 =======
 #define FTRACE_GRAPH_TRAMP_ADDR FTRACE_GRAPH_ADDR
 

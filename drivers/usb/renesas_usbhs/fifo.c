@@ -109,10 +109,13 @@ static struct usbhs_pkt *__usbhsf_pkt_get(struct usbhs_pipe *pipe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct usbhs_pkt *usbhs_pkt_pop(struct usbhs_pipe *pipe, struct usbhs_pkt *pkt)
 {
 	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
 =======
+=======
+>>>>>>> v3.18
 static void usbhsf_fifo_clear(struct usbhs_pipe *pipe,
 			      struct usbhs_fifo *fifo);
 static void usbhsf_fifo_unselect(struct usbhs_pipe *pipe,
@@ -126,6 +129,9 @@ struct usbhs_pkt *usbhs_pkt_pop(struct usbhs_pipe *pipe, struct usbhs_pkt *pkt)
 {
 	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
 	struct usbhs_fifo *fifo = usbhs_pipe_to_fifo(pipe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long flags;
 
@@ -133,12 +139,15 @@ struct usbhs_pkt *usbhs_pkt_pop(struct usbhs_pipe *pipe, struct usbhs_pkt *pkt)
 	usbhs_lock(priv, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pkt)
 		pkt = __usbhsf_pkt_get(pipe);
 
 	if (pkt)
 		__usbhsf_pkt_del(pkt);
 =======
+=======
+>>>>>>> v3.18
 	usbhs_pipe_disable(pipe);
 
 	if (!pkt)
@@ -160,6 +169,9 @@ struct usbhs_pkt *usbhs_pkt_pop(struct usbhs_pipe *pipe, struct usbhs_pkt *pkt)
 
 	if (fifo)
 		usbhsf_fifo_unselect(pipe, fifo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	usbhs_unlock(priv, flags);
@@ -207,8 +219,12 @@ static int usbhsf_pkt_handler(struct usbhs_pipe *pipe, int type)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(func))
 		ret = func(pkt, &is_done);
+=======
+	ret = func(pkt, &is_done);
+>>>>>>> v3.18
 =======
 	ret = func(pkt, &is_done);
 >>>>>>> v3.18
@@ -306,6 +322,7 @@ static void usbhsf_fifo_clear(struct usbhs_pipe *pipe,
 {
 	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
 
 	if (!usbhs_pipe_is_dcp(pipe)) {
@@ -327,11 +344,16 @@ static void usbhsf_fifo_clear(struct usbhs_pipe *pipe,
 	if (!ret)
 		usbhs_write(priv, fifo->ctr, BCLR);
 =======
+=======
+>>>>>>> v3.18
 
 	if (!usbhs_pipe_is_dcp(pipe))
 		usbhsf_fifo_barrier(priv, fifo);
 
 	usbhs_write(priv, fifo->ctr, BCLR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -765,7 +787,10 @@ usbhs_fifo_read_end:
 		pkt->length, pkt->actual, *is_done, pkt->zero);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Transmission end
 	 */
@@ -774,6 +799,9 @@ usbhs_fifo_read_end:
 			usbhs_dcp_control_transfer_done(pipe);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 usbhs_fifo_read_busy:
 	usbhsf_fifo_unselect(pipe, fifo);
@@ -850,8 +878,11 @@ static void __usbhsf_dma_ctrl(struct usbhs_pipe *pipe,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define usbhsf_dma_map(p)	__usbhsf_dma_map_ctrl(p, 1)
 #define usbhsf_dma_unmap(p)	__usbhsf_dma_map_ctrl(p, 0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __usbhsf_dma_map_ctrl(struct usbhs_pkt *pkt, int map)
@@ -897,9 +928,15 @@ static void xfer_work(struct work_struct *work)
 	usbhs_pipe_running(pipe, 1);
 	usbhs_pipe_set_trans_count_if_bulk(pipe, pkt->trans);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_async_issue_pending(chan);
 	usbhsf_dma_start(pipe, fifo);
 	usbhs_pipe_enable(pipe);
+=======
+	usbhs_pipe_enable(pipe);
+	usbhsf_dma_start(pipe, fifo);
+	dma_async_issue_pending(chan);
+>>>>>>> v3.18
 =======
 	usbhs_pipe_enable(pipe);
 	usbhsf_dma_start(pipe, fifo);
@@ -970,11 +1007,14 @@ static int usbhsf_dma_push_done(struct usbhs_pkt *pkt, int *is_done)
 {
 	struct usbhs_pipe *pipe = pkt->pipe;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	pkt->actual = pkt->trans;
 
 	*is_done = !pkt->zero;	/* send zero packet ? */
 =======
+=======
+>>>>>>> v3.18
 	int is_short = pkt->trans % usbhs_pipe_get_maxpacket(pipe);
 
 	pkt->actual += pkt->trans;
@@ -986,6 +1026,9 @@ static int usbhsf_dma_push_done(struct usbhs_pkt *pkt, int *is_done)
 	else
 		*is_done = !pkt->zero;	/* send zero packet? */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usbhs_pipe_running(pipe, !*is_done);
 
@@ -994,13 +1037,19 @@ static int usbhsf_dma_push_done(struct usbhs_pkt *pkt, int *is_done)
 	usbhsf_fifo_unselect(pipe, pipe->fifo);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (!*is_done) {
 		/* change handler to PIO */
 		pkt->handler = &usbhs_fifo_pio_push_handler;
 		return pkt->handler->try_run(pkt, is_done);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1066,7 +1115,10 @@ static int usbhsf_dma_try_pop(struct usbhs_pkt *pkt, int *is_done)
 	pkt->trans = len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usbhsf_tx_irq_ctrl(pipe, 0);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_WORK(&pkt->work, xfer_work);
@@ -1263,6 +1315,7 @@ void usbhs_fifo_init(struct usbhs_priv *priv)
 
 	cfifo->pipe	= NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cfifo->tx_chan	= NULL;
 	cfifo->rx_chan	= NULL;
 
@@ -1280,6 +1333,10 @@ void usbhs_fifo_init(struct usbhs_priv *priv)
 	d0fifo->pipe	= NULL;
 	d1fifo->pipe	= NULL;
 >>>>>>> v3.18
+=======
+	d0fifo->pipe	= NULL;
+	d1fifo->pipe	= NULL;
+>>>>>>> v3.18
 }
 
 void usbhs_fifo_quit(struct usbhs_priv *priv)
@@ -1291,9 +1348,12 @@ void usbhs_fifo_quit(struct usbhs_priv *priv)
 	mod->irq_bempsts	= 0;
 	mod->irq_brdysts	= 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	usbhsf_dma_quit(priv, usbhsf_get_d0fifo(priv));
 	usbhsf_dma_quit(priv, usbhsf_get_d1fifo(priv));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1318,6 +1378,10 @@ int usbhs_fifo_probe(struct usbhs_priv *priv)
 	fifo->tx_slave.shdma_slave.slave_id	= usbhs_get_dparam(priv, d0_tx_id);
 	fifo->rx_slave.shdma_slave.slave_id	= usbhs_get_dparam(priv, d0_rx_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usbhsf_dma_init(priv, fifo);
+>>>>>>> v3.18
 =======
 	usbhsf_dma_init(priv, fifo);
 >>>>>>> v3.18
@@ -1331,6 +1395,10 @@ int usbhs_fifo_probe(struct usbhs_priv *priv)
 	fifo->tx_slave.shdma_slave.slave_id	= usbhs_get_dparam(priv, d1_tx_id);
 	fifo->rx_slave.shdma_slave.slave_id	= usbhs_get_dparam(priv, d1_rx_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usbhsf_dma_init(priv, fifo);
+>>>>>>> v3.18
 =======
 	usbhsf_dma_init(priv, fifo);
 >>>>>>> v3.18
@@ -1341,6 +1409,11 @@ int usbhs_fifo_probe(struct usbhs_priv *priv)
 void usbhs_fifo_remove(struct usbhs_priv *priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	usbhsf_dma_quit(priv, usbhsf_get_d0fifo(priv));
+	usbhsf_dma_quit(priv, usbhsf_get_d1fifo(priv));
+>>>>>>> v3.18
 =======
 	usbhsf_dma_quit(priv, usbhsf_get_d0fifo(priv));
 	usbhsf_dma_quit(priv, usbhsf_get_d1fifo(priv));

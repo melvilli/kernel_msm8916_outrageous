@@ -17,7 +17,10 @@
  * Atomically decrements @v and calls <fail_fn> if the result is negative.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CC_HAVE_ASM_GOTO
 static inline void __mutex_fastpath_lock(atomic_t *v,
 					 void (*fail_fn)(atomic_t *))
@@ -32,6 +35,9 @@ exit:
 	return;
 }
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __mutex_fastpath_lock(v, fail_fn)			\
 do {								\
@@ -50,6 +56,10 @@ do {								\
 		       "r8", "r9", "r10", "r11", "memory");	\
 } while (0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -58,6 +68,7 @@ do {								\
  *  __mutex_fastpath_lock_retval - try to take the lock by moving the count
  *                                 from 1 to a 0 value
  *  @count: pointer of type atomic_t
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  @fail_fn: function to call if the original value was not 1
  *
@@ -71,6 +82,8 @@ static inline int __mutex_fastpath_lock_retval(atomic_t *count,
 	if (unlikely(atomic_dec_return(count) < 0))
 		return fail_fn(count);
 =======
+=======
+>>>>>>> v3.18
  *
  * Change the count from 1 to a value lower than 1. This function returns 0
  * if the fastpath succeeds, or -1 otherwise.
@@ -79,6 +92,9 @@ static inline int __mutex_fastpath_lock_retval(atomic_t *count)
 {
 	if (unlikely(atomic_dec_return(count) < 0))
 		return -1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		return 0;
@@ -92,7 +108,10 @@ static inline int __mutex_fastpath_lock_retval(atomic_t *count)
  * Atomically increments @v and calls <fail_fn> if the result is nonpositive.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CC_HAVE_ASM_GOTO
 static inline void __mutex_fastpath_unlock(atomic_t *v,
 					   void (*fail_fn)(atomic_t *))
@@ -107,6 +126,9 @@ exit:
 	return;
 }
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __mutex_fastpath_unlock(v, fail_fn)			\
 do {								\
@@ -125,6 +147,10 @@ do {								\
 		       "r8", "r9", "r10", "r11", "memory");	\
 } while (0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

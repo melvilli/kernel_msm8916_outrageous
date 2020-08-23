@@ -13,13 +13,19 @@
 #define _TLV320AIC23_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct device;
 struct regmap_config;
 
 extern const struct regmap_config tlv320aic23_regmap;
 int tlv320aic23_probe(struct device *dev, struct regmap *regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Codec TLV320AIC23 */
 #define TLV320AIC23_LINVOL		0x00

@@ -4,7 +4,11 @@
  * Copyright (C) 2008 IBM
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Author: Darrick J. Wong <djwong@us.ibm.com>
+=======
+ * Author: Darrick J. Wong <darrick.wong@oracle.com>
+>>>>>>> v3.18
 =======
  * Author: Darrick J. Wong <darrick.wong@oracle.com>
 >>>>>>> v3.18
@@ -297,7 +301,11 @@ static int aem_init_ipmi_data(struct aem_ipmi_data *data, int iface,
 			"Unable to register user with IPMI interface %d\n",
 			data->interface);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EACCES;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -851,16 +859,22 @@ static ssize_t aem_show_power(struct device *dev,
 	u64 before, after, delta, time;
 	signed long leftover;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec b, a;
 
 	mutex_lock(&data->lock);
 	update_aem_energy_one(data, attr->index);
 	getnstimeofday(&b);
 =======
+=======
+>>>>>>> v3.18
 
 	mutex_lock(&data->lock);
 	update_aem_energy_one(data, attr->index);
 	time = ktime_get_ns();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	before = data->energy[attr->index];
 
@@ -874,16 +888,22 @@ static ssize_t aem_show_power(struct device *dev,
 
 	update_aem_energy_one(data, attr->index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	getnstimeofday(&a);
 	after = data->energy[attr->index];
 	mutex_unlock(&data->lock);
 
 	time = timespec_to_ns(&a) - timespec_to_ns(&b);
 =======
+=======
+>>>>>>> v3.18
 	time = ktime_get_ns() - time;
 	after = data->energy[attr->index];
 	mutex_unlock(&data->lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	delta = (after - before) * UJ_PER_MJ;
 
@@ -1126,7 +1146,11 @@ static void __exit aem_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Darrick J. Wong <djwong@us.ibm.com>");
+=======
+MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Darrick J. Wong <darrick.wong@oracle.com>");
 >>>>>>> v3.18

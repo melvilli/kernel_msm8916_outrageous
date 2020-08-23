@@ -37,12 +37,18 @@ void br_log_state(const struct net_bridge_port *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void br_set_state(struct net_bridge_port *p, unsigned int state)
 {
 	p->state = state;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* called under bridge lock */
 struct net_bridge_port *br_get_port(struct net_bridge *br, u16 port_no)
@@ -116,7 +122,11 @@ static void br_root_port_block(const struct net_bridge *br,
 		  (unsigned int) p->port_no, p->dev->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->state = BR_STATE_LISTENING;
+=======
+	br_set_state(p, BR_STATE_LISTENING);
+>>>>>>> v3.18
 =======
 	br_set_state(p, BR_STATE_LISTENING);
 >>>>>>> v3.18
@@ -400,7 +410,11 @@ static void br_make_blocking(struct net_bridge_port *p)
 			br_topology_change_detection(p->br);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->state = BR_STATE_BLOCKING;
+=======
+		br_set_state(p, BR_STATE_BLOCKING);
+>>>>>>> v3.18
 =======
 		br_set_state(p, BR_STATE_BLOCKING);
 >>>>>>> v3.18
@@ -421,6 +435,7 @@ static void br_make_forwarding(struct net_bridge_port *p)
 
 	if (br->stp_enabled == BR_NO_STP || br->forward_delay == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->state = BR_STATE_FORWARDING;
 		br_topology_change_detection(br);
 		del_timer(&p->forward_delay_timer);
@@ -429,6 +444,8 @@ static void br_make_forwarding(struct net_bridge_port *p)
 	else
 		p->state = BR_STATE_LEARNING;
 =======
+=======
+>>>>>>> v3.18
 		br_set_state(p, BR_STATE_FORWARDING);
 		br_topology_change_detection(br);
 		del_timer(&p->forward_delay_timer);
@@ -436,6 +453,9 @@ static void br_make_forwarding(struct net_bridge_port *p)
 		br_set_state(p, BR_STATE_LISTENING);
 	else
 		br_set_state(p, BR_STATE_LEARNING);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	br_multicast_enable_port(p);

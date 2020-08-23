@@ -45,8 +45,12 @@ static const u8 AD7418_REG_TEMP[] = { AD7418_REG_TEMP_IN,
 
 struct ad7418_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device		*hwmon_dev;
 	struct attribute_group	attrs;
+=======
+	struct i2c_client	*client;
+>>>>>>> v3.18
 =======
 	struct i2c_client	*client;
 >>>>>>> v3.18
@@ -59,6 +63,7 @@ struct ad7418_data {
 	u16			in[4];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ad7418_probe(struct i2c_client *client,
 			const struct i2c_device_id *id);
@@ -103,10 +108,15 @@ static struct ad7418_data *ad7418_update_device(struct device *dev)
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ad7418_data *data = i2c_get_clientdata(client);
 =======
+=======
+>>>>>>> v3.18
 static struct ad7418_data *ad7418_update_device(struct device *dev)
 {
 	struct ad7418_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_lock(&data->lock);
@@ -177,8 +187,13 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *devattr,
 {
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(devattr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ad7418_data *data = i2c_get_clientdata(client);
+=======
+	struct ad7418_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ad7418_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -210,7 +225,11 @@ static SENSOR_DEVICE_ATTR(in3_input, S_IRUGO, show_adc, NULL, 2);
 static SENSOR_DEVICE_ATTR(in4_input, S_IRUGO, show_adc, NULL, 3);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ad7416_attributes[] = {
+=======
+static struct attribute *ad7416_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *ad7416_attrs[] = {
 >>>>>>> v3.18
@@ -220,8 +239,14 @@ static struct attribute *ad7416_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct attribute *ad7417_attributes[] = {
+=======
+ATTRIBUTE_GROUPS(ad7416);
+
+static struct attribute *ad7417_attrs[] = {
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(ad7416);
 
@@ -237,8 +262,14 @@ static struct attribute *ad7417_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct attribute *ad7418_attributes[] = {
+=======
+ATTRIBUTE_GROUPS(ad7417);
+
+static struct attribute *ad7418_attrs[] = {
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(ad7417);
 
@@ -251,7 +282,10 @@ static struct attribute *ad7418_attrs[] = {
 	NULL
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 ATTRIBUTE_GROUPS(ad7418);
 
 static void ad7418_init_client(struct i2c_client *client)
@@ -270,21 +304,30 @@ static void ad7418_init_client(struct i2c_client *client)
 						AD7418_REG_CONF2, 0x00);
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int ad7418_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_adapter *adapter = client->adapter;
 	struct ad7418_data *data;
 	int err;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct i2c_adapter *adapter = client->adapter;
 	struct ad7418_data *data;
 	struct device *hwmon_dev;
 	const struct attribute_group **attr_groups = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_BYTE_DATA |
@@ -292,8 +335,12 @@ static int ad7418_probe(struct i2c_client *client,
 		return -EOPNOTSUPP;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data = devm_kzalloc(&client->dev, sizeof(struct ad7418_data),
 			    GFP_KERNEL);
+=======
+	data = devm_kzalloc(dev, sizeof(struct ad7418_data), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	data = devm_kzalloc(dev, sizeof(struct ad7418_data), GFP_KERNEL);
 >>>>>>> v3.18
@@ -304,6 +351,10 @@ static int ad7418_probe(struct i2c_client *client,
 
 	mutex_init(&data->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	data->client = client;
+>>>>>>> v3.18
 =======
 	data->client = client;
 >>>>>>> v3.18
@@ -313,7 +364,11 @@ static int ad7418_probe(struct i2c_client *client,
 	case ad7416:
 		data->adc_max = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->attrs.attrs = ad7416_attributes;
+=======
+		attr_groups = ad7416_groups;
+>>>>>>> v3.18
 =======
 		attr_groups = ad7416_groups;
 >>>>>>> v3.18
@@ -322,7 +377,11 @@ static int ad7418_probe(struct i2c_client *client,
 	case ad7417:
 		data->adc_max = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->attrs.attrs = ad7417_attributes;
+=======
+		attr_groups = ad7417_groups;
+>>>>>>> v3.18
 =======
 		attr_groups = ad7417_groups;
 >>>>>>> v3.18
@@ -331,22 +390,29 @@ static int ad7418_probe(struct i2c_client *client,
 	case ad7418:
 		data->adc_max = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		data->attrs.attrs = ad7418_attributes;
 		break;
 	}
 
 	dev_info(&client->dev, "%s chip found\n", client->name);
 =======
+=======
+>>>>>>> v3.18
 		attr_groups = ad7418_groups;
 		break;
 	}
 
 	dev_info(dev, "%s chip found\n", client->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Initialize the AD7418 chip */
 	ad7418_init_client(client);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&client->dev.kobj, &data->attrs);
@@ -374,6 +440,8 @@ static int ad7418_remove(struct i2c_client *client)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 	hwmon_dev = devm_hwmon_device_register_with_groups(dev,
 							   client->name,
 							   data, attr_groups);
@@ -395,6 +463,9 @@ static struct i2c_driver ad7418_driver = {
 	.probe		= ad7418_probe,
 	.id_table	= ad7418_id,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(ad7418_driver);

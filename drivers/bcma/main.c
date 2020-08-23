@@ -11,6 +11,10 @@
 #include <linux/bcma/bcma.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 >>>>>>> v3.18
@@ -35,6 +39,11 @@ static ssize_t manuf_show(struct device *dev, struct device_attribute *attr, cha
 	return sprintf(buf, "0x%03X\n", core->id.manuf);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(manuf);
+
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(manuf);
 
@@ -45,6 +54,11 @@ static ssize_t id_show(struct device *dev, struct device_attribute *attr, char *
 	return sprintf(buf, "0x%03X\n", core->id.id);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(id);
+
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(id);
 
@@ -55,6 +69,11 @@ static ssize_t rev_show(struct device *dev, struct device_attribute *attr, char 
 	return sprintf(buf, "0x%02X\n", core->id.rev);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR_RO(rev);
+
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR_RO(rev);
 
@@ -65,6 +84,7 @@ static ssize_t class_show(struct device *dev, struct device_attribute *attr, cha
 	return sprintf(buf, "0x%X\n", core->id.class);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct device_attribute bcma_device_attrs[] = {
 	__ATTR_RO(manuf),
 	__ATTR_RO(id),
@@ -73,6 +93,8 @@ static struct device_attribute bcma_device_attrs[] = {
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(class);
 
 static struct attribute *bcma_device_attrs[] = {
@@ -83,6 +105,9 @@ static struct attribute *bcma_device_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(bcma_device);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct bus_type bcma_bus_type = {
@@ -92,7 +117,11 @@ static struct bus_type bcma_bus_type = {
 	.remove		= bcma_device_remove,
 	.uevent		= bcma_device_uevent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= bcma_device_attrs,
+=======
+	.dev_groups	= bcma_device_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= bcma_device_groups,
 >>>>>>> v3.18
@@ -106,7 +135,12 @@ static u16 bcma_cc_core_id(struct bcma_bus *bus)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct bcma_device *bcma_find_core(struct bcma_bus *bus, u16 coreid)
+=======
+struct bcma_device *bcma_find_core_unit(struct bcma_bus *bus, u16 coreid,
+					u8 unit)
+>>>>>>> v3.18
 =======
 struct bcma_device *bcma_find_core_unit(struct bcma_bus *bus, u16 coreid,
 					u8 unit)
@@ -116,7 +150,11 @@ struct bcma_device *bcma_find_core_unit(struct bcma_bus *bus, u16 coreid,
 
 	list_for_each_entry(core, &bus->cores, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (core->id.id == coreid)
+=======
+		if (core->id.id == coreid && core->core_unit == unit)
+>>>>>>> v3.18
 =======
 		if (core->id.id == coreid && core->core_unit == unit)
 >>>>>>> v3.18
@@ -124,6 +162,7 @@ struct bcma_device *bcma_find_core_unit(struct bcma_bus *bus, u16 coreid,
 	}
 	return NULL;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 EXPORT_SYMBOL_GPL(bcma_find_core);
 
@@ -138,6 +177,8 @@ struct bcma_device *bcma_find_core_unit(struct bcma_bus *bus, u16 coreid,
 	}
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL_GPL(bcma_find_core_unit);
 
 bool bcma_wait_value(struct bcma_device *core, u16 reg, u32 mask, u32 value,
@@ -157,6 +198,9 @@ bool bcma_wait_value(struct bcma_device *core, u16 reg, u32 mask, u32 value,
 	bcma_warn(core->bus, "Timeout waiting for register 0x%04X!\n", reg);
 
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -171,11 +215,14 @@ static void bcma_release_core_dev(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bcma_register_cores(struct bcma_bus *bus)
 {
 	struct bcma_device *core;
 	int err, dev_id = 0;
 =======
+=======
+>>>>>>> v3.18
 static bool bcma_is_core_needed_early(u16 core_id)
 {
 	switch (core_id) {
@@ -266,6 +313,9 @@ static int bcma_register_devices(struct bcma_bus *bus)
 {
 	struct bcma_device *core;
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	list_for_each_entry(core, &bus->cores, list) {
@@ -274,13 +324,19 @@ static int bcma_register_devices(struct bcma_bus *bus)
 		case BCMA_CORE_4706_CHIPCOMMON:
 		case BCMA_CORE_CHIPCOMMON:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case BCMA_CORE_PCI:
 		case BCMA_CORE_PCIE:
 =======
+=======
+>>>>>>> v3.18
 		case BCMA_CORE_NS_CHIPCOMMON_B:
 		case BCMA_CORE_PCI:
 		case BCMA_CORE_PCIE:
 		case BCMA_CORE_PCIE2:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case BCMA_CORE_MIPS_74K:
 		case BCMA_CORE_4706_MAC_GBIT_COMMON:
@@ -288,17 +344,24 @@ static int bcma_register_devices(struct bcma_bus *bus)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Early cores were already registered */
 		if (bcma_is_core_needed_early(core->id.id))
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Only first GMAC core on BCM4706 is connected and working */
 		if (core->id.id == BCMA_CORE_4706_MAC_GBIT &&
 		    core->core_unit > 0)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		core->dev.release = bcma_release_core_dev;
 		core->dev.bus = &bcma_bus_type;
@@ -327,6 +390,9 @@ static int bcma_register_devices(struct bcma_bus *bus)
 		}
 		core->dev_registered = true;
 		dev_id++;
+=======
+		bcma_register_core(bus, core);
+>>>>>>> v3.18
 =======
 		bcma_register_core(bus, core);
 >>>>>>> v3.18
@@ -397,7 +463,11 @@ int bcma_bus_register(struct bcma_bus *bus)
 	if (err) {
 		bcma_err(bus, "Failed to scan: %d\n", err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -1;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -411,13 +481,19 @@ int bcma_bus_register(struct bcma_bus *bus)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Cores providing flash access go before SPROM init */
 	list_for_each_entry(core, &bus->cores, list) {
 		if (bcma_is_core_needed_early(core->id.id))
 			bcma_register_core(bus, core);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Try to get SPROM */
 	err = bcma_sprom_get(bus);
@@ -434,7 +510,10 @@ int bcma_bus_register(struct bcma_bus *bus)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Init CC core */
 	core = bcma_find_core(bus, BCMA_CORE_NS_CHIPCOMMON_B);
 	if (core) {
@@ -442,6 +521,9 @@ int bcma_bus_register(struct bcma_bus *bus)
 		bcma_core_chipcommon_b_init(&bus->drv_cc_b);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Init MIPS core */
 	core = bcma_find_core(bus, BCMA_CORE_MIPS_74K);
@@ -465,7 +547,10 @@ int bcma_bus_register(struct bcma_bus *bus)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Init PCIe Gen 2 core */
 	core = bcma_find_core_unit(bus, BCMA_CORE_PCIE2, 0);
 	if (core) {
@@ -473,6 +558,9 @@ int bcma_bus_register(struct bcma_bus *bus)
 		bcma_core_pcie2_init(&bus->drv_pcie2);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Init GBIT MAC COMMON core */
 	core = bcma_find_core(bus, BCMA_CORE_4706_MAC_GBIT_COMMON);
@@ -483,7 +571,11 @@ int bcma_bus_register(struct bcma_bus *bus)
 
 	/* Register found cores */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcma_register_cores(bus);
+=======
+	bcma_register_devices(bus);
+>>>>>>> v3.18
 =======
 	bcma_register_devices(bus);
 >>>>>>> v3.18
@@ -505,6 +597,11 @@ void bcma_bus_unregister(struct bcma_bus *bus)
 		bcma_err(bus, "Can not unregister GPIO driver: %i\n", err);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bcma_core_chipcommon_b_free(&bus->drv_cc_b);
+
+>>>>>>> v3.18
 =======
 	bcma_core_chipcommon_b_free(&bus->drv_cc_b);
 
@@ -529,8 +626,11 @@ int __init bcma_bus_early_register(struct bcma_bus *bus,
 	struct bcma_device_id match;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bcma_init_bus(bus);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	match.manuf = BCMA_MANUF_BCM;
@@ -656,11 +756,16 @@ static int bcma_device_probe(struct device *dev)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	get_device(dev);
 	if (adrv->probe)
 		err = adrv->probe(core);
 	if (err)
 		put_device(dev);
+=======
+	if (adrv->probe)
+		err = adrv->probe(core);
+>>>>>>> v3.18
 =======
 	if (adrv->probe)
 		err = adrv->probe(core);
@@ -678,7 +783,10 @@ static int bcma_device_remove(struct device *dev)
 	if (adrv->remove)
 		adrv->remove(core);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_device(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -704,12 +812,18 @@ static int __init bcma_modinit(void)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	err = bcma_host_soc_register_driver();
 	if (err) {
 		pr_err("SoC host initialization failed\n");
 		err = 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_BCMA_HOST_PCI
 	err = bcma_host_pci_init();
@@ -729,6 +843,10 @@ static void __exit bcma_modexit(void)
 	bcma_host_pci_exit();
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bcma_host_soc_unregister_driver();
+>>>>>>> v3.18
 =======
 	bcma_host_soc_unregister_driver();
 >>>>>>> v3.18

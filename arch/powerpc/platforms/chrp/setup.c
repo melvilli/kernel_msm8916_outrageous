@@ -259,7 +259,11 @@ static void chrp_init_early(void)
 	const char *property;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strstr(cmd_line, "console="))
+=======
+	if (strstr(boot_command_line, "console="))
+>>>>>>> v3.18
 =======
 	if (strstr(boot_command_line, "console="))
 >>>>>>> v3.18

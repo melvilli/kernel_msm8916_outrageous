@@ -31,9 +31,15 @@
 #include <linux/kdebug.h>
 #include <linux/perf_event.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/magic.h>
 #include <linux/ratelimit.h>
 #include <linux/context_tracking.h>
+=======
+#include <linux/ratelimit.h>
+#include <linux/context_tracking.h>
+#include <linux/hugetlb.h>
+>>>>>>> v3.18
 =======
 #include <linux/ratelimit.h>
 #include <linux/context_tracking.h>
@@ -121,6 +127,7 @@ static int store_updates_sp(struct pt_regs *regs)
 #define MM_FAULT_ERR(sig)	(sig)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_sigbus(struct pt_regs *regs, unsigned long address)
 {
 	siginfo_t info;
@@ -138,6 +145,8 @@ static int do_sigbus(struct pt_regs *regs, unsigned long address)
 	}
 	return MM_FAULT_ERR(SIGBUS);
 =======
+=======
+>>>>>>> v3.18
 static int do_sigbus(struct pt_regs *regs, unsigned long address,
 		     unsigned int fault)
 {
@@ -169,6 +178,9 @@ static int do_sigbus(struct pt_regs *regs, unsigned long address,
 	info.si_addr_lsb = lsb;
 	force_sig_info(SIGBUS, &info, current);
 	return MM_FAULT_RETURN;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -211,11 +223,16 @@ static int mm_fault_error(struct pt_regs *regs, unsigned long addr, int fault)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Bus error. x86 handles HWPOISON here, we'll add this if/when
 	 * we support the feature in HW
 	 */
 	if (fault & VM_FAULT_SIGBUS)
 		return do_sigbus(regs, addr);
+=======
+	if (fault & (VM_FAULT_SIGBUS|VM_FAULT_HWPOISON|VM_FAULT_HWPOISON_LARGE))
+		return do_sigbus(regs, addr, fault);
+>>>>>>> v3.18
 =======
 	if (fault & (VM_FAULT_SIGBUS|VM_FAULT_HWPOISON|VM_FAULT_HWPOISON_LARGE))
 		return do_sigbus(regs, addr, fault);
@@ -252,7 +269,11 @@ int __kprobes do_page_fault(struct pt_regs *regs, unsigned long address,
  	int is_exec = trap == 0x400;
 	int fault;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc = 0;
+=======
+	int rc = 0, store_update_sp = 0;
+>>>>>>> v3.18
 =======
 	int rc = 0, store_update_sp = 0;
 >>>>>>> v3.18
@@ -327,7 +348,10 @@ int __kprobes do_page_fault(struct pt_regs *regs, unsigned long address,
 	perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS, 1, regs, address);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We want to do this outside mmap_sem, because reading code around nip
 	 * can result in fault, which will cause a deadlock when called with
@@ -336,6 +360,9 @@ int __kprobes do_page_fault(struct pt_regs *regs, unsigned long address,
 	if (user_mode(regs))
 		store_update_sp = store_updates_sp(regs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (user_mode(regs))
 		flags |= FAULT_FLAG_USER;
@@ -406,8 +433,12 @@ retry:
 		 * expand the stack rather than segfaulting.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (address + 2048 < uregs->gpr[1]
 		    && (!user_mode(regs) || !store_updates_sp(regs)))
+=======
+		if (address + 2048 < uregs->gpr[1] && !store_update_sp)
+>>>>>>> v3.18
 =======
 		if (address + 2048 < uregs->gpr[1] && !store_update_sp)
 >>>>>>> v3.18
@@ -490,8 +521,11 @@ good_area:
 	fault = handle_mm_fault(mm, vma, address, flags);
 	if (unlikely(fault & (VM_FAULT_RETRY|VM_FAULT_ERROR))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		rc = mm_fault_error(regs, address, fault);
@@ -514,15 +548,21 @@ good_area:
 #ifdef CONFIG_PPC_SMLPAR
 			if (firmware_has_feature(FW_FEATURE_CMO)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				preempt_disable();
 				get_lppaca()->page_ins += (1 << PAGE_FACTOR);
 =======
+=======
+>>>>>>> v3.18
 				u32 page_ins;
 
 				preempt_disable();
 				page_ins = be32_to_cpu(get_lppaca()->page_ins);
 				page_ins += 1 << PAGE_FACTOR;
 				get_lppaca()->page_ins = cpu_to_be32(page_ins);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				preempt_enable();
 			}
@@ -576,7 +616,10 @@ void bad_page_fault(struct pt_regs *regs, unsigned long address, int sig)
 {
 	const struct exception_table_entry *entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long *stackend;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -608,8 +651,12 @@ void bad_page_fault(struct pt_regs *regs, unsigned long address, int sig)
 		regs->nip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	stackend = end_of_stack(current);
 	if (current != &init_task && *stackend != STACK_END_MAGIC)
+=======
+	if (task_stack_end_corrupted(current))
+>>>>>>> v3.18
 =======
 	if (task_stack_end_corrupted(current))
 >>>>>>> v3.18

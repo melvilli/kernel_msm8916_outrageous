@@ -29,15 +29,21 @@
 #include <asm/opcodes.h>
 #include <asm/cacheflush.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "kprobes.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/percpu.h>
 #include <linux/bug.h>
 
 #include "kprobes.h"
 #include "probes-arm.h"
 #include "probes-thumb.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "patch.h"
 
@@ -65,6 +71,10 @@ int __kprobes arch_prepare_kprobe(struct kprobe *p)
 	bool thumb;
 	kprobe_decode_insn_t *decode_insn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	const union decode_action *actions;
+>>>>>>> v3.18
 =======
 	const union decode_action *actions;
 >>>>>>> v3.18
@@ -81,16 +91,22 @@ int __kprobes arch_prepare_kprobe(struct kprobe *p)
 		u16 inst2 = __mem_to_opcode_thumb16(((u16 *)addr)[1]);
 		insn = __opcode_thumb32_compose(insn, inst2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		decode_insn = thumb32_kprobe_decode_insn;
 	} else
 		decode_insn = thumb16_kprobe_decode_insn;
 =======
+=======
+>>>>>>> v3.18
 		decode_insn = thumb32_probes_decode_insn;
 		actions = kprobes_t32_actions;
 	} else {
 		decode_insn = thumb16_probes_decode_insn;
 		actions = kprobes_t16_actions;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else /* !CONFIG_THUMB2_KERNEL */
 	thumb = false;
@@ -98,7 +114,12 @@ int __kprobes arch_prepare_kprobe(struct kprobe *p)
 		return -EINVAL;
 	insn = __mem_to_opcode_arm(*p->addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	decode_insn = arm_kprobe_decode_insn;
+=======
+	decode_insn = arm_probes_decode_insn;
+	actions = kprobes_arm_actions;
+>>>>>>> v3.18
 =======
 	decode_insn = arm_probes_decode_insn;
 	actions = kprobes_arm_actions;
@@ -109,7 +130,11 @@ int __kprobes arch_prepare_kprobe(struct kprobe *p)
 	p->ainsn.insn = tmp_insn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch ((*decode_insn)(insn, &p->ainsn)) {
+=======
+	switch ((*decode_insn)(insn, &p->ainsn, true, actions)) {
+>>>>>>> v3.18
 =======
 	switch ((*decode_insn)(insn, &p->ainsn, true, actions)) {
 >>>>>>> v3.18
@@ -125,7 +150,11 @@ int __kprobes arch_prepare_kprobe(struct kprobe *p)
 		flush_insns(p->ainsn.insn,
 				sizeof(p->ainsn.insn[0]) * MAX_INSN_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		p->ainsn.insn_fn = (kprobe_insn_fn_t *)
+=======
+		p->ainsn.insn_fn = (probes_insn_fn_t *)
+>>>>>>> v3.18
 =======
 		p->ainsn.insn_fn = (probes_insn_fn_t *)
 >>>>>>> v3.18
@@ -234,7 +263,11 @@ static inline void __kprobes
 singlestep(struct kprobe *p, struct pt_regs *regs, struct kprobe_ctlblk *kcb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->ainsn.insn_singlestep(p, regs);
+=======
+	p->ainsn.insn_singlestep(p->opcode, &p->ainsn, regs);
+>>>>>>> v3.18
 =======
 	p->ainsn.insn_singlestep(p->opcode, &p->ainsn, regs);
 >>>>>>> v3.18
@@ -648,7 +681,11 @@ static struct undef_hook kprobes_arm_break_hook = {
 int __init arch_init_kprobes()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arm_kprobe_decode_init();
+=======
+	arm_probes_decode_init();
+>>>>>>> v3.18
 =======
 	arm_probes_decode_init();
 >>>>>>> v3.18

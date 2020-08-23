@@ -16,6 +16,7 @@
 #include "symbol.h"
 #include "strlist.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <elf.h>
 #include <limits.h>
@@ -26,6 +27,8 @@
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 #include "header.h"
 
 #include <elf.h>
@@ -33,6 +36,9 @@
 #include <symbol/kallsyms.h>
 #include <sys/utsname.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dso__load_kernel_sym(struct dso *dso, struct map *map,
 				symbol_filter_t filter);
@@ -43,6 +49,7 @@ char **vmlinux_path;
 
 struct symbol_conf symbol_conf = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.exclude_other	  = true,
 	.use_modules	  = true,
 	.try_vmlinux_path = true,
@@ -50,6 +57,8 @@ struct symbol_conf symbol_conf = {
 	.demangle	  = true,
 	.symfs            = "",
 =======
+=======
+>>>>>>> v3.18
 	.use_modules		= true,
 	.try_vmlinux_path	= true,
 	.annotate_src		= true,
@@ -58,6 +67,9 @@ struct symbol_conf symbol_conf = {
 	.cumulate_callchain	= true,
 	.show_hist_headers	= true,
 	.symfs			= "",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -74,6 +86,10 @@ static enum dso_binary_type binary_type_symtab[] = {
 	DSO_BINARY_TYPE__GUEST_KMODULE,
 	DSO_BINARY_TYPE__SYSTEM_PATH_KMODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DSO_BINARY_TYPE__OPENEMBEDDED_DEBUGINFO,
+>>>>>>> v3.18
 =======
 	DSO_BINARY_TYPE__OPENEMBEDDED_DEBUGINFO,
 >>>>>>> v3.18
@@ -114,6 +130,10 @@ static int choose_best_symbol(struct symbol *syma, struct symbol *symb)
 	s64 a;
 	s64 b;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	size_t na, nb;
+>>>>>>> v3.18
 =======
 	size_t na, nb;
 >>>>>>> v3.18
@@ -151,12 +171,15 @@ static int choose_best_symbol(struct symbol *syma, struct symbol *symb)
 		return SYMBOL_B;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* If all else fails, choose the symbol with the longest name */
 	if (strlen(syma->name) >= strlen(symb->name))
 		return SYMBOL_A;
 	else
 		return SYMBOL_B;
 =======
+=======
+>>>>>>> v3.18
 	/* Choose the symbol with the longest name */
 	na = strlen(syma->name);
 	nb = strlen(symb->name);
@@ -172,6 +195,9 @@ static int choose_best_symbol(struct symbol *syma, struct symbol *symb)
 		return SYMBOL_B;
 
 	return SYMBOL_A;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -197,6 +223,10 @@ again:
 		if (choose_best_symbol(curr, next) == SYMBOL_A) {
 			rb_erase(&next->rb_node, symbols);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			symbol__delete(next);
+>>>>>>> v3.18
 =======
 			symbol__delete(next);
 >>>>>>> v3.18
@@ -205,6 +235,10 @@ again:
 			nd = rb_next(&curr->rb_node);
 			rb_erase(&curr->rb_node, symbols);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			symbol__delete(curr);
+>>>>>>> v3.18
 =======
 			symbol__delete(curr);
 >>>>>>> v3.18
@@ -228,7 +262,11 @@ void symbols__fixup_end(struct rb_root *symbols)
 
 		if (prev->end == prev->start && prev->end != curr->start)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			prev->end = curr->start - 1;
+=======
+			prev->end = curr->start;
+>>>>>>> v3.18
 =======
 			prev->end = curr->start;
 >>>>>>> v3.18
@@ -253,7 +291,11 @@ void __map_groups__fixup_end(struct map_groups *mg, enum map_type type)
 		prev = curr;
 		curr = rb_entry(nd, struct map, rb_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prev->end = curr->start - 1;
+=======
+		prev->end = curr->start;
+>>>>>>> v3.18
 =======
 		prev->end = curr->start;
 >>>>>>> v3.18
@@ -279,7 +321,11 @@ struct symbol *symbol__new(u64 start, u64 len, u8 binding, const char *name)
 
 	sym->start   = start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sym->end     = len ? start + len - 1 : start;
+=======
+	sym->end     = len ? start + len : start;
+>>>>>>> v3.18
 =======
 	sym->end     = len ? start + len : start;
 >>>>>>> v3.18
@@ -317,12 +363,18 @@ size_t symbol__fprintf_symname_offs(const struct symbol *sym,
 		length = fprintf(fp, "%s", sym->name);
 		if (al) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset = al->addr - sym->start;
 =======
+=======
+>>>>>>> v3.18
 			if (al->addr < sym->end)
 				offset = al->addr - sym->start;
 			else
 				offset = al->addr - al->map->start - sym->start;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			length += fprintf(fp, "+0x%lx", offset);
 		}
@@ -383,7 +435,11 @@ static struct symbol *symbols__find(struct rb_root *symbols, u64 ip)
 		if (ip < s->start)
 			n = n->rb_left;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (ip > s->end)
+=======
+		else if (ip >= s->end)
+>>>>>>> v3.18
 =======
 		else if (ip >= s->end)
 >>>>>>> v3.18
@@ -396,7 +452,10 @@ static struct symbol *symbols__find(struct rb_root *symbols, u64 ip)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct symbol *symbols__first(struct rb_root *symbols)
 {
 	struct rb_node *n = rb_first(symbols);
@@ -417,6 +476,9 @@ static struct symbol *symbols__next(struct symbol *sym)
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct symbol_name_rb_node {
 	struct rb_node	rb_node;
@@ -489,7 +551,10 @@ struct symbol *dso__find_symbol(struct dso *dso,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct symbol *dso__first_symbol(struct dso *dso, enum map_type type)
 {
 	return symbols__first(&dso->symbols[type]);
@@ -500,6 +565,9 @@ struct symbol *dso__next_symbol(struct symbol *sym)
 	return symbols__next(sym);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct symbol *dso__find_symbol_by_name(struct dso *dso, enum map_type type,
 					const char *name)
@@ -529,6 +597,7 @@ size_t dso__fprintf_symbols_by_name(struct dso *dso,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int kallsyms__parse(const char *filename, void *arg,
 		    int (*process_symbol)(void *arg, const char *name,
@@ -585,6 +654,8 @@ int kallsyms__parse(const char *filename, void *arg,
 out_failure:
 	return -1;
 =======
+=======
+>>>>>>> v3.18
 int modules__parse(const char *filename, void *arg,
 		   int (*process_module)(void *arg, const char *name,
 					 u64 start))
@@ -641,6 +712,9 @@ out:
 	free(line);
 	fclose(file);
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -650,6 +724,7 @@ struct process_kallsyms_args {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u8 kallsyms2elf_type(char type)
 {
 	if (type == 'W')
@@ -657,6 +732,8 @@ static u8 kallsyms2elf_type(char type)
 
 	return isupper(type) ? STB_GLOBAL : STB_LOCAL;
 =======
+=======
+>>>>>>> v3.18
 /*
  * These are symbols in the kernel image, so make sure that
  * sym is from a kernel DSO.
@@ -690,6 +767,9 @@ bool symbol__is_idle(struct symbol *sym)
 	}
 
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -733,7 +813,10 @@ static int dso__load_all_kallsyms(struct dso *dso, const char *filename,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dso__split_kallsyms_for_kcore(struct dso *dso, struct map *map,
 					 symbol_filter_t filter)
 {
@@ -781,6 +864,9 @@ static int dso__split_kallsyms_for_kcore(struct dso *dso, struct map *map,
 	return count + moved;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Split the symbols into maps, making sure there are no overlaps, i.e. the
@@ -788,7 +874,11 @@ static int dso__split_kallsyms_for_kcore(struct dso *dso, struct map *map,
  * the original ELF section names vmlinux have.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dso__split_kallsyms(struct dso *dso, struct map *map,
+=======
+static int dso__split_kallsyms(struct dso *dso, struct map *map, u64 delta,
+>>>>>>> v3.18
 =======
 static int dso__split_kallsyms(struct dso *dso, struct map *map, u64 delta,
 >>>>>>> v3.18
@@ -857,13 +947,19 @@ static int dso__split_kallsyms(struct dso *dso, struct map *map, u64 delta,
 			struct dso *ndso;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			if (delta) {
 				/* Kernel was relocated at boot time */
 				pos->start -= delta;
 				pos->end -= delta;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (count == 0) {
 				curr_map = map;
@@ -895,11 +991,17 @@ static int dso__split_kallsyms(struct dso *dso, struct map *map, u64 delta,
 			map_groups__insert(kmaps, curr_map);
 			++kernel_range;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if (delta) {
 			/* Kernel was relocated at boot time */
 			pos->start -= delta;
 			pos->end -= delta;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 filter_symbol:
@@ -944,10 +1046,13 @@ bool symbol__restricted_filename(const char *filename,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int dso__load_kallsyms(struct dso *dso, const char *filename,
 		       struct map *map, symbol_filter_t filter)
 {
 =======
+=======
+>>>>>>> v3.18
 struct module_info {
 	struct rb_node rb_node;
 	char *name;
@@ -1342,6 +1447,9 @@ int dso__load_kallsyms(struct dso *dso, const char *filename,
 {
 	u64 delta = 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (symbol__restricted_filename(filename, "/proc/kallsyms"))
 		return -1;
@@ -1350,14 +1458,20 @@ int dso__load_kallsyms(struct dso *dso, const char *filename,
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	symbols__fixup_end(&dso->symbols[map->type]);
 	symbols__fixup_duplicate(&dso->symbols[map->type]);
 =======
+=======
+>>>>>>> v3.18
 	if (kallsyms__delta(map, filename, &delta))
 		return -1;
 
 	symbols__fixup_duplicate(&dso->symbols[map->type]);
 	symbols__fixup_end(&dso->symbols[map->type]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dso->kernel == DSO_TYPE_GUEST_KERNEL)
@@ -1366,12 +1480,18 @@ int dso__load_kallsyms(struct dso *dso, const char *filename,
 		dso->symtab_type = DSO_BINARY_TYPE__KALLSYMS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return dso__split_kallsyms(dso, map, filter);
 =======
+=======
+>>>>>>> v3.18
 	if (!dso__load_kcore(dso, map, filename))
 		return dso__split_kallsyms_for_kcore(dso, map, filter);
 	else
 		return dso__split_kallsyms(dso, map, delta, filter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1438,7 +1558,10 @@ out_failure:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool dso__is_compatible_symtab_type(struct dso *dso, bool kmod,
 					   enum dso_binary_type type)
 {
@@ -1479,6 +1602,9 @@ static bool dso__is_compatible_symtab_type(struct dso *dso, bool kmod,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int dso__load(struct dso *dso, struct map *map, symbol_filter_t filter)
 {
@@ -1491,6 +1617,10 @@ int dso__load(struct dso *dso, struct map *map, symbol_filter_t filter)
 	struct symsrc ss_[2];
 	struct symsrc *syms_ss = NULL, *runtime_ss = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool kmod;
+>>>>>>> v3.18
 =======
 	bool kmod;
 >>>>>>> v3.18
@@ -1535,13 +1665,19 @@ int dso__load(struct dso *dso, struct map *map, symbol_filter_t filter)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Iterate over candidate debug images.
 =======
+=======
+>>>>>>> v3.18
 	kmod = dso->symtab_type == DSO_BINARY_TYPE__SYSTEM_PATH_KMODULE ||
 		dso->symtab_type == DSO_BINARY_TYPE__GUEST_KMODULE;
 
 	/*
 	 * Iterate over candidate debug images.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Keep track of "interesting" ones (those which have a symtab, dynsym,
 	 * and/or opd section) for processing.
@@ -1553,14 +1689,20 @@ int dso__load(struct dso *dso, struct map *map, symbol_filter_t filter)
 		enum dso_binary_type symtab_type = binary_type_symtab[i];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (dso__binary_type_file(dso, symtab_type,
 					  root_dir, name, PATH_MAX))
 =======
+=======
+>>>>>>> v3.18
 		if (!dso__is_compatible_symtab_type(dso, kmod, symtab_type))
 			continue;
 
 		if (dso__read_binary_type_filename(dso, symtab_type,
 						   root_dir, name, PATH_MAX))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 
@@ -1572,6 +1714,11 @@ int dso__load(struct dso *dso, struct map *map, symbol_filter_t filter)
 			syms_ss = ss;
 			next_slot = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (!dso->symsrc_filename)
+				dso->symsrc_filename = strdup(name);
+>>>>>>> v3.18
 =======
 			if (!dso->symsrc_filename)
 				dso->symsrc_filename = strdup(name);
@@ -1589,6 +1736,11 @@ int dso__load(struct dso *dso, struct map *map, symbol_filter_t filter)
 			if (syms_ss && runtime_ss)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		} else {
+			symsrc__destroy(ss);
+>>>>>>> v3.18
 =======
 		} else {
 			symsrc__destroy(ss);
@@ -1610,7 +1762,11 @@ int dso__load(struct dso *dso, struct map *map, symbol_filter_t filter)
 
 	if (syms_ss)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = dso__load_sym(dso, map, syms_ss, runtime_ss, filter, 0);
+=======
+		ret = dso__load_sym(dso, map, syms_ss, runtime_ss, filter, kmod);
+>>>>>>> v3.18
 =======
 		ret = dso__load_sym(dso, map, syms_ss, runtime_ss, filter, kmod);
 >>>>>>> v3.18
@@ -1651,7 +1807,12 @@ struct map *map_groups__find_by_name(struct map_groups *mg,
 
 int dso__load_vmlinux(struct dso *dso, struct map *map,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      const char *vmlinux, symbol_filter_t filter)
+=======
+		      const char *vmlinux, bool vmlinux_allocated,
+		      symbol_filter_t filter)
+>>>>>>> v3.18
 =======
 		      const char *vmlinux, bool vmlinux_allocated,
 		      symbol_filter_t filter)
@@ -1663,13 +1824,19 @@ int dso__load_vmlinux(struct dso *dso, struct map *map,
 	enum dso_binary_type symtab_type;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(symfs_vmlinux, sizeof(symfs_vmlinux), "%s%s",
 		 symbol_conf.symfs, vmlinux);
 =======
+=======
+>>>>>>> v3.18
 	if (vmlinux[0] == '/')
 		snprintf(symfs_vmlinux, sizeof(symfs_vmlinux), "%s", vmlinux);
 	else
 		symbol__join_symfs(symfs_vmlinux, vmlinux);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (dso->kernel == DSO_TYPE_GUEST_KERNEL)
@@ -1685,13 +1852,19 @@ int dso__load_vmlinux(struct dso *dso, struct map *map,
 
 	if (err > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dso__set_long_name(dso, (char *)vmlinux);
 =======
+=======
+>>>>>>> v3.18
 		if (dso->kernel == DSO_TYPE_GUEST_KERNEL)
 			dso->binary_type = DSO_BINARY_TYPE__GUEST_VMLINUX;
 		else
 			dso->binary_type = DSO_BINARY_TYPE__VMLINUX;
 		dso__set_long_name(dso, vmlinux, vmlinux_allocated);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dso__set_loaded(dso, map->type);
 		pr_debug("Using %s for symbols\n", symfs_vmlinux);
@@ -1712,6 +1885,7 @@ int dso__load_vmlinux_path(struct dso *dso, struct map *map,
 	filename = dso__build_id_filename(dso, NULL, 0);
 	if (filename != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = dso__load_vmlinux(dso, map, filename, filter);
 		if (err > 0) {
 			dso->lname_alloc = 1;
@@ -1722,10 +1896,16 @@ int dso__load_vmlinux_path(struct dso *dso, struct map *map,
 		if (err > 0)
 			goto out;
 >>>>>>> v3.18
+=======
+		err = dso__load_vmlinux(dso, map, filename, true, filter);
+		if (err > 0)
+			goto out;
+>>>>>>> v3.18
 		free(filename);
 	}
 
 	for (i = 0; i < vmlinux_path__nr_entries; ++i) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		err = dso__load_vmlinux(dso, map, vmlinux_path[i], filter);
 		if (err > 0) {
@@ -1738,13 +1918,21 @@ int dso__load_vmlinux_path(struct dso *dso, struct map *map,
 		if (err > 0)
 			break;
 >>>>>>> v3.18
+=======
+		err = dso__load_vmlinux(dso, map, vmlinux_path[i], false, filter);
+		if (err > 0)
+			break;
+>>>>>>> v3.18
 	}
 out:
 	return err;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int find_matching_kcore(struct map *map, char *dir, size_t dir_sz)
 {
 	char kallsyms_filename[PATH_MAX];
@@ -1849,6 +2037,9 @@ proc_kallsyms:
 	return strdup("/proc/kallsyms");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int dso__load_kernel_sym(struct dso *dso, struct map *map,
 				symbol_filter_t filter)
@@ -1877,6 +2068,7 @@ static int dso__load_kernel_sym(struct dso *dso, struct map *map,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (symbol_conf.vmlinux_name != NULL) {
 		err = dso__load_vmlinux(dso, map,
 					symbol_conf.vmlinux_name, filter);
@@ -1894,6 +2086,8 @@ static int dso__load_kernel_sym(struct dso *dso, struct map *map,
 		if (err > 0)
 			goto out_fixup;
 =======
+=======
+>>>>>>> v3.18
 	if (!symbol_conf.ignore_vmlinux && symbol_conf.vmlinux_name != NULL) {
 		return dso__load_vmlinux(dso, map, symbol_conf.vmlinux_name,
 					 false, filter);
@@ -1903,6 +2097,9 @@ static int dso__load_kernel_sym(struct dso *dso, struct map *map,
 		err = dso__load_vmlinux_path(dso, map, filter);
 		if (err > 0)
 			return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1910,6 +2107,7 @@ static int dso__load_kernel_sym(struct dso *dso, struct map *map,
 	if (symbol_conf.symfs[0] != 0)
 		return -1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * Say the kernel DSO was created when processing the build-id header table,
@@ -1957,11 +2155,16 @@ static int dso__load_kernel_sym(struct dso *dso, struct map *map,
 		kallsyms_filename = "/proc/kallsyms";
 	}
 =======
+=======
+>>>>>>> v3.18
 	kallsyms_allocated_filename = dso__find_kallsyms(dso, map);
 	if (!kallsyms_allocated_filename)
 		return -1;
 
 	kallsyms_filename = kallsyms_allocated_filename;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 do_kallsyms:
@@ -1971,9 +2174,15 @@ do_kallsyms:
 	free(kallsyms_allocated_filename);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err > 0) {
 		dso__set_long_name(dso, strdup("[kernel.kallsyms]"));
 out_fixup:
+=======
+	if (err > 0 && !dso__is_kcore(dso)) {
+		dso->binary_type = DSO_BINARY_TYPE__KALLSYMS;
+		dso__set_long_name(dso, "[kernel.kallsyms]", false);
+>>>>>>> v3.18
 =======
 	if (err > 0 && !dso__is_kcore(dso)) {
 		dso->binary_type = DSO_BINARY_TYPE__KALLSYMS;
@@ -2009,8 +2218,14 @@ static int dso__load_guest_kernel_sym(struct dso *dso, struct map *map,
 		if (symbol_conf.default_guest_vmlinux_name != NULL) {
 			err = dso__load_vmlinux(dso, map,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				symbol_conf.default_guest_vmlinux_name, filter);
 			goto out_try_fixup;
+=======
+						symbol_conf.default_guest_vmlinux_name,
+						false, filter);
+			return err;
+>>>>>>> v3.18
 =======
 						symbol_conf.default_guest_vmlinux_name,
 						false, filter);
@@ -2030,6 +2245,7 @@ static int dso__load_guest_kernel_sym(struct dso *dso, struct map *map,
 	if (err > 0)
 		pr_debug("Using %s for symbols\n", kallsyms_filename);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out_try_fixup:
 	if (err > 0) {
@@ -2038,10 +2254,15 @@ out_try_fixup:
 			dso__set_long_name(dso, strdup(path));
 		}
 =======
+=======
+>>>>>>> v3.18
 	if (err > 0 && !dso__is_kcore(dso)) {
 		dso->binary_type = DSO_BINARY_TYPE__GUEST_KALLSYMS;
 		machine__mmap_name(machine, path, sizeof(path));
 		dso__set_long_name(dso, strdup(path), true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		map__fixup_start(map);
 		map__fixup_end(map);
@@ -2052,6 +2273,7 @@ out_try_fixup:
 
 static void vmlinux_path__exit(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while (--vmlinux_path__nr_entries >= 0) {
 		free(vmlinux_path[vmlinux_path__nr_entries]);
@@ -2069,6 +2291,8 @@ static int vmlinux_path__init(void)
 
 	vmlinux_path = malloc(sizeof(char *) * 5);
 =======
+=======
+>>>>>>> v3.18
 	while (--vmlinux_path__nr_entries >= 0)
 		zfree(&vmlinux_path[vmlinux_path__nr_entries]);
 
@@ -2082,6 +2306,9 @@ static int vmlinux_path__init(struct perf_session_env *env)
 	char *kernel_version;
 
 	vmlinux_path = malloc(sizeof(char *) * 6);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (vmlinux_path == NULL)
 		return -1;
@@ -2096,6 +2323,7 @@ static int vmlinux_path__init(struct perf_session_env *env)
 	++vmlinux_path__nr_entries;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* only try running kernel version if no symfs was given */
 	if (symbol_conf.symfs[0] != 0)
 		return 0;
@@ -2105,6 +2333,8 @@ static int vmlinux_path__init(struct perf_session_env *env)
 
 	snprintf(bf, sizeof(bf), "/boot/vmlinux-%s", uts.release);
 =======
+=======
+>>>>>>> v3.18
 	/* only try kernel version if no symfs was given */
 	if (symbol_conf.symfs[0] != 0)
 		return 0;
@@ -2119,14 +2349,20 @@ static int vmlinux_path__init(struct perf_session_env *env)
 	}
 
 	snprintf(bf, sizeof(bf), "/boot/vmlinux-%s", kernel_version);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vmlinux_path[vmlinux_path__nr_entries] = strdup(bf);
 	if (vmlinux_path[vmlinux_path__nr_entries] == NULL)
 		goto out_fail;
 	++vmlinux_path__nr_entries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snprintf(bf, sizeof(bf), "/lib/modules/%s/build/vmlinux", uts.release);
 =======
+=======
+>>>>>>> v3.18
 	snprintf(bf, sizeof(bf), "/usr/lib/debug/boot/vmlinux-%s",
 		 kernel_version);
 	vmlinux_path[vmlinux_path__nr_entries] = strdup(bf);
@@ -2134,6 +2370,9 @@ static int vmlinux_path__init(struct perf_session_env *env)
 		goto out_fail;
         ++vmlinux_path__nr_entries;
 	snprintf(bf, sizeof(bf), "/lib/modules/%s/build/vmlinux", kernel_version);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vmlinux_path[vmlinux_path__nr_entries] = strdup(bf);
 	if (vmlinux_path[vmlinux_path__nr_entries] == NULL)
@@ -2141,7 +2380,11 @@ static int vmlinux_path__init(struct perf_session_env *env)
 	++vmlinux_path__nr_entries;
 	snprintf(bf, sizeof(bf), "/usr/lib/debug/lib/modules/%s/vmlinux",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 uts.release);
+=======
+		 kernel_version);
+>>>>>>> v3.18
 =======
 		 kernel_version);
 >>>>>>> v3.18
@@ -2158,7 +2401,11 @@ out_fail:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int setup_list(struct strlist **list, const char *list_str,
+=======
+int setup_list(struct strlist **list, const char *list_str,
+>>>>>>> v3.18
 =======
 int setup_list(struct strlist **list, const char *list_str,
 >>>>>>> v3.18
@@ -2195,7 +2442,11 @@ static bool symbol__read_kptr_restrict(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int symbol__init(void)
+=======
+int symbol__init(struct perf_session_env *env)
+>>>>>>> v3.18
 =======
 int symbol__init(struct perf_session_env *env)
 >>>>>>> v3.18
@@ -2214,7 +2465,11 @@ int symbol__init(struct perf_session_env *env)
 					  sizeof(struct symbol));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (symbol_conf.try_vmlinux_path && vmlinux_path__init() < 0)
+=======
+	if (symbol_conf.try_vmlinux_path && vmlinux_path__init(env) < 0)
+>>>>>>> v3.18
 =======
 	if (symbol_conf.try_vmlinux_path && vmlinux_path__init(env) < 0)
 >>>>>>> v3.18

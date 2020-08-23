@@ -54,7 +54,10 @@ static struct resource rc32434_res_pci_mem1 = {
 	.end = 0x5FFFFFFF,
 	.flags = IORESOURCE_MEM,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.parent = &rc32434_res_pci_mem1,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.sibling = NULL,

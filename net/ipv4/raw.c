@@ -59,6 +59,10 @@
 #include <linux/route.h>
 #include <linux/skbuff.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/igmp.h>
+>>>>>>> v3.18
 =======
 #include <linux/igmp.h>
 >>>>>>> v3.18
@@ -179,7 +183,13 @@ static int raw_v4_input(struct sk_buff *skb, const struct iphdr *iph, int hash)
 	while (sk) {
 		delivered = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (iph->protocol != IPPROTO_ICMP || !icmp_filter(sk, skb)) {
+=======
+		if ((iph->protocol != IPPROTO_ICMP || !icmp_filter(sk, skb)) &&
+		    ip_mc_sf_allow(sk, iph->daddr, iph->saddr,
+				   skb->dev->ifindex)) {
+>>>>>>> v3.18
 =======
 		if ((iph->protocol != IPPROTO_ICMP || !icmp_filter(sk, skb)) &&
 		    ip_mc_sf_allow(sk, iph->daddr, iph->saddr,
@@ -229,13 +239,19 @@ static void raw_err(struct sock *sk, struct sk_buff *skb, u32 info)
 	if (type == ICMP_DEST_UNREACH && code == ICMP_FRAG_NEEDED)
 		ipv4_sk_update_pmtu(skb, sk, info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else if (type == ICMP_REDIRECT)
 		ipv4_sk_redirect(skb, sk);
 =======
+=======
+>>>>>>> v3.18
 	else if (type == ICMP_REDIRECT) {
 		ipv4_sk_redirect(skb, sk);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Report error on raw socket, if:
@@ -315,7 +331,11 @@ static int raw_rcv_skb(struct sock *sk, struct sk_buff *skb)
 	/* Charge it to the socket. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipv4_pktinfo_prepare(skb);
+=======
+	ipv4_pktinfo_prepare(sk, skb);
+>>>>>>> v3.18
 =======
 	ipv4_pktinfo_prepare(sk, skb);
 >>>>>>> v3.18
@@ -385,6 +405,11 @@ static int raw_send_hdrinc(struct sock *sk, struct flowi4 *fl4,
 	skb->ip_summed = CHECKSUM_NONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sock_tx_timestamp(sk, &skb_shinfo(skb)->tx_flags);
+
+>>>>>>> v3.18
 =======
 	sock_tx_timestamp(sk, &skb_shinfo(skb)->tx_flags);
 
@@ -518,7 +543,11 @@ static int raw_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 
 	if (msg->msg_namelen) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr_in *usin = (struct sockaddr_in *)msg->msg_name;
+=======
+		DECLARE_SOCKADDR(struct sockaddr_in *, usin, msg->msg_name);
+>>>>>>> v3.18
 =======
 		DECLARE_SOCKADDR(struct sockaddr_in *, usin, msg->msg_name);
 >>>>>>> v3.18
@@ -548,17 +577,23 @@ static int raw_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 	ipc.opt = NULL;
 	ipc.tx_flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ipc.oif = sk->sk_bound_dev_if;
 
 	if (msg->msg_controllen) {
 		err = ip_cmsg_send(sock_net(sk), msg, &ipc);
 =======
+=======
+>>>>>>> v3.18
 	ipc.ttl = 0;
 	ipc.tos = -1;
 	ipc.oif = sk->sk_bound_dev_if;
 
 	if (msg->msg_controllen) {
 		err = ip_cmsg_send(sock_net(sk), msg, &ipc, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err)
 			goto out;
@@ -596,7 +631,11 @@ static int raw_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tos = RT_CONN_FLAGS(sk);
+=======
+	tos = get_rtconn_flags(&ipc, sk);
+>>>>>>> v3.18
 =======
 	tos = get_rtconn_flags(&ipc, sk);
 >>>>>>> v3.18
@@ -615,10 +654,16 @@ static int raw_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 			   RT_SCOPE_UNIVERSE,
 			   inet->hdrincl ? IPPROTO_RAW : sk->sk_protocol,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   inet_sk_flowi_flags(sk) | FLOWI_FLAG_CAN_SLEEP |
 			    (inet->hdrincl ? FLOWI_FLAG_KNOWN_NH : 0),
 			   daddr, saddr, 0, 0,
 			   sock_i_uid(sk));
+=======
+			   inet_sk_flowi_flags(sk) |
+			    (inet->hdrincl ? FLOWI_FLAG_KNOWN_NH : 0),
+			   daddr, saddr, 0, 0);
+>>>>>>> v3.18
 =======
 			   inet_sk_flowi_flags(sk) |
 			    (inet->hdrincl ? FLOWI_FLAG_KNOWN_NH : 0),
@@ -653,6 +698,11 @@ back_from_confirm:
 
 	 else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		sock_tx_timestamp(sk, &ipc.tx_flags);
+
+>>>>>>> v3.18
 =======
 		sock_tx_timestamp(sk, &ipc.tx_flags);
 
@@ -742,7 +792,11 @@ static int raw_recvmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 	size_t copied = 0;
 	int err = -EOPNOTSUPP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in *sin = (struct sockaddr_in *)msg->msg_name;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_in *, sin, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_in *, sin, msg->msg_name);
 >>>>>>> v3.18
@@ -1046,7 +1100,11 @@ static void raw_sock_seq_show(struct seq_file *seq, struct sock *sp, int i)
 
 	seq_printf(seq, "%4d: %08X:%04X %08X:%04X"
 <<<<<<< HEAD
+<<<<<<< HEAD
 		" %02X %08X:%08X %02X:%08lX %08X %5d %8d %lu %d %pK %d\n",
+=======
+		" %02X %08X:%08X %02X:%08lX %08X %5u %8d %lu %d %pK %d\n",
+>>>>>>> v3.18
 =======
 		" %02X %08X:%08X %02X:%08lX %08X %5u %8d %lu %d %pK %d\n",
 >>>>>>> v3.18

@@ -5,6 +5,10 @@
 #define _TRACE_WRITEBACK_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/tracepoint.h>
+>>>>>>> v3.18
 =======
 #include <linux/tracepoint.h>
 >>>>>>> v3.18

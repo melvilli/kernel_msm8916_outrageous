@@ -827,9 +827,12 @@
 #define __NR_kcmp		(__NR_Linux + 332)
 #define __NR_finit_module	(__NR_Linux + 333)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define __NR_Linux_syscalls	(__NR_finit_module + 1)
 =======
+=======
+>>>>>>> v3.18
 #define __NR_sched_setattr	(__NR_Linux + 334)
 #define __NR_sched_getattr	(__NR_Linux + 335)
 #define __NR_utimes		(__NR_Linux + 336)
@@ -840,13 +843,19 @@
 #define __NR_bpf		(__NR_Linux + 341)
 
 #define __NR_Linux_syscalls	(__NR_bpf + 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
 #define __IGNORE_select		/* newselect */
 #define __IGNORE_fadvise64	/* fadvise64_64 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __IGNORE_utimes		/* utime */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

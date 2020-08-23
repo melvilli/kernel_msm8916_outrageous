@@ -36,6 +36,10 @@
 #include "dma.h"
 #include "registers.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "dma_v2.h"
+>>>>>>> v3.18
 =======
 #include "dma_v2.h"
 >>>>>>> v3.18
@@ -152,7 +156,11 @@ static int ioat_dca_add_requester(struct dca_provider *dca, struct device *dev)
 
 	/* This implementation only supports PCI-Express */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus != &pci_bus_type)
+=======
+	if (!dev_is_pci(dev))
+>>>>>>> v3.18
 =======
 	if (!dev_is_pci(dev))
 >>>>>>> v3.18
@@ -188,7 +196,11 @@ static int ioat_dca_remove_requester(struct dca_provider *dca,
 
 	/* This implementation only supports PCI-Express */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus != &pci_bus_type)
+=======
+	if (!dev_is_pci(dev))
+>>>>>>> v3.18
 =======
 	if (!dev_is_pci(dev))
 >>>>>>> v3.18
@@ -333,7 +345,11 @@ static int ioat2_dca_add_requester(struct dca_provider *dca, struct device *dev)
 
 	/* This implementation only supports PCI-Express */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus != &pci_bus_type)
+=======
+	if (!dev_is_pci(dev))
+>>>>>>> v3.18
 =======
 	if (!dev_is_pci(dev))
 >>>>>>> v3.18
@@ -371,7 +387,11 @@ static int ioat2_dca_remove_requester(struct dca_provider *dca,
 
 	/* This implementation only supports PCI-Express */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus != &pci_bus_type)
+=======
+	if (!dev_is_pci(dev))
+>>>>>>> v3.18
 =======
 	if (!dev_is_pci(dev))
 >>>>>>> v3.18
@@ -517,7 +537,11 @@ static int ioat3_dca_add_requester(struct dca_provider *dca, struct device *dev)
 
 	/* This implementation only supports PCI-Express */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus != &pci_bus_type)
+=======
+	if (!dev_is_pci(dev))
+>>>>>>> v3.18
 =======
 	if (!dev_is_pci(dev))
 >>>>>>> v3.18
@@ -555,7 +579,11 @@ static int ioat3_dca_remove_requester(struct dca_provider *dca,
 
 	/* This implementation only supports PCI-Express */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->bus != &pci_bus_type)
+=======
+	if (!dev_is_pci(dev))
+>>>>>>> v3.18
 =======
 	if (!dev_is_pci(dev))
 >>>>>>> v3.18

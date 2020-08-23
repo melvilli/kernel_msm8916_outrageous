@@ -5,6 +5,10 @@
  *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+>>>>>>> v3.18
 =======
  *
 >>>>>>> v3.18
@@ -34,6 +38,7 @@
 #define VERSION "0.6"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool ignore_dga;
 static bool ignore_csr;
 static bool ignore_sniffer;
@@ -43,10 +48,15 @@ static bool force_scofix;
 static int sco_conn;
 static int reset = 1;
 =======
+=======
+>>>>>>> v3.18
 static bool disable_scofix;
 static bool force_scofix;
 
 static bool reset = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct usb_driver btusb_driver;
@@ -62,13 +72,19 @@ static struct usb_driver btusb_driver;
 #define BTUSB_INTEL		0x100
 #define BTUSB_INTEL_BOOT	0x200
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct usb_device_id btusb_table[] = {
 =======
+=======
+>>>>>>> v3.18
 #define BTUSB_BCM_PATCHRAM	0x400
 #define BTUSB_MARVELL		0x800
 
 static const struct usb_device_id btusb_table[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Generic Bluetooth USB device */
 	{ USB_DEVICE_INFO(0xe0, 0x01, 0x01) },
@@ -121,15 +137,21 @@ static const struct usb_device_id btusb_table[] = {
 
 	/* Broadcom BCM20702A0 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x0b05, 0x17b5) },
 	{ USB_DEVICE(0x0b05, 0x17cb) },
 	{ USB_DEVICE(0x04ca, 0x2003) },
 	{ USB_DEVICE(0x0489, 0xe042) },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0489, 0xe042) },
 	{ USB_DEVICE(0x04ca, 0x2003) },
 	{ USB_DEVICE(0x0b05, 0x17b5) },
 	{ USB_DEVICE(0x0b05, 0x17cb) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x413c, 0x8197) },
 
@@ -137,9 +159,12 @@ static const struct usb_device_id btusb_table[] = {
 	{ USB_VENDOR_AND_INTERFACE_INFO(0x0489, 0xff, 0x01, 0x01) },
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*Broadcom devices with vendor specific id */
 	{ USB_VENDOR_AND_INTERFACE_INFO(0x0a5c, 0xff, 0x01, 0x01) },
 =======
+=======
+>>>>>>> v3.18
 	/* Broadcom devices with vendor specific id */
 	{ USB_VENDOR_AND_INTERFACE_INFO(0x0a5c, 0xff, 0x01, 0x01),
 	  .driver_info = BTUSB_BCM_PATCHRAM },
@@ -149,6 +174,9 @@ static const struct usb_device_id btusb_table[] = {
 
 	/* Belkin F8065bf - Broadcom based */
 	{ USB_VENDOR_AND_INTERFACE_INFO(0x050d, 0xff, 0x01, 0x01) },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* IMC Networks - Broadcom based */
@@ -164,7 +192,11 @@ static const struct usb_device_id btusb_table[] = {
 MODULE_DEVICE_TABLE(usb, btusb_table);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id blacklist_table[] = {
+=======
+static const struct usb_device_id blacklist_table[] = {
+>>>>>>> v3.18
 =======
 static const struct usb_device_id blacklist_table[] = {
 >>>>>>> v3.18
@@ -176,6 +208,7 @@ static const struct usb_device_id blacklist_table[] = {
 
 	/* Atheros 3011 with sflash firmware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x0cf3, 0x3002), .driver_info = BTUSB_IGNORE },
 	{ USB_DEVICE(0x0cf3, 0xe019), .driver_info = BTUSB_IGNORE },
 	{ USB_DEVICE(0x13d3, 0x3304), .driver_info = BTUSB_IGNORE },
@@ -183,12 +216,17 @@ static const struct usb_device_id blacklist_table[] = {
 	{ USB_DEVICE(0x0489, 0xe03d), .driver_info = BTUSB_IGNORE },
 	{ USB_DEVICE(0x0489, 0xe027), .driver_info = BTUSB_IGNORE },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0489, 0xe027), .driver_info = BTUSB_IGNORE },
 	{ USB_DEVICE(0x0489, 0xe03d), .driver_info = BTUSB_IGNORE },
 	{ USB_DEVICE(0x0930, 0x0215), .driver_info = BTUSB_IGNORE },
 	{ USB_DEVICE(0x0cf3, 0x3002), .driver_info = BTUSB_IGNORE },
 	{ USB_DEVICE(0x0cf3, 0xe019), .driver_info = BTUSB_IGNORE },
 	{ USB_DEVICE(0x13d3, 0x3304), .driver_info = BTUSB_IGNORE },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Atheros AR9285 Malbec with sflash firmware */
@@ -196,7 +234,10 @@ static const struct usb_device_id blacklist_table[] = {
 
 	/* Atheros 3012 with sflash firmware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0489, 0xe04d), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0489, 0xe04e), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0489, 0xe056), .driver_info = BTUSB_ATH3012 },
@@ -213,6 +254,9 @@ static const struct usb_device_id blacklist_table[] = {
 	{ USB_DEVICE(0x0930, 0x0220), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0930, 0x0227), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0b05, 0x17d0), .driver_info = BTUSB_ATH3012 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ USB_DEVICE(0x0cf3, 0x0036), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0x3004), .driver_info = BTUSB_ATH3012 },
@@ -220,6 +264,7 @@ static const struct usb_device_id blacklist_table[] = {
 	{ USB_DEVICE(0x0cf3, 0x311d), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0x311e), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0x311f), .driver_info = BTUSB_ATH3012 },
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ USB_DEVICE(0x0cf3, 0x817a), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x13d3, 0x3375), .driver_info = BTUSB_ATH3012 },
@@ -242,6 +287,8 @@ static const struct usb_device_id blacklist_table[] = {
 	{ USB_DEVICE(0x0cf3, 0x3121), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0xe003), .driver_info = BTUSB_ATH3012 },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0cf3, 0x3121), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0x817a), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0cf3, 0xe003), .driver_info = BTUSB_ATH3012 },
@@ -252,12 +299,16 @@ static const struct usb_device_id blacklist_table[] = {
 	{ USB_DEVICE(0x13d3, 0x3393), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x13d3, 0x3402), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x13d3, 0x3432), .driver_info = BTUSB_ATH3012 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Atheros AR5BBU12 with sflash firmware */
 	{ USB_DEVICE(0x0489, 0xe02c), .driver_info = BTUSB_IGNORE },
 
 	/* Atheros AR5BBU12 with sflash firmware */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{ USB_DEVICE(0x0489, 0xe03c), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0489, 0xe036), .driver_info = BTUSB_ATH3012 },
@@ -267,6 +318,8 @@ static const struct usb_device_id blacklist_table[] = {
 	{ USB_DEVICE(0x0a5c, 0x200a), .driver_info = BTUSB_WRONG_SCO_MTU },
 	{ USB_DEVICE(0x0a5c, 0x2009), .driver_info = BTUSB_BCM92035 },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0489, 0xe036), .driver_info = BTUSB_ATH3012 },
 	{ USB_DEVICE(0x0489, 0xe03c), .driver_info = BTUSB_ATH3012 },
 
@@ -274,6 +327,9 @@ static const struct usb_device_id blacklist_table[] = {
 	{ USB_DEVICE(0x0a5c, 0x2009), .driver_info = BTUSB_BCM92035 },
 	{ USB_DEVICE(0x0a5c, 0x200a), .driver_info = BTUSB_WRONG_SCO_MTU },
 	{ USB_DEVICE(0x0a5c, 0x2035), .driver_info = BTUSB_WRONG_SCO_MTU },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Broadcom BCM2045 */
@@ -317,6 +373,7 @@ static const struct usb_device_id blacklist_table[] = {
 
 	/* CSR BlueCore Bluetooth Sniffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x0a12, 0x0002), .driver_info = BTUSB_SNIFFER },
 
 	/* Frontline ComProbe Bluetooth Sniffer */
@@ -325,6 +382,8 @@ static const struct usb_device_id blacklist_table[] = {
 	/* Intel Bluetooth device */
 	{ USB_DEVICE(0x8087, 0x07dc), .driver_info = BTUSB_INTEL },
 =======
+=======
+>>>>>>> v3.18
 	{ USB_DEVICE(0x0a12, 0x0002),
 	  .driver_info = BTUSB_SNIFFER | BTUSB_BROKEN_ISOC },
 
@@ -339,6 +398,9 @@ static const struct usb_device_id blacklist_table[] = {
 	/* Marvell device */
 	{ USB_DEVICE(0x1286, 0x2044), .driver_info = BTUSB_MARVELL },
 	{ USB_DEVICE(0x1286, 0x2046), .driver_info = BTUSB_MARVELL },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	{ }	/* Terminating entry */
@@ -359,8 +421,11 @@ struct btusb_data {
 	struct usb_interface *isoc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spinlock_t lock;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long flags;
@@ -368,6 +433,7 @@ struct btusb_data {
 	struct work_struct work;
 	struct work_struct waker;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct usb_anchor tx_anchor;
 	struct usb_anchor intr_anchor;
@@ -377,6 +443,8 @@ struct btusb_data {
 	int tx_in_flight;
 	spinlock_t txlock;
 =======
+=======
+>>>>>>> v3.18
 	struct usb_anchor deferred;
 	struct usb_anchor tx_anchor;
 	int tx_in_flight;
@@ -390,6 +458,9 @@ struct btusb_data {
 	struct sk_buff *evt_skb;
 	struct sk_buff *acl_skb;
 	struct sk_buff *sco_skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct usb_endpoint_descriptor *intr_ep;
@@ -406,6 +477,7 @@ struct btusb_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int inc_tx(struct btusb_data *data)
 {
 	unsigned long flags;
@@ -419,6 +491,8 @@ static int inc_tx(struct btusb_data *data)
 
 	return rv;
 =======
+=======
+>>>>>>> v3.18
 static inline void btusb_free_frags(struct btusb_data *data)
 {
 	unsigned long flags;
@@ -602,6 +676,9 @@ static int btusb_recv_isoc(struct btusb_data *data, void *buffer, int count)
 	spin_unlock(&data->rxlock);
 
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -612,8 +689,13 @@ static void btusb_intr_complete(struct urb *urb)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("%s urb %p status %d count %d", hdev->name,
 					urb, urb->status, urb->actual_length);
+=======
+	BT_DBG("%s urb %p status %d count %d", hdev->name, urb, urb->status,
+	       urb->actual_length);
+>>>>>>> v3.18
 =======
 	BT_DBG("%s urb %p status %d count %d", hdev->name, urb, urb->status,
 	       urb->actual_length);
@@ -626,9 +708,14 @@ static void btusb_intr_complete(struct urb *urb)
 		hdev->stat.byte_rx += urb->actual_length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (hci_recv_fragment(hdev, HCI_EVENT_PKT,
 						urb->transfer_buffer,
 						urb->actual_length) < 0) {
+=======
+		if (btusb_recv_intr(data, urb->transfer_buffer,
+				    urb->actual_length) < 0) {
+>>>>>>> v3.18
 =======
 		if (btusb_recv_intr(data, urb->transfer_buffer,
 				    urb->actual_length) < 0) {
@@ -654,7 +741,11 @@ static void btusb_intr_complete(struct urb *urb)
 		if (err != -EPERM && err != -ENODEV)
 			BT_ERR("%s urb %p failed to resubmit (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						hdev->name, urb, -err);
+=======
+			       hdev->name, urb, -err);
+>>>>>>> v3.18
 =======
 			       hdev->name, urb, -err);
 >>>>>>> v3.18
@@ -691,8 +782,12 @@ static int btusb_submit_intr_urb(struct hci_dev *hdev, gfp_t mem_flags)
 
 	usb_fill_int_urb(urb, data->udev, pipe, buf, size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						btusb_intr_complete, hdev,
 						data->intr_ep->bInterval);
+=======
+			 btusb_intr_complete, hdev, data->intr_ep->bInterval);
+>>>>>>> v3.18
 =======
 			 btusb_intr_complete, hdev, data->intr_ep->bInterval);
 >>>>>>> v3.18
@@ -706,7 +801,11 @@ static int btusb_submit_intr_urb(struct hci_dev *hdev, gfp_t mem_flags)
 		if (err != -EPERM && err != -ENODEV)
 			BT_ERR("%s urb %p submission failed (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						hdev->name, urb, -err);
+=======
+			       hdev->name, urb, -err);
+>>>>>>> v3.18
 =======
 			       hdev->name, urb, -err);
 >>>>>>> v3.18
@@ -725,8 +824,13 @@ static void btusb_bulk_complete(struct urb *urb)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("%s urb %p status %d count %d", hdev->name,
 					urb, urb->status, urb->actual_length);
+=======
+	BT_DBG("%s urb %p status %d count %d", hdev->name, urb, urb->status,
+	       urb->actual_length);
+>>>>>>> v3.18
 =======
 	BT_DBG("%s urb %p status %d count %d", hdev->name, urb, urb->status,
 	       urb->actual_length);
@@ -739,9 +843,14 @@ static void btusb_bulk_complete(struct urb *urb)
 		hdev->stat.byte_rx += urb->actual_length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (hci_recv_fragment(hdev, HCI_ACLDATA_PKT,
 						urb->transfer_buffer,
 						urb->actual_length) < 0) {
+=======
+		if (btusb_recv_bulk(data, urb->transfer_buffer,
+				    urb->actual_length) < 0) {
+>>>>>>> v3.18
 =======
 		if (btusb_recv_bulk(data, urb->transfer_buffer,
 				    urb->actual_length) < 0) {
@@ -767,7 +876,11 @@ static void btusb_bulk_complete(struct urb *urb)
 		if (err != -EPERM && err != -ENODEV)
 			BT_ERR("%s urb %p failed to resubmit (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						hdev->name, urb, -err);
+=======
+			       hdev->name, urb, -err);
+>>>>>>> v3.18
 =======
 			       hdev->name, urb, -err);
 >>>>>>> v3.18
@@ -801,8 +914,13 @@ static int btusb_submit_bulk_urb(struct hci_dev *hdev, gfp_t mem_flags)
 	pipe = usb_rcvbulkpipe(data->udev, data->bulk_rx_ep->bEndpointAddress);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_fill_bulk_urb(urb, data->udev, pipe,
 					buf, size, btusb_bulk_complete, hdev);
+=======
+	usb_fill_bulk_urb(urb, data->udev, pipe, buf, size,
+			  btusb_bulk_complete, hdev);
+>>>>>>> v3.18
 =======
 	usb_fill_bulk_urb(urb, data->udev, pipe, buf, size,
 			  btusb_bulk_complete, hdev);
@@ -818,7 +936,11 @@ static int btusb_submit_bulk_urb(struct hci_dev *hdev, gfp_t mem_flags)
 		if (err != -EPERM && err != -ENODEV)
 			BT_ERR("%s urb %p submission failed (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						hdev->name, urb, -err);
+=======
+			       hdev->name, urb, -err);
+>>>>>>> v3.18
 =======
 			       hdev->name, urb, -err);
 >>>>>>> v3.18
@@ -837,8 +959,13 @@ static void btusb_isoc_complete(struct urb *urb)
 	int i, err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BT_DBG("%s urb %p status %d count %d", hdev->name,
 					urb, urb->status, urb->actual_length);
+=======
+	BT_DBG("%s urb %p status %d count %d", hdev->name, urb, urb->status,
+	       urb->actual_length);
+>>>>>>> v3.18
 =======
 	BT_DBG("%s urb %p status %d count %d", hdev->name, urb, urb->status,
 	       urb->actual_length);
@@ -858,9 +985,14 @@ static void btusb_isoc_complete(struct urb *urb)
 			hdev->stat.byte_rx += length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (hci_recv_fragment(hdev, HCI_SCODATA_PKT,
 						urb->transfer_buffer + offset,
 								length) < 0) {
+=======
+			if (btusb_recv_isoc(data, urb->transfer_buffer + offset,
+					    length) < 0) {
+>>>>>>> v3.18
 =======
 			if (btusb_recv_isoc(data, urb->transfer_buffer + offset,
 					    length) < 0) {
@@ -886,7 +1018,11 @@ static void btusb_isoc_complete(struct urb *urb)
 		if (err != -EPERM && err != -ENODEV)
 			BT_ERR("%s urb %p failed to resubmit (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						hdev->name, urb, -err);
+=======
+			       hdev->name, urb, -err);
+>>>>>>> v3.18
 =======
 			       hdev->name, urb, -err);
 >>>>>>> v3.18
@@ -945,6 +1081,7 @@ static int btusb_submit_isoc_urb(struct hci_dev *hdev, gfp_t mem_flags)
 
 	usb_fill_int_urb(urb, data->udev, pipe, buf, size, btusb_isoc_complete,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				hdev, data->isoc_rx_ep->bInterval);
 
 	urb->transfer_flags  = URB_FREE_BUFFER | URB_ISO_ASAP;
@@ -952,12 +1089,17 @@ static int btusb_submit_isoc_urb(struct hci_dev *hdev, gfp_t mem_flags)
 	__fill_isoc_descriptor(urb, size,
 			le16_to_cpu(data->isoc_rx_ep->wMaxPacketSize));
 =======
+=======
+>>>>>>> v3.18
 			 hdev, data->isoc_rx_ep->bInterval);
 
 	urb->transfer_flags = URB_FREE_BUFFER | URB_ISO_ASAP;
 
 	__fill_isoc_descriptor(urb, size,
 			       le16_to_cpu(data->isoc_rx_ep->wMaxPacketSize));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	usb_anchor_urb(urb, &data->isoc_anchor);
@@ -967,7 +1109,11 @@ static int btusb_submit_isoc_urb(struct hci_dev *hdev, gfp_t mem_flags)
 		if (err != -EPERM && err != -ENODEV)
 			BT_ERR("%s urb %p submission failed (%d)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 						hdev->name, urb, -err);
+=======
+			       hdev->name, urb, -err);
+>>>>>>> v3.18
 =======
 			       hdev->name, urb, -err);
 >>>>>>> v3.18
@@ -983,17 +1129,23 @@ static void btusb_tx_complete(struct urb *urb)
 {
 	struct sk_buff *skb = urb->context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hci_dev *hdev = (struct hci_dev *) skb->dev;
 	struct btusb_data *data = hci_get_drvdata(hdev);
 
 	BT_DBG("%s urb %p status %d count %d", hdev->name,
 					urb, urb->status, urb->actual_length);
 =======
+=======
+>>>>>>> v3.18
 	struct hci_dev *hdev = (struct hci_dev *)skb->dev;
 	struct btusb_data *data = hci_get_drvdata(hdev);
 
 	BT_DBG("%s urb %p status %d count %d", hdev->name, urb, urb->status,
 	       urb->actual_length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!test_bit(HCI_RUNNING, &hdev->flags))
@@ -1018,15 +1170,21 @@ static void btusb_isoc_tx_complete(struct urb *urb)
 {
 	struct sk_buff *skb = urb->context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hci_dev *hdev = (struct hci_dev *) skb->dev;
 
 	BT_DBG("%s urb %p status %d count %d", hdev->name,
 					urb, urb->status, urb->actual_length);
 =======
+=======
+>>>>>>> v3.18
 	struct hci_dev *hdev = (struct hci_dev *)skb->dev;
 
 	BT_DBG("%s urb %p status %d count %d", hdev->name, urb, urb->status,
 	       urb->actual_length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!test_bit(HCI_RUNNING, &hdev->flags))
@@ -1112,6 +1270,11 @@ static int btusb_close(struct hci_dev *hdev)
 
 	btusb_stop_traffic(data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	btusb_free_frags(data);
+
+>>>>>>> v3.18
 =======
 	btusb_free_frags(data);
 
@@ -1136,6 +1299,10 @@ static int btusb_flush(struct hci_dev *hdev)
 
 	usb_kill_anchored_urbs(&data->tx_anchor);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	btusb_free_frags(data);
+>>>>>>> v3.18
 =======
 	btusb_free_frags(data);
 >>>>>>> v3.18
@@ -1144,9 +1311,14 @@ static int btusb_flush(struct hci_dev *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int btusb_send_frame(struct sk_buff *skb)
 {
 	struct hci_dev *hdev = (struct hci_dev *) skb->dev;
+=======
+static struct urb *alloc_ctrl_urb(struct hci_dev *hdev, struct sk_buff *skb)
+{
+>>>>>>> v3.18
 =======
 static struct urb *alloc_ctrl_urb(struct hci_dev *hdev, struct sk_buff *skb)
 {
@@ -1155,6 +1327,7 @@ static struct urb *alloc_ctrl_urb(struct hci_dev *hdev, struct sk_buff *skb)
 	struct usb_ctrlrequest *dr;
 	struct urb *urb;
 	unsigned int pipe;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err;
 
@@ -1250,6 +1423,8 @@ skip_waking:
 			BT_ERR("%s urb %p submission failed (%d)",
 						hdev->name, urb, -err);
 =======
+=======
+>>>>>>> v3.18
 
 	urb = usb_alloc_urb(0, GFP_KERNEL);
 	if (!urb)
@@ -1341,6 +1516,9 @@ static int submit_tx_urb(struct hci_dev *hdev, struct urb *urb)
 		if (err != -EPERM && err != -ENODEV)
 			BT_ERR("%s urb %p submission failed (%d)",
 			       hdev->name, urb, -err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(urb->setup_packet);
 		usb_unanchor_urb(urb);
@@ -1349,7 +1527,10 @@ static int submit_tx_urb(struct hci_dev *hdev, struct urb *urb)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 done:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	usb_free_urb(urb);
@@ -1357,7 +1538,10 @@ done:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int submit_or_queue_tx_urb(struct hci_dev *hdev, struct urb *urb)
 {
 	struct btusb_data *data = hci_get_drvdata(hdev);
@@ -1421,6 +1605,9 @@ static int btusb_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 	return -EILSEQ;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void btusb_notify(struct hci_dev *hdev, unsigned int evt)
 {
@@ -1429,9 +1616,14 @@ static void btusb_notify(struct hci_dev *hdev, unsigned int evt)
 	BT_DBG("%s evt %d", hdev->name, evt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((evt == HCI_NOTIFY_SCO_COMPLETE) || (evt == HCI_NOTIFY_CONN_DEL)) {
 		BT_DBG("SCO conn state changed: evt %d", evt);
 		sco_conn = (evt == HCI_NOTIFY_SCO_COMPLETE) ? 1 : 0;
+=======
+	if (hci_conn_num(hdev, SCO_LINK) != data->sco_num) {
+		data->sco_num = hci_conn_num(hdev, SCO_LINK);
+>>>>>>> v3.18
 =======
 	if (hci_conn_num(hdev, SCO_LINK) != data->sco_num) {
 		data->sco_num = hci_conn_num(hdev, SCO_LINK);
@@ -1491,7 +1683,11 @@ static void btusb_work(struct work_struct *work)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sco_conn) {
+=======
+	if (data->sco_num > 0) {
+>>>>>>> v3.18
 =======
 	if (data->sco_num > 0) {
 >>>>>>> v3.18
@@ -1509,14 +1705,20 @@ static void btusb_work(struct work_struct *work)
 		if (hdev->voice_setting & 0x0020) {
 			static const int alts[3] = { 2, 4, 5 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 			new_alts = alts[hdev->conn_hash.sco_num - 1];
 		} else {
 			new_alts = hdev->conn_hash.sco_num;
 =======
+=======
+>>>>>>> v3.18
 
 			new_alts = alts[data->sco_num - 1];
 		} else {
 			new_alts = data->sco_num;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -1573,7 +1775,10 @@ static int btusb_setup_bcm92035(struct hci_dev *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int btusb_setup_csr(struct hci_dev *hdev)
 {
 	struct hci_rp_read_local_version *rp;
@@ -1613,6 +1818,9 @@ static int btusb_setup_csr(struct hci_dev *hdev)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct intel_version {
 	u8 status;
@@ -1629,7 +1837,11 @@ struct intel_version {
 
 static const struct firmware *btusb_setup_intel_get_fw(struct hci_dev *hdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						struct intel_version *ver)
+=======
+						       struct intel_version *ver)
+>>>>>>> v3.18
 =======
 						       struct intel_version *ver)
 >>>>>>> v3.18
@@ -1788,7 +2000,10 @@ static int btusb_setup_intel_patching(struct hci_dev *hdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define BDADDR_INTEL (&(bdaddr_t) {{0x00, 0x8b, 0x9e, 0x19, 0x03, 0x00}})
 
 static int btusb_check_bdaddr_intel(struct hci_dev *hdev)
@@ -1834,6 +2049,9 @@ static int btusb_check_bdaddr_intel(struct hci_dev *hdev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int btusb_setup_intel(struct hci_dev *hdev)
 {
@@ -1908,6 +2126,10 @@ static int btusb_setup_intel(struct hci_dev *hdev)
 			hdev->name, ver->fw_patch_num);
 		kfree_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		btusb_check_bdaddr_intel(hdev);
+>>>>>>> v3.18
 =======
 		btusb_check_bdaddr_intel(hdev);
 >>>>>>> v3.18
@@ -1924,6 +2146,10 @@ static int btusb_setup_intel(struct hci_dev *hdev)
 	if (!fw) {
 		kfree_skb(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		btusb_check_bdaddr_intel(hdev);
+>>>>>>> v3.18
 =======
 		btusb_check_bdaddr_intel(hdev);
 >>>>>>> v3.18
@@ -1932,8 +2158,11 @@ static int btusb_setup_intel(struct hci_dev *hdev)
 	fw_ptr = fw->data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree_skb(skb);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* This Intel specific command enables the manufacturer mode of the
@@ -1953,6 +2182,10 @@ static int btusb_setup_intel(struct hci_dev *hdev)
 	if (skb->data[0]) {
 		u8 evt_status = skb->data[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2016,6 +2249,10 @@ static int btusb_setup_intel(struct hci_dev *hdev)
 		hdev->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	btusb_check_bdaddr_intel(hdev);
+>>>>>>> v3.18
 =======
 	btusb_check_bdaddr_intel(hdev);
 >>>>>>> v3.18
@@ -2034,6 +2271,11 @@ exit_mfg_disable:
 
 	BT_INFO("%s: Intel Bluetooth firmware patch completed", hdev->name);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	btusb_check_bdaddr_intel(hdev);
+>>>>>>> v3.18
 =======
 
 	btusb_check_bdaddr_intel(hdev);
@@ -2059,7 +2301,10 @@ exit_mfg_deactivate:
 		hdev->name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	btusb_check_bdaddr_intel(hdev);
 	return 0;
 }
@@ -2306,13 +2551,20 @@ static int btusb_set_bdaddr_bcm(struct hci_dev *hdev, const bdaddr_t *bdaddr)
 	}
 	kfree_skb(skb);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static int btusb_probe(struct usb_interface *intf,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				const struct usb_device_id *id)
+=======
+		       const struct usb_device_id *id)
+>>>>>>> v3.18
 =======
 		       const struct usb_device_id *id)
 >>>>>>> v3.18
@@ -2321,7 +2573,11 @@ static int btusb_probe(struct usb_interface *intf,
 	struct btusb_data *data;
 	struct hci_dev *hdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, version, err;
+=======
+	int i, err;
+>>>>>>> v3.18
 =======
 	int i, err;
 >>>>>>> v3.18
@@ -2335,6 +2591,10 @@ static int btusb_probe(struct usb_interface *intf,
 	if (!id->driver_info) {
 		const struct usb_device_id *match;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2346,6 +2606,7 @@ static int btusb_probe(struct usb_interface *intf,
 	if (id->driver_info == BTUSB_IGNORE)
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ignore_dga && id->driver_info & BTUSB_DIGIANSWER)
 		return -ENODEV;
@@ -2371,6 +2632,8 @@ static int btusb_probe(struct usb_interface *intf,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (id->driver_info & BTUSB_ATH3012) {
 		struct usb_device *udev = interface_to_usbdev(intf);
 
@@ -2380,6 +2643,9 @@ static int btusb_probe(struct usb_interface *intf,
 			return -ENODEV;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data = devm_kzalloc(&intf->dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
@@ -2413,6 +2679,7 @@ static int btusb_probe(struct usb_interface *intf,
 	data->intf = intf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&data->lock);
 
 	INIT_WORK(&data->work, btusb_work);
@@ -2425,6 +2692,8 @@ static int btusb_probe(struct usb_interface *intf,
 	init_usb_anchor(&data->isoc_anchor);
 	init_usb_anchor(&data->deferred);
 =======
+=======
+>>>>>>> v3.18
 	INIT_WORK(&data->work, btusb_work);
 	INIT_WORK(&data->waker, btusb_waker);
 	init_usb_anchor(&data->deferred);
@@ -2435,6 +2704,9 @@ static int btusb_probe(struct usb_interface *intf,
 	init_usb_anchor(&data->bulk_anchor);
 	init_usb_anchor(&data->isoc_anchor);
 	spin_lock_init(&data->rxlock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	hdev = hci_alloc_dev();
@@ -2458,9 +2730,12 @@ static int btusb_probe(struct usb_interface *intf,
 		hdev->setup = btusb_setup_bcm92035;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (id->driver_info & BTUSB_INTEL)
 		hdev->setup = btusb_setup_intel;
 =======
+=======
+>>>>>>> v3.18
 	if (id->driver_info & BTUSB_BCM_PATCHRAM) {
 		hdev->setup = btusb_setup_bcm_patchram;
 		hdev->set_bdaddr = btusb_set_bdaddr_bcm;
@@ -2473,6 +2748,9 @@ static int btusb_probe(struct usb_interface *intf,
 
 	if (id->driver_info & BTUSB_MARVELL)
 		hdev->set_bdaddr = btusb_set_bdaddr_marvell;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (id->driver_info & BTUSB_INTEL_BOOT)
@@ -2500,11 +2778,14 @@ static int btusb_probe(struct usb_interface *intf,
 	if (id->driver_info & BTUSB_CSR) {
 		struct usb_device *udev = data->udev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Old firmware would otherwise execute USB reset */
 		if (le16_to_cpu(udev->descriptor.bcdDevice) < 0x117)
 			set_bit(HCI_QUIRK_RESET_ON_CLOSE, &hdev->quirks);
 =======
+=======
+>>>>>>> v3.18
 		u16 bcdDevice = le16_to_cpu(udev->descriptor.bcdDevice);
 
 		/* Old firmware would otherwise execute USB reset */
@@ -2514,6 +2795,9 @@ static int btusb_probe(struct usb_interface *intf,
 		/* Fake CSR devices with broken commands */
 		if (bcdDevice <= 0x100)
 			hdev->setup = btusb_setup_csr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -2524,9 +2808,12 @@ static int btusb_probe(struct usb_interface *intf,
 		if (le16_to_cpu(udev->descriptor.bcdDevice) > 0x997)
 			set_bit(HCI_QUIRK_RAW_DEVICE, &hdev->quirks);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		data->isoc = NULL;
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	if (id->driver_info & BTUSB_INTEL_BOOT) {
@@ -2539,13 +2826,20 @@ static int btusb_probe(struct usb_interface *intf,
 			hci_free_dev(hdev);
 			return err;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (data->isoc) {
 		err = usb_driver_claim_interface(&btusb_driver,
 <<<<<<< HEAD
+<<<<<<< HEAD
 							data->isoc, data);
+=======
+						 data->isoc, data);
+>>>>>>> v3.18
 =======
 						 data->isoc, data);
 >>>>>>> v3.18
@@ -2563,7 +2857,10 @@ static int btusb_probe(struct usb_interface *intf,
 
 	usb_set_intfdata(intf, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usb_enable_autosuspend(data->udev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2594,6 +2891,10 @@ static void btusb_disconnect(struct usb_interface *intf)
 		usb_driver_release_interface(&btusb_driver, data->isoc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	btusb_free_frags(data);
+>>>>>>> v3.18
 =======
 	btusb_free_frags(data);
 >>>>>>> v3.18
@@ -2717,6 +3018,7 @@ static struct usb_driver btusb_driver = {
 module_usb_driver(btusb_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(ignore_dga, bool, 0644);
 MODULE_PARM_DESC(ignore_dga, "Ignore devices with id 08fd:0001");
 
@@ -2726,6 +3028,8 @@ MODULE_PARM_DESC(ignore_csr, "Ignore devices with id 0a12:0001");
 module_param(ignore_sniffer, bool, 0644);
 MODULE_PARM_DESC(ignore_sniffer, "Ignore devices with id 0a12:0002");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 module_param(disable_scofix, bool, 0644);

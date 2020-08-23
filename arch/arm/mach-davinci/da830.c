@@ -12,6 +12,10 @@
 #include <linux/init.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/gpio-davinci.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/gpio-davinci.h>
 >>>>>>> v3.18
@@ -25,7 +29,10 @@
 #include <mach/time.h>
 #include <mach/da8xx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/gpio-davinci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -393,7 +400,11 @@ static struct clk_lookup da830_clks[] = {
 	CLK("i2c_davinci.1",	NULL,		&i2c0_clk),
 	CLK(NULL,		"timer0",	&timerp64_0_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK("watchdog",		NULL,		&timerp64_1_clk),
+=======
+	CLK("davinci-wdt",	NULL,		&timerp64_1_clk),
+>>>>>>> v3.18
 =======
 	CLK("davinci-wdt",	NULL,		&timerp64_1_clk),
 >>>>>>> v3.18
@@ -407,9 +418,15 @@ static struct clk_lookup da830_clks[] = {
 	CLK(NULL,		"tptc1",	&tptc1_clk),
 	CLK("da830-mmc.0",	NULL,		&mmcsd_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CLK(NULL,		"uart0",	&uart0_clk),
 	CLK(NULL,		"uart1",	&uart1_clk),
 	CLK(NULL,		"uart2",	&uart2_clk),
+=======
+	CLK("serial8250.0",	NULL,		&uart0_clk),
+	CLK("serial8250.1",	NULL,		&uart1_clk),
+	CLK("serial8250.2",	NULL,		&uart2_clk),
+>>>>>>> v3.18
 =======
 	CLK("serial8250.0",	NULL,		&uart0_clk),
 	CLK("serial8250.1",	NULL,		&uart1_clk),
@@ -435,6 +452,10 @@ static struct clk_lookup da830_clks[] = {
 	CLK(NULL,		"secu_mgr",	&secu_mgr_clk),
 	CLK("davinci_emac.1",	NULL,		&emac_clk),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLK("davinci_mdio.0",   "fck",          &emac_clk),
+>>>>>>> v3.18
 =======
 	CLK("davinci_mdio.0",   "fck",          &emac_clk),
 >>>>>>> v3.18
@@ -1172,7 +1193,10 @@ static struct davinci_id da830_ids[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct davinci_gpio_platform_data da830_gpio_platform_data = {
 	.ngpio = 128,
 };
@@ -1182,6 +1206,9 @@ int __init da830_register_gpio(void)
 	return da8xx_register_gpio(&da830_gpio_platform_data);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct davinci_timer_instance da830_timer_instance[2] = {
 	{
@@ -1229,11 +1256,14 @@ static struct davinci_soc_info davinci_soc_info_da830 = {
 	.intc_irq_num		= DA830_N_CP_INTC_IRQ,
 	.timer_info		= &da830_timer_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.gpio_type		= GPIO_TYPE_DAVINCI,
 	.gpio_base		= DA8XX_GPIO_BASE,
 	.gpio_num		= 128,
 	.gpio_irq		= IRQ_DA8XX_GPIO0,
 	.serial_dev		= &da8xx_serial_device,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.emac_pdata		= &da8xx_emac_pdata,

@@ -19,6 +19,7 @@ Description:
 		pllY is locked.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 What:		/sys/bus/iio/devices/iio:deviceX/store_eeprom
 KernelVersion:	3.4.0
 Contact:	linux-iio@vger.kernel.org
@@ -27,6 +28,8 @@ Description:
 		on-chip EEPROM. After power-up or chip reset the device will
 		automatically load the saved configuration.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 What:		/sys/bus/iio/devices/iio:deviceX/sync_dividers

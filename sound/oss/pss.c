@@ -124,7 +124,11 @@ static bool pss_mixer;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct pss_mixerdata {
+=======
+struct pss_mixerdata {
+>>>>>>> v3.18
 =======
 struct pss_mixerdata {
 >>>>>>> v3.18
@@ -134,9 +138,15 @@ struct pss_mixerdata {
 	unsigned int treble;
 	unsigned int synth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } pss_mixerdata;
 
 typedef struct pss_confdata {
+=======
+};
+
+struct pss_confdata {
+>>>>>>> v3.18
 =======
 };
 
@@ -147,6 +157,7 @@ struct pss_confdata {
 	int             dma;
 	int            *osp;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pss_mixerdata   mixer;
 	int             ad_mixer_dev;
 } pss_confdata;
@@ -154,12 +165,17 @@ struct pss_confdata {
 static pss_confdata pss_data;
 static pss_confdata *devc = &pss_data;
 =======
+=======
+>>>>>>> v3.18
 	struct pss_mixerdata mixer;
 	int             ad_mixer_dev;
 };
   
 static struct pss_confdata pss_data;
 static struct pss_confdata *devc = &pss_data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEFINE_SPINLOCK(lock);
 
@@ -170,7 +186,11 @@ static bool	pss_enable_joystick;    /* Parameter for enabling the joystick */
 static coproc_operations pss_coproc_operations;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pss_write(pss_confdata *devc, int data)
+=======
+static void pss_write(struct pss_confdata *devc, int data)
+>>>>>>> v3.18
 =======
 static void pss_write(struct pss_confdata *devc, int data)
 >>>>>>> v3.18
@@ -230,7 +250,11 @@ static int __init probe_pss(struct address_info *hw_config)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int set_irq(pss_confdata * devc, int dev, int irq)
+=======
+static int set_irq(struct pss_confdata *devc, int dev, int irq)
+>>>>>>> v3.18
 =======
 static int set_irq(struct pss_confdata *devc, int dev, int irq)
 >>>>>>> v3.18
@@ -260,7 +284,11 @@ static int set_irq(struct pss_confdata *devc, int dev, int irq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void set_io_base(pss_confdata * devc, int dev, int base)
+=======
+static void set_io_base(struct pss_confdata *devc, int dev, int base)
+>>>>>>> v3.18
 =======
 static void set_io_base(struct pss_confdata *devc, int dev, int base)
 >>>>>>> v3.18
@@ -272,7 +300,11 @@ static void set_io_base(struct pss_confdata *devc, int dev, int base)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int set_dma(pss_confdata * devc, int dev, int dma)
+=======
+static int set_dma(struct pss_confdata *devc, int dev, int dma)
+>>>>>>> v3.18
 =======
 static int set_dma(struct pss_confdata *devc, int dev, int dma)
 >>>>>>> v3.18
@@ -300,7 +332,11 @@ static int set_dma(struct pss_confdata *devc, int dev, int dma)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pss_reset_dsp(pss_confdata * devc)
+=======
+static int pss_reset_dsp(struct pss_confdata *devc)
+>>>>>>> v3.18
 =======
 static int pss_reset_dsp(struct pss_confdata *devc)
 >>>>>>> v3.18
@@ -315,7 +351,11 @@ static int pss_reset_dsp(struct pss_confdata *devc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pss_put_dspword(pss_confdata * devc, unsigned short word)
+=======
+static int pss_put_dspword(struct pss_confdata *devc, unsigned short word)
+>>>>>>> v3.18
 =======
 static int pss_put_dspword(struct pss_confdata *devc, unsigned short word)
 >>>>>>> v3.18
@@ -335,7 +375,11 @@ static int pss_put_dspword(struct pss_confdata *devc, unsigned short word)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pss_get_dspword(pss_confdata * devc, unsigned short *word)
+=======
+static int pss_get_dspword(struct pss_confdata *devc, unsigned short *word)
+>>>>>>> v3.18
 =======
 static int pss_get_dspword(struct pss_confdata *devc, unsigned short *word)
 >>>>>>> v3.18
@@ -355,7 +399,12 @@ static int pss_get_dspword(struct pss_confdata *devc, unsigned short *word)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pss_download_boot(pss_confdata * devc, unsigned char *block, int size, int flags)
+=======
+static int pss_download_boot(struct pss_confdata *devc, unsigned char *block,
+			     int size, int flags)
+>>>>>>> v3.18
 =======
 static int pss_download_boot(struct pss_confdata *devc, unsigned char *block,
 			     int size, int flags)
@@ -450,7 +499,11 @@ static int pss_download_boot(struct pss_confdata *devc, unsigned char *block,
 
 /* Mixer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void set_master_volume(pss_confdata *devc, int left, int right)
+=======
+static void set_master_volume(struct pss_confdata *devc, int left, int right)
+>>>>>>> v3.18
 =======
 static void set_master_volume(struct pss_confdata *devc, int left, int right)
 >>>>>>> v3.18
@@ -473,7 +526,11 @@ static void set_master_volume(struct pss_confdata *devc, int left, int right)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void set_synth_volume(pss_confdata *devc, int volume)
+=======
+static void set_synth_volume(struct pss_confdata *devc, int volume)
+>>>>>>> v3.18
 =======
 static void set_synth_volume(struct pss_confdata *devc, int volume)
 >>>>>>> v3.18
@@ -486,7 +543,11 @@ static void set_synth_volume(struct pss_confdata *devc, int volume)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void set_bass(pss_confdata *devc, int level)
+=======
+static void set_bass(struct pss_confdata *devc, int level)
+>>>>>>> v3.18
 =======
 static void set_bass(struct pss_confdata *devc, int level)
 >>>>>>> v3.18
@@ -497,7 +558,11 @@ static void set_bass(struct pss_confdata *devc, int level)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void set_treble(pss_confdata *devc, int level)
+=======
+static void set_treble(struct pss_confdata *devc, int level)
+>>>>>>> v3.18
 =======
 static void set_treble(struct pss_confdata *devc, int level)
 >>>>>>> v3.18
@@ -508,7 +573,11 @@ static void set_treble(struct pss_confdata *devc, int level)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pss_mixer_reset(pss_confdata *devc)
+=======
+static void pss_mixer_reset(struct pss_confdata *devc)
+>>>>>>> v3.18
 =======
 static void pss_mixer_reset(struct pss_confdata *devc)
 >>>>>>> v3.18
@@ -572,7 +641,12 @@ static int ret_vol_stereo(int left, int right)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int call_ad_mixer(pss_confdata *devc,unsigned int cmd, void __user *arg)
+=======
+static int call_ad_mixer(struct pss_confdata *devc, unsigned int cmd,
+			 void __user *arg)
+>>>>>>> v3.18
 =======
 static int call_ad_mixer(struct pss_confdata *devc, unsigned int cmd,
 			 void __user *arg)
@@ -587,7 +661,11 @@ static int call_ad_mixer(struct pss_confdata *devc, unsigned int cmd,
 static int pss_mixer_ioctl (int dev, unsigned int cmd, void __user *arg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pss_confdata *devc = mixer_devs[dev]->devc;
+=======
+	struct pss_confdata *devc = mixer_devs[dev]->devc;
+>>>>>>> v3.18
 =======
 	struct pss_confdata *devc = mixer_devs[dev]->devc;
 >>>>>>> v3.18

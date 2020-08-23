@@ -153,7 +153,10 @@ config	IP_VS_WLC
 	  module, choose M here. If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config  IP_VS_FO
 		tristate "weighted failover scheduling"
 	---help---
@@ -164,6 +167,9 @@ config  IP_VS_FO
 	  If you want to compile it in kernel, say Y. To compile it as a
 	  module, choose M here. If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config	IP_VS_LBLC
 	tristate "locality-based least-connection scheduling"

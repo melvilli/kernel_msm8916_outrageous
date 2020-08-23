@@ -5,7 +5,10 @@
 comment "HSI clients"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NOKIA_MODEM
 	tristate "Nokia Modem"
 	depends on HSI && SSI_PROTOCOL
@@ -23,6 +26,9 @@ config SSI_PROTOCOL
 
 	If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HSI_CHAR
 	tristate "HSI/SSI character driver"

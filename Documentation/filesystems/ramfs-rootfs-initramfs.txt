@@ -80,11 +80,17 @@ Most systems just mount another filesystem over rootfs and ignore it.  The
 amount of space an empty instance of ramfs takes up is tiny.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 If CONFIG_TMPFS is enabled, rootfs will use tmpfs instead of ramfs by
 default.  To force ramfs, add "rootfstype=ramfs" to the kernel command
 line.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 What is initramfs?
 ------------------

@@ -40,7 +40,10 @@ Optionnal property:
 			  chained/cascaded together.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - phy-handle		: Phandle to a PHY on an external MDIO bus, not the
 			  switch internal one. See
 			  Documentation/devicetree/bindings/net/ethernet.txt
@@ -57,6 +60,9 @@ Optional subnodes:
 			  Documentation/devicetree/bindings/net/fixed-link.txt
 			  for details.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 
@@ -78,6 +84,10 @@ Example:
 				reg = <0>;
 				label = "lan1";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				phy-handle = <&phy0>;
+>>>>>>> v3.18
 =======
 				phy-handle = <&phy0>;
 >>>>>>> v3.18

@@ -47,7 +47,11 @@ static const char e1000_copyright[] = "Copyright (c) 1999-2006 Intel Corporation
  *   {PCI_DEVICE(PCI_VENDOR_ID_INTEL, device_id)}
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(e1000_pci_tbl) = {
+=======
+static const struct pci_device_id e1000_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id e1000_pci_tbl[] = {
 >>>>>>> v3.18
@@ -149,11 +153,14 @@ static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
 				     struct e1000_rx_ring *rx_ring,
 				     int *work_done, int work_to_do);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void e1000_alloc_dummy_rx_buffers(struct e1000_adapter *adapter,
 					 struct e1000_rx_ring *rx_ring,
 					 int cleaned_count)
 {
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
@@ -507,6 +514,7 @@ static void e1000_down_and_stop(struct e1000_adapter *adapter)
 	set_bit(__E1000_DOWN, &adapter->flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Only kill reset task if adapter is not resetting */
 	if (!test_bit(__E1000_RESETTING, &adapter->flags))
 		cancel_work_sync(&adapter->reset_task);
@@ -515,6 +523,8 @@ static void e1000_down_and_stop(struct e1000_adapter *adapter)
 	cancel_delayed_work_sync(&adapter->phy_info_task);
 	cancel_delayed_work_sync(&adapter->fifo_stall_task);
 =======
+=======
+>>>>>>> v3.18
 	cancel_delayed_work_sync(&adapter->watchdog_task);
 
 	/*
@@ -529,6 +539,9 @@ static void e1000_down_and_stop(struct e1000_adapter *adapter)
 	/* Only kill reset task if adapter is not resetting */
 	if (!test_bit(__E1000_RESETTING, &adapter->flags))
 		cancel_work_sync(&adapter->reset_task);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -574,6 +587,7 @@ void e1000_down(struct e1000_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void e1000_reinit_safe(struct e1000_adapter *adapter)
 {
 	while (test_and_set_bit(__E1000_RESETTING, &adapter->flags))
@@ -589,6 +603,10 @@ void e1000_reinit_locked(struct e1000_adapter *adapter)
 {
 	/* if rtnl_lock is not held the call path is bogus */
 	ASSERT_RTNL();
+=======
+void e1000_reinit_locked(struct e1000_adapter *adapter)
+{
+>>>>>>> v3.18
 =======
 void e1000_reinit_locked(struct e1000_adapter *adapter)
 {
@@ -1053,6 +1071,7 @@ static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	pci_using_dac = 0;
 	if ((hw->bus_type == e1000_bus_type_pcix) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    !dma_set_mask(&pdev->dev, DMA_BIT_MASK(64))) {
 		/* according to DMA-API-HOWTO, coherent calls will always
 		 * succeed if the set call did
@@ -1062,17 +1081,25 @@ static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 	} else {
 		err = dma_set_mask(&pdev->dev, DMA_BIT_MASK(32));
 =======
+=======
+>>>>>>> v3.18
 	    !dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(64))) {
 		pci_using_dac = 1;
 	} else {
 		err = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (err) {
 			pr_err("No usable DMA config, aborting\n");
 			goto err_dma;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(32));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -1131,12 +1158,18 @@ static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 				  NETIF_F_SG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	netdev->priv_flags |= IFF_UNICAST_FLT;
 =======
+=======
+>>>>>>> v3.18
 	/* Do not set IFF_UNICAST_FLT for VMWare's 82545EM */
 	if (hw->device_id != E1000_DEV_ID_82545EM_COPPER ||
 	    hw->subsystem_vendor_id != PCI_VENDOR_ID_VMWARE)
 		netdev->priv_flags |= IFF_UNICAST_FLT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	adapter->en_mng_pt = e1000_enable_mng_pass_thru(hw);
@@ -1373,7 +1406,10 @@ static int e1000_sw_init(struct e1000_adapter *adapter)
 
 	spin_lock_init(&adapter->stats_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&adapter->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1500,11 +1536,17 @@ static int e1000_close(struct net_device *netdev)
 	struct e1000_adapter *adapter = netdev_priv(netdev);
 	struct e1000_hw *hw = &adapter->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int count = E1000_CHECK_RESET_COUNT;
 
 	while (test_bit(__E1000_RESETTING, &adapter->flags) && count--)
 		usleep_range(10000, 20000);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	WARN_ON(test_bit(__E1000_RESETTING, &adapter->flags));
@@ -1567,7 +1609,11 @@ static int e1000_setup_tx_resources(struct e1000_adapter *adapter,
 	int size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = sizeof(struct e1000_buffer) * txdr->count;
+=======
+	size = sizeof(struct e1000_tx_buffer) * txdr->count;
+>>>>>>> v3.18
 =======
 	size = sizeof(struct e1000_tx_buffer) * txdr->count;
 >>>>>>> v3.18
@@ -1761,7 +1807,11 @@ static int e1000_setup_rx_resources(struct e1000_adapter *adapter,
 	int size, desc_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = sizeof(struct e1000_buffer) * rxdr->count;
+=======
+	size = sizeof(struct e1000_rx_buffer) * rxdr->count;
+>>>>>>> v3.18
 =======
 	size = sizeof(struct e1000_rx_buffer) * rxdr->count;
 >>>>>>> v3.18
@@ -2025,8 +2075,14 @@ void e1000_free_all_tx_resources(struct e1000_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void e1000_unmap_and_free_tx_resource(struct e1000_adapter *adapter,
 					     struct e1000_buffer *buffer_info)
+=======
+static void
+e1000_unmap_and_free_tx_resource(struct e1000_adapter *adapter,
+				 struct e1000_tx_buffer *buffer_info)
+>>>>>>> v3.18
 =======
 static void
 e1000_unmap_and_free_tx_resource(struct e1000_adapter *adapter,
@@ -2061,7 +2117,11 @@ static void e1000_clean_tx_ring(struct e1000_adapter *adapter,
 {
 	struct e1000_hw *hw = &adapter->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_buffer *buffer_info;
+=======
+	struct e1000_tx_buffer *buffer_info;
+>>>>>>> v3.18
 =======
 	struct e1000_tx_buffer *buffer_info;
 >>>>>>> v3.18
@@ -2077,7 +2137,11 @@ static void e1000_clean_tx_ring(struct e1000_adapter *adapter,
 
 	netdev_reset_queue(adapter->netdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size = sizeof(struct e1000_buffer) * tx_ring->count;
+=======
+	size = sizeof(struct e1000_tx_buffer) * tx_ring->count;
+>>>>>>> v3.18
 =======
 	size = sizeof(struct e1000_tx_buffer) * tx_ring->count;
 >>>>>>> v3.18
@@ -2145,7 +2209,10 @@ void e1000_free_all_rx_resources(struct e1000_adapter *adapter)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define E1000_HEADROOM (NET_SKB_PAD + NET_IP_ALIGN)
 static unsigned int e1000_frag_len(const struct e1000_adapter *a)
 {
@@ -2168,6 +2235,9 @@ static void e1000_free_frag(const void *data)
 	put_page(virt_to_head_page(data));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * e1000_clean_rx_ring - Free Rx Buffers per Queue
@@ -2179,7 +2249,11 @@ static void e1000_clean_rx_ring(struct e1000_adapter *adapter,
 {
 	struct e1000_hw *hw = &adapter->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_buffer *buffer_info;
+=======
+	struct e1000_rx_buffer *buffer_info;
+>>>>>>> v3.18
 =======
 	struct e1000_rx_buffer *buffer_info;
 >>>>>>> v3.18
@@ -2187,6 +2261,7 @@ static void e1000_clean_rx_ring(struct e1000_adapter *adapter,
 	unsigned long size;
 	unsigned int i;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Free all the Rx ring sk_buffs */
 	for (i = 0; i < rx_ring->count; i++) {
@@ -2222,6 +2297,8 @@ static void e1000_clean_rx_ring(struct e1000_adapter *adapter,
 
 	size = sizeof(struct e1000_buffer) * rx_ring->count;
 =======
+=======
+>>>>>>> v3.18
 	/* Free all the Rx netfrags */
 	for (i = 0; i < rx_ring->count; i++) {
 		buffer_info = &rx_ring->buffer_info[i];
@@ -2253,6 +2330,9 @@ static void e1000_clean_rx_ring(struct e1000_adapter *adapter,
 	rx_ring->rx_skb_top = NULL;
 
 	size = sizeof(struct e1000_rx_buffer) * rx_ring->count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memset(rx_ring->buffer_info, 0, size);
 
@@ -2477,11 +2557,16 @@ static void e1000_update_phy_info_task(struct work_struct *work)
 						     struct e1000_adapter,
 						     phy_info_task.work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(__E1000_DOWN, &adapter->flags))
 		return;
 	mutex_lock(&adapter->mutex);
 	e1000_phy_get_info(&adapter->hw, &adapter->phy_info);
 	mutex_unlock(&adapter->mutex);
+=======
+
+	e1000_phy_get_info(&adapter->hw, &adapter->phy_info);
+>>>>>>> v3.18
 =======
 
 	e1000_phy_get_info(&adapter->hw, &adapter->phy_info);
@@ -2502,9 +2587,12 @@ static void e1000_82547_tx_fifo_stall_task(struct work_struct *work)
 	u32 tctl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(__E1000_DOWN, &adapter->flags))
 		return;
 	mutex_lock(&adapter->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (atomic_read(&adapter->tx_fifo_stall)) {
@@ -2528,7 +2616,10 @@ static void e1000_82547_tx_fifo_stall_task(struct work_struct *work)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&adapter->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2585,10 +2676,13 @@ static void e1000_watchdog(struct work_struct *work)
 	u32 link, tctl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(__E1000_DOWN, &adapter->flags))
 		return;
 
 	mutex_lock(&adapter->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	link = e1000_has_link(adapter);
@@ -2682,7 +2776,11 @@ link_up:
 			schedule_work(&adapter->reset_task);
 			/* exit immediately since reset is imminent */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto unlock;
+=======
+			return;
+>>>>>>> v3.18
 =======
 			return;
 >>>>>>> v3.18
@@ -2714,9 +2812,12 @@ link_up:
 	if (!test_bit(__E1000_DOWN, &adapter->flags))
 		schedule_delayed_work(&adapter->watchdog_task, 2 * HZ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 unlock:
 	mutex_unlock(&adapter->mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2864,21 +2965,28 @@ set_itr_now:
 
 static int e1000_tso(struct e1000_adapter *adapter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     struct e1000_tx_ring *tx_ring, struct sk_buff *skb)
 {
 	struct e1000_context_desc *context_desc;
 	struct e1000_buffer *buffer_info;
 =======
+=======
+>>>>>>> v3.18
 		     struct e1000_tx_ring *tx_ring, struct sk_buff *skb,
 		     __be16 protocol)
 {
 	struct e1000_context_desc *context_desc;
 	struct e1000_tx_buffer *buffer_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int i;
 	u32 cmd_length = 0;
 	u16 ipcse = 0, tucse, mss;
 	u8 ipcss, ipcso, tucss, tucso, hdr_len;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int err;
 
@@ -2893,6 +3001,8 @@ static int e1000_tso(struct e1000_adapter *adapter,
 		mss = skb_shinfo(skb)->gso_size;
 		if (skb->protocol == htons(ETH_P_IP)) {
 =======
+=======
+>>>>>>> v3.18
 
 	if (skb_is_gso(skb)) {
 		int err;
@@ -2904,6 +3014,9 @@ static int e1000_tso(struct e1000_adapter *adapter,
 		hdr_len = skb_transport_offset(skb) + tcp_hdrlen(skb);
 		mss = skb_shinfo(skb)->gso_size;
 		if (protocol == htons(ETH_P_IP)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct iphdr *iph = ip_hdr(skb);
 			iph->tot_len = 0;
@@ -2915,7 +3028,11 @@ static int e1000_tso(struct e1000_adapter *adapter,
 			cmd_length = E1000_TXD_CMD_IP;
 			ipcse = skb_transport_offset(skb) - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (skb->protocol == htons(ETH_P_IPV6)) {
+=======
+		} else if (skb_is_gso_v6(skb)) {
+>>>>>>> v3.18
 =======
 		} else if (skb_is_gso_v6(skb)) {
 >>>>>>> v3.18
@@ -2962,16 +3079,22 @@ static int e1000_tso(struct e1000_adapter *adapter,
 
 static bool e1000_tx_csum(struct e1000_adapter *adapter,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  struct e1000_tx_ring *tx_ring, struct sk_buff *skb)
 {
 	struct e1000_context_desc *context_desc;
 	struct e1000_buffer *buffer_info;
 =======
+=======
+>>>>>>> v3.18
 			  struct e1000_tx_ring *tx_ring, struct sk_buff *skb,
 			  __be16 protocol)
 {
 	struct e1000_context_desc *context_desc;
 	struct e1000_tx_buffer *buffer_info;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int i;
 	u8 css;
@@ -2981,7 +3104,11 @@ static bool e1000_tx_csum(struct e1000_adapter *adapter,
 		return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (skb->protocol) {
+=======
+	switch (protocol) {
+>>>>>>> v3.18
 =======
 	switch (protocol) {
 >>>>>>> v3.18
@@ -3036,7 +3163,11 @@ static int e1000_tx_map(struct e1000_adapter *adapter,
 	struct e1000_hw *hw = &adapter->hw;
 	struct pci_dev *pdev = adapter->pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_buffer *buffer_info;
+=======
+	struct e1000_tx_buffer *buffer_info;
+>>>>>>> v3.18
 =======
 	struct e1000_tx_buffer *buffer_info;
 >>>>>>> v3.18
@@ -3186,7 +3317,11 @@ static void e1000_tx_queue(struct e1000_adapter *adapter,
 	struct e1000_hw *hw = &adapter->hw;
 	struct e1000_tx_desc *tx_desc = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_buffer *buffer_info;
+=======
+	struct e1000_tx_buffer *buffer_info;
+>>>>>>> v3.18
 =======
 	struct e1000_tx_buffer *buffer_info;
 >>>>>>> v3.18
@@ -3334,6 +3469,10 @@ static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
 	int tso;
 	unsigned int f;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__be16 protocol = vlan_get_protocol(skb);
+>>>>>>> v3.18
 =======
 	__be16 protocol = vlan_get_protocol(skb);
 >>>>>>> v3.18
@@ -3346,11 +3485,14 @@ static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
 	tx_ring = adapter->tx_ring;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(skb->len <= 0)) {
 		dev_kfree_skb_any(skb);
 		return NETDEV_TX_OK;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* On PCI/PCI-X HW, if packet size is less than ETH_ZLEN,
@@ -3459,7 +3601,11 @@ static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
 	first = tx_ring->next_to_use;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tso = e1000_tso(adapter, tx_ring, skb);
+=======
+	tso = e1000_tso(adapter, tx_ring, skb, protocol);
+>>>>>>> v3.18
 =======
 	tso = e1000_tso(adapter, tx_ring, skb, protocol);
 >>>>>>> v3.18
@@ -3473,15 +3619,21 @@ static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
 			tx_ring->last_tx_tso = true;
 		tx_flags |= E1000_TX_FLAGS_TSO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (likely(e1000_tx_csum(adapter, tx_ring, skb)))
 		tx_flags |= E1000_TX_FLAGS_CSUM;
 
 	if (likely(skb->protocol == htons(ETH_P_IP)))
 =======
+=======
+>>>>>>> v3.18
 	} else if (likely(e1000_tx_csum(adapter, tx_ring, skb, protocol)))
 		tx_flags |= E1000_TX_FLAGS_CSUM;
 
 	if (protocol == htons(ETH_P_IP))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tx_flags |= E1000_TX_FLAGS_IPV4;
 
@@ -3630,7 +3782,11 @@ static void e1000_dump(struct e1000_adapter *adapter)
 	for (i = 0; tx_ring->desc && (i < tx_ring->count); i++) {
 		struct e1000_tx_desc *tx_desc = E1000_TX_DESC(*tx_ring, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct e1000_buffer *buffer_info = &tx_ring->buffer_info[i];
+=======
+		struct e1000_tx_buffer *buffer_info = &tx_ring->buffer_info[i];
+>>>>>>> v3.18
 =======
 		struct e1000_tx_buffer *buffer_info = &tx_ring->buffer_info[i];
 >>>>>>> v3.18
@@ -3676,7 +3832,11 @@ rx_ring_summary:
 	for (i = 0; rx_ring->desc && (i < rx_ring->count); i++) {
 		struct e1000_rx_desc *rx_desc = E1000_RX_DESC(*rx_ring, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct e1000_buffer *buffer_info = &rx_ring->buffer_info[i];
+=======
+		struct e1000_rx_buffer *buffer_info = &rx_ring->buffer_info[i];
+>>>>>>> v3.18
 =======
 		struct e1000_rx_buffer *buffer_info = &rx_ring->buffer_info[i];
 >>>>>>> v3.18
@@ -3694,7 +3854,11 @@ rx_ring_summary:
 		pr_info("R[0x%03X]     %016llX %016llX %016llX %p %s\n",
 			i, le64_to_cpu(u->a), le64_to_cpu(u->b),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(u64)buffer_info->dma, buffer_info->skb, type);
+=======
+			(u64)buffer_info->dma, buffer_info->rxbuf.data, type);
+>>>>>>> v3.18
 =======
 			(u64)buffer_info->dma, buffer_info->rxbuf.data, type);
 >>>>>>> v3.18
@@ -3744,10 +3908,15 @@ static void e1000_reset_task(struct work_struct *work)
 		container_of(work, struct e1000_adapter, reset_task);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (test_bit(__E1000_DOWN, &adapter->flags))
 		return;
 	e_err(drv, "Reset adapter\n");
 	e1000_reinit_safe(adapter);
+=======
+	e_err(drv, "Reset adapter\n");
+	e1000_reinit_locked(adapter);
+>>>>>>> v3.18
 =======
 	e_err(drv, "Reset adapter\n");
 	e1000_reinit_locked(adapter);
@@ -3804,11 +3973,16 @@ static int e1000_change_mtu(struct net_device *netdev, int new_mtu)
 	/* e1000_down has a dependency on max_frame_size */
 	hw->max_frame_size = max_frame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (netif_running(netdev)) {
 		/* prevent buffers from being reallocated */
 		adapter->alloc_rx_buf = e1000_alloc_dummy_rx_buffers;
 		e1000_down(adapter);
 	}
+=======
+	if (netif_running(netdev))
+		e1000_down(adapter);
+>>>>>>> v3.18
 =======
 	if (netif_running(netdev))
 		e1000_down(adapter);
@@ -4095,7 +4269,11 @@ static bool e1000_clean_tx_irq(struct e1000_adapter *adapter,
 	struct net_device *netdev = adapter->netdev;
 	struct e1000_tx_desc *tx_desc, *eop_desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_buffer *buffer_info;
+=======
+	struct e1000_tx_buffer *buffer_info;
+>>>>>>> v3.18
 =======
 	struct e1000_tx_buffer *buffer_info;
 >>>>>>> v3.18
@@ -4178,8 +4356,12 @@ static bool e1000_clean_tx_irq(struct e1000_adapter *adapter,
 			      "  jiffies              <%lx>\n"
 			      "  next_to_watch.status <%x>\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				(unsigned long)((tx_ring - adapter->tx_ring) /
 					sizeof(struct e1000_tx_ring)),
+=======
+				(unsigned long)(tx_ring - adapter->tx_ring),
+>>>>>>> v3.18
 =======
 				(unsigned long)(tx_ring - adapter->tx_ring),
 >>>>>>> v3.18
@@ -4242,6 +4424,7 @@ static void e1000_rx_checksum(struct e1000_adapter *adapter, u32 status_err,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * e1000_consume_page - helper function
  **/
 static void e1000_consume_page(struct e1000_buffer *bi, struct sk_buff *skb,
@@ -4249,12 +4432,17 @@ static void e1000_consume_page(struct e1000_buffer *bi, struct sk_buff *skb,
 {
 	bi->page = NULL;
 =======
+=======
+>>>>>>> v3.18
  * e1000_consume_page - helper function for jumbo Rx path
  **/
 static void e1000_consume_page(struct e1000_rx_buffer *bi, struct sk_buff *skb,
 			       u16 length)
 {
 	bi->rxbuf.page = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb->len += length;
 	skb->data_len += length;
@@ -4283,7 +4471,10 @@ static void e1000_receive_skb(struct e1000_adapter *adapter, u8 status,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * e1000_tbi_adjust_stats
  * @hw: Struct containing variables accessed by shared code
  * @frame_len: The length of the frame in question
@@ -4391,6 +4582,9 @@ static struct sk_buff *e1000_alloc_rx_skb(struct e1000_adapter *adapter,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * e1000_clean_jumbo_rx_irq - Send received data up the network stack; legacy
  * @adapter: board private structure
@@ -4406,6 +4600,7 @@ static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
 				     int *work_done, int work_to_do)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_hw *hw = &adapter->hw;
 	struct net_device *netdev = adapter->netdev;
 	struct pci_dev *pdev = adapter->pdev;
@@ -4413,10 +4608,15 @@ static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
 	struct e1000_buffer *buffer_info, *next_buffer;
 	unsigned long irq_flags;
 =======
+=======
+>>>>>>> v3.18
 	struct net_device *netdev = adapter->netdev;
 	struct pci_dev *pdev = adapter->pdev;
 	struct e1000_rx_desc *rx_desc, *next_rxd;
 	struct e1000_rx_buffer *buffer_info, *next_buffer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 length;
 	unsigned int i;
@@ -4439,8 +4639,11 @@ static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
 
 		status = rx_desc->status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb = buffer_info->skb;
 		buffer_info->skb = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -4454,7 +4657,11 @@ static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
 		cleaned_count++;
 		dma_unmap_page(&pdev->dev, buffer_info->dma,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       buffer_info->length, DMA_FROM_DEVICE);
+=======
+			       adapter->rx_buffer_len, DMA_FROM_DEVICE);
+>>>>>>> v3.18
 =======
 			       adapter->rx_buffer_len, DMA_FROM_DEVICE);
 >>>>>>> v3.18
@@ -4465,6 +4672,7 @@ static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
 		/* errors is only valid for DD + EOP descriptors */
 		if (unlikely((status & E1000_RXD_STAT_EOP) &&
 		    (rx_desc->errors & E1000_RXD_ERR_FRAME_ERR_MASK))) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			u8 *mapped;
 			u8 last_byte;
@@ -4486,6 +4694,8 @@ static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
 				/* recycle both page and skb */
 				buffer_info->skb = skb;
 =======
+=======
+>>>>>>> v3.18
 			u8 *mapped = page_address(buffer_info->rxbuf.page);
 
 			if (e1000_tbi_should_accept(adapter, status,
@@ -4495,6 +4705,9 @@ static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
 			} else if (netdev->features & NETIF_F_RXALL) {
 				goto process_skb;
 			} else {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				/* an error means any chain goes out the window
 				 * too
@@ -4513,15 +4726,21 @@ process_skb:
 			if (!rxtop) {
 				/* this is the beginning of a chain */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				rxtop = skb;
 				skb_fill_page_desc(rxtop, 0, buffer_info->page,
 =======
+=======
+>>>>>>> v3.18
 				rxtop = napi_get_frags(&adapter->napi);
 				if (!rxtop)
 					break;
 
 				skb_fill_page_desc(rxtop, 0,
 						   buffer_info->rxbuf.page,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						   0, length);
 			} else {
@@ -4529,9 +4748,13 @@ process_skb:
 				skb_fill_page_desc(rxtop,
 				    skb_shinfo(rxtop)->nr_frags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    buffer_info->page, 0, length);
 				/* re-use the skb, only consumed the page */
 				buffer_info->skb = skb;
+=======
+				    buffer_info->rxbuf.page, 0, length);
+>>>>>>> v3.18
 =======
 				    buffer_info->rxbuf.page, 0, length);
 >>>>>>> v3.18
@@ -4544,6 +4767,7 @@ process_skb:
 				skb_fill_page_desc(rxtop,
 				    skb_shinfo(rxtop)->nr_frags,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    buffer_info->page, 0, length);
 				/* re-use the current skb, we only consumed the
 				 * page
@@ -4552,10 +4776,14 @@ process_skb:
 =======
 				    buffer_info->rxbuf.page, 0, length);
 >>>>>>> v3.18
+=======
+				    buffer_info->rxbuf.page, 0, length);
+>>>>>>> v3.18
 				skb = rxtop;
 				rxtop = NULL;
 				e1000_consume_page(buffer_info, skb, length);
 			} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				/* no chain, got EOP, this buf is the packet
 				 * copybreak to save the put_page/alloc_page
@@ -4565,6 +4793,8 @@ process_skb:
 					u8 *vaddr;
 					vaddr = kmap_atomic(buffer_info->page);
 =======
+=======
+>>>>>>> v3.18
 				struct page *p;
 				/* no chain, got EOP, this buf is the packet
 				 * copybreak to save the put_page/alloc_page
@@ -4581,11 +4811,15 @@ process_skb:
 						break;
 
 					vaddr = kmap_atomic(p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					memcpy(skb_tail_pointer(skb), vaddr,
 					       length);
 					kunmap_atomic(vaddr);
 					/* re-use the page, so don't erase
+<<<<<<< HEAD
 <<<<<<< HEAD
 					 * buffer_info->page
 					 */
@@ -4594,6 +4828,8 @@ process_skb:
 					skb_fill_page_desc(skb, 0,
 							   buffer_info->page, 0,
 =======
+=======
+>>>>>>> v3.18
 					 * buffer_info->rxbuf.page
 					 */
 					skb_put(skb, length);
@@ -4614,6 +4850,9 @@ process_skb:
 						break;
 					}
 					skb_fill_page_desc(skb, 0, p, 0,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 							   length);
 					e1000_consume_page(buffer_info, skb,
@@ -4634,6 +4873,7 @@ process_skb:
 		total_rx_packets++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* eth type trans needs skb->data to point to something */
 		if (!pskb_may_pull(skb, ETH_HLEN)) {
 			e_err(drv, "pskb_may_pull failed.\n");
@@ -4643,6 +4883,8 @@ process_skb:
 
 		e1000_receive_skb(adapter, status, rx_desc->special, skb);
 =======
+=======
+>>>>>>> v3.18
 		if (status & E1000_RXD_STAT_VP) {
 			__le16 vlan = rx_desc->special;
 			u16 vid = le16_to_cpu(vlan) & E1000_RXD_SPC_VLAN_MASK;
@@ -4651,6 +4893,9 @@ process_skb:
 		}
 
 		napi_gro_frags(&adapter->napi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 next_desc:
@@ -4683,6 +4928,7 @@ next_desc:
  * of reassembly being done in the stack
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void e1000_check_copybreak(struct net_device *netdev,
 				 struct e1000_buffer *buffer_info,
 				 u32 length, struct sk_buff **skb)
@@ -4703,6 +4949,8 @@ static void e1000_check_copybreak(struct net_device *netdev,
 	buffer_info->skb = *skb;
 	*skb = new_skb;
 =======
+=======
+>>>>>>> v3.18
 static struct sk_buff *e1000_copybreak(struct e1000_adapter *adapter,
 				       struct e1000_rx_buffer *buffer_info,
 				       u32 length, const void *data)
@@ -4722,6 +4970,9 @@ static struct sk_buff *e1000_copybreak(struct e1000_adapter *adapter,
 	memcpy(skb_put(skb, length), data, length);
 
 	return skb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4737,6 +4988,7 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 			       int *work_done, int work_to_do)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct e1000_hw *hw = &adapter->hw;
 	struct net_device *netdev = adapter->netdev;
 	struct pci_dev *pdev = adapter->pdev;
@@ -4744,10 +4996,15 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 	struct e1000_buffer *buffer_info, *next_buffer;
 	unsigned long flags;
 =======
+=======
+>>>>>>> v3.18
 	struct net_device *netdev = adapter->netdev;
 	struct pci_dev *pdev = adapter->pdev;
 	struct e1000_rx_desc *rx_desc, *next_rxd;
 	struct e1000_rx_buffer *buffer_info, *next_buffer;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 length;
 	unsigned int i;
@@ -4762,6 +5019,10 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 	while (rx_desc->status & E1000_RXD_STAT_DD) {
 		struct sk_buff *skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		u8 *data;
+>>>>>>> v3.18
 =======
 		u8 *data;
 >>>>>>> v3.18
@@ -4774,11 +5035,14 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 
 		status = rx_desc->status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb = buffer_info->skb;
 		buffer_info->skb = NULL;
 
 		prefetch(skb->data - NET_IP_ALIGN);
 =======
+=======
+>>>>>>> v3.18
 		length = le16_to_cpu(rx_desc->length);
 
 		data = buffer_info->rxbuf.data;
@@ -4800,6 +5064,9 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 			buffer_info->dma = 0;
 			buffer_info->rxbuf.data = NULL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (++i == rx_ring->count) i = 0;
@@ -4811,11 +5078,15 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 		cleaned = true;
 		cleaned_count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_unmap_single(&pdev->dev, buffer_info->dma,
 				 buffer_info->length, DMA_FROM_DEVICE);
 		buffer_info->dma = 0;
 
 		length = le16_to_cpu(rx_desc->length);
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -4831,9 +5102,14 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 		if (adapter->discarding) {
 			/* All receives must fit into a single buffer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			e_dbg("Receive packet consumed multiple buffers\n");
 			/* recycle */
 			buffer_info->skb = skb;
+=======
+			netdev_dbg(netdev, "Receive packet consumed multiple buffers\n");
+			dev_kfree_skb(skb);
+>>>>>>> v3.18
 =======
 			netdev_dbg(netdev, "Receive packet consumed multiple buffers\n");
 			dev_kfree_skb(skb);
@@ -4844,6 +5120,7 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 		}
 
 		if (unlikely(rx_desc->errors & E1000_RXD_ERR_FRAME_ERR_MASK)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			u8 last_byte = *(skb->data + length - 1);
 			if (TBI_ACCEPT(hw, status, rx_desc->errors, length,
@@ -4860,6 +5137,8 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 				/* recycle */
 				buffer_info->skb = skb;
 =======
+=======
+>>>>>>> v3.18
 			if (e1000_tbi_should_accept(adapter, status,
 						    rx_desc->errors,
 						    length, data)) {
@@ -4868,6 +5147,9 @@ static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
 				goto process_skb;
 			} else {
 				dev_kfree_skb(skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto next_desc;
 			}
@@ -4884,14 +5166,20 @@ process_skb:
 			length -= 4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		e1000_check_copybreak(netdev, buffer_info, length, &skb);
 
 		skb_put(skb, length);
 =======
+=======
+>>>>>>> v3.18
 		if (buffer_info->rxbuf.data == NULL)
 			skb_put(skb, length);
 		else /* copybreak skb */
 			skb_trim(skb, length);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Receive Checksum Offload */
@@ -4939,6 +5227,7 @@ e1000_alloc_jumbo_rx_buffers(struct e1000_adapter *adapter,
 			     struct e1000_rx_ring *rx_ring, int cleaned_count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *netdev = adapter->netdev;
 	struct pci_dev *pdev = adapter->pdev;
 	struct e1000_rx_desc *rx_desc;
@@ -4947,16 +5236,22 @@ e1000_alloc_jumbo_rx_buffers(struct e1000_adapter *adapter,
 	unsigned int i;
 	unsigned int bufsz = 256 - 16 /*for skb_reserve */ ;
 =======
+=======
+>>>>>>> v3.18
 	struct pci_dev *pdev = adapter->pdev;
 	struct e1000_rx_desc *rx_desc;
 	struct e1000_rx_buffer *buffer_info;
 	unsigned int i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	i = rx_ring->next_to_use;
 	buffer_info = &rx_ring->buffer_info[i];
 
 	while (cleaned_count--) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		skb = buffer_info->skb;
 		if (skb) {
@@ -4979,10 +5274,15 @@ check_page:
 			buffer_info->page = alloc_page(GFP_ATOMIC);
 			if (unlikely(!buffer_info->page)) {
 =======
+=======
+>>>>>>> v3.18
 		/* allocate a new page if necessary */
 		if (!buffer_info->rxbuf.page) {
 			buffer_info->rxbuf.page = alloc_page(GFP_ATOMIC);
 			if (unlikely(!buffer_info->rxbuf.page)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				adapter->alloc_rx_buff_failed++;
 				break;
@@ -4991,6 +5291,7 @@ check_page:
 
 		if (!buffer_info->dma) {
 			buffer_info->dma = dma_map_page(&pdev->dev,
+<<<<<<< HEAD
 <<<<<<< HEAD
 							buffer_info->page, 0,
 							buffer_info->length,
@@ -5004,6 +5305,8 @@ check_page:
 				adapter->alloc_rx_buff_failed++;
 				break; /* while !buffer_info->skb */
 =======
+=======
+>>>>>>> v3.18
 							buffer_info->rxbuf.page, 0,
 							adapter->rx_buffer_len,
 							DMA_FROM_DEVICE);
@@ -5013,6 +5316,9 @@ check_page:
 				buffer_info->dma = 0;
 				adapter->alloc_rx_buff_failed++;
 				break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -5050,11 +5356,17 @@ static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
 {
 	struct e1000_hw *hw = &adapter->hw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *netdev = adapter->netdev;
 	struct pci_dev *pdev = adapter->pdev;
 	struct e1000_rx_desc *rx_desc;
 	struct e1000_buffer *buffer_info;
 	struct sk_buff *skb;
+=======
+	struct pci_dev *pdev = adapter->pdev;
+	struct e1000_rx_desc *rx_desc;
+	struct e1000_rx_buffer *buffer_info;
+>>>>>>> v3.18
 =======
 	struct pci_dev *pdev = adapter->pdev;
 	struct e1000_rx_desc *rx_desc;
@@ -5068,6 +5380,7 @@ static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
 
 	while (cleaned_count--) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb = buffer_info->skb;
 		if (skb) {
 			skb_trim(skb, 0);
@@ -5077,6 +5390,8 @@ static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
 		skb = netdev_alloc_skb_ip_align(netdev, bufsz);
 		if (unlikely(!skb)) {
 =======
+=======
+>>>>>>> v3.18
 		void *data;
 
 		if (buffer_info->rxbuf.data)
@@ -5084,6 +5399,9 @@ static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
 
 		data = e1000_alloc_frag(adapter);
 		if (!data) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* Better luck next round */
 			adapter->alloc_rx_buff_failed++;
@@ -5091,6 +5409,7 @@ static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
 		}
 
 		/* Fix for errata 23, can't cross 64kB boundary */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!e1000_check_64k_bound(adapter, skb->data, bufsz)) {
 			struct sk_buff *oldskb = skb;
@@ -5102,6 +5421,8 @@ static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
 			if (!skb) {
 				dev_kfree_skb(oldskb);
 =======
+=======
+>>>>>>> v3.18
 		if (!e1000_check_64k_bound(adapter, data, bufsz)) {
 			void *olddata = data;
 			e_err(rx_err, "skb align check failed: %u bytes at "
@@ -5111,11 +5432,15 @@ static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
 			/* Failed allocation, critical failure */
 			if (!data) {
 				e1000_free_frag(olddata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				adapter->alloc_rx_buff_failed++;
 				break;
 			}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (!e1000_check_64k_bound(adapter, skb->data, bufsz)) {
 				/* give up */
@@ -5142,6 +5467,8 @@ map_skb:
 			adapter->alloc_rx_buff_failed++;
 			break; /* while !buffer_info->skb */
 =======
+=======
+>>>>>>> v3.18
 			if (!e1000_check_64k_bound(adapter, data, bufsz)) {
 				/* give up */
 				e1000_free_frag(data);
@@ -5162,6 +5489,9 @@ map_skb:
 			buffer_info->dma = 0;
 			adapter->alloc_rx_buff_failed++;
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -5177,8 +5507,11 @@ map_skb:
 			      "%p\n", adapter->rx_buffer_len,
 			      (void *)(unsigned long)buffer_info->dma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_kfree_skb(skb);
 			buffer_info->skb = NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -5186,12 +5519,15 @@ map_skb:
 					 adapter->rx_buffer_len,
 					 DMA_FROM_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			buffer_info->dma = 0;
 
 			adapter->alloc_rx_buff_failed++;
 			break; /* while !buffer_info->skb */
 		}
 =======
+=======
+>>>>>>> v3.18
 
 			e1000_free_frag(data);
 			buffer_info->rxbuf.data = NULL;
@@ -5202,6 +5538,9 @@ map_skb:
 		}
 		buffer_info->rxbuf.data = data;
  skip:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rx_desc = E1000_RX_DESC(*rx_ring, i);
 		rx_desc->buffer_addr = cpu_to_le64(buffer_info->dma);
@@ -5626,12 +5965,18 @@ static int __e1000_shutdown(struct pci_dev *pdev, bool *enable_wake)
 
 	if (netif_running(netdev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		int count = E1000_CHECK_RESET_COUNT;
 
 		while (test_bit(__E1000_RESETTING, &adapter->flags) && count--)
 			usleep_range(10000, 20000);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		WARN_ON(test_bit(__E1000_RESETTING, &adapter->flags));
 		e1000_down(adapter);

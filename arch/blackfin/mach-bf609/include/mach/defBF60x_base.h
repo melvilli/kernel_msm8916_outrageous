@@ -840,7 +840,10 @@
 #define PORTG_REVID                 0xFFC0337C         /* PORTG Port x GPIO Revision ID */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* ==================================================
         Pads Controller Registers
    ================================================== */
@@ -851,6 +854,9 @@
 #define PADS0_EMAC_PTP_CLKSEL	    0xFFC03404         /* PADS0 Clock Selection for EMAC and PTP */
 #define PADS0_TWI_VSEL		    0xFFC03408         /* PADS0 TWI Voltage Selection */
 #define PADS0_PORTS_HYST	    0xFFC03440         /* PADS0 Hysteresis Enable Register */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* =========================

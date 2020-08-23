@@ -22,7 +22,11 @@
 #include <asm/pgalloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long asid_cache = ASID_USER_FIRST;
+=======
+DEFINE_PER_CPU(unsigned long, asid_cache) = ASID_USER_FIRST;
+>>>>>>> v3.18
 =======
 DEFINE_PER_CPU(unsigned long, asid_cache) = ASID_USER_FIRST;
 >>>>>>> v3.18
@@ -122,8 +126,11 @@ good_area:
 		if (fault & VM_FAULT_OOM)
 			goto out_of_memory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else if (fault & VM_FAULT_SIGSEGV)
 			goto bad_area;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		else if (fault & VM_FAULT_SIGBUS)

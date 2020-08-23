@@ -83,9 +83,15 @@ static inline int dlm_mle_equal(struct dlm_ctxt *dlm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct kmem_cache *dlm_lockres_cache = NULL;
 static struct kmem_cache *dlm_lockname_cache = NULL;
 static struct kmem_cache *dlm_mle_cache = NULL;
+=======
+static struct kmem_cache *dlm_lockres_cache;
+static struct kmem_cache *dlm_lockname_cache;
+static struct kmem_cache *dlm_mle_cache;
+>>>>>>> v3.18
 =======
 static struct kmem_cache *dlm_lockres_cache;
 static struct kmem_cache *dlm_lockname_cache;
@@ -349,7 +355,10 @@ static int dlm_find_mle(struct dlm_ctxt *dlm,
 	struct dlm_master_list_entry *tmpmle;
 	struct hlist_head *bucket;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hlist_node *list;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int hash;
@@ -359,9 +368,13 @@ static int dlm_find_mle(struct dlm_ctxt *dlm,
 	hash = dlm_lockid_hash(name, namelen);
 	bucket = dlm_master_hash(dlm, hash);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hlist_for_each(list, bucket) {
 		tmpmle = hlist_entry(list, struct dlm_master_list_entry,
 				     master_hash_node);
+=======
+	hlist_for_each_entry(tmpmle, bucket, master_hash_node) {
+>>>>>>> v3.18
 =======
 	hlist_for_each_entry(tmpmle, bucket, master_hash_node) {
 >>>>>>> v3.18
@@ -489,12 +502,15 @@ bail:
 void dlm_destroy_master_caches(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dlm_lockname_cache)
 		kmem_cache_destroy(dlm_lockname_cache);
 
 	if (dlm_lockres_cache)
 		kmem_cache_destroy(dlm_lockres_cache);
 =======
+=======
+>>>>>>> v3.18
 	if (dlm_lockname_cache) {
 		kmem_cache_destroy(dlm_lockname_cache);
 		dlm_lockname_cache = NULL;
@@ -504,6 +520,9 @@ void dlm_destroy_master_caches(void)
 		kmem_cache_destroy(dlm_lockres_cache);
 		dlm_lockres_cache = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -606,6 +625,10 @@ static void dlm_init_lockres(struct dlm_ctxt *dlm,
 	res->migration_pending = 0;
 	res->inflight_locks = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	res->inflight_assert_workers = 0;
+>>>>>>> v3.18
 =======
 	res->inflight_assert_workers = 0;
 >>>>>>> v3.18
@@ -653,9 +676,12 @@ struct dlm_lock_resource *dlm_new_lockres(struct dlm_ctxt *dlm,
 
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (res && res->lockname.name)
 		kmem_cache_free(dlm_lockname_cache, (void *)res->lockname.name);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (res)
@@ -719,7 +745,10 @@ void dlm_lockres_drop_inflight_ref(struct dlm_ctxt *dlm,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __dlm_lockres_grab_inflight_worker(struct dlm_ctxt *dlm,
 		struct dlm_lock_resource *res)
 {
@@ -757,6 +786,9 @@ static void dlm_lockres_drop_inflight_worker(struct dlm_ctxt *dlm,
 	spin_unlock(&res->spinlock);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * lookup a lock resource by name.
@@ -802,6 +834,7 @@ lookup:
 		spin_unlock(&dlm->spinlock);
 		spin_lock(&tmpres->spinlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/*
 		 * Right after dlm spinlock was released, dlm_thread could have
@@ -815,6 +848,8 @@ lookup:
 			goto lookup;
 		}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Wait on the thread that is mastering the resource */
@@ -1693,7 +1728,12 @@ send_response:
 			response = DLM_MASTER_RESP_ERROR;
 			dlm_lockres_put(res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
+=======
+		} else
+			dlm_lockres_grab_inflight_worker(dlm, res);
+>>>>>>> v3.18
 =======
 		} else
 			dlm_lockres_grab_inflight_worker(dlm, res);
@@ -1984,13 +2024,19 @@ ok:
 			while ((nn = find_next_bit (mle->response_map, O2NM_MAX_NODES,
 						    nn+1)) < O2NM_MAX_NODES) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (nn != dlm->node_num && nn != assert->node_idx)
 					master_request = 1;
 =======
+=======
+>>>>>>> v3.18
 				if (nn != dlm->node_num && nn != assert->node_idx) {
 					master_request = 1;
 					break;
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -2098,11 +2144,17 @@ kill:
 	__dlm_print_one_lock_resource(res);
 	spin_unlock(&res->spinlock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&dlm->master_lock);
 	if (mle)
 		__dlm_put_mle(mle);
 	spin_unlock(&dlm->master_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&dlm->spinlock);
 	*ret_data = (void *)res;
@@ -2225,6 +2277,11 @@ static void dlm_assert_master_worker(struct dlm_work_item *item, void *data)
 
 put:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dlm_lockres_drop_inflight_worker(dlm, res);
+
+>>>>>>> v3.18
 =======
 	dlm_lockres_drop_inflight_worker(dlm, res);
 
@@ -2472,7 +2529,10 @@ static int dlm_is_lockres_migrateable(struct dlm_ctxt *dlm,
 	assert_spin_locked(&res->spinlock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* delay migration when the lockres is in MIGRATING state */
 	if (res->state & DLM_LOCK_RES_MIGRATING)
 		return 0;
@@ -2481,6 +2541,9 @@ static int dlm_is_lockres_migrateable(struct dlm_ctxt *dlm,
 	if (res->state & DLM_LOCK_RES_RECOVERING)
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (res->owner != dlm->node_num)
 		return 0;
@@ -2567,11 +2630,14 @@ static int dlm_migrate_lockres(struct dlm_ctxt *dlm,
 	ret = dlm_add_migration_mle(dlm, res, mle, &oldmle, name,
 				    namelen, target, dlm->node_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* get an extra reference on the mle.
 	 * otherwise the assert_master from the new
 	 * master will destroy this.
 	 */
 	dlm_get_mle_inuse(mle);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_unlock(&dlm->master_lock);
@@ -2610,7 +2676,10 @@ fail:
 			dlm_mle_detach_hb_events(dlm, mle);
 			dlm_put_mle(mle);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dlm_put_mle_inuse(mle);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		} else if (mle) {
@@ -2631,7 +2700,10 @@ fail:
 	flush_workqueue(dlm->dlm_worker);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* get an extra reference on the mle.
 	 * otherwise the assert_master from the new
 	 * master will destroy this.
@@ -2643,6 +2715,9 @@ fail:
 	spin_unlock(&dlm->master_lock);
 	spin_unlock(&dlm->spinlock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* notify new node and send all lock state */
 	/* call send_one_lockres with migration flag.
@@ -3222,12 +3297,15 @@ static int dlm_add_migration_mle(struct dlm_ctxt *dlm,
 			__dlm_unlink_mle(dlm, tmp);
 			__dlm_mle_detach_hb_events(dlm, tmp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = DLM_MIGRATE_RESPONSE_MASTERY_REF;
 			mlog(0, "%s:%.*s: master=%u, newmaster=%u, "
 			    "telling master to get ref for cleared out mle "
 			    "during migration\n", dlm->name, namelen, name,
 			    master, new_master);
 =======
+=======
+>>>>>>> v3.18
 			if (tmp->type == DLM_MLE_MASTER) {
 				ret = DLM_MIGRATE_RESPONSE_MASTERY_REF;
 				mlog(0, "%s:%.*s: master=%u, newmaster=%u, "
@@ -3237,6 +3315,9 @@ static int dlm_add_migration_mle(struct dlm_ctxt *dlm,
 						namelen, name, master,
 						new_master);
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		spin_unlock(&tmp->spinlock);
@@ -3336,7 +3417,11 @@ void dlm_clean_master_list(struct dlm_ctxt *dlm, u8 dead_node)
 	struct dlm_lock_resource *res;
 	struct hlist_head *bucket;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hlist_node *list;
+=======
+	struct hlist_node *tmp;
+>>>>>>> v3.18
 =======
 	struct hlist_node *tmp;
 >>>>>>> v3.18
@@ -3351,10 +3436,14 @@ top:
 	for (i = 0; i < DLM_HASH_BUCKETS; i++) {
 		bucket = dlm_master_hash(dlm, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hlist_for_each(list, bucket) {
 			mle = hlist_entry(list, struct dlm_master_list_entry,
 					  master_hash_node);
 
+=======
+		hlist_for_each_entry_safe(mle, tmp, bucket, master_hash_node) {
+>>>>>>> v3.18
 =======
 		hlist_for_each_entry_safe(mle, tmp, bucket, master_hash_node) {
 >>>>>>> v3.18
@@ -3392,6 +3481,7 @@ top:
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (mle->new_master == dead_node && mle->inuse) {
 				mlog(ML_NOTICE, "%s: target %u died during "
 						"migration from %u, the MLE is "
@@ -3401,6 +3491,8 @@ top:
 				continue;
 			}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/* If we have reached this point, this mle needs to be
@@ -3551,7 +3643,11 @@ void dlm_force_free_mles(struct dlm_ctxt *dlm)
 	struct hlist_head *bucket;
 	struct dlm_master_list_entry *mle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct hlist_node *tmp, *list;
+=======
+	struct hlist_node *tmp;
+>>>>>>> v3.18
 =======
 	struct hlist_node *tmp;
 >>>>>>> v3.18
@@ -3571,9 +3667,13 @@ void dlm_force_free_mles(struct dlm_ctxt *dlm)
 	for (i = 0; i < DLM_HASH_BUCKETS; i++) {
 		bucket = dlm_master_hash(dlm, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hlist_for_each_safe(list, tmp, bucket) {
 			mle = hlist_entry(list, struct dlm_master_list_entry,
 					  master_hash_node);
+=======
+		hlist_for_each_entry_safe(mle, tmp, bucket, master_hash_node) {
+>>>>>>> v3.18
 =======
 		hlist_for_each_entry_safe(mle, tmp, bucket, master_hash_node) {
 >>>>>>> v3.18

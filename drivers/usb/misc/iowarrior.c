@@ -16,7 +16,10 @@
 #include <linux/module.h>
 #include <linux/usb.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -56,10 +59,13 @@
 #define MAX_WRITES_IN_FLIGHT 4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Use our own dbg macro */
 #undef dbg
 #define dbg( format, arg... ) do { if( debug ) printk( KERN_DEBUG __FILE__ ": " format "\n" , ## arg ); } while ( 0 )
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 MODULE_AUTHOR(DRIVER_AUTHOR);
@@ -69,9 +75,12 @@ MODULE_LICENSE("GPL");
 /* Module parameters */
 static DEFINE_MUTEX(iowarrior_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool debug = 0;
 module_param(debug, bool, 0644);
 MODULE_PARM_DESC(debug, "debug=1 enables debugging messages");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -246,8 +255,13 @@ static void iowarrior_write_callback(struct urb *urb)
 	    !(status == -ENOENT ||
 	      status == -ECONNRESET || status == -ESHUTDOWN)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dbg("%s - nonzero write bulk status received: %d",
 		    __func__, status);
+=======
+		dev_dbg(&dev->interface->dev,
+			"nonzero write bulk status received: %d\n", status);
+>>>>>>> v3.18
 =======
 		dev_dbg(&dev->interface->dev,
 			"nonzero write bulk status received: %d\n", status);
@@ -267,7 +281,11 @@ static void iowarrior_write_callback(struct urb *urb)
 static inline void iowarrior_delete(struct iowarrior *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("%s - minor %d", __func__, dev->minor);
+=======
+	dev_dbg(&dev->interface->dev, "minor %d\n", dev->minor);
+>>>>>>> v3.18
 =======
 	dev_dbg(&dev->interface->dev, "minor %d\n", dev->minor);
 >>>>>>> v3.18
@@ -308,7 +326,12 @@ static ssize_t iowarrior_read(struct file *file, char __user *buffer,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("%s - minor %d, count = %zd", __func__, dev->minor, count);
+=======
+	dev_dbg(&dev->interface->dev, "minor %d, count = %zd\n",
+		dev->minor, count);
+>>>>>>> v3.18
 =======
 	dev_dbg(&dev->interface->dev, "minor %d, count = %zd\n",
 		dev->minor, count);
@@ -324,7 +347,11 @@ static ssize_t iowarrior_read(struct file *file, char __user *buffer,
 		atomic_set(&dev->overflow_flag, 0);
 		if ((read_idx = read_index(dev)) == -1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* queue emty */
+=======
+			/* queue empty */
+>>>>>>> v3.18
 =======
 			/* queue empty */
 >>>>>>> v3.18
@@ -385,7 +412,12 @@ static ssize_t iowarrior_write(struct file *file,
 		goto exit;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("%s - minor %d, count = %zd", __func__, dev->minor, count);
+=======
+	dev_dbg(&dev->interface->dev, "minor %d, count = %zd\n",
+		dev->minor, count);
+>>>>>>> v3.18
 =======
 	dev_dbg(&dev->interface->dev, "minor %d, count = %zd\n",
 		dev->minor, count);
@@ -452,7 +484,12 @@ static ssize_t iowarrior_write(struct file *file,
 		if (!int_out_urb) {
 			retval = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dbg("%s Unable to allocate urb ", __func__);
+=======
+			dev_dbg(&dev->interface->dev,
+				"Unable to allocate urb\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(&dev->interface->dev,
 				"Unable to allocate urb\n");
@@ -464,7 +501,12 @@ static ssize_t iowarrior_write(struct file *file,
 		if (!buf) {
 			retval = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dbg("%s Unable to allocate buffer ", __func__);
+=======
+			dev_dbg(&dev->interface->dev,
+				"Unable to allocate buffer\n");
+>>>>>>> v3.18
 =======
 			dev_dbg(&dev->interface->dev,
 				"Unable to allocate buffer\n");
@@ -485,8 +527,14 @@ static ssize_t iowarrior_write(struct file *file,
 		retval = usb_submit_urb(int_out_urb, GFP_KERNEL);
 		if (retval) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dbg("%s submit error %d for urb nr.%d", __func__,
 			    retval, atomic_read(&dev->write_busy));
+=======
+			dev_dbg(&dev->interface->dev,
+				"submit error %d for urb nr.%d\n",
+				retval, atomic_read(&dev->write_busy));
+>>>>>>> v3.18
 =======
 			dev_dbg(&dev->interface->dev,
 				"submit error %d for urb nr.%d\n",
@@ -552,8 +600,13 @@ static long iowarrior_ioctl(struct file *file, unsigned int cmd,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("%s - minor %d, cmd 0x%.4x, arg %ld", __func__, dev->minor, cmd,
 	    arg);
+=======
+	dev_dbg(&dev->interface->dev, "minor %d, cmd 0x%.4x, arg %ld\n",
+		dev->minor, cmd, arg);
+>>>>>>> v3.18
 =======
 	dev_dbg(&dev->interface->dev, "minor %d, cmd 0x%.4x, arg %ld\n",
 		dev->minor, cmd, arg);
@@ -656,8 +709,11 @@ static int iowarrior_open(struct inode *inode, struct file *file)
 	int retval = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("%s", __func__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&iowarrior_mutex);
@@ -720,7 +776,11 @@ static int iowarrior_release(struct inode *inode, struct file *file)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbg("%s - minor %d", __func__, dev->minor);
+=======
+	dev_dbg(&dev->interface->dev, "minor %d\n", dev->minor);
+>>>>>>> v3.18
 =======
 	dev_dbg(&dev->interface->dev, "minor %d\n", dev->minor);
 >>>>>>> v3.18
@@ -863,6 +923,7 @@ static int iowarrior_probe(struct usb_interface *interface,
 			dev->int_out_endpoint = endpoint;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (!dev->int_in_endpoint) {
 		dev_err(&interface->dev, "no interrupt-in endpoint found\n");
@@ -878,6 +939,8 @@ static int iowarrior_probe(struct usb_interface *interface,
 		}
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* we have to check the report_size often, so remember it in the endianness suitable for our machine */

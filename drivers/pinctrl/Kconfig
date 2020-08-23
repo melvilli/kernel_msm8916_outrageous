@@ -12,15 +12,21 @@ menu "Pin controllers"
 
 config PINMUX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Support pin multiplexing controllers"
 
 config PINCONF
 	bool "Support pin configuration controllers"
 =======
+=======
+>>>>>>> v3.18
 	bool "Support pin multiplexing controllers" if COMPILE_TEST
 
 config PINCONF
 	bool "Support pin configuration controllers" if COMPILE_TEST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config GENERIC_PINCONF
@@ -33,6 +39,7 @@ config DEBUG_PINCTRL
 	help
 	  Say Y here to add some extra checks and diagnostics to PINCTRL calls.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config PINCTRL_ABX500
 	bool "ST-Ericsson ABx500 family Mixed Signal Circuit gpio functions"
@@ -57,6 +64,8 @@ config PINCTRL_AB8505
 	bool "AB8505 pin controller driver"
 	depends on PINCTRL_ABX500 && ARCH_U8500
 =======
+=======
+>>>>>>> v3.18
 config PINCTRL_ADI2
 	bool "ADI pin controller driver"
 	depends on BLACKFIN
@@ -85,6 +94,9 @@ config PINCTRL_BF54x
 config PINCTRL_BF60x
 	def_bool y if BF60x
 	select PINCTRL_ADI2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config PINCTRL_AT91
@@ -94,10 +106,13 @@ config PINCTRL_AT91
 	select PINMUX
 	select PINCONF
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
 	  Say Y here to enable the at91 pinctrl driver
 
 =======
+=======
+>>>>>>> v3.18
 	select GPIOLIB
 	select OF_GPIO
 	select GPIOLIB_IRQCHIP
@@ -116,12 +131,16 @@ config PINCTRL_BAYTRAIL
 
 	  Requires ACPI device enumeration code to set up a platform device.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PINCTRL_BCM2835
 	bool
 	select PINMUX
 	select PINCONF
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config PINCTRL_IMX
 	bool
@@ -168,6 +187,8 @@ config PINCTRL_IMX6SL
 	help
 	  Say Y here to enable the imx6sl pinctrl driver
 =======
+=======
+>>>>>>> v3.18
 config PINCTRL_BCM281XX
 	bool "Broadcom BCM281xx pinctrl driver"
 	depends on OF && (ARCH_BCM_MOBILE || COMPILE_TEST)
@@ -180,6 +201,9 @@ config PINCTRL_BCM281XX
 	  for the BCM281xx SoC family, including BCM11130, BCM11140, BCM11351,
 	  BCM28145, and BCM28155 SoCs.  This driver requires the pinctrl
 	  framework.  GPIO is provided by a separate GPIO driver.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config PINCTRL_LANTIQ
@@ -193,6 +217,7 @@ config PINCTRL_FALCON
 	depends on SOC_FALCON
 	depends on PINCTRL_LANTIQ
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config PINCTRL_MXS
 	bool
@@ -225,12 +250,17 @@ config PINCTRL_DB8540
 	bool "DB8540 pin controller driver"
 	depends on PINCTRL_NOMADIK && ARCH_U8500
 =======
+=======
+>>>>>>> v3.18
 config PINCTRL_ROCKCHIP
 	bool
 	select PINMUX
 	select GENERIC_PINCONF
 	select GENERIC_IRQ_CHIP
 	select MFD_SYSCON
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config PINCTRL_SINGLE
@@ -242,6 +272,7 @@ config PINCTRL_SINGLE
 	help
 	  This selects the device tree based generic pinctrl driver.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config USE_PINCTRL_IRQ
 	default n
@@ -260,10 +291,13 @@ config PINCTRL_MSM_TLMM
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config PINCTRL_SIRF
 	bool "CSR SiRFprimaII/SiRFmarco pin controller driver"
 	depends on ARCH_SIRF
 	select PINMUX
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 config PINCTRL_SUNXI
@@ -271,6 +305,8 @@ config PINCTRL_SUNXI
 	select PINMUX
 	select GENERIC_PINCONF
 =======
+=======
+>>>>>>> v3.18
 	select GPIOLIB_IRQCHIP
 
 config PINCTRL_ST
@@ -279,6 +315,9 @@ config PINCTRL_ST
 	select PINMUX
 	select PINCONF
 	select GPIOLIB_IRQCHIP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config PINCTRL_TEGRA
@@ -299,7 +338,10 @@ config PINCTRL_TEGRA114
 	select PINCTRL_TEGRA
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PINCTRL_TEGRA124
 	bool
 	select PINCTRL_TEGRA
@@ -322,6 +364,9 @@ config PINCTRL_TZ1090_PDC
 	select PINMUX
 	select PINCONF
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PINCTRL_U300
 	bool "U300 pin controller driver"
@@ -333,6 +378,10 @@ config PINCTRL_COH901
 	bool "ST-Ericsson U300 COH 901 335/571 GPIO"
 	depends on GPIOLIB && ARCH_U300 && PINCTRL_U300
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GPIOLIB_IRQCHIP
+>>>>>>> v3.18
 =======
 	select GPIOLIB_IRQCHIP
 >>>>>>> v3.18
@@ -342,6 +391,7 @@ config PINCTRL_COH901
 	  COH 901 335 and COH 901 571/3. They contain 3, 5 or 7
 	  ports of 8 GPIO pins each.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config PINCTRL_SAMSUNG
 	bool
@@ -367,6 +417,8 @@ source "drivers/pinctrl/mvebu/Kconfig"
 source "drivers/pinctrl/sh-pfc/Kconfig"
 source "drivers/pinctrl/spear/Kconfig"
 =======
+=======
+>>>>>>> v3.18
 config PINCTRL_PALMAS
 	bool "Pinctrl driver for the PALMAS Series MFD devices"
 	depends on OF && MFD_PALMAS
@@ -387,6 +439,9 @@ source "drivers/pinctrl/samsung/Kconfig"
 source "drivers/pinctrl/sh-pfc/Kconfig"
 source "drivers/pinctrl/spear/Kconfig"
 source "drivers/pinctrl/sunxi/Kconfig"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 source "drivers/pinctrl/vt8500/Kconfig"
 
@@ -396,11 +451,17 @@ config PINCTRL_XWAY
 	depends on PINCTRL_LANTIQ
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config PINCTRL_TB10X
 	bool
 	depends on ARC_PLAT_TB10X
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endmenu
 

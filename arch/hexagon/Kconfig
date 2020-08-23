@@ -24,7 +24,10 @@ config HEXAGON
 	select GENERIC_SMP_IDLE_THREAD
 	select STACKTRACE_SUPPORT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select KTIME_SCALAR
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select GENERIC_CLOCKEVENTS
@@ -32,6 +35,10 @@ config HEXAGON
 	select MODULES_USE_ELF_RELA
 	select GENERIC_CPU_DEVICES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_DMA_ATTRS
+>>>>>>> v3.18
 =======
 	select HAVE_DMA_ATTRS
 >>>>>>> v3.18
@@ -164,6 +171,10 @@ endmenu
 
 source "init/Kconfig"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+source "kernel/Kconfig.freezer"
+>>>>>>> v3.18
 =======
 source "kernel/Kconfig.freezer"
 >>>>>>> v3.18

@@ -22,7 +22,11 @@ The rfkill subsystem has a concept of "hard" and "soft" block, which
 differ little in their meaning (block == transmitters off) but rather in
 whether they can be changed or not:
 <<<<<<< HEAD
+<<<<<<< HEAD
  - hard block: read-only radio block that cannot be overriden by software
+=======
+ - hard block: read-only radio block that cannot be overridden by software
+>>>>>>> v3.18
 =======
  - hard block: read-only radio block that cannot be overridden by software
 >>>>>>> v3.18
@@ -76,7 +80,11 @@ To create an rfkill driver, driver's Kconfig needs to have
 
 to ensure the driver cannot be built-in when rfkill is modular. The !RFKILL
 <<<<<<< HEAD
+<<<<<<< HEAD
 case allows the driver to be built when rfkill is not configured, which which
+=======
+case allows the driver to be built when rfkill is not configured, which
+>>>>>>> v3.18
 =======
 case allows the driver to be built when rfkill is not configured, which
 >>>>>>> v3.18

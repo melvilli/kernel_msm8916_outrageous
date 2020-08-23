@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * General MIPS MT support routines, usable in AP/SP, SMVP, or SMTC kernels
+=======
+ * General MIPS MT support routines, usable in AP/SP and SMVP.
+>>>>>>> v3.18
 =======
  * General MIPS MT support routines, usable in AP/SP and SMVP.
 >>>>>>> v3.18
@@ -62,9 +66,12 @@ void mips_mt_regdump(unsigned long mvpctl)
 	unsigned long haltval;
 	unsigned long tcstatval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	void smtc_soft_dump(void);
 #endif /* CONFIG_MIPT_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -124,9 +131,12 @@ void mips_mt_regdump(unsigned long mvpctl)
 			write_tc_c0_tchalt(0);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	smtc_soft_dump();
 #endif /* CONFIG_MIPT_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	printk("===========================\n");
@@ -306,11 +316,14 @@ void mips_mt_set_cpuoptions(void)
 void mt_cflush_lockdown(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	void smtc_cflush_lockdown(void);
 
 	smtc_cflush_lockdown();
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* FILL IN VSMP and AP/SP VERSIONS HERE */
@@ -319,11 +332,14 @@ void mt_cflush_lockdown(void)
 void mt_cflush_release(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	void smtc_cflush_release(void);
 
 	smtc_cflush_release();
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* FILL IN VSMP and AP/SP VERSIONS HERE */

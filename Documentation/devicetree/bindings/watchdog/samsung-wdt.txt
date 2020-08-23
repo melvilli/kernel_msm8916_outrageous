@@ -6,6 +6,7 @@ occurred.
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : should be "samsung,s3c2410-wdt"
 - reg : base physical address of the controller and length of memory mapped
 	region.
@@ -14,6 +15,8 @@ Required properties:
 Optional properties:
 - timeout-sec : contains the watchdog timeout in seconds.
 =======
+=======
+>>>>>>> v3.18
 - compatible : should be one among the following
 	(a) "samsung,s3c2410-wdt" for Exynos4 and previous SoCs
 	(b) "samsung,exynos5250-wdt" for Exynos5250
@@ -41,4 +44,7 @@ watchdog@101D0000 {
 	clock-names = "watchdog";
 	samsung,syscon-phandle = <&pmu_syscon>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

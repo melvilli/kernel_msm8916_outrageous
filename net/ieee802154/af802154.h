@@ -26,7 +26,12 @@
 
 struct sk_buff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct net_devce;
+=======
+struct net_device;
+struct ieee802154_addr;
+>>>>>>> v3.18
 =======
 struct net_device;
 struct ieee802154_addr;
@@ -37,7 +42,11 @@ void ieee802154_raw_deliver(struct net_device *dev, struct sk_buff *skb);
 int ieee802154_dgram_deliver(struct net_device *dev, struct sk_buff *skb);
 struct net_device *ieee802154_get_dev(struct net *net,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct ieee802154_addr *addr);
+=======
+				      const struct ieee802154_addr *addr);
+>>>>>>> v3.18
 =======
 				      const struct ieee802154_addr *addr);
 >>>>>>> v3.18

@@ -19,6 +19,7 @@
 #define	__XFS_INODE_ITEM_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This is the structure used to lay out an inode log item in the
  * log.  The size of the inline data/extents/b-tree root to be logged
@@ -132,6 +133,9 @@ static inline int xfs_ilog_fdata(int w)
 =======
 /* kernel only definitions */
 >>>>>>> v3.18
+=======
+/* kernel only definitions */
+>>>>>>> v3.18
 
 struct xfs_buf;
 struct xfs_bmbt_rec;
@@ -139,7 +143,10 @@ struct xfs_inode;
 struct xfs_mount;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 typedef struct xfs_inode_log_item {
@@ -152,6 +159,7 @@ typedef struct xfs_inode_log_item {
 	unsigned int		ili_last_fields;   /* fields when flushed */
 	unsigned int		ili_fields;	   /* fields to be logged */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct xfs_bmbt_rec	*ili_extents_buf;  /* array of logged
 						      data exts */
 	struct xfs_bmbt_rec	*ili_aextents_buf; /* array of logged
@@ -160,6 +168,10 @@ typedef struct xfs_inode_log_item {
 } xfs_inode_log_item_t;
 
 
+=======
+} xfs_inode_log_item_t;
+
+>>>>>>> v3.18
 =======
 } xfs_inode_log_item_t;
 
@@ -178,7 +190,11 @@ extern int xfs_inode_item_format_convert(xfs_log_iovec_t *,
 					 xfs_inode_log_format_t *);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __KERNEL__ */
+=======
+extern struct kmem_zone	*xfs_ili_zone;
+>>>>>>> v3.18
 =======
 extern struct kmem_zone	*xfs_ili_zone;
 >>>>>>> v3.18

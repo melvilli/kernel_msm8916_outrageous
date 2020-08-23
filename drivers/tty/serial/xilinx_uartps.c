@@ -1,8 +1,14 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Xilinx PS UART driver
  *
  * 2011 (c) Xilinx Inc.
+=======
+ * Cadence UART driver (found in Xilinx Zynq)
+ *
+ * 2011 - 2014 (C) Xilinx Inc.
+>>>>>>> v3.18
 =======
  * Cadence UART driver (found in Xilinx Zynq)
  *
@@ -16,6 +22,7 @@
  * later version.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #include <linux/platform_device.h>
@@ -25,6 +32,8 @@
 #include <linux/tty_flip.h>
 #include <linux/console.h>
 =======
+=======
+>>>>>>> v3.18
  * This driver has originally been pushed by Xilinx using a Zynq-branding. This
  * still shows in the naming of this file, the kconfig symbols and some symbols
  * in the code.
@@ -41,6 +50,9 @@
 #include <linux/slab.h>
 #include <linux/tty.h>
 #include <linux/tty_flip.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/irq.h>
@@ -48,6 +60,7 @@
 #include <linux/of.h>
 #include <linux/module.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define XUARTPS_TTY_NAME	"ttyPS"
 #define XUARTPS_NAME		"xuartps"
@@ -132,6 +145,8 @@
 /** Interrupt Registers
  *
 =======
+=======
+>>>>>>> v3.18
 #define CDNS_UART_TTY_NAME	"ttyPS"
 #define CDNS_UART_NAME		"xuartps"
 #define CDNS_UART_MAJOR		0	/* use dynamic node allocation */
@@ -209,6 +224,9 @@ MODULE_PARM_DESC(rx_timeout, "Rx timeout, 1-255");
 
 /*
  * Interrupt Registers:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Interrupt control logic uses the interrupt enable register (IER) and the
  * interrupt disable register (IDR) to set the value of the bits in the
@@ -217,6 +235,7 @@ MODULE_PARM_DESC(rx_timeout, "Rx timeout, 1-255");
  * Writing a 1 to IER Enables an interrupt, writing a 1 to IDR disables an
  * interrupt. IMR and ISR are read only, and IER and IDR are write only.
  * Reading either IER or IDR returns 0x00.
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  * All four registers have the same bit definitions.
@@ -236,6 +255,8 @@ MODULE_PARM_DESC(rx_timeout, "Rx timeout, 1-255");
 /** Channel Status Register
  *
 =======
+=======
+>>>>>>> v3.18
  * All four registers have the same bit definitions.
  */
 #define CDNS_UART_IXR_TOUT	0x00000100 /* RX Timeout error interrupt */
@@ -255,11 +276,15 @@ MODULE_PARM_DESC(rx_timeout, "Rx timeout, 1-255");
 
 /*
  * Channel Status Register:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The channel status register (CSR) is provided to enable the control logic
  * to monitor the status of bits in the channel interrupt status register,
  * even if these are masked out by the interrupt mask register.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define XUARTPS_SR_RXEMPTY	0x00000002 /* RX FIFO empty */
 #define XUARTPS_SR_TXEMPTY	0x00000008 /* TX FIFO empty */
@@ -275,6 +300,8 @@ MODULE_PARM_DESC(rx_timeout, "Rx timeout, 1-255");
  **/
 static irqreturn_t xuartps_isr(int irq, void *dev_id)
 =======
+=======
+>>>>>>> v3.18
 #define CDNS_UART_SR_RXEMPTY	0x00000002 /* RX FIFO empty */
 #define CDNS_UART_SR_TXEMPTY	0x00000008 /* TX FIFO empty */
 #define CDNS_UART_SR_TXFULL	0x00000010 /* TX FIFO full */
@@ -311,6 +338,9 @@ struct cdns_uart {
  * Return: IRQHANDLED
  */
 static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct uart_port *port = (struct uart_port *)dev_id;
@@ -325,12 +355,15 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 	 * interrupt(s) is/are active.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	isrstatus = xuartps_readl(XUARTPS_ISR_OFFSET);
 
 	/* drop byte with parity error if IGNPAR specified */
 	if (isrstatus & port->ignore_status_mask & XUARTPS_IXR_PARITY)
 		isrstatus &= ~(XUARTPS_IXR_RXTRIG | XUARTPS_IXR_TOUT);
 =======
+=======
+>>>>>>> v3.18
 	isrstatus = cdns_uart_readl(CDNS_UART_ISR_OFFSET);
 
 	/*
@@ -352,11 +385,15 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 	/* drop byte with parity error if IGNPAR specified */
 	if (isrstatus & port->ignore_status_mask & CDNS_UART_IXR_PARITY)
 		isrstatus &= ~(CDNS_UART_IXR_RXTRIG | CDNS_UART_IXR_TOUT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	isrstatus &= port->read_status_mask;
 	isrstatus &= ~port->ignore_status_mask;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((isrstatus & XUARTPS_IXR_TOUT) ||
 		(isrstatus & XUARTPS_IXR_RXTRIG)) {
@@ -377,6 +414,8 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 
 			uart_insert_char(port, isrstatus, XUARTPS_IXR_OVERRUN,
 =======
+=======
+>>>>>>> v3.18
 	if ((isrstatus & CDNS_UART_IXR_TOUT) ||
 		(isrstatus & CDNS_UART_IXR_RXTRIG)) {
 		/* Receive Timeout Interrupt */
@@ -422,6 +461,9 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 			}
 
 			uart_insert_char(port, isrstatus, CDNS_UART_IXR_OVERRUN,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					data, status);
 		}
@@ -432,15 +474,21 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 
 	/* Dispatch an appropriate handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((isrstatus & XUARTPS_IXR_TXEMPTY) == XUARTPS_IXR_TXEMPTY) {
 		if (uart_circ_empty(&port->state->xmit)) {
 			xuartps_writel(XUARTPS_IXR_TXEMPTY,
 						XUARTPS_IDR_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	if ((isrstatus & CDNS_UART_IXR_TXEMPTY) == CDNS_UART_IXR_TXEMPTY) {
 		if (uart_circ_empty(&port->state->xmit)) {
 			cdns_uart_writel(CDNS_UART_IXR_TXEMPTY,
 						CDNS_UART_IDR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			numbytes = port->fifosize;
@@ -450,6 +498,7 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 					break;
 				/* Get the data from the UART circular buffer
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 * and write it to the xuartps's TX_FIFO
 				 * register.
 				 */
@@ -457,12 +506,17 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 					port->state->xmit.buf[port->state->xmit.
 					tail], XUARTPS_FIFO_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 				 * and write it to the cdns_uart's TX_FIFO
 				 * register.
 				 */
 				cdns_uart_writel(
 					port->state->xmit.buf[port->state->xmit.
 					tail], CDNS_UART_FIFO_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				port->icount.tx++;
@@ -472,7 +526,11 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 				 */
 				port->state->xmit.tail =
 <<<<<<< HEAD
+<<<<<<< HEAD
 					(port->state->xmit.tail + 1) & \
+=======
+					(port->state->xmit.tail + 1) &
+>>>>>>> v3.18
 =======
 					(port->state->xmit.tail + 1) &
 >>>>>>> v3.18
@@ -486,7 +544,11 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xuartps_writel(isrstatus, XUARTPS_ISR_OFFSET);
+=======
+	cdns_uart_writel(isrstatus, CDNS_UART_ISR_OFFSET);
+>>>>>>> v3.18
 =======
 	cdns_uart_writel(isrstatus, CDNS_UART_ISR_OFFSET);
 >>>>>>> v3.18
@@ -498,6 +560,7 @@ static irqreturn_t cdns_uart_isr(int irq, void *dev_id)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_set_baud_rate - Calculate and set the baud rate
  * @port: Handle to the uart port structure
@@ -537,6 +600,8 @@ static unsigned int xuartps_set_baud_rate(struct uart_port *port,
 
 		calc_baud = sel_clk / (brgr_val * (brdiv_val + 1));
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_calc_baud_divs - Calculate baud rate divisors
  * @clk: UART module input clock
  * @baud: Desired baud rate
@@ -578,6 +643,9 @@ static unsigned int cdns_uart_calc_baud_divs(unsigned int clk,
 			continue;
 
 		calc_baud = clk / (cd * (bdiv + 1));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (baud > calc_baud)
@@ -585,6 +653,7 @@ static unsigned int cdns_uart_calc_baud_divs(unsigned int clk,
 		else
 			bauderror = calc_baud - baud;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* use the values when percent error is acceptable */
 		if (((bauderror * 100) / baud) < 3) {
@@ -597,6 +666,8 @@ static unsigned int cdns_uart_calc_baud_divs(unsigned int clk,
 	xuartps_writel(brgr_val, XUARTPS_BAUDGEN_OFFSET);
 	xuartps_writel(brdiv_val, XUARTPS_BAUDDIV_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 		if (besterror > bauderror) {
 			*rbdiv = bdiv;
 			*rcd = cd;
@@ -640,11 +711,15 @@ static unsigned int cdns_uart_set_baud_rate(struct uart_port *port,
 	cdns_uart_writel(cd, CDNS_UART_BAUDGEN_OFFSET);
 	cdns_uart_writel(bdiv, CDNS_UART_BAUDDIV_OFFSET);
 	cdns_uart->baud = baud;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return calc_baud;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*----------------------Uart Operations---------------------------*/
 
@@ -655,6 +730,8 @@ static unsigned int cdns_uart_set_baud_rate(struct uart_port *port,
  **/
 static void xuartps_start_tx(struct uart_port *port)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_COMMON_CLK
 /**
  * cdns_uart_clk_notitifer_cb - Clock notifier callback
@@ -756,6 +833,9 @@ static int cdns_uart_clk_notifier_cb(struct notifier_block *nb,
  * @port: Handle to the uart port structure
  */
 static void cdns_uart_start_tx(struct uart_port *port)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int status, numbytes = port->fifosize;
@@ -763,6 +843,7 @@ static void cdns_uart_start_tx(struct uart_port *port)
 	if (uart_circ_empty(&port->state->xmit) || uart_tx_stopped(port))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = xuartps_readl(XUARTPS_CR_OFFSET);
 	/* Set the TX enable bit and clear the TX disable bit to enable the
@@ -775,6 +856,8 @@ static void cdns_uart_start_tx(struct uart_port *port)
 		& XUARTPS_SR_TXFULL)) != XUARTPS_SR_TXFULL) {
 
 =======
+=======
+>>>>>>> v3.18
 	status = cdns_uart_readl(CDNS_UART_CR_OFFSET);
 	/* Set the TX enable bit and clear the TX disable bit to enable the
 	 * transmitter.
@@ -784,6 +867,9 @@ static void cdns_uart_start_tx(struct uart_port *port)
 
 	while (numbytes-- && ((cdns_uart_readl(CDNS_UART_SR_OFFSET) &
 				CDNS_UART_SR_TXFULL)) != CDNS_UART_SR_TXFULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Break if no more data available in the UART buffer */
 		if (uart_circ_empty(&port->state->xmit))
@@ -791,17 +877,23 @@ static void cdns_uart_start_tx(struct uart_port *port)
 
 		/* Get the data from the UART circular buffer and
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * write it to the xuartps's TX_FIFO register.
 		 */
 		xuartps_writel(
 			port->state->xmit.buf[port->state->xmit.tail],
 			XUARTPS_FIFO_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 		 * write it to the cdns_uart's TX_FIFO register.
 		 */
 		cdns_uart_writel(
 			port->state->xmit.buf[port->state->xmit.tail],
 			CDNS_UART_FIFO_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		port->icount.tx++;
 
@@ -812,9 +904,15 @@ static void cdns_uart_start_tx(struct uart_port *port)
 					(UART_XMIT_SIZE - 1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Enable the TX Empty interrupt */
 	xuartps_writel(XUARTPS_IXR_TXEMPTY, XUARTPS_IER_OFFSET);
+=======
+	cdns_uart_writel(CDNS_UART_IXR_TXEMPTY, CDNS_UART_ISR_OFFSET);
+	/* Enable the TX Empty interrupt */
+	cdns_uart_writel(CDNS_UART_IXR_TXEMPTY, CDNS_UART_IER_OFFSET);
+>>>>>>> v3.18
 =======
 	cdns_uart_writel(CDNS_UART_IXR_TXEMPTY, CDNS_UART_ISR_OFFSET);
 	/* Enable the TX Empty interrupt */
@@ -826,6 +924,7 @@ static void cdns_uart_start_tx(struct uart_port *port)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_stop_tx - Stop TX
  * @port: Handle to the uart port structure
@@ -868,6 +967,8 @@ static unsigned int xuartps_tx_empty(struct uart_port *port)
 
 	status = xuartps_readl(XUARTPS_ISR_OFFSET) & XUARTPS_IXR_TXEMPTY;
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_stop_tx - Stop TX
  * @port: Handle to the uart port structure
  */
@@ -906,11 +1007,15 @@ static unsigned int cdns_uart_tx_empty(struct uart_port *port)
 	unsigned int status;
 
 	status = cdns_uart_readl(CDNS_UART_SR_OFFSET) & CDNS_UART_SR_TXEMPTY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return status ? TIOCSER_TEMT : 0;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_break_ctl - Based on the input ctl we have to start or stop
  *			transmitting char breaks
@@ -920,12 +1025,17 @@ static unsigned int cdns_uart_tx_empty(struct uart_port *port)
  **/
 static void xuartps_break_ctl(struct uart_port *port, int ctl)
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_break_ctl - Based on the input ctl we have to start or stop
  *			transmitting char breaks
  * @port: Handle to the uart port structure
  * @ctl: Value based on which start or stop decision is taken
  */
 static void cdns_uart_break_ctl(struct uart_port *port, int ctl)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned int status;
@@ -933,6 +1043,7 @@ static void cdns_uart_break_ctl(struct uart_port *port, int ctl)
 
 	spin_lock_irqsave(&port->lock, flags);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = xuartps_readl(XUARTPS_CR_OFFSET);
 
@@ -944,6 +1055,8 @@ static void cdns_uart_break_ctl(struct uart_port *port, int ctl)
 			xuartps_writel(XUARTPS_CR_STOPBRK | status,
 					 XUARTPS_CR_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	status = cdns_uart_readl(CDNS_UART_CR_OFFSET);
 
 	if (ctl == -1)
@@ -953,6 +1066,9 @@ static void cdns_uart_break_ctl(struct uart_port *port, int ctl)
 		if ((status & CDNS_UART_CR_STOPBRK) == 0)
 			cdns_uart_writel(CDNS_UART_CR_STOPBRK | status,
 					 CDNS_UART_CR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_unlock_irqrestore(&port->lock, flags);
@@ -960,7 +1076,11 @@ static void cdns_uart_break_ctl(struct uart_port *port, int ctl)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * xuartps_set_termios - termios operations, handling data length, parity,
+=======
+ * cdns_uart_set_termios - termios operations, handling data length, parity,
+>>>>>>> v3.18
 =======
  * cdns_uart_set_termios - termios operations, handling data length, parity,
 >>>>>>> v3.18
@@ -968,6 +1088,7 @@ static void cdns_uart_break_ctl(struct uart_port *port, int ctl)
  * @port: Handle to the uart port structure
  * @termios: Handle to the input termios structure
  * @old: Values of the previously saved termios structure
+<<<<<<< HEAD
 <<<<<<< HEAD
  *
  **/
@@ -977,12 +1098,17 @@ static void xuartps_set_termios(struct uart_port *port,
 	unsigned int cval = 0;
 	unsigned int baud;
 =======
+=======
+>>>>>>> v3.18
  */
 static void cdns_uart_set_termios(struct uart_port *port,
 				struct ktermios *termios, struct ktermios *old)
 {
 	unsigned int cval = 0;
 	unsigned int baud, minbaud, maxbaud;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned long flags;
 	unsigned int ctrl_reg, mode_reg;
@@ -990,6 +1116,7 @@ static void cdns_uart_set_termios(struct uart_port *port,
 	spin_lock_irqsave(&port->lock, flags);
 
 	/* Empty the receive FIFO 1st before making changes */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	while ((xuartps_readl(XUARTPS_SR_OFFSET) &
 		 XUARTPS_SR_RXEMPTY) != XUARTPS_SR_RXEMPTY) {
@@ -1049,6 +1176,8 @@ static void cdns_uart_set_termios(struct uart_port *port,
 
 	mode_reg = xuartps_readl(XUARTPS_MR_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	while ((cdns_uart_readl(CDNS_UART_SR_OFFSET) &
 		 CDNS_UART_SR_RXEMPTY) != CDNS_UART_SR_RXEMPTY) {
 		cdns_uart_readl(CDNS_UART_FIFO_OFFSET);
@@ -1110,11 +1239,15 @@ static void cdns_uart_set_termios(struct uart_port *port,
 			CDNS_UART_IXR_FRAMING | CDNS_UART_IXR_OVERRUN;
 
 	mode_reg = cdns_uart_readl(CDNS_UART_MR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Handling Data Size */
 	switch (termios->c_cflag & CSIZE) {
 	case CS6:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		cval |= XUARTPS_MR_CHARLEN_6_BIT;
 		break;
@@ -1125,6 +1258,8 @@ static void cdns_uart_set_termios(struct uart_port *port,
 	case CS8:
 		cval |= XUARTPS_MR_CHARLEN_8_BIT;
 =======
+=======
+>>>>>>> v3.18
 		cval |= CDNS_UART_MR_CHARLEN_6_BIT;
 		break;
 	case CS7:
@@ -1133,6 +1268,9 @@ static void cdns_uart_set_termios(struct uart_port *port,
 	default:
 	case CS8:
 		cval |= CDNS_UART_MR_CHARLEN_8_BIT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		termios->c_cflag &= ~CSIZE;
 		termios->c_cflag |= CS8;
@@ -1142,9 +1280,15 @@ static void cdns_uart_set_termios(struct uart_port *port,
 	/* Handling Parity and Stop Bits length */
 	if (termios->c_cflag & CSTOPB)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cval |= XUARTPS_MR_STOPMODE_2_BIT; /* 2 STOP bits */
 	else
 		cval |= XUARTPS_MR_STOPMODE_1_BIT; /* 1 STOP bit */
+=======
+		cval |= CDNS_UART_MR_STOPMODE_2_BIT; /* 2 STOP bits */
+	else
+		cval |= CDNS_UART_MR_STOPMODE_1_BIT; /* 1 STOP bit */
+>>>>>>> v3.18
 =======
 		cval |= CDNS_UART_MR_STOPMODE_2_BIT; /* 2 STOP bits */
 	else
@@ -1155,6 +1299,7 @@ static void cdns_uart_set_termios(struct uart_port *port,
 		/* Mark or Space parity */
 		if (termios->c_cflag & CMSPAR) {
 			if (termios->c_cflag & PARODD)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				cval |= XUARTPS_MR_PARITY_MARK;
 			else
@@ -1167,6 +1312,8 @@ static void cdns_uart_set_termios(struct uart_port *port,
 		cval |= XUARTPS_MR_PARITY_NONE;
 	xuartps_writel(cval , XUARTPS_MR_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 				cval |= CDNS_UART_MR_PARITY_MARK;
 			else
 				cval |= CDNS_UART_MR_PARITY_SPACE;
@@ -1181,12 +1328,16 @@ static void cdns_uart_set_termios(struct uart_port *port,
 	}
 	cval |= mode_reg & 1;
 	cdns_uart_writel(cval, CDNS_UART_MR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&port->lock, flags);
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_startup - Called when an application opens a xuartps port
  * @port: Handle to the uart port structure
@@ -1199,6 +1350,8 @@ static int xuartps_startup(struct uart_port *port)
 
 	retval = request_irq(port->irq, xuartps_isr, 0, XUARTPS_NAME,
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_startup - Called when an application opens a cdns_uart port
  * @port: Handle to the uart port structure
  *
@@ -1209,6 +1362,9 @@ static int cdns_uart_startup(struct uart_port *port)
 	unsigned int retval = 0, status = 0;
 
 	retval = request_irq(port->irq, cdns_uart_isr, 0, CDNS_UART_NAME,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 								(void *)port);
 	if (retval)
@@ -1216,8 +1372,13 @@ static int cdns_uart_startup(struct uart_port *port)
 
 	/* Disable the TX and RX */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xuartps_writel(XUARTPS_CR_TX_DIS | XUARTPS_CR_RX_DIS,
 						XUARTPS_CR_OFFSET);
+=======
+	cdns_uart_writel(CDNS_UART_CR_TX_DIS | CDNS_UART_CR_RX_DIS,
+						CDNS_UART_CR_OFFSET);
+>>>>>>> v3.18
 =======
 	cdns_uart_writel(CDNS_UART_CR_TX_DIS | CDNS_UART_CR_RX_DIS,
 						CDNS_UART_CR_OFFSET);
@@ -1227,20 +1388,27 @@ static int cdns_uart_startup(struct uart_port *port)
 	 * no break chars.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xuartps_writel(XUARTPS_CR_TXRST | XUARTPS_CR_RXRST,
 				XUARTPS_CR_OFFSET);
 
 	status = xuartps_readl(XUARTPS_CR_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	cdns_uart_writel(CDNS_UART_CR_TXRST | CDNS_UART_CR_RXRST,
 				CDNS_UART_CR_OFFSET);
 
 	status = cdns_uart_readl(CDNS_UART_CR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Clear the RX disable and TX disable bits and then set the TX enable
 	 * bit and RX enable bit to enable the transmitter and receiver.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	xuartps_writel((status & ~(XUARTPS_CR_TX_DIS | XUARTPS_CR_RX_DIS))
 			| (XUARTPS_CR_TX_EN | XUARTPS_CR_RX_EN |
@@ -1250,10 +1418,16 @@ static int cdns_uart_startup(struct uart_port *port)
 			| (CDNS_UART_CR_TX_EN | CDNS_UART_CR_RX_EN |
 			CDNS_UART_CR_STOPBRK), CDNS_UART_CR_OFFSET);
 >>>>>>> v3.18
+=======
+	cdns_uart_writel((status & ~(CDNS_UART_CR_TX_DIS | CDNS_UART_CR_RX_DIS))
+			| (CDNS_UART_CR_TX_EN | CDNS_UART_CR_RX_EN |
+			CDNS_UART_CR_STOPBRK), CDNS_UART_CR_OFFSET);
+>>>>>>> v3.18
 
 	/* Set the Mode Register with normal mode,8 data bits,1 stop bit,
 	 * no parity.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	xuartps_writel(XUARTPS_MR_CHMODE_NORM | XUARTPS_MR_STOPMODE_1_BIT
 		| XUARTPS_MR_PARITY_NONE | XUARTPS_MR_CHARLEN_8_BIT,
@@ -1273,6 +1447,8 @@ static int cdns_uart_startup(struct uart_port *port)
 		XUARTPS_IXR_FRAMING | XUARTPS_IXR_OVERRUN |
 		XUARTPS_IXR_RXTRIG | XUARTPS_IXR_TOUT, XUARTPS_IER_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	cdns_uart_writel(CDNS_UART_MR_CHMODE_NORM | CDNS_UART_MR_STOPMODE_1_BIT
 		| CDNS_UART_MR_PARITY_NONE | CDNS_UART_MR_CHARLEN_8_BIT,
 		 CDNS_UART_MR_OFFSET);
@@ -1298,6 +1474,9 @@ static int cdns_uart_startup(struct uart_port *port)
 		CDNS_UART_IXR_FRAMING | CDNS_UART_IXR_OVERRUN |
 		CDNS_UART_IXR_RXTRIG | CDNS_UART_IXR_TOUT,
 		CDNS_UART_IER_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return retval;
@@ -1305,21 +1484,28 @@ static int cdns_uart_startup(struct uart_port *port)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * xuartps_shutdown - Called when an application closes a xuartps port
  * @port: Handle to the uart port structure
  *
  **/
 static void xuartps_shutdown(struct uart_port *port)
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_shutdown - Called when an application closes a cdns_uart port
  * @port: Handle to the uart port structure
  */
 static void cdns_uart_shutdown(struct uart_port *port)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int status;
 
 	/* Disable interrupts */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = xuartps_readl(XUARTPS_IMR_OFFSET);
 	xuartps_writel(status, XUARTPS_IDR_OFFSET);
@@ -1328,17 +1514,23 @@ static void cdns_uart_shutdown(struct uart_port *port)
 	xuartps_writel(XUARTPS_CR_TX_DIS | XUARTPS_CR_RX_DIS,
 				 XUARTPS_CR_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	status = cdns_uart_readl(CDNS_UART_IMR_OFFSET);
 	cdns_uart_writel(status, CDNS_UART_IDR_OFFSET);
 
 	/* Disable the TX and RX */
 	cdns_uart_writel(CDNS_UART_CR_TX_DIS | CDNS_UART_CR_RX_DIS,
 				 CDNS_UART_CR_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_irq(port->irq, port);
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_type - Set UART type to xuartps port
  * @port: Handle to the uart port structure
@@ -1359,6 +1551,8 @@ static const char *xuartps_type(struct uart_port *port)
  **/
 static int xuartps_verify_port(struct uart_port *port,
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_type - Set UART type to cdns_uart port
  * @port: Handle to the uart port structure
  *
@@ -1377,6 +1571,9 @@ static const char *cdns_uart_type(struct uart_port *port)
  * Return: 0 on success, negative errno otherwise.
  */
 static int cdns_uart_verify_port(struct uart_port *port,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					struct serial_struct *ser)
 {
@@ -1394,6 +1591,7 @@ static int cdns_uart_verify_port(struct uart_port *port,
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_request_port - Claim the memory region attached to xuartps port,
  *				called when the driver adds a xuartps port via
@@ -1414,6 +1612,8 @@ static int xuartps_request_port(struct uart_port *port)
 		dev_err(port->dev, "Unable to map registers\n");
 		release_mem_region(port->mapbase, XUARTPS_REGISTER_SPACE);
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_request_port - Claim the memory region attached to cdns_uart port,
  *				called when the driver adds a cdns_uart port via
  *				uart_add_one_port()
@@ -1432,6 +1632,9 @@ static int cdns_uart_request_port(struct uart_port *port)
 	if (!port->membase) {
 		dev_err(port->dev, "Unable to map registers\n");
 		release_mem_region(port->mapbase, CDNS_UART_REGISTER_SPACE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENOMEM;
 	}
@@ -1439,6 +1642,7 @@ static int cdns_uart_request_port(struct uart_port *port)
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_release_port - Release the memory region attached to a xuartps
  *				port, called when the driver removes a xuartps
@@ -1450,6 +1654,8 @@ static void xuartps_release_port(struct uart_port *port)
 {
 	release_mem_region(port->mapbase, XUARTPS_REGISTER_SPACE);
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_release_port - Release UART port
  * @port: Handle to the uart port structure
  *
@@ -1459,12 +1665,16 @@ static void xuartps_release_port(struct uart_port *port)
 static void cdns_uart_release_port(struct uart_port *port)
 {
 	release_mem_region(port->mapbase, CDNS_UART_REGISTER_SPACE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	iounmap(port->membase);
 	port->membase = NULL;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_config_port - Configure xuartps, called when the driver adds a
  *				xuartps port
@@ -1476,6 +1686,8 @@ static void xuartps_config_port(struct uart_port *port, int flags)
 {
 	if (flags & UART_CONFIG_TYPE && xuartps_request_port(port) == 0)
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_config_port - Configure UART port
  * @port: Handle to the uart port structure
  * @flags: If any
@@ -1483,11 +1695,15 @@ static void xuartps_config_port(struct uart_port *port, int flags)
 static void cdns_uart_config_port(struct uart_port *port, int flags)
 {
 	if (flags & UART_CONFIG_TYPE && cdns_uart_request_port(port) == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		port->type = PORT_XUARTPS;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_get_mctrl - Get the modem control state
  *
@@ -1498,19 +1714,28 @@ static void cdns_uart_config_port(struct uart_port *port, int flags)
  **/
 static unsigned int xuartps_get_mctrl(struct uart_port *port)
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_get_mctrl - Get the modem control state
  * @port: Handle to the uart port structure
  *
  * Return: the modem control state
  */
 static unsigned int cdns_uart_get_mctrl(struct uart_port *port)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return TIOCM_CTS | TIOCM_DSR | TIOCM_CAR;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void xuartps_set_mctrl(struct uart_port *port, unsigned int mctrl)
+=======
+static void cdns_uart_set_mctrl(struct uart_port *port, unsigned int mctrl)
+>>>>>>> v3.18
 =======
 static void cdns_uart_set_mctrl(struct uart_port *port, unsigned int mctrl)
 >>>>>>> v3.18
@@ -1518,6 +1743,7 @@ static void cdns_uart_set_mctrl(struct uart_port *port, unsigned int mctrl)
 	/* N/A */
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void xuartps_enable_ms(struct uart_port *port)
 {
@@ -1581,6 +1807,8 @@ static struct uart_port *xuartps_get_port(void)
 
 	port = &xuartps_port[id];
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CONSOLE_POLL
 static int cdns_uart_poll_get_char(struct uart_port *port)
 {
@@ -1675,6 +1903,9 @@ static struct uart_port *cdns_uart_get_port(int id)
 		return NULL;
 
 	port = &cdns_uart_port[id];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* At this point, we've got an empty uart_port struct, initialize it */
@@ -1686,8 +1917,13 @@ static struct uart_port *cdns_uart_get_port(int id)
 	port->iotype	= UPIO_MEM32;
 	port->flags	= UPF_BOOT_AUTOCONF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port->ops	= &xuartps_ops;
 	port->fifosize	= XUARTPS_FIFO_SIZE;
+=======
+	port->ops	= &cdns_uart_ops;
+	port->fifosize	= CDNS_UART_FIFO_SIZE;
+>>>>>>> v3.18
 =======
 	port->ops	= &cdns_uart_ops;
 	port->fifosize	= CDNS_UART_FIFO_SIZE;
@@ -1697,6 +1933,7 @@ static struct uart_port *cdns_uart_get_port(int id)
 	return port;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*-----------------------Console driver operations--------------------------*/
 
@@ -1711,6 +1948,8 @@ static void xuartps_console_wait_tx(struct uart_port *port)
 	while ((xuartps_readl(XUARTPS_SR_OFFSET) & XUARTPS_SR_TXEMPTY)
 				!= XUARTPS_SR_TXEMPTY)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SERIAL_XILINX_PS_UART_CONSOLE
 /**
  * cdns_uart_console_wait_tx - Wait for the TX to be full
@@ -1720,11 +1959,15 @@ static void cdns_uart_console_wait_tx(struct uart_port *port)
 {
 	while ((cdns_uart_readl(CDNS_UART_SR_OFFSET) & CDNS_UART_SR_TXEMPTY)
 				!= CDNS_UART_SR_TXEMPTY)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		barrier();
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_console_putchar - write the character to the FIFO buffer
  * @port: Handle to the uart port structure
@@ -1750,6 +1993,8 @@ static void xuartps_console_write(struct console *co, const char *s,
 	unsigned long flags;
 	unsigned int imr;
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_console_putchar - write the character to the FIFO buffer
  * @port: Handle to the uart port structure
  * @ch: Character to be written
@@ -1791,6 +2036,9 @@ static void cdns_uart_console_write(struct console *co, const char *s,
 	struct uart_port *port = &cdns_uart_port[co->index];
 	unsigned long flags;
 	unsigned int imr, ctrl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int locked = 1;
 
@@ -1800,6 +2048,7 @@ static void cdns_uart_console_write(struct console *co, const char *s,
 		spin_lock_irqsave(&port->lock, flags);
 
 	/* save and disable interrupt */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	imr = xuartps_readl(XUARTPS_IMR_OFFSET);
 	xuartps_writel(imr, XUARTPS_IDR_OFFSET);
@@ -1814,6 +2063,8 @@ static void cdns_uart_console_write(struct console *co, const char *s,
 	xuartps_writel(~imr, XUARTPS_IDR_OFFSET);
 	xuartps_writel(imr, XUARTPS_IER_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 	imr = cdns_uart_readl(CDNS_UART_IMR_OFFSET);
 	cdns_uart_writel(imr, CDNS_UART_IDR_OFFSET);
 
@@ -1832,6 +2083,9 @@ static void cdns_uart_console_write(struct console *co, const char *s,
 
 	/* restore interrupt state */
 	cdns_uart_writel(imr, CDNS_UART_IER_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (locked)
@@ -1839,6 +2093,7 @@ static void cdns_uart_console_write(struct console *co, const char *s,
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_console_setup - Initialize the uart to default config
  * @co: Console handle
@@ -1850,6 +2105,8 @@ static int __init xuartps_console_setup(struct console *co, char *options)
 {
 	struct uart_port *port = &xuartps_port[co->index];
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_console_setup - Initialize the uart to default config
  * @co: Console handle
  * @options: Initial settings of uart
@@ -1859,6 +2116,9 @@ static int __init xuartps_console_setup(struct console *co, char *options)
 static int __init cdns_uart_console_setup(struct console *co, char *options)
 {
 	struct uart_port *port = &cdns_uart_port[co->index];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int baud = 9600;
 	int bits = 8;
@@ -1866,7 +2126,11 @@ static int __init cdns_uart_console_setup(struct console *co, char *options)
 	int flow = 'n';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (co->index < 0 || co->index >= XUARTPS_NR_PORTS)
+=======
+	if (co->index < 0 || co->index >= CDNS_UART_NR_PORTS)
+>>>>>>> v3.18
 =======
 	if (co->index < 0 || co->index >= CDNS_UART_NR_PORTS)
 >>>>>>> v3.18
@@ -1883,6 +2147,7 @@ static int __init cdns_uart_console_setup(struct console *co, char *options)
 	return uart_set_options(port, co, baud, parity, bits, flow);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct uart_driver xuartps_uart_driver;
 
@@ -1968,6 +2233,8 @@ static int xuartps_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Cannot get uart_port structure\n");
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 static struct uart_driver cdns_uart_uart_driver;
 
 static struct console cdns_uart_console = {
@@ -2203,6 +2470,9 @@ static int cdns_uart_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Cannot get uart_port structure\n");
 		rc = -ENODEV;
 		goto err_out_notif_unreg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/* Register the port.
@@ -2212,6 +2482,7 @@ static int cdns_uart_probe(struct platform_device *pdev)
 		port->mapbase = res->start;
 		port->irq = res2->start;
 		port->dev = &pdev->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		port->uartclk = clk_get_rate(clk);
 		port->private_data = clk;
@@ -2245,6 +2516,8 @@ static int xuartps_remove(struct platform_device *pdev)
 	port->mapbase = 0;
 	clk_disable_unprepare(clk);
 =======
+=======
+>>>>>>> v3.18
 		port->uartclk = clk_get_rate(cdns_uart_data->uartclk);
 		port->private_data = cdns_uart_data;
 		cdns_uart_data->port = port;
@@ -2268,11 +2541,15 @@ err_out_clk_disable:
 err_out_clk_dis_pclk:
 	clk_disable_unprepare(cdns_uart_data->pclk);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rc;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * xuartps_suspend - suspend event
  * @pdev: Pointer to the platform device structure
@@ -2335,6 +2612,8 @@ static int __init xuartps_init(void)
 	/* Register the xuartps driver with the serial core */
 	retval = uart_register_driver(&xuartps_uart_driver);
 =======
+=======
+>>>>>>> v3.18
  * cdns_uart_remove - called when the platform driver is unregistered
  * @pdev: Pointer to the platform device structure
  *
@@ -2382,11 +2661,15 @@ static int __init cdns_uart_init(void)
 
 	/* Register the cdns_uart driver with the serial core */
 	retval = uart_register_driver(&cdns_uart_uart_driver);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (retval)
 		return retval;
 
 	/* Register the platform driver */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	retval = platform_driver_register(&xuartps_platform_driver);
 	if (retval)
@@ -2396,10 +2679,16 @@ static int __init cdns_uart_init(void)
 	if (retval)
 		uart_unregister_driver(&cdns_uart_uart_driver);
 >>>>>>> v3.18
+=======
+	retval = platform_driver_register(&cdns_uart_platform_driver);
+	if (retval)
+		uart_unregister_driver(&cdns_uart_uart_driver);
+>>>>>>> v3.18
 
 	return retval;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * xuartps_exit - Driver unregistration call
@@ -2422,6 +2711,8 @@ module_exit(xuartps_exit);
 
 MODULE_DESCRIPTION("Driver for PS UART");
 =======
+=======
+>>>>>>> v3.18
 static void __exit cdns_uart_exit(void)
 {
 	/* Unregister the platform driver */
@@ -2435,6 +2726,9 @@ module_init(cdns_uart_init);
 module_exit(cdns_uart_exit);
 
 MODULE_DESCRIPTION("Driver for Cadence UART");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_AUTHOR("Xilinx Inc.");
 MODULE_LICENSE("GPL");

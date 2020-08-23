@@ -49,7 +49,11 @@ struct b2056_inittabs_pts {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev3_syn[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_phy_rev3_syn[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_phy_rev3_syn[] = {
 >>>>>>> v3.18
@@ -237,7 +241,11 @@ static const struct b2056_inittab_entry b2056_inittab_phy_rev3_syn[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev3_tx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_phy_rev3_tx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_phy_rev3_tx[] = {
 >>>>>>> v3.18
@@ -389,7 +397,11 @@ static const struct b2056_inittab_entry b2056_inittab_phy_rev3_tx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev3_rx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_phy_rev3_rx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_phy_rev3_rx[] = {
 >>>>>>> v3.18
@@ -543,7 +555,11 @@ static const struct b2056_inittab_entry b2056_inittab_phy_rev3_rx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev4_syn[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_phy_rev4_syn[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_phy_rev4_syn[] = {
 >>>>>>> v3.18
@@ -731,7 +747,11 @@ static const struct b2056_inittab_entry b2056_inittab_phy_rev4_syn[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev4_tx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_phy_rev4_tx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_phy_rev4_tx[] = {
 >>>>>>> v3.18
@@ -883,7 +903,11 @@ static const struct b2056_inittab_entry b2056_inittab_phy_rev4_tx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev4_rx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_phy_rev4_rx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_phy_rev4_rx[] = {
 >>>>>>> v3.18
@@ -1037,7 +1061,11 @@ static const struct b2056_inittab_entry b2056_inittab_phy_rev4_rx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev5_syn[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev5_syn[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev5_syn[] = {
 >>>>>>> v3.18
@@ -1225,7 +1253,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev5_syn[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev5_tx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev5_tx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev5_tx[] = {
 >>>>>>> v3.18
@@ -1385,7 +1417,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev5_tx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev5_rx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev5_rx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev5_rx[] = {
 >>>>>>> v3.18
@@ -1539,7 +1575,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev5_rx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev6_syn[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev6_syn[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev6_syn[] = {
 >>>>>>> v3.18
@@ -1727,7 +1767,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev6_syn[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev6_tx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev6_tx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev6_tx[] = {
 >>>>>>> v3.18
@@ -1887,7 +1931,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev6_tx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev6_rx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev6_rx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev6_rx[] = {
 >>>>>>> v3.18
@@ -2041,7 +2089,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev6_rx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev7_syn[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_syn[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_syn[] = {
 >>>>>>> v3.18
@@ -2229,7 +2281,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_syn[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev7_tx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_tx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_tx[] = {
 >>>>>>> v3.18
@@ -2389,7 +2445,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_tx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev7_rx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_rx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_rx[] = {
 >>>>>>> v3.18
@@ -2543,7 +2603,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev7_9_rx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev8_syn[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev8_syn[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev8_syn[] = {
 >>>>>>> v3.18
@@ -2731,7 +2795,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev8_syn[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev8_tx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev8_tx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev8_tx[] = {
 >>>>>>> v3.18
@@ -2891,7 +2959,11 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev8_tx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b2056_inittab_entry b2056_inittab_rev8_rx[] = {
+=======
+static const struct b2056_inittab_entry b2056_inittab_radio_rev8_rx[] = {
+>>>>>>> v3.18
 =======
 static const struct b2056_inittab_entry b2056_inittab_radio_rev8_rx[] = {
 >>>>>>> v3.18
@@ -3045,6 +3117,7 @@ static const struct b2056_inittab_entry b2056_inittab_radio_rev8_rx[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define INITTABSPTS(prefix) \
 	.syn		= prefix##_syn,			\
 	.syn_length	= ARRAY_SIZE(prefix##_syn),	\
@@ -3064,6 +3137,8 @@ static const struct b2056_inittabs_pts b2056_inittabs[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static const struct b2056_inittab_entry b2056_inittab_radio_rev11_syn[] = {
 	[B2056_SYN_PLL_PFD]		= { .ghz5 = 0x0006, .ghz2 = 0x0006, UPLOAD, },
 	[B2056_SYN_PLL_CP2]		= { .ghz5 = 0x003f, .ghz2 = 0x003f, UPLOAD, },
@@ -3127,6 +3202,9 @@ INITTABSPTS(b2056_inittab_radio_rev7_9);
 INITTABSPTS(b2056_inittab_radio_rev8);
 INITTABSPTS(b2056_inittab_radio_rev11);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define RADIOREGS3(r00, r01, r02, r03, r04, r05, r06, r07, r08, r09, \
 		   r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, \
@@ -3180,7 +3258,11 @@ INITTABSPTS(b2056_inittab_radio_rev11);
 
 /* http://bcm-v4.sipsolutions.net/802.11/Radio/2056/ChannelTable */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_rev3[] = {
+=======
+static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_phy_rev3[] = {
+>>>>>>> v3.18
 =======
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_phy_rev3[] = {
 >>>>>>> v3.18
@@ -4179,7 +4261,11 @@ static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_phy_rev3[
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_rev4[] = {
+=======
+static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_phy_rev4[] = {
+>>>>>>> v3.18
 =======
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_phy_rev4[] = {
 >>>>>>> v3.18
@@ -5178,7 +5264,11 @@ static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_phy_rev4[
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_rev5[] = {
+=======
+static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev5[] = {
+>>>>>>> v3.18
 =======
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev5[] = {
 >>>>>>> v3.18
@@ -6177,7 +6267,11 @@ static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_rev6[] = {
+=======
+static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev6[] = {
+>>>>>>> v3.18
 =======
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev6[] = {
 >>>>>>> v3.18
@@ -7176,7 +7270,11 @@ static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_rev7_9[] = {
+=======
+static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev7_9[] = {
+>>>>>>> v3.18
 =======
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev7_9[] = {
 >>>>>>> v3.18
@@ -8175,7 +8273,11 @@ static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_rev8[] = {
+=======
+static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev8[] = {
+>>>>>>> v3.18
 =======
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev8[] = {
 >>>>>>> v3.18
@@ -9174,7 +9276,10 @@ static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct b43_nphy_channeltab_entry_rev3 b43_nphy_channeltab_radio_rev11[] = {
 	{
 		.freq			= 4920,
@@ -10323,6 +10428,9 @@ static const struct b2056_inittabs_pts
 	return NULL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void b2056_upload_inittab(struct b43_wldev *dev, bool ghz5,
 				 bool ignore_uploadflag, u16 routing,
@@ -10351,17 +10459,23 @@ void b2056_upload_inittabs(struct b43_wldev *dev,
 	const struct b2056_inittabs_pts *pts;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->phy.rev >= ARRAY_SIZE(b2056_inittabs)) {
 		B43_WARN_ON(1);
 		return;
 	}
 	pts = &b2056_inittabs[dev->phy.rev];
 =======
+=======
+>>>>>>> v3.18
 	pts = b43_nphy_get_inittabs_rev3(dev);
 	if (!pts) {
 		B43_WARN_ON(1);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	b2056_upload_inittab(dev, ghz5, ignore_uploadflag,
@@ -10382,18 +10496,24 @@ void b2056_upload_syn_pll_cp2(struct b43_wldev *dev, bool ghz5)
 	const struct b2056_inittab_entry *e;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->phy.rev >= ARRAY_SIZE(b2056_inittabs)) {
 		B43_WARN_ON(1);
 		return;
 	}
 	pts = &b2056_inittabs[dev->phy.rev];
 =======
+=======
+>>>>>>> v3.18
 	pts = b43_nphy_get_inittabs_rev3(dev);
 	if (!pts) {
 		B43_WARN_ON(1);
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	e = &pts->syn[B2056_SYN_PLL_CP2];
 
@@ -10403,6 +10523,7 @@ void b2056_upload_syn_pll_cp2(struct b43_wldev *dev, bool ghz5)
 const struct b43_nphy_channeltab_entry_rev3 *
 b43_nphy_get_chantabent_rev3(struct b43_wldev *dev, u16 freq)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const struct b43_nphy_channeltab_entry_rev3 *e;
 	unsigned int length, i;
@@ -10437,6 +10558,8 @@ b43_nphy_get_chantabent_rev3(struct b43_wldev *dev, u16 freq)
 		B43_WARN_ON(1);
 		return NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct b43_phy *phy = &dev->phy;
 	const struct b43_nphy_channeltab_entry_rev3 *e;
 	unsigned int length, i;
@@ -10477,6 +10600,9 @@ b43_nphy_get_chantabent_rev3(struct b43_wldev *dev, u16 freq)
 			B43_WARN_ON(1);
 			return NULL;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

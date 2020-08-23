@@ -7,7 +7,11 @@
  * the Free Software Foundation.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Maintained by: Eilon Greenstein <eilong@broadcom.com>
+=======
+ * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
+>>>>>>> v3.18
 =======
  * Maintained by: Ariel Elior <ariel.elior@qlogic.com>
 >>>>>>> v3.18
@@ -26,7 +30,11 @@
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/irq.h>
 >>>>>>> v3.18
@@ -36,10 +44,15 @@
 
 /* This is used as a replacement for an MCP if it's not present */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int load_count[2][3]; /* per-path: 0-common, 1-port0, 2-port1 */
 
 extern int num_queues;
 extern int int_mode;
+=======
+extern int bnx2x_load_count[2][3]; /* per-path: 0-common, 1-port0, 2-port1 */
+extern int bnx2x_num_queues;
+>>>>>>> v3.18
 =======
 extern int bnx2x_load_count[2][3]; /* per-path: 0-common, 1-port0, 2-port1 */
 extern int bnx2x_num_queues;
@@ -64,6 +77,7 @@ extern int bnx2x_num_queues;
 	} while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BNX2X_PCI_ALLOC(x, y, size)				\
 do {								\
 	x = dma_alloc_coherent(&bp->pdev->dev, size, y,		\
@@ -79,6 +93,8 @@ do {								\
 			goto alloc_mem_err; \
 	} while (0)
 =======
+=======
+>>>>>>> v3.18
 #define BNX2X_PCI_ALLOC(y, size)					\
 ({									\
 	void *x = dma_zalloc_coherent(&bp->pdev->dev, size, y, GFP_KERNEL); \
@@ -99,6 +115,9 @@ do {								\
 	}								\
 	x;								\
 })
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*********************** Interfaces ****************************
@@ -132,14 +151,20 @@ void bnx2x_send_unload_done(struct bnx2x *bp, bool keep_link);
  * @ind_table:		indirection table to configure
  * @config_hash:	re-configure RSS hash keys configuration
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 int bnx2x_config_rss_pf(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 			bool config_hash);
 =======
+=======
+>>>>>>> v3.18
  * @enable:		enabled or disabled configuration
  */
 int bnx2x_rss(struct bnx2x *bp, struct bnx2x_rss_config_obj *rss_obj,
 	      bool config_hash, bool enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -450,6 +475,7 @@ int bnx2x_set_eth_mac(struct bnx2x *bp, bool set);
  * netif_addr_lock_bh()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_set_rx_mode(struct net_device *dev);
 
 /**
@@ -477,6 +503,9 @@ int bnx2x_set_q_rx_mode(struct bnx2x *bp, u8 cl_id,
 			unsigned long rx_accept_flags,
 			unsigned long tx_accept_flags,
 			unsigned long ramrod_flags);
+=======
+void bnx2x_set_rx_mode_inner(struct bnx2x *bp);
+>>>>>>> v3.18
 =======
 void bnx2x_set_rx_mode_inner(struct bnx2x *bp);
 >>>>>>> v3.18
@@ -542,9 +571,12 @@ void bnx2x_update_max_mf_config(struct bnx2x *bp, u32 value);
 void bnx2x_fw_dump_lvl(struct bnx2x *bp, const char *lvl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* validate currect fw is loaded */
 bool bnx2x_test_firmware_version(struct bnx2x *bp, bool is_err);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* dev_close main block */
@@ -566,7 +598,12 @@ int bnx2x_set_vf_vlan(struct net_device *netdev, int vf, u16 vlan, u8 qos);
 
 /* select_queue callback */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb);
+=======
+u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb,
+		       void *accel_priv, select_queue_fallback_t fallback);
+>>>>>>> v3.18
 =======
 u16 bnx2x_select_queue(struct net_device *dev, struct sk_buff *skb,
 		       void *accel_priv, select_queue_fallback_t fallback);
@@ -611,9 +648,12 @@ int bnx2x_reload_if_running(struct net_device *dev);
 int bnx2x_change_mac_addr(struct net_device *dev, void *p);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* NAPI poll Rx part */
 int bnx2x_rx_int(struct bnx2x_fastpath *fp, int budget);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* NAPI poll Tx part */
@@ -627,6 +667,7 @@ int bnx2x_resume(struct pci_dev *pdev);
 void bnx2x_free_irq(struct bnx2x *bp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void bnx2x_free_fp_mem_cnic(struct bnx2x *bp);
 void bnx2x_free_fp_mem(struct bnx2x *bp);
 int bnx2x_alloc_fp_mem_cnic(struct bnx2x *bp);
@@ -634,6 +675,11 @@ int bnx2x_alloc_fp_mem(struct bnx2x *bp);
 void bnx2x_init_rx_rings(struct bnx2x *bp);
 void bnx2x_init_rx_rings_cnic(struct bnx2x *bp);
 void bnx2x_free_skbs_cnic(struct bnx2x *bp);
+=======
+void bnx2x_free_fp_mem(struct bnx2x *bp);
+void bnx2x_init_rx_rings(struct bnx2x *bp);
+void bnx2x_init_rx_rings_cnic(struct bnx2x *bp);
+>>>>>>> v3.18
 =======
 void bnx2x_free_fp_mem(struct bnx2x *bp);
 void bnx2x_init_rx_rings(struct bnx2x *bp);
@@ -663,6 +709,7 @@ int bnx2x_enable_msi(struct bnx2x *bp);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * bnx2x_poll - NAPI callback
  *
  * @napi:	napi structure
@@ -671,11 +718,16 @@ int bnx2x_enable_msi(struct bnx2x *bp);
  */
 int bnx2x_poll(struct napi_struct *napi, int budget);
 =======
+=======
+>>>>>>> v3.18
  * bnx2x_low_latency_recv - LL callback
  *
  * @napi:	napi structure
  */
 int bnx2x_low_latency_recv(struct napi_struct *napi);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -873,6 +925,7 @@ static inline bool bnx2x_has_tx_work(struct bnx2x_fastpath *fp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int bnx2x_has_rx_work(struct bnx2x_fastpath *fp)
 {
 	u16 rx_cons_sb;
@@ -884,6 +937,8 @@ static inline int bnx2x_has_rx_work(struct bnx2x_fastpath *fp)
 		rx_cons_sb++;
 	return (fp->rx_comp_cons != rx_cons_sb);
 =======
+=======
+>>>>>>> v3.18
 #define BNX2X_IS_CQE_COMPLETED(cqe_fp) (cqe_fp->marker == 0x0)
 #define BNX2X_SEED_CQE(cqe_fp) (cqe_fp->marker = 0xFFFFFFFF)
 static inline int bnx2x_has_rx_work(struct bnx2x_fastpath *fp)
@@ -896,6 +951,9 @@ static inline int bnx2x_has_rx_work(struct bnx2x_fastpath *fp)
 	cqe = &fp->rx_comp_ring[cons];
 	cqe_fp = &cqe->fast_path_cqe;
 	return BNX2X_IS_CQE_COMPLETED(cqe_fp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -931,6 +989,7 @@ static inline void bnx2x_free_rx_sge(struct bnx2x *bp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void bnx2x_add_all_napi_cnic(struct bnx2x *bp)
 {
 	int i;
@@ -953,18 +1012,26 @@ static inline void bnx2x_add_all_napi(struct bnx2x *bp)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline void bnx2x_del_all_napi_cnic(struct bnx2x *bp)
 {
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_rx_queue_cnic(bp, i)
 		netif_napi_del(&bnx2x_fp(bp, i, napi));
 =======
+=======
+>>>>>>> v3.18
 	for_each_rx_queue_cnic(bp, i) {
 		napi_hash_del(&bnx2x_fp(bp, i, napi));
 		netif_napi_del(&bnx2x_fp(bp, i, napi));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -973,13 +1040,19 @@ static inline void bnx2x_del_all_napi(struct bnx2x *bp)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_eth_queue(bp, i)
 		netif_napi_del(&bnx2x_fp(bp, i, napi));
 =======
+=======
+>>>>>>> v3.18
 	for_each_eth_queue(bp, i) {
 		napi_hash_del(&bnx2x_fp(bp, i, napi));
 		netif_napi_del(&bnx2x_fp(bp, i, napi));
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -997,6 +1070,7 @@ static inline void bnx2x_disable_msi(struct bnx2x *bp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int bnx2x_calc_num_queues(struct bnx2x *bp)
 {
 	return  num_queues ?
@@ -1005,6 +1079,8 @@ static inline int bnx2x_calc_num_queues(struct bnx2x *bp)
 		       BNX2X_MAX_QUEUES(bp));
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void bnx2x_clear_sge_mask_next_elems(struct bnx2x_fastpath *fp)
@@ -1063,7 +1139,11 @@ static inline int func_by_vn(struct bnx2x *bp, int vn)
 static inline int bnx2x_config_rss_eth(struct bnx2x *bp, bool config_hash)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return bnx2x_config_rss_pf(bp, &bp->rss_conf_obj, config_hash);
+=======
+	return bnx2x_rss(bp, &bp->rss_conf_obj, config_hash, true);
+>>>>>>> v3.18
 =======
 	return bnx2x_rss(bp, &bp->rss_conf_obj, config_hash, true);
 >>>>>>> v3.18
@@ -1098,9 +1178,12 @@ static inline int bnx2x_func_start(struct bnx2x *bp)
 		start_params->network_cos_mode = FW_WRR;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	start_params->gre_tunnel_mode = IPGRE_TUNNEL;
 	start_params->gre_tunnel_rss = GRE_INNER_HEADERS_RSS;
 =======
+=======
+>>>>>>> v3.18
 	start_params->tunnel_mode	= TUNN_MODE_GRE;
 	start_params->gre_tunnel_type	= IPGRE_TUNNEL;
 	start_params->inner_gre_rss_en	= 1;
@@ -1110,6 +1193,9 @@ static inline int bnx2x_func_start(struct bnx2x *bp)
 		start_params->class_fail = 1;
 		start_params->no_added_tags = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return bnx2x_func_state_change(bp, &func_params);
@@ -1270,8 +1356,11 @@ static inline u8 bnx2x_fp_qzone_id(struct bnx2x_fastpath *fp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 bnx2x_rx_ustorm_prods_offset(struct bnx2x_fastpath *fp);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline void bnx2x_init_txdata(struct bnx2x *bp,
@@ -1298,7 +1387,10 @@ static inline u8 bnx2x_cnic_eth_cl_id(struct bnx2x *bp, u8 cl_idx)
 static inline u8 bnx2x_cnic_fw_sb_id(struct bnx2x *bp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* the 'first' id is allocated for the cnic */
@@ -1310,6 +1402,7 @@ static inline u8 bnx2x_cnic_igu_sb_id(struct bnx2x *bp)
 	return bp->igu_base_sb;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static inline void bnx2x_init_fcoe_fp(struct bnx2x *bp)
@@ -1353,6 +1446,8 @@ static inline void bnx2x_init_fcoe_fp(struct bnx2x *bp)
 	   fp->igu_sb_id);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static inline int bnx2x_clean_tx_queue(struct bnx2x *bp,
@@ -1467,8 +1562,13 @@ static inline bool bnx2x_mtu_allows_gro(int mtu)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * 1. number of frags should not grow above MAX_SKB_FRAGS
 	 * 2. frag must fit the page
+=======
+	 * 1. Number of frags should not grow above MAX_SKB_FRAGS
+	 * 2. Frag must fit the page
+>>>>>>> v3.18
 =======
 	 * 1. Number of frags should not grow above MAX_SKB_FRAGS
 	 * 2. Frag must fit the page
@@ -1534,6 +1634,7 @@ static inline void bnx2x_update_drv_flags(struct bnx2x *bp, u32 flags, u32 set)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool bnx2x_is_valid_ether_addr(struct bnx2x *bp, u8 *addr)
 {
 	if (is_valid_ether_addr(addr) ||
@@ -1543,6 +1644,9 @@ static inline bool bnx2x_is_valid_ether_addr(struct bnx2x *bp, u8 *addr)
 
 	return false;
 }
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1561,6 +1665,12 @@ int bnx2x_drain_tx_queues(struct bnx2x *bp);
 void bnx2x_squeeze_objects(struct bnx2x *bp);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void bnx2x_schedule_sp_rtnl(struct bnx2x*, enum sp_rtnl_flag,
+			    u32 verbose);
+
+>>>>>>> v3.18
 =======
 void bnx2x_schedule_sp_rtnl(struct bnx2x*, enum sp_rtnl_flag,
 			    u32 verbose);

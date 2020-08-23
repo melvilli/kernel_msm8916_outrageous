@@ -13,6 +13,7 @@
 #include <linux/mfd/dbx500-prcmu.h>
 #include <linux/platform_data/clk-ux500.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "clk.h"
 
@@ -20,6 +21,8 @@ void u8540_clk_init(void)
 {
 	/* register clocks here */
 =======
+=======
+>>>>>>> v3.18
 #include "clk.h"
 
 void u8540_clk_init(u32 clkrst1_base, u32 clkrst2_base, u32 clkrst3_base,
@@ -584,5 +587,8 @@ void u8540_clk_init(u32 clkrst1_base, u32 clkrst2_base, u32 clkrst3_base,
 	clk = clk_reg_prcc_kclk("p6_rng_kclk", "rngclk",
 			clkrst6_base, BIT(0), CLK_SET_RATE_GATE);
 	clk_register_clkdev(clk, NULL, "rng");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

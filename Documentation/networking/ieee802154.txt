@@ -5,8 +5,13 @@
 Introduction
 ============
 <<<<<<< HEAD
+<<<<<<< HEAD
 The IEEE 802.15.4 working group focuses on standartization of bottom
 two layers: Medium Accsess Control (MAC) and Physical (PHY). And there
+=======
+The IEEE 802.15.4 working group focuses on standardization of bottom
+two layers: Medium Access Control (MAC) and Physical (PHY). And there
+>>>>>>> v3.18
 =======
 The IEEE 802.15.4 working group focuses on standardization of bottom
 two layers: Medium Access Control (MAC) and Physical (PHY). And there
@@ -72,7 +77,11 @@ code via plain sk_buffs. On skb reception skb->cb must contain additional
 info as described in the struct ieee802154_mac_cb. During packet transmission
 the skb->cb is used to provide additional data to device's header_ops->create
 <<<<<<< HEAD
+<<<<<<< HEAD
 function. Be aware, that this data can be overriden later (when socket code
+=======
+function. Be aware that this data can be overridden later (when socket code
+>>>>>>> v3.18
 =======
 function. Be aware that this data can be overridden later (when socket code
 >>>>>>> v3.18

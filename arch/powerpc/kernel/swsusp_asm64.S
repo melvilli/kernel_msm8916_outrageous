@@ -47,11 +47,14 @@
 #define SL_r30		0xf0
 #define SL_r31		0xf8
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SL_SIZE		SL_r31+8
 
 /* these macros rely on the save area being
  * pointed to by r11 */
 =======
+=======
+>>>>>>> v3.18
 #define SL_SPRG1	0x100
 #define SL_TCR		0x108
 #define SL_SIZE		SL_TCR+8
@@ -65,6 +68,9 @@
 #define RESTORE_SPR(register)		\
 	ld	r0, SL_##register(r11)	;\
 	mtspr	SPRN_##register, r0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SAVE_SPECIAL(special)		\
 	mf##special	r0		;\
@@ -120,9 +126,12 @@ _GLOBAL(swsusp_arch_suspend)
 	SAVE_REGISTER(r31)
 	SAVE_SPECIAL(MSR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SAVE_SPECIAL(SDR1)
 	SAVE_SPECIAL(XER)
 =======
+=======
+>>>>>>> v3.18
 	SAVE_SPECIAL(XER)
 #ifdef CONFIG_PPC_BOOK3S_64
 BEGIN_FW_FTR_SECTION
@@ -134,6 +143,9 @@ END_FW_FTR_SECTION_IFCLR(FW_FEATURE_LPAR)
 	/* Save SPRG1, SPRG1 be used save paca */
 	SAVE_SPR(SPRG1)
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* we push the stack up 128 bytes but don't store the
@@ -182,6 +194,10 @@ copy_page_loop:
 nothing_to_copy:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PPC_BOOK3S_64
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC_BOOK3S_64
 >>>>>>> v3.18
@@ -202,6 +218,10 @@ nothing_to_copy:
 
 	tlbia
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -247,11 +267,14 @@ nothing_to_copy:
 	RESTORE_REGISTER(r30)
 	RESTORE_REGISTER(r31)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* can't use RESTORE_SPECIAL(MSR) */
 	ld	r0, SL_MSR(r11)
 	mtmsrd	r0, 0
 	RESTORE_SPECIAL(SDR1)
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_PPC_BOOK3S_64
 	/* can't use RESTORE_SPECIAL(MSR) */
@@ -279,6 +302,9 @@ END_FW_FTR_SECTION_IFCLR(FW_FEATURE_LPAR)
 	/* Invalidate all tlbs */
 	bl	_tlbil_all
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RESTORE_SPECIAL(XER)
 
@@ -286,7 +312,13 @@ END_FW_FTR_SECTION_IFCLR(FW_FEATURE_LPAR)
 
 	addi	r1,r1,-128
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	slb_flush_and_rebolt
+=======
+#ifdef CONFIG_PPC_BOOK3S_64
+	bl	slb_flush_and_rebolt
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PPC_BOOK3S_64
 	bl	slb_flush_and_rebolt

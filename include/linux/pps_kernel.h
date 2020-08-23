@@ -81,7 +81,11 @@ struct pps_device {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct device_attribute pps_attrs[];
+=======
+extern const struct attribute_group *pps_groups[];
+>>>>>>> v3.18
 =======
 extern const struct attribute_group *pps_groups[];
 >>>>>>> v3.18

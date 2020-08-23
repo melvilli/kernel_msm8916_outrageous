@@ -94,7 +94,10 @@
 
 #include <linux/input.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "gspca.h"
@@ -399,9 +402,15 @@ static void setbrightcont(struct gspca_dev *gspca_dev)
 	for (i = 0; i < 10; i++) {
 		v = max[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		v += (sd->brightness->val - sd->brightness->maximum)
 			* 150 / sd->brightness->maximum; /* 200 ? */
 		v -= delta[i] * sd->contrast->val / sd->contrast->maximum;
+=======
+		v += (sd->brightness->val - (s32)sd->brightness->maximum)
+			* 150 / (s32)sd->brightness->maximum; /* 200 ? */
+		v -= delta[i] * sd->contrast->val / (s32)sd->contrast->maximum;
+>>>>>>> v3.18
 =======
 		v += (sd->brightness->val - (s32)sd->brightness->maximum)
 			* 150 / (s32)sd->brightness->maximum; /* 200 ? */
@@ -430,7 +439,11 @@ static void setcolors(struct gspca_dev *gspca_dev)
 	reg_w(gspca_dev, 0xff, 0x00);			/* page 0 */
 	for (i = 0; i < 9; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		v = a[i] * sd->saturation->val / sd->saturation->maximum;
+=======
+		v = a[i] * sd->saturation->val / (s32)sd->saturation->maximum;
+>>>>>>> v3.18
 =======
 		v = a[i] * sd->saturation->val / (s32)sd->saturation->maximum;
 >>>>>>> v3.18
@@ -863,8 +876,12 @@ static int sd_dbg_s_register(struct gspca_dev *gspca_dev,
 	 *		       long on the USB bus)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (reg->match.type == V4L2_CHIP_MATCH_HOST &&
 	    reg->match.addr == 0 &&
+=======
+	if (reg->match.addr == 0 &&
+>>>>>>> v3.18
 =======
 	if (reg->match.addr == 0 &&
 >>>>>>> v3.18
@@ -889,6 +906,7 @@ static int sd_dbg_s_register(struct gspca_dev *gspca_dev,
 	return gspca_dev->usb_err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int sd_chip_ident(struct gspca_dev *gspca_dev,
 			struct v4l2_dbg_chip_ident *chip)
@@ -905,13 +923,19 @@ static int sd_chip_ident(struct gspca_dev *gspca_dev,
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif
 
 #if IS_ENABLED(CONFIG_INPUT)
 static int sd_int_pkt_scan(struct gspca_dev *gspca_dev,
 			u8 *data,		/* interrupt packet data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int len)		/* interrput packet length */
+=======
+			int len)		/* interrupt packet length */
+>>>>>>> v3.18
 =======
 			int len)		/* interrupt packet length */
 >>>>>>> v3.18
@@ -956,7 +980,10 @@ static const struct sd_desc sd_desc = {
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	.set_register = sd_dbg_s_register,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_chip_ident = sd_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

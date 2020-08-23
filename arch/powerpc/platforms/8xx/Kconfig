@@ -46,7 +46,10 @@ config PPC_ADDER875
 	bool "Analogue & Micro Adder 875"
 	select CPM1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select REDBOOT
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help

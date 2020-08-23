@@ -185,11 +185,16 @@ static void nas100d_power_off(void)
 	/* This causes the box to drop the power and go dead. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* enable the pwr cntl gpio */
 	gpio_line_config(NAS100D_PO_GPIO, IXP4XX_GPIO_OUT);
 
 	/* do the deed */
 	gpio_line_set(NAS100D_PO_GPIO, IXP4XX_GPIO_HIGH);
+=======
+	/* enable the pwr cntl gpio and assert power off */
+	gpio_direction_output(NAS100D_PO_GPIO, 1);
+>>>>>>> v3.18
 =======
 	/* enable the pwr cntl gpio and assert power off */
 	gpio_direction_output(NAS100D_PO_GPIO, 1);
@@ -231,7 +236,11 @@ static void nas100d_power_handler(unsigned long data)
 
 			/* Change the state of the power LED to "blink" */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpio_line_set(NAS100D_LED_PWR_GPIO, IXP4XX_GPIO_LOW);
+=======
+			gpio_set_value(NAS100D_LED_PWR_GPIO, 0);
+>>>>>>> v3.18
 =======
 			gpio_set_value(NAS100D_LED_PWR_GPIO, 0);
 >>>>>>> v3.18
@@ -252,7 +261,10 @@ static irqreturn_t nas100d_reset_handler(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int __init nas100d_gpio_init(void)
 {
 	if (!machine_is_nas100d())
@@ -280,6 +292,9 @@ static int __init nas100d_gpio_init(void)
 }
 device_initcall(nas100d_gpio_init);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init nas100d_init(void)
 {
@@ -311,8 +326,12 @@ static void __init nas100d_init(void)
 
 	if (request_irq(gpio_to_irq(NAS100D_RB_GPIO), &nas100d_reset_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IRQF_DISABLED | IRQF_TRIGGER_LOW,
 		"NAS100D reset button", NULL) < 0) {
+=======
+		IRQF_TRIGGER_LOW, "NAS100D reset button", NULL) < 0) {
+>>>>>>> v3.18
 =======
 		IRQF_TRIGGER_LOW, "NAS100D reset button", NULL) < 0) {
 >>>>>>> v3.18
@@ -321,6 +340,7 @@ static void __init nas100d_init(void)
 			gpio_to_irq(NAS100D_RB_GPIO));
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* The power button on the Iomega NAS100d is on GPIO 14, but
 	 * it cannot handle interrupts on that GPIO line.  So we'll
@@ -335,6 +355,8 @@ static void __init nas100d_init(void)
 
 	mod_timer(&nas100d_power_timer, jiffies + msecs_to_jiffies(500));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*

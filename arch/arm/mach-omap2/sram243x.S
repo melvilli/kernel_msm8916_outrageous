@@ -102,7 +102,11 @@ i_dll_delay:
 	subs	r4, r4, #0x1
 	bne	i_dll_delay
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18
@@ -130,7 +134,11 @@ volt_delay:
 	cmp	r5, r7			@ time up?
 	bhi	volt_delay		@ not yet->branch
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr			@ back to caller.
+=======
+	ret	lr			@ back to caller.
+>>>>>>> v3.18
 =======
 	ret	lr			@ back to caller.
 >>>>>>> v3.18
@@ -229,7 +237,11 @@ volt_delay_c:
 	cmp	r8, r7			@ time up?
 	bhi	volt_delay_c		@ not yet->branch
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr			@ back to caller
+=======
+	ret	lr			@ back to caller
+>>>>>>> v3.18
 =======
 	ret	lr			@ back to caller
 >>>>>>> v3.18

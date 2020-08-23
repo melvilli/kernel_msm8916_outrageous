@@ -491,6 +491,10 @@ void iscsi_boot_destroy_kset(struct iscsi_boot_kset *boot_kset)
 
 	kset_unregister(boot_kset->kset);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(boot_kset);
+>>>>>>> v3.18
 =======
 	kfree(boot_kset);
 >>>>>>> v3.18

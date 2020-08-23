@@ -11,6 +11,10 @@
 #include <linux/slab.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/completion.h>
+>>>>>>> v3.18
 =======
 #include <linux/completion.h>
 >>>>>>> v3.18
@@ -24,7 +28,13 @@
 #include <linux/spi/spi.h>
 #include <linux/spi/spi_bitbang.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+#include <linux/dmaengine.h>
+#include <linux/dma-direction.h>
+#include <linux/dma-mapping.h>
+>>>>>>> v3.18
 =======
 #include <linux/dmaengine.h>
 #include <linux/dma-direction.h>
@@ -70,6 +80,7 @@
 #define SIRFSOC_SPI_TRAN_DAT_FORMAT_16	(2 << 26)
 #define SIRFSOC_SPI_TRAN_DAT_FORMAT_32	(3 << 26)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIRFSOC_SPI_CMD_BYTE_NUM(x)		((x & 3) << 28)
 #define SIRFSOC_SPI_ENA_AUTO_CLR		BIT(30)
 #define SIRFSOC_SPI_MUL_DAT_MODE		BIT(31)
@@ -80,6 +91,8 @@
 #define SIRFSOC_SPI_RX_OFLOW_INT_EN		BIT(2)
 #define SIRFSOC_SPI_TX_UFLOW_INT_EN		BIT(3)
 =======
+=======
+>>>>>>> v3.18
 #define SIRFSOC_SPI_CMD_BYTE_NUM(x)	((x & 3) << 28)
 #define SIRFSOC_SPI_ENA_AUTO_CLR	BIT(30)
 #define SIRFSOC_SPI_MUL_DAT_MODE	BIT(31)
@@ -89,6 +102,9 @@
 #define SIRFSOC_SPI_TX_DONE_INT_EN	BIT(1)
 #define SIRFSOC_SPI_RX_OFLOW_INT_EN	BIT(2)
 #define SIRFSOC_SPI_TX_UFLOW_INT_EN	BIT(3)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SIRFSOC_SPI_RX_IO_DMA_INT_EN	BIT(4)
 #define SIRFSOC_SPI_TX_IO_DMA_INT_EN	BIT(5)
@@ -99,7 +115,11 @@
 #define SIRFSOC_SPI_FRM_END_INT_EN	BIT(10)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIRFSOC_SPI_INT_MASK_ALL		0x1FFF
+=======
+#define SIRFSOC_SPI_INT_MASK_ALL	0x1FFF
+>>>>>>> v3.18
 =======
 #define SIRFSOC_SPI_INT_MASK_ALL	0x1FFF
 >>>>>>> v3.18
@@ -110,6 +130,10 @@
 #define SIRFSOC_SPI_RX_OFLOW		BIT(2)
 #define SIRFSOC_SPI_TX_UFLOW		BIT(3)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SIRFSOC_SPI_RX_IO_DMA		BIT(4)
+>>>>>>> v3.18
 =======
 #define SIRFSOC_SPI_RX_IO_DMA		BIT(4)
 >>>>>>> v3.18
@@ -151,10 +175,13 @@
 #define SIRFSOC_SPI_FIFO_THD(x)		(((x) & 0xFF) << 2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sirfsoc_spi {
 	struct spi_bitbang bitbang;
 	struct completion done;
 =======
+=======
+>>>>>>> v3.18
 /*
  * only if the rx/tx buffer and transfer size are 4-bytes aligned, we use dma
  * due to the limitation of dma controller
@@ -170,13 +197,19 @@ struct sirfsoc_spi {
 	struct spi_bitbang bitbang;
 	struct completion rx_done;
 	struct completion tx_done;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	void __iomem *base;
 	u32 ctrl_freq;  /* SPI controller clock speed */
 	struct clk *clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *p;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -191,6 +224,7 @@ struct sirfsoc_spi {
 
 	/* number of words left to be tranmitted/received */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int left_tx_cnt;
 	unsigned int left_rx_cnt;
 
@@ -199,6 +233,8 @@ struct sirfsoc_spi {
 
 	int chipselect[0];
 =======
+=======
+>>>>>>> v3.18
 	unsigned int left_tx_word;
 	unsigned int left_rx_word;
 
@@ -216,6 +252,9 @@ struct sirfsoc_spi {
 	 */
 	bool	tx_by_cmd;
 	bool	hw_cs;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -232,7 +271,11 @@ static void spi_sirfsoc_rx_word_u8(struct sirfsoc_spi *sspi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sspi->left_rx_cnt--;
+=======
+	sspi->left_rx_word--;
+>>>>>>> v3.18
 =======
 	sspi->left_rx_word--;
 >>>>>>> v3.18
@@ -250,7 +293,11 @@ static void spi_sirfsoc_tx_word_u8(struct sirfsoc_spi *sspi)
 
 	writel(data, sspi->base + SIRFSOC_SPI_TXFIFO_DATA);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sspi->left_tx_cnt--;
+=======
+	sspi->left_tx_word--;
+>>>>>>> v3.18
 =======
 	sspi->left_tx_word--;
 >>>>>>> v3.18
@@ -269,7 +316,11 @@ static void spi_sirfsoc_rx_word_u16(struct sirfsoc_spi *sspi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sspi->left_rx_cnt--;
+=======
+	sspi->left_rx_word--;
+>>>>>>> v3.18
 =======
 	sspi->left_rx_word--;
 >>>>>>> v3.18
@@ -287,7 +338,11 @@ static void spi_sirfsoc_tx_word_u16(struct sirfsoc_spi *sspi)
 
 	writel(data, sspi->base + SIRFSOC_SPI_TXFIFO_DATA);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sspi->left_tx_cnt--;
+=======
+	sspi->left_tx_word--;
+>>>>>>> v3.18
 =======
 	sspi->left_tx_word--;
 >>>>>>> v3.18
@@ -306,7 +361,11 @@ static void spi_sirfsoc_rx_word_u32(struct sirfsoc_spi *sspi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sspi->left_rx_cnt--;
+=======
+	sspi->left_rx_word--;
+>>>>>>> v3.18
 =======
 	sspi->left_rx_word--;
 >>>>>>> v3.18
@@ -325,6 +384,7 @@ static void spi_sirfsoc_tx_word_u32(struct sirfsoc_spi *sspi)
 
 	writel(data, sspi->base + SIRFSOC_SPI_TXFIFO_DATA);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sspi->left_tx_cnt--;
 }
 
@@ -340,6 +400,9 @@ static void spi_sirfsoc_tasklet_tx(unsigned long arg)
 =======
 	sspi->left_tx_word--;
 >>>>>>> v3.18
+=======
+	sspi->left_tx_word--;
+>>>>>>> v3.18
 }
 
 static irqreturn_t spi_sirfsoc_irq(int irq, void *dev_id)
@@ -347,9 +410,12 @@ static irqreturn_t spi_sirfsoc_irq(int irq, void *dev_id)
 	struct sirfsoc_spi *sspi = dev_id;
 	u32 spi_stat = readl(sspi->base + SIRFSOC_SPI_INT_STATUS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	writel(spi_stat, sspi->base + SIRFSOC_SPI_INT_STATUS);
 =======
+=======
+>>>>>>> v3.18
 	if (sspi->tx_by_cmd && (spi_stat & SIRFSOC_SPI_FRM_END)) {
 		complete(&sspi->tx_done);
 		writel(0x0, sspi->base + SIRFSOC_SPI_INT_EN);
@@ -357,11 +423,15 @@ static irqreturn_t spi_sirfsoc_irq(int irq, void *dev_id)
 				sspi->base + SIRFSOC_SPI_INT_STATUS);
 		return IRQ_HANDLED;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Error Conditions */
 	if (spi_stat & SIRFSOC_SPI_RX_OFLOW ||
 			spi_stat & SIRFSOC_SPI_TX_UFLOW) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		complete(&sspi->done);
 		writel(0x0, sspi->base + SIRFSOC_SPI_INT_EN);
@@ -416,6 +486,8 @@ static int spi_sirfsoc_transfer(struct spi_device *spi, struct spi_transfer *t)
 		writel(t->len - 1, sspi->base + SIRFSOC_SPI_TX_DMA_IO_LEN);
 		writel(t->len - 1, sspi->base + SIRFSOC_SPI_RX_DMA_IO_LEN);
 =======
+=======
+>>>>>>> v3.18
 		complete(&sspi->tx_done);
 		complete(&sspi->rx_done);
 		writel(0x0, sspi->base + SIRFSOC_SPI_INT_EN);
@@ -494,6 +566,9 @@ static void spi_sirfsoc_dma_transfer(struct spi_device *spi,
 				sspi->base + SIRFSOC_SPI_TX_DMA_IO_LEN);
 		writel(sspi->left_tx_word - 1,
 				sspi->base + SIRFSOC_SPI_RX_DMA_IO_LEN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		writel(readl(sspi->base + SIRFSOC_SPI_CTRL),
@@ -501,6 +576,7 @@ static void spi_sirfsoc_dma_transfer(struct spi_device *spi,
 		writel(0, sspi->base + SIRFSOC_SPI_TX_DMA_IO_LEN);
 		writel(0, sspi->base + SIRFSOC_SPI_RX_DMA_IO_LEN);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	writel(SIRFSOC_SPI_FIFO_RESET, sspi->base + SIRFSOC_SPI_RXFIFO_OP);
@@ -528,6 +604,8 @@ static void spi_sirfsoc_dma_transfer(struct spi_device *spi,
 
 	return t->len - sspi->left_rx_cnt;
 =======
+=======
+>>>>>>> v3.18
 	sspi->dst_start = dma_map_single(&spi->dev, sspi->rx, t->len,
 					(t->tx_buf != t->rx_buf) ?
 					DMA_FROM_DEVICE : DMA_BIDIRECTIONAL);
@@ -647,6 +725,9 @@ static int spi_sirfsoc_transfer(struct spi_device *spi, struct spi_transfer *t)
 		spi_sirfsoc_pio_transfer(spi, t);
 
 	return t->len - sspi->left_rx_word * sspi->word_width;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -655,9 +736,14 @@ static void spi_sirfsoc_chipselect(struct spi_device *spi, int value)
 	struct sirfsoc_spi *sspi = spi_master_get_devdata(spi->master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sspi->chipselect[spi->chip_select] == 0) {
 		u32 regval = readl(sspi->base + SIRFSOC_SPI_CTRL);
 		regval |= SIRFSOC_SPI_CS_IO_OUT;
+=======
+	if (sspi->hw_cs) {
+		u32 regval = readl(sspi->base + SIRFSOC_SPI_CTRL);
+>>>>>>> v3.18
 =======
 	if (sspi->hw_cs) {
 		u32 regval = readl(sspi->base + SIRFSOC_SPI_CTRL);
@@ -679,9 +765,12 @@ static void spi_sirfsoc_chipselect(struct spi_device *spi, int value)
 		writel(regval, sspi->base + SIRFSOC_SPI_CTRL);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int gpio = sspi->chipselect[spi->chip_select];
 		gpio_direction_output(gpio, spi->mode & SPI_CS_HIGH ? 0 : 1);
 =======
+=======
+>>>>>>> v3.18
 		switch (value) {
 		case BITBANG_CS_ACTIVE:
 			gpio_direction_output(spi->cs_gpio,
@@ -692,6 +781,9 @@ static void spi_sirfsoc_chipselect(struct spi_device *spi, int value)
 					spi->mode & SPI_CS_HIGH ? 0 : 1);
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -712,11 +804,15 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 	hz = t && t->speed_hz ? t->speed_hz : spi->max_speed_hz;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Enable IO mode for RX, TX */
 	writel(SIRFSOC_SPI_IO_MODE_SEL, sspi->base + SIRFSOC_SPI_TX_DMA_IO_CTRL);
 	writel(SIRFSOC_SPI_IO_MODE_SEL, sspi->base + SIRFSOC_SPI_RX_DMA_IO_CTRL);
 	regval = (sspi->ctrl_freq / (2 * hz)) - 1;
 
+=======
+	regval = (sspi->ctrl_freq / (2 * hz)) - 1;
+>>>>>>> v3.18
 =======
 	regval = (sspi->ctrl_freq / (2 * hz)) - 1;
 >>>>>>> v3.18
@@ -730,6 +826,7 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 		regval |= SIRFSOC_SPI_TRAN_DAT_FORMAT_8;
 		sspi->rx_word = spi_sirfsoc_rx_word_u8;
 		sspi->tx_word = spi_sirfsoc_tx_word_u8;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		txfifo_ctrl = SIRFSOC_SPI_FIFO_THD(SIRFSOC_SPI_FIFO_SIZE / 2) |
 					SIRFSOC_SPI_FIFO_WIDTH_BYTE;
@@ -747,6 +844,8 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 		rxfifo_ctrl = SIRFSOC_SPI_FIFO_THD(SIRFSOC_SPI_FIFO_SIZE / 2) |
 					SIRFSOC_SPI_FIFO_WIDTH_WORD;
 =======
+=======
+>>>>>>> v3.18
 		break;
 	case 12:
 	case 16:
@@ -755,12 +854,16 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 			SIRFSOC_SPI_TRAN_DAT_FORMAT_16;
 		sspi->rx_word = spi_sirfsoc_rx_word_u16;
 		sspi->tx_word = spi_sirfsoc_tx_word_u16;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 32:
 		regval |= SIRFSOC_SPI_TRAN_DAT_FORMAT_32;
 		sspi->rx_word = spi_sirfsoc_rx_word_u32;
 		sspi->tx_word = spi_sirfsoc_tx_word_u32;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		txfifo_ctrl = SIRFSOC_SPI_FIFO_THD(SIRFSOC_SPI_FIFO_SIZE / 2) |
 					SIRFSOC_SPI_FIFO_WIDTH_DWORD;
@@ -774,6 +877,8 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		break;
 	default:
 		BUG();
@@ -785,6 +890,9 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 	rxfifo_ctrl = SIRFSOC_SPI_FIFO_THD(SIRFSOC_SPI_FIFO_SIZE / 2) |
 					   (sspi->word_width >> 1);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!(spi->mode & SPI_CS_HIGH))
 		regval |= SIRFSOC_SPI_CS_IDLE_STAT;
@@ -795,8 +903,13 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Data should be driven at least 1/2 cycle before the fetch edge to make
 	 * sure that data gets stable at the fetch edge.
+=======
+	 * Data should be driven at least 1/2 cycle before the fetch edge
+	 * to make sure that data gets stable at the fetch edge.
+>>>>>>> v3.18
 =======
 	 * Data should be driven at least 1/2 cycle before the fetch edge
 	 * to make sure that data gets stable at the fetch edge.
@@ -820,8 +933,11 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 	writel(rxfifo_ctrl, sspi->base + SIRFSOC_SPI_RXFIFO_CTRL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	writel(regval, sspi->base + SIRFSOC_SPI_CTRL);
 =======
+=======
+>>>>>>> v3.18
 	if (t && t->tx_buf && !t->rx_buf && (t->len <= SIRFSOC_MAX_CMD_BYTES)) {
 		regval |= (SIRFSOC_SPI_CMD_BYTE_NUM((t->len - 1)) |
 				SIRFSOC_SPI_CMD_MODE);
@@ -850,6 +966,9 @@ spi_sirfsoc_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 			sspi->base + SIRFSOC_SPI_RX_DMA_IO_CTRL);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -864,14 +983,20 @@ static int spi_sirfsoc_setup(struct spi_device *spi)
 	sspi = spi_master_get_devdata(spi->master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!spi->bits_per_word)
 		spi->bits_per_word = 8;
 
 =======
+=======
+>>>>>>> v3.18
 	if (spi->cs_gpio == -ENOENT)
 		sspi->hw_cs = true;
 	else
 		sspi->hw_cs = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return spi_sirfsoc_setup_transfer(spi, NULL);
 }
@@ -881,6 +1006,7 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 	struct sirfsoc_spi *sspi;
 	struct spi_master *master;
 	struct resource *mem_res;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int num_cs, cs_gpio, irq;
 	int i;
@@ -895,10 +1021,15 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 
 	master = spi_alloc_master(&pdev->dev, sizeof(*sspi) + sizeof(int) * num_cs);
 =======
+=======
+>>>>>>> v3.18
 	int irq;
 	int i, ret;
 
 	master = spi_alloc_master(&pdev->dev, sizeof(*sspi));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!master) {
 		dev_err(&pdev->dev, "Unable to allocate SPI master\n");
@@ -908,6 +1039,7 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 	sspi = spi_master_get_devdata(master);
 
 	mem_res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!mem_res) {
 		dev_err(&pdev->dev, "Unable to get IO resource\n");
@@ -942,6 +1074,8 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	sspi->base = devm_ioremap_resource(&pdev->dev, mem_res);
 	if (IS_ERR(sspi->base)) {
 		ret = PTR_ERR(sspi->base);
@@ -959,7 +1093,11 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 		goto free_master;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sspi->bitbang.master = spi_master_get(master);
+=======
+	sspi->bitbang.master = master;
+>>>>>>> v3.18
 =======
 	sspi->bitbang.master = master;
 >>>>>>> v3.18
@@ -968,6 +1106,7 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 	sspi->bitbang.txrx_bufs = spi_sirfsoc_transfer;
 	sspi->bitbang.master->setup = spi_sirfsoc_setup;
 	master->bus_num = pdev->id;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	sspi->bitbang.master->dev.of_node = pdev->dev.of_node;
 
@@ -981,6 +1120,8 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 		ret = -EINVAL;
 		goto free_pin;
 =======
+=======
+>>>>>>> v3.18
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_LSB_FIRST | SPI_CS_HIGH;
 	master->bits_per_word_mask = SPI_BPW_MASK(8) | SPI_BPW_MASK(12) |
 					SPI_BPW_MASK(16) | SPI_BPW_MASK(32);
@@ -1004,16 +1145,24 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 	if (IS_ERR(sspi->clk)) {
 		ret = PTR_ERR(sspi->clk);
 		goto free_tx_dma;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	clk_prepare_enable(sspi->clk);
 	sspi->ctrl_freq = clk_get_rate(sspi->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	init_completion(&sspi->done);
 
 	tasklet_init(&sspi->tasklet_tx, spi_sirfsoc_tasklet_tx,
 		     (unsigned long)sspi);
+=======
+	init_completion(&sspi->rx_done);
+	init_completion(&sspi->tx_done);
+>>>>>>> v3.18
 =======
 	init_completion(&sspi->rx_done);
 	init_completion(&sspi->tx_done);
@@ -1026,6 +1175,7 @@ static int spi_sirfsoc_probe(struct platform_device *pdev)
 	/* We are not using dummy delay between command and data */
 	writel(0, sspi->base + SIRFSOC_SPI_DUMMY_DELAY_CTL);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = spi_bitbang_start(&sspi->bitbang);
 	if (ret)
@@ -1044,6 +1194,8 @@ free_master:
 	spi_master_put(master);
 err_cs:
 =======
+=======
+>>>>>>> v3.18
 	sspi->dummypage = kmalloc(2 * PAGE_SIZE, GFP_KERNEL);
 	if (!sspi->dummypage) {
 		ret = -ENOMEM;
@@ -1083,6 +1235,9 @@ free_rx_dma:
 free_master:
 	spi_master_put(master);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1092,7 +1247,10 @@ static int  spi_sirfsoc_remove(struct platform_device *pdev)
 	struct spi_master *master;
 	struct sirfsoc_spi *sspi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1100,6 +1258,7 @@ static int  spi_sirfsoc_remove(struct platform_device *pdev)
 	sspi = spi_master_get_devdata(master);
 
 	spi_bitbang_stop(&sspi->bitbang);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < master->num_chipselect; i++) {
 		if (sspi->chipselect[i] > 0)
@@ -1109,16 +1268,22 @@ static int  spi_sirfsoc_remove(struct platform_device *pdev)
 	clk_put(sspi->clk);
 	pinctrl_put(sspi->p);
 =======
+=======
+>>>>>>> v3.18
 	kfree(sspi->dummypage);
 	clk_disable_unprepare(sspi->clk);
 	clk_put(sspi->clk);
 	dma_release_channel(sspi->rx_chan);
 	dma_release_channel(sspi->tx_chan);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spi_master_put(master);
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_PM
 static int spi_sirfsoc_suspend(struct device *dev)
@@ -1127,6 +1292,8 @@ static int spi_sirfsoc_suspend(struct device *dev)
 	struct spi_master *master = platform_get_drvdata(pdev);
 	struct sirfsoc_spi *sspi = spi_master_get_devdata(master);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int spi_sirfsoc_suspend(struct device *dev)
 {
@@ -1137,6 +1304,9 @@ static int spi_sirfsoc_suspend(struct device *dev)
 	ret = spi_master_suspend(master);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clk_disable(sspi->clk);
@@ -1146,8 +1316,12 @@ static int spi_sirfsoc_suspend(struct device *dev)
 static int spi_sirfsoc_resume(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_device *pdev = to_platform_device(dev);
 	struct spi_master *master = platform_get_drvdata(pdev);
+=======
+	struct spi_master *master = dev_get_drvdata(dev);
+>>>>>>> v3.18
 =======
 	struct spi_master *master = dev_get_drvdata(dev);
 >>>>>>> v3.18
@@ -1160,6 +1334,7 @@ static int spi_sirfsoc_resume(struct device *dev)
 	writel(SIRFSOC_SPI_FIFO_START, sspi->base + SIRFSOC_SPI_TXFIFO_OP);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -1170,6 +1345,8 @@ static const struct dev_pm_ops spi_sirfsoc_pm_ops = {
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	return spi_master_resume(master);
 }
 #endif
@@ -1177,6 +1354,9 @@ static const struct dev_pm_ops spi_sirfsoc_pm_ops = {
 static SIMPLE_DEV_PM_OPS(spi_sirfsoc_pm_ops, spi_sirfsoc_suspend,
 			 spi_sirfsoc_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct of_device_id spi_sirfsoc_of_match[] = {
 	{ .compatible = "sirf,prima2-spi", },
@@ -1190,9 +1370,13 @@ static struct platform_driver spi_sirfsoc_driver = {
 		.name = DRIVER_NAME,
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm     = &spi_sirfsoc_pm_ops,
 #endif
+=======
+		.pm     = &spi_sirfsoc_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm     = &spi_sirfsoc_pm_ops,
 >>>>>>> v3.18
@@ -1203,10 +1387,16 @@ static struct platform_driver spi_sirfsoc_driver = {
 };
 module_platform_driver(spi_sirfsoc_driver);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 MODULE_DESCRIPTION("SiRF SoC SPI master driver");
 MODULE_AUTHOR("Zhiwu Song <Zhiwu.Song@csr.com>, "
 		"Barry Song <Baohua.Song@csr.com>");
+=======
+MODULE_DESCRIPTION("SiRF SoC SPI master driver");
+MODULE_AUTHOR("Zhiwu Song <Zhiwu.Song@csr.com>");
+MODULE_AUTHOR("Barry Song <Baohua.Song@csr.com>");
+>>>>>>> v3.18
 =======
 MODULE_DESCRIPTION("SiRF SoC SPI master driver");
 MODULE_AUTHOR("Zhiwu Song <Zhiwu.Song@csr.com>");

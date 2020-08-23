@@ -4,7 +4,11 @@
 struct pt_regs;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void bad_trap(struct pt_regs *, long);
+=======
+void bad_trap(struct pt_regs *, long);
+>>>>>>> v3.18
 =======
 void bad_trap(struct pt_regs *, long);
 >>>>>>> v3.18

@@ -7,7 +7,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -37,7 +40,10 @@ struct pm_clock_entry {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pm_clk_enable - Enable a clock, reporting any errors
  * @dev: The device for the given clock
  * @clk: The clock being enabled.
@@ -53,6 +59,9 @@ static inline int __pm_clk_enable(struct device *dev, struct clk *clk)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * pm_clk_acquire - Acquire a device clock.
  * @dev: Device whose clock is to be acquired.
@@ -65,6 +74,10 @@ static void pm_clk_acquire(struct device *dev, struct pm_clock_entry *ce)
 		ce->status = PCE_STATUS_ERROR;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clk_prepare(ce->clk);
+>>>>>>> v3.18
 =======
 		clk_prepare(ce->clk);
 >>>>>>> v3.18
@@ -125,17 +138,23 @@ static void __pm_clk_remove(struct pm_clock_entry *ce)
 	if (ce->status < PCE_STATUS_ERROR) {
 		if (ce->status == PCE_STATUS_ENABLED)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clk_disable_unprepare(ce->clk);
 
 		if (ce->status >= PCE_STATUS_ACQUIRED)
 			clk_put(ce->clk);
 =======
+=======
+>>>>>>> v3.18
 			clk_disable(ce->clk);
 
 		if (ce->status >= PCE_STATUS_ACQUIRED) {
 			clk_unprepare(ce->clk);
 			clk_put(ce->clk);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -284,6 +303,10 @@ int pm_clk_resume(struct device *dev)
 	struct pm_clock_entry *ce;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -298,8 +321,14 @@ int pm_clk_resume(struct device *dev)
 	list_for_each_entry(ce, &psd->clock_list, node) {
 		if (ce->status < PCE_STATUS_ERROR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clk_enable(ce->clk);
 			ce->status = PCE_STATUS_ENABLED;
+=======
+			ret = __pm_clk_enable(dev, ce->clk);
+			if (!ret)
+				ce->status = PCE_STATUS_ENABLED;
+>>>>>>> v3.18
 =======
 			ret = __pm_clk_enable(dev, ce->clk);
 			if (!ret)
@@ -394,9 +423,12 @@ int pm_clk_suspend(struct device *dev)
 	spin_lock_irqsave(&psd->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry_reverse(ce, &psd->clock_list, node)
 		clk_disable(ce->clk);
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry_reverse(ce, &psd->clock_list, node) {
 		if (ce->status < PCE_STATUS_ERROR) {
 			if (ce->status == PCE_STATUS_ENABLED)
@@ -404,6 +436,9 @@ int pm_clk_suspend(struct device *dev)
 			ce->status = PCE_STATUS_ACQUIRED;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&psd->lock, flags);
@@ -421,6 +456,10 @@ int pm_clk_resume(struct device *dev)
 	struct pm_clock_entry *ce;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -434,9 +473,12 @@ int pm_clk_resume(struct device *dev)
 	spin_lock_irqsave(&psd->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(ce, &psd->clock_list, node)
 		clk_enable(ce->clk);
 =======
+=======
+>>>>>>> v3.18
 	list_for_each_entry(ce, &psd->clock_list, node) {
 		if (ce->status < PCE_STATUS_ERROR) {
 			ret = __pm_clk_enable(dev, ce->clk);
@@ -444,6 +486,9 @@ int pm_clk_resume(struct device *dev)
 				ce->status = PCE_STATUS_ENABLED;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_unlock_irqrestore(&psd->lock, flags);

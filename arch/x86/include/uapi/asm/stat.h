@@ -2,6 +2,11 @@
 #define _ASM_X86_STAT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/posix_types.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/posix_types.h>
 
@@ -84,6 +89,7 @@ struct stat64 {
 
 struct stat {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	st_dev;
 	unsigned long	st_ino;
 	unsigned long	st_nlink;
@@ -105,6 +111,8 @@ struct stat {
 	unsigned long   st_ctime_nsec;
 	long		__unused[3];
 =======
+=======
+>>>>>>> v3.18
 	__kernel_ulong_t	st_dev;
 	__kernel_ulong_t	st_ino;
 	__kernel_ulong_t	st_nlink;
@@ -125,6 +133,9 @@ struct stat {
 	__kernel_ulong_t	st_ctime;
 	__kernel_ulong_t	st_ctime_nsec;
 	__kernel_long_t		__unused[3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

@@ -28,7 +28,10 @@
 void machine_halt(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	warn_early_printk();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	arch_local_irq_disable_all();
@@ -39,7 +42,10 @@ void machine_halt(void)
 void machine_power_off(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	warn_early_printk();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	arch_local_irq_disable_all();

@@ -155,6 +155,7 @@ static inline u32 ethtool_rxfh_indir_default(u32 index, u32 n_rx_rings)
  *	flags from &enum ethtool_reset_flags.  Returns a negative
  *	error code or zero.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @get_rxfh_indir_size: Get the size of the RX flow hash indirection table.
  *	Returns zero if not supported for this specific device.
  * @get_rxfh_indir: Get the contents of the RX flow hash indirection table.
@@ -163,6 +164,8 @@ static inline u32 ethtool_rxfh_indir_default(u32 index, u32 n_rx_rings)
  * @set_rxfh_indir: Set the contents of the RX flow hash indirection table.
  *	Will not be called if @get_rxfh_indir_size returns zero.
 =======
+=======
+>>>>>>> v3.18
  * @get_rxfh_key_size: Get the size of the RX flow hash key.
  *	Returns zero if not supported for this specific device.
  * @get_rxfh_indir_size: Get the size of the RX flow hash indirection table.
@@ -177,6 +180,9 @@ static inline u32 ethtool_rxfh_indir_default(u32 index, u32 n_rx_rings)
  *	changed, the other argument will be %NULL.
  *	Will only be called if one or both of @get_rxfh_indir_size and
  *	@get_rxfh_key_size are implemented and return non-zero.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	Returns a negative error code or zero.
  * @get_channels: Get number of channels.
@@ -201,6 +207,12 @@ static inline u32 ethtool_rxfh_indir_default(u32 index, u32 n_rx_rings)
  *
  * See the structures used by these operations for further documentation.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Note that for all operations using a structure ending with a zero-
+ * length array, the array is allocated separately in the kernel and
+ * is passed to the driver as an additional parameter.
+>>>>>>> v3.18
 =======
  * Note that for all operations using a structure ending with a zero-
  * length array, the array is allocated separately in the kernel and
@@ -253,15 +265,21 @@ struct ethtool_ops {
 	int	(*flash_device)(struct net_device *, struct ethtool_flash *);
 	int	(*reset)(struct net_device *, u32 *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	(*get_rxfh_indir_size)(struct net_device *);
 	int	(*get_rxfh_indir)(struct net_device *, u32 *);
 	int	(*set_rxfh_indir)(struct net_device *, const u32 *);
 =======
+=======
+>>>>>>> v3.18
 	u32	(*get_rxfh_key_size)(struct net_device *);
 	u32	(*get_rxfh_indir_size)(struct net_device *);
 	int	(*get_rxfh)(struct net_device *, u32 *indir, u8 *key);
 	int	(*set_rxfh)(struct net_device *, const u32 *indir,
 			    const u8 *key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	void	(*get_channels)(struct net_device *, struct ethtool_channels *);
 	int	(*set_channels)(struct net_device *, struct ethtool_channels *);
@@ -277,11 +295,17 @@ struct ethtool_ops {
 	int	(*get_eee)(struct net_device *, struct ethtool_eee *);
 	int	(*set_eee)(struct net_device *, struct ethtool_eee *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int	(*get_tunable)(struct net_device *,
 			       const struct ethtool_tunable *, void *);
 	int	(*set_tunable)(struct net_device *,
 			       const struct ethtool_tunable *, const void *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

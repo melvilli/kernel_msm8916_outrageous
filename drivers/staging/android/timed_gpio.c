@@ -46,6 +46,7 @@ static enum hrtimer_restart gpio_timer_func(struct hrtimer *timer)
 static int gpio_get_time(struct timed_output_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timed_gpio_data	*data =
 		container_of(dev, struct timed_gpio_data, dev);
 
@@ -56,6 +57,8 @@ static int gpio_get_time(struct timed_output_dev *dev)
 	} else
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	struct timed_gpio_data *data;
 	struct timeval t;
 
@@ -67,6 +70,9 @@ static int gpio_get_time(struct timed_output_dev *dev)
 	t = ktime_to_timeval(hrtimer_get_remaining(&data->timer));
 
 	return t.tv_sec * 1000 + t.tv_usec / 1000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -105,7 +111,12 @@ static int timed_gpio_probe(struct platform_device *pdev)
 		return -EBUSY;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_data = kzalloc(sizeof(struct timed_gpio_data) * pdata->num_gpios,
+=======
+	gpio_data = devm_kzalloc(&pdev->dev,
+			sizeof(struct timed_gpio_data) * pdata->num_gpios,
+>>>>>>> v3.18
 =======
 	gpio_data = devm_kzalloc(&pdev->dev,
 			sizeof(struct timed_gpio_data) * pdata->num_gpios,
@@ -151,7 +162,10 @@ err_out:
 		gpio_free(gpio_data[i].gpio);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(gpio_data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -170,8 +184,11 @@ static int timed_gpio_remove(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(gpio_data);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

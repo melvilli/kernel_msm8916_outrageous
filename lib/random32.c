@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
   This is a maximally equidistributed combined Tausworthe generator
   based on code from GNU Scientific Library 1.5 (30 Jun 2004)
 
@@ -34,6 +35,8 @@
 
 */
 =======
+=======
+>>>>>>> v3.18
  * This is a maximally equidistributed combined Tausworthe generator
  * based on code from GNU Scientific Library 1.5 (30 Jun 2004)
  *
@@ -65,6 +68,9 @@
  * This affects the seeding procedure by imposing the requirement
  * s1 > 1, s2 > 7, s3 > 15, s4 > 127.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/types.h>
@@ -73,8 +79,11 @@
 #include <linux/jiffies.h>
 #include <linux/random.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/timer.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/sched.h>
 #include <asm/unaligned.h>
 
@@ -85,6 +94,9 @@ static inline void prandom_state_selftest(void)
 {
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static DEFINE_PER_CPU(struct rnd_state, net_rand_state);
@@ -99,6 +111,7 @@ static DEFINE_PER_CPU(struct rnd_state, net_rand_state);
 u32 prandom_u32_state(struct rnd_state *state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TAUSWORTHE(s,a,b,c,d) ((s&c)<<d) ^ (((s <<a) ^ s)>>b)
 
 	state->s1 = TAUSWORTHE(state->s1, 13, 19, 4294967294UL, 12);
@@ -107,6 +120,8 @@ u32 prandom_u32_state(struct rnd_state *state)
 
 	return (state->s1 ^ state->s2 ^ state->s3);
 =======
+=======
+>>>>>>> v3.18
 #define TAUSWORTHE(s, a, b, c, d) ((s & c) << d) ^ (((s << a) ^ s) >> b)
 	state->s1 = TAUSWORTHE(state->s1,  6U, 13U, 4294967294U, 18U);
 	state->s2 = TAUSWORTHE(state->s2,  2U, 27U, 4294967288U,  2U);
@@ -114,6 +129,9 @@ u32 prandom_u32_state(struct rnd_state *state)
 	state->s4 = TAUSWORTHE(state->s4,  3U, 12U, 4294967168U, 13U);
 
 	return (state->s1 ^ state->s2 ^ state->s3 ^ state->s4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(prandom_u32_state);
@@ -128,6 +146,7 @@ EXPORT_SYMBOL(prandom_u32_state);
 u32 prandom_u32(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long r;
 	struct rnd_state *state = &get_cpu_var(net_rand_state);
 	r = prandom_u32_state(state);
@@ -138,6 +157,8 @@ EXPORT_SYMBOL(prandom_u32);
 
 /*
 =======
+=======
+>>>>>>> v3.18
 	struct rnd_state *state = &get_cpu_var(net_rand_state);
 	u32 res;
 
@@ -149,6 +170,9 @@ EXPORT_SYMBOL(prandom_u32);
 EXPORT_SYMBOL(prandom_u32);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *	prandom_bytes_state - get the requested number of pseudo-random bytes
  *
@@ -159,6 +183,7 @@ EXPORT_SYMBOL(prandom_u32);
  *	This is used for pseudo-randomness with no outside seeding.
  *	For more random results, use prandom_bytes().
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 void prandom_bytes_state(struct rnd_state *state, void *buf, int bytes)
 {
@@ -182,6 +207,8 @@ void prandom_bytes_state(struct rnd_state *state, void *buf, int bytes)
 			random >>= BITS_PER_BYTE;
 		}
 =======
+=======
+>>>>>>> v3.18
 void prandom_bytes_state(struct rnd_state *state, void *buf, size_t bytes)
 {
 	u8 *ptr = buf;
@@ -199,6 +226,9 @@ void prandom_bytes_state(struct rnd_state *state, void *buf, size_t bytes)
 			bytes--;
 			rem >>= BITS_PER_BYTE;
 		} while (bytes > 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -210,7 +240,11 @@ EXPORT_SYMBOL(prandom_bytes_state);
  *	@bytes: the requested number of bytes
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void prandom_bytes(void *buf, int bytes)
+=======
+void prandom_bytes(void *buf, size_t bytes)
+>>>>>>> v3.18
 =======
 void prandom_bytes(void *buf, size_t bytes)
 >>>>>>> v3.18
@@ -223,7 +257,10 @@ void prandom_bytes(void *buf, size_t bytes)
 EXPORT_SYMBOL(prandom_bytes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void prandom_warmup(struct rnd_state *state)
 {
 	/* Calling RNG ten times to satisfy recurrence condition */
@@ -260,6 +297,9 @@ static void prandom_seed_early(struct rnd_state *state, u32 seed,
 	state->s4 = __seed(HWSEED() ^ LCG(state->s3), 128U);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  *	prandom_seed - add entropy to pseudo random number generator
@@ -277,8 +317,14 @@ void prandom_seed(u32 entropy)
 	for_each_possible_cpu (i) {
 		struct rnd_state *state = &per_cpu(net_rand_state, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		state->s1 = __seed(state->s1 ^ entropy, 2);
 		prandom_u32_state(state);
+=======
+
+		state->s1 = __seed(state->s1 ^ entropy, 2U);
+		prandom_warmup(state);
+>>>>>>> v3.18
 =======
 
 		state->s1 = __seed(state->s1 ^ entropy, 2U);
@@ -297,6 +343,7 @@ static int __init prandom_init(void)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_possible_cpu(i) {
 		struct rnd_state *state = &per_cpu(net_rand_state,i);
 
@@ -314,6 +361,8 @@ static int __init prandom_init(void)
 		prandom_u32_state(state);
 	}
 =======
+=======
+>>>>>>> v3.18
 	prandom_state_selftest();
 
 	for_each_possible_cpu(i) {
@@ -324,6 +373,9 @@ static int __init prandom_init(void)
 		prandom_warmup(state);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -331,6 +383,10 @@ core_initcall(prandom_init);
 
 static void __prandom_timer(unsigned long dontcare);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -339,6 +395,7 @@ static DEFINE_TIMER(seed_timer, __prandom_timer, 0, 0);
 static void __prandom_timer(unsigned long dontcare)
 {
 	u32 entropy;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	get_random_bytes(&entropy, sizeof(entropy));
@@ -353,6 +410,8 @@ static void prandom_start_seed_timer(void)
 	set_timer_slack(&seed_timer, HZ);
 	seed_timer.expires = jiffies + 40 * HZ;
 =======
+=======
+>>>>>>> v3.18
 	unsigned long expires;
 
 	get_random_bytes(&entropy, sizeof(entropy));
@@ -369,6 +428,9 @@ static void __init __prandom_start_seed_timer(void)
 {
 	set_timer_slack(&seed_timer, HZ);
 	seed_timer.expires = jiffies + msecs_to_jiffies(40 * MSEC_PER_SEC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	add_timer(&seed_timer);
 }
@@ -385,11 +447,14 @@ static void __prandom_reseed(bool late)
 	static DEFINE_SPINLOCK(lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* only allow initial seeding (late == false) once */
 	spin_lock_irqsave(&lock, flags);
 	if (latch && !late)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	/* Asking for random bytes might result in bytes getting
 	 * moved into the nonblocking pool and thus marking it
 	 * as initialized. In this case we would double back into
@@ -406,11 +471,15 @@ static void __prandom_reseed(bool late)
 	if (latch && !late)
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	latch = true;
 
 	for_each_possible_cpu(i) {
 		struct rnd_state *state = &per_cpu(net_rand_state,i);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		u32 seeds[3];
 
@@ -422,6 +491,8 @@ static void __prandom_reseed(bool late)
 		/* mix it in */
 		prandom_u32_state(state);
 =======
+=======
+>>>>>>> v3.18
 		u32 seeds[4];
 
 		get_random_bytes(&seeds, sizeof(seeds));
@@ -431,6 +502,9 @@ static void __prandom_reseed(bool late)
 		state->s4 = __seed(seeds[3], 128U);
 
 		prandom_warmup(state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 out:
@@ -446,11 +520,14 @@ static int __init prandom_reseed(void)
 {
 	__prandom_reseed(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	prandom_start_seed_timer();
 	return 0;
 }
 late_initcall(prandom_reseed);
 =======
+=======
+>>>>>>> v3.18
 	__prandom_start_seed_timer();
 	return 0;
 }
@@ -617,4 +694,7 @@ static void __init prandom_state_selftest(void)
 		pr_info("prandom: %d self tests passed\n", runs);
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

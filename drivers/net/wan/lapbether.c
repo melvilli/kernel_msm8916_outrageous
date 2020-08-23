@@ -326,8 +326,13 @@ static int lapbeth_new_device(struct net_device *dev)
 	ASSERT_RTNL();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ndev = alloc_netdev(sizeof(*lapbeth), "lapb%d", 
 			   lapbeth_setup);
+=======
+	ndev = alloc_netdev(sizeof(*lapbeth), "lapb%d", NET_NAME_UNKNOWN,
+			    lapbeth_setup);
+>>>>>>> v3.18
 =======
 	ndev = alloc_netdev(sizeof(*lapbeth), "lapb%d", NET_NAME_UNKNOWN,
 			    lapbeth_setup);
@@ -376,7 +381,11 @@ static int lapbeth_device_event(struct notifier_block *this,
 {
 	struct lapbethdev *lapbeth;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18

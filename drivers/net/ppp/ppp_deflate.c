@@ -247,7 +247,11 @@ static int z_compress(void *arg, unsigned char *rptr, unsigned char *obuf,
 	 * See if we managed to reduce the size of the packet.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (olen < isize && olen <= osize) {
+=======
+	if (olen < isize) {
+>>>>>>> v3.18
 =======
 	if (olen < isize) {
 >>>>>>> v3.18

@@ -15,8 +15,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -587,7 +591,10 @@ struct pch_gbe_hw_stats {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct pch_gbe_privdata - PCI Device ID driver data
  * @phy_tx_clk_delay:		Bool, configure the PHY TX delay in software
  * @phy_disable_hibernate:	Bool, disable PHY hibernation
@@ -601,6 +608,9 @@ struct pch_gbe_privdata {
 };
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct pch_gbe_adapter - board specific private data structure
  * @stats_lock:	Spinlock structure for status
@@ -625,6 +635,10 @@ struct pch_gbe_privdata {
  * @tx_queue_len:	Transmit queue length
  * @have_msi:		PCI MSI mode flag
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @pch_gbe_privdata:	PCI Device ID driver_data
+>>>>>>> v3.18
 =======
  * @pch_gbe_privdata:	PCI Device ID driver_data
 >>>>>>> v3.18
@@ -655,6 +669,7 @@ struct pch_gbe_adapter {
 	int hwts_tx_en;
 	int hwts_rx_en;
 	struct pci_dev *ptp_pdev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -696,6 +711,8 @@ extern s32 pch_gbe_mac_read_mac_addr(struct pch_gbe_hw *hw);
 extern u16 pch_gbe_mac_ctrl_miim(struct pch_gbe_hw *hw,
 				  u32 addr, u32 dir, u32 reg, u16 data);
 =======
+=======
+>>>>>>> v3.18
 	struct pch_gbe_privdata *pdata;
 };
 
@@ -738,5 +755,8 @@ s32 pch_gbe_mac_force_mac_fc(struct pch_gbe_hw *hw);
 s32 pch_gbe_mac_read_mac_addr(struct pch_gbe_hw *hw);
 u16 pch_gbe_mac_ctrl_miim(struct pch_gbe_hw *hw, u32 addr, u32 dir, u32 reg,
 			  u16 data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _PCH_GBE_H_ */

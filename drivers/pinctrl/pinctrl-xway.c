@@ -103,6 +103,10 @@ enum xway_mux {
 	XWAY_MUX_DFE,
 	XWAY_MUX_SDIO,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	XWAY_MUX_GPHY,
+>>>>>>> v3.18
 =======
 	XWAY_MUX_GPHY,
 >>>>>>> v3.18
@@ -114,6 +118,7 @@ static const struct ltq_mfp_pin xway_mfp[] = {
 	MFP_XWAY(GPIO0, GPIO,	EXIN,	NONE,	TDM),
 	MFP_XWAY(GPIO1, GPIO,	EXIN,	NONE,	NONE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MFP_XWAY(GPIO2, GPIO,	CGU,	EXIN,	NONE),
 	MFP_XWAY(GPIO3, GPIO,	CGU,	NONE,	PCI),
 	MFP_XWAY(GPIO4, GPIO,	STP,	NONE,	ASC),
@@ -121,12 +126,17 @@ static const struct ltq_mfp_pin xway_mfp[] = {
 	MFP_XWAY(GPIO6, GPIO,	STP,	GPT,	ASC),
 	MFP_XWAY(GPIO7, GPIO,	CGU,	PCI,	NONE),
 =======
+=======
+>>>>>>> v3.18
 	MFP_XWAY(GPIO2, GPIO,	CGU,	EXIN,	GPHY),
 	MFP_XWAY(GPIO3, GPIO,	CGU,	NONE,	PCI),
 	MFP_XWAY(GPIO4, GPIO,	STP,	NONE,	ASC),
 	MFP_XWAY(GPIO5, GPIO,	STP,	NONE,	GPHY),
 	MFP_XWAY(GPIO6, GPIO,	STP,	GPT,	ASC),
 	MFP_XWAY(GPIO7, GPIO,	CGU,	PCI,	GPHY),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MFP_XWAY(GPIO8, GPIO,	CGU,	NMI,	NONE),
 	MFP_XWAY(GPIO9, GPIO,	ASC,	SPI,	EXIN),
@@ -165,15 +175,21 @@ static const struct ltq_mfp_pin xway_mfp[] = {
 	MFP_XWAY(GPIO42, GPIO,	MDIO,	NONE,	NONE),
 	MFP_XWAY(GPIO43, GPIO,	MDIO,	NONE,	NONE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MFP_XWAY(GPIO44, GPIO,	NONE,	NONE,	SIN),
 	MFP_XWAY(GPIO45, GPIO,	NONE,	NONE,	SIN),
 	MFP_XWAY(GPIO46, GPIO,	NONE,	NONE,	EXIN),
 	MFP_XWAY(GPIO47, GPIO,	NONE,	NONE,	SIN),
 =======
+=======
+>>>>>>> v3.18
 	MFP_XWAY(GPIO44, GPIO,	NONE,	GPHY,	SIN),
 	MFP_XWAY(GPIO45, GPIO,	NONE,	GPHY,	SIN),
 	MFP_XWAY(GPIO46, GPIO,	NONE,	NONE,	EXIN),
 	MFP_XWAY(GPIO47, GPIO,	NONE,	GPHY,	SIN),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	MFP_XWAY(GPIO48, GPIO,	EBU,	NONE,	NONE),
 	MFP_XWAY(GPIO49, GPIO,	EBU,	NONE,	NONE),
@@ -229,7 +245,10 @@ static const unsigned pins_nmi[] = {GPIO8};
 static const unsigned pins_mdio[] = {GPIO42, GPIO43};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const unsigned pins_gphy0_led0[] = {GPIO5};
 static const unsigned pins_gphy0_led1[] = {GPIO7};
 static const unsigned pins_gphy0_led2[] = {GPIO2};
@@ -237,6 +256,9 @@ static const unsigned pins_gphy1_led0[] = {GPIO44};
 static const unsigned pins_gphy1_led1[] = {GPIO45};
 static const unsigned pins_gphy1_led2[] = {GPIO47};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const unsigned pins_ebu_a24[] = {GPIO13};
 static const unsigned pins_ebu_clk[] = {GPIO21};
@@ -353,13 +375,19 @@ static const struct ltq_pin_group xway_grps[] = {
 	GRP_MUX("req4", PCI, pins_pci_gnt4),
 	GRP_MUX("mdio", MDIO, pins_mdio),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	GRP_MUX("gphy0 led0", GPHY, pins_gphy0_led0),
 	GRP_MUX("gphy0 led1", GPHY, pins_gphy0_led1),
 	GRP_MUX("gphy0 led2", GPHY, pins_gphy0_led2),
 	GRP_MUX("gphy1 led0", GPHY, pins_gphy1_led0),
 	GRP_MUX("gphy1 led1", GPHY, pins_gphy1_led1),
 	GRP_MUX("gphy1 led2", GPHY, pins_gphy1_led2),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -405,6 +433,12 @@ static const char * const xway_nmi_grps[] = {"nmi"};
 /* ar9/vr9/gr9 */
 static const char * const xrx_mdio_grps[] = {"mdio"};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static const char * const xrx_gphy_grps[] = {"gphy0 led0", "gphy0 led1",
+						"gphy0 led2", "gphy1 led0",
+						"gphy1 led1", "gphy1 led2"};
+>>>>>>> v3.18
 =======
 static const char * const xrx_gphy_grps[] = {"gphy0 led0", "gphy0 led1",
 						"gphy0 led2", "gphy1 led0",
@@ -460,6 +494,10 @@ static const struct ltq_pmx_func xrx_funcs[] = {
 	{"ebu",		ARRAY_AND_SIZE(xrx_ebu_grps)},
 	{"mdio",	ARRAY_AND_SIZE(xrx_mdio_grps)},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{"gphy",	ARRAY_AND_SIZE(xrx_gphy_grps)},
+>>>>>>> v3.18
 =======
 	{"gphy",	ARRAY_AND_SIZE(xrx_gphy_grps)},
 >>>>>>> v3.18
@@ -531,6 +569,7 @@ static int xway_pinconf_get(struct pinctrl_dev *pctldev,
 static int xway_pinconf_set(struct pinctrl_dev *pctldev,
 				unsigned pin,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				unsigned long config)
 {
 	struct ltq_pinmux_info *info = pinctrl_dev_get_drvdata(pctldev);
@@ -587,6 +626,8 @@ static int xway_pinconf_set(struct pinctrl_dev *pctldev,
 		return -ENOTSUPP;
 	}
 =======
+=======
+>>>>>>> v3.18
 				unsigned long *configs,
 				unsigned num_configs)
 {
@@ -666,6 +707,9 @@ static int xway_pinconf_set(struct pinctrl_dev *pctldev,
 		}
 	} /* for each config */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -673,7 +717,12 @@ static int xway_pinconf_set(struct pinctrl_dev *pctldev,
 int xway_pinconf_group_set(struct pinctrl_dev *pctldev,
 			unsigned selector,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned long config)
+=======
+			unsigned long *configs,
+			unsigned num_configs)
+>>>>>>> v3.18
 =======
 			unsigned long *configs,
 			unsigned num_configs)
@@ -685,7 +734,13 @@ int xway_pinconf_group_set(struct pinctrl_dev *pctldev,
 	for (i = 0; i < info->grps[selector].npins && !ret; i++)
 		ret = xway_pinconf_set(pctldev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				info->grps[selector].pins[i], config);
+=======
+				info->grps[selector].pins[i],
+				configs,
+				num_configs);
+>>>>>>> v3.18
 =======
 				info->grps[selector].pins[i],
 				configs,
@@ -899,6 +954,10 @@ static int pinmux_xway_probe(struct platform_device *pdev)
 	ret = gpiochip_add(&xway_chip);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		of_gpiochip_remove(&xway_chip);
+>>>>>>> v3.18
 =======
 		of_gpiochip_remove(&xway_chip);
 >>>>>>> v3.18
@@ -924,6 +983,10 @@ static int pinmux_xway_probe(struct platform_device *pdev)
 	ret = ltq_pinctrl_register(pdev, &xway_info);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		gpiochip_remove(&xway_chip);
+>>>>>>> v3.18
 =======
 		gpiochip_remove(&xway_chip);
 >>>>>>> v3.18

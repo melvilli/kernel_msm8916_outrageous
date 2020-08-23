@@ -54,7 +54,11 @@ static const char *pci_bus_speed_strings[] = {
 	"33 MHz PCI",		/* 0x00 */
 	"66 MHz PCI",		/* 0x01 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"66 MHz PCI-X", 	/* 0x02 */
+=======
+	"66 MHz PCI-X",		/* 0x02 */
+>>>>>>> v3.18
 =======
 	"66 MHz PCI-X",		/* 0x02 */
 >>>>>>> v3.18
@@ -121,17 +125,23 @@ static void pci_slot_release(struct kobject *kobj)
 
 static struct pci_slot_attribute pci_slot_attr_address =
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(address, (S_IFREG | S_IRUGO), address_read_file, NULL);
 static struct pci_slot_attribute pci_slot_attr_max_speed =
 	__ATTR(max_bus_speed, (S_IFREG | S_IRUGO), max_speed_read_file, NULL);
 static struct pci_slot_attribute pci_slot_attr_cur_speed =
 	__ATTR(cur_bus_speed, (S_IFREG | S_IRUGO), cur_speed_read_file, NULL);
 =======
+=======
+>>>>>>> v3.18
 	__ATTR(address, S_IRUGO, address_read_file, NULL);
 static struct pci_slot_attribute pci_slot_attr_max_speed =
 	__ATTR(max_bus_speed, S_IRUGO, max_speed_read_file, NULL);
 static struct pci_slot_attribute pci_slot_attr_cur_speed =
 	__ATTR(cur_bus_speed, S_IRUGO, cur_speed_read_file, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static struct attribute *pci_slot_default_attrs[] = {
@@ -333,6 +343,7 @@ EXPORT_SYMBOL_GPL(pci_create_slot);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * pci_renumber_slot - update %struct pci_slot -> number
  * @slot: &struct pci_slot to update
  * @slot_nr: new number for slot
@@ -359,6 +370,8 @@ out:
 EXPORT_SYMBOL_GPL(pci_renumber_slot);
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * pci_destroy_slot - decrement refcount for physical PCI slot

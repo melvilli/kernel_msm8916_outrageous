@@ -81,6 +81,10 @@ void o2hb_exit(void);
 int o2hb_init(void);
 int o2hb_check_node_heartbeating(u8 node_num);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int o2hb_check_node_heartbeating_no_sem(u8 node_num);
+>>>>>>> v3.18
 =======
 int o2hb_check_node_heartbeating_no_sem(u8 node_num);
 >>>>>>> v3.18

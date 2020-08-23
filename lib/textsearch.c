@@ -160,6 +160,10 @@ errout:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(textsearch_register);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(textsearch_register);
 >>>>>>> v3.18
@@ -195,6 +199,10 @@ out:
 	return err;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(textsearch_unregister);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(textsearch_unregister);
 >>>>>>> v3.18
@@ -245,6 +253,10 @@ unsigned int textsearch_find_continuous(struct ts_config *conf,
 	return textsearch_find(conf, state);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(textsearch_find_continuous);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(textsearch_find_continuous);
 >>>>>>> v3.18
@@ -259,9 +271,13 @@ EXPORT_SYMBOL(textsearch_find_continuous);
  *
  * Looks up the search algorithm module and creates a new textsearch
 <<<<<<< HEAD
+<<<<<<< HEAD
  * configuration for the specified pattern. Upon completion all
  * necessary refcnts are held and the configuration must be put back
  * using textsearch_put() after usage.
+=======
+ * configuration for the specified pattern.
+>>>>>>> v3.18
 =======
  * configuration for the specified pattern.
 >>>>>>> v3.18
@@ -315,6 +331,10 @@ errout:
 	return ERR_PTR(err);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(textsearch_prepare);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(textsearch_prepare);
 >>>>>>> v3.18
@@ -337,11 +357,14 @@ void textsearch_destroy(struct ts_config *conf)
 	kfree(conf);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 EXPORT_SYMBOL(textsearch_register);
 EXPORT_SYMBOL(textsearch_unregister);
 EXPORT_SYMBOL(textsearch_prepare);
 EXPORT_SYMBOL(textsearch_find_continuous);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(textsearch_destroy);

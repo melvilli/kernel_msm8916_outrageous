@@ -161,11 +161,14 @@ void r420_pipes_init(struct radeon_device *rdev)
 u32 r420_mc_rreg(struct radeon_device *rdev, u32 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 r;
 
 	WREG32(R_0001F8_MC_IND_INDEX, S_0001F8_MC_IND_ADDR(reg));
 	r = RREG32(R_0001FC_MC_IND_DATA);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 	u32 r;
 
@@ -173,6 +176,9 @@ u32 r420_mc_rreg(struct radeon_device *rdev, u32 reg)
 	WREG32(R_0001F8_MC_IND_INDEX, S_0001F8_MC_IND_ADDR(reg));
 	r = RREG32(R_0001FC_MC_IND_DATA);
 	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return r;
 }
@@ -180,10 +186,13 @@ u32 r420_mc_rreg(struct radeon_device *rdev, u32 reg)
 void r420_mc_wreg(struct radeon_device *rdev, u32 reg, u32 v)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WREG32(R_0001F8_MC_IND_INDEX, S_0001F8_MC_IND_ADDR(reg) |
 		S_0001F8_MC_IND_WR_EN(1));
 	WREG32(R_0001FC_MC_IND_DATA, v);
 =======
+=======
+>>>>>>> v3.18
 	unsigned long flags;
 
 	spin_lock_irqsave(&rdev->mc_idx_lock, flags);
@@ -191,6 +200,9 @@ void r420_mc_wreg(struct radeon_device *rdev, u32 reg, u32 v)
 		S_0001F8_MC_IND_WR_EN(1));
 	WREG32(R_0001FC_MC_IND_DATA, v);
 	spin_unlock_irqrestore(&rdev->mc_idx_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -233,7 +245,11 @@ static void r420_cp_errata_init(struct radeon_device *rdev)
 	radeon_ring_write(ring, rdev->config.r300.resync_scratch);
 	radeon_ring_write(ring, 0xDEADBEEF);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_ring_unlock_commit(rdev, ring);
+=======
+	radeon_ring_unlock_commit(rdev, ring, false);
+>>>>>>> v3.18
 =======
 	radeon_ring_unlock_commit(rdev, ring, false);
 >>>>>>> v3.18
@@ -250,7 +266,11 @@ static void r420_cp_errata_fini(struct radeon_device *rdev)
 	radeon_ring_write(ring, PACKET0(R300_RB3D_DSTCACHE_CTLSTAT, 0));
 	radeon_ring_write(ring, R300_RB3D_DC_FINISH);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_ring_unlock_commit(rdev, ring);
+=======
+	radeon_ring_unlock_commit(rdev, ring, false);
+>>>>>>> v3.18
 =======
 	radeon_ring_unlock_commit(rdev, ring, false);
 >>>>>>> v3.18
@@ -357,6 +377,10 @@ int r420_resume(struct radeon_device *rdev)
 int r420_suspend(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_pm_suspend(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_suspend(rdev);
 >>>>>>> v3.18
@@ -374,6 +398,10 @@ int r420_suspend(struct radeon_device *rdev)
 void r420_fini(struct radeon_device *rdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	radeon_pm_fini(rdev);
+>>>>>>> v3.18
 =======
 	radeon_pm_fini(rdev);
 >>>>>>> v3.18
@@ -474,6 +502,12 @@ int r420_init(struct radeon_device *rdev)
 	r420_set_reg_safe(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Initialize power management */
+	radeon_pm_init(rdev);
+
+>>>>>>> v3.18
 =======
 	/* Initialize power management */
 	radeon_pm_init(rdev);

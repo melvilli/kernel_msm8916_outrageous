@@ -92,8 +92,13 @@ struct tsl2x7x_settings {
 struct tsl2X7X_platform_data {
 	int (*platform_power)(struct device *dev, pm_message_t);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*power_on)      (struct iio_dev *indio_dev);
 	int (*power_off)     (struct i2c_client *dev);
+=======
+	int (*power_on)(struct iio_dev *indio_dev);
+	int (*power_off)(struct i2c_client *dev);
+>>>>>>> v3.18
 =======
 	int (*power_on)(struct iio_dev *indio_dev);
 	int (*power_off)(struct i2c_client *dev);

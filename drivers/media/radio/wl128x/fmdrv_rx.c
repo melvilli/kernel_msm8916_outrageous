@@ -117,7 +117,11 @@ int fm_rx_set_freq(struct fmdev *fmdev, u32 freq)
 		goto exit;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	curr_frq = be16_to_cpu(curr_frq);
+=======
+	curr_frq = be16_to_cpu((__force __be16)curr_frq);
+>>>>>>> v3.18
 =======
 	curr_frq = be16_to_cpu((__force __be16)curr_frq);
 >>>>>>> v3.18
@@ -194,7 +198,11 @@ int fm_rx_seek(struct fmdev *fmdev, u32 seek_upward,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	curr_frq = be16_to_cpu(curr_frq);
+=======
+	curr_frq = be16_to_cpu((__force __be16)curr_frq);
+>>>>>>> v3.18
 =======
 	curr_frq = be16_to_cpu((__force __be16)curr_frq);
 >>>>>>> v3.18
@@ -294,7 +302,11 @@ again:
 			return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		curr_frq = be16_to_cpu(curr_frq);
+=======
+		curr_frq = be16_to_cpu((__force __be16)curr_frq);
+>>>>>>> v3.18
 =======
 		curr_frq = be16_to_cpu((__force __be16)curr_frq);
 >>>>>>> v3.18
@@ -530,7 +542,11 @@ int fm_rx_set_rfdepend_softmute(struct fmdev *fmdev, u8 rfdepend_mute)
 int fm_rx_get_rssi_level(struct fmdev *fmdev, u16 *rssilvl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 curr_rssi_lel;
+=======
+	__be16 curr_rssi_lel;
+>>>>>>> v3.18
 =======
 	__be16 curr_rssi_lel;
 >>>>>>> v3.18
@@ -625,7 +641,11 @@ int fm_rx_set_stereo_mono(struct fmdev *fmdev, u16 mode)
 int fm_rx_get_stereo_mono(struct fmdev *fmdev, u16 *mode)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 curr_mode;
+=======
+	__be16 curr_mode;
+>>>>>>> v3.18
 =======
 	__be16 curr_mode;
 >>>>>>> v3.18

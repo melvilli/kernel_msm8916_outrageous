@@ -332,7 +332,11 @@ static inline void pfx##write##bwlq(type val,				\
 			local_irq_save(__flags);			\
 		__asm__ __volatile__(					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			".set	mips3"		"\t\t# __writeq""\n\t"	\
+=======
+			".set	arch=r4000"	"\t\t# __writeq""\n\t"	\
+>>>>>>> v3.18
 =======
 			".set	arch=r4000"	"\t\t# __writeq""\n\t"	\
 >>>>>>> v3.18
@@ -366,7 +370,11 @@ static inline type pfx##read##bwlq(const volatile void __iomem *mem)	\
 			local_irq_save(__flags);			\
 		__asm__ __volatile__(					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			".set	mips3"		"\t\t# __readq" "\n\t"	\
+=======
+			".set	arch=r4000"	"\t\t# __readq" "\n\t"	\
+>>>>>>> v3.18
 =======
 			".set	arch=r4000"	"\t\t# __readq" "\n\t"	\
 >>>>>>> v3.18
@@ -463,12 +471,18 @@ __BUILDIO(q, u64)
 #define readq_relaxed			readq
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define writeb_relaxed			writeb
 #define writew_relaxed			writew
 #define writel_relaxed			writel
 #define writeq_relaxed			writeq
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define readb_be(addr)							\
 	__raw_readb((__force unsigned *)(addr))
@@ -596,7 +610,11 @@ static inline void memcpy_toio(volatile void __iomem *dst, const void *src, int 
  * This API used to be exported; it now is for arch code internal use only.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_DMA_NONCOHERENT
+=======
+#if defined(CONFIG_DMA_NONCOHERENT) || defined(CONFIG_DMA_MAYBE_COHERENT)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_DMA_NONCOHERENT) || defined(CONFIG_DMA_MAYBE_COHERENT)
 >>>>>>> v3.18
@@ -619,7 +637,11 @@ extern void (*_dma_cache_inv)(unsigned long start, unsigned long size);
 	do { (void) (start); (void) (size); } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_DMA_NONCOHERENT */
+=======
+#endif /* CONFIG_DMA_NONCOHERENT || CONFIG_DMA_MAYBE_COHERENT */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_DMA_NONCOHERENT || CONFIG_DMA_MAYBE_COHERENT */
 >>>>>>> v3.18

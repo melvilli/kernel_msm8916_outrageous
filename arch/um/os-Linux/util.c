@@ -95,7 +95,10 @@ static inline void __attribute__ ((noreturn)) uml_abort(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * UML helper threads must not handle SIGWINCH/INT/TERM
  */
@@ -106,6 +109,9 @@ void os_fix_helper_signals(void)
 	signal(SIGTERM, SIG_DFL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void os_dump_core(void)
 {

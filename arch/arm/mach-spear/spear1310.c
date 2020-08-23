@@ -15,7 +15,10 @@
 
 #include <linux/amba/pl022.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/irqchip.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/of_platform.h>
@@ -33,6 +36,10 @@ static void __init spear1310_dt_init(void)
 {
 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	platform_device_register_simple("spear-cpufreq", -1, NULL, 0);
+>>>>>>> v3.18
 =======
 	platform_device_register_simple("spear-cpufreq", -1, NULL, 0);
 >>>>>>> v3.18
@@ -50,7 +57,11 @@ static const char * const spear1310_dt_board_compat[] = {
  * 0xD8000000		0xFA000000
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct map_desc spear1310_io_desc[] __initdata = {
+=======
+static struct map_desc spear1310_io_desc[] __initdata = {
+>>>>>>> v3.18
 =======
 static struct map_desc spear1310_io_desc[] __initdata = {
 >>>>>>> v3.18
@@ -72,7 +83,10 @@ DT_MACHINE_START(SPEAR1310_DT, "ST SPEAr1310 SoC with Flattened Device Tree")
 	.smp		=	smp_ops(spear13xx_smp_ops),
 	.map_io		=	spear1310_map_io,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_irq	=	irqchip_init,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_time	=	spear13xx_timer_init,

@@ -1,6 +1,7 @@
 MSM SoC HSUSB controllers
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 OTG:
 
 Required properties :
@@ -267,6 +268,8 @@ Example MSM HSUSB EHCI controller device node :
 		qcom,vdd-voltage-level = <1 2 3 5 7>;
 		qcom,usb2-enable-uicc;
 =======
+=======
+>>>>>>> v3.18
 EHCI
 
 Required properties:
@@ -359,5 +362,8 @@ Example HSUSB OTG controller device node:
         qcom,otg-control = <1>;
         qcom,phy-init-sequence = < -1 0x63 >;
         qcom,vdd-levels = <1 5 7>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

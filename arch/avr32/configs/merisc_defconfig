@@ -47,7 +47,10 @@ CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 CONFIG_MTD=y
 CONFIG_MTD_CONCAT=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MTD_PARTITIONS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_MTD_CHAR=y
@@ -60,7 +63,10 @@ CONFIG_MTD_PHYSMAP=y
 CONFIG_MTD_BLOCK2MTD=y
 CONFIG_BLK_DEV_LOOP=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_ATMEL_PWM=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_ATMEL_SSC=y
@@ -111,7 +117,11 @@ CONFIG_MMC_ATMELMCI=y
 CONFIG_NEW_LEDS=y
 CONFIG_LEDS_CLASS=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_LEDS_ATMEL_PWM=y
+=======
+CONFIG_LEDS_PWM=y
+>>>>>>> v3.18
 =======
 CONFIG_LEDS_PWM=y
 >>>>>>> v3.18
@@ -121,6 +131,11 @@ CONFIG_RTC_DRV_PCF8563=y
 CONFIG_DMADEVICES=y
 CONFIG_UIO=y
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_PWM=y
+CONFIG_PWM_ATMEL=m
+>>>>>>> v3.18
 =======
 CONFIG_PWM=y
 CONFIG_PWM_ATMEL=m

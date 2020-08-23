@@ -7,6 +7,7 @@
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -64,6 +65,8 @@ static inline void dbg_setup(u8 ep_num, const struct usb_ctrlrequest *req)
 static inline void dbg_print_reg(const char *name, int reg)
 {  }
 =======
+=======
+>>>>>>> v3.18
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2  of
  * the License as published by the Free Software Foundation.
@@ -278,6 +281,9 @@ void dwc3_trace(void (*trace)(struct va_format *), const char *fmt, ...);
 extern int dwc3_debugfs_init(struct dwc3 *);
 extern void dwc3_debugfs_exit(struct dwc3 *);
 #else
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int dwc3_debugfs_init(struct dwc3 *d)
 {  return 0;  }
@@ -285,7 +291,11 @@ static inline void dwc3_debugfs_exit(struct dwc3 *d)
 {  }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#endif /* __DWC3_DEBUG_H */
+>>>>>>> v3.18
 =======
 #endif /* __DWC3_DEBUG_H */
 >>>>>>> v3.18

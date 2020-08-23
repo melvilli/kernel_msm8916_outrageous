@@ -233,7 +233,10 @@ static int __exit amiga_parallel_remove(struct platform_device *pdev)
 		free_irq(IRQ_AMIGA_CIAA_FLG, port);
 	parport_put_port(port);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

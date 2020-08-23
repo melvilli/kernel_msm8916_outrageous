@@ -458,7 +458,11 @@ out_invalid:
 	if (LOG_INVALID(net, IPPROTO_DCCP))
 		nf_log_packet(net, nf_ct_l3num(ct), 0, skb, NULL, NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      NULL, msg);
+=======
+			      NULL, "%s", msg);
+>>>>>>> v3.18
 =======
 			      NULL, "%s", msg);
 >>>>>>> v3.18
@@ -619,7 +623,11 @@ static int dccp_error(struct net *net, struct nf_conn *tmpl,
 out_invalid:
 	if (LOG_INVALID(net, IPPROTO_DCCP))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nf_log_packet(net, pf, 0, skb, NULL, NULL, NULL, msg);
+=======
+		nf_log_packet(net, pf, 0, skb, NULL, NULL, NULL, "%s", msg);
+>>>>>>> v3.18
 =======
 		nf_log_packet(net, pf, 0, skb, NULL, NULL, NULL, "%s", msg);
 >>>>>>> v3.18

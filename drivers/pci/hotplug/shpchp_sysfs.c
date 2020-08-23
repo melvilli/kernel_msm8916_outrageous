@@ -39,7 +39,11 @@ static ssize_t show_ctrl (struct device *dev, struct device_attribute *attr, cha
 {
 	struct pci_dev *pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char * out = buf;
+=======
+	char *out = buf;
+>>>>>>> v3.18
 =======
 	char *out = buf;
 >>>>>>> v3.18

@@ -9,11 +9,14 @@
 #include <uapi/asm/ptrace.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASSEMBLY__
 
 extern long psw_kernel_bits;
 extern long psw_user_bits;
 =======
+=======
+>>>>>>> v3.18
 #define PIF_SYSCALL		0	/* inside a system call */
 #define PIF_PER_TRAP		1	/* deliver sigtrap on return to user */
 
@@ -71,6 +74,9 @@ enum {
 	typecheck(psw_t, __psw);		\
 	&(*(struct psw_bits *)(&(__psw)));	\
 }))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -85,7 +91,13 @@ struct pt_regs
 	unsigned long orig_gpr2;
 	unsigned int int_code;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long int_parm_long;
+=======
+	unsigned int int_parm;
+	unsigned long int_parm_long;
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned int int_parm;
 	unsigned long int_parm_long;
@@ -142,7 +154,10 @@ struct per_struct_kernel {
 #define PER_CONTROL_ALTERATION		0x00200000UL
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void set_pt_regs_flag(struct pt_regs *regs, int flag)
 {
 	regs->flags |= (1U << flag);
@@ -158,12 +173,19 @@ static inline int test_pt_regs_flag(struct pt_regs *regs, int flag)
 	return !!(regs->flags & (1U << flag));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * These are defined as per linux/ptrace.h, which see.
  */
 #define arch_has_single_step()	(1)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define arch_has_block_step()	(1)
+>>>>>>> v3.18
 =======
 #define arch_has_block_step()	(1)
 >>>>>>> v3.18
@@ -179,13 +201,19 @@ static inline long regs_return_value(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void instruction_pointer_set(struct pt_regs *regs,
 					   unsigned long val)
 {
 	regs->psw.addr = val | PSW_ADDR_AMODE;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int regs_query_register_offset(const char *name);
 const char *regs_query_register_name(unsigned int offset);

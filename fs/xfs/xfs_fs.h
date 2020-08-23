@@ -234,6 +234,7 @@ typedef struct xfs_fsop_resblks {
 #define XFS_FSOP_GEOM_FLAGS_SECTOR	0x0200	/* sector sizes >1BB	*/
 #define XFS_FSOP_GEOM_FLAGS_ATTR2	0x0400	/* inline attributes rework */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XFS_FSOP_GEOM_FLAGS_PROJID32	0x0800  /* 32-bit project IDs	*/
 #define XFS_FSOP_GEOM_FLAGS_DIRV2CI	0x1000	/* ASCII only CI names	*/
 #define XFS_FSOP_GEOM_FLAGS_LAZYSB	0x4000	/* lazy superblock counters */
@@ -243,6 +244,8 @@ typedef struct xfs_fsop_resblks {
 /*
  * Minimum and maximum sizes need for growth checks
 =======
+=======
+>>>>>>> v3.18
 #define XFS_FSOP_GEOM_FLAGS_PROJID32	0x0800	/* 32-bit project IDs	*/
 #define XFS_FSOP_GEOM_FLAGS_DIRV2CI	0x1000	/* ASCII only CI names	*/
 #define XFS_FSOP_GEOM_FLAGS_LAZYSB	0x4000	/* lazy superblock counters */
@@ -254,6 +257,9 @@ typedef struct xfs_fsop_resblks {
  * Minimum and maximum sizes need for growth checks.
  *
  * Block counts are in units of filesystem blocks, not basic blocks.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 #define XFS_MIN_AG_BLOCKS	64
@@ -267,8 +273,13 @@ typedef struct xfs_fsop_resblks {
 
 /* Used for sanity checks on superblock */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XFS_MAX_DBLOCKS(s) ((xfs_drfsbno_t)(s)->sb_agcount * (s)->sb_agblocks)
 #define XFS_MIN_DBLOCKS(s) ((xfs_drfsbno_t)((s)->sb_agcount - 1) *	\
+=======
+#define XFS_MAX_DBLOCKS(s) ((xfs_rfsblock_t)(s)->sb_agcount * (s)->sb_agblocks)
+#define XFS_MIN_DBLOCKS(s) ((xfs_rfsblock_t)((s)->sb_agcount - 1) *	\
+>>>>>>> v3.18
 =======
 #define XFS_MAX_DBLOCKS(s) ((xfs_rfsblock_t)(s)->sb_agcount * (s)->sb_agblocks)
 #define XFS_MIN_DBLOCKS(s) ((xfs_rfsblock_t)((s)->sb_agcount - 1) *	\
@@ -331,7 +342,10 @@ typedef struct xfs_bstat {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Project quota id helpers (previously projid was 16bit only
  * and using two 16bit values to hold new 32bit projid was choosen
  * to retain compatibility with "old" filesystems).
@@ -343,6 +357,9 @@ bstat_get_projid(struct xfs_bstat *bs)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * The user-level BulkStat Request interface structure.
  */
@@ -378,7 +395,11 @@ typedef struct xfs_error_injection {
  */
 #define XFS_EOFBLOCKS_VERSION		1
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct xfs_eofblocks {
+=======
+struct xfs_fs_eofblocks {
+>>>>>>> v3.18
 =======
 struct xfs_fs_eofblocks {
 >>>>>>> v3.18
@@ -399,6 +420,12 @@ struct xfs_fs_eofblocks {
 #define XFS_EOF_FLAGS_PRID		(1 << 3) /* filter by project id */
 #define XFS_EOF_FLAGS_MINFILESIZE	(1 << 4) /* filter by min file size */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define XFS_EOF_FLAGS_UNION		(1 << 5) /* union filter algorithm;
+						  * kernel only, not included in
+						  * valid mask */
+>>>>>>> v3.18
 =======
 #define XFS_EOF_FLAGS_UNION		(1 << 5) /* union filter algorithm;
 						  * kernel only, not included in
@@ -494,7 +521,10 @@ typedef struct xfs_handle {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Structure passed to XFS_IOC_SWAPEXT
  */
 typedef struct xfs_swapext
@@ -510,6 +540,9 @@ typedef struct xfs_swapext
 } xfs_swapext_t;
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Flags for going down operation
  */
@@ -549,7 +582,11 @@ typedef struct xfs_swapext
 #define XFS_IOC_GETBMAPX	_IOWR('X', 56, struct getbmap)
 #define XFS_IOC_ZERO_RANGE	_IOW ('X', 57, struct xfs_flock64)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define XFS_IOC_FREE_EOFBLOCKS	_IOR ('X', 58, struct xfs_eofblocks)
+=======
+#define XFS_IOC_FREE_EOFBLOCKS	_IOR ('X', 58, struct xfs_fs_eofblocks)
+>>>>>>> v3.18
 =======
 #define XFS_IOC_FREE_EOFBLOCKS	_IOR ('X', 58, struct xfs_fs_eofblocks)
 >>>>>>> v3.18
@@ -577,9 +614,12 @@ typedef struct xfs_swapext
 #define XFS_IOC_ERROR_CLEARALL	     _IOW ('X', 117, struct xfs_error_injection)
 /*	XFS_IOC_ATTRCTL_BY_HANDLE -- deprecated 118	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*	XFS_IOC_FREEZE		  -- FIFREEZE   119	 */
 /*	XFS_IOC_THAW		  -- FITHAW     120	 */
 =======
+=======
+>>>>>>> v3.18
 
 /*	XFS_IOC_FREEZE		  -- FIFREEZE   119	 */
 /*	XFS_IOC_THAW		  -- FITHAW     120	 */
@@ -588,6 +628,9 @@ typedef struct xfs_swapext
 #define XFS_IOC_THAW		     _IOWR('X', 120, int)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define XFS_IOC_FSSETDM_BY_HANDLE    _IOW ('X', 121, struct xfs_fsop_setdm_handlereq)
 #define XFS_IOC_ATTRLIST_BY_HANDLE   _IOW ('X', 122, struct xfs_fsop_attrlist_handlereq)

@@ -562,6 +562,10 @@ static struct platform_pwm_backlight_data backlight_data = {
 	.dft_brightness = 100,
 	.pwm_period_ns  = 30923,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.enable_gpio    = -1,
+>>>>>>> v3.18
 =======
 	.enable_gpio    = -1,
 >>>>>>> v3.18
@@ -578,7 +582,12 @@ static struct platform_device backlight = {
 
 static struct pwm_lookup hx4700_pwm_lookup[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PWM_LOOKUP("pxa27x-pwm.1", 0, "pwm-backlight", NULL),
+=======
+	PWM_LOOKUP("pxa27x-pwm.1", 0, "pwm-backlight", NULL,
+		   30923, PWM_POLARITY_NORMAL),
+>>>>>>> v3.18
 =======
 	PWM_LOOKUP("pxa27x-pwm.1", 0, "pwm-backlight", NULL,
 		   30923, PWM_POLARITY_NORMAL),
@@ -901,8 +910,11 @@ static void __init hx4700_init(void)
 	gpio_set_value(GPIO71_HX4700_ASIC3_nRESET, 1);
 	mdelay(10);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	regulator_has_full_constraints();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

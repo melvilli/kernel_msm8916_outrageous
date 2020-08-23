@@ -3,6 +3,7 @@
 #include "ncp_fs_sb.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* define because it is easy to change PRINTK to {*}PRINTK */
 #define PRINTK(format, args...) printk(KERN_DEBUG format , ## args)
 
@@ -12,6 +13,8 @@
 #else
 #define PPRINTK(format, args...)
 =======
+=======
+>>>>>>> v3.18
 #undef NCPFS_PARANOIA
 #ifdef NCPFS_PARANOIA
 #define ncp_vdbg(fmt, ...)					\
@@ -22,12 +25,16 @@ do {								\
 	if (0)							\
 		pr_debug(fmt, ##__VA_ARGS__);			\
 } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
 #ifndef DEBUG_NCP
 #define DEBUG_NCP 0
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if DEBUG_NCP > 0
 #define DPRINTK(format, args...) PRINTK(format , ## args)
@@ -41,6 +48,8 @@ do {								\
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 
 #if DEBUG_NCP > 0 && !defined(DEBUG)
 #define DEBUG
@@ -52,6 +61,9 @@ do {								\
 		pr_debug(fmt, ##__VA_ARGS__);			\
 } while (0)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NCP_MAX_RPC_TIMEOUT (6*HZ)
 

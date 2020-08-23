@@ -10,6 +10,10 @@
 #include <linux/types.h>
 #include <asm/cmpxchg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/barrier.h>
+>>>>>>> v3.18
 =======
 #include <asm/barrier.h>
 >>>>>>> v3.18
@@ -18,8 +22,13 @@
 #define ATOMIC64_INIT(i)	{ (i) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
 #define atomic64_read(v)	(*(volatile long *)&(v)->counter)
+=======
+#define atomic_read(v)		ACCESS_ONCE((v)->counter)
+#define atomic64_read(v)	ACCESS_ONCE((v)->counter)
+>>>>>>> v3.18
 =======
 #define atomic_read(v)		ACCESS_ONCE((v)->counter)
 #define atomic64_read(v)	ACCESS_ONCE((v)->counter)
@@ -28,6 +37,7 @@
 #define atomic_set(v, i)	(((v)->counter) = i)
 #define atomic64_set(v, i)	(((v)->counter) = i)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void atomic_add(int, atomic_t *);
 extern void atomic64_add(long, atomic64_t *);
@@ -51,6 +61,8 @@ extern long atomic64_sub_ret(long, atomic64_t *);
 #define atomic_add_return(i, v) atomic_add_ret(i, v)
 #define atomic64_add_return(i, v) atomic64_add_ret(i, v)
 =======
+=======
+>>>>>>> v3.18
 #define ATOMIC_OP(op)							\
 void atomic_##op(int, atomic_t *);					\
 void atomic64_##op(long, atomic64_t *);
@@ -73,6 +85,9 @@ ATOMIC_OPS(sub)
 
 #define atomic_inc_return(v)   atomic_add_return(1, v)
 #define atomic64_inc_return(v) atomic64_add_return(1, v)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -87,17 +102,23 @@ ATOMIC_OPS(sub)
 #define atomic64_inc_and_test(v) (atomic64_inc_return(v) == 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_sub_and_test(i, v) (atomic_sub_ret(i, v) == 0)
 #define atomic64_sub_and_test(i, v) (atomic64_sub_ret(i, v) == 0)
 
 #define atomic_dec_and_test(v) (atomic_sub_ret(1, v) == 0)
 #define atomic64_dec_and_test(v) (atomic64_sub_ret(1, v) == 0)
 =======
+=======
+>>>>>>> v3.18
 #define atomic_sub_and_test(i, v) (atomic_sub_return(i, v) == 0)
 #define atomic64_sub_and_test(i, v) (atomic64_sub_return(i, v) == 0)
 
 #define atomic_dec_and_test(v) (atomic_sub_return(1, v) == 0)
 #define atomic64_dec_and_test(v) (atomic64_sub_return(1, v) == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define atomic_inc(v) atomic_add(1, v)
@@ -107,8 +128,13 @@ ATOMIC_OPS(sub)
 #define atomic64_dec(v) atomic64_sub(1, v)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define atomic_add_negative(i, v) (atomic_add_ret(i, v) < 0)
 #define atomic64_add_negative(i, v) (atomic64_add_ret(i, v) < 0)
+=======
+#define atomic_add_negative(i, v) (atomic_add_return(i, v) < 0)
+#define atomic64_add_negative(i, v) (atomic64_add_return(i, v) < 0)
+>>>>>>> v3.18
 =======
 #define atomic_add_negative(i, v) (atomic_add_return(i, v) < 0)
 #define atomic64_add_negative(i, v) (atomic64_add_return(i, v) < 0)
@@ -154,6 +180,7 @@ static inline long atomic64_add_unless(atomic64_t *v, long a, long u)
 #define atomic64_inc_not_zero(v) atomic64_add_unless((v), 1, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern long atomic64_dec_if_positive(atomic64_t *v);
 
 /* Atomic operations are already serializing */
@@ -161,6 +188,9 @@ extern long atomic64_dec_if_positive(atomic64_t *v);
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
+=======
+long atomic64_dec_if_positive(atomic64_t *v);
+>>>>>>> v3.18
 =======
 long atomic64_dec_if_positive(atomic64_t *v);
 >>>>>>> v3.18

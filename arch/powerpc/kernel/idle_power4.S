@@ -47,7 +47,11 @@ END_FTR_SECTION_IFCLR(CPU_FTR_CAN_NAP)
 	std	r0,16(r1)
 	stdu    r1,-128(r1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	.trace_hardirqs_on
+=======
+	bl	trace_hardirqs_on
+>>>>>>> v3.18
 =======
 	bl	trace_hardirqs_on
 >>>>>>> v3.18

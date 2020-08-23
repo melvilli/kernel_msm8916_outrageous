@@ -35,15 +35,21 @@ extern unsigned long __toc_start;
 struct lppaca lppaca[] = {
 	[0 ... (NR_LPPACAS-1)] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.desc = 0xd397d781,	/* "LpPa" */
 		.size = sizeof(struct lppaca),
 		.fpregs_in_use = 1,
 		.slb_count = 64,
 =======
+=======
+>>>>>>> v3.18
 		.desc = cpu_to_be32(0xd397d781),	/* "LpPa" */
 		.size = cpu_to_be16(sizeof(struct lppaca)),
 		.fpregs_in_use = 1,
 		.slb_count = cpu_to_be16(64),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.vmxregs_in_use = 0,
 		.page_ins = 0,
@@ -54,7 +60,11 @@ static struct lppaca *extra_lppacas;
 static long __initdata lppaca_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void allocate_lppacas(int nr_cpus, unsigned long limit)
+=======
+static void __init allocate_lppacas(int nr_cpus, unsigned long limit)
+>>>>>>> v3.18
 =======
 static void __init allocate_lppacas(int nr_cpus, unsigned long limit)
 >>>>>>> v3.18
@@ -69,7 +79,11 @@ static void __init allocate_lppacas(int nr_cpus, unsigned long limit)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct lppaca *new_lppaca(int cpu)
+=======
+static struct lppaca * __init new_lppaca(int cpu)
+>>>>>>> v3.18
 =======
 static struct lppaca * __init new_lppaca(int cpu)
 >>>>>>> v3.18
@@ -86,7 +100,11 @@ static struct lppaca * __init new_lppaca(int cpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void free_lppacas(void)
+=======
+static void __init free_lppacas(void)
+>>>>>>> v3.18
 =======
 static void __init free_lppacas(void)
 >>>>>>> v3.18
@@ -118,6 +136,7 @@ static inline void free_lppacas(void) { }
  * 3 persistent SLBs are registered here.  The buffer will be zero
  * initially, hence will all be invaild until we actually write them.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 struct slb_shadow slb_shadow[] __cacheline_aligned = {
 	[0 ... (NR_CPUS-1)] = {
@@ -126,6 +145,8 @@ struct slb_shadow slb_shadow[] __cacheline_aligned = {
 	},
 };
 =======
+=======
+>>>>>>> v3.18
  *
  * If you make the number of persistent SLB entries dynamic, please also
  * update PR KVM to flush and restore them accordingly.
@@ -152,6 +173,9 @@ static struct slb_shadow * __init init_slb_shadow(int cpu)
 #else /* CONFIG_PPC_STD_MMU_64 */
 
 static void __init allocate_slb_shadows(int nr_cpus, int limit) { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* CONFIG_PPC_STD_MMU_64 */
@@ -185,7 +209,12 @@ void __init initialise_paca(struct paca_struct *new_paca, int cpu)
 	new_paca->kernel_toc = kernel_toc;
 	new_paca->kernelbase = (unsigned long) _stext;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_paca->kernel_msr = MSR_KERNEL;
+=======
+	/* Only set MSR:IR/DR when MMU is initialized */
+	new_paca->kernel_msr = MSR_KERNEL & ~(MSR_IR | MSR_DR);
+>>>>>>> v3.18
 =======
 	/* Only set MSR:IR/DR when MMU is initialized */
 	new_paca->kernel_msr = MSR_KERNEL & ~(MSR_IR | MSR_DR);
@@ -196,9 +225,12 @@ void __init initialise_paca(struct paca_struct *new_paca, int cpu)
 	new_paca->data_offset = 0xfeeeeeeeeeeeeeeeULL;
 #ifdef CONFIG_PPC_STD_MMU_64
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_paca->slb_shadow_ptr = &slb_shadow[cpu];
 #endif /* CONFIG_PPC_STD_MMU_64 */
 =======
+=======
+>>>>>>> v3.18
 	new_paca->slb_shadow_ptr = init_slb_shadow(cpu);
 #endif /* CONFIG_PPC_STD_MMU_64 */
 
@@ -206,6 +238,9 @@ void __init initialise_paca(struct paca_struct *new_paca, int cpu)
 	/* For now -- if we have threads this will be adjusted later */
 	new_paca->tcd_ptr = &new_paca->tcd;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -254,6 +289,11 @@ void __init allocate_pacas(void)
 	allocate_lppacas(nr_cpu_ids, limit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	allocate_slb_shadows(nr_cpu_ids, limit);
+
+>>>>>>> v3.18
 =======
 	allocate_slb_shadows(nr_cpu_ids, limit);
 

@@ -6,7 +6,11 @@
 #include <asm/irq.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NR_IPI	7
+=======
+#define NR_IPI	8
+>>>>>>> v3.18
 =======
 #define NR_IPI	8
 >>>>>>> v3.18

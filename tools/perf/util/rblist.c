@@ -49,17 +49,23 @@ void rblist__remove_node(struct rblist *rblist, struct rb_node *rb_node)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rb_node *rblist__find(struct rblist *rblist, const void *entry)
 {
 	struct rb_node **p = &rblist->entries.rb_node;
 	struct rb_node *parent = NULL;
 =======
+=======
+>>>>>>> v3.18
 static struct rb_node *__rblist__findnew(struct rblist *rblist,
 					 const void *entry,
 					 bool create)
 {
 	struct rb_node **p = &rblist->entries.rb_node;
 	struct rb_node *parent = NULL, *new_node = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	while (*p != NULL) {
@@ -77,8 +83,11 @@ static struct rb_node *__rblist__findnew(struct rblist *rblist,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (create) {
 		new_node = rblist->node_new(rblist, entry);
 		if (new_node) {
@@ -99,6 +108,9 @@ struct rb_node *rblist__find(struct rblist *rblist, const void *entry)
 struct rb_node *rblist__findnew(struct rblist *rblist, const void *entry)
 {
 	return __rblist__findnew(rblist, entry, true);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

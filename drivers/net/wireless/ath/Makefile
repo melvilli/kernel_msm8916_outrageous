@@ -5,6 +5,11 @@ obj-$(CONFIG_ATH6KL)		+= ath6kl/
 obj-$(CONFIG_AR5523)		+= ar5523/
 obj-$(CONFIG_WIL6210)		+= wil6210/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_ATH10K)		+= ath10k/
+obj-$(CONFIG_WCN36XX)		+= wcn36xx/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_ATH10K)		+= ath10k/
 obj-$(CONFIG_WCN36XX)		+= wcn36xx/
@@ -16,11 +21,14 @@ ath-objs :=	main.o \
 		regd.o \
 		hw.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		key.o
 
 ath-$(CONFIG_ATH_DEBUG) += debug.o
 ccflags-y += -D__CHECK_ENDIAN__
 =======
+=======
+>>>>>>> v3.18
 		key.o \
 		dfs_pattern_detector.o \
 		dfs_pri_detector.o
@@ -31,4 +39,7 @@ ath-$(CONFIG_ATH_TRACEPOINTS) += trace.o
 ccflags-y += -D__CHECK_ENDIAN__
 
 CFLAGS_trace.o := -I$(src)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

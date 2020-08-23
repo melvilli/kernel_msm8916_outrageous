@@ -18,6 +18,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_types.h"
 #include "xfs_log.h"
 #include "xfs_trans.h"
@@ -31,6 +32,8 @@
 #include "xfs_btree.h"
 #include "xfs_mount.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_shared.h"
 #include "xfs_format.h"
 #include "xfs_log_format.h"
@@ -41,6 +44,9 @@
 #include "xfs_da_format.h"
 #include "xfs_inode.h"
 #include "xfs_btree.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_da_btree.h"
 #include "xfs_ialloc.h"
@@ -50,6 +56,11 @@
 #include "xfs_attr.h"
 #include "xfs_attr_leaf.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "xfs_trans.h"
+#include "xfs_log.h"
+>>>>>>> v3.18
 =======
 #include "xfs_trans.h"
 #include "xfs_log.h"
@@ -64,6 +75,11 @@
 #include "xfs_log_recover.h"
 #include "xfs_inode_item.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "xfs_bmap_btree.h"
+#include "xfs_filestream.h"
+>>>>>>> v3.18
 =======
 #include "xfs_bmap_btree.h"
 #include "xfs_filestream.h"

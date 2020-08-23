@@ -197,7 +197,11 @@ static int pm860x_backlight_probe(struct platform_device *pdev)
 {
 	struct pm860x_chip *chip = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pm860x_backlight_pdata *pdata = pdev->dev.platform_data;
+=======
+	struct pm860x_backlight_pdata *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct pm860x_backlight_pdata *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -221,7 +225,11 @@ static int pm860x_backlight_probe(struct platform_device *pdev)
 	res = platform_get_resource_byname(pdev, IORESOURCE_REG, "always on");
 	if (!res) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "No REG resorce for always on\n");
+=======
+		dev_err(&pdev->dev, "No REG resource for always on\n");
+>>>>>>> v3.18
 =======
 		dev_err(&pdev->dev, "No REG resource for always on\n");
 >>>>>>> v3.18
@@ -252,7 +260,11 @@ static int pm860x_backlight_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = MAX_BRIGHTNESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register(name, &pdev->dev, data,
+=======
+	bl = devm_backlight_device_register(&pdev->dev, name, &pdev->dev, data,
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev, name, &pdev->dev, data,
 >>>>>>> v3.18
@@ -268,6 +280,7 @@ static int pm860x_backlight_probe(struct platform_device *pdev)
 	/* read current backlight */
 	ret = pm860x_backlight_get_brightness(bl);
 	if (ret < 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out_brt;
 
@@ -285,10 +298,15 @@ static int pm860x_backlight_remove(struct platform_device *pdev)
 	backlight_device_unregister(bl);
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 
 	backlight_update_status(bl);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -296,10 +314,15 @@ static struct platform_driver pm860x_backlight_driver = {
 	.driver		= {
 		.name	= "88pm860x-backlight",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
 	},
 	.probe		= pm860x_backlight_probe,
 	.remove		= pm860x_backlight_remove,
+=======
+	},
+	.probe		= pm860x_backlight_probe,
+>>>>>>> v3.18
 =======
 	},
 	.probe		= pm860x_backlight_probe,

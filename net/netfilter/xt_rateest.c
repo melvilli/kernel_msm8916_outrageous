@@ -19,7 +19,11 @@ xt_rateest_mt(const struct sk_buff *skb, struct xt_action_param *par)
 {
 	const struct xt_rateest_match_info *info = par->matchinfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gnet_stats_rate_est *r;
+=======
+	struct gnet_stats_rate_est64 *r;
+>>>>>>> v3.18
 =======
 	struct gnet_stats_rate_est64 *r;
 >>>>>>> v3.18

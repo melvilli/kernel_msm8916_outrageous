@@ -77,6 +77,7 @@ static struct genl_family tipc_genl_family = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_ops tipc_genl_ops = {
 	.cmd		= TIPC_GENL_CMD,
 	.doit		= handle_cmd,
@@ -85,6 +86,8 @@ static struct genl_ops tipc_genl_ops = {
 static int tipc_genl_family_registered;
 
 =======
+=======
+>>>>>>> v3.18
 static struct genl_ops tipc_genl_ops[] = {
 	{
 		.cmd		= TIPC_GENL_CMD,
@@ -92,14 +95,21 @@ static struct genl_ops tipc_genl_ops[] = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int tipc_netlink_start(void)
 {
 	int res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = genl_register_family_with_ops(&tipc_genl_family,
 		&tipc_genl_ops, 1);
+=======
+	res = genl_register_family_with_ops(&tipc_genl_family, tipc_genl_ops);
+>>>>>>> v3.18
 =======
 	res = genl_register_family_with_ops(&tipc_genl_family, tipc_genl_ops);
 >>>>>>> v3.18
@@ -108,8 +118,11 @@ int tipc_netlink_start(void)
 		return res;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	tipc_genl_family_registered = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -118,11 +131,15 @@ int tipc_netlink_start(void)
 void tipc_netlink_stop(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tipc_genl_family_registered)
 		return;
 
 	genl_unregister_family(&tipc_genl_family);
 	tipc_genl_family_registered = 0;
+=======
+	genl_unregister_family(&tipc_genl_family);
+>>>>>>> v3.18
 =======
 	genl_unregister_family(&tipc_genl_family);
 >>>>>>> v3.18

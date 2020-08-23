@@ -29,7 +29,10 @@ static inline cycles_t get_cycles(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern unsigned long (*mach_random_get_entropy)(void);
 
 static inline unsigned long random_get_entropy(void)
@@ -40,5 +43,8 @@ static inline unsigned long random_get_entropy(void)
 }
 #define random_get_entropy	random_get_entropy
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

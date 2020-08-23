@@ -17,9 +17,14 @@
 #include <linux/pci.h>
 #include <linux/usb/hcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 
 #include "usb.h"
+=======
+
+#include "hub.h"
+>>>>>>> v3.18
 =======
 
 #include "hub.h"
@@ -62,6 +67,11 @@ EXPORT_SYMBOL_GPL(usb_acpi_power_manageable);
 int usb_acpi_set_power_state(struct usb_device *hdev, int index, bool enable)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct usb_hub *hub = usb_hub_to_struct_hub(hdev);
+	struct usb_port *port_dev;
+>>>>>>> v3.18
 =======
 	struct usb_hub *hub = usb_hub_to_struct_hub(hdev);
 	struct usb_port *port_dev;
@@ -72,14 +82,20 @@ int usb_acpi_set_power_state(struct usb_device *hdev, int index, bool enable)
 	int error = -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_handle = (acpi_handle)usb_get_hub_port_acpi_handle(hdev,
 		port1);
 =======
+=======
+>>>>>>> v3.18
 	if (!hub)
 		return -ENODEV;
 	port_dev = hub->ports[port1 - 1];
 
 	port_handle = (acpi_handle) usb_get_hub_port_acpi_handle(hdev, port1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!port_handle)
 		return error;
@@ -92,10 +108,16 @@ int usb_acpi_set_power_state(struct usb_device *hdev, int index, bool enable)
 	error = acpi_bus_set_power(port_handle, state);
 	if (!error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&hdev->dev, "The power of hub port %d was set to %d\n",
 			port1, enable);
 	else
 		dev_dbg(&hdev->dev, "The power of hub port failed to be set\n");
+=======
+		dev_dbg(&port_dev->dev, "acpi: power was set to %d\n", enable);
+	else
+		dev_dbg(&port_dev->dev, "acpi: power failed to be set\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&port_dev->dev, "acpi: power was set to %d\n", enable);
 	else
@@ -106,6 +128,7 @@ int usb_acpi_set_power_state(struct usb_device *hdev, int index, bool enable)
 }
 EXPORT_SYMBOL_GPL(usb_acpi_set_power_state);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int usb_acpi_check_port_connect_type(struct usb_device *hdev,
 	acpi_handle handle, int port1)
@@ -119,6 +142,8 @@ static int usb_acpi_check_port_connect_type(struct usb_device *hdev,
 	/*
 	 * Accoding to ACPI Spec 9.13. PLD indicates whether usb port is
 =======
+=======
+>>>>>>> v3.18
 static enum usb_port_connect_type usb_acpi_get_connect_type(acpi_handle handle,
 		struct acpi_pld_info *pld)
 {
@@ -129,6 +154,9 @@ static enum usb_port_connect_type usb_acpi_get_connect_type(acpi_handle handle,
 
 	/*
 	 * According to ACPI Spec 9.13. PLD indicates whether usb port is
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * user visible and _UPC indicates whether it is connectable. If
 	 * the port was visible and connectable, it could be freely connected
@@ -137,10 +165,13 @@ static enum usb_port_connect_type usb_acpi_get_connect_type(acpi_handle handle,
 	 * no connectable, the port would be not used.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	status = acpi_get_physical_device_location(handle, &pld);
 	if (ACPI_FAILURE(status))
 		return -ENODEV;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	status = acpi_evaluate_object(handle, "_UPC", NULL, &buffer);
@@ -148,7 +179,10 @@ static enum usb_port_connect_type usb_acpi_get_connect_type(acpi_handle handle,
 	if (!upc || (upc->type != ACPI_TYPE_PACKAGE)
 		|| upc->package.count != 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto out;
@@ -156,6 +190,7 @@ static enum usb_port_connect_type usb_acpi_get_connect_type(acpi_handle handle,
 
 	if (upc->package.elements[0].integer.value)
 		if (pld->user_visible)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			usb_set_hub_port_connect_type(hdev, port1,
 				USB_PORT_CONNECT_TYPE_HOT_PLUG);
@@ -177,6 +212,8 @@ static int usb_acpi_find_device(struct device *dev, acpi_handle *handle)
 	acpi_handle *parent_handle;
 	int port_num;
 =======
+=======
+>>>>>>> v3.18
 			connect_type = USB_PORT_CONNECT_TYPE_HOT_PLUG;
 		else
 			connect_type = USB_PORT_CONNECT_TYPE_HARD_WIRED;
@@ -199,6 +236,9 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 	struct usb_device *udev;
 	struct acpi_device *adev;
 	acpi_handle *parent_handle;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -216,6 +256,7 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 	 */
 	if (is_usb_device(dev)) {
 		udev = to_usb_device(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (udev->parent) {
 			enum usb_port_connect_type type;
@@ -250,6 +291,8 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 	} else if (is_usb_port(dev)) {
 		sscanf(dev_name(dev), "port%d", &port_num);
 =======
+=======
+>>>>>>> v3.18
 		if (udev->parent)
 			return NULL;
 
@@ -263,6 +306,9 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 		acpi_handle *handle;
 		acpi_status status;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Get the struct usb_device point of port's hub */
 		udev = to_usb_device(dev->parent->parent);
@@ -275,6 +321,7 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 		if (!udev->parent) {
 			struct usb_hcd *hcd = bus_to_hcd(udev->bus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int raw_port_num;
 
 			raw_port_num = usb_hcd_find_raw_port_number(hcd,
@@ -284,6 +331,8 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 			if (!*handle)
 				return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 			int raw;
 
 			raw = usb_hcd_find_raw_port_number(hcd, port1);
@@ -291,12 +340,16 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 					raw, false);
 			if (!adev)
 				return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			parent_handle =
 				usb_get_hub_port_acpi_handle(udev->parent,
 				udev->portnum);
 			if (!parent_handle)
+<<<<<<< HEAD
 <<<<<<< HEAD
 				return -ENODEV;
 
@@ -310,6 +363,8 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 				return NULL;
 
 			acpi_bus_get_device(parent_handle, &adev);
@@ -331,6 +386,9 @@ static struct acpi_device *usb_acpi_find_companion(struct device *dev)
 	}
 
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -343,7 +401,11 @@ static struct acpi_bus_type usb_acpi_bus = {
 	.name = "USB",
 	.match = usb_acpi_bus_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.find_device = usb_acpi_find_device,
+=======
+	.find_companion = usb_acpi_find_companion,
+>>>>>>> v3.18
 =======
 	.find_companion = usb_acpi_find_companion,
 >>>>>>> v3.18

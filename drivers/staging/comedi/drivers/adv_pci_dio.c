@@ -30,6 +30,10 @@ Configuration options:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -70,7 +74,10 @@ enum hw_io_access {
 
 #define SIZE_8254	   4	/* 8254 IO space length */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SIZE_8255	   4	/* 8255 IO space length */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -401,7 +408,10 @@ static const struct dio_boardtype boardtypes[] = {
 
 struct pci_dio_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char valid;		/*  card is usable */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	char GlobalIrqEnabled;	/*  1= any IRQ source is enabled */
@@ -458,6 +468,7 @@ static int pci_dio_insn_bits_di_w(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
 ==============================================================================
 */
@@ -465,19 +476,28 @@ static int pci_dio_insn_bits_do_b(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
 				  struct comedi_insn *insn, unsigned int *data)
 =======
+=======
+>>>>>>> v3.18
 static int pci_dio_insn_bits_do_b(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
 				  struct comedi_insn *insn,
 				  unsigned int *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const struct diosubd_data *d = (const struct diosubd_data *)s->private;
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data[0]) {
 		s->state &= ~data[0];
 		s->state |= (data[0] & data[1]);
+=======
+	if (comedi_dio_update_state(s, data)) {
+>>>>>>> v3.18
 =======
 	if (comedi_dio_update_state(s, data)) {
 >>>>>>> v3.18
@@ -486,6 +506,10 @@ static int pci_dio_insn_bits_do_b(struct comedi_device *dev,
 			     dev->iobase + d->addr + i);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -495,6 +519,7 @@ static int pci_dio_insn_bits_do_b(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
 ==============================================================================
 */
@@ -502,19 +527,28 @@ static int pci_dio_insn_bits_do_w(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
 				  struct comedi_insn *insn, unsigned int *data)
 =======
+=======
+>>>>>>> v3.18
 static int pci_dio_insn_bits_do_w(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
 				  struct comedi_insn *insn,
 				  unsigned int *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	const struct diosubd_data *d = (const struct diosubd_data *)s->private;
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data[0]) {
 		s->state &= ~data[0];
 		s->state |= (data[0] & data[1]);
+=======
+	if (comedi_dio_update_state(s, data)) {
+>>>>>>> v3.18
 =======
 	if (comedi_dio_update_state(s, data)) {
 >>>>>>> v3.18
@@ -523,6 +557,10 @@ static int pci_dio_insn_bits_do_w(struct comedi_device *dev,
 			     dev->iobase + d->addr + 2 * i);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -638,7 +676,11 @@ static int pci1760_unchecked_mbxrequest(struct comedi_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comedi_error(dev, "PCI-1760 mailbox request timeout!");
+=======
+	dev_err(dev->class_dev, "PCI-1760 mailbox request timeout!\n");
+>>>>>>> v3.18
 =======
 	dev_err(dev->class_dev, "PCI-1760 mailbox request timeout!\n");
 >>>>>>> v3.18
@@ -660,8 +702,13 @@ static int pci1760_mbxrequest(struct comedi_device *dev,
 {
 	if (omb[2] == CMD_ClearIMB2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comedi_error(dev,
 			     "bug! this function should not be used for CMD_ClearIMB2 command");
+=======
+		dev_err(dev->class_dev,
+			"bug! this function should not be used for CMD_ClearIMB2 command\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->class_dev,
 			"bug! this function should not be used for CMD_ClearIMB2 command\n");
@@ -671,6 +718,10 @@ static int pci1760_mbxrequest(struct comedi_device *dev,
 	if (inb(dev->iobase + IMB2) == omb[2]) {
 		int retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -694,6 +745,7 @@ static int pci1760_insn_bits_di(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
 ==============================================================================
 */
@@ -701,10 +753,15 @@ static int pci1760_insn_bits_do(struct comedi_device *dev,
 				struct comedi_subdevice *s,
 				struct comedi_insn *insn, unsigned int *data)
 =======
+=======
+>>>>>>> v3.18
 static int pci1760_insn_bits_do(struct comedi_device *dev,
 				struct comedi_subdevice *s,
 				struct comedi_insn *insn,
 				unsigned int *data)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int ret;
@@ -717,9 +774,13 @@ static int pci1760_insn_bits_do(struct comedi_device *dev,
 	unsigned char imb[4];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data[0]) {
 		s->state &= ~data[0];
 		s->state |= (data[0] & data[1]);
+=======
+	if (comedi_dio_update_state(s, data)) {
+>>>>>>> v3.18
 =======
 	if (comedi_dio_update_state(s, data)) {
 >>>>>>> v3.18
@@ -729,6 +790,10 @@ static int pci1760_insn_bits_do(struct comedi_device *dev,
 			return ret;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -895,7 +960,11 @@ static int pci1760_reset(struct comedi_device *dev)
 static int pci_dio_reset(struct comedi_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dio_boardtype *this_board = comedi_board(dev);
+=======
+	const struct dio_boardtype *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct dio_boardtype *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -907,7 +976,11 @@ static int pci_dio_reset(struct comedi_device *dev)
 		outb(0, dev->iobase + PCI1730_IDO);
 		outb(0, dev->iobase + PCI1730_IDO + 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* NO break there! */
+=======
+		/* fallthrough */
+>>>>>>> v3.18
 =======
 		/* fallthrough */
 >>>>>>> v3.18
@@ -971,7 +1044,11 @@ static int pci_dio_reset(struct comedi_device *dev)
 		outb(0x80, dev->iobase + PCI1753E_ICR2);
 		outb(0x80, dev->iobase + PCI1753E_ICR3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* NO break there! */
+=======
+		/* fallthrough */
+>>>>>>> v3.18
 =======
 		/* fallthrough */
 >>>>>>> v3.18
@@ -1065,7 +1142,11 @@ static int pci_dio_add_di(struct comedi_device *dev,
 			  const struct diosubd_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dio_boardtype *this_board = comedi_board(dev);
+=======
+	const struct dio_boardtype *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct dio_boardtype *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -1099,7 +1180,11 @@ static int pci_dio_add_do(struct comedi_device *dev,
 			  const struct diosubd_data *d)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dio_boardtype *this_board = comedi_board(dev);
+=======
+	const struct dio_boardtype *this_board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	const struct dio_boardtype *this_board = dev->board_ptr;
 >>>>>>> v3.18
@@ -1196,10 +1281,16 @@ static int pci_dio_auto_attach(struct comedi_device *dev,
 	dev->board_name = this_board->name;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -1234,16 +1325,22 @@ static int pci_dio_auto_attach(struct comedi_device *dev,
 		for (j = 0; j < this_board->sdio[i].regs; j++) {
 			s = &dev->subdevices[subdev];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			subdev_8255_init(dev, s, NULL,
 					 dev->iobase +
 					 this_board->sdio[i].addr +
 					 SIZE_8255 * j);
 =======
+=======
+>>>>>>> v3.18
 			ret = subdev_8255_init(dev, s, NULL,
 					       this_board->sdio[i].addr +
 					       j * I8255_SIZE);
 			if (ret)
 				return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			subdev++;
 		}
@@ -1266,8 +1363,11 @@ static int pci_dio_auto_attach(struct comedi_device *dev,
 		pci1760_attach(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv->valid = 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pci_dio_reset(dev);
@@ -1277,6 +1377,7 @@ static int pci_dio_auto_attach(struct comedi_device *dev,
 
 static void pci_dio_detach(struct comedi_device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct pci_dio_private *devpriv = dev->private;
 	struct comedi_subdevice *s;
@@ -1293,6 +1394,11 @@ static void pci_dio_detach(struct comedi_device *dev)
 		s->private = NULL; /* some private data is static */
 	}
 	comedi_pci_disable(dev);
+=======
+	if (dev->iobase)
+		pci_dio_reset(dev);
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 =======
 	if (dev->iobase)
 		pci_dio_reset(dev);
@@ -1317,7 +1423,11 @@ static int adv_pci_dio_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(adv_pci_dio_pci_table) = {
+=======
+static const struct pci_device_id adv_pci_dio_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id adv_pci_dio_pci_table[] = {
 >>>>>>> v3.18

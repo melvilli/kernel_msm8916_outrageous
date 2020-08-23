@@ -7,6 +7,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt)	"kexec: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt)	"kexec: " fmt
 
@@ -27,7 +32,10 @@
 #include <asm/mmu_context.h>
 #include <asm/debugreg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #include <asm/kexec-bzimage64.h>
 
 #ifdef CONFIG_KEXEC_FILE
@@ -35,6 +43,9 @@ static struct kexec_file_ops *kexec_file_loaders[] = {
 		&kexec_bzImage64_ops,
 };
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void free_transition_pgtable(struct kimage *image)
@@ -187,7 +198,10 @@ static void load_segments(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KEXEC_FILE
 /* Update purgatory as needed after various image segments have been prepared */
 static int arch_update_purgatory(struct kimage *image)
@@ -227,6 +241,9 @@ static inline int arch_update_purgatory(struct kimage *image)
 }
 #endif /* CONFIG_KEXEC_FILE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int machine_kexec_prepare(struct kimage *image)
 {
@@ -242,12 +259,18 @@ int machine_kexec_prepare(struct kimage *image)
 		return result;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* update purgatory as needed */
 	result = arch_update_purgatory(image);
 	if (result)
 		return result;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -345,9 +368,12 @@ void arch_crash_save_vmcoreinfo(void)
 	VMCOREINFO_LENGTH(node_data, MAX_NUMNODES);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 =======
+=======
+>>>>>>> v3.18
 	vmcoreinfo_append_str("KERNELOFFSET=%lx\n",
 			      (unsigned long)&_text - __START_KERNEL);
 }
@@ -549,4 +575,7 @@ overflow:
 	return -ENOEXEC;
 }
 #endif /* CONFIG_KEXEC_FILE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

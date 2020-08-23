@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_DEFINES_H_
@@ -70,6 +76,7 @@
 
 /* Extended Device Control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_CTRL_EXT_SDP3_DATA 0x00000080 /* Value of SW Defineable Pin 3 */
 /* Physical Func Reset Done Indication */
 #define E1000_CTRL_EXT_PFRSTD    0x00004000
@@ -81,6 +88,8 @@
 #define E1000_CTRL_EXT_EIAME          0x01000000
 #define E1000_CTRL_EXT_IRCA           0x00000001
 =======
+=======
+>>>>>>> v3.18
 #define E1000_CTRL_EXT_SDP2_DATA 0x00000040 /* Value of SW Defineable Pin 2 */
 #define E1000_CTRL_EXT_SDP3_DATA 0x00000080 /* Value of SW Defineable Pin 3 */
 #define E1000_CTRL_EXT_SDP2_DIR  0x00000400 /* SDP2 Data direction */
@@ -96,6 +105,9 @@
 #define E1000_CTRL_EXT_LINK_MODE_GMII	0x00000000
 #define E1000_CTRL_EXT_EIAME	0x01000000
 #define E1000_CTRL_EXT_IRCA		0x00000001
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Interrupt delay cancellation */
 /* Driver loaded bit for FW */
@@ -104,6 +116,7 @@
 /* Clear Interrupt timers after IMS clear */
 /* packet buffer parity error detection enabled */
 /* descriptor FIFO parity error detection enable */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define E1000_CTRL_EXT_PBA_CLR        0x80000000 /* PBA Clear */
 #define E1000_I2CCMD_REG_ADDR_SHIFT   16
@@ -120,6 +133,8 @@
 #define E1000_GPIE_EIAME              0x40000000
 #define E1000_GPIE_PBA                0x80000000
 =======
+=======
+>>>>>>> v3.18
 #define E1000_CTRL_EXT_PBA_CLR		0x80000000 /* PBA Clear */
 #define E1000_CTRL_EXT_PHYPDEN		0x00100000
 #define E1000_I2CCMD_REG_ADDR_SHIFT	16
@@ -137,6 +152,9 @@
 #define E1000_GPIE_MSIX_MODE		0x00000010
 #define E1000_GPIE_EIAME		0x40000000
 #define E1000_GPIE_PBA			0x80000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Receive Descriptor bit definitions */
@@ -160,17 +178,23 @@
 /* Same mask, but for extended and packet split descriptors */
 #define E1000_RXDEXT_ERR_FRAME_ERR_MASK ( \
 <<<<<<< HEAD
+<<<<<<< HEAD
     E1000_RXDEXT_STATERR_CE  |            \
     E1000_RXDEXT_STATERR_SE  |            \
     E1000_RXDEXT_STATERR_SEQ |            \
     E1000_RXDEXT_STATERR_CXE |            \
     E1000_RXDEXT_STATERR_RXE)
 =======
+=======
+>>>>>>> v3.18
 	E1000_RXDEXT_STATERR_CE  |            \
 	E1000_RXDEXT_STATERR_SE  |            \
 	E1000_RXDEXT_STATERR_SEQ |            \
 	E1000_RXDEXT_STATERR_CXE |            \
 	E1000_RXDEXT_STATERR_RXE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define E1000_MRQC_RSS_FIELD_IPV4_TCP          0x00010000
@@ -261,7 +285,12 @@
 #define E1000_CTRL_SWDPIN0  0x00040000  /* SWDPIN 0 value */
 #define E1000_CTRL_SWDPIN1  0x00080000  /* SWDPIN 1 value */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_CTRL_SWDPIO0  0x00400000  /* SWDPIN 0 Input or output */
+=======
+#define E1000_CTRL_SDP0_DIR 0x00400000  /* SDP0 Data direction */
+#define E1000_CTRL_SDP1_DIR 0x00800000  /* SDP1 Data direction */
+>>>>>>> v3.18
 =======
 #define E1000_CTRL_SDP0_DIR 0x00400000  /* SDP0 Data direction */
 #define E1000_CTRL_SDP1_DIR 0x00800000  /* SDP1 Data direction */
@@ -280,12 +309,18 @@
 
 #define E1000_CONNSW_ENRGSRC             0x4
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define E1000_CONNSW_PHYSD		0x400
 #define E1000_CONNSW_PHY_PDN		0x800
 #define E1000_CONNSW_SERDESD		0x200
 #define E1000_CONNSW_AUTOSENSE_CONF	0x2
 #define E1000_CONNSW_AUTOSENSE_EN	0x1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define E1000_PCS_CFG_PCS_EN             8
 #define E1000_PCS_LCTL_FLV_LINK_UP       1
@@ -355,13 +390,19 @@
 
 /* LED Control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_LEDCTL_LED0_MODE_SHIFT      0
 #define E1000_LEDCTL_LED0_BLINK           0x00000080
 =======
+=======
+>>>>>>> v3.18
 #define E1000_LEDCTL_LED0_MODE_SHIFT	0
 #define E1000_LEDCTL_LED0_BLINK		0x00000080
 #define E1000_LEDCTL_LED0_MODE_MASK	0x0000000F
 #define E1000_LEDCTL_LED0_IVRT		0x00000040
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define E1000_LEDCTL_MODE_LED_ON        0xE
@@ -386,6 +427,7 @@
 
 /* DMA Coalescing register fields */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_DMACR_DMACWT_MASK         0x00003FFF /* DMA Coalescing
 							* Watchdog Timer */
 #define E1000_DMACR_DMACTHR_MASK        0x00FF0000 /* DMA Coalescing Receive
@@ -394,16 +436,22 @@
 #define E1000_DMACR_DMAC_LX_MASK        0x30000000 /* Lx when no PCIe
 							* transactions */
 =======
+=======
+>>>>>>> v3.18
 #define E1000_DMACR_DMACWT_MASK         0x00003FFF /* DMA Coal Watchdog Timer */
 #define E1000_DMACR_DMACTHR_MASK        0x00FF0000 /* DMA Coal Rx Threshold */
 #define E1000_DMACR_DMACTHR_SHIFT       16
 #define E1000_DMACR_DMAC_LX_MASK        0x30000000 /* Lx when no PCIe trans */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define E1000_DMACR_DMAC_LX_SHIFT       28
 #define E1000_DMACR_DMAC_EN             0x80000000 /* Enable DMA Coalescing */
 /* DMA Coalescing BMC-to-OS Watchdog Enable */
 #define E1000_DMACR_DC_BMC2OSW_EN	0x00008000
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define E1000_DMCTXTH_DMCTTHR_MASK      0x00000FFF /* DMA Coalescing Transmit
 							* Threshold */
@@ -421,6 +469,8 @@
 #define E1000_FCRTC_RTH_COAL_MASK       0x0003FFF0 /* Flow ctrl Rcv Threshold
 							* High val */
 =======
+=======
+>>>>>>> v3.18
 #define E1000_DMCTXTH_DMCTTHR_MASK      0x00000FFF /* DMA Coal Tx Threshold */
 
 #define E1000_DMCTLX_TTLX_MASK          0x00000FFF /* Time to LX request */
@@ -431,6 +481,9 @@
 #define E1000_DMCCNT_CCOUNT_MASK        0x01FFFFFF /* DMA Coal Rx Current Cnt */
 
 #define E1000_FCRTC_RTH_COAL_MASK       0x0003FFF0 /* FC Rx Thresh High val */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define E1000_FCRTC_RTH_COAL_SHIFT      4
 #define E1000_PCIEMISC_LX_DECISION      0x00000080 /* Lx power decision */
@@ -439,6 +492,12 @@
 #define E1000_RXPBS_CFG_TS_EN           0x80000000
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define I210_RXPBSIZE_DEFAULT		0x000000A2 /* RXPBSIZE default */
+#define I210_TXPBSIZE_DEFAULT		0x04000014 /* TXPBSIZE default */
+
+>>>>>>> v3.18
 =======
 #define I210_RXPBSIZE_DEFAULT		0x000000A2 /* RXPBSIZE default */
 #define I210_TXPBSIZE_DEFAULT		0x04000014 /* TXPBSIZE default */
@@ -511,6 +570,7 @@
  */
 #define IMS_ENABLE_MASK ( \
 <<<<<<< HEAD
+<<<<<<< HEAD
     E1000_IMS_RXT0   |    \
     E1000_IMS_TXDW   |    \
     E1000_IMS_RXDMT0 |    \
@@ -518,12 +578,17 @@
     E1000_IMS_LSC    |    \
     E1000_IMS_DOUTSYNC)
 =======
+=======
+>>>>>>> v3.18
 	E1000_IMS_RXT0   |    \
 	E1000_IMS_TXDW   |    \
 	E1000_IMS_RXDMT0 |    \
 	E1000_IMS_RXSEQ  |    \
 	E1000_IMS_LSC    |    \
 	E1000_IMS_DOUTSYNC)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Interrupt Mask Set */
@@ -581,7 +646,10 @@
 
 /* Error Codes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_SUCCESS      0
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define E1000_ERR_NVM      1
@@ -650,9 +718,12 @@
 #define E1000_TIMINCA_16NS_SHIFT 24
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_TSICR_TXTS 0x00000002
 #define E1000_TSIM_TXTS 0x00000002
 =======
+=======
+>>>>>>> v3.18
 /* Time Sync Interrupt Cause/Mask Register Bits */
 
 #define TSINTR_SYS_WRAP  (1 << 0) /* SYSTIM Wrap around. */
@@ -714,6 +785,9 @@
 #define TS_SDP3_SEL_FC0  (2 << 15) /* Freq clock  0 is output on SDP3. */
 #define TS_SDP3_SEL_FC1  (3 << 15) /* Freq clock  1 is output on SDP3. */
 #define TS_SDP3_EN       (1 << 17) /* SDP3 is assigned to Tsync. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define E1000_MDICNFG_EXT_MDIO    0x80000000      /* MDI ext/int destination */
@@ -722,7 +796,10 @@
 #define E1000_MDICNFG_PHY_SHIFT   21
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define E1000_MEDIA_PORT_COPPER			1
 #define E1000_MEDIA_PORT_OTHER			2
 #define E1000_M88E1112_AUTO_COPPER_SGMII	0x2
@@ -734,6 +811,9 @@
 #define E1000_M88E1112_PAGE_ADDR		0x16
 #define E1000_M88E1112_STATUS			0x01
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* PCI Express Control */
 #define E1000_GCR_CMPL_TMOUT_MASK       0x0000F000
@@ -824,6 +904,10 @@
 #define E1000_EECD_FLUPD_I210		0x00800000 /* Update FLASH */
 #define E1000_EECD_FLUDONE_I210		0x04000000 /* Update FLASH done*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define E1000_EECD_FLASH_DETECTED_I210	0x00080000 /* FLASH detected */
+>>>>>>> v3.18
 =======
 #define E1000_EECD_FLASH_DETECTED_I210	0x00080000 /* FLASH detected */
 >>>>>>> v3.18
@@ -835,12 +919,18 @@
 #define E1000_I210_FIFO_SEL_BMC2OS_TX	0x06
 #define E1000_I210_FIFO_SEL_BMC2OS_RX	0x01
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define E1000_I210_FLASH_SECTOR_SIZE	0x1000 /* 4KB FLASH sector unit size */
 /* Secure FLASH mode requires removing MSb */
 #define E1000_I210_FW_PTR_MASK		0x7FFF
 /* Firmware code revision field word offset*/
 #define E1000_I210_FW_VER_OFFSET	328
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define E1000_EECD_FLUPD_I210		0x00800000 /* Update FLASH */
 #define E1000_EECD_FLUDONE_I210		0x04000000 /* Update FLASH done*/
@@ -881,6 +971,7 @@
 #define NVM_LED_1_CFG              0x001C
 #define NVM_LED_0_2_CFG            0x001F
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* NVM version defines */
 #define NVM_ETRACK_WORD            0x0042
@@ -896,6 +987,8 @@
 #define NVM_VER_INVALID            0xFFFF
 #define NVM_ETRACK_SHIFT               16
 =======
+=======
+>>>>>>> v3.18
 #define NVM_ETRACK_WORD            0x0042
 #define NVM_ETRACK_HIWORD          0x0043
 #define NVM_COMB_VER_OFF           0x0083
@@ -916,6 +1009,9 @@
 #define NVM_HEX_CONV			16
 #define NVM_HEX_TENS			10
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define NVM_ETS_CFG			0x003E
 #define NVM_ETS_LTHRES_DELTA_MASK	0x07C0
@@ -1014,7 +1110,11 @@
 #define M88_VENDOR           0x0141
 #define I210_I_PHY_ID        0x01410C00
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define M88E1545_E_PHY_ID    0x01410EA0
+=======
+#define M88E1543_E_PHY_ID    0x01410EA0
+>>>>>>> v3.18
 =======
 #define M88E1543_E_PHY_ID    0x01410EA0
 >>>>>>> v3.18
@@ -1140,9 +1240,15 @@
 #define E1000_EEE_LP_ADV_ADDR_I210   61          /* EEE LP Adv Register */
 #define E1000_MMDAC_FUNC_DATA        0x4000      /* Data, no post increment */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_M88E1545_PAGE_ADDR	0x16       /* Page Offset Register */
 #define E1000_M88E1545_EEE_CTRL_1	0x0
 #define E1000_M88E1545_EEE_CTRL_1_MS	0x0001     /* EEE Master/Slave */
+=======
+#define E1000_M88E1543_PAGE_ADDR	0x16       /* Page Offset Register */
+#define E1000_M88E1543_EEE_CTRL_1	0x0
+#define E1000_M88E1543_EEE_CTRL_1_MS	0x0001     /* EEE Master/Slave */
+>>>>>>> v3.18
 =======
 #define E1000_M88E1543_PAGE_ADDR	0x16       /* Page Offset Register */
 #define E1000_M88E1543_EEE_CTRL_1	0x0
@@ -1169,8 +1275,12 @@
 
 /* DMA Coalescing register fields */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define E1000_PCIEMISC_LX_DECISION      0x00000080 /* Lx power decision based
                                                       on DMA coal */
+=======
+#define E1000_PCIEMISC_LX_DECISION      0x00000080 /* Lx power on DMA coal */
+>>>>>>> v3.18
 =======
 #define E1000_PCIEMISC_LX_DECISION      0x00000080 /* Lx power on DMA coal */
 >>>>>>> v3.18

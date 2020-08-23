@@ -20,6 +20,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "au0828.h"
+
+>>>>>>> v3.18
 =======
 #include "au0828.h"
 
@@ -31,7 +36,10 @@
 #include <linux/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "au0828.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "media/tuner.h"
@@ -150,6 +158,10 @@ static int i2c_sendbytes(struct i2c_adapter *i2c_adap,
 	int i, strobe = 0;
 	struct au0828_dev *dev = i2c_adap->algo_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 i2c_speed = dev->board.i2c_clk_divider;
+>>>>>>> v3.18
 =======
 	u8 i2c_speed = dev->board.i2c_clk_divider;
 >>>>>>> v3.18
@@ -158,6 +170,7 @@ static int i2c_sendbytes(struct i2c_adapter *i2c_adap,
 
 	au0828_write(dev, AU0828_I2C_MULTIBYTE_MODE_2FF, 0x01);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Set the I2C clock */
 	if (((dev->board.tuner_type == TUNER_XC5000) ||
@@ -174,6 +187,8 @@ static int i2c_sendbytes(struct i2c_adapter *i2c_adap,
 			     dev->board.i2c_clk_divider);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (((dev->board.tuner_type == TUNER_XC5000) ||
 	     (dev->board.tuner_type == TUNER_XC5000C)) &&
 	    (dev->board.tuner_addr == msg->addr)) {
@@ -189,6 +204,9 @@ static int i2c_sendbytes(struct i2c_adapter *i2c_adap,
 	}
 	/* Set the I2C clock */
 	au0828_write(dev, AU0828_I2C_CLK_DIVIDER_202, i2c_speed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Hardware needs 8 bit addresses */
@@ -259,6 +277,10 @@ static int i2c_readbytes(struct i2c_adapter *i2c_adap,
 {
 	struct au0828_dev *dev = i2c_adap->algo_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u8 i2c_speed = dev->board.i2c_clk_divider;
+>>>>>>> v3.18
 =======
 	u8 i2c_speed = dev->board.i2c_clk_divider;
 >>>>>>> v3.18
@@ -269,10 +291,13 @@ static int i2c_readbytes(struct i2c_adapter *i2c_adap,
 	au0828_write(dev, AU0828_I2C_MULTIBYTE_MODE_2FF, 0x01);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Set the I2C clock */
 	au0828_write(dev, AU0828_I2C_CLK_DIVIDER_202,
 		     dev->board.i2c_clk_divider);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Due to xc5000c clock stretch, we cannot use full speed at
 	 * readings from xc5000, as otherwise they'll fail.
@@ -284,6 +309,9 @@ static int i2c_readbytes(struct i2c_adapter *i2c_adap,
 
 	/* Set the I2C clock */
 	au0828_write(dev, AU0828_I2C_CLK_DIVIDER_202, i2c_speed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Hardware needs 8 bit addresses */
@@ -378,7 +406,11 @@ static struct i2c_algorithm au0828_i2c_algo_template = {
 
 static struct i2c_adapter au0828_i2c_adap_template = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name              = DRIVER_NAME,
+=======
+	.name              = KBUILD_MODNAME,
+>>>>>>> v3.18
 =======
 	.name              = KBUILD_MODNAME,
 >>>>>>> v3.18
@@ -407,7 +439,11 @@ static void do_i2c_scan(char *name, struct i2c_client *c)
 		if (rc < 0)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s: i2c scan: found device @ 0x%x  [%s]\n",
+=======
+		pr_info("%s: i2c scan: found device @ 0x%x  [%s]\n",
+>>>>>>> v3.18
 =======
 		pr_info("%s: i2c scan: found device @ 0x%x  [%s]\n",
 >>>>>>> v3.18
@@ -427,7 +463,11 @@ int au0828_i2c_register(struct au0828_dev *dev)
 	dev->i2c_adap.dev.parent = &dev->usbdev->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(dev->i2c_adap.name, DRIVER_NAME,
+=======
+	strlcpy(dev->i2c_adap.name, KBUILD_MODNAME,
+>>>>>>> v3.18
 =======
 	strlcpy(dev->i2c_adap.name, KBUILD_MODNAME,
 >>>>>>> v3.18
@@ -446,17 +486,23 @@ int au0828_i2c_register(struct au0828_dev *dev)
 
 	if (0 == dev->i2c_rc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_INFO "%s: i2c bus registered\n", DRIVER_NAME);
 		if (i2c_scan)
 			do_i2c_scan(DRIVER_NAME, &dev->i2c_client);
 	} else
 		printk(KERN_INFO "%s: i2c bus register FAILED\n", DRIVER_NAME);
 =======
+=======
+>>>>>>> v3.18
 		pr_info("i2c bus registered\n");
 		if (i2c_scan)
 			do_i2c_scan(KBUILD_MODNAME, &dev->i2c_client);
 	} else
 		pr_info("i2c bus register FAILED\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return dev->i2c_rc;

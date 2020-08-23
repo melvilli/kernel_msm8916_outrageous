@@ -143,7 +143,11 @@ struct wl1271_rx_descriptor {
 } __packed;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wlcore_rx(struct wl1271 *wl, struct wl_fw_status_1 *status);
+=======
+int wlcore_rx(struct wl1271 *wl, struct wl_fw_status *status);
+>>>>>>> v3.18
 =======
 int wlcore_rx(struct wl1271 *wl, struct wl_fw_status *status);
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -110,7 +114,10 @@ acpi_ex_get_object_reference(union acpi_operand_object *obj_desc,
 
 	case ACPI_DESC_TYPE_NAMED:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -269,6 +276,10 @@ acpi_ex_do_concatenate(union acpi_operand_object *operand0,
 	switch (operand0->common.type) {
 	case ACPI_TYPE_INTEGER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -278,6 +289,10 @@ acpi_ex_do_concatenate(union acpi_operand_object *operand0,
 
 	case ACPI_TYPE_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -287,6 +302,10 @@ acpi_ex_do_concatenate(union acpi_operand_object *operand0,
 
 	case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -295,6 +314,10 @@ acpi_ex_do_concatenate(union acpi_operand_object *operand0,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -409,7 +432,11 @@ acpi_ex_do_concatenate(union acpi_operand_object *operand0,
 	*actual_return_desc = return_desc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18
@@ -547,6 +574,10 @@ acpi_ex_do_logical_numeric_op(u16 opcode,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -612,6 +643,10 @@ acpi_ex_do_logical_op(u16 opcode,
 	switch (operand0->common.type) {
 	case ACPI_TYPE_INTEGER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -621,6 +656,10 @@ acpi_ex_do_logical_op(u16 opcode,
 
 	case ACPI_TYPE_STRING:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -630,6 +669,10 @@ acpi_ex_do_logical_op(u16 opcode,
 
 	case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -638,6 +681,10 @@ acpi_ex_do_logical_op(u16 opcode,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -684,6 +731,10 @@ acpi_ex_do_logical_op(u16 opcode,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -755,6 +806,10 @@ acpi_ex_do_logical_op(u16 opcode,
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -764,7 +819,11 @@ acpi_ex_do_logical_op(u16 opcode,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18

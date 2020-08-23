@@ -22,7 +22,11 @@ struct alloc_asids_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_alloc_asids(gxio_trio_context_t * context, unsigned int count,
+=======
+int gxio_trio_alloc_asids(gxio_trio_context_t *context, unsigned int count,
+>>>>>>> v3.18
 =======
 int gxio_trio_alloc_asids(gxio_trio_context_t *context, unsigned int count,
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ struct alloc_memory_maps_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_alloc_memory_maps(gxio_trio_context_t * context,
+=======
+int gxio_trio_alloc_memory_maps(gxio_trio_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_trio_alloc_memory_maps(gxio_trio_context_t *context,
 >>>>>>> v3.18
@@ -70,7 +78,10 @@ int gxio_trio_alloc_memory_maps(gxio_trio_context_t *context,
 EXPORT_SYMBOL(gxio_trio_alloc_memory_maps);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct alloc_scatter_queues_param {
 	unsigned int count;
 	unsigned int first;
@@ -94,6 +105,9 @@ int gxio_trio_alloc_scatter_queues(gxio_trio_context_t *context,
 }
 
 EXPORT_SYMBOL(gxio_trio_alloc_scatter_queues);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct alloc_pio_regions_param {
@@ -103,7 +117,11 @@ struct alloc_pio_regions_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_alloc_pio_regions(gxio_trio_context_t * context,
+=======
+int gxio_trio_alloc_pio_regions(gxio_trio_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_trio_alloc_pio_regions(gxio_trio_context_t *context,
 >>>>>>> v3.18
@@ -131,7 +149,11 @@ struct init_pio_region_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_init_pio_region_aux(gxio_trio_context_t * context,
+=======
+int gxio_trio_init_pio_region_aux(gxio_trio_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_trio_init_pio_region_aux(gxio_trio_context_t *context,
 >>>>>>> v3.18
@@ -165,7 +187,11 @@ struct init_memory_map_mmu_aux_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_init_memory_map_mmu_aux(gxio_trio_context_t * context,
+=======
+int gxio_trio_init_memory_map_mmu_aux(gxio_trio_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_trio_init_memory_map_mmu_aux(gxio_trio_context_t *context,
 >>>>>>> v3.18
@@ -199,7 +225,11 @@ struct get_port_property_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_get_port_property(gxio_trio_context_t * context,
+=======
+int gxio_trio_get_port_property(gxio_trio_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_trio_get_port_property(gxio_trio_context_t *context,
 >>>>>>> v3.18
@@ -226,7 +256,11 @@ struct config_legacy_intr_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_config_legacy_intr(gxio_trio_context_t * context, int inter_x,
+=======
+int gxio_trio_config_legacy_intr(gxio_trio_context_t *context, int inter_x,
+>>>>>>> v3.18
 =======
 int gxio_trio_config_legacy_intr(gxio_trio_context_t *context, int inter_x,
 >>>>>>> v3.18
@@ -259,7 +293,11 @@ struct config_msi_intr_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_config_msi_intr(gxio_trio_context_t * context, int inter_x,
+=======
+int gxio_trio_config_msi_intr(gxio_trio_context_t *context, int inter_x,
+>>>>>>> v3.18
 =======
 int gxio_trio_config_msi_intr(gxio_trio_context_t *context, int inter_x,
 >>>>>>> v3.18
@@ -295,7 +333,11 @@ struct set_mps_mrs_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_set_mps_mrs(gxio_trio_context_t * context, uint16_t mps,
+=======
+int gxio_trio_set_mps_mrs(gxio_trio_context_t *context, uint16_t mps,
+>>>>>>> v3.18
 =======
 int gxio_trio_set_mps_mrs(gxio_trio_context_t *context, uint16_t mps,
 >>>>>>> v3.18
@@ -319,7 +361,11 @@ struct force_rc_link_up_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_force_rc_link_up(gxio_trio_context_t * context, unsigned int mac)
+=======
+int gxio_trio_force_rc_link_up(gxio_trio_context_t *context, unsigned int mac)
+>>>>>>> v3.18
 =======
 int gxio_trio_force_rc_link_up(gxio_trio_context_t *context, unsigned int mac)
 >>>>>>> v3.18
@@ -340,7 +386,11 @@ struct force_ep_link_up_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_force_ep_link_up(gxio_trio_context_t * context, unsigned int mac)
+=======
+int gxio_trio_force_ep_link_up(gxio_trio_context_t *context, unsigned int mac)
+>>>>>>> v3.18
 =======
 int gxio_trio_force_ep_link_up(gxio_trio_context_t *context, unsigned int mac)
 >>>>>>> v3.18
@@ -361,7 +411,11 @@ struct get_mmio_base_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_get_mmio_base(gxio_trio_context_t * context, HV_PTE *base)
+=======
+int gxio_trio_get_mmio_base(gxio_trio_context_t *context, HV_PTE *base)
+>>>>>>> v3.18
 =======
 int gxio_trio_get_mmio_base(gxio_trio_context_t *context, HV_PTE *base)
 >>>>>>> v3.18
@@ -386,7 +440,11 @@ struct check_mmio_offset_param {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int gxio_trio_check_mmio_offset(gxio_trio_context_t * context,
+=======
+int gxio_trio_check_mmio_offset(gxio_trio_context_t *context,
+>>>>>>> v3.18
 =======
 int gxio_trio_check_mmio_offset(gxio_trio_context_t *context,
 >>>>>>> v3.18

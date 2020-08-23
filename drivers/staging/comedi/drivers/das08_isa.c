@@ -17,10 +17,13 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -51,6 +54,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -185,6 +192,7 @@ static int das08_isa_attach(struct comedi_device *dev,
 			    struct comedi_devconfig *it)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct das08_board_struct *thisboard = comedi_board(dev);
 	struct das08_private_struct *devpriv;
 	int ret;
@@ -194,6 +202,8 @@ static int das08_isa_attach(struct comedi_device *dev,
 		return -ENOMEM;
 	dev->private = devpriv;
 =======
+=======
+>>>>>>> v3.18
 	const struct das08_board_struct *thisboard = dev->board_ptr;
 	struct das08_private_struct *devpriv;
 	int ret;
@@ -201,6 +211,9 @@ static int das08_isa_attach(struct comedi_device *dev,
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = comedi_request_region(dev, it->options[0], thisboard->iosize);
@@ -211,6 +224,7 @@ static int das08_isa_attach(struct comedi_device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void das08_isa_detach(struct comedi_device *dev)
 {
 	das08_common_detach(dev);
@@ -219,12 +233,18 @@ static void das08_isa_detach(struct comedi_device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static struct comedi_driver das08_isa_driver = {
 	.driver_name	= "isa-das08",
 	.module		= THIS_MODULE,
 	.attach		= das08_isa_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= das08_isa_detach,
+=======
+	.detach		= comedi_legacy_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_legacy_detach,
 >>>>>>> v3.18

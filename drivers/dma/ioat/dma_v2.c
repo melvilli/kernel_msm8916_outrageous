@@ -149,7 +149,11 @@ static void __cleanup(struct ioat2_dma_chan *ioat, dma_addr_t phys_complete)
 		dump_desc_dbg(ioat, desc);
 		if (tx->cookie) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ioat_dma_unmap(chan, tx->flags, desc->len, desc->hw);
+=======
+			dma_descriptor_unmap(tx);
+>>>>>>> v3.18
 =======
 			dma_descriptor_unmap(tx);
 >>>>>>> v3.18
@@ -740,7 +744,12 @@ int ioat2_check_space_lock(struct ioat2_dma_chan *ioat, int num_descs)
 	 * event directly
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (jiffies > chan->timer.expires && timer_pending(&chan->timer)) {
+=======
+	if (time_is_before_jiffies(chan->timer.expires)
+	    && timer_pending(&chan->timer)) {
+>>>>>>> v3.18
 =======
 	if (time_is_before_jiffies(chan->timer.expires)
 	    && timer_pending(&chan->timer)) {
@@ -909,7 +918,10 @@ int ioat2_dma_probe(struct ioatdma_device *device, int dca)
 	if (err)
 		return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ioat_set_tcp_copy_break(2048);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

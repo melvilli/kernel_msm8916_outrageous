@@ -67,9 +67,15 @@ static void nf_ct_expectation_timed_out(unsigned long ul_expect)
 	struct nf_conntrack_expect *exp = (void *)ul_expect;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&nf_conntrack_lock);
 	nf_ct_unlink_expect(exp);
 	spin_unlock_bh(&nf_conntrack_lock);
+=======
+	spin_lock_bh(&nf_conntrack_expect_lock);
+	nf_ct_unlink_expect(exp);
+	spin_unlock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&nf_conntrack_expect_lock);
 	nf_ct_unlink_expect(exp);
@@ -90,7 +96,12 @@ static unsigned int nf_ct_expect_dst_hash(const struct nf_conntrack_tuple *tuple
 		      (((tuple->dst.protonum ^ tuple->src.l3num) << 16) |
 		       (__force __u16)tuple->dst.u.all) ^ nf_conntrack_hash_rnd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ((u64)hash * nf_ct_expect_hsize) >> 32;
+=======
+
+	return reciprocal_scale(hash, nf_ct_expect_hsize);
+>>>>>>> v3.18
 =======
 
 	return reciprocal_scale(hash, nf_ct_expect_hsize);
@@ -167,7 +178,10 @@ nf_ct_find_expectation(struct net *net, u16 zone,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Avoid race with other CPUs, that for exp->master ct, is
 	 * about to invoke ->destroy(), or nf_ct_delete() via timeout
 	 * or early_drop().
@@ -180,6 +194,9 @@ nf_ct_find_expectation(struct net *net, u16 zone,
 		     !atomic_inc_not_zero(&exp->master->ct_general.use)))
 		return NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (exp->flags & NF_CT_EXPECT_PERMANENT) {
 		atomic_inc(&exp->use);
@@ -189,6 +206,11 @@ nf_ct_find_expectation(struct net *net, u16 zone,
 		return exp;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Undo exp->master refcnt increase, if del_timer() failed */
+	nf_ct_put(exp->master);
+>>>>>>> v3.18
 =======
 	/* Undo exp->master refcnt increase, if del_timer() failed */
 	nf_ct_put(exp->master);
@@ -209,6 +231,10 @@ void nf_ct_remove_expectations(struct nf_conn *ct)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -219,6 +245,10 @@ void nf_ct_remove_expectations(struct nf_conn *ct)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_unlock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -242,8 +272,12 @@ static inline int expect_clash(const struct nf_conntrack_expect *a,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nf_ct_tuple_mask_cmp(&a->tuple, &b->tuple, &intersect_mask) &&
 	       nf_ct_zone(a->master) == nf_ct_zone(b->master);
+=======
+	return nf_ct_tuple_mask_cmp(&a->tuple, &b->tuple, &intersect_mask);
+>>>>>>> v3.18
 =======
 	return nf_ct_tuple_mask_cmp(&a->tuple, &b->tuple, &intersect_mask);
 >>>>>>> v3.18
@@ -262,7 +296,11 @@ static inline int expect_matches(const struct nf_conntrack_expect *a,
 void nf_ct_unexpect_related(struct nf_conntrack_expect *exp)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&nf_conntrack_lock);
+=======
+	spin_lock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -271,7 +309,11 @@ void nf_ct_unexpect_related(struct nf_conntrack_expect *exp)
 		nf_ct_expect_put(exp);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&nf_conntrack_lock);
+=======
+	spin_unlock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_unlock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -346,12 +388,18 @@ void nf_ct_expect_init(struct nf_conntrack_expect *exp, unsigned int class,
 
 	exp->tuple.dst.u.all = *dst;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_NF_NAT_NEEDED
 	memset(&exp->saved_addr, 0, sizeof(exp->saved_addr));
 	memset(&exp->saved_proto, 0, sizeof(exp->saved_proto));
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(nf_ct_expect_init);
@@ -391,7 +439,11 @@ static int nf_ct_expect_insert(struct nf_conntrack_expect *exp)
 		    (unsigned long)exp);
 	helper = rcu_dereference_protected(master_help->helper,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   lockdep_is_held(&nf_conntrack_lock));
+=======
+					   lockdep_is_held(&nf_conntrack_expect_lock));
+>>>>>>> v3.18
 =======
 					   lockdep_is_held(&nf_conntrack_expect_lock));
 >>>>>>> v3.18
@@ -455,7 +507,11 @@ static inline int __nf_ct_expect_check(struct nf_conntrack_expect *expect)
 	/* Will be over limit? */
 	helper = rcu_dereference_protected(master_help->helper,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   lockdep_is_held(&nf_conntrack_lock));
+=======
+					   lockdep_is_held(&nf_conntrack_expect_lock));
+>>>>>>> v3.18
 =======
 					   lockdep_is_held(&nf_conntrack_expect_lock));
 >>>>>>> v3.18
@@ -481,7 +537,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int nf_ct_expect_related_report(struct nf_conntrack_expect *expect, 
+=======
+int nf_ct_expect_related_report(struct nf_conntrack_expect *expect,
+>>>>>>> v3.18
 =======
 int nf_ct_expect_related_report(struct nf_conntrack_expect *expect,
 >>>>>>> v3.18
@@ -490,7 +550,11 @@ int nf_ct_expect_related_report(struct nf_conntrack_expect *expect,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&nf_conntrack_lock);
+=======
+	spin_lock_bh(&nf_conntrack_expect_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_bh(&nf_conntrack_expect_lock);
 >>>>>>> v3.18
@@ -502,17 +566,23 @@ int nf_ct_expect_related_report(struct nf_conntrack_expect *expect,
 	if (ret < 0)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_bh(&nf_conntrack_lock);
 	nf_ct_expect_event_report(IPEXP_NEW, expect, portid, report);
 	return ret;
 out:
 	spin_unlock_bh(&nf_conntrack_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_bh(&nf_conntrack_expect_lock);
 	nf_ct_expect_event_report(IPEXP_NEW, expect, portid, report);
 	return ret;
 out:
 	spin_unlock_bh(&nf_conntrack_expect_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }

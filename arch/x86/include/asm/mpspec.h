@@ -2,7 +2,10 @@
 #define _ASM_X86_MPSPEC_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -30,12 +33,15 @@ extern int pic_mode;
 extern unsigned int def_to_bigsmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_NUMAQ
 extern int mp_bus_id_to_node[MAX_MP_BUSSES];
 extern int mp_bus_id_to_local[MAX_MP_BUSSES];
 extern int quad_local_to_mp_bus_id [NR_CPUS/4][4];
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else /* CONFIG_X86_64: */
@@ -54,8 +60,11 @@ extern DECLARE_BITMAP(mp_bus_not_pci, MAX_MP_BUSSES);
 
 extern unsigned int boot_cpu_physical_apicid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern unsigned int max_physical_apicid;
 extern int mpc_default_type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern unsigned long mp_lapic_addr;
@@ -104,6 +113,7 @@ static inline void early_reserve_e820_mpc_new(void) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit generic_processor_info(int apicid, int version);
 #ifdef CONFIG_ACPI
 extern void mp_register_ioapic(int id, u32 address, u32 gsi_base);
@@ -114,6 +124,9 @@ struct device;
 extern int mp_register_gsi(struct device *dev, u32 gsi, int edge_level,
 				 int active_high_low);
 #endif /* CONFIG_ACPI */
+=======
+int generic_processor_info(int apicid, int version);
+>>>>>>> v3.18
 =======
 int generic_processor_info(int apicid, int version);
 >>>>>>> v3.18
@@ -182,10 +195,13 @@ static inline void physid_set_mask_of_physid(int physid, physid_mask_t *map)
 extern physid_mask_t phys_cpu_present_map;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int generic_mps_oem_check(struct mpc_table *, char *, char *);
 
 extern int default_acpi_madt_oem_check(char *, char *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* _ASM_X86_MPSPEC_H */

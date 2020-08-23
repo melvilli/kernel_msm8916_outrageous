@@ -4,8 +4,14 @@
 
 obj-y += setup.o init.o cmdline.o env.o time.o reset.o irq.o \
 <<<<<<< HEAD
+<<<<<<< HEAD
     pci.o bonito-irq.o mem.o machtype.o platform.o
 obj-$(CONFIG_GPIOLIB) += gpio.o
+=======
+    bonito-irq.o mem.o machtype.o platform.o
+obj-$(CONFIG_GPIOLIB) += gpio.o
+obj-$(CONFIG_PCI) += pci.o
+>>>>>>> v3.18
 =======
     bonito-irq.o mem.o machtype.o platform.o
 obj-$(CONFIG_GPIOLIB) += gpio.o
@@ -33,10 +39,16 @@ obj-$(CONFIG_CS5536) += cs5536/
 
 obj-$(CONFIG_LOONGSON_SUSPEND) += pm.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #
 # Big Memory (SWIOTLB) Support
 #
 obj-$(CONFIG_SWIOTLB) += dma-swiotlb.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

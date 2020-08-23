@@ -37,7 +37,12 @@ void olpc_analog_input(struct snd_ac97 *ac97, int on)
 			1 << AC97_AD_HPFD_SHIFT, on << AC97_AD_HPFD_SHIFT);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "setting High Pass Filter - %d\n", err);
+=======
+		dev_err(ac97->bus->card->dev,
+			"setting High Pass Filter - %d\n", err);
+>>>>>>> v3.18
 =======
 		dev_err(ac97->bus->card->dev,
 			"setting High Pass Filter - %d\n", err);
@@ -64,7 +69,11 @@ void olpc_mic_bias(struct snd_ac97 *ac97, int on)
 			1 << AC97_AD_VREFD_SHIFT, on << AC97_AD_VREFD_SHIFT);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "setting MIC Bias - %d\n", err);
+=======
+		dev_err(ac97->bus->card->dev, "setting MIC Bias - %d\n", err);
+>>>>>>> v3.18
 =======
 		dev_err(ac97->bus->card->dev, "setting MIC Bias - %d\n", err);
 >>>>>>> v3.18
@@ -163,7 +172,11 @@ int olpc_quirks(struct snd_card *card, struct snd_ac97 *ac97)
 
 	if (gpio_request(OLPC_GPIO_MIC_AC, DRV_NAME)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR DRV_NAME ": unable to allocate MIC GPIO\n");
+=======
+		dev_err(card->dev, "unable to allocate MIC GPIO\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "unable to allocate MIC GPIO\n");
 >>>>>>> v3.18
@@ -175,7 +188,11 @@ int olpc_quirks(struct snd_card *card, struct snd_ac97 *ac97)
 	memset(&elem, 0, sizeof(elem));
 	elem.iface = SNDRV_CTL_ELEM_IFACE_MIXER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(elem.name, "High Pass Filter Enable", sizeof(elem.name));
+=======
+	strlcpy(elem.name, "High Pass Filter Enable", sizeof(elem.name));
+>>>>>>> v3.18
 =======
 	strlcpy(elem.name, "High Pass Filter Enable", sizeof(elem.name));
 >>>>>>> v3.18
@@ -185,7 +202,11 @@ int olpc_quirks(struct snd_card *card, struct snd_ac97 *ac97)
 	memset(&elem, 0, sizeof(elem));
 	elem.iface = SNDRV_CTL_ELEM_IFACE_MIXER;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(elem.name, "V_REFOUT Enable", sizeof(elem.name));
+=======
+	strlcpy(elem.name, "V_REFOUT Enable", sizeof(elem.name));
+>>>>>>> v3.18
 =======
 	strlcpy(elem.name, "V_REFOUT Enable", sizeof(elem.name));
 >>>>>>> v3.18

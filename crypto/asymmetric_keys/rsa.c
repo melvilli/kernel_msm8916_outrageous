@@ -75,6 +75,7 @@ static const struct {
 } RSA_ASN1_templates[PKEY_HASH__LAST] = {
 #define _(X) { RSA_digest_info_##X, sizeof(RSA_digest_info_##X) }
 <<<<<<< HEAD
+<<<<<<< HEAD
 	[PKEY_HASH_MD5]		= _(MD5),
 	[PKEY_HASH_SHA1]	= _(SHA1),
 	[PKEY_HASH_RIPE_MD_160]	= _(RIPE_MD_160),
@@ -83,6 +84,8 @@ static const struct {
 	[PKEY_HASH_SHA512]	= _(SHA512),
 	[PKEY_HASH_SHA224]	= _(SHA224),
 =======
+=======
+>>>>>>> v3.18
 	[HASH_ALGO_MD5]		= _(MD5),
 	[HASH_ALGO_SHA1]	= _(SHA1),
 	[HASH_ALGO_RIPE_MD_160]	= _(RIPE_MD_160),
@@ -90,6 +93,9 @@ static const struct {
 	[HASH_ALGO_SHA384]	= _(SHA384),
 	[HASH_ALGO_SHA512]	= _(SHA512),
 	[HASH_ALGO_SHA224]	= _(SHA224),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #undef _
 };

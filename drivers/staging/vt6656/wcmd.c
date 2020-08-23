@@ -26,6 +26,7 @@
  *
  * Functions:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      s_vProbeChannel - Active scan channel
  *      s_MgrMakeProbeRequest - Make ProbeRequest packet
  *      CommandTimer - Timer function to handle command
@@ -39,11 +40,17 @@
  *	vnt_schedule_command - Push Command and wait Command Scheduler to do
  *	vnt_cmd_timer_wait- Call back timer
 >>>>>>> v3.18
+=======
+ *	vnt_cmd_complete - Command Complete function
+ *	vnt_schedule_command - Push Command and wait Command Scheduler to do
+ *	vnt_cmd_timer_wait- Call back timer
+>>>>>>> v3.18
  *
  * Revision History:
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include "tmacro.h"
 #include "device.h"
@@ -1208,6 +1215,8 @@ void BSSvSecondTxData(struct vnt_private *pDevice)
 	pDevice->sTimerTxData.expires = RUN_AT(10 * HZ);      //10s callback
 	add_timer(&pDevice->sTimerTxData);
 =======
+=======
+>>>>>>> v3.18
 #include "device.h"
 #include "mac.h"
 #include "wcmd.h"
@@ -1366,5 +1375,8 @@ void vnt_reset_command_timer(struct vnt_private *priv)
 	priv->cmd_enqueue_idx = 0;
 	priv->command_state = WLAN_CMD_IDLE;
 	priv->cmd_running = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

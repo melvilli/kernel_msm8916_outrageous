@@ -36,7 +36,10 @@ extern const u32 r6xx_ps_size, r6xx_vs_size;
 extern const u32 r6xx_default_size, r7xx_default_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __pure uint32_t int2float(uint32_t x);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

@@ -5,11 +5,15 @@
 
 struct spi_bitbang {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct workqueue_struct	*workqueue;
 	struct work_struct	work;
 
 	spinlock_t		lock;
 	struct list_head	queue;
+=======
+	spinlock_t		lock;
+>>>>>>> v3.18
 =======
 	spinlock_t		lock;
 >>>>>>> v3.18
@@ -46,7 +50,10 @@ struct spi_bitbang {
 extern int spi_bitbang_setup(struct spi_device *spi);
 extern void spi_bitbang_cleanup(struct spi_device *spi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int spi_bitbang_transfer(struct spi_device *spi, struct spi_message *m);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int spi_bitbang_setup_transfer(struct spi_device *spi,
@@ -55,7 +62,11 @@ extern int spi_bitbang_setup_transfer(struct spi_device *spi,
 /* start or stop queue processing */
 extern int spi_bitbang_start(struct spi_bitbang *spi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int spi_bitbang_stop(struct spi_bitbang *spi);
+=======
+extern void spi_bitbang_stop(struct spi_bitbang *spi);
+>>>>>>> v3.18
 =======
 extern void spi_bitbang_stop(struct spi_bitbang *spi);
 >>>>>>> v3.18

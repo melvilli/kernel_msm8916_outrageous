@@ -13,8 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+ * along with this program; if not, you can access it online at
+ * http://www.gnu.org/licenses/gpl-2.0.html.
+>>>>>>> v3.18
 =======
  * along with this program; if not, you can access it online at
  * http://www.gnu.org/licenses/gpl-2.0.html.
@@ -29,6 +34,10 @@
 #define __LINUX_RCU_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <trace/events/rcu.h>
+>>>>>>> v3.18
 =======
 #include <trace/events/rcu.h>
 >>>>>>> v3.18
@@ -77,6 +86,7 @@
 extern struct debug_obj_descr rcuhead_debug_descr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void debug_rcu_head_queue(struct rcu_head *head)
 {
 	debug_object_activate(head, &rcuhead_debug_descr);
@@ -84,6 +94,8 @@ static inline void debug_rcu_head_queue(struct rcu_head *head)
 				  STATE_RCU_HEAD_READY,
 				  STATE_RCU_HEAD_QUEUED);
 =======
+=======
+>>>>>>> v3.18
 static inline int debug_rcu_head_queue(struct rcu_head *head)
 {
 	int r1;
@@ -93,6 +105,9 @@ static inline int debug_rcu_head_queue(struct rcu_head *head)
 				  STATE_RCU_HEAD_READY,
 				  STATE_RCU_HEAD_QUEUED);
 	return r1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -105,8 +120,14 @@ static inline void debug_rcu_head_unqueue(struct rcu_head *head)
 }
 #else	/* !CONFIG_DEBUG_OBJECTS_RCU_HEAD */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void debug_rcu_head_queue(struct rcu_head *head)
 {
+=======
+static inline int debug_rcu_head_queue(struct rcu_head *head)
+{
+	return 0;
+>>>>>>> v3.18
 =======
 static inline int debug_rcu_head_queue(struct rcu_head *head)
 {
@@ -119,6 +140,7 @@ static inline void debug_rcu_head_unqueue(struct rcu_head *head)
 }
 #endif	/* #else !CONFIG_DEBUG_OBJECTS_RCU_HEAD */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern void kfree(const void *);
 
@@ -140,6 +162,8 @@ static inline bool __rcu_reclaim(char *rn, struct rcu_head *head)
 extern int rcu_expedited;
 
 =======
+=======
+>>>>>>> v3.18
 void kfree(const void *);
 
 /*
@@ -164,6 +188,9 @@ static inline bool __rcu_reclaim(const char *rn, struct rcu_head *head)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_RCU_STALL_COMMON
 
@@ -173,7 +200,10 @@ int rcu_jiffies_till_stall_check(void);
 #endif /* #ifdef CONFIG_RCU_STALL_COMMON */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Strings used in tracepoints need to be exported via the
  * tracing system such that tools like perf and trace-cmd can
@@ -181,5 +211,8 @@ int rcu_jiffies_till_stall_check(void);
  */
 #define TPS(x)  tracepoint_string(x)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* __LINUX_RCU_H */

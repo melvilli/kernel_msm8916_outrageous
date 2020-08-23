@@ -6,21 +6,31 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_platform.h>
 
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 
 #include <asm/qe.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <sysdev/cpm2_pic.h>
 
 #include "mpc85xx.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id __initdata mpc85xx_common_ids[] = {
+=======
+static const struct of_device_id mpc85xx_common_ids[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id mpc85xx_common_ids[] __initconst = {
 >>>>>>> v3.18
@@ -93,7 +103,10 @@ void __init mpc85xx_cpm2_pic_init(void)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_QUICC_ENGINE
 void __init mpc85xx_qe_init(void)
@@ -137,4 +150,7 @@ void __init mpc85xx_qe_par_io_init(void)
 	}
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

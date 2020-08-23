@@ -34,7 +34,10 @@
 #include "desc.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 //
@@ -43,7 +46,11 @@
 
 typedef struct tagSDot11Counters {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long Length;             // Length of structure
+=======
+	unsigned long Length;
+>>>>>>> v3.18
 =======
 	unsigned long Length;
 >>>>>>> v3.18
@@ -69,10 +76,13 @@ typedef struct tagSDot11Counters {
 	unsigned long long   CCMPDecryptErrors;
 	unsigned long long   FourWayHandshakeFailures;
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    unsigned long long   WEPUndecryptableCount;
 //    unsigned long long   WEPICVErrorCount;
 //    unsigned long long   DecryptSuccessCount;
 //    unsigned long long   DecryptFailureCount;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 } SDot11Counters, *PSDot11Counters;
@@ -83,8 +93,12 @@ typedef struct tagSDot11Counters {
 typedef struct tagSMib2Counter {
 	long    ifIndex;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char    ifDescr[256];               // max size 255 plus zero ending
 	// e.g. "interface 1"
+=======
+	char    ifDescr[256];
+>>>>>>> v3.18
 =======
 	char    ifDescr[256];
 >>>>>>> v3.18
@@ -112,6 +126,7 @@ typedef struct tagSMib2Counter {
 
 // Value in the ifType entry
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define WIRELESSLANIEEE80211b      6           //
 
 // Value in the ifAdminStatus/ifOperStatus entry
@@ -119,12 +134,17 @@ typedef struct tagSMib2Counter {
 #define DOWN                2           //
 #define TESTING             3           //
 =======
+=======
+>>>>>>> v3.18
 #define WIRELESSLANIEEE80211b      6
 
 // Value in the ifAdminStatus/ifOperStatus entry
 #define UP                  1
 #define DOWN                2
 #define TESTING             3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 //
@@ -210,7 +230,11 @@ typedef struct tagSISRCounters {
 	unsigned long dwIsrRxNoBuf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long dwIsrUnknown;               // unknown interrupt count
+=======
+	unsigned long dwIsrUnknown;
+>>>>>>> v3.18
 =======
 	unsigned long dwIsrUnknown;
 >>>>>>> v3.18
@@ -223,6 +247,7 @@ typedef struct tagSISRCounters {
 	unsigned long dwIsrSYNCFlushOK;
 	unsigned long dwIsrSTIMER1Int;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/////////////////////////////////////
 } SISRCounters, *PSISRCounters;
 
@@ -232,6 +257,8 @@ typedef struct tagSISRCounters {
 #define UNDER_CREATION      3           //
 #define INVALID             4           //
 =======
+=======
+>>>>>>> v3.18
 } SISRCounters, *PSISRCounters;
 
 // Value in the etherStatsStatus entry
@@ -239,6 +266,9 @@ typedef struct tagSISRCounters {
 #define CREATE_REQUEST      2
 #define UNDER_CREATION      3
 #define INVALID             4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 //
@@ -246,10 +276,13 @@ typedef struct tagSISRCounters {
 //
 typedef struct tagSStatCounter {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//
 	// ISR status count
 	//
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	// RSR status count
@@ -345,10 +378,13 @@ typedef struct tagSStatCounter {
 	unsigned long long   ullTxDirectedBytes[TYPE_MAXTD];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    unsigned long dwTxRetryCount[8];
 	//
 	// ISR status count
 	//
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	SISRCounters ISRStat;
@@ -358,6 +394,7 @@ typedef struct tagSStatCounter {
 #ifdef Calcu_LinkQual
 	//Tx count:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long TxNoRetryOkCount;         //success tx no retry !
 	unsigned long TxRetryOkCount;              //success tx but retry !
 	unsigned long TxFailCount;                      //fail tx ?
@@ -365,12 +402,17 @@ typedef struct tagSStatCounter {
 	unsigned long RxOkCnt;                          //success rx !
 	unsigned long RxFcsErrCnt;                    //fail rx ?
 =======
+=======
+>>>>>>> v3.18
 	unsigned long TxNoRetryOkCount;
 	unsigned long TxRetryOkCount;
 	unsigned long TxFailCount;
 	//Rx count:
 	unsigned long RxOkCnt;
 	unsigned long RxFcsErrCnt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	//statistic
 	unsigned long SignalStren;
@@ -379,12 +421,15 @@ typedef struct tagSStatCounter {
 } SStatCounter, *PSStatCounter;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Classes  ----------------------------*/
 
 /*---------------------  Export Variables  --------------------------*/
 
 /*---------------------  Export Functions  --------------------------*/
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void STAvClearAllCounter(PSStatCounter pStatistic);

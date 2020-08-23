@@ -395,8 +395,12 @@ static int sp8870_read_ber (struct dvb_frontend* fe, u32 * ber)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 tmp = ret << 6;
 
+=======
+	tmp = ret << 6;
+>>>>>>> v3.18
 =======
 	tmp = ret << 6;
 >>>>>>> v3.18

@@ -724,8 +724,11 @@ static int gelic_wl_get_scan(struct net_device *netdev,
 		ret = -EAGAIN;
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case GELIC_WL_SCAN_STAT_INIT:
@@ -733,7 +736,10 @@ static int gelic_wl_get_scan(struct net_device *netdev,
 		ret = -ENODEV;
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case GELIC_WL_SCAN_STAT_GOT_LIST:
@@ -1838,6 +1844,7 @@ static const char *wpasecstr(enum gelic_eurus_wpa_security sec)
 	case GELIC_EURUS_WPA_SEC_NONE:
 		return "NONE";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case GELIC_EURUS_WPA_SEC_WPA_TKIP_TKIP:
 		return "WPA_TKIP_TKIP";
@@ -1858,6 +1865,8 @@ static const char *wpasecstr(enum gelic_eurus_wpa_security sec)
 		return "WPA2_AES_AES";
 		break;
 =======
+=======
+>>>>>>> v3.18
 	case GELIC_EURUS_WPA_SEC_WPA_TKIP_TKIP:
 		return "WPA_TKIP_TKIP";
 	case GELIC_EURUS_WPA_SEC_WPA_TKIP_AES:
@@ -1870,6 +1879,9 @@ static const char *wpasecstr(enum gelic_eurus_wpa_security sec)
 		return "WPA2_TKIP_AES";
 	case GELIC_EURUS_WPA_SEC_WPA2_AES_AES:
 		return "WPA2_AES_AES";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return "";

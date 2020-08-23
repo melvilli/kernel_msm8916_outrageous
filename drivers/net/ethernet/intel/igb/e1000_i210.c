@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 ******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* e1000_i210
@@ -61,6 +67,11 @@
 #include "e1000_i210.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static s32 igb_update_flash_i210(struct e1000_hw *hw);
+
+>>>>>>> v3.18
 =======
 static s32 igb_update_flash_i210(struct e1000_hw *hw);
 
@@ -130,7 +141,11 @@ static s32 igb_get_hw_semaphore_i210(struct e1000_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return E1000_SUCCESS;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -146,7 +161,11 @@ static s32 igb_get_hw_semaphore_i210(struct e1000_hw *hw)
  *  EEPROM access and return -E1000_ERR_NVM (-1).
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 igb_acquire_nvm_i210(struct e1000_hw *hw)
+=======
+static s32 igb_acquire_nvm_i210(struct e1000_hw *hw)
+>>>>>>> v3.18
 =======
 static s32 igb_acquire_nvm_i210(struct e1000_hw *hw)
 >>>>>>> v3.18
@@ -162,7 +181,11 @@ static s32 igb_acquire_nvm_i210(struct e1000_hw *hw)
  *  then release the semaphores acquired.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void igb_release_nvm_i210(struct e1000_hw *hw)
+=======
+static void igb_release_nvm_i210(struct e1000_hw *hw)
+>>>>>>> v3.18
 =======
 static void igb_release_nvm_i210(struct e1000_hw *hw)
 >>>>>>> v3.18
@@ -184,7 +207,11 @@ s32 igb_acquire_swfw_sync_i210(struct e1000_hw *hw, u16 mask)
 	u32 swmask = mask;
 	u32 fwmask = mask << 16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = E1000_SUCCESS;
+=======
+	s32 ret_val = 0;
+>>>>>>> v3.18
 =======
 	s32 ret_val = 0;
 >>>>>>> v3.18
@@ -233,7 +260,11 @@ void igb_release_swfw_sync_i210(struct e1000_hw *hw, u16 mask)
 	u32 swfw_sync;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (igb_get_hw_semaphore_i210(hw) != E1000_SUCCESS)
+=======
+	while (igb_get_hw_semaphore_i210(hw))
+>>>>>>> v3.18
 =======
 	while (igb_get_hw_semaphore_i210(hw))
 >>>>>>> v3.18
@@ -257,15 +288,21 @@ void igb_release_swfw_sync_i210(struct e1000_hw *hw, u16 mask)
  *  Uses necessary synchronization semaphores.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 igb_read_nvm_srrd_i210(struct e1000_hw *hw, u16 offset, u16 words,
 			     u16 *data)
 {
 	s32 status = E1000_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 static s32 igb_read_nvm_srrd_i210(struct e1000_hw *hw, u16 offset, u16 words,
 				  u16 *data)
 {
 	s32 status = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 i, count;
 
@@ -277,7 +314,11 @@ static s32 igb_read_nvm_srrd_i210(struct e1000_hw *hw, u16 offset, u16 words,
 		count = (words - i) / E1000_EERD_EEWR_MAX_COUNT > 0 ?
 			E1000_EERD_EEWR_MAX_COUNT : (words - i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (hw->nvm.ops.acquire(hw) == E1000_SUCCESS) {
+=======
+		if (!(hw->nvm.ops.acquire(hw))) {
+>>>>>>> v3.18
 =======
 		if (!(hw->nvm.ops.acquire(hw))) {
 >>>>>>> v3.18
@@ -289,7 +330,11 @@ static s32 igb_read_nvm_srrd_i210(struct e1000_hw *hw, u16 offset, u16 words,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (status != E1000_SUCCESS)
+=======
+		if (status)
+>>>>>>> v3.18
 =======
 		if (status)
 >>>>>>> v3.18
@@ -318,7 +363,11 @@ static s32 igb_write_nvm_srwr(struct e1000_hw *hw, u16 offset, u16 words,
 	u32 i, k, eewr = 0;
 	u32 attempts = 100000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = E1000_SUCCESS;
+=======
+	s32 ret_val = 0;
+>>>>>>> v3.18
 =======
 	s32 ret_val = 0;
 >>>>>>> v3.18
@@ -344,7 +393,11 @@ static s32 igb_write_nvm_srwr(struct e1000_hw *hw, u16 offset, u16 words,
 			if (E1000_NVM_RW_REG_DONE &
 			    rd32(E1000_SRWR)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ret_val = E1000_SUCCESS;
+=======
+				ret_val = 0;
+>>>>>>> v3.18
 =======
 				ret_val = 0;
 >>>>>>> v3.18
@@ -354,7 +407,11 @@ static s32 igb_write_nvm_srwr(struct e1000_hw *hw, u16 offset, u16 words,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret_val != E1000_SUCCESS) {
+=======
+		if (ret_val) {
+>>>>>>> v3.18
 =======
 		if (ret_val) {
 >>>>>>> v3.18
@@ -384,15 +441,21 @@ out:
  *  partially written.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 igb_write_nvm_srwr_i210(struct e1000_hw *hw, u16 offset, u16 words,
 			      u16 *data)
 {
 	s32 status = E1000_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 static s32 igb_write_nvm_srwr_i210(struct e1000_hw *hw, u16 offset, u16 words,
 				   u16 *data)
 {
 	s32 status = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u16 i, count;
 
@@ -404,7 +467,11 @@ static s32 igb_write_nvm_srwr_i210(struct e1000_hw *hw, u16 offset, u16 words,
 		count = (words - i) / E1000_EERD_EEWR_MAX_COUNT > 0 ?
 			E1000_EERD_EEWR_MAX_COUNT : (words - i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (hw->nvm.ops.acquire(hw) == E1000_SUCCESS) {
+=======
+		if (!(hw->nvm.ops.acquire(hw))) {
+>>>>>>> v3.18
 =======
 		if (!(hw->nvm.ops.acquire(hw))) {
 >>>>>>> v3.18
@@ -416,7 +483,11 @@ static s32 igb_write_nvm_srwr_i210(struct e1000_hw *hw, u16 offset, u16 words,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (status != E1000_SUCCESS)
+=======
+		if (status)
+>>>>>>> v3.18
 =======
 		if (status)
 >>>>>>> v3.18
@@ -428,8 +499,11 @@ static s32 igb_write_nvm_srwr_i210(struct e1000_hw *hw, u16 offset, u16 words,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  igb_read_nvm_i211 - Read NVM wrapper function for I211
 =======
+=======
+>>>>>>> v3.18
  *  igb_read_invm_word_i210 - Reads OTP
  *  @hw: pointer to the HW structure
  *  @address: the word address (aka eeprom offset) to read
@@ -473,6 +547,9 @@ static s32 igb_read_invm_word_i210(struct e1000_hw *hw, u8 address, u16 *data)
 
 /**
  * igb_read_invm_i210 - Read invm wrapper function for I210/I211
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  @hw: pointer to the HW structure
  *  @words: number of words to read
@@ -481,20 +558,27 @@ static s32 igb_read_invm_word_i210(struct e1000_hw *hw, u8 address, u16 *data)
  *  Wrapper function to return data formerly found in the NVM.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 igb_read_nvm_i211(struct e1000_hw *hw, u16 offset, u16 words,
 			       u16 *data)
 {
 	s32 ret_val = E1000_SUCCESS;
 =======
+=======
+>>>>>>> v3.18
 static s32 igb_read_invm_i210(struct e1000_hw *hw, u16 offset,
 				u16 words __always_unused, u16 *data)
 {
 	s32 ret_val = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Only the MAC addr is required to be present in the iNVM */
 	switch (offset) {
 	case NVM_MAC_ADDR:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret_val = igb_read_invm_i211(hw, offset, &data[0]);
 		ret_val |= igb_read_invm_i211(hw, offset+1, &data[1]);
@@ -537,6 +621,8 @@ static s32 igb_read_invm_i210(struct e1000_hw *hw, u16 offset,
 			ret_val = E1000_SUCCESS;
 		}
 =======
+=======
+>>>>>>> v3.18
 		ret_val = igb_read_invm_word_i210(hw, (u8)offset, &data[0]);
 		ret_val |= igb_read_invm_word_i210(hw, (u8)offset+1,
 						     &data[1]);
@@ -580,6 +666,9 @@ static s32 igb_read_invm_i210(struct e1000_hw *hw, u16 offset,
 			ret_val = 0;
 		}
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case NVM_SUB_DEV_ID:
 		*data = hw->subsystem_device_id;
@@ -602,6 +691,7 @@ static s32 igb_read_invm_i210(struct e1000_hw *hw, u16 offset,
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  igb_read_invm_i211 - Reads OTP
  *  @hw: pointer to the HW structure
@@ -647,6 +737,8 @@ s32 igb_read_invm_i211(struct e1000_hw *hw, u16 address, u16 *data)
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  *  igb_read_invm_version - Reads iNVM version and image type
  *  @hw: pointer to the HW structure
  *  @invm_ver: version structure for the version read
@@ -680,7 +772,11 @@ s32 igb_read_invm_version(struct e1000_hw *hw,
 		if ((i == 1) && ((*record & E1000_INVM_VER_FIELD_ONE) == 0)) {
 			version = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = E1000_SUCCESS;
+=======
+			status = 0;
+>>>>>>> v3.18
 =======
 			status = 0;
 >>>>>>> v3.18
@@ -691,7 +787,11 @@ s32 igb_read_invm_version(struct e1000_hw *hw,
 			 ((*record & E1000_INVM_VER_FIELD_TWO) == 0)) {
 			version = (*record & E1000_INVM_VER_FIELD_ONE) >> 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = E1000_SUCCESS;
+=======
+			status = 0;
+>>>>>>> v3.18
 =======
 			status = 0;
 >>>>>>> v3.18
@@ -706,7 +806,11 @@ s32 igb_read_invm_version(struct e1000_hw *hw,
 			version = (*next_record & E1000_INVM_VER_FIELD_TWO)
 				  >> 13;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = E1000_SUCCESS;
+=======
+			status = 0;
+>>>>>>> v3.18
 =======
 			status = 0;
 >>>>>>> v3.18
@@ -719,7 +823,11 @@ s32 igb_read_invm_version(struct e1000_hw *hw,
 			 ((*record & 0x3) == 0)) {
 			version = (*record & E1000_INVM_VER_FIELD_ONE) >> 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = E1000_SUCCESS;
+=======
+			status = 0;
+>>>>>>> v3.18
 =======
 			status = 0;
 >>>>>>> v3.18
@@ -728,7 +836,11 @@ s32 igb_read_invm_version(struct e1000_hw *hw,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status == E1000_SUCCESS) {
+=======
+	if (!status) {
+>>>>>>> v3.18
 =======
 	if (!status) {
 >>>>>>> v3.18
@@ -745,7 +857,11 @@ s32 igb_read_invm_version(struct e1000_hw *hw,
 		if ((i == 1) && ((*record & E1000_INVM_IMGTYPE_FIELD) == 0)) {
 			invm_ver->invm_img_type = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = E1000_SUCCESS;
+=======
+			status = 0;
+>>>>>>> v3.18
 =======
 			status = 0;
 >>>>>>> v3.18
@@ -758,7 +874,11 @@ s32 igb_read_invm_version(struct e1000_hw *hw,
 			invm_ver->invm_img_type =
 				(*next_record & E1000_INVM_IMGTYPE_FIELD) >> 23;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			status = E1000_SUCCESS;
+=======
+			status = 0;
+>>>>>>> v3.18
 =======
 			status = 0;
 >>>>>>> v3.18
@@ -776,6 +896,7 @@ s32 igb_read_invm_version(struct e1000_hw *hw,
  *  and then verifies that the sum of the EEPROM is equal to 0xBABA.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 igb_validate_nvm_checksum_i210(struct e1000_hw *hw)
 {
 	s32 status = E1000_SUCCESS;
@@ -783,12 +904,17 @@ s32 igb_validate_nvm_checksum_i210(struct e1000_hw *hw)
 
 	if (hw->nvm.ops.acquire(hw) == E1000_SUCCESS) {
 =======
+=======
+>>>>>>> v3.18
 static s32 igb_validate_nvm_checksum_i210(struct e1000_hw *hw)
 {
 	s32 status = 0;
 	s32 (*read_op_ptr)(struct e1000_hw *, u16, u16, u16 *);
 
 	if (!(hw->nvm.ops.acquire(hw))) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Replace the read function with semaphore grabbing with
@@ -820,9 +946,15 @@ static s32 igb_validate_nvm_checksum_i210(struct e1000_hw *hw)
  *  value to the EEPROM. Next commit EEPROM data onto the Flash.
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 igb_update_nvm_checksum_i210(struct e1000_hw *hw)
 {
 	s32 ret_val = E1000_SUCCESS;
+=======
+static s32 igb_update_nvm_checksum_i210(struct e1000_hw *hw)
+{
+	s32 ret_val = 0;
+>>>>>>> v3.18
 =======
 static s32 igb_update_nvm_checksum_i210(struct e1000_hw *hw)
 {
@@ -837,7 +969,11 @@ static s32 igb_update_nvm_checksum_i210(struct e1000_hw *hw)
 	 */
 	ret_val = igb_read_nvm_eerd(hw, 0, 1, &nvm_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret_val != E1000_SUCCESS) {
+=======
+	if (ret_val) {
+>>>>>>> v3.18
 =======
 	if (ret_val) {
 >>>>>>> v3.18
@@ -846,7 +982,11 @@ static s32 igb_update_nvm_checksum_i210(struct e1000_hw *hw)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (hw->nvm.ops.acquire(hw) == E1000_SUCCESS) {
+=======
+	if (!(hw->nvm.ops.acquire(hw))) {
+>>>>>>> v3.18
 =======
 	if (!(hw->nvm.ops.acquire(hw))) {
 >>>>>>> v3.18
@@ -868,7 +1008,11 @@ static s32 igb_update_nvm_checksum_i210(struct e1000_hw *hw)
 		ret_val = igb_write_nvm_srwr(hw, NVM_CHECKSUM_REG, 1,
 						&checksum);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret_val != E1000_SUCCESS) {
+=======
+		if (ret_val) {
+>>>>>>> v3.18
 =======
 		if (ret_val) {
 >>>>>>> v3.18
@@ -901,7 +1045,11 @@ static s32 igb_pool_flash_update_done_i210(struct e1000_hw *hw)
 		reg = rd32(E1000_EECD);
 		if (reg & E1000_EECD_FLUDONE_I210) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret_val = E1000_SUCCESS;
+=======
+			ret_val = 0;
+>>>>>>> v3.18
 =======
 			ret_val = 0;
 >>>>>>> v3.18
@@ -915,7 +1063,10 @@ static s32 igb_pool_flash_update_done_i210(struct e1000_hw *hw)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *  igb_get_flash_presence_i210 - Check if flash device is detected.
  *  @hw: pointer to the HW structure
  *
@@ -933,15 +1084,24 @@ bool igb_get_flash_presence_i210(struct e1000_hw *hw)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *  igb_update_flash_i210 - Commit EEPROM to the flash
  *  @hw: pointer to the HW structure
  *
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 s32 igb_update_flash_i210(struct e1000_hw *hw)
 {
 	s32 ret_val = E1000_SUCCESS;
+=======
+static s32 igb_update_flash_i210(struct e1000_hw *hw)
+{
+	s32 ret_val = 0;
+>>>>>>> v3.18
 =======
 static s32 igb_update_flash_i210(struct e1000_hw *hw)
 {
@@ -960,7 +1120,11 @@ static s32 igb_update_flash_i210(struct e1000_hw *hw)
 
 	ret_val = igb_pool_flash_update_done_i210(hw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret_val == E1000_SUCCESS)
+=======
+	if (ret_val)
+>>>>>>> v3.18
 =======
 	if (ret_val)
 >>>>>>> v3.18
@@ -1017,7 +1181,11 @@ static s32 __igb_access_xmdio_reg(struct e1000_hw *hw, u16 address,
 				  u8 dev_addr, u16 *data, bool read)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s32 ret_val = E1000_SUCCESS;
+=======
+	s32 ret_val = 0;
+>>>>>>> v3.18
 =======
 	s32 ret_val = 0;
 >>>>>>> v3.18
@@ -1074,7 +1242,10 @@ s32 igb_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr, u16 data)
 	return __igb_access_xmdio_reg(hw, addr, dev_addr, &data, false);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  *  igb_init_nvm_params_i210 - Init NVM func ptrs.
@@ -1171,4 +1342,7 @@ s32 igb_pll_workaround_i210(struct e1000_hw *hw)
 	wr32(E1000_MDICNFG, mdicnfg);
 	return ret_val;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

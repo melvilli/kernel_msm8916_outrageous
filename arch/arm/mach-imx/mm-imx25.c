@@ -55,7 +55,10 @@ void __init imx25_init_early(void)
 	mxc_set_cpu_type(MXC_CPU_MX25);
 	mxc_iomux_v3_init(MX25_IO_ADDRESS(MX25_IOMUXC_BASE_ADDR));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mxc_arch_reset_init(MX25_IO_ADDRESS(MX25_WDOG_BASE_ADDR));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -65,6 +68,7 @@ void __init mx25_init_irq(void)
 	mxc_init_irq(MX25_IO_ADDRESS(MX25_AVIC_BASE_ADDR));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static struct sdma_script_start_addrs imx25_sdma_script __initdata = {
 	.ap_2_ap_addr = 729,
@@ -89,6 +93,10 @@ static struct sdma_platform_data imx25_sdma_pdata __initdata = {
 static struct sdma_platform_data imx25_sdma_pdata __initdata = {
 	.fw_name = "sdma-imx25.bin",
 >>>>>>> v3.18
+=======
+static struct sdma_platform_data imx25_sdma_pdata __initdata = {
+	.fw_name = "sdma-imx25.bin",
+>>>>>>> v3.18
 };
 
 static const struct resource imx25_audmux_res[] __initconst = {
@@ -98,6 +106,10 @@ static const struct resource imx25_audmux_res[] __initconst = {
 void __init imx25_soc_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mxc_arch_reset_init(MX25_IO_ADDRESS(MX25_WDOG_BASE_ADDR));
+>>>>>>> v3.18
 =======
 	mxc_arch_reset_init(MX25_IO_ADDRESS(MX25_WDOG_BASE_ADDR));
 >>>>>>> v3.18

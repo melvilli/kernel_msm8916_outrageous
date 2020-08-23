@@ -35,7 +35,10 @@
 #include <linux/init.h>
 #include <linux/acpi.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/acpi_io.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -45,6 +48,10 @@
 #include <linux/interrupt.h>
 #include <linux/debugfs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 =======
 #include <asm/unaligned.h>
 >>>>>>> v3.18
@@ -575,8 +582,12 @@ static int apei_check_gar(struct acpi_generic_address *reg, u64 *paddr,
 	access_size_code = reg->access_width;
 	space_id = reg->space_id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Handle possible alignment issues */
 	memcpy(paddr, &reg->address, sizeof(*paddr));
+=======
+	*paddr = get_unaligned(&reg->address);
+>>>>>>> v3.18
 =======
 	*paddr = get_unaligned(&reg->address);
 >>>>>>> v3.18
@@ -758,7 +769,10 @@ struct dentry *apei_get_debugfs_dir(void)
 EXPORT_SYMBOL_GPL(apei_get_debugfs_dir);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int __weak arch_apei_enable_cmcff(struct acpi_hest_header *hest_hdr,
 				  void *data)
 {
@@ -772,6 +786,9 @@ void __weak arch_apei_report_mem_error(int sev,
 }
 EXPORT_SYMBOL_GPL(arch_apei_report_mem_error);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int apei_osc_setup(void)
 {
@@ -786,9 +803,15 @@ int apei_osc_setup(void)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	capbuf[OSC_QUERY_TYPE] = OSC_QUERY_ENABLE;
 	capbuf[OSC_SUPPORT_TYPE] = 1;
 	capbuf[OSC_CONTROL_TYPE] = 0;
+=======
+	capbuf[OSC_QUERY_DWORD] = OSC_QUERY_ENABLE;
+	capbuf[OSC_SUPPORT_DWORD] = 1;
+	capbuf[OSC_CONTROL_DWORD] = 0;
+>>>>>>> v3.18
 =======
 	capbuf[OSC_QUERY_DWORD] = OSC_QUERY_ENABLE;
 	capbuf[OSC_SUPPORT_DWORD] = 1;

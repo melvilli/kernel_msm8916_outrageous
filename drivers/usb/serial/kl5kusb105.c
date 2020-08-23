@@ -38,7 +38,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -67,8 +70,11 @@ static void klsi_105_set_termios(struct tty_struct *tty,
 			struct usb_serial_port *port, struct ktermios *old);
 static int  klsi_105_tiocmget(struct tty_struct *tty);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int  klsi_105_tiocmset(struct tty_struct *tty,
 			unsigned int set, unsigned int clear);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void klsi_105_process_read_urb(struct urb *urb);
@@ -101,7 +107,10 @@ static struct usb_serial_driver kl5kusb105d_device = {
 	/*.break_ctl =		klsi_105_break_ctl,*/
 	.tiocmget =		klsi_105_tiocmget,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.tiocmset =		klsi_105_tiocmset,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.port_probe =		klsi_105_port_probe,
@@ -192,11 +201,17 @@ static int klsi_105_get_line_state(struct usb_serial_port *port,
 
 	status_buf = kmalloc(KLSI_STATUSBUF_LEN, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!status_buf) {
 		dev_err(&port->dev, "%s - out of memory for status buffer.\n",
 				__func__);
 		return -ENOMEM;
 	}
+=======
+	if (!status_buf)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!status_buf)
 		return -ENOMEM;
@@ -214,6 +229,7 @@ static int klsi_105_get_line_state(struct usb_serial_port *port,
 			     10000
 			     );
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rc != KLSI_STATUSBUF_LEN) {
 		dev_err(&port->dev, "reading line status failed: %d\n", rc);
 		if (rc >= 0)
@@ -223,6 +239,8 @@ static int klsi_105_get_line_state(struct usb_serial_port *port,
 
 		dev_info(&port->serial->dev->dev, "read status %x %x",
 =======
+=======
+>>>>>>> v3.18
 	if (rc < 0)
 		dev_err(&port->dev, "Reading line status failed (error = %d)\n",
 			rc);
@@ -230,6 +248,9 @@ static int klsi_105_get_line_state(struct usb_serial_port *port,
 		status = get_unaligned_le16(status_buf);
 
 		dev_info(&port->serial->dev->dev, "read status %x %x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 status_buf[0], status_buf[1]);
 
@@ -300,11 +321,17 @@ static int  klsi_105_open(struct tty_struct *tty, struct usb_serial_port *port)
 	 */
 	cfg = kmalloc(sizeof(*cfg), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cfg) {
 		dev_err(&port->dev, "%s - out of memory for config buffer.\n",
 				__func__);
 		return -ENOMEM;
 	}
+=======
+	if (!cfg)
+		return -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	if (!cfg)
 		return -ENOMEM;
@@ -337,7 +364,11 @@ static int  klsi_105_open(struct tty_struct *tty, struct usb_serial_port *port)
 	if (rc) {
 		retval = rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_free_cfg;
+=======
+		goto exit;
+>>>>>>> v3.18
 =======
 		goto exit;
 >>>>>>> v3.18
@@ -356,13 +387,17 @@ static int  klsi_105_open(struct tty_struct *tty, struct usb_serial_port *port)
 		dev_err(&port->dev, "Enabling read failed (error = %d)\n", rc);
 		retval = rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_generic_close;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else
 		dev_dbg(&port->dev, "%s - enabled reading\n", __func__);
 
 	rc = klsi_105_get_line_state(port, &line_state);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (rc < 0) {
 		retval = rc;
@@ -392,6 +427,8 @@ err_free_cfg:
 	kfree(cfg);
 
 =======
+=======
+>>>>>>> v3.18
 	if (rc >= 0) {
 		spin_lock_irqsave(&priv->lock, flags);
 		priv->line_state = line_state;
@@ -403,6 +440,9 @@ err_free_cfg:
 
 exit:
 	kfree(cfg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return retval;
 }
@@ -488,10 +528,15 @@ static void klsi_105_set_termios(struct tty_struct *tty,
 
 	cfg = kmalloc(sizeof(*cfg), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cfg) {
 		dev_err(dev, "%s - out of memory for config buffer.\n", __func__);
 		return;
 	}
+=======
+	if (!cfg)
+		return;
+>>>>>>> v3.18
 =======
 	if (!cfg)
 		return;
@@ -547,7 +592,11 @@ static void klsi_105_set_termios(struct tty_struct *tty,
 		break;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(dev, "KLSI USB->Serial converter: unsupported baudrate request, using default of 9600");
+=======
+		dev_dbg(dev, "unsupported baudrate, using 9600\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(dev, "unsupported baudrate, using 9600\n");
 >>>>>>> v3.18
@@ -689,6 +738,7 @@ static int klsi_105_tiocmget(struct tty_struct *tty)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int klsi_105_tiocmset(struct tty_struct *tty,
 			     unsigned int set, unsigned int clear)
 {
@@ -716,6 +766,8 @@ static int klsi_105_tiocmset(struct tty_struct *tty,
 	return retval;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 module_usb_serial_driver(serial_drivers, id_table);

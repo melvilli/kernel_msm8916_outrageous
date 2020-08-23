@@ -33,7 +33,10 @@
 #include <linux/module.h>
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -1312,6 +1315,7 @@ static int tsi108_open(struct net_device *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->rxring = dma_alloc_coherent(NULL, rxring_size, &data->rxdma,
 					  GFP_KERNEL | __GFP_ZERO);
 	if (!data->rxring)
@@ -1320,6 +1324,8 @@ static int tsi108_open(struct net_device *dev)
 	data->txring = dma_alloc_coherent(NULL, txring_size, &data->txdma,
 					  GFP_KERNEL | __GFP_ZERO);
 =======
+=======
+>>>>>>> v3.18
 	data->rxring = dma_zalloc_coherent(NULL, rxring_size, &data->rxdma,
 					   GFP_KERNEL);
 	if (!data->rxring)
@@ -1327,6 +1333,9 @@ static int tsi108_open(struct net_device *dev)
 
 	data->txring = dma_zalloc_coherent(NULL, txring_size, &data->txdma,
 					   GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!data->txring) {
 		pci_free_consistent(0, rxring_size, data->rxring, data->rxdma);
@@ -1572,7 +1581,11 @@ tsi108_init_one(struct platform_device *pdev)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	einfo = pdev->dev.platform_data;
+=======
+	einfo = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	einfo = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -1700,7 +1713,10 @@ static int tsi108_ether_remove(struct platform_device *pdev)
 	unregister_netdev(dev);
 	tsi108_stop_ethernet(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(priv->regs);

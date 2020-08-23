@@ -24,8 +24,11 @@
 #include "../ctype.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* misc.c */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_64
 #define memptr long
 #else
@@ -35,6 +38,9 @@
 /* misc.c */
 extern memptr free_mem_ptr;
 extern memptr free_mem_end_ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern struct boot_params *real_mode;		/* Pointer to real-mode data */
 void __putstr(const char *s);
@@ -51,6 +57,7 @@ static inline void debug_putstr(const char *s)
 
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_EARLY_PRINTK
 
@@ -70,6 +77,8 @@ static inline void console_init(void)
 { }
 
 =======
+=======
+>>>>>>> v3.18
 #if CONFIG_EARLY_PRINTK || CONFIG_RANDOMIZE_BASE
 /* cmdline.c */
 int cmdline_find_option(const char *option, char *buffer, int bufsize);
@@ -104,6 +113,9 @@ void console_init(void);
 static const int early_serial_base;
 static inline void console_init(void)
 { }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

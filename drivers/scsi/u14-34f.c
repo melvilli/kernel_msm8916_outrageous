@@ -874,7 +874,11 @@ static int port_detect \
    /* Board detected, allocate its IRQ */
    if (request_irq(irq, do_interrupt_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
              IRQF_DISABLED | ((subversion == ESA) ? IRQF_SHARED : 0),
+=======
+             (subversion == ESA) ? IRQF_SHARED : 0,
+>>>>>>> v3.18
 =======
              (subversion == ESA) ? IRQF_SHARED : 0,
 >>>>>>> v3.18
@@ -1011,7 +1015,11 @@ static int port_detect \
 
    if (sh[j]->max_id > 8 || sh[j]->max_lun > 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
       printk("%s: wide SCSI support enabled, max_id %u, max_lun %u.\n",
+=======
+      printk("%s: wide SCSI support enabled, max_id %u, max_lun %llu.\n",
+>>>>>>> v3.18
 =======
       printk("%s: wide SCSI support enabled, max_id %u, max_lun %llu.\n",
 >>>>>>> v3.18
@@ -1294,9 +1302,15 @@ static int u14_34f_queuecommand_lck(struct scsi_cmnd *SCpnt, void (*done)(struct
    SCpnt->host_scribble = (unsigned char *) &cpp->cpp_index;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    if (do_trace) printk("%s: qcomm, mbox %d, target %d.%d:%d.\n",
                         BN(j), i, SCpnt->device->channel, SCpnt->device->id,
                         SCpnt->device->lun);
+=======
+   if (do_trace) printk("%s: qcomm, mbox %d, target %d.%d:%u.\n",
+                        BN(j), i, SCpnt->device->channel, SCpnt->device->id,
+                        (u8)SCpnt->device->lun);
+>>>>>>> v3.18
 =======
    if (do_trace) printk("%s: qcomm, mbox %d, target %d.%d:%u.\n",
                         BN(j), i, SCpnt->device->channel, SCpnt->device->id,
@@ -1307,7 +1321,11 @@ static int u14_34f_queuecommand_lck(struct scsi_cmnd *SCpnt, void (*done)(struct
    cpp->channel = SCpnt->device->channel;
    cpp->target = SCpnt->device->id;
 <<<<<<< HEAD
+<<<<<<< HEAD
    cpp->lun = SCpnt->device->lun;
+=======
+   cpp->lun = (u8)SCpnt->device->lun;
+>>>>>>> v3.18
 =======
    cpp->lun = (u8)SCpnt->device->lun;
 >>>>>>> v3.18
@@ -1682,15 +1700,21 @@ static int reorder(unsigned int j, unsigned long cursec,
       for (n = 0; n < n_ready; n++) {
          k = il[n]; cpp = &HD(j)->cp[k]; SCpnt = cpp->SCpnt;
 <<<<<<< HEAD
+<<<<<<< HEAD
          printk("%s %d.%d:%d mb %d fc %d nr %d sec %ld ns %u"\
                 " cur %ld s:%c r:%c rev:%c in:%c ov:%c xd %d.\n",
                 (ihdlr ? "ihdlr" : "qcomm"), SCpnt->channel, SCpnt->target,
                 SCpnt->lun, k, flushcount, n_ready,
 =======
+=======
+>>>>>>> v3.18
          printk("%s %d.%d:%llu mb %d fc %d nr %d sec %ld ns %u"\
                 " cur %ld s:%c r:%c rev:%c in:%c ov:%c xd %d.\n",
                 (ihdlr ? "ihdlr" : "qcomm"), SCpnt->channel, SCpnt->target,
                 (u8)SCpnt->lun, k, flushcount, n_ready,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                 blk_rq_pos(SCpnt->request), blk_rq_sectors(SCpnt->request),
 		cursec, YESNO(s), YESNO(r), YESNO(rev), YESNO(input_only),

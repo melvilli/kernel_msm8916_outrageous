@@ -34,7 +34,12 @@
  * wa->wa_descr initialized.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wa_create(struct wahc *wa, struct usb_interface *iface)
+=======
+int wa_create(struct wahc *wa, struct usb_interface *iface,
+	kernel_ulong_t quirks)
+>>>>>>> v3.18
 =======
 int wa_create(struct wahc *wa, struct usb_interface *iface,
 	kernel_ulong_t quirks)
@@ -43,6 +48,7 @@ int wa_create(struct wahc *wa, struct usb_interface *iface,
 	int result;
 	struct device *dev = &iface->dev;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (iface->cur_altsetting->desc.bNumEndpoints < 3)
 		return -ENODEV;
@@ -59,6 +65,8 @@ int wa_create(struct wahc *wa, struct usb_interface *iface,
 		result = -ENOMEM;
 		goto error_xfer_result_alloc;
 =======
+=======
+>>>>>>> v3.18
 	result = wa_rpipes_create(wa);
 	if (result < 0)
 		goto error_rpipes_create;
@@ -71,6 +79,9 @@ int wa_create(struct wahc *wa, struct usb_interface *iface,
 	if (wa->dti_buf == NULL) {
 		result = -ENOMEM;
 		goto error_dti_buf_alloc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	result = wa_nep_create(wa, iface);
@@ -83,8 +94,13 @@ int wa_create(struct wahc *wa, struct usb_interface *iface,
 
 error_nep_create:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(wa->xfer_result);
 error_xfer_result_alloc:
+=======
+	kfree(wa->dti_buf);
+error_dti_buf_alloc:
+>>>>>>> v3.18
 =======
 	kfree(wa->dti_buf);
 error_dti_buf_alloc:
@@ -102,10 +118,15 @@ void __wa_destroy(struct wahc *wa)
 		usb_kill_urb(wa->dti_urb);
 		usb_put_urb(wa->dti_urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		usb_kill_urb(wa->buf_in_urb);
 		usb_put_urb(wa->buf_in_urb);
 	}
 	kfree(wa->xfer_result);
+=======
+	}
+	kfree(wa->dti_buf);
+>>>>>>> v3.18
 =======
 	}
 	kfree(wa->dti_buf);

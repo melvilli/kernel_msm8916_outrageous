@@ -23,23 +23,34 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/gpio.h>
 #include <subdev/bios.h>
 #include <subdev/bios/gpio.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <subdev/bios.h>
 #include <subdev/bios/gpio.h>
 
 #include "priv.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 nouveau_gpio_drive(struct nouveau_gpio *gpio,
 		   int idx, int line, int dir, int out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpio->drive ? gpio->drive(gpio, line, dir, out) : -ENODEV;
+=======
+	const struct nouveau_gpio_impl *impl = (void *)nv_object(gpio)->oclass;
+	return impl->drive ? impl->drive(gpio, line, dir, out) : -ENODEV;
+>>>>>>> v3.18
 =======
 	const struct nouveau_gpio_impl *impl = (void *)nv_object(gpio)->oclass;
 	return impl->drive ? impl->drive(gpio, line, dir, out) : -ENODEV;
@@ -50,7 +61,12 @@ static int
 nouveau_gpio_sense(struct nouveau_gpio *gpio, int idx, int line)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpio->sense ? gpio->sense(gpio, line) : -ENODEV;
+=======
+	const struct nouveau_gpio_impl *impl = (void *)nv_object(gpio)->oclass;
+	return impl->sense ? impl->sense(gpio, line) : -ENODEV;
+>>>>>>> v3.18
 =======
 	const struct nouveau_gpio_impl *impl = (void *)nv_object(gpio)->oclass;
 	return impl->sense ? impl->sense(gpio, line) : -ENODEV;
@@ -86,7 +102,11 @@ nouveau_gpio_find(struct nouveau_gpio *gpio, int idx, u8 tag, u8 line,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -EINVAL;
+=======
+	return -ENOENT;
+>>>>>>> v3.18
 =======
 	return -ENOENT;
 >>>>>>> v3.18
@@ -125,7 +145,10 @@ nouveau_gpio_get(struct nouveau_gpio *gpio, int idx, u8 tag, u8 line)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void
 nouveau_gpio_intr_fini(struct nvkm_event *event, int type, int index)
 {
@@ -221,13 +244,20 @@ _nouveau_gpio_init(struct nouveau_object *object)
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void
 _nouveau_gpio_dtor(struct nouveau_object *object)
 {
 	struct nouveau_gpio *gpio = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_event_destroy(&gpio->events);
+=======
+	nvkm_event_fini(&gpio->event);
+>>>>>>> v3.18
 =======
 	nvkm_event_fini(&gpio->event);
 >>>>>>> v3.18
@@ -238,14 +268,20 @@ int
 nouveau_gpio_create_(struct nouveau_object *parent,
 		     struct nouveau_object *engine,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     struct nouveau_oclass *oclass, int lines,
 		     int length, void **pobject)
 {
 =======
+=======
+>>>>>>> v3.18
 		     struct nouveau_oclass *oclass,
 		     int length, void **pobject)
 {
 	const struct nouveau_gpio_impl *impl = (void *)oclass;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nouveau_gpio *gpio;
 	int ret;
@@ -256,6 +292,7 @@ nouveau_gpio_create_(struct nouveau_object *parent,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = nouveau_event_create(lines, &gpio->events);
 	if (ret)
@@ -288,6 +325,8 @@ nouveau_gpio_init(struct nouveau_gpio *gpio)
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	gpio->find = nouveau_gpio_find;
 	gpio->set  = nouveau_gpio_set;
 	gpio->get  = nouveau_gpio_get;
@@ -316,5 +355,8 @@ _nouveau_gpio_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

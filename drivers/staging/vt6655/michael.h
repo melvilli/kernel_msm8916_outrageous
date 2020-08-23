@@ -32,6 +32,7 @@
 #define __MICHAEL_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*---------------------  Export Definitions -------------------------*/
 
 /*---------------------  Export Types  ------------------------------*/
@@ -51,6 +52,8 @@ void MIC_vGetMIC(unsigned long *pdwL, unsigned long *pdwR);
 
 // Rotation functions on 32 bit values
 =======
+=======
+>>>>>>> v3.18
 #include <linux/types.h>
 
 void MIC_vInit(u32 dwK0, u32 dwK1);
@@ -65,13 +68,20 @@ void MIC_vAppend(unsigned char *src, unsigned int nBytes);
 void MIC_vGetMIC(u32 *pdwL, u32 *pdwR);
 
 /* Rotation functions on 32 bit values */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ROL32(A, n)							\
 	(((A) << (n)) | (((A)>>(32-(n)))  & ((1UL << (n)) - 1)))
 #define ROR32(A, n) ROL32((A), 32-(n))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif //__MICHAEL_H__
+=======
+#endif /*__MICHAEL_H__ */
+>>>>>>> v3.18
 =======
 #endif /*__MICHAEL_H__ */
 >>>>>>> v3.18

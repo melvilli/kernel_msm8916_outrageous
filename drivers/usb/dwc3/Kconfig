@@ -1,7 +1,11 @@
 config USB_DWC3
 	tristate "DesignWare USB3 DRD Core Support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (USB || USB_GADGET)
+=======
+	depends on (USB || USB_GADGET) && HAS_DMA
+>>>>>>> v3.18
 =======
 	depends on (USB || USB_GADGET) && HAS_DMA
 >>>>>>> v3.18
@@ -45,7 +49,10 @@ config USB_DWC3_DUAL_ROLE
 endchoice
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 comment "Platform Glue Driver Support"
 
 config USB_DWC3_OMAP
@@ -105,6 +112,9 @@ config USB_DWC3_QCOM
 
 comment "Debugging features"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config USB_DWC3_DEBUG
 	bool "Enable Debugging Messages"
@@ -118,7 +128,10 @@ config USB_DWC3_VERBOSE
 	  Say Y here to enable verbose debugging messages on DWC3 Driver.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DWC3_HOST_USB3_LPM_ENABLE
 	bool "Enable USB3 LPM Capability"
 	depends on USB_DWC3_HOST=y || USB_DWC3_DUAL_ROLE=y
@@ -126,5 +139,8 @@ config DWC3_HOST_USB3_LPM_ENABLE
 	help
 	  Select this when you want to enable USB3 LPM with dwc3 xhci host.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif

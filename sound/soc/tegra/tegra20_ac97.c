@@ -38,7 +38,10 @@
 #include <sound/dmaengine_pcm.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "tegra_asoc_utils.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "tegra20_ac97.h"
@@ -146,7 +149,11 @@ static void tegra20_ac97_codec_write(struct snd_ac97 *ac97_snd,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_ac97_bus_ops soc_ac97_ops = {
+=======
+static struct snd_ac97_bus_ops tegra20_ac97_ops = {
+>>>>>>> v3.18
 =======
 static struct snd_ac97_bus_ops tegra20_ac97_ops = {
 >>>>>>> v3.18
@@ -156,7 +163,10 @@ static struct snd_ac97_bus_ops tegra20_ac97_ops = {
 	.warm_reset	= tegra20_ac97_codec_warm_reset,
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(soc_ac97_ops);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -318,7 +328,11 @@ static const struct regmap_config tegra20_ac97_regmap_config = {
 	.volatile_reg = tegra20_ac97_volatile_reg,
 	.precious_reg = tegra20_ac97_precious_reg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cache_type = REGCACHE_RBTREE,
+=======
+	.cache_type = REGCACHE_FLAT,
+>>>>>>> v3.18
 =======
 	.cache_type = REGCACHE_FLAT,
 >>>>>>> v3.18
@@ -328,8 +342,12 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 {
 	struct tegra20_ac97 *ac97;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *mem, *memregion;
 	u32 of_dma[2];
+=======
+	struct resource *mem;
+>>>>>>> v3.18
 =======
 	struct resource *mem;
 >>>>>>> v3.18
@@ -346,7 +364,11 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 	dev_set_drvdata(&pdev->dev, ac97);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ac97->clk_ac97 = clk_get(&pdev->dev, NULL);
+=======
+	ac97->clk_ac97 = devm_clk_get(&pdev->dev, NULL);
+>>>>>>> v3.18
 =======
 	ac97->clk_ac97 = devm_clk_get(&pdev->dev, NULL);
 >>>>>>> v3.18
@@ -357,6 +379,7 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 	}
 
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!mem) {
 		dev_err(&pdev->dev, "No memory resource\n");
@@ -381,6 +404,11 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 	if (IS_ERR(regs)) {
 		ret = PTR_ERR(regs);
 >>>>>>> v3.18
+=======
+	regs = devm_ioremap_resource(&pdev->dev, mem);
+	if (IS_ERR(regs)) {
+		ret = PTR_ERR(regs);
+>>>>>>> v3.18
 		goto err_clk_put;
 	}
 
@@ -393,6 +421,7 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_property_read_u32_array(pdev->dev.of_node,
 				       "nvidia,dma-request-selector",
 				       of_dma, 2) < 0) {
@@ -401,6 +430,8 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 		goto err_clk_put;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ac97->reset_gpio = of_get_named_gpio(pdev->dev.of_node,
@@ -428,7 +459,10 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 	ac97->capture_dma_data.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
 	ac97->capture_dma_data.maxburst = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ac97->capture_dma_data.slave_id = of_dma[1];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -436,8 +470,11 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 	ac97->playback_dma_data.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
 	ac97->playback_dma_data.maxburst = 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ac97->playback_dma_data.slave_id = of_dma[1];
 =======
+=======
+>>>>>>> v3.18
 
 	ret = clk_prepare_enable(ac97->clk_ac97);
 	if (ret) {
@@ -450,6 +487,9 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to set AC'97 ops: %d\n", ret);
 		goto err_clk_disable_unprepare;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = snd_soc_register_component(&pdev->dev, &tegra20_ac97_component,
@@ -458,7 +498,11 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Could not register DAI: %d\n", ret);
 		ret = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_clk_put;
+=======
+		goto err_clk_disable_unprepare;
+>>>>>>> v3.18
 =======
 		goto err_clk_disable_unprepare;
 >>>>>>> v3.18
@@ -470,6 +514,7 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 		goto err_unregister_component;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = tegra_asoc_utils_init(&ac97->util_data, &pdev->dev);
 	if (ret)
@@ -487,11 +532,14 @@ static int tegra20_ac97_platform_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* XXX: crufty ASoC AC97 API - only one AC97 codec allowed */
 	workdata = ac97;
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 err_asoc_utils_fini:
 	tegra_asoc_utils_fini(&ac97->util_data);
@@ -503,6 +551,8 @@ err_clk_put:
 	clk_put(ac97->clk_ac97);
 err:
 =======
+=======
+>>>>>>> v3.18
 err_unregister_component:
 	snd_soc_unregister_component(&pdev->dev);
 err_clk_disable_unprepare:
@@ -510,6 +560,9 @@ err_clk_disable_unprepare:
 err_clk_put:
 err:
 	snd_soc_set_ac97_ops(NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -522,10 +575,16 @@ static int tegra20_ac97_platform_remove(struct platform_device *pdev)
 	snd_soc_unregister_component(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tegra_asoc_utils_fini(&ac97->util_data);
 
 	clk_disable_unprepare(ac97->clk_ac97);
 	clk_put(ac97->clk_ac97);
+=======
+	clk_disable_unprepare(ac97->clk_ac97);
+
+	snd_soc_set_ac97_ops(NULL);
+>>>>>>> v3.18
 =======
 	clk_disable_unprepare(ac97->clk_ac97);
 

@@ -1,7 +1,11 @@
 /*
  * Copyright (C) 2010-2011 Neil Brown
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2010-2011 Red Hat, Inc. All rights reserved.
+=======
+ * Copyright (C) 2010-2014 Red Hat, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2010-2014 Red Hat, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -23,6 +27,11 @@
 #define DM_MSG_PREFIX "raid"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool devices_handle_discard_safely = false;
+
+>>>>>>> v3.18
 =======
 static bool devices_handle_discard_safely = false;
 
@@ -335,7 +344,12 @@ static int validate_region_size(struct raid_set *rs, unsigned long region_size)
 		if (min_region_size > (1 << 13)) {
 			/* If not a power of 2, make it the next power of 2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			region_size = roundup_pow_of_two(min_region_size);
+=======
+			if (min_region_size & (min_region_size - 1))
+				region_size = 1 << fls(region_size);
+>>>>>>> v3.18
 =======
 			if (min_region_size & (min_region_size - 1))
 				region_size = 1 << fls(region_size);
@@ -489,6 +503,11 @@ too_many:
  *    [[no]sync]			Force or prevent recovery of the
  *                                      entire array
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *    [devices_handle_discard_safely]	Allow discards on RAID4/5/6; useful if RAID
+ *					member device(s) properly support TRIM/UNMAP
+>>>>>>> v3.18
 =======
  *    [devices_handle_discard_safely]	Allow discards on RAID4/5/6; useful if RAID
  *					member device(s) properly support TRIM/UNMAP
@@ -523,7 +542,11 @@ static int parse_raid_params(struct raid_set *rs, char **argv,
 	 * "chunk_size" is the only argument of this type.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strict_strtoul(argv[0], 10, &value) < 0)) {
+=======
+	if ((kstrtoul(argv[0], 10, &value) < 0)) {
+>>>>>>> v3.18
 =======
 	if ((kstrtoul(argv[0], 10, &value) < 0)) {
 >>>>>>> v3.18
@@ -608,7 +631,11 @@ static int parse_raid_params(struct raid_set *rs, char **argv,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strict_strtoul(argv[i], 10, &value) < 0) {
+=======
+		if (kstrtoul(argv[i], 10, &value) < 0) {
+>>>>>>> v3.18
 =======
 		if (kstrtoul(argv[i], 10, &value) < 0) {
 >>>>>>> v3.18
@@ -1180,7 +1207,10 @@ static int analyse_superblocks(struct dm_target *ti, struct raid_set *rs)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Enable/disable discard support on RAID set depending on
  * RAID level and discard properties of underlying RAID members.
  */
@@ -1228,6 +1258,9 @@ static void configure_discard_support(struct dm_target *ti, struct raid_set *rs)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Construct a RAID4/5/6 mapping:
  * Args:
@@ -1261,7 +1294,11 @@ static int raid_ctr(struct dm_target *ti, unsigned argc, char **argv)
 
 	/* number of RAID parameters */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoul(argv[0], 10, &num_raid_params) < 0) {
+=======
+	if (kstrtoul(argv[0], 10, &num_raid_params) < 0) {
+>>>>>>> v3.18
 =======
 	if (kstrtoul(argv[0], 10, &num_raid_params) < 0) {
 >>>>>>> v3.18
@@ -1278,7 +1315,11 @@ static int raid_ctr(struct dm_target *ti, unsigned argc, char **argv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strict_strtoul(argv[num_raid_params], 10, &num_raid_devs) < 0) ||
+=======
+	if ((kstrtoul(argv[num_raid_params], 10, &num_raid_devs) < 0) ||
+>>>>>>> v3.18
 =======
 	if ((kstrtoul(argv[num_raid_params], 10, &num_raid_devs) < 0) ||
 >>>>>>> v3.18
@@ -1319,12 +1360,18 @@ static int raid_ctr(struct dm_target *ti, unsigned argc, char **argv)
 	ti->num_flush_bios = 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Disable/enable discard support on RAID set.
 	 */
 	configure_discard_support(ti, rs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_lock(&rs->md.reconfig_mutex);
 	ret = md_run(&rs->md);
@@ -1484,6 +1531,10 @@ static void raid_status(struct dm_target *ti, status_type_t type,
 		 */
 		DMEMIT(" %llu",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		       (strcmp(rs->md.last_sync_action, "check")) ? 0 :
+>>>>>>> v3.18
 =======
 		       (strcmp(rs->md.last_sync_action, "check")) ? 0 :
 >>>>>>> v3.18
@@ -1672,7 +1723,10 @@ static void raid_postsuspend(struct dm_target *ti)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void attempt_restore_of_faulty_devices(struct raid_set *rs)
 {
 	int i;
@@ -1729,6 +1783,9 @@ static void attempt_restore_of_faulty_devices(struct raid_set *rs)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void raid_resume(struct dm_target *ti)
 {
@@ -1739,7 +1796,10 @@ static void raid_resume(struct dm_target *ti)
 		bitmap_load(&rs->md);
 		rs->bitmap_loaded = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else {
 		/*
 		 * A secondary resume while the device is active.
@@ -1747,6 +1807,9 @@ static void raid_resume(struct dm_target *ti)
 		 * devices are reachable again.
 		 */
 		attempt_restore_of_faulty_devices(rs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -1757,7 +1820,11 @@ static void raid_resume(struct dm_target *ti)
 static struct target_type raid_target = {
 	.name = "raid",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.version = {1, 5, 0},
+=======
+	.version = {1, 6, 0},
+>>>>>>> v3.18
 =======
 	.version = {1, 6, 0},
 >>>>>>> v3.18
@@ -1792,11 +1859,17 @@ module_init(dm_raid_init);
 module_exit(dm_raid_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 module_param(devices_handle_discard_safely, bool, 0644);
 MODULE_PARM_DESC(devices_handle_discard_safely,
 		 "Set to Y if all devices in each array reliably return zeroes on reads from discarded regions");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_DESCRIPTION(DM_NAME " raid4/5/6 target");
 MODULE_ALIAS("dm-raid1");

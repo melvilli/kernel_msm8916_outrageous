@@ -233,7 +233,11 @@ static int firmware_download(struct usb_device *udev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	max_packet_size = udev->ep_out[0x1]->desc.wMaxPacketSize;
+=======
+	max_packet_size = le16_to_cpu(udev->ep_out[0x1]->desc.wMaxPacketSize);
+>>>>>>> v3.18
 =======
 	max_packet_size = le16_to_cpu(udev->ep_out[0x1]->desc.wMaxPacketSize);
 >>>>>>> v3.18
@@ -380,7 +384,11 @@ static inline void set_map_flags(struct poseidon *pd, struct usb_device *udev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int check_firmware(struct usb_device *udev, int *down_firmware)
+=======
+static int check_firmware(struct usb_device *udev)
+>>>>>>> v3.18
 =======
 static int check_firmware(struct usb_device *udev)
 >>>>>>> v3.18
@@ -404,10 +412,15 @@ static int check_firmware(struct usb_device *udev)
 	kfree(buf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret < 0) {
 		*down_firmware = 1;
 		return firmware_download(udev);
 	}
+=======
+	if (ret < 0)
+		return firmware_download(udev);
+>>>>>>> v3.18
 =======
 	if (ret < 0)
 		return firmware_download(udev);
@@ -425,9 +438,15 @@ static int poseidon_probe(struct usb_interface *interface,
 
 	/* download firmware */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	check_firmware(udev, &ret);
 	if (ret)
 		return 0;
+=======
+	ret = check_firmware(udev);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = check_firmware(udev);
 	if (ret)
@@ -456,6 +475,7 @@ static int poseidon_probe(struct usb_interface *interface,
 		/* register v4l2 device */
 		ret = v4l2_device_register(&interface->dev, &pd->v4l2_dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* register devices in directory /dev */
 		ret = pd_video_init(pd);
@@ -463,6 +483,8 @@ static int poseidon_probe(struct usb_interface *interface,
 		poseidon_fm_init(pd);
 		pd_dvb_usb_device_init(pd);
 =======
+=======
+>>>>>>> v3.18
 		if (ret)
 			goto err_v4l2;
 
@@ -479,6 +501,9 @@ static int poseidon_probe(struct usb_interface *interface,
 		ret = pd_dvb_usb_device_init(pd);
 		if (ret)
 			goto err_dvb;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		INIT_LIST_HEAD(&pd->device_list);
@@ -498,7 +523,10 @@ static int poseidon_probe(struct usb_interface *interface,
 #endif
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 err_dvb:
 	poseidon_fm_exit(pd);
 err_fm:
@@ -512,6 +540,9 @@ err_v4l2:
 	usb_put_dev(pd->udev);
 	kfree(pd);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

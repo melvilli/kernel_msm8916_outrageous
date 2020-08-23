@@ -17,6 +17,11 @@
 #include <linux/err.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/miscdevice.h>
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/miscdevice.h>
 #include <linux/module.h>
@@ -52,16 +57,22 @@ void kvmppc_set_pending_interrupt(struct kvm_vcpu *vcpu, enum int_class type)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	tag = PPC_DBELL_LPID(vcpu->kvm->arch.lpid) | vcpu->vcpu_id;
 	mb();
 	ppc_msgsnd(dbell_type, 0, tag);
 =======
+=======
+>>>>>>> v3.18
 	preempt_disable();
 	tag = PPC_DBELL_LPID(get_lpid(vcpu)) | vcpu->vcpu_id;
 	mb();
 	ppc_msgsnd(dbell_type, 0, tag);
 	preempt_enable();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -72,7 +83,11 @@ void kvmppc_e500_tlbil_one(struct kvmppc_vcpu_e500 *vcpu_e500,
 	unsigned int tid, ts;
 	gva_t eaddr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 val, lpid;
+=======
+	u32 val;
+>>>>>>> v3.18
 =======
 	u32 val;
 >>>>>>> v3.18
@@ -81,7 +96,10 @@ void kvmppc_e500_tlbil_one(struct kvmppc_vcpu_e500 *vcpu_e500,
 	ts = get_tlb_ts(gtlbe);
 	tid = get_tlb_tid(gtlbe);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lpid = vcpu_e500->vcpu.kvm->arch.lpid;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -93,7 +111,11 @@ void kvmppc_e500_tlbil_one(struct kvmppc_vcpu_e500 *vcpu_e500,
 
 	mtspr(SPRN_MAS6, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mtspr(SPRN_MAS5, MAS5_SGS | lpid);
+=======
+	mtspr(SPRN_MAS5, MAS5_SGS | get_lpid(&vcpu_e500->vcpu));
+>>>>>>> v3.18
 =======
 	mtspr(SPRN_MAS5, MAS5_SGS | get_lpid(&vcpu_e500->vcpu));
 >>>>>>> v3.18
@@ -118,7 +140,11 @@ void kvmppc_e500_tlbil_all(struct kvmppc_vcpu_e500 *vcpu_e500)
 
 	local_irq_save(flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mtspr(SPRN_MAS5, MAS5_SGS | vcpu_e500->vcpu.kvm->arch.lpid);
+=======
+	mtspr(SPRN_MAS5, MAS5_SGS | get_lpid(&vcpu_e500->vcpu));
+>>>>>>> v3.18
 =======
 	mtspr(SPRN_MAS5, MAS5_SGS | get_lpid(&vcpu_e500->vcpu));
 >>>>>>> v3.18
@@ -137,14 +163,20 @@ void kvmppc_mmu_msr_notify(struct kvm_vcpu *vcpu, u32 old_msr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PER_CPU(struct kvm_vcpu *, last_vcpu_on_cpu);
 
 void kvmppc_core_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
 =======
+=======
+>>>>>>> v3.18
 /* We use two lpids per VM */
 static DEFINE_PER_CPU(struct kvm_vcpu *[KVMPPC_NR_LPIDS], last_vcpu_of_lpid);
 
 static void kvmppc_core_vcpu_load_e500mc(struct kvm_vcpu *vcpu, int cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvmppc_vcpu_e500 *vcpu_e500 = to_e500(vcpu);
@@ -152,17 +184,23 @@ static void kvmppc_core_vcpu_load_e500mc(struct kvm_vcpu *vcpu, int cpu)
 	kvmppc_booke_vcpu_load(vcpu, cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mtspr(SPRN_LPID, vcpu->kvm->arch.lpid);
 	mtspr(SPRN_EPCR, vcpu->arch.shadow_epcr);
 	mtspr(SPRN_GPIR, vcpu->vcpu_id);
 	mtspr(SPRN_MSRP, vcpu->arch.shadow_msrp);
 =======
+=======
+>>>>>>> v3.18
 	mtspr(SPRN_LPID, get_lpid(vcpu));
 	mtspr(SPRN_EPCR, vcpu->arch.shadow_epcr);
 	mtspr(SPRN_GPIR, vcpu->vcpu_id);
 	mtspr(SPRN_MSRP, vcpu->arch.shadow_msrp);
 	vcpu->arch.eplc = EPC_EGS | (get_lpid(vcpu) << EPC_ELPID_SHIFT);
 	vcpu->arch.epsc = vcpu->arch.eplc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mtspr(SPRN_EPLC, vcpu->arch.eplc);
 	mtspr(SPRN_EPSC, vcpu->arch.epsc);
@@ -184,6 +222,7 @@ static void kvmppc_core_vcpu_load_e500mc(struct kvm_vcpu *vcpu, int cpu)
 
 	if (vcpu->arch.oldpir != mfspr(SPRN_PIR) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    __get_cpu_var(last_vcpu_on_cpu) != vcpu) {
 		kvmppc_e500_tlbil_all(vcpu_e500);
 		__get_cpu_var(last_vcpu_on_cpu) = vcpu;
@@ -194,6 +233,8 @@ static void kvmppc_core_vcpu_load_e500mc(struct kvm_vcpu *vcpu, int cpu)
 
 void kvmppc_core_vcpu_put(struct kvm_vcpu *vcpu)
 =======
+=======
+>>>>>>> v3.18
 	    __get_cpu_var(last_vcpu_of_lpid)[get_lpid(vcpu)] != vcpu) {
 		kvmppc_e500_tlbil_all(vcpu_e500);
 		__get_cpu_var(last_vcpu_of_lpid)[get_lpid(vcpu)] = vcpu;
@@ -201,6 +242,9 @@ void kvmppc_core_vcpu_put(struct kvm_vcpu *vcpu)
 }
 
 static void kvmppc_core_vcpu_put_e500mc(struct kvm_vcpu *vcpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	vcpu->arch.eplc = mfspr(SPRN_EPLC);
@@ -232,7 +276,10 @@ int kvmppc_core_check_processor_compat(void)
 	else if (strcmp(cur_cpu_spec->cpu_name, "e5500") == 0)
 		r = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ALTIVEC
 	/*
 	 * Since guests have the priviledge to enable AltiVec, we need AltiVec
@@ -243,6 +290,9 @@ int kvmppc_core_check_processor_compat(void)
 	else if (strcmp(cur_cpu_spec->cpu_name, "e6500") == 0)
 		r = 0;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		r = -ENOTSUPP;
@@ -260,9 +310,13 @@ int kvmppc_core_vcpu_setup(struct kvm_vcpu *vcpu)
 	vcpu->arch.shadow_epcr |= SPRN_EPCR_ICM;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vcpu->arch.shadow_msrp = MSRP_UCLEP | MSRP_DEP | MSRP_PMMP;
 	vcpu->arch.eplc = EPC_EGS | (vcpu->kvm->arch.lpid << EPC_ELPID_SHIFT);
 	vcpu->arch.epsc = vcpu->arch.eplc;
+=======
+	vcpu->arch.shadow_msrp = MSRP_UCLEP | MSRP_PMMP;
+>>>>>>> v3.18
 =======
 	vcpu->arch.shadow_msrp = MSRP_UCLEP | MSRP_PMMP;
 >>>>>>> v3.18
@@ -276,7 +330,12 @@ int kvmppc_core_vcpu_setup(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_core_get_sregs(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs)
+=======
+static int kvmppc_core_get_sregs_e500mc(struct kvm_vcpu *vcpu,
+					struct kvm_sregs *sregs)
+>>>>>>> v3.18
 =======
 static int kvmppc_core_get_sregs_e500mc(struct kvm_vcpu *vcpu,
 					struct kvm_sregs *sregs)
@@ -301,16 +360,22 @@ static int kvmppc_core_get_sregs_e500mc(struct kvm_vcpu *vcpu,
 	sregs->u.e.ivor_high[5] = vcpu->arch.ivor[BOOKE_IRQPRIO_DBELL_CRIT];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kvmppc_get_sregs_ivor(vcpu, sregs);
 }
 
 int kvmppc_core_set_sregs(struct kvm_vcpu *vcpu, struct kvm_sregs *sregs)
 =======
+=======
+>>>>>>> v3.18
 	return kvmppc_get_sregs_ivor(vcpu, sregs);
 }
 
 static int kvmppc_core_set_sregs_e500mc(struct kvm_vcpu *vcpu,
 					struct kvm_sregs *sregs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvmppc_vcpu_e500 *vcpu_e500 = to_e500(vcpu);
@@ -345,6 +410,7 @@ static int kvmppc_core_set_sregs_e500mc(struct kvm_vcpu *vcpu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_get_one_reg(struct kvm_vcpu *vcpu, u64 id,
 			union kvmppc_one_reg *val)
 {
@@ -361,6 +427,8 @@ int kvmppc_set_one_reg(struct kvm_vcpu *vcpu, u64 id,
 
 struct kvm_vcpu *kvmppc_core_vcpu_create(struct kvm *kvm, unsigned int id)
 =======
+=======
+>>>>>>> v3.18
 static int kvmppc_get_one_reg_e500mc(struct kvm_vcpu *vcpu, u64 id,
 			      union kvmppc_one_reg *val)
 {
@@ -395,6 +463,9 @@ static int kvmppc_set_one_reg_e500mc(struct kvm_vcpu *vcpu, u64 id,
 
 static struct kvm_vcpu *kvmppc_core_vcpu_create_e500mc(struct kvm *kvm,
 						       unsigned int id)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct kvmppc_vcpu_e500 *vcpu_e500;
@@ -437,7 +508,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kvmppc_core_vcpu_free(struct kvm_vcpu *vcpu)
+=======
+static void kvmppc_core_vcpu_free_e500mc(struct kvm_vcpu *vcpu)
+>>>>>>> v3.18
 =======
 static void kvmppc_core_vcpu_free_e500mc(struct kvm_vcpu *vcpu)
 >>>>>>> v3.18
@@ -451,7 +526,11 @@ static void kvmppc_core_vcpu_free_e500mc(struct kvm_vcpu *vcpu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int kvmppc_core_init_vm(struct kvm *kvm)
+=======
+static int kvmppc_core_init_vm_e500mc(struct kvm *kvm)
+>>>>>>> v3.18
 =======
 static int kvmppc_core_init_vm_e500mc(struct kvm *kvm)
 >>>>>>> v3.18
@@ -463,7 +542,10 @@ static int kvmppc_core_init_vm_e500mc(struct kvm *kvm)
 		return lpid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Use two lpids per VM on cores with two threads like e6500. Use
 	 * even numbers to speedup vcpu lpid computation with consecutive lpids
@@ -472,11 +554,15 @@ static int kvmppc_core_init_vm_e500mc(struct kvm *kvm)
 	if (threads_per_core == 2)
 		lpid <<= 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kvm->arch.lpid = lpid;
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void kvmppc_core_destroy_vm(struct kvm *kvm)
 {
@@ -484,6 +570,8 @@ void kvmppc_core_destroy_vm(struct kvm *kvm)
 }
 
 =======
+=======
+>>>>>>> v3.18
 static void kvmppc_core_destroy_vm_e500mc(struct kvm *kvm)
 {
 	int lpid = kvm->arch.lpid;
@@ -511,6 +599,9 @@ static struct kvmppc_ops kvm_ops_e500mc = {
 	.emulate_mfspr = kvmppc_core_emulate_mfspr_e500,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init kvmppc_e500mc_init(void)
 {
@@ -519,6 +610,7 @@ static int __init kvmppc_e500mc_init(void)
 	r = kvmppc_booke_init();
 	if (r)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return r;
 
 	kvmppc_init_lpid(64);
@@ -526,6 +618,8 @@ static int __init kvmppc_e500mc_init(void)
 
 	return kvm_init(NULL, sizeof(struct kvmppc_vcpu_e500), 0, THIS_MODULE);
 =======
+=======
+>>>>>>> v3.18
 		goto err_out;
 
 	/*
@@ -545,12 +639,19 @@ static int __init kvmppc_e500mc_init(void)
 
 err_out:
 	return r;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __exit kvmppc_e500mc_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kvmppc_pr_ops = NULL;
+>>>>>>> v3.18
 =======
 	kvmppc_pr_ops = NULL;
 >>>>>>> v3.18
@@ -560,6 +661,11 @@ static void __exit kvmppc_e500mc_exit(void)
 module_init(kvmppc_e500mc_init);
 module_exit(kvmppc_e500mc_exit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS_MISCDEV(KVM_MINOR);
+MODULE_ALIAS("devname:kvm");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS_MISCDEV(KVM_MINOR);
 MODULE_ALIAS("devname:kvm");

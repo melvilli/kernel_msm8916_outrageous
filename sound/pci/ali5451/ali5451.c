@@ -66,6 +66,7 @@ module_param(enable, bool, 0444);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Debug part definitions
  */
 
@@ -78,6 +79,8 @@ module_param(enable, bool, 0444);
 #endif
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  Constants definition
@@ -279,7 +282,11 @@ struct snd_ali {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(snd_ali_ids) = {
+=======
+static const struct pci_device_id snd_ali_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id snd_ali_ids[] = {
 >>>>>>> v3.18
@@ -329,7 +336,11 @@ static int snd_ali_codec_ready(struct snd_ali *codec,
 
 	snd_ali_5451_poke(codec, port, res & ~0x8000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("ali_codec_ready: codec is not ready.\n ");
+=======
+	dev_dbg(codec->card->dev, "ali_codec_ready: codec is not ready.\n ");
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "ali_codec_ready: codec is not ready.\n ");
 >>>>>>> v3.18
@@ -354,7 +365,11 @@ static int snd_ali_stimer_ready(struct snd_ali *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "ali_stimer_read: stimer is not ready.\n");
+=======
+	dev_err(codec->card->dev, "ali_stimer_read: stimer is not ready.\n");
+>>>>>>> v3.18
 =======
 	dev_err(codec->card->dev, "ali_stimer_read: stimer is not ready.\n");
 >>>>>>> v3.18
@@ -370,7 +385,12 @@ static void snd_ali_codec_poke(struct snd_ali *codec,int secondary,
 
 	if (reg >= 0x80) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ali_codec_poke: reg(%xh) invalid.\n", reg);
+=======
+		dev_err(codec->card->dev,
+			"ali_codec_poke: reg(%xh) invalid.\n", reg);
+>>>>>>> v3.18
 =======
 		dev_err(codec->card->dev,
 			"ali_codec_poke: reg(%xh) invalid.\n", reg);
@@ -406,7 +426,12 @@ static unsigned short snd_ali_codec_peek(struct snd_ali *codec,
 
 	if (reg >= 0x80) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ali_codec_peek: reg(%xh) invalid.\n", reg);
+=======
+		dev_err(codec->card->dev,
+			"ali_codec_peek: reg(%xh) invalid.\n", reg);
+>>>>>>> v3.18
 =======
 		dev_err(codec->card->dev,
 			"ali_codec_peek: reg(%xh) invalid.\n", reg);
@@ -443,7 +468,11 @@ static void snd_ali_codec_write(struct snd_ac97 *ac97,
 	struct snd_ali *codec = ac97->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("codec_write: reg=%xh data=%xh.\n", reg, val);
+=======
+	dev_dbg(codec->card->dev, "codec_write: reg=%xh data=%xh.\n", reg, val);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "codec_write: reg=%xh data=%xh.\n", reg, val);
 >>>>>>> v3.18
@@ -463,7 +492,11 @@ static unsigned short snd_ali_codec_read(struct snd_ac97 *ac97,
 	struct snd_ali *codec = ac97->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("codec_read reg=%xh.\n", reg);
+=======
+	dev_dbg(codec->card->dev, "codec_read reg=%xh.\n", reg);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "codec_read reg=%xh.\n", reg);
 >>>>>>> v3.18
@@ -508,7 +541,11 @@ static int snd_ali_reset_5451(struct snd_ali *codec)
 
 	/* non-fatal if you have a non PM capable codec */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* snd_printk(KERN_WARNING "ali5451: reset time out\n"); */
+=======
+	/* dev_warn(codec->card->dev, "ali5451: reset time out\n"); */
+>>>>>>> v3.18
 =======
 	/* dev_warn(codec->card->dev, "ali5451: reset time out\n"); */
 >>>>>>> v3.18
@@ -566,7 +603,11 @@ static void snd_ali_disable_voice_irq(struct snd_ali *codec,
 	struct snd_ali_channel_control *pchregs = &(codec->chregs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("disable_voice_irq channel=%d\n",channel);
+=======
+	dev_dbg(codec->card->dev, "disable_voice_irq channel=%d\n", channel);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "disable_voice_irq channel=%d\n", channel);
 >>>>>>> v3.18
@@ -583,7 +624,11 @@ static int snd_ali_alloc_pcm_channel(struct snd_ali *codec, int channel)
 
 	if (codec->synth.chcnt >= ALI_CHANNELS){
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR
+=======
+		dev_err(codec->card->dev,
+>>>>>>> v3.18
 =======
 		dev_err(codec->card->dev,
 >>>>>>> v3.18
@@ -595,7 +640,11 @@ static int snd_ali_alloc_pcm_channel(struct snd_ali *codec, int channel)
 		codec->synth.chmap |= 1 << idx;
 		codec->synth.chcnt++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_ali_printk("alloc_pcm_channel no. %d.\n",idx);
+=======
+		dev_dbg(codec->card->dev, "alloc_pcm_channel no. %d.\n", idx);
+>>>>>>> v3.18
 =======
 		dev_dbg(codec->card->dev, "alloc_pcm_channel no. %d.\n", idx);
 >>>>>>> v3.18
@@ -610,7 +659,12 @@ static int snd_ali_find_free_channel(struct snd_ali * codec, int rec)
 	int result = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("find_free_channel: for %s\n",rec ? "rec" : "pcm");
+=======
+	dev_dbg(codec->card->dev,
+		"find_free_channel: for %s\n", rec ? "rec" : "pcm");
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev,
 		"find_free_channel: for %s\n", rec ? "rec" : "pcm");
@@ -630,8 +684,13 @@ static int snd_ali_find_free_channel(struct snd_ali * codec, int rec)
 			return result;
 		else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "ali_find_free_channel: "
 				   "record channel is busy now.\n");
+=======
+			dev_err(codec->card->dev,
+				"ali_find_free_channel: record channel is busy now.\n");
+>>>>>>> v3.18
 =======
 			dev_err(codec->card->dev,
 				"ali_find_free_channel: record channel is busy now.\n");
@@ -650,8 +709,13 @@ static int snd_ali_find_free_channel(struct snd_ali * codec, int rec)
 			return result;
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "ali_find_free_channel: "
 				   "S/PDIF out channel is in busy now.\n");
+=======
+			dev_err(codec->card->dev,
+				"ali_find_free_channel: S/PDIF out channel is in busy now.\n");
+>>>>>>> v3.18
 =======
 			dev_err(codec->card->dev,
 				"ali_find_free_channel: S/PDIF out channel is in busy now.\n");
@@ -664,7 +728,11 @@ static int snd_ali_find_free_channel(struct snd_ali * codec, int rec)
 			return result;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printk(KERN_ERR "ali_find_free_channel: no free channels.\n");
+=======
+	dev_err(codec->card->dev, "ali_find_free_channel: no free channels.\n");
+>>>>>>> v3.18
 =======
 	dev_err(codec->card->dev, "ali_find_free_channel: no free channels.\n");
 >>>>>>> v3.18
@@ -676,7 +744,11 @@ static void snd_ali_free_channel_pcm(struct snd_ali *codec, int channel)
 	unsigned int idx = channel & 0x0000001f;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("free_channel_pcm channel=%d\n",channel);
+=======
+	dev_dbg(codec->card->dev, "free_channel_pcm channel=%d\n", channel);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "free_channel_pcm channel=%d\n", channel);
 >>>>>>> v3.18
@@ -686,8 +758,14 @@ static void snd_ali_free_channel_pcm(struct snd_ali *codec, int channel)
 
 	if (!(codec->synth.chmap & (1 << idx))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ali_free_channel_pcm: "
 			   "channel %d is not in use.\n", channel);
+=======
+		dev_err(codec->card->dev,
+			"ali_free_channel_pcm: channel %d is not in use.\n",
+			channel);
+>>>>>>> v3.18
 =======
 		dev_err(codec->card->dev,
 			"ali_free_channel_pcm: channel %d is not in use.\n",
@@ -705,7 +783,11 @@ static void snd_ali_stop_voice(struct snd_ali *codec, unsigned int channel)
 	unsigned int mask = 1 << (channel & 0x1f);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("stop_voice: channel=%d\n",channel);
+=======
+	dev_dbg(codec->card->dev, "stop_voice: channel=%d\n", channel);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "stop_voice: channel=%d\n", channel);
 >>>>>>> v3.18
@@ -750,7 +832,11 @@ static void snd_ali_detect_spdif_rate(struct snd_ali *codec)
 
 	if (count > 50000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ali_detect_spdif_rate: timeout!\n");
+=======
+		dev_err(codec->card->dev, "ali_detect_spdif_rate: timeout!\n");
+>>>>>>> v3.18
 =======
 		dev_err(codec->card->dev, "ali_detect_spdif_rate: timeout!\n");
 >>>>>>> v3.18
@@ -769,7 +855,11 @@ static void snd_ali_detect_spdif_rate(struct snd_ali *codec)
 
 	if (count > 50000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ali_detect_spdif_rate: timeout!\n");
+=======
+		dev_err(codec->card->dev, "ali_detect_spdif_rate: timeout!\n");
+>>>>>>> v3.18
 =======
 		dev_err(codec->card->dev, "ali_detect_spdif_rate: timeout!\n");
 >>>>>>> v3.18
@@ -946,12 +1036,17 @@ static void snd_ali_update_ptr(struct snd_ali *codec, int channel)
 {
 	struct snd_ali_voice *pvoice;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_runtime *runtime;
 	struct snd_ali_channel_control *pchregs;
 	unsigned int old, mask;
 #ifdef ALI_DEBUG
 	unsigned int temp, cspf;
 #endif
+=======
+	struct snd_ali_channel_control *pchregs;
+	unsigned int old, mask;
+>>>>>>> v3.18
 =======
 	struct snd_ali_channel_control *pchregs;
 	unsigned int old, mask;
@@ -968,7 +1063,10 @@ static void snd_ali_update_ptr(struct snd_ali *codec, int channel)
 
 	pvoice = &codec->synth.voices[channel];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	runtime = pvoice->substream->runtime;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -977,6 +1075,7 @@ static void snd_ali_update_ptr(struct snd_ali *codec, int channel)
 
 	if (pvoice->pcm && pvoice->substream) {
 		/* pcm interrupt */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef ALI_DEBUG
 		outb((u8)(pvoice->number), ALI_REG(codec, ALI_GC_CIR));
@@ -987,11 +1086,16 @@ static void snd_ali_update_ptr(struct snd_ali *codec, int channel)
 			snd_ali_printk("update_ptr: cso=%4.4x cspf=%d.\n",
 				       (u16)temp, cspf);
 =======
+=======
+>>>>>>> v3.18
 		if (pvoice->running) {
 			dev_dbg(codec->card->dev,
 				"update_ptr: cso=%4.4x cspf=%d.\n",
 				inw(ALI_REG(codec, ALI_CSO_ALPHA_FMS + 2)),
 				(inl(ALI_REG(codec, ALI_CSPF)) & mask) == mask);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			spin_unlock(&codec->reg_lock);
 			snd_pcm_period_elapsed(pvoice->substream);
@@ -1049,7 +1153,11 @@ static struct snd_ali_voice *snd_ali_alloc_voice(struct snd_ali * codec,
 	int idx;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("alloc_voice: type=%d rec=%d\n", type, rec);
+=======
+	dev_dbg(codec->card->dev, "alloc_voice: type=%d rec=%d\n", type, rec);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "alloc_voice: type=%d rec=%d\n", type, rec);
 >>>>>>> v3.18
@@ -1060,7 +1168,11 @@ static struct snd_ali_voice *snd_ali_alloc_voice(struct snd_ali * codec,
 			snd_ali_find_free_channel(codec,rec);
 		if (idx < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR "ali_alloc_voice: err.\n");
+=======
+			dev_err(codec->card->dev, "ali_alloc_voice: err.\n");
+>>>>>>> v3.18
 =======
 			dev_err(codec->card->dev, "ali_alloc_voice: err.\n");
 >>>>>>> v3.18
@@ -1087,7 +1199,11 @@ static void snd_ali_free_voice(struct snd_ali * codec,
 	void *private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("free_voice: channel=%d\n",pvoice->number);
+=======
+	dev_dbg(codec->card->dev, "free_voice: channel=%d\n", pvoice->number);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "free_voice: channel=%d\n", pvoice->number);
 >>>>>>> v3.18
@@ -1274,7 +1390,11 @@ static int snd_ali_trigger(struct snd_pcm_substream *substream,
 	if (do_start)
 		outl(what, ALI_REG(codec, ALI_START));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("trigger: what=%xh whati=%xh\n", what, whati);
+=======
+	dev_dbg(codec->card->dev, "trigger: what=%xh whati=%xh\n", what, whati);
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "trigger: what=%xh whati=%xh\n", what, whati);
 >>>>>>> v3.18
@@ -1364,7 +1484,11 @@ static int snd_ali_playback_prepare(struct snd_pcm_substream *substream)
 	unsigned int EC;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("playback_prepare ...\n");
+=======
+	dev_dbg(codec->card->dev, "playback_prepare ...\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "playback_prepare ...\n");
 >>>>>>> v3.18
@@ -1395,7 +1519,11 @@ static int snd_ali_playback_prepare(struct snd_pcm_substream *substream)
 	pvoice->eso = runtime->buffer_size; 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("playback_prepare: eso=%xh count=%xh\n",
+=======
+	dev_dbg(codec->card->dev, "playback_prepare: eso=%xh count=%xh\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "playback_prepare: eso=%xh count=%xh\n",
 >>>>>>> v3.18
@@ -1411,8 +1539,14 @@ static int snd_ali_playback_prepare(struct snd_pcm_substream *substream)
 	VOL = 0;
 	EC = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("playback_prepare:\n");
 	snd_ali_printk("ch=%d, Rate=%d Delta=%xh,GVSEL=%xh,PAN=%xh,CTRL=%xh\n",
+=======
+	dev_dbg(codec->card->dev, "playback_prepare:\n");
+	dev_dbg(codec->card->dev,
+		"ch=%d, Rate=%d Delta=%xh,GVSEL=%xh,PAN=%xh,CTRL=%xh\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "playback_prepare:\n");
 	dev_dbg(codec->card->dev,
@@ -1471,7 +1605,11 @@ static int snd_ali_prepare(struct snd_pcm_substream *substream)
 	spin_lock_irq(&codec->reg_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("ali_prepare...\n");
+=======
+	dev_dbg(codec->card->dev, "ali_prepare...\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "ali_prepare...\n");
 >>>>>>> v3.18
@@ -1494,8 +1632,13 @@ static int snd_ali_prepare(struct snd_pcm_substream *substream)
 		rate = snd_ali_get_spdif_in_rate(codec);
 		if (rate == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_WARNING "ali_capture_preapre: "
 				   "spdif rate detect err!\n");
+=======
+			dev_warn(codec->card->dev,
+				 "ali_capture_preapre: spdif rate detect err!\n");
+>>>>>>> v3.18
 =======
 			dev_warn(codec->card->dev,
 				 "ali_capture_preapre: spdif rate detect err!\n");
@@ -1507,7 +1650,12 @@ static int snd_ali_prepare(struct snd_pcm_substream *substream)
 		if (bValue & 0x10) {
 			outb(bValue,ALI_REG(codec,ALI_SPDIF_CTRL));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_WARNING "clear SPDIF parity error flag.\n");
+=======
+			dev_warn(codec->card->dev,
+				 "clear SPDIF parity error flag.\n");
+>>>>>>> v3.18
 =======
 			dev_warn(codec->card->dev,
 				 "clear SPDIF parity error flag.\n");
@@ -1571,9 +1719,14 @@ snd_ali_playback_pointer(struct snd_pcm_substream *substream)
 	cso = inw(ALI_REG(codec, ALI_CSO_ALPHA_FMS + 2));
 	spin_unlock(&codec->reg_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("playback pointer returned cso=%xh.\n", cso);
 
 	cso %= runtime->buffer_size;
+=======
+	dev_dbg(codec->card->dev, "playback pointer returned cso=%xh.\n", cso);
+
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "playback pointer returned cso=%xh.\n", cso);
 
@@ -1599,7 +1752,10 @@ static snd_pcm_uframes_t snd_ali_pointer(struct snd_pcm_substream *substream)
 	spin_unlock(&codec->reg_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cso %= runtime->buffer_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return cso;
@@ -1848,7 +2004,12 @@ static int snd_ali_pcm(struct snd_ali *codec, int device,
 			  desc->playback_num, desc->capture_num, &pcm);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "snd_ali_pcm: err called snd_pcm_new.\n");
+=======
+		dev_err(codec->card->dev,
+			"snd_ali_pcm: err called snd_pcm_new.\n");
+>>>>>>> v3.18
 =======
 		dev_err(codec->card->dev,
 			"snd_ali_pcm: err called snd_pcm_new.\n");
@@ -2029,7 +2190,11 @@ static int snd_ali_mixer(struct snd_ali *codec)
 		err = snd_ac97_mixer(codec->ac97_bus, &ac97, &codec->ac97[i]);
 		if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_printk(KERN_ERR
+=======
+			dev_err(codec->card->dev,
+>>>>>>> v3.18
 =======
 			dev_err(codec->card->dev,
 >>>>>>> v3.18
@@ -2119,8 +2284,12 @@ static int ali_resume(struct device *dev)
 	pci_restore_state(pci);
 	if (pci_enable_device(pci) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "ali5451: pci_enable_device failed, "
 		       "disabling device\n");
+=======
+		dev_err(dev, "pci_enable_device failed, disabling device\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev, "pci_enable_device failed, disabling device\n");
 >>>>>>> v3.18
@@ -2189,15 +2358,21 @@ static int snd_ali_chip_init(struct snd_ali *codec)
 	struct pci_dev *pci_dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("chip initializing ... \n");
 
 	if (snd_ali_reset_5451(codec)) {
 		snd_printk(KERN_ERR "ali_chip_init: reset 5451 error.\n");
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(codec->card->dev, "chip initializing ...\n");
 
 	if (snd_ali_reset_5451(codec)) {
 		dev_err(codec->card->dev, "ali_chip_init: reset 5451 error.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -1;
 	}
@@ -2245,7 +2420,11 @@ static int snd_ali_chip_init(struct snd_ali *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("chip initialize succeed.\n");
+=======
+	dev_dbg(codec->card->dev, "chip initialize succeed.\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "chip initialize succeed.\n");
 >>>>>>> v3.18
@@ -2275,7 +2454,11 @@ static int snd_ali_resources(struct snd_ali *codec)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("resources allocation ...\n");
+=======
+	dev_dbg(codec->card->dev, "resources allocation ...\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(codec->card->dev, "resources allocation ...\n");
 >>>>>>> v3.18
@@ -2287,17 +2470,23 @@ static int snd_ali_resources(struct snd_ali *codec)
 	if (request_irq(codec->pci->irq, snd_ali_card_interrupt,
 			IRQF_SHARED, KBUILD_MODNAME, codec)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "Unable to request irq.\n");
 		return -EBUSY;
 	}
 	codec->irq = codec->pci->irq;
 	snd_ali_printk("resources allocated.\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_err(codec->card->dev, "Unable to request irq.\n");
 		return -EBUSY;
 	}
 	codec->irq = codec->pci->irq;
 	dev_dbg(codec->card->dev, "resources allocated.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2324,7 +2513,11 @@ static int snd_ali_create(struct snd_card *card,
 	*r_ali = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("creating ...\n");
+=======
+	dev_dbg(card->dev, "creating ...\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(card->dev, "creating ...\n");
 >>>>>>> v3.18
@@ -2337,8 +2530,13 @@ static int snd_ali_create(struct snd_card *card,
 	if (pci_set_dma_mask(pci, DMA_BIT_MASK(31)) < 0 ||
 	    pci_set_consistent_dma_mask(pci, DMA_BIT_MASK(31)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "architecture does not support "
 			   "31bit PCI busmaster DMA\n");
+=======
+		dev_err(card->dev,
+			"architecture does not support 31bit PCI busmaster DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev,
 			"architecture does not support 31bit PCI busmaster DMA\n");
@@ -2407,7 +2605,11 @@ static int snd_ali_create(struct snd_card *card,
 	codec->pci_m1533 = pci_get_device(0x10b9, 0x1533, NULL);
 	if (!codec->pci_m1533) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ali5451: cannot find ALi 1533 chip.\n");
+=======
+		dev_err(card->dev, "cannot find ALi 1533 chip.\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "cannot find ALi 1533 chip.\n");
 >>>>>>> v3.18
@@ -2418,7 +2620,11 @@ static int snd_ali_create(struct snd_card *card,
 	codec->pci_m7101 = pci_get_device(0x10b9, 0x7101, NULL);
 	if (!codec->pci_m7101 && codec->revision == ALI_5451_V02) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ali5451: cannot find ALi 7101 chip.\n");
+=======
+		dev_err(card->dev, "cannot find ALi 7101 chip.\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "cannot find ALi 7101 chip.\n");
 >>>>>>> v3.18
@@ -2427,7 +2633,11 @@ static int snd_ali_create(struct snd_card *card,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("snd_device_new is called.\n");
+=======
+	dev_dbg(card->dev, "snd_device_new is called.\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(card->dev, "snd_device_new is called.\n");
 >>>>>>> v3.18
@@ -2438,8 +2648,11 @@ static int snd_ali_create(struct snd_card *card,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* initialise synth voices*/
@@ -2449,7 +2662,11 @@ static int snd_ali_create(struct snd_card *card,
 	err = snd_ali_chip_init(codec);
 	if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ali create: chip init error.\n");
+=======
+		dev_err(card->dev, "ali create: chip init error.\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "ali create: chip init error.\n");
 >>>>>>> v3.18
@@ -2460,7 +2677,11 @@ static int snd_ali_create(struct snd_card *card,
 	codec->image = kmalloc(sizeof(*codec->image), GFP_KERNEL);
 	if (!codec->image)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_WARNING "can't allocate apm buffer\n");
+=======
+		dev_warn(card->dev, "can't allocate apm buffer\n");
+>>>>>>> v3.18
 =======
 		dev_warn(card->dev, "can't allocate apm buffer\n");
 >>>>>>> v3.18
@@ -2471,7 +2692,11 @@ static int snd_ali_create(struct snd_card *card,
 
 	*r_ali = codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("created.\n");
+=======
+	dev_dbg(card->dev, "created.\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(card->dev, "created.\n");
 >>>>>>> v3.18
@@ -2486,9 +2711,15 @@ static int snd_ali_probe(struct pci_dev *pci,
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("probe ...\n");
 
 	err = snd_card_create(index, id, THIS_MODULE, 0, &card);
+=======
+	dev_dbg(&pci->dev, "probe ...\n");
+
+	err = snd_card_new(&pci->dev, index, id, THIS_MODULE, 0, &card);
+>>>>>>> v3.18
 =======
 	dev_dbg(&pci->dev, "probe ...\n");
 
@@ -2503,7 +2734,11 @@ static int snd_ali_probe(struct pci_dev *pci,
 	card->private_data = codec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("mixer building ...\n");
+=======
+	dev_dbg(&pci->dev, "mixer building ...\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(&pci->dev, "mixer building ...\n");
 >>>>>>> v3.18
@@ -2512,7 +2747,11 @@ static int snd_ali_probe(struct pci_dev *pci,
 		goto error;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("pcm building ...\n");
+=======
+	dev_dbg(&pci->dev, "pcm building ...\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(&pci->dev, "pcm building ...\n");
 >>>>>>> v3.18
@@ -2529,7 +2768,11 @@ static int snd_ali_probe(struct pci_dev *pci,
 		card->shortname, codec->port, codec->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_ali_printk("register card.\n");
+=======
+	dev_dbg(&pci->dev, "register card.\n");
+>>>>>>> v3.18
 =======
 	dev_dbg(&pci->dev, "register card.\n");
 >>>>>>> v3.18
@@ -2549,7 +2792,10 @@ static void snd_ali_remove(struct pci_dev *pci)
 {
 	snd_card_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

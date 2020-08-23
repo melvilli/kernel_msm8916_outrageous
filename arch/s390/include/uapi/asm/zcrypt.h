@@ -155,7 +155,10 @@ struct ica_xcRB {
 	unsigned int	status;
 } __attribute__((packed));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * struct ep11_cprb - EP11 connectivity programming request block
@@ -217,6 +220,9 @@ struct ep11_urb {
 	uint64_t		resp;
 } __attribute__((packed));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AUTOSELECT ((unsigned int)0xFFFFFFFF)
 
@@ -248,6 +254,12 @@ struct ep11_urb {
  *     Send an arbitrary CPRB to a crypto card.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *   ZSENDEP11CPRB
+ *     Send an arbitrary EP11 CPRB to an EP11 coprocessor crypto card.
+ *
+>>>>>>> v3.18
 =======
  *   ZSENDEP11CPRB
  *     Send an arbitrary EP11 CPRB to an EP11 coprocessor crypto card.
@@ -327,6 +339,10 @@ struct ep11_urb {
 #define ICARSACRT	_IOC(_IOC_READ|_IOC_WRITE, ZCRYPT_IOCTL_MAGIC, 0x06, 0)
 #define ZSECSENDCPRB	_IOC(_IOC_READ|_IOC_WRITE, ZCRYPT_IOCTL_MAGIC, 0x81, 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ZSENDEP11CPRB	_IOC(_IOC_READ|_IOC_WRITE, ZCRYPT_IOCTL_MAGIC, 0x04, 0)
+>>>>>>> v3.18
 =======
 #define ZSENDEP11CPRB	_IOC(_IOC_READ|_IOC_WRITE, ZCRYPT_IOCTL_MAGIC, 0x04, 0)
 >>>>>>> v3.18

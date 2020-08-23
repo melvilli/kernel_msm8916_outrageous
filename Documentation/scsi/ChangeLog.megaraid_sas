@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Release Date    : Thu. Jun 19, 2014 17:00:00 PST 2014 -
 			(emaild-id:megaraidlinux@lsi.com)
 			Adam Radford
@@ -59,6 +62,9 @@ Old Version     : 06.506.00.00-rc1
     11.Add support to differentiate between iMR and MR Firmware.
     12.Version and Changelog update.
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Release Date    : Sat. Feb 9, 2013 17:00:00 PST 2013 -
 			(emaild-id:megaraidlinux@lsi.com)

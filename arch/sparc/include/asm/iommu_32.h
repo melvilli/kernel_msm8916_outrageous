@@ -100,7 +100,11 @@ struct iommu_regs {
 
 struct iommu_struct {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iommu_regs *regs;
+=======
+	struct iommu_regs __iomem *regs;
+>>>>>>> v3.18
 =======
 	struct iommu_regs __iomem *regs;
 >>>>>>> v3.18
@@ -113,6 +117,7 @@ struct iommu_struct {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void iommu_invalidate(struct iommu_regs *regs)
 {
 	regs->tlbflush = 0;
@@ -122,6 +127,8 @@ static inline void iommu_invalidate_page(struct iommu_regs *regs, unsigned long 
 {
 	regs->pageflush = (ba & PAGE_MASK);
 =======
+=======
+>>>>>>> v3.18
 static inline void iommu_invalidate(struct iommu_regs __iomem *regs)
 {
 	sbus_writel(0, &regs->tlbflush);
@@ -130,6 +137,9 @@ static inline void iommu_invalidate(struct iommu_regs __iomem *regs)
 static inline void iommu_invalidate_page(struct iommu_regs __iomem *regs, unsigned long ba)
 {
 	sbus_writel(ba & PAGE_MASK, &regs->pageflush);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

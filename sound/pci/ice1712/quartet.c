@@ -204,6 +204,10 @@ static const char * const ext_clock_names[3] = {"IEC958 In", "Word Clock 1xFS",
 #define AK4620_SMUTE		(1<<7)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PROC_FS
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PROC_FS
 >>>>>>> v3.18
@@ -232,6 +236,10 @@ static char *get_binary(char *buffer, int value)
 	return buffer;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif /* CONFIG_PROC_FS */
+>>>>>>> v3.18
 =======
 #endif /* CONFIG_PROC_FS */
 >>>>>>> v3.18
@@ -287,7 +295,11 @@ static void qtet_akm_write(struct snd_akm4xxx *ak, int chip,
 	if (snd_BUG_ON(chip < 0 || chip >= 4))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*printk(KERN_DEBUG "Writing to AK4620: chip=%d, addr=0x%x,
+=======
+	/*dev_dbg(ice->card->dev, "Writing to AK4620: chip=%d, addr=0x%x,
+>>>>>>> v3.18
 =======
 	/*dev_dbg(ice->card->dev, "Writing to AK4620: chip=%d, addr=0x%x,
 >>>>>>> v3.18
@@ -909,7 +921,11 @@ static void qtet_set_rate(struct snd_ice1712 *ice, unsigned int rate)
 	/* switch to internal clock, drop CPLD_SYNC_SEL */
 	new &= ~CPLD_SYNC_SEL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* printk(KERN_DEBUG "QT - set_rate: old %x, new %x\n",
+=======
+	/* dev_dbg(ice->card->dev, "QT - set_rate: old %x, new %x\n",
+>>>>>>> v3.18
 =======
 	/* dev_dbg(ice->card->dev, "QT - set_rate: old %x, new %x\n",
 >>>>>>> v3.18
@@ -993,7 +1009,11 @@ static void qtet_ak4113_change(struct ak4113 *ak4113, unsigned char c0,
 		/* only for SPDIF master mode, rate was changed */
 		rate = snd_ak4113_external_rate(ak4113);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* printk(KERN_DEBUG "ak4113 - input rate changed to %d\n",
+=======
+		/* dev_dbg(ice->card->dev, "ak4113 - input rate changed to %d\n",
+>>>>>>> v3.18
 =======
 		/* dev_dbg(ice->card->dev, "ak4113 - input rate changed to %d\n",
 >>>>>>> v3.18

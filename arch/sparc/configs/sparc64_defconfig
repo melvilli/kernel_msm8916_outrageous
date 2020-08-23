@@ -30,6 +30,10 @@ CONFIG_PCI_MSI=y
 CONFIG_SUN_OPENPROMFS=m
 CONFIG_BINFMT_MISC=m
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_NET=y
+>>>>>>> v3.18
 =======
 CONFIG_NET=y
 >>>>>>> v3.18

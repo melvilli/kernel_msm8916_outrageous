@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_PHY_H_
@@ -95,6 +101,10 @@ s32  igb_write_phy_reg_mdic(struct e1000_hw *hw, u32 offset, u16 data);
 s32  igb_read_phy_reg_i2c(struct e1000_hw *hw, u32 offset, u16 *data);
 s32  igb_write_phy_reg_i2c(struct e1000_hw *hw, u32 offset, u16 data);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+s32  igb_read_sfp_data_byte(struct e1000_hw *hw, u16 offset, u8 *data);
+>>>>>>> v3.18
 =======
 s32  igb_read_sfp_data_byte(struct e1000_hw *hw, u16 offset, u8 *data);
 >>>>>>> v3.18
@@ -184,10 +194,13 @@ s32  igb_check_polarity_m88(struct e1000_hw *hw);
 #define GS40G_MAC_SPEED_1G		0X0006
 #define GS40G_COPPER_SPEC		0x0010
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define GS40G_CS_POWER_DOWN		0x0002
 #define GS40G_LINE_LB			0x4000
 
 =======
+=======
+>>>>>>> v3.18
 #define GS40G_LINE_LB			0x4000
 
 /* SFP modules ID memory locations */
@@ -208,5 +221,8 @@ struct e1000_sfp_flags {
 	u8 e10_base_px:1;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

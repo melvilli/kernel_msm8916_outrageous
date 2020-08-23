@@ -87,6 +87,10 @@ config SPU_BASE
 	bool
 	default n
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select PPC_COPRO_BASE
+>>>>>>> v3.18
 =======
 	select PPC_COPRO_BASE
 >>>>>>> v3.18

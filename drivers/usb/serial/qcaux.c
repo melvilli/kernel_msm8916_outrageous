@@ -17,7 +17,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/tty.h>
@@ -58,7 +61,11 @@
 #define SAMSUNG_PRODUCT_U520			0x6640 /* SCH-U520 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct usb_device_id id_table[] = {
+=======
+static const struct usb_device_id id_table[] = {
+>>>>>>> v3.18
 =======
 static const struct usb_device_id id_table[] = {
 >>>>>>> v3.18

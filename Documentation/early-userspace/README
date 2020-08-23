@@ -72,7 +72,11 @@ gen_initramfs_list.sh.  If a directory is specified as an argument then
 the contents are scanned, uid/gid translation is performed, and
 usr/gen_init_cpio file directives are output.  If a directory is
 <<<<<<< HEAD
+<<<<<<< HEAD
 specified as an arugemnt to scripts/gen_initramfs_list.sh then the
+=======
+specified as an argument to scripts/gen_initramfs_list.sh then the
+>>>>>>> v3.18
 =======
 specified as an argument to scripts/gen_initramfs_list.sh then the
 >>>>>>> v3.18
@@ -88,8 +92,12 @@ Where's this all leading?
 The klibc distribution contains some of the necessary software to make
 early userspace useful.  The klibc distribution is currently
 <<<<<<< HEAD
+<<<<<<< HEAD
 maintained separately from the kernel, but this may change early in
 the 2.7 era (it missed the boat for 2.5).
+=======
+maintained separately from the kernel.
+>>>>>>> v3.18
 =======
 maintained separately from the kernel.
 >>>>>>> v3.18

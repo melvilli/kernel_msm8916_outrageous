@@ -174,6 +174,7 @@ static struct pci_driver delkin_cb_pci_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init delkin_cb_init(void)
 {
 	return pci_register_driver(&delkin_cb_pci_driver);
@@ -186,6 +187,9 @@ static void __exit delkin_cb_exit(void)
 
 module_init(delkin_cb_init);
 module_exit(delkin_cb_exit);
+=======
+module_pci_driver(delkin_cb_pci_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(delkin_cb_pci_driver);
 >>>>>>> v3.18

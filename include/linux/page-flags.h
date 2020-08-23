@@ -110,7 +110,10 @@ enum pageflags {
 	PG_compound_lock,
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PG_readahead,		/* page in a readahead window */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__NR_PAGEFLAGS,
@@ -176,6 +179,7 @@ static inline int __TestClearPage##uname(struct page *page)		\
 	__SETPAGEFLAG(uname, lname)  __CLEARPAGEFLAG(uname, lname)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PAGEFLAG_FALSE(uname) 						\
 static inline int Page##uname(const struct page *page)			\
 			{ return 0; }
@@ -184,12 +188,17 @@ static inline int Page##uname(const struct page *page)			\
 	TESTSETFLAG(uname, lname) TESTCLEARFLAG(uname, lname)
 
 =======
+=======
+>>>>>>> v3.18
 #define TESTSCFLAG(uname, lname)					\
 	TESTSETFLAG(uname, lname) TESTCLEARFLAG(uname, lname)
 
 #define TESTPAGEFLAG_FALSE(uname)					\
 static inline int Page##uname(const struct page *page) { return 0; }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SETPAGEFLAG_NOOP(uname)						\
 static inline void SetPage##uname(struct page *page) {  }
@@ -201,6 +210,12 @@ static inline void ClearPage##uname(struct page *page) {  }
 static inline void __ClearPage##uname(struct page *page) {  }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define TESTSETFLAG_FALSE(uname)					\
+static inline int TestSetPage##uname(struct page *page) { return 0; }
+
+>>>>>>> v3.18
 =======
 #define TESTSETFLAG_FALSE(uname)					\
 static inline int TestSetPage##uname(struct page *page) { return 0; }
@@ -213,13 +228,19 @@ static inline int TestClearPage##uname(struct page *page) { return 0; }
 static inline int __TestClearPage##uname(struct page *page) { return 0; }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PAGEFLAG_FALSE(uname) TESTPAGEFLAG_FALSE(uname)			\
 	SETPAGEFLAG_NOOP(uname) CLEARPAGEFLAG_NOOP(uname)
 
 #define TESTSCFLAG_FALSE(uname)						\
 	TESTSETFLAG_FALSE(uname) TESTCLEARFLAG_FALSE(uname)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct page;	/* forward declaration */
 
@@ -227,6 +248,10 @@ TESTPAGEFLAG(Locked, locked)
 PAGEFLAG(Error, error) TESTCLEARFLAG(Error, error)
 PAGEFLAG(Referenced, referenced) TESTCLEARFLAG(Referenced, referenced)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__SETPAGEFLAG(Referenced, referenced)
+>>>>>>> v3.18
 =======
 	__SETPAGEFLAG(Referenced, referenced)
 >>>>>>> v3.18
@@ -241,6 +266,10 @@ PAGEFLAG(SavePinned, savepinned);			/* Xen */
 PAGEFLAG(Reserved, reserved) __CLEARPAGEFLAG(Reserved, reserved)
 PAGEFLAG(SwapBacked, swapbacked) __CLEARPAGEFLAG(SwapBacked, swapbacked)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__SETPAGEFLAG(SwapBacked, swapbacked)
+>>>>>>> v3.18
 =======
 	__SETPAGEFLAG(SwapBacked, swapbacked)
 >>>>>>> v3.18
@@ -265,9 +294,15 @@ TESTPAGEFLAG(Writeback, writeback) TESTSCFLAG(Writeback, writeback)
 PAGEFLAG(MappedToDisk, mappedtodisk)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* PG_readahead is only used for file reads; PG_reclaim is only for writes */
 PAGEFLAG(Reclaim, reclaim) TESTCLEARFLAG(Reclaim, reclaim)
 PAGEFLAG(Readahead, reclaim)		/* Reminder to do async read-ahead */
+=======
+/* PG_readahead is only used for reads; PG_reclaim is only for writes */
+PAGEFLAG(Reclaim, reclaim) TESTCLEARFLAG(Reclaim, reclaim)
+PAGEFLAG(Readahead, reclaim) TESTCLEARFLAG(Readahead, reclaim)
+>>>>>>> v3.18
 =======
 /* PG_readahead is only used for reads; PG_reclaim is only for writes */
 PAGEFLAG(Reclaim, reclaim) TESTCLEARFLAG(Reclaim, reclaim)
@@ -289,7 +324,10 @@ PAGEFLAG(SwapCache, swapcache)
 #else
 PAGEFLAG_FALSE(SwapCache)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SETPAGEFLAG_NOOP(SwapCache) CLEARPAGEFLAG_NOOP(SwapCache)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -302,8 +340,13 @@ PAGEFLAG(Mlocked, mlocked) __CLEARPAGEFLAG(Mlocked, mlocked)
 	TESTSCFLAG(Mlocked, mlocked) __TESTCLEARFLAG(Mlocked, mlocked)
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 PAGEFLAG_FALSE(Mlocked) SETPAGEFLAG_NOOP(Mlocked)
 	TESTCLEARFLAG_FALSE(Mlocked) __TESTCLEARFLAG_FALSE(Mlocked)
+=======
+PAGEFLAG_FALSE(Mlocked) __CLEARPAGEFLAG_NOOP(Mlocked)
+	TESTSCFLAG_FALSE(Mlocked) __TESTCLEARFLAG_FALSE(Mlocked)
+>>>>>>> v3.18
 =======
 PAGEFLAG_FALSE(Mlocked) __CLEARPAGEFLAG_NOOP(Mlocked)
 	TESTSCFLAG_FALSE(Mlocked) __TESTCLEARFLAG_FALSE(Mlocked)
@@ -368,14 +411,20 @@ extern void cancel_dirty_page(struct page *page, unsigned int account_size);
 
 int test_clear_page_writeback(struct page *page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int test_set_page_writeback(struct page *page);
 =======
+=======
+>>>>>>> v3.18
 int __test_set_page_writeback(struct page *page, bool keep_write);
 
 #define test_set_page_writeback(page)			\
 	__test_set_page_writeback(page, false)
 #define test_set_page_writeback_keepwrite(page)	\
 	__test_set_page_writeback(page, true)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void set_page_writeback(struct page *page)
@@ -384,12 +433,18 @@ static inline void set_page_writeback(struct page *page)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void set_page_writeback_keepwrite(struct page *page)
 {
 	test_set_page_writeback_keepwrite(page);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PAGEFLAGS_EXTENDED
 /*
@@ -397,7 +452,13 @@ static inline void set_page_writeback_keepwrite(struct page *page)
  * flags for PageHead() and PageTail() checks of compound pages so that bit
  * tests can be used in performance sensitive paths. PageCompound is
 <<<<<<< HEAD
+<<<<<<< HEAD
  * generally not used in hot code paths.
+=======
+ * generally not used in hot code paths except arch/powerpc/mm/init_64.c
+ * and arch/powerpc/kvm/book3s_64_vio_hv.c which use it to detect huge pages
+ * and avoid handling those in real mode.
+>>>>>>> v3.18
 =======
  * generally not used in hot code paths except arch/powerpc/mm/init_64.c
  * and arch/powerpc/kvm/book3s_64_vio_hv.c which use it to detect huge pages
@@ -420,6 +481,12 @@ static inline void ClearPageCompound(struct page *page)
 }
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#define PG_head_mask ((1L << PG_head))
+
+>>>>>>> v3.18
 =======
 
 #define PG_head_mask ((1L << PG_head))
@@ -490,7 +557,11 @@ static inline void ClearPageCompound(struct page *page)
 static inline int PageTransHuge(struct page *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(PageTail(page));
+=======
+	VM_BUG_ON_PAGE(PageTail(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(PageTail(page), page);
 >>>>>>> v3.18
@@ -542,7 +613,11 @@ static inline int PageTransTail(struct page *page)
 static inline int PageSlabPfmemalloc(struct page *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageSlab(page));
+=======
+	VM_BUG_ON_PAGE(!PageSlab(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageSlab(page), page);
 >>>>>>> v3.18
@@ -552,7 +627,11 @@ static inline int PageSlabPfmemalloc(struct page *page)
 static inline void SetPageSlabPfmemalloc(struct page *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageSlab(page));
+=======
+	VM_BUG_ON_PAGE(!PageSlab(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageSlab(page), page);
 >>>>>>> v3.18
@@ -562,7 +641,11 @@ static inline void SetPageSlabPfmemalloc(struct page *page)
 static inline void __ClearPageSlabPfmemalloc(struct page *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageSlab(page));
+=======
+	VM_BUG_ON_PAGE(!PageSlab(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageSlab(page), page);
 >>>>>>> v3.18
@@ -572,7 +655,11 @@ static inline void __ClearPageSlabPfmemalloc(struct page *page)
 static inline void ClearPageSlabPfmemalloc(struct page *page)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageSlab(page));
+=======
+	VM_BUG_ON_PAGE(!PageSlab(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageSlab(page), page);
 >>>>>>> v3.18

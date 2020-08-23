@@ -27,7 +27,10 @@
 #include <linux/pwm.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pinctrl/consumer.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -212,6 +215,7 @@ static int ecap_pwm_probe(struct platform_device *pdev)
 	struct ecap_pwm_chip *pc;
 	u16 status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct pinctrl *pinctrl;
 
 	pinctrl = devm_pinctrl_get_select_default(&pdev->dev);
@@ -224,10 +228,15 @@ static int ecap_pwm_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	pc = devm_kzalloc(&pdev->dev, sizeof(*pc), GFP_KERNEL);
 	if (!pc)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	clk = devm_clk_get(&pdev->dev, "fck");
@@ -296,7 +305,10 @@ static int ecap_pwm_remove(struct platform_device *pdev)
 	pm_runtime_put_sync(&pdev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm_runtime_put_sync(&pdev->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pm_runtime_disable(&pdev->dev);
@@ -304,6 +316,10 @@ static int ecap_pwm_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -324,7 +340,10 @@ static void ecap_pwm_restore_context(struct ecap_pwm_chip *pc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM_SLEEP
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ecap_pwm_suspend(struct device *dev)

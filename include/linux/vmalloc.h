@@ -11,6 +11,7 @@ struct vm_area_struct;		/* vma defining user mapping in mm_types.h */
 
 /* bits in flags of vmalloc's vm_struct below */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VM_IOREMAP	0x00000001	/* ioremap() and friends */
 #define VM_ALLOC	0x00000002	/* vmalloc() */
 #define VM_MAP		0x00000004	/* vmap()ed pages */
@@ -19,12 +20,17 @@ struct vm_area_struct;		/* vma defining user mapping in mm_types.h */
 #define VM_UNLIST	0x00000020	/* vm_struct is not listed in vmlist */
 #define VM_LOWMEM	0x00000040	/* Tracking of direct mapped lowmem */
 =======
+=======
+>>>>>>> v3.18
 #define VM_IOREMAP		0x00000001	/* ioremap() and friends */
 #define VM_ALLOC		0x00000002	/* vmalloc() */
 #define VM_MAP			0x00000004	/* vmap()ed pages */
 #define VM_USERMAP		0x00000008	/* suitable for remap_vmalloc_range */
 #define VM_VPAGES		0x00000010	/* buffer for pages was vmalloc'ed */
 #define VM_UNINITIALIZED	0x00000020	/* vm_struct is not fully initialized */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* bits [20..32] reserved for arch specific ioremap internals */
 
@@ -93,11 +99,17 @@ extern void *vmap(struct page **pages, unsigned int count,
 extern void vunmap(const void *addr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int remap_vmalloc_range_partial(struct vm_area_struct *vma,
 				       unsigned long uaddr, void *kaddr,
 				       unsigned long size);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int remap_vmalloc_range(struct vm_area_struct *vma, void *addr,
 							unsigned long pgoff);
@@ -127,7 +139,11 @@ extern struct vm_struct *find_vm_area(const void *addr);
 
 extern int map_vm_area(struct vm_struct *area, pgprot_t prot,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct page ***pages);
+=======
+			struct page **pages);
+>>>>>>> v3.18
 =======
 			struct page **pages);
 >>>>>>> v3.18
@@ -168,6 +184,7 @@ extern struct list_head vmap_area_list;
 extern __init void vm_area_add_early(struct vm_struct *vm);
 extern __init void vm_area_register_early(struct vm_struct *vm, size_t align);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern __init int vm_area_check_early(struct vm_struct *vm);
 #ifdef CONFIG_ENABLE_VMALLOC_SAVING
 extern void mark_vmalloc_reserved_area(void *addr, unsigned long size);
@@ -175,6 +192,8 @@ extern void mark_vmalloc_reserved_area(void *addr, unsigned long size);
 static inline void mark_vmalloc_reserved_area(void *addr, unsigned long size)
 { };
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -208,12 +227,16 @@ struct vmalloc_info {
 
 #ifdef CONFIG_MMU
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ENABLE_VMALLOC_SAVING
 extern unsigned long total_vmalloc_size;
 #define VMALLOC_TOTAL total_vmalloc_size
 #else
 #define VMALLOC_TOTAL (VMALLOC_END - VMALLOC_START)
 #endif
+=======
+#define VMALLOC_TOTAL (VMALLOC_END - VMALLOC_START)
+>>>>>>> v3.18
 =======
 #define VMALLOC_TOTAL (VMALLOC_END - VMALLOC_START)
 >>>>>>> v3.18

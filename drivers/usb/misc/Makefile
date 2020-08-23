@@ -3,9 +3,12 @@
 # (the ones that don't fit into any other categories)
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ccflags-$(CONFIG_USB_DEBUG) := -DDEBUG
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_USB_ADUTUX)		+= adutux.o
@@ -26,7 +29,11 @@ obj-$(CONFIG_USB_LEGOTOWER)		+= legousbtower.o
 obj-$(CONFIG_USB_RIO500)		+= rio500.o
 obj-$(CONFIG_USB_TEST)			+= usbtest.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_USB_EHSET_TEST_FIXTURE)	+= ehset.o
+=======
+obj-$(CONFIG_USB_EHSET_TEST_FIXTURE)    += ehset.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_EHSET_TEST_FIXTURE)    += ehset.o
 >>>>>>> v3.18
@@ -38,12 +45,16 @@ obj-$(CONFIG_USB_HSIC_USB3503)		+= usb3503.o
 
 obj-$(CONFIG_USB_SISUSBVGA)		+= sisusbvga/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 obj-$(CONFIG_USB_QCOM_DIAG_BRIDGE)	+= diag_bridge.o
 mdm_bridge-y				:= mdm_ctrl_bridge.o mdm_data_bridge.o
 obj-$(CONFIG_USB_QCOM_MDM_BRIDGE) 	+= mdm_bridge.o
 obj-$(CONFIG_USB_QCOM_KS_BRIDGE)	+= ks_bridge.o
 obj-$(CONFIG_USB_QCOM_IPC_BRIDGE)	+= ipc_bridge.o
+=======
+obj-$(CONFIG_USB_LINK_LAYER_TEST)	+= lvstest.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_USB_LINK_LAYER_TEST)	+= lvstest.o
 >>>>>>> v3.18

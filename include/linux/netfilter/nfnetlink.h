@@ -15,6 +15,12 @@ struct nfnl_callback {
 		    const struct nlmsghdr *nlh,
 		    const struct nlattr * const cda[]);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*call_batch)(struct sock *nl, struct sk_buff *skb,
+			  const struct nlmsghdr *nlh,
+			  const struct nlattr * const cda[]);
+>>>>>>> v3.18
 =======
 	int (*call_batch)(struct sock *nl, struct sk_buff *skb,
 			  const struct nlmsghdr *nlh,
@@ -29,6 +35,7 @@ struct nfnetlink_subsystem {
 	__u8 subsys_id;			/* nfnetlink subsystem ID */
 	__u8 cb_count;			/* number of callbacks */
 	const struct nfnl_callback *cb;	/* callback for individual types */
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -47,6 +54,8 @@ extern int nfnetlink_unicast(struct sk_buff *skb, struct net *net,
 extern void nfnl_lock(__u8 subsys_id);
 extern void nfnl_unlock(__u8 subsys_id);
 =======
+=======
+>>>>>>> v3.18
 	int (*commit)(struct sk_buff *skb);
 	int (*abort)(struct sk_buff *skb);
 };
@@ -86,6 +95,9 @@ static inline int lockdep_nfnl_is_held(__u8 subsys_id)
  */
 #define nfnl_dereference(p, ss)					\
 	rcu_dereference_protected(p, lockdep_nfnl_is_held(ss))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define MODULE_ALIAS_NFNL_SUBSYS(subsys) \

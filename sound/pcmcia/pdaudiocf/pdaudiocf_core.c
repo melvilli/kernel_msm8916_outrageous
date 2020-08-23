@@ -163,9 +163,14 @@ struct snd_pdacf *snd_pdacf_create(struct snd_card *card)
 		return NULL;
 	chip->card = card;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_init(&chip->reg_lock);
 	spin_lock_init(&chip->ak4117_lock);
 	tasklet_init(&chip->tq, pdacf_tasklet, (unsigned long)chip);
+=======
+	mutex_init(&chip->reg_lock);
+	spin_lock_init(&chip->ak4117_lock);
+>>>>>>> v3.18
 =======
 	mutex_init(&chip->reg_lock);
 	spin_lock_init(&chip->ak4117_lock);
@@ -180,7 +185,10 @@ static void snd_pdacf_ak4117_change(struct ak4117 *ak4117, unsigned char c0, uns
 {
 	struct snd_pdacf *chip = ak4117->change_callback_private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u16 val;
@@ -188,7 +196,11 @@ static void snd_pdacf_ak4117_change(struct ak4117 *ak4117, unsigned char c0, uns
 	if (!(c0 & AK4117_UNLCK))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&chip->reg_lock, flags);
+=======
+	mutex_lock(&chip->reg_lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&chip->reg_lock);
 >>>>>>> v3.18
@@ -199,7 +211,11 @@ static void snd_pdacf_ak4117_change(struct ak4117 *ak4117, unsigned char c0, uns
 		val &= ~PDAUDIOCF_BLUE_LED_OFF;
 	pdacf_reg_write(chip, PDAUDIOCF_REG_SCR, val);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&chip->reg_lock, flags);
+=======
+	mutex_unlock(&chip->reg_lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->reg_lock);
 >>>>>>> v3.18

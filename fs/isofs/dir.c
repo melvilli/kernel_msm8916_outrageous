@@ -79,8 +79,13 @@ int get_acorn_filename(struct iso_directory_record *de,
  * This should _really_ be cleaned up some day..
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_isofs_readdir(struct inode *inode, struct file *filp,
 		void *dirent, filldir_t filldir,
+=======
+static int do_isofs_readdir(struct inode *inode, struct file *file,
+		struct dir_context *ctx,
+>>>>>>> v3.18
 =======
 static int do_isofs_readdir(struct inode *inode, struct file *file,
 		struct dir_context *ctx,
@@ -100,15 +105,21 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
 	struct isofs_sb_info *sbi = ISOFS_SB(inode->i_sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	offset = filp->f_pos & (bufsize - 1);
 	block = filp->f_pos >> bufbits;
 
 	while (filp->f_pos < inode->i_size) {
 =======
+=======
+>>>>>>> v3.18
 	offset = ctx->pos & (bufsize - 1);
 	block = ctx->pos >> bufbits;
 
 	while (ctx->pos < inode->i_size) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		int de_len;
 
@@ -121,7 +132,11 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
 		de = (struct iso_directory_record *) (bh->b_data + offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		de_len = *(unsigned char *) de;
+=======
+		de_len = *(unsigned char *)de;
+>>>>>>> v3.18
 =======
 		de_len = *(unsigned char *)de;
 >>>>>>> v3.18
@@ -136,8 +151,13 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
 			brelse(bh);
 			bh = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos = (filp->f_pos + ISOFS_BLOCK_SIZE) & ~(ISOFS_BLOCK_SIZE - 1);
 			block = filp->f_pos >> bufbits;
+=======
+			ctx->pos = (ctx->pos + ISOFS_BLOCK_SIZE) & ~(ISOFS_BLOCK_SIZE - 1);
+			block = ctx->pos >> bufbits;
+>>>>>>> v3.18
 =======
 			ctx->pos = (ctx->pos + ISOFS_BLOCK_SIZE) & ~(ISOFS_BLOCK_SIZE - 1);
 			block = ctx->pos >> bufbits;
@@ -186,7 +206,11 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
 		if (de->flags[-sbi->s_high_sierra] & 0x80) {
 			first_de = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos += de_len;
+=======
+			ctx->pos += de_len;
+>>>>>>> v3.18
 =======
 			ctx->pos += de_len;
 >>>>>>> v3.18
@@ -197,9 +221,15 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
 		/* Handle the case of the '.' directory */
 		if (de->name_len[0] == 1 && de->name[0] == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (filldir(dirent, ".", 1, filp->f_pos, inode->i_ino, DT_DIR) < 0)
 				break;
 			filp->f_pos += de_len;
+=======
+			if (!dir_emit_dot(file, ctx))
+				break;
+			ctx->pos += de_len;
+>>>>>>> v3.18
 =======
 			if (!dir_emit_dot(file, ctx))
 				break;
@@ -213,10 +243,16 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
 		/* Handle the case of the '..' directory */
 		if (de->name_len[0] == 1 && de->name[0] == 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			inode_number = parent_ino(filp->f_path.dentry);
 			if (filldir(dirent, "..", 2, filp->f_pos, inode_number, DT_DIR) < 0)
 				break;
 			filp->f_pos += de_len;
+=======
+			if (!dir_emit_dotdot(file, ctx))
+				break;
+			ctx->pos += de_len;
+>>>>>>> v3.18
 =======
 			if (!dir_emit_dotdot(file, ctx))
 				break;
@@ -236,7 +272,11 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
 		    (!sbi->s_showassoc &&
 				(de->flags[-sbi->s_high_sierra] & 4))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			filp->f_pos += de_len;
+=======
+			ctx->pos += de_len;
+>>>>>>> v3.18
 =======
 			ctx->pos += de_len;
 >>>>>>> v3.18
@@ -272,15 +312,21 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
 		}
 		if (len > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (filldir(dirent, p, len, filp->f_pos, inode_number, DT_UNKNOWN) < 0)
 				break;
 		}
 		filp->f_pos += de_len;
 =======
+=======
+>>>>>>> v3.18
 			if (!dir_emit(ctx, p, len, inode_number, DT_UNKNOWN))
 				break;
 		}
 		ctx->pos += de_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		continue;
@@ -296,8 +342,12 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
  * "do_isofs_readdir()".
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int isofs_readdir(struct file *filp,
 		void *dirent, filldir_t filldir)
+=======
+static int isofs_readdir(struct file *file, struct dir_context *ctx)
+>>>>>>> v3.18
 =======
 static int isofs_readdir(struct file *file, struct dir_context *ctx)
 >>>>>>> v3.18
@@ -306,7 +356,11 @@ static int isofs_readdir(struct file *file, struct dir_context *ctx)
 	char *tmpname;
 	struct iso_directory_record *tmpde;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = file_inode(filp);
+=======
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 	struct inode *inode = file_inode(file);
 >>>>>>> v3.18
@@ -318,7 +372,11 @@ static int isofs_readdir(struct file *file, struct dir_context *ctx)
 	tmpde = (struct iso_directory_record *) (tmpname+1024);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = do_isofs_readdir(inode, filp, dirent, filldir, tmpname, tmpde);
+=======
+	result = do_isofs_readdir(inode, file, ctx, tmpname, tmpde);
+>>>>>>> v3.18
 =======
 	result = do_isofs_readdir(inode, file, ctx, tmpname, tmpde);
 >>>>>>> v3.18
@@ -332,7 +390,11 @@ const struct file_operations isofs_dir_operations =
 	.llseek = generic_file_llseek,
 	.read = generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir = isofs_readdir,
+=======
+	.iterate = isofs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate = isofs_readdir,
 >>>>>>> v3.18

@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -75,6 +79,10 @@
 #define ACPI_SIG_IBFT           "IBFT"	/* iSCSI Boot Firmware Table */
 #define ACPI_SIG_IVRS           "IVRS"	/* I/O Virtualization Reporting Structure */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ACPI_SIG_LPIT           "LPIT"	/* Low Power Idle Table */
+>>>>>>> v3.18
 =======
 #define ACPI_SIG_LPIT           "LPIT"	/* Low Power Idle Table */
 >>>>>>> v3.18
@@ -336,12 +344,18 @@ struct acpi_table_dbg2 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct acpi_dbg2_header {
 	u32 info_offset;
 	u32 info_count;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Debug Device Information Subtable */
 
@@ -407,7 +421,11 @@ struct acpi_table_dbgp {
  *
  * Conforms to "Intel Virtualization Technology for Directed I/O",
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Version 1.2, Sept. 2008
+=======
+ * Version 2.2, Sept. 2013
+>>>>>>> v3.18
 =======
  * Version 2.2, Sept. 2013
 >>>>>>> v3.18
@@ -438,14 +456,20 @@ enum acpi_dmar_type {
 	ACPI_DMAR_TYPE_HARDWARE_UNIT = 0,
 	ACPI_DMAR_TYPE_RESERVED_MEMORY = 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ACPI_DMAR_TYPE_ATSR = 2,
 	ACPI_DMAR_HARDWARE_AFFINITY = 3,
 	ACPI_DMAR_TYPE_RESERVED = 4	/* 4 and greater are reserved */
 =======
+=======
+>>>>>>> v3.18
 	ACPI_DMAR_TYPE_ROOT_ATS = 2,
 	ACPI_DMAR_TYPE_HARDWARE_AFFINITY = 3,
 	ACPI_DMAR_TYPE_NAMESPACE = 4,
 	ACPI_DMAR_TYPE_RESERVED = 5	/* 5 and greater are reserved */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -460,7 +484,11 @@ struct acpi_dmar_device_scope {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Values for entry_type in struct acpi_dmar_device_scope */
+=======
+/* Values for entry_type in struct acpi_dmar_device_scope - device types */
+>>>>>>> v3.18
 =======
 /* Values for entry_type in struct acpi_dmar_device_scope - device types */
 >>>>>>> v3.18
@@ -471,6 +499,7 @@ enum acpi_dmar_scope_type {
 	ACPI_DMAR_SCOPE_TYPE_BRIDGE = 2,
 	ACPI_DMAR_SCOPE_TYPE_IOAPIC = 3,
 	ACPI_DMAR_SCOPE_TYPE_HPET = 4,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ACPI_DMAR_SCOPE_TYPE_RESERVED = 5	/* 5 and greater are reserved */
 };
@@ -483,6 +512,8 @@ struct acpi_dmar_pci_path {
 /*
  * DMAR Sub-tables, correspond to Type in struct acpi_dmar_header
 =======
+=======
+>>>>>>> v3.18
 	ACPI_DMAR_SCOPE_TYPE_NAMESPACE = 5,
 	ACPI_DMAR_SCOPE_TYPE_RESERVED = 6	/* 6 and greater are reserved */
 };
@@ -494,6 +525,9 @@ struct acpi_dmar_pci_path {
 
 /*
  * DMAR Subtables, correspond to Type in struct acpi_dmar_header
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -548,7 +582,10 @@ struct acpi_dmar_rhsa {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* 4: ACPI Namespace Device Declaration Structure */
 
 struct acpi_dmar_andd {
@@ -558,6 +595,9 @@ struct acpi_dmar_andd {
 	char device_name[1];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*******************************************************************************
  *
@@ -862,8 +902,11 @@ struct acpi_ivrs_memory {
 /*******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * MCFG - PCI Memory Mapped Configuration table and sub-table
 =======
+=======
+>>>>>>> v3.18
  * LPIT - Low Power Idle Table
  *
  * Conforms to "ACPI Low Power Idle Table (LPIT) and _LPD Proposal (DRAFT)"
@@ -929,6 +972,9 @@ struct acpi_lpit_io {
 /*******************************************************************************
  *
  * MCFG - PCI Memory Mapped Configuration table and subtable
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *        Version 1
  *
@@ -1033,7 +1079,11 @@ enum acpi_slic_type {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * SLIC Sub-tables, correspond to Type in struct acpi_slic_header
+=======
+ * SLIC Subtables, correspond to Type in struct acpi_slic_header
+>>>>>>> v3.18
 =======
  * SLIC Subtables, correspond to Type in struct acpi_slic_header
 >>>>>>> v3.18

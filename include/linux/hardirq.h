@@ -2,7 +2,11 @@
 #define LINUX_HARDIRQ_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/preempt.h>
+=======
+#include <linux/preempt_mask.h>
+>>>>>>> v3.18
 =======
 #include <linux/preempt_mask.h>
 >>>>>>> v3.18
@@ -11,6 +15,7 @@
 #include <linux/vtime.h>
 #include <asm/hardirq.h>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * We put the hardirq and softirq counter into the preemption
@@ -131,11 +136,16 @@ extern void synchronize_irq(unsigned int irq);
 
 #if defined(CONFIG_TINY_RCU) || defined(CONFIG_TINY_PREEMPT_RCU)
 =======
+=======
+>>>>>>> v3.18
 
 extern void synchronize_irq(unsigned int irq);
 extern void synchronize_hardirq(unsigned int irq);
 
 #if defined(CONFIG_TINY_RCU)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void rcu_nmi_enter(void)
@@ -161,7 +171,11 @@ extern void rcu_nmi_exit(void);
 	do {						\
 		account_irq_enter_time(current);	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		add_preempt_count(HARDIRQ_OFFSET);	\
+=======
+		preempt_count_add(HARDIRQ_OFFSET);	\
+>>>>>>> v3.18
 =======
 		preempt_count_add(HARDIRQ_OFFSET);	\
 >>>>>>> v3.18
@@ -181,7 +195,11 @@ extern void irq_enter(void);
 		trace_hardirq_exit();			\
 		account_irq_exit_time(current);		\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sub_preempt_count(HARDIRQ_OFFSET);	\
+=======
+		preempt_count_sub(HARDIRQ_OFFSET);	\
+>>>>>>> v3.18
 =======
 		preempt_count_sub(HARDIRQ_OFFSET);	\
 >>>>>>> v3.18
@@ -198,7 +216,11 @@ extern void irq_exit(void);
 		ftrace_nmi_enter();				\
 		BUG_ON(in_nmi());				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		add_preempt_count(NMI_OFFSET + HARDIRQ_OFFSET);	\
+=======
+		preempt_count_add(NMI_OFFSET + HARDIRQ_OFFSET);	\
+>>>>>>> v3.18
 =======
 		preempt_count_add(NMI_OFFSET + HARDIRQ_OFFSET);	\
 >>>>>>> v3.18
@@ -212,7 +234,11 @@ extern void irq_exit(void);
 		rcu_nmi_exit();					\
 		BUG_ON(!in_nmi());				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sub_preempt_count(NMI_OFFSET + HARDIRQ_OFFSET);	\
+=======
+		preempt_count_sub(NMI_OFFSET + HARDIRQ_OFFSET);	\
+>>>>>>> v3.18
 =======
 		preempt_count_sub(NMI_OFFSET + HARDIRQ_OFFSET);	\
 >>>>>>> v3.18

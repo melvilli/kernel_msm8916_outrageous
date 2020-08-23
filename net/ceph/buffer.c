@@ -7,6 +7,10 @@
 #include <linux/ceph/buffer.h>
 #include <linux/ceph/decode.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/ceph/libceph.h> /* for ceph_kv{malloc,free} */
+>>>>>>> v3.18
 =======
 #include <linux/ceph/libceph.h> /* for ceph_kv{malloc,free} */
 >>>>>>> v3.18
@@ -20,6 +24,7 @@ struct ceph_buffer *ceph_buffer_new(size_t len, gfp_t gfp)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	b->vec.iov_base = kmalloc(len, gfp | __GFP_NOWARN);
 	if (b->vec.iov_base) {
 		b->is_vmalloc = false;
@@ -31,10 +36,15 @@ struct ceph_buffer *ceph_buffer_new(size_t len, gfp_t gfp)
 		}
 		b->is_vmalloc = true;
 =======
+=======
+>>>>>>> v3.18
 	b->vec.iov_base = ceph_kvmalloc(len, gfp);
 	if (!b->vec.iov_base) {
 		kfree(b);
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -52,12 +62,16 @@ void ceph_buffer_release(struct kref *kref)
 
 	dout("buffer_release %p\n", b);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (b->vec.iov_base) {
 		if (b->is_vmalloc)
 			vfree(b->vec.iov_base);
 		else
 			kfree(b->vec.iov_base);
 	}
+=======
+	ceph_kvfree(b->vec.iov_base);
+>>>>>>> v3.18
 =======
 	ceph_kvfree(b->vec.iov_base);
 >>>>>>> v3.18

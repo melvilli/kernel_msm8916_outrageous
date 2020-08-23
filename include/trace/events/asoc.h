@@ -12,6 +12,7 @@
 struct snd_soc_jack;
 struct snd_soc_codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_soc_platform;
 struct snd_soc_card;
 struct snd_soc_dapm_widget;
@@ -106,6 +107,11 @@ DEFINE_EVENT(snd_soc_preg, snd_soc_preg_read,
 	TP_ARGS(platform, reg, val)
 
 );
+=======
+struct snd_soc_card;
+struct snd_soc_dapm_widget;
+struct snd_soc_dapm_path;
+>>>>>>> v3.18
 =======
 struct snd_soc_card;
 struct snd_soc_dapm_widget;
@@ -273,7 +279,11 @@ TRACE_EVENT(snd_soc_dapm_output_path,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("%c%s -> %s -> %s\n",
+=======
+	TP_printk("%c%s -> %s -> %s",
+>>>>>>> v3.18
 =======
 	TP_printk("%c%s -> %s -> %s",
 >>>>>>> v3.18
@@ -306,7 +316,11 @@ TRACE_EVENT(snd_soc_dapm_input_path,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("%c%s <- %s <- %s\n",
+=======
+	TP_printk("%c%s <- %s <- %s",
+>>>>>>> v3.18
 =======
 	TP_printk("%c%s <- %s <- %s",
 >>>>>>> v3.18
@@ -332,7 +346,11 @@ TRACE_EVENT(snd_soc_dapm_connected,
 	),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_printk("%s: found %d paths\n",
+=======
+	TP_printk("%s: found %d paths",
+>>>>>>> v3.18
 =======
 	TP_printk("%s: found %d paths",
 >>>>>>> v3.18
@@ -406,7 +424,11 @@ TRACE_EVENT(snd_soc_cache_sync,
 
 	TP_STRUCT__entry(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__string(	name,		codec->name	)
+=======
+		__string(	name,		codec->component.name)
+>>>>>>> v3.18
 =======
 		__string(	name,		codec->component.name)
 >>>>>>> v3.18
@@ -417,15 +439,21 @@ TRACE_EVENT(snd_soc_cache_sync,
 
 	TP_fast_assign(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__assign_str(name, codec->name);
 		__assign_str(status, status);
 		__assign_str(type, type);
 		__entry->id = codec->id;
 =======
+=======
+>>>>>>> v3.18
 		__assign_str(name, codec->component.name);
 		__assign_str(status, status);
 		__assign_str(type, type);
 		__entry->id = codec->component.id;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	),
 

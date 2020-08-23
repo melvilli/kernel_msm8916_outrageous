@@ -4,6 +4,11 @@
 #define __IEEE80211_DEBUGFS_NETDEV_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ieee80211_i.h"
+
+>>>>>>> v3.18
 =======
 #include "ieee80211_i.h"
 

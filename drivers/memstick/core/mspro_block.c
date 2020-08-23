@@ -759,7 +759,11 @@ static int mspro_block_complete_req(struct memstick_dev *card, int error)
 		if (error || (card->current_mrq.tpc == MSPRO_CMD_STOP)) {
 			if (msb->data_dir == READ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				for (cnt = 0; cnt < msb->current_seg; cnt++) {
+=======
+				for (cnt = 0; cnt < msb->current_seg; cnt++)
+>>>>>>> v3.18
 =======
 				for (cnt = 0; cnt < msb->current_seg; cnt++)
 >>>>>>> v3.18
@@ -771,7 +775,10 @@ static int mspro_block_complete_req(struct memstick_dev *card, int error)
 
 					t_len *= msb->page_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -1032,8 +1039,13 @@ static int mspro_block_read_attributes(struct memstick_dev *card)
 		attr_count = attr->count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msb->attr_group.attrs = kzalloc((attr_count + 1)
 					* sizeof(struct attribute),
+=======
+	msb->attr_group.attrs = kcalloc(attr_count + 1,
+					sizeof(*msb->attr_group.attrs),
+>>>>>>> v3.18
 =======
 	msb->attr_group.attrs = kcalloc(attr_count + 1,
 					sizeof(*msb->attr_group.attrs),

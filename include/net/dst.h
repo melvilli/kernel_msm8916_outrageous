@@ -46,7 +46,11 @@ struct dst_entry {
 #endif
 	int			(*input)(struct sk_buff *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int			(*output)(struct sk_buff *);
+=======
+	int			(*output)(struct sock *sk, struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 	int			(*output)(struct sock *sk, struct sk_buff *skb);
 >>>>>>> v3.18
@@ -59,10 +63,16 @@ struct dst_entry {
 #define DST_NOCACHE		0x0010
 #define DST_NOCOUNT		0x0020
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DST_NOPEER		0x0040
 #define DST_FAKE_RTABLE		0x0080
 #define DST_XFRM_TUNNEL		0x0100
 #define DST_XFRM_QUEUE		0x0200
+=======
+#define DST_FAKE_RTABLE		0x0040
+#define DST_XFRM_TUNNEL		0x0080
+#define DST_XFRM_QUEUE		0x0100
+>>>>>>> v3.18
 =======
 #define DST_FAKE_RTABLE		0x0040
 #define DST_XFRM_TUNNEL		0x0080
@@ -117,6 +127,7 @@ struct dst_entry {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u32 *dst_cow_metrics_generic(struct dst_entry *dst, unsigned long old);
 extern const u32 dst_default_metrics[];
 
@@ -124,6 +135,8 @@ extern const u32 dst_default_metrics[];
 #define __DST_METRICS_PTR(Y)	\
 	((u32 *)((Y) & ~DST_METRICS_READ_ONLY))
 =======
+=======
+>>>>>>> v3.18
 u32 *dst_cow_metrics_generic(struct dst_entry *dst, unsigned long old);
 extern const u32 dst_default_metrics[];
 
@@ -132,6 +145,9 @@ extern const u32 dst_default_metrics[];
 #define DST_METRICS_FLAGS		0x3UL
 #define __DST_METRICS_PTR(Y)	\
 	((u32 *)((Y) & ~DST_METRICS_FLAGS))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DST_METRICS_PTR(X)	__DST_METRICS_PTR((X)->_metrics)
 
@@ -141,14 +157,20 @@ static inline bool dst_metrics_read_only(const struct dst_entry *dst)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __dst_destroy_metrics_generic(struct dst_entry *dst, unsigned long old);
 =======
+=======
+>>>>>>> v3.18
 static inline void dst_metrics_set_force_overwrite(struct dst_entry *dst)
 {
 	dst->_metrics |= DST_METRICS_FORCE_OVERWRITE;
 }
 
 void __dst_destroy_metrics_generic(struct dst_entry *dst, unsigned long old);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void dst_destroy_metrics_generic(struct dst_entry *dst)
@@ -293,7 +315,11 @@ static inline struct dst_entry *dst_clone(struct dst_entry *dst)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dst_release(struct dst_entry *dst);
+=======
+void dst_release(struct dst_entry *dst);
+>>>>>>> v3.18
 =======
 void dst_release(struct dst_entry *dst);
 >>>>>>> v3.18
@@ -346,6 +372,10 @@ static inline void skb_dst_force(struct sk_buff *skb)
  *	@skb: buffer
  *	@dev: tunnel device
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *	@net: netns for packet i/o
+>>>>>>> v3.18
 =======
  *	@net: netns for packet i/o
 >>>>>>> v3.18
@@ -354,7 +384,12 @@ static inline void skb_dst_force(struct sk_buff *skb)
  *	so make some cleanups. (no accounting done)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev)
+=======
+static inline void __skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
+				   struct net *net)
+>>>>>>> v3.18
 =======
 static inline void __skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
 				   struct net *net)
@@ -363,6 +398,7 @@ static inline void __skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
 	skb->dev = dev;
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Clear rxhash so that we can recalulate the hash for the
 	 * encapsulated packet, unless we have already determine the hash
@@ -374,6 +410,8 @@ static inline void __skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
 	skb_dst_drop(skb);
 	nf_reset(skb);
 =======
+=======
+>>>>>>> v3.18
 	 * Clear hash so that we can recalulate the hash for the
 	 * encapsulated packet, unless we have already determine the hash
 	 * over the L4 4-tuple.
@@ -381,6 +419,9 @@ static inline void __skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
 	skb_clear_hash_if_not_l4(skb);
 	skb_set_queue_mapping(skb, 0);
 	skb_scrub_packet(skb, !net_eq(net, dev_net(dev)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -394,7 +435,12 @@ static inline void __skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
  *	Note: this accounting is not SMP safe.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev)
+=======
+static inline void skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
+				 struct net *net)
+>>>>>>> v3.18
 =======
 static inline void skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
 				 struct net *net)
@@ -404,7 +450,11 @@ static inline void skb_tunnel_rx(struct sk_buff *skb, struct net_device *dev,
 	dev->stats.rx_packets++;
 	dev->stats.rx_bytes += skb->len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__skb_tunnel_rx(skb, dev);
+=======
+	__skb_tunnel_rx(skb, dev, net);
+>>>>>>> v3.18
 =======
 	__skb_tunnel_rx(skb, dev, net);
 >>>>>>> v3.18
@@ -423,6 +473,7 @@ static inline struct dst_entry *skb_dst_pop(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int dst_discard(struct sk_buff *skb);
 extern void *dst_alloc(struct dst_ops *ops, struct net_device *dev,
 		       int initial_ref, int initial_obsolete,
@@ -430,6 +481,8 @@ extern void *dst_alloc(struct dst_ops *ops, struct net_device *dev,
 extern void __dst_free(struct dst_entry *dst);
 extern struct dst_entry *dst_destroy(struct dst_entry *dst);
 =======
+=======
+>>>>>>> v3.18
 int dst_discard_sk(struct sock *sk, struct sk_buff *skb);
 static inline int dst_discard(struct sk_buff *skb)
 {
@@ -439,6 +492,9 @@ void *dst_alloc(struct dst_ops *ops, struct net_device *dev, int initial_ref,
 		int initial_obsolete, unsigned short flags);
 void __dst_free(struct dst_entry *dst);
 struct dst_entry *dst_destroy(struct dst_entry *dst);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void dst_free(struct dst_entry *dst)
@@ -518,10 +574,13 @@ static inline void dst_set_expires(struct dst_entry *dst, int timeout)
 
 /* Output packet to network from transport.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int dst_output(struct sk_buff *skb)
 {
 	return skb_dst(skb)->output(skb);
 =======
+=======
+>>>>>>> v3.18
 static inline int dst_output_sk(struct sock *sk, struct sk_buff *skb)
 {
 	return skb_dst(skb)->output(sk, skb);
@@ -529,6 +588,9 @@ static inline int dst_output_sk(struct sock *sk, struct sk_buff *skb)
 static inline int dst_output(struct sk_buff *skb)
 {
 	return dst_output_sk(skb->sk, skb);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -546,7 +608,11 @@ static inline struct dst_entry *dst_check(struct dst_entry *dst, u32 cookie)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void		dst_init(void);
+=======
+void dst_init(void);
+>>>>>>> v3.18
 =======
 void dst_init(void);
 >>>>>>> v3.18
@@ -555,6 +621,10 @@ void dst_init(void);
 enum {
 	XFRM_LOOKUP_ICMP = 1 << 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	XFRM_LOOKUP_QUEUE = 1 << 1,
+>>>>>>> v3.18
 =======
 	XFRM_LOOKUP_QUEUE = 1 << 1,
 >>>>>>> v3.18
@@ -569,8 +639,11 @@ static inline struct dst_entry *xfrm_lookup(struct net *net,
 {
 	return dst_orig;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } 
 =======
+=======
+>>>>>>> v3.18
 }
 
 static inline struct dst_entry *xfrm_lookup_route(struct net *net,
@@ -581,6 +654,9 @@ static inline struct dst_entry *xfrm_lookup_route(struct net *net,
 {
 	return dst_orig;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct xfrm_state *dst_xfrm(const struct dst_entry *dst)
@@ -590,10 +666,13 @@ static inline struct xfrm_state *dst_xfrm(const struct dst_entry *dst)
 
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct dst_entry *xfrm_lookup(struct net *net, struct dst_entry *dst_orig,
 				     const struct flowi *fl, struct sock *sk,
 				     int flags);
 =======
+=======
+>>>>>>> v3.18
 struct dst_entry *xfrm_lookup(struct net *net, struct dst_entry *dst_orig,
 			      const struct flowi *fl, struct sock *sk,
 			      int flags);
@@ -601,6 +680,9 @@ struct dst_entry *xfrm_lookup(struct net *net, struct dst_entry *dst_orig,
 struct dst_entry *xfrm_lookup_route(struct net *net, struct dst_entry *dst_orig,
 				    const struct flowi *fl, struct sock *sk,
 				    int flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* skb attached with this dst needs transformation if dst->xfrm is valid */

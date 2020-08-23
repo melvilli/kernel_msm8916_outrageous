@@ -22,7 +22,11 @@ Example for OMAP4:
 
 usbhsehci: ehci@4a064c00 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	compatible = "ti,ehci-omap", "usb-ehci";
+=======
+	compatible = "ti,ehci-omap";
+>>>>>>> v3.18
 =======
 	compatible = "ti,ehci-omap";
 >>>>>>> v3.18

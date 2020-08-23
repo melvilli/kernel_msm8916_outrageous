@@ -10,6 +10,7 @@
 #ifdef CONFIG_SMP
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 select_task_rq_idle(struct task_struct *p, int sd_flag, int flags)
 {
 	return task_cpu(p); /* IDLE tasks as never migrated */
@@ -27,18 +28,24 @@ static void post_schedule_idle(struct rq *rq)
 }
 #endif /* CONFIG_SMP */
 =======
+=======
+>>>>>>> v3.18
 select_task_rq_idle(struct task_struct *p, int cpu, int sd_flag, int flags)
 {
 	return task_cpu(p); /* IDLE tasks as never migrated */
 }
 #endif /* CONFIG_SMP */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Idle tasks are unconditionally rescheduled:
  */
 static void check_preempt_curr_idle(struct rq *rq, struct task_struct *p, int flags)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	resched_task(rq->idle);
 }
@@ -51,6 +58,8 @@ static struct task_struct *pick_next_task_idle(struct rq *rq)
 	rq->post_schedule = 1;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	resched_curr(rq);
 }
 
@@ -60,6 +69,9 @@ pick_next_task_idle(struct rq *rq, struct task_struct *prev)
 	put_prev_task(rq, prev);
 
 	schedstat_inc(rq, sched_goidle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return rq->idle;
 }
@@ -80,6 +92,11 @@ dequeue_task_idle(struct rq *rq, struct task_struct *p, int flags)
 static void put_prev_task_idle(struct rq *rq, struct task_struct *prev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	idle_exit_fair(rq);
+	rq_last_tick_reset(rq);
+>>>>>>> v3.18
 =======
 	idle_exit_fair(rq);
 	rq_last_tick_reset(rq);
@@ -111,11 +128,17 @@ static unsigned int get_rr_interval_idle(struct rq *rq, struct task_struct *task
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void update_curr_idle(struct rq *rq)
 {
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Simple, special scheduling class for the per-CPU idle tasks:
@@ -135,8 +158,11 @@ const struct sched_class idle_sched_class = {
 #ifdef CONFIG_SMP
 	.select_task_rq		= select_task_rq_idle,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.pre_schedule		= pre_schedule_idle,
 	.post_schedule		= post_schedule_idle,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -149,6 +175,10 @@ const struct sched_class idle_sched_class = {
 	.prio_changed		= prio_changed_idle,
 	.switched_to		= switched_to_idle,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.update_curr		= update_curr_idle,
+>>>>>>> v3.18
 =======
 	.update_curr		= update_curr_idle,
 >>>>>>> v3.18

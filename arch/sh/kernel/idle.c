@@ -17,7 +17,10 @@
 #include <linux/irqflags.h>
 #include <linux/smp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/cpuidle.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/atomic.h>
@@ -44,8 +47,12 @@ void arch_cpu_idle_dead(void)
 void arch_cpu_idle(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpuidle_idle_call())
 		sh_idle();
+=======
+	sh_idle();
+>>>>>>> v3.18
 =======
 	sh_idle();
 >>>>>>> v3.18

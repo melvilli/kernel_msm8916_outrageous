@@ -142,9 +142,13 @@ static struct inode *v9fs_qid_iget_dotl(struct super_block *sb,
 
 	v9fs_stat2inode_dotl(st, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_9P_FSCACHE
 	v9fs_cache_inode_get_cookie(inode);
 #endif
+=======
+	v9fs_cache_inode_get_cookie(inode);
+>>>>>>> v3.18
 =======
 	v9fs_cache_inode_get_cookie(inode);
 >>>>>>> v3.18
@@ -156,7 +160,12 @@ static struct inode *v9fs_qid_iget_dotl(struct super_block *sb,
 	return inode;
 error:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iget_failed(inode);
+=======
+	unlock_new_inode(inode);
+	iput(inode);
+>>>>>>> v3.18
 =======
 	unlock_new_inode(inode);
 	iput(inode);
@@ -237,7 +246,11 @@ int v9fs_open_to_dotl_flags(int flags)
  * @dir: directory inode that is being created
  * @dentry:  dentry that is being deleted
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mode: create permissions
+=======
+ * @omode: create permissions
+>>>>>>> v3.18
 =======
  * @omode: create permissions
 >>>>>>> v3.18
@@ -280,6 +293,7 @@ v9fs_vfs_atomic_open_dotl(struct inode *dir, struct dentry *dentry,
 
 	/* Only creates */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(flags & O_CREAT))
 		return	finish_no_open(file, res);
 	else if (dentry->d_inode) {
@@ -288,6 +302,10 @@ v9fs_vfs_atomic_open_dotl(struct inode *dir, struct dentry *dentry,
 		else
 			return finish_no_open(file, res);
 	}
+=======
+	if (!(flags & O_CREAT) || dentry->d_inode)
+		return	finish_no_open(file, res);
+>>>>>>> v3.18
 =======
 	if (!(flags & O_CREAT) || dentry->d_inode)
 		return	finish_no_open(file, res);
@@ -356,7 +374,12 @@ v9fs_vfs_atomic_open_dotl(struct inode *dir, struct dentry *dentry,
 	v9inode = V9FS_I(inode);
 	mutex_lock(&v9inode->v_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v9ses->cache && !v9inode->writeback_fid &&
+=======
+	if ((v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE) &&
+	    !v9inode->writeback_fid &&
+>>>>>>> v3.18
 =======
 	if ((v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE) &&
 	    !v9inode->writeback_fid &&
@@ -384,10 +407,15 @@ v9fs_vfs_atomic_open_dotl(struct inode *dir, struct dentry *dentry,
 		goto err_clunk_old_fid;
 	file->private_data = ofid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_9P_FSCACHE
 	if (v9ses->cache)
 		v9fs_cache_inode_set_cookie(inode, file);
 #endif
+=======
+	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
+		v9fs_cache_inode_set_cookie(inode, file);
+>>>>>>> v3.18
 =======
 	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
 		v9fs_cache_inode_set_cookie(inode, file);
@@ -412,7 +440,11 @@ err_clunk_old_fid:
  * @dir:  inode that is being unlinked
  * @dentry: dentry that is being unlinked
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mode: mode for new directory
+=======
+ * @omode: mode for new directory
+>>>>>>> v3.18
 =======
  * @omode: mode for new directory
 >>>>>>> v3.18
@@ -434,7 +466,11 @@ static int v9fs_vfs_mkdir_dotl(struct inode *dir,
 	struct posix_acl *dacl = NULL, *pacl = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "name %s\n", dentry->d_name.name);
+=======
+	p9_debug(P9_DEBUG_VFS, "name %pd\n", dentry);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, "name %pd\n", dentry);
 >>>>>>> v3.18
@@ -519,7 +555,10 @@ v9fs_vfs_getattr_dotl(struct vfsmount *mnt, struct dentry *dentry,
 		 struct kstat *stat)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct v9fs_session_info *v9ses;
@@ -528,7 +567,10 @@ v9fs_vfs_getattr_dotl(struct vfsmount *mnt, struct dentry *dentry,
 
 	p9_debug(P9_DEBUG_VFS, "dentry: %p\n", dentry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = -EPERM;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	v9ses = v9fs_dentry2v9ses(dentry);
@@ -608,7 +650,10 @@ int v9fs_vfs_setattr_dotl(struct dentry *dentry, struct iattr *iattr)
 {
 	int retval;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v9fs_session_info *v9ses;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct p9_fid *fid;
@@ -632,8 +677,11 @@ int v9fs_vfs_setattr_dotl(struct dentry *dentry, struct iattr *iattr)
 	p9attr.mtime_nsec = iattr->ia_mtime.tv_nsec;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = -EPERM;
 	v9ses = v9fs_dentry2v9ses(dentry);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	fid = v9fs_fid_lookup(dentry);
@@ -669,7 +717,10 @@ int v9fs_vfs_setattr_dotl(struct dentry *dentry, struct iattr *iattr)
  * @stat: stat structure
  * @inode: inode to populate
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @sb: superblock of filesystem
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -776,7 +827,11 @@ v9fs_vfs_symlink_dotl(struct inode *dir, struct dentry *dentry,
 
 	v9fs_invalidate_inode_attr(dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v9ses->cache) {
+=======
+	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE) {
+>>>>>>> v3.18
 =======
 	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE) {
 >>>>>>> v3.18
@@ -833,7 +888,10 @@ v9fs_vfs_link_dotl(struct dentry *old_dentry, struct inode *dir,
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char *name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct dentry *dir_dentry;
@@ -841,8 +899,13 @@ v9fs_vfs_link_dotl(struct dentry *old_dentry, struct inode *dir,
 	struct v9fs_session_info *v9ses;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "dir ino: %lu, old_name: %s, new_name: %s\n",
 		 dir->i_ino, old_dentry->d_name.name, dentry->d_name.name);
+=======
+	p9_debug(P9_DEBUG_VFS, "dir ino: %lu, old_name: %pd, new_name: %pd\n",
+		 dir->i_ino, old_dentry, dentry);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, "dir ino: %lu, old_name: %pd, new_name: %pd\n",
 		 dir->i_ino, old_dentry, dentry);
@@ -859,8 +922,11 @@ v9fs_vfs_link_dotl(struct dentry *old_dentry, struct inode *dir,
 		return PTR_ERR(oldfid);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name = (char *) dentry->d_name.name;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = p9_client_link(dfid, oldfid, (char *)dentry->d_name.name);
@@ -891,7 +957,11 @@ v9fs_vfs_link_dotl(struct dentry *old_dentry, struct inode *dir,
  * @dir: inode destination for new link
  * @dentry: dentry for file
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @mode: mode for creation
+=======
+ * @omode: mode for creation
+>>>>>>> v3.18
 =======
  * @omode: mode for creation
 >>>>>>> v3.18
@@ -1005,7 +1075,11 @@ v9fs_vfs_follow_link_dotl(struct dentry *dentry, struct nameidata *nd)
 	char *target;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p9_debug(P9_DEBUG_VFS, "%s\n", dentry->d_name.name);
+=======
+	p9_debug(P9_DEBUG_VFS, "%pd\n", dentry);
+>>>>>>> v3.18
 =======
 	p9_debug(P9_DEBUG_VFS, "%pd\n", dentry);
 >>>>>>> v3.18
@@ -1057,7 +1131,11 @@ int v9fs_refresh_inode_dotl(struct p9_fid *fid, struct inode *inode)
 	i_size = inode->i_size;
 	v9fs_stat2inode_dotl(st, inode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (v9ses->cache)
+=======
+	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
+>>>>>>> v3.18
 =======
 	if (v9ses->cache == CACHE_LOOSE || v9ses->cache == CACHE_FSCACHE)
 >>>>>>> v3.18

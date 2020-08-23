@@ -154,7 +154,10 @@ error_heartbeat:
 	ibmasm_event_buffer_exit(sp);
 error_eventbuffer:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(sp);
@@ -169,7 +172,11 @@ error_resources:
 static void ibmasm_remove_one(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct service_processor *sp = (struct service_processor *)pci_get_drvdata(pdev);
+=======
+	struct service_processor *sp = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct service_processor *sp = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -190,7 +197,10 @@ static void ibmasm_remove_one(struct pci_dev *pdev)
 	iounmap(sp->base_address);
 	ibmasm_event_buffer_exit(sp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(sp);

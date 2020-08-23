@@ -456,7 +456,11 @@ static unsigned int ac97_read(struct snd_soc_codec *codec,
 		reg == AC97_VENDOR_ID1 || reg == AC97_VENDOR_ID2 ||
 		reg == AC97_REC_GAIN)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return soc_ac97_ops.read(codec->ac97, reg);
+=======
+		return soc_ac97_ops->read(codec->ac97, reg);
+>>>>>>> v3.18
 =======
 		return soc_ac97_ops->read(codec->ac97, reg);
 >>>>>>> v3.18
@@ -477,7 +481,11 @@ static int ac97_write(struct snd_soc_codec *codec, unsigned int reg,
 
 	if (reg < 0x7c)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		soc_ac97_ops.write(codec->ac97, reg, val);
+=======
+		soc_ac97_ops->write(codec->ac97, reg, val);
+>>>>>>> v3.18
 =======
 		soc_ac97_ops->write(codec->ac97, reg, val);
 >>>>>>> v3.18
@@ -590,8 +598,13 @@ static int wm9712_set_bias_level(struct snd_soc_codec *codec,
 static int wm9712_reset(struct snd_soc_codec *codec, int try_warm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (try_warm && soc_ac97_ops.warm_reset) {
 		soc_ac97_ops.warm_reset(codec->ac97);
+=======
+	if (try_warm && soc_ac97_ops->warm_reset) {
+		soc_ac97_ops->warm_reset(codec->ac97);
+>>>>>>> v3.18
 =======
 	if (try_warm && soc_ac97_ops->warm_reset) {
 		soc_ac97_ops->warm_reset(codec->ac97);
@@ -601,9 +614,15 @@ static int wm9712_reset(struct snd_soc_codec *codec, int try_warm)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	soc_ac97_ops.reset(codec->ac97);
 	if (soc_ac97_ops.warm_reset)
 		soc_ac97_ops.warm_reset(codec->ac97);
+=======
+	soc_ac97_ops->reset(codec->ac97);
+	if (soc_ac97_ops->warm_reset)
+		soc_ac97_ops->warm_reset(codec->ac97);
+>>>>>>> v3.18
 =======
 	soc_ac97_ops->reset(codec->ac97);
 	if (soc_ac97_ops->warm_reset)
@@ -644,7 +663,11 @@ static int wm9712_soc_resume(struct snd_soc_codec *codec)
 			    (i > 0x58 && i != 0x5c))
 				continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			soc_ac97_ops.write(codec->ac97, i, cache[i>>1]);
+=======
+			soc_ac97_ops->write(codec->ac97, i, cache[i>>1]);
+>>>>>>> v3.18
 =======
 			soc_ac97_ops->write(codec->ac97, i, cache[i>>1]);
 >>>>>>> v3.18
@@ -659,7 +682,11 @@ static int wm9712_soc_probe(struct snd_soc_codec *codec)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_new_ac97_codec(codec, &soc_ac97_ops, 0);
+=======
+	ret = snd_soc_new_ac97_codec(codec, soc_ac97_ops, 0);
+>>>>>>> v3.18
 =======
 	ret = snd_soc_new_ac97_codec(codec, soc_ac97_ops, 0);
 >>>>>>> v3.18

@@ -986,7 +986,11 @@ static int mn10300_serial_startup(struct uart_port *_port)
 
 	if (request_irq(port->rx_irq, mn10300_serial_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_NOBALANCING,
+=======
+			IRQF_NOBALANCING,
+>>>>>>> v3.18
 =======
 			IRQF_NOBALANCING,
 >>>>>>> v3.18
@@ -995,7 +999,11 @@ static int mn10300_serial_startup(struct uart_port *_port)
 
 	if (request_irq(port->tx_irq, mn10300_serial_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_NOBALANCING,
+=======
+			IRQF_NOBALANCING,
+>>>>>>> v3.18
 =======
 			IRQF_NOBALANCING,
 >>>>>>> v3.18
@@ -1004,7 +1012,11 @@ static int mn10300_serial_startup(struct uart_port *_port)
 
 	if (request_irq(port->tm_irq, mn10300_serial_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED | IRQF_NOBALANCING,
+=======
+			IRQF_NOBALANCING,
+>>>>>>> v3.18
 =======
 			IRQF_NOBALANCING,
 >>>>>>> v3.18

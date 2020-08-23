@@ -96,7 +96,12 @@ static inline int TEMP_FROM_REG(s8 val)
 
 struct smsc47m192_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+	const struct attribute_group *groups[3];
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 	const struct attribute_group *groups[3];
@@ -117,6 +122,7 @@ struct smsc47m192_data {
 	u8 vrm;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int smsc47m192_probe(struct i2c_client *client,
 			    const struct i2c_device_id *id);
@@ -143,6 +149,8 @@ static struct i2c_driver smsc47m192_driver = {
 	.address_list	= normal_i2c,
 };
 =======
+=======
+>>>>>>> v3.18
 static struct smsc47m192_data *smsc47m192_update_device(struct device *dev)
 {
 	struct smsc47m192_data *data = dev_get_drvdata(dev);
@@ -206,6 +214,9 @@ static struct smsc47m192_data *smsc47m192_update_device(struct device *dev)
 
 	return data;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Voltages */
@@ -242,8 +253,13 @@ static ssize_t set_in_min(struct device *dev, struct device_attribute *attr,
 	struct sensor_device_attribute *sensor_attr = to_sensor_dev_attr(attr);
 	int nr = sensor_attr->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct smsc47m192_data *data = i2c_get_clientdata(client);
+=======
+	struct smsc47m192_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct smsc47m192_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -269,8 +285,13 @@ static ssize_t set_in_max(struct device *dev, struct device_attribute *attr,
 	struct sensor_device_attribute *sensor_attr = to_sensor_dev_attr(attr);
 	int nr = sensor_attr->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct smsc47m192_data *data = i2c_get_clientdata(client);
+=======
+	struct smsc47m192_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct smsc47m192_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -341,8 +362,13 @@ static ssize_t set_temp_min(struct device *dev, struct device_attribute *attr,
 	struct sensor_device_attribute *sensor_attr = to_sensor_dev_attr(attr);
 	int nr = sensor_attr->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct smsc47m192_data *data = i2c_get_clientdata(client);
+=======
+	struct smsc47m192_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct smsc47m192_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -368,8 +394,13 @@ static ssize_t set_temp_max(struct device *dev, struct device_attribute *attr,
 	struct sensor_device_attribute *sensor_attr = to_sensor_dev_attr(attr);
 	int nr = sensor_attr->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct smsc47m192_data *data = i2c_get_clientdata(client);
+=======
+	struct smsc47m192_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct smsc47m192_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -404,8 +435,13 @@ static ssize_t set_temp_offset(struct device *dev, struct device_attribute
 	struct sensor_device_attribute *sensor_attr = to_sensor_dev_attr(attr);
 	int nr = sensor_attr->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct smsc47m192_data *data = i2c_get_clientdata(client);
+=======
+	struct smsc47m192_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct smsc47m192_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -649,6 +685,7 @@ static int smsc47m192_probe(struct i2c_client *client,
 			    const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct smsc47m192_data *data;
 	int config;
 	int err;
@@ -660,6 +697,8 @@ static int smsc47m192_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	struct smsc47m192_data *data;
@@ -670,6 +709,9 @@ static int smsc47m192_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	data->vrm = vid_which_vrm();
 	mutex_init(&data->update_lock);
@@ -677,6 +719,7 @@ static int smsc47m192_probe(struct i2c_client *client,
 	/* Initialize the SMSC47M192 chip */
 	smsc47m192_init_client(client);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&client->dev.kobj, &smsc47m192_group);
@@ -781,6 +824,8 @@ static struct smsc47m192_data *smsc47m192_update_device(struct device *dev)
 	return data;
 }
 =======
+=======
+>>>>>>> v3.18
 	/* sysfs hooks */
 	data->groups[0] = &smsc47m192_group;
 	/* Pin 110 is either in4 (+12V) or VID4 */
@@ -809,6 +854,9 @@ static struct i2c_driver smsc47m192_driver = {
 	.detect		= smsc47m192_detect,
 	.address_list	= normal_i2c,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 module_i2c_driver(smsc47m192_driver);

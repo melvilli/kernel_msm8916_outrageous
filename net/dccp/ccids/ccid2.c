@@ -750,7 +750,10 @@ static void ccid2_hc_tx_exit(struct sock *sk)
 		kfree(hc->tx_seqbuf[i]);
 	hc->tx_seqbufc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dccp_ackvec_parsed_cleanup(&hc->tx_av_chunks);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

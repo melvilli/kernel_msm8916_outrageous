@@ -23,10 +23,13 @@
 #include "pas2.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef DEB
 #define DEB(WHAT)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PAS_PCM_INTRBITS (0x08)
@@ -160,8 +163,11 @@ static int pas_audio_ioctl(int dev, unsigned int cmd, void __user *arg)
 	int __user *p = arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_pcm.c: static int pas_audio_ioctl(unsigned int cmd = %X, unsigned int arg = %X)\n", cmd, arg));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (cmd) 
@@ -211,8 +217,11 @@ static int pas_audio_ioctl(int dev, unsigned int cmd, void __user *arg)
 static void pas_audio_reset(int dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_pcm.c: static void pas_audio_reset(void)\n"));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pas_write(pas_read(0xF8A) & ~0x40, 0xF8A);	/* Disable PCM */
@@ -224,8 +233,11 @@ static int pas_audio_open(int dev, int mode)
 	unsigned long   flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_pcm.c: static int pas_audio_open(int mode = %X)\n", mode));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&pas_lock, flags);
@@ -252,8 +264,11 @@ static void pas_audio_close(int dev)
 	unsigned long   flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_pcm.c: static void pas_audio_close(void)\n"));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&pas_lock, flags);
@@ -272,8 +287,11 @@ static void pas_audio_output_block(int dev, unsigned long buf, int count,
 	unsigned long   flags, cnt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_pcm.c: static void pas_audio_output_block(char *buf = %P, int count = %X)\n", buf, count));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cnt = count;
@@ -322,8 +340,11 @@ static void pas_audio_start_input(int dev, unsigned long buf, int count,
 	int             cnt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_pcm.c: static void pas_audio_start_input(char *buf = %P, int count = %X)\n", buf, count));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cnt = count;
@@ -410,8 +431,11 @@ static struct audio_driver pas_audio_driver =
 void __init pas_pcm_init(struct address_info *hw_config)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_pcm.c: long pas_pcm_init()\n"));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pcm_bitsok = 8;

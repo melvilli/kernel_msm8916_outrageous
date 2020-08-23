@@ -2,7 +2,11 @@
  * PCI interface driver for DW SPI Core
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2009, Intel Corporation.
+=======
+ * Copyright (c) 2009, 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2009, 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -16,10 +20,13 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -39,6 +46,7 @@ struct dw_spi_pci {
 	struct dw_spi	dws;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int spi_pci_probe(struct pci_dev *pdev,
 	const struct pci_device_id *ent)
@@ -61,6 +69,8 @@ static int spi_pci_probe(struct pci_dev *pdev,
 		goto err_disable;
 	}
 =======
+=======
+>>>>>>> v3.18
 struct spi_pci_desc {
 	int	(*setup)(struct dw_spi *);
 };
@@ -85,6 +95,9 @@ static int spi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 			GFP_KERNEL);
 	if (!dwpci)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dwpci->pdev = pdev;
@@ -92,6 +105,7 @@ static int spi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	/* Get basic io resource and map it */
 	dws->paddr = pci_resource_start(pdev, pci_bar);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dws->iolen = pci_resource_len(pdev, pci_bar);
 
@@ -108,6 +122,8 @@ static int spi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	dws->parent_dev = &pdev->dev;
 =======
+=======
+>>>>>>> v3.18
 
 	ret = pcim_iomap_regions(pdev, 1 << pci_bar, pci_name(pdev));
 	if (ret)
@@ -115,12 +131,16 @@ static int spi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	dws->regs = pcim_iomap_table(pdev)[pci_bar];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dws->bus_num = 0;
 	dws->num_cs = 4;
 	dws->irq = pdev->irq;
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Specific handling for Intel MID paltforms, like dma setup,
 	 * clock rate, FIFO depth.
@@ -149,6 +169,8 @@ err_disable:
 	pci_disable_device(pdev);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	 * Specific handling for paltforms, like dma setup,
 	 * clock rate, FIFO depth.
 	 */
@@ -169,6 +191,9 @@ err_disable:
 		pdev->vendor, pdev->device);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -176,6 +201,7 @@ static void spi_pci_remove(struct pci_dev *pdev)
 {
 	struct dw_spi_pci *dwpci = pci_get_drvdata(pdev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
 	dw_spi_remove_host(&dwpci->dws);
@@ -221,6 +247,8 @@ static DEFINE_PCI_DEVICE_TABLE(pci_ids) = {
 	/* Intel MID platform SPI controller 0 */
 	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, 0x0800) },
 =======
+=======
+>>>>>>> v3.18
 	dw_spi_remove_host(&dwpci->dws);
 }
 
@@ -247,6 +275,9 @@ static SIMPLE_DEV_PM_OPS(dw_spi_pm_ops, spi_suspend, spi_resume);
 static const struct pci_device_id pci_ids[] = {
 	/* Intel MID platform SPI controller 0 */
 	{ PCI_VDEVICE(INTEL, 0x0800), (kernel_ulong_t)&spi_pci_mid_desc},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
@@ -257,8 +288,14 @@ static struct pci_driver dw_spi_driver = {
 	.probe =	spi_pci_probe,
 	.remove =	spi_pci_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.suspend =	spi_suspend,
 	.resume	=	spi_resume,
+=======
+	.driver         = {
+		.pm     = &dw_spi_pm_ops,
+	},
+>>>>>>> v3.18
 =======
 	.driver         = {
 		.pm     = &dw_spi_pm_ops,

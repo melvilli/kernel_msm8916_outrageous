@@ -10,6 +10,7 @@
 
 #include <linux/clk-provider.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/io.h>
@@ -23,6 +24,8 @@
 /*
  * DOC: basic adjustable factor-based clock that cannot gate
 =======
+=======
+>>>>>>> v3.18
 #include <linux/delay.h>
 #include <linux/err.h>
 #include <linux/io.h>
@@ -35,6 +38,9 @@
 
 /*
  * DOC: basic adjustable factor-based clock
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Traits of this clock:
@@ -45,6 +51,7 @@
  * parent - fixed parent.  No clk_set_parent support
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct clk_factors {
 	struct clk_hw hw;
@@ -58,11 +65,16 @@ struct clk_factors {
 
 #define SETMASK(len, pos)		(((-1U) >> (31-len))  << (pos))
 =======
+=======
+>>>>>>> v3.18
 #define to_clk_factors(_hw) container_of(_hw, struct clk_factors, hw)
 
 #define FACTORS_MAX_PARENTS		5
 
 #define SETMASK(len, pos)		(((1U << (len)) - 1) << (pos))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CLRMASK(len, pos)		(~(SETMASK(len, pos)))
 #define FACTOR_GET(bit, len, reg)	(((reg) & SETMASK(len, bit)) >> (bit))
@@ -109,11 +121,14 @@ static long clk_factors_round_rate(struct clk_hw *hw, unsigned long rate,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int clk_factors_set_rate(struct clk_hw *hw, unsigned long rate,
 				unsigned long parent_rate)
 {
 	u8 n, k, m, p;
 =======
+=======
+>>>>>>> v3.18
 static long clk_factors_determine_rate(struct clk_hw *hw, unsigned long rate,
 				       unsigned long *best_parent_rate,
 				       struct clk **best_parent_p)
@@ -153,6 +168,9 @@ static int clk_factors_set_rate(struct clk_hw *hw, unsigned long rate,
 				unsigned long parent_rate)
 {
 	u8 n = 0, k = 0, m = 0, p = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 reg;
 	struct clk_factors *factors = to_clk_factors(hw);
@@ -187,6 +205,10 @@ static int clk_factors_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops clk_factors_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.determine_rate = clk_factors_determine_rate,
+>>>>>>> v3.18
 =======
 	.determine_rate = clk_factors_determine_rate,
 >>>>>>> v3.18
@@ -195,6 +217,7 @@ static const struct clk_ops clk_factors_ops = {
 	.set_rate = clk_factors_set_rate,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * clk_register_factors - register a factors clock with
@@ -246,6 +269,8 @@ struct clk *clk_register_factors(struct device *dev, const char *name,
 	if (IS_ERR(clk))
 		kfree(factors);
 =======
+=======
+>>>>>>> v3.18
 struct clk * __init sunxi_factors_register(struct device_node *node,
 					   const struct factors_data *data,
 					   spinlock_t *lock)
@@ -329,6 +354,9 @@ struct clk * __init sunxi_factors_register(struct device_node *node,
 		of_clk_add_provider(node, of_clk_src_simple_get, clk);
 		clk_register_clkdev(clk, clk_name, NULL);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return clk;

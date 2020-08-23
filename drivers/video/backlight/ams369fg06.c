@@ -326,17 +326,23 @@ static int ams369fg06_power_on(struct ams369fg06 *lcd)
 		dev_err(lcd->dev, "reset is NULL.\n");
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		pd->reset(lcd->ld);
 		msleep(pd->reset_delay);
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	pd->reset(lcd->ld);
 	msleep(pd->reset_delay);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = ams369fg06_ldi_init(lcd);
 	if (ret) {
@@ -419,11 +425,14 @@ static int ams369fg06_set_power(struct lcd_device *ld, int power)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ams369fg06_get_brightness(struct backlight_device *bd)
 {
 	return bd->props.brightness;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ams369fg06_set_brightness(struct backlight_device *bd)
@@ -455,7 +464,10 @@ static struct lcd_ops ams369fg06_lcd_ops = {
 
 static const struct backlight_ops ams369fg06_backlight_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_brightness = ams369fg06_get_brightness,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.update_status = ams369fg06_set_brightness,
@@ -486,7 +498,11 @@ static int ams369fg06_probe(struct spi_device *spi)
 	lcd->dev = &spi->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd->lcd_pd = spi->dev.platform_data;
+=======
+	lcd->lcd_pd = dev_get_platdata(&spi->dev);
+>>>>>>> v3.18
 =======
 	lcd->lcd_pd = dev_get_platdata(&spi->dev);
 >>>>>>> v3.18
@@ -496,8 +512,13 @@ static int ams369fg06_probe(struct spi_device *spi)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ld = lcd_device_register("ams369fg06", &spi->dev, lcd,
 		&ams369fg06_lcd_ops);
+=======
+	ld = devm_lcd_device_register(&spi->dev, "ams369fg06", &spi->dev, lcd,
+					&ams369fg06_lcd_ops);
+>>>>>>> v3.18
 =======
 	ld = devm_lcd_device_register(&spi->dev, "ams369fg06", &spi->dev, lcd,
 					&ams369fg06_lcd_ops);
@@ -512,6 +533,7 @@ static int ams369fg06_probe(struct spi_device *spi)
 	props.max_brightness = MAX_BRIGHTNESS;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bd = backlight_device_register("ams369fg06-bl", &spi->dev, lcd,
 		&ams369fg06_backlight_ops, &props);
 	if (IS_ERR(bd)) {
@@ -519,11 +541,16 @@ static int ams369fg06_probe(struct spi_device *spi)
 		goto out_lcd_unregister;
 	}
 =======
+=======
+>>>>>>> v3.18
 	bd = devm_backlight_device_register(&spi->dev, "ams369fg06-bl",
 					&spi->dev, lcd,
 					&ams369fg06_backlight_ops, &props);
 	if (IS_ERR(bd))
 		return PTR_ERR(bd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bd->props.brightness = DEFAULT_BRIGHTNESS;
@@ -548,10 +575,13 @@ static int ams369fg06_probe(struct spi_device *spi)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 out_lcd_unregister:
 	lcd_device_unregister(ld);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -562,9 +592,12 @@ static int ams369fg06_remove(struct spi_device *spi)
 
 	ams369fg06_power(lcd, FB_BLANK_POWERDOWN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backlight_device_unregister(lcd->bd);
 	lcd_device_unregister(lcd->ld);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

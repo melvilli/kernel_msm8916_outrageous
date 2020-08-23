@@ -11,13 +11,19 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
 =======
+=======
+>>>>>>> v3.18
 #include "skeleton.dtsi"
 #include <dt-bindings/pinctrl/at91.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/clock/at91.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 / {
@@ -57,7 +63,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	clocks {
 		slow_xtal: slow_xtal {
 			compatible = "fixed-clock";
@@ -72,6 +81,9 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ahb {
 		compatible = "simple-bus";
@@ -102,7 +114,10 @@
 				compatible = "atmel,at91rm9200-pmc";
 				reg = <0xfffffc00 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <1 IRQ_TYPE_LEVEL_HIGH 7>;
 				interrupt-controller;
 				#address-cells = <1>;
@@ -357,6 +372,9 @@
 						reg = <24>;
 					};
 				};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -364,7 +382,11 @@
 				compatible = "atmel,at91rm9200-st";
 				reg = <0xfffffd00 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <1 4 7>;
+=======
+				interrupts = <1 IRQ_TYPE_LEVEL_HIGH 7>;
+>>>>>>> v3.18
 =======
 				interrupts = <1 IRQ_TYPE_LEVEL_HIGH 7>;
 >>>>>>> v3.18
@@ -374,13 +396,19 @@
 				compatible = "atmel,at91rm9200-tcb";
 				reg = <0xfffa0000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <17 4 0 18 4 0 19 4 0>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <17 IRQ_TYPE_LEVEL_HIGH 0
 					      18 IRQ_TYPE_LEVEL_HIGH 0
 					      19 IRQ_TYPE_LEVEL_HIGH 0>;
 				clocks = <&tc0_clk>, <&tc1_clk>, <&tc2_clk>;
 				clock-names = "t0_clk", "t1_clk", "t2_clk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -388,13 +416,19 @@
 				compatible = "atmel,at91rm9200-tcb";
 				reg = <0xfffa4000 0x100>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <20 4 0 21 4 0 22 4 0>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <20 IRQ_TYPE_LEVEL_HIGH 0
 					      21 IRQ_TYPE_LEVEL_HIGH 0
 					      22 IRQ_TYPE_LEVEL_HIGH 0>;
 				clocks = <&tc3_clk>, <&tc4_clk>, <&tc5_clk>;
 				clock-names = "t0_clk", "t1_clk", "t2_clk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			};
 
@@ -402,14 +436,20 @@
 				compatible = "atmel,at91rm9200-i2c";
 				reg = <0xfffb8000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <12 4 6>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_twi>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <12 IRQ_TYPE_LEVEL_HIGH 6>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_twi>;
 				clocks = <&twi0_clk>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				#address-cells = <1>;
 				#size-cells = <0>;
@@ -420,16 +460,22 @@
 				compatible = "atmel,hsmci";
 				reg = <0xfffb4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <10 4 0>;
 				#address-cells = <1>;
 				#size-cells = <0>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <10 IRQ_TYPE_LEVEL_HIGH 0>;
 				clocks = <&mci0_clk>;
 				clock-names = "mci_clk";
 				#address-cells = <1>;
 				#size-cells = <0>;
 				pinctrl-names = "default";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -438,15 +484,21 @@
 				compatible = "atmel,at91rm9200-ssc";
 				reg = <0xfffd0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <14 4 5>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_ssc0_tx &pinctrl_ssc0_rx>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <14 IRQ_TYPE_LEVEL_HIGH 5>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_ssc0_tx &pinctrl_ssc0_rx>;
 				clocks = <&ssc0_clk>;
 				clock-names = "pclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disable";
 			};
@@ -455,15 +507,21 @@
 				compatible = "atmel,at91rm9200-ssc";
 				reg = <0xfffd4000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <15 4 5>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_ssc1_tx &pinctrl_ssc1_rx>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <15 IRQ_TYPE_LEVEL_HIGH 5>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_ssc1_tx &pinctrl_ssc1_rx>;
 				clocks = <&ssc1_clk>;
 				clock-names = "pclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disable";
 			};
@@ -472,15 +530,21 @@
 				compatible = "atmel,at91rm9200-ssc";
 				reg = <0xfffd8000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <16 4 5>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_ssc2_tx &pinctrl_ssc2_rx>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <16 IRQ_TYPE_LEVEL_HIGH 5>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_ssc2_tx &pinctrl_ssc2_rx>;
 				clocks = <&ssc2_clk>;
 				clock-names = "pclk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disable";
 			};
@@ -489,17 +553,23 @@
 				compatible = "cdns,at91rm9200-emac", "cdns,emac";
 				reg = <0xfffbc000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <24 4 3>;
 				phy-mode = "rmii";
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_macb_rmii>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <24 IRQ_TYPE_LEVEL_HIGH 3>;
 				phy-mode = "rmii";
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_macb_rmii>;
 				clocks = <&macb0_clk>;
 				clock-names = "ether_clk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -523,8 +593,13 @@
 					pinctrl_dbgu: dbgu-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 30 0x1 0x0	/* PA30 periph A */
 							 0 31 0x1 0x1>;	/* PA31 periph with pullup */
+=======
+							<AT91_PIOA 30 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA30 periph A */
+							 AT91_PIOA 31 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;	/* PA31 periph with pullup */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 30 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA30 periph A */
 							 AT91_PIOA 31 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;	/* PA31 periph with pullup */
@@ -535,6 +610,7 @@
 				uart0 {
 					pinctrl_uart0: uart0-0 {
 						atmel,pins =
+<<<<<<< HEAD
 <<<<<<< HEAD
 							<0 17 0x1 0x0	/* PA17 periph A */
 							 0 18 0x1 0x0>;	/* PA18 periph A */
@@ -549,6 +625,8 @@
 						atmel,pins =
 							<0 21 0x1 0x0>;	/* PA21 periph A */
 =======
+=======
+>>>>>>> v3.18
 							<AT91_PIOA 17 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA17 periph A */
 							 AT91_PIOA 18 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PA18 periph A */
 					};
@@ -561,6 +639,9 @@
 					pinctrl_uart0_rts: uart0_rts-0 {
 						atmel,pins =
 							<AT91_PIOA 21 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PA21 periph A */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					};
 				};
@@ -569,8 +650,13 @@
 					pinctrl_uart1: uart1-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 20 0x1 0x1	/* PB20 periph A with pullup */
 							 1 21 0x1 0x0>;	/* PB21 periph A */
+=======
+							<AT91_PIOB 20 AT91_PERIPH_A AT91_PINCTRL_PULL_UP	/* PB20 periph A with pullup */
+							 AT91_PIOB 21 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB21 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 20 AT91_PERIPH_A AT91_PINCTRL_PULL_UP	/* PB20 periph A with pullup */
 							 AT91_PIOB 21 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB21 periph A */
@@ -580,7 +666,11 @@
 					pinctrl_uart1_rts: uart1_rts-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 24 0x1 0x0>;	/* PB24 periph A */
+=======
+							<AT91_PIOB 24 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB24 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 24 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB24 periph A */
 >>>>>>> v3.18
@@ -589,7 +679,11 @@
 					pinctrl_uart1_cts: uart1_cts-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 26 0x1 0x0>;	/* PB26 periph A */
+=======
+							<AT91_PIOB 26 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB26 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 26 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB26 periph A */
 >>>>>>> v3.18
@@ -598,8 +692,13 @@
 					pinctrl_uart1_dtr_dsr: uart1_dtr_dsr-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 19 0x1 0x0	/* PB19 periph A */
 							 1 25 0x1 0x0>;	/* PB25 periph A */
+=======
+							<AT91_PIOB 19 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB19 periph A */
+							 AT91_PIOB 25 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB25 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 19 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB19 periph A */
 							 AT91_PIOB 25 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB25 periph A */
@@ -609,7 +708,11 @@
 					pinctrl_uart1_dcd: uart1_dcd-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 23 0x1 0x0>;	/* PB23 periph A */
+=======
+							<AT91_PIOB 23 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB23 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 23 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB23 periph A */
 >>>>>>> v3.18
@@ -618,7 +721,11 @@
 					pinctrl_uart1_ri: uart1_ri-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 18 0x1 0x0>;	/* PB18 periph A */
+=======
+							<AT91_PIOB 18 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB18 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 18 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB18 periph A */
 >>>>>>> v3.18
@@ -629,8 +736,13 @@
 					pinctrl_uart2: uart2-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 22 0x1 0x0	/* PA22 periph A */
 							 0 23 0x1 0x1>;	/* PA23 periph A with pullup */
+=======
+							<AT91_PIOA 22 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA22 periph A */
+							 AT91_PIOA 23 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;	/* PA23 periph A with pullup */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 22 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA22 periph A */
 							 AT91_PIOA 23 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;	/* PA23 periph A with pullup */
@@ -640,7 +752,11 @@
 					pinctrl_uart2_rts: uart2_rts-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 30 0x2 0x0>;	/* PA30 periph B */
+=======
+							<AT91_PIOA 30 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PA30 periph B */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 30 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PA30 periph B */
 >>>>>>> v3.18
@@ -649,7 +765,11 @@
 					pinctrl_uart2_cts: uart2_cts-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 31 0x2 0x0>;	/* PA31 periph B */
+=======
+							<AT91_PIOA 31 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PA31 periph B */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 31 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PA31 periph B */
 >>>>>>> v3.18
@@ -660,8 +780,13 @@
 					pinctrl_uart3: uart3-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 5 0x2 0x1	/* PA5 periph B with pullup */
 							 0 6 0x2 0x0>;	/* PA6 periph B */
+=======
+							<AT91_PIOA 5 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PA5 periph B with pullup */
+							 AT91_PIOA 6 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PA6 periph B */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 5 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PA5 periph B with pullup */
 							 AT91_PIOA 6 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PA6 periph B */
@@ -671,7 +796,11 @@
 					pinctrl_uart3_rts: uart3_rts-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 0 0x2 0x0>;	/* PB0 periph B */
+=======
+							<AT91_PIOB 0 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PB0 periph B */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 0 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PB0 periph B */
 >>>>>>> v3.18
@@ -680,7 +809,11 @@
 					pinctrl_uart3_cts: uart3_cts-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 1 0x2 0x0>;	/* PB1 periph B */
+=======
+							<AT91_PIOB 1 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PB1 periph B */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 1 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PB1 periph B */
 >>>>>>> v3.18
@@ -691,8 +824,13 @@
 					pinctrl_nand: nand-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<2 2 0x0 0x1	/* PC2 gpio RDY pin pull_up */
 							 1 1 0x0 0x1>;	/* PB1 gpio CD pin pull_up */
+=======
+							<AT91_PIOC 2 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP	/* PC2 gpio RDY pin pull_up */
+							 AT91_PIOB 1 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;	/* PB1 gpio CD pin pull_up */
+>>>>>>> v3.18
 =======
 							<AT91_PIOC 2 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP	/* PC2 gpio RDY pin pull_up */
 							 AT91_PIOB 1 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;	/* PB1 gpio CD pin pull_up */
@@ -703,6 +841,7 @@
 				macb {
 					pinctrl_macb_rmii: macb_rmii-0 {
 						atmel,pins =
+<<<<<<< HEAD
 <<<<<<< HEAD
 							<0 7 0x1 0x0	/* PA7 periph A */
 							 0 8 0x1 0x0	/* PA8 periph A */
@@ -715,6 +854,8 @@
 							 0 15 0x1 0x0	/* PA15 periph A */
 							 0 16 0x1 0x0>;	/* PA16 periph A */
 =======
+=======
+>>>>>>> v3.18
 							<AT91_PIOA 7 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA7 periph A */
 							 AT91_PIOA 8 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA8 periph A */
 							 AT91_PIOA 9 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA9 periph A */
@@ -725,11 +866,15 @@
 							 AT91_PIOA 14 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA14 periph A */
 							 AT91_PIOA 15 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA15 periph A */
 							 AT91_PIOA 16 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PA16 periph A */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					};
 
 					pinctrl_macb_rmii_mii: macb_rmii_mii-0 {
 						atmel,pins =
+<<<<<<< HEAD
 <<<<<<< HEAD
 							<1 12 0x2 0x0	/* PB12 periph B */
 							 1 13 0x2 0x0	/* PB13 periph B */
@@ -740,6 +885,8 @@
 							 1 18 0x2 0x0	/* PB18 periph B */
 							 1 19 0x2 0x0>;	/* PB19 periph B */
 =======
+=======
+>>>>>>> v3.18
 							<AT91_PIOB 12 AT91_PERIPH_B AT91_PINCTRL_NONE	/* PB12 periph B */
 							 AT91_PIOB 13 AT91_PERIPH_B AT91_PINCTRL_NONE	/* PB13 periph B */
 							 AT91_PIOB 14 AT91_PERIPH_B AT91_PINCTRL_NONE	/* PB14 periph B */
@@ -748,6 +895,9 @@
 							 AT91_PIOB 17 AT91_PERIPH_B AT91_PINCTRL_NONE	/* PB17 periph B */
 							 AT91_PIOB 18 AT91_PERIPH_B AT91_PINCTRL_NONE	/* PB18 periph B */
 							 AT91_PIOB 19 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PB19 periph B */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					};
 				};
@@ -756,7 +906,11 @@
 					pinctrl_mmc0_clk: mmc0_clk-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 27 0x1 0x0>;	/* PA27 periph A */
+=======
+							<AT91_PIOA 27 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PA27 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 27 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PA27 periph A */
 >>>>>>> v3.18
@@ -765,8 +919,13 @@
 					pinctrl_mmc0_slot0_cmd_dat0: mmc0_slot0_cmd_dat0-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 28 0x1 0x1	/* PA28 periph A with pullup */
 							 0 29 0x1 0x1>;	/* PA29 periph A with pullup */
+=======
+							<AT91_PIOA 28 AT91_PERIPH_A AT91_PINCTRL_PULL_UP	/* PA28 periph A with pullup */
+							 AT91_PIOA 29 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;	/* PA29 periph A with pullup */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 28 AT91_PERIPH_A AT91_PINCTRL_PULL_UP	/* PA28 periph A with pullup */
 							 AT91_PIOA 29 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;	/* PA29 periph A with pullup */
@@ -776,9 +935,15 @@
 					pinctrl_mmc0_slot0_dat1_3: mmc0_slot0_dat1_3-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 3 0x2 0x1	/* PB3 periph B with pullup */
 							 1 4 0x2 0x1	/* PB4 periph B with pullup */
 							 1 5 0x2 0x1>;	/* PB5 periph B with pullup */
+=======
+							<AT91_PIOB 3 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PB3 periph B with pullup */
+							 AT91_PIOB 4 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PB4 periph B with pullup */
+							 AT91_PIOB 5 AT91_PERIPH_B AT91_PINCTRL_PULL_UP>;	/* PB5 periph B with pullup */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 3 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PB3 periph B with pullup */
 							 AT91_PIOB 4 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PB4 periph B with pullup */
@@ -789,8 +954,13 @@
 					pinctrl_mmc0_slot1_cmd_dat0: mmc0_slot1_cmd_dat0-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 8 0x2 0x1	/* PA8 periph B with pullup */
 							 0 9 0x2 0x1>;	/* PA9 periph B with pullup */
+=======
+							<AT91_PIOA 8 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PA8 periph B with pullup */
+							 AT91_PIOA 9 AT91_PERIPH_B AT91_PINCTRL_PULL_UP>;	/* PA9 periph B with pullup */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 8 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PA8 periph B with pullup */
 							 AT91_PIOA 9 AT91_PERIPH_B AT91_PINCTRL_PULL_UP>;	/* PA9 periph B with pullup */
@@ -800,9 +970,15 @@
 					pinctrl_mmc0_slot1_dat1_3: mmc0_slot1_dat1_3-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 10 0x2 0x1	/* PA10 periph B with pullup */
 							 0 11 0x2 0x1	/* PA11 periph B with pullup */
 							 0 12 0x2 0x1>;	/* PA12 periph B with pullup */
+=======
+							<AT91_PIOA 10 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PA10 periph B with pullup */
+							 AT91_PIOA 11 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PA11 periph B with pullup */
+							 AT91_PIOA 12 AT91_PERIPH_B AT91_PINCTRL_PULL_UP>;	/* PA12 periph B with pullup */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 10 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PA10 periph B with pullup */
 							 AT91_PIOA 11 AT91_PERIPH_B AT91_PINCTRL_PULL_UP	/* PA11 periph B with pullup */
@@ -815,9 +991,15 @@
 					pinctrl_ssc0_tx: ssc0_tx-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 0 0x1 0x0	/* PB0 periph A */
 							 1 1 0x1 0x0	/* PB1 periph A */
 							 1 2 0x1 0x0>;	/* PB2 periph A */
+=======
+							<AT91_PIOB 0 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB0 periph A */
+							 AT91_PIOB 1 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB1 periph A */
+							 AT91_PIOB 2 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB2 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 0 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB0 periph A */
 							 AT91_PIOB 1 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB1 periph A */
@@ -828,9 +1010,15 @@
 					pinctrl_ssc0_rx: ssc0_rx-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 3 0x1 0x0	/* PB3 periph A */
 							 1 4 0x1 0x0	/* PB4 periph A */
 							 1 5 0x1 0x0>;	/* PB5 periph A */
+=======
+							<AT91_PIOB 3 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB3 periph A */
+							 AT91_PIOB 4 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB4 periph A */
+							 AT91_PIOB 5 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB5 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 3 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB3 periph A */
 							 AT91_PIOB 4 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB4 periph A */
@@ -843,9 +1031,15 @@
 					pinctrl_ssc1_tx: ssc1_tx-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 6 0x1 0x0	/* PB6 periph A */
 							 1 7 0x1 0x0	/* PB7 periph A */
 							 1 8 0x1 0x0>;	/* PB8 periph A */
+=======
+							<AT91_PIOB 6 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB6 periph A */
+							 AT91_PIOB 7 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB7 periph A */
+							 AT91_PIOB 8 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB8 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 6 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB6 periph A */
 							 AT91_PIOB 7 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB7 periph A */
@@ -856,9 +1050,15 @@
 					pinctrl_ssc1_rx: ssc1_rx-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 9 0x1 0x0	/* PB9 periph A */
 							 1 10 0x1 0x0	/* PB10 periph A */
 							 1 11 0x1 0x0>;	/* PB11 periph A */
+=======
+							<AT91_PIOB 9 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB9 periph A */
+							 AT91_PIOB 10 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB10 periph A */
+							 AT91_PIOB 11 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB11 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 9 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB9 periph A */
 							 AT91_PIOB 10 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB10 periph A */
@@ -871,9 +1071,15 @@
 					pinctrl_ssc2_tx: ssc2_tx-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 12 0x1 0x0	/* PB12 periph A */
 							 1 13 0x1 0x0	/* PB13 periph A */
 							 1 14 0x1 0x0>;	/* PB14 periph A */
+=======
+							<AT91_PIOB 12 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB12 periph A */
+							 AT91_PIOB 13 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB13 periph A */
+							 AT91_PIOB 14 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB14 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 12 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB12 periph A */
 							 AT91_PIOB 13 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB13 periph A */
@@ -884,9 +1090,15 @@
 					pinctrl_ssc2_rx: ssc2_rx-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<1 15 0x1 0x0	/* PB15 periph A */
 							 1 16 0x1 0x0	/* PB16 periph A */
 							 1 17 0x1 0x0>;	/* PB17 periph A */
+=======
+							<AT91_PIOB 15 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB15 periph A */
+							 AT91_PIOB 16 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB16 periph A */
+							 AT91_PIOB 17 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PB17 periph A */
+>>>>>>> v3.18
 =======
 							<AT91_PIOB 15 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB15 periph A */
 							 AT91_PIOB 16 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PB16 periph A */
@@ -899,8 +1111,13 @@
 					pinctrl_twi: twi-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 25 0x1 0x2	/* PA25 periph A with multi drive */
 							 0 26 0x1 0x2>;	/* PA26 periph A with multi drive */
+=======
+							<AT91_PIOA 25 AT91_PERIPH_A AT91_PINCTRL_MULTI_DRIVE	/* PA25 periph A with multi drive */
+							 AT91_PIOA 26 AT91_PERIPH_A AT91_PINCTRL_MULTI_DRIVE>;	/* PA26 periph A with multi drive */
+>>>>>>> v3.18
 =======
 							<AT91_PIOA 25 AT91_PERIPH_A AT91_PINCTRL_MULTI_DRIVE	/* PA25 periph A with multi drive */
 							 AT91_PIOA 26 AT91_PERIPH_A AT91_PINCTRL_MULTI_DRIVE>;	/* PA26 periph A with multi drive */
@@ -910,9 +1127,12 @@
 					pinctrl_twi_gpio: twi_gpio-0 {
 						atmel,pins =
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<0 25 0x0 0x2	/* PA25 GPIO with multi drive */
 							 0 26 0x0 0x2>;	/* PA26 GPIO with multi drive */
 =======
+=======
+>>>>>>> v3.18
 							<AT91_PIOA 25 AT91_PERIPH_GPIO AT91_PINCTRL_MULTI_DRIVE	/* PA25 GPIO with multi drive */
 							 AT91_PIOA 26 AT91_PERIPH_GPIO AT91_PINCTRL_MULTI_DRIVE>;	/* PA26 GPIO with multi drive */
 					};
@@ -1000,6 +1220,9 @@
 							<AT91_PIOA 0 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA0 periph A SPI0_MISO pin */
 							 AT91_PIOA 1 AT91_PERIPH_A AT91_PINCTRL_NONE	/* PA1 periph A SPI0_MOSI pin */
 							 AT91_PIOA 2 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PA2 periph A SPI0_SPCK pin */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					};
 				};
@@ -1008,7 +1231,11 @@
 					compatible = "atmel,at91rm9200-gpio";
 					reg = <0xfffff400 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <2 4 1>;
+=======
+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
+>>>>>>> v3.18
 =======
 					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
 >>>>>>> v3.18
@@ -1017,6 +1244,10 @@
 					interrupt-controller;
 					#interrupt-cells = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					clocks = <&pioA_clk>;
+>>>>>>> v3.18
 =======
 					clocks = <&pioA_clk>;
 >>>>>>> v3.18
@@ -1026,7 +1257,11 @@
 					compatible = "atmel,at91rm9200-gpio";
 					reg = <0xfffff600 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <3 4 1>;
+=======
+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
+>>>>>>> v3.18
 =======
 					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
 >>>>>>> v3.18
@@ -1035,6 +1270,10 @@
 					interrupt-controller;
 					#interrupt-cells = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					clocks = <&pioB_clk>;
+>>>>>>> v3.18
 =======
 					clocks = <&pioB_clk>;
 >>>>>>> v3.18
@@ -1044,7 +1283,11 @@
 					compatible = "atmel,at91rm9200-gpio";
 					reg = <0xfffff800 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <4 4 1>;
+=======
+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
+>>>>>>> v3.18
 =======
 					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
 >>>>>>> v3.18
@@ -1053,6 +1296,10 @@
 					interrupt-controller;
 					#interrupt-cells = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					clocks = <&pioC_clk>;
+>>>>>>> v3.18
 =======
 					clocks = <&pioC_clk>;
 >>>>>>> v3.18
@@ -1062,7 +1309,11 @@
 					compatible = "atmel,at91rm9200-gpio";
 					reg = <0xfffffa00 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					interrupts = <5 4 1>;
+=======
+					interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
+>>>>>>> v3.18
 =======
 					interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
 >>>>>>> v3.18
@@ -1071,6 +1322,10 @@
 					interrupt-controller;
 					#interrupt-cells = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					clocks = <&pioD_clk>;
+>>>>>>> v3.18
 =======
 					clocks = <&pioD_clk>;
 >>>>>>> v3.18
@@ -1081,15 +1336,21 @@
 				compatible = "atmel,at91rm9200-usart";
 				reg = <0xfffff200 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <1 4 7>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_dbgu>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <1 IRQ_TYPE_LEVEL_HIGH 7>;
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_dbgu>;
 				clocks = <&mck>;
 				clock-names = "usart";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -1098,7 +1359,11 @@
 				compatible = "atmel,at91rm9200-usart";
 				reg = <0xfffc0000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <6 4 5>;
+=======
+				interrupts = <6 IRQ_TYPE_LEVEL_HIGH 5>;
+>>>>>>> v3.18
 =======
 				interrupts = <6 IRQ_TYPE_LEVEL_HIGH 5>;
 >>>>>>> v3.18
@@ -1107,6 +1372,11 @@
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_uart0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&usart0_clk>;
+				clock-names = "usart";
+>>>>>>> v3.18
 =======
 				clocks = <&usart0_clk>;
 				clock-names = "usart";
@@ -1118,7 +1388,11 @@
 				compatible = "atmel,at91rm9200-usart";
 				reg = <0xfffc4000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <7 4 5>;
+=======
+				interrupts = <7 IRQ_TYPE_LEVEL_HIGH 5>;
+>>>>>>> v3.18
 =======
 				interrupts = <7 IRQ_TYPE_LEVEL_HIGH 5>;
 >>>>>>> v3.18
@@ -1127,6 +1401,11 @@
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_uart1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&usart1_clk>;
+				clock-names = "usart";
+>>>>>>> v3.18
 =======
 				clocks = <&usart1_clk>;
 				clock-names = "usart";
@@ -1138,7 +1417,11 @@
 				compatible = "atmel,at91rm9200-usart";
 				reg = <0xfffc8000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <8 4 5>;
+=======
+				interrupts = <8 IRQ_TYPE_LEVEL_HIGH 5>;
+>>>>>>> v3.18
 =======
 				interrupts = <8 IRQ_TYPE_LEVEL_HIGH 5>;
 >>>>>>> v3.18
@@ -1147,6 +1430,11 @@
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_uart2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&usart2_clk>;
+				clock-names = "usart";
+>>>>>>> v3.18
 =======
 				clocks = <&usart2_clk>;
 				clock-names = "usart";
@@ -1158,7 +1446,11 @@
 				compatible = "atmel,at91rm9200-usart";
 				reg = <0xfffcc000 0x200>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <23 4 5>;
+=======
+				interrupts = <23 IRQ_TYPE_LEVEL_HIGH 5>;
+>>>>>>> v3.18
 =======
 				interrupts = <23 IRQ_TYPE_LEVEL_HIGH 5>;
 >>>>>>> v3.18
@@ -1167,6 +1459,11 @@
 				pinctrl-names = "default";
 				pinctrl-0 = <&pinctrl_uart3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				clocks = <&usart3_clk>;
+				clock-names = "usart";
+>>>>>>> v3.18
 =======
 				clocks = <&usart3_clk>;
 				clock-names = "usart";
@@ -1178,8 +1475,11 @@
 				compatible = "atmel,at91rm9200-udc";
 				reg = <0xfffb0000 0x4000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interrupts = <11 4 2>;
 =======
+=======
+>>>>>>> v3.18
 				interrupts = <11 IRQ_TYPE_LEVEL_HIGH 2>;
 				clocks = <&udc_clk>, <&udpck>;
 				clock-names = "pclk", "hclk";
@@ -1196,6 +1496,9 @@
 				pinctrl-0 = <&pinctrl_spi0>;
 				clocks = <&spi0_clk>;
 				clock-names = "spi_clk";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				status = "disabled";
 			};
@@ -1212,9 +1515,15 @@
 			pinctrl-0 = <&pinctrl_nand>;
 			nand-ecc-mode = "soft";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioC 2 0
 				 0
 				 &pioB 1 0
+=======
+			gpios = <&pioC 2 GPIO_ACTIVE_HIGH
+				 0
+				 &pioB 1 GPIO_ACTIVE_HIGH
+>>>>>>> v3.18
 =======
 			gpios = <&pioC 2 GPIO_ACTIVE_HIGH
 				 0
@@ -1228,7 +1537,13 @@
 			compatible = "atmel,at91rm9200-ohci", "usb-ohci";
 			reg = <0x00300000 0x100000>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			interrupts = <23 4 2>;
+=======
+			interrupts = <23 IRQ_TYPE_LEVEL_HIGH 2>;
+			clocks = <&usb>, <&ohci_clk>, <&ohci_clk>, <&uhpck>;
+			clock-names = "usb_clk", "ohci_clk", "hclk", "uhpck";
+>>>>>>> v3.18
 =======
 			interrupts = <23 IRQ_TYPE_LEVEL_HIGH 2>;
 			clocks = <&usb>, <&ohci_clk>, <&ohci_clk>, <&uhpck>;
@@ -1241,8 +1556,13 @@
 	i2c@0 {
 		compatible = "i2c-gpio";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpios = <&pioA 25 0 /* sda */
 			 &pioA 26 0 /* scl */
+=======
+		gpios = <&pioA 25 GPIO_ACTIVE_HIGH /* sda */
+			 &pioA 26 GPIO_ACTIVE_HIGH /* scl */
+>>>>>>> v3.18
 =======
 		gpios = <&pioA 25 GPIO_ACTIVE_HIGH /* sda */
 			 &pioA 26 GPIO_ACTIVE_HIGH /* scl */

@@ -14,6 +14,7 @@
  *
  * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
 <<<<<<< HEAD
+<<<<<<< HEAD
  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY 
  * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
  * THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
@@ -23,6 +24,8 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
 =======
+=======
+>>>>>>> v3.18
  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
  * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
  * THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
@@ -31,6 +34,9 @@
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
@@ -60,15 +66,21 @@
 #define dbg(format, arg...)					\
 	do {							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(debug)					\
 			printk (KERN_DEBUG "%s: " format "\n",	\
 				MY_NAME , ## arg); 		\
 	} while(0)
 =======
+=======
+>>>>>>> v3.18
 		if (debug)					\
 			printk (KERN_DEBUG "%s: " format "\n",	\
 				MY_NAME , ## arg);		\
 	} while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define err(format, arg...) printk(KERN_ERR "%s: " format "\n", MY_NAME , ## arg)
 #define info(format, arg...) printk(KERN_INFO "%s: " format "\n", MY_NAME , ## arg)
@@ -101,7 +113,11 @@ static int zt5550_hc_config(struct pci_dev *pdev)
 
 	/* Since we know that no boards exist with two HC chips, treat it as an error */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(hc_dev) {
+=======
+	if (hc_dev) {
+>>>>>>> v3.18
 =======
 	if (hc_dev) {
 >>>>>>> v3.18
@@ -111,7 +127,11 @@ static int zt5550_hc_config(struct pci_dev *pdev)
 
 	ret = pci_enable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(ret) {
+=======
+	if (ret) {
+>>>>>>> v3.18
 =======
 	if (ret) {
 >>>>>>> v3.18
@@ -125,7 +145,11 @@ static int zt5550_hc_config(struct pci_dev *pdev)
 	dbg("pci resource len %llx", (unsigned long long)pci_resource_len(hc_dev, 1));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!request_mem_region(pci_resource_start(hc_dev, 1),
+=======
+	if (!request_mem_region(pci_resource_start(hc_dev, 1),
+>>>>>>> v3.18
 =======
 	if (!request_mem_region(pci_resource_start(hc_dev, 1),
 >>>>>>> v3.18
@@ -138,7 +162,11 @@ static int zt5550_hc_config(struct pci_dev *pdev)
 	hc_registers =
 	    ioremap(pci_resource_start(hc_dev, 1), pci_resource_len(hc_dev, 1));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!hc_registers) {
+=======
+	if (!hc_registers) {
+>>>>>>> v3.18
 =======
 	if (!hc_registers) {
 >>>>>>> v3.18
@@ -181,7 +209,11 @@ exit_disable_device:
 static int zt5550_hc_cleanup(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!hc_dev)
+=======
+	if (!hc_dev)
+>>>>>>> v3.18
 =======
 	if (!hc_dev)
 >>>>>>> v3.18
@@ -209,9 +241,15 @@ static int zt5550_hc_check_irq(void *dev_id)
 
 	ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(dev_id == zt5550_hpc.dev_id) {
 		reg = readb(csr_int_status);
 		if(reg)
+=======
+	if (dev_id == zt5550_hpc.dev_id) {
+		reg = readb(csr_int_status);
+		if (reg)
+>>>>>>> v3.18
 =======
 	if (dev_id == zt5550_hpc.dev_id) {
 		reg = readb(csr_int_status);
@@ -227,9 +265,15 @@ static int zt5550_hc_enable_irq(void)
 	u8 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(hc_dev == NULL) {
 		return -ENODEV;
 	}
+=======
+	if (hc_dev == NULL)
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (hc_dev == NULL)
 		return -ENODEV;
@@ -246,9 +290,14 @@ static int zt5550_hc_disable_irq(void)
 	u8 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(hc_dev == NULL) {
 		return -ENODEV;
 	}
+=======
+	if (hc_dev == NULL)
+		return -ENODEV;
+>>>>>>> v3.18
 =======
 	if (hc_dev == NULL)
 		return -ENODEV;
@@ -266,9 +315,15 @@ static int zt5550_hc_init_one (struct pci_dev *pdev, const struct pci_device_id 
 
 	status = zt5550_hc_config(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(status != 0) {
 		return status;
 	}
+=======
+	if (status != 0)
+		return status;
+
+>>>>>>> v3.18
 =======
 	if (status != 0)
 		return status;
@@ -280,7 +335,11 @@ static int zt5550_hc_init_one (struct pci_dev *pdev, const struct pci_device_id 
 	zt5550_hpc_ops.query_enum = zt5550_hc_query_enum;
 	zt5550_hpc.ops = &zt5550_hpc_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!poll) {
+=======
+	if (!poll) {
+>>>>>>> v3.18
 =======
 	if (!poll) {
 >>>>>>> v3.18
@@ -297,7 +356,11 @@ static int zt5550_hc_init_one (struct pci_dev *pdev, const struct pci_device_id 
 
 	status = cpci_hp_register_controller(&zt5550_hpc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(status != 0) {
+=======
+	if (status != 0) {
+>>>>>>> v3.18
 =======
 	if (status != 0) {
 >>>>>>> v3.18
@@ -308,8 +371,14 @@ static int zt5550_hc_init_one (struct pci_dev *pdev, const struct pci_device_id 
 
 	/* Look for first device matching cPCI bus's bridge vendor and device IDs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!(bus0_dev = pci_get_device(PCI_VENDOR_ID_DEC,
 					 PCI_DEVICE_ID_DEC_21154, NULL))) {
+=======
+	bus0_dev = pci_get_device(PCI_VENDOR_ID_DEC,
+				  PCI_DEVICE_ID_DEC_21154, NULL);
+	if (!bus0_dev) {
+>>>>>>> v3.18
 =======
 	bus0_dev = pci_get_device(PCI_VENDOR_ID_DEC,
 				  PCI_DEVICE_ID_DEC_21154, NULL);
@@ -323,7 +392,11 @@ static int zt5550_hc_init_one (struct pci_dev *pdev, const struct pci_device_id 
 
 	status = cpci_hp_register_bus(bus0, 0x0a, 0x0f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(status != 0) {
+=======
+	if (status != 0) {
+>>>>>>> v3.18
 =======
 	if (status != 0) {
 >>>>>>> v3.18
@@ -334,7 +407,11 @@ static int zt5550_hc_init_one (struct pci_dev *pdev, const struct pci_device_id 
 
 	status = cpci_hp_start();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(status != 0) {
+=======
+	if (status != 0) {
+>>>>>>> v3.18
 =======
 	if (status != 0) {
 >>>>>>> v3.18
@@ -369,7 +446,11 @@ static struct pci_device_id zt5550_hc_pci_tbl[] = {
 };
 MODULE_DEVICE_TABLE(pci, zt5550_hc_pci_tbl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -383,7 +464,11 @@ static struct pci_driver zt5550_hc_driver = {
 static int __init zt5550_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource* r;
+=======
+	struct resource *r;
+>>>>>>> v3.18
 =======
 	struct resource *r;
 >>>>>>> v3.18
@@ -392,17 +477,23 @@ static int __init zt5550_init(void)
 	info(DRIVER_DESC " version: " DRIVER_VERSION);
 	r = request_region(ENUM_PORT, 1, "#ENUM hotswap signal register");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(!r)
 		return -EBUSY;
 
 	rc = pci_register_driver(&zt5550_hc_driver);
 	if(rc < 0)
 =======
+=======
+>>>>>>> v3.18
 	if (!r)
 		return -EBUSY;
 
 	rc = pci_register_driver(&zt5550_hc_driver);
 	if (rc < 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		release_region(ENUM_PORT, 1);
 	return rc;

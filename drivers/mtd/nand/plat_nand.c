@@ -10,6 +10,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -35,7 +39,11 @@ static const char *part_probe_types[] = { "cmdlinepart", NULL };
 static int plat_nand_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_nand_data *pdata = pdev->dev.platform_data;
+=======
+	struct platform_nand_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct platform_nand_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -55,6 +63,7 @@ static int plat_nand_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
@@ -81,6 +90,8 @@ static int plat_nand_probe(struct platform_device *pdev)
 		goto out_release_io;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* Allocate memory for the device structure (and zero it) */
 	data = devm_kzalloc(&pdev->dev, sizeof(struct plat_nand_data),
 			    GFP_KERNEL);
@@ -91,6 +102,9 @@ static int plat_nand_probe(struct platform_device *pdev)
 	data->io_base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(data->io_base))
 		return PTR_ERR(data->io_base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data->chip.priv = &data;
@@ -144,12 +158,15 @@ out:
 	if (pdata->ctrl.remove)
 		pdata->ctrl.remove(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	iounmap(data->io_base);
 out_release_io:
 	release_mem_region(res->start, resource_size(res));
 out_free:
 	kfree(data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;
@@ -162,10 +179,14 @@ static int plat_nand_remove(struct platform_device *pdev)
 {
 	struct plat_nand_data *data = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct platform_nand_data *pdata = pdev->dev.platform_data;
 	struct resource *res;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+=======
+	struct platform_nand_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct platform_nand_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -174,9 +195,12 @@ static int plat_nand_remove(struct platform_device *pdev)
 	if (pdata->ctrl.remove)
 		pdata->ctrl.remove(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(data->io_base);
 	release_mem_region(res->start, resource_size(res));
 	kfree(data);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

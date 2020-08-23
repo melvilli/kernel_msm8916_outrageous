@@ -162,7 +162,11 @@ static struct snd_soc_dai_link mx27vis_aic32x4_dai = {
 	.stream_name	= "TLV320AIC32X4",
 	.codec_dai_name	= "tlv320aic32x4-hifi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.platform_name	= "imx-pcm-audio.0",
+=======
+	.platform_name	= "imx-ssi.0",
+>>>>>>> v3.18
 =======
 	.platform_name	= "imx-ssi.0",
 >>>>>>> v3.18

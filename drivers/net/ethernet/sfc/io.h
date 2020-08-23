@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2013 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -27,7 +33,11 @@
  **************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Notes on locking strategy:
+=======
+ * Notes on locking strategy for the Falcon architecture:
+>>>>>>> v3.18
 =======
  * Notes on locking strategy for the Falcon architecture:
 >>>>>>> v3.18
@@ -65,13 +75,19 @@
  *   register, the write is discarded and the collector maintains its
  *   current state.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  *
  * The EF10 architecture exposes very few registers to the host and
  * most of them are only 32 bits wide.  The only exceptions are the MC
  * doorbell register pair, which has its own latching, and
  * TX_DESC_UPD, which works in a similar way to the Falcon
  * architecture.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 
@@ -80,7 +96,10 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Hardware issue requires that only 64-bit naturally aligned writes
  * are seen by hardware. Its not strictly necessary to restrict to
  * x86_64 arch, but done for safety since unusual write combining behaviour
@@ -93,6 +112,9 @@
 #endif
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef EFX_USE_QWORD_IO
 static inline void _efx_writeq(struct efx_nic *efx, __le64 value,
@@ -118,7 +140,11 @@ static inline __le32 _efx_readd(struct efx_nic *efx, unsigned int reg)
 
 /* Write a normal 128-bit CSR, locking as appropriate. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void efx_writeo(struct efx_nic *efx, efx_oword_t *value,
+=======
+static inline void efx_writeo(struct efx_nic *efx, const efx_oword_t *value,
+>>>>>>> v3.18
 =======
 static inline void efx_writeo(struct efx_nic *efx, const efx_oword_t *value,
 >>>>>>> v3.18
@@ -147,7 +173,11 @@ static inline void efx_writeo(struct efx_nic *efx, const efx_oword_t *value,
 /* Write 64-bit SRAM through the supplied mapping, locking as appropriate. */
 static inline void efx_sram_writeq(struct efx_nic *efx, void __iomem *membase,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   efx_qword_t *value, unsigned int index)
+=======
+				   const efx_qword_t *value, unsigned int index)
+>>>>>>> v3.18
 =======
 				   const efx_qword_t *value, unsigned int index)
 >>>>>>> v3.18
@@ -172,7 +202,11 @@ static inline void efx_sram_writeq(struct efx_nic *efx, void __iomem *membase,
 
 /* Write a 32-bit CSR or the last dword of a special 128-bit CSR */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void efx_writed(struct efx_nic *efx, efx_dword_t *value,
+=======
+static inline void efx_writed(struct efx_nic *efx, const efx_dword_t *value,
+>>>>>>> v3.18
 =======
 static inline void efx_writed(struct efx_nic *efx, const efx_dword_t *value,
 >>>>>>> v3.18
@@ -237,8 +271,14 @@ static inline void efx_readd(struct efx_nic *efx, efx_dword_t *value,
 
 /* Write a 128-bit CSR forming part of a table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void efx_writeo_table(struct efx_nic *efx, efx_oword_t *value,
 				      unsigned int reg, unsigned int index)
+=======
+static inline void
+efx_writeo_table(struct efx_nic *efx, const efx_oword_t *value,
+		 unsigned int reg, unsigned int index)
+>>>>>>> v3.18
 =======
 static inline void
 efx_writeo_table(struct efx_nic *efx, const efx_oword_t *value,
@@ -256,6 +296,7 @@ static inline void efx_reado_table(struct efx_nic *efx, efx_oword_t *value,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Page-mapped register block size */
 #define EFX_PAGE_BLOCK_SIZE 0x2000
 
@@ -263,12 +304,17 @@ static inline void efx_reado_table(struct efx_nic *efx, efx_oword_t *value,
 #define EFX_PAGED_REG(page, reg) \
 	((page) * EFX_PAGE_BLOCK_SIZE + (reg))
 =======
+=======
+>>>>>>> v3.18
 /* Page size used as step between per-VI registers */
 #define EFX_VI_PAGE_SIZE 0x2000
 
 /* Calculate offset to page-mapped register */
 #define EFX_PAGED_REG(page, reg) \
 	((page) * EFX_VI_PAGE_SIZE + (reg))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Write the whole of RX_DESC_UPD or TX_DESC_UPD */
@@ -298,18 +344,24 @@ static inline void _efx_writeo_page(struct efx_nic *efx, efx_oword_t *value,
 			 page)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Write a page-mapped 32-bit CSR (EVQ_RPTR or the high bits of
  * RX_DESC_UPD or TX_DESC_UPD)
  */
 static inline void _efx_writed_page(struct efx_nic *efx, efx_dword_t *value,
 				    unsigned int reg, unsigned int page)
 =======
+=======
+>>>>>>> v3.18
 /* Write a page-mapped 32-bit CSR (EVQ_RPTR, EVQ_TMR (EF10), or the
  * high bits of RX_DESC_UPD or TX_DESC_UPD)
  */
 static inline void
 _efx_writed_page(struct efx_nic *efx, const efx_dword_t *value,
 		 unsigned int reg, unsigned int page)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	efx_writed(efx, value, EFX_PAGED_REG(page, reg));
@@ -318,15 +370,21 @@ _efx_writed_page(struct efx_nic *efx, const efx_dword_t *value,
 	_efx_writed_page(efx, value,					\
 			 reg +						\
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 BUILD_BUG_ON_ZERO((reg) != 0x400 && (reg) != 0x83c \
 					   && (reg) != 0xa1c),		\
 =======
+=======
+>>>>>>> v3.18
 			 BUILD_BUG_ON_ZERO((reg) != 0x400 &&		\
 					   (reg) != 0x420 &&		\
 					   (reg) != 0x830 &&		\
 					   (reg) != 0x83c &&		\
 					   (reg) != 0xa18 &&		\
 					   (reg) != 0xa1c),		\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			 page)
 
@@ -336,7 +394,11 @@ _efx_writed_page(struct efx_nic *efx, const efx_dword_t *value,
  */
 static inline void _efx_writed_page_locked(struct efx_nic *efx,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   efx_dword_t *value,
+=======
+					   const efx_dword_t *value,
+>>>>>>> v3.18
 =======
 					   const efx_dword_t *value,
 >>>>>>> v3.18

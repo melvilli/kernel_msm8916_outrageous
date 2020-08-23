@@ -3,6 +3,11 @@
 #include <linux/vmalloc.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/pgtable.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/pgtable.h>
 
@@ -44,6 +49,10 @@ static inline pmd_t *pmd_off_k(unsigned long virt)
 struct mem_type {
 	pteval_t prot_pte;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pteval_t prot_pte_s2;
+>>>>>>> v3.18
 =======
 	pteval_t prot_pte_s2;
 >>>>>>> v3.18
@@ -102,6 +111,11 @@ void __init bootmem_init(void);
 void arm_mm_memblock_reserve(void);
 void dma_contiguous_remap(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+unsigned long __clear_cr(unsigned long mask);
+>>>>>>> v3.18
 =======
 
 unsigned long __clear_cr(unsigned long mask);

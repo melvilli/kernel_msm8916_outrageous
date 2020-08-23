@@ -49,6 +49,10 @@
 #include <asm/hvsi.h>
 #include <asm/udbg.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/machdep.h>
+>>>>>>> v3.18
 =======
 #include <asm/machdep.h>
 >>>>>>> v3.18
@@ -408,8 +412,12 @@ module_exit(hvc_vio_exit);
 void __init hvc_vio_init_early(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device_node *stdout_node;
 	const u32 *termno;
+=======
+	const __be32 *termno;
+>>>>>>> v3.18
 =======
 	const __be32 *termno;
 >>>>>>> v3.18
@@ -417,6 +425,7 @@ void __init hvc_vio_init_early(void)
 	const struct hv_ops *ops;
 
 	/* find the boot console from /chosen/stdout */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!of_chosen)
 		return;
@@ -431,17 +440,23 @@ void __init hvc_vio_init_early(void)
 		printk(KERN_WARNING "stdout node missing 'name' property!\n");
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 	if (!of_stdout)
 		return;
 	name = of_get_property(of_stdout, "name", NULL);
 	if (!name) {
 		printk(KERN_WARNING "stdout node missing 'name' property!\n");
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	/* Check if it's a virtual terminal */
 	if (strncmp(name, "vty", 3) != 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto out;
 	termno = of_get_property(stdout_node, "reg", NULL);
@@ -449,16 +464,22 @@ void __init hvc_vio_init_early(void)
 		goto out;
 	hvterm_priv0.termno = *termno;
 =======
+=======
+>>>>>>> v3.18
 		return;
 	termno = of_get_property(of_stdout, "reg", NULL);
 	if (termno == NULL)
 		return;
 	hvterm_priv0.termno = of_read_number(termno, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_init(&hvterm_priv0.buf_lock);
 	hvterm_privs[0] = &hvterm_priv0;
 
 	/* Check the protocol */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (of_device_is_compatible(stdout_node, "hvterm1")) {
 		hvterm_priv0.proto = HV_PROTOCOL_RAW;
@@ -466,11 +487,16 @@ void __init hvc_vio_init_early(void)
 	}
 	else if (of_device_is_compatible(stdout_node, "hvterm-protocol")) {
 =======
+=======
+>>>>>>> v3.18
 	if (of_device_is_compatible(of_stdout, "hvterm1")) {
 		hvterm_priv0.proto = HV_PROTOCOL_RAW;
 		ops = &hvterm_raw_ops;
 	}
 	else if (of_device_is_compatible(of_stdout, "hvterm-protocol")) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		hvterm_priv0.proto = HV_PROTOCOL_HVSI;
 		ops = &hvterm_hvsi_ops;
@@ -480,7 +506,11 @@ void __init hvc_vio_init_early(void)
 		hvsilib_establish(&hvterm_priv0.hvsi);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -493,6 +523,7 @@ void __init hvc_vio_init_early(void)
 	 */
 	if (hvterm_priv0.proto == HV_PROTOCOL_HVSI)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
 #endif
 	add_preferred_console("hvc", 0, NULL);
@@ -500,12 +531,17 @@ void __init hvc_vio_init_early(void)
 out:
 	of_node_put(stdout_node);
 =======
+=======
+>>>>>>> v3.18
 		return;
 #endif
 	/* Check whether the user has requested a different console. */
 	if (!strstr(boot_command_line, "console="))
 		add_preferred_console("hvc", 0, NULL);
 	hvc_instantiate(0, 0, ops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -125,6 +125,11 @@ struct dasd_ccw_req *dasd_default_erp_postaction(struct dasd_ccw_req *cqr)
 {
 	int success;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long long startclk, stopclk;
+	struct dasd_device *startdev;
+>>>>>>> v3.18
 =======
 	unsigned long long startclk, stopclk;
 	struct dasd_device *startdev;
@@ -134,6 +139,12 @@ struct dasd_ccw_req *dasd_default_erp_postaction(struct dasd_ccw_req *cqr)
 
 	success = cqr->status == DASD_CQR_DONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	startclk = cqr->startclk;
+	stopclk = cqr->stopclk;
+	startdev = cqr->startdev;
+>>>>>>> v3.18
 =======
 	startclk = cqr->startclk;
 	stopclk = cqr->stopclk;
@@ -154,6 +165,12 @@ struct dasd_ccw_req *dasd_default_erp_postaction(struct dasd_ccw_req *cqr)
 
 	/* set corresponding status to original cqr */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	cqr->startclk = startclk;
+	cqr->stopclk = stopclk;
+	cqr->startdev = startdev;
+>>>>>>> v3.18
 =======
 	cqr->startclk = startclk;
 	cqr->stopclk = stopclk;
@@ -177,7 +194,10 @@ dasd_log_sense(struct dasd_ccw_req *cqr, struct irb *irb)
 
 	device = cqr->startdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cqr->intrc == -ETIMEDOUT) {
 		dev_err(&device->cdev->dev,
 			"A timeout error occurred for cqr %p", cqr);
@@ -188,6 +208,9 @@ dasd_log_sense(struct dasd_ccw_req *cqr, struct irb *irb)
 			"A transport error occurred for cqr %p", cqr);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* dump sense data */
 	if (device->discipline && device->discipline->dump_sense)

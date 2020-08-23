@@ -64,8 +64,11 @@ PG_MAGIC              'P'         pg_{read,write}_hdr include/linux/pg.h
 CMAGIC                0x0111      user              include/linux/a.out.h
 MKISS_DRIVER_MAGIC    0x04bf      mkiss_channel     drivers/net/mkiss.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 RISCOM8_MAGIC         0x0907      riscom_port       drivers/char/riscom8.h
 SPECIALIX_MAGIC       0x0907      specialix_port    drivers/char/specialix_io8.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 HDLC_MAGIC            0x239e      n_hdlc            drivers/char/n_hdlc.c
@@ -86,7 +89,10 @@ X25_ASY_MAGIC         0x5303      x25_asy           drivers/net/x25_asy.h
 SIXPACK_MAGIC         0x5304      sixpack           drivers/net/hamradio/6pack.h
 AX25_MAGIC            0x5316      ax_disp           drivers/net/mkiss.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 ESP_MAGIC             0x53ee      esp_struct        drivers/char/esp.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 TTY_MAGIC             0x5401      tty_struct        include/linux/tty.h
@@ -101,7 +107,10 @@ RFCOMM_TTY_MAGIC      0x6d02                        net/bluetooth/rfcomm/tty.c
 USB_SERIAL_PORT_MAGIC 0x7301      usb_serial_port   drivers/usb/serial/usb-serial.h
 CG_MAGIC              0x00090255  ufs_cylinder_group include/linux/ufs_fs.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 A2232_MAGIC           0x000a2232  gs_port           drivers/char/ser_a2232.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 RPORT_MAGIC           0x00525001  r_port            drivers/char/rocket_int.h
@@ -109,8 +118,11 @@ LSEMAGIC              0x05091998  lse               drivers/fc4/fc.c
 GDTIOCTL_MAGIC        0x06030f07  gdth_iowr_str     drivers/scsi/gdth_ioctl.h
 RIEBL_MAGIC           0x09051990                    drivers/net/atarilance.c
 <<<<<<< HEAD
+<<<<<<< HEAD
 RIO_MAGIC             0x12345678  gs_port           drivers/char/rio/rio_linux.c
 SX_MAGIC              0x12345678  gs_port           drivers/char/sx.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 NBD_REQUEST_MAGIC     0x12560953  nbd_request       include/linux/nbd.h
@@ -129,7 +141,10 @@ CTC_ASYNC_MAGIC       0x49344C01  ctc_tty_info      drivers/s390/net/ctctty.c
 ISDN_NET_MAGIC        0x49344C02  isdn_net_local_s  drivers/isdn/i4l/isdn_net_lib.h
 SAVEKMSG_MAGIC2       0x4B4D5347  savekmsg          arch/*/amiga/config.c
 <<<<<<< HEAD
+<<<<<<< HEAD
 STLI_BOARDMAGIC       0x4bc6c825  stlibrd           include/linux/istallion.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CS_STATE_MAGIC        0x4c4f4749  cs_state          sound/oss/cs46xx.c
@@ -143,10 +158,15 @@ SAVEKMSG_MAGIC1       0x53415645  savekmsg          arch/*/amiga/config.c
 GDA_MAGIC             0x58464552  gda               arch/mips/include/asm/sn/gda.h
 RED_MAGIC1            0x5a2cf071  (any)             mm/slab.c
 <<<<<<< HEAD
+<<<<<<< HEAD
 STL_PORTMAGIC         0x5a7182c9  stlport           include/linux/stallion.h
 EEPROM_MAGIC_VALUE    0x5ab478d2  lanai_dev         drivers/atm/lanai.c
 HDLCDRV_MAGIC         0x5ac6e778  hdlcdrv_state     include/linux/hdlcdrv.h
 EPCA_MAGIC            0x5c6df104  channel           include/linux/epca.h
+=======
+EEPROM_MAGIC_VALUE    0x5ab478d2  lanai_dev         drivers/atm/lanai.c
+HDLCDRV_MAGIC         0x5ac6e778  hdlcdrv_state     include/linux/hdlcdrv.h
+>>>>>>> v3.18
 =======
 EEPROM_MAGIC_VALUE    0x5ab478d2  lanai_dev         drivers/atm/lanai.c
 HDLCDRV_MAGIC         0x5ac6e778  hdlcdrv_state     include/linux/hdlcdrv.h
@@ -163,7 +183,10 @@ LO_MAGIC              0x68797548  nbd_device        include/linux/nbd.h
 OPROFILE_MAGIC        0x6f70726f  super_block       drivers/oprofile/oprofilefs.h
 M3_STATE_MAGIC        0x734d724d  m3_state          sound/oss/maestro3.c
 <<<<<<< HEAD
+<<<<<<< HEAD
 STL_PANELMAGIC        0x7ef621a1  stlpanel          include/linux/stallion.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 VMALLOC_MAGIC         0x87654320  snd_alloc_track   sound/core/memory.c
@@ -171,7 +194,10 @@ KMALLOC_MAGIC         0x87654321  snd_alloc_track   sound/core/memory.c
 PWC_MAGIC             0x89DC10AB  pwc_device        drivers/usb/media/pwc.h
 NBD_REPLY_MAGIC       0x96744668  nbd_reply         include/linux/nbd.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 STL_BOARDMAGIC        0xa2267f52  stlbrd            include/linux/stallion.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ENI155_MAGIC          0xa54b872d  midway_eprom	    drivers/atm/eni.h
@@ -179,7 +205,10 @@ SCI_MAGIC             0xbabeface  gs_port           drivers/char/sh-sci.h
 CODA_MAGIC            0xC0DAC0DA  coda_file_info    fs/coda/coda_fs_i.h
 DPMEM_MAGIC           0xc0ffee11  gdt_pci_sram      drivers/scsi/gdth.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 STLI_PORTMAGIC        0xe671c7a1  stliport          include/linux/istallion.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 YAM_MAGIC             0xF10A7654  yam_port          drivers/net/hamradio/yam.c

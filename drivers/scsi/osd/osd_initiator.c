@@ -8,7 +8,11 @@
  *
  * Authors:
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Boaz Harrosh <bharrosh@panasas.com>
+=======
+ *   Boaz Harrosh <ooo@electrozaur.com>
+>>>>>>> v3.18
 =======
  *   Boaz Harrosh <ooo@electrozaur.com>
 >>>>>>> v3.18
@@ -62,7 +66,11 @@
 enum { OSD_REQ_RETRIES = 1 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Boaz Harrosh <bharrosh@panasas.com>");
+=======
+MODULE_AUTHOR("Boaz Harrosh <ooo@electrozaur.com>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Boaz Harrosh <ooo@electrozaur.com>");
 >>>>>>> v3.18
@@ -740,7 +748,11 @@ static int _osd_req_list_objects(struct osd_request *or,
 	bio->bi_rw &= ~REQ_WRITE;
 	or->in.bio = bio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	or->in.total_bytes = bio->bi_size;
+=======
+	or->in.total_bytes = bio->bi_iter.bi_size;
+>>>>>>> v3.18
 =======
 	or->in.total_bytes = bio->bi_iter.bi_size;
 >>>>>>> v3.18
@@ -1580,8 +1592,13 @@ static struct request *_make_request(struct request_queue *q, bool has_write,
 
 		req = blk_get_request(q, has_write ? WRITE : READ, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (unlikely(!req))
 			return ERR_PTR(-ENOMEM);
+=======
+		if (IS_ERR(req))
+			return req;
+>>>>>>> v3.18
 =======
 		if (IS_ERR(req))
 			return req;

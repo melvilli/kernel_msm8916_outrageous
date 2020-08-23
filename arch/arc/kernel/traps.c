@@ -29,10 +29,16 @@ void __init trap_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void die(const char *str, struct pt_regs *regs, unsigned long address,
 	 unsigned long cause_reg)
 {
 	show_kernel_fault_diag(str, regs, address, cause_reg);
+=======
+void die(const char *str, struct pt_regs *regs, unsigned long address)
+{
+	show_kernel_fault_diag(str, regs, address);
+>>>>>>> v3.18
 =======
 void die(const char *str, struct pt_regs *regs, unsigned long address)
 {
@@ -49,8 +55,13 @@ void die(const char *str, struct pt_regs *regs, unsigned long address)
  *  -for kernel, chk if due to copy_(to|from)_user, otherwise die()
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static noinline int handle_exception(unsigned long cause, char *str,
 				     struct pt_regs *regs, siginfo_t *info)
+=======
+static noinline int
+handle_exception(const char *str, struct pt_regs *regs, siginfo_t *info)
+>>>>>>> v3.18
 =======
 static noinline int
 handle_exception(const char *str, struct pt_regs *regs, siginfo_t *info)
@@ -61,7 +72,10 @@ handle_exception(const char *str, struct pt_regs *regs, siginfo_t *info)
 
 		tsk->thread.fault_address = (__force unsigned int)info->si_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tsk->thread.cause_code = cause;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -73,7 +87,11 @@ handle_exception(const char *str, struct pt_regs *regs, siginfo_t *info)
 			return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		die(str, regs, (unsigned long)info->si_addr, cause);
+=======
+		die(str, regs, (unsigned long)info->si_addr);
+>>>>>>> v3.18
 =======
 		die(str, regs, (unsigned long)info->si_addr);
 >>>>>>> v3.18
@@ -84,7 +102,11 @@ handle_exception(const char *str, struct pt_regs *regs, siginfo_t *info)
 
 #define DO_ERROR_INFO(signr, str, name, sicode) \
 <<<<<<< HEAD
+<<<<<<< HEAD
 int name(unsigned long cause, unsigned long address, struct pt_regs *regs) \
+=======
+int name(unsigned long address, struct pt_regs *regs) \
+>>>>>>> v3.18
 =======
 int name(unsigned long address, struct pt_regs *regs) \
 >>>>>>> v3.18
@@ -96,7 +118,11 @@ int name(unsigned long address, struct pt_regs *regs) \
 		.si_addr = (void __user *)address,	\
 	};					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return handle_exception(cause, str, regs, &info);\
+=======
+	return handle_exception(str, regs, &info);\
+>>>>>>> v3.18
 =======
 	return handle_exception(str, regs, &info);\
 >>>>>>> v3.18
@@ -113,6 +139,7 @@ DO_ERROR_INFO(SIGTRAP, "Breakpoint Set", trap_is_brkpt, TRAP_BRKPT)
 DO_ERROR_INFO(SIGBUS, "Misaligned Access", do_misaligned_error, BUS_ADRALN)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARC_MISALIGN_ACCESS
 /*
  * Entry Point for Misaligned Data access Exception, for emulating in software
@@ -127,6 +154,8 @@ int do_misaligned_access(unsigned long cause, unsigned long address,
 }
 #endif
 =======
+=======
+>>>>>>> v3.18
 /*
  * Entry Point for Misaligned Data access Exception, for emulating in software
  */
@@ -139,6 +168,9 @@ int do_misaligned_access(unsigned long address, struct pt_regs *regs,
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -146,10 +178,16 @@ int do_misaligned_access(unsigned long address, struct pt_regs *regs,
  *  -Duplicate TLB entry is handled seperately though
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_machine_check_fault(unsigned long cause, unsigned long address,
 			    struct pt_regs *regs)
 {
 	die("Machine Check Exception", regs, address, cause);
+=======
+void do_machine_check_fault(unsigned long address, struct pt_regs *regs)
+{
+	die("Machine Check Exception", regs, address);
+>>>>>>> v3.18
 =======
 void do_machine_check_fault(unsigned long address, struct pt_regs *regs)
 {
@@ -168,6 +206,7 @@ void do_machine_check_fault(unsigned long address, struct pt_regs *regs)
  *  -2 used by kprobes
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_non_swi_trap(unsigned long cause, unsigned long address,
 			struct pt_regs *regs)
 {
@@ -181,6 +220,8 @@ void do_non_swi_trap(unsigned long cause, unsigned long address,
 	case 2:
 		trap_is_kprobe(param, address, regs);
 =======
+=======
+>>>>>>> v3.18
 void do_non_swi_trap(unsigned long address, struct pt_regs *regs)
 {
 	unsigned int param = regs->ecr_param;
@@ -192,13 +233,20 @@ void do_non_swi_trap(unsigned long address, struct pt_regs *regs)
 
 	case 2:
 		trap_is_kprobe(address, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
 	case 3:
 	case 4:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kgdb_trap(regs, param);
+=======
+		kgdb_trap(regs);
+>>>>>>> v3.18
 =======
 		kgdb_trap(regs);
 >>>>>>> v3.18
@@ -215,6 +263,7 @@ void do_non_swi_trap(unsigned long address, struct pt_regs *regs)
  *   this exception, hence the check
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void do_insterror_or_kprobe(unsigned long cause,
 				       unsigned long address,
 				       struct pt_regs *regs)
@@ -226,6 +275,8 @@ void do_insterror_or_kprobe(unsigned long cause,
 
 	insterror_is_error(cause, address, regs);
 =======
+=======
+>>>>>>> v3.18
 void do_insterror_or_kprobe(unsigned long address, struct pt_regs *regs)
 {
 	int rc;
@@ -236,5 +287,8 @@ void do_insterror_or_kprobe(unsigned long address, struct pt_regs *regs)
 		return;
 
 	insterror_is_error(address, regs);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

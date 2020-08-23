@@ -2,7 +2,10 @@ ccflags-y += -I$(src)			# needed for trace events
 
 obj-y					+= ion/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_FIQ_DEBUGGER)		+= fiq_debugger/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -14,9 +17,14 @@ obj-$(CONFIG_ANDROID_TIMED_GPIO)	+= timed_gpio.o
 obj-$(CONFIG_ANDROID_LOW_MEMORY_KILLER)	+= lowmemorykiller.o
 obj-$(CONFIG_ANDROID_INTF_ALARM_DEV)	+= alarm-dev.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SYNC)			+= sync.o
 obj-$(CONFIG_SW_SYNC)			+= sw_sync.o
 obj-$(CONFIG_ONESHOT_SYNC)		+= oneshot_sync.o
+=======
+obj-$(CONFIG_SYNC)			+= sync.o sync_debug.o
+obj-$(CONFIG_SW_SYNC)			+= sw_sync.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SYNC)			+= sync.o sync_debug.o
 obj-$(CONFIG_SW_SYNC)			+= sw_sync.o

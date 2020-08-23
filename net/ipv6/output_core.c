@@ -4,10 +4,13 @@
  */
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <net/ipv6.h>
 #include <net/ip6_fib.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <net/ip.h>
 #include <net/ipv6.h>
 #include <net/ip6_fib.h>
@@ -46,11 +49,15 @@ void ipv6_proxy_select_ident(struct sk_buff *skb)
 	skb_shinfo(skb)->ip6_frag_id = htonl(id);
 }
 EXPORT_SYMBOL_GPL(ipv6_proxy_select_ident);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int ip6_find_1stfragopt(struct sk_buff *skb, u8 **nexthdr)
 {
 	u16 offset = sizeof(struct ipv6hdr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned int packet_len = skb->tail - skb->network_header;
 	int found_rhdr = 0;
@@ -59,6 +66,8 @@ int ip6_find_1stfragopt(struct sk_buff *skb, u8 **nexthdr)
 	while (offset <= packet_len) {
 		struct ipv6_opt_hdr *exthdr;
 =======
+=======
+>>>>>>> v3.18
 	struct ipv6_opt_hdr *exthdr =
 				(struct ipv6_opt_hdr *)(ipv6_hdr(skb) + 1);
 	unsigned int packet_len = skb_tail_pointer(skb) -
@@ -67,6 +76,9 @@ int ip6_find_1stfragopt(struct sk_buff *skb, u8 **nexthdr)
 	*nexthdr = &ipv6_hdr(skb)->nexthdr;
 
 	while (offset + 1 <= packet_len) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		switch (**nexthdr) {
@@ -85,6 +97,7 @@ int ip6_find_1stfragopt(struct sk_buff *skb, u8 **nexthdr)
 				return offset;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		default :
 			return offset;
 		}
@@ -102,6 +115,8 @@ int ip6_find_1stfragopt(struct sk_buff *skb, u8 **nexthdr)
 }
 EXPORT_SYMBOL(ip6_find_1stfragopt);
 =======
+=======
+>>>>>>> v3.18
 		default:
 			return offset;
 		}
@@ -163,4 +178,7 @@ int ip6_local_out(struct sk_buff *skb)
 	return err;
 }
 EXPORT_SYMBOL_GPL(ip6_local_out);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

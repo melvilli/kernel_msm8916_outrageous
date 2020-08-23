@@ -219,7 +219,11 @@ typedef struct {
 #define ST_TX_UNDRRUN 0x08
 #define ST_TX_OWNRSHP 0x02
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ST_TX_EOT     0x01	/* End of transmition */
+=======
+#define ST_TX_EOT     0x01	/* End of transmission */
+>>>>>>> v3.18
 =======
 #define ST_TX_EOT     0x01	/* End of transmission */
 >>>>>>> v3.18

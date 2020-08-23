@@ -43,8 +43,11 @@
 #define S3C2443_UCLKCON			S3C2443_CLKREG(0x8C)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S3C2443_SWRST_RESET		(0x533c2443)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define S3C2443_PLLCON_OFF		(1<<24)

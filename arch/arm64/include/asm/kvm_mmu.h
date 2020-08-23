@@ -42,7 +42,10 @@
 #define TRAMPOLINE_VA		(HYP_PAGE_OFFSET_MASK & PAGE_MASK)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * KVM_MMU_CACHE_MIN_PAGES is the number of stage2 page table translation
  * levels in addition to the PGD and potentially the PUD which are
@@ -55,6 +58,9 @@
 #define KVM_MMU_CACHE_MIN_PAGES	2
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef __ASSEMBLY__
 
@@ -69,6 +75,10 @@
 #else
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/pgalloc.h>
+>>>>>>> v3.18
 =======
 #include <asm/pgalloc.h>
 >>>>>>> v3.18
@@ -78,6 +88,7 @@
 #define KERN_TO_HYP(kva)	((unsigned long)kva - PAGE_OFFSET + HYP_PAGE_OFFSET)
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Align KVM with the kernel's view of physical memory. Should be
  * 40bit IPA, with PGD being 8kB aligned in the 4KB page configuration.
@@ -91,12 +102,17 @@
 #define S2_PGD_ORDER	get_order(PTRS_PER_S2_PGD * sizeof(pgd_t))
 
 =======
+=======
+>>>>>>> v3.18
  * We currently only support a 40bit IPA.
  */
 #define KVM_PHYS_SHIFT	(40)
 #define KVM_PHYS_SIZE	(1UL << KVM_PHYS_SHIFT)
 #define KVM_PHYS_MASK	(KVM_PHYS_SIZE - 1UL)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int create_hyp_mappings(void *from, void *to);
 int create_hyp_io_mappings(void *from, void *to, phys_addr_t);
@@ -107,7 +123,11 @@ int kvm_alloc_stage2_pgd(struct kvm *kvm);
 void kvm_free_stage2_pgd(struct kvm *kvm);
 int kvm_phys_addr_ioremap(struct kvm *kvm, phys_addr_t guest_ipa,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  phys_addr_t pa, unsigned long size);
+=======
+			  phys_addr_t pa, unsigned long size, bool writable);
+>>>>>>> v3.18
 =======
 			  phys_addr_t pa, unsigned long size, bool writable);
 >>>>>>> v3.18
@@ -126,6 +146,7 @@ void kvm_clear_hyp_idmap(void);
 #define	kvm_set_pmd(pmdp, pmd)		set_pmd(pmdp, pmd)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool kvm_is_write_fault(unsigned long esr)
 {
 	unsigned long esr_ec = esr >> ESR_EL2_EC_SHIFT;
@@ -140,6 +161,10 @@ static inline bool kvm_is_write_fault(unsigned long esr)
 }
 
 static inline void kvm_clean_pgd(pgd_t *pgd) {}
+=======
+static inline void kvm_clean_pgd(pgd_t *pgd) {}
+static inline void kvm_clean_pmd(pmd_t *pmd) {}
+>>>>>>> v3.18
 =======
 static inline void kvm_clean_pgd(pgd_t *pgd) {}
 static inline void kvm_clean_pmd(pmd_t *pmd) {}
@@ -163,7 +188,10 @@ static inline void kvm_set_s2pmd_writable(pmd_t *pmd)
 #define kvm_pmd_addr_end(addr, end)	pmd_addr_end(addr, end)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * In the case where PGDIR_SHIFT is larger than KVM_PHYS_SHIFT, we can address
  * the entire IPA input range with a single pgd entry, and we would only need
@@ -276,6 +304,9 @@ static inline bool kvm_page_empty(void *ptr)
 #endif
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct kvm;
 

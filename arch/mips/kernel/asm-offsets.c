@@ -15,13 +15,19 @@
 #include <linux/kbuild.h>
 #include <linux/suspend.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/ptrace.h>
 #include <asm/processor.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/pm.h>
 #include <asm/ptrace.h>
 #include <asm/processor.h>
 #include <asm/smp-cps.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/kvm_host.h>
@@ -71,9 +77,12 @@ void output_ptreg_defines(void)
 	OFFSET(PT_STATUS, pt_regs, cp0_status);
 	OFFSET(PT_CAUSE, pt_regs, cp0_cause);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MIPS_MT_SMTC
 	OFFSET(PT_TCSTATUS, pt_regs, cp0_tcstatus);
 #endif /* CONFIG_MIPS_MT_SMTC */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_CPU_CAVIUM_OCTEON
@@ -93,6 +102,12 @@ void output_task_defines(void)
 	OFFSET(TASK_MM, task_struct, mm);
 	OFFSET(TASK_PID, task_struct, pid);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_CC_STACKPROTECTOR)
+	OFFSET(TASK_STACK_CANARY, task_struct, stack_canary);
+#endif
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_CC_STACKPROTECTOR)
 	OFFSET(TASK_STACK_CANARY, task_struct, stack_canary);
@@ -182,8 +197,11 @@ void output_thread_fpu_defines(void)
 	OFFSET(THREAD_FPR31, task_struct, thread.fpu.fpr[31]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OFFSET(THREAD_FCR31, task_struct, thread.fpu.fcr31);
 =======
+=======
+>>>>>>> v3.18
 	/* the least significant 64 bits of each FP register */
 	OFFSET(THREAD_FPR0_LS64, task_struct,
 	       thread.fpu.fpr[0].val64[FPR_IDX(64, 0)]);
@@ -252,6 +270,9 @@ void output_thread_fpu_defines(void)
 
 	OFFSET(THREAD_FCR31, task_struct, thread.fpu.fcr31);
 	OFFSET(THREAD_MSA_CSR, task_struct, thread.fpu.msacsr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	BLANK();
 }
@@ -419,7 +440,10 @@ void output_pbe_defines(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CPU_PM
 void output_pm_defines(void)
 {
@@ -434,6 +458,9 @@ void output_pm_defines(void)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void output_kvm_defines(void)
 {
@@ -499,7 +526,10 @@ void output_kvm_defines(void)
 	BLANK();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_MIPS_CPS
 void output_cps_defines(void)
@@ -516,4 +546,7 @@ void output_cps_defines(void)
 	DEFINE(VPEBOOTCFG_SIZE, sizeof(struct vpe_boot_config));
 }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

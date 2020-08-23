@@ -37,7 +37,11 @@ struct usX2Ydev {
 				format;
 	int			chip_status;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex		prepare_mutex;
+=======
+	struct mutex		pcm_mutex;
+>>>>>>> v3.18
 =======
 	struct mutex		pcm_mutex;
 >>>>>>> v3.18

@@ -91,17 +91,23 @@ int mlx4_ib_umem_write_mtt(struct mlx4_ib_dev *dev, struct mlx4_mtt *mtt,
 {
 	u64 *pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_umem_chunk *chunk;
 	int i, j, k;
 	int n;
 	int len;
 	int err = 0;
 =======
+=======
+>>>>>>> v3.18
 	int i, k, entry;
 	int n;
 	int len;
 	int err = 0;
 	struct scatterlist *sg;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pages = (u64 *) __get_free_page(GFP_KERNEL);
@@ -110,6 +116,7 @@ int mlx4_ib_umem_write_mtt(struct mlx4_ib_dev *dev, struct mlx4_mtt *mtt,
 
 	i = n = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry(chunk, &umem->chunk_list, list)
 		for (j = 0; j < chunk->nmap; ++j) {
@@ -132,6 +139,8 @@ int mlx4_ib_umem_write_mtt(struct mlx4_ib_dev *dev, struct mlx4_mtt *mtt,
 			}
 		}
 =======
+=======
+>>>>>>> v3.18
 	for_each_sg(umem->sg_head.sgl, sg, umem->nmap, entry) {
 		len = sg_dma_len(sg) >> mtt->page_shift;
 		for (k = 0; k < len; ++k) {
@@ -151,6 +160,9 @@ int mlx4_ib_umem_write_mtt(struct mlx4_ib_dev *dev, struct mlx4_mtt *mtt,
 			}
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (i)
@@ -176,13 +188,19 @@ struct ib_mr *mlx4_ib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 		return ERR_PTR(-ENOMEM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mr->umem = ib_umem_get(pd->uobject->context, start, length,
 			       access_flags, 0);
 =======
+=======
+>>>>>>> v3.18
 	/* Force registering the memory as writable. */
 	/* Used for memory re-registeration. HCA protects the access */
 	mr->umem = ib_umem_get(pd->uobject->context, start, length,
 			       access_flags | IB_ACCESS_LOCAL_WRITE, 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(mr->umem)) {
 		err = PTR_ERR(mr->umem);
@@ -222,7 +240,10 @@ err_free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int mlx4_ib_rereg_user_mr(struct ib_mr *mr, int flags,
 			  u64 start, u64 length, u64 virt_addr,
 			  int mr_access_flags, struct ib_pd *pd,
@@ -310,6 +331,9 @@ release_mpt_entry:
 	return err;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int mlx4_ib_dereg_mr(struct ib_mr *ibmr)
 {

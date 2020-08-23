@@ -7,6 +7,7 @@
 #include <linux/tracepoint.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct search;
 
 DECLARE_EVENT_CLASS(bcache_request,
@@ -14,6 +15,11 @@ DECLARE_EVENT_CLASS(bcache_request,
 	TP_PROTO(struct search *s, struct bio *bio),
 
 	TP_ARGS(s, bio),
+=======
+DECLARE_EVENT_CLASS(bcache_request,
+	TP_PROTO(struct bcache_device *d, struct bio *bio),
+	TP_ARGS(d, bio),
+>>>>>>> v3.18
 =======
 DECLARE_EVENT_CLASS(bcache_request,
 	TP_PROTO(struct bcache_device *d, struct bio *bio),
@@ -29,13 +35,17 @@ DECLARE_EVENT_CLASS(bcache_request,
 		__field(unsigned int,	nr_sector		)
 		__array(char,		rwbs,	6		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__array(char,		comm,	TASK_COMM_LEN	)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	),
 
 	TP_fast_assign(
 		__entry->dev		= bio->bi_bdev->bd_dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->orig_major	= s->d->disk->major;
 		__entry->orig_minor	= s->d->disk->first_minor;
@@ -74,6 +84,8 @@ DECLARE_EVENT_CLASS(bcache_bio,
 	TP_PROTO(struct bio *bio),
 
 =======
+=======
+>>>>>>> v3.18
 		__entry->orig_major	= d->disk->major;
 		__entry->orig_minor	= d->disk->first_minor;
 		__entry->sector		= bio->bi_iter.bi_sector;
@@ -140,6 +152,9 @@ DEFINE_EVENT(bcache_request, bcache_request_end,
 
 DECLARE_EVENT_CLASS(bcache_bio,
 	TP_PROTO(struct bio *bio),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	TP_ARGS(bio),
 
@@ -149,13 +164,17 @@ DECLARE_EVENT_CLASS(bcache_bio,
 		__field(unsigned int,	nr_sector		)
 		__array(char,		rwbs,	6		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__array(char,		comm,	TASK_COMM_LEN	)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	),
 
 	TP_fast_assign(
 		__entry->dev		= bio->bi_bdev->bd_dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		__entry->sector		= bio->bi_sector;
 		__entry->nr_sector	= bio->bi_size >> 9;
@@ -346,6 +365,8 @@ DEFINE_EVENT(bcache_gc, bcache_gc_end,
 
 	     TP_ARGS(uuid)
 =======
+=======
+>>>>>>> v3.18
 		__entry->sector		= bio->bi_iter.bi_sector;
 		__entry->nr_sector	= bio->bi_iter.bi_size >> 9;
 		blk_fill_rwbs(__entry->rwbs, bio->bi_rw, bio->bi_iter.bi_size);
@@ -721,6 +742,9 @@ DEFINE_EVENT(bkey, bcache_writeback,
 DEFINE_EVENT(bkey, bcache_writeback_collision,
 	TP_PROTO(struct bkey *k),
 	TP_ARGS(k)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 

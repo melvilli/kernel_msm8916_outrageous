@@ -49,7 +49,11 @@ extern ushort ext4_mballoc_debug;
 	} while (0)
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mb_debug(n, fmt, a...)
+=======
+#define mb_debug(n, fmt, a...)		no_printk(fmt, ## a)
+>>>>>>> v3.18
 =======
 #define mb_debug(n, fmt, a...)		no_printk(fmt, ## a)
 >>>>>>> v3.18
@@ -180,8 +184,11 @@ struct ext4_allocation_context {
 	struct ext4_free_extent ac_f_ex;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* number of iterations done. we have to track to limit searching */
 	unsigned long ac_ex_scanned;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u16 ac_groups_scanned;

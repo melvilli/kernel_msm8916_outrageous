@@ -111,7 +111,12 @@ static void orinoco_add_hostscan_result(struct orinoco_private *priv,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	freq = ieee80211_dsss_chan_to_freq(le16_to_cpu(bss->a.channel));
+=======
+	freq = ieee80211_channel_to_frequency(
+		le16_to_cpu(bss->a.channel), IEEE80211_BAND_2GHZ);
+>>>>>>> v3.18
 =======
 	freq = ieee80211_channel_to_frequency(
 		le16_to_cpu(bss->a.channel), IEEE80211_BAND_2GHZ);
@@ -128,14 +133,20 @@ static void orinoco_add_hostscan_result(struct orinoco_private *priv,
 	signal = SIGNAL_TO_MBM(le16_to_cpu(bss->a.level));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cbss = cfg80211_inform_bss(wiphy, channel, bss->a.bssid, timestamp,
 				   capability, beacon_interval, ie_buf, ie_len,
 				   signal, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	cbss = cfg80211_inform_bss(wiphy, channel, CFG80211_BSS_FTYPE_UNKNOWN,
 				   bss->a.bssid, timestamp, capability,
 				   beacon_interval, ie_buf, ie_len, signal,
 				   GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg80211_put_bss(wiphy, cbss);
 }
@@ -159,7 +170,11 @@ void orinoco_add_extscan_result(struct orinoco_private *priv,
 	ie = cfg80211_find_ie(WLAN_EID_DS_PARAMS, bss->data, ie_len);
 	chan = ie ? ie[2] : 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	freq = ieee80211_dsss_chan_to_freq(chan);
+=======
+	freq = ieee80211_channel_to_frequency(chan, IEEE80211_BAND_2GHZ);
+>>>>>>> v3.18
 =======
 	freq = ieee80211_channel_to_frequency(chan, IEEE80211_BAND_2GHZ);
 >>>>>>> v3.18
@@ -172,14 +187,20 @@ void orinoco_add_extscan_result(struct orinoco_private *priv,
 	signal = SIGNAL_TO_MBM(bss->level);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cbss = cfg80211_inform_bss(wiphy, channel, bss->bssid, timestamp,
 				   capability, beacon_interval, ie, ie_len,
 				   signal, GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	cbss = cfg80211_inform_bss(wiphy, channel, CFG80211_BSS_FTYPE_UNKNOWN,
 				   bss->bssid, timestamp, capability,
 				   beacon_interval, ie, ie_len, signal,
 				   GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cfg80211_put_bss(wiphy, cbss);
 }

@@ -3,9 +3,15 @@
  *  Bluetooth HCI UART driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (C) 2002-2003  Maxim Krasnyansky <maxk@qualcomm.com>
  *  Copyright (C) 2004-2005  Marcel Holtmann <marcel@holtmann.org>
  *  Copyright (c) 2000-2001, 2010, Code Aurora Forum. All rights reserved.
+=======
+ *  Copyright (C) 2000-2001  Qualcomm Incorporated
+ *  Copyright (C) 2002-2003  Maxim Krasnyansky <maxk@qualcomm.com>
+ *  Copyright (C) 2004-2005  Marcel Holtmann <marcel@holtmann.org>
+>>>>>>> v3.18
 =======
  *  Copyright (C) 2000-2001  Qualcomm Incorporated
  *  Copyright (C) 2002-2003  Maxim Krasnyansky <maxk@qualcomm.com>
@@ -42,7 +48,11 @@
 
 /* UART protocols */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HCI_UART_MAX_PROTO	7
+=======
+#define HCI_UART_MAX_PROTO	6
+>>>>>>> v3.18
 =======
 #define HCI_UART_MAX_PROTO	6
 >>>>>>> v3.18
@@ -54,7 +64,10 @@
 #define HCI_UART_LL	4
 #define HCI_UART_ATH3K	5
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define HCI_UART_IBS	6
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -63,8 +76,12 @@
 #define HCI_UART_CREATE_AMP	2
 #define HCI_UART_INIT_PENDING	3
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/interrupt.h>
+=======
+#define HCI_UART_EXT_CONFIG	4
+>>>>>>> v3.18
 =======
 #define HCI_UART_EXT_CONFIG	4
 >>>>>>> v3.18
@@ -132,6 +149,7 @@ int ath_deinit(void);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_BT_HCIUART_IBS
 int ibs_init(void);
 int ibs_deinit(void);
@@ -139,15 +157,20 @@ int ibs_deinit(void);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_BT_HCIUART_3WIRE
 int h5_init(void);
 int h5_deinit(void);
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef CONFIG_BT_HCIUART_IBS
 int ibs_init(void);
 int ibs_deinit(void);
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

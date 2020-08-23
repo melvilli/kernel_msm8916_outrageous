@@ -29,7 +29,10 @@ Optional properties:
     configuration will not be modified.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 Pins on the device (for linking into audio routes):
 
   * IN1L
@@ -49,6 +52,9 @@ Pins on the device (for linking into audio routes):
   * RON
   * MICBIAS
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Example:
 

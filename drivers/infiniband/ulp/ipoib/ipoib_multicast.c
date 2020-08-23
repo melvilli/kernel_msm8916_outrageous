@@ -387,13 +387,19 @@ static int ipoib_mcast_join_complete(int status,
 
 	/* We trap for port events ourselves. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (status == -ENETRESET)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (status == -ENETRESET) {
 		status = 0;
 		goto out;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!status)
@@ -415,7 +421,12 @@ static int ipoib_mcast_join_complete(int status,
 			queue_work(ipoib_workqueue, &priv->carrier_on_task);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return 0;
+=======
+		status = 0;
+		goto out;
+>>>>>>> v3.18
 =======
 		status = 0;
 		goto out;
@@ -447,7 +458,12 @@ static int ipoib_mcast_join_complete(int status,
 	spin_unlock_irq(&priv->lock);
 	mutex_unlock(&mcast_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+out:
+	complete(&mcast->done);
+>>>>>>> v3.18
 =======
 out:
 	complete(&mcast->done);
@@ -502,6 +518,12 @@ static void ipoib_mcast_join(struct net_device *dev, struct ipoib_mcast *mcast,
 
 	set_bit(IPOIB_MCAST_FLAG_BUSY, &mcast->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	init_completion(&mcast->done);
+	set_bit(IPOIB_MCAST_JOIN_STARTED, &mcast->flags);
+
+>>>>>>> v3.18
 =======
 	init_completion(&mcast->done);
 	set_bit(IPOIB_MCAST_JOIN_STARTED, &mcast->flags);
@@ -513,6 +535,10 @@ static void ipoib_mcast_join(struct net_device *dev, struct ipoib_mcast *mcast,
 	if (IS_ERR(mcast->mc)) {
 		clear_bit(IPOIB_MCAST_FLAG_BUSY, &mcast->flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		complete(&mcast->done);
+>>>>>>> v3.18
 =======
 		complete(&mcast->done);
 >>>>>>> v3.18
@@ -538,6 +564,10 @@ void ipoib_mcast_join_task(struct work_struct *work)
 		container_of(work, struct ipoib_dev_priv, mcast_task.work);
 	struct net_device *dev = priv->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ib_port_attr port_attr;
+>>>>>>> v3.18
 =======
 	struct ib_port_attr port_attr;
 >>>>>>> v3.18
@@ -546,7 +576,10 @@ void ipoib_mcast_join_task(struct work_struct *work)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ib_query_port(priv->ca, priv->port, &port_attr) ||
 	    port_attr.state != IB_PORT_ACTIVE) {
 		ipoib_dbg(priv, "port state is not ACTIVE (state = %d) suspending join task\n",
@@ -555,12 +588,16 @@ void ipoib_mcast_join_task(struct work_struct *work)
 	}
 	priv->local_lid = port_attr.lid;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ib_query_gid(priv->ca, priv->port, 0, &priv->local_gid))
 		ipoib_warn(priv, "ib_query_gid() failed\n");
 	else
 		memcpy(priv->dev->dev_addr + 4, priv->local_gid.raw, sizeof (union ib_gid));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	{
 		struct ib_port_attr attr;
@@ -571,6 +608,8 @@ void ipoib_mcast_join_task(struct work_struct *work)
 			ipoib_warn(priv, "ib_query_port failed\n");
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!priv->broadcast) {
@@ -797,12 +836,18 @@ void ipoib_mcast_dev_flush(struct net_device *dev)
 	spin_unlock_irqrestore(&priv->lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* seperate between the wait to the leave*/
 	list_for_each_entry_safe(mcast, tmcast, &remove_list, list)
 		if (test_bit(IPOIB_MCAST_JOIN_STARTED, &mcast->flags))
 			wait_for_completion(&mcast->done);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each_entry_safe(mcast, tmcast, &remove_list, list) {
 		ipoib_mcast_leave(dev, mcast);

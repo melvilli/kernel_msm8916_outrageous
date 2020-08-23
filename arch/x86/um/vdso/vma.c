@@ -13,7 +13,11 @@
 #include <linux/init.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __read_mostly vdso_enabled = 1;
+=======
+static unsigned int __read_mostly vdso_enabled = 1;
+>>>>>>> v3.18
 =======
 static unsigned int __read_mostly vdso_enabled = 1;
 >>>>>>> v3.18

@@ -20,6 +20,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/err.h>
+>>>>>>> v3.18
 =======
 #include <linux/err.h>
 >>>>>>> v3.18
@@ -296,6 +300,12 @@ static void mx2_gpio_irq_handler(u32 irq, struct irq_desc *desc)
 	u32 irq_msk, irq_stat;
 	struct mxc_gpio_port *port;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct irq_chip *chip = irq_get_chip(irq);
+
+	chained_irq_enter(chip, desc);
+>>>>>>> v3.18
 =======
 	struct irq_chip *chip = irq_get_chip(irq);
 
@@ -313,6 +323,10 @@ static void mx2_gpio_irq_handler(u32 irq, struct irq_desc *desc)
 			mxc_gpio_irq_handler(port, irq_stat);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	chained_irq_exit(chip, desc);
+>>>>>>> v3.18
 =======
 	chained_irq_exit(chip, desc);
 >>>>>>> v3.18
@@ -420,7 +434,11 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 	mxc_gpio_get_hw(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port = kzalloc(sizeof(struct mxc_gpio_port), GFP_KERNEL);
+=======
+	port = devm_kzalloc(&pdev->dev, sizeof(*port), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	port = devm_kzalloc(&pdev->dev, sizeof(*port), GFP_KERNEL);
 >>>>>>> v3.18
@@ -428,6 +446,7 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	iores = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!iores) {
 		err = -ENODEV;
@@ -453,6 +472,8 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 		goto out_iounmap;
 	}
 =======
+=======
+>>>>>>> v3.18
 	port->base = devm_ioremap_resource(&pdev->dev, iores);
 	if (IS_ERR(port->base))
 		return PTR_ERR(port->base);
@@ -461,6 +482,9 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 	port->irq = platform_get_irq(pdev, 0);
 	if (port->irq < 0)
 		return port->irq;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* disable the interrupt and clear the status */
@@ -492,7 +516,11 @@ static int mxc_gpio_probe(struct platform_device *pdev)
 			 port->base + GPIO_GDIR, NULL, 0);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_iounmap;
+=======
+		goto out_bgio;
+>>>>>>> v3.18
 =======
 		goto out_bgio;
 >>>>>>> v3.18
@@ -529,6 +557,7 @@ out_irqdesc_free:
 	irq_free_descs(irq_base, 32);
 out_gpiochip_remove:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WARN_ON(gpiochip_remove(&port->bgc.gc) < 0);
 out_bgpio_remove:
 	bgpio_remove(&port->bgc);
@@ -539,10 +568,15 @@ out_release_mem:
 out_kfree:
 	kfree(port);
 =======
+=======
+>>>>>>> v3.18
 	gpiochip_remove(&port->bgc.gc);
 out_bgpio_remove:
 	bgpio_remove(&port->bgc);
 out_bgio:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_info(&pdev->dev, "%s failed with errno %d\n", __func__, err);
 	return err;

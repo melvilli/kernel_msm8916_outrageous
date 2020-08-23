@@ -20,6 +20,10 @@
 #include <linux/string.h>
 #include "rtl_core.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "rtl_wx.h"
+>>>>>>> v3.18
 =======
 #include "rtl_wx.h"
 >>>>>>> v3.18
@@ -58,6 +62,10 @@ static int r8192_wx_get_rate(struct net_device *dev,
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -111,6 +119,10 @@ static int r8192_wx_get_rts(struct net_device *dev,
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -144,6 +156,10 @@ static int r8192_wx_get_power(struct net_device *dev,
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -496,6 +512,10 @@ static int r8192_wx_set_scan(struct net_device *dev, struct iw_request_info *a,
 	if (wrqu->data.flags & IW_SCAN_THIS_ESSID) {
 		struct iw_scan_req *req = (struct iw_scan_req *)b;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -630,7 +650,11 @@ static int r8192_wx_set_nick(struct net_device *dev,
 		return -E2BIG;
 	down(&priv->wx_sem);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wrqu->data.length = min((size_t) wrqu->data.length, sizeof(priv->nick));
+=======
+	wrqu->data.length = min_t(size_t, wrqu->data.length, sizeof(priv->nick));
+>>>>>>> v3.18
 =======
 	wrqu->data.length = min_t(size_t, wrqu->data.length, sizeof(priv->nick));
 >>>>>>> v3.18
@@ -678,6 +702,10 @@ static int r8192_wx_get_name(struct net_device *dev,
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -962,6 +990,10 @@ static int r8192_wx_get_sens(struct net_device *dev,
 {
 	struct r8192_priv *priv = rtllib_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1027,6 +1059,10 @@ static int r8192_wx_set_enc_ext(struct net_device *dev,
 		struct iw_point *encoding = &wrqu->encoding;
 		u8 idx = 0, alg = 0, group = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1167,12 +1203,15 @@ static int r8192_wx_set_PromiscuousMode(struct net_device *dev,
 	struct rtllib_device *ieee = priv->rtllib;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *info_buf = (u32 *)(wrqu->data.pointer);
 
 	u32 oid = info_buf[0];
 	u32 bPromiscuousOn = info_buf[1];
 	u32 bFilterSourceStationFrame = info_buf[2];
 =======
+=======
+>>>>>>> v3.18
 	u32 info_buf[3];
 
 	u32 oid;
@@ -1185,6 +1224,9 @@ static int r8192_wx_set_PromiscuousMode(struct net_device *dev,
 	oid = info_buf[0];
 	bPromiscuousOn = info_buf[1];
 	bFilterSourceStationFrame = info_buf[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (OID_RT_INTEL_PROMISCUOUS_MODE == oid) {
@@ -1265,7 +1307,11 @@ static iw_handler r8192_wx_handlers[] = {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * the following rule need to be follwing,
+=======
+ * the following rule need to be following,
+>>>>>>> v3.18
 =======
  * the following rule need to be following,
 >>>>>>> v3.18
@@ -1357,6 +1403,10 @@ static struct iw_statistics *r8192_get_wireless_stats(struct net_device *dev)
 	int tmp_qual = 0;
 	int tmp_noise = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1380,7 +1430,11 @@ static struct iw_statistics *r8192_get_wireless_stats(struct net_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iw_handler_def  r8192_wx_handlers_def = {
+=======
+const struct iw_handler_def r8192_wx_handlers_def = {
+>>>>>>> v3.18
 =======
 const struct iw_handler_def r8192_wx_handlers_def = {
 >>>>>>> v3.18

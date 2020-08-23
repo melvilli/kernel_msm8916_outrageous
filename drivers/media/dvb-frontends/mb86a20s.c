@@ -2,7 +2,11 @@
  *   Fujitu mb86a20s ISDB-T/ISDB-Tsb Module driver
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (C) 2010-2013 Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ *   Copyright (C) 2010-2013 Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  *   Copyright (C) 2010-2013 Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -38,7 +42,11 @@ enum mb86a20s_bandwidth {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u8 mb86a20s_subchannel[] = {
+=======
+static u8 mb86a20s_subchannel[] = {
+>>>>>>> v3.18
 =======
 static u8 mb86a20s_subchannel[] = {
 >>>>>>> v3.18
@@ -84,6 +92,7 @@ static struct regdata mb86a20s_init1[] = {
 
 static struct regdata mb86a20s_init2[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x50, 0xd1 }, { 0x51, 0x22 },
 	{ 0x39, 0x01 },
 	{ 0x71, 0x00 },
@@ -106,6 +115,8 @@ static struct regdata mb86a20s_init2[] = {
 	{ 0x04, 0x29 }, { 0x05, 0x0a },
 	{ 0x04, 0x32 }, { 0x05, 0x0a },
 =======
+=======
+>>>>>>> v3.18
 	{ 0x28, 0x22 }, { 0x29, 0x00 }, { 0x2a, 0x1f }, { 0x2b, 0xf0 },
 	{ 0x3b, 0x21 },
 	{ 0x3c, 0x38 },
@@ -125,6 +136,9 @@ static struct regdata mb86a20s_init2[] = {
 	{ 0x04, 0x1e }, { 0x05, 0x00 },
 	{ 0x04, 0x29 }, { 0x05, 0x64 },
 	{ 0x04, 0x32 }, { 0x05, 0x02 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x04, 0x14 }, { 0x05, 0x02 },
 	{ 0x04, 0x04 }, { 0x05, 0x00 },
@@ -134,6 +148,11 @@ static struct regdata mb86a20s_init2[] = {
 	{ 0x04, 0x12 }, { 0x05, 0x00 },
 	{ 0x04, 0x13 }, { 0x05, 0xff },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 0x04, 0x15 }, { 0x05, 0x4e },
+	{ 0x04, 0x16 }, { 0x05, 0x20 },
+>>>>>>> v3.18
 =======
 	{ 0x04, 0x15 }, { 0x05, 0x4e },
 	{ 0x04, 0x16 }, { 0x05, 0x20 },
@@ -192,6 +211,7 @@ static struct regdata mb86a20s_init2[] = {
 	{ 0x45, 0x04 },				/* CN symbol 4 */
 	{ 0x48, 0x04 },				/* CN manual mode */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x50, 0xd5 }, { 0x51, 0x01 },
 	{ 0x50, 0xd6 }, { 0x51, 0x1f },
 	{ 0x50, 0xd2 }, { 0x51, 0x03 },
@@ -223,6 +243,8 @@ static struct regdata mb86a20s_init2[] = {
 	{ 0x28, 0x1d }, { 0x29, 0x00 }, { 0x2a, 0x04 }, { 0x2b, 0xba },
 	{ 0x28, 0x1e }, { 0x29, 0x00 }, { 0x2a, 0x06 }, { 0x2b, 0x14 },
 =======
+=======
+>>>>>>> v3.18
 
 	{ 0x50, 0xd6 }, { 0x51, 0x1f },
 	{ 0x50, 0xd2 }, { 0x51, 0x03 },
@@ -259,6 +281,9 @@ static struct regdata mb86a20s_init2[] = {
 	{ 0x28, 0x1c }, { 0x29, 0x00 }, { 0x2a, 0x00 }, { 0x2b, 0x3d },
 	{ 0x28, 0x1d }, { 0x29, 0x00 }, { 0x2a, 0x00 }, { 0x2b, 0x94 },
 	{ 0x28, 0x1e }, { 0x29, 0x00 }, { 0x2a, 0x00 }, { 0x2b, 0xba },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ 0x50, 0x1e }, { 0x51, 0x5d },
 	{ 0x50, 0x22 }, { 0x51, 0x00 },
@@ -269,7 +294,13 @@ static struct regdata mb86a20s_init2[] = {
 	{ 0x50, 0x27 }, { 0x51, 0xc3 },
 	{ 0x50, 0x39 }, { 0x51, 0x02 },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x50, 0xd5 }, { 0x51, 0x01 },
+=======
+	{ 0xec, 0x0f },
+	{ 0xeb, 0x1f },
+	{ 0x28, 0x6a }, { 0x29, 0x00 }, { 0x2a, 0x00 }, { 0x2b, 0x00 },
+>>>>>>> v3.18
 =======
 	{ 0xec, 0x0f },
 	{ 0xeb, 0x1f },
@@ -394,11 +425,15 @@ static int mb86a20s_read_status(struct dvb_frontend *fe, fe_status_t *status)
 		*status |= FE_HAS_SYNC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Actually, on state S8, it starts receiving TS, but the TS
 	 * output is only on normal state after the transition to S9.
 	 */
 	if (val >= 9)
+=======
+	if (val >= 8)				/* Maybe 9? */
+>>>>>>> v3.18
 =======
 	if (val >= 8)				/* Maybe 9? */
 >>>>>>> v3.18
@@ -540,6 +575,12 @@ static int mb86a20s_get_interleaving(struct mb86a20s_state *state,
 {
 	int rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int interleaving[] = {
+		0, 1, 2, 4, 8
+	};
+>>>>>>> v3.18
 =======
 	int interleaving[] = {
 		0, 1, 2, 4, 8
@@ -562,6 +603,7 @@ static int mb86a20s_get_interleaving(struct mb86a20s_state *state,
 		return rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch ((rc >> 4) & 0x07) {
 	case 1:
 		return GUARD_INTERVAL_1_4;
@@ -576,6 +618,9 @@ static int mb86a20s_get_interleaving(struct mb86a20s_state *state,
 	case 0:
 		return GUARD_INTERVAL_AUTO;
 	}
+=======
+	return interleaving[(rc >> 4) & 0x07];
+>>>>>>> v3.18
 =======
 	return interleaving[(rc >> 4) & 0x07];
 >>>>>>> v3.18
@@ -657,7 +702,11 @@ static u32 isdbt_rate[3][5][4] = {
 static void mb86a20s_layer_bitrate(struct dvb_frontend *fe, u32 layer,
 				   u32 modulation, u32 forward_error_correction,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   u32 interleaving,
+=======
+				   u32 guard_interval,
+>>>>>>> v3.18
 =======
 				   u32 guard_interval,
 >>>>>>> v3.18
@@ -669,7 +718,11 @@ static void mb86a20s_layer_bitrate(struct dvb_frontend *fe, u32 layer,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * If modulation/fec/interleaving is not detected, the default is
+=======
+	 * If modulation/fec/guard is not detected, the default is
+>>>>>>> v3.18
 =======
 	 * If modulation/fec/guard is not detected, the default is
 >>>>>>> v3.18
@@ -711,7 +764,11 @@ static void mb86a20s_layer_bitrate(struct dvb_frontend *fe, u32 layer,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (interleaving) {
+=======
+	switch (guard_interval) {
+>>>>>>> v3.18
 =======
 	switch (guard_interval) {
 >>>>>>> v3.18
@@ -806,7 +863,11 @@ static int mb86a20s_get_frontend(struct dvb_frontend *fe)
 		mb86a20s_layer_bitrate(fe, layer, c->layer[layer].modulation,
 				       c->layer[layer].fec,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       c->layer[layer].interleaving,
+=======
+				       c->guard_interval,
+>>>>>>> v3.18
 =======
 				       c->guard_interval,
 >>>>>>> v3.18
@@ -828,16 +889,22 @@ static int mb86a20s_get_frontend(struct dvb_frontend *fe)
 	if (rc < 0)
 		return rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((rc & 0x60) == 0x20) {
 		switch (rc & 0x0c >> 2) {
 		case 0:
 			c->transmission_mode = TRANSMISSION_MODE_2K;
 			break;
 =======
+=======
+>>>>>>> v3.18
 	c->transmission_mode = TRANSMISSION_MODE_AUTO;
 	if ((rc & 0x60) == 0x20) {
 		/* Only modes 2 and 3 are supported */
 		switch ((rc >> 2) & 0x03) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		case 1:
 			c->transmission_mode = TRANSMISSION_MODE_4K;
@@ -848,7 +915,13 @@ static int mb86a20s_get_frontend(struct dvb_frontend *fe)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(rc & 0x10)) {
+=======
+	c->guard_interval = GUARD_INTERVAL_AUTO;
+	if (!(rc & 0x10)) {
+		/* Guard interval 1/32 is not supported */
+>>>>>>> v3.18
 =======
 	c->guard_interval = GUARD_INTERVAL_AUTO;
 	if (!(rc & 0x10)) {
@@ -1357,7 +1430,11 @@ struct linear_segments {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct linear_segments cnr_to_db_table[] = {
+=======
+static const struct linear_segments cnr_to_db_table[] = {
+>>>>>>> v3.18
 =======
 static const struct linear_segments cnr_to_db_table[] = {
 >>>>>>> v3.18
@@ -1395,7 +1472,11 @@ static const struct linear_segments cnr_to_db_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct linear_segments cnr_64qam_table[] = {
+=======
+static const struct linear_segments cnr_64qam_table[] = {
+>>>>>>> v3.18
 =======
 static const struct linear_segments cnr_64qam_table[] = {
 >>>>>>> v3.18
@@ -1433,7 +1514,11 @@ static const struct linear_segments cnr_64qam_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct linear_segments cnr_16qam_table[] = {
+=======
+static const struct linear_segments cnr_16qam_table[] = {
+>>>>>>> v3.18
 =======
 static const struct linear_segments cnr_16qam_table[] = {
 >>>>>>> v3.18
@@ -1471,7 +1556,11 @@ static const struct linear_segments cnr_16qam_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct linear_segments cnr_qpsk_table[] = {
+=======
+static const struct linear_segments cnr_qpsk_table[] = {
+>>>>>>> v3.18
 =======
 static const struct linear_segments cnr_qpsk_table[] = {
 >>>>>>> v3.18
@@ -1509,7 +1598,11 @@ static const struct linear_segments cnr_qpsk_table[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 interpolate_value(u32 value, struct linear_segments *segments,
+=======
+static u32 interpolate_value(u32 value, const struct linear_segments *segments,
+>>>>>>> v3.18
 =======
 static u32 interpolate_value(u32 value, const struct linear_segments *segments,
 >>>>>>> v3.18
@@ -1597,7 +1690,11 @@ static int mb86a20s_get_blk_error_layer_CNR(struct dvb_frontend *fe)
 	u32 mer, cnr;
 	int rc, val, layer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct linear_segments *segs;
+=======
+	const struct linear_segments *segs;
+>>>>>>> v3.18
 =======
 	const struct linear_segments *segs;
 >>>>>>> v3.18
@@ -2224,11 +2321,14 @@ static void mb86a20s_release(struct dvb_frontend *fe)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mb86a20s_get_frontend_algo(struct dvb_frontend *fe)
 {
         return DVBFE_ALGO_HW;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct dvb_frontend_ops mb86a20s_ops;
@@ -2305,15 +2405,21 @@ static struct dvb_frontend_ops mb86a20s_ops = {
 	.read_signal_strength = mb86a20s_read_signal_strength_from_cache,
 	.tune = mb86a20s_tune,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_frontend_algo = mb86a20s_get_frontend_algo,
 };
 
 MODULE_DESCRIPTION("DVB Frontend module for Fujitsu mb86A20s hardware");
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
 =======
+=======
+>>>>>>> v3.18
 };
 
 MODULE_DESCRIPTION("DVB Frontend module for Fujitsu mb86A20s hardware");
 MODULE_AUTHOR("Mauro Carvalho Chehab");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MODULE_LICENSE("GPL");

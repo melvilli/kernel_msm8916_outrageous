@@ -11,7 +11,10 @@
 #include "ste_dma40_ll.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u8 d40_width_to_bits(enum dma_slave_buswidth width)
 {
 	if (width == DMA_SLAVE_BUSWIDTH_1_BYTE)
@@ -24,6 +27,9 @@ u8 d40_width_to_bits(enum dma_slave_buswidth width)
 		return STEDMA40_ESIZE_32_BIT;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Sets up proper LCSP1 and LCSP3 register for a logical channel */
 void d40_log_cfg(struct stedma40_chan_cfg *cfg,
@@ -33,6 +39,7 @@ void d40_log_cfg(struct stedma40_chan_cfg *cfg,
 	u32 l1 = 0; /* src */
 
 	/* src is mem? -> increase address pos */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (cfg->dir ==  STEDMA40_MEM_TO_PERIPH ||
 	    cfg->dir ==  STEDMA40_MEM_TO_MEM)
@@ -61,6 +68,8 @@ void d40_log_cfg(struct stedma40_chan_cfg *cfg,
 	l1 |= cfg->src_info.psize << D40_MEM_LCSP1_SCFG_PSIZE_POS;
 	l1 |= cfg->src_info.data_width << D40_MEM_LCSP1_SCFG_ESIZE_POS;
 =======
+=======
+>>>>>>> v3.18
 	if (cfg->dir ==  DMA_MEM_TO_DEV ||
 	    cfg->dir ==  DMA_MEM_TO_MEM)
 		l1 |= BIT(D40_MEM_LCSP1_SCFG_INCR_POS);
@@ -89,6 +98,9 @@ void d40_log_cfg(struct stedma40_chan_cfg *cfg,
 	l1 |= cfg->src_info.psize << D40_MEM_LCSP1_SCFG_PSIZE_POS;
 	l1 |= d40_width_to_bits(cfg->src_info.data_width)
 		<< D40_MEM_LCSP1_SCFG_ESIZE_POS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*lcsp1 = l1;
@@ -97,9 +109,13 @@ void d40_log_cfg(struct stedma40_chan_cfg *cfg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Sets up SRC and DST CFG register for both logical and physical channels */
 void d40_phy_cfg(struct stedma40_chan_cfg *cfg,
 		 u32 *src_cfg, u32 *dst_cfg, bool is_log)
+=======
+void d40_phy_cfg(struct stedma40_chan_cfg *cfg, u32 *src_cfg, u32 *dst_cfg)
+>>>>>>> v3.18
 =======
 void d40_phy_cfg(struct stedma40_chan_cfg *cfg, u32 *src_cfg, u32 *dst_cfg)
 >>>>>>> v3.18
@@ -107,6 +123,7 @@ void d40_phy_cfg(struct stedma40_chan_cfg *cfg, u32 *src_cfg, u32 *dst_cfg)
 	u32 src = 0;
 	u32 dst = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!is_log) {
 		/* Physical channel */
@@ -170,6 +187,8 @@ void d40_phy_cfg(struct stedma40_chan_cfg *cfg, u32 *src_cfg, u32 *dst_cfg)
 	if (cfg->dst_info.big_endian)
 		dst |= 1 << D40_SREG_CFG_LBE_POS;
 =======
+=======
+>>>>>>> v3.18
 	if ((cfg->dir == DMA_DEV_TO_MEM) ||
 	    (cfg->dir == DMA_DEV_TO_DEV)) {
 		/* Set master port to 1 */
@@ -225,6 +244,9 @@ void d40_phy_cfg(struct stedma40_chan_cfg *cfg, u32 *src_cfg, u32 *dst_cfg)
 		src |= BIT(D40_SREG_CFG_LBE_POS);
 	if (cfg->dst_info.big_endian)
 		dst |= BIT(D40_SREG_CFG_LBE_POS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*src_cfg = src;
@@ -252,6 +274,7 @@ static int d40_phy_fill_lli(struct d40_phy_lli *lli,
 
 	/* Must be aligned */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!IS_ALIGNED(data, 0x1 << data_width))
 		return -EINVAL;
 
@@ -262,6 +285,8 @@ static int d40_phy_fill_lli(struct d40_phy_lli *lli,
 	/* The number of elements. IE now many chunks */
 	lli->reg_elt = (data_size >> data_width) << D40_SREG_ELEM_PHY_ECNT_POS;
 =======
+=======
+>>>>>>> v3.18
 	if (!IS_ALIGNED(data, data_width))
 		return -EINVAL;
 
@@ -271,6 +296,9 @@ static int d40_phy_fill_lli(struct d40_phy_lli *lli,
 
 	/* The number of elements. IE now many chunks */
 	lli->reg_elt = (data_size / data_width) << D40_SREG_ELEM_PHY_ECNT_POS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -279,8 +307,12 @@ static int d40_phy_fill_lli(struct d40_phy_lli *lli,
 	 */
 	if (addr_inc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lli->reg_elt |= (0x1 << data_width) <<
 			D40_SREG_ELEM_PHY_EIDX_POS;
+=======
+		lli->reg_elt |= data_width << D40_SREG_ELEM_PHY_EIDX_POS;
+>>>>>>> v3.18
 =======
 		lli->reg_elt |= data_width << D40_SREG_ELEM_PHY_EIDX_POS;
 >>>>>>> v3.18
@@ -292,7 +324,11 @@ static int d40_phy_fill_lli(struct d40_phy_lli *lli,
 	/* If this scatter list entry is the last one, no next link */
 	if (next_lli == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lli->reg_lnk = 0x1 << D40_SREG_LNK_PHY_TCP_POS;
+=======
+		lli->reg_lnk = BIT(D40_SREG_LNK_PHY_TCP_POS);
+>>>>>>> v3.18
 =======
 		lli->reg_lnk = BIT(D40_SREG_LNK_PHY_TCP_POS);
 >>>>>>> v3.18
@@ -302,6 +338,7 @@ static int d40_phy_fill_lli(struct d40_phy_lli *lli,
 	/* Set/clear interrupt generation on this link item.*/
 	if (term_int)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lli->reg_cfg |= 0x1 << D40_SREG_CFG_TIM_POS;
 	else
 		lli->reg_cfg &= ~(0x1 << D40_SREG_CFG_TIM_POS);
@@ -309,6 +346,8 @@ static int d40_phy_fill_lli(struct d40_phy_lli *lli,
 	/* Post link */
 	lli->reg_lnk |= 0 << D40_SREG_LNK_PHY_PRE_POS;
 =======
+=======
+>>>>>>> v3.18
 		lli->reg_cfg |= BIT(D40_SREG_CFG_TIM_POS);
 	else
 		lli->reg_cfg &= ~BIT(D40_SREG_CFG_TIM_POS);
@@ -317,6 +356,9 @@ static int d40_phy_fill_lli(struct d40_phy_lli *lli,
 	 * Post link - D40_SREG_LNK_PHY_PRE_POS = 0
 	 * Relink happens after transfer completion.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -327,15 +369,21 @@ static int d40_seg_size(int size, int data_width1, int data_width2)
 	u32 max_w = max(data_width1, data_width2);
 	u32 min_w = min(data_width1, data_width2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 seg_max = ALIGN(STEDMA40_MAX_SEG_SIZE << min_w, 1 << max_w);
 
 	if (seg_max > STEDMA40_MAX_SEG_SIZE)
 		seg_max -= (1 << max_w);
 =======
+=======
+>>>>>>> v3.18
 	u32 seg_max = ALIGN(STEDMA40_MAX_SEG_SIZE * min_w, max_w);
 
 	if (seg_max > STEDMA40_MAX_SEG_SIZE)
 		seg_max -= max_w;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (size <= seg_max)
@@ -343,7 +391,11 @@ static int d40_seg_size(int size, int data_width1, int data_width2)
 
 	if (size <= 2 * seg_max)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return ALIGN(size / 2, 1 << max_w);
+=======
+		return ALIGN(size / 2, max_w);
+>>>>>>> v3.18
 =======
 		return ALIGN(size / 2, max_w);
 >>>>>>> v3.18
@@ -513,15 +565,21 @@ static void d40_log_fill_lli(struct d40_log_lli *lli,
 
 	/* The number of elements to transfer */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lli->lcsp02 = ((data_size >> data_width) <<
 		       D40_MEM_LCSP0_ECNT_POS) & D40_MEM_LCSP0_ECNT_MASK;
 
 	BUG_ON((data_size >> data_width) > STEDMA40_MAX_SEG_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	lli->lcsp02 = ((data_size / data_width) <<
 		       D40_MEM_LCSP0_ECNT_POS) & D40_MEM_LCSP0_ECNT_MASK;
 
 	BUG_ON((data_size / data_width) > STEDMA40_MAX_SEG_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* 16 LSBs address of the current element */

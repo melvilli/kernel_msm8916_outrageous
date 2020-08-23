@@ -54,6 +54,7 @@
 #include <asm/sal.h>
 #include <asm/cyclone.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/xen/hypervisor.h>
 
 #define BAD_MADT_ENTRY(entry, end) (                                        \
@@ -64,10 +65,15 @@
 
 u32 acpi_rsdt_forced;
 =======
+=======
+>>>>>>> v3.18
 
 #define PREFIX			"ACPI: "
 
 int acpi_lapic;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned int acpi_cpei_override;
 unsigned int acpi_cpei_phys_cpuid;
@@ -128,8 +134,11 @@ acpi_get_sysname(void)
 		else
 			return "sn2";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (xen_pv_domain() && !strcmp(hdr->oem_id, "XEN")) {
 		return "xen";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -695,6 +704,11 @@ int __init early_acpi_boot_init(void)
 		printk(KERN_ERR PREFIX
 		       "Error parsing MADT - no LAPIC entries\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else
+		acpi_lapic = 1;
+>>>>>>> v3.18
 =======
 	else
 		acpi_lapic = 1;
@@ -823,6 +837,7 @@ int acpi_isa_irq_to_gsi(unsigned isa_irq, u32 *gsi)
  */
 #ifdef CONFIG_ACPI_HOTPLUG_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit
 int acpi_map_cpu2node(acpi_handle handle, int cpu, int physid)
 {
@@ -836,6 +851,11 @@ static int acpi_map_cpu2node(acpi_handle handle, int cpu, int physid)
 {
 #ifdef CONFIG_ACPI_NUMA
 >>>>>>> v3.18
+=======
+static int acpi_map_cpu2node(acpi_handle handle, int cpu, int physid)
+{
+#ifdef CONFIG_ACPI_NUMA
+>>>>>>> v3.18
 	/*
 	 * We don't have cpu-only-node hotadd. But if the system equips
 	 * SRAT table, pxm is already found and node is ready.
@@ -844,16 +864,22 @@ static int acpi_map_cpu2node(acpi_handle handle, int cpu, int physid)
   	 * table for possible cpus.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nid = acpi_map_pxm_to_node(pxm_id);
 	node_cpuid[cpu].phys_id = physid;
 	node_cpuid[cpu].nid = nid;
 #endif
 	return (0);
 =======
+=======
+>>>>>>> v3.18
 	node_cpuid[cpu].phys_id = physid;
 	node_cpuid[cpu].nid = acpi_get_node(handle);
 #endif
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -911,6 +937,7 @@ __init void prefill_possible_map(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit _acpi_map_lsapic(acpi_handle handle, int *pcpu)
 {
 	struct acpi_buffer buffer = { ACPI_ALLOCATE_BUFFER, NULL };
@@ -946,10 +973,15 @@ static int __cpuinit _acpi_map_lsapic(acpi_handle handle, int *pcpu)
 	buffer.length = ACPI_ALLOCATE_BUFFER;
 	buffer.pointer = NULL;
 =======
+=======
+>>>>>>> v3.18
 static int _acpi_map_lsapic(acpi_handle handle, int physid, int *pcpu)
 {
 	cpumask_t tmp_map;
 	int cpu;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cpumask_complement(&tmp_map, cpu_present_mask);
@@ -970,9 +1002,15 @@ static int _acpi_map_lsapic(acpi_handle handle, int physid, int *pcpu)
 
 /* wrapper to silence section mismatch warning */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __ref acpi_map_lsapic(acpi_handle handle, int *pcpu)
 {
 	return _acpi_map_lsapic(handle, pcpu);
+=======
+int __ref acpi_map_lsapic(acpi_handle handle, int physid, int *pcpu)
+{
+	return _acpi_map_lsapic(handle, physid, pcpu);
+>>>>>>> v3.18
 =======
 int __ref acpi_map_lsapic(acpi_handle handle, int physid, int *pcpu)
 {
@@ -1005,7 +1043,11 @@ static acpi_status acpi_map_iosapic(acpi_handle handle, u32 depth,
 	struct acpi_madt_io_sapic *iosapic;
 	unsigned int gsi_base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int pxm, node;
+=======
+	int node;
+>>>>>>> v3.18
 =======
 	int node;
 >>>>>>> v3.18
@@ -1036,6 +1078,7 @@ static acpi_status acpi_map_iosapic(acpi_handle handle, u32 depth,
 	kfree(buffer.pointer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * OK, it's an IOSAPIC MADT entry, look for a _PXM value to tell
 	 * us which node to associate this with.
@@ -1047,6 +1090,11 @@ static acpi_status acpi_map_iosapic(acpi_handle handle, u32 depth,
 	node = pxm_to_node(pxm);
 
 	if (node >= MAX_NUMNODES || !node_online(node) ||
+=======
+	/* OK, it's an IOSAPIC MADT entry; associate it with a node */
+	node = acpi_get_node(handle);
+	if (node == NUMA_NO_NODE || !node_online(node) ||
+>>>>>>> v3.18
 =======
 	/* OK, it's an IOSAPIC MADT entry; associate it with a node */
 	node = acpi_get_node(handle);

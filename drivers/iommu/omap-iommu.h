@@ -29,7 +29,10 @@ struct iotlb_entry {
 struct omap_iommu {
 	const char	*name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct module	*owner;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void __iomem	*regbase;
@@ -50,12 +53,18 @@ struct omap_iommu {
 	int		nr_tlb_entries;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	mmap;
 	struct mutex		mmap_lock; /* protect mmap */
 
 	void *ctx; /* iommu context: registres saved area */
 	u32 da_start;
 	u32 da_end;
+=======
+	void *ctx; /* iommu context: registres saved area */
+
+	int has_bus_err_back;
+>>>>>>> v3.18
 =======
 	void *ctx; /* iommu context: registres saved area */
 
@@ -140,6 +149,10 @@ static inline struct omap_iommu *dev_to_omap_iommu(struct device *dev)
 #define MMU_READ_RAM		0x6c
 #define MMU_EMU_FAULT_AD	0x70
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MMU_GP_REG		0x88
+>>>>>>> v3.18
 =======
 #define MMU_GP_REG		0x88
 >>>>>>> v3.18
@@ -165,16 +178,22 @@ static inline struct omap_iommu *dev_to_omap_iommu(struct device *dev)
 	((~0UL >> MMU_RAM_PADDR_SHIFT) << MMU_RAM_PADDR_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MMU_RAM_ENDIAN_MASK	(1 << MMU_RAM_ENDIAN_SHIFT)
 #define MMU_RAM_ENDIAN_BIG	(1 << MMU_RAM_ENDIAN_SHIFT)
 
 =======
+=======
+>>>>>>> v3.18
 #define MMU_RAM_ENDIAN_SHIFT	9
 #define MMU_RAM_ENDIAN_MASK	(1 << MMU_RAM_ENDIAN_SHIFT)
 #define MMU_RAM_ENDIAN_LITTLE	(0 << MMU_RAM_ENDIAN_SHIFT)
 #define MMU_RAM_ENDIAN_BIG	(1 << MMU_RAM_ENDIAN_SHIFT)
 
 #define MMU_RAM_ELSZ_SHIFT	7
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define MMU_RAM_ELSZ_MASK	(3 << MMU_RAM_ELSZ_SHIFT)
 #define MMU_RAM_ELSZ_8		(0 << MMU_RAM_ELSZ_SHIFT)
@@ -186,6 +205,11 @@ static inline struct omap_iommu *dev_to_omap_iommu(struct device *dev)
 #define MMU_RAM_MIXED		MMU_RAM_MIXED_MASK
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MMU_GP_REG_BUS_ERR_BACK_EN	0x1
+
+>>>>>>> v3.18
 =======
 #define MMU_GP_REG_BUS_ERR_BACK_EN	0x1
 

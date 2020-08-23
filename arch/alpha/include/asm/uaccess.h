@@ -372,7 +372,10 @@ __copy_tofrom_user_nocheck(void *to, const void *from, long len)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern inline long
 __copy_tofrom_user(void *to, const void *from, long len, const void __user *validate)
 {
@@ -381,6 +384,9 @@ __copy_tofrom_user(void *to, const void *from, long len, const void __user *vali
 	return len;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define __copy_to_user(to,from,n)					\
 ({									\
@@ -397,6 +403,7 @@ __copy_tofrom_user(void *to, const void *from, long len, const void __user *vali
 #define __copy_from_user_inatomic __copy_from_user
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern inline long
 copy_to_user(void __user *to, const void *from, long n)
 {
@@ -404,11 +411,16 @@ copy_to_user(void __user *to, const void *from, long n)
 		n = __copy_tofrom_user_nocheck((__force void *)to, from, n);
 	return n;
 =======
+=======
+>>>>>>> v3.18
 
 extern inline long
 copy_to_user(void __user *to, const void *from, long n)
 {
 	return __copy_tofrom_user((__force void *)to, from, n, to);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -416,11 +428,15 @@ extern inline long
 copy_from_user(void *to, const void __user *from, long n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(__access_ok((unsigned long)from, n, get_fs())))
 		n = __copy_tofrom_user_nocheck(to, (__force void *)from, n);
 	else
 		memset(to, 0, n);
 	return n;
+=======
+	return __copy_tofrom_user(to, (__force void *)from, n, from);
+>>>>>>> v3.18
 =======
 	return __copy_tofrom_user(to, (__force void *)from, n, from);
 >>>>>>> v3.18

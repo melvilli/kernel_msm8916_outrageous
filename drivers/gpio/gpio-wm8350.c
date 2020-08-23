@@ -107,7 +107,11 @@ static struct gpio_chip template_chip = {
 	.set			= wm8350_gpio_set,
 	.to_irq			= wm8350_gpio_to_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_sleep		= 1,
+=======
+	.can_sleep		= true,
+>>>>>>> v3.18
 =======
 	.can_sleep		= true,
 >>>>>>> v3.18
@@ -117,7 +121,11 @@ static int wm8350_gpio_probe(struct platform_device *pdev)
 {
 	struct wm8350 *wm8350 = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm8350_platform_data *pdata = wm8350->dev->platform_data;
+=======
+	struct wm8350_platform_data *pdata = dev_get_platdata(wm8350->dev);
+>>>>>>> v3.18
 =======
 	struct wm8350_platform_data *pdata = dev_get_platdata(wm8350->dev);
 >>>>>>> v3.18
@@ -154,7 +162,12 @@ static int wm8350_gpio_remove(struct platform_device *pdev)
 	struct wm8350_gpio_data *wm8350_gpio = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&wm8350_gpio->gpio_chip);
+=======
+	gpiochip_remove(&wm8350_gpio->gpio_chip);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&wm8350_gpio->gpio_chip);
 	return 0;

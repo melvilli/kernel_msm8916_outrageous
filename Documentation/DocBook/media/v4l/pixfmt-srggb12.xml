@@ -19,7 +19,11 @@
 
 	<para>The following four pixel formats are raw sRGB / Bayer formats with
 <<<<<<< HEAD
+<<<<<<< HEAD
 12 bits per colour. Each colour component is stored in a 16-bit word, with 6
+=======
+12 bits per colour. Each colour component is stored in a 16-bit word, with 4
+>>>>>>> v3.18
 =======
 12 bits per colour. Each colour component is stored in a 16-bit word, with 4
 >>>>>>> v3.18

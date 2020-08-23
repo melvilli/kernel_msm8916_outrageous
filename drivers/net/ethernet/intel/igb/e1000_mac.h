@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*******************************************************************************
 
   Intel(R) Gigabit Ethernet Linux driver
@@ -26,6 +27,8 @@
 
 *******************************************************************************/
 =======
+=======
+>>>>>>> v3.18
 /* Intel(R) Gigabit Ethernet Linux driver
  * Copyright(c) 2007-2014 Intel Corporation.
  *
@@ -48,6 +51,9 @@
  * e1000-devel Mailing List <e1000-devel@lists.sourceforge.net>
  * Intel Corporation, 5200 N.E. Elam Young Parkway, Hillsboro, OR 97124-6497
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef _E1000_MAC_H_
@@ -112,7 +118,11 @@ enum e1000_mng_mode {
 #define E1000_MNG_DHCP_COOKIE_STATUS_VLAN	0x2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void e1000_init_function_pointers_82575(struct e1000_hw *hw);
+=======
+void e1000_init_function_pointers_82575(struct e1000_hw *hw);
+>>>>>>> v3.18
 =======
 void e1000_init_function_pointers_82575(struct e1000_hw *hw);
 >>>>>>> v3.18

@@ -140,12 +140,18 @@ struct mnt_fhstatus {
  * @info: pointer to mount request arguments
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Uses default timeout parameters specified by underlying transport.
 =======
+=======
+>>>>>>> v3.18
  * Uses default timeout parameters specified by underlying transport. On
  * successful return, the auth_flavs list and auth_flav_len will be populated
  * with the list from the server or a faked-up list if the server didn't
  * provide one.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 int nfs_mount(struct nfs_mount_request *info)
@@ -203,7 +209,10 @@ int nfs_mount(struct nfs_mount_request *info)
 	status = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If the server didn't provide a flavor list, allow the
 	 * client to try any flavor.
@@ -213,6 +222,9 @@ int nfs_mount(struct nfs_mount_request *info)
 		info->auth_flavs[0] = RPC_AUTH_NULL;
 		*info->auth_flav_len = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	return status;

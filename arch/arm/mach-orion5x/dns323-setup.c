@@ -551,7 +551,11 @@ static int __init dns323_identify_rev(void)
 	}
 	if (i >= 1000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("DNS-323: Timeout accessing PHY, assuming rev B1\n");
+=======
+		pr_warn("DNS-323: Timeout accessing PHY, assuming rev B1\n");
+>>>>>>> v3.18
 =======
 		pr_warn("DNS-323: Timeout accessing PHY, assuming rev B1\n");
 >>>>>>> v3.18
@@ -567,7 +571,11 @@ static int __init dns323_identify_rev(void)
 	}
 	if (i >= 1000) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("DNS-323: Timeout reading PHY, assuming rev B1\n");
+=======
+		pr_warn("DNS-323: Timeout reading PHY, assuming rev B1\n");
+>>>>>>> v3.18
 =======
 		pr_warn("DNS-323: Timeout reading PHY, assuming rev B1\n");
 >>>>>>> v3.18
@@ -586,8 +594,13 @@ static int __init dns323_identify_rev(void)
 		return DNS323_REV_C1;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("DNS-323: Unknown PHY ID 0x%04x, assuming rev B1\n",
 			   reg & 0xffff);
+=======
+		pr_warn("DNS-323: Unknown PHY ID 0x%04x, assuming rev B1\n",
+			reg & 0xffff);
+>>>>>>> v3.18
 =======
 		pr_warn("DNS-323: Unknown PHY ID 0x%04x, assuming rev B1\n",
 			reg & 0xffff);
@@ -625,13 +638,19 @@ static void __init dns323_init(void)
 	 * CS3 holds a 8 MB Spansion S29GL064M90TFIR4
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mvebu_mbus_add_window("devbus-boot", DNS323_NOR_BOOT_BASE,
 			      DNS323_NOR_BOOT_SIZE);
 =======
+=======
+>>>>>>> v3.18
 	mvebu_mbus_add_window_by_id(ORION_MBUS_DEVBUS_BOOT_TARGET,
 				    ORION_MBUS_DEVBUS_BOOT_ATTR,
 				    DNS323_NOR_BOOT_BASE,
 				    DNS323_NOR_BOOT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_device_register(&dns323_nor_flash);
 
@@ -661,6 +680,11 @@ static void __init dns323_init(void)
 
 		/* Register fixup for the PHY LEDs */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (!IS_BUILTIN(CONFIG_PHYLIB))
+			break;
+>>>>>>> v3.18
 =======
 		if (!IS_BUILTIN(CONFIG_PHYLIB))
 			break;

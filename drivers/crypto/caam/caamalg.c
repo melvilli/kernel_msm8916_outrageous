@@ -66,6 +66,7 @@
 
 /* length of descriptors text */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DESC_JOB_IO_LEN			(CAAM_CMD_SZ * 5 + CAAM_PTR_SZ * 3)
 
 #define DESC_AEAD_BASE			(4 * CAAM_CMD_SZ)
@@ -74,6 +75,8 @@
 #define DESC_AEAD_GIVENC_LEN		(DESC_AEAD_ENC_LEN + 7 * CAAM_CMD_SZ)
 
 =======
+=======
+>>>>>>> v3.18
 #define DESC_AEAD_BASE			(4 * CAAM_CMD_SZ)
 #define DESC_AEAD_ENC_LEN		(DESC_AEAD_BASE + 15 * CAAM_CMD_SZ)
 #define DESC_AEAD_DEC_LEN		(DESC_AEAD_BASE + 18 * CAAM_CMD_SZ)
@@ -83,6 +86,9 @@
 #define DESC_AEAD_NULL_ENC_LEN		(DESC_AEAD_NULL_BASE + 14 * CAAM_CMD_SZ)
 #define DESC_AEAD_NULL_DEC_LEN		(DESC_AEAD_NULL_BASE + 17 * CAAM_CMD_SZ)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define DESC_ABLKCIPHER_BASE		(3 * CAAM_CMD_SZ)
 #define DESC_ABLKCIPHER_ENC_LEN		(DESC_ABLKCIPHER_BASE + \
@@ -97,8 +103,11 @@
 #ifdef DEBUG
 /* for print_hex_dumps with line references */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define xstr(s) str(s)
 #define str(s) #s
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define debug(format, arg...) printk(format, arg)
@@ -106,6 +115,10 @@
 #define debug(format, arg...)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct list_head alg_list;
+>>>>>>> v3.18
 =======
 static struct list_head alg_list;
 >>>>>>> v3.18
@@ -116,7 +129,10 @@ static inline void append_dec_op1(u32 *desc, u32 type)
 	u32 *jump_cmd, *uncond_jump_cmd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* DK bit is valid only for AES */
 	if ((type & OP_ALG_ALGSEL_MASK) != OP_ALG_ALGSEL_AES) {
 		append_operation(desc, type | OP_ALG_AS_INITFINAL |
@@ -124,6 +140,9 @@ static inline void append_dec_op1(u32 *desc, u32 type)
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	jump_cmd = append_jump(desc, JUMP_TEST_ALL | JUMP_COND_SHRD);
 	append_operation(desc, type | OP_ALG_AS_INITFINAL |
@@ -136,6 +155,7 @@ static inline void append_dec_op1(u32 *desc, u32 type)
 }
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Wait for completion of class 1 key loading before allowing
  * error propagation
@@ -152,15 +172,23 @@ static inline void append_dec_shr_done(u32 *desc)
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * For aead functions, read payload and write payload,
  * both of which are specified in req->src and req->dst
  */
 static inline void aead_append_src_dst(u32 *desc, u32 msg_type)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	append_seq_fifo_load(desc, 0, FIFOLD_CLASS_BOTH |
 			     KEY_VLF | msg_type | FIFOLD_TYPE_LASTBOTH);
 	append_seq_fifo_store(desc, 0, FIFOST_TYPE_MESSAGE_DATA | KEY_VLF);
+=======
+	append_seq_fifo_store(desc, 0, FIFOST_TYPE_MESSAGE_DATA | KEY_VLF);
+	append_seq_fifo_load(desc, 0, FIFOLD_CLASS_BOTH |
+			     KEY_VLF | msg_type | FIFOLD_TYPE_LASTBOTH);
+>>>>>>> v3.18
 =======
 	append_seq_fifo_store(desc, 0, FIFOST_TYPE_MESSAGE_DATA | KEY_VLF);
 	append_seq_fifo_load(desc, 0, FIFOLD_CLASS_BOTH |
@@ -253,10 +281,13 @@ static void init_sh_desc_key_aead(u32 *desc, struct caam_ctx *ctx,
 
 	set_jump_tgt_here(desc, key_jump_cmd);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Propagate errors from shared to job descriptor */
 	append_cmd(desc, SET_OK_NO_PROP_ERRORS | CMD_LOAD);
 =======
+=======
+>>>>>>> v3.18
 }
 
 static int aead_null_set_sh_desc(struct crypto_aead *aead)
@@ -448,6 +479,9 @@ static int aead_null_set_sh_desc(struct crypto_aead *aead)
 #endif
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -458,6 +492,7 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	struct device *jrdev = ctx->jrdev;
 	bool keys_fit_inline = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *key_jump_cmd, *jump_cmd;
 	u32 geniv, moveiv;
 	u32 *desc;
@@ -466,6 +501,8 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 		return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	u32 geniv, moveiv;
 	u32 *desc;
 
@@ -476,6 +513,9 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	if (!ctx->enckeylen)
 		return aead_null_set_sh_desc(aead);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Job Descriptor and Shared Descriptors
@@ -502,7 +542,11 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	append_math_sub_imm_u32(desc, REG2, SEQINLEN, IMM, tfm->ivsize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* assoclen + cryptlen = (assoclen + cryptlen) - cryptlen */
+=======
+	/* assoclen = (assoclen + cryptlen) - cryptlen */
+>>>>>>> v3.18
 =======
 	/* assoclen = (assoclen + cryptlen) - cryptlen */
 >>>>>>> v3.18
@@ -535,7 +579,11 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	}
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "aead enc shdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "aead enc shdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "aead enc shdesc@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -548,6 +596,10 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	 * must all fit into the 64-word Descriptor h/w Buffer
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	keys_fit_inline = false;
+>>>>>>> v3.18
 =======
 	keys_fit_inline = false;
 >>>>>>> v3.18
@@ -556,6 +608,7 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	    CAAM_DESC_BYTES_MAX)
 		keys_fit_inline = true;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	desc = ctx->sh_desc_dec;
 
@@ -574,10 +627,15 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	append_cmd(desc, SET_OK_NO_PROP_ERRORS | CMD_LOAD);
 	set_jump_tgt_here(desc, jump_cmd);
 =======
+=======
+>>>>>>> v3.18
 	/* aead_decrypt shared descriptor */
 	desc = ctx->sh_desc_dec;
 
 	init_sh_desc_key_aead(desc, ctx, keys_fit_inline);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Class 2 operation */
@@ -585,9 +643,15 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 			 OP_ALG_AS_INITFINAL | OP_ALG_DECRYPT | OP_ALG_ICV_ON);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* assoclen + cryptlen = seqinlen - ivsize */
 	append_math_sub_imm_u32(desc, REG3, SEQINLEN, IMM,
 				ctx->authsize + tfm->ivsize)
+=======
+	/* assoclen + cryptlen = seqinlen - ivsize - authsize */
+	append_math_sub_imm_u32(desc, REG3, SEQINLEN, IMM,
+				ctx->authsize + tfm->ivsize);
+>>>>>>> v3.18
 =======
 	/* assoclen + cryptlen = seqinlen - ivsize - authsize */
 	append_math_sub_imm_u32(desc, REG3, SEQINLEN, IMM,
@@ -614,7 +678,10 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	append_seq_fifo_load(desc, ctx->authsize, FIFOLD_CLASS_CLASS2 |
 			     FIFOLD_TYPE_LAST2 | FIFOLD_TYPE_ICV);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	append_dec_shr_done(desc);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -627,7 +694,11 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	}
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "aead dec shdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "aead dec shdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "aead dec shdesc@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -640,6 +711,10 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	 * must all fit into the 64-word Descriptor h/w Buffer
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	keys_fit_inline = false;
+>>>>>>> v3.18
 =======
 	keys_fit_inline = false;
 >>>>>>> v3.18
@@ -704,9 +779,13 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	/* Will read cryptlen */
 	append_math_add(desc, VARSEQINLEN, SEQINLEN, REG0, CAAM_CMD_SZ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	append_seq_fifo_load(desc, 0, FIFOLD_CLASS_BOTH | KEY_VLF |
 			     FIFOLD_TYPE_MSG1OUT2 | FIFOLD_TYPE_LASTBOTH);
 	append_seq_fifo_store(desc, 0, FIFOST_TYPE_MESSAGE_DATA | KEY_VLF);
+=======
+	aead_append_src_dst(desc, FIFOLD_TYPE_MSG1OUT2);
+>>>>>>> v3.18
 =======
 	aead_append_src_dst(desc, FIFOLD_TYPE_MSG1OUT2);
 >>>>>>> v3.18
@@ -724,7 +803,11 @@ static int aead_set_sh_desc(struct crypto_aead *aead)
 	}
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "aead givenc shdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "aead givenc shdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "aead givenc shdesc@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -762,6 +845,7 @@ static int aead_setkey(struct crypto_aead *aead,
 	struct caam_ctx *ctx = crypto_aead_ctx(aead);
 	struct device *jrdev = ctx->jrdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtattr *rta = (void *)key;
 	struct crypto_authenc_key_param *param;
 	unsigned int authkeylen;
@@ -781,10 +865,15 @@ static int aead_setkey(struct crypto_aead *aead,
 
 	if (keylen > CAAM_MAX_KEY_SIZE)
 =======
+=======
+>>>>>>> v3.18
 	struct crypto_authenc_keys keys;
 	int ret = 0;
 
 	if (crypto_authenc_extractkeys(&keys, key, keylen) != 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto badkey;
 
@@ -793,6 +882,7 @@ static int aead_setkey(struct crypto_aead *aead,
 				      OP_ALG_ALGSEL_SHIFT] * 2;
 	ctx->split_key_pad_len = ALIGN(ctx->split_key_len, 16);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef DEBUG
 	printk(KERN_ERR "keylen %d enckeylen %d authkeylen %d\n",
@@ -805,6 +895,8 @@ static int aead_setkey(struct crypto_aead *aead,
 
 	ret = gen_split_aead_key(ctx, key, authkeylen);
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->split_key_pad_len + keys.enckeylen > CAAM_MAX_KEY_SIZE)
 		goto badkey;
 
@@ -819,6 +911,9 @@ static int aead_setkey(struct crypto_aead *aead,
 #endif
 
 	ret = gen_split_aead_key(ctx, keys.authkey, keys.authkeylen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret) {
 		goto badkey;
@@ -826,21 +921,28 @@ static int aead_setkey(struct crypto_aead *aead,
 
 	/* postpend encryption key to auth split key */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(ctx->key + ctx->split_key_pad_len, key + authkeylen, enckeylen);
 
 	ctx->key_dma = dma_map_single(jrdev, ctx->key, ctx->split_key_pad_len +
 				       enckeylen, DMA_TO_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 	memcpy(ctx->key + ctx->split_key_pad_len, keys.enckey, keys.enckeylen);
 
 	ctx->key_dma = dma_map_single(jrdev, ctx->key, ctx->split_key_pad_len +
 				      keys.enckeylen, DMA_TO_DEVICE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (dma_mapping_error(jrdev, ctx->key_dma)) {
 		dev_err(jrdev, "unable to map key i/o memory\n");
 		return -ENOMEM;
 	}
 #ifdef DEBUG
+<<<<<<< HEAD
 <<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "ctx.key@"xstr(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, ctx->key,
@@ -849,19 +951,28 @@ static int aead_setkey(struct crypto_aead *aead,
 
 	ctx->enckeylen = enckeylen;
 =======
+=======
+>>>>>>> v3.18
 	print_hex_dump(KERN_ERR, "ctx.key@"__stringify(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, ctx->key,
 		       ctx->split_key_pad_len + keys.enckeylen, 1);
 #endif
 
 	ctx->enckeylen = keys.enckeylen;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = aead_set_sh_desc(aead);
 	if (ret) {
 		dma_unmap_single(jrdev, ctx->key_dma, ctx->split_key_pad_len +
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 enckeylen, DMA_TO_DEVICE);
+=======
+				 keys.enckeylen, DMA_TO_DEVICE);
+>>>>>>> v3.18
 =======
 				 keys.enckeylen, DMA_TO_DEVICE);
 >>>>>>> v3.18
@@ -881,17 +992,23 @@ static int ablkcipher_setkey(struct crypto_ablkcipher *ablkcipher,
 	struct device *jrdev = ctx->jrdev;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 *key_jump_cmd, *jump_cmd;
 	u32 *desc;
 
 #ifdef DEBUG
 	print_hex_dump(KERN_ERR, "key in @"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 	u32 *key_jump_cmd;
 	u32 *desc;
 
 #ifdef DEBUG
 	print_hex_dump(KERN_ERR, "key in @"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       DUMP_PREFIX_ADDRESS, 16, 4, key, keylen, 1);
 #endif
@@ -920,9 +1037,12 @@ static int ablkcipher_setkey(struct crypto_ablkcipher *ablkcipher,
 	set_jump_tgt_here(desc, key_jump_cmd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Propagate errors from shared to job descriptor */
 	append_cmd(desc, SET_OK_NO_PROP_ERRORS | CMD_LOAD);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Load iv */
@@ -945,7 +1065,12 @@ static int ablkcipher_setkey(struct crypto_ablkcipher *ablkcipher,
 	}
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "ablkcipher enc shdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR,
+		       "ablkcipher enc shdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR,
 		       "ablkcipher enc shdesc@"__stringify(__LINE__)": ",
@@ -967,11 +1092,15 @@ static int ablkcipher_setkey(struct crypto_ablkcipher *ablkcipher,
 			  KEY_DEST_CLASS_REG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* For aead, only propagate error immediately if shared */
 	jump_cmd = append_jump(desc, JUMP_TEST_ALL);
 	set_jump_tgt_here(desc, key_jump_cmd);
 	append_cmd(desc, SET_OK_NO_PROP_ERRORS | CMD_LOAD);
 	set_jump_tgt_here(desc, jump_cmd);
+=======
+	set_jump_tgt_here(desc, key_jump_cmd);
+>>>>>>> v3.18
 =======
 	set_jump_tgt_here(desc, key_jump_cmd);
 >>>>>>> v3.18
@@ -987,6 +1116,7 @@ static int ablkcipher_setkey(struct crypto_ablkcipher *ablkcipher,
 	ablkcipher_append_src_dst(desc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Wait for key to load before allowing propagating error */
 	append_dec_shr_done(desc);
 
@@ -995,10 +1125,15 @@ static int ablkcipher_setkey(struct crypto_ablkcipher *ablkcipher,
 					      DMA_TO_DEVICE);
 	if (dma_mapping_error(jrdev, ctx->sh_desc_enc_dma)) {
 =======
+=======
+>>>>>>> v3.18
 	ctx->sh_desc_dec_dma = dma_map_single(jrdev, desc,
 					      desc_bytes(desc),
 					      DMA_TO_DEVICE);
 	if (dma_mapping_error(jrdev, ctx->sh_desc_dec_dma)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(jrdev, "unable to map shared descriptor\n");
 		return -ENOMEM;
@@ -1006,7 +1141,12 @@ static int ablkcipher_setkey(struct crypto_ablkcipher *ablkcipher,
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "ablkcipher dec shdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR,
+		       "ablkcipher dec shdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR,
 		       "ablkcipher dec shdesc@"__stringify(__LINE__)": ",
@@ -1139,6 +1279,7 @@ static void aead_encrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		 offsetof(struct aead_edesc, hw_desc));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) {
 		char tmp[CAAM_ERROR_STR_MAX];
 
@@ -1148,10 +1289,15 @@ static void aead_encrypt_done(struct device *jrdev, u32 *desc, u32 err,
 	if (err)
 		caam_jr_strstatus(jrdev, err);
 >>>>>>> v3.18
+=======
+	if (err)
+		caam_jr_strstatus(jrdev, err);
+>>>>>>> v3.18
 
 	aead_unmap(jrdev, edesc, req);
 
 #ifdef DEBUG
+<<<<<<< HEAD
 <<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "assoc  @"xstr(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->assoc),
@@ -1161,6 +1307,8 @@ static void aead_encrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		       edesc->src_nents ? 100 : ivsize, 1);
 	print_hex_dump(KERN_ERR, "dst    @"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 	print_hex_dump(KERN_ERR, "assoc  @"__stringify(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->assoc),
 		       req->assoclen , 1);
@@ -1168,6 +1316,9 @@ static void aead_encrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->src) - ivsize,
 		       edesc->src_nents ? 100 : ivsize, 1);
 	print_hex_dump(KERN_ERR, "dst    @"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->src),
 		       edesc->src_nents ? 100 : req->cryptlen +
@@ -1197,6 +1348,7 @@ static void aead_decrypt_done(struct device *jrdev, u32 *desc, u32 err,
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "dstiv  @"xstr(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, req->iv,
 		       ivsize, 1);
@@ -1211,6 +1363,8 @@ static void aead_decrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		dev_err(jrdev, "%08x: %s\n", err, caam_jr_strstatus(tmp, err));
 	}
 =======
+=======
+>>>>>>> v3.18
 	print_hex_dump(KERN_ERR, "dstiv  @"__stringify(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, req->iv,
 		       ivsize, 1);
@@ -1221,6 +1375,9 @@ static void aead_decrypt_done(struct device *jrdev, u32 *desc, u32 err,
 
 	if (err)
 		caam_jr_strstatus(jrdev, err);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	aead_unmap(jrdev, edesc, req);
@@ -1233,7 +1390,11 @@ static void aead_decrypt_done(struct device *jrdev, u32 *desc, u32 err,
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "iphdrout@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "iphdrout@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "iphdrout@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -1245,7 +1406,11 @@ static void aead_decrypt_done(struct device *jrdev, u32 *desc, u32 err,
 	if (!err && edesc->sec4_sg_bytes) {
 		struct scatterlist *sg = sg_last(req->src, edesc->src_nents);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print_hex_dump(KERN_ERR, "sglastout@"xstr(__LINE__)": ",
+=======
+		print_hex_dump(KERN_ERR, "sglastout@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 		print_hex_dump(KERN_ERR, "sglastout@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -1275,6 +1440,7 @@ static void ablkcipher_encrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		 offsetof(struct ablkcipher_edesc, hw_desc));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) {
 		char tmp[CAAM_ERROR_STR_MAX];
 
@@ -1287,6 +1453,8 @@ static void ablkcipher_encrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		       edesc->src_nents > 1 ? 100 : ivsize, 1);
 	print_hex_dump(KERN_ERR, "dst    @"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 	if (err)
 		caam_jr_strstatus(jrdev, err);
 
@@ -1295,6 +1463,9 @@ static void ablkcipher_encrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		       DUMP_PREFIX_ADDRESS, 16, 4, req->info,
 		       edesc->src_nents > 1 ? 100 : ivsize, 1);
 	print_hex_dump(KERN_ERR, "dst    @"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->src),
 		       edesc->dst_nents > 1 ? 100 : req->nbytes, 1);
@@ -1321,6 +1492,7 @@ static void ablkcipher_decrypt_done(struct device *jrdev, u32 *desc, u32 err,
 	edesc = (struct ablkcipher_edesc *)((char *)desc -
 		 offsetof(struct ablkcipher_edesc, hw_desc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (err) {
 		char tmp[CAAM_ERROR_STR_MAX];
 
@@ -1333,6 +1505,8 @@ static void ablkcipher_decrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		       ivsize, 1);
 	print_hex_dump(KERN_ERR, "dst    @"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 	if (err)
 		caam_jr_strstatus(jrdev, err);
 
@@ -1341,6 +1515,9 @@ static void ablkcipher_decrypt_done(struct device *jrdev, u32 *desc, u32 err,
 		       DUMP_PREFIX_ADDRESS, 16, 4, req->info,
 		       ivsize, 1);
 	print_hex_dump(KERN_ERR, "dst    @"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->src),
 		       edesc->dst_nents > 1 ? 100 : req->nbytes, 1);
@@ -1373,6 +1550,7 @@ static void init_aead_job(u32 *sh_desc, dma_addr_t ptr,
 	debug("assoclen %d cryptlen %d authsize %d\n",
 	      req->assoclen, req->cryptlen, authsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "assoc  @"xstr(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->assoc),
 		       req->assoclen , 1);
@@ -1384,6 +1562,8 @@ static void init_aead_job(u32 *sh_desc, dma_addr_t ptr,
 			edesc->src_nents ? 100 : req->cryptlen, 1);
 	print_hex_dump(KERN_ERR, "shrdesc@"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 	print_hex_dump(KERN_ERR, "assoc  @"__stringify(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->assoc),
 		       req->assoclen , 1);
@@ -1394,6 +1574,9 @@ static void init_aead_job(u32 *sh_desc, dma_addr_t ptr,
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->src),
 			edesc->src_nents ? 100 : req->cryptlen, 1);
 	print_hex_dump(KERN_ERR, "shrdesc@"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       DUMP_PREFIX_ADDRESS, 16, 4, sh_desc,
 		       desc_bytes(sh_desc), 1);
@@ -1412,12 +1595,18 @@ static void init_aead_job(u32 *sh_desc, dma_addr_t ptr,
 		in_options = LDST_SGF;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (encrypt)
 		append_seq_in_ptr(desc, src_dma, req->assoclen + ivsize +
 				  req->cryptlen - authsize, in_options);
 	else
 		append_seq_in_ptr(desc, src_dma, req->assoclen + ivsize +
 				  req->cryptlen, in_options);
+=======
+
+	append_seq_in_ptr(desc, src_dma, req->assoclen + ivsize + req->cryptlen,
+			  in_options);
+>>>>>>> v3.18
 =======
 
 	append_seq_in_ptr(desc, src_dma, req->assoclen + ivsize + req->cryptlen,
@@ -1444,7 +1633,12 @@ static void init_aead_job(u32 *sh_desc, dma_addr_t ptr,
 	}
 	if (encrypt)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		append_seq_out_ptr(desc, dst_dma, req->cryptlen, out_options);
+=======
+		append_seq_out_ptr(desc, dst_dma, req->cryptlen + authsize,
+				   out_options);
+>>>>>>> v3.18
 =======
 		append_seq_out_ptr(desc, dst_dma, req->cryptlen + authsize,
 				   out_options);
@@ -1475,6 +1669,7 @@ static void init_aead_giv_job(u32 *sh_desc, dma_addr_t ptr,
 	debug("assoclen %d cryptlen %d authsize %d\n",
 	      req->assoclen, req->cryptlen, authsize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "assoc  @"xstr(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->assoc),
 		       req->assoclen , 1);
@@ -1485,6 +1680,8 @@ static void init_aead_giv_job(u32 *sh_desc, dma_addr_t ptr,
 			edesc->src_nents > 1 ? 100 : req->cryptlen, 1);
 	print_hex_dump(KERN_ERR, "shrdesc@"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 	print_hex_dump(KERN_ERR, "assoc  @"__stringify(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->assoc),
 		       req->assoclen , 1);
@@ -1494,6 +1691,9 @@ static void init_aead_giv_job(u32 *sh_desc, dma_addr_t ptr,
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->src),
 			edesc->src_nents > 1 ? 100 : req->cryptlen, 1);
 	print_hex_dump(KERN_ERR, "shrdesc@"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       DUMP_PREFIX_ADDRESS, 16, 4, sh_desc,
 		       desc_bytes(sh_desc), 1);
@@ -1511,8 +1711,13 @@ static void init_aead_giv_job(u32 *sh_desc, dma_addr_t ptr,
 		in_options = LDST_SGF;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	append_seq_in_ptr(desc, src_dma, req->assoclen + ivsize +
 			  req->cryptlen - authsize, in_options);
+=======
+	append_seq_in_ptr(desc, src_dma, req->assoclen + ivsize + req->cryptlen,
+			  in_options);
+>>>>>>> v3.18
 =======
 	append_seq_in_ptr(desc, src_dma, req->assoclen + ivsize + req->cryptlen,
 			  in_options);
@@ -1534,7 +1739,12 @@ static void init_aead_giv_job(u32 *sh_desc, dma_addr_t ptr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	append_seq_out_ptr(desc, dst_dma, ivsize + req->cryptlen, out_options);
+=======
+	append_seq_out_ptr(desc, dst_dma, ivsize + req->cryptlen + authsize,
+			   out_options);
+>>>>>>> v3.18
 =======
 	append_seq_out_ptr(desc, dst_dma, ivsize + req->cryptlen + authsize,
 			   out_options);
@@ -1558,15 +1768,21 @@ static void init_ablkcipher_job(u32 *sh_desc, dma_addr_t ptr,
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "presciv@"xstr(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, req->info,
 		       ivsize, 1);
 	print_hex_dump(KERN_ERR, "src    @"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 	print_hex_dump(KERN_ERR, "presciv@"__stringify(__LINE__)": ",
 		       DUMP_PREFIX_ADDRESS, 16, 4, req->info,
 		       ivsize, 1);
 	print_hex_dump(KERN_ERR, "src    @"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       DUMP_PREFIX_ADDRESS, 16, 4, sg_virt(req->src),
 		       edesc->src_nents ? 100 : req->nbytes, 1);
@@ -1610,7 +1826,12 @@ static void init_ablkcipher_job(u32 *sh_desc, dma_addr_t ptr,
  */
 static struct aead_edesc *aead_edesc_alloc(struct aead_request *req,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   int desc_bytes, bool *all_contig_ptr)
+=======
+					   int desc_bytes, bool *all_contig_ptr,
+					   bool encrypt)
+>>>>>>> v3.18
 =======
 					   int desc_bytes, bool *all_contig_ptr,
 					   bool encrypt)
@@ -1630,6 +1851,7 @@ static struct aead_edesc *aead_edesc_alloc(struct aead_request *req,
 	int ivsize = crypto_aead_ivsize(aead);
 	int sec4_sg_index, sec4_sg_len = 0, sec4_sg_bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	assoc_nents = sg_count(req->assoc, req->assoclen, &assoc_chained);
 	src_nents = sg_count(req->src, req->cryptlen, &src_chained);
@@ -1637,6 +1859,8 @@ static struct aead_edesc *aead_edesc_alloc(struct aead_request *req,
 	if (unlikely(req->dst != req->src))
 		dst_nents = sg_count(req->dst, req->cryptlen, &dst_chained);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int authsize = ctx->authsize;
 
 	assoc_nents = sg_count(req->assoc, req->assoclen, &assoc_chained);
@@ -1653,6 +1877,9 @@ static struct aead_edesc *aead_edesc_alloc(struct aead_request *req,
 					(encrypt ? authsize : 0),
 				     &src_chained);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sgc = dma_map_sg_chained(jrdev, req->assoc, assoc_nents ? : 1,
@@ -1668,9 +1895,12 @@ static struct aead_edesc *aead_edesc_alloc(struct aead_request *req,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check if data are contiguous */
 	iv_dma = dma_map_single(jrdev, req->iv, ivsize, DMA_TO_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 	iv_dma = dma_map_single(jrdev, req->iv, ivsize, DMA_TO_DEVICE);
 	if (dma_mapping_error(jrdev, iv_dma)) {
 		dev_err(jrdev, "unable to map IV\n");
@@ -1678,6 +1908,9 @@ static struct aead_edesc *aead_edesc_alloc(struct aead_request *req,
 	}
 
 	/* Check if data are contiguous */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (assoc_nents || sg_dma_address(req->assoc) + req->assoclen !=
 	    iv_dma || src_nents || iv_dma + ivsize !=
@@ -1710,8 +1943,11 @@ static struct aead_edesc *aead_edesc_alloc(struct aead_request *req,
 	edesc->sec4_sg = (void *)edesc + sizeof(struct aead_edesc) +
 			 desc_bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	edesc->sec4_sg_dma = dma_map_single(jrdev, edesc->sec4_sg,
 					    sec4_sg_bytes, DMA_TO_DEVICE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*all_contig_ptr = all_contig;
@@ -1737,13 +1973,19 @@ static struct aead_edesc *aead_edesc_alloc(struct aead_request *req,
 				   edesc->sec4_sg + sec4_sg_index, 0);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	edesc->sec4_sg_dma = dma_map_single(jrdev, edesc->sec4_sg,
 					    sec4_sg_bytes, DMA_TO_DEVICE);
 	if (dma_mapping_error(jrdev, edesc->sec4_sg_dma)) {
 		dev_err(jrdev, "unable to map S/G table\n");
 		return ERR_PTR(-ENOMEM);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return edesc;
@@ -1760,11 +2002,17 @@ static int aead_encrypt(struct aead_request *req)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->cryptlen += ctx->authsize;
 
 	/* allocate extended descriptor */
 	edesc = aead_edesc_alloc(req, DESC_JOB_IO_LEN *
 				 CAAM_CMD_SZ, &all_contig);
+=======
+	/* allocate extended descriptor */
+	edesc = aead_edesc_alloc(req, DESC_JOB_IO_LEN *
+				 CAAM_CMD_SZ, &all_contig, true);
+>>>>>>> v3.18
 =======
 	/* allocate extended descriptor */
 	edesc = aead_edesc_alloc(req, DESC_JOB_IO_LEN *
@@ -1778,7 +2026,11 @@ static int aead_encrypt(struct aead_request *req)
 		      all_contig, true);
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "aead jobdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "aead jobdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "aead jobdesc@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -1811,7 +2063,11 @@ static int aead_decrypt(struct aead_request *req)
 	/* allocate extended descriptor */
 	edesc = aead_edesc_alloc(req, DESC_JOB_IO_LEN *
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 CAAM_CMD_SZ, &all_contig);
+=======
+				 CAAM_CMD_SZ, &all_contig, false);
+>>>>>>> v3.18
 =======
 				 CAAM_CMD_SZ, &all_contig, false);
 >>>>>>> v3.18
@@ -1820,7 +2076,11 @@ static int aead_decrypt(struct aead_request *req)
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "dec src@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "dec src@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "dec src@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -1833,7 +2093,11 @@ static int aead_decrypt(struct aead_request *req)
 		      ctx->sh_desc_dec_dma, edesc, req, all_contig, false);
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "aead jobdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "aead jobdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "aead jobdesc@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -1880,7 +2144,12 @@ static struct aead_edesc *aead_giv_edesc_alloc(struct aead_givcrypt_request
 
 	if (unlikely(req->dst != req->src))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dst_nents = sg_count(req->dst, req->cryptlen, &dst_chained);
+=======
+		dst_nents = sg_count(req->dst, req->cryptlen + ctx->authsize,
+				     &dst_chained);
+>>>>>>> v3.18
 =======
 		dst_nents = sg_count(req->dst, req->cryptlen + ctx->authsize,
 				     &dst_chained);
@@ -1899,9 +2168,12 @@ static struct aead_edesc *aead_giv_edesc_alloc(struct aead_givcrypt_request
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Check if data are contiguous */
 	iv_dma = dma_map_single(jrdev, greq->giv, ivsize, DMA_TO_DEVICE);
 =======
+=======
+>>>>>>> v3.18
 	iv_dma = dma_map_single(jrdev, greq->giv, ivsize, DMA_TO_DEVICE);
 	if (dma_mapping_error(jrdev, iv_dma)) {
 		dev_err(jrdev, "unable to map IV\n");
@@ -1909,6 +2181,9 @@ static struct aead_edesc *aead_giv_edesc_alloc(struct aead_givcrypt_request
 	}
 
 	/* Check if data are contiguous */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (assoc_nents || sg_dma_address(req->assoc) + req->assoclen !=
 	    iv_dma || src_nents || iv_dma + ivsize != sg_dma_address(req->src))
@@ -1949,8 +2224,11 @@ static struct aead_edesc *aead_giv_edesc_alloc(struct aead_givcrypt_request
 	edesc->sec4_sg = (void *)edesc + sizeof(struct aead_edesc) +
 			 desc_bytes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	edesc->sec4_sg_dma = dma_map_single(jrdev, edesc->sec4_sg,
 					    sec4_sg_bytes, DMA_TO_DEVICE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	*contig_ptr = contig;
@@ -1977,13 +2255,19 @@ static struct aead_edesc *aead_giv_edesc_alloc(struct aead_givcrypt_request
 				   edesc->sec4_sg + sec4_sg_index, 0);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	edesc->sec4_sg_dma = dma_map_single(jrdev, edesc->sec4_sg,
 					    sec4_sg_bytes, DMA_TO_DEVICE);
 	if (dma_mapping_error(jrdev, edesc->sec4_sg_dma)) {
 		dev_err(jrdev, "unable to map S/G table\n");
 		return ERR_PTR(-ENOMEM);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return edesc;
@@ -2001,8 +2285,11 @@ static int aead_givencrypt(struct aead_givcrypt_request *areq)
 	int ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	req->cryptlen += ctx->authsize;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* allocate extended descriptor */
@@ -2014,7 +2301,11 @@ static int aead_givencrypt(struct aead_givcrypt_request *areq)
 
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "giv src@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "giv src@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "giv src@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -2027,7 +2318,11 @@ static int aead_givencrypt(struct aead_givcrypt_request *areq)
 			  ctx->sh_desc_givenc_dma, edesc, req, contig);
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "aead jobdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "aead jobdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "aead jobdesc@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -2048,12 +2343,18 @@ static int aead_givencrypt(struct aead_givcrypt_request *areq)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int aead_null_givencrypt(struct aead_givcrypt_request *areq)
 {
 	return aead_encrypt(&areq->areq);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * allocate and map the ablkcipher extended descriptor for ablkcipher
@@ -2093,20 +2394,29 @@ static struct ablkcipher_edesc *ablkcipher_edesc_alloc(struct ablkcipher_request
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	iv_dma = dma_map_single(jrdev, req->info, ivsize, DMA_TO_DEVICE);
 	if (dma_mapping_error(jrdev, iv_dma)) {
 		dev_err(jrdev, "unable to map IV\n");
 		return ERR_PTR(-ENOMEM);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Check if iv can be contiguous with source and destination.
 	 * If so, include it. If not, create scatterlist.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iv_dma = dma_map_single(jrdev, req->info, ivsize, DMA_TO_DEVICE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!src_nents && iv_dma + ivsize == sg_dma_address(req->src))
@@ -2148,11 +2458,14 @@ static struct ablkcipher_edesc *ablkcipher_edesc_alloc(struct ablkcipher_request
 	edesc->sec4_sg_dma = dma_map_single(jrdev, edesc->sec4_sg,
 					    sec4_sg_bytes, DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	edesc->iv_dma = iv_dma;
 
 #ifdef DEBUG
 	print_hex_dump(KERN_ERR, "ablkcipher sec4_sg@"xstr(__LINE__)": ",
 =======
+=======
+>>>>>>> v3.18
 	if (dma_mapping_error(jrdev, edesc->sec4_sg_dma)) {
 		dev_err(jrdev, "unable to map S/G table\n");
 		return ERR_PTR(-ENOMEM);
@@ -2162,6 +2475,9 @@ static struct ablkcipher_edesc *ablkcipher_edesc_alloc(struct ablkcipher_request
 
 #ifdef DEBUG
 	print_hex_dump(KERN_ERR, "ablkcipher sec4_sg@"__stringify(__LINE__)": ",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       DUMP_PREFIX_ADDRESS, 16, 4, edesc->sec4_sg,
 		       sec4_sg_bytes, 1);
@@ -2192,7 +2508,11 @@ static int ablkcipher_encrypt(struct ablkcipher_request *req)
 		ctx->sh_desc_enc_dma, edesc, req, iv_contig);
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "ablkcipher jobdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "ablkcipher jobdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "ablkcipher jobdesc@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -2234,7 +2554,11 @@ static int ablkcipher_decrypt(struct ablkcipher_request *req)
 	desc = edesc->hw_desc;
 #ifdef DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print_hex_dump(KERN_ERR, "ablkcipher jobdesc@"xstr(__LINE__)": ",
+=======
+	print_hex_dump(KERN_ERR, "ablkcipher jobdesc@"__stringify(__LINE__)": ",
+>>>>>>> v3.18
 =======
 	print_hex_dump(KERN_ERR, "ablkcipher jobdesc@"__stringify(__LINE__)": ",
 >>>>>>> v3.18
@@ -2277,7 +2601,10 @@ static struct caam_alg_template driver_algs[] = {
 	/* single-pass ipsec_esp descriptor */
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.name = "authenc(hmac(md5),ecb(cipher_null))",
 		.driver_name = "authenc-hmac-md5-ecb-cipher_null-caam",
 		.blocksize = NULL_BLOCK_SIZE,
@@ -2396,6 +2723,9 @@ static struct caam_alg_template driver_algs[] = {
 		.alg_op = OP_ALG_ALGSEL_SHA512 | OP_ALG_AAI_HMAC,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.name = "authenc(hmac(md5),cbc(aes))",
 		.driver_name = "authenc-hmac-md5-cbc-aes-caam",
@@ -2805,7 +3135,10 @@ static struct caam_alg_template driver_algs[] = {
 struct caam_crypto_alg {
 	struct list_head entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *ctrldev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int class1_alg_type;
@@ -2821,6 +3154,7 @@ static int caam_cra_init(struct crypto_tfm *tfm)
 		 container_of(alg, struct caam_crypto_alg, crypto_alg);
 	struct caam_ctx *ctx = crypto_tfm_ctx(tfm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct caam_drv_private *priv = dev_get_drvdata(caam_alg->ctrldev);
 	int tgt_jr = atomic_inc_return(&priv->tfm_count);
 
@@ -2830,12 +3164,17 @@ static int caam_cra_init(struct crypto_tfm *tfm)
 	 */
 	ctx->jrdev = priv->jrdev[(tgt_jr / 2) % priv->total_jobrs];
 =======
+=======
+>>>>>>> v3.18
 
 	ctx->jrdev = caam_jr_alloc();
 	if (IS_ERR(ctx->jrdev)) {
 		pr_err("Job Ring Device allocation for transform failed\n");
 		return PTR_ERR(ctx->jrdev);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* copy descriptor header template value */
@@ -2864,7 +3203,10 @@ static void caam_cra_exit(struct crypto_tfm *tfm)
 				 desc_bytes(ctx->sh_desc_givenc),
 				 DMA_TO_DEVICE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->key_dma &&
 	    !dma_mapping_error(ctx->jrdev, ctx->key_dma))
 		dma_unmap_single(ctx->jrdev, ctx->key_dma,
@@ -2872,12 +3214,16 @@ static void caam_cra_exit(struct crypto_tfm *tfm)
 				 DMA_TO_DEVICE);
 
 	caam_jr_free(ctx->jrdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __exit caam_algapi_exit(void)
 {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device_node *dev_node;
 	struct platform_device *pdev;
@@ -2905,12 +3251,17 @@ static void __exit caam_algapi_exit(void)
 
 	list_for_each_entry_safe(t_alg, n, &priv->alg_list, entry) {
 =======
+=======
+>>>>>>> v3.18
 	struct caam_crypto_alg *t_alg, *n;
 
 	if (!alg_list.next)
 		return;
 
 	list_for_each_entry_safe(t_alg, n, &alg_list, entry) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		crypto_unregister_alg(&t_alg->crypto_alg);
 		list_del(&t_alg->entry);
@@ -2919,8 +3270,12 @@ static void __exit caam_algapi_exit(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct caam_crypto_alg *caam_alg_alloc(struct device *ctrldev,
 					      struct caam_alg_template
+=======
+static struct caam_crypto_alg *caam_alg_alloc(struct caam_alg_template
+>>>>>>> v3.18
 =======
 static struct caam_crypto_alg *caam_alg_alloc(struct caam_alg_template
 >>>>>>> v3.18
@@ -2932,7 +3287,11 @@ static struct caam_crypto_alg *caam_alg_alloc(struct caam_alg_template
 	t_alg = kzalloc(sizeof(struct caam_crypto_alg), GFP_KERNEL);
 	if (!t_alg) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(ctrldev, "failed to allocate t_alg\n");
+=======
+		pr_err("failed to allocate t_alg\n");
+>>>>>>> v3.18
 =======
 		pr_err("failed to allocate t_alg\n");
 >>>>>>> v3.18
@@ -2968,7 +3327,10 @@ static struct caam_crypto_alg *caam_alg_alloc(struct caam_alg_template
 	t_alg->class2_alg_type = template->class2_alg_type;
 	t_alg->alg_op = template->alg_op;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t_alg->ctrldev = ctrldev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2981,7 +3343,11 @@ static int __init caam_algapi_init(void)
 	struct platform_device *pdev;
 	struct device *ctrldev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct caam_drv_private *priv;
+=======
+	void *priv;
+>>>>>>> v3.18
 =======
 	void *priv;
 >>>>>>> v3.18
@@ -2996,13 +3362,19 @@ static int __init caam_algapi_init(void)
 
 	pdev = of_find_device_by_node(dev_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!pdev)
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	if (!pdev) {
 		of_node_put(dev_node);
 		return -ENODEV;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ctrldev = &pdev->dev;
@@ -3010,10 +3382,13 @@ static int __init caam_algapi_init(void)
 	of_node_put(dev_node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_LIST_HEAD(&priv->alg_list);
 
 	atomic_set(&priv->tfm_count, -1);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If priv is NULL, it's probably because the caam driver wasn't
 	 * properly initialized (e.g. RNG4 init failed). Thus, bail out here.
@@ -3023,6 +3398,9 @@ static int __init caam_algapi_init(void)
 
 
 	INIT_LIST_HEAD(&alg_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* register crypto algorithms the device supports */
@@ -3031,23 +3409,30 @@ static int __init caam_algapi_init(void)
 		struct caam_crypto_alg *t_alg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		t_alg = caam_alg_alloc(ctrldev, &driver_algs[i]);
 		if (IS_ERR(t_alg)) {
 			err = PTR_ERR(t_alg);
 			dev_warn(ctrldev, "%s alg allocation failed\n",
 				 driver_algs[i].driver_name);
 =======
+=======
+>>>>>>> v3.18
 		t_alg = caam_alg_alloc(&driver_algs[i]);
 		if (IS_ERR(t_alg)) {
 			err = PTR_ERR(t_alg);
 			pr_warn("%s alg allocation failed\n",
 				driver_algs[i].driver_name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			continue;
 		}
 
 		err = crypto_register_alg(&t_alg->crypto_alg);
 		if (err) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			dev_warn(ctrldev, "%s alg registration failed\n",
 				t_alg->crypto_alg.cra_driver_name);
@@ -3059,6 +3444,8 @@ static int __init caam_algapi_init(void)
 		dev_info(ctrldev, "%s algorithms registered in /proc/crypto\n",
 			 (char *)of_get_property(dev_node, "compatible", NULL));
 =======
+=======
+>>>>>>> v3.18
 			pr_warn("%s alg registration failed\n",
 				t_alg->crypto_alg.cra_driver_name);
 			kfree(t_alg);
@@ -3067,6 +3454,9 @@ static int __init caam_algapi_init(void)
 	}
 	if (!list_empty(&alg_list))
 		pr_info("caam algorithms registered in /proc/crypto\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return err;

@@ -268,9 +268,15 @@ enum {
 
 #define DM_VERSION_MAJOR	4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DM_VERSION_MINOR	24
 #define DM_VERSION_PATCHLEVEL	0
 #define DM_VERSION_EXTRA	"-ioctl (2013-01-15)"
+=======
+#define DM_VERSION_MINOR	28
+#define DM_VERSION_PATCHLEVEL	0
+#define DM_VERSION_EXTRA	"-ioctl (2014-09-17)"
+>>>>>>> v3.18
 =======
 #define DM_VERSION_MINOR	28
 #define DM_VERSION_PATCHLEVEL	0
@@ -348,7 +354,10 @@ enum {
 #define DM_DATA_OUT_FLAG		(1 << 16) /* Out */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * If set with DM_DEV_REMOVE or DM_REMOVE_ALL this indicates that if
  * the device cannot be removed immediately because it is still in use
@@ -360,5 +369,8 @@ enum {
  */
 #define DM_DEFERRED_REMOVE		(1 << 17) /* In/Out */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* _LINUX_DM_IOCTL_H */

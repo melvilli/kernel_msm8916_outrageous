@@ -680,7 +680,11 @@ MODULE_DEVICE_TABLE(i2c, auo_pixcir_idtable);
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id auo_pixcir_ts_dt_idtable[] = {
+=======
+static const struct of_device_id auo_pixcir_ts_dt_idtable[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id auo_pixcir_ts_dt_idtable[] = {
 >>>>>>> v3.18

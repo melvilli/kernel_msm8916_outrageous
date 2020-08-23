@@ -21,6 +21,11 @@
 #define SYSC_REG_SYSTEM_CONFIG0		0x10
 #define SYSC_REG_SYSTEM_CONFIG1		0x14
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SYSC_REG_CLKCFG0		0x2c
+#define SYSC_REG_CPU_SYS_CLKCFG		0x3c
+>>>>>>> v3.18
 =======
 #define SYSC_REG_CLKCFG0		0x2c
 #define SYSC_REG_CPU_SYS_CLKCFG		0x3c
@@ -35,6 +40,11 @@
 #define MT7620A_CHIP_NAME1		0x20203032
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SYSCFG0_XTAL_FREQ_SEL		BIT(6)
+
+>>>>>>> v3.18
 =======
 #define SYSCFG0_XTAL_FREQ_SEL		BIT(6)
 
@@ -46,6 +56,7 @@
 #define CHIP_REV_ECO_MASK		0xf
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CPLL_SW_CONFIG_SHIFT		31
 #define CPLL_SW_CONFIG_MASK		0x1
 #define CPLL_CPU_CLK_SHIFT		24
@@ -55,6 +66,8 @@
 #define CPLL_DIV_RATIO_SHIFT            10
 #define CPLL_DIV_RATIO                  0x3
 =======
+=======
+>>>>>>> v3.18
 #define CLKCFG0_PERI_CLK_SEL		BIT(4)
 
 #define CPU_SYS_CLKCFG_OCP_RATIO_SHIFT	16
@@ -83,6 +96,9 @@
 
 #define CPLL_CFG1_CPU_AUX1		BIT(25)
 #define CPLL_CFG1_CPU_AUX0		BIT(24)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define SYSCFG0_DRAM_TYPE_MASK		0x3

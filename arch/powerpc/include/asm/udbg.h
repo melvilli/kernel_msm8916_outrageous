@@ -28,16 +28,22 @@ extern void udbg_printf(const char *fmt, ...)
 extern void udbg_progress(char *s, unsigned short hex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void udbg_init_uart(void __iomem *comport, unsigned int speed,
 			   unsigned int clock);
 extern unsigned int udbg_probe_uart_speed(void __iomem *comport,
 					  unsigned int clock);
 =======
+=======
+>>>>>>> v3.18
 extern void udbg_uart_init_mmio(void __iomem *addr, unsigned int stride);
 extern void udbg_uart_init_pio(unsigned long port, unsigned int stride);
 
 extern void udbg_uart_setup(unsigned int speed, unsigned int clock);
 extern unsigned int udbg_probe_uart_speed(unsigned int clock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct device_node;
@@ -60,7 +66,10 @@ extern void __init udbg_init_40x_realmode(void);
 extern void __init udbg_init_cpm(void);
 extern void __init udbg_init_usbgecko(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void __init udbg_init_wsp(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern void __init udbg_init_memcons(void);

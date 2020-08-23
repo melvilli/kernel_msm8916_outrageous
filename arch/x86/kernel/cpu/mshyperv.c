@@ -16,7 +16,13 @@
 #include <linux/module.h>
 #include <linux/hardirq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
+=======
+#include <linux/efi.h>
+#include <linux/interrupt.h>
+#include <linux/irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/efi.h>
 #include <linux/interrupt.h>
@@ -30,6 +36,12 @@
 #include <asm/idle.h>
 #include <asm/irq_regs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/i8259.h>
+#include <asm/apic.h>
+#include <asm/timer.h>
+>>>>>>> v3.18
 =======
 #include <asm/i8259.h>
 #include <asm/apic.h>
@@ -40,8 +52,11 @@ struct ms_hyperv_info ms_hyperv;
 EXPORT_SYMBOL_GPL(ms_hyperv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool __init ms_hyperv_platform(void)
 =======
+=======
+>>>>>>> v3.18
 #if IS_ENABLED(CONFIG_HYPERV)
 static void (*vmbus_handler)(void);
 
@@ -82,6 +97,9 @@ EXPORT_SYMBOL_GPL(hv_remove_vmbus_irq);
 #endif
 
 static uint32_t  __init ms_hyperv_platform(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 eax;
@@ -89,7 +107,11 @@ static uint32_t  __init ms_hyperv_platform(void)
 
 	if (!boot_cpu_has(X86_FEATURE_HYPERVISOR))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return false;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -98,16 +120,22 @@ static uint32_t  __init ms_hyperv_platform(void)
 	      &eax, &hyp_signature[0], &hyp_signature[1], &hyp_signature[2]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return eax >= HYPERV_CPUID_MIN &&
 		eax <= HYPERV_CPUID_MAX &&
 		!memcmp("Microsoft Hv", hyp_signature, 12);
 =======
+=======
+>>>>>>> v3.18
 	if (eax >= HYPERV_CPUID_MIN &&
 	    eax <= HYPERV_CPUID_MAX &&
 	    !memcmp("Microsoft Hv", hyp_signature, 12))
 		return HYPERV_CPUID_VENDOR_AND_MAX_FUNCTIONS;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -129,7 +157,10 @@ static struct clocksource hyperv_cs = {
 	.read		= read_hv_clock,
 	.mask		= CLOCKSOURCE_MASK(64),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= CLOCK_SOURCE_IS_CONTINUOUS,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -146,9 +177,12 @@ static void __init ms_hyperv_init_platform(void)
 	       ms_hyperv.features, ms_hyperv.hints);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ms_hyperv.features & HV_X64_MSR_TIME_REF_COUNT_AVAILABLE)
 		clocksource_register_hz(&hyperv_cs, NSEC_PER_SEC/100);
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_LOCAL_APIC
 	if (ms_hyperv.features & HV_X64_MSR_APIC_FREQUENCY_AVAILABLE) {
 		/*
@@ -171,6 +205,9 @@ static void __init ms_hyperv_init_platform(void)
 	no_timer_check = 1;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -180,6 +217,7 @@ const __refconst struct hypervisor_x86 x86_hyper_ms_hyperv = {
 	.init_platform		= ms_hyperv_init_platform,
 };
 EXPORT_SYMBOL(x86_hyper_ms_hyperv);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #if IS_ENABLED(CONFIG_HYPERV)
@@ -219,5 +257,7 @@ void hv_register_vmbus_handler(int irq, irq_handler_t handler)
 }
 #endif
 EXPORT_SYMBOL_GPL(hv_register_vmbus_handler);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -146,6 +146,11 @@ const struct snd_pci_quirk *
 snd_pci_quirk_lookup(struct pci_dev *pci, const struct snd_pci_quirk *list)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pci)
+		return NULL;
+>>>>>>> v3.18
 =======
 	if (!pci)
 		return NULL;

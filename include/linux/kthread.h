@@ -74,7 +74,10 @@ struct kthread_work {
 	struct list_head	node;
 	kthread_work_func_t	func;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t	done;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct kthread_worker	*worker;
@@ -89,7 +92,10 @@ struct kthread_work {
 	.node = LIST_HEAD_INIT((work).node),				\
 	.func = (fn),							\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.done = __WAIT_QUEUE_HEAD_INITIALIZER((work).done),		\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -102,9 +108,14 @@ struct kthread_work {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * kthread_worker.lock and kthread_work.done need their own lockdep class
  * keys if they are defined on stack with lockdep enabled.  Use the
  * following macros when defining them on stack.
+=======
+ * kthread_worker.lock needs its own lockdep class key when defined on
+ * stack with lockdep enabled.  Use the following macros in such cases.
+>>>>>>> v3.18
 =======
  * kthread_worker.lock needs its own lockdep class key when defined on
  * stack with lockdep enabled.  Use the following macros in such cases.
@@ -116,6 +127,7 @@ struct kthread_work {
 # define DEFINE_KTHREAD_WORKER_ONSTACK(worker)				\
 	struct kthread_worker worker = KTHREAD_WORKER_INIT_ONSTACK(worker)
 <<<<<<< HEAD
+<<<<<<< HEAD
 # define KTHREAD_WORK_INIT_ONSTACK(work, fn)				\
 	({ init_kthread_work((&work), fn); work; })
 # define DEFINE_KTHREAD_WORK_ONSTACK(work, fn)				\
@@ -123,6 +135,10 @@ struct kthread_work {
 #else
 # define DEFINE_KTHREAD_WORKER_ONSTACK(worker) DEFINE_KTHREAD_WORKER(worker)
 # define DEFINE_KTHREAD_WORK_ONSTACK(work, fn) DEFINE_KTHREAD_WORK(work, fn)
+=======
+#else
+# define DEFINE_KTHREAD_WORKER_ONSTACK(worker) DEFINE_KTHREAD_WORKER(worker)
+>>>>>>> v3.18
 =======
 #else
 # define DEFINE_KTHREAD_WORKER_ONSTACK(worker) DEFINE_KTHREAD_WORKER(worker)
@@ -144,7 +160,10 @@ extern void __init_kthread_worker(struct kthread_worker *worker,
 		INIT_LIST_HEAD(&(work)->node);				\
 		(work)->func = (fn);					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		init_waitqueue_head(&(work)->done);			\
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} while (0)

@@ -16,6 +16,12 @@ int pas_init_mixer(void);
 void pas_midi_init(void);
 void pas_midi_interrupt(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+/*	From pas2_mixer.c*/
+void mix_write(unsigned char data, int ioaddr);
+>>>>>>> v3.18
 =======
 
 /*	From pas2_mixer.c*/

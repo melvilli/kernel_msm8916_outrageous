@@ -6,6 +6,7 @@
 # Licensed under GPLv2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y				:=
 obj-m				:=
 obj-n				:=
@@ -42,6 +43,8 @@ obj-$(CONFIG_S5PV210_SETUP_SDHCI_GPIO)	+= setup-sdhci-gpio.o
 obj-$(CONFIG_S5PV210_SETUP_SPI)		+= setup-spi.o
 obj-$(CONFIG_S5PV210_SETUP_USB_PHY) += setup-usb-phy.o
 =======
+=======
+>>>>>>> v3.18
 ccflags-$(CONFIG_ARCH_MULTIPLATFORM) += -I$(srctree)/$(src)/include -I$(srctree)/arch/arm/plat-samsung/include
 
 # Core
@@ -51,4 +54,7 @@ obj-$(CONFIG_PM_SLEEP)		+= pm.o sleep.o
 # machine support
 
 obj-y				+= s5pv210.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

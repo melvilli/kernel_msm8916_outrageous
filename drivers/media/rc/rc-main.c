@@ -1,7 +1,11 @@
 /* rc-main.c - Remote Controller core module
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2009-2010 by Mauro Carvalho Chehab <mchehab@redhat.com>
+=======
+ * Copyright (C) 2009-2010 by Mauro Carvalho Chehab
+>>>>>>> v3.18
 =======
  * Copyright (C) 2009-2010 by Mauro Carvalho Chehab
 >>>>>>> v3.18
@@ -21,6 +25,10 @@
 #include <linux/delay.h>
 #include <linux/input.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/leds.h>
+>>>>>>> v3.18
 =======
 #include <linux/leds.h>
 >>>>>>> v3.18
@@ -30,11 +38,17 @@
 #include "rc-core-priv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Bitmap to store allocated device numbers from 0 to IRRCV_NUM_DEVICES - 1 */
 #define IRRCV_NUM_DEVICES      256
 static DECLARE_BITMAP(ir_core_dev_number, IRRCV_NUM_DEVICES);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Sizes are in bytes, 256 bytes allows for 32 entries on x64 */
 #define IR_TAB_MIN_SIZE	256
@@ -47,6 +61,10 @@ static DECLARE_BITMAP(ir_core_dev_number, IRRCV_NUM_DEVICES);
 static LIST_HEAD(rc_map_list);
 static DEFINE_SPINLOCK(rc_map_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static struct led_trigger *led_feedback;
+>>>>>>> v3.18
 =======
 static struct led_trigger *led_feedback;
 >>>>>>> v3.18
@@ -76,7 +94,11 @@ struct rc_map *rc_map_get(const char *name)
 #ifdef MODULE
 	if (!map) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int rc = request_module(name);
+=======
+		int rc = request_module("%s", name);
+>>>>>>> v3.18
 =======
 		int rc = request_module("%s", name);
 >>>>>>> v3.18
@@ -303,8 +325,13 @@ static unsigned int ir_establish_scancode(struct rc_dev *dev,
 	 * indicate the valid bits of the scancodes.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->scanmask)
 		scancode &= dev->scanmask;
+=======
+	if (dev->scancode_mask)
+		scancode &= dev->scancode_mask;
+>>>>>>> v3.18
 =======
 	if (dev->scancode_mask)
 		scancode &= dev->scancode_mask;
@@ -564,6 +591,10 @@ static void ir_do_keyup(struct rc_dev *dev, bool sync)
 	IR_dprintk(1, "keyup key 0x%04x\n", dev->last_keycode);
 	input_report_key(dev->input_dev, dev->last_keycode, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	led_trigger_event(led_feedback, LED_OFF);
+>>>>>>> v3.18
 =======
 	led_trigger_event(led_feedback, LED_OFF);
 >>>>>>> v3.18
@@ -649,6 +680,10 @@ EXPORT_SYMBOL_GPL(rc_repeat);
  * ir_do_keydown() - internal function to process a keypress
  * @dev:	the struct rc_dev descriptor of the device
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @protocol:	the protocol of the keypress
+>>>>>>> v3.18
 =======
  * @protocol:	the protocol of the keypress
 >>>>>>> v3.18
@@ -660,6 +695,7 @@ EXPORT_SYMBOL_GPL(rc_repeat);
  * called with keylock held.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ir_do_keydown(struct rc_dev *dev, int scancode,
 			  u32 keycode, u8 toggle)
 {
@@ -667,6 +703,8 @@ static void ir_do_keydown(struct rc_dev *dev, int scancode,
 			 dev->last_scancode != scancode ||
 			 dev->last_toggle != toggle;
 =======
+=======
+>>>>>>> v3.18
 static void ir_do_keydown(struct rc_dev *dev, enum rc_type protocol,
 			  u32 scancode, u32 keycode, u8 toggle)
 {
@@ -674,6 +712,9 @@ static void ir_do_keydown(struct rc_dev *dev, enum rc_type protocol,
 			  dev->last_protocol != protocol ||
 			  dev->last_scancode != scancode ||
 			  dev->last_toggle   != toggle);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (new_event && dev->keypressed)
@@ -685,6 +726,10 @@ static void ir_do_keydown(struct rc_dev *dev, enum rc_type protocol,
 		/* Register a keypress */
 		dev->keypressed = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dev->last_protocol = protocol;
+>>>>>>> v3.18
 =======
 		dev->last_protocol = protocol;
 >>>>>>> v3.18
@@ -694,15 +739,21 @@ static void ir_do_keydown(struct rc_dev *dev, enum rc_type protocol,
 
 		IR_dprintk(1, "%s: key down event, "
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   "key 0x%04x, scancode 0x%04x\n",
 			   dev->input_name, keycode, scancode);
 		input_report_key(dev->input_dev, keycode, 1);
 =======
+=======
+>>>>>>> v3.18
 			   "key 0x%04x, protocol 0x%04x, scancode 0x%08x\n",
 			   dev->input_name, keycode, protocol, scancode);
 		input_report_key(dev->input_dev, keycode, 1);
 
 		led_trigger_event(led_feedback, LED_FULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -713,7 +764,12 @@ static void ir_do_keydown(struct rc_dev *dev, enum rc_type protocol,
  * rc_keydown() - generates input event for a key press
  * @dev:	the struct rc_dev descriptor of the device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @scancode:   the scancode that we're seeking
+=======
+ * @protocol:	the protocol for the keypress
+ * @scancode:	the scancode for the keypress
+>>>>>>> v3.18
 =======
  * @protocol:	the protocol for the keypress
  * @scancode:	the scancode for the keypress
@@ -725,7 +781,11 @@ static void ir_do_keydown(struct rc_dev *dev, enum rc_type protocol,
  * remote control.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rc_keydown(struct rc_dev *dev, int scancode, u8 toggle)
+=======
+void rc_keydown(struct rc_dev *dev, enum rc_type protocol, u32 scancode, u8 toggle)
+>>>>>>> v3.18
 =======
 void rc_keydown(struct rc_dev *dev, enum rc_type protocol, u32 scancode, u8 toggle)
 >>>>>>> v3.18
@@ -735,7 +795,11 @@ void rc_keydown(struct rc_dev *dev, enum rc_type protocol, u32 scancode, u8 togg
 
 	spin_lock_irqsave(&dev->keylock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir_do_keydown(dev, scancode, keycode, toggle);
+=======
+	ir_do_keydown(dev, protocol, scancode, keycode, toggle);
+>>>>>>> v3.18
 =======
 	ir_do_keydown(dev, protocol, scancode, keycode, toggle);
 >>>>>>> v3.18
@@ -753,7 +817,12 @@ EXPORT_SYMBOL_GPL(rc_keydown);
  *                          an automatic keyup event at a later time
  * @dev:	the struct rc_dev descriptor of the device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @scancode:   the scancode that we're seeking
+=======
+ * @protocol:	the protocol for the keypress
+ * @scancode:	the scancode for the keypress
+>>>>>>> v3.18
 =======
  * @protocol:	the protocol for the keypress
  * @scancode:	the scancode for the keypress
@@ -765,7 +834,12 @@ EXPORT_SYMBOL_GPL(rc_keydown);
  * remote control. The driver must manually call rc_keyup() at a later stage.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void rc_keydown_notimeout(struct rc_dev *dev, int scancode, u8 toggle)
+=======
+void rc_keydown_notimeout(struct rc_dev *dev, enum rc_type protocol,
+			  u32 scancode, u8 toggle)
+>>>>>>> v3.18
 =======
 void rc_keydown_notimeout(struct rc_dev *dev, enum rc_type protocol,
 			  u32 scancode, u8 toggle)
@@ -776,7 +850,11 @@ void rc_keydown_notimeout(struct rc_dev *dev, enum rc_type protocol,
 
 	spin_lock_irqsave(&dev->keylock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ir_do_keydown(dev, scancode, keycode, toggle);
+=======
+	ir_do_keydown(dev, protocol, scancode, keycode, toggle);
+>>>>>>> v3.18
 =======
 	ir_do_keydown(dev, protocol, scancode, keycode, toggle);
 >>>>>>> v3.18
@@ -785,7 +863,10 @@ void rc_keydown_notimeout(struct rc_dev *dev, enum rc_type protocol,
 EXPORT_SYMBOL_GPL(rc_keydown_notimeout);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int rc_open(struct rc_dev *rdev)
 {
 	int rval = 0;
@@ -806,11 +887,15 @@ int rc_open(struct rc_dev *rdev)
 }
 EXPORT_SYMBOL_GPL(rc_open);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ir_open(struct input_dev *idev)
 {
 	struct rc_dev *rdev = input_get_drvdata(idev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return rdev->open(rdev);
 }
@@ -822,6 +907,8 @@ static void ir_close(struct input_dev *idev)
 	 if (rdev)
 		rdev->close(rdev);
 =======
+=======
+>>>>>>> v3.18
 	return rc_open(rdev);
 }
 
@@ -842,6 +929,9 @@ static void ir_close(struct input_dev *idev)
 {
 	struct rc_dev *rdev = input_get_drvdata(idev);
 	rc_close(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -883,6 +973,7 @@ static struct {
 	{ RC_BIT_RC5_SZ,	"rc-5-sz"	},
 	{ RC_BIT_SANYO,		"sanyo"		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ RC_BIT_MCE_KBD,	"mce_kbd"	},
 	{ RC_BIT_LIRC,		"lirc"		},
 };
@@ -896,6 +987,8 @@ static struct {
  * This routine is a callback routine for input read the IR protocol type(s).
  * it is trigged by reading /sys/class/rc/rc?/protocols.
 =======
+=======
+>>>>>>> v3.18
 	{ RC_BIT_SHARP,		"sharp"		},
 	{ RC_BIT_MCE_KBD,	"mce_kbd"	},
 	{ RC_BIT_LIRC,		"lirc"		},
@@ -935,6 +1028,9 @@ struct rc_filter_attribute {
  *
  * This routine is a callback routine for input read the IR protocol type(s).
  * it is trigged by reading /sys/class/rc/rc?/[wakeup_]protocols.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * It returns the protocol names of supported protocols.
  * Enabled protocols are printed in brackets.
@@ -947,6 +1043,10 @@ static ssize_t show_protocols(struct device *device,
 {
 	struct rc_dev *dev = to_rc_dev(device);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct rc_filter_attribute *fattr = to_rc_filter_attr(mattr);
+>>>>>>> v3.18
 =======
 	struct rc_filter_attribute *fattr = to_rc_filter_attr(mattr);
 >>>>>>> v3.18
@@ -960,6 +1060,7 @@ static ssize_t show_protocols(struct device *device,
 
 	mutex_lock(&dev->lock);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enabled = dev->enabled_protocols;
 	if (dev->driver_type == RC_DRIVER_SCANCODE)
@@ -975,6 +1076,8 @@ static ssize_t show_protocols(struct device *device,
 		   (long long)allowed,
 		   (long long)enabled);
 =======
+=======
+>>>>>>> v3.18
 	if (fattr->type == RC_FILTER_NORMAL) {
 		enabled = dev->enabled_protocols;
 		allowed = dev->allowed_protocols;
@@ -989,6 +1092,9 @@ static ssize_t show_protocols(struct device *device,
 
 	IR_dprintk(1, "%s: allowed - 0x%llx, enabled - 0x%llx\n",
 		   __func__, (long long)allowed, (long long)enabled);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (i = 0; i < ARRAY_SIZE(proto_names); i++) {
@@ -1006,14 +1112,18 @@ static ssize_t show_protocols(struct device *device,
 	*tmp = '\n';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&dev->lock);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return tmp + 1 - buf;
 }
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * store_protocols() - changes the current IR protocol(s)
  * @device:	the device descriptor
@@ -1061,6 +1171,8 @@ static ssize_t store_protocols(struct device *device,
 
 	while ((tmp = strsep((char **) &data, " \n")) != NULL) {
 =======
+=======
+>>>>>>> v3.18
  * parse_protocol_change() - parses a protocol change request
  * @protocols:	pointer to the bitmask of current protocols
  * @buf:	pointer to the buffer with a list of changes
@@ -1080,6 +1192,9 @@ static int parse_protocol_change(u64 *protocols, const char *buf)
 	int i;
 
 	while ((tmp = strsep((char **)&buf, " \n")) != NULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!*tmp)
 			break;
@@ -1107,8 +1222,12 @@ static int parse_protocol_change(u64 *protocols, const char *buf)
 		if (i == ARRAY_SIZE(proto_names)) {
 			IR_dprintk(1, "Unknown protocol: '%s'\n", tmp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = -EINVAL;
 			goto out;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -1118,22 +1237,29 @@ static int parse_protocol_change(u64 *protocols, const char *buf)
 
 		if (enable)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			type |= mask;
 		else if (disable)
 			type &= ~mask;
 		else
 			type = mask;
 =======
+=======
+>>>>>>> v3.18
 			*protocols |= mask;
 		else if (disable)
 			*protocols &= ~mask;
 		else
 			*protocols = mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	if (!count) {
 		IR_dprintk(1, "Protocol not specified\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret = -EINVAL;
 		goto out;
@@ -1159,6 +1285,8 @@ out:
 	mutex_unlock(&dev->lock);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -1384,6 +1512,9 @@ static ssize_t store_filter(struct device *device,
 unlock:
 	mutex_unlock(&dev->lock);
 	return (ret < 0) ? ret : len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1403,6 +1534,12 @@ static int rc_dev_uevent(struct device *device, struct kobj_uevent_env *env)
 	struct rc_dev *dev = to_rc_dev(device);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!dev || !dev->input_dev)
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!dev || !dev->input_dev)
 		return -ENODEV;
@@ -1419,6 +1556,7 @@ static int rc_dev_uevent(struct device *device, struct kobj_uevent_env *env)
 /*
  * Static device attribute struct with the sysfs attributes for IR's
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static DEVICE_ATTR(protocols, S_IRUGO | S_IWUSR,
 		   show_protocols, store_protocols);
@@ -1440,6 +1578,8 @@ static const struct attribute_group *rc_dev_attr_groups[] = {
 static struct device_type rc_dev_type = {
 	.groups		= rc_dev_attr_groups,
 =======
+=======
+>>>>>>> v3.18
 static RC_PROTO_ATTR(protocols, S_IRUGO | S_IWUSR,
 		     show_protocols, store_protocols, RC_FILTER_NORMAL);
 static RC_PROTO_ATTR(wakeup_protocols, S_IRUGO | S_IWUSR,
@@ -1492,6 +1632,9 @@ static struct attribute_group rc_dev_wakeup_filter_attr_grp = {
 };
 
 static struct device_type rc_dev_type = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.release	= rc_dev_release,
 	.uevent		= rc_dev_uevent,
@@ -1548,10 +1691,16 @@ int rc_register_device(struct rc_dev *dev)
 {
 	static bool raw_init = false; /* raw decoders loaded? */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static atomic_t devno = ATOMIC_INIT(0);
 	struct rc_map *rc_map;
 	const char *path;
 	int rc;
+=======
+	struct rc_map *rc_map;
+	const char *path;
+	int rc, devno, attr = 0;
+>>>>>>> v3.18
 =======
 	struct rc_map *rc_map;
 	const char *path;
@@ -1577,7 +1726,10 @@ int rc_register_device(struct rc_dev *dev)
 		dev->input_dev->close = ir_close;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	do {
 		devno = find_first_zero_bit(ir_core_dev_number,
 					    IRRCV_NUM_DEVICES);
@@ -1596,6 +1748,9 @@ int rc_register_device(struct rc_dev *dev)
 		dev->sysfs_groups[attr++] = &rc_dev_wakeup_protocol_attr_grp;
 	dev->sysfs_groups[attr++] = NULL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Take the lock here, as the device sysfs node will appear
@@ -1606,7 +1761,11 @@ int rc_register_device(struct rc_dev *dev)
 	mutex_lock(&dev->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->devno = (unsigned long)(atomic_inc_return(&devno) - 1);
+=======
+	dev->devno = devno;
+>>>>>>> v3.18
 =======
 	dev->devno = devno;
 >>>>>>> v3.18
@@ -1625,8 +1784,11 @@ int rc_register_device(struct rc_dev *dev)
 	dev->input_dev->phys = dev->input_phys;
 	dev->input_dev->name = dev->input_name;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = input_register_device(dev->input_dev);
 =======
+=======
+>>>>>>> v3.18
 
 	/* input_register_device can call ir_open, so unlock mutex here */
 	mutex_unlock(&dev->lock);
@@ -1635,6 +1797,9 @@ int rc_register_device(struct rc_dev *dev)
 
 	mutex_lock(&dev->lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (rc)
 		goto out_table;
@@ -1676,6 +1841,11 @@ int rc_register_device(struct rc_dev *dev)
 	if (dev->change_protocol) {
 		u64 rc_type = (1 << rc_map->rc_type);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (dev->driver_type == RC_DRIVER_IR_RAW)
+			rc_type |= RC_BIT_LIRC;
+>>>>>>> v3.18
 =======
 		if (dev->driver_type == RC_DRIVER_IR_RAW)
 			rc_type |= RC_BIT_LIRC;
@@ -1709,6 +1879,10 @@ out_dev:
 out_unlock:
 	mutex_unlock(&dev->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clear_bit(dev->devno, ir_core_dev_number);
+>>>>>>> v3.18
 =======
 	clear_bit(dev->devno, ir_core_dev_number);
 >>>>>>> v3.18
@@ -1724,6 +1898,11 @@ void rc_unregister_device(struct rc_dev *dev)
 	del_timer_sync(&dev->timer_keyup);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	clear_bit(dev->devno, ir_core_dev_number);
+
+>>>>>>> v3.18
 =======
 	clear_bit(dev->devno, ir_core_dev_number);
 
@@ -1758,6 +1937,10 @@ static int __init rc_core_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	led_trigger_register_simple("rc-feedback", &led_feedback);
+>>>>>>> v3.18
 =======
 	led_trigger_register_simple("rc-feedback", &led_feedback);
 >>>>>>> v3.18
@@ -1770,6 +1953,10 @@ static void __exit rc_core_exit(void)
 {
 	class_unregister(&rc_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	led_trigger_unregister_simple(led_feedback);
+>>>>>>> v3.18
 =======
 	led_trigger_unregister_simple(led_feedback);
 >>>>>>> v3.18
@@ -1784,7 +1971,11 @@ EXPORT_SYMBOL_GPL(rc_core_debug);
 module_param_named(debug, rc_core_debug, int, 0644);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Mauro Carvalho Chehab <mchehab@redhat.com>");
+=======
+MODULE_AUTHOR("Mauro Carvalho Chehab");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Mauro Carvalho Chehab");
 >>>>>>> v3.18

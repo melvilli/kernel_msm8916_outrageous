@@ -29,7 +29,11 @@
 #include <linux/pm.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/spi/spi.h>
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -45,6 +49,7 @@
 
 struct wm8940_priv {
 	unsigned int sysclk;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	enum snd_soc_control_type control_type;
 };
@@ -138,6 +143,8 @@ static const char *wm8940_filter_mode_text[] = {"Audio", "Application"};
 static const struct soc_enum wm8940_filter_mode_enum
 = SOC_ENUM_SINGLE(WM8940_ADC, 7, 2, wm8940_filter_mode_text);
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regmap;
 };
 
@@ -267,6 +274,9 @@ static SOC_ENUM_SINGLE_DECL(wm8940_mic_bias_level_enum,
 static const char *wm8940_filter_mode_text[] = {"Audio", "Application"};
 static SOC_ENUM_SINGLE_DECL(wm8940_filter_mode_enum,
 			    WM8940_ADC, 7, wm8940_filter_mode_text);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static DECLARE_TLV_DB_SCALE(wm8940_spk_vol_tlv, -5700, 100, 1);
@@ -401,7 +411,11 @@ static const struct snd_soc_dapm_widget wm8940_dapm_widgets[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct snd_soc_dapm_route audio_map[] = {
+=======
+static const struct snd_soc_dapm_route wm8940_dapm_routes[] = {
+>>>>>>> v3.18
 =======
 static const struct snd_soc_dapm_route wm8940_dapm_routes[] = {
 >>>>>>> v3.18
@@ -437,6 +451,7 @@ static const struct snd_soc_dapm_route wm8940_dapm_routes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm8940_add_widgets(struct snd_soc_codec *codec)
 {
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
@@ -452,6 +467,8 @@ error_ret:
 	return ret;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define wm8940_reset(c) snd_soc_write(c, WM8940_SOFTRESET, 0);
@@ -551,6 +568,7 @@ static int wm8940_i2s_hw_params(struct snd_pcm_substream *substream,
 		goto error_ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S8:
 		companding = companding | (1 << 5);
@@ -565,6 +583,8 @@ static int wm8940_i2s_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 8:
 		companding = companding | (1 << 5);
@@ -578,6 +598,9 @@ static int wm8940_i2s_hw_params(struct snd_pcm_substream *substream,
 		iface |= (2 << 5);
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iface |= (3 << 5);
 		break;
@@ -606,6 +629,10 @@ static int wm8940_set_bias_level(struct snd_soc_codec *codec,
 				 enum snd_soc_bias_level level)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct wm8940_priv *wm8940 = snd_soc_codec_get_drvdata(codec);
+>>>>>>> v3.18
 =======
 	struct wm8940_priv *wm8940 = snd_soc_codec_get_drvdata(codec);
 >>>>>>> v3.18
@@ -633,7 +660,11 @@ static int wm8940_set_bias_level(struct snd_soc_codec *codec,
 	case SND_SOC_BIAS_STANDBY:
 		if (codec->dapm.bias_level == SND_SOC_BIAS_OFF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ret = snd_soc_cache_sync(codec);
+=======
+			ret = regcache_sync(wm8940->regmap);
+>>>>>>> v3.18
 =======
 			ret = regcache_sync(wm8940->regmap);
 >>>>>>> v3.18
@@ -852,7 +883,10 @@ static int wm8940_resume(struct snd_soc_codec *codec)
 static int wm8940_probe(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct wm8940_priv *wm8940 = snd_soc_codec_get_drvdata(codec);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct wm8940_setup_data *pdata = codec->dev->platform_data;
@@ -860,12 +894,15 @@ static int wm8940_probe(struct snd_soc_codec *codec)
 	u16 reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 8, 16, wm8940->control_type);
 	if (ret < 0) {
 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = wm8940_reset(codec);
@@ -890,11 +927,14 @@ static int wm8940_probe(struct snd_soc_codec *codec)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = snd_soc_add_codec_controls(codec, wm8940_snd_controls,
 			     ARRAY_SIZE(wm8940_snd_controls));
 	if (ret)
 		return ret;
 	ret = wm8940_add_widgets(codec);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -913,11 +953,14 @@ static struct snd_soc_codec_driver soc_codec_dev_wm8940 = {
 	.resume =	wm8940_resume,
 	.set_bias_level = wm8940_set_bias_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_cache_size = ARRAY_SIZE(wm8940_reg_defaults),
 	.reg_word_size = sizeof(u16),
 	.reg_cache_default = wm8940_reg_defaults,
 	.volatile_register = wm8940_volatile_register,
 =======
+=======
+>>>>>>> v3.18
 	.controls =     wm8940_snd_controls,
 	.num_controls = ARRAY_SIZE(wm8940_snd_controls),
 	.dapm_widgets = wm8940_dapm_widgets,
@@ -936,6 +979,9 @@ static const struct regmap_config wm8940_regmap = {
 
 	.readable_reg = wm8940_readable_register,
 	.volatile_reg = wm8940_volatile_register,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -951,14 +997,20 @@ static int wm8940_i2c_probe(struct i2c_client *i2c,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_set_clientdata(i2c, wm8940);
 	wm8940->control_type = SND_SOC_I2C;
 =======
+=======
+>>>>>>> v3.18
 	wm8940->regmap = devm_regmap_init_i2c(i2c, &wm8940_regmap);
 	if (IS_ERR(wm8940->regmap))
 		return PTR_ERR(wm8940->regmap);
 
 	i2c_set_clientdata(i2c, wm8940);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = snd_soc_register_codec(&i2c->dev,

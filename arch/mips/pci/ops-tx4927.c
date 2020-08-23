@@ -200,10 +200,16 @@ static struct {
 char *tx4927_pcibios_setup(char *str)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
 
 	if (!strncmp(str, "trdyto=", 7)) {
 		if (strict_strtoul(str + 7, 0, &val) == 0)
+=======
+	if (!strncmp(str, "trdyto=", 7)) {
+		u8 val = 0;
+		if (kstrtou8(str + 7, 0, &val) == 0)
+>>>>>>> v3.18
 =======
 	if (!strncmp(str, "trdyto=", 7)) {
 		u8 val = 0;
@@ -214,7 +220,12 @@ char *tx4927_pcibios_setup(char *str)
 	}
 	if (!strncmp(str, "retryto=", 8)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strict_strtoul(str + 8, 0, &val) == 0)
+=======
+		u8 val = 0;
+		if (kstrtou8(str + 8, 0, &val) == 0)
+>>>>>>> v3.18
 =======
 		u8 val = 0;
 		if (kstrtou8(str + 8, 0, &val) == 0)
@@ -224,7 +235,12 @@ char *tx4927_pcibios_setup(char *str)
 	}
 	if (!strncmp(str, "gbwc=", 5)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (strict_strtoul(str + 5, 0, &val) == 0)
+=======
+		u16 val;
+		if (kstrtou16(str + 5, 0, &val) == 0)
+>>>>>>> v3.18
 =======
 		u16 val;
 		if (kstrtou16(str + 5, 0, &val) == 0)

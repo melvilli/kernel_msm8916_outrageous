@@ -29,6 +29,10 @@ struct gpio_charger {
 	const struct gpio_charger_platform_data *pdata;
 	unsigned int irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool wakeup_enabled;
+>>>>>>> v3.18
 =======
 	bool wakeup_enabled;
 >>>>>>> v3.18
@@ -59,7 +63,11 @@ static int gpio_charger_get_property(struct power_supply *psy,
 	switch (psp) {
 	case POWER_SUPPLY_PROP_ONLINE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		val->intval = gpio_get_value_cansleep(pdata->gpio);
+=======
+		val->intval = !!gpio_get_value_cansleep(pdata->gpio);
+>>>>>>> v3.18
 =======
 		val->intval = !!gpio_get_value_cansleep(pdata->gpio);
 >>>>>>> v3.18
@@ -145,6 +153,11 @@ static int gpio_charger_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, gpio_charger);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_init_wakeup(&pdev->dev, 1);
+
+>>>>>>> v3.18
 =======
 	device_init_wakeup(&pdev->dev, 1);
 
@@ -169,8 +182,11 @@ static int gpio_charger_remove(struct platform_device *pdev)
 	gpio_free(gpio_charger->pdata->gpio);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -178,7 +194,10 @@ static int gpio_charger_remove(struct platform_device *pdev)
 
 #ifdef CONFIG_PM_SLEEP
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int gpio_charger_suspend(struct device *dev)
 {
 	struct gpio_charger *gpio_charger = dev_get_drvdata(dev);
@@ -190,6 +209,9 @@ static int gpio_charger_suspend(struct device *dev)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int gpio_charger_resume(struct device *dev)
 {
@@ -197,6 +219,11 @@ static int gpio_charger_resume(struct device *dev)
 	struct gpio_charger *gpio_charger = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (gpio_charger->wakeup_enabled)
+		disable_irq_wake(gpio_charger->irq);
+>>>>>>> v3.18
 =======
 	if (gpio_charger->wakeup_enabled)
 		disable_irq_wake(gpio_charger->irq);
@@ -208,7 +235,12 @@ static int gpio_charger_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static SIMPLE_DEV_PM_OPS(gpio_charger_pm_ops, NULL, gpio_charger_resume);
+=======
+static SIMPLE_DEV_PM_OPS(gpio_charger_pm_ops,
+		gpio_charger_suspend, gpio_charger_resume);
+>>>>>>> v3.18
 =======
 static SIMPLE_DEV_PM_OPS(gpio_charger_pm_ops,
 		gpio_charger_suspend, gpio_charger_resume);

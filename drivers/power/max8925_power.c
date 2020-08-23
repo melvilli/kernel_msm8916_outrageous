@@ -444,7 +444,11 @@ max8925_power_dt_init(struct platform_device *pdev)
 		return pdev->dev.platform_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	np = of_find_node_by_name(nproot, "charger");
+=======
+	np = of_get_child_by_name(nproot, "charger");
+>>>>>>> v3.18
 =======
 	np = of_get_child_by_name(nproot, "charger");
 >>>>>>> v3.18
@@ -457,6 +461,11 @@ max8925_power_dt_init(struct platform_device *pdev)
 			sizeof(struct max8925_power_pdata),
 			GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!pdata)
+		goto ret;
+>>>>>>> v3.18
 =======
 	if (!pdata)
 		goto ret;
@@ -475,6 +484,11 @@ max8925_power_dt_init(struct platform_device *pdev)
 	pdata->no_temp_support = no_temp_support;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ret:
+	of_node_put(np);
+>>>>>>> v3.18
 =======
 ret:
 	of_node_put(np);

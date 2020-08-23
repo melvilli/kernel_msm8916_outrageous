@@ -21,6 +21,7 @@
 #include <linux/init.h>
 #include <linux/smp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/spinlock.h>
 #include <linux/io.h>
 #include <linux/delay.h>
@@ -32,6 +33,8 @@
 #include <asm/smp_twd.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/delay.h>
 
@@ -41,6 +44,9 @@
 #include "common.h"
 #include "sh73a0.h"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define WUPCR		IOMEM(0xe6151010)
 #define SRESCR		IOMEM(0xe6151018)
@@ -49,8 +55,11 @@
 #define APARMBAREA	IOMEM(0xe6f10020)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PSTR_SHUTDOWN_MODE	3
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define SH73A0_SCU_BASE 0xf0000000
@@ -64,6 +73,7 @@ void __init sh73a0_register_twd(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit sh73a0_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	cpu = cpu_logical_map(cpu);
@@ -73,6 +83,8 @@ static int __cpuinit sh73a0_boot_secondary(unsigned int cpu, struct task_struct 
 	else
 		__raw_writel(1 << cpu, SRESCR);	/* reset */
 =======
+=======
+>>>>>>> v3.18
 static int sh73a0_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	unsigned int lcpu = cpu_logical_map(cpu);
@@ -81,6 +93,9 @@ static int sh73a0_boot_secondary(unsigned int cpu, struct task_struct *idle)
 		__raw_writel(1 << lcpu, WUPCR);	/* wake up */
 	else
 		__raw_writel(1 << lcpu, SRESCR);	/* reset */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -88,6 +103,7 @@ static int sh73a0_boot_secondary(unsigned int cpu, struct task_struct *idle)
 
 static void __init sh73a0_smp_prepare_cpus(unsigned int max_cpus)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	scu_enable(shmobile_scu_base);
 
@@ -153,6 +169,8 @@ struct smp_operations sh73a0_smp_ops __initdata = {
 	.cpu_die		= sh73a0_cpu_die,
 	.cpu_disable		= sh73a0_cpu_disable,
 =======
+=======
+>>>>>>> v3.18
 	/* Map the reset vector (in headsmp.S) */
 	__raw_writel(0, APARMBAREA);      /* 4k */
 	__raw_writel(__pa(shmobile_boot_vector), SBAR);
@@ -169,6 +187,9 @@ struct smp_operations sh73a0_smp_ops __initdata = {
 	.cpu_disable		= shmobile_smp_cpu_disable,
 	.cpu_die		= shmobile_smp_scu_cpu_die,
 	.cpu_kill		= shmobile_smp_scu_cpu_kill,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };

@@ -4,7 +4,11 @@
  * Watchdog driver for DaVinci DM644x/DM646x processors
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2006 Texas Instruments.
+=======
+ * Copyright (C) 2006-2013 Texas Instruments.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2006-2013 Texas Instruments.
 >>>>>>> v3.18
@@ -20,6 +24,7 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/fs.h>
 #include <linux/miscdevice.h>
 #include <linux/watchdog.h>
@@ -32,6 +37,13 @@
 #include <linux/device.h>
 #include <linux/clk.h>
 #include <linux/slab.h>
+=======
+#include <linux/watchdog.h>
+#include <linux/platform_device.h>
+#include <linux/io.h>
+#include <linux/device.h>
+#include <linux/clk.h>
+>>>>>>> v3.18
 =======
 #include <linux/watchdog.h>
 #include <linux/platform_device.h>
@@ -74,6 +86,7 @@
 #define WDKEY_SEQ1		(0xda7e << 16)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int heartbeat = DEFAULT_HEARTBEAT;
 
 static DEFINE_SPINLOCK(io_lock);
@@ -100,6 +113,8 @@ static void wdt_service(void)
 
 static void wdt_enable(void)
 =======
+=======
+>>>>>>> v3.18
 static int heartbeat;
 
 /*
@@ -115,11 +130,15 @@ struct davinci_wdt_device {
 };
 
 static int davinci_wdt_start(struct watchdog_device *wdd)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	u32 tgcr;
 	u32 timer_margin;
 	unsigned long wdt_freq;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	wdt_freq = clk_get_rate(wdt_clk);
@@ -143,6 +162,8 @@ static int davinci_wdt_start(struct watchdog_device *wdd)
 	/* enable run continuously */
 	iowrite32(ENAMODE12_PERIODIC, wdt_base + TCR);
 =======
+=======
+>>>>>>> v3.18
 	struct davinci_wdt_device *davinci_wdt = watchdog_get_drvdata(wdd);
 
 	wdt_freq = clk_get_rate(davinci_wdt->clk);
@@ -163,12 +184,16 @@ static int davinci_wdt_start(struct watchdog_device *wdd)
 	iowrite32(timer_margin, davinci_wdt->base + PRD34);
 	/* enable run continuously */
 	iowrite32(ENAMODE12_PERIODIC, davinci_wdt->base + TCR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Once the WDT is in pre-active state write to
 	 * TIM12, TIM34, PRD12, PRD34, TCR, TGCR, WDTCR are
 	 * write protected (except for the WDKEY field)
 	 */
 	/* put watchdog in pre-active state */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	iowrite32(WDKEY_SEQ0 | WDEN, wdt_base + WDTCR);
 	/* put watchdog in active state */
@@ -252,6 +277,8 @@ static struct miscdevice davinci_wdt_miscdev = {
 	.name = "watchdog",
 	.fops = &davinci_wdt_fops,
 =======
+=======
+>>>>>>> v3.18
 	iowrite32(WDKEY_SEQ0 | WDEN, davinci_wdt->base + WDTCR);
 	/* put watchdog in active state */
 	iowrite32(WDKEY_SEQ1 | WDEN, davinci_wdt->base + WDTCR);
@@ -305,6 +332,9 @@ static const struct watchdog_ops davinci_wdt_ops = {
 	.stop		= davinci_wdt_ping,
 	.ping		= davinci_wdt_ping,
 	.get_timeleft	= davinci_wdt_get_timeleft,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -313,6 +343,7 @@ static int davinci_wdt_probe(struct platform_device *pdev)
 	int ret = 0;
 	struct device *dev = &pdev->dev;
 	struct resource  *wdt_mem;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	wdt_clk = devm_clk_get(dev, NULL);
@@ -338,6 +369,8 @@ static int davinci_wdt_probe(struct platform_device *pdev)
 		set_bit(WDT_DEVICE_INITED, &wdt_status);
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct watchdog_device *wdd;
 	struct davinci_wdt_device *davinci_wdt;
 
@@ -375,6 +408,9 @@ static int davinci_wdt_probe(struct platform_device *pdev)
 	ret = watchdog_register_device(wdd);
 	if (ret < 0)
 		dev_err(dev, "cannot register watchdog device\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -383,13 +419,19 @@ static int davinci_wdt_probe(struct platform_device *pdev)
 static int davinci_wdt_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	misc_deregister(&davinci_wdt_miscdev);
 	clk_disable_unprepare(wdt_clk);
 =======
+=======
+>>>>>>> v3.18
 	struct davinci_wdt_device *davinci_wdt = platform_get_drvdata(pdev);
 
 	watchdog_unregister_device(&davinci_wdt->wdd);
 	clk_disable_unprepare(davinci_wdt->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -404,7 +446,11 @@ MODULE_DEVICE_TABLE(of, davinci_wdt_of_match);
 static struct platform_driver platform_wdt_driver = {
 	.driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.name = "watchdog",
+=======
+		.name = "davinci-wdt",
+>>>>>>> v3.18
 =======
 		.name = "davinci-wdt",
 >>>>>>> v3.18
@@ -428,8 +474,12 @@ MODULE_PARM_DESC(heartbeat,
 
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
 MODULE_ALIAS("platform:watchdog");
+=======
+MODULE_ALIAS("platform:davinci-wdt");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:davinci-wdt");
 >>>>>>> v3.18

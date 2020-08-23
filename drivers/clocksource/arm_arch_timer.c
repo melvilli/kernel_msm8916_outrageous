@@ -31,8 +31,11 @@
 #define CNTTIDR_VIRT(n)	(BIT(1) << ((n) * 4))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CNTPCT_LO	0x00
 #define CNTPCT_HI	0x04
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define CNTVCT_LO	0x08
@@ -72,6 +75,10 @@ static struct clock_event_device __percpu *arch_timer_evt;
 
 static bool arch_timer_use_virtual = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static bool arch_timer_c3stop;
+>>>>>>> v3.18
 =======
 static bool arch_timer_c3stop;
 >>>>>>> v3.18
@@ -82,8 +89,14 @@ static bool arch_timer_mem_use_virtual;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void arch_timer_reg_write(int access, int reg, u32 val,
 					struct clock_event_device *clk)
+=======
+static __always_inline
+void arch_timer_reg_write(int access, enum arch_timer_reg reg, u32 val,
+			  struct clock_event_device *clk)
+>>>>>>> v3.18
 =======
 static __always_inline
 void arch_timer_reg_write(int access, enum arch_timer_reg reg, u32 val,
@@ -95,6 +108,7 @@ void arch_timer_reg_write(int access, enum arch_timer_reg reg, u32 val,
 		switch (reg) {
 		case ARCH_TIMER_REG_CTRL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			writel_relaxed_no_log(val, timer->base + CNTP_CTL);
 			break;
 		case ARCH_TIMER_REG_TVAL:
@@ -103,17 +117,23 @@ void arch_timer_reg_write(int access, enum arch_timer_reg reg, u32 val,
 		default:
 			BUILD_BUG();
 =======
+=======
+>>>>>>> v3.18
 			writel_relaxed(val, timer->base + CNTP_CTL);
 			break;
 		case ARCH_TIMER_REG_TVAL:
 			writel_relaxed(val, timer->base + CNTP_TVAL);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else if (access == ARCH_TIMER_MEM_VIRT_ACCESS) {
 		struct arch_timer *timer = to_arch_timer(clk);
 		switch (reg) {
 		case ARCH_TIMER_REG_CTRL:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			writel_relaxed_no_log(val, timer->base + CNTV_CTL);
 			break;
@@ -123,11 +143,16 @@ void arch_timer_reg_write(int access, enum arch_timer_reg reg, u32 val,
 		default:
 			BUILD_BUG();
 =======
+=======
+>>>>>>> v3.18
 			writel_relaxed(val, timer->base + CNTV_CTL);
 			break;
 		case ARCH_TIMER_REG_TVAL:
 			writel_relaxed(val, timer->base + CNTV_TVAL);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -136,8 +161,14 @@ void arch_timer_reg_write(int access, enum arch_timer_reg reg, u32 val,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline u32 arch_timer_reg_read(int access, int reg,
 				      struct clock_event_device *clk)
+=======
+static __always_inline
+u32 arch_timer_reg_read(int access, enum arch_timer_reg reg,
+			struct clock_event_device *clk)
+>>>>>>> v3.18
 =======
 static __always_inline
 u32 arch_timer_reg_read(int access, enum arch_timer_reg reg,
@@ -151,6 +182,7 @@ u32 arch_timer_reg_read(int access, enum arch_timer_reg reg,
 		switch (reg) {
 		case ARCH_TIMER_REG_CTRL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			val = readl_relaxed_no_log(timer->base + CNTP_CTL);
 			break;
 		case ARCH_TIMER_REG_TVAL:
@@ -159,17 +191,23 @@ u32 arch_timer_reg_read(int access, enum arch_timer_reg reg,
 		default:
 			BUILD_BUG();
 =======
+=======
+>>>>>>> v3.18
 			val = readl_relaxed(timer->base + CNTP_CTL);
 			break;
 		case ARCH_TIMER_REG_TVAL:
 			val = readl_relaxed(timer->base + CNTP_TVAL);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else if (access == ARCH_TIMER_MEM_VIRT_ACCESS) {
 		struct arch_timer *timer = to_arch_timer(clk);
 		switch (reg) {
 		case ARCH_TIMER_REG_CTRL:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			val = readl_relaxed_no_log(timer->base + CNTV_CTL);
 			break;
@@ -179,11 +217,16 @@ u32 arch_timer_reg_read(int access, enum arch_timer_reg reg,
 		default:
 			BUILD_BUG();
 =======
+=======
+>>>>>>> v3.18
 			val = readl_relaxed(timer->base + CNTV_CTL);
 			break;
 		case ARCH_TIMER_REG_TVAL:
 			val = readl_relaxed(timer->base + CNTV_TVAL);
 			break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else {
@@ -194,16 +237,22 @@ u32 arch_timer_reg_read(int access, enum arch_timer_reg reg,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline irqreturn_t timer_handler(const int access,
 					struct clock_event_device *evt)
 {
 	unsigned long ctrl;
 =======
+=======
+>>>>>>> v3.18
 static __always_inline irqreturn_t timer_handler(const int access,
 					struct clock_event_device *evt)
 {
 	unsigned long ctrl;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ctrl = arch_timer_reg_read(access, ARCH_TIMER_REG_CTRL, evt);
 	if (ctrl & ARCH_TIMER_CTRL_IT_STAT) {
@@ -245,7 +294,11 @@ static irqreturn_t arch_timer_handler_virt_mem(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void timer_set_mode(const int access, int mode,
+=======
+static __always_inline void timer_set_mode(const int access, int mode,
+>>>>>>> v3.18
 =======
 static __always_inline void timer_set_mode(const int access, int mode,
 >>>>>>> v3.18
@@ -260,11 +313,14 @@ static __always_inline void timer_set_mode(const int access, int mode,
 		arch_timer_reg_write(access, ARCH_TIMER_REG_CTRL, ctrl, clk);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case CLOCK_EVT_MODE_ONESHOT:
 		ctrl = arch_timer_reg_read(access, ARCH_TIMER_REG_CTRL, clk);
 		ctrl |= ARCH_TIMER_CTRL_ENABLE;
 		arch_timer_reg_write(access, ARCH_TIMER_REG_CTRL, ctrl, clk);
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -297,6 +353,7 @@ static void arch_timer_set_mode_phys_mem(enum clock_event_mode mode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void set_next_event(const int access, unsigned long evt,
 				  struct clock_event_device *clk)
 {
@@ -306,6 +363,8 @@ static inline void set_next_event(const int access, unsigned long evt,
 	arch_timer_reg_write(access, ARCH_TIMER_REG_CTRL, ctrl, clk);
 	arch_timer_reg_write(access, ARCH_TIMER_REG_TVAL, evt, clk);
 =======
+=======
+>>>>>>> v3.18
 static __always_inline void set_next_event(const int access, unsigned long evt,
 					   struct clock_event_device *clk)
 {
@@ -315,6 +374,9 @@ static __always_inline void set_next_event(const int access, unsigned long evt,
 	ctrl &= ~ARCH_TIMER_CTRL_IT_MASK;
 	arch_timer_reg_write(access, ARCH_TIMER_REG_TVAL, evt, clk);
 	arch_timer_reg_write(access, ARCH_TIMER_REG_CTRL, ctrl, clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -347,8 +409,13 @@ static int arch_timer_set_next_event_phys_mem(unsigned long evt,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit __arch_timer_setup(unsigned type,
 				       struct clock_event_device *clk)
+=======
+static void __arch_timer_setup(unsigned type,
+			       struct clock_event_device *clk)
+>>>>>>> v3.18
 =======
 static void __arch_timer_setup(unsigned type,
 			       struct clock_event_device *clk)
@@ -358,7 +425,12 @@ static void __arch_timer_setup(unsigned type,
 
 	if (type == ARCH_CP15_TIMER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk->features |= CLOCK_EVT_FEAT_C3STOP;
+=======
+		if (arch_timer_c3stop)
+			clk->features |= CLOCK_EVT_FEAT_C3STOP;
+>>>>>>> v3.18
 =======
 		if (arch_timer_c3stop)
 			clk->features |= CLOCK_EVT_FEAT_C3STOP;
@@ -397,6 +469,7 @@ static void __arch_timer_setup(unsigned type,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void arch_counter_set_user_access(void)
 {
 	u32 cntkctl = arch_timer_get_cntkctl();
@@ -413,6 +486,8 @@ static void arch_counter_set_user_access(void)
 
 	arch_timer_set_cntkctl(cntkctl);
 =======
+=======
+>>>>>>> v3.18
 static void arch_timer_evtstrm_enable(int divider)
 {
 	u32 cntkctl = arch_timer_get_cntkctl();
@@ -426,6 +501,9 @@ static void arch_timer_evtstrm_enable(int divider)
 #ifdef CONFIG_COMPAT
 	compat_elf_hwcap |= COMPAT_HWCAP_EVTSTRM;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -443,7 +521,10 @@ static void arch_timer_configure_evtstream(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void arch_counter_set_user_access(void)
 {
 	u32 cntkctl = arch_timer_get_cntkctl();
@@ -461,6 +542,9 @@ static void arch_counter_set_user_access(void)
 	arch_timer_set_cntkctl(cntkctl);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int arch_timer_setup(struct clock_event_device *clk)
 {
@@ -492,8 +576,12 @@ arch_timer_detect_rate(void __iomem *cntbase, struct device_node *np)
 	if (of_property_read_u32(np, "clock-frequency", &arch_timer_rate)) {
 		if (cntbase)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			arch_timer_rate = readl_relaxed_no_log(cntbase
 								+ CNTFRQ);
+=======
+			arch_timer_rate = readl_relaxed(cntbase + CNTFRQ);
+>>>>>>> v3.18
 =======
 			arch_timer_rate = readl_relaxed(cntbase + CNTFRQ);
 >>>>>>> v3.18
@@ -529,6 +617,7 @@ u32 arch_timer_get_rate(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u64 arch_counter_get_cntpct_mem(void)
 {
 	u32 pct_lo, pct_hi, tmp_hi;
@@ -546,14 +635,23 @@ static notrace u64 arch_counter_get_cntvct_mem(void)
 =======
 static u64 arch_counter_get_cntvct_mem(void)
 >>>>>>> v3.18
+=======
+static u64 arch_counter_get_cntvct_mem(void)
+>>>>>>> v3.18
 {
 	u32 vct_lo, vct_hi, tmp_hi;
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vct_hi = readl_relaxed_no_log(arch_counter_base + CNTVCT_HI);
 		vct_lo = readl_relaxed_no_log(arch_counter_base + CNTVCT_LO);
 		tmp_hi = readl_relaxed_no_log(arch_counter_base + CNTVCT_HI);
+=======
+		vct_hi = readl_relaxed(arch_counter_base + CNTVCT_HI);
+		vct_lo = readl_relaxed(arch_counter_base + CNTVCT_LO);
+		tmp_hi = readl_relaxed(arch_counter_base + CNTVCT_HI);
+>>>>>>> v3.18
 =======
 		vct_hi = readl_relaxed(arch_counter_base + CNTVCT_HI);
 		vct_lo = readl_relaxed(arch_counter_base + CNTVCT_LO);
@@ -571,22 +669,29 @@ static u64 arch_counter_get_cntvct_mem(void)
  * if we don't have the cp15 accessors we won't have a problem.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 u64 (*arch_timer_read_counter)(void) = arch_counter_get_cntvct_cp15;
 
 static cycle_t arch_counter_read(struct clocksource *cs)
 {
 	return arch_counter_get_cntvct();
 =======
+=======
+>>>>>>> v3.18
 u64 (*arch_timer_read_counter)(void) = arch_counter_get_cntvct;
 
 static cycle_t arch_counter_read(struct clocksource *cs)
 {
 	return arch_timer_read_counter();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static cycle_t arch_counter_read_cc(const struct cyclecounter *cc)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return arch_counter_get_cntvct();
 }
@@ -605,6 +710,10 @@ u64 arch_counter_get_cntvct(void)
 	return arch_timer_read_counter();
 }
 EXPORT_SYMBOL(arch_counter_get_cntvct);
+=======
+	return arch_timer_read_counter();
+}
+>>>>>>> v3.18
 =======
 	return arch_timer_read_counter();
 }
@@ -636,12 +745,15 @@ static void __init arch_counter_register(unsigned type)
 
 	/* Register the CP15 based counter if we have one */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (type & ARCH_CP15_TIMER)
 		arch_timer_read_counter = arch_counter_get_cntvct_cp15;
 	else
 		arch_timer_read_counter = arch_counter_get_cntvct_mem;
 
 =======
+=======
+>>>>>>> v3.18
 	if (type & ARCH_CP15_TIMER) {
 		arch_timer_read_counter = arch_counter_get_cntvct;
 	} else {
@@ -655,6 +767,9 @@ static void __init arch_counter_register(unsigned type)
 		clocksource_counter.name = "arch_mem_counter";
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	start_count = arch_timer_read_counter();
 	clocksource_register_hz(&clocksource_counter, arch_timer_rate);
@@ -667,7 +782,11 @@ static void __init arch_counter_register(unsigned type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit arch_timer_stop(struct clock_event_device *clk)
+=======
+static void arch_timer_stop(struct clock_event_device *clk)
+>>>>>>> v3.18
 =======
 static void arch_timer_stop(struct clock_event_device *clk)
 >>>>>>> v3.18
@@ -687,7 +806,11 @@ static void arch_timer_stop(struct clock_event_device *clk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit arch_timer_cpu_notify(struct notifier_block *self,
+=======
+static int arch_timer_cpu_notify(struct notifier_block *self,
+>>>>>>> v3.18
 =======
 static int arch_timer_cpu_notify(struct notifier_block *self,
 >>>>>>> v3.18
@@ -710,7 +833,11 @@ static int arch_timer_cpu_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block arch_timer_cpu_nb __cpuinitdata = {
+=======
+static struct notifier_block arch_timer_cpu_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block arch_timer_cpu_nb = {
 >>>>>>> v3.18
@@ -851,7 +978,10 @@ static const struct of_device_id arch_timer_mem_of_match[] __initconst = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool __init
 arch_timer_probed(int type, const struct of_device_id *matches)
 {
@@ -866,6 +996,9 @@ arch_timer_probed(int type, const struct of_device_id *matches)
 	return probed;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init arch_timer_common_init(void)
 {
@@ -874,11 +1007,17 @@ static void __init arch_timer_common_init(void)
 	/* Wait until both nodes are probed if we have two timers */
 	if ((arch_timers_present & mask) != mask) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (of_find_matching_node(NULL, arch_timer_mem_of_match) &&
 				!(arch_timers_present & ARCH_MEM_TIMER))
 			return;
 		if (of_find_matching_node(NULL, arch_timer_of_match) &&
 				!(arch_timers_present & ARCH_CP15_TIMER))
+=======
+		if (!arch_timer_probed(ARCH_MEM_TIMER, arch_timer_mem_of_match))
+			return;
+		if (!arch_timer_probed(ARCH_CP15_TIMER, arch_timer_of_match))
+>>>>>>> v3.18
 =======
 		if (!arch_timer_probed(ARCH_MEM_TIMER, arch_timer_mem_of_match))
 			return;
@@ -925,6 +1064,11 @@ static void __init arch_timer_init(struct device_node *np)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	arch_timer_c3stop = !of_property_read_bool(np, "always-on");
+
+>>>>>>> v3.18
 =======
 	arch_timer_c3stop = !of_property_read_bool(np, "always-on");
 
@@ -950,7 +1094,11 @@ static void __init arch_timer_mem_init(struct device_node *np)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cnttidr = readl_relaxed_no_log(cntctlbase + CNTTIDR);
+=======
+	cnttidr = readl_relaxed(cntctlbase + CNTTIDR);
+>>>>>>> v3.18
 =======
 	cnttidr = readl_relaxed(cntctlbase + CNTTIDR);
 >>>>>>> v3.18
@@ -995,7 +1143,11 @@ static void __init arch_timer_mem_init(struct device_node *np)
 	if (!irq) {
 		pr_err("arch_timer: Frame missing %s irq",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				arch_timer_mem_use_virtual ? "virt" : "phys");
+=======
+		       arch_timer_mem_use_virtual ? "virt" : "phys");
+>>>>>>> v3.18
 =======
 		       arch_timer_mem_use_virtual ? "virt" : "phys");
 >>>>>>> v3.18

@@ -42,6 +42,7 @@ static int magician_spk_switch = 1;
 static int magician_in_sel = MAGICIAN_MIC;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void magician_ext_control(struct snd_soc_codec *codec)
 {
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
@@ -68,6 +69,8 @@ static void magician_ext_control(struct snd_soc_codec *codec)
 
 	snd_soc_dapm_sync(dapm);
 =======
+=======
+>>>>>>> v3.18
 static void magician_ext_control(struct snd_soc_dapm_context *dapm)
 {
 
@@ -96,12 +99,16 @@ static void magician_ext_control(struct snd_soc_dapm_context *dapm)
 	snd_soc_dapm_sync_unlocked(dapm);
 
 	snd_soc_dapm_mutex_unlock(dapm);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int magician_startup(struct snd_pcm_substream *substream)
 {
 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct snd_soc_codec *codec = rtd->codec;
 
@@ -111,6 +118,11 @@ static int magician_startup(struct snd_pcm_substream *substream)
 	magician_ext_control(codec);
 
 	mutex_unlock(&codec->mutex);
+=======
+
+	/* check the jack status at stream startup */
+	magician_ext_control(&rtd->card->dapm);
+>>>>>>> v3.18
 =======
 
 	/* check the jack status at stream startup */
@@ -315,7 +327,11 @@ static int magician_set_hp(struct snd_kcontrol *kcontrol,
 			     struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
 >>>>>>> v3.18
@@ -325,7 +341,11 @@ static int magician_set_hp(struct snd_kcontrol *kcontrol,
 
 	magician_hp_switch = ucontrol->value.integer.value[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	magician_ext_control(codec);
+=======
+	magician_ext_control(&card->dapm);
+>>>>>>> v3.18
 =======
 	magician_ext_control(&card->dapm);
 >>>>>>> v3.18
@@ -343,7 +363,11 @@ static int magician_set_spk(struct snd_kcontrol *kcontrol,
 			    struct snd_ctl_elem_value *ucontrol)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_codec *codec = snd_kcontrol_chip(kcontrol);
+=======
+	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
+>>>>>>> v3.18
 =======
 	struct snd_soc_card *card = snd_kcontrol_chip(kcontrol);
 >>>>>>> v3.18
@@ -353,7 +377,11 @@ static int magician_set_spk(struct snd_kcontrol *kcontrol,
 
 	magician_spk_switch = ucontrol->value.integer.value[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	magician_ext_control(codec);
+=======
+	magician_ext_control(&card->dapm);
+>>>>>>> v3.18
 =======
 	magician_ext_control(&card->dapm);
 >>>>>>> v3.18
@@ -454,7 +482,10 @@ static int magician_uda1380_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -466,6 +497,7 @@ static int magician_uda1380_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_nc_pin(dapm, "VINL");
 	snd_soc_dapm_nc_pin(dapm, "VINR");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Add magician specific controls */
 	err = snd_soc_add_codec_controls(codec, uda1380_magician_controls,
@@ -480,6 +512,8 @@ static int magician_uda1380_init(struct snd_soc_pcm_runtime *rtd)
 	/* Set up magician specific audio path interconnects */
 	snd_soc_dapm_add_routes(dapm, audio_map, ARRAY_SIZE(audio_map));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -516,13 +550,19 @@ static struct snd_soc_card snd_soc_card_magician = {
 	.num_links = ARRAY_SIZE(magician_dai),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	.controls = uda1380_magician_controls,
 	.num_controls = ARRAY_SIZE(uda1380_magician_controls),
 	.dapm_widgets = uda1380_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(uda1380_dapm_widgets),
 	.dapm_routes = audio_map,
 	.num_dapm_routes = ARRAY_SIZE(audio_map),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

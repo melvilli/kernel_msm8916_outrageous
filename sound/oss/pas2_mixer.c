@@ -22,10 +22,13 @@
 #include "pas2.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef DEB
 #define DEB(what)		/* (what) */
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int      pas_translate_code;
@@ -124,8 +127,11 @@ pas_mixer_set(int whichDev, unsigned int level)
 	int             left, right, devmask, changed, i, mixer = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("static int pas_mixer_set(int whichDev = %d, unsigned int level = %X)\n", whichDev, level));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	left = level & 0x7f;
@@ -214,8 +220,11 @@ pas_mixer_reset(void)
 	int             foo;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_mixer.c: void pas_mixer_reset(void)\n"));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (foo = 0; foo < SOUND_MIXER_NRDEVICES; foo++)
@@ -230,7 +239,10 @@ static int pas_mixer_ioctl(int dev, unsigned int cmd, void __user *arg)
 	int __user *p = (int __user *)arg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEB(printk("pas2_mixer.c: int pas_mixer_ioctl(unsigned int cmd = %X, unsigned int arg = %X)\n", cmd, arg));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (cmd == SOUND_MIXER_PRIVATE1) { /* Set loudness bit */

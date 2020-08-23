@@ -4,7 +4,11 @@
  * serial port.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2007 Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2007 Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2007 Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -18,10 +22,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -319,6 +326,7 @@ static struct serio_driver taos_drv = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init taos_init(void)
 {
 	return serio_register_driver(&taos_drv);
@@ -336,9 +344,14 @@ MODULE_LICENSE("GPL");
 module_init(taos_init);
 module_exit(taos_exit);
 =======
+=======
+>>>>>>> v3.18
 module_serio_driver(taos_drv);
 
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
 MODULE_DESCRIPTION("TAOS evaluation module driver");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

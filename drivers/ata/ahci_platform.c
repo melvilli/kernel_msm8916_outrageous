@@ -13,6 +13,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clk.h>
 #include <linux/kernel.h>
 #include <linux/gfp.h>
@@ -87,6 +88,8 @@ static const struct ata_port_info ahci_port_info[] = {
 static struct scsi_host_template ahci_platform_sht = {
 	AHCI_SHT("ahci_platform"),
 =======
+=======
+>>>>>>> v3.18
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/pm.h>
@@ -102,12 +105,16 @@ static const struct ata_port_info ahci_port_info = {
 	.pio_mask	= ATA_PIO4,
 	.udma_mask	= ATA_UDMA6,
 	.port_ops	= &ahci_platform_ops,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 static int ahci_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ahci_platform_data *pdata = dev_get_platdata(dev);
 	const struct platform_device_id *id = platform_get_device_id(pdev);
@@ -376,6 +383,8 @@ static const struct dev_pm_ops ahci_pm_ops = {
 static const struct of_device_id ahci_of_match[] = {
 	{ .compatible = "snps,spear-ahci", },
 =======
+=======
+>>>>>>> v3.18
 	struct ahci_host_priv *hpriv;
 	int rc;
 
@@ -411,6 +420,9 @@ static const struct of_device_id ahci_of_match[] = {
 	{ .compatible = "ibm,476gtr-ahci", },
 	{ .compatible = "snps,dwc-ahci", },
 	{ .compatible = "hisilicon,hisi-ahci", },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
@@ -426,7 +438,10 @@ static struct platform_driver ahci_driver = {
 		.pm = &ahci_pm_ops,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.id_table	= ahci_devtype,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

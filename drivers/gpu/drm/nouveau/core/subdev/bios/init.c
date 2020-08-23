@@ -10,8 +10,13 @@
 #include <subdev/bios/gpio.h>
 #include <subdev/bios/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <subdev/devinit.h>
 #include <subdev/clock.h>
+=======
+#include <subdev/bios/ramcfg.h>
+#include <subdev/devinit.h>
+>>>>>>> v3.18
 =======
 #include <subdev/bios/ramcfg.h>
 #include <subdev/devinit.h>
@@ -104,8 +109,14 @@ init_conn(struct nvbios_init *init)
 {
 	struct nouveau_bios *bios = init->bios;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8  ver, len;
 	u16 conn;
+=======
+	struct nvbios_connE connE;
+	u8  ver, hdr;
+	u32 conn;
+>>>>>>> v3.18
 =======
 	struct nvbios_connE connE;
 	u8  ver, hdr;
@@ -116,9 +127,15 @@ init_conn(struct nvbios_init *init)
 		if (init->outp) {
 			conn = init->outp->connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			conn = dcb_conn(bios, conn, &ver, &len);
 			if (conn)
 				return nv_ro08(bios, conn);
+=======
+			conn = nvbios_connEp(bios, conn, &ver, &hdr, &connE);
+			if (conn)
+				return connE.type;
+>>>>>>> v3.18
 =======
 			conn = nvbios_connEp(bios, conn, &ver, &hdr, &connE);
 			if (conn)
@@ -136,6 +153,11 @@ static inline u32
 init_nvreg(struct nvbios_init *init, u32 reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct nouveau_devinit *devinit = nouveau_devinit(init->bios);
+
+>>>>>>> v3.18
 =======
 	struct nouveau_devinit *devinit = nouveau_devinit(init->bios);
 
@@ -170,6 +192,12 @@ init_nvreg(struct nvbios_init *init, u32 reg)
 	if (reg & ~0x00fffffc)
 		warn("unknown bits in register 0x%08x\n", reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	if (devinit->mmio)
+		reg = devinit->mmio(devinit, reg);
+>>>>>>> v3.18
 =======
 
 	if (devinit->mmio)
@@ -183,7 +211,11 @@ init_rd32(struct nvbios_init *init, u32 reg)
 {
 	reg = init_nvreg(init, reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (init_exec(init))
+=======
+	if (reg != ~0 && init_exec(init))
+>>>>>>> v3.18
 =======
 	if (reg != ~0 && init_exec(init))
 >>>>>>> v3.18
@@ -196,7 +228,11 @@ init_wr32(struct nvbios_init *init, u32 reg, u32 val)
 {
 	reg = init_nvreg(init, reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (init_exec(init))
+=======
+	if (reg != ~0 && init_exec(init))
+>>>>>>> v3.18
 =======
 	if (reg != ~0 && init_exec(init))
 >>>>>>> v3.18
@@ -208,7 +244,11 @@ init_mask(struct nvbios_init *init, u32 reg, u32 mask, u32 val)
 {
 	reg = init_nvreg(init, reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (init_exec(init)) {
+=======
+	if (reg != ~0 && init_exec(init)) {
+>>>>>>> v3.18
 =======
 	if (reg != ~0 && init_exec(init)) {
 >>>>>>> v3.18
@@ -341,9 +381,15 @@ static void
 init_prog_pll(struct nvbios_init *init, u32 id, u32 freq)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nouveau_clock *clk = nouveau_clock(init->bios);
 	if (clk && clk->pll_set && init_exec(init)) {
 		int ret = clk->pll_set(clk, id, freq);
+=======
+	struct nouveau_devinit *devinit = nouveau_devinit(init->bios);
+	if (devinit->pll_set && init_exec(init)) {
+		int ret = devinit->pll_set(devinit, id, freq);
+>>>>>>> v3.18
 =======
 	struct nouveau_devinit *devinit = nouveau_devinit(init->bios);
 	if (devinit->pll_set && init_exec(init)) {
@@ -439,6 +485,7 @@ init_unknown_script(struct nouveau_bios *bios)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u16
 init_ram_restrict_table(struct nvbios_init *init)
 {
@@ -477,6 +524,8 @@ init_ram_restrict_group_count(struct nvbios_init *init)
 static u8
 init_ram_restrict_strap(struct nvbios_init *init)
 =======
+=======
+>>>>>>> v3.18
 static u8
 init_ram_restrict_group_count(struct nvbios_init *init)
 {
@@ -485,6 +534,9 @@ init_ram_restrict_group_count(struct nvbios_init *init)
 
 static u8
 init_ram_restrict(struct nvbios_init *init)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* This appears to be the behaviour of the VBIOS parser, and *is*
@@ -496,6 +548,7 @@ init_ram_restrict(struct nvbios_init *init)
 	 * in case *not* re-reading the strap causes similar breakage.
 	 */
 	if (!init->ramcfg || init->bios->version.major < 0x70)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		init->ramcfg = init_rd32(init, 0x101000);
 	return (init->ramcfg & 0x00000003c) >> 2;
@@ -509,6 +562,10 @@ init_ram_restrict(struct nvbios_init *init)
 	if (table)
 		return nv_ro08(init->bios, table + strap);
 	return 0x00;
+=======
+		init->ramcfg = 0x80000000 | nvbios_ramcfg_index(init->subdev);
+	return (init->ramcfg & 0x7fffffff);
+>>>>>>> v3.18
 =======
 		init->ramcfg = 0x80000000 | nvbios_ramcfg_index(init->subdev);
 	return (init->ramcfg & 0x7fffffff);
@@ -947,9 +1004,14 @@ init_idx_addr_latched(struct nvbios_init *init)
 	u8 count = nv_ro08(bios, init->offset + 17);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace("INDEX_ADDRESS_LATCHED\t"
 	      "R[0x%06x] : R[0x%06x]\n\tCTRL &= 0x%08x |= 0x%08x\n",
 	      creg, dreg, mask, data);
+=======
+	trace("INDEX_ADDRESS_LATCHED\tR[0x%06x] : R[0x%06x]\n", creg, dreg);
+	trace("\tCTRL &= 0x%08x |= 0x%08x\n", mask, data);
+>>>>>>> v3.18
 =======
 	trace("INDEX_ADDRESS_LATCHED\tR[0x%06x] : R[0x%06x]\n", creg, dreg);
 	trace("\tCTRL &= 0x%08x |= 0x%08x\n", mask, data);
@@ -1524,7 +1586,11 @@ init_configure_mem(struct nvbios_init *init)
 	init_wrvgai(init, 0x03c4, 0x01, data | 0x20);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((addr = nv_ro32(bios, sdata)) != 0xffffffff) {
+=======
+	for (; (addr = nv_ro32(bios, sdata)) != 0xffffffff; sdata += 4) {
+>>>>>>> v3.18
 =======
 	for (; (addr = nv_ro32(bios, sdata)) != 0xffffffff; sdata += 4) {
 >>>>>>> v3.18
@@ -2287,7 +2353,11 @@ nvbios_init(struct nouveau_subdev *subdev, bool execute)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18

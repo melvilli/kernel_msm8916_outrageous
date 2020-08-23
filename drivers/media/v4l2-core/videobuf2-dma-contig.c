@@ -99,6 +99,12 @@ static void *vb2_dc_vaddr(void *buf_priv)
 	struct vb2_dc_buf *buf = buf_priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!buf->vaddr && buf->db_attach)
+		buf->vaddr = dma_buf_vmap(buf->db_attach->dmabuf);
+
+>>>>>>> v3.18
 =======
 	if (!buf->vaddr && buf->db_attach)
 		buf->vaddr = dma_buf_vmap(buf->db_attach->dmabuf);
@@ -124,8 +130,12 @@ static void vb2_dc_prepare(void *buf_priv)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_sync_sg_for_device(buf->dev, sgt->sgl, sgt->orig_nents,
 			       buf->dma_dir);
+=======
+	dma_sync_sg_for_device(buf->dev, sgt->sgl, sgt->nents, buf->dma_dir);
+>>>>>>> v3.18
 =======
 	dma_sync_sg_for_device(buf->dev, sgt->sgl, sgt->nents, buf->dma_dir);
 >>>>>>> v3.18
@@ -141,7 +151,11 @@ static void vb2_dc_finish(void *buf_priv)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_sync_sg_for_cpu(buf->dev, sgt->sgl, sgt->orig_nents, buf->dma_dir);
+=======
+	dma_sync_sg_for_cpu(buf->dev, sgt->sgl, sgt->nents, buf->dma_dir);
+>>>>>>> v3.18
 =======
 	dma_sync_sg_for_cpu(buf->dev, sgt->sgl, sgt->nents, buf->dma_dir);
 >>>>>>> v3.18
@@ -409,7 +423,11 @@ static struct sg_table *vb2_dc_get_base_sgt(struct vb2_dc_buf *buf)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct dma_buf *vb2_dc_get_dmabuf(void *buf_priv)
+=======
+static struct dma_buf *vb2_dc_get_dmabuf(void *buf_priv, unsigned long flags)
+>>>>>>> v3.18
 =======
 static struct dma_buf *vb2_dc_get_dmabuf(void *buf_priv, unsigned long flags)
 >>>>>>> v3.18
@@ -424,7 +442,11 @@ static struct dma_buf *vb2_dc_get_dmabuf(void *buf_priv, unsigned long flags)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dbuf = dma_buf_export(buf, &vb2_dc_dmabuf_ops, buf->size, 0);
+=======
+	dbuf = dma_buf_export(buf, &vb2_dc_dmabuf_ops, buf->size, flags, NULL);
+>>>>>>> v3.18
 =======
 	dbuf = dma_buf_export(buf, &vb2_dc_dmabuf_ops, buf->size, flags, NULL);
 >>>>>>> v3.18
@@ -447,7 +469,10 @@ static inline int vma_is_io(struct vm_area_struct *vma)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int vb2_dc_get_user_pfn(unsigned long start, int n_pages,
 	struct vm_area_struct *vma, unsigned long *res)
 {
@@ -481,6 +506,9 @@ static int vb2_dc_get_user_pfn(unsigned long start, int n_pages,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vb2_dc_get_user_pages(unsigned long start, struct page **pages,
 	int n_pages, struct vm_area_struct *vma, int write)
@@ -493,6 +521,12 @@ static int vb2_dc_get_user_pages(unsigned long start, struct page **pages,
 			int ret = follow_pfn(vma, start, &pfn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			if (!pfn_valid(pfn))
+				return -EINVAL;
+
+>>>>>>> v3.18
 =======
 			if (!pfn_valid(pfn))
 				return -EINVAL;
@@ -534,6 +568,7 @@ static void vb2_dc_put_userptr(void *buf_priv)
 	struct sg_table *sgt = buf->dma_sgt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dma_unmap_sg(buf->dev, sgt->sgl, sgt->orig_nents, buf->dma_dir);
 	if (!vma_is_io(buf->vma))
 		vb2_dc_sgt_foreach_page(sgt, vb2_dc_put_dirty_page);
@@ -541,6 +576,8 @@ static void vb2_dc_put_userptr(void *buf_priv)
 	sg_free_table(sgt);
 	kfree(sgt);
 =======
+=======
+>>>>>>> v3.18
 	if (sgt) {
 		dma_unmap_sg(buf->dev, sgt->sgl, sgt->orig_nents, buf->dma_dir);
 		if (!vma_is_io(buf->vma))
@@ -549,13 +586,19 @@ static void vb2_dc_put_userptr(void *buf_priv)
 		sg_free_table(sgt);
 		kfree(sgt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vb2_put_vma(buf->vma);
 	kfree(buf);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * For some kind of reserved memory there might be no struct page available,
  * so all that can be done to support such 'pages' is to try to convert
@@ -587,6 +630,9 @@ static inline dma_addr_t vb2_dc_pfn_to_dma(struct device *dev, unsigned long pfn
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void *vb2_dc_get_userptr(void *alloc_ctx, unsigned long vaddr,
 	unsigned long size, int write)
@@ -659,7 +705,10 @@ static void *vb2_dc_get_userptr(void *alloc_ctx, unsigned long vaddr,
 	ret = vb2_dc_get_user_pages(start, pages, n_pages, vma, write);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		unsigned long pfn;
 		if (vb2_dc_get_user_pfn(start, n_pages, vma, &pfn) == 0) {
 			buf->dma_addr = vb2_dc_pfn_to_dma(buf->dev, pfn);
@@ -668,6 +717,9 @@ static void *vb2_dc_get_userptr(void *alloc_ctx, unsigned long vaddr,
 			return buf;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_err("failed to get user pages\n");
 		goto fail_vma;
@@ -764,7 +816,11 @@ static int vb2_dc_map_dmabuf(void *mem_priv)
 	/* get the associated scatterlist for this buffer */
 	sgt = dma_buf_map_attachment(buf->db_attach, buf->dma_dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR_OR_NULL(sgt)) {
+=======
+	if (IS_ERR(sgt)) {
+>>>>>>> v3.18
 =======
 	if (IS_ERR(sgt)) {
 >>>>>>> v3.18
@@ -784,6 +840,10 @@ static int vb2_dc_map_dmabuf(void *mem_priv)
 	buf->dma_addr = sg_dma_address(sgt->sgl);
 	buf->dma_sgt = sgt;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	buf->vaddr = NULL;
+>>>>>>> v3.18
 =======
 	buf->vaddr = NULL;
 >>>>>>> v3.18
@@ -807,11 +867,17 @@ static void vb2_dc_unmap_dmabuf(void *mem_priv)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (buf->vaddr) {
 		dma_buf_vunmap(buf->db_attach->dmabuf, buf->vaddr);
 		buf->vaddr = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dma_buf_unmap_attachment(buf->db_attach, sgt, buf->dma_dir);
 

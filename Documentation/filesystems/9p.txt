@@ -70,11 +70,14 @@ OPTIONS
 
   cache=mode	specifies a caching policy.  By default, no caches are used.
 <<<<<<< HEAD
+<<<<<<< HEAD
 			loose = no attempts are made at consistency,
                                 intended for exclusive, read-only mounts
 			fscache = use FS-Cache for a persistent, read-only
 				cache backend.
 =======
+=======
+>>>>>>> v3.18
                         none = default no cache policy, metadata and data
                                 alike are synchronous.
 			loose = no attempts are made at consistency,
@@ -83,6 +86,9 @@ OPTIONS
 				cache backend.
                         mmap = minimal cache that is only used for read-write
                                 mmap.  Northing else is cached, like cache=none
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   debug=n	specifies debug level.  The debug level is a bitmask.
@@ -159,8 +165,12 @@ News and other information is maintained on a Wiki.
 (http://sf.net/apps/mediawiki/v9fs/index.php).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Bug reports may be issued through the kernel.org bugzilla 
 (http://bugzilla.kernel.org)
+=======
+Bug reports are best issued via the mailing list.
+>>>>>>> v3.18
 =======
 Bug reports are best issued via the mailing list.
 >>>>>>> v3.18
@@ -172,6 +182,7 @@ For information on Plan 9 from User Space (Plan 9 applications and libraries
 ported to Linux/BSD/OSX/etc) check out http://swtch.com/plan9
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 STATUS
 ======
@@ -180,5 +191,7 @@ The 2.6 kernel support is working on PPC and x86.
 
 PLEASE USE THE KERNEL BUGZILLA TO REPORT PROBLEMS. (http://bugzilla.kernel.org)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -66,7 +66,11 @@ struct packet_ring_buffer {
 	unsigned int		pg_vec_len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	atomic_t		pending;
+=======
+	unsigned int __percpu	*pending_refcnt;
+>>>>>>> v3.18
 =======
 	unsigned int __percpu	*pending_refcnt;
 >>>>>>> v3.18
@@ -120,6 +124,10 @@ struct packet_sock {
 	unsigned int		tp_tstamp;
 	struct net_device __rcu	*cached_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int			(*xmit)(struct sk_buff *skb);
+>>>>>>> v3.18
 =======
 	int			(*xmit)(struct sk_buff *skb);
 >>>>>>> v3.18

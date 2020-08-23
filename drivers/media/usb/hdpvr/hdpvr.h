@@ -155,6 +155,10 @@ struct hdpvr_video_info {
 	u16	height;
 	u8	fps;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool	valid;
+>>>>>>> v3.18
 =======
 	bool	valid;
 >>>>>>> v3.18
@@ -308,7 +312,11 @@ int hdpvr_config_call(struct hdpvr_device *dev, uint value,
 		      unsigned char valbuf);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hdpvr_video_info *get_video_info(struct hdpvr_device *dev);
+=======
+int get_video_info(struct hdpvr_device *dev, struct hdpvr_video_info *vid_info);
+>>>>>>> v3.18
 =======
 int get_video_info(struct hdpvr_device *dev, struct hdpvr_video_info *vid_info);
 >>>>>>> v3.18

@@ -67,7 +67,11 @@
 #include "tehuti.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(bdx_pci_tbl) = {
+=======
+static const struct pci_device_id bdx_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id bdx_pci_tbl[] = {
 >>>>>>> v3.18
@@ -1769,7 +1773,11 @@ static void bdx_tx_cleanup(struct bdx_priv *priv)
 
 	/* We reclaimed resources, so in case the Q is stopped by xmit callback,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * we resume the transmition and use tx_lock to synchronize with xmit.*/
+=======
+	 * we resume the transmission and use tx_lock to synchronize with xmit.*/
+>>>>>>> v3.18
 =======
 	 * we resume the transmission and use tx_lock to synchronize with xmit.*/
 >>>>>>> v3.18
@@ -2422,7 +2430,11 @@ static void bdx_set_ethtool_ops(struct net_device *netdev)
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(netdev, &bdx_ethtool_ops);
+=======
+	netdev->ethtool_ops = &bdx_ethtool_ops;
+>>>>>>> v3.18
 =======
 	netdev->ethtool_ops = &bdx_ethtool_ops;
 >>>>>>> v3.18
@@ -2459,7 +2471,10 @@ static void bdx_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vfree(nic);

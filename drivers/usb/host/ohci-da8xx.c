@@ -86,7 +86,11 @@ static int ohci_da8xx_init(struct usb_hcd *hcd)
 {
 	struct device *dev		= hcd->self.controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da8xx_ohci_root_hub *hub	= dev->platform_data;
+=======
+	struct da8xx_ohci_root_hub *hub	= dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct da8xx_ohci_root_hub *hub	= dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -176,7 +180,11 @@ static int ohci_da8xx_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 {
 	struct device *dev		= hcd->self.controller;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da8xx_ohci_root_hub *hub	= dev->platform_data;
+=======
+	struct da8xx_ohci_root_hub *hub	= dev_get_platdata(dev);
+>>>>>>> v3.18
 =======
 	struct da8xx_ohci_root_hub *hub	= dev_get_platdata(dev);
 >>>>>>> v3.18
@@ -301,7 +309,11 @@ static int usb_hcd_da8xx_probe(const struct hc_driver *driver,
 			       struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da8xx_ohci_root_hub *hub	= pdev->dev.platform_data;
+=======
+	struct da8xx_ohci_root_hub *hub	= dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct da8xx_ohci_root_hub *hub	= dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -312,6 +324,7 @@ static int usb_hcd_da8xx_probe(const struct hc_driver *driver,
 	if (hub == NULL)
 		return -ENODEV;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	usb11_clk = clk_get(&pdev->dev, "usb11");
 	if (IS_ERR(usb11_clk))
@@ -349,6 +362,8 @@ static int usb_hcd_da8xx_probe(const struct hc_driver *driver,
 		error = -ENOMEM;
 		goto err3;
 =======
+=======
+>>>>>>> v3.18
 	usb11_clk = devm_clk_get(&pdev->dev, "usb11");
 	if (IS_ERR(usb11_clk))
 		return PTR_ERR(usb11_clk);
@@ -371,6 +386,9 @@ static int usb_hcd_da8xx_probe(const struct hc_driver *driver,
 	if (IS_ERR(hcd->regs)) {
 		error = PTR_ERR(hcd->regs);
 		goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -380,12 +398,15 @@ static int usb_hcd_da8xx_probe(const struct hc_driver *driver,
 	if (irq < 0) {
 		error = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err4;
 	}
 	error = usb_add_hcd(hcd, irq, 0);
 	if (error)
 		goto err4;
 =======
+=======
+>>>>>>> v3.18
 		goto err;
 	}
 	error = usb_add_hcd(hcd, irq, 0);
@@ -393,6 +414,9 @@ static int usb_hcd_da8xx_probe(const struct hc_driver *driver,
 		goto err;
 
 	device_wakeup_enable(hcd->self.controller);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (hub->ocic_notify) {
@@ -402,6 +426,7 @@ static int usb_hcd_da8xx_probe(const struct hc_driver *driver,
 	}
 
 	usb_remove_hcd(hcd);
+<<<<<<< HEAD
 <<<<<<< HEAD
 err4:
 	iounmap(hcd->regs);
@@ -413,6 +438,10 @@ err1:
 	clk_put(usb20_clk);
 err0:
 	clk_put(usb11_clk);
+=======
+err:
+	usb_put_hcd(hcd);
+>>>>>>> v3.18
 =======
 err:
 	usb_put_hcd(hcd);
@@ -433,6 +462,7 @@ static inline void
 usb_hcd_da8xx_remove(struct usb_hcd *hcd, struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct da8xx_ohci_root_hub *hub	= pdev->dev.platform_data;
 
 	hub->ocic_notify(NULL);
@@ -443,11 +473,16 @@ usb_hcd_da8xx_remove(struct usb_hcd *hcd, struct platform_device *pdev)
 	clk_put(usb20_clk);
 	clk_put(usb11_clk);
 =======
+=======
+>>>>>>> v3.18
 	struct da8xx_ohci_root_hub *hub	= dev_get_platdata(&pdev->dev);
 
 	hub->ocic_notify(NULL);
 	usb_remove_hcd(hcd);
 	usb_put_hcd(hcd);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -462,7 +497,10 @@ static int ohci_hcd_da8xx_drv_remove(struct platform_device *dev)
 
 	usb_hcd_da8xx_remove(hcd, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -471,11 +509,14 @@ static int ohci_hcd_da8xx_drv_remove(struct platform_device *dev)
 
 #ifdef CONFIG_PM
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ohci_da8xx_suspend(struct platform_device *dev, pm_message_t message)
 {
 	struct usb_hcd	*hcd	= platform_get_drvdata(dev);
 	struct ohci_hcd	*ohci	= hcd_to_ohci(hcd);
 =======
+=======
+>>>>>>> v3.18
 static int ohci_da8xx_suspend(struct platform_device *pdev,
 				pm_message_t message)
 {
@@ -484,6 +525,9 @@ static int ohci_da8xx_suspend(struct platform_device *pdev,
 	bool		do_wakeup	= device_may_wakeup(&pdev->dev);
 	int		ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (time_before(jiffies, ohci->next_statechange))
@@ -491,11 +535,14 @@ static int ohci_da8xx_suspend(struct platform_device *pdev,
 	ohci->next_statechange = jiffies;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ohci_da8xx_clock(0);
 	hcd->state = HC_STATE_SUSPENDED;
 	dev->dev.power.power_state = PMSG_SUSPEND;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	ret = ohci_suspend(hcd, do_wakeup);
 	if (ret)
 		return ret;
@@ -504,6 +551,9 @@ static int ohci_da8xx_suspend(struct platform_device *pdev,
 	hcd->state = HC_STATE_SUSPENDED;
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

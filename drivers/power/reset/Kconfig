@@ -7,10 +7,13 @@ menuconfig POWER_RESET
 	  Say Y here to enable board reset and power off
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config POWER_RESET_GPIO
 	bool "GPIO power-off driver"
 	depends on OF_GPIO && POWER_RESET
 =======
+=======
+>>>>>>> v3.18
 if POWER_RESET
 
 config POWER_RESET_AS3722
@@ -57,12 +60,16 @@ config POWER_RESET_BRCMSTB
 config POWER_RESET_GPIO
 	bool "GPIO power-off driver"
 	depends on OF_GPIO
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This driver supports turning off your board via a GPIO line.
 	  If your board needs a GPIO high/low to power down, say Y and
 	  create a binding in your devicetree.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config POWER_RESET_MSM
 	bool "Qualcomm MSM power-off driver"
@@ -92,6 +99,8 @@ config POWER_RESET_QNAP
 	bool "QNAP power-off driver"
 	depends on OF_GPIO && POWER_RESET && PLAT_ORION
 =======
+=======
+>>>>>>> v3.18
 config POWER_RESET_GPIO_RESTART
 	bool "GPIO restart driver"
 	depends on OF_GPIO
@@ -122,6 +131,9 @@ config POWER_RESET_LTC2952
 config POWER_RESET_QNAP
 	bool "QNAP power-off driver"
 	depends on OF_GPIO && PLAT_ORION
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This driver supports turning off QNAP NAS devices by sending
@@ -138,6 +150,7 @@ config POWER_RESET_RESTART
 	  user presses a key. u-boot then boots into Linux.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config POWER_RESET_VEXPRESS
 	bool
 	depends on POWER_RESET
@@ -145,6 +158,8 @@ config POWER_RESET_VEXPRESS
 	  Power off and reset support for the ARM Ltd. Versatile
 	  Express boards.
 =======
+=======
+>>>>>>> v3.18
 config POWER_RESET_SUN6I
 	bool "Allwinner A31 SoC reset driver"
 	depends on ARCH_SUNXI
@@ -196,4 +211,7 @@ config POWER_RESET_SYSCON
 
 endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

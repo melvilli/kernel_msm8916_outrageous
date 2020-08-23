@@ -22,7 +22,10 @@ struct mc13xxx_regulator {
 	int vsel_shift;
 	int vsel_mask;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int hi_bit;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

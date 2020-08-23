@@ -13,7 +13,11 @@ config RC_MAP
 	   provide the tool and the same RC maps for load from
 	   userspace. Its available at
 <<<<<<< HEAD
+<<<<<<< HEAD
 			http://git.linuxtv.org/v4l-utils
+=======
+		http://git.linuxtv.org/cgit.cgi/v4l-utils.git/
+>>>>>>> v3.18
 =======
 		http://git.linuxtv.org/cgit.cgi/v4l-utils.git/
 >>>>>>> v3.18

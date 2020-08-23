@@ -50,13 +50,19 @@ unsigned long bmips_smp_boot_sp;
 unsigned long bmips_smp_boot_gp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bmips_send_ipi_single(int cpu, unsigned int action);
 static irqreturn_t bmips_ipi_interrupt(int irq, void *dev_id);
 =======
+=======
+>>>>>>> v3.18
 static void bmips43xx_send_ipi_single(int cpu, unsigned int action);
 static void bmips5000_send_ipi_single(int cpu, unsigned int action);
 static irqreturn_t bmips43xx_ipi_interrupt(int irq, void *dev_id);
 static irqreturn_t bmips5000_ipi_interrupt(int irq, void *dev_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* SW interrupts 0,1 are used for interprocessor signaling */
@@ -70,6 +76,7 @@ static irqreturn_t bmips5000_ipi_interrupt(int irq, void *dev_id);
 
 static void __init bmips_smp_setup(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int i;
 
@@ -107,6 +114,8 @@ static void __init bmips_smp_setup(void)
 	}
 #endif
 =======
+=======
+>>>>>>> v3.18
 	int i, cpu = 1, boot_cpu = 0;
 	int cpu_hw_intr;
 
@@ -160,6 +169,9 @@ static void __init bmips_smp_setup(void)
 	default:
 		max_cpus = 1;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!bmips_smp_enabled)
@@ -170,10 +182,13 @@ static void __init bmips_smp_setup(void)
 		board_ebase_setup = &bmips_ebase_setup;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < max_cpus; i++) {
 		__cpu_number_map[i] = 1;
 		__cpu_logical_map[i] = 1;
 =======
+=======
+>>>>>>> v3.18
 	__cpu_number_map[boot_cpu] = 0;
 	__cpu_logical_map[0] = boot_cpu;
 
@@ -183,6 +198,9 @@ static void __init bmips_smp_setup(void)
 			__cpu_logical_map[cpu] = i;
 			cpu++;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_cpu_possible(i, 1);
 		set_cpu_present(i, 1);
@@ -195,6 +213,7 @@ static void __init bmips_smp_setup(void)
 static void bmips_prepare_cpus(unsigned int max_cpus)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(IPI0_IRQ, bmips_ipi_interrupt, IRQF_PERCPU,
 			"smp_ipi0", NULL))
 		panic("Can't request IPI0 interrupt\n");
@@ -202,6 +221,8 @@ static void bmips_prepare_cpus(unsigned int max_cpus)
 			"smp_ipi1", NULL))
 		panic("Can't request IPI1 interrupt\n");
 =======
+=======
+>>>>>>> v3.18
 	irqreturn_t (*bmips_ipi_interrupt)(int irq, void *dev_id);
 
 	switch (current_cpu_type()) {
@@ -222,6 +243,9 @@ static void bmips_prepare_cpus(unsigned int max_cpus)
 	if (request_irq(IPI1_IRQ, bmips_ipi_interrupt, IRQF_PERCPU,
 			"smp_ipi1", NULL))
 		panic("Can't request IPI1 interrupt");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -252,6 +276,7 @@ static void bmips_boot_secondary(int cpu, struct task_struct *idle)
 	pr_info("SMP: Booting CPU%d...\n", cpu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpumask_test_cpu(cpu, &bmips_booted_mask))
 		bmips_send_ipi_single(cpu, 0);
 	else {
@@ -271,6 +296,8 @@ static void bmips_boot_secondary(int cpu, struct task_struct *idle)
 		}
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (cpumask_test_cpu(cpu, &bmips_booted_mask)) {
 		switch (current_cpu_type()) {
 		case CPU_BMIPS4350:
@@ -304,6 +331,9 @@ static void bmips_boot_secondary(int cpu, struct task_struct *idle)
 			}
 			break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cpumask_set_cpu(cpu, &bmips_booted_mask);
 	}
@@ -316,6 +346,7 @@ static void bmips_init_secondary(void)
 {
 	/* move NMI vector to kseg0, in case XKS01 is enabled */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_CPU_BMIPS4350) || defined(CONFIG_CPU_BMIPS4380)
 	void __iomem *cbr = BMIPS_GET_CBR();
@@ -332,6 +363,8 @@ static void bmips_init_secondary(void)
 	write_c0_brcm_action(ACTION_CLR_IPI(smp_processor_id(), 0));
 #endif
 =======
+=======
+>>>>>>> v3.18
 	void __iomem *cbr;
 	unsigned long old_vec;
 	unsigned long relo_vector;
@@ -358,6 +391,9 @@ static void bmips_init_secondary(void)
 		write_c0_brcm_action(ACTION_CLR_IPI(smp_processor_id(), 0));
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -378,6 +414,7 @@ static void bmips_smp_finish(void)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Runs on CPU0 after all CPUs have been booted
  */
 static void bmips_cpus_done(void)
@@ -389,6 +426,8 @@ static void bmips_cpus_done(void)
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * BMIPS5000 raceless IPIs
  *
  * Each CPU has two inbound SW IRQs which are independent of all other CPUs.
@@ -397,7 +436,11 @@ static void bmips_cpus_done(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bmips_send_ipi_single(int cpu, unsigned int action)
+=======
+static void bmips5000_send_ipi_single(int cpu, unsigned int action)
+>>>>>>> v3.18
 =======
 static void bmips5000_send_ipi_single(int cpu, unsigned int action)
 >>>>>>> v3.18
@@ -406,7 +449,11 @@ static void bmips5000_send_ipi_single(int cpu, unsigned int action)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t bmips_ipi_interrupt(int irq, void *dev_id)
+=======
+static irqreturn_t bmips5000_ipi_interrupt(int irq, void *dev_id)
+>>>>>>> v3.18
 =======
 static irqreturn_t bmips5000_ipi_interrupt(int irq, void *dev_id)
 >>>>>>> v3.18
@@ -424,8 +471,11 @@ static irqreturn_t bmips5000_ipi_interrupt(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 =======
+=======
+>>>>>>> v3.18
 static void bmips5000_send_ipi_mask(const struct cpumask *mask,
 	unsigned int action)
 {
@@ -434,6 +484,9 @@ static void bmips5000_send_ipi_mask(const struct cpumask *mask,
 	for_each_cpu(i, mask)
 		bmips5000_send_ipi_single(i, action);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -450,7 +503,11 @@ static DEFINE_SPINLOCK(ipi_lock);
 static DEFINE_PER_CPU(int, ipi_action_mask);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bmips_send_ipi_single(int cpu, unsigned int action)
+=======
+static void bmips43xx_send_ipi_single(int cpu, unsigned int action)
+>>>>>>> v3.18
 =======
 static void bmips43xx_send_ipi_single(int cpu, unsigned int action)
 >>>>>>> v3.18
@@ -465,7 +522,11 @@ static void bmips43xx_send_ipi_single(int cpu, unsigned int action)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static irqreturn_t bmips_ipi_interrupt(int irq, void *dev_id)
+=======
+static irqreturn_t bmips43xx_ipi_interrupt(int irq, void *dev_id)
+>>>>>>> v3.18
 =======
 static irqreturn_t bmips43xx_ipi_interrupt(int irq, void *dev_id)
 >>>>>>> v3.18
@@ -475,7 +536,11 @@ static irqreturn_t bmips43xx_ipi_interrupt(int irq, void *dev_id)
 
 	spin_lock_irqsave(&ipi_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	action = __get_cpu_var(ipi_action_mask);
+=======
+	action = __this_cpu_read(ipi_action_mask);
+>>>>>>> v3.18
 =======
 	action = __this_cpu_read(ipi_action_mask);
 >>>>>>> v3.18
@@ -492,9 +557,13 @@ static irqreturn_t bmips43xx_ipi_interrupt(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* BMIPS type */
 
 static void bmips_send_ipi_mask(const struct cpumask *mask,
+=======
+static void bmips43xx_send_ipi_mask(const struct cpumask *mask,
+>>>>>>> v3.18
 =======
 static void bmips43xx_send_ipi_mask(const struct cpumask *mask,
 >>>>>>> v3.18
@@ -504,7 +573,11 @@ static void bmips43xx_send_ipi_mask(const struct cpumask *mask,
 
 	for_each_cpu(i, mask)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bmips_send_ipi_single(i, action);
+=======
+		bmips43xx_send_ipi_single(i, action);
+>>>>>>> v3.18
 =======
 		bmips43xx_send_ipi_single(i, action);
 >>>>>>> v3.18
@@ -564,8 +637,11 @@ void __ref play_dead(void)
 #endif /* CONFIG_HOTPLUG_CPU */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct plat_smp_ops bmips_smp_ops = {
 =======
+=======
+>>>>>>> v3.18
 struct plat_smp_ops bmips43xx_smp_ops = {
 	.smp_setup		= bmips_smp_setup,
 	.prepare_cpus		= bmips_prepare_cpus,
@@ -581,6 +657,9 @@ struct plat_smp_ops bmips43xx_smp_ops = {
 };
 
 struct plat_smp_ops bmips5000_smp_ops = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.smp_setup		= bmips_smp_setup,
 	.prepare_cpus		= bmips_prepare_cpus,
@@ -588,9 +667,14 @@ struct plat_smp_ops bmips5000_smp_ops = {
 	.smp_finish		= bmips_smp_finish,
 	.init_secondary		= bmips_init_secondary,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cpus_done		= bmips_cpus_done,
 	.send_ipi_single	= bmips_send_ipi_single,
 	.send_ipi_mask		= bmips_send_ipi_mask,
+=======
+	.send_ipi_single	= bmips5000_send_ipi_single,
+	.send_ipi_mask		= bmips5000_send_ipi_mask,
+>>>>>>> v3.18
 =======
 	.send_ipi_single	= bmips5000_send_ipi_single,
 	.send_ipi_mask		= bmips5000_send_ipi_mask,
@@ -610,7 +694,11 @@ struct plat_smp_ops bmips5000_smp_ops = {
  ***********************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit bmips_wr_vec(unsigned long dst, char *start, char *end)
+=======
+static void bmips_wr_vec(unsigned long dst, char *start, char *end)
+>>>>>>> v3.18
 =======
 static void bmips_wr_vec(unsigned long dst, char *start, char *end)
 >>>>>>> v3.18
@@ -622,7 +710,11 @@ static void bmips_wr_vec(unsigned long dst, char *start, char *end)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void __cpuinit bmips_nmi_handler_setup(void)
+=======
+static inline void bmips_nmi_handler_setup(void)
+>>>>>>> v3.18
 =======
 static inline void bmips_nmi_handler_setup(void)
 >>>>>>> v3.18
@@ -634,7 +726,11 @@ static inline void bmips_nmi_handler_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit bmips_ebase_setup(void)
+=======
+void bmips_ebase_setup(void)
+>>>>>>> v3.18
 =======
 void bmips_ebase_setup(void)
 >>>>>>> v3.18
@@ -644,6 +740,7 @@ void bmips_ebase_setup(void)
 
 	BUG_ON(ebase != CKSEG0);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_CPU_BMIPS4350)
 	/*
@@ -683,6 +780,8 @@ void bmips_ebase_setup(void)
 	return;
 #endif
 =======
+=======
+>>>>>>> v3.18
 	switch (current_cpu_type()) {
 	case CPU_BMIPS4350:
 		/*
@@ -724,6 +823,9 @@ void bmips_ebase_setup(void)
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	board_nmi_handler_setup = &bmips_nmi_handler_setup;
 	ebase = new_ebase;

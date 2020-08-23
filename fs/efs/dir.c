@@ -8,7 +8,11 @@
 #include "efs.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int efs_readdir(struct file *, void *, filldir_t);
+=======
+static int efs_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 =======
 static int efs_readdir(struct file *, struct dir_context *);
 >>>>>>> v3.18
@@ -17,7 +21,11 @@ const struct file_operations efs_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= efs_readdir,
+=======
+	.iterate	= efs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= efs_readdir,
 >>>>>>> v3.18
@@ -27,6 +35,7 @@ const struct inode_operations efs_dir_inode_operations = {
 	.lookup		= efs_lookup,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int efs_readdir(struct file *filp, void *dirent, filldir_t filldir) {
 	struct inode *inode = file_inode(filp);
@@ -51,6 +60,8 @@ static int efs_readdir(struct file *filp, void *dirent, filldir_t filldir) {
 	/* look at all blocks */
 	while (block < inode->i_blocks) {
 =======
+=======
+>>>>>>> v3.18
 static int efs_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *inode = file_inode(file);
@@ -72,13 +83,21 @@ static int efs_readdir(struct file *file, struct dir_context *ctx)
 		struct efs_dir		*dirblock;
 		struct buffer_head *bh;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* read the dir block */
 		bh = sb_bread(inode->i_sb, efs_bmap(inode, block));
 
 		if (!bh) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "EFS: readdir(): failed to read dir block %d\n", block);
+=======
+			pr_err("%s(): failed to read dir block %d\n",
+			       __func__, block);
+>>>>>>> v3.18
 =======
 			pr_err("%s(): failed to read dir block %d\n",
 			       __func__, block);
@@ -90,7 +109,11 @@ static int efs_readdir(struct file *file, struct dir_context *ctx)
 
 		if (be16_to_cpu(dirblock->magic) != EFS_DIRBLK_MAGIC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "EFS: readdir(): invalid directory block\n");
+=======
+			pr_err("%s(): invalid directory block\n", __func__);
+>>>>>>> v3.18
 =======
 			pr_err("%s(): invalid directory block\n", __func__);
 >>>>>>> v3.18
@@ -99,12 +122,15 @@ static int efs_readdir(struct file *file, struct dir_context *ctx)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while (slot < dirblock->slots) {
 			if (dirblock->space[slot] == 0) {
 				slot++;
 				continue;
 			}
 =======
+=======
+>>>>>>> v3.18
 		for (; slot < dirblock->slots; slot++) {
 			struct efs_dentry *dirslot;
 			efs_ino_t inodenum;
@@ -113,6 +139,9 @@ static int efs_readdir(struct file *file, struct dir_context *ctx)
 
 			if (dirblock->space[slot] == 0)
 				continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			dirslot  = (struct efs_dentry *) (((char *) bh->b_data) + EFS_SLOTAT(dirblock, slot));
@@ -120,6 +149,7 @@ static int efs_readdir(struct file *file, struct dir_context *ctx)
 			inodenum = be32_to_cpu(dirslot->inode);
 			namelen  = dirslot->namelen;
 			nameptr  = dirslot->name;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #ifdef DEBUG
@@ -150,6 +180,8 @@ static int efs_readdir(struct file *file, struct dir_context *ctx)
 			}
 			slot++;
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("%s(): block %d slot %d/%d: inode %u, name \"%s\", namelen %u\n",
 				 __func__, block, slot, dirblock->slots-1,
 				 inodenum, nameptr, namelen);
@@ -170,6 +202,9 @@ static int efs_readdir(struct file *file, struct dir_context *ctx)
 				brelse(bh);
 				return 0;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		brelse(bh);
@@ -178,9 +213,13 @@ static int efs_readdir(struct file *file, struct dir_context *ctx)
 		block++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	filp->f_pos = (block << EFS_DIRBSIZE_BITS) | slot;
 out:
+=======
+	ctx->pos = (block << EFS_DIRBSIZE_BITS) | slot;
+>>>>>>> v3.18
 =======
 	ctx->pos = (block << EFS_DIRBSIZE_BITS) | slot;
 >>>>>>> v3.18

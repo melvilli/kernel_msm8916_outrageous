@@ -8,7 +8,11 @@
 #include "reiserfs.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // find where objectid map starts
+=======
+/* find where objectid map starts */
+>>>>>>> v3.18
 =======
 /* find where objectid map starts */
 >>>>>>> v3.18
@@ -25,7 +29,11 @@ static void check_objectid_map(struct super_block *s, __le32 * map)
 			       (long unsigned int)le32_to_cpu(map[0]));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// FIXME: add something else here
+=======
+	/* FIXME: add something else here */
+>>>>>>> v3.18
 =======
 	/* FIXME: add something else here */
 >>>>>>> v3.18
@@ -37,6 +45,7 @@ static void check_objectid_map(struct super_block *s, __le32 * map)
 }
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* When we allocate objectids we allocate the first unused objectid.
    Each sequence of objectids in use (the odd sequences) is followed
@@ -52,6 +61,8 @@ static void check_objectid_map(struct super_block *s, __le32 * map)
    interesting optimizations of layout could result from complicating
    objectid assignment, but we have deferred making them for now. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * When we allocate objectids we allocate the first unused objectid.
  * Each sequence of objectids in use (the odd sequences) is followed
@@ -67,6 +78,9 @@ static void check_objectid_map(struct super_block *s, __le32 * map)
  * interesting optimizations of layout could result from complicating
  * objectid assignment, but we have deferred making them for now.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* get unique object identifier */
@@ -91,6 +105,7 @@ __u32 reiserfs_get_unused_objectid(struct reiserfs_transaction_handle *th)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* This incrementation allocates the first unused objectid. That
 	   is to say, the first entry on the objectid map is the first
 	   unused objectid, and by incrementing it we use it.  See below
@@ -105,6 +120,8 @@ __u32 reiserfs_get_unused_objectid(struct reiserfs_transaction_handle *th)
 	   result is to eliminate a pair of objectids from oids.  We do this
 	   by shifting the entire map to the left. */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * This incrementation allocates the first unused objectid. That
 	 * is to say, the first entry on the objectid map is the first
@@ -122,6 +139,9 @@ __u32 reiserfs_get_unused_objectid(struct reiserfs_transaction_handle *th)
 	 * result is to eliminate a pair of objectids from oids.  We do this
 	 * by shifting the entire map to the left.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (sb_oid_cursize(rs) > 2 && map[1] == map[2]) {
 		memmove(map + 1, map + 3,
@@ -130,7 +150,11 @@ __u32 reiserfs_get_unused_objectid(struct reiserfs_transaction_handle *th)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	journal_mark_dirty(th, s, SB_BUFFER_WITH_SB(s));
+=======
+	journal_mark_dirty(th, SB_BUFFER_WITH_SB(s));
+>>>>>>> v3.18
 =======
 	journal_mark_dirty(th, SB_BUFFER_WITH_SB(s));
 >>>>>>> v3.18
@@ -147,6 +171,7 @@ void reiserfs_release_objectid(struct reiserfs_transaction_handle *th,
 	int i = 0;
 
 	BUG_ON(!th->t_trans_id);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//return;
 	check_objectid_map(s, map);
@@ -167,6 +192,8 @@ void reiserfs_release_objectid(struct reiserfs_transaction_handle *th,
 
 			/* Did we unallocate the last member of an odd sequence, and can shrink oids? */
 =======
+=======
+>>>>>>> v3.18
 	/*return; */
 	check_objectid_map(s, map);
 
@@ -189,6 +216,9 @@ void reiserfs_release_objectid(struct reiserfs_transaction_handle *th,
 			 * Did we unallocate the last member of an
 			 * odd sequence, and can shrink oids?
 			 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (map[i] == map[i + 1]) {
 				/* shrink objectid map */
@@ -196,7 +226,10 @@ void reiserfs_release_objectid(struct reiserfs_transaction_handle *th,
 					(sb_oid_cursize(rs) - i -
 					 2) * sizeof(__u32));
 <<<<<<< HEAD
+<<<<<<< HEAD
 				//disk_sb->s_oid_cursize -= 2;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				set_sb_oid_cursize(rs, sb_oid_cursize(rs) - 2);
@@ -214,7 +247,10 @@ void reiserfs_release_objectid(struct reiserfs_transaction_handle *th,
 			/* size of objectid map is not changed */
 			if (objectid_to_release + 1 == le32_to_cpu(map[i + 1])) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				//objectid_map[i+1]--;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				le32_add_cpu(&map[i + 1], -1);
@@ -222,10 +258,13 @@ void reiserfs_release_objectid(struct reiserfs_transaction_handle *th,
 			}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* JDM comparing two little-endian values for equality -- safe */
 			if (sb_oid_cursize(rs) == sb_oid_maxsize(rs)) {
 				/* objectid map must be expanded, but there is no space */
 =======
+=======
+>>>>>>> v3.18
 			/*
 			 * JDM comparing two little-endian values for
 			 * equality -- safe
@@ -235,6 +274,9 @@ void reiserfs_release_objectid(struct reiserfs_transaction_handle *th,
 			 * there is no space
 			 */
 			if (sb_oid_cursize(rs) == sb_oid_maxsize(rs)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				PROC_INFO_INC(s, leaked_oid);
 				return;
@@ -272,8 +314,14 @@ int reiserfs_convert_objectid_map_v1(struct super_block *s)
 
 	if (cur_size > new_size) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* mark everyone used that was listed as free at the end of the objectid
 		 ** map
+=======
+		/*
+		 * mark everyone used that was listed as free at
+		 * the end of the objectid map
+>>>>>>> v3.18
 =======
 		/*
 		 * mark everyone used that was listed as free at

@@ -34,6 +34,7 @@ void fimc_is_hw_set_intgr0_gd0(struct fimc_is *is)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fimc_is_hw_wait_intsr0_intsd0(struct fimc_is *is)
 {
 	unsigned int timeout = 2000;
@@ -58,11 +59,14 @@ int fimc_is_hw_wait_intsr0_intsd0(struct fimc_is *is)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 int fimc_is_hw_wait_intmsr0_intmsd0(struct fimc_is *is)
 {
 	unsigned int timeout = 2000;
 	u32 cfg, status;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	cfg = mcuctl_read(is, MCUCTL_REG_INTMSR0);
 	status = INTMSR0_GET_INTMSD(0, cfg);
@@ -79,6 +83,8 @@ int fimc_is_hw_wait_intmsr0_intmsd0(struct fimc_is *is)
 		udelay(1);
 	}
 =======
+=======
+>>>>>>> v3.18
 	do {
 		cfg = mcuctl_read(is, MCUCTL_REG_INTMSR0);
 		status = INTMSR0_GET_INTMSD(0, cfg);
@@ -91,6 +97,9 @@ int fimc_is_hw_wait_intmsr0_intmsd0(struct fimc_is *is)
 		udelay(1);
 	} while (status != 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -108,8 +117,13 @@ int fimc_is_hw_set_param(struct fimc_is *is)
 
 	mcuctl_write(param_count, is, MCUCTL_REG_ISSR(3));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcuctl_write(config->p_region_index1, is, MCUCTL_REG_ISSR(4));
 	mcuctl_write(config->p_region_index2, is, MCUCTL_REG_ISSR(5));
+=======
+	mcuctl_write(config->p_region_index[0], is, MCUCTL_REG_ISSR(4));
+	mcuctl_write(config->p_region_index[1], is, MCUCTL_REG_ISSR(5));
+>>>>>>> v3.18
 =======
 	mcuctl_write(config->p_region_index[0], is, MCUCTL_REG_ISSR(4));
 	mcuctl_write(config->p_region_index[1], is, MCUCTL_REG_ISSR(5));
@@ -120,7 +134,11 @@ int fimc_is_hw_set_param(struct fimc_is *is)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fimc_is_hw_set_tune(struct fimc_is *is)
+=======
+static int __maybe_unused fimc_is_hw_set_tune(struct fimc_is *is)
+>>>>>>> v3.18
 =======
 static int __maybe_unused fimc_is_hw_set_tune(struct fimc_is *is)
 >>>>>>> v3.18
@@ -157,7 +175,10 @@ int fimc_is_hw_get_params(struct fimc_is *is, unsigned int num_args)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void fimc_is_hw_set_isp_buf_mask(struct fimc_is *is, unsigned int mask)
 {
 	if (hweight32(mask) == 1) {
@@ -172,6 +193,9 @@ void fimc_is_hw_set_isp_buf_mask(struct fimc_is *is, unsigned int mask)
 	mcuctl_write(mask, is, MCUCTL_REG_ISSR(23));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void fimc_is_hw_set_sensor_num(struct fimc_is *is)
 {
@@ -181,7 +205,11 @@ void fimc_is_hw_set_sensor_num(struct fimc_is *is)
 	mcuctl_write(is->sensor_index, is, MCUCTL_REG_ISSR(1));
 	mcuctl_write(IHC_GET_SENSOR_NUM, is, MCUCTL_REG_ISSR(2));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mcuctl_write(FIMC_IS_SENSOR_NUM, is, MCUCTL_REG_ISSR(3));
+=======
+	mcuctl_write(FIMC_IS_SENSORS_NUM, is, MCUCTL_REG_ISSR(3));
+>>>>>>> v3.18
 =======
 	mcuctl_write(FIMC_IS_SENSORS_NUM, is, MCUCTL_REG_ISSR(3));
 >>>>>>> v3.18
@@ -285,7 +313,11 @@ int fimc_is_itf_mode_change(struct fimc_is *is)
 	ret = fimc_is_wait_event(is, IS_ST_CHANGE_MODE, 1,
 				FIMC_IS_CONFIG_TIMEOUT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ret < 0)
+=======
+	if (ret < 0)
+>>>>>>> v3.18
 =======
 	if (ret < 0)
 >>>>>>> v3.18

@@ -160,15 +160,21 @@ static __le32 *cx25821_risc_field_upstream(struct cx25821_channel *chan, __le32 
 		 * the FIFO. */
 		if (fifo_enable && line == 3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			*(rp++) = RISC_WRITECR;
 			*(rp++) = sram_ch->dma_ctl;
 			*(rp++) = FLD_VID_FIFO_EN;
 			*(rp++) = 0x00000001;
 =======
+=======
+>>>>>>> v3.18
 			*(rp++) = cpu_to_le32(RISC_WRITECR);
 			*(rp++) = cpu_to_le32(sram_ch->dma_ctl);
 			*(rp++) = cpu_to_le32(FLD_VID_FIFO_EN);
 			*(rp++) = cpu_to_le32(0x00000001);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -338,8 +344,14 @@ int cx25821_write_frame(struct cx25821_channel *chan,
 	if (frame_size - curpos < count)
 		count = frame_size - curpos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy((char *)out->_data_buf_virt_addr + frame_offset + curpos,
 			data, count);
+=======
+	if (copy_from_user((__force char *)out->_data_buf_virt_addr + frame_offset + curpos,
+				data, count))
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 	if (copy_from_user((__force char *)out->_data_buf_virt_addr + frame_offset + curpos,
 				data, count))

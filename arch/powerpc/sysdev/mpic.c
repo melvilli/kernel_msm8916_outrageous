@@ -49,13 +49,19 @@
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct bus_type mpic_subsys = {
 	.name = "mpic",
 	.dev_name = "mpic",
 };
 EXPORT_SYMBOL_GPL(mpic_subsys);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct mpic *mpics;
 static struct mpic *mpic_primary;
@@ -539,7 +545,11 @@ static void __init mpic_scan_ht_pic(struct mpic *mpic, u8 __iomem *devbase,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -894,6 +904,7 @@ int mpic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 	/* Default: read HW settings */
 	if (flow_type == IRQ_TYPE_DEFAULT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch(vold & (MPIC_INFO(VECPRI_POLARITY_MASK) |
 			       MPIC_INFO(VECPRI_SENSE_MASK))) {
 			case MPIC_INFO(VECPRI_SENSE_EDGE) |
@@ -914,6 +925,8 @@ int mpic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 				break;
 		}
 =======
+=======
+>>>>>>> v3.18
 		int vold_ps;
 
 		vold_ps = vold & (MPIC_INFO(VECPRI_POLARITY_MASK) |
@@ -933,6 +946,9 @@ int mpic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 			flow_type = IRQ_TYPE_LEVEL_LOW;
 		else
 			WARN_ONCE(1, "mpic: unknown IRQ type %d\n", vold);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -956,7 +972,10 @@ int mpic_set_irq_type(struct irq_data *d, unsigned int flow_type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int mpic_irq_set_wake(struct irq_data *d, unsigned int on)
 {
 	struct irq_desc *desc = container_of(d, struct irq_desc, irq_data);
@@ -973,6 +992,9 @@ static int mpic_irq_set_wake(struct irq_data *d, unsigned int on)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void mpic_set_vector(unsigned int virq, unsigned int vector)
 {
@@ -993,7 +1015,11 @@ void mpic_set_vector(unsigned int virq, unsigned int vector)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mpic_set_destination(unsigned int virq, unsigned int cpuid)
+=======
+static void mpic_set_destination(unsigned int virq, unsigned int cpuid)
+>>>>>>> v3.18
 =======
 static void mpic_set_destination(unsigned int virq, unsigned int cpuid)
 >>>>>>> v3.18
@@ -1016,6 +1042,10 @@ static struct irq_chip mpic_irq_chip = {
 	.irq_eoi	= mpic_end_irq,
 	.irq_set_type	= mpic_set_irq_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_set_wake	= mpic_irq_set_wake,
+>>>>>>> v3.18
 =======
 	.irq_set_wake	= mpic_irq_set_wake,
 >>>>>>> v3.18
@@ -1034,6 +1064,10 @@ static struct irq_chip mpic_tm_chip = {
 	.irq_unmask	= mpic_unmask_tm,
 	.irq_eoi	= mpic_end_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.irq_set_wake	= mpic_irq_set_wake,
+>>>>>>> v3.18
 =======
 	.irq_set_wake	= mpic_irq_set_wake,
 >>>>>>> v3.18
@@ -1131,9 +1165,12 @@ static int mpic_host_map(struct irq_domain *h, unsigned int virq,
 	 */
 	if (!mpic_is_ipi(mpic, hw) && (mpic->flags & MPIC_NO_RESET)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mpic_set_vector(virq, hw);
 		mpic_set_destination(virq, mpic_processor_id(mpic));
 =======
+=======
+>>>>>>> v3.18
 		int cpu;
 
 		preempt_disable();
@@ -1142,6 +1179,9 @@ static int mpic_host_map(struct irq_domain *h, unsigned int virq,
 
 		mpic_set_vector(virq, hw);
 		mpic_set_destination(virq, cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mpic_irq_set_priority(virq, 8);
 	}
@@ -1251,7 +1291,10 @@ static struct irq_domain_ops mpic_host_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static u32 fsl_mpic_get_version(struct mpic *mpic)
 {
 	u32 brr1;
@@ -1265,13 +1308,19 @@ static u32 fsl_mpic_get_version(struct mpic *mpic)
 	return brr1 & MPIC_FSL_BRR1_VER;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Exported functions
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 u32 fsl_mpic_primary_get_version(void)
 {
 	struct mpic *mpic = mpic_primary;
@@ -1282,6 +1331,9 @@ u32 fsl_mpic_primary_get_version(void)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct mpic * __init mpic_alloc(struct device_node *node,
 				phys_addr_t phys_addr,
@@ -1430,7 +1482,10 @@ struct mpic * __init mpic_alloc(struct device_node *node,
 
 	if (mpic->flags & MPIC_FSL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 brr1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		int ret;
@@ -1444,9 +1499,13 @@ struct mpic * __init mpic_alloc(struct device_node *node,
 			 MPIC_CPU_THISBASE, 0x1000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		brr1 = _mpic_read(mpic->reg_type, &mpic->thiscpuregs,
 				MPIC_FSL_BRR1);
 		fsl_version = brr1 & MPIC_FSL_BRR1_VER;
+=======
+		fsl_version = fsl_mpic_get_version(mpic);
+>>>>>>> v3.18
 =======
 		fsl_version = fsl_mpic_get_version(mpic);
 >>>>>>> v3.18
@@ -1545,7 +1604,11 @@ struct mpic * __init mpic_alloc(struct device_node *node,
 	 */
 	last_irq = (greg_feature & MPIC_GREG_FEATURE_LAST_SRC_MASK)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				>> MPIC_GREG_FEATURE_LAST_SRC_SHIFT;	
+=======
+				>> MPIC_GREG_FEATURE_LAST_SRC_SHIFT;
+>>>>>>> v3.18
 =======
 				>> MPIC_GREG_FEATURE_LAST_SRC_SHIFT;
 >>>>>>> v3.18
@@ -1644,9 +1707,13 @@ void __init mpic_init(struct mpic *mpic)
 
 	if (mpic->flags & MPIC_FSL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 brr1 = _mpic_read(mpic->reg_type, &mpic->thiscpuregs,
 				      MPIC_FSL_BRR1);
 		u32 version = brr1 & MPIC_FSL_BRR1_VER;
+=======
+		u32 version = fsl_mpic_get_version(mpic);
+>>>>>>> v3.18
 =======
 		u32 version = fsl_mpic_get_version(mpic);
 >>>>>>> v3.18
@@ -1662,10 +1729,13 @@ void __init mpic_init(struct mpic *mpic)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FSL mpic error interrupt intialization */
 	if (mpic->flags & MPIC_FSL_HAS_EIMR)
 		mpic_err_int_init(mpic, MPIC_FSL_ERR_INT);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Initialize timers to our reserved vectors and mask them for now */
@@ -1708,7 +1778,11 @@ void __init mpic_init(struct mpic *mpic)
 			u32 vecpri = MPIC_VECPRI_MASK | i |
 				(8 << MPIC_VECPRI_PRIORITY_SHIFT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1721,7 +1795,11 @@ void __init mpic_init(struct mpic *mpic)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -1760,11 +1838,17 @@ void __init mpic_init(struct mpic *mpic)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* FSL mpic error interrupt intialization */
 	if (mpic->flags & MPIC_FSL_HAS_EIMR)
 		mpic_err_int_init(mpic, MPIC_FSL_ERR_INT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2139,6 +2223,11 @@ static int mpic_init_sys(void)
 {
 	register_syscore_ops(&mpic_syscore_ops);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	subsys_system_register(&mpic_subsys, NULL);
+
+>>>>>>> v3.18
 =======
 	subsys_system_register(&mpic_subsys, NULL);
 

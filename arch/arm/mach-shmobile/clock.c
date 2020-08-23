@@ -22,11 +22,14 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/sh_clk.h>
 #include <linux/export.h>
 #include <mach/clock.h>
 #include <mach/common.h>
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_COMMON_CLK
 #include <linux/clk.h>
@@ -57,6 +60,9 @@ void __init shmobile_clk_workaround(const struct clk_name *clks,
 #include <linux/export.h>
 #include "clock.h"
 #include "common.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 unsigned long shmobile_fixed_ratio_clk_recalc(struct clk *clk)
@@ -92,6 +98,11 @@ void __clk_put(struct clk *clk)
 }
 EXPORT_SYMBOL(__clk_put);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+#endif /* CONFIG_COMMON_CLK */
+>>>>>>> v3.18
 =======
 
 #endif /* CONFIG_COMMON_CLK */

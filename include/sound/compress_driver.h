@@ -33,7 +33,10 @@
 
 struct snd_compr_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct snd_pcm_substream;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -64,7 +67,10 @@ struct snd_compr_runtime {
 	u64 total_bytes_transferred;
 	wait_queue_head_t sleep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_pcm_substream *fe_substream;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	void *private_data;
@@ -91,7 +97,10 @@ struct snd_compr_stream {
 	bool next_track;
 	void *private_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *be;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -129,8 +138,11 @@ struct snd_compr_ops {
 	int (*get_metadata)(struct snd_compr_stream *stream,
 			struct snd_compr_metadata *metadata);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*set_next_track_param)(struct snd_compr_stream *stream,
 			union snd_codec_options *codec_options);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*trigger)(struct snd_compr_stream *stream, int cmd);
@@ -175,7 +187,10 @@ int snd_compress_deregister(struct snd_compr *device);
 int snd_compress_new(struct snd_card *card, int device,
 			int type, struct snd_compr *compr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_compress_free(struct snd_card *card, struct snd_compr *compr);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -193,7 +208,10 @@ static inline void snd_compr_fragment_elapsed(struct snd_compr_stream *stream)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void snd_compr_drain_notify(struct snd_compr_stream *stream)
 {
 	if (snd_BUG_ON(!stream))
@@ -203,5 +221,8 @@ static inline void snd_compr_drain_notify(struct snd_compr_stream *stream)
 	wake_up(&stream->runtime->sleep);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

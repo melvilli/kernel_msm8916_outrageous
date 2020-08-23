@@ -12,7 +12,10 @@
 #include <linux/kernel.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -301,6 +304,10 @@ static int yurex_probe(struct usb_interface *interface, const struct usb_device_
 	/* save our data pointer in this interface device */
 	usb_set_intfdata(interface, dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dev->bbu = -1;
+>>>>>>> v3.18
 =======
 	dev->bbu = -1;
 >>>>>>> v3.18
@@ -315,8 +322,11 @@ static int yurex_probe(struct usb_interface *interface, const struct usb_device_
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->bbu = -1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_info(&interface->dev,
@@ -371,7 +381,11 @@ static int yurex_fasync(int fd, struct file *file, int on)
 	struct usb_yurex *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = (struct usb_yurex *)file->private_data;
+=======
+	dev = file->private_data;
+>>>>>>> v3.18
 =======
 	dev = file->private_data;
 >>>>>>> v3.18
@@ -418,7 +432,11 @@ static int yurex_release(struct inode *inode, struct file *file)
 	struct usb_yurex *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = (struct usb_yurex *)file->private_data;
+=======
+	dev = file->private_data;
+>>>>>>> v3.18
 =======
 	dev = file->private_data;
 >>>>>>> v3.18
@@ -439,7 +457,11 @@ static ssize_t yurex_read(struct file *file, char *buffer, size_t count, loff_t 
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = (struct usb_yurex *)file->private_data;
+=======
+	dev = file->private_data;
+>>>>>>> v3.18
 =======
 	dev = file->private_data;
 >>>>>>> v3.18
@@ -480,7 +502,11 @@ static ssize_t yurex_write(struct file *file, const char *user_buffer, size_t co
 
 	count = min(sizeof(buffer), count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev = (struct usb_yurex *)file->private_data;
+=======
+	dev = file->private_data;
+>>>>>>> v3.18
 =======
 	dev = file->private_data;
 >>>>>>> v3.18
@@ -491,7 +517,11 @@ static ssize_t yurex_write(struct file *file, const char *user_buffer, size_t co
 
 	mutex_lock(&dev->io_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev->interface) {		/* alreaday disconnected */
+=======
+	if (!dev->interface) {		/* already disconnected */
+>>>>>>> v3.18
 =======
 	if (!dev->interface) {		/* already disconnected */
 >>>>>>> v3.18

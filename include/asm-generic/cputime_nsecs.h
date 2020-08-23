@@ -22,6 +22,11 @@ typedef u64 __nocast cputime_t;
 typedef u64 __nocast cputime64_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cmpxchg_cputime(ptr, old, new) cmpxchg64(ptr, old, new)
+
+>>>>>>> v3.18
 =======
 #define cmpxchg_cputime(ptr, old, new) cmpxchg64(ptr, old, new)
 
@@ -50,12 +55,18 @@ typedef u64 __nocast cputime64_t;
  * Convert cputime <-> nanoseconds
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define nsecs_to_cputime(__nsecs)	((__force u64)(__nsecs))
 =======
+=======
+>>>>>>> v3.18
 #define cputime_to_nsecs(__ct)		\
 	(__force u64)(__ct)
 #define nsecs_to_cputime(__nsecs)	\
 	(__force cputime_t)(__nsecs)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

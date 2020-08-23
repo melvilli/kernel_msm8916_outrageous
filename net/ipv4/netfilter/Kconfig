@@ -37,7 +37,10 @@ config NF_CONNTRACK_PROC_COMPAT
 	  If unsure, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config NF_LOG_ARP
 	tristate "ARP packet logging"
 	default m if NETFILTER_ADVANCED=n
@@ -149,6 +152,9 @@ config NF_NAT_H323
 
 endif # NF_NAT_IPV4
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config IP_NF_IPTABLES
 	tristate "IP tables support (required for filtering/masq/NAT)"
@@ -217,6 +223,10 @@ config IP_NF_TARGET_REJECT
 	tristate "REJECT target support"
 	depends on IP_NF_FILTER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select NF_REJECT_IPV4
+>>>>>>> v3.18
 =======
 	select NF_REJECT_IPV4
 >>>>>>> v3.18
@@ -228,6 +238,7 @@ config IP_NF_TARGET_REJECT
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config IP_NF_TARGET_REJECT_SKERR
 	bool "Force socket error when rejecting with icmp*"
@@ -278,6 +289,8 @@ if NF_NAT_IPV4
 config IP_NF_TARGET_MASQUERADE
 	tristate "MASQUERADE target support"
 =======
+=======
+>>>>>>> v3.18
 config IP_NF_TARGET_SYNPROXY
 	tristate "SYNPROXY target support"
 	depends on NF_CONNTRACK && NETFILTER_ADVANCED
@@ -311,6 +324,9 @@ if IP_NF_NAT
 config IP_NF_TARGET_MASQUERADE
 	tristate "MASQUERADE target support"
 	select NF_NAT_MASQUERADE_IPV4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default m if NETFILTER_ADVANCED=n
 	help
@@ -323,6 +339,7 @@ config IP_NF_TARGET_MASQUERADE
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IP_NF_TARGET_NATTYPE_MODULE
 	tristate "NATTYPE target support"
 	depends on NF_NAT
@@ -334,6 +351,8 @@ config IP_NF_TARGET_NATTYPE_MODULE
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config IP_NF_TARGET_NETMAP
@@ -354,6 +373,7 @@ config IP_NF_TARGET_REDIRECT
 	(e.g. when running oldconfig). It selects
 	CONFIG_NETFILTER_XT_TARGET_REDIRECT.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 endif
 
@@ -396,6 +416,9 @@ config NF_NAT_H323
 	tristate
 	depends on NF_CONNTRACK && NF_NAT_IPV4
 	default NF_NAT_IPV4 && NF_CONNTRACK_H323
+=======
+endif # IP_NF_NAT
+>>>>>>> v3.18
 =======
 endif # IP_NF_NAT
 >>>>>>> v3.18

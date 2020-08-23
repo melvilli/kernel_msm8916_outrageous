@@ -1749,7 +1749,10 @@ int ntfs_attr_make_non_resident(ntfs_inode *ni, const u32 data_size)
 		set_page_dirty(page);
 		unlock_page(page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mark_page_accessed(page);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		page_cache_release(page);

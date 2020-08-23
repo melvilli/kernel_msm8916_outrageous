@@ -50,14 +50,20 @@ static inline bool ath9k_hw_calibrate(struct ath_hw *ah,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline bool ath9k_hw_getisr(struct ath_hw *ah, enum ath9k_int *masked)
 {
 	return ath9k_hw_ops(ah)->get_isr(ah, masked);
 =======
+=======
+>>>>>>> v3.18
 static inline bool ath9k_hw_getisr(struct ath_hw *ah, enum ath9k_int *masked,
 				   u32 *sync_cause_p)
 {
 	return ath9k_hw_ops(ah)->get_isr(ah, masked, sync_cause_p);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -74,13 +80,19 @@ static inline int ath9k_hw_txprocdesc(struct ath_hw *ah, void *ds,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int ath9k_hw_get_duration(struct ath_hw *ah, const void *ds,
 					int index)
 {
 	return ath9k_hw_ops(ah)->get_duration(ah, ds, index);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void ath9k_hw_antdiv_comb_conf_get(struct ath_hw *ah,
 		struct ath_hw_antcomb_conf *antconf)
@@ -95,6 +107,7 @@ static inline void ath9k_hw_antdiv_comb_conf_set(struct ath_hw *ah,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void ath9k_hw_antctrl_shared_chain_lnadiv(struct ath_hw *ah,
 							bool enable)
 {
@@ -105,6 +118,8 @@ static inline void ath9k_hw_antctrl_shared_chain_lnadiv(struct ath_hw *ah,
 /* Private hardware call ops */
 
 =======
+=======
+>>>>>>> v3.18
 static inline void ath9k_hw_tx99_start(struct ath_hw *ah, u32 qnum)
 {
 	ath9k_hw_ops(ah)->tx99_start(ah, qnum);
@@ -148,6 +163,9 @@ static inline bool ath9k_hw_detect_bb_hang(struct ath_hw *ah)
 	return ath9k_hw_private_ops(ah)->detect_bb_hang(ah);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* PHY ops */
 
@@ -275,7 +293,10 @@ static inline void ath9k_hw_set_radar_params(struct ath_hw *ah)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void ath9k_hw_init_cal_settings(struct ath_hw *ah)
 {
 	ath9k_hw_private_ops(ah)->init_cal_settings(ah);
@@ -303,5 +324,8 @@ static inline void ath9k_hw_ani_cache_ini_regs(struct ath_hw *ah)
 	ath9k_hw_private_ops(ah)->ani_cache_ini_regs(ah);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* ATH9K_HW_OPS_H */

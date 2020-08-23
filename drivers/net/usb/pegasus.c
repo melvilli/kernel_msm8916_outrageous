@@ -127,6 +127,7 @@ static void async_ctrl_callback(struct urb *urb)
 static int get_registers(pegasus_t *pegasus, __u16 indx, __u16 size, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 *buf;
 	int ret;
 
@@ -164,6 +165,8 @@ static int set_registers(pegasus_t *pegasus, __u16 indx, __u16 size,
 			  "%s returned %d\n", __func__, ret);
 	kfree(buf);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = usb_control_msg(pegasus->usb, usb_rcvctrlpipe(pegasus->usb, 0),
@@ -185,12 +188,16 @@ static int set_registers(pegasus_t *pegasus, __u16 indx, __u16 size, void *data)
 	if (ret < 0)
 		netif_dbg(pegasus, drv, pegasus->net,
 			  "%s returned %d\n", __func__, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 static int set_register(pegasus_t *pegasus, __u16 indx, __u8 data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 *buf;
 	int ret;
@@ -207,6 +214,8 @@ static int set_register(pegasus_t *pegasus, __u16 indx, __u8 data)
 			  "%s returned %d\n", __func__, ret);
 	kfree(buf);
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	ret = usb_control_msg(pegasus->usb, usb_sndctrlpipe(pegasus->usb, 0),
@@ -215,6 +224,9 @@ static int set_register(pegasus_t *pegasus, __u16 indx, __u8 data)
 	if (ret < 0)
 		netif_dbg(pegasus, drv, pegasus->net,
 			  "%s returned %d\n", __func__, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -1216,7 +1228,11 @@ static int pegasus_probe(struct usb_interface *intf,
 	net->watchdog_timeo = PEGASUS_TX_TIMEOUT;
 	net->netdev_ops = &pegasus_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(net, &ops);
+=======
+	net->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	net->ethtool_ops = &ops;
 >>>>>>> v3.18

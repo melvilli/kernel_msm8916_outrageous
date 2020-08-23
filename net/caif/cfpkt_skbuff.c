@@ -204,6 +204,7 @@ int cfpkt_add_body(struct cfpkt *pkt, const void *data, u16 len)
 			return -EPROTO;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * Is the SKB non-linear after skb_cow_data()? If so, we are
 		 * going to add data to the last SKB, so we need to adjust
@@ -219,10 +220,15 @@ int cfpkt_add_body(struct cfpkt *pkt, const void *data, u16 len)
 	/* All set to put the last SKB and optionally write data there. */
 	to = skb_put(lastskb, len);
 =======
+=======
+>>>>>>> v3.18
 	}
 
 	/* All set to put the last SKB and optionally write data there. */
 	to = pskb_put(skb, lastskb, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (likely(data))
 		memcpy(to, data, len);

@@ -180,6 +180,7 @@ struct shared_phy_params {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct shared_phy *wlc_phy_shared_attach(struct shared_phy_params *shp);
 extern struct brcms_phy_pub *wlc_phy_attach(struct shared_phy *sh,
 					    struct bcma_device *d11core,
@@ -298,6 +299,8 @@ extern s8 wlc_phy_get_tx_power_offset_by_mcs(struct brcms_phy_pub *ppi,
 					     u8 mcs_offset);
 extern s8 wlc_phy_get_tx_power_offset(struct brcms_phy_pub *ppi, u8 tbl_offset);
 =======
+=======
+>>>>>>> v3.18
 struct shared_phy *wlc_phy_shared_attach(struct shared_phy_params *shp);
 struct brcms_phy_pub *wlc_phy_attach(struct shared_phy *sh,
 				     struct bcma_device *d11core, int bandtype,
@@ -400,5 +403,8 @@ const u8 *wlc_phy_get_ofdm_rate_lookup(void);
 s8 wlc_phy_get_tx_power_offset_by_mcs(struct brcms_phy_pub *ppi,
 				      u8 mcs_offset);
 s8 wlc_phy_get_tx_power_offset(struct brcms_phy_pub *ppi, u8 tbl_offset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif                          /* _BRCM_PHY_HAL_H_ */

@@ -25,9 +25,15 @@
 #include <linux/io.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/hardware.h>
 #include <mach/at91_pmc.h>
+=======
+#include <linux/clk/at91_pmc.h>
+
+#include <mach/hardware.h>
+>>>>>>> v3.18
 =======
 #include <linux/clk/at91_pmc.h>
 
@@ -82,7 +88,11 @@ EXPORT_SYMBOL_GPL(at91_pmc_base);
 				|| cpu_is_at91sam9g45() \
 				|| cpu_is_at91sam9x5() \
 <<<<<<< HEAD
+<<<<<<< HEAD
 				|| cpu_is_at91sam9n12()))
+=======
+				|| cpu_is_sama5d3()))
+>>>>>>> v3.18
 =======
 				|| cpu_is_sama5d3()))
 >>>>>>> v3.18
@@ -341,8 +351,11 @@ EXPORT_SYMBOL(clk_get_rate);
 /*------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_AT91_PROGRAMMABLE_CLOCKS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -473,8 +486,11 @@ static void __init init_programmable_clock(struct clk *clk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* CONFIG_AT91_PROGRAMMABLE_CLOCKS */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*------------------------------------------------------------------------*/
@@ -506,7 +522,11 @@ static int at91_clk_show(struct seq_file *s, void *unused)
 	}
 	seq_printf(s, "MCKR = %8x\n", at91_pmc_read(AT91_PMC_MCKR));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (cpu_has_upll())
+=======
+	if (cpu_has_upll() || cpu_is_at91sam9n12())
+>>>>>>> v3.18
 =======
 	if (cpu_has_upll() || cpu_is_at91sam9n12())
 >>>>>>> v3.18
@@ -598,7 +618,10 @@ int __init clk_register(struct clk *clk)
 		clk->mode = pmc_sys_mode;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_AT91_PROGRAMMABLE_CLOCKS
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	else if (clk_is_programmable(clk)) {
@@ -606,7 +629,10 @@ int __init clk_register(struct clk *clk)
 		init_programmable_clock(clk);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -641,6 +667,11 @@ static u32 __init at91_usb_rate(struct clk *pll, u32 freq, u32 reg)
 	if (pll == &pllb && (reg & AT91_PMC_USB96M))
 		return freq / 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else if (pll == &utmi_clk || cpu_is_at91sam9n12())
+		return freq / (1 + ((reg & AT91_PMC_OHCIUSBDIV) >> 8));
+>>>>>>> v3.18
 =======
 	else if (pll == &utmi_clk || cpu_is_at91sam9n12())
 		return freq / (1 + ((reg & AT91_PMC_OHCIUSBDIV) >> 8));
@@ -715,6 +746,11 @@ static struct clk *const standard_pmc_clocks[] __initconst = {
 static void __init at91_pllb_usbfs_clock_init(unsigned long main_clock)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int reg;
+
+>>>>>>> v3.18
 =======
 	unsigned int reg;
 
@@ -728,14 +764,20 @@ static void __init at91_pllb_usbfs_clock_init(unsigned long main_clock)
 	uhpck.parent = &pllb;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at91_pllb_usb_init = at91_pll_calc(main_clock, 48000000 * 2) | AT91_PMC_USB96M;
 	pllb.rate_hz = at91_pll_rate(&pllb, main_clock, at91_pllb_usb_init);
 	if (cpu_is_at91rm9200()) {
 =======
+=======
+>>>>>>> v3.18
 	reg = at91_pllb_usb_init = at91_pll_calc(main_clock, 48000000 * 2);
 	pllb.rate_hz = at91_pll_rate(&pllb, main_clock, at91_pllb_usb_init);
 	if (cpu_is_at91rm9200()) {
 		reg = at91_pllb_usb_init |= AT91_PMC_USB96M;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		uhpck.pmc_mask = AT91RM9200_PMC_UHP;
 		udpck.pmc_mask = AT91RM9200_PMC_UDP;
@@ -744,7 +786,10 @@ static void __init at91_pllb_usbfs_clock_init(unsigned long main_clock)
 		   cpu_is_at91sam9263() || cpu_is_at91sam9g20() ||
 		   cpu_is_at91sam9g10()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		reg = at91_pllb_usb_init |= AT91_PMC_USB96M;
 		uhpck.pmc_mask = AT91SAM926x_PMC_UHP;
 		udpck.pmc_mask = AT91SAM926x_PMC_UDP;
@@ -757,6 +802,9 @@ static void __init at91_pllb_usbfs_clock_init(unsigned long main_clock)
 		at91_pmc_write(AT91_PMC_USB, reg);
 
 		/* Still setup masks */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		uhpck.pmc_mask = AT91SAM926x_PMC_UHP;
 		udpck.pmc_mask = AT91SAM926x_PMC_UDP;
@@ -764,8 +812,13 @@ static void __init at91_pllb_usbfs_clock_init(unsigned long main_clock)
 	at91_pmc_write(AT91_CKGR_PLLBR, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	udpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, at91_pllb_usb_init);
 	uhpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, at91_pllb_usb_init);
+=======
+	udpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, reg);
+	uhpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, reg);
+>>>>>>> v3.18
 =======
 	udpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, reg);
 	uhpck.rate_hz = at91_usb_rate(&pllb, pllb.rate_hz, reg);
@@ -789,8 +842,12 @@ static void __init at91_upll_usbfs_clock_init(unsigned long main_clock)
 	uhpck.parent = &utmi_clk;
 	uhpck.pmc_mask = AT91SAM926x_PMC_UHP;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uhpck.rate_hz = utmi_clk.rate_hz;
 	uhpck.rate_hz /= 1 + ((at91_pmc_read(AT91_PMC_USB) & AT91_PMC_OHCIUSBDIV) >> 8);
+=======
+	uhpck.rate_hz = at91_usb_rate(&utmi_clk, utmi_clk.rate_hz, usbr);
+>>>>>>> v3.18
 =======
 	uhpck.rate_hz = at91_usb_rate(&utmi_clk, utmi_clk.rate_hz, usbr);
 >>>>>>> v3.18
@@ -936,12 +993,18 @@ static int __init at91_pmc_init(unsigned long main_clock)
 static struct of_device_id pmc_ids[] = {
 	{ .compatible = "atmel,at91rm9200-pmc" },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{ .compatible = "atmel,at91sam9260-pmc" },
 	{ .compatible = "atmel,at91sam9g45-pmc" },
 	{ .compatible = "atmel,at91sam9n12-pmc" },
 	{ .compatible = "atmel,at91sam9x5-pmc" },
 	{ .compatible = "atmel,sama5d3-pmc" },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ /*sentinel*/ }
 };

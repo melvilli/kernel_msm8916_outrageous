@@ -53,6 +53,10 @@
 #include <asm/uaccess.h>
 #include <linux/atomic.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 >>>>>>> v3.18
@@ -158,7 +162,10 @@ static void which_list(ns_dev * card, struct sk_buff *skb);
 #endif
 static void ns_poll(unsigned long arg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ns_parse_mac(char *mac, unsigned char *esi);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ns_phy_put(struct atm_dev *dev, unsigned char value,
@@ -647,9 +654,15 @@ static int ns_init_card(int i, struct pci_dev *pcidev)
 	card->hbnr.max = MAX_HB;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card->sm_handle = 0x00000000;
 	card->sm_addr = 0x00000000;
 	card->lg_handle = 0x00000000;
+=======
+	card->sm_handle = NULL;
+	card->sm_addr = 0x00000000;
+	card->lg_handle = NULL;
+>>>>>>> v3.18
 =======
 	card->sm_handle = NULL;
 	card->sm_addr = 0x00000000;
@@ -793,16 +806,22 @@ static int ns_init_card(int i, struct pci_dev *pcidev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ns_parse_mac(mac[i], card->atmdev->esi)) {
 		nicstar_read_eprom(card->membase, NICSTAR_EPROM_MAC_ADDR_OFFSET,
 				   card->atmdev->esi, 6);
 		if (memcmp(card->atmdev->esi, "\x00\x00\x00\x00\x00\x00", 6) ==
 		    0) {
 =======
+=======
+>>>>>>> v3.18
 	if (mac[i] == NULL || !mac_pton(mac[i], card->atmdev->esi)) {
 		nicstar_read_eprom(card->membase, NICSTAR_EPROM_MAC_ADDR_OFFSET,
 				   card->atmdev->esi, 6);
 		if (ether_addr_equal(card->atmdev->esi, "\x00\x00\x00\x00\x00\x00")) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			nicstar_read_eprom(card->membase,
 					   NICSTAR_EPROM_MAC_ADDR_OFFSET_ALT,
@@ -1001,7 +1020,11 @@ static void push_rxbufs(ns_dev * card, struct sk_buff *skb)
 				handle2 = card->sm_handle;
 				card->sm_addr = 0x00000000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				card->sm_handle = 0x00000000;
+=======
+				card->sm_handle = NULL;
+>>>>>>> v3.18
 =======
 				card->sm_handle = NULL;
 >>>>>>> v3.18
@@ -1019,7 +1042,11 @@ static void push_rxbufs(ns_dev * card, struct sk_buff *skb)
 				handle2 = card->lg_handle;
 				card->lg_addr = 0x00000000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				card->lg_handle = 0x00000000;
+=======
+				card->lg_handle = NULL;
+>>>>>>> v3.18
 =======
 				card->lg_handle = NULL;
 >>>>>>> v3.18
@@ -1769,15 +1796,21 @@ static int push_scqe(ns_dev * card, vc_map * vc, scq_info * scq, ns_scqe * tbd,
 
 		scq->full = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spin_unlock_irqrestore(&scq->lock, flags);
 		interruptible_sleep_on_timeout(&scq->scqfull_waitq,
 					       SCQFULL_TIMEOUT);
 		spin_lock_irqsave(&scq->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 		wait_event_interruptible_lock_irq_timeout(scq->scqfull_waitq,
 							  scq->tail != scq->next,
 							  scq->lock,
 							  SCQFULL_TIMEOUT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (scq->full) {
@@ -1826,15 +1859,21 @@ static int push_scqe(ns_dev * card, vc_map * vc, scq_info * scq, ns_scqe * tbd,
 			if (has_run++)
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			spin_unlock_irqrestore(&scq->lock, flags);
 			interruptible_sleep_on_timeout(&scq->scqfull_waitq,
 						       SCQFULL_TIMEOUT);
 			spin_lock_irqsave(&scq->lock, flags);
 =======
+=======
+>>>>>>> v3.18
 			wait_event_interruptible_lock_irq_timeout(scq->scqfull_waitq,
 								  scq->tail != scq->next,
 								  scq->lock,
 								  SCQFULL_TIMEOUT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
@@ -2845,6 +2884,7 @@ static void ns_poll(unsigned long arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ns_parse_mac(char *mac, unsigned char *esi)
 {
 	int i, j;
@@ -2868,6 +2908,8 @@ static int ns_parse_mac(char *mac, unsigned char *esi)
 }
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void ns_phy_put(struct atm_dev *dev, unsigned char value,

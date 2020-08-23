@@ -196,7 +196,11 @@ static int __init loop_init(void)
 	rc->priv		= &loopdev;
 	rc->driver_type		= RC_DRIVER_IR_RAW;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc->allowed_protos	= RC_BIT_ALL;
+=======
+	rc->allowed_protocols	= RC_BIT_ALL;
+>>>>>>> v3.18
 =======
 	rc->allowed_protocols	= RC_BIT_ALL;
 >>>>>>> v3.18

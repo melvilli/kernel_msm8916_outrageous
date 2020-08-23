@@ -308,14 +308,20 @@ static int vmw_sou_crtc_set_config(struct drm_mode_set *set)
 		connector->encoder = NULL;
 		encoder->crtc = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		crtc->fb = NULL;
 		crtc->x = 0;
 		crtc->y = 0;
 =======
+=======
+>>>>>>> v3.18
 		crtc->primary->fb = NULL;
 		crtc->x = 0;
 		crtc->y = 0;
 		crtc->enabled = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		vmw_sou_del_active(dev_priv, sou);
@@ -375,14 +381,20 @@ static int vmw_sou_crtc_set_config(struct drm_mode_set *set)
 		connector->encoder = NULL;
 		encoder->crtc = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		crtc->fb = NULL;
 		crtc->x = 0;
 		crtc->y = 0;
 =======
+=======
+>>>>>>> v3.18
 		crtc->primary->fb = NULL;
 		crtc->x = 0;
 		crtc->y = 0;
 		crtc->enabled = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		return ret;
@@ -394,14 +406,20 @@ static int vmw_sou_crtc_set_config(struct drm_mode_set *set)
 	encoder->crtc = crtc;
 	crtc->mode = *mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crtc->fb = fb;
 	crtc->x = set->x;
 	crtc->y = set->y;
 =======
+=======
+>>>>>>> v3.18
 	crtc->primary->fb = fb;
 	crtc->x = set->x;
 	crtc->y = set->y;
 	crtc->enabled = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -486,6 +504,11 @@ static int vmw_sou_init(struct vmw_private *dev_priv, unsigned unit)
 	encoder->possible_clones = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	(void) drm_connector_register(connector);
+
+>>>>>>> v3.18
 =======
 	(void) drm_connector_register(connector);
 
@@ -594,7 +617,11 @@ void vmw_kms_screen_object_update_implicit_fb(struct vmw_private *dev_priv,
 
 	dev_priv->sou_priv->implicit_fb =
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vmw_framebuffer_to_vfb(sou->base.crtc.fb);
+=======
+		vmw_framebuffer_to_vfb(sou->base.crtc.primary->fb);
+>>>>>>> v3.18
 =======
 		vmw_framebuffer_to_vfb(sou->base.crtc.primary->fb);
 >>>>>>> v3.18

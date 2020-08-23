@@ -1,4 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
 
@@ -37,7 +42,11 @@ static int vcpu_online(unsigned int cpu)
 	if (err != 1) {
 		if (!xen_initial_domain())
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "XENBUS: Unable to read cpu state\n");
+=======
+			pr_err("Unable to read cpu state\n");
+>>>>>>> v3.18
 =======
 			pr_err("Unable to read cpu state\n");
 >>>>>>> v3.18
@@ -50,7 +59,11 @@ static int vcpu_online(unsigned int cpu)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "XENBUS: unknown state(%s) on CPU%d\n", state, cpu);
+=======
+	pr_err("unknown state(%s) on CPU%d\n", state, cpu);
+>>>>>>> v3.18
 =======
 	pr_err("unknown state(%s) on CPU%d\n", state, cpu);
 >>>>>>> v3.18

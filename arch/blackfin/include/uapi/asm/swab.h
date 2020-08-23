@@ -5,8 +5,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef _BLACKFIN_SWAB_H
 #define _BLACKFIN_SWAB_H
+=======
+#ifndef _UAPI_BLACKFIN_SWAB_H
+#define _UAPI_BLACKFIN_SWAB_H
+>>>>>>> v3.18
 =======
 #ifndef _UAPI_BLACKFIN_SWAB_H
 #define _UAPI_BLACKFIN_SWAB_H
@@ -53,7 +58,11 @@ static __inline__ __attribute_const__ __u16 __arch_swab16(__u16 xx)
 #endif /* __GNUC__ */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif				/* _BLACKFIN_SWAB_H */
+=======
+#endif /* _UAPI_BLACKFIN_SWAB_H */
+>>>>>>> v3.18
 =======
 #endif /* _UAPI_BLACKFIN_SWAB_H */
 >>>>>>> v3.18

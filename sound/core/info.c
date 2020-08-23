@@ -254,7 +254,10 @@ static ssize_t snd_info_entry_write(struct file *file, const char __user *buffer
 	ssize_t size = 0;
 	loff_t pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long realloc_size;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -266,8 +269,12 @@ static ssize_t snd_info_entry_write(struct file *file, const char __user *buffer
 	if (pos < 0 || (long) pos != pos || (ssize_t) count < 0)
 		return -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	realloc_size = (unsigned long) pos + (unsigned long) count;
 	if (realloc_size < (unsigned long) pos || realloc_size > UINT_MAX)
+=======
+	if ((unsigned long) pos + (unsigned long) count < (unsigned long) pos)
+>>>>>>> v3.18
 =======
 	if ((unsigned long) pos + (unsigned long) count < (unsigned long) pos)
 >>>>>>> v3.18
@@ -428,10 +435,13 @@ static int snd_info_entry_release(struct inode *inode, struct file *file)
 				entry->c.text.write(entry, data->wbuffer);
 				if (data->wbuffer->error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					snd_printk(KERN_WARNING "data write error to %s (%i)\n",
 						entry->name,
 						data->wbuffer->error);
 =======
+=======
+>>>>>>> v3.18
 					if (entry->card)
 						dev_warn(entry->card->dev, "info: data write error to %s (%i)\n",
 							 entry->name,
@@ -440,6 +450,9 @@ static int snd_info_entry_release(struct inode *inode, struct file *file)
 						pr_warn("ALSA: info: data write error to %s (%i)\n",
 							entry->name,
 							data->wbuffer->error);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -561,7 +574,11 @@ int __init snd_info_init(void)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_SEQUENCER) || defined(CONFIG_SND_SEQUENCER_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_SEQUENCER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_SEQUENCER)
 >>>>>>> v3.18
@@ -592,7 +609,11 @@ int __exit snd_info_done(void)
 	snd_info_version_done();
 	if (snd_proc_root) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_SND_SEQUENCER) || defined(CONFIG_SND_SEQUENCER_MODULE)
+=======
+#if IS_ENABLED(CONFIG_SND_SEQUENCER)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_SND_SEQUENCER)
 >>>>>>> v3.18
@@ -703,6 +724,7 @@ int snd_info_card_free(struct snd_card *card)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * snd_register_module_info - create and register module
  * @module: the module pointer
@@ -733,6 +755,8 @@ struct snd_info_entry *snd_register_module_info(struct module *module,
 	return entry;
 }
 EXPORT_SYMBOL(snd_register_module_info);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

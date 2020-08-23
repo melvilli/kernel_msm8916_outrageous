@@ -53,6 +53,10 @@ static int sockstat_seq_show(struct seq_file *seq, void *v)
 {
 	struct net *net = seq->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int frag_mem;
+>>>>>>> v3.18
 =======
 	unsigned int frag_mem;
 >>>>>>> v3.18
@@ -76,8 +80,13 @@ static int sockstat_seq_show(struct seq_file *seq, void *v)
 	seq_printf(seq, "RAW: inuse %d\n",
 		   sock_prot_inuse_get(net, &raw_prot));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(seq,  "FRAG: inuse %d memory %d\n",
 			ip_frag_nqueues(net), ip_frag_mem(net));
+=======
+	frag_mem = ip_frag_mem(net);
+	seq_printf(seq,  "FRAG: inuse %u memory %u\n", !!frag_mem, frag_mem);
+>>>>>>> v3.18
 =======
 	frag_mem = ip_frag_mem(net);
 	seq_printf(seq,  "FRAG: inuse %u memory %u\n", !!frag_mem, frag_mem);
@@ -121,7 +130,11 @@ static const struct snmp_mib snmp4_ipstats_list[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Following RFC4293 items are displayed in /proc/net/netstat */
+=======
+/* Following items are displayed in /proc/net/netstat */
+>>>>>>> v3.18
 =======
 /* Following items are displayed in /proc/net/netstat */
 >>>>>>> v3.18
@@ -139,14 +152,20 @@ static const struct snmp_mib snmp4_ipextstats_list[] = {
 	SNMP_MIB_ITEM("InBcastOctets", IPSTATS_MIB_INBCASTOCTETS),
 	SNMP_MIB_ITEM("OutBcastOctets", IPSTATS_MIB_OUTBCASTOCTETS),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SNMP_MIB_ITEM("InCsumErrors", IPSTATS_MIB_CSUMERRORS),
 =======
+=======
+>>>>>>> v3.18
 	/* Non RFC4293 fields */
 	SNMP_MIB_ITEM("InCsumErrors", IPSTATS_MIB_CSUMERRORS),
 	SNMP_MIB_ITEM("InNoECTPkts", IPSTATS_MIB_NOECTPKTS),
 	SNMP_MIB_ITEM("InECT1Pkts", IPSTATS_MIB_ECT1PKTS),
 	SNMP_MIB_ITEM("InECT0Pkts", IPSTATS_MIB_ECT0PKTS),
 	SNMP_MIB_ITEM("InCEPkts", IPSTATS_MIB_CEPKTS),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SNMP_MIB_SENTINEL
 };
@@ -291,6 +310,10 @@ static const struct snmp_mib snmp4_net_list[] = {
 	SNMP_MIB_ITEM("TCPSYNChallenge", LINUX_MIB_TCPSYNCHALLENGE),
 	SNMP_MIB_ITEM("TCPFastOpenActive", LINUX_MIB_TCPFASTOPENACTIVE),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SNMP_MIB_ITEM("TCPFastOpenActiveFail", LINUX_MIB_TCPFASTOPENACTIVEFAIL),
+>>>>>>> v3.18
 =======
 	SNMP_MIB_ITEM("TCPFastOpenActiveFail", LINUX_MIB_TCPFASTOPENACTIVEFAIL),
 >>>>>>> v3.18
@@ -300,7 +323,10 @@ static const struct snmp_mib snmp4_net_list[] = {
 	SNMP_MIB_ITEM("TCPFastOpenCookieReqd", LINUX_MIB_TCPFASTOPENCOOKIEREQD),
 	SNMP_MIB_ITEM("TCPSpuriousRtxHostQueues", LINUX_MIB_TCPSPURIOUS_RTX_HOSTQUEUES),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	SNMP_MIB_ITEM("BusyPollRxPackets", LINUX_MIB_BUSYPOLLRXPACKETS),
 	SNMP_MIB_ITEM("TCPAutoCorking", LINUX_MIB_TCPAUTOCORKING),
 	SNMP_MIB_ITEM("TCPFromZeroWindowAdv", LINUX_MIB_TCPFROMZEROWINDOWADV),
@@ -308,6 +334,9 @@ static const struct snmp_mib snmp4_net_list[] = {
 	SNMP_MIB_ITEM("TCPWantZeroWindowAdv", LINUX_MIB_TCPWANTZEROWINDOWADV),
 	SNMP_MIB_ITEM("TCPSynRetrans", LINUX_MIB_TCPSYNRETRANS),
 	SNMP_MIB_ITEM("TCPOrigDataSent", LINUX_MIB_TCPORIGDATASENT),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SNMP_MIB_SENTINEL
 };
@@ -363,6 +392,7 @@ static void icmp_put(struct seq_file *seq)
 
 	seq_puts(seq, "\nIcmp: InMsgs InErrors InCsumErrors");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; icmpmibmap[i].name != NULL; i++)
 		seq_printf(seq, " In%s", icmpmibmap[i].name);
 	seq_printf(seq, " OutMsgs OutErrors");
@@ -380,6 +410,8 @@ static void icmp_put(struct seq_file *seq)
 		snmp_fold_field((void __percpu **) net->mib.icmp_statistics, ICMP_MIB_OUTERRORS));
 	for (i=0; icmpmibmap[i].name != NULL; i++)
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; icmpmibmap[i].name != NULL; i++)
 		seq_printf(seq, " In%s", icmpmibmap[i].name);
 	seq_printf(seq, " OutMsgs OutErrors");
@@ -396,6 +428,9 @@ static void icmp_put(struct seq_file *seq)
 		snmp_fold_field(net->mib.icmp_statistics, ICMP_MIB_OUTMSGS),
 		snmp_fold_field(net->mib.icmp_statistics, ICMP_MIB_OUTERRORS));
 	for (i = 0; icmpmibmap[i].name != NULL; i++)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		seq_printf(seq, " %lu",
 			   atomic_long_read(ptr + (icmpmibmap[i].index | 0x100)));
@@ -422,7 +457,11 @@ static int snmp_seq_show(struct seq_file *seq, void *v)
 	for (i = 0; snmp4_ipstats_list[i].name != NULL; i++)
 		seq_printf(seq, " %llu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   snmp_fold_field64((void __percpu **)net->mib.ip_statistics,
+=======
+			   snmp_fold_field64(net->mib.ip_statistics,
+>>>>>>> v3.18
 =======
 			   snmp_fold_field64(net->mib.ip_statistics,
 >>>>>>> v3.18
@@ -442,17 +481,23 @@ static int snmp_seq_show(struct seq_file *seq, void *v)
 		if (snmp4_tcp_list[i].entry == TCP_MIB_MAXCONN)
 			seq_printf(seq, " %ld",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   snmp_fold_field((void __percpu **)net->mib.tcp_statistics,
 						   snmp4_tcp_list[i].entry));
 		else
 			seq_printf(seq, " %lu",
 				   snmp_fold_field((void __percpu **)net->mib.tcp_statistics,
 =======
+=======
+>>>>>>> v3.18
 				   snmp_fold_field(net->mib.tcp_statistics,
 						   snmp4_tcp_list[i].entry));
 		else
 			seq_printf(seq, " %lu",
 				   snmp_fold_field(net->mib.tcp_statistics,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 						   snmp4_tcp_list[i].entry));
 	}
@@ -465,7 +510,11 @@ static int snmp_seq_show(struct seq_file *seq, void *v)
 	for (i = 0; snmp4_udp_list[i].name != NULL; i++)
 		seq_printf(seq, " %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   snmp_fold_field((void __percpu **)net->mib.udp_statistics,
+=======
+			   snmp_fold_field(net->mib.udp_statistics,
+>>>>>>> v3.18
 =======
 			   snmp_fold_field(net->mib.udp_statistics,
 >>>>>>> v3.18
@@ -480,7 +529,11 @@ static int snmp_seq_show(struct seq_file *seq, void *v)
 	for (i = 0; snmp4_udp_list[i].name != NULL; i++)
 		seq_printf(seq, " %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   snmp_fold_field((void __percpu **)net->mib.udplite_statistics,
+=======
+			   snmp_fold_field(net->mib.udplite_statistics,
+>>>>>>> v3.18
 =======
 			   snmp_fold_field(net->mib.udplite_statistics,
 >>>>>>> v3.18
@@ -521,7 +574,11 @@ static int netstat_seq_show(struct seq_file *seq, void *v)
 	for (i = 0; snmp4_net_list[i].name != NULL; i++)
 		seq_printf(seq, " %lu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   snmp_fold_field((void __percpu **)net->mib.net_statistics,
+=======
+			   snmp_fold_field(net->mib.net_statistics,
+>>>>>>> v3.18
 =======
 			   snmp_fold_field(net->mib.net_statistics,
 >>>>>>> v3.18
@@ -535,7 +592,11 @@ static int netstat_seq_show(struct seq_file *seq, void *v)
 	for (i = 0; snmp4_ipextstats_list[i].name != NULL; i++)
 		seq_printf(seq, " %llu",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   snmp_fold_field64((void __percpu **)net->mib.ip_statistics,
+=======
+			   snmp_fold_field64(net->mib.ip_statistics,
+>>>>>>> v3.18
 =======
 			   snmp_fold_field64(net->mib.ip_statistics,
 >>>>>>> v3.18

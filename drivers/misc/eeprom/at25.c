@@ -11,7 +11,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/module.h>
@@ -375,16 +378,22 @@ static int at25_probe(struct spi_device *spi)
 			err = at25_np_to_chip(&spi->dev, np, &chip);
 			if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto fail;
 		} else {
 			dev_err(&spi->dev, "Error: no chip description\n");
 			err = -ENODEV;
 			goto fail;
 =======
+=======
+>>>>>>> v3.18
 				return err;
 		} else {
 			dev_err(&spi->dev, "Error: no chip description\n");
 			return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	} else
@@ -400,8 +409,12 @@ static int at25_probe(struct spi_device *spi)
 	else {
 		dev_dbg(&spi->dev, "unsupported address type\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -EINVAL;
 		goto fail;
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -415,6 +428,7 @@ static int at25_probe(struct spi_device *spi)
 	if (sr < 0 || sr & AT25_SR_nRDY) {
 		dev_dbg(&spi->dev, "rdsr --> %d (%02x)\n", sr, sr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = -ENXIO;
 		goto fail;
 	}
@@ -424,12 +438,17 @@ static int at25_probe(struct spi_device *spi)
 		goto fail;
 	}
 =======
+=======
+>>>>>>> v3.18
 		return -ENXIO;
 	}
 
 	at25 = devm_kzalloc(&spi->dev, sizeof(struct at25_data), GFP_KERNEL);
 	if (!at25)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_init(&at25->lock);
@@ -463,7 +482,11 @@ static int at25_probe(struct spi_device *spi)
 	err = sysfs_create_bin_file(&spi->dev.kobj, &at25->bin);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail;
+=======
+		return err;
+>>>>>>> v3.18
 =======
 		return err;
 >>>>>>> v3.18
@@ -481,10 +504,13 @@ static int at25_probe(struct spi_device *spi)
 		at25->chip.page_size);
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 fail:
 	dev_dbg(&spi->dev, "probe err %d\n", err);
 	kfree(at25);
 	return err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -496,7 +522,10 @@ static int at25_remove(struct spi_device *spi)
 	at25 = spi_get_drvdata(spi);
 	sysfs_remove_bin_file(&spi->dev.kobj, &at25->bin);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(at25);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -505,19 +534,29 @@ static int at25_remove(struct spi_device *spi)
 /*-------------------------------------------------------------------------*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id at25_of_match[] = {
 	{ .compatible = "atmel,at25", },
 	{ }
 };
 MODULE_DEVICE_TABLE(of, at25_of_match);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct spi_driver at25_driver = {
 	.driver = {
 		.name		= "at25",
 		.owner		= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.of_match_table = at25_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = at25_of_match,
 >>>>>>> v3.18

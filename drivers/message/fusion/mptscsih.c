@@ -96,7 +96,11 @@ static void	mptscsih_copy_sense_data(struct scsi_cmnd *sc, MPT_SCSI_HOST *hd, MP
 
 int	mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel, u8 id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int lun, int ctx2abort, ulong timeout);
+=======
+		u64 lun, int ctx2abort, ulong timeout);
+>>>>>>> v3.18
 =======
 		u64 lun, int ctx2abort, ulong timeout);
 >>>>>>> v3.18
@@ -541,7 +545,11 @@ mptscsih_info_scsiio(MPT_ADAPTER *ioc, struct scsi_cmnd *sc, SCSIIOReply_t * pSc
 
 	scsi_print_command(sc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(MYIOC_s_DEBUG_FMT "\tfw_channel = %d, fw_id = %d, lun = %d\n",
+=======
+	printk(MYIOC_s_DEBUG_FMT "\tfw_channel = %d, fw_id = %d, lun = %llu\n",
+>>>>>>> v3.18
 =======
 	printk(MYIOC_s_DEBUG_FMT "\tfw_channel = %d, fw_id = %d, lun = %llu\n",
 >>>>>>> v3.18
@@ -701,7 +709,11 @@ mptscsih_io_done(MPT_ADAPTER *ioc, MPT_FRAME_HDR *mf, MPT_FRAME_HDR *mr)
 		if (scsi_state & MPI_SCSI_STATE_RESPONSE_INFO_VALID &&
 		    pScsiReply->ResponseInfo) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(MYIOC_s_NOTE_FMT "[%d:%d:%d:%d] "
+=======
+			printk(MYIOC_s_NOTE_FMT "[%d:%d:%d:%llu] "
+>>>>>>> v3.18
 =======
 			printk(MYIOC_s_NOTE_FMT "[%d:%d:%d:%llu] "
 >>>>>>> v3.18
@@ -1168,7 +1180,11 @@ mptscsih_report_queue_full(struct scsi_cmnd *sc, SCSIIOReply_t *pScsiReply, SCSI
 	ioc = hd->ioc;
 	if (time - hd->last_queue_full > 10 * HZ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk(ioc, printk(MYIOC_s_WARN_FMT "Device (%d:%d:%d) reported QUEUE_FULL!\n",
+=======
+		dprintk(ioc, printk(MYIOC_s_WARN_FMT "Device (%d:%d:%llu) reported QUEUE_FULL!\n",
+>>>>>>> v3.18
 =======
 		dprintk(ioc, printk(MYIOC_s_WARN_FMT "Device (%d:%d:%llu) reported QUEUE_FULL!\n",
 >>>>>>> v3.18
@@ -1288,6 +1304,7 @@ mptscsih_info(struct Scsi_Host *SChost)
 	h = shost_priv(SChost);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (h) {
 		if (h->info_kbuf == NULL)
 			if ((h->info_kbuf = kmalloc(0x1000 /* 4Kb */, GFP_KERNEL)) == NULL)
@@ -1298,6 +1315,8 @@ mptscsih_info(struct Scsi_Host *SChost)
 		h->info_kbuf[size-1] = '\0';
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (h->info_kbuf == NULL)
 		if ((h->info_kbuf = kmalloc(0x1000 /* 4Kb */, GFP_KERNEL)) == NULL)
 			return h->info_kbuf;
@@ -1305,6 +1324,9 @@ mptscsih_info(struct Scsi_Host *SChost)
 
 	mpt_print_ioc_summary(h->ioc, h->info_kbuf, &size, 0, 0);
 	h->info_kbuf[size-1] = '\0';
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return h->info_kbuf;
@@ -1331,7 +1353,10 @@ int mptscsih_show_info(struct seq_file *m, struct Scsi_Host *host)
  *	mptscsih_qcmd - Primary Fusion MPT SCSI initiator IO start routine.
  *	@SCpnt: Pointer to scsi_cmnd structure
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@done: Pointer SCSI mid-layer IO completion function
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -1343,7 +1368,11 @@ int mptscsih_show_info(struct seq_file *m, struct Scsi_Host *host)
  */
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 mptscsih_qcmd(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
+=======
+mptscsih_qcmd(struct scsi_cmnd *SCpnt)
+>>>>>>> v3.18
 =======
 mptscsih_qcmd(struct scsi_cmnd *SCpnt)
 >>>>>>> v3.18
@@ -1363,10 +1392,16 @@ mptscsih_qcmd(struct scsi_cmnd *SCpnt)
 	hd = shost_priv(SCpnt->device->host);
 	ioc = hd->ioc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCpnt->scsi_done = done;
 
 	dmfprintk(ioc, printk(MYIOC_s_DEBUG_FMT "qcmd: SCpnt=%p, done()=%p\n",
 		ioc->name, SCpnt, done));
+=======
+
+	dmfprintk(ioc, printk(MYIOC_s_DEBUG_FMT "qcmd: SCpnt=%p\n",
+		ioc->name, SCpnt));
+>>>>>>> v3.18
 =======
 
 	dmfprintk(ioc, printk(MYIOC_s_DEBUG_FMT "qcmd: SCpnt=%p\n",
@@ -1410,8 +1445,12 @@ mptscsih_qcmd(struct scsi_cmnd *SCpnt)
 	 * use the Inquiry data to determine if device supports tagged.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (vdevice
 	    && (vdevice->vtarget->tflags & MPT_TARGET_FLAGS_Q_YES)
+=======
+	if ((vdevice->vtarget->tflags & MPT_TARGET_FLAGS_Q_YES)
+>>>>>>> v3.18
 =======
 	if ((vdevice->vtarget->tflags & MPT_TARGET_FLAGS_Q_YES)
 >>>>>>> v3.18
@@ -1564,7 +1603,11 @@ mptscsih_freeChainBuffers(MPT_ADAPTER *ioc, int req_idx)
  **/
 int
 <<<<<<< HEAD
+<<<<<<< HEAD
 mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel, u8 id, int lun,
+=======
+mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel, u8 id, u64 lun,
+>>>>>>> v3.18
 =======
 mptscsih_IssueTaskMgmt(MPT_SCSI_HOST *hd, u8 type, u8 channel, u8 id, u64 lun,
 >>>>>>> v3.18
@@ -2430,7 +2473,11 @@ mptscsih_slave_configure(struct scsi_device *sdev)
 
 	dsprintk(ioc, printk(MYIOC_s_DEBUG_FMT
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"device @ %p, channel=%d, id=%d, lun=%d\n",
+=======
+		"device @ %p, channel=%d, id=%d, lun=%llu\n",
+>>>>>>> v3.18
 =======
 		"device @ %p, channel=%d, id=%d, lun=%llu\n",
 >>>>>>> v3.18
@@ -3025,7 +3072,11 @@ mptscsih_do_cmd(MPT_SCSI_HOST *hd, INTERNAL_CMD *io)
 
 	devtprintk(ioc, printk(MYIOC_s_DEBUG_FMT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    "%s: Sending Command 0x%02x for fw_channel=%d fw_id=%d lun=%d\n",
+=======
+	    "%s: Sending Command 0x%02x for fw_channel=%d fw_id=%d lun=%llu\n",
+>>>>>>> v3.18
 =======
 	    "%s: Sending Command 0x%02x for fw_channel=%d fw_id=%d lun=%llu\n",
 >>>>>>> v3.18

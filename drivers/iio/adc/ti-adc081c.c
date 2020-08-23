@@ -10,6 +10,10 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -79,7 +83,11 @@ static int adc081c_probe(struct i2c_client *client,
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iio = iio_device_alloc(sizeof(*adc));
+=======
+	iio = devm_iio_device_alloc(&client->dev, sizeof(*adc));
+>>>>>>> v3.18
 =======
 	iio = devm_iio_device_alloc(&client->dev, sizeof(*adc));
 >>>>>>> v3.18
@@ -89,6 +97,7 @@ static int adc081c_probe(struct i2c_client *client,
 	adc = iio_priv(iio);
 	adc->i2c = client;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	adc->ref = regulator_get(&client->dev, "vref");
 	if (IS_ERR(adc->ref)) {
@@ -100,6 +109,8 @@ static int adc081c_probe(struct i2c_client *client,
 	if (err < 0)
 		goto regulator_put;
 =======
+=======
+>>>>>>> v3.18
 	adc->ref = devm_regulator_get(&client->dev, "vref");
 	if (IS_ERR(adc->ref))
 		return PTR_ERR(adc->ref);
@@ -107,6 +118,9 @@ static int adc081c_probe(struct i2c_client *client,
 	err = regulator_enable(adc->ref);
 	if (err < 0)
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iio->dev.parent = &client->dev;
@@ -128,10 +142,13 @@ static int adc081c_probe(struct i2c_client *client,
 regulator_disable:
 	regulator_disable(adc->ref);
 <<<<<<< HEAD
+<<<<<<< HEAD
 regulator_put:
 	regulator_put(adc->ref);
 iio_free:
 	iio_device_free(iio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -146,8 +163,11 @@ static int adc081c_remove(struct i2c_client *client)
 	iio_device_unregister(iio);
 	regulator_disable(adc->ref);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator_put(adc->ref);
 	iio_device_free(iio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

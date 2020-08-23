@@ -529,7 +529,11 @@ ips_setup(char *ips_str)
 		 */
 		for (i = 0; i < ARRAY_SIZE(options); i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (strnicmp
+=======
+			if (strncasecmp
+>>>>>>> v3.18
 =======
 			if (strncasecmp
 >>>>>>> v3.18

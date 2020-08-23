@@ -78,7 +78,11 @@ static struct fb_monspecs __initdata hammerhead_hda350t_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct atmel_lcdfb_info __initdata hammerhead_lcdc_data = {
+=======
+struct atmel_lcdfb_pdata __initdata hammerhead_lcdc_data = {
+>>>>>>> v3.18
 =======
 struct atmel_lcdfb_pdata __initdata hammerhead_lcdc_data = {
 >>>>>>> v3.18

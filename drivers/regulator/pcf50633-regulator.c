@@ -87,18 +87,24 @@ static int pcf50633_regulator_probe(struct platform_device *pdev)
 
 	config.dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	config.init_data = pdev->dev.platform_data;
 	config.driver_data = pcf;
 	config.regmap = pcf->regmap;
 
 	rdev = regulator_register(&regulators[pdev->id], &config);
 =======
+=======
+>>>>>>> v3.18
 	config.init_data = dev_get_platdata(&pdev->dev);
 	config.driver_data = pcf;
 	config.regmap = pcf->regmap;
 
 	rdev = devm_regulator_register(&pdev->dev, &regulators[pdev->id],
 				       &config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (IS_ERR(rdev))
 		return PTR_ERR(rdev);
@@ -111,6 +117,7 @@ static int pcf50633_regulator_probe(struct platform_device *pdev)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int pcf50633_regulator_remove(struct platform_device *pdev)
 {
@@ -129,11 +136,16 @@ static struct platform_driver pcf50633_regulator_driver = {
 	.probe = pcf50633_regulator_probe,
 	.remove = pcf50633_regulator_remove,
 =======
+=======
+>>>>>>> v3.18
 static struct platform_driver pcf50633_regulator_driver = {
 	.driver = {
 		.name = "pcf50633-regulator",
 	},
 	.probe = pcf50633_regulator_probe,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

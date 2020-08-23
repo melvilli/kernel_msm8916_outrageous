@@ -9,6 +9,7 @@ struct clk;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * enum si5351_variant - SiLabs Si5351 chip variant
  * @SI5351_VARIANT_A: Si5351A (8 output clocks, XTAL input)
  * @SI5351_VARIANT_A3: Si5351A MSOP10 (3 output clocks, XTAL input)
@@ -23,6 +24,8 @@ enum si5351_variant {
 };
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * enum si5351_pll_src - Si5351 pll clock source
@@ -83,7 +86,10 @@ enum si5351_drive_strength {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * enum si5351_disable_state - Si5351 clock output disable state
  * @SI5351_DISABLE_DEFAULT: default, do not change eeprom config
  * @SI5351_DISABLE_LOW: CLKx is set to a LOW state when disabled
@@ -101,6 +107,9 @@ enum si5351_disable_state {
 };
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct si5351_clkout_config - Si5351 clock output configuration
  * @clkout: clkout number
@@ -115,6 +124,10 @@ struct si5351_clkout_config {
 	enum si5351_clkout_src clkout_src;
 	enum si5351_drive_strength drive;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum si5351_disable_state disable_state;
+>>>>>>> v3.18
 =======
 	enum si5351_disable_state disable_state;
 >>>>>>> v3.18
@@ -125,7 +138,10 @@ struct si5351_clkout_config {
 /**
  * struct si5351_platform_data - Platform data for the Si5351 clock driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @variant: Si5351 chip variant
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @clk_xtal: xtal input clock
@@ -135,7 +151,10 @@ struct si5351_clkout_config {
  */
 struct si5351_platform_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	enum si5351_variant variant;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct clk *clk_xtal;

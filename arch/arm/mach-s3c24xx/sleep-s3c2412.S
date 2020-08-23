@@ -66,7 +66,11 @@ s3c2412_sleep_enter1:
 	bne	s3c2412_sleep_enter1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, r14
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

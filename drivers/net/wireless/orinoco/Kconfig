@@ -108,7 +108,11 @@ config PCI_HERMES
 config PCMCIA_HERMES
 	tristate "Hermes PCMCIA card support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCMCIA && HERMES
+=======
+	depends on PCMCIA && HERMES && HAS_IOPORT_MAP
+>>>>>>> v3.18
 =======
 	depends on PCMCIA && HERMES && HAS_IOPORT_MAP
 >>>>>>> v3.18
@@ -127,7 +131,11 @@ config PCMCIA_HERMES
 config PCMCIA_SPECTRUM
 	tristate "Symbol Spectrum24 Trilogy PCMCIA card support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCMCIA && HERMES
+=======
+	depends on PCMCIA && HERMES && HAS_IOPORT_MAP
+>>>>>>> v3.18
 =======
 	depends on PCMCIA && HERMES && HAS_IOPORT_MAP
 >>>>>>> v3.18

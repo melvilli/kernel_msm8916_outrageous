@@ -21,6 +21,10 @@
 
 #include <asm/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cacheflush.h>
+>>>>>>> v3.18
 =======
 #include <asm/cacheflush.h>
 >>>>>>> v3.18
@@ -30,6 +34,10 @@
 #include <asm/page.h>
 #include <asm/pgalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/ftrace.h>
+>>>>>>> v3.18
 =======
 #include <asm/ftrace.h>
 >>>>>>> v3.18
@@ -113,6 +121,10 @@ EXPORT_SYMBOL(csum_partial_copy_generic);
  */
 EXPORT_SYMBOL(__xtensa_copy_user);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL(__invalidate_icache_range);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__invalidate_icache_range);
 >>>>>>> v3.18
@@ -134,10 +146,13 @@ EXPORT_SYMBOL(insl);
 
 extern long common_exception_return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern long _spill_registers;
 EXPORT_SYMBOL(common_exception_return);
 EXPORT_SYMBOL(_spill_registers);
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(common_exception_return);
 
 #ifdef CONFIG_FUNCTION_TRACER
@@ -148,4 +163,7 @@ EXPORT_SYMBOL(__invalidate_dcache_range);
 #if XCHAL_DCACHE_IS_WRITEBACK
 EXPORT_SYMBOL(__flush_dcache_range);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -1,14 +1,20 @@
 
 obj-$(CONFIG_SPU_FS) += spufs.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 spufs-y += inode.o file.o context.o syscalls.o coredump.o
 spufs-y += sched.o backing_ops.o hw_ops.o run.o gang.o
 spufs-y += switch.o fault.o lscsa_alloc.o
 =======
+=======
+>>>>>>> v3.18
 spufs-y += inode.o file.o context.o syscalls.o
 spufs-y += sched.o backing_ops.o hw_ops.o run.o gang.o
 spufs-y += switch.o fault.o lscsa_alloc.o
 spufs-$(CONFIG_COREDUMP) += coredump.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # magic for the trace events

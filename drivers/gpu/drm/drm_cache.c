@@ -33,13 +33,19 @@
 
 #if defined(CONFIG_X86)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  * clflushopt is an unordered instruction which needs fencing with mfence or
  * sfence to avoid ordering issues.  For drm_clflush_page this fencing happens
  * in the caller.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 drm_clflush_page(struct page *page)
@@ -54,7 +60,11 @@ drm_clflush_page(struct page *page)
 	page_virtual = kmap_atomic(page);
 	for (i = 0; i < PAGE_SIZE; i += size)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clflush(page_virtual + i);
+=======
+		clflushopt(page_virtual + i);
+>>>>>>> v3.18
 =======
 		clflushopt(page_virtual + i);
 >>>>>>> v3.18
@@ -139,6 +149,7 @@ EXPORT_SYMBOL(drm_clflush_sg);
 
 void
 <<<<<<< HEAD
+<<<<<<< HEAD
 drm_clflush_virt_range(char *addr, unsigned long length)
 {
 #if defined(CONFIG_X86)
@@ -149,6 +160,8 @@ drm_clflush_virt_range(char *addr, unsigned long length)
 			clflush(addr);
 		clflush(end - 1);
 =======
+=======
+>>>>>>> v3.18
 drm_clflush_virt_range(void *addr, unsigned long length)
 {
 #if defined(CONFIG_X86)
@@ -158,6 +171,9 @@ drm_clflush_virt_range(void *addr, unsigned long length)
 		for (; addr < end; addr += boot_cpu_data.x86_clflush_size)
 			clflushopt(addr);
 		clflushopt(end - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mb();
 		return;

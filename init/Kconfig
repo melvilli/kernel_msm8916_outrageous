@@ -54,7 +54,10 @@ config CROSS_COMPILE
 	  directory to select the cross-compiler automatically.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config COMPILE_TEST
 	bool "Compile also drivers which will not load"
 	default n
@@ -69,6 +72,9 @@ config COMPILE_TEST
 	  here. If you are a user/distributor, say N here to exclude useless
 	  drivers to be distributed.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config LOCALVERSION
 	string "Local version - append to kernel release"
@@ -116,11 +122,14 @@ config HAVE_KERNEL_LZO
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 choice
 	prompt "Kernel compression mode"
 	default KERNEL_GZIP
 	depends on HAVE_KERNEL_GZIP || HAVE_KERNEL_BZIP2 || HAVE_KERNEL_LZMA || HAVE_KERNEL_XZ || HAVE_KERNEL_LZO
 =======
+=======
+>>>>>>> v3.18
 config HAVE_KERNEL_LZ4
 	bool
 
@@ -128,6 +137,9 @@ choice
 	prompt "Kernel compression mode"
 	default KERNEL_GZIP
 	depends on HAVE_KERNEL_GZIP || HAVE_KERNEL_BZIP2 || HAVE_KERNEL_LZMA || HAVE_KERNEL_XZ || HAVE_KERNEL_LZO || HAVE_KERNEL_LZ4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  The linux kernel is a kind of self-extracting executable.
@@ -196,7 +208,10 @@ config KERNEL_LZO
 	  (both compression and decompression) is the fastest.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config KERNEL_LZ4
 	bool "LZ4"
 	depends on HAVE_KERNEL_LZ4
@@ -209,6 +224,9 @@ config KERNEL_LZ4
 	  is about 8% bigger than LZO. But the decompression speed is
 	  faster than LZO.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endchoice
 
@@ -275,7 +293,10 @@ config POSIX_MQUEUE_SYSCTL
 	default y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config CROSS_MEMORY_ATTACH
 	bool "Enable process_vm_readv/writev syscalls"
 	depends on MMU
@@ -286,6 +307,9 @@ config CROSS_MEMORY_ATTACH
 	  to directly read from or write to another process' address space.
 	  See the man page for more details.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config FHANDLE
 	bool "open by fhandle syscalls"
@@ -300,7 +324,10 @@ config FHANDLE
 	  syscalls.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config USELIB
 	bool "uselib syscall"
 	default y
@@ -311,6 +338,9 @@ config USELIB
 	  earlier, you may need to enable this syscall.  Current systems
 	  running glibc can safely disable this.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config AUDIT
 	bool "Auditing support"
@@ -322,16 +352,22 @@ config AUDIT
 	  auditing without CONFIG_AUDITSYSCALL.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config AUDITSYSCALL
 	bool "Enable system-call auditing support"
 	depends on AUDIT && (X86 || PPC || S390 || IA64 || UML || SPARC64 || SUPERH || (ARM && AEABI && !OABI_COMPAT))
 =======
+=======
+>>>>>>> v3.18
 config HAVE_ARCH_AUDITSYSCALL
 	bool
 
 config AUDITSYSCALL
 	bool "Enable system-call auditing support"
 	depends on AUDIT && HAVE_ARCH_AUDITSYSCALL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default y if SECURITY_SELINUX
 	help
@@ -350,6 +386,7 @@ config AUDIT_TREE
 	select FSNOTIFY
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config AUDIT_LOGINUID_IMMUTABLE
 	bool "Make audit loginuid immutable"
 	depends on AUDIT
@@ -364,6 +401,8 @@ config AUDIT_LOGINUID_IMMUTABLE
 	  one to drop potentially dangerous capabilites from the login tasks,
 	  but may not be backwards compatible with older init systems.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 source "kernel/irq/Kconfig"
@@ -406,7 +445,12 @@ config VIRT_CPU_ACCOUNTING_NATIVE
 config VIRT_CPU_ACCOUNTING_GEN
 	bool "Full dynticks CPU time accounting"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HAVE_CONTEXT_TRACKING && 64BIT
+=======
+	depends on HAVE_CONTEXT_TRACKING
+	depends on HAVE_VIRT_CPU_ACCOUNTING_GEN
+>>>>>>> v3.18
 =======
 	depends on HAVE_CONTEXT_TRACKING
 	depends on HAVE_VIRT_CPU_ACCOUNTING_GEN
@@ -527,6 +571,10 @@ config TREE_PREEMPT_RCU
 	bool "Preemptible tree-based hierarchical RCU"
 	depends on PREEMPT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select IRQ_WORK
+>>>>>>> v3.18
 =======
 	select IRQ_WORK
 >>>>>>> v3.18
@@ -549,6 +597,7 @@ config TINY_RCU
 	  memory footprint of RCU.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TINY_PREEMPT_RCU
 	bool "Preemptible UP-only small-memory-footprint RCU"
 	depends on PREEMPT && !SMP
@@ -565,6 +614,8 @@ config PREEMPT_RCU
 	  This option enables preemptible-RCU code that is common between
 	  the TREE_PREEMPT_RCU and TINY_PREEMPT_RCU implementations.
 =======
+=======
+>>>>>>> v3.18
 endchoice
 
 config PREEMPT_RCU
@@ -582,6 +633,9 @@ config TASKS_RCU
 	  user-mode execution as quiescent states.
 
 	  If unsure, say N.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config RCU_STALL_COMMON
@@ -616,6 +670,7 @@ config CONTEXT_TRACKING_FORCE
 	bool "Force context tracking"
 	depends on CONTEXT_TRACKING
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default CONTEXT_TRACKING
 	help
 	  Probe on user/kernel boundaries by default in order to
@@ -624,6 +679,8 @@ config CONTEXT_TRACKING_FORCE
 	  This test is there for debugging until we have a real user like the
 	  full dynticks mode.
 =======
+=======
+>>>>>>> v3.18
 	default y if !NO_HZ_FULL
 	help
 	  The major pre-requirement for full dynticks to work is to
@@ -647,6 +704,9 @@ config CONTEXT_TRACKING_FORCE
 	  Say N otherwise, this option brings an overhead that you
 	  don't want in production.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config RCU_FANOUT
@@ -792,7 +852,11 @@ config RCU_BOOST_DELAY
 
 config RCU_NOCB_CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Offload RCU callback processing from boot-selected CPUs (EXPERIMENTAL"
+=======
+	bool "Offload RCU callback processing from boot-selected CPUs"
+>>>>>>> v3.18
 =======
 	bool "Offload RCU callback processing from boot-selected CPUs"
 >>>>>>> v3.18
@@ -822,6 +886,7 @@ choice
 	default RCU_NOCB_CPU_NONE
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This option allows no-CBs CPUs to be specified at build time.
 	  Additional no-CBs CPUs may be specified by the rcu_nocbs=
 	  boot parameter.
@@ -845,6 +910,8 @@ config RCU_NOCB_CPU_ZERO
 	  Select this if CPU 0 needs to be a no-CBs CPU for real-time
 	  or energy-efficiency reasons.
 =======
+=======
+>>>>>>> v3.18
 	  This option allows no-CBs CPUs (whose RCU callbacks are invoked
 	  from kthreads rather than from softirq context) to be specified
 	  at build time.  Additional no-CBs CPUs may be specified by
@@ -878,6 +945,9 @@ config RCU_NOCB_CPU_ZERO
 	  Select this if CPU 0 needs to be a no-CBs CPU for real-time
 	  or energy-efficiency reasons, but the real reason it exists
 	  is to ensure that randconfig testing covers mixed systems.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config RCU_NOCB_CPU_ALL
@@ -886,14 +956,20 @@ config RCU_NOCB_CPU_ALL
 	help
 	  This option forces all CPUs to be no-CBs CPUs.  The rcu_nocbs=
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  boot parameter will be ignored.
 =======
+=======
+>>>>>>> v3.18
 	  boot parameter will be ignored.  All CPUs' RCU callbacks will
 	  be executed in the context of per-CPU rcuo kthreads created for
 	  this purpose.  Assuming that the kthreads whose names start with
 	  "rcuo" are bound to "housekeeping" CPUs, this reduces OS jitter
 	  on the remaining CPUs, but might decrease memory locality during
 	  RCU-callback invocation, thus potentially degrading throughput.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	  Select this if all CPUs need to be no-CBs CPUs for real-time
@@ -904,9 +980,12 @@ endchoice
 endmenu # "RCU Subsystem"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config IKCONFIG
 	tristate "Kernel .config support"
 =======
+=======
+>>>>>>> v3.18
 config BUILD_BIN2C
 	bool
 	default n
@@ -914,6 +993,9 @@ config BUILD_BIN2C
 config IKCONFIG
 	tristate "Kernel .config support"
 	select BUILD_BIN2C
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	---help---
 	  This option enables the complete Linux kernel ".config" file
@@ -937,6 +1019,7 @@ config LOG_BUF_SHIFT
 	range 12 21
 	default 17
 <<<<<<< HEAD
+<<<<<<< HEAD
 	help
 	  Select kernel log buffer size as a power of 2.
 	  Examples:
@@ -948,6 +1031,8 @@ config LOG_BUF_SHIFT
 		     12 =>  4 KB
 
 =======
+=======
+>>>>>>> v3.18
 	depends on PRINTK
 	help
 	  Select the minimal kernel log buffer size as a power of 2.
@@ -999,6 +1084,9 @@ config LOG_CPU_MAX_BUF_SHIFT
 		     13 =>   8 KB for each CPU
 		     12 =>   4 KB for each CPU
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #
 # Architectures with an unreliable sched_clock() should select this:
@@ -1017,6 +1105,7 @@ config ARCH_SUPPORTS_NUMA_BALANCING
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # For architectures that (ab)use NUMA to represent different memory regions
 # all cpu-local but of different latencies, such as SuperH.
 #
@@ -1034,6 +1123,8 @@ config ARCH_USES_NUMA_PROT_NONE
 	depends on ARCH_WANTS_PROT_NUMA_PROT_NONE
 	depends on NUMA_BALANCING
 =======
+=======
+>>>>>>> v3.18
 #
 # For architectures that know their GCC __int128 support is sound
 #
@@ -1045,6 +1136,9 @@ config ARCH_SUPPORTS_INT128
 #
 config ARCH_WANT_NUMA_VARIABLE_LOCALITY
 	bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config NUMA_BALANCING_DEFAULT_ENABLED
@@ -1053,7 +1147,11 @@ config NUMA_BALANCING_DEFAULT_ENABLED
 	depends on NUMA_BALANCING
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  If set, autonumic NUMA balancing will be enabled if running on a NUMA
+=======
+	  If set, automatic NUMA balancing will be enabled if running on a NUMA
+>>>>>>> v3.18
 =======
 	  If set, automatic NUMA balancing will be enabled if running on a NUMA
 >>>>>>> v3.18
@@ -1068,7 +1166,11 @@ config NUMA_BALANCING
 	  This option adds support for automatic NUMA aware memory/task placement.
 	  The mechanism is quite primitive and is based on migrating memory when
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  it is references to the node the task is running on.
+=======
+	  it has references to the node the task is running on.
+>>>>>>> v3.18
 =======
 	  it has references to the node the task is running on.
 >>>>>>> v3.18
@@ -1078,7 +1180,11 @@ config NUMA_BALANCING
 menuconfig CGROUPS
 	boolean "Control Group support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on EVENTFD
+=======
+	select KERNFS
+>>>>>>> v3.18
 =======
 	select KERNFS
 >>>>>>> v3.18
@@ -1148,7 +1254,11 @@ config MEMCG
 	bool "Memory Resource Controller for Control Groups"
 	depends on RESOURCE_COUNTERS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MM_OWNER
+=======
+	select EVENTFD
+>>>>>>> v3.18
 =======
 	select EVENTFD
 >>>>>>> v3.18
@@ -1159,7 +1269,11 @@ config MEMCG
 	  Note that setting this option increases fixed memory overhead
 	  associated with each page of memory in the system. By this,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  20(40)bytes/PAGE_SIZE on 32(64)bit system will be occupied by memory
+=======
+	  8(16)bytes/PAGE_SIZE on 32(64)bit system will be occupied by memory
+>>>>>>> v3.18
 =======
 	  8(16)bytes/PAGE_SIZE on 32(64)bit system will be occupied by memory
 >>>>>>> v3.18
@@ -1173,9 +1287,12 @@ config MEMCG
 	  (and lose benefits of memory resource controller)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  This config option also selects MM_OWNER config option, which
 	  could in turn add some fork/exit overhead.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MEMCG_SWAP
@@ -1204,7 +1321,11 @@ config MEMCG_SWAP_ENABLED
 	  a bigger memory consumption. General purpose distribution kernels
 	  which want to enable the feature but keep it disabled by default
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  and let the user enable it by swapaccount boot command line
+=======
+	  and let the user enable it by swapaccount=1 boot command line
+>>>>>>> v3.18
 =======
 	  and let the user enable it by swapaccount=1 boot command line
 >>>>>>> v3.18
@@ -1225,13 +1346,19 @@ config MEMCG_KMEM
 	  will ever exhaust kernel resources alone.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  WARNING: Current implementation lacks reclaim support. That means
 	  allocation attempts will fail when close to the limit even if there
 	  are plenty of kmem available for reclaim. That makes this option
 	  unusable in real life so DO NOT SELECT IT unless for development
 	  purposes.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config CGROUP_HUGETLB
 	bool "HugeTLB Resource Controller for Control Groups"
@@ -1329,6 +1456,7 @@ config DEBUG_BLK_CGROUP
 endif # CGROUPS
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SCHED_HMP
 	bool "Scheduler support for heterogenous multi-processor systems"
 	depends on SMP && FAIR_GROUP_SCHED
@@ -1338,6 +1466,8 @@ config SCHED_HMP
 	  in their instructions per-cycle capability or the maximum
 	  frequency they can attain.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config CHECKPOINT_RESTORE
@@ -1380,9 +1510,12 @@ config IPC_NS
 config USER_NS
 	bool "User namespace"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on UIDGID_CONVERTED
 	select UIDGID_STRICT_TYPE_CHECKS
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default n
@@ -1417,6 +1550,7 @@ config NET_NS
 endif # NAMESPACES
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config UIDGID_CONVERTED
 	# True if all of the selected software conmponents are known
 	# to have uid_t and gid_t converted to kuid_t and kgid_t
@@ -1445,6 +1579,10 @@ config SCHED_AUTOGROUP
 config SCHED_AUTOGROUP
 	bool "Automatic process group scheduling"
 >>>>>>> v3.18
+=======
+config SCHED_AUTOGROUP
+	bool "Automatic process group scheduling"
+>>>>>>> v3.18
 	select CGROUPS
 	select CGROUP_SCHED
 	select FAIR_GROUP_SCHED
@@ -1456,9 +1594,12 @@ config SCHED_AUTOGROUP
 	  upon task session.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MM_OWNER
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SYSFS_DEPRECATED
@@ -1570,6 +1711,7 @@ config SYSCTL_ARCH_UNALIGN_ALLOW
 	  see arch/parisc/kernel/unaligned.c for reference
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HOTPLUG
 	def_bool y
 
@@ -1582,12 +1724,17 @@ config PANIC_TIMEOUT
 	help
 	  Set default panic timeout.
 =======
+=======
+>>>>>>> v3.18
 config HAVE_PCSPKR_PLATFORM
 	bool
 
 # interpreter that classic socket filters depend on
 config BPF
 	bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 menuconfig EXPERT
@@ -1608,7 +1755,10 @@ config UID16
 	  This enables the legacy 16-bit UID syscall wrappers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SGETMASK_SYSCALL
 	bool "sgetmask/ssetmask syscalls support" if EXPERT
 	def_bool PARISC || MN10300 || BLACKFIN || M68K || PPC || MIPS || X86 || SPARC || CRIS || MICROBLAZE || SUPERH
@@ -1629,6 +1779,9 @@ config SYSFS_SYSCALL
 
 	  If unsure say Y here.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SYSCTL_SYSCALL
 	bool "Sysctl syscall support" if EXPERT
@@ -1774,7 +1927,10 @@ config EVENTFD
 	  If unsure, say Y.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 # syscall, maps, verifier
 config BPF_SYSCALL
 	bool "Enable bpf() system call" if EXPERT
@@ -1785,6 +1941,9 @@ config BPF_SYSCALL
 	  Enable the bpf() system call that allows to manipulate eBPF
 	  programs and maps via file descriptors.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config SHMEM
 	bool "Use full shmem filesystem" if EXPERT
@@ -1806,7 +1965,10 @@ config AIO
 	  this option saves about 7k.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ADVISE_SYSCALLS
 	bool "Enable madvise/fadvise syscalls" if EXPERT
 	default y
@@ -1817,6 +1979,9 @@ config ADVISE_SYSCALLS
 	  applications use these syscalls, you can disable this option to save
 	  space.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PCI_QUIRKS
 	default y
@@ -1830,6 +1995,10 @@ config PCI_QUIRKS
 config EMBEDDED
 	bool "Embedded system"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	option allnoconfig_y
+>>>>>>> v3.18
 =======
 	option allnoconfig_y
 >>>>>>> v3.18
@@ -1960,7 +2129,10 @@ config SLOB
 endchoice
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SLUB_CPU_PARTIAL
 	default y
 	depends on SLUB && SMP
@@ -1972,6 +2144,9 @@ config SLUB_CPU_PARTIAL
 	  which requires the taking of locks that may cause latency spikes.
 	  Typically one would choose no for a realtime system.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MMAP_ALLOW_UNINITIALIZED
 	bool "Allow mmapped anonymous memory to be uninitialized"
@@ -1996,7 +2171,10 @@ config MMAP_ALLOW_UNINITIALIZED
 	  See Documentation/nommu-mmap.txt for more information.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SYSTEM_TRUSTED_KEYRING
 	bool "Provide system-wide ring of trusted keys"
 	depends on KEYS
@@ -2009,6 +2187,9 @@ config SYSTEM_TRUSTED_KEYRING
 
 	  Keys in this keyring are used by module signature checking.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config PROFILING
 	bool "Profiling support"
@@ -2048,6 +2229,10 @@ config BASE_SMALL
 menuconfig MODULES
 	bool "Enable loadable module support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	option modules
+>>>>>>> v3.18
 =======
 	option modules
 >>>>>>> v3.18
@@ -2122,6 +2307,10 @@ config MODULE_SIG
 	bool "Module signature verification"
 	depends on MODULES
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SYSTEM_TRUSTED_KEYRING
+>>>>>>> v3.18
 =======
 	select SYSTEM_TRUSTED_KEYRING
 >>>>>>> v3.18
@@ -2203,7 +2392,10 @@ config MODULE_SIG_HASH
 	default "sha512" if MODULE_SIG_SHA512
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MODULE_COMPRESS
 	bool "Compress modules on installation"
 	depends on MODULES
@@ -2247,6 +2439,9 @@ config MODULE_COMPRESS_XZ
 
 endchoice
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # MODULES
 

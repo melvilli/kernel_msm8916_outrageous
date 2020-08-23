@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -283,8 +287,14 @@ acpi_status acpi_hw_clear_acpi_status(void)
 	acpi_os_release_lock(acpi_gbl_hardware_lock, lock_flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ACPI_FAILURE(status))
 		goto exit;
+=======
+	if (ACPI_FAILURE(status)) {
+		goto exit;
+	}
+>>>>>>> v3.18
 =======
 	if (ACPI_FAILURE(status)) {
 		goto exit;
@@ -430,6 +440,10 @@ acpi_status acpi_hw_register_read(u32 register_id, u32 *return_value)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -506,7 +520,10 @@ acpi_status acpi_hw_register_write(u32 register_id, u32 value)
 
 	case ACPI_REGISTER_PM1_CONTROL:	/* PM1 A/B: 16-bit access each */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -538,7 +555,10 @@ acpi_status acpi_hw_register_write(u32 register_id, u32 value)
 
 	case ACPI_REGISTER_PM2_CONTROL:	/* 8-bit access */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/*
@@ -576,6 +596,10 @@ acpi_status acpi_hw_register_write(u32 register_id, u32 value)
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -585,7 +609,11 @@ acpi_status acpi_hw_register_write(u32 register_id, u32 value)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       exit:
+=======
+exit:
+>>>>>>> v3.18
 =======
 exit:
 >>>>>>> v3.18

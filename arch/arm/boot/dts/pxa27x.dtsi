@@ -1,6 +1,11 @@
 /* The pxa3xx skeleton simply augments the 2xx version */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "pxa2xx.dtsi"
+=======
+#include "pxa2xx.dtsi"
+#include "dt-bindings/clock/pxa2xx-clock.h"
+>>>>>>> v3.18
 =======
 #include "pxa2xx.dtsi"
 #include "dt-bindings/clock/pxa2xx-clock.h"
@@ -16,8 +21,11 @@
 			marvell,intc-nr-irqs = <34>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 =======
+=======
+>>>>>>> v3.18
 
 		pwm0: pwm@40b00000 {
 			compatible = "marvell,pxa270-pwm", "marvell,pxa250-pwm";
@@ -60,5 +68,8 @@
 		};
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

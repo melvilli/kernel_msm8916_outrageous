@@ -39,14 +39,20 @@
 #define DIV_ROUND_UP(x, y)  (((x) + (y) - 1) / (y))
 #define max_t(type, x, y)  ((x) > (y) ? (x) : (y))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define surf_size_struct SVGA3dSize
 #define u32 uint32
 =======
+=======
+>>>>>>> v3.18
 #define min_t(type, x, y)  ((x) < (y) ? (x) : (y))
 #define surf_size_struct SVGA3dSize
 #define u32 uint32
 #define u64 uint64_t
 #define U32_MAX ((u32)~0U)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __KERNEL__ */
@@ -713,8 +719,13 @@ static const struct svga3d_surface_desc svga3d_surface_descs[] = {
 static inline u32 clamped_umul32(u32 a, u32 b)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint64_t tmp = (uint64_t) a*b;
 	return (tmp > (uint64_t) ((u32) -1)) ? (u32) -1 : tmp;
+=======
+	u64 tmp = (u64) a*b;
+	return (tmp > (u64) U32_MAX) ? U32_MAX : tmp;
+>>>>>>> v3.18
 =======
 	u64 tmp = (u64) a*b;
 	return (tmp > (u64) U32_MAX) ? U32_MAX : tmp;
@@ -848,7 +859,11 @@ svga3dsurface_get_serialized_size(SVGA3dSurfaceFormat format,
 {
 	const struct svga3d_surface_desc *desc = svga3dsurface_get_desc(format);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 total_size = 0;
+=======
+	u64 total_size = 0;
+>>>>>>> v3.18
 =======
 	u64 total_size = 0;
 >>>>>>> v3.18
@@ -865,7 +880,11 @@ svga3dsurface_get_serialized_size(SVGA3dSurfaceFormat format,
 		total_size *= SVGA3D_MAX_SURFACE_FACES;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return total_size;
+=======
+	return (u32) min_t(u64, total_size, (u64) U32_MAX);
+>>>>>>> v3.18
 =======
 	return (u32) min_t(u64, total_size, (u64) U32_MAX);
 >>>>>>> v3.18

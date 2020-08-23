@@ -63,7 +63,11 @@ minstrel_stats_open(struct inode *inode, struct file *file)
 	char *p;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ms = kmalloc(sizeof(*ms) + 4096, GFP_KERNEL);
+=======
+	ms = kmalloc(2048, GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	ms = kmalloc(2048, GFP_KERNEL);
 >>>>>>> v3.18
@@ -73,16 +77,22 @@ minstrel_stats_open(struct inode *inode, struct file *file)
 	file->private_data = ms;
 	p = ms->buf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p += sprintf(p, "rate      throughput  ewma prob  this prob  "
 			"this succ/attempt   success    attempts\n");
 	for (i = 0; i < mi->n_rates; i++) {
 		struct minstrel_rate *mr = &mi->r[i];
 =======
+=======
+>>>>>>> v3.18
 	p += sprintf(p, "rate          tpt eprob *prob"
 			"  *ok(*cum)        ok(      cum)\n");
 	for (i = 0; i < mi->n_rates; i++) {
 		struct minstrel_rate *mr = &mi->r[i];
 		struct minstrel_rate_stats *mrs = &mi->r[i].stats;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		*(p++) = (i == mi->max_tp_rate[0]) ? 'A' : ' ';
@@ -93,6 +103,7 @@ minstrel_stats_open(struct inode *inode, struct file *file)
 		p += sprintf(p, "%3u%s", mr->bitrate / 2,
 				(mr->bitrate & 1 ? ".5" : "  "));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		tp = MINSTREL_TRUNC(mr->cur_tp / 10);
 		prob = MINSTREL_TRUNC(mr->cur_prob * 1000);
@@ -115,6 +126,8 @@ minstrel_stats_open(struct inode *inode, struct file *file)
 	ms->len = p - ms->buf;
 
 =======
+=======
+>>>>>>> v3.18
 		tp = MINSTREL_TRUNC(mrs->cur_tp / 10);
 		prob = MINSTREL_TRUNC(mrs->cur_prob * 1000);
 		eprob = MINSTREL_TRUNC(mrs->probability * 1000);
@@ -137,6 +150,9 @@ minstrel_stats_open(struct inode *inode, struct file *file)
 
 	WARN_ON(ms->len + sizeof(*ms) > 2048);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

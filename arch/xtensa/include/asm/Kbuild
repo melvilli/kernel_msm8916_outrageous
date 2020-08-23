@@ -9,16 +9,22 @@ generic-y += errno.h
 generic-y += exec.h
 generic-y += fcntl.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic-y += futex.h
 generic-y += hardirq.h
 generic-y += ioctl.h
 generic-y += irq_regs.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += hardirq.h
 generic-y += hash.h
 generic-y += ioctl.h
 generic-y += irq_regs.h
 generic-y += irq_work.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 generic-y += kdebug.h
 generic-y += kmap_types.h
@@ -29,6 +35,10 @@ generic-y += local64.h
 generic-y += mcs_spinlock.h
 generic-y += percpu.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+generic-y += preempt.h
+>>>>>>> v3.18
 =======
 generic-y += preempt.h
 >>>>>>> v3.18

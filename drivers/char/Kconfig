@@ -7,6 +7,7 @@ menu "Character devices"
 source "drivers/tty/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEVMEM
 	bool "Memory device driver"
 	default y
@@ -22,6 +23,8 @@ config DEVMEM
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config DEVKMEM
 	bool "/dev/kmem virtual device support"
 	default y
@@ -31,6 +34,7 @@ config DEVKMEM
 	  kind of kernel debugging operations.
 	  When in doubt, say "N".
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config STALDRV
 	bool "Stallion multiport serial support"
@@ -44,6 +48,8 @@ config STALDRV
 	  in this case.  If you have never heard about all this, it's safe to
 	  say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config SGI_SNSC
@@ -71,10 +77,15 @@ config SGI_MBCS
 source "drivers/tty/serial/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 source "drivers/char/diag/Kconfig"
 
 config TTY_PRINTK
 	bool "TTY driver to output user messages via printk"
+=======
+config TTY_PRINTK
+	tristate "TTY driver to output user messages via printk"
+>>>>>>> v3.18
 =======
 config TTY_PRINTK
 	tristate "TTY driver to output user messages via printk"
@@ -447,7 +458,11 @@ config APPLICOM
 config SONYPI
 	tristate "Sony Vaio Programmable I/O Control Device support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on X86 && PCI && INPUT && !64BIT
+=======
+	depends on X86_32 && PCI && INPUT
+>>>>>>> v3.18
 =======
 	depends on X86_32 && PCI && INPUT
 >>>>>>> v3.18
@@ -542,6 +557,10 @@ config MAX_RAW_DEVS
 	int "Maximum number of RAW devices to support (1-65536)"
 	depends on RAW_DRIVER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	range 1 65536
+>>>>>>> v3.18
 =======
 	range 1 65536
 >>>>>>> v3.18
@@ -569,11 +588,14 @@ config HPET_MMAP
 	  the HPET registers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  In some hardware implementations, the page containing HPET
 	  registers may also contain other things that shouldn't be
 	  exposed to the user.  If this applies to your hardware,
 	  say N here.
 =======
+=======
+>>>>>>> v3.18
 config HPET_MMAP_DEFAULT
 	bool "Enable HPET MMAP access by default"
 	default y
@@ -584,6 +606,9 @@ config HPET_MMAP_DEFAULT
 	  exposed to the user.  This option selects the default (if
 	  kernel parameter hpet_mmap is not set) user access to the
 	  registers for applications that require it.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config HANGCHECK_TIMER
@@ -627,6 +652,7 @@ config TELCLOCK
 
 config DEVPORT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "/dev/port character device"
 	depends on ISA || PCI
 	default y
@@ -634,10 +660,15 @@ config DEVPORT
 	  Say Y here if you want to support the /dev/port device. The /dev/port
 	  device is similar to /dev/mem, but for I/O ports.
 =======
+=======
+>>>>>>> v3.18
 	bool
 	depends on !M68K
 	depends on ISA || PCI
 	default y
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 source "drivers/s390/char/Kconfig"
@@ -661,6 +692,7 @@ config TILE_SROM
 	  device appear much like a simple EEPROM, and knows
 	  how to partition a single ROM for multiple purposes.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MSM_ROTATOR_USE_IMEM
         bool "Enable rotator driver to use iMem"
@@ -703,6 +735,10 @@ config MSM_RDBG
           Implements a shared memory based transport mechanism that allows
           for a debugger running on a host PC to communicate with a remote
 	  stub running on peripheral subsystems such as the ADSP, MODEM etc.
+=======
+source "drivers/char/xillybus/Kconfig"
+
+>>>>>>> v3.18
 =======
 source "drivers/char/xillybus/Kconfig"
 

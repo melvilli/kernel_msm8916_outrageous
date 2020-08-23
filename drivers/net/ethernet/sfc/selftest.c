@@ -1,8 +1,14 @@
 /****************************************************************************
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for Solarflare Solarstorm network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
  * Copyright 2006-2010 Solarflare Communications Inc.
+=======
+ * Driver for Solarflare network controllers and boards
+ * Copyright 2005-2006 Fen Systems Ltd.
+ * Copyright 2006-2012 Solarflare Communications Inc.
+>>>>>>> v3.18
 =======
  * Driver for Solarflare network controllers and boards
  * Copyright 2005-2006 Fen Systems Ltd.
@@ -57,7 +63,11 @@ struct efx_loopback_payload {
 
 /* Loopback test source MAC address */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const unsigned char payload_source[ETH_ALEN] = {
+=======
+static const u8 payload_source[ETH_ALEN] __aligned(2) = {
+>>>>>>> v3.18
 =======
 static const u8 payload_source[ETH_ALEN] __aligned(2) = {
 >>>>>>> v3.18
@@ -199,7 +209,11 @@ static int efx_test_eventq_irq(struct efx_nic *efx,
 
 		efx_for_each_channel(channel, efx) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			napi_disable(&channel->napi_str);
+=======
+			efx_stop_eventq(channel);
+>>>>>>> v3.18
 =======
 			efx_stop_eventq(channel);
 >>>>>>> v3.18
@@ -215,8 +229,12 @@ static int efx_test_eventq_irq(struct efx_nic *efx,
 					clear_bit(channel->channel, &int_pend);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			napi_enable(&channel->napi_str);
 			efx_nic_eventq_read_ack(channel);
+=======
+			efx_start_eventq(channel);
+>>>>>>> v3.18
 =======
 			efx_start_eventq(channel);
 >>>>>>> v3.18
@@ -385,8 +403,13 @@ static void efx_iterate_state(struct efx_nic *efx)
 
 	/* Initialise the layerII header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(&payload->header.h_dest, net_dev->dev_addr, ETH_ALEN);
 	memcpy(&payload->header.h_source, &payload_source, ETH_ALEN);
+=======
+	ether_addr_copy((u8 *)&payload->header.h_dest, net_dev->dev_addr);
+	ether_addr_copy((u8 *)&payload->header.h_source, payload_source);
+>>>>>>> v3.18
 =======
 	ether_addr_copy((u8 *)&payload->header.h_dest, net_dev->dev_addr);
 	ether_addr_copy((u8 *)&payload->header.h_source, payload_source);
@@ -471,6 +494,7 @@ static int efx_poll_loopback(struct efx_nic *efx)
 {
 	struct efx_loopback_state *state = efx->loopback_selftest;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct efx_channel *channel;
 
 	/* NAPI polling is not enabled, so process channels
@@ -479,6 +503,9 @@ static int efx_poll_loopback(struct efx_nic *efx)
 		if (channel->work_pending)
 			efx_process_channel_now(channel);
 	}
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -614,10 +641,13 @@ static int efx_wait_for_link(struct efx_nic *efx)
 			efx->type->monitor(efx);
 			mutex_unlock(&efx->mac_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else {
 			struct efx_channel *channel = efx_get_channel(efx, 0);
 			if (channel->work_pending)
 				efx_process_channel_now(channel);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -764,7 +794,11 @@ int efx_selftest(struct efx_nic *efx, struct efx_self_tests *tests,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if ((tests->registers < 0) && !rc_test)
+=======
+		if ((tests->memory < 0 || tests->registers < 0) && !rc_test)
+>>>>>>> v3.18
 =======
 		if ((tests->memory < 0 || tests->registers < 0) && !rc_test)
 >>>>>>> v3.18

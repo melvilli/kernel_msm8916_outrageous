@@ -11,7 +11,10 @@
  */
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/serio.h>
@@ -84,7 +87,12 @@ static int amba_kmi_open(struct serio *io)
 	writeb(KMICR_EN, KMICR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = request_irq(kmi->irq, amba_kmi_int, 0, "kmi-pl050", kmi);
+=======
+	ret = request_irq(kmi->irq, amba_kmi_int, IRQF_SHARED, "kmi-pl050",
+			  kmi);
+>>>>>>> v3.18
 =======
 	ret = request_irq(kmi->irq, amba_kmi_int, IRQF_SHARED, "kmi-pl050",
 			  kmi);
@@ -176,8 +184,11 @@ static int amba_kmi_remove(struct amba_device *dev)
 	struct amba_kmi_port *kmi = amba_get_drvdata(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	amba_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	serio_unregister_port(kmi->io);

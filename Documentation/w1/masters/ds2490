@@ -22,8 +22,11 @@ Notes and limitations.
 - The 5V strong pullup is supported with a minimum of 5.9mA and a
   maximum of 30.4 mA.  (From DS2490.pdf)
 <<<<<<< HEAD
+<<<<<<< HEAD
 - While the ds2490 supports a hardware search the code doesn't take
   advantage of it (in tested case it only returned first device).
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 - The hardware will detect when devices are attached to the bus on the

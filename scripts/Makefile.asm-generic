@@ -22,6 +22,9 @@ all: $(patsubst %, $(obj)/%, $(generic-y))
 $(obj)/%.h:
 	$(call cmd,wrap)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

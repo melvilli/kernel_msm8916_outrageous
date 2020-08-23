@@ -2016,7 +2016,11 @@ static int __init in2000_detect(struct scsi_host_template * tpnt)
 		write1_io(0, IO_INTR_MASK);	/* allow all ints */
 		x = int_tab[(switches & (SW_INT0 | SW_INT1)) >> SW_INT_SHIFT];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (request_irq(x, in2000_intr, IRQF_DISABLED, "in2000", instance)) {
+=======
+		if (request_irq(x, in2000_intr, 0, "in2000", instance)) {
+>>>>>>> v3.18
 =======
 		if (request_irq(x, in2000_intr, 0, "in2000", instance)) {
 >>>>>>> v3.18
@@ -2256,7 +2260,11 @@ static int in2000_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		if (hd->connected) {
 			cmd = (Scsi_Cmnd *) hd->connected;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
+=======
+			seq_printf(m, " %d:%llu(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
+>>>>>>> v3.18
 =======
 			seq_printf(m, " %d:%llu(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
 >>>>>>> v3.18
@@ -2267,7 +2275,11 @@ static int in2000_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		cmd = (Scsi_Cmnd *) hd->input_Q;
 		while (cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
+=======
+			seq_printf(m, " %d:%llu(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
+>>>>>>> v3.18
 =======
 			seq_printf(m, " %d:%llu(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
 >>>>>>> v3.18
@@ -2279,7 +2291,11 @@ static int in2000_show_info(struct seq_file *m, struct Scsi_Host *instance)
 		cmd = (Scsi_Cmnd *) hd->disconnected_Q;
 		while (cmd) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(m, " %d:%d(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
+=======
+			seq_printf(m, " %d:%llu(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
+>>>>>>> v3.18
 =======
 			seq_printf(m, " %d:%llu(%02x)", cmd->device->id, cmd->device->lun, cmd->cmnd[0]);
 >>>>>>> v3.18

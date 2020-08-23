@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -28,7 +32,11 @@ int qla4xxx_get_dhcp_ip_address(struct scsi_qla_host *ha);
 int qla4xxx_abort_task(struct scsi_qla_host *ha, struct srb *srb);
 int qla4xxx_reset_lun(struct scsi_qla_host *ha, struct ddb_entry *ddb_entry,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      int lun);
+=======
+		      uint64_t lun);
+>>>>>>> v3.18
 =======
 		      uint64_t lun);
 >>>>>>> v3.18
@@ -85,7 +93,11 @@ int qla4xxx_process_ddb_changed(struct scsi_qla_host *ha, uint32_t fw_ddb_index,
 void qla4xxx_dump_buffer(void *b, uint32_t size);
 int qla4xxx_send_marker_iocb(struct scsi_qla_host *ha,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ddb_entry *ddb_entry, int lun, uint16_t mrkr_mod);
+=======
+	struct ddb_entry *ddb_entry, uint64_t lun, uint16_t mrkr_mod);
+>>>>>>> v3.18
 =======
 	struct ddb_entry *ddb_entry, uint64_t lun, uint16_t mrkr_mod);
 >>>>>>> v3.18
@@ -96,6 +108,11 @@ int qla4xxx_mailbox_command(struct scsi_qla_host *ha, uint8_t inCount,
 int qla4xxx_get_chap_index(struct scsi_qla_host *ha, char *username,
 			   char *password, int bidi, uint16_t *chap_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int qla4xxx_set_chap(struct scsi_qla_host *ha, char *username, char *password,
+		     uint16_t idx, int bidi);
+>>>>>>> v3.18
 =======
 int qla4xxx_set_chap(struct scsi_qla_host *ha, char *username, char *password,
 		     uint16_t idx, int bidi);
@@ -284,7 +301,10 @@ int qla4xxx_get_default_ddb(struct scsi_qla_host *ha, uint32_t options,
 int qla4xxx_get_uni_chap_at_index(struct scsi_qla_host *ha, char *username,
 				  char *password, uint16_t chap_index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int qla4xxx_disable_acb(struct scsi_qla_host *ha);
 int qla4xxx_set_acb(struct scsi_qla_host *ha, uint32_t *mbox_cmd,
 		    uint32_t *mbox_sts, dma_addr_t acb_dma);
@@ -299,6 +319,9 @@ int qla4_83xx_set_port_config(struct scsi_qla_host *ha, uint32_t *config);
 int qla4_8xxx_check_init_adapter_retry(struct scsi_qla_host *ha);
 int qla4_83xx_is_detached(struct scsi_qla_host *ha);
 int qla4xxx_sysfs_ddb_export(struct scsi_qla_host *ha);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern int ql4xextended_error_logging;

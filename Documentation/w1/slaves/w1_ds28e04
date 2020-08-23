@@ -25,7 +25,11 @@ Memory Access
 	A write operation on the "eeprom" file writes the given byte sequence
 	to the EEPROM of the DS28E04. If CRC checking mode is enabled only
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fully alligned blocks of 32 bytes with valid CRC16 values (in bytes 30
+=======
+	fully aligned blocks of 32 bytes with valid CRC16 values (in bytes 30
+>>>>>>> v3.18
 =======
 	fully aligned blocks of 32 bytes with valid CRC16 values (in bytes 30
 >>>>>>> v3.18

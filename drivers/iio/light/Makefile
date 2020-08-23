@@ -3,12 +3,15 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_ADJD_S311)		+= adjd_s311.o
 obj-$(CONFIG_SENSORS_LM3533)	+= lm3533-als.o
 obj-$(CONFIG_SENSORS_TSL2563)	+= tsl2563.o
 obj-$(CONFIG_VCNL4000)		+= vcnl4000.o
 obj-$(CONFIG_HID_SENSOR_ALS)	+= hid-sensor-als.o
 =======
+=======
+>>>>>>> v3.18
 # When adding new entries keep the list in alphabetical order
 obj-$(CONFIG_ADJD_S311)		+= adjd_s311.o
 obj-$(CONFIG_AL3320A)		+= al3320a.o
@@ -26,4 +29,7 @@ obj-$(CONFIG_TCS3414)		+= tcs3414.o
 obj-$(CONFIG_TCS3472)		+= tcs3472.o
 obj-$(CONFIG_TSL4531)		+= tsl4531.o
 obj-$(CONFIG_VCNL4000)		+= vcnl4000.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

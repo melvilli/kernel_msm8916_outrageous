@@ -31,16 +31,22 @@
 #include <asm/div64.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/drm_crtc_helper.h>
 #include <drm/drm_edid.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/pm_runtime.h>
 #include <drm/drm_crtc_helper.h>
 #include <drm/drm_edid.h>
 
 #include <linux/gcd.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void avivo_crtc_load_lut(struct drm_crtc *crtc)
 {
@@ -73,7 +79,12 @@ static void avivo_crtc_load_lut(struct drm_crtc *crtc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	WREG32(AVIVO_D1GRPH_LUT_SEL + radeon_crtc->crtc_offset, radeon_crtc->crtc_id);
+=======
+	/* Only change bit 0 of LUT_SEL, other bits are set elsewhere */
+	WREG32_P(AVIVO_D1GRPH_LUT_SEL + radeon_crtc->crtc_offset, radeon_crtc->crtc_id, ~1);
+>>>>>>> v3.18
 =======
 	/* Only change bit 0 of LUT_SEL, other bits are set elsewhere */
 	WREG32_P(AVIVO_D1GRPH_LUT_SEL + radeon_crtc->crtc_offset, radeon_crtc->crtc_id, ~1);
@@ -168,8 +179,11 @@ static void dce5_crtc_load_lut(struct drm_crtc *crtc)
 	/* XXX match this to the depth of the crtc fmt block, move to modeset? */
 	WREG32(0x6940 + radeon_crtc->crtc_offset, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 	if (ASIC_IS_DCE8(rdev)) {
 		/* XXX this only needs to be programmed once per crtc at startup,
 		 * not sure where the best place for it is
@@ -177,6 +191,9 @@ static void dce5_crtc_load_lut(struct drm_crtc *crtc)
 		WREG32(CIK_ALPHA_CONTROL + radeon_crtc->crtc_offset,
 		       CIK_CURSOR_ALPHA_BLND_ENA);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -265,6 +282,7 @@ static void radeon_crtc_destroy(struct drm_crtc *crtc)
 
 	drm_crtc_cleanup(crtc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(radeon_crtc);
 }
 
@@ -276,6 +294,8 @@ static void radeon_unpin_work_func(struct work_struct *__work)
 	struct radeon_unpin_work *work =
 		container_of(__work, struct radeon_unpin_work, work);
 =======
+=======
+>>>>>>> v3.18
 	destroy_workqueue(radeon_crtc->flip_queue);
 	kfree(radeon_crtc);
 }
@@ -291,6 +311,9 @@ static void radeon_unpin_work_func(struct work_struct *__work)
 {
 	struct radeon_flip_work *work =
 		container_of(__work, struct radeon_flip_work, unpin_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int r;
 
@@ -310,6 +333,7 @@ static void radeon_unpin_work_func(struct work_struct *__work)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void radeon_crtc_handle_flip(struct radeon_device *rdev, int crtc_id)
 {
 	struct radeon_crtc *radeon_crtc = rdev->mode_info.crtcs[crtc_id];
@@ -319,10 +343,16 @@ void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id)
 {
 	struct radeon_crtc *radeon_crtc = rdev->mode_info.crtcs[crtc_id];
 >>>>>>> v3.18
+=======
+void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id)
+{
+	struct radeon_crtc *radeon_crtc = rdev->mode_info.crtcs[crtc_id];
+>>>>>>> v3.18
 	unsigned long flags;
 	u32 update_pending;
 	int vpos, hpos;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	spin_lock_irqsave(&rdev->ddev->event_lock, flags);
 	work = radeon_crtc->unpin_work;
@@ -344,6 +374,8 @@ void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id)
 		radeon_crtc->deferred_flip_completion = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	/* can happen during initialization */
 	if (radeon_crtc == NULL)
 		return;
@@ -371,6 +403,9 @@ void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id)
 	}
 
 	update_pending = radeon_page_flip_pending(rdev, crtc_id);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Has the pageflip already completed in crtc, or is it certain
@@ -378,8 +413,13 @@ void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id)
 	 */
 	if (update_pending &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    (DRM_SCANOUTPOS_VALID & radeon_get_crtc_scanoutpos(rdev->ddev, crtc_id,
 							       &vpos, &hpos)) &&
+=======
+	    (DRM_SCANOUTPOS_VALID & radeon_get_crtc_scanoutpos(rdev->ddev, crtc_id, 0,
+							       &vpos, &hpos, NULL, NULL)) &&
+>>>>>>> v3.18
 =======
 	    (DRM_SCANOUTPOS_VALID & radeon_get_crtc_scanoutpos(rdev->ddev, crtc_id, 0,
 							       &vpos, &hpos, NULL, NULL)) &&
@@ -395,6 +435,7 @@ void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id)
 		update_pending = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (update_pending) {
 		/* crtc didn't flip in this target vblank interval,
 		 * but flip is pending in crtc. It will complete it
@@ -403,6 +444,8 @@ void radeon_crtc_handle_vblank(struct radeon_device *rdev, int crtc_id)
 		 */
 		radeon_crtc->deferred_flip_completion = 1;
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock_irqrestore(&rdev->ddev->event_lock, flags);
 	if (!update_pending)
 		radeon_crtc_handle_flip(rdev, crtc_id);
@@ -433,14 +476,23 @@ void radeon_crtc_handle_flip(struct radeon_device *rdev, int crtc_id)
 				 "RADEON_FLIP_SUBMITTED(%d)\n",
 				 radeon_crtc->flip_status,
 				 RADEON_FLIP_SUBMITTED);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_unlock_irqrestore(&rdev->ddev->event_lock, flags);
 		return;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Pageflip (will be) certainly completed in this vblank. Clean up. */
 	radeon_crtc->unpin_work = NULL;
+=======
+	/* Pageflip completed. Clean up. */
+	radeon_crtc->flip_status = RADEON_FLIP_NONE;
+	radeon_crtc->flip_work = NULL;
+>>>>>>> v3.18
 =======
 	/* Pageflip completed. Clean up. */
 	radeon_crtc->flip_status = RADEON_FLIP_NONE;
@@ -455,10 +507,13 @@ void radeon_crtc_handle_flip(struct radeon_device *rdev, int crtc_id)
 
 	drm_vblank_put(rdev->ddev, radeon_crtc->crtc_id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_fence_unref(&work->fence);
 	radeon_post_page_flip(work->rdev, work->crtc_id);
 	schedule_work(&work->work);
 =======
+=======
+>>>>>>> v3.18
 	radeon_irq_kms_pflip_irq_put(rdev, work->crtc_id);
 	queue_work(radeon_crtc->flip_queue, &work->unpin_work);
 }
@@ -522,13 +577,21 @@ static void radeon_flip_work_func(struct work_struct *__work)
 	radeon_crtc->flip_status = RADEON_FLIP_SUBMITTED;
 	spin_unlock_irqrestore(&crtc->dev->event_lock, flags);
 	up_read(&rdev->exclusive_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int radeon_crtc_page_flip(struct drm_crtc *crtc,
 				 struct drm_framebuffer *fb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 struct drm_pending_vblank_event *event)
+=======
+				 struct drm_pending_vblank_event *event,
+				 uint32_t page_flip_flags)
+>>>>>>> v3.18
 =======
 				 struct drm_pending_vblank_event *event,
 				 uint32_t page_flip_flags)
@@ -541,17 +604,23 @@ static int radeon_crtc_page_flip(struct drm_crtc *crtc,
 	struct radeon_framebuffer *new_radeon_fb;
 	struct drm_gem_object *obj;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct radeon_bo *rbo;
 	struct radeon_unpin_work *work;
 	unsigned long flags;
 	u32 tiling_flags, pitch_pixels;
 	u64 base;
 =======
+=======
+>>>>>>> v3.18
 	struct radeon_flip_work *work;
 	struct radeon_bo *new_rbo;
 	uint32_t tiling_flags, pitch_pixels;
 	uint64_t base;
 	unsigned long flags;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int r;
 
@@ -559,6 +628,7 @@ static int radeon_crtc_page_flip(struct drm_crtc *crtc,
 	if (work == NULL)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	work->event = event;
 	work->rdev = rdev;
@@ -613,6 +683,8 @@ static int radeon_crtc_page_flip(struct drm_crtc *crtc,
 	radeon_bo_get_tiling_flags(rbo, &tiling_flags, NULL);
 	radeon_bo_unreserve(rbo);
 =======
+=======
+>>>>>>> v3.18
 	INIT_WORK(&work->flip_work, radeon_flip_work_func);
 	INIT_WORK(&work->unpin_work, radeon_unpin_work_func);
 
@@ -653,6 +725,9 @@ static int radeon_crtc_page_flip(struct drm_crtc *crtc,
 	work->fence = fence_get(reservation_object_get_excl(new_rbo->tbo.resv));
 	radeon_bo_get_tiling_flags(new_rbo, &tiling_flags, NULL);
 	radeon_bo_unreserve(new_rbo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!ASIC_IS_AVIVO(rdev)) {
@@ -690,6 +765,7 @@ static int radeon_crtc_page_flip(struct drm_crtc *crtc,
 		}
 		base &= ~7;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	spin_lock_irqsave(&dev->event_lock, flags);
@@ -733,6 +809,8 @@ unlock_free:
 }
 
 =======
+=======
+>>>>>>> v3.18
 	work->base = base;
 
 	r = drm_vblank_get(crtc->dev, radeon_crtc->crtc_id);
@@ -825,13 +903,20 @@ radeon_crtc_set_config(struct drm_mode_set *set)
 	pm_runtime_put_autosuspend(dev->dev);
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct drm_crtc_funcs radeon_crtc_funcs = {
 	.cursor_set = radeon_crtc_cursor_set,
 	.cursor_move = radeon_crtc_cursor_move,
 	.gamma_set = radeon_crtc_gamma_set,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_config = drm_crtc_helper_set_config,
+=======
+	.set_config = radeon_crtc_set_config,
+>>>>>>> v3.18
 =======
 	.set_config = radeon_crtc_set_config,
 >>>>>>> v3.18
@@ -854,9 +939,12 @@ static void radeon_crtc_init(struct drm_device *dev, int index)
 	drm_mode_crtc_set_gamma_size(&radeon_crtc->base, 256);
 	radeon_crtc->crtc_id = index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev->mode_info.crtcs[index] = radeon_crtc;
 
 =======
+=======
+>>>>>>> v3.18
 	radeon_crtc->flip_queue = create_singlethread_workqueue("radeon-crtc");
 	rdev->mode_info.crtcs[index] = radeon_crtc;
 
@@ -870,6 +958,9 @@ static void radeon_crtc_init(struct drm_device *dev, int index)
 	dev->mode_config.cursor_width = radeon_crtc->max_cursor_width;
 	dev->mode_config.cursor_height = radeon_crtc->max_cursor_height;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if 0
 	radeon_crtc->mode_set.crtc = &radeon_crtc->base;
@@ -890,7 +981,11 @@ static void radeon_crtc_init(struct drm_device *dev, int index)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const char *encoder_names[37] = {
+=======
+static const char *encoder_names[38] = {
+>>>>>>> v3.18
 =======
 static const char *encoder_names[38] = {
 >>>>>>> v3.18
@@ -931,7 +1026,12 @@ static const char *encoder_names[38] = {
 	"NUTMEG",
 	"TRAVIS",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"INTERNAL_VCE"
+=======
+	"INTERNAL_VCE",
+	"INTERNAL_UNIPHY3",
+>>>>>>> v3.18
 =======
 	"INTERNAL_VCE",
 	"INTERNAL_UNIPHY3",
@@ -961,7 +1061,11 @@ static void radeon_print_display_setup(struct drm_device *dev)
 		radeon_connector = to_radeon_connector(connector);
 		DRM_INFO("Connector %d:\n", i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		DRM_INFO("  %s\n", drm_get_connector_name(connector));
+=======
+		DRM_INFO("  %s\n", connector->name);
+>>>>>>> v3.18
 =======
 		DRM_INFO("  %s\n", connector->name);
 >>>>>>> v3.18
@@ -1054,6 +1158,7 @@ static bool radeon_setup_enc_conn(struct drm_device *dev)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int radeon_ddc_get_modes(struct radeon_connector *radeon_connector)
 {
@@ -1231,6 +1336,8 @@ void radeon_compute_pll_avivo(struct radeon_pll *pll,
 	DRM_DEBUG_KMS("%d, pll dividers - fb: %d.%d ref: %d, post %d\n",
 		      *dot_clock_p, fb_div, frac_fb_div, ref_div, post_div);
 =======
+=======
+>>>>>>> v3.18
 /* avivo */
 
 /**
@@ -1452,6 +1559,9 @@ void radeon_compute_pll_avivo(struct radeon_pll *pll,
 	DRM_DEBUG_KMS("%d - %d, pll dividers - fb: %d.%d ref: %d, post %d\n",
 		      freq, *dot_clock_p * 10, *fb_div_p, *frac_fb_div_p,
 		      ref_div, post_div);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1759,7 +1869,10 @@ static struct drm_prop_enum_list radeon_underscan_enum_list[] =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct drm_prop_enum_list radeon_audio_enum_list[] =
 {	{ RADEON_AUDIO_DISABLE, "off" },
 	{ RADEON_AUDIO_ENABLE, "on" },
@@ -1772,6 +1885,9 @@ static struct drm_prop_enum_list radeon_dither_enum_list[] =
 	{ RADEON_FMT_DITHER_ENABLE, "on" },
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int radeon_modeset_create_props(struct radeon_device *rdev)
 {
@@ -1824,7 +1940,10 @@ static int radeon_modeset_create_props(struct radeon_device *rdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	sz = ARRAY_SIZE(radeon_audio_enum_list);
 	rdev->mode_info.audio_property =
 		drm_property_create_enum(rdev->ddev, 0,
@@ -1837,6 +1956,9 @@ static int radeon_modeset_create_props(struct radeon_device *rdev)
 					 "dither",
 					 radeon_dither_enum_list, sz);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1871,6 +1993,7 @@ static void radeon_afmt_init(struct radeon_device *rdev)
 	for (i = 0; i < RADEON_MAX_AFMT_BLOCKS; i++)
 		rdev->mode_info.afmt[i] = NULL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ASIC_IS_DCE6(rdev)) {
 		/* todo */
@@ -1908,6 +2031,8 @@ static void radeon_afmt_init(struct radeon_device *rdev)
 				rdev->mode_info.afmt[5]->offset = EVERGREEN_CRTC5_REGISTER_OFFSET;
 				rdev->mode_info.afmt[5]->id = 5;
 =======
+=======
+>>>>>>> v3.18
 	if (ASIC_IS_NODCE(rdev)) {
 		/* nothing to do */
 	} else if (ASIC_IS_DCE4(rdev)) {
@@ -1943,6 +2068,9 @@ static void radeon_afmt_init(struct radeon_device *rdev)
 			if (rdev->mode_info.afmt[i]) {
 				rdev->mode_info.afmt[i]->offset = eg_offsets[i];
 				rdev->mode_info.afmt[i]->id = i;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
@@ -2050,6 +2178,7 @@ int radeon_modeset_init(struct radeon_device *rdev)
 	radeon_afmt_init(rdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize power management */
 	radeon_pm_init(rdev);
 
@@ -2057,6 +2186,8 @@ int radeon_modeset_init(struct radeon_device *rdev)
 	drm_kms_helper_poll_init(rdev->ddev);
 
 =======
+=======
+>>>>>>> v3.18
 	radeon_fbdev_init(rdev);
 	drm_kms_helper_poll_init(rdev->ddev);
 
@@ -2073,6 +2204,9 @@ int radeon_modeset_init(struct radeon_device *rdev)
 		radeon_pm_compute_clocks(rdev);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -2082,7 +2216,10 @@ void radeon_modeset_fini(struct radeon_device *rdev)
 	radeon_fbdev_fini(rdev);
 	kfree(rdev->mode_info.bios_hardcoded_edid);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_pm_fini(rdev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2158,7 +2295,11 @@ bool radeon_crtc_scaling_mode_fixup(struct drm_crtc *crtc,
 			    ((radeon_encoder->underscan_type == UNDERSCAN_ON) ||
 			     ((radeon_encoder->underscan_type == UNDERSCAN_AUTO) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      drm_detect_hdmi_monitor(radeon_connector->edid) &&
+=======
+			      drm_detect_hdmi_monitor(radeon_connector_edid(connector)) &&
+>>>>>>> v3.18
 =======
 			      drm_detect_hdmi_monitor(radeon_connector_edid(connector)) &&
 >>>>>>> v3.18
@@ -2208,6 +2349,7 @@ bool radeon_crtc_scaling_mode_fixup(struct drm_crtc *crtc,
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Retrieve current video scanout position of crtc on a given gpu.
  *
  * \param dev Device to query.
@@ -2215,6 +2357,8 @@ bool radeon_crtc_scaling_mode_fixup(struct drm_crtc *crtc,
  * \param *vpos Location where vertical scanout position should be stored.
  * \param *hpos Location where horizontal scanout position should go.
 =======
+=======
+>>>>>>> v3.18
  * Retrieve current video scanout position of crtc on a given gpu, and
  * an optional accurate timestamp of when query happened.
  *
@@ -2227,6 +2371,9 @@ bool radeon_crtc_scaling_mode_fixup(struct drm_crtc *crtc,
  *               scanout position query. Can be NULL to skip timestamp.
  * \param *etime Target location for timestamp taken immediately after
  *               scanout position query. Can be NULL to skip timestamp.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Returns vpos as a positive number while in active scanout area.
@@ -2244,7 +2391,12 @@ bool radeon_crtc_scaling_mode_fixup(struct drm_crtc *crtc,
  *
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc, int *vpos, int *hpos)
+=======
+int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc, unsigned int flags,
+			       int *vpos, int *hpos, ktime_t *stime, ktime_t *etime)
+>>>>>>> v3.18
 =======
 int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc, unsigned int flags,
 			       int *vpos, int *hpos, ktime_t *stime, ktime_t *etime)
@@ -2257,13 +2409,19 @@ int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc, unsigned int fl
 	struct radeon_device *rdev = dev->dev_private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* preempt_disable_rt() should go right here in PREEMPT_RT patchset. */
 
 	/* Get optional system timestamp before query. */
 	if (stime)
 		*stime = ktime_get();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ASIC_IS_DCE4(rdev)) {
 		if (crtc == 0) {
@@ -2348,13 +2506,19 @@ int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc, unsigned int fl
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Get optional system timestamp after query. */
 	if (etime)
 		*etime = ktime_get();
 
 	/* preempt_enable_rt() should go right here in PREEMPT_RT patchset. */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Decode into vertical and horizontal scanout position. */
 	*vpos = position & 0x1fff;
@@ -2395,8 +2559,11 @@ int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc, unsigned int fl
 	/* In vblank? */
 	if (in_vbl)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret |= DRM_SCANOUTPOS_INVBL;
 =======
+=======
+>>>>>>> v3.18
 		ret |= DRM_SCANOUTPOS_IN_VBLANK;
 
 	/* Is vpos outside nominal vblank area, but less than
@@ -2420,6 +2587,9 @@ int radeon_get_crtc_scanoutpos(struct drm_device *dev, int crtc, unsigned int fl
 			ret |= 0x8;
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;

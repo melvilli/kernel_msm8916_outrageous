@@ -480,7 +480,11 @@ static unsigned int mg_out(struct mg_host *host,
 static void mg_read_one(struct mg_host *host, struct request *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 *buff = (u16 *)req->buffer;
+=======
+	u16 *buff = (u16 *)bio_data(req->bio);
+>>>>>>> v3.18
 =======
 	u16 *buff = (u16 *)bio_data(req->bio);
 >>>>>>> v3.18
@@ -501,7 +505,11 @@ static void mg_read(struct request *req)
 
 	MG_DBG("requested %d sects (from %ld), buffer=0x%p\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       blk_rq_sectors(req), blk_rq_pos(req), req->buffer);
+=======
+	       blk_rq_sectors(req), blk_rq_pos(req), bio_data(req->bio));
+>>>>>>> v3.18
 =======
 	       blk_rq_sectors(req), blk_rq_pos(req), bio_data(req->bio));
 >>>>>>> v3.18
@@ -523,7 +531,11 @@ static void mg_read(struct request *req)
 static void mg_write_one(struct mg_host *host, struct request *req)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16 *buff = (u16 *)req->buffer;
+=======
+	u16 *buff = (u16 *)bio_data(req->bio);
+>>>>>>> v3.18
 =======
 	u16 *buff = (u16 *)bio_data(req->bio);
 >>>>>>> v3.18
@@ -547,7 +559,11 @@ static void mg_write(struct request *req)
 
 	MG_DBG("requested %d sects (from %ld), buffer=0x%p\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       rem, blk_rq_pos(req), req->buffer);
+=======
+	       rem, blk_rq_pos(req), bio_data(req->bio));
+>>>>>>> v3.18
 =======
 	       rem, blk_rq_pos(req), bio_data(req->bio));
 >>>>>>> v3.18
@@ -602,7 +618,11 @@ ok_to_read:
 
 	MG_DBG("sector %ld, remaining=%ld, buffer=0x%p\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       blk_rq_pos(req), blk_rq_sectors(req) - 1, req->buffer);
+=======
+	       blk_rq_pos(req), blk_rq_sectors(req) - 1, bio_data(req->bio));
+>>>>>>> v3.18
 =======
 	       blk_rq_pos(req), blk_rq_sectors(req) - 1, bio_data(req->bio));
 >>>>>>> v3.18
@@ -645,7 +665,11 @@ ok_to_write:
 		mg_write_one(host, req);
 		MG_DBG("sector %ld, remaining=%ld, buffer=0x%p\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       blk_rq_pos(req), blk_rq_sectors(req), req->buffer);
+=======
+		       blk_rq_pos(req), blk_rq_sectors(req), bio_data(req->bio));
+>>>>>>> v3.18
 =======
 		       blk_rq_pos(req), blk_rq_sectors(req), bio_data(req->bio));
 >>>>>>> v3.18
@@ -661,7 +685,11 @@ ok_to_write:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mg_times_out(unsigned long data)
+=======
+static void mg_times_out(unsigned long data)
+>>>>>>> v3.18
 =======
 static void mg_times_out(unsigned long data)
 >>>>>>> v3.18
@@ -944,7 +972,11 @@ static int mg_probe(struct platform_device *plat_dev)
 	/* disk reset */
 	if (prv_data->dev_attr == MG_STORAGE_DEV) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* If POR seq. not yet finised, wait */
+=======
+		/* If POR seq. not yet finished, wait */
+>>>>>>> v3.18
 =======
 		/* If POR seq. not yet finished, wait */
 >>>>>>> v3.18
@@ -969,7 +1001,11 @@ static int mg_probe(struct platform_device *plat_dev)
 		}
 		err = request_irq(host->irq, mg_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IRQF_DISABLED | IRQF_TRIGGER_RISING,
+=======
+				IRQF_TRIGGER_RISING,
+>>>>>>> v3.18
 =======
 				IRQF_TRIGGER_RISING,
 >>>>>>> v3.18

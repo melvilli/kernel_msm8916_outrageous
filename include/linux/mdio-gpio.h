@@ -18,12 +18,18 @@ struct mdio_gpio_platform_data {
 	unsigned int mdc;
 	unsigned int mdio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int mdo;
 
 	bool mdc_active_low;
 	bool mdio_active_low;
 	bool mdo_active_low;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	unsigned int phy_mask;

@@ -11,15 +11,21 @@
  */
 #include <linux/rbtree.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ext4.h"
 #include "extents_status.h"
 #include "ext4_extents.h"
 =======
+=======
+>>>>>>> v3.18
 #include <linux/list_sort.h>
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
 #include "ext4.h"
 #include "extents_status.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <trace/events/ext4.h>
@@ -156,6 +162,11 @@ static int __es_remove_extent(struct inode *inode, ext4_lblk_t lblk,
 static int __es_try_to_reclaim_extents(struct ext4_inode_info *ei,
 				       int nr_to_scan);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int __ext4_es_shrink(struct ext4_sb_info *sbi, int nr_to_scan,
+			    struct ext4_inode_info *locked_ei);
+>>>>>>> v3.18
 =======
 static int __ext4_es_shrink(struct ext4_sb_info *sbi, int nr_to_scan,
 			    struct ext4_inode_info *locked_ei);
@@ -196,7 +207,11 @@ static void ext4_es_print_tree(struct inode *inode)
 		struct extent_status *es;
 		es = rb_entry(node, struct extent_status, rb_node);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG " [%u/%u) %llu %llx",
+=======
+		printk(KERN_DEBUG " [%u/%u) %llu %x",
+>>>>>>> v3.18
 =======
 		printk(KERN_DEBUG " [%u/%u) %llu %x",
 >>>>>>> v3.18
@@ -278,7 +293,11 @@ void ext4_es_find_delayed_extent_range(struct inode *inode,
 		es1 = tree->cache_es;
 		if (in_range(lblk, es1->es_lblk, es1->es_len)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			es_debug("%u cached by [%u/%u) %llu %llx\n",
+=======
+			es_debug("%u cached by [%u/%u) %llu %x\n",
+>>>>>>> v3.18
 =======
 			es_debug("%u cached by [%u/%u) %llu %x\n",
 >>>>>>> v3.18
@@ -313,7 +332,10 @@ out:
 	read_unlock(&EXT4_I(inode)->i_es_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ext4_es_lru_add(inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	trace_ext4_es_find_delayed_extent_range_exit(inode, es);
@@ -337,10 +359,13 @@ ext4_es_alloc_extent(struct inode *inode, ext4_lblk_t lblk, ext4_lblk_t len,
 	if (!ext4_es_is_delayed(es)) {
 		EXT4_I(inode)->i_es_lru_nr++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		percpu_counter_inc(&EXT4_SB(inode->i_sb)->s_extent_cache_cnt);
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		percpu_counter_inc(&EXT4_SB(inode->i_sb)->
 					s_es_stats.es_stats_lru_cnt);
 	}
@@ -348,6 +373,9 @@ ext4_es_alloc_extent(struct inode *inode, ext4_lblk_t lblk, ext4_lblk_t len,
 	EXT4_I(inode)->i_es_all_nr++;
 	percpu_counter_inc(&EXT4_SB(inode->i_sb)->s_es_stats.es_stats_all_cnt);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return es;
 }
@@ -355,6 +383,12 @@ ext4_es_alloc_extent(struct inode *inode, ext4_lblk_t lblk, ext4_lblk_t len,
 static void ext4_es_free_extent(struct inode *inode, struct extent_status *es)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	EXT4_I(inode)->i_es_all_nr--;
+	percpu_counter_dec(&EXT4_SB(inode->i_sb)->s_es_stats.es_stats_all_cnt);
+
+>>>>>>> v3.18
 =======
 	EXT4_I(inode)->i_es_all_nr--;
 	percpu_counter_dec(&EXT4_SB(inode->i_sb)->s_es_stats.es_stats_all_cnt);
@@ -365,7 +399,12 @@ static void ext4_es_free_extent(struct inode *inode, struct extent_status *es)
 		BUG_ON(EXT4_I(inode)->i_es_lru_nr == 0);
 		EXT4_I(inode)->i_es_lru_nr--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		percpu_counter_dec(&EXT4_SB(inode->i_sb)->s_extent_cache_cnt);
+=======
+		percpu_counter_dec(&EXT4_SB(inode->i_sb)->
+					s_es_stats.es_stats_lru_cnt);
+>>>>>>> v3.18
 =======
 		percpu_counter_dec(&EXT4_SB(inode->i_sb)->
 					s_es_stats.es_stats_lru_cnt);
@@ -389,9 +428,12 @@ static int ext4_es_can_be_merged(struct extent_status *es1,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (((__u64) es1->es_len) + es2->es_len > 0xFFFFFFFFULL)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (((__u64) es1->es_len) + es2->es_len > EXT_MAX_BLOCKS) {
 		pr_warn("ES assertion failed when merging extents. "
 			"The sum of lengths of es1 (%d) and es2 (%d) "
@@ -400,6 +442,9 @@ static int ext4_es_can_be_merged(struct extent_status *es1,
 		WARN_ON(1);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (((__u64) es1->es_lblk) + es1->es_len != es2->es_lblk)
@@ -464,6 +509,11 @@ ext4_es_try_to_merge_right(struct inode *inode, struct extent_status *es)
 
 #ifdef ES_AGGRESSIVE_TEST
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ext4_extents.h"	/* Needed when ES_AGGRESSIVE_TEST is defined */
+
+>>>>>>> v3.18
 =======
 #include "ext4_extents.h"	/* Needed when ES_AGGRESSIVE_TEST is defined */
 
@@ -479,7 +529,11 @@ static void ext4_es_insert_extent_ext_check(struct inode *inode,
 	int depth, ee_status, es_status;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	path = ext4_ext_find_extent(inode, es->es_lblk, NULL);
+=======
+	path = ext4_find_extent(inode, es->es_lblk, NULL, EXT4_EX_NOCACHE);
+>>>>>>> v3.18
 =======
 	path = ext4_find_extent(inode, es->es_lblk, NULL, EXT4_EX_NOCACHE);
 >>>>>>> v3.18
@@ -496,7 +550,11 @@ static void ext4_es_insert_extent_ext_check(struct inode *inode,
 		ee_len = ext4_ext_get_actual_len(ex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ee_status = ext4_ext_is_uninitialized(ex) ? 1 : 0;
+=======
+		ee_status = ext4_ext_is_unwritten(ex) ? 1 : 0;
+>>>>>>> v3.18
 =======
 		ee_status = ext4_ext_is_unwritten(ex) ? 1 : 0;
 >>>>>>> v3.18
@@ -509,17 +567,23 @@ static void ext4_es_insert_extent_ext_check(struct inode *inode,
 		if (!ext4_es_is_written(es) && !ext4_es_is_unwritten(es)) {
 			if (in_range(es->es_lblk, ee_block, ee_len)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warn("ES insert assertation failed for "
 					"inode: %lu we can find an extent "
 					"at block [%d/%d/%llu/%c], but we "
 					"want to add an delayed/hole extent "
 					"[%d/%d/%llu/%llx]\n",
 =======
+=======
+>>>>>>> v3.18
 				pr_warn("ES insert assertion failed for "
 					"inode: %lu we can find an extent "
 					"at block [%d/%d/%llu/%c], but we "
 					"want to add a delayed/hole extent "
 					"[%d/%d/%llu/%x]\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					inode->i_ino, ee_block, ee_len,
 					ee_start, ee_status ? 'u' : 'w',
@@ -536,7 +600,11 @@ static void ext4_es_insert_extent_ext_check(struct inode *inode,
 		if (es->es_lblk < ee_block ||
 		    ext4_es_pblock(es) != ee_start + es->es_lblk - ee_block) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warn("ES insert assertation failed for inode: %lu "
+=======
+			pr_warn("ES insert assertion failed for inode: %lu "
+>>>>>>> v3.18
 =======
 			pr_warn("ES insert assertion failed for inode: %lu "
 >>>>>>> v3.18
@@ -550,7 +618,11 @@ static void ext4_es_insert_extent_ext_check(struct inode *inode,
 
 		if (ee_status ^ es_status) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warn("ES insert assertation failed for inode: %lu "
+=======
+			pr_warn("ES insert assertion failed for inode: %lu "
+>>>>>>> v3.18
 =======
 			pr_warn("ES insert assertion failed for inode: %lu "
 >>>>>>> v3.18
@@ -567,15 +639,21 @@ static void ext4_es_insert_extent_ext_check(struct inode *inode,
 		 */
 		if (!ext4_es_is_delayed(es) && !ext4_es_is_hole(es)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warn("ES insert assertation failed for inode: %lu "
 				"can't find an extent at block %d but we want "
 				"to add an written/unwritten extent "
 				"[%d/%d/%llu/%llx]\n", inode->i_ino,
 =======
+=======
+>>>>>>> v3.18
 			pr_warn("ES insert assertion failed for inode: %lu "
 				"can't find an extent at block %d but we want "
 				"to add a written/unwritten extent "
 				"[%d/%d/%llu/%x]\n", inode->i_ino,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				es->es_lblk, es->es_lblk, es->es_len,
 				ext4_es_pblock(es), ext4_es_status(es));
@@ -583,10 +661,15 @@ static void ext4_es_insert_extent_ext_check(struct inode *inode,
 	}
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (path) {
 		ext4_ext_drop_refs(path);
 		kfree(path);
 	}
+=======
+	ext4_ext_drop_refs(path);
+	kfree(path);
+>>>>>>> v3.18
 =======
 	ext4_ext_drop_refs(path);
 	kfree(path);
@@ -617,9 +700,15 @@ static void ext4_es_insert_extent_ind_check(struct inode *inode,
 			 * block has been allocated.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warn("ES insert assertation failed for inode: %lu "
 				"We can find blocks but we want to add a "
 				"delayed/hole extent [%d/%d/%llu/%llx]\n",
+=======
+			pr_warn("ES insert assertion failed for inode: %lu "
+				"We can find blocks but we want to add a "
+				"delayed/hole extent [%d/%d/%llu/%x]\n",
+>>>>>>> v3.18
 =======
 			pr_warn("ES insert assertion failed for inode: %lu "
 				"We can find blocks but we want to add a "
@@ -631,7 +720,11 @@ static void ext4_es_insert_extent_ind_check(struct inode *inode,
 		} else if (ext4_es_is_written(es)) {
 			if (retval != es->es_len) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warn("ES insert assertation failed for "
+=======
+				pr_warn("ES insert assertion failed for "
+>>>>>>> v3.18
 =======
 				pr_warn("ES insert assertion failed for "
 >>>>>>> v3.18
@@ -641,7 +734,11 @@ static void ext4_es_insert_extent_ind_check(struct inode *inode,
 			}
 			if (map.m_pblk != ext4_es_pblock(es)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warn("ES insert assertation failed for "
+=======
+				pr_warn("ES insert assertion failed for "
+>>>>>>> v3.18
 =======
 				pr_warn("ES insert assertion failed for "
 >>>>>>> v3.18
@@ -661,9 +758,15 @@ static void ext4_es_insert_extent_ind_check(struct inode *inode,
 	} else if (retval == 0) {
 		if (ext4_es_is_written(es)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warn("ES insert assertation failed for inode: %lu "
 				"We can't find the block but we want to add "
 				"an written extent [%d/%d/%llu/%llx]\n",
+=======
+			pr_warn("ES insert assertion failed for inode: %lu "
+				"We can't find the block but we want to add "
+				"a written extent [%d/%d/%llu/%x]\n",
+>>>>>>> v3.18
 =======
 			pr_warn("ES insert assertion failed for inode: %lu "
 				"We can't find the block but we want to add "
@@ -750,10 +853,15 @@ out:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ext4_es_insert_extent() adds a space to a extent status tree.
  *
  * ext4_es_insert_extent is called by ext4_da_write_begin and
  * ext4_es_remove_extent.
+=======
+ * ext4_es_insert_extent() adds information to an inode's extent
+ * status tree.
+>>>>>>> v3.18
 =======
  * ext4_es_insert_extent() adds information to an inode's extent
  * status tree.
@@ -764,7 +872,11 @@ out:
 int ext4_es_insert_extent(struct inode *inode, ext4_lblk_t lblk,
 			  ext4_lblk_t len, ext4_fsblk_t pblk,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  unsigned long long status)
+=======
+			  unsigned int status)
+>>>>>>> v3.18
 =======
 			  unsigned int status)
 >>>>>>> v3.18
@@ -774,7 +886,11 @@ int ext4_es_insert_extent(struct inode *inode, ext4_lblk_t lblk,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	es_debug("add [%u/%u) %llu %llx to extent status tree of inode %lu\n",
+=======
+	es_debug("add [%u/%u) %llu %x to extent status tree of inode %lu\n",
+>>>>>>> v3.18
 =======
 	es_debug("add [%u/%u) %llu %x to extent status tree of inode %lu\n",
 >>>>>>> v3.18
@@ -785,6 +901,7 @@ int ext4_es_insert_extent(struct inode *inode, ext4_lblk_t lblk,
 
 	BUG_ON(end < lblk);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if ((status & EXTENT_STATUS_DELAYED) &&
 	    (status & EXTENT_STATUS_WRITTEN)) {
@@ -803,6 +920,11 @@ int ext4_es_insert_extent(struct inode *inode, ext4_lblk_t lblk,
 	newes.es_len = len;
 	ext4_es_store_pblock_status(&newes, pblk, status);
 >>>>>>> v3.18
+=======
+	newes.es_lblk = lblk;
+	newes.es_len = len;
+	ext4_es_store_pblock_status(&newes, pblk, status);
+>>>>>>> v3.18
 	trace_ext4_es_insert_extent(inode, &newes);
 
 	ext4_es_insert_extent_check(inode, &newes);
@@ -812,8 +934,11 @@ int ext4_es_insert_extent(struct inode *inode, ext4_lblk_t lblk,
 	if (err != 0)
 		goto error;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __es_insert_extent(inode, &newes);
 =======
+=======
+>>>>>>> v3.18
 retry:
 	err = __es_insert_extent(inode, &newes);
 	if (err == -ENOMEM && __ext4_es_shrink(EXT4_SB(inode->i_sb), 1,
@@ -821,13 +946,19 @@ retry:
 		goto retry;
 	if (err == -ENOMEM && !ext4_es_is_delayed(&newes))
 		err = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 error:
 	write_unlock(&EXT4_I(inode)->i_es_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ext4_es_lru_add(inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ext4_es_print_tree(inode);
@@ -837,7 +968,10 @@ error:
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * ext4_es_cache_extent() inserts information into the extent status
  * tree if and only if there isn't information about the range in
  * question already.
@@ -869,6 +1003,9 @@ void ext4_es_cache_extent(struct inode *inode, ext4_lblk_t lblk,
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * ext4_es_lookup_extent() looks up an extent in extent status tree.
  *
@@ -881,6 +1018,10 @@ int ext4_es_lookup_extent(struct inode *inode, ext4_lblk_t lblk,
 {
 	struct ext4_es_tree *tree;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ext4_es_stats *stats;
+>>>>>>> v3.18
 =======
 	struct ext4_es_stats *stats;
 >>>>>>> v3.18
@@ -921,6 +1062,10 @@ int ext4_es_lookup_extent(struct inode *inode, ext4_lblk_t lblk,
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	stats = &EXT4_SB(inode->i_sb)->s_es_stats;
+>>>>>>> v3.18
 =======
 	stats = &EXT4_SB(inode->i_sb)->s_es_stats;
 >>>>>>> v3.18
@@ -930,6 +1075,12 @@ out:
 		es->es_len = es1->es_len;
 		es->es_pblk = es1->es_pblk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		stats->es_stats_cache_hits++;
+	} else {
+		stats->es_stats_cache_misses++;
+>>>>>>> v3.18
 =======
 		stats->es_stats_cache_hits++;
 	} else {
@@ -940,7 +1091,10 @@ out:
 	read_unlock(&EXT4_I(inode)->i_es_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ext4_es_lru_add(inode);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	trace_ext4_es_lookup_extent_exit(inode, es, found);
@@ -957,13 +1111,19 @@ static int __es_remove_extent(struct inode *inode, ext4_lblk_t lblk,
 	ext4_lblk_t len1, len2;
 	ext4_fsblk_t block;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0;
 
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 retry:
 	err = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	es = __es_tree_search(&tree->root, lblk);
 	if (!es)
@@ -989,6 +1149,7 @@ retry:
 			newes.es_lblk = end + 1;
 			newes.es_len = len2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (ext4_es_is_written(&orig_es) ||
 			    ext4_es_is_unwritten(&orig_es)) {
 				block = ext4_es_pblock(&orig_es) +
@@ -997,6 +1158,8 @@ retry:
 			}
 			ext4_es_store_status(&newes, ext4_es_status(&orig_es));
 =======
+=======
+>>>>>>> v3.18
 			block = 0x7FDEADBEEFULL;
 			if (ext4_es_is_written(&orig_es) ||
 			    ext4_es_is_unwritten(&orig_es))
@@ -1004,17 +1167,26 @@ retry:
 					orig_es.es_len - len2;
 			ext4_es_store_pblock_status(&newes, block,
 						    ext4_es_status(&orig_es));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			err = __es_insert_extent(inode, &newes);
 			if (err) {
 				es->es_lblk = orig_es.es_lblk;
 				es->es_len = orig_es.es_len;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 				if ((err == -ENOMEM) &&
 				    __ext4_es_shrink(EXT4_SB(inode->i_sb), 1,
 						     EXT4_I(inode)))
 					goto retry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				goto out;
 			}
@@ -1093,6 +1265,7 @@ int ext4_es_remove_extent(struct inode *inode, ext4_lblk_t lblk,
 	return err;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int ext4_es_zeroout(struct inode *inode, struct ext4_extent *ex)
 {
@@ -1174,6 +1347,8 @@ void ext4_es_unregister_shrinker(struct super_block *sb)
 {
 	unregister_shrinker(&EXT4_SB(sb)->s_es_shrinker);
 =======
+=======
+>>>>>>> v3.18
 static int ext4_inode_touch_time_cmp(void *priv, struct list_head *a,
 				     struct list_head *b)
 {
@@ -1476,6 +1651,9 @@ void ext4_es_unregister_shrinker(struct ext4_sb_info *sbi)
 	percpu_counter_destroy(&sbi->s_es_stats.es_stats_all_cnt);
 	percpu_counter_destroy(&sbi->s_es_stats.es_stats_lru_cnt);
 	unregister_shrinker(&sbi->s_es_shrinker);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1485,12 +1663,15 @@ void ext4_es_lru_add(struct inode *inode)
 	struct ext4_sb_info *sbi = EXT4_SB(inode->i_sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&sbi->s_es_lru_lock);
 	if (list_empty(&ei->i_es_lru))
 		list_add_tail(&ei->i_es_lru, &sbi->s_es_lru);
 	else
 		list_move_tail(&ei->i_es_lru, &sbi->s_es_lru);
 =======
+=======
+>>>>>>> v3.18
 	ei->i_touch_when = jiffies;
 
 	if (!list_empty(&ei->i_es_lru))
@@ -1499,6 +1680,9 @@ void ext4_es_lru_add(struct inode *inode)
 	spin_lock(&sbi->s_es_lru_lock);
 	if (list_empty(&ei->i_es_lru))
 		list_add_tail(&ei->i_es_lru, &sbi->s_es_lru);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock(&sbi->s_es_lru_lock);
 }
@@ -1522,7 +1706,13 @@ static int __es_try_to_reclaim_extents(struct ext4_inode_info *ei,
 	struct rb_node *node;
 	struct extent_status *es;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int nr_shrunk = 0;
+=======
+	unsigned long nr_shrunk = 0;
+	static DEFINE_RATELIMIT_STATE(_rs, DEFAULT_RATELIMIT_INTERVAL,
+				      DEFAULT_RATELIMIT_BURST);
+>>>>>>> v3.18
 =======
 	unsigned long nr_shrunk = 0;
 	static DEFINE_RATELIMIT_STATE(_rs, DEFAULT_RATELIMIT_INTERVAL,
@@ -1533,11 +1723,17 @@ static int __es_try_to_reclaim_extents(struct ext4_inode_info *ei,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (ext4_test_inode_state(inode, EXT4_STATE_EXT_PRECACHED) &&
 	    __ratelimit(&_rs))
 		ext4_warning(inode->i_sb, "forced shrink of precached extents");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	node = rb_first(&tree->root);
 	while (node != NULL) {

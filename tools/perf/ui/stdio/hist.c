@@ -184,7 +184,12 @@ static size_t callchain__fprintf_graph(FILE *fp, struct rb_root *root,
 			 * displayed twice.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!i++ && sort__first_dimension == SORT_SYM)
+=======
+			if (!i++ && field_order == NULL &&
+			    sort_order && !prefixcmp(sort_order, "sym"))
+>>>>>>> v3.18
 =======
 			if (!i++ && field_order == NULL &&
 			    sort_order && !prefixcmp(sort_order, "sym"))
@@ -219,8 +224,12 @@ static size_t callchain__fprintf_graph(FILE *fp, struct rb_root *root,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static size_t __callchain__fprintf_flat(FILE *fp,
 					struct callchain_node *self,
+=======
+static size_t __callchain__fprintf_flat(FILE *fp, struct callchain_node *node,
+>>>>>>> v3.18
 =======
 static size_t __callchain__fprintf_flat(FILE *fp, struct callchain_node *node,
 >>>>>>> v3.18
@@ -230,6 +239,7 @@ static size_t __callchain__fprintf_flat(FILE *fp, struct callchain_node *node,
 	size_t ret = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!self)
 		return 0;
 
@@ -238,6 +248,8 @@ static size_t __callchain__fprintf_flat(FILE *fp, struct callchain_node *node,
 
 	list_for_each_entry(chain, &self->val, list) {
 =======
+=======
+>>>>>>> v3.18
 	if (!node)
 		return 0;
 
@@ -245,6 +257,9 @@ static size_t __callchain__fprintf_flat(FILE *fp, struct callchain_node *node,
 
 
 	list_for_each_entry(chain, &node->val, list) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (chain->ip >= PERF_CONTEXT_MAX)
 			continue;
@@ -259,7 +274,11 @@ static size_t __callchain__fprintf_flat(FILE *fp, struct callchain_node *node,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static size_t callchain__fprintf_flat(FILE *fp, struct rb_root *self,
+=======
+static size_t callchain__fprintf_flat(FILE *fp, struct rb_root *tree,
+>>>>>>> v3.18
 =======
 static size_t callchain__fprintf_flat(FILE *fp, struct rb_root *tree,
 >>>>>>> v3.18
@@ -268,10 +287,16 @@ static size_t callchain__fprintf_flat(FILE *fp, struct rb_root *tree,
 	size_t ret = 0;
 	u32 entries_printed = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node *rb_node;
 	struct callchain_node *chain;
 
 	rb_node = rb_first(self);
+=======
+	struct callchain_node *chain;
+	struct rb_node *rb_node = rb_first(tree);
+
+>>>>>>> v3.18
 =======
 	struct callchain_node *chain;
 	struct rb_node *rb_node = rb_first(tree);
@@ -302,7 +327,13 @@ static size_t hist_entry_callchain__fprintf(struct hist_entry *he,
 	switch (callchain_param.mode) {
 	case CHAIN_GRAPH_REL:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return callchain__fprintf_graph(fp, &he->sorted_chain, he->stat.period,
+=======
+		return callchain__fprintf_graph(fp, &he->sorted_chain,
+						symbol_conf.cumulate_callchain ?
+						he->stat_acc->period : he->stat.period,
+>>>>>>> v3.18
 =======
 		return callchain__fprintf_graph(fp, &he->sorted_chain,
 						symbol_conf.cumulate_callchain ?
@@ -334,6 +365,7 @@ static size_t hist_entry__callchain_fprintf(struct hist_entry *he,
 	u64 total_period = hists->stats.total_period;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sort__first_dimension == SORT_COMM) {
 		struct sort_entry *se = list_first_entry(&hist_entry__sort_list,
 							 typeof(*se), list);
@@ -349,6 +381,8 @@ static int hist_entry__fprintf(struct hist_entry *he, size_t size,
 {
 	char bf[512];
 =======
+=======
+>>>>>>> v3.18
 	if (field_order == NULL && (sort_order == NULL ||
 				    !prefixcmp(sort_order, "comm"))) {
 		struct perf_hpp_fmt *fmt;
@@ -406,12 +440,16 @@ static int hist_entry__fprintf(struct hist_entry *he, size_t size,
 			       struct hists *hists,
 			       char *bf, size_t bfsz, FILE *fp)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 	struct perf_hpp hpp = {
 		.buf		= bf,
 		.size		= size,
 	};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	bool color = !symbol_conf.field_sep;
 
@@ -421,11 +459,16 @@ static int hist_entry__fprintf(struct hist_entry *he, size_t size,
 	ret = hist_entry__period_snprintf(&hpp, he, color);
 	hist_entry__sort_snprintf(he, bf + ret, size - ret, hists);
 =======
+=======
+>>>>>>> v3.18
 
 	if (size == 0 || size > bfsz)
 		size = hpp.size = bfsz;
 
 	hist_entry__snprintf(he, &hpp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = fprintf(fp, "%s\n", bf);
@@ -438,10 +481,16 @@ static int hist_entry__fprintf(struct hist_entry *he, size_t size,
 
 size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      int max_cols, FILE *fp)
 {
 	struct perf_hpp_fmt *fmt;
 	struct sort_entry *se;
+=======
+		      int max_cols, float min_pcnt, FILE *fp)
+{
+	struct perf_hpp_fmt *fmt;
+>>>>>>> v3.18
 =======
 		      int max_cols, float min_pcnt, FILE *fp)
 {
@@ -452,7 +501,10 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 	unsigned int width;
 	const char *sep = symbol_conf.field_sep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *col_width = symbol_conf.col_width_list_str;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int nr_rows = 0;
@@ -461,6 +513,7 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 		.buf	= bf,
 		.size	= sizeof(bf),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.ptr	= hists_to_evsel(hists),
 	};
 	bool first = true;
@@ -468,6 +521,8 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 	init_rem_hits();
 
 =======
+=======
+>>>>>>> v3.18
 	};
 	bool first = true;
 	size_t linesz;
@@ -481,6 +536,9 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 	if (symbol_conf.col_width_list_str)
 		perf_hpp__set_user_width(symbol_conf.col_width_list_str);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!show_header)
 		goto print_entries;
@@ -489,6 +547,12 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 
 	perf_hpp__for_each_format(fmt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (perf_hpp__should_skip(fmt))
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (perf_hpp__should_skip(fmt))
 			continue;
@@ -499,6 +563,7 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 		else
 			first = false;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		fmt->header(&dummy_hpp);
 		fprintf(fp, "%s", bf);
@@ -527,10 +592,15 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		fmt->header(fmt, &dummy_hpp, hists_to_evsel(hists));
 		fprintf(fp, "%s", bf);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	fprintf(fp, "\n");
 	if (max_rows && ++nr_rows >= max_rows)
@@ -547,6 +617,12 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 		unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (perf_hpp__should_skip(fmt))
+			continue;
+
+>>>>>>> v3.18
 =======
 		if (perf_hpp__should_skip(fmt))
 			continue;
@@ -557,6 +633,7 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 		else
 			first = false;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		width = fmt->width(&dummy_hpp);
 		for (i = 0; i < width; i++)
@@ -576,6 +653,9 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 =======
 		width = fmt->width(fmt, &dummy_hpp, hists_to_evsel(hists));
 >>>>>>> v3.18
+=======
+		width = fmt->width(fmt, &dummy_hpp, hists_to_evsel(hists));
+>>>>>>> v3.18
 		for (i = 0; i < width; i++)
 			fprintf(fp, ".");
 	}
@@ -590,9 +670,12 @@ size_t hists__fprintf(struct hists *hists, bool show_header, int max_rows,
 
 print_entries:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (nd = rb_first(&hists->entries); nd; nd = rb_next(nd)) {
 		struct hist_entry *h = rb_entry(nd, struct hist_entry, rb_node);
 =======
+=======
+>>>>>>> v3.18
 	linesz = hists__sort_list_width(hists) + 3 + 1;
 	linesz += perf_hpp__color_overhead();
 	line = malloc(linesz);
@@ -604,11 +687,15 @@ print_entries:
 	for (nd = rb_first(&hists->entries); nd; nd = rb_next(nd)) {
 		struct hist_entry *h = rb_entry(nd, struct hist_entry, rb_node);
 		float percent;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (h->filtered)
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ret += hist_entry__fprintf(h, max_cols, hists, fp);
 
@@ -624,6 +711,8 @@ print_entries:
 out:
 	free(rem_sq_bracket);
 =======
+=======
+>>>>>>> v3.18
 		percent = hist_entry__get_percent_limit(h);
 		if (percent < min_pcnt)
 			continue;
@@ -643,6 +732,9 @@ out:
 	free(line);
 out:
 	zfree(&rem_sq_bracket);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;

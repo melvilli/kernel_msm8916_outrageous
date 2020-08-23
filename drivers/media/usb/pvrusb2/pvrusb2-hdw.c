@@ -2705,11 +2705,17 @@ static void pvr2_hdw_remove_usb_stuff(struct pvr2_hdw *hdw)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void pvr2_hdw_set_v4l2_dev(struct pvr2_hdw *hdw, struct video_device *vdev)
 {
 	vdev->v4l2_dev = &hdw->v4l2_dev;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Destroy hardware interaction structure */
@@ -2872,7 +2878,11 @@ static void pvr2_subdev_set_control(struct pvr2_hdw *hdw, int id,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 v4l2_std_id pvr2_hdw_get_detected_std(struct pvr2_hdw *hdw)
+=======
+static v4l2_std_id pvr2_hdw_get_detected_std(struct pvr2_hdw *hdw)
+>>>>>>> v3.18
 =======
 static v4l2_std_id pvr2_hdw_get_detected_std(struct pvr2_hdw *hdw)
 >>>>>>> v3.18
@@ -2918,7 +2928,11 @@ static void pvr2_subdev_update(struct pvr2_hdw *hdw)
 			vs = hdw->std_mask_cur;
 			v4l2_device_call_all(&hdw->v4l2_dev, 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     core, s_std, vs);
+=======
+					     video, s_std, vs);
+>>>>>>> v3.18
 =======
 					     video, s_std, vs);
 >>>>>>> v3.18
@@ -5178,6 +5192,7 @@ static int pvr2_hdw_get_eeprom_addr(struct pvr2_hdw *hdw)
 	return result;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 int pvr2_hdw_register_access(struct pvr2_hdw *hdw,
@@ -5216,5 +5231,7 @@ int pvr2_hdw_register_access(struct pvr2_hdw *hdw,
   *** c-basic-offset: 8 ***
   *** End: ***
   */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

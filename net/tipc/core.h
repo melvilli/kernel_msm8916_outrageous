@@ -2,8 +2,13 @@
  * net/tipc/core.h: Include file for TIPC global declarations
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2005-2006, Ericsson AB
  * Copyright (c) 2005-2007, 2010-2011, Wind River Systems
+=======
+ * Copyright (c) 2005-2006, 2013 Ericsson AB
+ * Copyright (c) 2005-2007, 2010-2013, Wind River Systems
+>>>>>>> v3.18
 =======
  * Copyright (c) 2005-2006, 2013 Ericsson AB
  * Copyright (c) 2005-2007, 2010-2013, Wind River Systems
@@ -53,7 +58,11 @@
 #include <linux/timer.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/uaccess.h>
+=======
+#include <linux/uaccess.h>
+>>>>>>> v3.18
 =======
 #include <linux/uaccess.h>
 >>>>>>> v3.18
@@ -66,7 +75,12 @@
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include <linux/rtnetlink.h>
+#include <linux/etherdevice.h>
+>>>>>>> v3.18
 =======
 #include <linux/rtnetlink.h>
 #include <linux/etherdevice.h>
@@ -94,7 +108,12 @@ extern u32 tipc_own_addr __read_mostly;
 extern int tipc_max_ports __read_mostly;
 extern int tipc_net_id __read_mostly;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int tipc_remote_management __read_mostly;
+=======
+extern int sysctl_tipc_rmem[3] __read_mostly;
+extern int sysctl_tipc_named_timeout __read_mostly;
+>>>>>>> v3.18
 =======
 extern int sysctl_tipc_rmem[3] __read_mostly;
 extern int sysctl_tipc_named_timeout __read_mostly;
@@ -108,6 +127,7 @@ extern int tipc_random __read_mostly;
 /*
  * Routines available to privileged subsystems
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int tipc_core_start_net(unsigned long);
 extern int  tipc_handler_start(void);
@@ -125,6 +145,8 @@ typedef void (*Handler) (unsigned long);
 u32 tipc_k_signal(Handler routine, unsigned long argument);
 
 =======
+=======
+>>>>>>> v3.18
 int tipc_netlink_start(void);
 void tipc_netlink_stop(void);
 int tipc_socket_init(void);
@@ -147,6 +169,9 @@ void tipc_unregister_sysctl(void);
  */
 typedef void (*Handler) (unsigned long);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * k_init_timer - initialize a timer
@@ -224,12 +249,18 @@ static inline void k_term_timer(struct timer_list *timer)
 struct tipc_skb_cb {
 	void *handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	struct sk_buff *tail;
 	bool deferred;
 	bool wakeup_pending;
 	u16 chain_sz;
 	u16 chain_imp;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -241,7 +272,11 @@ static inline struct tipc_msg *buf_msg(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct sk_buff *tipc_buf_acquire(u32 size);
+=======
+struct sk_buff *tipc_buf_acquire(u32 size);
+>>>>>>> v3.18
 =======
 struct sk_buff *tipc_buf_acquire(u32 size);
 >>>>>>> v3.18

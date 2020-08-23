@@ -754,9 +754,15 @@ static int open(struct tty_struct *tty, struct file *filp)
 
 	/* If port is closing, signal caller to try again */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tty_hung_up_p(filp) || info->port.flags & ASYNC_CLOSING){
 		if (info->port.flags & ASYNC_CLOSING)
 			interruptible_sleep_on(&info->port.close_wait);
+=======
+	if (info->port.flags & ASYNC_CLOSING){
+		wait_event_interruptible_tty(tty, info->port.close_wait,
+					     !(info->port.flags & ASYNC_CLOSING));
+>>>>>>> v3.18
 =======
 	if (info->port.flags & ASYNC_CLOSING){
 		wait_event_interruptible_tty(tty, info->port.close_wait,
@@ -1773,6 +1779,10 @@ static int hdlcdev_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 					      HDLC_FLAG_TXC_BRG    | HDLC_FLAG_TXC_RXCPIN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		memset(&new_line, 0, sizeof(new_line));
+>>>>>>> v3.18
 =======
 		memset(&new_line, 0, sizeof(new_line));
 >>>>>>> v3.18
@@ -3298,7 +3308,10 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 	int		retval;
 	bool		do_clocal = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool		extra_count = false;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long	flags;
@@ -3335,10 +3348,14 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 
 	spin_lock_irqsave(&info->lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!tty_hung_up_p(filp)) {
 		extra_count = true;
 		port->count--;
 	}
+=======
+	port->count--;
+>>>>>>> v3.18
 =======
 	port->count--;
 >>>>>>> v3.18
@@ -3379,8 +3396,12 @@ static int block_til_ready(struct tty_struct *tty, struct file *filp,
 	set_current_state(TASK_RUNNING);
 	remove_wait_queue(&port->open_wait, &wait);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (extra_count)
+=======
+	if (!tty_hung_up_p(filp))
+>>>>>>> v3.18
 =======
 	if (!tty_hung_up_p(filp))
 >>>>>>> v3.18
@@ -3500,7 +3521,11 @@ static int alloc_buf_list(SLMP_INFO *info)
 		/* calculate and store physical address of this buffer entry */
 		info->rx_buf_list_ex[i].phys_entry =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			info->buffer_list_phys + (i * sizeof(SCABUFSIZE));
+=======
+			info->buffer_list_phys + (i * SCABUFSIZE);
+>>>>>>> v3.18
 =======
 			info->buffer_list_phys + (i * SCABUFSIZE);
 >>>>>>> v3.18

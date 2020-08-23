@@ -6,6 +6,10 @@ nouveau-y += dispnv04/dfp.o
 nouveau-y += dispnv04/disp.o
 nouveau-y += dispnv04/hw.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+nouveau-y += dispnv04/overlay.o
+>>>>>>> v3.18
 =======
 nouveau-y += dispnv04/overlay.o
 >>>>>>> v3.18

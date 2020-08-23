@@ -249,7 +249,11 @@ static const char * const model_names[] = {
 #define MAX_MODEL_NAME_LEN sizeof("FireDTV ????")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int node_probe(struct device *dev)
+=======
+static int node_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
+>>>>>>> v3.18
 =======
 static int node_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 >>>>>>> v3.18
@@ -263,8 +267,13 @@ static int node_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, fdtv);
 	fdtv->device		= dev;
+=======
+	dev_set_drvdata(&unit->device, fdtv);
+	fdtv->device		= &unit->device;
+>>>>>>> v3.18
 =======
 	dev_set_drvdata(&unit->device, fdtv);
 	fdtv->device		= &unit->device;
@@ -279,7 +288,11 @@ static int node_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 	INIT_WORK(&fdtv->remote_ctrl_work, avc_remote_ctrl_work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	name_len = fw_csr_string(fw_unit(dev)->directory, CSR_MODEL,
+=======
+	name_len = fw_csr_string(unit->directory, CSR_MODEL,
+>>>>>>> v3.18
 =======
 	name_len = fw_csr_string(unit->directory, CSR_MODEL,
 >>>>>>> v3.18
@@ -291,7 +304,11 @@ static int node_probe(struct fw_unit *unit, const struct ieee1394_device_id *id)
 	fdtv->type = i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = fdtv_register_rc(fdtv, dev);
+=======
+	err = fdtv_register_rc(fdtv, &unit->device);
+>>>>>>> v3.18
 =======
 	err = fdtv_register_rc(fdtv, &unit->device);
 >>>>>>> v3.18
@@ -325,9 +342,15 @@ fail_free:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int node_remove(struct device *dev)
 {
 	struct firedtv *fdtv = dev_get_drvdata(dev);
+=======
+static void node_remove(struct fw_unit *unit)
+{
+	struct firedtv *fdtv = dev_get_drvdata(&unit->device);
+>>>>>>> v3.18
 =======
 static void node_remove(struct fw_unit *unit)
 {
@@ -344,7 +367,10 @@ static void node_remove(struct fw_unit *unit)
 
 	kfree(fdtv);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -418,15 +444,21 @@ static struct fw_driver fdtv_driver = {
 		.name   = "firedtv",
 		.bus    = &fw_bus_type,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.probe  = node_probe,
 		.remove = node_remove,
 	},
 	.update   = node_update,
 =======
+=======
+>>>>>>> v3.18
 	},
 	.probe    = node_probe,
 	.update   = node_update,
 	.remove   = node_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.id_table = fdtv_id_table,
 };

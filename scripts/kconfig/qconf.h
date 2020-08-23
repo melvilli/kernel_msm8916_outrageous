@@ -33,6 +33,10 @@ class ConfigMainWindow;
 class ConfigSettings : public QSettings {
 public:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ConfigSettings();
+>>>>>>> v3.18
 =======
 	ConfigSettings();
 >>>>>>> v3.18

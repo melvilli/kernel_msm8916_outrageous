@@ -16,7 +16,10 @@
 
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pci.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/sched.h>
@@ -42,7 +45,11 @@ const char *mei_dev_state_str(int state)
 	MEI_DEV_STATE(POWER_UP);
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return "unkown";
+=======
+		return "unknown";
+>>>>>>> v3.18
 =======
 		return "unknown";
 >>>>>>> v3.18
@@ -50,6 +57,7 @@ const char *mei_dev_state_str(int state)
 #undef MEI_DEV_STATE
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void mei_device_init(struct mei_device *dev)
 {
@@ -79,6 +87,8 @@ void mei_device_init(struct mei_device *dev)
 }
 EXPORT_SYMBOL_GPL(mei_device_init);
 =======
+=======
+>>>>>>> v3.18
 const char *mei_pg_state_str(enum mei_pg_state state)
 {
 #define MEI_PG_STATE(state) case MEI_PG_##state: return #state
@@ -206,6 +216,9 @@ int mei_reset(struct mei_device *dev)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(mei_reset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -213,6 +226,7 @@ EXPORT_SYMBOL_GPL(mei_reset);
  *
  * @dev: the device structure
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * returns 0 on success, <0 on failure.
  */
@@ -222,6 +236,8 @@ int mei_start(struct mei_device *dev)
 
 	/* acknowledge interrupt and stop interupts */
 =======
+=======
+>>>>>>> v3.18
  * Return: 0 on success, <0 on failure.
  */
 int mei_start(struct mei_device *dev)
@@ -231,11 +247,15 @@ int mei_start(struct mei_device *dev)
 	mutex_lock(&dev->device_lock);
 
 	/* acknowledge interrupt and stop interrupts */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mei_clear_interrupts(dev);
 
 	mei_hw_config(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dev_dbg(&dev->pdev->dev, "reset in start the mei device.\n");
 
@@ -244,6 +264,8 @@ int mei_start(struct mei_device *dev)
 	if (mei_hbm_start_wait(dev)) {
 		dev_err(&dev->pdev->dev, "HBM haven't started");
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(dev->dev, "reset in start the mei device.\n");
 
 	dev->reset_count = 0;
@@ -265,13 +287,20 @@ int mei_start(struct mei_device *dev)
 
 	if (mei_hbm_start_wait(dev)) {
 		dev_err(dev->dev, "HBM haven't started");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto err;
 	}
 
 	if (!mei_host_is_ready(dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "host is not ready.\n");
+=======
+		dev_err(dev->dev, "host is not ready.\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev, "host is not ready.\n");
 >>>>>>> v3.18
@@ -279,6 +308,7 @@ int mei_start(struct mei_device *dev)
 	}
 
 	if (!mei_hw_is_ready(dev)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dev_err(&dev->pdev->dev, "ME is not ready.\n");
 		goto err;
@@ -292,6 +322,8 @@ int mei_start(struct mei_device *dev)
 
 	dev_dbg(&dev->pdev->dev, "link layer has been established.\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_err(dev->dev, "ME is not ready.\n");
 		goto err;
 	}
@@ -302,13 +334,20 @@ int mei_start(struct mei_device *dev)
 	}
 
 	dev_dbg(dev->dev, "link layer has been established.\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&dev->device_lock);
 	return 0;
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_err(&dev->pdev->dev, "link layer initialization failed.\n");
+=======
+	dev_err(dev->dev, "link layer initialization failed.\n");
+>>>>>>> v3.18
 =======
 	dev_err(dev->dev, "link layer initialization failed.\n");
 >>>>>>> v3.18
@@ -319,6 +358,7 @@ err:
 EXPORT_SYMBOL_GPL(mei_start);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * mei_reset - resets host and fw.
  *
@@ -409,6 +449,8 @@ void mei_stop(struct mei_device *dev)
 	dev->dev_state = MEI_DEV_POWER_DOWN;
 	mei_reset(dev, 0);
 =======
+=======
+>>>>>>> v3.18
  * mei_restart - restart device after suspend
  *
  * @dev: the device structure
@@ -482,6 +524,9 @@ void mei_stop(struct mei_device *dev)
 
 	dev->dev_state = MEI_DEV_POWER_DOWN;
 	mei_reset(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&dev->device_lock);
@@ -491,8 +536,11 @@ void mei_stop(struct mei_device *dev)
 EXPORT_SYMBOL_GPL(mei_stop);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * mei_write_is_idle - check if the write queues are idle
  *
@@ -568,5 +616,8 @@ void mei_device_init(struct mei_device *dev,
 	dev->dev      = device;
 }
 EXPORT_SYMBOL_GPL(mei_device_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 

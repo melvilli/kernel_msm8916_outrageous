@@ -137,6 +137,7 @@ static struct rtnl_link_stats64 *ifb_stats64(struct net_device *dev,
 
 	do {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin_bh(&dp->rsync);
 		stats->rx_packets = dp->rx_packets;
 		stats->rx_bytes = dp->rx_bytes;
@@ -145,6 +146,8 @@ static struct rtnl_link_stats64 *ifb_stats64(struct net_device *dev,
 	do {
 		start = u64_stats_fetch_begin_bh(&dp->tsync);
 =======
+=======
+>>>>>>> v3.18
 		start = u64_stats_fetch_begin_irq(&dp->rsync);
 		stats->rx_packets = dp->rx_packets;
 		stats->rx_bytes = dp->rx_bytes;
@@ -152,13 +155,20 @@ static struct rtnl_link_stats64 *ifb_stats64(struct net_device *dev,
 
 	do {
 		start = u64_stats_fetch_begin_irq(&dp->tsync);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		stats->tx_packets = dp->tx_packets;
 		stats->tx_bytes = dp->tx_bytes;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (u64_stats_fetch_retry_bh(&dp->tsync, start));
+=======
+	} while (u64_stats_fetch_retry_irq(&dp->tsync, start));
+>>>>>>> v3.18
 =======
 	} while (u64_stats_fetch_retry_irq(&dp->tsync, start));
 >>>>>>> v3.18
@@ -195,12 +205,15 @@ static void ifb_setup(struct net_device *dev)
 
 	dev->features |= IFB_FEATURES;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->vlan_features |= IFB_FEATURES;
 
 	dev->flags |= IFF_NOARP;
 	dev->flags &= ~IFF_MULTICAST;
 	dev->priv_flags &= ~(IFF_XMIT_DST_RELEASE | IFF_TX_SKB_SHARING);
 =======
+=======
+>>>>>>> v3.18
 	dev->vlan_features |= IFB_FEATURES & ~(NETIF_F_HW_VLAN_CTAG_TX |
 					       NETIF_F_HW_VLAN_STAG_TX);
 
@@ -208,6 +221,9 @@ static void ifb_setup(struct net_device *dev)
 	dev->flags &= ~IFF_MULTICAST;
 	dev->priv_flags &= ~IFF_TX_SKB_SHARING;
 	netif_keep_dst(dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	eth_hw_addr_random(dev);
 }
@@ -290,27 +306,39 @@ static int __init ifb_init_one(int index)
 {
 	struct net_device *dev_ifb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	dev_ifb = alloc_netdev(sizeof(struct ifb_private),
 				 "ifb%d", ifb_setup);
 =======
+=======
+>>>>>>> v3.18
 	struct ifb_private *dp;
 	int err;
 
 	dev_ifb = alloc_netdev(sizeof(struct ifb_private), "ifb%d",
 			       NET_NAME_UNKNOWN, ifb_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!dev_ifb)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	dp = netdev_priv(dev_ifb);
 	u64_stats_init(&dp->rsync);
 	u64_stats_init(&dp->tsync);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev_ifb->rtnl_link_ops = &ifb_link_ops;
 	err = register_netdevice(dev_ifb);

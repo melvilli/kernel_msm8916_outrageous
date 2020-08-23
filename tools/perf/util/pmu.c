@@ -1,12 +1,15 @@
 #include <linux/list.h>
 #include <sys/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sys/stat.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <dirent.h>
 #include "sysfs.h"
 =======
+=======
+>>>>>>> v3.18
 #include <unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -14,6 +17,9 @@
 #include <dirent.h>
 #include <api/fs/fs.h>
 #include <locale.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "util.h"
 #include "pmu.h"
@@ -21,12 +27,15 @@
 #include "cpumap.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct perf_pmu_alias {
 	char *name;
 	struct list_head terms;
 	struct list_head list;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct perf_pmu_format {
@@ -87,6 +96,7 @@ int perf_pmu__format_parse(char *dir, struct list_head *head)
  * /sys/bus/event_source/devices/<dev>/format as sysfs group attributes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pmu_format(char *name, struct list_head *format)
 {
 	struct stat st;
@@ -95,12 +105,17 @@ static int pmu_format(char *name, struct list_head *format)
 
 	sysfs = sysfs_find_mountpoint();
 =======
+=======
+>>>>>>> v3.18
 static int pmu_format(const char *name, struct list_head *format)
 {
 	struct stat st;
 	char path[PATH_MAX];
 	const char *sysfs = sysfs__mountpoint();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!sysfs)
 		return -1;
@@ -118,8 +133,11 @@ static int pmu_format(const char *name, struct list_head *format)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int perf_pmu__new_alias(struct list_head *list, char *name, FILE *file)
 =======
+=======
+>>>>>>> v3.18
 static int perf_pmu__parse_scale(struct perf_pmu_alias *alias, char *dir, char *name)
 {
 	struct stat st;
@@ -194,6 +212,9 @@ error:
 }
 
 static int perf_pmu__new_alias(struct list_head *list, char *dir, char *name, FILE *file)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct perf_pmu_alias *alias;
@@ -211,6 +232,12 @@ static int perf_pmu__new_alias(struct list_head *list, char *dir, char *name, FI
 
 	INIT_LIST_HEAD(&alias->terms);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	alias->scale = 1.0;
+	alias->unit[0] = '\0';
+
+>>>>>>> v3.18
 =======
 	alias->scale = 1.0;
 	alias->unit[0] = '\0';
@@ -224,11 +251,14 @@ static int perf_pmu__new_alias(struct list_head *list, char *dir, char *name, FI
 
 	alias->name = strdup(name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add_tail(&alias->list, list);
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * load unit name and scale if available
 	 */
@@ -253,6 +283,9 @@ static inline bool pmu_alias_info_file(char *name)
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Process all the sysfs attributes located under the directory
@@ -277,13 +310,19 @@ static int pmu_aliases_parse(char *dir, struct list_head *head)
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * skip info files parsed in perf_pmu__new_alias()
 		 */
 		if (pmu_alias_info_file(name))
 			continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		snprintf(path, PATH_MAX, "%s/%s", dir, name);
 
@@ -292,7 +331,12 @@ static int pmu_aliases_parse(char *dir, struct list_head *head)
 		if (!file)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = perf_pmu__new_alias(head, name, file);
+=======
+
+		ret = perf_pmu__new_alias(head, dir, name, file);
+>>>>>>> v3.18
 =======
 
 		ret = perf_pmu__new_alias(head, dir, name, file);
@@ -309,6 +353,7 @@ static int pmu_aliases_parse(char *dir, struct list_head *head)
  * /sys/bus/event_source/devices/<dev>/events as sysfs group attributes.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pmu_aliases(char *name, struct list_head *head)
 {
 	struct stat st;
@@ -317,12 +362,17 @@ static int pmu_aliases(char *name, struct list_head *head)
 
 	sysfs = sysfs_find_mountpoint();
 =======
+=======
+>>>>>>> v3.18
 static int pmu_aliases(const char *name, struct list_head *head)
 {
 	struct stat st;
 	char path[PATH_MAX];
 	const char *sysfs = sysfs__mountpoint();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!sysfs)
 		return -1;
@@ -343,7 +393,11 @@ static int pmu_alias_terms(struct perf_pmu_alias *alias,
 			   struct list_head *terms)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct parse_events_term *term, *clone;
+=======
+	struct parse_events_term *term, *cloned;
+>>>>>>> v3.18
 =======
 	struct parse_events_term *term, *cloned;
 >>>>>>> v3.18
@@ -352,7 +406,11 @@ static int pmu_alias_terms(struct perf_pmu_alias *alias,
 
 	list_for_each_entry(term, &alias->terms, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = parse_events_term__clone(&clone, term);
+=======
+		ret = parse_events_term__clone(&cloned, term);
+>>>>>>> v3.18
 =======
 		ret = parse_events_term__clone(&cloned, term);
 >>>>>>> v3.18
@@ -361,7 +419,11 @@ static int pmu_alias_terms(struct perf_pmu_alias *alias,
 			return ret;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_add_tail(&clone->list, &list);
+=======
+		list_add_tail(&cloned->list, &list);
+>>>>>>> v3.18
 =======
 		list_add_tail(&cloned->list, &list);
 >>>>>>> v3.18
@@ -376,6 +438,7 @@ static int pmu_alias_terms(struct perf_pmu_alias *alias,
  * /sys/bus/event_source/devices/<dev>/type as sysfs attribute.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int pmu_type(char *name, __u32 *type)
 {
 	struct stat st;
@@ -386,6 +449,8 @@ static int pmu_type(char *name, __u32 *type)
 
 	sysfs = sysfs_find_mountpoint();
 =======
+=======
+>>>>>>> v3.18
 static int pmu_type(const char *name, __u32 *type)
 {
 	struct stat st;
@@ -394,6 +459,9 @@ static int pmu_type(const char *name, __u32 *type)
 	int ret = 0;
 	const char *sysfs = sysfs__mountpoint();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!sysfs)
 		return -1;
@@ -420,16 +488,22 @@ static void pmu_read_sysfs(void)
 {
 	char path[PATH_MAX];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const char *sysfs;
 	DIR *dir;
 	struct dirent *dent;
 
 	sysfs = sysfs_find_mountpoint();
 =======
+=======
+>>>>>>> v3.18
 	DIR *dir;
 	struct dirent *dent;
 	const char *sysfs = sysfs__mountpoint();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!sysfs)
 		return;
@@ -452,6 +526,7 @@ static void pmu_read_sysfs(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct cpu_map *pmu_cpumask(char *name)
 {
 	struct stat st;
@@ -462,6 +537,8 @@ static struct cpu_map *pmu_cpumask(char *name)
 
 	sysfs = sysfs_find_mountpoint();
 =======
+=======
+>>>>>>> v3.18
 static struct cpu_map *pmu_cpumask(const char *name)
 {
 	struct stat st;
@@ -470,6 +547,9 @@ static struct cpu_map *pmu_cpumask(const char *name)
 	struct cpu_map *cpus;
 	const char *sysfs = sysfs__mountpoint();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!sysfs)
 		return NULL;
@@ -490,8 +570,11 @@ static struct cpu_map *pmu_cpumask(const char *name)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct perf_pmu *pmu_lookup(char *name)
 =======
+=======
+>>>>>>> v3.18
 struct perf_event_attr *__attribute__((weak))
 perf_pmu__get_default_config(struct perf_pmu *pmu __maybe_unused)
 {
@@ -499,6 +582,9 @@ perf_pmu__get_default_config(struct perf_pmu *pmu __maybe_unused)
 }
 
 static struct perf_pmu *pmu_lookup(const char *name)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct perf_pmu *pmu;
@@ -534,11 +620,14 @@ static struct perf_pmu *pmu_lookup(const char *name)
 	pmu->type = type;
 	list_add_tail(&pmu->list, &pmus);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return pmu;
 }
 
 static struct perf_pmu *pmu_find(char *name)
 =======
+=======
+>>>>>>> v3.18
 
 	pmu->default_config = perf_pmu__get_default_config(pmu);
 
@@ -546,6 +635,9 @@ static struct perf_pmu *pmu_find(char *name)
 }
 
 static struct perf_pmu *pmu_find(const char *name)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct perf_pmu *pmu;
@@ -573,7 +665,11 @@ struct perf_pmu *perf_pmu__scan(struct perf_pmu *pmu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct perf_pmu *perf_pmu__find(char *name)
+=======
+struct perf_pmu *perf_pmu__find(const char *name)
+>>>>>>> v3.18
 =======
 struct perf_pmu *perf_pmu__find(const char *name)
 >>>>>>> v3.18
@@ -606,6 +702,7 @@ pmu_find_format(struct list_head *formats, char *name)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Returns value based on the format definition (format parameter)
  * and unformated value (value parameter).
  *
@@ -616,6 +713,8 @@ static __u64 pmu_format_value(unsigned long *format, __u64 value)
 	unsigned long fbit, vbit;
 	__u64 v = 0;
 =======
+=======
+>>>>>>> v3.18
  * Sets value based on the format definition (format parameter)
  * and unformated value (value parameter).
  */
@@ -623,6 +722,9 @@ static void pmu_format_value(unsigned long *format, __u64 value, __u64 *v,
 			     bool zero)
 {
 	unsigned long fbit, vbit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for (fbit = 0, vbit = 0; fbit < PERF_PMU_FORMAT_BITS; fbit++) {
@@ -630,6 +732,7 @@ static void pmu_format_value(unsigned long *format, __u64 value, __u64 *v,
 		if (!test_bit(fbit, format))
 			continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!(value & (1llu << vbit++)))
 			continue;
@@ -639,16 +742,22 @@ static void pmu_format_value(unsigned long *format, __u64 value, __u64 *v,
 
 	return v;
 =======
+=======
+>>>>>>> v3.18
 		if (value & (1llu << vbit++))
 			*v |= (1llu << fbit);
 		else if (zero)
 			*v &= ~(1llu << fbit);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /*
  * Setup one of config[12] attr members based on the
+<<<<<<< HEAD
 <<<<<<< HEAD
  * user input data - temr parameter.
  */
@@ -656,12 +765,17 @@ static int pmu_config_term(struct list_head *formats,
 			   struct perf_event_attr *attr,
 			   struct parse_events_term *term)
 =======
+=======
+>>>>>>> v3.18
  * user input data - term parameter.
  */
 static int pmu_config_term(struct list_head *formats,
 			   struct perf_event_attr *attr,
 			   struct parse_events_term *term,
 			   bool zero)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct perf_pmu_format *format;
@@ -702,7 +816,11 @@ static int pmu_config_term(struct list_head *formats,
 	 * them into value.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*vp |= pmu_format_value(format->bits, term->val.num);
+=======
+	pmu_format_value(format->bits, term->val.num, vp, zero);
+>>>>>>> v3.18
 =======
 	pmu_format_value(format->bits, term->val.num, vp, zero);
 >>>>>>> v3.18
@@ -712,7 +830,12 @@ static int pmu_config_term(struct list_head *formats,
 int perf_pmu__config_terms(struct list_head *formats,
 			   struct perf_event_attr *attr,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct list_head *head_terms)
+=======
+			   struct list_head *head_terms,
+			   bool zero)
+>>>>>>> v3.18
 =======
 			   struct list_head *head_terms,
 			   bool zero)
@@ -722,7 +845,11 @@ int perf_pmu__config_terms(struct list_head *formats,
 
 	list_for_each_entry(term, head_terms, list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pmu_config_term(formats, attr, term))
+=======
+		if (pmu_config_term(formats, attr, term, zero))
+>>>>>>> v3.18
 =======
 		if (pmu_config_term(formats, attr, term, zero))
 >>>>>>> v3.18
@@ -740,13 +867,19 @@ int perf_pmu__config(struct perf_pmu *pmu, struct perf_event_attr *attr,
 		     struct list_head *head_terms)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	attr->type = pmu->type;
 	return perf_pmu__config_terms(&pmu->format, attr, head_terms);
 =======
+=======
+>>>>>>> v3.18
 	bool zero = !!pmu->default_config;
 
 	attr->type = pmu->type;
 	return perf_pmu__config_terms(&pmu->format, attr, head_terms, zero);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -781,7 +914,10 @@ static struct perf_pmu_alias *pmu_find_alias(struct perf_pmu *pmu,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int check_unit_scale(struct perf_pmu_alias *alias,
 			    const char **unit, double *scale)
@@ -804,13 +940,21 @@ static int check_unit_scale(struct perf_pmu_alias *alias,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Find alias in the terms list and replace it with the terms
  * defined for the alias
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms)
+=======
+int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms,
+			  struct perf_pmu_info *info)
+>>>>>>> v3.18
 =======
 int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms,
 			  struct perf_pmu_info *info)
@@ -821,7 +965,10 @@ int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Mark unit and scale as not set
 	 * (different from default values, see below)
@@ -829,6 +976,9 @@ int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms,
 	info->unit   = NULL;
 	info->scale  = 0.0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each_entry_safe(term, h, head_terms, list) {
 		alias = pmu_find_alias(pmu, term);
@@ -838,10 +988,13 @@ int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms,
 		if (ret)
 			return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_del(&term->list);
 		free(term);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 		ret = check_unit_scale(alias, &info->unit, &info->scale);
 		if (ret)
@@ -862,6 +1015,9 @@ int perf_pmu__check_alias(struct perf_pmu *pmu, struct list_head *head_terms,
 	if (info->scale == 0.0)
 		info->scale  = 1.0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -895,7 +1051,10 @@ void perf_pmu__set_format(unsigned long *bits, long from, long to)
 		set_bit(b, bits);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static char *format_alias(char *buf, int len, struct perf_pmu *pmu,
 			  struct perf_pmu_alias *alias)
@@ -1021,4 +1180,7 @@ int perf_pmu__scan_file(struct perf_pmu *pmu, const char *name, const char *fmt,
 	va_end(args);
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

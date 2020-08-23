@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * include/asm-xtensa/tlbflush.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * This file is subject to the terms and conditions of the GNU General Public
@@ -9,7 +12,11 @@
  * for more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2001 - 2005 Tensilica Inc.
+=======
+ * Copyright (C) 2001 - 2013 Tensilica Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2001 - 2013 Tensilica Inc.
 >>>>>>> v3.18
@@ -19,8 +26,11 @@
 #define _XTENSA_TLBFLUSH_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef __KERNEL__
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/stringify.h>
@@ -45,6 +55,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void flush_tlb_all(void);
 extern void flush_tlb_mm(struct mm_struct*);
 extern void flush_tlb_page(struct vm_area_struct*,unsigned long);
@@ -52,6 +63,8 @@ extern void flush_tlb_range(struct vm_area_struct*,unsigned long,unsigned long);
 
 #define flush_tlb_kernel_range(start,end) flush_tlb_all()
 =======
+=======
+>>>>>>> v3.18
 void local_flush_tlb_all(void);
 void local_flush_tlb_mm(struct mm_struct *mm);
 void local_flush_tlb_page(struct vm_area_struct *vma,
@@ -80,6 +93,9 @@ void flush_tlb_kernel_range(unsigned long start, unsigned long end);
 									end)
 
 #endif /* CONFIG_SMP */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* TLB operations. */
@@ -229,7 +245,10 @@ static inline unsigned long read_itlb_translation (int way)
 
 #endif	/* __ASSEMBLY__ */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __KERNEL__ */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif	/* _XTENSA_TLBFLUSH_H */

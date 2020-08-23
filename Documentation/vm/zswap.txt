@@ -9,7 +9,11 @@ faster than reads from a swap device.
 
 NOTE: Zswap is a new feature as of v3.11 and interacts heavily with memory
 <<<<<<< HEAD
+<<<<<<< HEAD
 reclaim.  This interaction has not be fully explored on the large set of
+=======
+reclaim.  This interaction has not been fully explored on the large set of
+>>>>>>> v3.18
 =======
 reclaim.  This interaction has not been fully explored on the large set of
 >>>>>>> v3.18
@@ -28,7 +32,11 @@ Some potential benefits:
 
 Zswap evicts pages from compressed cache on an LRU basis to the backing swap
 <<<<<<< HEAD
+<<<<<<< HEAD
 device when the compressed pool reaches it size limit.  This requirement had
+=======
+device when the compressed pool reaches its size limit.  This requirement had
+>>>>>>> v3.18
 =======
 device when the compressed pool reaches its size limit.  This requirement had
 >>>>>>> v3.18
@@ -46,7 +54,11 @@ the backing swap device in the case that the compressed pool is full.
 Zswap makes use of zbud for the managing the compressed memory pool.  Each
 allocation in zbud is not directly accessible by address.  Rather, a handle is
 <<<<<<< HEAD
+<<<<<<< HEAD
 return by the allocation routine and that handle must be mapped before being
+=======
+returned by the allocation routine and that handle must be mapped before being
+>>>>>>> v3.18
 =======
 returned by the allocation routine and that handle must be mapped before being
 >>>>>>> v3.18
@@ -69,7 +81,11 @@ via frontswap, to free the compressed entry.
 
 Zswap seeks to be simple in its policies.  Sysfs attributes allow for one user
 <<<<<<< HEAD
+<<<<<<< HEAD
 controlled policies:
+=======
+controlled policy:
+>>>>>>> v3.18
 =======
 controlled policy:
 >>>>>>> v3.18

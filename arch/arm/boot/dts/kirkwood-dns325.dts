@@ -1,7 +1,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "kirkwood-dnskw.dtsi"
+=======
+#include "kirkwood-dnskw.dtsi"
+>>>>>>> v3.18
 =======
 #include "kirkwood-dnskw.dtsi"
 >>>>>>> v3.18
@@ -18,6 +22,10 @@
 	chosen {
 		bootargs = "console=ttyS0,115200n8 earlyprintk";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		stdout-path = &uart0;
+>>>>>>> v3.18
 =======
 		stdout-path = &uart0;
 >>>>>>> v3.18
@@ -25,6 +33,7 @@
 
 	gpio-leds {
 		compatible = "gpio-leds";
+<<<<<<< HEAD
 <<<<<<< HEAD
 		white-power {
 			label = "dns325:white:power";
@@ -47,6 +56,8 @@
 			label = "dns325:red:usb";
 			gpios = <&gpio0 29 1>; /* GPIO 29 Active Low */
 =======
+=======
+>>>>>>> v3.18
 		pinctrl-0 = <&pmx_led_power &pmx_led_red_usb_325
 			     &pmx_led_red_left_hdd &pmx_led_red_right_hdd
 			     &pmx_led_white_usb>;
@@ -72,6 +83,9 @@
 		red-usb {
 			label = "dns325:red:usb";
 			gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};

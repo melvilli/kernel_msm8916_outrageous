@@ -271,7 +271,10 @@ reset_rds:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool cadet_has_rds_data(struct cadet *dev)
 {
 	bool result;
@@ -282,6 +285,9 @@ static bool cadet_has_rds_data(struct cadet *dev)
 	return result;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void cadet_handler(unsigned long data)
@@ -293,6 +299,7 @@ static void cadet_handler(unsigned long data)
 		outb(0x3, dev->io);       /* Select RDS Decoder Control */
 		if ((inb(dev->io + 1) & 0x20) != 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_CRIT "cadet: RDS fifo overflow\n");
 		outb(0x80, dev->io);      /* Select RDS fifo */
 		while ((inb(dev->io) & 0x80) != 0) {
@@ -301,12 +308,17 @@ static void cadet_handler(unsigned long data)
 				printk(KERN_WARNING "cadet: RDS buffer overflow\n");
 			else
 =======
+=======
+>>>>>>> v3.18
 			pr_err("cadet: RDS fifo overflow\n");
 		outb(0x80, dev->io);      /* Select RDS fifo */
 
 		while ((inb(dev->io) & 0x80) != 0) {
 			dev->rdsbuf[dev->rdsin] = inb(dev->io + 1);
 			if (dev->rdsin + 1 != dev->rdsout)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				dev->rdsin++;
 		}
@@ -317,7 +329,11 @@ static void cadet_handler(unsigned long data)
 	 * Service pending read
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->rdsin != dev->rdsout)
+=======
+	if (cadet_has_rds_data(dev))
+>>>>>>> v3.18
 =======
 	if (cadet_has_rds_data(dev))
 >>>>>>> v3.18
@@ -354,6 +370,7 @@ static ssize_t cadet_read(struct file *file, char __user *data, size_t count, lo
 	if (dev->rdsstat == 0)
 		cadet_start_rds(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->rdsin == dev->rdsout) {
 		if (file->f_flags & O_NONBLOCK) {
 			i = -EWOULDBLOCK;
@@ -371,6 +388,8 @@ static ssize_t cadet_read(struct file *file, char __user *data, size_t count, lo
 unlock:
 	mutex_unlock(&dev->lock);
 =======
+=======
+>>>>>>> v3.18
 	mutex_unlock(&dev->lock);
 
 	if (!cadet_has_rds_data(dev) && (file->f_flags & O_NONBLOCK))
@@ -386,6 +405,9 @@ unlock:
 
 	if (i && copy_to_user(data, readbuf, i))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return i;
 }
@@ -397,7 +419,11 @@ static int vidioc_querycap(struct file *file, void *priv,
 	strlcpy(v->driver, "ADS Cadet", sizeof(v->driver));
 	strlcpy(v->card, "ADS Cadet", sizeof(v->card));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(v->bus_info, "ISA", sizeof(v->bus_info));
+=======
+	strlcpy(v->bus_info, "ISA:radio-cadet", sizeof(v->bus_info));
+>>>>>>> v3.18
 =======
 	strlcpy(v->bus_info, "ISA:radio-cadet", sizeof(v->bus_info));
 >>>>>>> v3.18
@@ -540,7 +566,11 @@ static unsigned int cadet_poll(struct file *file, struct poll_table_struct *wait
 		mutex_unlock(&dev->lock);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev->rdsin != dev->rdsout)
+=======
+	if (cadet_has_rds_data(dev))
+>>>>>>> v3.18
 =======
 	if (cadet_has_rds_data(dev))
 >>>>>>> v3.18
@@ -695,7 +725,10 @@ static int __init cadet_init(void)
 	dev->vdev.release = video_device_release_empty;
 	dev->vdev.lock = &dev->lock;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &dev->vdev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(&dev->vdev, dev);

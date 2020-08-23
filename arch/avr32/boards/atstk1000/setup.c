@@ -56,7 +56,11 @@ static struct fb_monspecs __initdata atstk1000_default_monspecs = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct atmel_lcdfb_info __initdata atstk1000_lcdc_data = {
+=======
+struct atmel_lcdfb_pdata __initdata atstk1000_lcdc_data = {
+>>>>>>> v3.18
 =======
 struct atmel_lcdfb_pdata __initdata atstk1000_lcdc_data = {
 >>>>>>> v3.18

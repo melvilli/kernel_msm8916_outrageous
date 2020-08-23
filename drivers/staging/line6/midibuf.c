@@ -16,12 +16,15 @@
 static int midibuf_message_length(unsigned char code)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (code < 0x80)
 		return -1;
 	else if (code < 0xf0) {
 		static const int length[] = { 3, 3, 3, 3, 2, 2, 3 };
 		return length[(code >> 4) - 8];
 =======
+=======
+>>>>>>> v3.18
 	int message_length;
 
 	if (code < 0x80)
@@ -30,6 +33,9 @@ static int midibuf_message_length(unsigned char code)
 		static const int length[] = { 3, 3, 3, 3, 2, 2, 3 };
 
 		message_length = length[(code >> 4) - 8];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		/*
@@ -41,13 +47,19 @@ static int midibuf_message_length(unsigned char code)
 			1, 1, 1, -1, 1, 1
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return length[code & 0x0f];
 	}
 =======
+=======
+>>>>>>> v3.18
 		message_length = length[code & 0x0f];
 	}
 
 	return message_length;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

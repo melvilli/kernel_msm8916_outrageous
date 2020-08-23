@@ -23,6 +23,7 @@
 #include "xfs.h"
 #include "xfs_fs.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xfs_log.h"
 #include "xfs_trans.h"
 #include "xfs_sb.h"
@@ -37,6 +38,8 @@
 #include "xfs_dfrag.h"
 #include "xfs_vnodeops.h"
 =======
+=======
+>>>>>>> v3.18
 #include "xfs_format.h"
 #include "xfs_log_format.h"
 #include "xfs_trans_resv.h"
@@ -46,6 +49,9 @@
 #include "xfs_inode.h"
 #include "xfs_itable.h"
 #include "xfs_error.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "xfs_fsops.h"
 #include "xfs_alloc.h"
@@ -72,7 +78,11 @@ xfs_compat_flock64_copyin(
 	    get_user(bf->l_pid,		&arg32->l_pid) ||
 	    copy_from_user(bf->l_pad,	&arg32->l_pad,	4*sizeof(u32)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -90,15 +100,21 @@ xfs_compat_ioc_fsgeometry_v1(
 	error = xfs_fs_geometry(mp, &fsgeo, 3);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -error;
 	/* The 32-bit variant simply has some padding at the end */
 	if (copy_to_user(arg32, &fsgeo, sizeof(struct compat_xfs_fsop_geom_v1)))
 		return -XFS_ERROR(EFAULT);
 =======
+=======
+>>>>>>> v3.18
 		return error;
 	/* The 32-bit variant simply has some padding at the end */
 	if (copy_to_user(arg32, &fsgeo, sizeof(struct compat_xfs_fsop_geom_v1)))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -111,7 +127,11 @@ xfs_compat_growfs_data_copyin(
 	if (get_user(in->newblocks, &arg32->newblocks) ||
 	    get_user(in->imaxpct,   &arg32->imaxpct))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -126,7 +146,11 @@ xfs_compat_growfs_rt_copyin(
 	if (get_user(in->newblocks, &arg32->newblocks) ||
 	    get_user(in->extsize,   &arg32->extsize))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -137,7 +161,11 @@ STATIC int
 xfs_inumbers_fmt_compat(
 	void			__user *ubuffer,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const xfs_inogrp_t	*buffer,
+=======
+	const struct xfs_inogrp	*buffer,
+>>>>>>> v3.18
 =======
 	const struct xfs_inogrp	*buffer,
 >>>>>>> v3.18
@@ -152,7 +180,11 @@ xfs_inumbers_fmt_compat(
 		    put_user(buffer[i].xi_alloccount, &p32[i].xi_alloccount) ||
 		    put_user(buffer[i].xi_allocmask,  &p32[i].xi_allocmask))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -175,7 +207,11 @@ xfs_ioctl32_bstime_copyin(
 	if (get_user(sec32,		&bstime32->tv_sec)	||
 	    get_user(bstime->tv_nsec,	&bstime32->tv_nsec))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -208,16 +244,22 @@ xfs_ioctl32_bstat_copyin(
 	    get_user(bstat->bs_projid_lo, &bstat32->bs_projid_lo) ||
 	    get_user(bstat->bs_projid_hi, &bstat32->bs_projid_hi) ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    get_user(bstat->bs_dmevmask, &bstat32->bs_dmevmask)	||
 	    get_user(bstat->bs_dmstate,	&bstat32->bs_dmstate)	||
 	    get_user(bstat->bs_aextents, &bstat32->bs_aextents))
 		return -XFS_ERROR(EFAULT);
 =======
+=======
+>>>>>>> v3.18
 	    get_user(bstat->bs_forkoff,	&bstat32->bs_forkoff)	||
 	    get_user(bstat->bs_dmevmask, &bstat32->bs_dmevmask)	||
 	    get_user(bstat->bs_dmstate,	&bstat32->bs_dmstate)	||
 	    get_user(bstat->bs_aextents, &bstat32->bs_aextents))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -235,7 +277,11 @@ xfs_bstime_store_compat(
 	if (put_user(sec32, &p32->tv_sec) ||
 	    put_user(p->tv_nsec, &p32->tv_nsec))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -254,7 +300,11 @@ xfs_bulkstat_one_fmt_compat(
 
 	if (ubsize < sizeof(*p32))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return XFS_ERROR(ENOMEM);
+=======
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 		return -ENOMEM;
 >>>>>>> v3.18
@@ -278,16 +328,22 @@ xfs_bulkstat_one_fmt_compat(
 	    put_user(buffer->bs_projid,	  &p32->bs_projid)	||
 	    put_user(buffer->bs_projid_hi,	&p32->bs_projid_hi)	||
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    put_user(buffer->bs_dmevmask, &p32->bs_dmevmask)	||
 	    put_user(buffer->bs_dmstate,  &p32->bs_dmstate)	||
 	    put_user(buffer->bs_aextents, &p32->bs_aextents))
 		return XFS_ERROR(EFAULT);
 =======
+=======
+>>>>>>> v3.18
 	    put_user(buffer->bs_forkoff,  &p32->bs_forkoff)	||
 	    put_user(buffer->bs_dmevmask, &p32->bs_dmevmask)	||
 	    put_user(buffer->bs_dmstate,  &p32->bs_dmstate)	||
 	    put_user(buffer->bs_aextents, &p32->bs_aextents))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ubused)
 		*ubused = sizeof(*p32);
@@ -327,6 +383,7 @@ xfs_compat_ioc_bulkstat(
 
 	if (!capable(CAP_SYS_ADMIN))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 
 	if (XFS_FORCED_SHUTDOWN(mp))
@@ -352,6 +409,8 @@ xfs_compat_ioc_bulkstat(
 	if (bulkreq.ubuffer == NULL)
 		return -XFS_ERROR(EINVAL);
 =======
+=======
+>>>>>>> v3.18
 		return -EPERM;
 
 	if (XFS_FORCED_SHUTDOWN(mp))
@@ -376,6 +435,9 @@ xfs_compat_ioc_bulkstat(
 
 	if (bulkreq.ubuffer == NULL)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (cmd == XFS_IOC_FSINUMBERS_32) {
@@ -392,9 +454,15 @@ xfs_compat_ioc_bulkstat(
 			bulkreq.ubuffer, &done);
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = XFS_ERROR(EINVAL);
 	if (error)
 		return -error;
+=======
+		error = -EINVAL;
+	if (error)
+		return error;
+>>>>>>> v3.18
 =======
 		error = -EINVAL;
 	if (error)
@@ -405,15 +473,21 @@ xfs_compat_ioc_bulkstat(
 		if (copy_to_user(bulkreq.lastip, &inlast,
 						sizeof(xfs_ino_t)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
 
 		if (copy_to_user(bulkreq.ocount, &count, sizeof(count)))
 			return -XFS_ERROR(EFAULT);
 =======
+=======
+>>>>>>> v3.18
 			return -EFAULT;
 
 		if (copy_to_user(bulkreq.ocount, &count, sizeof(count)))
 			return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -429,7 +503,11 @@ xfs_compat_handlereq_copyin(
 
 	if (copy_from_user(&hreq32, arg32, sizeof(compat_xfs_fsop_handlereq_t)))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EFAULT);
+=======
+		return -EFAULT;
+>>>>>>> v3.18
 =======
 		return -EFAULT;
 >>>>>>> v3.18
@@ -467,6 +545,7 @@ xfs_compat_attrlist_by_handle(
 
 	if (!capable(CAP_SYS_ADMIN))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 	if (copy_from_user(&al_hreq, arg,
 			   sizeof(compat_xfs_fsop_attrlist_handlereq_t)))
@@ -475,6 +554,8 @@ xfs_compat_attrlist_by_handle(
 	    al_hreq.buflen > XATTR_LIST_MAX)
 		return -XFS_ERROR(EINVAL);
 =======
+=======
+>>>>>>> v3.18
 		return -EPERM;
 	if (copy_from_user(&al_hreq, arg,
 			   sizeof(compat_xfs_fsop_attrlist_handlereq_t)))
@@ -482,6 +563,9 @@ xfs_compat_attrlist_by_handle(
 	if (al_hreq.buflen < sizeof(struct attrlist) ||
 	    al_hreq.buflen > XATTR_LIST_MAX)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -489,7 +573,11 @@ xfs_compat_attrlist_by_handle(
 	 */
 	if (al_hreq.flags & ~(ATTR_ROOT | ATTR_SECURE))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EINVAL);
+=======
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 		return -EINVAL;
 >>>>>>> v3.18
@@ -499,6 +587,7 @@ xfs_compat_attrlist_by_handle(
 		return PTR_ERR(dentry);
 
 	error = -ENOMEM;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kbuf = kmem_zalloc(al_hreq.buflen, KM_SLEEP | KM_MAYFAIL);
 	if (!kbuf) {
@@ -510,12 +599,17 @@ xfs_compat_attrlist_by_handle(
 	cursor = (attrlist_cursor_kern_t *)&al_hreq.pos;
 	error = -xfs_attr_list(XFS_I(dentry->d_inode), kbuf, al_hreq.buflen,
 =======
+=======
+>>>>>>> v3.18
 	kbuf = kmem_zalloc_large(al_hreq.buflen, KM_SLEEP);
 	if (!kbuf)
 		goto out_dput;
 
 	cursor = (attrlist_cursor_kern_t *)&al_hreq.pos;
 	error = xfs_attr_list(XFS_I(dentry->d_inode), kbuf, al_hreq.buflen,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					al_hreq.flags, cursor);
 	if (error)
@@ -525,12 +619,18 @@ xfs_compat_attrlist_by_handle(
 		error = -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  out_kfree:
 	if (is_vmalloc_addr(kbuf))
 		kmem_free_large(kbuf);
 	else
 		kmem_free(kbuf);
  out_dput:
+=======
+out_kfree:
+	kmem_free(kbuf);
+out_dput:
+>>>>>>> v3.18
 =======
 out_kfree:
 	kmem_free(kbuf);
@@ -554,15 +654,21 @@ xfs_compat_attrmulti_by_handle(
 
 	if (!capable(CAP_SYS_ADMIN))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 	if (copy_from_user(&am_hreq, arg,
 			   sizeof(compat_xfs_fsop_attrmulti_handlereq_t)))
 		return -XFS_ERROR(EFAULT);
 =======
+=======
+>>>>>>> v3.18
 		return -EPERM;
 	if (copy_from_user(&am_hreq, arg,
 			   sizeof(compat_xfs_fsop_attrmulti_handlereq_t)))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* overflow check */
@@ -574,7 +680,11 @@ xfs_compat_attrmulti_by_handle(
 		return PTR_ERR(dentry);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = E2BIG;
+=======
+	error = -E2BIG;
+>>>>>>> v3.18
 =======
 	error = -E2BIG;
 >>>>>>> v3.18
@@ -585,16 +695,22 @@ xfs_compat_attrmulti_by_handle(
 	ops = memdup_user(compat_ptr(am_hreq.ops), size);
 	if (IS_ERR(ops)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = PTR_ERR(ops);
 		goto out_dput;
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		error = -PTR_ERR(ops);
 		goto out_dput;
 	}
 
 	error = -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	attr_name = kmalloc(MAXNAMELEN, GFP_KERNEL);
 	if (!attr_name)
@@ -638,7 +754,11 @@ xfs_compat_attrmulti_by_handle(
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ops[i].am_error = EINVAL;
+=======
+			ops[i].am_error = -EINVAL;
+>>>>>>> v3.18
 =======
 			ops[i].am_error = -EINVAL;
 >>>>>>> v3.18
@@ -647,7 +767,11 @@ xfs_compat_attrmulti_by_handle(
 
 	if (copy_to_user(compat_ptr(am_hreq.ops), ops, size))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = XFS_ERROR(EFAULT);
+=======
+		error = -EFAULT;
+>>>>>>> v3.18
 =======
 		error = -EFAULT;
 >>>>>>> v3.18
@@ -658,7 +782,11 @@ xfs_compat_attrmulti_by_handle(
  out_dput:
 	dput(dentry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -error;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -676,15 +804,21 @@ xfs_compat_fssetdm_by_handle(
 
 	if (!capable(CAP_MKNOD))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(EPERM);
 	if (copy_from_user(&dmhreq, arg,
 			   sizeof(compat_xfs_fsop_setdm_handlereq_t)))
 		return -XFS_ERROR(EFAULT);
 =======
+=======
+>>>>>>> v3.18
 		return -EPERM;
 	if (copy_from_user(&dmhreq, arg,
 			   sizeof(compat_xfs_fsop_setdm_handlereq_t)))
 		return -EFAULT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dentry = xfs_compat_handlereq_to_dentry(parfilp, &dmhreq.hreq);
@@ -693,7 +827,11 @@ xfs_compat_fssetdm_by_handle(
 
 	if (IS_IMMUTABLE(dentry->d_inode) || IS_APPEND(dentry->d_inode)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -XFS_ERROR(EPERM);
+=======
+		error = -EPERM;
+>>>>>>> v3.18
 =======
 		error = -EPERM;
 >>>>>>> v3.18
@@ -702,17 +840,23 @@ xfs_compat_fssetdm_by_handle(
 
 	if (copy_from_user(&fsd, compat_ptr(dmhreq.data), sizeof(fsd))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -XFS_ERROR(EFAULT);
 		goto out;
 	}
 
 	error = -xfs_set_dmattrs(XFS_I(dentry->d_inode), fsd.fsd_dmevmask,
 =======
+=======
+>>>>>>> v3.18
 		error = -EFAULT;
 		goto out;
 	}
 
 	error = xfs_set_dmattrs(XFS_I(dentry->d_inode), fsd.fsd_dmevmask,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 fsd.fsd_dmstate);
 
@@ -736,7 +880,11 @@ xfs_file_compat_ioctl(
 
 	if (filp->f_mode & FMODE_NOCMTIME)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ioflags |= IO_INVIS;
+=======
+		ioflags |= XFS_IO_INVIS;
+>>>>>>> v3.18
 =======
 		ioflags |= XFS_IO_INVIS;
 >>>>>>> v3.18
@@ -791,7 +939,11 @@ xfs_file_compat_ioctl(
 
 		if (xfs_compat_flock64_copyin(&bf, arg))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -805,7 +957,11 @@ xfs_file_compat_ioctl(
 
 		if (xfs_compat_growfs_data_copyin(&in, arg))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -815,7 +971,11 @@ xfs_file_compat_ioctl(
 		error = xfs_growfs_data(mp, &in);
 		mnt_drop_write_file(filp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -error;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -825,7 +985,11 @@ xfs_file_compat_ioctl(
 
 		if (xfs_compat_growfs_rt_copyin(&in, arg))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -835,7 +999,11 @@ xfs_file_compat_ioctl(
 		error = xfs_growfs_rt(mp, &in);
 		mnt_drop_write_file(filp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -error;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -856,6 +1024,7 @@ xfs_file_compat_ioctl(
 				   offsetof(struct xfs_swapext, sx_stat)) ||
 		    xfs_ioctl32_bstat_copyin(&sxp.sx_stat, &sxu->sx_stat))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
 		error = mnt_want_write_file(filp);
 		if (error)
@@ -864,6 +1033,8 @@ xfs_file_compat_ioctl(
 		mnt_drop_write_file(filp);
 		return -error;
 =======
+=======
+>>>>>>> v3.18
 			return -EFAULT;
 		error = mnt_want_write_file(filp);
 		if (error)
@@ -871,6 +1042,9 @@ xfs_file_compat_ioctl(
 		error = xfs_ioc_swapext(&sxp);
 		mnt_drop_write_file(filp);
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	case XFS_IOC_FSBULKSTAT_32:
@@ -884,7 +1058,11 @@ xfs_file_compat_ioctl(
 
 		if (xfs_compat_handlereq_copyin(&hreq, arg))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -896,7 +1074,11 @@ xfs_file_compat_ioctl(
 
 		if (xfs_compat_handlereq_copyin(&hreq, arg))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -907,7 +1089,11 @@ xfs_file_compat_ioctl(
 
 		if (xfs_compat_handlereq_copyin(&hreq, arg))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -XFS_ERROR(EFAULT);
+=======
+			return -EFAULT;
+>>>>>>> v3.18
 =======
 			return -EFAULT;
 >>>>>>> v3.18
@@ -921,7 +1107,11 @@ xfs_file_compat_ioctl(
 		return xfs_compat_fssetdm_by_handle(filp, arg);
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -XFS_ERROR(ENOIOCTLCMD);
+=======
+		return -ENOIOCTLCMD;
+>>>>>>> v3.18
 =======
 		return -ENOIOCTLCMD;
 >>>>>>> v3.18

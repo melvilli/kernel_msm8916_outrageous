@@ -92,7 +92,11 @@ static struct gpio_chip template_chip = {
 	.direction_output	= arizona_gpio_direction_out,
 	.set			= arizona_gpio_set,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.can_sleep		= 1,
+=======
+	.can_sleep		= true,
+>>>>>>> v3.18
 =======
 	.can_sleep		= true,
 >>>>>>> v3.18
@@ -102,7 +106,11 @@ static int arizona_gpio_probe(struct platform_device *pdev)
 {
 	struct arizona *arizona = dev_get_drvdata(pdev->dev.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct arizona_pdata *pdata = arizona->dev->platform_data;
+=======
+	struct arizona_pdata *pdata = dev_get_platdata(arizona->dev);
+>>>>>>> v3.18
 =======
 	struct arizona_pdata *pdata = dev_get_platdata(arizona->dev);
 >>>>>>> v3.18
@@ -118,6 +126,12 @@ static int arizona_gpio_probe(struct platform_device *pdev)
 	arizona_gpio->gpio_chip = template_chip;
 	arizona_gpio->gpio_chip.dev = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_OF_GPIO
+	arizona_gpio->gpio_chip.of_node = arizona->dev->of_node;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_OF_GPIO
 	arizona_gpio->gpio_chip.of_node = arizona->dev->of_node;
@@ -128,6 +142,10 @@ static int arizona_gpio_probe(struct platform_device *pdev)
 	case WM5102:
 	case WM5110:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case WM8997:
+>>>>>>> v3.18
 =======
 	case WM8997:
 >>>>>>> v3.18
@@ -164,7 +182,12 @@ static int arizona_gpio_remove(struct platform_device *pdev)
 	struct arizona_gpio *arizona_gpio = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpiochip_remove(&arizona_gpio->gpio_chip);
+=======
+	gpiochip_remove(&arizona_gpio->gpio_chip);
+	return 0;
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&arizona_gpio->gpio_chip);
 	return 0;

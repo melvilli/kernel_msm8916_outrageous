@@ -2,12 +2,15 @@
 # Bridge netfilter configuration
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 menuconfig BRIDGE_NF_EBTABLES
 	tristate "Ethernet Bridge tables (ebtables) support"
 	depends on BRIDGE && NETFILTER
 	select NETFILTER_XTABLES
 =======
+=======
+>>>>>>> v3.18
 #
 menuconfig NF_TABLES_BRIDGE
 	depends on BRIDGE && NETFILTER && NF_TABLES
@@ -35,6 +38,9 @@ endif # NF_TABLES_BRIDGE
 menuconfig BRIDGE_NF_EBTABLES
 	tristate "Ethernet Bridge tables (ebtables) support"
 	depends on BRIDGE && NETFILTER && NETFILTER_XTABLES
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  ebtables is a general, extensible frame/packet identification
@@ -220,6 +226,7 @@ config BRIDGE_EBT_LOG
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config BRIDGE_EBT_ULOG
 	tristate "ebt: ulog support (OBSOLETE)"
 	help
@@ -236,6 +243,8 @@ config BRIDGE_EBT_ULOG
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config BRIDGE_EBT_NFLOG

@@ -151,6 +151,7 @@ enum chip_register_bits {
 enum pci_interrupt_cause {
 	/*  MAIN_IRQ_CAUSE (R10200) Bits*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IRQ_COM_IN_I2O_IOP0            = (1 << 0),
 	IRQ_COM_IN_I2O_IOP1            = (1 << 1),
 	IRQ_COM_IN_I2O_IOP2            = (1 << 2),
@@ -181,6 +182,8 @@ enum pci_interrupt_cause {
 	IRQ_I2O_ERR                    = (1 << 30),
 	IRQ_PCIE_ERR                   = (1 << 31),
 =======
+=======
+>>>>>>> v3.18
 	MVS_IRQ_COM_IN_I2O_IOP0        = (1 << 0),
 	MVS_IRQ_COM_IN_I2O_IOP1        = (1 << 1),
 	MVS_IRQ_COM_IN_I2O_IOP2        = (1 << 2),
@@ -210,6 +213,9 @@ enum pci_interrupt_cause {
 	MVS_IRQ_COM_ERR                = (1 << 29),
 	MVS_IRQ_I2O_ERR                = (1 << 30),
 	MVS_IRQ_PCIE_ERR               = (1 << 31),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

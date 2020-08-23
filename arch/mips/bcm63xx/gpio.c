@@ -19,6 +19,7 @@
 #include <bcm63xx_regs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef BCMCPU_RUNTIME_DETECT
 #define gpio_out_low_reg	GPIO_DATA_LO_REG
 #ifdef CONFIG_BCM63XX_CPU_6345
@@ -32,6 +33,8 @@ static inline void bcm63xx_gpio_out_low_reg_init(void)
 {
 }
 #else /* ! BCMCPU_RUNTIME_DETECT */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static u32 gpio_out_low_reg;
@@ -48,7 +51,10 @@ static void bcm63xx_gpio_out_low_reg_init(void)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* ! BCMCPU_RUNTIME_DETECT */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

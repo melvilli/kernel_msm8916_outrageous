@@ -186,13 +186,19 @@ static bool twl4030_vibra_check_coexist(struct twl4030_vibra_data *pdata,
 		return true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_find_node_by_name(node, "codec"))
 		return true;
 =======
+=======
+>>>>>>> v3.18
 	if (of_find_node_by_name(node, "codec")) {
 		of_node_put(node);
 		return true;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return false;
@@ -201,7 +207,11 @@ static bool twl4030_vibra_check_coexist(struct twl4030_vibra_data *pdata,
 static int twl4030_vibra_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct twl4030_vibra_data *pdata = pdev->dev.platform_data;
+=======
+	struct twl4030_vibra_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct twl4030_vibra_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

@@ -27,6 +27,7 @@
  *          Christian König
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/seq_file.h>
 #include <linux/slab.h>
 #include <drm/drmP.h>
@@ -303,6 +304,10 @@ int radeon_ib_ring_tests(struct radeon_device *rdev)
 #include <drm/drmP.h>
 #include "radeon.h"
 >>>>>>> v3.18
+=======
+#include <drm/drmP.h>
+#include "radeon.h"
+>>>>>>> v3.18
 
 /*
  * Rings
@@ -320,6 +325,7 @@ int radeon_ib_ring_tests(struct radeon_device *rdev)
 static int radeon_debugfs_ring_init(struct radeon_device *rdev, struct radeon_ring *ring);
 
 /**
+<<<<<<< HEAD
 <<<<<<< HEAD
  * radeon_ring_write - write a value to the ring
  *
@@ -342,6 +348,8 @@ void radeon_ring_write(struct radeon_ring *ring, uint32_t v)
 }
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * radeon_ring_supports_scratch_reg - check if the ring supports
@@ -377,6 +385,7 @@ bool radeon_ring_supports_scratch_reg(struct radeon_device *rdev,
 void radeon_ring_free_size(struct radeon_device *rdev, struct radeon_ring *ring)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rptr;
 
 	if (rdev->wb.enabled && ring != &rdev->ring[R600_RING_TYPE_UVD_INDEX])
@@ -391,6 +400,8 @@ void radeon_ring_free_size(struct radeon_device *rdev, struct radeon_ring *ring)
 	if (!ring->ring_free_dw) {
 		ring->ring_free_dw = ring->ring_size / 4;
 =======
+=======
+>>>>>>> v3.18
 	uint32_t rptr = radeon_ring_get_rptr(rdev, ring);
 
 	/* This works because ring_size is a power of 2 */
@@ -402,6 +413,9 @@ void radeon_ring_free_size(struct radeon_device *rdev, struct radeon_ring *ring)
 		ring->ring_free_dw = ring->ring_size / 4;
 		/*  update lockup info to avoid false positive */
 		radeon_ring_lockup_update(rdev, ring);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -427,12 +441,15 @@ int radeon_ring_alloc(struct radeon_device *rdev, struct radeon_ring *ring, unsi
 	 * pad safely */
 	radeon_ring_free_size(rdev, ring);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ring->ring_free_dw == (ring->ring_size / 4)) {
 		/* This is an empty ring update lockup info to avoid
 		 * false positive.
 		 */
 		radeon_ring_lockup_update(ring);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ndw = (ndw + ring->align_mask) & ~ring->align_mask;
@@ -442,7 +459,11 @@ int radeon_ring_alloc(struct radeon_device *rdev, struct radeon_ring *ring, unsi
 			break;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		r = radeon_fence_wait_next_locked(rdev, ring->idx);
+=======
+		r = radeon_fence_wait_next(rdev, ring->idx);
+>>>>>>> v3.18
 =======
 		r = radeon_fence_wait_next(rdev, ring->idx);
 >>>>>>> v3.18
@@ -485,6 +506,10 @@ int radeon_ring_lock(struct radeon_device *rdev, struct radeon_ring *ring, unsig
  * @rdev: radeon_device pointer
  * @ring: radeon_ring structure holding ring information
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @hdp_flush: Whether or not to perform an HDP cache flush
+>>>>>>> v3.18
 =======
  * @hdp_flush: Whether or not to perform an HDP cache flush
 >>>>>>> v3.18
@@ -493,9 +518,12 @@ int radeon_ring_lock(struct radeon_device *rdev, struct radeon_ring *ring, unsig
  * execute new commands on the ring buffer (all asics).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void radeon_ring_commit(struct radeon_device *rdev, struct radeon_ring *ring)
 {
 =======
+=======
+>>>>>>> v3.18
 void radeon_ring_commit(struct radeon_device *rdev, struct radeon_ring *ring,
 			bool hdp_flush)
 {
@@ -504,16 +532,22 @@ void radeon_ring_commit(struct radeon_device *rdev, struct radeon_ring *ring,
 	 */
 	if (hdp_flush && rdev->asic->ring[ring->idx]->hdp_flush)
 		rdev->asic->ring[ring->idx]->hdp_flush(rdev, ring);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* We pad to match fetch size */
 	while (ring->wptr & ring->align_mask) {
 		radeon_ring_write(ring, ring->nop);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_MEMORYBARRIER();
 	WREG32(ring->wptr_reg, (ring->wptr << ring->ptr_reg_shift) & ring->ptr_reg_mask);
 	(void)RREG32(ring->wptr_reg);
 =======
+=======
+>>>>>>> v3.18
 	mb();
 	/* If we are emitting the HDP flush via MMIO, we need to do it after
 	 * all CPU writes to VRAM finished.
@@ -521,6 +555,9 @@ void radeon_ring_commit(struct radeon_device *rdev, struct radeon_ring *ring,
 	if (hdp_flush && rdev->asic->mmio_hdp_flush)
 		rdev->asic->mmio_hdp_flush(rdev);
 	radeon_ring_set_wptr(rdev, ring);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -531,6 +568,7 @@ void radeon_ring_commit(struct radeon_device *rdev, struct radeon_ring *ring,
  * @rdev: radeon_device pointer
  * @ring: radeon_ring structure holding ring information
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Call radeon_ring_commit() then unlock the ring (all asics).
  */
@@ -538,6 +576,8 @@ void radeon_ring_unlock_commit(struct radeon_device *rdev, struct radeon_ring *r
 {
 	radeon_ring_commit(rdev, ring);
 =======
+=======
+>>>>>>> v3.18
  * @hdp_flush: Whether or not to perform an HDP cache flush
  *
  * Call radeon_ring_commit() then unlock the ring (all asics).
@@ -546,6 +586,9 @@ void radeon_ring_unlock_commit(struct radeon_device *rdev, struct radeon_ring *r
 			       bool hdp_flush)
 {
 	radeon_ring_commit(rdev, ring, hdp_flush);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&rdev->ring_lock);
 }
@@ -577,6 +620,7 @@ void radeon_ring_unlock_undo(struct radeon_device *rdev, struct radeon_ring *rin
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * radeon_ring_force_activity - add some nop packets to the ring
  *
  * @rdev: radeon_device pointer
@@ -602,6 +646,8 @@ void radeon_ring_force_activity(struct radeon_device *rdev, struct radeon_ring *
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * radeon_ring_lockup_update - update lockup variables
  *
  * @ring: radeon_ring structure holding ring information
@@ -609,16 +655,22 @@ void radeon_ring_force_activity(struct radeon_device *rdev, struct radeon_ring *
  * Update the last rptr value and timestamp (all asics).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void radeon_ring_lockup_update(struct radeon_ring *ring)
 {
 	ring->last_rptr = ring->rptr;
 	ring->last_activity = jiffies;
 =======
+=======
+>>>>>>> v3.18
 void radeon_ring_lockup_update(struct radeon_device *rdev,
 			       struct radeon_ring *ring)
 {
 	atomic_set(&ring->last_rptr, radeon_ring_get_rptr(rdev, ring));
 	atomic64_set(&ring->last_activity, jiffies_64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -627,6 +679,7 @@ void radeon_ring_lockup_update(struct radeon_device *rdev,
  * @rdev:       radeon device structure
  * @ring:       radeon_ring structure holding ring information
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * We don't need to initialize the lockup tracking information as we will either
  * have CP rptr to a different value of jiffies wrap around which will force
@@ -665,6 +718,8 @@ bool radeon_ring_test_lockup(struct radeon_device *rdev, struct radeon_ring *rin
 	if (radeon_lockup_timeout && elapsed >= radeon_lockup_timeout) {
 		dev_err(rdev->dev, "GPU lockup CP stall for more than %lumsec\n", elapsed);
 =======
+=======
+>>>>>>> v3.18
  */
 bool radeon_ring_test_lockup(struct radeon_device *rdev, struct radeon_ring *ring)
 {
@@ -682,6 +737,9 @@ bool radeon_ring_test_lockup(struct radeon_device *rdev, struct radeon_ring *rin
 	if (radeon_lockup_timeout && elapsed >= radeon_lockup_timeout) {
 		dev_err(rdev->dev, "ring %d stalled for more than %llumsec\n",
 			ring->idx, elapsed);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return true;
 	}
@@ -738,7 +796,11 @@ unsigned radeon_ring_backup(struct radeon_device *rdev, struct radeon_ring *ring
 
 	/* and then save the content of the ring */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*data = kmalloc_array(size, sizeof(uint32_t), GFP_KERNEL);
+=======
+	*data = drm_malloc_ab(size, sizeof(uint32_t));
+>>>>>>> v3.18
 =======
 	*data = drm_malloc_ab(size, sizeof(uint32_t));
 >>>>>>> v3.18
@@ -783,8 +845,13 @@ int radeon_ring_restore(struct radeon_device *rdev, struct radeon_ring *ring,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_ring_unlock_commit(rdev, ring);
 	kfree(data);
+=======
+	radeon_ring_unlock_commit(rdev, ring, false);
+	drm_free_large(data);
+>>>>>>> v3.18
 =======
 	radeon_ring_unlock_commit(rdev, ring, false);
 	drm_free_large(data);
@@ -800,10 +867,13 @@ int radeon_ring_restore(struct radeon_device *rdev, struct radeon_ring *ring,
  * @ring_size: size of the ring
  * @rptr_offs: offset of the rptr writeback location in the WB buffer
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @rptr_reg: MMIO offset of the rptr register
  * @wptr_reg: MMIO offset of the wptr register
  * @ptr_reg_shift: bit offset of the rptr/wptr values
  * @ptr_reg_mask: bit mask of the rptr/wptr values
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @nop: nop packet for this ring
@@ -813,8 +883,12 @@ int radeon_ring_restore(struct radeon_device *rdev, struct radeon_ring *ring,
  */
 int radeon_ring_init(struct radeon_device *rdev, struct radeon_ring *ring, unsigned ring_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     unsigned rptr_offs, unsigned rptr_reg, unsigned wptr_reg,
 		     u32 ptr_reg_shift, u32 ptr_reg_mask, u32 nop)
+=======
+		     unsigned rptr_offs, u32 nop)
+>>>>>>> v3.18
 =======
 		     unsigned rptr_offs, u32 nop)
 >>>>>>> v3.18
@@ -824,10 +898,13 @@ int radeon_ring_init(struct radeon_device *rdev, struct radeon_ring *ring, unsig
 	ring->ring_size = ring_size;
 	ring->rptr_offs = rptr_offs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ring->rptr_reg = rptr_reg;
 	ring->wptr_reg = wptr_reg;
 	ring->ptr_reg_shift = ptr_reg_shift;
 	ring->ptr_reg_mask = ptr_reg_mask;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ring->nop = nop;
@@ -835,7 +912,11 @@ int radeon_ring_init(struct radeon_device *rdev, struct radeon_ring *ring, unsig
 	if (ring->ring_obj == NULL) {
 		r = radeon_bo_create(rdev, ring->ring_size, PAGE_SIZE, true,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				     RADEON_GEM_DOMAIN_GTT,
+=======
+				     RADEON_GEM_DOMAIN_GTT, 0, NULL,
+>>>>>>> v3.18
 =======
 				     RADEON_GEM_DOMAIN_GTT, 0, NULL,
 >>>>>>> v3.18
@@ -873,7 +954,11 @@ int radeon_ring_init(struct radeon_device *rdev, struct radeon_ring *ring, unsig
 		DRM_ERROR("Failed to register debugfs file for rings !\n");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	radeon_ring_lockup_update(ring);
+=======
+	radeon_ring_lockup_update(rdev, ring);
+>>>>>>> v3.18
 =======
 	radeon_ring_lockup_update(rdev, ring);
 >>>>>>> v3.18
@@ -924,6 +1009,7 @@ static int radeon_debugfs_ring_info(struct seq_file *m, void *data)
 	int ridx = *(int*)node->info_ent->data;
 	struct radeon_ring *ring = &rdev->ring[ridx];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned count, i, j;
 	u32 tmp;
 
@@ -953,6 +1039,8 @@ static int radeon_debugfs_ring_info(struct seq_file *m, void *data)
 			i = (i + 1) & ring->ptr_mask;
 		}
 =======
+=======
+>>>>>>> v3.18
 
 	uint32_t rptr, wptr, rptr_next;
 	unsigned count, i, j;
@@ -999,6 +1087,9 @@ static int radeon_debugfs_ring_info(struct seq_file *m, void *data)
 			seq_puts(m, " #");
 		seq_puts(m, "\n");
 		i = (i + 1) & ring->ptr_mask;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -1011,6 +1102,11 @@ static int radeon_dma1_index = R600_RING_TYPE_DMA_INDEX;
 static int radeon_dma2_index = CAYMAN_RING_TYPE_DMA1_INDEX;
 static int r600_uvd_index = R600_RING_TYPE_UVD_INDEX;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static int si_vce1_index = TN_RING_TYPE_VCE1_INDEX;
+static int si_vce2_index = TN_RING_TYPE_VCE2_INDEX;
+>>>>>>> v3.18
 =======
 static int si_vce1_index = TN_RING_TYPE_VCE1_INDEX;
 static int si_vce2_index = TN_RING_TYPE_VCE2_INDEX;
@@ -1023,6 +1119,7 @@ static struct drm_info_list radeon_debugfs_ring_info_list[] = {
 	{"radeon_ring_dma1", radeon_debugfs_ring_info, 0, &radeon_dma1_index},
 	{"radeon_ring_dma2", radeon_debugfs_ring_info, 0, &radeon_dma2_index},
 	{"radeon_ring_uvd", radeon_debugfs_ring_info, 0, &r600_uvd_index},
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -1040,6 +1137,10 @@ static int radeon_debugfs_sa_info(struct seq_file *m, void *data)
 
 static struct drm_info_list radeon_debugfs_sa_list[] = {
         {"radeon_sa_info", &radeon_debugfs_sa_info, 0, NULL},
+=======
+	{"radeon_ring_vce1", radeon_debugfs_ring_info, 0, &si_vce1_index},
+	{"radeon_ring_vce2", radeon_debugfs_ring_info, 0, &si_vce2_index},
+>>>>>>> v3.18
 =======
 	{"radeon_ring_vce1", radeon_debugfs_ring_info, 0, &si_vce1_index},
 	{"radeon_ring_vce2", radeon_debugfs_ring_info, 0, &si_vce2_index},
@@ -1068,6 +1169,7 @@ static int radeon_debugfs_ring_init(struct radeon_device *rdev, struct radeon_ri
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static int radeon_debugfs_sa_init(struct radeon_device *rdev)
 {
@@ -1077,5 +1179,7 @@ static int radeon_debugfs_sa_init(struct radeon_device *rdev)
 	return 0;
 #endif
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -2,7 +2,11 @@
 
   Intel 10 Gigabit PCI Express Linux driver
 <<<<<<< HEAD
+<<<<<<< HEAD
   Copyright(c) 1999 - 2013 Intel Corporation.
+=======
+  Copyright(c) 1999 - 2014 Intel Corporation.
+>>>>>>> v3.18
 =======
   Copyright(c) 1999 - 2014 Intel Corporation.
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -41,6 +49,7 @@
 #define IXGBE_I2C_EEPROM_DEV_ADDR2   0xA2
 
 /* EEPROM byte offsets */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define IXGBE_SFF_IDENTIFIER         0x0
 #define IXGBE_SFF_IDENTIFIER_SFP     0x3
@@ -72,6 +81,8 @@
 #define IXGBE_I2C_EEPROM_STATUS_IN_PROGRESS  0x3
 
 =======
+=======
+>>>>>>> v3.18
 #define IXGBE_SFF_IDENTIFIER		0x0
 #define IXGBE_SFF_IDENTIFIER_SFP	0x3
 #define IXGBE_SFF_VENDOR_OUI_BYTE0	0x25
@@ -115,6 +126,9 @@
 #define IXGBE_I2C_EEPROM_STATUS_PASS		0x1
 #define IXGBE_I2C_EEPROM_STATUS_FAIL		0x2
 #define IXGBE_I2C_EEPROM_STATUS_IN_PROGRESS	0x3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Flow control defines */
 #define IXGBE_TAF_SYM_PAUSE                  0x400
@@ -154,6 +168,7 @@ s32 ixgbe_identify_phy_generic(struct ixgbe_hw *hw);
 s32 ixgbe_reset_phy_generic(struct ixgbe_hw *hw);
 s32 ixgbe_read_phy_reg_generic(struct ixgbe_hw *hw, u32 reg_addr,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                u32 device_type, u16 *phy_data);
 s32 ixgbe_write_phy_reg_generic(struct ixgbe_hw *hw, u32 reg_addr,
                                 u32 device_type, u16 phy_data);
@@ -192,6 +207,8 @@ s32 ixgbe_read_i2c_sff8472_generic(struct ixgbe_hw *hw, u8 byte_offset,
 s32 ixgbe_write_i2c_eeprom_generic(struct ixgbe_hw *hw, u8 byte_offset,
                                    u8 eeprom_data);
 =======
+=======
+>>>>>>> v3.18
 			       u32 device_type, u16 *phy_data);
 s32 ixgbe_write_phy_reg_generic(struct ixgbe_hw *hw, u32 reg_addr,
 				u32 device_type, u16 phy_data);
@@ -235,5 +252,8 @@ s32 ixgbe_read_i2c_sff8472_generic(struct ixgbe_hw *hw, u8 byte_offset,
 				   u8 *sff8472_data);
 s32 ixgbe_write_i2c_eeprom_generic(struct ixgbe_hw *hw, u8 byte_offset,
 				   u8 eeprom_data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _IXGBE_PHY_H_ */

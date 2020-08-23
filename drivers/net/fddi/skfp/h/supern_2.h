@@ -93,6 +93,7 @@ union rx_descr {
 	struct {
 #ifdef	LITTLE_ENDIAN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned	rx_length :16 ;	/* frame length lower/upper byte */
 	unsigned	rx_erfbb  :2 ;	/* received frame byte boundary */
 	unsigned	rx_reserv2:2 ;	/* reserved */	
@@ -121,6 +122,8 @@ union rx_descr {
 	unsigned	rx_reserv2:2 ;	/* reserved */	
 	unsigned	rx_length :16 ;	/* frame length lower/upper byte */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int	rx_length :16 ;	/* frame length lower/upper byte */
 	unsigned int	rx_erfbb  :2 ;	/* received frame byte boundary */
 	unsigned int	rx_reserv2:2 ;	/* reserved */
@@ -148,6 +151,9 @@ union rx_descr {
 	unsigned int	rx_erfbb  :2 ;	/* received frame byte boundary */
 	unsigned int	rx_reserv2:2 ;	/* reserved */
 	unsigned int	rx_length :16 ;	/* frame length lower/upper byte */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	} r ;
@@ -193,6 +199,7 @@ union tx_descr {
 	struct {
 #ifdef	LITTLE_ENDIAN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned	tx_length:16 ;	/* frame length lower/upper byte */
 	unsigned	tx_res	 :8 ;	/* reserved 	 (bit 16..23) */
 	unsigned	tx_xmtabt:1 ;	/* transmit abort */
@@ -211,6 +218,8 @@ union tx_descr {
 	unsigned	tx_res	 :8 ;	/* reserved 	 (bit 16..23) */
 	unsigned	tx_length:16 ;	/* frame length lower/upper byte */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int	tx_length:16 ;	/* frame length lower/upper byte */
 	unsigned int	tx_res	 :8 ;	/* reserved 	 (bit 16..23) */
 	unsigned int	tx_xmtabt:1 ;	/* transmit abort */
@@ -228,6 +237,9 @@ union tx_descr {
 	unsigned int	tx_xmtabt:1 ;	/* transmit abort */
 	unsigned int	tx_res	 :8 ;	/* reserved 	 (bit 16..23) */
 	unsigned int	tx_length:16 ;	/* frame length lower/upper byte */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	} t ;
@@ -253,6 +265,7 @@ union tx_pointer {
 	struct t {
 #ifdef	LITTLE_ENDIAN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned	tp_pointer:16 ;	/* pointer to tx_descr (low/high) */
 	unsigned	tp_res	  :8 ;	/* reserved 	 (bit 16..23) */
 	unsigned	tp_pattern:8 ;	/* fixed pattern (bit 24..31) */
@@ -261,6 +274,8 @@ union tx_pointer {
 	unsigned	tp_res	  :8 ;	/* reserved 	 (bit 16..23) */
 	unsigned	tp_pointer:16 ;	/* pointer to tx_descr (low/high) */
 =======
+=======
+>>>>>>> v3.18
 	unsigned int	tp_pointer:16 ;	/* pointer to tx_descr (low/high) */
 	unsigned int	tp_res	  :8 ;	/* reserved 	 (bit 16..23) */
 	unsigned int	tp_pattern:8 ;	/* fixed pattern (bit 24..31) */
@@ -268,6 +283,9 @@ union tx_pointer {
 	unsigned int	tp_pattern:8 ;	/* fixed pattern (bit 24..31) */
 	unsigned int	tp_res	  :8 ;	/* reserved 	 (bit 16..23) */
 	unsigned int	tp_pointer:16 ;	/* pointer to tx_descr (low/high) */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	} t ;

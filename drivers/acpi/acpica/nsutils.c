@@ -7,7 +7,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -424,6 +428,10 @@ acpi_ns_externalize_name(u32 internal_name_length,
 	switch (internal_name[0]) {
 	case AML_ROOT_PREFIX:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -432,6 +440,10 @@ acpi_ns_externalize_name(u32 internal_name_length,
 
 	case AML_PARENT_PREFIX:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -451,6 +463,10 @@ acpi_ns_externalize_name(u32 internal_name_length,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -607,7 +623,11 @@ struct acpi_namespace_node *acpi_ns_validate_handle(acpi_handle handle)
 void acpi_ns_terminate(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	union acpi_operand_object *obj_desc;
+=======
+	acpi_status status;
+>>>>>>> v3.18
 =======
 	acpi_status status;
 >>>>>>> v3.18
@@ -615,6 +635,7 @@ void acpi_ns_terminate(void)
 	ACPI_FUNCTION_TRACE(ns_terminate);
 
 	/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * 1) Free the entire namespace -- all nodes and objects
 	 *
@@ -630,6 +651,8 @@ void acpi_ns_terminate(void)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	 * Free the entire namespace -- all nodes and all objects
 	 * attached to the nodes
 	 */
@@ -645,6 +668,9 @@ void acpi_ns_terminate(void)
 	acpi_ns_delete_node(acpi_gbl_root_node);
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ACPI_DEBUG_PRINT((ACPI_DB_INFO, "Namespace freed\n"));
 	return_VOID;
@@ -758,7 +784,11 @@ acpi_ns_get_node(struct acpi_namespace_node *prefix_node,
 	(void)acpi_ut_release_mutex(ACPI_MTX_NAMESPACE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       cleanup:
+=======
+cleanup:
+>>>>>>> v3.18
 =======
 cleanup:
 >>>>>>> v3.18

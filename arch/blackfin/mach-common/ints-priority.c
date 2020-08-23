@@ -456,7 +456,11 @@ void handle_sec_sci_fault(uint32_t gstat)
 			break;
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_DEBUG "sec sci unknow err\n");
+=======
+			printk(KERN_DEBUG "sec sci unknown err\n");
+>>>>>>> v3.18
 =======
 			printk(KERN_DEBUG "sec sci unknown err\n");
 >>>>>>> v3.18
@@ -476,6 +480,7 @@ void handle_sec_ssi_fault(uint32_t gstat)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void handle_sec_fault(unsigned int irq, struct irq_desc *desc)
 {
 	uint32_t sec_gstat;
@@ -483,6 +488,10 @@ void handle_sec_fault(unsigned int irq, struct irq_desc *desc)
 	raw_spin_lock(&desc->lock);
 
 	sec_gstat = bfin_read32(SEC_GSTAT);
+=======
+void handle_sec_fault(uint32_t sec_gstat)
+{
+>>>>>>> v3.18
 =======
 void handle_sec_fault(uint32_t sec_gstat)
 {
@@ -504,6 +513,7 @@ void handle_sec_fault(uint32_t sec_gstat)
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	raw_spin_unlock(&desc->lock);
 
@@ -517,6 +527,8 @@ void handle_core_fault(unsigned int irq, struct irq_desc *desc)
 	raw_spin_lock(&desc->lock);
 
 =======
+=======
+>>>>>>> v3.18
 }
 
 static struct irqaction bfin_fault_irq = {
@@ -527,6 +539,9 @@ static irqreturn_t bfin_fault_routine(int irq, void *data)
 {
 	struct pt_regs *fp = get_irq_regs();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (irq) {
 	case IRQ_C0_DBL_FAULT:
@@ -545,12 +560,15 @@ static irqreturn_t bfin_fault_routine(int irq, void *data)
 		panic("Core 0 NMI L1 parity error");
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default:
 		panic("Core 1 fault %d occurs unexpectedly", irq);
 	}
 
 	raw_spin_unlock(&desc->lock);
 =======
+=======
+>>>>>>> v3.18
 	case IRQ_SEC_ERR:
 		pr_err("SEC error\n");
 		handle_sec_fault(bfin_read32(SEC_GSTAT));
@@ -560,6 +578,9 @@ static irqreturn_t bfin_fault_routine(int irq, void *data)
 	}
 
 	return IRQ_HANDLED;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif /* SEC_GCTL */
@@ -739,10 +760,16 @@ static inline void bfin_set_irq_handler(unsigned irq, irq_flow_handler_t handle)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DECLARE_BITMAP(gpio_enabled, MAX_BLACKFIN_GPIOS);
 extern void bfin_gpio_irq_prepare(unsigned gpio);
 
 #if !BFIN_GPIO_PINT
+=======
+#ifdef CONFIG_GPIO_ADI
+
+static DECLARE_BITMAP(gpio_enabled, MAX_BLACKFIN_GPIOS);
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_GPIO_ADI
 
@@ -862,6 +889,7 @@ static int bfin_gpio_irq_type(struct irq_data *d, unsigned int type)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 static int bfin_gpio_set_wake(struct irq_data *d, unsigned int state)
 {
@@ -871,6 +899,8 @@ static int bfin_gpio_set_wake(struct irq_data *d, unsigned int state)
 # define bfin_gpio_set_wake NULL
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void bfin_demux_gpio_block(unsigned int irq)
@@ -939,6 +969,7 @@ void bfin_demux_gpio_irq(unsigned int inta_irq,
 	bfin_demux_gpio_block(irq);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #else
 
@@ -1214,6 +1245,8 @@ void bfin_pint_resume(void)
 
 #ifdef SEC_GCTL
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM
 
 static int bfin_gpio_set_wake(struct irq_data *d, unsigned int state)
@@ -1248,6 +1281,9 @@ static struct irq_chip bfin_gpio_irqchip = {
 #ifdef SEC_GCTL
 static u32 save_pint_sec_ctl[NR_PINT_SYS_IRQS];
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sec_suspend(void)
 {
@@ -1275,6 +1311,7 @@ static struct syscore_ops sec_pm_syscore_ops = {
 	.suspend = sec_suspend,
 	.resume = sec_resume,
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #endif
@@ -1364,11 +1401,16 @@ static struct irq_chip bfin_gpio_irqchip = {
 
 void __cpuinit init_exception_vectors(void)
 =======
+=======
+>>>>>>> v3.18
 #endif
 
 #endif
 
 void init_exception_vectors(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	/* cannot program in software:
@@ -1420,6 +1462,7 @@ int __init init_arch_irq(void)
 	local_irq_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if BFIN_GPIO_PINT
 # ifdef CONFIG_PINTx_REASSIGN
 	pint[0]->assign = CONFIG_PINT0_ASSIGN;
@@ -1433,6 +1476,8 @@ int __init init_arch_irq(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	for (irq = 0; irq <= SYS_IRQS; irq++) {
 		if (irq <= IRQ_CORETMR)
 			irq_set_chip(irq, &bfin_core_irqchip);
@@ -1441,12 +1486,17 @@ int __init init_arch_irq(void)
 
 		switch (irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if BFIN_GPIO_PINT
 		case IRQ_PINT0:
 		case IRQ_PINT1:
 		case IRQ_PINT2:
 		case IRQ_PINT3:
 #elif defined(BF537_FAMILY)
+=======
+#if !BFIN_GPIO_PINT
+#if defined(BF537_FAMILY)
+>>>>>>> v3.18
 =======
 #if !BFIN_GPIO_PINT
 #if defined(BF537_FAMILY)
@@ -1469,6 +1519,10 @@ int __init init_arch_irq(void)
 			irq_set_chained_handler(irq, bfin_demux_gpio_irq);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1520,6 +1574,10 @@ int __init init_arch_irq(void)
 #endif
 	/* if configured as edge, then will be changed to do_edge_IRQ */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_GPIO_ADI
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_GPIO_ADI
 >>>>>>> v3.18
@@ -1528,6 +1586,10 @@ int __init init_arch_irq(void)
 		irq_set_chip_and_handler(irq, &bfin_gpio_irqchip,
 					 handle_level_irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -1634,6 +1696,7 @@ int __init init_arch_irq(void)
 	local_irq_disable();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if BFIN_GPIO_PINT
 # ifdef CONFIG_PINTx_REASSIGN
 	pint[0]->assign = CONFIG_PINT0_ASSIGN;
@@ -1649,6 +1712,8 @@ int __init init_arch_irq(void)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	for (irq = 0; irq <= SYS_IRQS; irq++) {
 		if (irq <= IRQ_CORETMR) {
 			irq_set_chip_and_handler(irq, &bfin_core_irqchip,
@@ -1658,9 +1723,12 @@ int __init init_arch_irq(void)
 				irq_set_handler(irq, handle_percpu_irq);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else if (irq >= BFIN_IRQ(21) && irq <= BFIN_IRQ(26)) {
 			irq_set_chip(irq, &bfin_sec_irqchip);
 			irq_set_chained_handler(irq, bfin_demux_gpio_irq);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		} else if (irq >= BFIN_IRQ(34) && irq <= BFIN_IRQ(37)) {
@@ -1668,6 +1736,7 @@ int __init init_arch_irq(void)
 				handle_percpu_irq);
 		} else {
 			irq_set_chip(irq, &bfin_sec_irqchip);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (irq == IRQ_SEC_ERR)
 				irq_set_handler(irq, handle_sec_fault);
@@ -1683,10 +1752,15 @@ int __init init_arch_irq(void)
 		irq_set_chip_and_handler(irq, &bfin_gpio_irqchip,
 					handle_level_irq);
 =======
+=======
+>>>>>>> v3.18
 			irq_set_handler(irq, handle_fasteoi_irq);
 			__irq_set_preflow_handler(irq, bfin_sec_preflow_handler);
 		}
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	bfin_write_IMASK(0);
@@ -1701,8 +1775,11 @@ int __init init_arch_irq(void)
 	bfin_sec_set_priority(CONFIG_SEC_IRQ_PRIORITY_LEVELS, sec_int_priority);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bfin_sec_set_priority(CONFIG_SEC_IRQ_PRIORITY_LEVELS, sec_int_priority);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Enable interrupts IVG7-15 */
@@ -1727,7 +1804,10 @@ int __init init_arch_irq(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bfin_fault_irq.handler = bfin_fault_routine;
 #ifdef CONFIG_L1_PARITY_CHECK
 	setup_irq(IRQ_C0_NMI_L1_PARITY_ERR, &bfin_fault_irq);
@@ -1735,6 +1815,9 @@ int __init init_arch_irq(void)
 	setup_irq(IRQ_C0_DBL_FAULT, &bfin_fault_irq);
 	setup_irq(IRQ_SEC_ERR, &bfin_fault_irq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -1810,6 +1893,7 @@ asmlinkage int __ipipe_grab_irq(int vec, struct pt_regs *regs)
 #endif
 		/* This is basically what we need from the register frame. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__raw_get_cpu_var(__ipipe_tick_regs).ipend = regs->ipend;
 		__raw_get_cpu_var(__ipipe_tick_regs).pc = regs->pc;
 		if (this_domain != ipipe_root_domain)
@@ -1817,12 +1901,17 @@ asmlinkage int __ipipe_grab_irq(int vec, struct pt_regs *regs)
 		else
 			__raw_get_cpu_var(__ipipe_tick_regs).ipend |= 0x10;
 =======
+=======
+>>>>>>> v3.18
 		__this_cpu_write(__ipipe_tick_regs.ipend, regs->ipend);
 		__this_cpu_write(__ipipe_tick_regs.pc, regs->pc);
 		if (this_domain != ipipe_root_domain)
 			__this_cpu_and(__ipipe_tick_regs.ipend, ~0x10);
 		else
 			__this_cpu_or(__ipipe_tick_regs.ipend, 0x10);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

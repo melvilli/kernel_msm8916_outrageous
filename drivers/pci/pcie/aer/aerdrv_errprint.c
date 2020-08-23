@@ -23,9 +23,13 @@
 
 #include "aerdrv.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/ras.h>
+=======
+#include <ras/ras_event.h>
+>>>>>>> v3.18
 =======
 #include <ras/ras_event.h>
 >>>>>>> v3.18
@@ -96,24 +100,34 @@ static const char *aer_correctable_error_string[] = {
 	"Replay Timer Timeout",		/* Bit Position 12	*/
 	"Advisory Non-Fatal",		/* Bit Position 13	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 static const char *aer_uncorrectable_error_string[] = {
 	NULL,
 =======
+=======
+>>>>>>> v3.18
 	"Corrected Internal Error",	/* Bit Position 14	*/
 	"Header Log Overflow",		/* Bit Position 15	*/
 };
 
 static const char *aer_uncorrectable_error_string[] = {
 	"Undefined",			/* Bit Position 0	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	NULL,
 	NULL,
 	NULL,
 	"Data Link Protocol",		/* Bit Position 4	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NULL,
+=======
+	"Surprise Down Error",		/* Bit Position 5	*/
+>>>>>>> v3.18
 =======
 	"Surprise Down Error",		/* Bit Position 5	*/
 >>>>>>> v3.18
@@ -133,12 +147,18 @@ static const char *aer_uncorrectable_error_string[] = {
 	"ECRC",				/* Bit Position 19	*/
 	"Unsupported Request",		/* Bit Position 20	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	"ACS Violation",		/* Bit Position 21	*/
 	"Uncorrectable Internal Error",	/* Bit Position 22	*/
 	"MC Blocked TLP",		/* Bit Position 23	*/
 	"AtomicOp Egress Blocked",	/* Bit Position 24	*/
 	"TLP Prefix Blocked Error",	/* Bit Position 25	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -150,7 +170,10 @@ static const char *aer_agent_string[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __print_tlp_header(struct pci_dev *dev,
 			       struct aer_header_log_regs *t)
 {
@@ -166,6 +189,9 @@ static void __print_tlp_header(struct pci_dev *dev,
 		*(tlp + 13), *(tlp + 12));
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __aer_print_error(struct pci_dev *dev,
 			      struct aer_err_info *info)
@@ -196,6 +222,7 @@ static void __aer_print_error(struct pci_dev *dev,
 
 void aer_print_error(struct pci_dev *dev, struct aer_err_info *info)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int id = ((dev->bus->number << 8) | dev->devfn);
 
@@ -240,6 +267,8 @@ void aer_print_error(struct pci_dev *dev, struct aer_err_info *info)
 			   "  Error of this Agent(%04x) is reported first\n",
 			id);
 =======
+=======
+>>>>>>> v3.18
 	int layer, agent;
 	int id = ((dev->bus->number << 8) | dev->devfn);
 
@@ -269,6 +298,9 @@ out:
 	if (info->id && info->error_dev_num > 1 && info->id == id)
 		dev_err(&dev->dev, "  Error of this Agent(%04x) is reported first\n", id);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_aer_event(dev_name(&dev->dev), (info->status & ~info->mask),
 			info->severity);
@@ -304,6 +336,10 @@ void cper_print_aer(struct pci_dev *dev, int cper_severity,
 
 	aer_severity = cper_severity_to_aer(cper_severity);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -319,6 +355,7 @@ void cper_print_aer(struct pci_dev *dev, int cper_severity,
 		status_strs_size = ARRAY_SIZE(aer_uncorrectable_error_string);
 		tlp_header_valid = status & AER_LOG_TLP_MASKS;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	layer = AER_GET_LAYER_ERROR(aer_severity, status);
 	agent = AER_GET_AGENT(aer_severity, status);
@@ -343,6 +380,8 @@ void cper_print_aer(struct pci_dev *dev, int cper_severity,
 			*(tlp + 13), *(tlp + 12));
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	layer = AER_GET_LAYER_ERROR(aer_severity, status);
 	agent = AER_GET_AGENT(aer_severity, status);
@@ -359,6 +398,9 @@ void cper_print_aer(struct pci_dev *dev, int cper_severity,
 	if (tlp_header_valid)
 		__print_tlp_header(dev, &aer->header_log);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trace_aer_event(dev_name(&dev->dev), (status & ~mask),
 			aer_severity);

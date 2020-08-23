@@ -93,7 +93,11 @@ static struct drm_fb_cma *drm_fb_cma_alloc(struct drm_device *dev,
 	ret = drm_framebuffer_init(dev, &fb_cma->fb, &drm_fb_cma_funcs);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev->dev, "Failed to initalize framebuffer: %d\n", ret);
+=======
+		dev_err(dev->dev, "Failed to initialize framebuffer: %d\n", ret);
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev, "Failed to initialize framebuffer: %d\n", ret);
 >>>>>>> v3.18
@@ -186,17 +190,23 @@ EXPORT_SYMBOL_GPL(drm_fb_cma_get_gem_obj);
 
 #ifdef CONFIG_DEBUG_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * drm_fb_cma_describe() - Helper to dump information about a single
  * CMA framebuffer object
  */
 void drm_fb_cma_describe(struct drm_framebuffer *fb, struct seq_file *m)
 =======
+=======
+>>>>>>> v3.18
 /*
  * drm_fb_cma_describe() - Helper to dump information about a single
  * CMA framebuffer object
  */
 static void drm_fb_cma_describe(struct drm_framebuffer *fb, struct seq_file *m)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drm_fb_cma *fb_cma = to_fb_cma(fb);
@@ -212,7 +222,10 @@ static void drm_fb_cma_describe(struct drm_framebuffer *fb, struct seq_file *m)
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(drm_fb_cma_describe);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -344,7 +357,11 @@ err_drm_gem_cma_free_object:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct drm_fb_helper_funcs drm_fb_cma_helper_funcs = {
+=======
+static const struct drm_fb_helper_funcs drm_fb_cma_helper_funcs = {
+>>>>>>> v3.18
 =======
 static const struct drm_fb_helper_funcs drm_fb_cma_helper_funcs = {
 >>>>>>> v3.18
@@ -375,14 +392,20 @@ struct drm_fbdev_cma *drm_fbdev_cma_init(struct drm_device *dev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fbdev_cma->fb_helper.funcs = &drm_fb_cma_helper_funcs;
 	helper = &fbdev_cma->fb_helper;
 
 =======
+=======
+>>>>>>> v3.18
 	helper = &fbdev_cma->fb_helper;
 
 	drm_fb_helper_prepare(dev, helper, &drm_fb_cma_helper_funcs);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = drm_fb_helper_init(dev, helper, num_crtc, max_conn_count);
 	if (ret < 0) {
@@ -403,7 +426,11 @@ struct drm_fbdev_cma *drm_fbdev_cma_init(struct drm_device *dev,
 	ret = drm_fb_helper_initial_config(helper, preferred_bpp);
 	if (ret < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(dev->dev, "Failed to set inital hw configuration.\n");
+=======
+		dev_err(dev->dev, "Failed to set initial hw configuration.\n");
+>>>>>>> v3.18
 =======
 		dev_err(dev->dev, "Failed to set initial hw configuration.\n");
 >>>>>>> v3.18
@@ -461,6 +488,7 @@ EXPORT_SYMBOL_GPL(drm_fbdev_cma_fini);
 void drm_fbdev_cma_restore_mode(struct drm_fbdev_cma *fbdev_cma)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (fbdev_cma) {
 		struct drm_device *dev = fbdev_cma->fb_helper.dev;
 
@@ -468,6 +496,10 @@ void drm_fbdev_cma_restore_mode(struct drm_fbdev_cma *fbdev_cma)
 		drm_fb_helper_restore_fbdev_mode(&fbdev_cma->fb_helper);
 		drm_modeset_unlock_all(dev);
 	}
+=======
+	if (fbdev_cma)
+		drm_fb_helper_restore_fbdev_mode_unlocked(&fbdev_cma->fb_helper);
+>>>>>>> v3.18
 =======
 	if (fbdev_cma)
 		drm_fb_helper_restore_fbdev_mode_unlocked(&fbdev_cma->fb_helper);

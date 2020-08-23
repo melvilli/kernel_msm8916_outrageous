@@ -8,6 +8,7 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kernel.h>
 #include <linux/smp.h>
 #include <linux/clk/tegra.h>
@@ -16,6 +17,8 @@
 
 #include "fuse.h"
 =======
+=======
+>>>>>>> v3.18
 
 #include <linux/clk/tegra.h>
 #include <linux/kernel.h>
@@ -26,6 +29,9 @@
 
 #include <asm/smp_plat.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include "sleep.h"
 
@@ -50,9 +56,12 @@ int tegra_cpu_kill(unsigned cpu)
 void __ref tegra_cpu_die(unsigned int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Clean L1 data cache */
 	tegra_disable_clean_inv_dcache();
 =======
+=======
+>>>>>>> v3.18
 	if (!tegra_hotplug_shutdown) {
 		WARN(1, "hotplug is not yet initialized\n");
 		return;
@@ -60,6 +69,9 @@ void __ref tegra_cpu_die(unsigned int cpu)
 
 	/* Clean L1 data cache */
 	tegra_disable_clean_inv_dcache(TEGRA_FLUSH_CACHE_LOUIS);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Shut down the current CPU. */
@@ -69,6 +81,7 @@ void __ref tegra_cpu_die(unsigned int cpu)
 	BUG();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init tegra_hotplug_init(void)
 {
@@ -81,6 +94,8 @@ void __init tegra_hotplug_init(void)
 		tegra_hotplug_shutdown = tegra30_hotplug_shutdown;
 }
 =======
+=======
+>>>>>>> v3.18
 static int __init tegra_hotplug_init(void)
 {
 	if (!IS_ENABLED(CONFIG_HOTPLUG_CPU))
@@ -101,4 +116,7 @@ static int __init tegra_hotplug_init(void)
 	return 0;
 }
 pure_initcall(tegra_hotplug_init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

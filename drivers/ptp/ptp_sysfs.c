@@ -19,6 +19,10 @@
  */
 #include <linux/capability.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -31,6 +35,7 @@ static ssize_t clock_name_show(struct device *dev,
 	struct ptp_clock *ptp = dev_get_drvdata(dev);
 	return snprintf(page, PAGE_SIZE-1, "%s\n", ptp->info->name);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #define PTP_SHOW_INT(name)						\
@@ -63,6 +68,8 @@ struct device_attribute ptp_dev_attrs[] = {
 };
 
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(clock_name, 0444, clock_name_show, NULL);
 
 #define PTP_SHOW_INT(name, var)						\
@@ -102,6 +109,9 @@ const struct attribute_group *ptp_groups[] = {
 };
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t extts_enable_store(struct device *dev,
 				  struct device_attribute *attr,
@@ -215,7 +225,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int ptp_pin_name2index(struct ptp_clock *ptp, const char *name)
 {
 	int i;
@@ -273,6 +286,9 @@ static ssize_t ptp_pin_store(struct device *dev, struct device_attribute *attr,
 	return count;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEVICE_ATTR(extts_enable, 0220, NULL, extts_enable_store);
 static DEVICE_ATTR(fifo,         0444, extts_fifo_show, NULL);
@@ -295,8 +311,11 @@ int ptp_cleanup_sysfs(struct ptp_clock *ptp)
 		device_remove_file(dev, &dev_attr_pps_enable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (info->n_pins) {
 		sysfs_remove_group(&dev->kobj, &ptp->pin_attr_group);
 		kfree(ptp->pin_attr);
@@ -345,6 +364,9 @@ no_pin_attr:
 	kfree(ptp->pin_dev_attr);
 no_dev_attr:
 	return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -373,8 +395,11 @@ int ptp_populate_sysfs(struct ptp_clock *ptp)
 			goto out4;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (info->n_pins) {
 		err = ptp_populate_pins(ptp);
 		if (err)
@@ -384,6 +409,9 @@ int ptp_populate_sysfs(struct ptp_clock *ptp)
 out5:
 	if (info->pps)
 		device_remove_file(dev, &dev_attr_pps_enable);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out4:
 	if (info->n_per_out)

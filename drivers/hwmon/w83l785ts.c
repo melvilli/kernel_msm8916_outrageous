@@ -2,7 +2,11 @@
  * w83l785ts.c - Part of lm_sensors, Linux kernel modules for hardware
  *               monitoring
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2003-2009  Jean Delvare <khali@linux-fr.org>
+=======
+ * Copyright (C) 2003-2009  Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  * Copyright (C) 2003-2009  Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -15,7 +19,11 @@
  *
  * Ported to Linux 2.6 by Wolfgang Ziegler <nuppla@gmx.at> and Jean Delvare
 <<<<<<< HEAD
+<<<<<<< HEAD
  * <khali@linux-fr.org>.
+=======
+ * <jdelvare@suse.de>.
+>>>>>>> v3.18
 =======
  * <jdelvare@suse.de>.
 >>>>>>> v3.18
@@ -197,12 +205,17 @@ static int w83l785ts_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->valid = 0;
 	mutex_init(&data->update_lock);
 
 	/* Default values in case the first read fails (unlikely). */
 	data->temp[1] = data->temp[0] = 0;
 
+=======
+	mutex_init(&data->update_lock);
+
+>>>>>>> v3.18
 =======
 	mutex_init(&data->update_lock);
 
@@ -313,7 +326,11 @@ static struct w83l785ts_data *w83l785ts_update_device(struct device *dev)
 module_i2c_driver(w83l785ts_driver);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_AUTHOR("Jean Delvare <khali@linux-fr.org>");
+=======
+MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
+>>>>>>> v3.18
 =======
 MODULE_AUTHOR("Jean Delvare <jdelvare@suse.de>");
 >>>>>>> v3.18

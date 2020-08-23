@@ -1,6 +1,10 @@
 # DAVINCI Platform Support
 snd-soc-davinci-objs := davinci-pcm.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+snd-soc-edma-objs := edma-pcm.o
+>>>>>>> v3.18
 =======
 snd-soc-edma-objs := edma-pcm.o
 >>>>>>> v3.18
@@ -10,6 +14,10 @@ snd-soc-davinci-vcif-objs:= davinci-vcif.o
 
 obj-$(CONFIG_SND_DAVINCI_SOC) += snd-soc-davinci.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_SND_EDMA_SOC) += snd-soc-edma.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_SND_EDMA_SOC) += snd-soc-edma.o
 >>>>>>> v3.18
@@ -17,6 +25,7 @@ obj-$(CONFIG_SND_DAVINCI_SOC_I2S) += snd-soc-davinci-i2s.o
 obj-$(CONFIG_SND_DAVINCI_SOC_MCASP) += snd-soc-davinci-mcasp.o
 obj-$(CONFIG_SND_DAVINCI_SOC_VCIF) += snd-soc-davinci-vcif.o
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # DAVINCI Machine Support
 snd-soc-evm-objs := davinci-evm.o
@@ -28,8 +37,13 @@ obj-$(CONFIG_SND_DA830_SOC_EVM) += snd-soc-evm.o
 obj-$(CONFIG_SND_DA850_SOC_EVM) += snd-soc-evm.o
 obj-$(CONFIG_SND_DAVINCI_SOC_SFFSDR) += snd-soc-sffsdr.o
 =======
+=======
+>>>>>>> v3.18
 # Generic DAVINCI/AM33xx Machine Support
 snd-soc-evm-objs := davinci-evm.o
 
 obj-$(CONFIG_SND_DAVINCI_SOC_GENERIC_EVM) += snd-soc-evm.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -60,7 +60,11 @@ static void writeq(u64 val, void __iomem *reg)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(niu_pci_tbl) = {
+=======
+static const struct pci_device_id niu_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id niu_pci_tbl[] = {
 >>>>>>> v3.18
@@ -2589,7 +2593,10 @@ static int niu_determine_phy_disposition(struct niu *np)
 			default:
 				return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			}
@@ -3501,17 +3508,23 @@ static int niu_process_rx_pkt(struct napi_struct *napi, struct niu *np,
 	rh = (struct rx_pkt_hdr1 *) skb->data;
 	if (np->dev->features & NETIF_F_RXHASH)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		skb->rxhash = ((u32)rh->hashval2_0 << 24 |
 			       (u32)rh->hashval2_1 << 16 |
 			       (u32)rh->hashval1_1 << 8 |
 			       (u32)rh->hashval1_2 << 0);
 =======
+=======
+>>>>>>> v3.18
 		skb_set_hash(skb,
 			     ((u32)rh->hashval2_0 << 24 |
 			      (u32)rh->hashval2_1 << 16 |
 			      (u32)rh->hashval1_1 << 8 |
 			      (u32)rh->hashval1_2 << 0),
 			     PKT_HASH_TYPE_L3);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	skb_pull(skb, sizeof(*rh));
 
@@ -8733,8 +8746,13 @@ static void niu_divide_channels(struct niu_parent *parent,
 	}
 	if (tot_rx < NIU_NUM_RXCHAN || tot_tx < NIU_NUM_TXCHAN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("niu%d: Driver bug, wasted channels, RX[%d] TX[%d]\n",
 			   parent->index, tot_rx, tot_tx);
+=======
+		pr_warn("niu%d: Driver bug, wasted channels, RX[%d] TX[%d]\n",
+			parent->index, tot_rx, tot_tx);
+>>>>>>> v3.18
 =======
 		pr_warn("niu%d: Driver bug, wasted channels, RX[%d] TX[%d]\n",
 			parent->index, tot_rx, tot_tx);
@@ -9061,7 +9079,11 @@ static void niu_try_msix(struct niu *np, u8 *ldg_num_map)
 	struct niu_parent *parent = np->parent;
 	struct pci_dev *pdev = np->pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, num_irqs, err;
+=======
+	int i, num_irqs;
+>>>>>>> v3.18
 =======
 	int i, num_irqs;
 >>>>>>> v3.18
@@ -9077,7 +9099,10 @@ static void niu_try_msix(struct niu *np, u8 *ldg_num_map)
 	BUG_ON(num_irqs > (NIU_NUM_LDG / parent->num_ports));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 retry:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	for (i = 0; i < num_irqs; i++) {
@@ -9085,6 +9110,7 @@ retry:
 		msi_vec[i].entry = i;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	err = pci_enable_msix(pdev, msi_vec, num_irqs);
 	if (err < 0) {
@@ -9096,11 +9122,16 @@ retry:
 		goto retry;
 	}
 =======
+=======
+>>>>>>> v3.18
 	num_irqs = pci_enable_msix_range(pdev, msi_vec, 1, num_irqs);
 	if (num_irqs < 0) {
 		np->flags &= ~NIU_FLAGS_MSIX;
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	np->flags |= NIU_FLAGS_MSIX;
@@ -9397,7 +9428,11 @@ static ssize_t show_port_phy(struct device *dev,
 {
 	struct platform_device *plat_dev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct niu_parent *p = plat_dev->dev.platform_data;
+=======
+	struct niu_parent *p = dev_get_platdata(&plat_dev->dev);
+>>>>>>> v3.18
 =======
 	struct niu_parent *p = dev_get_platdata(&plat_dev->dev);
 >>>>>>> v3.18
@@ -9431,7 +9466,11 @@ static ssize_t show_plat_type(struct device *dev,
 {
 	struct platform_device *plat_dev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct niu_parent *p = plat_dev->dev.platform_data;
+=======
+	struct niu_parent *p = dev_get_platdata(&plat_dev->dev);
+>>>>>>> v3.18
 =======
 	struct niu_parent *p = dev_get_platdata(&plat_dev->dev);
 >>>>>>> v3.18
@@ -9464,7 +9503,11 @@ static ssize_t __show_chan_per_port(struct device *dev,
 {
 	struct platform_device *plat_dev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct niu_parent *p = plat_dev->dev.platform_data;
+=======
+	struct niu_parent *p = dev_get_platdata(&plat_dev->dev);
+>>>>>>> v3.18
 =======
 	struct niu_parent *p = dev_get_platdata(&plat_dev->dev);
 >>>>>>> v3.18
@@ -9501,7 +9544,11 @@ static ssize_t show_num_ports(struct device *dev,
 {
 	struct platform_device *plat_dev = to_platform_device(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct niu_parent *p = plat_dev->dev.platform_data;
+=======
+	struct niu_parent *p = dev_get_platdata(&plat_dev->dev);
+>>>>>>> v3.18
 =======
 	struct niu_parent *p = dev_get_platdata(&plat_dev->dev);
 >>>>>>> v3.18
@@ -9531,7 +9578,11 @@ static struct niu_parent *niu_new_parent(struct niu *np,
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; attr_name(niu_parent_attributes[i]); i++) {
+=======
+	for (i = 0; niu_parent_attributes[i].attr.name; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; niu_parent_attributes[i].attr.name; i++) {
 >>>>>>> v3.18
@@ -9932,7 +9983,10 @@ err_out_free_res:
 err_out_disable_pdev:
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -9960,7 +10014,10 @@ static void niu_pci_remove_one(struct pci_dev *pdev)
 		pci_release_regions(pdev);
 		pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -10171,7 +10228,11 @@ static int niu_of_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, dev);
+=======
+	platform_set_drvdata(op, dev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, dev);
 >>>>>>> v3.18
@@ -10212,7 +10273,11 @@ err_out:
 static int niu_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&op->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -10246,7 +10311,10 @@ static int niu_of_remove(struct platform_device *op)
 
 		free_netdev(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_set_drvdata(&op->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}

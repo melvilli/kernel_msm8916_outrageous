@@ -49,6 +49,7 @@ void reiserfs_write_unlock(struct super_block *s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * If we already own the lock, just exit and don't increase the depth.
  * Useful when we don't want to lock more than once.
@@ -74,6 +75,8 @@ void reiserfs_write_unlock_once(struct super_block *s, int lock_depth)
 	if (lock_depth == -1)
 		reiserfs_write_unlock(s);
 =======
+=======
+>>>>>>> v3.18
 int __must_check reiserfs_write_unlock_nested(struct super_block *s)
 {
 	struct reiserfs_sb_info *sb_i = REISERFS_SB(s);
@@ -103,6 +106,9 @@ void reiserfs_write_lock_nested(struct super_block *s, int depth)
 	mutex_lock(&sb_i->lock);
 	sb_i->lock_owner = current;
 	sb_i->lock_depth = depth;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -115,9 +121,13 @@ void reiserfs_check_lock_depth(struct super_block *sb, char *caller)
 	struct reiserfs_sb_info *sb_i = REISERFS_SB(sb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sb_i->lock_depth < 0)
 		reiserfs_panic(sb, "%s called without kernel lock held %d",
 			       caller);
+=======
+	WARN_ON(sb_i->lock_depth < 0);
+>>>>>>> v3.18
 =======
 	WARN_ON(sb_i->lock_depth < 0);
 >>>>>>> v3.18

@@ -12,7 +12,10 @@
 #include <linux/mm.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kmemleak.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "internal.h"
@@ -578,6 +581,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_sys_fill_cache(struct file *filp, void *dirent,
 				filldir_t filldir,
 				struct ctl_table_header *head,
@@ -585,12 +589,17 @@ static int proc_sys_fill_cache(struct file *filp, void *dirent,
 {
 	struct dentry *child, *dir = filp->f_path.dentry;
 =======
+=======
+>>>>>>> v3.18
 static bool proc_sys_fill_cache(struct file *file,
 				struct dir_context *ctx,
 				struct ctl_table_header *head,
 				struct ctl_table *table)
 {
 	struct dentry *child, *dir = file->f_path.dentry;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct inode *inode;
 	struct qstr qname;
@@ -609,7 +618,11 @@ static bool proc_sys_fill_cache(struct file *file,
 			if (!inode) {
 				dput(child);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return -ENOMEM;
+=======
+				return false;
+>>>>>>> v3.18
 =======
 				return false;
 >>>>>>> v3.18
@@ -619,7 +632,11 @@ static bool proc_sys_fill_cache(struct file *file,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return -ENOMEM;
+=======
+			return false;
+>>>>>>> v3.18
 =======
 			return false;
 >>>>>>> v3.18
@@ -629,6 +646,7 @@ static bool proc_sys_fill_cache(struct file *file,
 	ino  = inode->i_ino;
 	type = inode->i_mode >> 12;
 	dput(child);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return !!filldir(dirent, qname.name, qname.len, filp->f_pos, ino, type);
 }
@@ -640,6 +658,8 @@ static int proc_sys_link_fill_cache(struct file *filp, void *dirent,
 {
 	int err, ret = 0;
 =======
+=======
+>>>>>>> v3.18
 	return dir_emit(ctx, qname.name, qname.len, ino, type);
 }
 
@@ -649,13 +669,20 @@ static bool proc_sys_link_fill_cache(struct file *file,
 				    struct ctl_table *table)
 {
 	bool ret = true;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	head = sysctl_head_grab(head);
 
 	if (S_ISLNK(table->mode)) {
 		/* It is not an error if we can not follow the link ignore it */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = sysctl_follow_link(&head, &table, current->nsproxy);
+=======
+		int err = sysctl_follow_link(&head, &table, current->nsproxy);
+>>>>>>> v3.18
 =======
 		int err = sysctl_follow_link(&head, &table, current->nsproxy);
 >>>>>>> v3.18
@@ -664,7 +691,11 @@ static bool proc_sys_link_fill_cache(struct file *file,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = proc_sys_fill_cache(filp, dirent, filldir, head, table);
+=======
+	ret = proc_sys_fill_cache(file, ctx, head, table);
+>>>>>>> v3.18
 =======
 	ret = proc_sys_fill_cache(file, ctx, head, table);
 >>>>>>> v3.18
@@ -673,6 +704,7 @@ out:
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int scan(struct ctl_table_header *head, ctl_table *table,
 		unsigned long *pos, struct file *file,
@@ -691,6 +723,8 @@ static int scan(struct ctl_table_header *head, ctl_table *table,
 	if (res == 0)
 		file->f_pos = *pos;
 =======
+=======
+>>>>>>> v3.18
 static int scan(struct ctl_table_header *head, struct ctl_table *table,
 		unsigned long *pos, struct file *file,
 		struct dir_context *ctx)
@@ -707,11 +741,15 @@ static int scan(struct ctl_table_header *head, struct ctl_table *table,
 
 	if (res)
 		ctx->pos = *pos;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return res;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int proc_sys_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
@@ -723,12 +761,20 @@ static int proc_sys_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct ctl_table_header *head = grab_header(file_inode(file));
 >>>>>>> v3.18
+=======
+static int proc_sys_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct ctl_table_header *head = grab_header(file_inode(file));
+>>>>>>> v3.18
 	struct ctl_table_header *h = NULL;
 	struct ctl_table *entry;
 	struct ctl_dir *ctl_dir;
 	unsigned long pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -737,6 +783,7 @@ static int proc_sys_readdir(struct file *file, struct dir_context *ctx)
 
 	ctl_dir = container_of(head, struct ctl_dir, header);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = 0;
 	/* Avoid a switch here: arm builds fail with missing __cmpdi2 */
@@ -758,6 +805,8 @@ static int proc_sys_readdir(struct file *file, struct dir_context *ctx)
 		ret = scan(h, entry, &pos, filp, dirent, filldir);
 		if (ret) {
 =======
+=======
+>>>>>>> v3.18
 	if (!dir_emit_dots(file, ctx))
 		return 0;
 
@@ -765,16 +814,24 @@ static int proc_sys_readdir(struct file *file, struct dir_context *ctx)
 
 	for (first_entry(ctl_dir, &h, &entry); h; next_entry(&h, &entry)) {
 		if (!scan(h, entry, &pos, file, ctx)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sysctl_head_finish(h);
 			break;
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = 1;
 out:
 	sysctl_head_finish(head);
 	return ret;
+=======
+	sysctl_head_finish(head);
+	return 0;
+>>>>>>> v3.18
 =======
 	sysctl_head_finish(head);
 	return 0;
@@ -854,7 +911,11 @@ static const struct file_operations proc_sys_file_operations = {
 static const struct file_operations proc_sys_dir_file_operations = {
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= proc_sys_readdir,
+=======
+	.iterate	= proc_sys_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= proc_sys_readdir,
 >>>>>>> v3.18
@@ -902,6 +963,7 @@ static int sysctl_is_seen(struct ctl_table_header *p)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_sys_compare(const struct dentry *parent,
 		const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
@@ -912,6 +974,8 @@ static int proc_sys_compare(const struct dentry *parent,
 	 * that inode here can be NULL */
 	/* AV: can it, indeed? */
 =======
+=======
+>>>>>>> v3.18
 static int proc_sys_compare(const struct dentry *parent, const struct dentry *dentry,
 		unsigned int len, const char *str, const struct qstr *name)
 {
@@ -922,6 +986,9 @@ static int proc_sys_compare(const struct dentry *parent, const struct dentry *de
 	 * that inode here can be NULL */
 	/* AV: can it, indeed? */
 	inode = ACCESS_ONCE(dentry->d_inode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!inode)
 		return 1;
@@ -1309,8 +1376,11 @@ struct ctl_table_header *__register_sysctl_table(
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kmemleak_not_leak(header);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	node = (struct ctl_node *)(header + 1);

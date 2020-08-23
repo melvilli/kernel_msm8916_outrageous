@@ -37,6 +37,10 @@
 #include "squashfs.h"
 #include "decompressor.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "page_actor.h"
+>>>>>>> v3.18
 =======
 #include "page_actor.h"
 >>>>>>> v3.18
@@ -91,8 +95,13 @@ static struct buffer_head *get_block_length(struct super_block *sb,
  * algorithms).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int squashfs_read_data(struct super_block *sb, void **buffer, u64 index,
 			int length, u64 *next_index, int srclength, int pages)
+=======
+int squashfs_read_data(struct super_block *sb, u64 index, int length,
+		u64 *next_index, struct squashfs_page_actor *output)
+>>>>>>> v3.18
 =======
 int squashfs_read_data(struct super_block *sb, u64 index, int length,
 		u64 *next_index, struct squashfs_page_actor *output)
@@ -103,9 +112,15 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 	int offset = index & ((1 << msblk->devblksize_log2) - 1);
 	u64 cur_index = index >> msblk->devblksize_log2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int bytes, compressed, b = 0, k = 0, page = 0, avail;
 
 	bh = kcalloc(((srclength + msblk->devblksize - 1)
+=======
+	int bytes, compressed, b = 0, k = 0, avail, i;
+
+	bh = kcalloc(((output->length + msblk->devblksize - 1)
+>>>>>>> v3.18
 =======
 	int bytes, compressed, b = 0, k = 0, avail, i;
 
@@ -127,9 +142,15 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 
 		TRACE("Block @ 0x%llx, %scompressed size %d, src size %d\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			index, compressed ? "" : "un", length, srclength);
 
 		if (length < 0 || length > srclength ||
+=======
+			index, compressed ? "" : "un", length, output->length);
+
+		if (length < 0 || length > output->length ||
+>>>>>>> v3.18
 =======
 			index, compressed ? "" : "un", length, output->length);
 
@@ -167,7 +188,11 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 				compressed ? "" : "un", length);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (length < 0 || length > srclength ||
+=======
+		if (length < 0 || length > output->length ||
+>>>>>>> v3.18
 =======
 		if (length < 0 || length > output->length ||
 >>>>>>> v3.18
@@ -184,10 +209,13 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (compressed) {
 		length = squashfs_decompress(msblk, buffer, bh, b, offset,
 			 length, srclength, pages);
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < b; i++) {
 		wait_on_buffer(bh[i]);
 		if (!buffer_uptodate(bh[i]))
@@ -197,6 +225,9 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 	if (compressed) {
 		length = squashfs_decompress(msblk, bh, b, offset, length,
 			output);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (length < 0)
 			goto read_failure;
@@ -204,6 +235,7 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 		/*
 		 * Block is uncompressed.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		int i, in, pg_offset = 0;
 
@@ -216,6 +248,10 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 		int in, pg_offset = 0;
 		void *data = squashfs_first_page(output);
 >>>>>>> v3.18
+=======
+		int in, pg_offset = 0;
+		void *data = squashfs_first_page(output);
+>>>>>>> v3.18
 
 		for (bytes = length; k < b; k++) {
 			in = min(bytes, msblk->devblksize - offset);
@@ -223,7 +259,11 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 			while (in) {
 				if (pg_offset == PAGE_CACHE_SIZE) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					page++;
+=======
+					data = squashfs_next_page(output);
+>>>>>>> v3.18
 =======
 					data = squashfs_next_page(output);
 >>>>>>> v3.18
@@ -232,8 +272,13 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 				avail = min_t(int, in, PAGE_CACHE_SIZE -
 						pg_offset);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				memcpy(buffer[page] + pg_offset,
 						bh[k]->b_data + offset, avail);
+=======
+				memcpy(data + pg_offset, bh[k]->b_data + offset,
+						avail);
+>>>>>>> v3.18
 =======
 				memcpy(data + pg_offset, bh[k]->b_data + offset,
 						avail);
@@ -246,6 +291,10 @@ int squashfs_read_data(struct super_block *sb, u64 index, int length,
 			put_bh(bh[k]);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		squashfs_finish_page(output);
+>>>>>>> v3.18
 =======
 		squashfs_finish_page(output);
 >>>>>>> v3.18

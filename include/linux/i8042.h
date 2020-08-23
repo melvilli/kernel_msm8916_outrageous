@@ -32,7 +32,10 @@
 #define I8042_CMD_MUX_SEND	0x1090
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Status register bits.
  */
@@ -57,6 +60,9 @@
 #define I8042_CTR_AUXDIS	0x20
 #define I8042_CTR_XLATE		0x40
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct serio;
 
@@ -66,6 +72,10 @@ void i8042_lock_chip(void);
 void i8042_unlock_chip(void);
 int i8042_command(unsigned char *param, int command);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+bool i8042_check_port_owner(const struct serio *);
+>>>>>>> v3.18
 =======
 bool i8042_check_port_owner(const struct serio *);
 >>>>>>> v3.18
@@ -90,12 +100,18 @@ static inline int i8042_command(unsigned char *param, int command)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline bool i8042_check_port_owner(const struct serio *serio)
 {
 	return false;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline int i8042_install_filter(bool (*filter)(unsigned char data, unsigned char str,
 					struct serio *serio))

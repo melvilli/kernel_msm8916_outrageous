@@ -125,6 +125,10 @@ snd_emux_detach_seq(struct snd_emux *emu)
 		snd_emux_terminate_all(emu);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_lock(&emu->register_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&emu->register_mutex);
 >>>>>>> v3.18
@@ -133,6 +137,10 @@ snd_emux_detach_seq(struct snd_emux *emu)
 		emu->client = -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mutex_unlock(&emu->register_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&emu->register_mutex);
 >>>>>>> v3.18
@@ -276,8 +284,13 @@ snd_emux_event_input(struct snd_seq_event *ev, int direct, void *private_data,
  * increment usage count
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int
 __snd_emux_inc_count(struct snd_emux *emu)
+=======
+int
+snd_emux_inc_count(struct snd_emux *emu)
+>>>>>>> v3.18
 =======
 int
 snd_emux_inc_count(struct snd_emux *emu)
@@ -296,6 +309,7 @@ snd_emux_inc_count(struct snd_emux *emu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int snd_emux_inc_count(struct snd_emux *emu)
 {
 	int ret;
@@ -307,13 +321,20 @@ int snd_emux_inc_count(struct snd_emux *emu)
 }
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*
  * decrease usage count
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void
 __snd_emux_dec_count(struct snd_emux *emu)
+=======
+void
+snd_emux_dec_count(struct snd_emux *emu)
+>>>>>>> v3.18
 =======
 void
 snd_emux_dec_count(struct snd_emux *emu)
@@ -327,12 +348,15 @@ snd_emux_dec_count(struct snd_emux *emu)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void snd_emux_dec_count(struct snd_emux *emu)
 {
 	mutex_lock(&emu->register_mutex);
 	__snd_emux_dec_count(emu);
 	mutex_unlock(&emu->register_mutex);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -355,7 +379,11 @@ snd_emux_use(void *private_data, struct snd_seq_port_subscribe *info)
 	mutex_lock(&emu->register_mutex);
 	snd_emux_init_port(p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__snd_emux_inc_count(emu);
+=======
+	snd_emux_inc_count(emu);
+>>>>>>> v3.18
 =======
 	snd_emux_inc_count(emu);
 >>>>>>> v3.18
@@ -382,7 +410,11 @@ snd_emux_unuse(void *private_data, struct snd_seq_port_subscribe *info)
 	mutex_lock(&emu->register_mutex);
 	snd_emux_sounds_off_all(p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__snd_emux_dec_count(emu);
+=======
+	snd_emux_dec_count(emu);
+>>>>>>> v3.18
 =======
 	snd_emux_dec_count(emu);
 >>>>>>> v3.18

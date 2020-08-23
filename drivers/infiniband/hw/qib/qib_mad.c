@@ -1635,7 +1635,10 @@ static int pma_get_portcounters_cong(struct ib_pma_mad *pmp,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void qib_snapshot_pmacounters(
 	struct qib_ibport *ibp,
 	struct qib_pma_counters *pmacounters)
@@ -1653,6 +1656,9 @@ static void qib_snapshot_pmacounters(
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int pma_get_portcounters_ext(struct ib_pma_mad *pmp,
 				    struct ib_device *ibdev, u8 port)
@@ -1663,6 +1669,10 @@ static int pma_get_portcounters_ext(struct ib_pma_mad *pmp,
 	struct qib_pportdata *ppd = ppd_from_ibp(ibp);
 	u64 swords, rwords, spkts, rpkts, xwait;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qib_pma_counters pma;
+>>>>>>> v3.18
 =======
 	struct qib_pma_counters pma;
 >>>>>>> v3.18
@@ -1689,11 +1699,14 @@ static int pma_get_portcounters_ext(struct ib_pma_mad *pmp,
 	p->port_xmit_packets = cpu_to_be64(spkts);
 	p->port_rcv_packets = cpu_to_be64(rpkts);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	p->port_unicast_xmit_packets = cpu_to_be64(ibp->n_unicast_xmit);
 	p->port_unicast_rcv_packets = cpu_to_be64(ibp->n_unicast_rcv);
 	p->port_multicast_xmit_packets = cpu_to_be64(ibp->n_multicast_xmit);
 	p->port_multicast_rcv_packets = cpu_to_be64(ibp->n_multicast_rcv);
 =======
+=======
+>>>>>>> v3.18
 
 	qib_snapshot_pmacounters(ibp, &pma);
 
@@ -1705,6 +1718,9 @@ static int pma_get_portcounters_ext(struct ib_pma_mad *pmp,
 		- ibp->z_multicast_xmit);
 	p->port_multicast_rcv_packets = cpu_to_be64(pma.n_multicast_rcv
 		- ibp->z_multicast_rcv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 bail:
@@ -1834,6 +1850,10 @@ static int pma_set_portcounters_ext(struct ib_pma_mad *pmp,
 	struct qib_pportdata *ppd = ppd_from_ibp(ibp);
 	u64 swords, rwords, spkts, rpkts, xwait;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct qib_pma_counters pma;
+>>>>>>> v3.18
 =======
 	struct qib_pma_counters pma;
 >>>>>>> v3.18
@@ -1853,6 +1873,7 @@ static int pma_set_portcounters_ext(struct ib_pma_mad *pmp,
 		ibp->z_port_rcv_packets = rpkts;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p->counter_select & IB_PMA_SELX_PORT_UNI_XMIT_PACKETS)
 		ibp->n_unicast_xmit = 0;
 
@@ -1865,6 +1886,8 @@ static int pma_set_portcounters_ext(struct ib_pma_mad *pmp,
 	if (p->counter_select & IB_PMA_SELX_PORT_MULTI_RCV_PACKETS)
 		ibp->n_multicast_rcv = 0;
 =======
+=======
+>>>>>>> v3.18
 	qib_snapshot_pmacounters(ibp, &pma);
 
 	if (p->counter_select & IB_PMA_SELX_PORT_UNI_XMIT_PACKETS)
@@ -1878,6 +1901,9 @@ static int pma_set_portcounters_ext(struct ib_pma_mad *pmp,
 
 	if (p->counter_select & IB_PMA_SELX_PORT_MULTI_RCV_PACKETS)
 		ibp->z_multicast_rcv = pma.n_multicast_rcv;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return pma_get_portcounters_ext(pmp, ibdev, port);
@@ -2507,7 +2533,11 @@ int qib_create_agents(struct qib_ibdev *dev)
 		agent = ib_register_mad_agent(&dev->ibdev, p + 1, IB_QPT_SMI,
 					      NULL, 0, send_handler,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					      NULL, NULL);
+=======
+					      NULL, NULL, 0);
+>>>>>>> v3.18
 =======
 					      NULL, NULL, 0);
 >>>>>>> v3.18

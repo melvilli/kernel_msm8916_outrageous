@@ -18,7 +18,11 @@
 #define SH_CACHE_ASSOC		8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CCR		0xffffffec	/* Address of Cache Control Register */
+=======
+#define SH_CCR		0xffffffec	/* Address of Cache Control Register */
+>>>>>>> v3.18
 =======
 #define SH_CCR		0xffffffec	/* Address of Cache Control Register */
 >>>>>>> v3.18

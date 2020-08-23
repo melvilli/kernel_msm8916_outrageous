@@ -24,8 +24,12 @@
 #include <linux/io.h>
 #include <linux/delay.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/common.h>
 #include <mach/r8a7779.h>
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -35,11 +39,14 @@
 #include <asm/smp_twd.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AVECR IOMEM(0xfe700040)
 #define R8A7779_SCU_BASE 0xf0000000
 
 static struct r8a7779_pm_ch r8a7779_ch_cpu1 = {
 =======
+=======
+>>>>>>> v3.18
 #include "common.h"
 #include "pm-rcar.h"
 #include "r8a7779.h"
@@ -48,6 +55,9 @@ static struct r8a7779_pm_ch r8a7779_ch_cpu1 = {
 #define R8A7779_SCU_BASE 0xf0000000
 
 static struct rcar_sysc_ch r8a7779_ch_cpu1 = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.chan_offs = 0x40, /* PWRSR0 .. PWRER0 */
 	.chan_bit = 1, /* ARM1 */
@@ -55,7 +65,11 @@ static struct rcar_sysc_ch r8a7779_ch_cpu1 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct r8a7779_pm_ch r8a7779_ch_cpu2 = {
+=======
+static struct rcar_sysc_ch r8a7779_ch_cpu2 = {
+>>>>>>> v3.18
 =======
 static struct rcar_sysc_ch r8a7779_ch_cpu2 = {
 >>>>>>> v3.18
@@ -65,7 +79,11 @@ static struct rcar_sysc_ch r8a7779_ch_cpu2 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct r8a7779_pm_ch r8a7779_ch_cpu3 = {
+=======
+static struct rcar_sysc_ch r8a7779_ch_cpu3 = {
+>>>>>>> v3.18
 =======
 static struct rcar_sysc_ch r8a7779_ch_cpu3 = {
 >>>>>>> v3.18
@@ -75,7 +93,11 @@ static struct rcar_sysc_ch r8a7779_ch_cpu3 = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct r8a7779_pm_ch *r8a7779_ch_cpu[4] = {
+=======
+static struct rcar_sysc_ch *r8a7779_ch_cpu[4] = {
+>>>>>>> v3.18
 =======
 static struct rcar_sysc_ch *r8a7779_ch_cpu[4] = {
 >>>>>>> v3.18
@@ -95,7 +117,11 @@ void __init r8a7779_register_twd(void)
 static int r8a7779_platform_cpu_kill(unsigned int cpu)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct r8a7779_pm_ch *ch = NULL;
+=======
+	struct rcar_sysc_ch *ch = NULL;
+>>>>>>> v3.18
 =======
 	struct rcar_sysc_ch *ch = NULL;
 >>>>>>> v3.18
@@ -108,7 +134,11 @@ static int r8a7779_platform_cpu_kill(unsigned int cpu)
 
 	if (ch)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = r8a7779_sysc_power_down(ch);
+=======
+		ret = rcar_sysc_power_down(ch);
+>>>>>>> v3.18
 =======
 		ret = rcar_sysc_power_down(ch);
 >>>>>>> v3.18
@@ -116,6 +146,7 @@ static int r8a7779_platform_cpu_kill(unsigned int cpu)
 	return ret ? ret : 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __cpuinit r8a7779_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
@@ -130,6 +161,8 @@ static int __cpuinit r8a7779_boot_secondary(unsigned int cpu, struct task_struct
 	if (ch)
 		ret = r8a7779_sysc_power_up(ch);
 =======
+=======
+>>>>>>> v3.18
 static int r8a7779_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
 	struct rcar_sysc_ch *ch = NULL;
@@ -143,6 +176,9 @@ static int r8a7779_boot_secondary(unsigned int cpu, struct task_struct *idle)
 		ret = rcar_sysc_power_up(ch);
 	else
 		ret = -EIO;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ret;
@@ -150,6 +186,7 @@ static int r8a7779_boot_secondary(unsigned int cpu, struct task_struct *idle)
 
 static void __init r8a7779_smp_prepare_cpus(unsigned int max_cpus)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	scu_enable(shmobile_scu_base);
 
@@ -159,6 +196,8 @@ static void __init r8a7779_smp_prepare_cpus(unsigned int max_cpus)
 	/* enable cache coherency on booting CPU */
 	scu_power_mode(shmobile_scu_base, SCU_PM_NORMAL);
 =======
+=======
+>>>>>>> v3.18
 	/* Map the reset vector (in headsmp-scu.S, headsmp.S) */
 	__raw_writel(__pa(shmobile_boot_vector), AVECR);
 	shmobile_boot_fn = virt_to_phys(shmobile_boot_scu);
@@ -167,6 +206,9 @@ static void __init r8a7779_smp_prepare_cpus(unsigned int max_cpus)
 	/* setup r8a7779 specific SCU bits */
 	shmobile_scu_base = IOMEM(R8A7779_SCU_BASE);
 	shmobile_smp_scu_prepare_cpus(max_cpus);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	r8a7779_pm_init();
@@ -177,6 +219,7 @@ static void __init r8a7779_smp_prepare_cpus(unsigned int max_cpus)
 	r8a7779_platform_cpu_kill(3);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init r8a7779_smp_init_cpus(void)
 {
@@ -212,16 +255,22 @@ static int r8a7779_cpu_kill(unsigned int cpu)
 		mdelay(1);
 	}
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_HOTPLUG_CPU
 static int r8a7779_cpu_kill(unsigned int cpu)
 {
 	if (shmobile_smp_scu_cpu_kill(cpu))
 		return r8a7779_platform_cpu_kill(cpu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void r8a7779_cpu_die(unsigned int cpu)
 {
@@ -238,6 +287,8 @@ static void r8a7779_cpu_die(unsigned int cpu)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static int r8a7779_cpu_disable(unsigned int cpu)
 {
 	/* only CPU1->3 have power domains, do not allow hotplug of CPU0 */
@@ -247,6 +298,7 @@ static int r8a7779_cpu_disable(unsigned int cpu)
 
 struct smp_operations r8a7779_smp_ops  __initdata = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.smp_init_cpus		= r8a7779_smp_init_cpus,
 	.smp_prepare_cpus	= r8a7779_smp_prepare_cpus,
 	.smp_boot_secondary	= r8a7779_boot_secondary,
@@ -255,12 +307,17 @@ struct smp_operations r8a7779_smp_ops  __initdata = {
 	.cpu_die		= r8a7779_cpu_die,
 	.cpu_disable		= r8a7779_cpu_disable,
 =======
+=======
+>>>>>>> v3.18
 	.smp_prepare_cpus	= r8a7779_smp_prepare_cpus,
 	.smp_boot_secondary	= r8a7779_boot_secondary,
 #ifdef CONFIG_HOTPLUG_CPU
 	.cpu_disable		= r8a7779_cpu_disable,
 	.cpu_die		= shmobile_smp_scu_cpu_die,
 	.cpu_kill		= r8a7779_cpu_kill,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 };

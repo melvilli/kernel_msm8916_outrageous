@@ -10,9 +10,12 @@
  * published by the Free Software Foundation; either version 2 of the
  * License or (at your optional) any later version of the license.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * The Linux Foundation chooses to take subject only to the GPLv2 license
  * terms, and distributes only under these terms.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -30,6 +33,7 @@
 
 #include <linux/memblock.h>
 #include <linux/err.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 #include <linux/of.h>
 #include <linux/of_fdt.h>
@@ -105,6 +109,11 @@ static struct cma *cma_get_area_by_name(const char *name)
 #include <linux/dma-contiguous.h>
 #include <linux/cma.h>
 >>>>>>> v3.18
+=======
+#include <linux/sizes.h>
+#include <linux/dma-contiguous.h>
+#include <linux/cma.h>
+>>>>>>> v3.18
 
 #ifdef CONFIG_CMA_SIZE_MBYTES
 #define CMA_SIZE_MBYTES CONFIG_CMA_SIZE_MBYTES
@@ -112,6 +121,7 @@ static struct cma *cma_get_area_by_name(const char *name)
 #define CMA_SIZE_MBYTES 0
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_CMA_RESERVE_DEFAULT_AREA
 #define CMA_RESERVE_AREA 1
@@ -122,11 +132,16 @@ static struct cma *cma_get_area_by_name(const char *name)
  * Default global CMA area size can be defined in kernel's .config.
  * This is usefull mainly for distro maintainers to create a kernel
 =======
+=======
+>>>>>>> v3.18
 struct cma *dma_contiguous_default_area;
 
 /*
  * Default global CMA area size can be defined in kernel's .config.
  * This is useful mainly for distro maintainers to create a kernel
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * that works correctly for most supported systems.
  * The size can be set in bytes or as a percentage of the total memory
@@ -138,6 +153,11 @@ struct cma *dma_contiguous_default_area;
 static const phys_addr_t size_bytes = CMA_SIZE_MBYTES * SZ_1M;
 static phys_addr_t size_cmdline = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static phys_addr_t base_cmdline;
+static phys_addr_t limit_cmdline;
+>>>>>>> v3.18
 =======
 static phys_addr_t base_cmdline;
 static phys_addr_t limit_cmdline;
@@ -148,7 +168,10 @@ static int __init early_cma(char *p)
 	pr_debug("%s(%s)\n", __func__, p);
 	size_cmdline = memparse(p, &p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (*p != '@')
 		return 0;
 	base_cmdline = memparse(p + 1, &p);
@@ -158,6 +181,9 @@ static int __init early_cma(char *p)
 	}
 	limit_cmdline = memparse(p + 1, &p);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -190,6 +216,7 @@ static inline __maybe_unused phys_addr_t cma_early_percent_memory(void)
 
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __init int cma_activate_area(unsigned long base_pfn, unsigned long count)
 {
@@ -338,11 +365,16 @@ int __init __dma_contiguous_reserve_memory(size_t size, size_t alignment,
 /**
  * dma_contiguous_reserve() - reserve area(s) for contiguous memory handling
 >>>>>>> v3.18
+=======
+/**
+ * dma_contiguous_reserve() - reserve area(s) for contiguous memory handling
+>>>>>>> v3.18
  * @limit: End address of the reserved memory (optional, 0 for any).
  *
  * This function reserves memory from early allocator. It should be
  * called by arch specific code once the early allocator (memblock or bootmem)
  * has been activated and all other subsystems have already allocated/reserved
+<<<<<<< HEAD
 <<<<<<< HEAD
  * memory. It reserves contiguous areas for global, device independent
  * allocations and (optionally) all areas defined in device tree structures.
@@ -416,6 +448,8 @@ void __init dma_contiguous_reserve(phys_addr_t limit)
 	}
 };
 =======
+=======
+>>>>>>> v3.18
  * memory.
  */
 void __init dma_contiguous_reserve(phys_addr_t limit)
@@ -455,21 +489,30 @@ void __init dma_contiguous_reserve(phys_addr_t limit)
 					    fixed);
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
  * dma_contiguous_reserve_area() - reserve custom contiguous area
  * @size: Size of the reserved area (in bytes),
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @base: Pointer to the base address of the reserved area, also used to return
  * 	  base address of the actually reserved area, optional, use pointer to
  *	  0 for any
  * @limit: End address of the reserved memory (optional, 0 for any).
 =======
+=======
+>>>>>>> v3.18
  * @base: Base address of the reserved area optional, use 0 for any
  * @limit: End address of the reserved memory (optional, 0 for any).
  * @res_cma: Pointer to store the created cma region.
  * @fixed: hint about where to place the reserved area
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * This function reserves memory from early allocator. It should be
@@ -477,6 +520,7 @@ void __init dma_contiguous_reserve(phys_addr_t limit)
  * has been activated and all other subsystems have already allocated/reserved
  * memory. This function allows to create custom reserved areas for specific
  * devices.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 int __init dma_contiguous_reserve_area(phys_addr_t size, phys_addr_t *res_base,
@@ -667,6 +711,8 @@ static void clear_cma_bitmap(struct cma *cma, unsigned long pfn, int count)
 	mutex_unlock(&cma->lock);
 }
 =======
+=======
+>>>>>>> v3.18
  *
  * If @fixed is true, reserve contiguous area at exactly @base.  If false,
  * reserve in range from @base to @limit.
@@ -687,6 +733,9 @@ int __init dma_contiguous_reserve_area(phys_addr_t size, phys_addr_t base,
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -697,6 +746,7 @@ int __init dma_contiguous_reserve_area(phys_addr_t size, phys_addr_t base,
  *
  * This function allocates memory buffer for specified device. It uses
  * device specific contiguous memory area if available or the default
+<<<<<<< HEAD
 <<<<<<< HEAD
  * global one. Requires architecture specific get_dev_cma_area() helper
  * function.
@@ -789,6 +839,8 @@ unsigned long dma_alloc_from_contiguous(struct device *dev, size_t count,
 	pr_debug("%s(): returned %lx\n", __func__, pfn);
 	return pfn;
 =======
+=======
+>>>>>>> v3.18
  * global one. Requires architecture specific dev_get_cma_area() helper
  * function.
  */
@@ -799,6 +851,9 @@ struct page *dma_alloc_from_contiguous(struct device *dev, int count,
 		align = CONFIG_CMA_ALIGNMENT;
 
 	return cma_alloc(dev_get_cma_area(dev), count, align);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -812,6 +867,7 @@ struct page *dma_alloc_from_contiguous(struct device *dev, int count,
  * It returns false when provided pages do not belong to contiguous area and
  * true otherwise.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 bool dma_release_from_contiguous(struct device *dev, unsigned long pfn,
 				 int count)
@@ -835,6 +891,8 @@ bool dma_release_from_contiguous(struct device *dev, unsigned long pfn,
 	return true;
 }
 =======
+=======
+>>>>>>> v3.18
 bool dma_release_from_contiguous(struct device *dev, struct page *pages,
 				 int count)
 {
@@ -907,4 +965,7 @@ static int __init rmem_cma_setup(struct reserved_mem *rmem)
 }
 RESERVEDMEM_OF_DECLARE(cma, "shared-dma-pool", rmem_cma_setup);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -36,6 +36,10 @@
 #include <linux/platform_device.h>
 #include <linux/serial_core.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_s3c.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_s3c.h>
 >>>>>>> v3.18
@@ -80,6 +84,10 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <mach/gpio-samsung.h>
+>>>>>>> v3.18
 =======
 #include <mach/gpio-samsung.h>
 >>>>>>> v3.18
@@ -89,7 +97,10 @@
 #include <plat/gpio-cfg.h>
 #include <plat/pm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/regs-serial.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/samsung-time.h>
@@ -207,7 +218,11 @@ static void gta02_charger_worker(struct work_struct *work)
 	 * 100mA limit for safety.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pcf50633_mbc_usb_curlim_set(pcf, 100);
+=======
+	pcf50633_mbc_usb_curlim_set(gta02_pcf, 100);
+>>>>>>> v3.18
 =======
 	pcf50633_mbc_usb_curlim_set(gta02_pcf, 100);
 >>>>>>> v3.18
@@ -516,7 +531,10 @@ static void __init gta02_map_io(void)
 {
 	s3c24xx_init_io(gta02_iodesc, ARRAY_SIZE(gta02_iodesc));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s3c24xx_init_clocks(12000000);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s3c24xx_init_uarts(gta02_uartcfgs, ARRAY_SIZE(gta02_uartcfgs));
@@ -603,12 +621,18 @@ static void __init gta02_machine_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void __init gta02_init_time(void)
 {
 	s3c2442_init_clocks(12000000);
 	samsung_timer_init();
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MACHINE_START(NEO1973_GTA02, "GTA02")
@@ -618,8 +642,12 @@ MACHINE_START(NEO1973_GTA02, "GTA02")
 	.init_irq	= s3c2442_init_irq,
 	.init_machine	= gta02_machine_init,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= samsung_timer_init,
 	.restart	= s3c244x_restart,
+=======
+	.init_time	= gta02_init_time,
+>>>>>>> v3.18
 =======
 	.init_time	= gta02_init_time,
 >>>>>>> v3.18

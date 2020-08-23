@@ -55,7 +55,11 @@ static struct clocksource iop_clocksource = {
  * IOP sched_clock() implementation via its clocksource.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace iop_read_sched_clock(void)
+=======
+static u64 notrace iop_read_sched_clock(void)
+>>>>>>> v3.18
 =======
 static u64 notrace iop_read_sched_clock(void)
 >>>>>>> v3.18
@@ -132,7 +136,11 @@ static struct irqaction iop_timer_irq = {
 	.name		= "IOP Timer Tick",
 	.handler	= iop_timer_interrupt,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+=======
+	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER | IRQF_IRQPOLL,
 >>>>>>> v3.18
@@ -151,7 +159,11 @@ void __init iop_init_time(unsigned long tick_rate)
 	u32 timer_ctl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(iop_read_sched_clock, 32, tick_rate);
+=======
+	sched_clock_register(iop_read_sched_clock, 32, tick_rate);
+>>>>>>> v3.18
 =======
 	sched_clock_register(iop_read_sched_clock, 32, tick_rate);
 >>>>>>> v3.18

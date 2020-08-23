@@ -2,6 +2,7 @@
 #define SOUND_FIREWIRE_AMDTP_H_INCLUDED
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/interrupt.h>
 #include <linux/mutex.h>
 #include <linux/spinlock.h>
@@ -10,6 +11,8 @@
 /**
  * enum cip_out_flags - describes details of the streaming protocol
 =======
+=======
+>>>>>>> v3.18
 #include <linux/err.h>
 #include <linux/interrupt.h>
 #include <linux/mutex.h>
@@ -18,16 +21,22 @@
 
 /**
  * enum cip_flags - describes details of the streaming protocol
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @CIP_NONBLOCKING: In non-blocking mode, each packet contains
  *	sample_rate/8000 samples, with rounding up or down to adjust
  *	for clock skew and left-over fractional samples.  This should
  *	be used if supported by the device.
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 enum cip_out_flags {
 	CIP_NONBLOCKING = 0,
 =======
+=======
+>>>>>>> v3.18
  * @CIP_BLOCKING: In blocking mode, each packet contains either zero or
  *	SYT_INTERVAL samples, with these two types alternating so that
  *	the overall sample rate comes out right.
@@ -55,6 +64,9 @@ enum cip_flags {
 	CIP_SKIP_DBC_ZERO_CHECK	= 0x20,
 	CIP_SKIP_INIT_DBC_CHECK	= 0x40,
 	CIP_EMPTY_HAS_WRONG_DBC	= 0x80,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -70,6 +82,7 @@ enum cip_sfc {
 	CIP_SFC_176400 = 5,
 	CIP_SFC_192000 = 6,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 #define AMDTP_OUT_PCM_FORMAT_BITS	(SNDRV_PCM_FMTBIT_S16 | \
@@ -83,6 +96,8 @@ struct amdtp_out_stream {
 	struct fw_unit *unit;
 	enum cip_out_flags flags;
 =======
+=======
+>>>>>>> v3.18
 	CIP_SFC_COUNT
 };
 
@@ -123,6 +138,9 @@ struct amdtp_stream {
 	struct fw_unit *unit;
 	enum cip_flags flags;
 	enum amdtp_stream_direction direction;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fw_iso_context *context;
 	struct mutex mutex;
@@ -132,12 +150,15 @@ struct amdtp_stream {
 	unsigned int pcm_channels;
 	unsigned int midi_ports;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void (*transfer_samples)(struct amdtp_out_stream *s,
 				 struct snd_pcm_substream *pcm,
 				 __be32 *buffer, unsigned int frames);
 
 	unsigned int syt_interval;
 =======
+=======
+>>>>>>> v3.18
 	void (*transfer_samples)(struct amdtp_stream *s,
 				 struct snd_pcm_substream *pcm,
 				 __be32 *buffer, unsigned int frames);
@@ -146,6 +167,9 @@ struct amdtp_stream {
 
 	unsigned int syt_interval;
 	unsigned int transfer_delay;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int source_node_id_field;
 	struct iso_packets_buffer buffer;
@@ -164,6 +188,7 @@ struct amdtp_stream {
 	unsigned int pcm_buffer_pointer;
 	unsigned int pcm_period_pointer;
 	bool pointer_flush;
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -227,6 +252,8 @@ static inline bool amdtp_out_streaming_error(struct amdtp_out_stream *s)
  * amdtp_out_stream_pcm_trigger - start/stop playback from a PCM device
  * @s: the AMDTP output stream
 =======
+=======
+>>>>>>> v3.18
 	bool double_pcm_frames;
 
 	struct snd_rawmidi_substream *midi[AMDTP_MAX_CHANNELS_FOR_MIDI * 8];
@@ -305,6 +332,9 @@ static inline bool amdtp_stream_pcm_running(struct amdtp_stream *s)
 /**
  * amdtp_stream_pcm_trigger - start/stop playback from a PCM device
  * @s: the AMDTP stream
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @pcm: the PCM device to be started, or %NULL to stop the current device
  *
@@ -313,8 +343,13 @@ static inline bool amdtp_stream_pcm_running(struct amdtp_stream *s)
  * device's .trigger callback.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void amdtp_out_stream_pcm_trigger(struct amdtp_out_stream *s,
 						struct snd_pcm_substream *pcm)
+=======
+static inline void amdtp_stream_pcm_trigger(struct amdtp_stream *s,
+					    struct snd_pcm_substream *pcm)
+>>>>>>> v3.18
 =======
 static inline void amdtp_stream_pcm_trigger(struct amdtp_stream *s,
 					    struct snd_pcm_substream *pcm)
@@ -324,7 +359,10 @@ static inline void amdtp_stream_pcm_trigger(struct amdtp_stream *s,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * amdtp_stream_midi_trigger - start/stop playback/capture with a MIDI device
  * @s: the AMDTP stream
@@ -343,6 +381,9 @@ static inline void amdtp_stream_midi_trigger(struct amdtp_stream *s,
 		ACCESS_ONCE(s->midi[port]) = midi;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline bool cip_sfc_is_base_44100(enum cip_sfc sfc)
 {
@@ -350,7 +391,10 @@ static inline bool cip_sfc_is_base_44100(enum cip_sfc sfc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void amdtp_stream_set_sync(enum cip_flags sync_mode,
 					 struct amdtp_stream *master,
 					 struct amdtp_stream *slave)
@@ -383,5 +427,8 @@ static inline bool amdtp_stream_wait_callback(struct amdtp_stream *s,
 				  msecs_to_jiffies(timeout)) > 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

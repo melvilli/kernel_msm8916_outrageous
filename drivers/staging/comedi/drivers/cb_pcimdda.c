@@ -16,11 +16,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -83,6 +86,10 @@ Configuration Options: not applicable, uses PCI auto config
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -102,6 +109,7 @@ Configuration Options: not applicable, uses PCI auto config
 #define PCIMDDA_8255_BASE_REG		0x0c
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_AO_READBACK_CHANNELS	6
 
 struct cb_pcimdda_private {
@@ -118,6 +126,8 @@ static int cb_pcimdda_ao_winsn(struct comedi_device *dev,
 	unsigned long offset = dev->iobase + PCIMDDA_DA_CHAN(chan);
 	unsigned int val = 0;
 =======
+=======
+>>>>>>> v3.18
 static int cb_pcimdda_ao_insn_write(struct comedi_device *dev,
 				    struct comedi_subdevice *s,
 				    struct comedi_insn *insn,
@@ -126,6 +136,9 @@ static int cb_pcimdda_ao_insn_write(struct comedi_device *dev,
 	unsigned int chan = CR_CHAN(insn->chanspec);
 	unsigned long offset = dev->iobase + PCIMDDA_DA_CHAN(chan);
 	unsigned int val = s->readback[chan];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int i;
 
@@ -145,9 +158,13 @@ static int cb_pcimdda_ao_insn_write(struct comedi_device *dev,
 		outb((val >> 8) & 0x00ff, offset + 1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* Cache the last value for readback */
 	devpriv->ao_readback[chan] = val;
+=======
+	s->readback[chan] = val;
+>>>>>>> v3.18
 =======
 	s->readback[chan] = val;
 >>>>>>> v3.18
@@ -155,6 +172,7 @@ static int cb_pcimdda_ao_insn_write(struct comedi_device *dev,
 	return insn->n;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int cb_pcimdda_ao_rinsn(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
@@ -175,6 +193,8 @@ static int cb_pcimdda_ao_rinsn(struct comedi_device *dev,
 
 	return insn->n;
 =======
+=======
+>>>>>>> v3.18
 static int cb_pcimdda_ao_insn_read(struct comedi_device *dev,
 				   struct comedi_subdevice *s,
 				   struct comedi_insn *insn,
@@ -186,6 +206,9 @@ static int cb_pcimdda_ao_insn_read(struct comedi_device *dev,
 	inw(dev->iobase + PCIMDDA_DA_CHAN(chan));
 
 	return comedi_readback_insn_read(dev, s, insn, data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -193,6 +216,7 @@ static int cb_pcimdda_auto_attach(struct comedi_device *dev,
 					    unsigned long context_unused)
 {
 	struct pci_dev *pcidev = comedi_to_pci_dev(dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct cb_pcimdda_private *devpriv;
 	struct comedi_subdevice *s;
@@ -203,6 +227,11 @@ static int cb_pcimdda_auto_attach(struct comedi_device *dev,
 		return -ENOMEM;
 	dev->private = devpriv;
 
+=======
+	struct comedi_subdevice *s;
+	int ret;
+
+>>>>>>> v3.18
 =======
 	struct comedi_subdevice *s;
 	int ret;
@@ -225,6 +254,7 @@ static int cb_pcimdda_auto_attach(struct comedi_device *dev,
 	s->maxdata	= 0xffff;
 	s->range_table	= &range_bipolar5;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->insn_write	= cb_pcimdda_ao_winsn;
 	s->insn_read	= cb_pcimdda_ao_rinsn;
 
@@ -245,6 +275,8 @@ static void cb_pcimdda_detach(struct comedi_device *dev)
 	comedi_spriv_free(dev, 1);
 	comedi_pci_disable(dev);
 =======
+=======
+>>>>>>> v3.18
 	s->insn_write	= cb_pcimdda_ao_insn_write;
 	s->insn_read	= cb_pcimdda_ao_insn_read;
 
@@ -259,6 +291,9 @@ static void cb_pcimdda_detach(struct comedi_device *dev)
 		return ret;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -267,7 +302,11 @@ static struct comedi_driver cb_pcimdda_driver = {
 	.module		= THIS_MODULE,
 	.auto_attach	= cb_pcimdda_auto_attach,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.detach		= cb_pcimdda_detach,
+=======
+	.detach		= comedi_pci_detach,
+>>>>>>> v3.18
 =======
 	.detach		= comedi_pci_detach,
 >>>>>>> v3.18
@@ -281,7 +320,11 @@ static int cb_pcimdda_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(cb_pcimdda_pci_table) = {
+=======
+static const struct pci_device_id cb_pcimdda_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id cb_pcimdda_pci_table[] = {
 >>>>>>> v3.18

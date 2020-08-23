@@ -144,7 +144,11 @@ static void sun4d_sbus_handler_irq(int sbusl)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sun4d_handler_irq(int pil, struct pt_regs *regs)
+=======
+void sun4d_handler_irq(unsigned int pil, struct pt_regs *regs)
+>>>>>>> v3.18
 =======
 void sun4d_handler_irq(unsigned int pil, struct pt_regs *regs)
 >>>>>>> v3.18
@@ -241,7 +245,11 @@ static void sun4d_shutdown_irq(struct irq_data *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct irq_chip sun4d_irq = {
+=======
+static struct irq_chip sun4d_irq = {
+>>>>>>> v3.18
 =======
 static struct irq_chip sun4d_irq = {
 >>>>>>> v3.18
@@ -294,9 +302,15 @@ static void __init sun4d_load_profile_irqs(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int _sun4d_build_device_irq(unsigned int real_irq,
                                      unsigned int pil,
                                      unsigned int board)
+=======
+static unsigned int _sun4d_build_device_irq(unsigned int real_irq,
+                                            unsigned int pil,
+                                            unsigned int board)
+>>>>>>> v3.18
 =======
 static unsigned int _sun4d_build_device_irq(unsigned int real_irq,
                                             unsigned int pil,
@@ -335,8 +349,13 @@ err_out:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int sun4d_build_device_irq(struct platform_device *op,
                                     unsigned int real_irq)
+=======
+static unsigned int sun4d_build_device_irq(struct platform_device *op,
+                                           unsigned int real_irq)
+>>>>>>> v3.18
 =======
 static unsigned int sun4d_build_device_irq(struct platform_device *op,
                                            unsigned int real_irq)
@@ -403,7 +422,12 @@ err_out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int sun4d_build_timer_irq(unsigned int board, unsigned int real_irq)
+=======
+static unsigned int sun4d_build_timer_irq(unsigned int board,
+                                          unsigned int real_irq)
+>>>>>>> v3.18
 =======
 static unsigned int sun4d_build_timer_irq(unsigned int board,
                                           unsigned int real_irq)

@@ -8,6 +8,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/init.h>
+>>>>>>> v3.18
 =======
 #include <linux/init.h>
 >>>>>>> v3.18
@@ -67,12 +71,18 @@ int dvma_map_iommu(unsigned long kaddr, unsigned long baddr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void sun3_dvma_init(void)
 {
 
 	memset(ptelist, 0, sizeof(ptelist));
 
 
+=======
+void __init sun3_dvma_init(void)
+{
+	memset(ptelist, 0, sizeof(ptelist));
+>>>>>>> v3.18
 =======
 void __init sun3_dvma_init(void)
 {

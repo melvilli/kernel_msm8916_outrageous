@@ -80,6 +80,10 @@
 #define v4l2_fourcc(a, b, c, d)\
 	((__u32)(a) | ((__u32)(b) << 8) | ((__u32)(c) << 16) | ((__u32)(d) << 24))
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define v4l2_fourcc_be(a, b, c, d)	(v4l2_fourcc(a, b, c, d) | (1 << 31))
+>>>>>>> v3.18
 =======
 #define v4l2_fourcc_be(a, b, c, d)	(v4l2_fourcc(a, b, c, d) | (1 << 31))
 >>>>>>> v3.18
@@ -129,11 +133,17 @@ enum v4l2_field {
 	 (field) == V4L2_FIELD_SEQ_TB ||\
 	 (field) == V4L2_FIELD_SEQ_BT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_FIELD_HAS_T_OR_B(field)	\
 	((field) == V4L2_FIELD_BOTTOM ||\
 	 (field) == V4L2_FIELD_TOP ||\
 	 (field) == V4L2_FIELD_ALTERNATE)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum v4l2_buf_type {
@@ -151,6 +161,10 @@ enum v4l2_buf_type {
 	V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE = 9,
 	V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE  = 10,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	V4L2_BUF_TYPE_SDR_CAPTURE          = 11,
+>>>>>>> v3.18
 =======
 	V4L2_BUF_TYPE_SDR_CAPTURE          = 11,
 >>>>>>> v3.18
@@ -171,9 +185,12 @@ enum v4l2_buf_type {
 	 || (type) == V4L2_BUF_TYPE_SLICED_VBI_OUTPUT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_TYPE_IS_PRIVATE(type)				\
 	((type) == V4L2_BUF_TYPE_PRIVATE)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum v4l2_tuner_type {
@@ -181,6 +198,11 @@ enum v4l2_tuner_type {
 	V4L2_TUNER_ANALOG_TV	     = 2,
 	V4L2_TUNER_DIGITAL_TV	     = 3,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	V4L2_TUNER_ADC               = 4,
+	V4L2_TUNER_RF                = 5,
+>>>>>>> v3.18
 =======
 	V4L2_TUNER_ADC               = 4,
 	V4L2_TUNER_RF                = 5,
@@ -234,8 +256,13 @@ struct v4l2_rect {
 	__s32   left;
 	__s32   top;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__s32   width;
 	__s32   height;
+=======
+	__u32   width;
+	__u32   height;
+>>>>>>> v3.18
 =======
 	__u32   width;
 	__u32   height;
@@ -296,6 +323,12 @@ struct v4l2_capability {
 #define V4L2_CAP_MODULATOR		0x00080000  /* has a modulator */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V4L2_CAP_SDR_CAPTURE		0x00100000  /* Is a SDR capture device */
+#define V4L2_CAP_EXT_PIX_FORMAT		0x00200000  /* Supports the extended pixel format */
+
+>>>>>>> v3.18
 =======
 #define V4L2_CAP_SDR_CAPTURE		0x00100000  /* Is a SDR capture device */
 #define V4L2_CAP_EXT_PIX_FORMAT		0x00200000  /* Supports the extended pixel format */
@@ -320,6 +353,10 @@ struct v4l2_pix_format {
 	__u32			colorspace;	/* enum v4l2_colorspace */
 	__u32			priv;		/* private data, depends on pixelformat */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	__u32			flags;		/* format flags (V4L2_PIX_FMT_FLAG_*) */
+>>>>>>> v3.18
 =======
 	__u32			flags;		/* format flags (V4L2_PIX_FMT_FLAG_*) */
 >>>>>>> v3.18
@@ -331,10 +368,13 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_RGB332  v4l2_fourcc('R', 'G', 'B', '1') /*  8  RGB-3-3-2     */
 #define V4L2_PIX_FMT_RGB444  v4l2_fourcc('R', '4', '4', '4') /* 16  xxxxrrrr ggggbbbb */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_PIX_FMT_RGB555  v4l2_fourcc('R', 'G', 'B', 'O') /* 16  RGB-5-5-5     */
 #define V4L2_PIX_FMT_RGB565  v4l2_fourcc('R', 'G', 'B', 'P') /* 16  RGB-5-6-5     */
 #define V4L2_PIX_FMT_RGB555X v4l2_fourcc('R', 'G', 'B', 'Q') /* 16  RGB-5-5-5 BE  */
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_PIX_FMT_ARGB444 v4l2_fourcc('A', 'R', '1', '2') /* 16  aaaarrrr ggggbbbb */
 #define V4L2_PIX_FMT_XRGB444 v4l2_fourcc('X', 'R', '1', '2') /* 16  xxxxrrrr ggggbbbb */
 #define V4L2_PIX_FMT_RGB555  v4l2_fourcc('R', 'G', 'B', 'O') /* 16  RGB-5-5-5     */
@@ -344,6 +384,9 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_RGB555X v4l2_fourcc('R', 'G', 'B', 'Q') /* 16  RGB-5-5-5 BE  */
 #define V4L2_PIX_FMT_ARGB555X v4l2_fourcc_be('A', 'R', '1', '5') /* 16  ARGB-5-5-5 BE */
 #define V4L2_PIX_FMT_XRGB555X v4l2_fourcc_be('X', 'R', '1', '5') /* 16  XRGB-5-5-5 BE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define V4L2_PIX_FMT_RGB565X v4l2_fourcc('R', 'G', 'B', 'R') /* 16  RGB-5-6-5 BE  */
 #define V4L2_PIX_FMT_BGR666  v4l2_fourcc('B', 'G', 'R', 'H') /* 18  BGR-6-6-6	  */
@@ -351,13 +394,19 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_RGB24   v4l2_fourcc('R', 'G', 'B', '3') /* 24  RGB-8-8-8     */
 #define V4L2_PIX_FMT_BGR32   v4l2_fourcc('B', 'G', 'R', '4') /* 32  BGR-8-8-8-8   */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_PIX_FMT_RGB32   v4l2_fourcc('R', 'G', 'B', '4') /* 32  RGB-8-8-8-8   */
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_PIX_FMT_ABGR32  v4l2_fourcc('A', 'R', '2', '4') /* 32  BGRA-8-8-8-8  */
 #define V4L2_PIX_FMT_XBGR32  v4l2_fourcc('X', 'R', '2', '4') /* 32  BGRX-8-8-8-8  */
 #define V4L2_PIX_FMT_RGB32   v4l2_fourcc('R', 'G', 'B', '4') /* 32  RGB-8-8-8-8   */
 #define V4L2_PIX_FMT_ARGB32  v4l2_fourcc('B', 'A', '2', '4') /* 32  ARGB-8-8-8-8  */
 #define V4L2_PIX_FMT_XRGB32  v4l2_fourcc('B', 'X', '2', '4') /* 32  XRGB-8-8-8-8  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Grey formats */
@@ -410,6 +459,11 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_NV12M   v4l2_fourcc('N', 'M', '1', '2') /* 12  Y/CbCr 4:2:0  */
 #define V4L2_PIX_FMT_NV21M   v4l2_fourcc('N', 'M', '2', '1') /* 21  Y/CrCb 4:2:0  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V4L2_PIX_FMT_NV16M   v4l2_fourcc('N', 'M', '1', '6') /* 16  Y/CbCr 4:2:2  */
+#define V4L2_PIX_FMT_NV61M   v4l2_fourcc('N', 'M', '6', '1') /* 16  Y/CrCb 4:2:2  */
+>>>>>>> v3.18
 =======
 #define V4L2_PIX_FMT_NV16M   v4l2_fourcc('N', 'M', '1', '6') /* 16  Y/CbCr 4:2:2  */
 #define V4L2_PIX_FMT_NV61M   v4l2_fourcc('N', 'M', '6', '1') /* 16  Y/CrCb 4:2:2  */
@@ -462,6 +516,7 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_MPEG1    v4l2_fourcc('M', 'P', 'G', '1') /* MPEG-1 ES     */
 #define V4L2_PIX_FMT_MPEG2    v4l2_fourcc('M', 'P', 'G', '2') /* MPEG-2 ES     */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_PIX_FMT_MPEG4    v4l2_fourcc('M', 'P', 'G', '4') /* MPEG-4 ES     */
 #define V4L2_PIX_FMT_XVID     v4l2_fourcc('X', 'V', 'I', 'D') /* Xvid           */
 #define V4L2_PIX_FMT_VC1_ANNEX_G v4l2_fourcc('V', 'C', '1', 'G') /* SMPTE 421M Annex G compliant stream */
@@ -472,11 +527,16 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_HEVC v4l2_fourcc('H', 'E', 'V', 'C') /* for HEVC stream */
 #define V4L2_PIX_FMT_HEVC_HYBRID v4l2_fourcc('H', 'V', 'C', 'H')
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_PIX_FMT_MPEG4    v4l2_fourcc('M', 'P', 'G', '4') /* MPEG-4 part 2 ES */
 #define V4L2_PIX_FMT_XVID     v4l2_fourcc('X', 'V', 'I', 'D') /* Xvid           */
 #define V4L2_PIX_FMT_VC1_ANNEX_G v4l2_fourcc('V', 'C', '1', 'G') /* SMPTE 421M Annex G compliant stream */
 #define V4L2_PIX_FMT_VC1_ANNEX_L v4l2_fourcc('V', 'C', '1', 'L') /* SMPTE 421M Annex L compliant stream */
 #define V4L2_PIX_FMT_VP8      v4l2_fourcc('V', 'P', '8', '0') /* VP8 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*  Vendor-specific formats   */
@@ -507,6 +567,7 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_SE401      v4l2_fourcc('S', '4', '0', '1') /* se401 janggu compressed rgb */
 #define V4L2_PIX_FMT_S5C_UYVY_JPG v4l2_fourcc('S', '5', 'C', 'I') /* S5C73M3 interleaved UYVY/JPEG */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_PIX_FMT_STATS_COMB v4l2_fourcc('S', 'T', 'C', 'M') /* Composite stats */
 
 #define V4L2_PIX_FMT_STATS_AE   v4l2_fourcc('S', 'T', 'A', 'E') /* AEC stats */
@@ -519,6 +580,8 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_STATS_BF   v4l2_fourcc('S', 'T', 'B', 'F') /* Bayer focus stats */
 #define V4L2_PIX_FMT_STATS_BHST v4l2_fourcc('B', 'H', 'S', 'T') /* Bayer hist stats */
 =======
+=======
+>>>>>>> v3.18
 
 /* SDR formats - used only for Software Defined Radio devices */
 #define V4L2_SDR_FMT_CU8          v4l2_fourcc('C', 'U', '0', '8') /* IQ u8 */
@@ -532,6 +595,9 @@ struct v4l2_pix_format {
 
 /* Flags */
 #define V4L2_PIX_FMT_FLAG_PREMUL_ALPHA	0x00000001
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -661,7 +727,11 @@ struct v4l2_jpegcompression {
 				 * output. Unless you exactly know what
 				 * you do, leave them untouched.
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 * Inluding less markers will make the
+=======
+				 * Including less markers will make the
+>>>>>>> v3.18
 =======
 				 * Including less markers will make the
 >>>>>>> v3.18
@@ -677,7 +747,11 @@ struct v4l2_jpegcompression {
 #define V4L2_JPEG_MARKER_COM (1<<6)    /* Comment segment */
 #define V4L2_JPEG_MARKER_APP (1<<7)    /* App segment, driver will
 <<<<<<< HEAD
+<<<<<<< HEAD
 					* allways use APP0 */
+=======
+					* always use APP0 */
+>>>>>>> v3.18
 =======
 					* always use APP0 */
 >>>>>>> v3.18
@@ -752,7 +826,10 @@ struct v4l2_plane {
  *		buffers (when type != *_MPLANE); number of elements in the
  *		planes array for multi-plane buffers
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @input:	input number from which the video data has has been captured
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -783,6 +860,7 @@ struct v4l2_buffer {
 };
 
 /*  Flags for 'flags' field */
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define V4L2_BUF_FLAG_MAPPED	0x0001  /* Buffer is mapped (flag) */
 #define V4L2_BUF_FLAG_QUEUED	0x0002	/* Buffer is queued for processing */
@@ -819,6 +897,8 @@ struct v4l2_buffer {
 #define V4L2_MSM_BUF_FLAG_YUV_601_709_CLAMP	0x20000000
 #define V4L2_MSM_BUF_FLAG_MBAFF			0x40000000
 =======
+=======
+>>>>>>> v3.18
 /* Buffer is mapped (flag) */
 #define V4L2_BUF_FLAG_MAPPED			0x00000001
 /* Buffer is queued for processing */
@@ -849,6 +929,9 @@ struct v4l2_buffer {
 #define V4L2_BUF_FLAG_TSTAMP_SRC_MASK		0x00070000
 #define V4L2_BUF_FLAG_TSTAMP_SRC_EOF		0x00000000
 #define V4L2_BUF_FLAG_TSTAMP_SRC_SOE		0x00010000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -888,8 +971,11 @@ struct v4l2_framebuffer {
  * region + offset instead of some physical address */
 	void                    *base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct v4l2_pix_format	fmt;
 =======
+=======
+>>>>>>> v3.18
 	struct {
 		__u32		width;
 		__u32		height;
@@ -900,6 +986,9 @@ struct v4l2_framebuffer {
 		__u32		colorspace;	/* enum v4l2_colorspace */
 		__u32		priv;		/* reserved field, set to 0 */
 	} fmt;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 /*  Flags for the 'capability' field. Read only */
@@ -951,12 +1040,15 @@ struct v4l2_captureparm {
 #define V4L2_MODE_HIGHQUALITY	0x0001	/*  High quality imaging mode */
 #define V4L2_CAP_TIMEPERFRAME	0x1000	/*  timeperframe field is supported */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_CAP_QCOM_FRAMESKIP	0x2000	/*  frame skipping is supported */
 
 struct v4l2_qcom_frameskip {
 	__u64		   maxframeinterval;
 	__u8		   fpsvariance;
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1088,7 +1180,11 @@ typedef __u64 v4l2_std_id;
  * "Common" PAL - This macro is there to be compatible with the old
  * V4L1 concept of "PAL": /BGDKHI.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Several PAL standards are mising here: /M, /N and /Nc
+=======
+ * Several PAL standards are missing here: /M, /N and /Nc
+>>>>>>> v3.18
 =======
  * Several PAL standards are missing here: /M, /N and /Nc
 >>>>>>> v3.18
@@ -1247,7 +1343,10 @@ struct v4l2_bt_timings {
 #define V4L2_DV_FL_HALF_LINE			(1 << 3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* A few useful defines to calculate the total blanking and frame sizes */
 #define V4L2_DV_BT_BLANKING_WIDTH(bt) \
 	((bt)->hfrontporch + (bt)->hsync + (bt)->hbackporch)
@@ -1258,6 +1357,9 @@ struct v4l2_bt_timings {
 	 (bt)->il_vfrontporch + (bt)->il_vsync + (bt)->il_vbackporch)
 #define V4L2_DV_BT_FRAME_HEIGHT(bt) \
 	((bt)->height + V4L2_DV_BT_BLANKING_HEIGHT(bt))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /** struct v4l2_dv_timings - DV timings
@@ -1279,6 +1381,11 @@ struct v4l2_dv_timings {
 /** struct v4l2_enum_dv_timings - DV timings enumeration
  * @index:	enumeration index
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @pad:	the pad number for which to enumerate timings (used with
+ *		v4l-subdev nodes only)
+>>>>>>> v3.18
 =======
  * @pad:	the pad number for which to enumerate timings (used with
  *		v4l-subdev nodes only)
@@ -1289,7 +1396,12 @@ struct v4l2_dv_timings {
 struct v4l2_enum_dv_timings {
 	__u32 index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 reserved[3];
+=======
+	__u32 pad;
+	__u32 reserved[2];
+>>>>>>> v3.18
 =======
 	__u32 pad;
 	__u32 reserved[2];
@@ -1332,6 +1444,11 @@ struct v4l2_bt_timings_cap {
 /** struct v4l2_dv_timings_cap - DV timings capabilities
  * @type:	the type of the timings (same as in struct v4l2_dv_timings)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @pad:	the pad number for which to query capabilities (used with
+ *		v4l-subdev nodes only)
+>>>>>>> v3.18
 =======
  * @pad:	the pad number for which to query capabilities (used with
  *		v4l-subdev nodes only)
@@ -1341,7 +1458,12 @@ struct v4l2_bt_timings_cap {
 struct v4l2_dv_timings_cap {
 	__u32 type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u32 reserved[3];
+=======
+	__u32 pad;
+	__u32 reserved[2];
+>>>>>>> v3.18
 =======
 	__u32 pad;
 	__u32 reserved[2];
@@ -1440,13 +1562,19 @@ struct v4l2_ext_control {
 		__s32 value;
 		__s64 value64;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char *string;
 =======
+=======
+>>>>>>> v3.18
 		char __user *string;
 		__u8 __user *p_u8;
 		__u16 __user *p_u16;
 		__u32 __user *p_u32;
 		void __user *ptr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 } __attribute__ ((packed));
@@ -1463,6 +1591,10 @@ struct v4l2_ext_controls {
 #define V4L2_CTRL_ID2CLASS(id)    ((id) & 0x0fff0000UL)
 #define V4L2_CTRL_DRIVER_PRIV(id) (((id) & 0xffff) >= 0x1000)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V4L2_CTRL_MAX_DIMS	  (4)
+>>>>>>> v3.18
 =======
 #define V4L2_CTRL_MAX_DIMS	  (4)
 >>>>>>> v3.18
@@ -1477,8 +1609,11 @@ enum v4l2_ctrl_type {
 	V4L2_CTRL_TYPE_STRING        = 7,
 	V4L2_CTRL_TYPE_BITMASK       = 8,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	V4L2_CTRL_TYPE_INTEGER_MENU = 9,
 =======
+=======
+>>>>>>> v3.18
 	V4L2_CTRL_TYPE_INTEGER_MENU  = 9,
 
 	/* Compound types are >= 0x0100 */
@@ -1486,6 +1621,9 @@ enum v4l2_ctrl_type {
 	V4L2_CTRL_TYPE_U8	     = 0x0100,
 	V4L2_CTRL_TYPE_U16	     = 0x0101,
 	V4L2_CTRL_TYPE_U32	     = 0x0102,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -1503,7 +1641,10 @@ struct v4l2_queryctrl {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*  Used in the VIDIOC_QUERY_EXT_CTRL ioctl for querying extended controls */
 struct v4l2_query_ext_ctrl {
 	__u32		     id;
@@ -1521,6 +1662,9 @@ struct v4l2_query_ext_ctrl {
 	__u32		     reserved[32];
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*  Used in the VIDIOC_QUERYMENU ioctl for querying menu items */
 struct v4l2_querymenu {
@@ -1543,15 +1687,21 @@ struct v4l2_querymenu {
 #define V4L2_CTRL_FLAG_WRITE_ONLY 	0x0040
 #define V4L2_CTRL_FLAG_VOLATILE		0x0080
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*  Query flag, to be ORed with the control ID */
 #define V4L2_CTRL_FLAG_NEXT_CTRL	0x80000000
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_CTRL_FLAG_HAS_PAYLOAD	0x0100
 
 /*  Query flags, to be ORed with the control ID */
 #define V4L2_CTRL_FLAG_NEXT_CTRL	0x80000000
 #define V4L2_CTRL_FLAG_NEXT_COMPOUND	0x40000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*  User-class control IDs defined by V4L2 */
@@ -1602,6 +1752,10 @@ struct v4l2_modulator {
 #define V4L2_TUNER_CAP_FREQ_BANDS	0x0400
 #define V4L2_TUNER_CAP_HWSEEK_PROG_LIM	0x0800
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V4L2_TUNER_CAP_1HZ		0x1000
+>>>>>>> v3.18
 =======
 #define V4L2_TUNER_CAP_1HZ		0x1000
 >>>>>>> v3.18
@@ -1735,7 +1889,10 @@ struct v4l2_enc_idx {
 #define V4L2_ENC_CMD_PAUSE      (2)
 #define V4L2_ENC_CMD_RESUME     (3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_ENC_QCOM_CMD_FLUSH  (4)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1758,7 +1915,10 @@ struct v4l2_encoder_cmd {
 #define V4L2_DEC_CMD_PAUSE       (2)
 #define V4L2_DEC_CMD_RESUME      (3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_DEC_QCOM_CMD_FLUSH  (4)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1773,6 +1933,7 @@ struct v4l2_encoder_cmd {
 #define V4L2_DEC_CMD_STOP_IMMEDIATELY	(1 << 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Flags for V4L2_DEC_QCOM_CMD_FLUSH */
 #define V4L2_DEC_QCOM_CMD_FLUSH_OUTPUT  (1 << 0)
 #define V4L2_DEC_QCOM_CMD_FLUSH_CAPTURE (1 << 1)
@@ -1780,6 +1941,8 @@ struct v4l2_encoder_cmd {
 #define V4L2_QCOM_CMD_FLUSH_OUTPUT  (1 << 0)
 #define V4L2_QCOM_CMD_FLUSH_CAPTURE (1 << 1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Play format requirements (returned by the driver): */
@@ -1840,13 +2003,19 @@ struct v4l2_vbi_format {
 #define V4L2_VBI_INTERLACED	(1 << 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* ITU-R start lines for each field */
 #define V4L2_VBI_ITU_525_F1_START (1)
 #define V4L2_VBI_ITU_525_F2_START (264)
 #define V4L2_VBI_ITU_625_F1_START (1)
 #define V4L2_VBI_ITU_625_F2_START (314)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Sliced VBI
  *
@@ -1972,6 +2141,10 @@ struct v4l2_plane_pix_format {
  * @plane_fmt:		per-plane information
  * @num_planes:		number of planes for this format
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @flags:		format flags (V4L2_PIX_FMT_FLAG_*)
+>>>>>>> v3.18
 =======
  * @flags:		format flags (V4L2_PIX_FMT_FLAG_*)
 >>>>>>> v3.18
@@ -1986,8 +2159,11 @@ struct v4l2_pix_format_mplane {
 	struct v4l2_plane_pix_format	plane_fmt[VIDEO_MAX_PLANES];
 	__u8				num_planes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8				reserved[11];
 =======
+=======
+>>>>>>> v3.18
 	__u8				flags;
 	__u8				reserved[10];
 } __attribute__ ((packed));
@@ -2001,6 +2177,9 @@ struct v4l2_sdr_format {
 	__u32				pixelformat;
 	__u32				buffersize;
 	__u8				reserved[24];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __attribute__ ((packed));
 
@@ -2023,6 +2202,10 @@ struct v4l2_format {
 		struct v4l2_vbi_format		vbi;     /* V4L2_BUF_TYPE_VBI_CAPTURE */
 		struct v4l2_sliced_vbi_format	sliced;  /* V4L2_BUF_TYPE_SLICED_VBI_CAPTURE */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct v4l2_sdr_format		sdr;     /* V4L2_BUF_TYPE_SDR_CAPTURE */
+>>>>>>> v3.18
 =======
 		struct v4l2_sdr_format		sdr;     /* V4L2_BUF_TYPE_SDR_CAPTURE */
 >>>>>>> v3.18
@@ -2051,6 +2234,7 @@ struct v4l2_streamparm {
 #define V4L2_EVENT_CTRL				3
 #define V4L2_EVENT_FRAME_SYNC			4
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_EVENT_PRIVATE_START		0x08000000
 
 #define V4L2_EVENT_MSM_VIDC_START	(V4L2_EVENT_PRIVATE_START + 0x00001000)
@@ -2070,10 +2254,15 @@ struct v4l2_streamparm {
 #define V4L2_EVENT_MSM_VIDC_HW_UNSUPPORTED (V4L2_EVENT_MSM_VIDC_START + 10)
 
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_EVENT_SOURCE_CHANGE		5
 #define V4L2_EVENT_MOTION_DET			6
 #define V4L2_EVENT_PRIVATE_START		0x08000000
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Payload for V4L2_EVENT_VSYNC */
 struct v4l2_event_vsync {
@@ -2105,7 +2294,10 @@ struct v4l2_event_frame_sync {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_EVENT_SRC_CH_RESOLUTION		(1 << 0)
 
 struct v4l2_event_src_change {
@@ -2127,6 +2319,9 @@ struct v4l2_event_motion_det {
 	__u32 region_mask;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct v4l2_event {
 	__u32				type;
@@ -2135,6 +2330,11 @@ struct v4l2_event {
 		struct v4l2_event_ctrl		ctrl;
 		struct v4l2_event_frame_sync	frame_sync;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		struct v4l2_event_src_change	src_change;
+		struct v4l2_event_motion_det	motion_det;
+>>>>>>> v3.18
 =======
 		struct v4l2_event_src_change	src_change;
 		struct v4l2_event_motion_det	motion_det;
@@ -2169,12 +2369,15 @@ struct v4l2_event_subscription {
 
 #define V4L2_CHIP_MATCH_BRIDGE      0  /* Match against chip ID on the bridge (0 for the bridge) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_CHIP_MATCH_HOST V4L2_CHIP_MATCH_BRIDGE
 #define V4L2_CHIP_MATCH_I2C_DRIVER  1  /* Match against I2C driver name */
 #define V4L2_CHIP_MATCH_I2C_ADDR    2  /* Match against I2C 7-bit address */
 #define V4L2_CHIP_MATCH_AC97        3  /* Match against anciliary AC97 chip */
 #define V4L2_CHIP_MATCH_SUBDEV      4  /* Match against subdev index */
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_CHIP_MATCH_SUBDEV      4  /* Match against subdev index */
 
 /* The following four defines are no longer in use */
@@ -2182,6 +2385,9 @@ struct v4l2_event_subscription {
 #define V4L2_CHIP_MATCH_I2C_DRIVER  1  /* Match against I2C driver name */
 #define V4L2_CHIP_MATCH_I2C_ADDR    2  /* Match against I2C 7-bit address */
 #define V4L2_CHIP_MATCH_AC97        3  /* Match against ancillary AC97 chip */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct v4l2_dbg_match {
@@ -2200,6 +2406,7 @@ struct v4l2_dbg_register {
 } __attribute__ ((packed));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* VIDIOC_DBG_G_CHIP_IDENT */
 struct v4l2_dbg_chip_ident {
 	struct v4l2_dbg_match match;
@@ -2207,6 +2414,8 @@ struct v4l2_dbg_chip_ident {
 	__u32 revision;    /* chip revision, chip specific */
 } __attribute__ ((packed));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define V4L2_CHIP_FL_READABLE (1 << 0)
@@ -2273,6 +2482,11 @@ struct v4l2_create_buffers {
 #define VIDIOC_G_INPUT		 _IOR('V', 38, int)
 #define VIDIOC_S_INPUT		_IOWR('V', 39, int)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VIDIOC_G_EDID		_IOWR('V', 40, struct v4l2_edid)
+#define VIDIOC_S_EDID		_IOWR('V', 41, struct v4l2_edid)
+>>>>>>> v3.18
 =======
 #define VIDIOC_G_EDID		_IOWR('V', 40, struct v4l2_edid)
 #define VIDIOC_S_EDID		_IOWR('V', 41, struct v4l2_edid)
@@ -2315,12 +2529,15 @@ struct v4l2_create_buffers {
 #define	VIDIOC_DBG_G_REGISTER 	_IOWR('V', 80, struct v4l2_dbg_register)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Experimental, meant for debugging, testing and internal use.
    Never use this ioctl in applications!
    Note: this ioctl is deprecated in favor of VIDIOC_DBG_G_CHIP_INFO and
    will go away in the future. */
 #define VIDIOC_DBG_G_CHIP_IDENT _IOWR('V', 81, struct v4l2_dbg_chip_ident)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define VIDIOC_S_HW_FREQ_SEEK	 _IOW('V', 82, struct v4l2_hw_freq_seek)
@@ -2360,6 +2577,11 @@ struct v4l2_create_buffers {
 #define VIDIOC_DBG_G_CHIP_INFO  _IOWR('V', 102, struct v4l2_dbg_chip_info)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define VIDIOC_QUERY_EXT_CTRL	_IOWR('V', 103, struct v4l2_query_ext_ctrl)
+
+>>>>>>> v3.18
 =======
 #define VIDIOC_QUERY_EXT_CTRL	_IOWR('V', 103, struct v4l2_query_ext_ctrl)
 

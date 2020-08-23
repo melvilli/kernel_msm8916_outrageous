@@ -32,8 +32,11 @@
 
 #undef KERNEL_STACK_OVERFLOW_CHECK
 <<<<<<< HEAD
+<<<<<<< HEAD
 #undef PREEMPTIBLE_KERNEL
 #undef ALLOCA_EXCEPTION_IN_IRAM
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -96,9 +99,15 @@
  *   a1:	a1
  *   a2:	new stack pointer, original value in depc
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -120,9 +129,14 @@
 ENTRY(user_exception)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Save a2, a3, and depc, restore excsave_1 and set SP. */
 
 	xsr	a3, excsave1
+=======
+	/* Save a1, a2, a3, and set SP. */
+
+>>>>>>> v3.18
 =======
 	/* Save a1, a2, a3, and set SP. */
 
@@ -253,9 +267,15 @@ ENDPROC(user_exception)
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -277,9 +297,14 @@ ENDPROC(user_exception)
 ENTRY(kernel_exception)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Save a0, a2, a3, DEPC and set SP. */
 
 	xsr	a3, excsave1		# restore a3, excsave_1
+=======
+	/* Save a1, a2, a3, and set SP. */
+
+>>>>>>> v3.18
 =======
 	/* Save a1, a2, a3, and set SP. */
 
@@ -435,7 +460,11 @@ common_exception:
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movi	a4, exc_table
+=======
+	rsr	a4, excsave1
+>>>>>>> v3.18
 =======
 	rsr	a4, excsave1
 >>>>>>> v3.18
@@ -452,6 +481,7 @@ common_exception:
 	.global common_exception_return
 common_exception_return:
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_TRACE_IRQFLAGS
 	l32i	a4, a1, PT_DEPC
@@ -476,6 +506,8 @@ common_exception_return:
 
 	rsil	a2, 0
 =======
+=======
+>>>>>>> v3.18
 1:
 	rsil	a2, LOCKLEVEL
 
@@ -485,6 +517,9 @@ common_exception_return:
 	GET_THREAD_INFO(a2, a1)
 	l32i	a4, a2, TI_FLAGS
 	_bbci.l	a3, PS_UM_BIT, 6f
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Specific to a user exception exit:
@@ -494,6 +529,7 @@ common_exception_return:
 	 * Note that we don't disable interrupts here. 
 	 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	GET_THREAD_INFO(a2,a1)
 	l32i	a4, a2, TI_FLAGS
@@ -506,6 +542,11 @@ common_exception_return:
 	_bbsi.l	a4, TIF_NOTIFY_RESUME, 2f
 	_bbci.l	a4, TIF_SIGPENDING, 5f
 >>>>>>> v3.18
+=======
+	_bbsi.l	a4, TIF_NEED_RESCHED, 3f
+	_bbsi.l	a4, TIF_NOTIFY_RESUME, 2f
+	_bbci.l	a4, TIF_SIGPENDING, 5f
+>>>>>>> v3.18
 
 2:	l32i	a4, a1, PT_DEPC
 	bgeui	a4, VALID_DOUBLE_EXCEPTION_ADDRESS, 4f
@@ -513,6 +554,10 @@ common_exception_return:
 	/* Call do_signal() */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rsil	a2, 0
+>>>>>>> v3.18
 =======
 	rsil	a2, 0
 >>>>>>> v3.18
@@ -524,6 +569,10 @@ common_exception_return:
 3:	/* Reschedule */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rsil	a2, 0
+>>>>>>> v3.18
 =======
 	rsil	a2, 0
 >>>>>>> v3.18
@@ -532,8 +581,11 @@ common_exception_return:
 	j	1b
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 4:	/* Restore optional registers. */
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PREEMPT
 6:
 	_bbci.l	a4, TIF_NEED_RESCHED, 4f
@@ -572,6 +624,9 @@ common_exception_return:
 1:
 #endif
 	/* Restore optional registers. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	load_xtregs_opt a1 a2 a4 a5 a6 a7 PT_XTREGS_OPT
@@ -646,7 +701,10 @@ user_exception_exit:
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if XCHAL_HAVE_THREADPTR
@@ -655,7 +713,11 @@ user_exception_exit:
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	j	common_exception_exit
+=======
+2:	j	common_exception_exit
+>>>>>>> v3.18
 =======
 2:	j	common_exception_exit
 >>>>>>> v3.18
@@ -667,6 +729,7 @@ user_exception_exit:
 
 kernel_exception_exit:
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef PREEMPTIBLE_KERNEL
 
@@ -691,6 +754,8 @@ kernel_exception_exit:
 
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Check if we have to do a movsp.
@@ -930,12 +995,15 @@ ENDPROC(unrecoverable_exception)
  *  The ALLOCA handler is entered when user code executes the MOVSP
  *  instruction and the caller's frame is not in the register file.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  In this case, the caller frame's a0..a3 are on the stack just
  *  below sp (a1), and this handler moves them.
  *
  *  For "MOVSP <ar>,<as>" without destination register a1, this routine
  *  simply moves the value from <as> to <ar> without moving the save area.
 =======
+=======
+>>>>>>> v3.18
  *
  * This algorithm was taken from the Ross Morley's RTOS Porting Layer:
  *
@@ -957,6 +1025,9 @@ ENDPROC(unrecoverable_exception)
  * If the WindowUnderflow code gets a TLB miss the page will get mapped
  * the the partial windeowUnderflow will be handeled in the double exception
  * handler.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Entry condition:
@@ -965,9 +1036,15 @@ ENDPROC(unrecoverable_exception)
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -978,6 +1055,7 @@ ENDPROC(unrecoverable_exception)
  *	     <  VALID_DOUBLE_EXCEPTION_ADDRESS: regular exception
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if XCHAL_HAVE_BE
 #define _EXTUI_MOVSP_SRC(ar)	extui ar, ar, 4, 4
@@ -1131,6 +1209,8 @@ ENTRY(fast_alloca)
 	rfe
 
 =======
+=======
+>>>>>>> v3.18
 ENTRY(fast_alloca)
 	rsr	a0, windowbase
 	rotw	-1
@@ -1153,6 +1233,9 @@ ENTRY(fast_alloca)
 	j	_WindowUnderflow12
 8:	j	_WindowUnderflow8
 4:	j	_WindowUnderflow4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 ENDPROC(fast_alloca)
 
@@ -1171,9 +1254,15 @@ ENDPROC(fast_alloca)
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -1226,7 +1315,10 @@ ENTRY(fast_syscall_unrecoverable)
 	l32i    a0, a2, PT_AREG0        # restore a0
 	xsr     a2, depc                # restore a2, depc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rsr     a3, excsave1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1251,15 +1343,21 @@ ENDPROC(fast_syscall_unrecoverable)
  *   a1:	a1
  *   a2:	new stack pointer, original in a0 and DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table, original in excsave_1
  *   a4..a15:	unchanged
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
 =======
+=======
+>>>>>>> v3.18
  *   a3:	a3
  *   a4..a15:	unchanged
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	dispatch table
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  *   PT_DEPC >= VALID_DOUBLE_EXCEPTION_ADDRESS: double exception, DEPC
@@ -1283,6 +1381,11 @@ ENDPROC(fast_syscall_unrecoverable)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_FAST_SYSCALL_XTENSA
+
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_FAST_SYSCALL_XTENSA
 
@@ -1299,8 +1402,11 @@ ENDPROC(fast_syscall_unrecoverable)
 ENTRY(fast_syscall_xtensa)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xsr	a3, excsave1		# restore a3, excsave1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	s32i	a7, a2, PT_AREG7	# we need an additional register
@@ -1356,7 +1462,10 @@ CATCH
 ENDPROC(fast_syscall_xtensa)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else /* CONFIG_FAST_SYSCALL_XTENSA */
 
 ENTRY(fast_syscall_xtensa)
@@ -1369,6 +1478,9 @@ ENDPROC(fast_syscall_xtensa)
 
 #endif /* CONFIG_FAST_SYSCALL_XTENSA */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* fast_syscall_spill_registers.
@@ -1379,9 +1491,15 @@ ENDPROC(fast_syscall_xtensa)
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -1392,6 +1510,11 @@ ENDPROC(fast_syscall_xtensa)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_FAST_SYSCALL_SPILL_REGISTERS
+
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_FAST_SYSCALL_SPILL_REGISTERS
 
@@ -1401,6 +1524,10 @@ ENTRY(fast_syscall_spill_registers)
 	/* Register a FIXUP handler (pass current wb as a parameter) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	xsr	a3, excsave1
+>>>>>>> v3.18
 =======
 	xsr	a3, excsave1
 >>>>>>> v3.18
@@ -1408,6 +1535,7 @@ ENTRY(fast_syscall_spill_registers)
 	s32i	a0, a3, EXC_TABLE_FIXUP
 	rsr	a0, windowbase
 	s32i	a0, a3, EXC_TABLE_PARAM
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/* Save a3 and SAR on stack. */
@@ -1563,6 +1691,8 @@ fast_syscall_spill_registers_fixup_return:
 ENTRY(_spill_registers)
 
 =======
+=======
+>>>>>>> v3.18
 	xsr	a3, excsave1		# restore a3 and excsave_1
 
 	/* Save a3, a4 and SAR on stack. */
@@ -1580,6 +1710,9 @@ ENTRY(_spill_registers)
 	s32i	a12, a2, PT_AREG12
 	s32i	a15, a2, PT_AREG15
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Rotate ws so that the current windowbase is at bit 0.
@@ -1588,17 +1721,23 @@ ENTRY(_spill_registers)
 	 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rsr	a4, windowbase
 	rsr	a3, windowstart		# a3 = xxxwww1yy
 	ssr	a4			# holds WB
 	slli	a4, a3, WSBITS
 	or	a3, a3, a4		# a3 = xxxwww1yyxxxwww1yy
 =======
+=======
+>>>>>>> v3.18
 	rsr	a0, windowbase
 	rsr	a3, windowstart		# a3 = xxxwww1yy
 	ssr	a0			# holds WB
 	slli	a0, a3, WSBITS
 	or	a3, a3, a0		# a3 = xxxwww1yyxxxwww1yy
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	srl	a3, a3			# a3 = 00xxxwww1yyxxxwww1
 
@@ -1606,7 +1745,11 @@ ENTRY(_spill_registers)
 
 	extui	a3, a3, 1, WSBITS-1	# a3 = 0yyxxxwww
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movi	a4, (1 << (WSBITS-1))
+=======
+	movi	a0, (1 << (WSBITS-1))
+>>>>>>> v3.18
 =======
 	movi	a0, (1 << (WSBITS-1))
 >>>>>>> v3.18
@@ -1615,7 +1758,11 @@ ENTRY(_spill_registers)
 	/* We want 1 at the top, so that we return to the current windowbase */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	or	a3, a3, a4		# 1yyxxxwww
+=======
+	or	a3, a3, a0		# 1yyxxxwww
+>>>>>>> v3.18
 =======
 	or	a3, a3, a0		# 1yyxxxwww
 >>>>>>> v3.18
@@ -1623,6 +1770,7 @@ ENTRY(_spill_registers)
 	/* Skip empty frames - get 'oldest' WINDOWSTART-bit. */
 
 	wsr	a3, windowstart		# save shifted windowstart
+<<<<<<< HEAD
 <<<<<<< HEAD
 	neg	a4, a3
 	and	a3, a4, a3		# first bit set from right: 000010000
@@ -1635,6 +1783,8 @@ ENTRY(_spill_registers)
 	rsr	a3, windowbase
 	add	a3, a3, a4
 =======
+=======
+>>>>>>> v3.18
 	neg	a0, a3
 	and	a3, a0, a3		# first bit set from right: 000010000
 
@@ -1645,6 +1795,9 @@ ENTRY(_spill_registers)
 
 	rsr	a3, windowbase
 	add	a3, a3, a0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	wsr	a3, windowbase
 	rsync
@@ -1660,6 +1813,7 @@ ENTRY(_spill_registers)
 	 * we have to save 4,8. or 12 registers.
 	 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	_bbsi.l	a3, 1, .Lc4
 	_bbsi.l	a3, 2, .Lc8
@@ -1679,6 +1833,8 @@ ENTRY(_spill_registers)
 	ret
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 .Lloop: _bbsi.l	a3, 1, .Lc4
 	_bbci.l	a3, 2, .Lc12
@@ -1692,6 +1848,7 @@ ENTRY(_spill_registers)
 	s32e	a9, a4, -28
 	s32e	a10, a4, -24
 	s32e	a11, a4, -20
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	srli	a11, a3, 2		# shift windowbase by 2
@@ -1708,10 +1865,15 @@ ENTRY(_spill_registers)
 	wsr	a3, windowstart
 	ret
 =======
+=======
+>>>>>>> v3.18
 	srli	a11, a3, 2		# shift windowbase by 2
 	rotw	2
 	_bnei	a3, 1, .Lloop
 	j	.Lexit
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 .Lc4:	s32e	a4, a9, -16
@@ -1729,17 +1891,23 @@ ENTRY(_spill_registers)
 	/* 12-register frame (call12) */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l32e	a2, a5, -12
 	s32e	a8, a2, -48
 	mov	a8, a2
 
 .Lc12c: s32e	a9, a8, -44
 =======
+=======
+>>>>>>> v3.18
 	l32e	a0, a5, -12
 	s32e	a8, a0, -48
 	mov	a8, a0
 
 	s32e	a9, a8, -44
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	s32e	a10, a8, -40
 	s32e	a11, a8, -36
@@ -1761,6 +1929,7 @@ ENTRY(_spill_registers)
 
 	rotw	1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	a5, a13
 	rotw	-1
 
@@ -1769,6 +1938,8 @@ ENTRY(_spill_registers)
 	s32e	a6, a9, -8
 	s32e	a7, a9, -4
 =======
+=======
+>>>>>>> v3.18
 	mov	a4, a13
 	rotw	-1
 
@@ -1776,6 +1947,9 @@ ENTRY(_spill_registers)
 	s32e	a5, a8, -12
 	s32e	a6, a8, -8
 	s32e	a7, a8, -4
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rotw	3
@@ -1783,6 +1957,7 @@ ENTRY(_spill_registers)
 	_beqi	a3, 1, .Lexit
 	j	.Lloop
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .Linvalid_mask:
 
@@ -1796,6 +1971,8 @@ ENTRY(_spill_registers)
 
 	/* User space: Setup a dummy frame and kill application.
 =======
+=======
+>>>>>>> v3.18
 .Lexit:
 
 	/* Done. Do the final rotation and set WS */
@@ -1831,6 +2008,9 @@ ENTRY(_spill_registers)
 
 	/* We get here because of an unrecoverable error in the window
 	 * registers, so set up a dummy frame and kill the user application.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 * Note: We assume EXC_TABLE_KSTK contains a valid stack pointer.
 	 */
@@ -1845,9 +2025,14 @@ ENTRY(_spill_registers)
 	movi	a0, 0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movi	a3, exc_table
 	l32i	a1, a3, EXC_TABLE_KSTK
 	wsr	a3, excsave1
+=======
+	rsr	a3, excsave1
+	l32i	a1, a3, EXC_TABLE_KSTK
+>>>>>>> v3.18
 =======
 	rsr	a3, excsave1
 	l32i	a1, a3, EXC_TABLE_KSTK
@@ -1862,7 +2047,11 @@ ENTRY(_spill_registers)
 	callx4	a4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 1:	/* Kernel space: PANIC! */
+=======
+	/* shouldn't return, so panic */
+>>>>>>> v3.18
 =======
 	/* shouldn't return, so panic */
 >>>>>>> v3.18
@@ -1873,8 +2062,11 @@ ENTRY(_spill_registers)
 1:	j	1b
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENDPROC(_spill_registers)
 =======
+=======
+>>>>>>> v3.18
 
 ENDPROC(fast_syscall_spill_registers)
 
@@ -2010,6 +2202,9 @@ ENTRY(fast_syscall_spill_registers)
 ENDPROC(fast_syscall_spill_registers)
 
 #endif /* CONFIG_FAST_SYSCALL_SPILL_REGISTERS */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_MMU
@@ -2038,9 +2233,15 @@ ENDPROC(fast_second_level_miss_double_kernel)
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -2054,14 +2255,20 @@ ENDPROC(fast_second_level_miss_double_kernel)
 ENTRY(fast_second_level_miss)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Save a1. Note: we don't expect a double exception. */
 
 	s32i	a1, a2, PT_AREG1
 =======
+=======
+>>>>>>> v3.18
 	/* Save a1 and a3. Note: we don't expect a double exception. */
 
 	s32i	a1, a2, PT_AREG1
 	s32i	a3, a2, PT_AREG3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* We need to map the page of PTEs for the user task.  Find
@@ -2085,9 +2292,12 @@ ENTRY(fast_second_level_miss)
 	beqz	a0, 9f
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* We deliberately destroy a3 that holds the exception table. */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 8:	rsr	a3, excvaddr		# fault address
@@ -2141,7 +2351,11 @@ ENTRY(fast_second_level_miss)
 	/* Exit critical section. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 4:	movi	a3, exc_table		# restore a3
+=======
+4:	rsr	a3, excsave1
+>>>>>>> v3.18
 =======
 4:	rsr	a3, excsave1
 >>>>>>> v3.18
@@ -2153,8 +2367,13 @@ ENTRY(fast_second_level_miss)
 	l32i	a0, a2, PT_AREG0
 	l32i	a1, a2, PT_AREG1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l32i	a2, a2, PT_DEPC
 	xsr	a3, excsave1
+=======
+	l32i	a3, a2, PT_AREG3
+	l32i	a2, a2, PT_DEPC
+>>>>>>> v3.18
 =======
 	l32i	a3, a2, PT_AREG3
 	l32i	a2, a2, PT_DEPC
@@ -2246,11 +2465,16 @@ ENTRY(fast_second_level_miss)
 2:	/* Invalid PGD, default exception handling */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	movi	a3, exc_table
 	rsr	a1, depc
 	xsr	a3, excsave1
 	s32i	a1, a2, PT_AREG2
 	s32i	a3, a2, PT_AREG3
+=======
+	rsr	a1, depc
+	s32i	a1, a2, PT_AREG2
+>>>>>>> v3.18
 =======
 	rsr	a1, depc
 	s32i	a1, a2, PT_AREG2
@@ -2275,9 +2499,15 @@ ENDPROC(fast_second_level_miss)
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -2291,15 +2521,21 @@ ENDPROC(fast_second_level_miss)
 ENTRY(fast_store_prohibited)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Save a1 and a4. */
 
 	s32i	a1, a2, PT_AREG1
 	s32i	a4, a2, PT_AREG4
 =======
+=======
+>>>>>>> v3.18
 	/* Save a1 and a3. */
 
 	s32i	a1, a2, PT_AREG1
 	s32i	a3, a2, PT_AREG3
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	GET_CURRENT(a1,a2)
@@ -2307,6 +2543,7 @@ ENTRY(fast_store_prohibited)
 	beqz	a0, 9f
 
 8:	rsr	a1, excvaddr		# fault address
+<<<<<<< HEAD
 <<<<<<< HEAD
 	_PGD_OFFSET(a0, a1, a4)
 	l32i	a0, a0, 0
@@ -2323,6 +2560,8 @@ ENTRY(fast_store_prohibited)
 	rsr	a1, excvaddr
 	s32i	a4, a0, 0
 =======
+=======
+>>>>>>> v3.18
 	_PGD_OFFSET(a0, a1, a3)
 	l32i	a0, a0, 0
 	beqz	a0, 2f
@@ -2342,6 +2581,9 @@ ENTRY(fast_store_prohibited)
 	or	a3, a3, a1
 	rsr	a1, excvaddr
 	s32i	a3, a0, 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* We need to flush the cache if we have page coloring. */
@@ -2350,7 +2592,11 @@ ENTRY(fast_store_prohibited)
 #endif
 	pdtlb	a0, a1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wdtlb	a4, a0
+=======
+	wdtlb	a3, a0
+>>>>>>> v3.18
 =======
 	wdtlb	a3, a0
 >>>>>>> v3.18
@@ -2359,6 +2605,10 @@ ENTRY(fast_store_prohibited)
 
 	movi	a0, 0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rsr	a3, excsave1
+>>>>>>> v3.18
 =======
 	rsr	a3, excsave1
 >>>>>>> v3.18
@@ -2367,7 +2617,11 @@ ENTRY(fast_store_prohibited)
 	/* Restore the working registers, and return. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l32i	a4, a2, PT_AREG4
+=======
+	l32i	a3, a2, PT_AREG3
+>>>>>>> v3.18
 =======
 	l32i	a3, a2, PT_AREG3
 >>>>>>> v3.18
@@ -2376,9 +2630,12 @@ ENTRY(fast_store_prohibited)
 	l32i	a2, a2, PT_DEPC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Restore excsave1 and a3. */
 
 	xsr	a3, excsave1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	bgeui	a2, VALID_DOUBLE_EXCEPTION_ADDRESS, 1f
@@ -2398,11 +2655,16 @@ ENTRY(fast_store_prohibited)
 2:	/* If there was a problem, handle fault in C */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rsr	a4, depc	# still holds a2
 	xsr	a3, excsave1
 	s32i	a4, a2, PT_AREG2
 	s32i	a3, a2, PT_AREG3
 	l32i	a4, a2, PT_AREG4
+=======
+	rsr	a3, depc	# still holds a2
+	s32i	a3, a2, PT_AREG2
+>>>>>>> v3.18
 =======
 	rsr	a3, depc	# still holds a2
 	s32i	a3, a2, PT_AREG2
@@ -2497,7 +2759,11 @@ ENDPROC(system_call)
 	.endr
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_entry	a1, 16
+=======
+	_entry	a1, 48
+>>>>>>> v3.18
 =======
 	_entry	a1, 48
 >>>>>>> v3.18
@@ -2525,7 +2791,11 @@ ENDPROC(system_call)
 ENTRY(_switch_to)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	entry	a1, 48
+=======
+	entry	a1, 16
+>>>>>>> v3.18
 =======
 	entry	a1, 16
 >>>>>>> v3.18

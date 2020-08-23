@@ -41,9 +41,14 @@ static int physmap_flash_remove(struct platform_device *dev)
 	if (info == NULL)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(dev, NULL);
 
 	physmap_data = dev->dev.platform_data;
+=======
+
+	physmap_data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 
 	physmap_data = dev_get_platdata(&dev->dev);
@@ -75,7 +80,11 @@ static void physmap_set_vpp(struct map_info *map, int state)
 
 	pdev = (struct platform_device *)map->map_priv_1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	physmap_data = pdev->dev.platform_data;
+=======
+	physmap_data = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	physmap_data = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -113,7 +122,11 @@ static int physmap_flash_probe(struct platform_device *dev)
 	int devices_found = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	physmap_data = dev->dev.platform_data;
+=======
+	physmap_data = dev_get_platdata(&dev->dev);
+>>>>>>> v3.18
 =======
 	physmap_data = dev_get_platdata(&dev->dev);
 >>>>>>> v3.18

@@ -17,7 +17,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -674,7 +677,12 @@ static unsigned int p54_flush_count(struct p54_common *priv)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void p54_flush(struct ieee80211_hw *dev, u32 queues, bool drop)
+=======
+static void p54_flush(struct ieee80211_hw *dev, struct ieee80211_vif *vif,
+		      u32 queues, bool drop)
+>>>>>>> v3.18
 =======
 static void p54_flush(struct ieee80211_hw *dev, struct ieee80211_vif *vif,
 		      u32 queues, bool drop)
@@ -705,7 +713,12 @@ static void p54_flush(struct ieee80211_hw *dev, struct ieee80211_vif *vif,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void p54_set_coverage_class(struct ieee80211_hw *dev, u8 coverage_class)
+=======
+static void p54_set_coverage_class(struct ieee80211_hw *dev,
+				   s16 coverage_class)
+>>>>>>> v3.18
 =======
 static void p54_set_coverage_class(struct ieee80211_hw *dev,
 				   s16 coverage_class)
@@ -771,7 +784,10 @@ struct ieee80211_hw *p54_init_common(size_t priv_data_len)
 				      BIT(NL80211_IFTYPE_MESH_POINT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->channel_change_time = 1000;	/* TODO: find actual value */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->beacon_req_id = cpu_to_le32(0);

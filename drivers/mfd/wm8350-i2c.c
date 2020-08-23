@@ -28,6 +28,10 @@ static int wm8350_i2c_probe(struct i2c_client *i2c,
 {
 	struct wm8350 *wm8350;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct wm8350_platform_data *pdata = dev_get_platdata(&i2c->dev);
+>>>>>>> v3.18
 =======
 	struct wm8350_platform_data *pdata = dev_get_platdata(&i2c->dev);
 >>>>>>> v3.18
@@ -49,7 +53,11 @@ static int wm8350_i2c_probe(struct i2c_client *i2c,
 	wm8350->dev = &i2c->dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return wm8350_device_init(wm8350, i2c->irq, i2c->dev.platform_data);
+=======
+	return wm8350_device_init(wm8350, i2c->irq, pdata);
+>>>>>>> v3.18
 =======
 	return wm8350_device_init(wm8350, i2c->irq, pdata);
 >>>>>>> v3.18
@@ -66,15 +74,21 @@ static int wm8350_i2c_remove(struct i2c_client *i2c)
 
 static const struct i2c_device_id wm8350_i2c_id[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
        { "wm8350", 0 },
        { "wm8351", 0 },
        { "wm8352", 0 },
        { }
 =======
+=======
+>>>>>>> v3.18
 	{ "wm8350", 0 },
 	{ "wm8351", 0 },
 	{ "wm8352", 0 },
 	{ }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 MODULE_DEVICE_TABLE(i2c, wm8350_i2c_id);

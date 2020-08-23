@@ -507,7 +507,11 @@ int __nand_correct_data(unsigned char *buf,
 		return 1;	/* error in ECC data; no action needed */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_err("%s: uncorrectable ECC error", __func__);
+=======
+	pr_err("%s: uncorrectable ECC error\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_err("%s: uncorrectable ECC error\n", __func__);
 >>>>>>> v3.18

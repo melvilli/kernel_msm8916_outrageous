@@ -2,7 +2,11 @@
  * This file is part of the Emulex Linux Device Driver for         *
  * Fibre Channel Host Bus Adapters.                                *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2004-2012 Emulex.  All rights reserved.           *
+=======
+ * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
+>>>>>>> v3.18
 =======
  * Copyright (C) 2004-2014 Emulex.  All rights reserved.           *
 >>>>>>> v3.18
@@ -43,11 +47,14 @@
 #include "lpfc.h"
 #include "lpfc_crtn.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define LPFC_MBUF_POOL_SIZE     64      /* max elements in MBUF safety pool */
 #define LPFC_MEM_POOL_SIZE      64      /* max elem in non-DMA safety pool */
 
 =======
+=======
+>>>>>>> v3.18
 #include "lpfc_logmsg.h"
 
 #define LPFC_MBUF_POOL_SIZE     64      /* max elements in MBUF safety pool */
@@ -71,6 +78,9 @@ lpfc_mem_alloc_active_rrq_pool_s4(struct lpfc_hba *phba) {
 	else
 		return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -177,7 +187,10 @@ lpfc_mem_alloc(struct lpfc_hba *phba, int align)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phba->cfg_EnableXLane) {
 		phba->device_data_mem_pool = mempool_create_kmalloc_pool(
 					LPFC_DEVICE_DATA_POOL_SIZE,
@@ -188,6 +201,9 @@ lpfc_mem_alloc(struct lpfc_hba *phba, int align)
 		phba->device_data_mem_pool = NULL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
  fail_free_hrb_pool:
@@ -232,6 +248,10 @@ lpfc_mem_free(struct lpfc_hba *phba)
 	int i;
 	struct lpfc_dma_pool *pool = &phba->lpfc_mbuf_safety_pool;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct lpfc_device_data *device_data;
+>>>>>>> v3.18
 =======
 	struct lpfc_device_data *device_data;
 >>>>>>> v3.18
@@ -257,11 +277,17 @@ lpfc_mem_free(struct lpfc_hba *phba)
 	mempool_destroy(phba->nlp_mem_pool);
 	phba->nlp_mem_pool = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (phba->sli_rev == LPFC_SLI_REV4 && phba->active_rrq_pool) {
 		mempool_destroy(phba->active_rrq_pool);
 		phba->active_rrq_pool = NULL;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Free mbox memory pool */
@@ -282,7 +308,10 @@ lpfc_mem_free(struct lpfc_hba *phba)
 	phba->lpfc_scsi_dma_buf_pool = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Free Device Data memory pool */
 	if (phba->device_data_mem_pool) {
 		/* Ensure all objects have been returned to the pool */
@@ -296,6 +325,9 @@ lpfc_mem_free(struct lpfc_hba *phba)
 		mempool_destroy(phba->device_data_mem_pool);
 	}
 	phba->device_data_mem_pool = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return;
 }

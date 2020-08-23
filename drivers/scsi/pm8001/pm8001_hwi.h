@@ -132,11 +132,17 @@
 #define LINKRATE_60			(0x04 << 8)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* for phy state */
 
 #define PHY_STATE_LINK_UP_SPC		0x1
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* for new SPC controllers MEMBASE III is shared between BIOS and DATA */
 #define GSM_SM_BASE			0x4F0000
@@ -1035,6 +1041,12 @@ struct set_dev_state_resp {
 #define DEVREG_FAILURE_DEVICE_TYPE_NOT_VALID		0x07
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define GSM_BASE					0x4F0000
+#define SHIFT_REG_64K_MASK				0xffff0000
+#define SHIFT_REG_BIT_SHIFT				8
+>>>>>>> v3.18
 =======
 #define GSM_BASE					0x4F0000
 #define SHIFT_REG_64K_MASK				0xffff0000

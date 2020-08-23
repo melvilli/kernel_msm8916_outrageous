@@ -59,6 +59,10 @@ enum {
  * @id: regulator id
  * @initdata: regulator init data (contraints, supplies, ...)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @reg_node: DT node of regulator (unused on non-DT platforms)
+>>>>>>> v3.18
 =======
  * @reg_node: DT node of regulator (unused on non-DT platforms)
 >>>>>>> v3.18
@@ -67,6 +71,10 @@ struct max8998_regulator_data {
 	int				id;
 	struct regulator_init_data	*initdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node		*reg_node;
+>>>>>>> v3.18
 =======
 	struct device_node		*reg_node;
 >>>>>>> v3.18
@@ -82,12 +90,17 @@ struct max8998_regulator_data {
  *   registers set by buck?_voltage?. The voltage of BUCK1/2 cannot
  *   be other than the preset values.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @buck1_voltage1: BUCK1 DVS mode 1 voltage register
  * @buck1_voltage2: BUCK1 DVS mode 2 voltage register
  * @buck1_voltage3: BUCK1 DVS mode 3 voltage register
  * @buck1_voltage4: BUCK1 DVS mode 4 voltage register
  * @buck2_voltage1: BUCK2 DVS mode 1 voltage register
  * @buck2_voltage2: BUCK2 DVS mode 2 voltage register
+=======
+ * @buck1_voltage: BUCK1 DVS mode 1 voltage registers
+ * @buck2_voltage: BUCK2 DVS mode 2 voltage registers
+>>>>>>> v3.18
 =======
  * @buck1_voltage: BUCK1 DVS mode 1 voltage registers
  * @buck2_voltage: BUCK2 DVS mode 2 voltage registers
@@ -114,6 +127,7 @@ struct max8998_platform_data {
 	struct max8998_regulator_data	*regulators;
 	int				num_regulators;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int				irq_base;
 	int				ono;
 	bool				buck_voltage_lock;
@@ -124,11 +138,16 @@ struct max8998_platform_data {
 	int				buck2_voltage1;
 	int				buck2_voltage2;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int			irq_base;
 	int				ono;
 	bool				buck_voltage_lock;
 	int				buck1_voltage[4];
 	int				buck2_voltage[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int				buck1_set1;
 	int				buck1_set2;

@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -132,7 +142,10 @@ enum iwl_ucode_tlv_type {
 	IWL_UCODE_TLV_DEF_CALIB		= 22,
 	IWL_UCODE_TLV_PHY_SKU		= 23,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	IWL_UCODE_TLV_SECURE_SEC_RT	= 24,
 	IWL_UCODE_TLV_SECURE_SEC_INIT	= 25,
 	IWL_UCODE_TLV_SECURE_SEC_WOWLAN	= 26,
@@ -141,6 +154,9 @@ enum iwl_ucode_tlv_type {
 	IWL_UCODE_TLV_API_CHANGES_SET	= 29,
 	IWL_UCODE_TLV_ENABLED_CAPABILITIES	= 30,
 	IWL_UCODE_TLV_N_SCAN_CHANNELS		= 31,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -151,7 +167,12 @@ struct iwl_ucode_tlv {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IWL_TLV_UCODE_MAGIC	0x0a4c5749
+=======
+#define IWL_TLV_UCODE_MAGIC		0x0a4c5749
+#define FW_VER_HUMAN_READABLE_SZ	64
+>>>>>>> v3.18
 =======
 #define IWL_TLV_UCODE_MAGIC		0x0a4c5749
 #define FW_VER_HUMAN_READABLE_SZ	64
@@ -167,7 +188,11 @@ struct iwl_tlv_ucode_header {
 	__le32 zero;
 	__le32 magic;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 human_readable[64];
+=======
+	u8 human_readable[FW_VER_HUMAN_READABLE_SZ];
+>>>>>>> v3.18
 =======
 	u8 human_readable[FW_VER_HUMAN_READABLE_SZ];
 >>>>>>> v3.18
@@ -184,7 +209,10 @@ struct iwl_tlv_ucode_header {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * ucode TLVs
  *
@@ -200,5 +228,8 @@ struct iwl_ucode_capa {
 	__le32 api_capa;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif  /* __iwl_fw_file_h__ */

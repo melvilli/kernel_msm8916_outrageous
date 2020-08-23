@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2012 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2012 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -71,6 +81,7 @@
  *
  *****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "mvm.h"
 #include "sta.h"
 #include "iwl-io.h"
@@ -89,6 +100,8 @@ static ssize_t iwl_dbgfs_tx_flush_write(struct file *file,
 	char buf[16];
 	int buf_size, ret;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/vmalloc.h>
 
 #include "mvm.h"
@@ -101,6 +114,9 @@ static ssize_t iwl_dbgfs_tx_flush_write(struct iwl_mvm *mvm, char *buf,
 					size_t count, loff_t *ppos)
 {
 	int ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 scd_q_msk;
 
@@ -108,11 +124,14 @@ static ssize_t iwl_dbgfs_tx_flush_write(struct iwl_mvm *mvm, char *buf,
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buf, 0, sizeof(buf));
 	buf_size = min(count, sizeof(buf) - 1);
 	if (copy_from_user(buf, user_buf, buf_size))
 		return -EFAULT;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sscanf(buf, "%x", &scd_q_msk) != 1)
@@ -128,6 +147,7 @@ static ssize_t iwl_dbgfs_tx_flush_write(struct iwl_mvm *mvm, char *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t iwl_dbgfs_sta_drain_write(struct file *file,
 					 const char __user *user_buf,
 					 size_t count, loff_t *ppos)
@@ -138,22 +158,30 @@ static ssize_t iwl_dbgfs_sta_drain_write(struct file *file,
 	char buf[8];
 	int buf_size, sta_id, drain, ret;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t iwl_dbgfs_sta_drain_write(struct iwl_mvm *mvm, char *buf,
 					 size_t count, loff_t *ppos)
 {
 	struct iwl_mvm_sta *mvmsta;
 	int sta_id, drain, ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!mvm->ucode_loaded || mvm->cur_ucode != IWL_UCODE_REGULAR)
 		return -EIO;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(buf, 0, sizeof(buf));
 	buf_size = min(count, sizeof(buf) - 1);
 	if (copy_from_user(buf, user_buf, buf_size))
 		return -EFAULT;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sscanf(buf, "%d %d", &sta_id, &drain) != 2)
@@ -166,6 +194,7 @@ static ssize_t iwl_dbgfs_sta_drain_write(struct iwl_mvm *mvm, char *buf,
 	mutex_lock(&mvm->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sta = rcu_dereference_protected(mvm->fw_id_to_mac_id[sta_id],
 					lockdep_is_held(&mvm->mutex));
 	if (IS_ERR_OR_NULL(sta))
@@ -174,12 +203,17 @@ static ssize_t iwl_dbgfs_sta_drain_write(struct iwl_mvm *mvm, char *buf,
 		ret = iwl_mvm_drain_sta(mvm, (void *)sta->drv_priv, drain) ? :
 			count;
 =======
+=======
+>>>>>>> v3.18
 	mvmsta = iwl_mvm_sta_from_staid_protected(mvm, sta_id);
 
 	if (!mvmsta)
 		ret = -ENOENT;
 	else
 		ret = iwl_mvm_drain_sta(mvm, mvmsta, drain) ? : count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&mvm->mutex);
@@ -188,7 +222,10 @@ static ssize_t iwl_dbgfs_sta_drain_write(struct iwl_mvm *mvm, char *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int iwl_dbgfs_fw_error_dump_open(struct inode *inode, struct file *file)
 {
 	struct iwl_mvm *mvm = inode->i_private;
@@ -261,12 +298,16 @@ static int iwl_dbgfs_fw_error_dump_release(struct inode *inode,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t iwl_dbgfs_sram_read(struct file *file, char __user *user_buf,
 				   size_t count, loff_t *ppos)
 {
 	struct iwl_mvm *mvm = file->private_data;
 	const struct fw_img *img;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ofs, len, pos = 0;
 	size_t bufsz, ret;
@@ -314,6 +355,8 @@ static ssize_t iwl_dbgfs_sram_read(struct file *file, char __user *user_buf,
 
 	kfree(buf);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int ofs, len;
 	size_t ret;
 	u8 *ptr;
@@ -339,12 +382,16 @@ static ssize_t iwl_dbgfs_sram_read(struct file *file, char __user *user_buf,
 
 	ret = simple_read_from_buffer(user_buf, count, ppos, ptr, len);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(ptr);
 
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t iwl_dbgfs_sram_write(struct file *file,
 				    const char __user *user_buf, size_t count,
@@ -360,6 +407,8 @@ static ssize_t iwl_dbgfs_sram_write(struct file *file,
 	if (copy_from_user(buf, user_buf, buf_size))
 		return -EFAULT;
 =======
+=======
+>>>>>>> v3.18
 static ssize_t iwl_dbgfs_sram_write(struct iwl_mvm *mvm, char *buf,
 				    size_t count, loff_t *ppos)
 {
@@ -373,17 +422,26 @@ static ssize_t iwl_dbgfs_sram_write(struct iwl_mvm *mvm, char *buf,
 	img = &mvm->fw->img[mvm->cur_ucode];
 	img_offset = img->sec[IWL_UCODE_SECTION_DATA].offset;
 	img_len = img->sec[IWL_UCODE_SECTION_DATA].len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (sscanf(buf, "%x,%x", &offset, &len) == 2) {
 		if ((offset & 0x3) || (len & 0x3))
 			return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (offset + len > img_offset + img_len)
 			return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mvm->dbgfs_sram_offset = offset;
 		mvm->dbgfs_sram_len = len;
@@ -396,7 +454,10 @@ static ssize_t iwl_dbgfs_sram_write(struct iwl_mvm *mvm, char *buf,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static ssize_t iwl_dbgfs_set_nic_temperature_read(struct file *file,
 						  char __user *user_buf,
 						  size_t count, loff_t *ppos)
@@ -487,6 +548,9 @@ static ssize_t iwl_dbgfs_nic_temp_read(struct file *file,
 	return simple_read_from_buffer(user_buf, count, ppos, buf, pos);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t iwl_dbgfs_stations_read(struct file *file, char __user *user_buf,
 				       size_t count, loff_t *ppos)
@@ -517,6 +581,7 @@ static ssize_t iwl_dbgfs_stations_read(struct file *file, char __user *user_buf,
 	return simple_read_from_buffer(user_buf, count, ppos, buf, pos);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t iwl_dbgfs_power_down_allow_write(struct file *file,
 						const char __user *user_buf,
@@ -632,6 +697,8 @@ static ssize_t iwl_dbgfs_mac_params_read(struct file *file,
 
 	return simple_read_from_buffer(user_buf, count, ppos, buf, pos);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t iwl_dbgfs_disable_power_off_read(struct file *file,
 						char __user *user_buf,
 						size_t count, loff_t *ppos)
@@ -674,6 +741,9 @@ static ssize_t iwl_dbgfs_disable_power_off_write(struct iwl_mvm *mvm, char *buf,
 	mutex_unlock(&mvm->mutex);
 
 	return ret ?: count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -690,6 +760,7 @@ static ssize_t iwl_dbgfs_disable_power_off_write(struct iwl_mvm *mvm, char *buf,
 					 true ? "\n" : ", ");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t iwl_dbgfs_bt_notif_read(struct file *file, char __user *user_buf,
 				       size_t count, loff_t *ppos)
 {
@@ -705,6 +776,8 @@ static ssize_t iwl_dbgfs_bt_notif_read(struct file *file, char __user *user_buf,
 	mutex_lock(&mvm->mutex);
 
 =======
+=======
+>>>>>>> v3.18
 static
 int iwl_mvm_coex_dump_mbox(struct iwl_bt_coex_profile_notif *notif, char *buf,
 			   int pos, int bufsz)
@@ -768,6 +841,9 @@ static
 int iwl_mvm_coex_dump_mbox_old(struct iwl_bt_coex_profile_notif_old *notif,
 			       char *buf, int pos, int bufsz)
 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pos += scnprintf(buf+pos, bufsz-pos, "MBOX dw0:\n");
 
@@ -822,6 +898,7 @@ int iwl_mvm_coex_dump_mbox_old(struct iwl_bt_coex_profile_notif_old *notif,
 	BT_MBOX_PRINT(3, UPDATE_REQUEST, true);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos += scnprintf(buf+pos, bufsz-pos, "bt_status = %d\n",
 					 notif->bt_status);
 	pos += scnprintf(buf+pos, bufsz-pos, "bt_open_conn = %d\n",
@@ -833,6 +910,8 @@ int iwl_mvm_coex_dump_mbox_old(struct iwl_bt_coex_profile_notif_old *notif,
 	pos += scnprintf(buf+pos, bufsz-pos, "bt_ci_compliance = %d\n",
 					 notif->bt_ci_compliance);
 =======
+=======
+>>>>>>> v3.18
 	return pos;
 }
 
@@ -886,6 +965,9 @@ static ssize_t iwl_dbgfs_bt_notif_read(struct file *file, char __user *user_buf,
 				 "antenna isolation = %d CORUN LUT index = %d\n",
 				 mvm->last_ant_isol, mvm->last_corun_lut);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&mvm->mutex);
@@ -897,6 +979,7 @@ static ssize_t iwl_dbgfs_bt_notif_read(struct file *file, char __user *user_buf,
 }
 #undef BT_MBOX_PRINT
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t iwl_dbgfs_fw_restart_write(struct file *file,
 					  const char __user *user_buf,
@@ -972,6 +1055,8 @@ int iwl_mvm_dbgfs_register(struct iwl_mvm *mvm, struct dentry *dbgfs_dir)
 	char buf[100];
 
 =======
+=======
+>>>>>>> v3.18
 static ssize_t iwl_dbgfs_bt_cmd_read(struct file *file, char __user *user_buf,
 				     size_t count, loff_t *ppos)
 {
@@ -1797,6 +1882,9 @@ int iwl_mvm_dbgfs_register(struct iwl_mvm *mvm, struct dentry *dbgfs_dir)
 
 	spin_lock_init(&mvm->drv_stats_lock);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mvm->debugfs_dir = dbgfs_dir;
 
@@ -1804,12 +1892,15 @@ int iwl_mvm_dbgfs_register(struct iwl_mvm *mvm, struct dentry *dbgfs_dir)
 	MVM_DEBUGFS_ADD_FILE(sta_drain, mvm->debugfs_dir, S_IWUSR);
 	MVM_DEBUGFS_ADD_FILE(sram, mvm->debugfs_dir, S_IWUSR | S_IRUSR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	MVM_DEBUGFS_ADD_FILE(stations, dbgfs_dir, S_IRUSR);
 	MVM_DEBUGFS_ADD_FILE(bt_notif, dbgfs_dir, S_IRUSR);
 	MVM_DEBUGFS_ADD_FILE(power_down_allow, mvm->debugfs_dir, S_IWUSR);
 	MVM_DEBUGFS_ADD_FILE(power_down_d3_allow, mvm->debugfs_dir, S_IWUSR);
 	MVM_DEBUGFS_ADD_FILE(fw_restart, mvm->debugfs_dir, S_IWUSR);
 =======
+=======
+>>>>>>> v3.18
 	MVM_DEBUGFS_ADD_FILE(set_nic_temperature, mvm->debugfs_dir,
 			     S_IWUSR | S_IRUSR);
 	MVM_DEBUGFS_ADD_FILE(nic_temp, dbgfs_dir, S_IRUSR);
@@ -1876,6 +1967,9 @@ int iwl_mvm_dbgfs_register(struct iwl_mvm *mvm, struct dentry *dbgfs_dir)
 	if (!debugfs_create_blob("nvm_prod", S_IRUSR,
 				  mvm->debugfs_dir, &mvm->nvm_prod_blob))
 		goto err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1893,6 +1987,7 @@ err:
 	IWL_ERR(mvm, "Can't create the mvm debugfs directory\n");
 	return -ENOMEM;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void iwl_mvm_vif_dbgfs_register(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
@@ -1949,5 +2044,7 @@ void iwl_mvm_vif_dbgfs_clean(struct iwl_mvm *mvm, struct ieee80211_vif *vif)
 	debugfs_remove_recursive(mvmvif->dbgfs_dir);
 	mvmvif->dbgfs_dir = NULL;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -86,6 +86,12 @@ ssize_t of_device_get_modalias(struct device *dev, char *str, ssize_t len)
 	ssize_t tsize, csize, repend;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if ((!dev) || (!dev->of_node))
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if ((!dev) || (!dev->of_node))
 		return -ENODEV;
@@ -164,7 +170,11 @@ void of_device_uevent(struct device *dev, struct kobj_uevent_env *env)
 
 	seen = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&of_aliases_mutex);
+=======
+	mutex_lock(&of_mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&of_mutex);
 >>>>>>> v3.18
@@ -176,7 +186,11 @@ void of_device_uevent(struct device *dev, struct kobj_uevent_env *env)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_unlock(&of_aliases_mutex);
+=======
+	mutex_unlock(&of_mutex);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&of_mutex);
 >>>>>>> v3.18

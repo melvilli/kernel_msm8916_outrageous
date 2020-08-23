@@ -80,7 +80,10 @@ prefixed with the string "marvell,", for Marvell Technology Group Ltd.
      - #address-cells : Should be <1>
      - #size-cells : Should be <0>
 <<<<<<< HEAD
+<<<<<<< HEAD
      - device_type : Should be "mdio"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
      - compatible : Should be "marvell,mv64360-mdio"
@@ -91,7 +94,10 @@ prefixed with the string "marvell,", for Marvell Technology Group Ltd.
 	     #address-cells = <1>;
 	     #size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     device_type = "mdio";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	     compatible = "marvell,mv64360-mdio";
@@ -139,7 +145,10 @@ prefixed with the string "marvell,", for Marvell Technology Group Ltd.
 
    Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
      - device_type : Should be "network".
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
      - compatible : Should be "marvell,mv64360-eth".
@@ -155,7 +164,10 @@ prefixed with the string "marvell,", for Marvell Technology Group Ltd.
    Example Discovery Ethernet port node:
      ethernet@0 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     device_type = "network";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	     compatible = "marvell,mv64360-eth";
@@ -172,7 +184,10 @@ prefixed with the string "marvell,", for Marvell Technology Group Ltd.
 
    Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
      - device_type : Should be "ethernet-phy"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
      - interrupts : <a> where a is the interrupt number for this phy.
@@ -183,7 +198,10 @@ prefixed with the string "marvell,", for Marvell Technology Group Ltd.
    Example Discovery PHY node:
      ethernet-phy@1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	     compatible = "broadcom,bcm5421";
@@ -290,7 +308,10 @@ prefixed with the string "marvell,", for Marvell Technology Group Ltd.
 
    Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
      - device_type : "serial"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
      - compatible : "marvell,mv64360-mpsc"
@@ -310,7 +331,10 @@ prefixed with the string "marvell,", for Marvell Technology Group Ltd.
    Example Discovery MPSCINTR node:
      mpsc@8000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	     device_type = "serial";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	     compatible = "marvell,mv64360-mpsc";

@@ -667,7 +667,11 @@ void handle_unaligned(struct pt_regs *regs)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret == 0 && modify && R1(regs->iir))
+=======
+	if (modify && R1(regs->iir))
+>>>>>>> v3.18
 =======
 	if (modify && R1(regs->iir))
 >>>>>>> v3.18
@@ -682,6 +686,7 @@ void handle_unaligned(struct pt_regs *regs)
 	if (ret)
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*
 		 * The unaligned handler failed.
 		 * If we were called by __get_user() or __put_user() jump
@@ -690,6 +695,8 @@ void handle_unaligned(struct pt_regs *regs)
 		if (!user_mode(regs) && fixup_exception(regs))
 			return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		printk(KERN_CRIT "Unaligned handler failed, ret = %d\n", ret);

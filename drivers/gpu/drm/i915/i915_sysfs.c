@@ -33,6 +33,11 @@
 #include "i915_drv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define dev_to_drm_minor(d) dev_get_drvdata((d))
+
+>>>>>>> v3.18
 =======
 #define dev_to_drm_minor(d) dev_get_drvdata((d))
 
@@ -43,6 +48,11 @@ static u32 calc_residency(struct drm_device *dev, const u32 reg)
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	u64 raw_time; /* 32b value may overflow during fixed point math */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u64 units = 128ULL, div = 100000ULL, bias = 100ULL;
+	u32 ret;
+>>>>>>> v3.18
 =======
 	u64 units = 128ULL, div = 100000ULL, bias = 100ULL;
 	u32 ret;
@@ -52,9 +62,12 @@ static u32 calc_residency(struct drm_device *dev, const u32 reg)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_time = I915_READ(reg) * 128ULL;
 	return DIV_ROUND_UP_ULL(raw_time, 100000);
 =======
+=======
+>>>>>>> v3.18
 	intel_runtime_pm_get(dev_priv);
 
 	/* On VLV and CHV, residency time is in CZ units rather than 1.28us */
@@ -104,6 +117,9 @@ static u32 calc_residency(struct drm_device *dev, const u32 reg)
 out:
 	intel_runtime_pm_put(dev_priv);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -111,7 +127,11 @@ static ssize_t
 show_rc6_mask(struct device *kdev, struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *dminor = container_of(kdev, struct drm_minor, kdev);
+=======
+	struct drm_minor *dminor = dev_to_drm_minor(kdev);
+>>>>>>> v3.18
 =======
 	struct drm_minor *dminor = dev_to_drm_minor(kdev);
 >>>>>>> v3.18
@@ -122,7 +142,11 @@ static ssize_t
 show_rc6_ms(struct device *kdev, struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *dminor = container_of(kdev, struct drm_minor, kdev);
+=======
+	struct drm_minor *dminor = dev_get_drvdata(kdev);
+>>>>>>> v3.18
 =======
 	struct drm_minor *dminor = dev_get_drvdata(kdev);
 >>>>>>> v3.18
@@ -134,13 +158,19 @@ static ssize_t
 show_rc6p_ms(struct device *kdev, struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *dminor = container_of(kdev, struct drm_minor, kdev);
 	u32 rc6p_residency = calc_residency(dminor->dev, GEN6_GT_GFX_RC6p);
 =======
+=======
+>>>>>>> v3.18
 	struct drm_minor *dminor = dev_to_drm_minor(kdev);
 	u32 rc6p_residency = calc_residency(dminor->dev, GEN6_GT_GFX_RC6p);
 	if (IS_VALLEYVIEW(dminor->dev))
 		rc6p_residency = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return snprintf(buf, PAGE_SIZE, "%u\n", rc6p_residency);
 }
@@ -149,13 +179,19 @@ static ssize_t
 show_rc6pp_ms(struct device *kdev, struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *dminor = container_of(kdev, struct drm_minor, kdev);
 	u32 rc6pp_residency = calc_residency(dminor->dev, GEN6_GT_GFX_RC6pp);
 =======
+=======
+>>>>>>> v3.18
 	struct drm_minor *dminor = dev_to_drm_minor(kdev);
 	u32 rc6pp_residency = calc_residency(dminor->dev, GEN6_GT_GFX_RC6pp);
 	if (IS_VALLEYVIEW(dminor->dev))
 		rc6pp_residency = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return snprintf(buf, PAGE_SIZE, "%u\n", rc6pp_residency);
 }
@@ -182,7 +218,11 @@ static struct attribute_group rc6_attr_group = {
 static int l3_access_valid(struct drm_device *dev, loff_t offset)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!HAS_L3_GPU_CACHE(dev))
+=======
+	if (!HAS_L3_DPF(dev))
+>>>>>>> v3.18
 =======
 	if (!HAS_L3_DPF(dev))
 >>>>>>> v3.18
@@ -204,12 +244,15 @@ i915_l3_read(struct file *filp, struct kobject *kobj,
 {
 	struct device *dev = container_of(kobj, struct device, kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *dminor = container_of(dev, struct drm_minor, kdev);
 	struct drm_device *drm_dev = dminor->dev;
 	struct drm_i915_private *dev_priv = drm_dev->dev_private;
 	uint32_t misccpctl;
 	int i, ret;
 =======
+=======
+>>>>>>> v3.18
 	struct drm_minor *dminor = dev_to_drm_minor(dev);
 	struct drm_device *drm_dev = dminor->dev;
 	struct drm_i915_private *dev_priv = drm_dev->dev_private;
@@ -217,6 +260,9 @@ i915_l3_read(struct file *filp, struct kobject *kobj,
 	int ret;
 
 	count = round_down(count, 4);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = l3_access_valid(drm_dev, offset);
@@ -224,6 +270,11 @@ i915_l3_read(struct file *filp, struct kobject *kobj,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	count = min_t(size_t, GEN7_L3LOG_SIZE - offset, count);
+
+>>>>>>> v3.18
 =======
 	count = min_t(size_t, GEN7_L3LOG_SIZE - offset, count);
 
@@ -232,6 +283,7 @@ i915_l3_read(struct file *filp, struct kobject *kobj,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	misccpctl = I915_READ(GEN7_MISCCPCTL);
 	I915_WRITE(GEN7_MISCCPCTL, misccpctl & ~GEN7_DOP_CLOCK_GATE_ENABLE);
@@ -245,6 +297,8 @@ i915_l3_read(struct file *filp, struct kobject *kobj,
 
 	return i - offset;
 =======
+=======
+>>>>>>> v3.18
 	if (dev_priv->l3_parity.remap_info[slice])
 		memcpy(buf,
 		       dev_priv->l3_parity.remap_info[slice] + (offset/4),
@@ -255,6 +309,9 @@ i915_l3_read(struct file *filp, struct kobject *kobj,
 	mutex_unlock(&drm_dev->struct_mutex);
 
 	return count;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -265,6 +322,7 @@ i915_l3_write(struct file *filp, struct kobject *kobj,
 {
 	struct device *dev = container_of(kobj, struct device, kobj);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *dminor = container_of(dev, struct drm_minor, kdev);
 	struct drm_device *drm_dev = dminor->dev;
 	struct drm_i915_private *dev_priv = drm_dev->dev_private;
@@ -272,6 +330,8 @@ i915_l3_write(struct file *filp, struct kobject *kobj,
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 	struct drm_minor *dminor = dev_to_drm_minor(dev);
 	struct drm_device *drm_dev = dminor->dev;
 	struct drm_i915_private *dev_priv = drm_dev->dev_private;
@@ -283,6 +343,9 @@ i915_l3_write(struct file *filp, struct kobject *kobj,
 	if (!HAS_HW_CONTEXTS(drm_dev))
 		return -ENXIO;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = l3_access_valid(drm_dev, offset);
 	if (ret)
@@ -293,7 +356,11 @@ i915_l3_write(struct file *filp, struct kobject *kobj,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!dev_priv->l3_parity.remap_info) {
+=======
+	if (!dev_priv->l3_parity.remap_info[slice]) {
+>>>>>>> v3.18
 =======
 	if (!dev_priv->l3_parity.remap_info[slice]) {
 >>>>>>> v3.18
@@ -317,6 +384,7 @@ i915_l3_write(struct file *filp, struct kobject *kobj,
 	*/
 	if (temp)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_priv->l3_parity.remap_info = temp;
 
 	memcpy(dev_priv->l3_parity.remap_info + (offset/4),
@@ -325,6 +393,8 @@ i915_l3_write(struct file *filp, struct kobject *kobj,
 
 	i915_gem_l3_remap(drm_dev);
 =======
+=======
+>>>>>>> v3.18
 		dev_priv->l3_parity.remap_info[slice] = temp;
 
 	memcpy(dev_priv->l3_parity.remap_info[slice] + (offset/4), buf, count);
@@ -332,6 +402,9 @@ i915_l3_write(struct file *filp, struct kobject *kobj,
 	/* NB: We defer the remapping until we switch to the context */
 	list_for_each_entry(ctx, &dev_priv->context_list, link)
 		ctx->remap_slice |= (1<<slice);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&drm_dev->struct_mutex);
@@ -345,8 +418,11 @@ static struct bin_attribute dpf_attrs = {
 	.read = i915_l3_read,
 	.write = i915_l3_write,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.mmap = NULL
 =======
+=======
+>>>>>>> v3.18
 	.mmap = NULL,
 	.private = (void *)0
 };
@@ -358,6 +434,9 @@ static struct bin_attribute dpf_attrs_1 = {
 	.write = i915_l3_write,
 	.mmap = NULL,
 	.private = (void *)1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -365,7 +444,11 @@ static ssize_t gt_cur_freq_mhz_show(struct device *kdev,
 				    struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *minor = container_of(kdev, struct drm_minor, kdev);
+=======
+	struct drm_minor *minor = dev_to_drm_minor(kdev);
+>>>>>>> v3.18
 =======
 	struct drm_minor *minor = dev_to_drm_minor(kdev);
 >>>>>>> v3.18
@@ -373,6 +456,7 @@ static ssize_t gt_cur_freq_mhz_show(struct device *kdev,
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&dev_priv->rps.hw_lock);
 	ret = dev_priv->rps.cur_delay * GT_FREQUENCY_MULTIPLIER;
@@ -385,6 +469,8 @@ static ssize_t gt_max_freq_mhz_show(struct device *kdev, struct device_attribute
 {
 	struct drm_minor *minor = container_of(kdev, struct drm_minor, kdev);
 =======
+=======
+>>>>>>> v3.18
 	flush_delayed_work(&dev_priv->rps.delayed_resume_work);
 
 	intel_runtime_pm_get(dev_priv);
@@ -418,15 +504,21 @@ static ssize_t vlv_rpe_freq_mhz_show(struct device *kdev,
 static ssize_t gt_max_freq_mhz_show(struct device *kdev, struct device_attribute *attr, char *buf)
 {
 	struct drm_minor *minor = dev_to_drm_minor(kdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct drm_device *dev = minor->dev;
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&dev_priv->rps.hw_lock);
 	ret = dev_priv->rps.max_delay * GT_FREQUENCY_MULTIPLIER;
 =======
+=======
+>>>>>>> v3.18
 	flush_delayed_work(&dev_priv->rps.delayed_resume_work);
 
 	mutex_lock(&dev_priv->rps.hw_lock);
@@ -434,6 +526,9 @@ static ssize_t gt_max_freq_mhz_show(struct device *kdev, struct device_attribute
 		ret = vlv_gpu_freq(dev_priv, dev_priv->rps.max_freq_softlimit);
 	else
 		ret = dev_priv->rps.max_freq_softlimit * GT_FREQUENCY_MULTIPLIER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev_priv->rps.hw_lock);
 
@@ -445,15 +540,21 @@ static ssize_t gt_max_freq_mhz_store(struct device *kdev,
 				     const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *minor = container_of(kdev, struct drm_minor, kdev);
 	struct drm_device *dev = minor->dev;
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	u32 val, rp_state_cap, hw_max, hw_min, non_oc_max;
 =======
+=======
+>>>>>>> v3.18
 	struct drm_minor *minor = dev_to_drm_minor(kdev);
 	struct drm_device *dev = minor->dev;
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	u32 val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ssize_t ret;
 
@@ -461,6 +562,7 @@ static ssize_t gt_max_freq_mhz_store(struct device *kdev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	val /= GT_FREQUENCY_MULTIPLIER;
 
@@ -473,6 +575,8 @@ static ssize_t gt_max_freq_mhz_store(struct device *kdev,
 
 	if (val < hw_min || val > hw_max || val < dev_priv->rps.min_delay) {
 =======
+=======
+>>>>>>> v3.18
 	flush_delayed_work(&dev_priv->rps.delayed_resume_work);
 
 	mutex_lock(&dev_priv->rps.hw_lock);
@@ -485,11 +589,15 @@ static ssize_t gt_max_freq_mhz_store(struct device *kdev,
 	if (val < dev_priv->rps.min_freq ||
 	    val > dev_priv->rps.max_freq ||
 	    val < dev_priv->rps.min_freq_softlimit) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_unlock(&dev_priv->rps.hw_lock);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (val > non_oc_max)
 		DRM_DEBUG("User requested overclocking to %d\n",
@@ -500,6 +608,8 @@ static ssize_t gt_max_freq_mhz_store(struct device *kdev,
 
 	dev_priv->rps.max_delay = val;
 =======
+=======
+>>>>>>> v3.18
 	if (val > dev_priv->rps.rp0_freq)
 		DRM_DEBUG("User requested overclocking to %d\n",
 			  val * GT_FREQUENCY_MULTIPLIER);
@@ -517,6 +627,9 @@ static ssize_t gt_max_freq_mhz_store(struct device *kdev,
 		 * unchanged. */
 		gen6_set_rps(dev, dev_priv->rps.cur_freq);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&dev_priv->rps.hw_lock);
@@ -527,7 +640,11 @@ static ssize_t gt_max_freq_mhz_store(struct device *kdev,
 static ssize_t gt_min_freq_mhz_show(struct device *kdev, struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *minor = container_of(kdev, struct drm_minor, kdev);
+=======
+	struct drm_minor *minor = dev_to_drm_minor(kdev);
+>>>>>>> v3.18
 =======
 	struct drm_minor *minor = dev_to_drm_minor(kdev);
 >>>>>>> v3.18
@@ -536,9 +653,12 @@ static ssize_t gt_min_freq_mhz_show(struct device *kdev, struct device_attribute
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&dev_priv->rps.hw_lock);
 	ret = dev_priv->rps.min_delay * GT_FREQUENCY_MULTIPLIER;
 =======
+=======
+>>>>>>> v3.18
 	flush_delayed_work(&dev_priv->rps.delayed_resume_work);
 
 	mutex_lock(&dev_priv->rps.hw_lock);
@@ -546,6 +666,9 @@ static ssize_t gt_min_freq_mhz_show(struct device *kdev, struct device_attribute
 		ret = vlv_gpu_freq(dev_priv, dev_priv->rps.min_freq_softlimit);
 	else
 		ret = dev_priv->rps.min_freq_softlimit * GT_FREQUENCY_MULTIPLIER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev_priv->rps.hw_lock);
 
@@ -557,15 +680,21 @@ static ssize_t gt_min_freq_mhz_store(struct device *kdev,
 				     const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *minor = container_of(kdev, struct drm_minor, kdev);
 	struct drm_device *dev = minor->dev;
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	u32 val, rp_state_cap, hw_max, hw_min;
 =======
+=======
+>>>>>>> v3.18
 	struct drm_minor *minor = dev_to_drm_minor(kdev);
 	struct drm_device *dev = minor->dev;
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	u32 val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ssize_t ret;
 
@@ -573,6 +702,7 @@ static ssize_t gt_min_freq_mhz_store(struct device *kdev,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	val /= GT_FREQUENCY_MULTIPLIER;
 
@@ -584,6 +714,8 @@ static ssize_t gt_min_freq_mhz_store(struct device *kdev,
 
 	if (val < hw_min || val > hw_max || val > dev_priv->rps.max_delay) {
 =======
+=======
+>>>>>>> v3.18
 	flush_delayed_work(&dev_priv->rps.delayed_resume_work);
 
 	mutex_lock(&dev_priv->rps.hw_lock);
@@ -596,17 +728,23 @@ static ssize_t gt_min_freq_mhz_store(struct device *kdev,
 	if (val < dev_priv->rps.min_freq ||
 	    val > dev_priv->rps.max_freq ||
 	    val > dev_priv->rps.max_freq_softlimit) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_unlock(&dev_priv->rps.hw_lock);
 		return -EINVAL;
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dev_priv->rps.cur_delay < val)
 		gen6_set_rps(dev_priv->dev, val);
 
 	dev_priv->rps.min_delay = val;
 =======
+=======
+>>>>>>> v3.18
 	dev_priv->rps.min_freq_softlimit = val;
 
 	if (dev_priv->rps.cur_freq < val) {
@@ -620,6 +758,9 @@ static ssize_t gt_min_freq_mhz_store(struct device *kdev,
 		 * unchanged. */
 		gen6_set_rps(dev, dev_priv->rps.cur_freq);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&dev_priv->rps.hw_lock);
@@ -633,6 +774,10 @@ static DEVICE_ATTR(gt_max_freq_mhz, S_IRUGO | S_IWUSR, gt_max_freq_mhz_show, gt_
 static DEVICE_ATTR(gt_min_freq_mhz, S_IRUGO | S_IWUSR, gt_min_freq_mhz_show, gt_min_freq_mhz_store);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(vlv_rpe_freq_mhz, S_IRUGO, vlv_rpe_freq_mhz_show, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(vlv_rpe_freq_mhz, S_IRUGO, vlv_rpe_freq_mhz_show, NULL);
 >>>>>>> v3.18
@@ -646,7 +791,11 @@ static DEVICE_ATTR(gt_RPn_freq_mhz, S_IRUGO, gt_rp_mhz_show, NULL);
 static ssize_t gt_rp_mhz_show(struct device *kdev, struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_minor *minor = container_of(kdev, struct drm_minor, kdev);
+=======
+	struct drm_minor *minor = dev_to_drm_minor(kdev);
+>>>>>>> v3.18
 =======
 	struct drm_minor *minor = dev_to_drm_minor(kdev);
 >>>>>>> v3.18
@@ -659,6 +808,7 @@ static ssize_t gt_rp_mhz_show(struct device *kdev, struct device_attribute *attr
 	if (ret)
 		return ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rp_state_cap = I915_READ(GEN6_RP_STATE_CAP);
 	mutex_unlock(&dev->struct_mutex);
 
@@ -669,6 +819,8 @@ static ssize_t gt_rp_mhz_show(struct device *kdev, struct device_attribute *attr
 	} else if (attr == &dev_attr_gt_RPn_freq_mhz) {
 		val = ((rp_state_cap & 0xff0000) >> 16) * GT_FREQUENCY_MULTIPLIER;
 =======
+=======
+>>>>>>> v3.18
 	intel_runtime_pm_get(dev_priv);
 	rp_state_cap = I915_READ(GEN6_RP_STATE_CAP);
 	intel_runtime_pm_put(dev_priv);
@@ -689,6 +841,9 @@ static ssize_t gt_rp_mhz_show(struct device *kdev, struct device_attribute *attr
 			val = vlv_gpu_freq(dev_priv, dev_priv->rps.min_freq);
 		else
 			val = ((rp_state_cap & 0xff0000) >> 16) * GT_FREQUENCY_MULTIPLIER;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} else {
 		BUG();
@@ -707,7 +862,10 @@ static const struct attribute *gen6_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct attribute *vlv_attrs[] = {
 	&dev_attr_gt_cur_freq_mhz.attr,
 	&dev_attr_gt_max_freq_mhz.attr,
@@ -784,6 +942,9 @@ static struct bin_attribute error_state_attr = {
 	.write = error_state_write,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void i915_setup_sysfs(struct drm_device *dev)
 {
@@ -792,7 +953,11 @@ void i915_setup_sysfs(struct drm_device *dev)
 #ifdef CONFIG_PM
 	if (INTEL_INFO(dev)->gen >= 6) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = sysfs_merge_group(&dev->primary->kdev.kobj,
+=======
+		ret = sysfs_merge_group(&dev->primary->kdev->kobj,
+>>>>>>> v3.18
 =======
 		ret = sysfs_merge_group(&dev->primary->kdev->kobj,
 >>>>>>> v3.18
@@ -801,6 +966,7 @@ void i915_setup_sysfs(struct drm_device *dev)
 			DRM_ERROR("RC6 residency sysfs setup failed\n");
 	}
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (HAS_L3_GPU_CACHE(dev)) {
 		ret = device_create_bin_file(&dev->primary->kdev, &dpf_attrs);
@@ -814,6 +980,8 @@ void i915_setup_sysfs(struct drm_device *dev)
 			DRM_ERROR("gen6 sysfs setup failed\n");
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (HAS_L3_DPF(dev)) {
 		ret = device_create_bin_file(dev->primary->kdev, &dpf_attrs);
 		if (ret)
@@ -839,17 +1007,23 @@ void i915_setup_sysfs(struct drm_device *dev)
 				    &error_state_attr);
 	if (ret)
 		DRM_ERROR("error_state sysfs setup failed\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void i915_teardown_sysfs(struct drm_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_files(&dev->primary->kdev.kobj, gen6_attrs);
 	device_remove_bin_file(&dev->primary->kdev,  &dpf_attrs);
 #ifdef CONFIG_PM
 	sysfs_unmerge_group(&dev->primary->kdev.kobj, &rc6_attr_group);
 =======
+=======
+>>>>>>> v3.18
 	sysfs_remove_bin_file(&dev->primary->kdev->kobj, &error_state_attr);
 	if (IS_VALLEYVIEW(dev))
 		sysfs_remove_files(&dev->primary->kdev->kobj, vlv_attrs);
@@ -859,6 +1033,9 @@ void i915_teardown_sysfs(struct drm_device *dev)
 	device_remove_bin_file(dev->primary->kdev,  &dpf_attrs);
 #ifdef CONFIG_PM
 	sysfs_unmerge_group(&dev->primary->kdev->kobj, &rc6_attr_group);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 }

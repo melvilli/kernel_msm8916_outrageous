@@ -54,7 +54,11 @@
 #define V4L2_CTRL_CLASS_MPEG		0x00990000	/* MPEG-compression controls */
 #define V4L2_CTRL_CLASS_CAMERA		0x009a0000	/* Camera class controls */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_CTRL_CLASS_FM_TX		0x009b0000	/* FM Modulator control class */
+=======
+#define V4L2_CTRL_CLASS_FM_TX		0x009b0000	/* FM Modulator controls */
+>>>>>>> v3.18
 =======
 #define V4L2_CTRL_CLASS_FM_TX		0x009b0000	/* FM Modulator controls */
 >>>>>>> v3.18
@@ -64,7 +68,13 @@
 #define V4L2_CTRL_CLASS_IMAGE_PROC	0x009f0000	/* Image processing controls */
 #define V4L2_CTRL_CLASS_DV		0x00a00000	/* Digital Video controls */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_CTRL_CLASS_FM_RX		0x00a10000	/* Digital Video controls */
+=======
+#define V4L2_CTRL_CLASS_FM_RX		0x00a10000	/* FM Receiver controls */
+#define V4L2_CTRL_CLASS_RF_TUNER	0x00a20000	/* RF tuner controls */
+#define V4L2_CTRL_CLASS_DETECT		0x00a30000	/* Detection controls */
+>>>>>>> v3.18
 =======
 #define V4L2_CTRL_CLASS_FM_RX		0x00a10000	/* FM Receiver controls */
 #define V4L2_CTRL_CLASS_RF_TUNER	0x00a20000	/* RF tuner controls */
@@ -151,8 +161,11 @@ enum v4l2_colorfx {
 /* last CID + 1 */
 #define V4L2_CID_LASTP1                         (V4L2_CID_BASE+43)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_CID_SPECIAL_EFFECT			(V4L2_CID_BASE+44)
 /* Minimum number of buffer neede by the device */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -176,8 +189,11 @@ enum v4l2_colorfx {
 #define V4L2_CID_USER_SI476X_BASE		(V4L2_CID_USER_BASE + 0x1040)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* MPEG-class control IDs */
 =======
+=======
+>>>>>>> v3.18
 /* The base for the TI VPE driver controls. Total of 16 controls is reserved for
  * this driver */
 #define V4L2_CID_USER_TI_VPE_BASE		(V4L2_CID_USER_BASE + 0x1050)
@@ -189,6 +205,9 @@ enum v4l2_colorfx {
 /* MPEG-class control IDs */
 /* The MPEG controls are applicable to all codec controls
  * and the 'MPEG' part of the define is historical */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define V4L2_CID_MPEG_BASE 			(V4L2_CTRL_CLASS_MPEG | 0x900)
@@ -379,7 +398,10 @@ enum v4l2_mpeg_video_header_mode {
 	V4L2_MPEG_VIDEO_HEADER_MODE_SEPARATE			= 0,
 	V4L2_MPEG_VIDEO_HEADER_MODE_JOINED_WITH_1ST_FRAME	= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	V4L2_MPEG_VIDEO_HEADER_MODE_JOINED_WITH_I_FRAME		= 2,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -394,7 +416,10 @@ enum v4l2_mpeg_video_multi_slice_mode {
 	V4L2_MPEG_VIDEO_MULTI_SICE_MODE_MAX_MB		= 1,
 	V4L2_MPEG_VIDEO_MULTI_SICE_MODE_MAX_BYTES	= 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	V4L2_MPEG_VIDEO_MULTI_SLICE_GOB			= 3,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -404,6 +429,11 @@ enum v4l2_mpeg_video_multi_slice_mode {
 #define V4L2_CID_MPEG_VIDEO_VBV_DELAY			(V4L2_CID_MPEG_BASE+225)
 #define V4L2_CID_MPEG_VIDEO_REPEAT_SEQ_HEADER		(V4L2_CID_MPEG_BASE+226)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V4L2_CID_MPEG_VIDEO_MV_H_SEARCH_RANGE		(V4L2_CID_MPEG_BASE+227)
+#define V4L2_CID_MPEG_VIDEO_MV_V_SEARCH_RANGE		(V4L2_CID_MPEG_BASE+228)
+>>>>>>> v3.18
 =======
 #define V4L2_CID_MPEG_VIDEO_MV_H_SEARCH_RANGE		(V4L2_CID_MPEG_BASE+227)
 #define V4L2_CID_MPEG_VIDEO_MV_V_SEARCH_RANGE		(V4L2_CID_MPEG_BASE+228)
@@ -446,7 +476,10 @@ enum v4l2_mpeg_video_h264_level {
 	V4L2_MPEG_VIDEO_H264_LEVEL_5_0	= 14,
 	V4L2_MPEG_VIDEO_H264_LEVEL_5_1	= 15,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	V4L2_MPEG_VIDEO_H264_LEVEL_5_2	= 16,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -455,10 +488,16 @@ enum v4l2_mpeg_video_h264_level {
 #define V4L2_CID_MPEG_VIDEO_H264_LOOP_FILTER_MODE	(V4L2_CID_MPEG_BASE+362)
 enum v4l2_mpeg_video_h264_loop_filter_mode {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	V4L2_MPEG_VIDEO_H264_LOOP_FILTER_MODE_DISABLED			= 0,
 	V4L2_MPEG_VIDEO_H264_LOOP_FILTER_MODE_ENABLED			= 1,
 	V4L2_MPEG_VIDEO_H264_LOOP_FILTER_MODE_DISABLED_AT_SLICE_BOUNDARY
 									= 2,
+=======
+	V4L2_MPEG_VIDEO_H264_LOOP_FILTER_MODE_ENABLED				= 0,
+	V4L2_MPEG_VIDEO_H264_LOOP_FILTER_MODE_DISABLED				= 1,
+	V4L2_MPEG_VIDEO_H264_LOOP_FILTER_MODE_DISABLED_AT_SLICE_BOUNDARY	= 2,
+>>>>>>> v3.18
 =======
 	V4L2_MPEG_VIDEO_H264_LOOP_FILTER_MODE_ENABLED				= 0,
 	V4L2_MPEG_VIDEO_H264_LOOP_FILTER_MODE_DISABLED				= 1,
@@ -485,7 +524,10 @@ enum v4l2_mpeg_video_h264_profile {
 	V4L2_MPEG_VIDEO_H264_PROFILE_STEREO_HIGH		= 15,
 	V4L2_MPEG_VIDEO_H264_PROFILE_MULTIVIEW_HIGH		= 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	V4L2_MPEG_VIDEO_H264_PROFILE_CONSTRAINED_HIGH		= 17,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -579,8 +621,11 @@ enum v4l2_mpeg_video_mpeg4_profile {
 };
 #define V4L2_CID_MPEG_VIDEO_MPEG4_QPEL		(V4L2_CID_MPEG_BASE+407)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define V4L2_CID_QCOM_VIDEO_SYNC_FRAME_SEQ_HDR		(V4L2_CID_MPEG_BASE+408)
 =======
+=======
+>>>>>>> v3.18
 
 /*  Control IDs for VP8 streams
  *  Although VP8 is not part of MPEG we add these controls to the MPEG class
@@ -613,6 +658,9 @@ enum v4l2_vp8_golden_frame_sel {
 #define V4L2_CID_MPEG_VIDEO_VPX_I_FRAME_QP		(V4L2_CID_MPEG_BASE+509)
 #define V4L2_CID_MPEG_VIDEO_VPX_P_FRAME_QP		(V4L2_CID_MPEG_BASE+510)
 #define V4L2_CID_MPEG_VIDEO_VPX_PROFILE			(V4L2_CID_MPEG_BASE+511)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*  MPEG-class control IDs specific to the CX2341x driver as defined by V4L2 */
@@ -683,6 +731,7 @@ enum v4l2_mpeg_mfc51_video_force_frame_type {
 #define V4L2_CID_MPEG_MFC51_VIDEO_H264_ADAPTIVE_RC_STATIC		(V4L2_CID_MPEG_MFC51_BASE+53)
 #define V4L2_CID_MPEG_MFC51_VIDEO_H264_NUM_REF_PIC_FOR_P		(V4L2_CID_MPEG_MFC51_BASE+54)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*  MPEG-class control IDs specific to the msm_vidc driver */
 #define V4L2_CID_MPEG_MSM_VIDC_BASE		(V4L2_CTRL_CLASS_MPEG | 0x2000)
@@ -1127,6 +1176,8 @@ enum v4l2_cid_mpeg_vidc_video_vpe_csc_type_enable {
 };
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /*  Camera class control IDs */
 
@@ -1238,6 +1289,11 @@ enum v4l2_auto_focus_range {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V4L2_CID_PAN_SPEED			(V4L2_CID_CAMERA_CLASS_BASE+32)
+#define V4L2_CID_TILT_SPEED			(V4L2_CID_CAMERA_CLASS_BASE+33)
+>>>>>>> v3.18
 =======
 #define V4L2_CID_PAN_SPEED			(V4L2_CID_CAMERA_CLASS_BASE+32)
 #define V4L2_CID_TILT_SPEED			(V4L2_CID_CAMERA_CLASS_BASE+33)
@@ -1254,7 +1310,10 @@ enum v4l2_auto_focus_range {
 #define V4L2_CID_RDS_TX_PS_NAME			(V4L2_CID_FM_TX_CLASS_BASE + 5)
 #define V4L2_CID_RDS_TX_RADIO_TEXT		(V4L2_CID_FM_TX_CLASS_BASE + 6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_CID_RDS_TX_MONO_STEREO		(V4L2_CID_FM_TX_CLASS_BASE + 7)
 #define V4L2_CID_RDS_TX_ARTIFICIAL_HEAD		(V4L2_CID_FM_TX_CLASS_BASE + 8)
 #define V4L2_CID_RDS_TX_COMPRESSED		(V4L2_CID_FM_TX_CLASS_BASE + 9)
@@ -1264,6 +1323,9 @@ enum v4l2_auto_focus_range {
 #define V4L2_CID_RDS_TX_MUSIC_SPEECH		(V4L2_CID_FM_TX_CLASS_BASE + 13)
 #define V4L2_CID_RDS_TX_ALT_FREQS_ENABLE	(V4L2_CID_FM_TX_CLASS_BASE + 14)
 #define V4L2_CID_RDS_TX_ALT_FREQS		(V4L2_CID_FM_TX_CLASS_BASE + 15)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define V4L2_CID_AUDIO_LIMITER_ENABLED		(V4L2_CID_FM_TX_CLASS_BASE + 64)
@@ -1325,6 +1387,12 @@ enum v4l2_flash_strobe_source {
 #define V4L2_FLASH_FAULT_OVER_CURRENT		(1 << 4)
 #define V4L2_FLASH_FAULT_INDICATOR		(1 << 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define V4L2_FLASH_FAULT_UNDER_VOLTAGE		(1 << 6)
+#define V4L2_FLASH_FAULT_INPUT_VOLTAGE		(1 << 7)
+#define V4L2_FLASH_FAULT_LED_OVER_TEMPERATURE	(1 << 8)
+>>>>>>> v3.18
 =======
 #define V4L2_FLASH_FAULT_UNDER_VOLTAGE		(1 << 6)
 #define V4L2_FLASH_FAULT_INPUT_VOLTAGE		(1 << 7)
@@ -1368,11 +1436,17 @@ enum v4l2_jpeg_chroma_subsampling {
 #define V4L2_CID_HBLANK				(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 2)
 #define V4L2_CID_ANALOGUE_GAIN			(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 3)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_CID_TEST_PATTERN_RED		(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 4)
 #define V4L2_CID_TEST_PATTERN_GREENR		(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 5)
 #define V4L2_CID_TEST_PATTERN_BLUE		(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 6)
 #define V4L2_CID_TEST_PATTERN_GREENB		(V4L2_CID_IMAGE_SOURCE_CLASS_BASE + 7)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -1420,7 +1494,10 @@ enum v4l2_deemphasis {
 
 #define V4L2_CID_RDS_RECEPTION			(V4L2_CID_FM_RX_CLASS_BASE + 2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define V4L2_CID_RDS_RX_PTY			(V4L2_CID_FM_RX_CLASS_BASE + 3)
 #define V4L2_CID_RDS_RX_PS_NAME			(V4L2_CID_FM_RX_CLASS_BASE + 4)
 #define V4L2_CID_RDS_RX_RADIO_TEXT		(V4L2_CID_FM_RX_CLASS_BASE + 5)
@@ -1456,6 +1533,9 @@ enum v4l2_detect_md_mode {
 #define V4L2_CID_DETECT_MD_GLOBAL_THRESHOLD	(V4L2_CID_DETECT_CLASS_BASE + 2)
 #define V4L2_CID_DETECT_MD_THRESHOLD_GRID	(V4L2_CID_DETECT_CLASS_BASE + 3)
 #define V4L2_CID_DETECT_MD_REGION_GRID		(V4L2_CID_DETECT_CLASS_BASE + 4)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

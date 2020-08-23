@@ -41,6 +41,10 @@
 #define W1_FAMILY_DS2780	0x32
 #define W1_FAMILY_DS2413	0x3A
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define W1_FAMILY_DS2406	0x12
+>>>>>>> v3.18
 =======
 #define W1_FAMILY_DS2406	0x12
 >>>>>>> v3.18
@@ -53,22 +57,31 @@
 struct w1_slave;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * struct w1_family_ops - operations for a family type
  * @add_slave: add_slave
  * @remove_slave: remove_slave
  * @groups: sysfs group
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct w1_family_ops
 {
 	int  (* add_slave)(struct w1_slave *);
 	void (* remove_slave)(struct w1_slave *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 =======
+=======
+>>>>>>> v3.18
 	const struct attribute_group **groups;
 };
 
@@ -79,6 +92,9 @@ struct w1_family_ops
  * @fops:		operations for this family
  * @refcnt:		reference counter
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct w1_family
 {

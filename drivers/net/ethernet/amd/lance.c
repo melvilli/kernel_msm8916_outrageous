@@ -755,7 +755,11 @@ lance_open(struct net_device *dev)
 
 	if (dev->irq == 0 ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 		request_irq(dev->irq, lance_interrupt, 0, lp->name, dev)) {
+=======
+		request_irq(dev->irq, lance_interrupt, 0, dev->name, dev)) {
+>>>>>>> v3.18
 =======
 		request_irq(dev->irq, lance_interrupt, 0, dev->name, dev)) {
 >>>>>>> v3.18

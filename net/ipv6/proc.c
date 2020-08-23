@@ -9,7 +9,11 @@
  *
  * Authors:	David S. Miller (davem@caip.rutgers.edu)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 		YOSHIFUJI Hideaki <yoshfuji@linux-ipv6.org>
+=======
+ *		YOSHIFUJI Hideaki <yoshfuji@linux-ipv6.org>
+>>>>>>> v3.18
 =======
  *		YOSHIFUJI Hideaki <yoshfuji@linux-ipv6.org>
 >>>>>>> v3.18
@@ -38,6 +42,10 @@ static int sockstat6_seq_show(struct seq_file *seq, void *v)
 {
 	struct net *net = seq->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int frag_mem = ip6_frag_mem(net);
+>>>>>>> v3.18
 =======
 	unsigned int frag_mem = ip6_frag_mem(net);
 >>>>>>> v3.18
@@ -51,8 +59,12 @@ static int sockstat6_seq_show(struct seq_file *seq, void *v)
 	seq_printf(seq, "RAW6: inuse %d\n",
 		       sock_prot_inuse_get(net, &rawv6_prot));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(seq, "FRAG6: inuse %d memory %d\n",
 		       ip6_frag_nqueues(net), ip6_frag_mem(net));
+=======
+	seq_printf(seq, "FRAG6: inuse %u memory %u\n", !!frag_mem, frag_mem);
+>>>>>>> v3.18
 =======
 	seq_printf(seq, "FRAG6: inuse %u memory %u\n", !!frag_mem, frag_mem);
 >>>>>>> v3.18
@@ -104,11 +116,17 @@ static const struct snmp_mib snmp6_ipstats_list[] = {
 	SNMP_MIB_ITEM("Ip6OutBcastOctets", IPSTATS_MIB_OUTBCASTOCTETS),
 	/* IPSTATS_MIB_CSUMERRORS is not relevant in IPv6 (no checksum) */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	SNMP_MIB_ITEM("Ip6InNoECTPkts", IPSTATS_MIB_NOECTPKTS),
 	SNMP_MIB_ITEM("Ip6InECT1Pkts", IPSTATS_MIB_ECT1PKTS),
 	SNMP_MIB_ITEM("Ip6InECT0Pkts", IPSTATS_MIB_ECT0PKTS),
 	SNMP_MIB_ITEM("Ip6InCEPkts", IPSTATS_MIB_CEPKTS),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	SNMP_MIB_SENTINEL
 };
@@ -202,7 +220,11 @@ static void snmp6_seq_show_icmpv6msg(struct seq_file *seq, atomic_long_t *smib)
  * or shared one (smib != NULL)
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void snmp6_seq_show_item(struct seq_file *seq, void __percpu **pcpumib,
+=======
+static void snmp6_seq_show_item(struct seq_file *seq, void __percpu *pcpumib,
+>>>>>>> v3.18
 =======
 static void snmp6_seq_show_item(struct seq_file *seq, void __percpu *pcpumib,
 >>>>>>> v3.18
@@ -221,7 +243,11 @@ static void snmp6_seq_show_item(struct seq_file *seq, void __percpu *pcpumib,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void snmp6_seq_show_item64(struct seq_file *seq, void __percpu **mib,
+=======
+static void snmp6_seq_show_item64(struct seq_file *seq, void __percpu *mib,
+>>>>>>> v3.18
 =======
 static void snmp6_seq_show_item64(struct seq_file *seq, void __percpu *mib,
 >>>>>>> v3.18
@@ -239,6 +265,7 @@ static int snmp6_seq_show(struct seq_file *seq, void *v)
 	struct net *net = (struct net *)seq->private;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snmp6_seq_show_item64(seq, (void __percpu **)net->mib.ipv6_statistics,
 			    snmp6_ipstats_list, offsetof(struct ipstats_mib, syncp));
 	snmp6_seq_show_item(seq, (void __percpu **)net->mib.icmpv6_statistics,
@@ -248,6 +275,8 @@ static int snmp6_seq_show(struct seq_file *seq, void *v)
 			    NULL, snmp6_udp6_list);
 	snmp6_seq_show_item(seq, (void __percpu **)net->mib.udplite_stats_in6,
 =======
+=======
+>>>>>>> v3.18
 	snmp6_seq_show_item64(seq, net->mib.ipv6_statistics,
 			    snmp6_ipstats_list, offsetof(struct ipstats_mib, syncp));
 	snmp6_seq_show_item(seq, net->mib.icmpv6_statistics,
@@ -256,6 +285,9 @@ static int snmp6_seq_show(struct seq_file *seq, void *v)
 	snmp6_seq_show_item(seq, net->mib.udp_stats_in6,
 			    NULL, snmp6_udp6_list);
 	snmp6_seq_show_item(seq, net->mib.udplite_stats_in6,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    NULL, snmp6_udplite6_list);
 	return 0;
@@ -280,7 +312,11 @@ static int snmp6_dev_seq_show(struct seq_file *seq, void *v)
 
 	seq_printf(seq, "%-32s\t%u\n", "ifIndex", idev->dev->ifindex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snmp6_seq_show_item64(seq, (void __percpu **)idev->stats.ipv6,
+=======
+	snmp6_seq_show_item64(seq, idev->stats.ipv6,
+>>>>>>> v3.18
 =======
 	snmp6_seq_show_item64(seq, idev->stats.ipv6,
 >>>>>>> v3.18

@@ -35,7 +35,10 @@ extern void omap3_pm_off_mode_enable(int);
 extern void omap_sram_idle(void);
 extern int omap_pm_clkdms_setup(struct clockdomain *clkdm, void *unused);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int (*omap_pm_suspend)(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -106,6 +109,10 @@ static inline void enable_omap3630_toggle_l2_on_restore(void) { }
 
 #define PM_OMAP4_ROM_SMP_BOOT_ERRATUM_GICD	(1 << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PM_OMAP4_CPU_OSWR_DISABLE		(1 << 1)
+>>>>>>> v3.18
 =======
 #define PM_OMAP4_CPU_OSWR_DISABLE		(1 << 1)
 >>>>>>> v3.18
@@ -155,7 +162,10 @@ static inline void omap_pm_setup_sr_i2c_pcb_length(u32 mm) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_SUSPEND
 void omap_common_suspend_init(void *pm_suspend);
 #else
@@ -163,5 +173,8 @@ static inline void omap_common_suspend_init(void *pm_suspend)
 {
 }
 #endif /* CONFIG_SUSPEND */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

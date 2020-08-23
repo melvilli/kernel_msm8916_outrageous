@@ -325,6 +325,11 @@ static ssize_t kone_sysfs_write_settings(struct file *fp, struct kobject *kobj,
 	return sizeof(struct kone_settings);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static BIN_ATTR(settings, 0660, kone_sysfs_read_settings,
+		kone_sysfs_write_settings, sizeof(struct kone_settings));
+>>>>>>> v3.18
 =======
 static BIN_ATTR(settings, 0660, kone_sysfs_read_settings,
 		kone_sysfs_write_settings, sizeof(struct kone_settings));
@@ -384,7 +389,10 @@ static ssize_t kone_sysfs_write_profilex(struct file *fp,
 	return sizeof(struct kone_profile);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define PROFILE_ATTR(number)					\
 static struct bin_attribute bin_attr_profile##number = {	\
 	.attr = { .name = "profile" #number, .mode = 0660 },	\
@@ -398,6 +406,9 @@ PROFILE_ATTR(2);
 PROFILE_ATTR(3);
 PROFILE_ATTR(4);
 PROFILE_ATTR(5);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static ssize_t kone_sysfs_show_actual_profile(struct device *dev,
@@ -408,6 +419,10 @@ static ssize_t kone_sysfs_show_actual_profile(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", kone->actual_profile);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_profile, 0440, kone_sysfs_show_actual_profile, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_profile, 0440, kone_sysfs_show_actual_profile, NULL);
 >>>>>>> v3.18
@@ -420,6 +435,10 @@ static ssize_t kone_sysfs_show_actual_dpi(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", kone->actual_dpi);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(actual_dpi, 0440, kone_sysfs_show_actual_dpi, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(actual_dpi, 0440, kone_sysfs_show_actual_dpi, NULL);
 >>>>>>> v3.18
@@ -446,6 +465,10 @@ static ssize_t kone_sysfs_show_weight(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", weight);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(weight, 0440, kone_sysfs_show_weight, NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(weight, 0440, kone_sysfs_show_weight, NULL);
 >>>>>>> v3.18
@@ -458,6 +481,11 @@ static ssize_t kone_sysfs_show_firmware_version(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%d\n", kone->firmware_version);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(firmware_version, 0440, kone_sysfs_show_firmware_version,
+		   NULL);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(firmware_version, 0440, kone_sysfs_show_firmware_version,
 		   NULL);
@@ -495,7 +523,11 @@ static ssize_t kone_sysfs_set_tcu(struct device *dev,
 	usb_dev = interface_to_usbdev(to_usb_interface(dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = strict_strtoul(buf, 10, &state);
+=======
+	retval = kstrtoul(buf, 10, &state);
+>>>>>>> v3.18
 =======
 	retval = kstrtoul(buf, 10, &state);
 >>>>>>> v3.18
@@ -567,6 +599,10 @@ exit_unlock:
 	return retval;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(tcu, 0660, kone_sysfs_show_tcu, kone_sysfs_set_tcu);
+>>>>>>> v3.18
 =======
 static DEVICE_ATTR(tcu, 0660, kone_sysfs_show_tcu, kone_sysfs_set_tcu);
 >>>>>>> v3.18
@@ -592,7 +628,11 @@ static ssize_t kone_sysfs_set_startup_profile(struct device *dev,
 	usb_dev = interface_to_usbdev(to_usb_interface(dev));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	retval = strict_strtoul(buf, 10, &new_startup_profile);
+=======
+	retval = kstrtoul(buf, 10, &new_startup_profile);
+>>>>>>> v3.18
 =======
 	retval = kstrtoul(buf, 10, &new_startup_profile);
 >>>>>>> v3.18
@@ -621,13 +661,19 @@ static ssize_t kone_sysfs_set_startup_profile(struct device *dev,
 	return size;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute kone_attributes[] = {
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR(startup_profile, 0660, kone_sysfs_show_startup_profile,
 		   kone_sysfs_set_startup_profile);
 
 static struct attribute *kone_attrs[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Read actual dpi settings.
@@ -635,8 +681,13 @@ static struct attribute *kone_attrs[] = {
 	 * kone_polling_rates to get real value.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(actual_dpi, 0440, kone_sysfs_show_actual_dpi, NULL),
 	__ATTR(actual_profile, 0440, kone_sysfs_show_actual_profile, NULL),
+=======
+	&dev_attr_actual_dpi.attr,
+	&dev_attr_actual_profile.attr,
+>>>>>>> v3.18
 =======
 	&dev_attr_actual_dpi.attr,
 	&dev_attr_actual_profile.attr,
@@ -650,7 +701,11 @@ static struct attribute *kone_attrs[] = {
 	 * weight.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(weight, 0440, kone_sysfs_show_weight, NULL),
+=======
+	&dev_attr_weight.attr,
+>>>>>>> v3.18
 =======
 	&dev_attr_weight.attr,
 >>>>>>> v3.18
@@ -662,8 +717,12 @@ static struct attribute *kone_attrs[] = {
 	 * positions to the left. E.g. a value of 138 means 1.38.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__ATTR(firmware_version, 0440,
 			kone_sysfs_show_firmware_version, NULL),
+=======
+	&dev_attr_firmware_version.attr,
+>>>>>>> v3.18
 =======
 	&dev_attr_firmware_version.attr,
 >>>>>>> v3.18
@@ -673,6 +732,7 @@ static struct attribute *kone_attrs[] = {
 	 * 1 = on. Writing 0 deactivates tcu and writing 1 calibrates and
 	 * activates the tcu
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__ATTR(tcu, 0660, kone_sysfs_show_tcu, kone_sysfs_set_tcu),
 
@@ -727,6 +787,8 @@ static struct bin_attribute kone_bin_attributes[] = {
 	},
 	__ATTR_NULL
 =======
+=======
+>>>>>>> v3.18
 	&dev_attr_tcu.attr,
 
 	/* Prints and takes the number of the profile the mouse starts with */
@@ -752,6 +814,9 @@ static const struct attribute_group kone_group = {
 static const struct attribute_group *kone_groups[] = {
 	&kone_group,
 	NULL,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -990,8 +1055,12 @@ static int __init kone_init(void)
 	if (IS_ERR(kone_class))
 		return PTR_ERR(kone_class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kone_class->dev_attrs = kone_attributes;
 	kone_class->dev_bin_attrs = kone_bin_attributes;
+=======
+	kone_class->dev_groups = kone_groups;
+>>>>>>> v3.18
 =======
 	kone_class->dev_groups = kone_groups;
 >>>>>>> v3.18

@@ -2,6 +2,10 @@
  * Carsten Langgaard, carstenl@mips.com
  * Copyright (C) 2000 MIPS Technologies, Inc.  All rights reserved.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2013 Imagination Technologies Ltd.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2013 Imagination Technologies Ltd.
 >>>>>>> v3.18
@@ -24,6 +28,7 @@
 #ifndef __ASM_MIPS_BOARDS_PIIX4_H
 #define __ASM_MIPS_BOARDS_PIIX4_H
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /************************************************************************
  *  IO register offsets
@@ -82,6 +87,8 @@
 #define PIIX4_OCW3_IRR		0x2
 #define PIIX4_OCW3_ISR		0x3
 =======
+=======
+>>>>>>> v3.18
 /* PIRQX Route Control */
 #define PIIX4_FUNC0_PIRQRC			0x60
 #define   PIIX4_FUNC0_PIRQRC_IRQ_ROUTING_DISABLE	(1 << 7)
@@ -127,6 +134,9 @@
 
 /* Data for magic special PCI cycle */
 #define PIIX4_SUSPEND_MAGIC			0x00120002
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __ASM_MIPS_BOARDS_PIIX4_H */

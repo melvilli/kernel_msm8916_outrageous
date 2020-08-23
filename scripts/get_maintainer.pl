@@ -22,6 +22,10 @@ my $email = 1;
 my $email_usename = 1;
 my $email_maintainer = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+my $email_reviewer = 1;
+>>>>>>> v3.18
 =======
 my $email_reviewer = 1;
 >>>>>>> v3.18
@@ -100,14 +104,20 @@ my %VCS_cmds;
 my %VCS_cmds_git = (
     "execute_cmd" => \&git_execute_cmd,
 <<<<<<< HEAD
+<<<<<<< HEAD
     "available" => '(which("git") ne "") && (-d ".git")',
     "find_signers_cmd" =>
 	"git log --no-color --follow --since=\$email_git_since " .
 =======
+=======
+>>>>>>> v3.18
     "available" => '(which("git") ne "") && (-e ".git")',
     "find_signers_cmd" =>
 	"git log --no-color --follow --since=\$email_git_since " .
 	    '--numstat --no-merges ' .
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    '--format="GitCommit: %H%n' .
 		      'GitAuthor: %an <%ae>%n' .
@@ -118,6 +128,10 @@ my %VCS_cmds_git = (
     "find_commit_signers_cmd" =>
 	"git log --no-color " .
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    '--numstat ' .
+>>>>>>> v3.18
 =======
 	    '--numstat ' .
 >>>>>>> v3.18
@@ -130,6 +144,10 @@ my %VCS_cmds_git = (
     "find_commit_author_cmd" =>
 	"git log --no-color " .
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    '--numstat ' .
+>>>>>>> v3.18
 =======
 	    '--numstat ' .
 >>>>>>> v3.18
@@ -145,6 +163,10 @@ my %VCS_cmds_git = (
     "author_pattern" => "^GitAuthor: (.*)",
     "subject_pattern" => "^GitSubject: (.*)",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "stat_pattern" => "^(\\d+)\\t(\\d+)\\t\$file\$",
+>>>>>>> v3.18
 =======
     "stat_pattern" => "^(\\d+)\\t(\\d+)\\t\$file\$",
 >>>>>>> v3.18
@@ -176,6 +198,10 @@ my %VCS_cmds_hg = (
     "author_pattern" => "^HgAuthor: (.*)",
     "subject_pattern" => "^HgSubject: (.*)",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "stat_pattern" => "^(\\d+)\t(\\d+)\t\$file\$",
+>>>>>>> v3.18
 =======
     "stat_pattern" => "^(\\d+)\t(\\d+)\t\$file\$",
 >>>>>>> v3.18
@@ -225,6 +251,10 @@ if (!GetOptions(
 		'mailmap!' => \$email_use_mailmap,
 		'm!' => \$email_maintainer,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		'r!' => \$email_reviewer,
+>>>>>>> v3.18
 =======
 		'r!' => \$email_reviewer,
 >>>>>>> v3.18
@@ -287,7 +317,12 @@ if ($sections) {
 
 if ($email &&
 <<<<<<< HEAD
+<<<<<<< HEAD
     ($email_maintainer + $email_list + $email_subscriber_list +
+=======
+    ($email_maintainer + $email_reviewer +
+     $email_list + $email_subscriber_list +
+>>>>>>> v3.18
 =======
     ($email_maintainer + $email_reviewer +
      $email_list + $email_subscriber_list +
@@ -782,6 +817,10 @@ MAINTAINER field selection options:
     --interactive => display a menu (mostly useful if used with the --git option)
     --m => include maintainer(s) if any
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    --r => include reviewer(s) if any
+>>>>>>> v3.18
 =======
     --r => include reviewer(s) if any
 >>>>>>> v3.18
@@ -1100,7 +1139,10 @@ sub add_categories {
 		    push_email_addresses($pvalue, $role);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    } elsif ($ptype eq "R") {
 		my ($name, $address) = parse_email($pvalue);
 		if ($name eq "") {
@@ -1117,6 +1159,9 @@ sub add_categories {
 		if ($email_reviewer) {
 		    push_email_addresses($pvalue, 'reviewer');
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    } elsif ($ptype eq "T") {
 		push(@scm, $pvalue);
@@ -1329,22 +1374,29 @@ sub extract_formatted_signatures {
 
 sub vcs_find_signers {
 <<<<<<< HEAD
+<<<<<<< HEAD
     my ($cmd) = @_;
     my $commits;
     my @lines = ();
     my @signatures = ();
 =======
+=======
+>>>>>>> v3.18
     my ($cmd, $file) = @_;
     my $commits;
     my @lines = ();
     my @signatures = ();
     my @authors = ();
     my @stats = ();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     @lines = &{$VCS_cmds{"execute_cmd"}}($cmd);
 
     my $pattern = $VCS_cmds{"commit_pattern"};
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     $commits = grep(/$pattern/, @lines);	# of commits
@@ -1353,6 +1405,8 @@ sub vcs_find_signers {
 
     return (0, @signatures) if !@signatures;
 =======
+=======
+>>>>>>> v3.18
     my $author_pattern = $VCS_cmds{"author_pattern"};
     my $stat_pattern = $VCS_cmds{"stat_pattern"};
 
@@ -1367,6 +1421,9 @@ sub vcs_find_signers {
 #    print("stats: <@stats>\n");
 
     return (0, \@signatures, \@authors, \@stats) if !@signatures;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     save_commits_by_author(@lines) if ($interactive);
@@ -1377,14 +1434,20 @@ sub vcs_find_signers {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     my ($types_ref, $signers_ref) = extract_formatted_signatures(@signatures);
 
     return ($commits, @$signers_ref);
 =======
+=======
+>>>>>>> v3.18
     my ($author_ref, $authors_ref) = extract_formatted_signatures(@authors);
     my ($types_ref, $signers_ref) = extract_formatted_signatures(@signatures);
 
     return ($commits, $signers_ref, $authors_ref, \@stats);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1942,14 +2005,20 @@ sub vcs_file_signoffs {
     my ($file) = @_;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     my @signers = ();
 =======
+=======
+>>>>>>> v3.18
     my $authors_ref;
     my $signers_ref;
     my $stats_ref;
     my @authors = ();
     my @signers = ();
     my @stats = ();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
     my $commits;
 
@@ -1960,8 +2029,11 @@ sub vcs_file_signoffs {
     $cmd =~ s/(\$\w+)/$1/eeg;		# interpolate $cmd
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     ($commits, @signers) = vcs_find_signers($cmd);
 =======
+=======
+>>>>>>> v3.18
     ($commits, $signers_ref, $authors_ref, $stats_ref) = vcs_find_signers($cmd, $file);
 
     @signers = @{$signers_ref} if defined $signers_ref;
@@ -1969,6 +2041,9 @@ sub vcs_file_signoffs {
     @stats = @{$stats_ref} if defined $stats_ref;
 
 #    print("commits: <$commits>\nsigners:<@signers>\nauthors: <@authors>\nstats: <@stats>\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
     foreach my $signer (@signers) {
@@ -1977,7 +2052,10 @@ sub vcs_file_signoffs {
 
     vcs_assign("commit_signer", $commits, @signers);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     vcs_assign("authored", $commits, @authors);
     if ($#authors == $#stats) {
 	my $stat_pattern = $VCS_cmds{"stat_pattern"};
@@ -2018,6 +2096,9 @@ sub vcs_file_signoffs {
 	vcs_assign("added_lines", $added, @list_added);
 	vcs_assign("removed_lines", $deleted, @list_deleted);
     }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2042,11 +2123,17 @@ sub vcs_file_blame {
 	if (vcs_is_hg()) {
 	    my $commit_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	    my $commit_authors_ref;
 	    my $commit_signers_ref;
 	    my $stats_ref;
 	    my @commit_authors = ();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	    my @commit_signers = ();
 	    my $commit = join(" -r ", @commits);
@@ -2056,7 +2143,13 @@ sub vcs_file_blame {
 	    $cmd =~ s/(\$\w+)/$1/eeg;	#substitute variables in $cmd
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    ($commit_count, @commit_signers) = vcs_find_signers($cmd);
+=======
+	    ($commit_count, $commit_signers_ref, $commit_authors_ref, $stats_ref) = vcs_find_signers($cmd, $file);
+	    @commit_authors = @{$commit_authors_ref} if defined $commit_authors_ref;
+	    @commit_signers = @{$commit_signers_ref} if defined $commit_signers_ref;
+>>>>>>> v3.18
 =======
 	    ($commit_count, $commit_signers_ref, $commit_authors_ref, $stats_ref) = vcs_find_signers($cmd, $file);
 	    @commit_authors = @{$commit_authors_ref} if defined $commit_authors_ref;
@@ -2068,11 +2161,17 @@ sub vcs_file_blame {
 	    foreach my $commit (@commits) {
 		my $commit_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		my $commit_authors_ref;
 		my $commit_signers_ref;
 		my $stats_ref;
 		my @commit_authors = ();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		my @commit_signers = ();
 		my $cmd;
@@ -2081,7 +2180,13 @@ sub vcs_file_blame {
 		$cmd =~ s/(\$\w+)/$1/eeg;	#substitute variables in $cmd
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		($commit_count, @commit_signers) = vcs_find_signers($cmd);
+=======
+		($commit_count, $commit_signers_ref, $commit_authors_ref, $stats_ref) = vcs_find_signers($cmd, $file);
+		@commit_authors = @{$commit_authors_ref} if defined $commit_authors_ref;
+		@commit_signers = @{$commit_signers_ref} if defined $commit_signers_ref;
+>>>>>>> v3.18
 =======
 		($commit_count, $commit_signers_ref, $commit_authors_ref, $stats_ref) = vcs_find_signers($cmd, $file);
 		@commit_authors = @{$commit_authors_ref} if defined $commit_authors_ref;

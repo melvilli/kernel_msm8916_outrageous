@@ -34,6 +34,10 @@ static bool rpfilter_lookup_reverse6(const struct sk_buff *skb,
 	bool ret = false;
 	struct flowi6 fl6 = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.flowi6_iif = LOOPBACK_IFINDEX,
+>>>>>>> v3.18
 =======
 		.flowi6_iif = LOOPBACK_IFINDEX,
 >>>>>>> v3.18

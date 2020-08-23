@@ -21,7 +21,10 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -211,7 +214,11 @@ static int adp5520_probe(struct i2c_client *client,
 					const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct adp5520_platform_data *pdata = client->dev.platform_data;
+=======
+	struct adp5520_platform_data *pdata = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct adp5520_platform_data *pdata = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -231,7 +238,11 @@ static int adp5520_probe(struct i2c_client *client,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip = kzalloc(sizeof(*chip), GFP_KERNEL);
+=======
+	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
 >>>>>>> v3.18
@@ -256,7 +267,11 @@ static int adp5520_probe(struct i2c_client *client,
 			dev_err(&client->dev, "failed to request irq %d\n",
 					chip->irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out_free_chip;
+=======
+			return ret;
+>>>>>>> v3.18
 =======
 			return ret;
 >>>>>>> v3.18
@@ -318,9 +333,12 @@ out_free_irq:
 		free_irq(chip->irq, chip);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free_chip:
 	kfree(chip);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;
@@ -336,7 +354,10 @@ static int adp5520_remove(struct i2c_client *client)
 	adp5520_remove_subdevs(chip);
 	adp5520_write(chip->dev, ADP5520_MODE_STATUS, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

@@ -199,7 +199,11 @@ int omap_vc_bypass_scale(struct voltagedomain *voltdm,
 
 		if (retries_cnt > 10) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: Retry count exceeded\n", __func__);
+=======
+			pr_warn("%s: Retry count exceeded\n", __func__);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: Retry count exceeded\n", __func__);
 >>>>>>> v3.18
@@ -225,11 +229,14 @@ static inline u32 omap_usec_to_32k(u32 usec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Set oscillator setup time for omap3 */
 static void omap3_set_clksetup(u32 usec, struct voltagedomain *voltdm)
 {
 	voltdm->write(omap_usec_to_32k(usec), OMAP3_PRM_CLKSETUP_OFFSET);
 =======
+=======
+>>>>>>> v3.18
 struct omap3_vc_timings {
 	u32 voltsetup1;
 	u32 voltsetup2;
@@ -350,6 +357,9 @@ static void omap3_init_voltsetup1(struct voltagedomain *voltdm,
 	val <<= __ffs(voltdm->vfsm->voltsetup_mask);
 	c->voltsetup1 &= ~voltdm->vfsm->voltsetup_mask;
 	c->voltsetup1 |= val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -363,6 +373,7 @@ static void omap3_init_voltsetup1(struct voltagedomain *voltdm,
  * or retention. Off mode has additionally an option to use sys_off_mode
  * pad, which uses a global signal to program the whole power IC to
  * off-mode.
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 static void omap3_set_i2c_timings(struct voltagedomain *voltdm, bool off_mode)
@@ -396,6 +407,8 @@ static void omap3_set_i2c_timings(struct voltagedomain *voltdm, bool off_mode)
 	 */
 	voltdm->write(0, OMAP3_PRM_VOLTSETUP2_OFFSET);
 =======
+=======
+>>>>>>> v3.18
  *
  * Note that pmic is not controlling the voltage scaling during
  * retention signaled over I2C4, so we can keep voltsetup2 as 0.
@@ -411,6 +424,9 @@ static void omap3_set_i2c_timings(struct voltagedomain *voltdm)
 	c++;
 	/* Configure PRWDM_POWER_RET over I2C4 */
 	omap3_init_voltsetup1(voltdm, c, voltdm->vc_param->ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -420,6 +436,7 @@ static void omap3_set_i2c_timings(struct voltagedomain *voltdm)
  *
  * Calculates and sets up off-mode timings for a channel. Off-mode
  * can use either I2C based voltage scaling, or alternatively
+<<<<<<< HEAD
 <<<<<<< HEAD
  * sys_off_mode pad can be used to send a global command to power IC.
  * This function first checks which mode is being used, and calls
@@ -480,6 +497,8 @@ static void omap3_set_off_timings(struct voltagedomain *voltdm)
 	/* voltoffset must be clksetup minus voltsetup2 according to TRM */
 	voltdm->write(clksetup - voltsetup2, OMAP3_PRM_VOLTOFFSET_OFFSET);
 =======
+=======
+>>>>>>> v3.18
  * sys_off_mode pad can be used to send a global command to power IC.n,
  * sys_off_mode has the additional benefit that voltages can be
  * scaled to zero volt level with TWL4030 / TWL5030, I2C can only
@@ -516,13 +535,22 @@ static void omap3_set_off_timings(struct voltagedomain *voltdm)
 	c->voltsetup2 = clksetup - voltoffset;
 	voltdm->write(clksetup, OMAP3_PRM_CLKSETUP_OFFSET);
 	voltdm->write(voltoffset, OMAP3_PRM_VOLTOFFSET_OFFSET);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __init omap3_vc_init_channel(struct voltagedomain *voltdm)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	omap3_set_off_timings(voltdm);
+=======
+	omap3_vc_init_pmic_signaling(voltdm);
+	omap3_set_off_timings(voltdm);
+	omap3_set_i2c_timings(voltdm);
+>>>>>>> v3.18
 =======
 	omap3_vc_init_pmic_signaling(voltdm);
 	omap3_set_off_timings(voltdm);
@@ -653,7 +681,11 @@ static void omap4_set_timings(struct voltagedomain *voltdm, bool off_mode)
 		OMAP4_DOWNTIME_MASK);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, OMAP4_SCRM_CLKSETUPTIME);
+=======
+	writel_relaxed(val, OMAP4_SCRM_CLKSETUPTIME);
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, OMAP4_SCRM_CLKSETUPTIME);
 >>>>>>> v3.18
@@ -779,7 +811,11 @@ static void __init omap4_vc_i2c_timing_init(struct voltagedomain *voltdm)
 
 	/* Write to SYSCTRL_PADCONF_WKUP_CTRL_I2C_2 to setup I2C pull */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writel(val, OMAP2_L4_IO_ADDRESS(OMAP4_CTRL_MODULE_PAD_WKUP +
+=======
+	writel_relaxed(val, OMAP2_L4_IO_ADDRESS(OMAP4_CTRL_MODULE_PAD_WKUP +
+>>>>>>> v3.18
 =======
 	writel_relaxed(val, OMAP2_L4_IO_ADDRESS(OMAP4_CTRL_MODULE_PAD_WKUP +
 >>>>>>> v3.18

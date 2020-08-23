@@ -22,7 +22,12 @@ LED sub-node properties:
   state is, without producing a glitch.  The default is off if this
   property is not present.
 <<<<<<< HEAD
+<<<<<<< HEAD
 - retain-state-suspended: (optional) Retain the LED status on suspending.
+=======
+- retain-state-suspended: (optional) The suspend state can be retained.Such
+  as charge-led gpio.
+>>>>>>> v3.18
 =======
 - retain-state-suspended: (optional) The suspend state can be retained.Such
   as charge-led gpio.
@@ -57,7 +62,10 @@ run-control {
 	};
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 leds {
 	compatible = "gpio-leds";
@@ -68,4 +76,7 @@ leds {
 		retain-state-suspended;
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

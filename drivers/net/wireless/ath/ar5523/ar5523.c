@@ -26,7 +26,10 @@
  */
 #include <linux/compiler.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -1095,7 +1098,12 @@ static int ar5523_set_rts_threshold(struct ieee80211_hw *hw, u32 value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ar5523_flush(struct ieee80211_hw *hw, u32 queues, bool drop)
+=======
+static void ar5523_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			 u32 queues, bool drop)
+>>>>>>> v3.18
 =======
 static void ar5523_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 			 u32 queues, bool drop)
@@ -1771,6 +1779,10 @@ static struct usb_device_id ar5523_id_table[] = {
 	AR5523_DEVICE_UG(0x2001, 0x3a02),	/* Dlink / DWLG132 */
 	AR5523_DEVICE_UX(0x2001, 0x3a04),	/* Dlink / DWLAG122 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	AR5523_DEVICE_UG(0x07d1, 0x3a07),	/* D-Link / WUA-2340 rev A1 */
+>>>>>>> v3.18
 =======
 	AR5523_DEVICE_UG(0x07d1, 0x3a07),	/* D-Link / WUA-2340 rev A1 */
 >>>>>>> v3.18

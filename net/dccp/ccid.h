@@ -94,8 +94,13 @@ extern struct ccid_operations ccid3_ops;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int  ccid_initialize_builtins(void);
 extern void ccid_cleanup_builtins(void);
+=======
+int ccid_initialize_builtins(void);
+void ccid_cleanup_builtins(void);
+>>>>>>> v3.18
 =======
 int ccid_initialize_builtins(void);
 void ccid_cleanup_builtins(void);
@@ -112,6 +117,7 @@ static inline void *ccid_priv(const struct ccid *ccid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern bool ccid_support_check(u8 const *ccid_array, u8 array_len);
 extern int  ccid_get_builtin_ccids(u8 **ccid_array, u8 *array_len);
 extern int  ccid_getsockopt_builtin_ccids(struct sock *sk, int len,
@@ -119,12 +125,17 @@ extern int  ccid_getsockopt_builtin_ccids(struct sock *sk, int len,
 
 extern struct ccid *ccid_new(const u8 id, struct sock *sk, bool rx);
 =======
+=======
+>>>>>>> v3.18
 bool ccid_support_check(u8 const *ccid_array, u8 array_len);
 int ccid_get_builtin_ccids(u8 **ccid_array, u8 *array_len);
 int ccid_getsockopt_builtin_ccids(struct sock *sk, int len,
 				  char __user *, int __user *);
 
 struct ccid *ccid_new(const u8 id, struct sock *sk, bool rx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline int ccid_get_current_rx_ccid(struct dccp_sock *dp)
@@ -146,8 +157,13 @@ static inline int ccid_get_current_tx_ccid(struct dccp_sock *dp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void ccid_hc_rx_delete(struct ccid *ccid, struct sock *sk);
 extern void ccid_hc_tx_delete(struct ccid *ccid, struct sock *sk);
+=======
+void ccid_hc_rx_delete(struct ccid *ccid, struct sock *sk);
+void ccid_hc_tx_delete(struct ccid *ccid, struct sock *sk);
+>>>>>>> v3.18
 =======
 void ccid_hc_rx_delete(struct ccid *ccid, struct sock *sk);
 void ccid_hc_tx_delete(struct ccid *ccid, struct sock *sk);

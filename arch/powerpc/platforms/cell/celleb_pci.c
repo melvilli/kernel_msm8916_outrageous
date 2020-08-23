@@ -455,7 +455,11 @@ static struct celleb_phb_spec celleb_fake_pci_spec __initdata = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id celleb_phb_match[] __initdata = {
+=======
+static const struct of_device_id celleb_phb_match[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id celleb_phb_match[] __initconst = {
 >>>>>>> v3.18

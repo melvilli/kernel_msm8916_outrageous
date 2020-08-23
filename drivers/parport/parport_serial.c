@@ -63,6 +63,10 @@ enum parport_pc_pci_cards {
 	timedia_9079b,
 	timedia_9079c,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	wch_ch353_1s1p,
+>>>>>>> v3.18
 =======
 	wch_ch353_1s1p,
 >>>>>>> v3.18
@@ -153,6 +157,10 @@ static struct parport_pc_pci cards[] = {
 	/* timedia_9079b */             { 1, { { 2, 3 }, } },
 	/* timedia_9079c */             { 1, { { 2, 3 }, } },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* wch_ch353_1s1p*/             { 1, { { 1, -1}, } },
+>>>>>>> v3.18
 =======
 	/* wch_ch353_1s1p*/             { 1, { { 1, -1}, } },
 >>>>>>> v3.18
@@ -262,6 +270,10 @@ static struct pci_device_id parport_serial_pci_tbl[] = {
 
 	/* WCH CARDS */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	{ 0x4348, 0x5053, PCI_ANY_ID, PCI_ANY_ID, 0, 0, wch_ch353_1s1p},
+>>>>>>> v3.18
 =======
 	{ 0x4348, 0x5053, PCI_ANY_ID, PCI_ANY_ID, 0, 0, wch_ch353_1s1p},
 >>>>>>> v3.18
@@ -492,13 +504,19 @@ static struct pciserial_board pci_parport_serial_boards[] = {
 		.uart_offset	= 8,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	[wch_ch353_1s1p] = {
 		.flags          = FL_BASE0|FL_BASE_BARS,
 		.num_ports      = 1,
 		.base_baud      = 115200,
 		.uart_offset    = 8,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	[wch_ch353_2s1p] = {
 		.flags          = FL_BASE0|FL_BASE_BARS,
@@ -618,7 +636,10 @@ static int parport_serial_pci_probe(struct pci_dev *dev,
 	err = pci_enable_device (dev);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata (dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree (priv);
@@ -627,7 +648,10 @@ static int parport_serial_pci_probe(struct pci_dev *dev,
 
 	if (parport_register (dev, id)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata (dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree (priv);
@@ -639,7 +663,10 @@ static int parport_serial_pci_probe(struct pci_dev *dev,
 		for (i = 0; i < priv->num_par; i++)
 			parport_pc_unregister_port (priv->port[i]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_set_drvdata (dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		kfree (priv);
@@ -655,8 +682,11 @@ static void parport_serial_pci_remove(struct pci_dev *dev)
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	// Serial ports

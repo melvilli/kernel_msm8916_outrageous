@@ -68,7 +68,11 @@ MODULE_FIRMWARE("BT3CPCC.bin");
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct bt3c_info_t {
+=======
+struct bt3c_info {
+>>>>>>> v3.18
 =======
 struct bt3c_info {
 >>>>>>> v3.18
@@ -85,7 +89,11 @@ struct bt3c_info {
 	unsigned long rx_count;
 	struct sk_buff *rx_skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 } bt3c_info_t;
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18
@@ -184,7 +192,11 @@ static int bt3c_write(unsigned int iobase, int fifo_size, __u8 *buf, int len)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bt3c_write_wakeup(bt3c_info_t *info)
+=======
+static void bt3c_write_wakeup(struct bt3c_info *info)
+>>>>>>> v3.18
 =======
 static void bt3c_write_wakeup(struct bt3c_info *info)
 >>>>>>> v3.18
@@ -206,8 +218,13 @@ static void bt3c_write_wakeup(struct bt3c_info *info)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		if (!(skb = skb_dequeue(&(info->txq)))) {
+=======
+		skb = skb_dequeue(&(info->txq));
+		if (!skb) {
+>>>>>>> v3.18
 =======
 		skb = skb_dequeue(&(info->txq));
 		if (!skb) {
@@ -232,7 +249,11 @@ static void bt3c_write_wakeup(struct bt3c_info *info)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void bt3c_receive(bt3c_info_t *info)
+=======
+static void bt3c_receive(struct bt3c_info *info)
+>>>>>>> v3.18
 =======
 static void bt3c_receive(struct bt3c_info *info)
 >>>>>>> v3.18
@@ -260,7 +281,12 @@ static void bt3c_receive(struct bt3c_info *info)
 			info->rx_state = RECV_WAIT_PACKET_TYPE;
 			info->rx_count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!(info->rx_skb = bt_skb_alloc(HCI_MAX_FRAME_SIZE, GFP_ATOMIC))) {
+=======
+			info->rx_skb = bt_skb_alloc(HCI_MAX_FRAME_SIZE, GFP_ATOMIC);
+			if (!info->rx_skb) {
+>>>>>>> v3.18
 =======
 			info->rx_skb = bt_skb_alloc(HCI_MAX_FRAME_SIZE, GFP_ATOMIC);
 			if (!info->rx_skb) {
@@ -274,7 +300,10 @@ static void bt3c_receive(struct bt3c_info *info)
 		if (info->rx_state == RECV_WAIT_PACKET_TYPE) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			info->rx_skb->dev = (void *) info->hdev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			bt_cb(info->rx_skb)->pkt_type = inb(iobase + DATA_L);
@@ -348,7 +377,11 @@ static void bt3c_receive(struct bt3c_info *info)
 
 				case RECV_WAIT_DATA:
 <<<<<<< HEAD
+<<<<<<< HEAD
 					hci_recv_frame(info->rx_skb);
+=======
+					hci_recv_frame(info->hdev, info->rx_skb);
+>>>>>>> v3.18
 =======
 					hci_recv_frame(info->hdev, info->rx_skb);
 >>>>>>> v3.18
@@ -370,7 +403,11 @@ static void bt3c_receive(struct bt3c_info *info)
 static irqreturn_t bt3c_interrupt(int irq, void *dev_inst)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bt3c_info_t *info = dev_inst;
+=======
+	struct bt3c_info *info = dev_inst;
+>>>>>>> v3.18
 =======
 	struct bt3c_info *info = dev_inst;
 >>>>>>> v3.18
@@ -426,7 +463,11 @@ static irqreturn_t bt3c_interrupt(int irq, void *dev_inst)
 static int bt3c_hci_flush(struct hci_dev *hdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bt3c_info_t *info = hci_get_drvdata(hdev);
+=======
+	struct bt3c_info *info = hci_get_drvdata(hdev);
+>>>>>>> v3.18
 =======
 	struct bt3c_info *info = hci_get_drvdata(hdev);
 >>>>>>> v3.18
@@ -458,6 +499,7 @@ static int bt3c_hci_close(struct hci_dev *hdev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bt3c_hci_send_frame(struct sk_buff *skb)
 {
 	bt3c_info_t *info;
@@ -472,11 +514,16 @@ static int bt3c_hci_send_frame(struct sk_buff *skb)
 	info = hci_get_drvdata(hdev);
 
 =======
+=======
+>>>>>>> v3.18
 static int bt3c_hci_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 {
 	struct bt3c_info *info = hci_get_drvdata(hdev);
 	unsigned long flags;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (bt_cb(skb)->pkt_type) {
 	case HCI_COMMAND_PKT:
@@ -505,6 +552,7 @@ static int bt3c_hci_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bt3c_hci_ioctl(struct hci_dev *hdev, unsigned int cmd, unsigned long arg)
 {
 	return -ENOIOCTLCMD;
@@ -513,12 +561,19 @@ static int bt3c_hci_ioctl(struct hci_dev *hdev, unsigned int cmd, unsigned long 
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 /* ======================== Card services HCI interaction ======================== */
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bt3c_load_firmware(bt3c_info_t *info, const unsigned char *firmware,
+=======
+static int bt3c_load_firmware(struct bt3c_info *info,
+			      const unsigned char *firmware,
+>>>>>>> v3.18
 =======
 static int bt3c_load_firmware(struct bt3c_info *info,
 			      const unsigned char *firmware,
@@ -608,7 +663,11 @@ error:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bt3c_open(bt3c_info_t *info)
+=======
+static int bt3c_open(struct bt3c_info *info)
+>>>>>>> v3.18
 =======
 static int bt3c_open(struct bt3c_info *info)
 >>>>>>> v3.18
@@ -639,16 +698,22 @@ static int bt3c_open(struct bt3c_info *info)
 	SET_HCIDEV_DEV(hdev, &info->p_dev->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hdev->open     = bt3c_hci_open;
 	hdev->close    = bt3c_hci_close;
 	hdev->flush    = bt3c_hci_flush;
 	hdev->send     = bt3c_hci_send_frame;
 	hdev->ioctl    = bt3c_hci_ioctl;
 =======
+=======
+>>>>>>> v3.18
 	hdev->open  = bt3c_hci_open;
 	hdev->close = bt3c_hci_close;
 	hdev->flush = bt3c_hci_flush;
 	hdev->send  = bt3c_hci_send_frame;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Load firmware */
@@ -687,7 +752,11 @@ error:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int bt3c_close(bt3c_info_t *info)
+=======
+static int bt3c_close(struct bt3c_info *info)
+>>>>>>> v3.18
 =======
 static int bt3c_close(struct bt3c_info *info)
 >>>>>>> v3.18
@@ -708,7 +777,11 @@ static int bt3c_close(struct bt3c_info *info)
 static int bt3c_probe(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bt3c_info_t *info;
+=======
+	struct bt3c_info *info;
+>>>>>>> v3.18
 =======
 	struct bt3c_info *info;
 >>>>>>> v3.18
@@ -775,7 +848,11 @@ static int bt3c_check_config_notpicky(struct pcmcia_device *p_dev,
 static int bt3c_config(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bt3c_info_t *info = link->priv;
+=======
+	struct bt3c_info *info = link->priv;
+>>>>>>> v3.18
 =======
 	struct bt3c_info *info = link->priv;
 >>>>>>> v3.18
@@ -820,7 +897,11 @@ failed:
 static void bt3c_release(struct pcmcia_device *link)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bt3c_info_t *info = link->priv;
+=======
+	struct bt3c_info *info = link->priv;
+>>>>>>> v3.18
 =======
 	struct bt3c_info *info = link->priv;
 >>>>>>> v3.18

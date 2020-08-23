@@ -15,6 +15,10 @@
 #include <linux/slab.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef CONFIG_COMMON_CLK
+>>>>>>> v3.18
 =======
 #ifndef CONFIG_COMMON_CLK
 >>>>>>> v3.18
@@ -25,6 +29,10 @@
 #define __clk_put(clk)	do { } while (0)
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18

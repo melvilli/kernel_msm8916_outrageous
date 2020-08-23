@@ -151,7 +151,11 @@ unsigned int ui_browser__rb_tree_refresh(struct ui_browser *browser)
 		ui_browser__gotorc(browser, row, 0);
 		browser->write(browser, nd, row);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (++row == browser->height)
+=======
+		if (++row == browser->rows)
+>>>>>>> v3.18
 =======
 		if (++row == browser->rows)
 >>>>>>> v3.18
@@ -171,7 +175,11 @@ void ui_browser__refresh_dimensions(struct ui_browser *browser)
 {
 	browser->width = SLtt_Screen_Cols - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	browser->height = SLtt_Screen_Rows - 2;
+=======
+	browser->height = browser->rows = SLtt_Screen_Rows - 2;
+>>>>>>> v3.18
 =======
 	browser->height = browser->rows = SLtt_Screen_Rows - 2;
 >>>>>>> v3.18
@@ -203,7 +211,11 @@ int ui_browser__warning(struct ui_browser *browser, int timeout,
 		va_end(args);
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		while ((key == ui__question_window("Warning!", text,
+=======
+		while ((key = ui__question_window("Warning!", text,
+>>>>>>> v3.18
 =======
 		while ((key = ui__question_window("Warning!", text,
 >>>>>>> v3.18
@@ -263,12 +275,18 @@ int ui_browser__show(struct ui_browser *browser, const char *title,
 	va_list ap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ui_browser__refresh_dimensions(browser);
 =======
+=======
+>>>>>>> v3.18
 	if (browser->refresh_dimensions == NULL)
 		browser->refresh_dimensions = ui_browser__refresh_dimensions;
 
 	browser->refresh_dimensions(browser);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pthread_mutex_lock(&ui__lock);
@@ -276,8 +294,12 @@ int ui_browser__show(struct ui_browser *browser, const char *title,
 
 	browser->title = title;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	free(browser->helpline);
 	browser->helpline = NULL;
+=======
+	zfree(&browser->helpline);
+>>>>>>> v3.18
 =======
 	zfree(&browser->helpline);
 >>>>>>> v3.18
@@ -292,6 +314,7 @@ int ui_browser__show(struct ui_browser *browser, const char *title,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ui_browser__hide(struct ui_browser *browser __maybe_unused)
 {
 	pthread_mutex_lock(&ui__lock);
@@ -299,11 +322,16 @@ void ui_browser__hide(struct ui_browser *browser __maybe_unused)
 	free(browser->helpline);
 	browser->helpline = NULL;
 =======
+=======
+>>>>>>> v3.18
 void ui_browser__hide(struct ui_browser *browser)
 {
 	pthread_mutex_lock(&ui__lock);
 	ui_helpline__pop();
 	zfree(&browser->helpline);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pthread_mutex_unlock(&ui__lock);
 }
@@ -313,7 +341,11 @@ static void ui_browser__scrollbar_set(struct ui_browser *browser)
 	int height = browser->height, h = 0, pct = 0,
 	    col = browser->width,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    row = browser->y - 1;
+=======
+	    row = 0;
+>>>>>>> v3.18
 =======
 	    row = 0;
 >>>>>>> v3.18
@@ -405,7 +437,11 @@ int ui_browser__run(struct ui_browser *browser, int delay_secs)
 		if (key == K_RESIZE) {
 			ui__refresh_dimensions(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ui_browser__refresh_dimensions(browser);
+=======
+			browser->refresh_dimensions(browser);
+>>>>>>> v3.18
 =======
 			browser->refresh_dimensions(browser);
 >>>>>>> v3.18
@@ -431,7 +467,11 @@ int ui_browser__run(struct ui_browser *browser, int delay_secs)
 				break;
 			++browser->index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (browser->index == browser->top_idx + browser->height) {
+=======
+			if (browser->index == browser->top_idx + browser->rows) {
+>>>>>>> v3.18
 =======
 			if (browser->index == browser->top_idx + browser->rows) {
 >>>>>>> v3.18
@@ -451,15 +491,21 @@ int ui_browser__run(struct ui_browser *browser, int delay_secs)
 		case K_PGDN:
 		case ' ':
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (browser->top_idx + browser->height > browser->nr_entries - 1)
 				break;
 
 			offset = browser->height;
 =======
+=======
+>>>>>>> v3.18
 			if (browser->top_idx + browser->rows > browser->nr_entries - 1)
 				break;
 
 			offset = browser->rows;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (browser->index + offset > browser->nr_entries - 1)
 				offset = browser->nr_entries - 1 - browser->index;
@@ -472,15 +518,21 @@ int ui_browser__run(struct ui_browser *browser, int delay_secs)
 				break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (browser->top_idx < browser->height)
 				offset = browser->top_idx;
 			else
 				offset = browser->height;
 =======
+=======
+>>>>>>> v3.18
 			if (browser->top_idx < browser->rows)
 				offset = browser->top_idx;
 			else
 				offset = browser->rows;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 			browser->index -= offset;
@@ -492,7 +544,11 @@ int ui_browser__run(struct ui_browser *browser, int delay_secs)
 			break;
 		case K_END:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			offset = browser->height - 1;
+=======
+			offset = browser->rows - 1;
+>>>>>>> v3.18
 =======
 			offset = browser->rows - 1;
 >>>>>>> v3.18
@@ -526,7 +582,11 @@ unsigned int ui_browser__list_head_refresh(struct ui_browser *browser)
 			ui_browser__gotorc(browser, row, 0);
 			browser->write(browser, pos, row);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (++row == browser->height)
+=======
+			if (++row == browser->rows)
+>>>>>>> v3.18
 =======
 			if (++row == browser->rows)
 >>>>>>> v3.18
@@ -635,7 +695,11 @@ void ui_browser__argv_seek(struct ui_browser *browser, off_t offset, int whence)
 		break;
 	case SEEK_END:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		browser->top = browser->top + browser->nr_entries + offset;
+=======
+		browser->top = browser->top + browser->nr_entries - 1 + offset;
+>>>>>>> v3.18
 =======
 		browser->top = browser->top + browser->nr_entries - 1 + offset;
 >>>>>>> v3.18
@@ -659,7 +723,11 @@ unsigned int ui_browser__argv_refresh(struct ui_browser *browser)
 			ui_browser__gotorc(browser, row, 0);
 			browser->write(browser, pos, row);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (++row == browser->height)
+=======
+			if (++row == browser->rows)
+>>>>>>> v3.18
 =======
 			if (++row == browser->rows)
 >>>>>>> v3.18
@@ -699,7 +767,11 @@ static void __ui_browser__line_arrow_up(struct ui_browser *browser,
 	SLsmg_set_char_set(1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (start < browser->top_idx + browser->height) {
+=======
+	if (start < browser->top_idx + browser->rows) {
+>>>>>>> v3.18
 =======
 	if (start < browser->top_idx + browser->rows) {
 >>>>>>> v3.18
@@ -713,7 +785,11 @@ static void __ui_browser__line_arrow_up(struct ui_browser *browser,
 			goto out;
 	} else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		row = browser->height - 1;
+=======
+		row = browser->rows - 1;
+>>>>>>> v3.18
 =======
 		row = browser->rows - 1;
 >>>>>>> v3.18
@@ -754,7 +830,11 @@ static void __ui_browser__line_arrow_down(struct ui_browser *browser,
 		SLsmg_draw_hline(2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (++row == 0)
+=======
+		if (row++ == 0)
+>>>>>>> v3.18
 =======
 		if (row++ == 0)
 >>>>>>> v3.18
@@ -763,15 +843,21 @@ static void __ui_browser__line_arrow_down(struct ui_browser *browser,
 		row = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (end >= browser->top_idx + browser->height)
 		end_row = browser->height - 1;
 	else
 		end_row = end - browser->top_idx;;
 =======
+=======
+>>>>>>> v3.18
 	if (end >= browser->top_idx + browser->rows)
 		end_row = browser->rows - 1;
 	else
 		end_row = end - browser->top_idx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ui_browser__gotorc(browser, row, column);
@@ -779,7 +865,11 @@ static void __ui_browser__line_arrow_down(struct ui_browser *browser,
 
 	ui_browser__gotorc(browser, end_row, column);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (end < browser->top_idx + browser->height) {
+=======
+	if (end < browser->top_idx + browser->rows) {
+>>>>>>> v3.18
 =======
 	if (end < browser->top_idx + browser->rows) {
 >>>>>>> v3.18

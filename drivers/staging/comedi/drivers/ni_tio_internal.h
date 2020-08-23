@@ -15,11 +15,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -29,6 +32,7 @@
 
 #include "ni_tio.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline enum ni_gpct_register NITIO_Gi_Autoincrement_Reg(unsigned
 							       counter_index)
@@ -705,6 +709,8 @@ static inline unsigned Gi_Gate_Interrupt_Enable_Bit(unsigned counter_index)
 	return bit;
 }
 =======
+=======
+>>>>>>> v3.18
 #define NITIO_AUTO_INC_REG(x)		(NITIO_G0_AUTO_INC + (x))
 #define GI_AUTO_INC_MASK		0xff
 #define NITIO_CMD_REG(x)		(NITIO_G0_CMD + (x))
@@ -839,13 +845,20 @@ static inline unsigned Gi_Gate_Interrupt_Enable_Bit(unsigned counter_index)
 #define NITIO_INT_ENA_REG(x)		(NITIO_G0_INT_ENA + (x))
 #define GI_TC_INTERRUPT_ENABLE(x)	(((x) % 2) ? (1 << 9) : (1 << 6))
 #define GI_GATE_INTERRUPT_ENABLE(x)	(((x) % 2) ? (1 << 10) : (1 << 8))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline void write_register(struct ni_gpct *counter, unsigned bits,
 				  enum ni_gpct_register reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(reg >= NITIO_Num_Registers);
+=======
+	BUG_ON(reg >= NITIO_NUM_REGS);
+>>>>>>> v3.18
 =======
 	BUG_ON(reg >= NITIO_NUM_REGS);
 >>>>>>> v3.18
@@ -856,7 +869,11 @@ static inline unsigned read_register(struct ni_gpct *counter,
 				     enum ni_gpct_register reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(reg >= NITIO_Num_Registers);
+=======
+	BUG_ON(reg >= NITIO_NUM_REGS);
+>>>>>>> v3.18
 =======
 	BUG_ON(reg >= NITIO_NUM_REGS);
 >>>>>>> v3.18
@@ -871,11 +888,17 @@ static inline int ni_tio_counting_mode_registers_present(const struct
 	case ni_gpct_variant_e_series:
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case ni_gpct_variant_m_series:
 	case ni_gpct_variant_660x:
 		return 1;
 		break;
+=======
+	case ni_gpct_variant_m_series:
+	case ni_gpct_variant_660x:
+		return 1;
+>>>>>>> v3.18
 =======
 	case ni_gpct_variant_m_series:
 	case ni_gpct_variant_660x:
@@ -898,7 +921,11 @@ static inline void ni_tio_set_bits_transient(struct ni_gpct *counter,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(register_index >= NITIO_Num_Registers);
+=======
+	BUG_ON(register_index >= NITIO_NUM_REGS);
+>>>>>>> v3.18
 =======
 	BUG_ON(register_index >= NITIO_NUM_REGS);
 >>>>>>> v3.18
@@ -937,7 +964,11 @@ static inline unsigned ni_tio_get_soft_copy(const struct ni_gpct *counter,
 	unsigned value;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(register_index >= NITIO_Num_Registers);
+=======
+	BUG_ON(register_index >= NITIO_NUM_REGS);
+>>>>>>> v3.18
 =======
 	BUG_ON(register_index >= NITIO_NUM_REGS);
 >>>>>>> v3.18

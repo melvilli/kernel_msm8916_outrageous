@@ -103,6 +103,7 @@ struct sir_driver {
 /* exported */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int irda_register_dongle(struct dongle_driver *new);
 extern int irda_unregister_dongle(struct dongle_driver *drv);
 
@@ -126,6 +127,8 @@ extern int sirdev_put_dongle(struct sir_dev *self);
 extern void sirdev_enable_rx(struct sir_dev *dev);
 extern int sirdev_schedule_request(struct sir_dev *dev, int state, unsigned param);
 =======
+=======
+>>>>>>> v3.18
 int irda_register_dongle(struct dongle_driver *new);
 int irda_unregister_dongle(struct dongle_driver *drv);
 
@@ -149,6 +152,9 @@ int sirdev_put_dongle(struct sir_dev *self);
 
 void sirdev_enable_rx(struct sir_dev *dev);
 int sirdev_schedule_request(struct sir_dev *dev, int state, unsigned param);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* inline helpers */

@@ -19,6 +19,7 @@
 #define __XFS_MRU_CACHE_H__
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Function pointer type for callback to free a client's data pointer. */
 typedef void (*xfs_mru_cache_free_func_t)(unsigned long, void*);
@@ -38,6 +39,8 @@ typedef struct xfs_mru_cache
 	unsigned int		queued;	   /* work has been queued */
 } xfs_mru_cache_t;
 =======
+=======
+>>>>>>> v3.18
 struct xfs_mru_cache;
 
 struct xfs_mru_cache_elem {
@@ -47,6 +50,9 @@ struct xfs_mru_cache_elem {
 
 /* Function pointer type for callback to free a client's data pointer. */
 typedef void (*xfs_mru_cache_free_func_t)(struct xfs_mru_cache_elem *elem);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int xfs_mru_cache_init(void);
@@ -57,17 +63,23 @@ int xfs_mru_cache_create(struct xfs_mru_cache **mrup, unsigned int lifetime_ms,
 void xfs_mru_cache_destroy(struct xfs_mru_cache *mru);
 int xfs_mru_cache_insert(struct xfs_mru_cache *mru, unsigned long key,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				void *value);
 void * xfs_mru_cache_remove(struct xfs_mru_cache *mru, unsigned long key);
 void xfs_mru_cache_delete(struct xfs_mru_cache *mru, unsigned long key);
 void *xfs_mru_cache_lookup(struct xfs_mru_cache *mru, unsigned long key);
 =======
+=======
+>>>>>>> v3.18
 		struct xfs_mru_cache_elem *elem);
 struct xfs_mru_cache_elem *
 xfs_mru_cache_remove(struct xfs_mru_cache *mru, unsigned long key);
 void xfs_mru_cache_delete(struct xfs_mru_cache *mru, unsigned long key);
 struct xfs_mru_cache_elem *
 xfs_mru_cache_lookup(struct xfs_mru_cache *mru, unsigned long key);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void xfs_mru_cache_done(struct xfs_mru_cache *mru);
 

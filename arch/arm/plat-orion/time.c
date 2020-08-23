@@ -18,6 +18,10 @@
 #include <linux/irq.h>
 #include <linux/sched_clock.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <plat/time.h>
+>>>>>>> v3.18
 =======
 #include <plat/time.h>
 >>>>>>> v3.18
@@ -65,7 +69,11 @@ static u32 ticks_per_jiffy;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 notrace orion_read_sched_clock(void)
+=======
+static u64 notrace orion_read_sched_clock(void)
+>>>>>>> v3.18
 =======
 static u64 notrace orion_read_sched_clock(void)
 >>>>>>> v3.18
@@ -183,7 +191,11 @@ static irqreturn_t orion_timer_interrupt(int irq, void *dev_id)
 static struct irqaction orion_timer_irq = {
 	.name		= "orion_tick",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags		= IRQF_DISABLED | IRQF_TIMER,
+=======
+	.flags		= IRQF_TIMER,
+>>>>>>> v3.18
 =======
 	.flags		= IRQF_TIMER,
 >>>>>>> v3.18
@@ -214,7 +226,11 @@ orion_time_init(void __iomem *_bridge_base, u32 _bridge_timer1_clr_mask,
 	 * Set scale and timer for sched_clock.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_sched_clock(orion_read_sched_clock, 32, tclk);
+=======
+	sched_clock_register(orion_read_sched_clock, 32, tclk);
+>>>>>>> v3.18
 =======
 	sched_clock_register(orion_read_sched_clock, 32, tclk);
 >>>>>>> v3.18

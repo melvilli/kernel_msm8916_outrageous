@@ -334,6 +334,7 @@ config N_GSM
 	  presents the mux as a set of 61 individual tty devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config N_SMUX
 	tristate "SMUX line discipline support"
 	depends on NET && SERIAL_MSM_HS
@@ -353,6 +354,8 @@ config SMUX_CTL
 	help
 	  Support for SMUX control driver on top of serial MUX.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config TRACE_ROUTER
@@ -389,7 +392,11 @@ config TRACE_SINK
 
 config PPC_EPAPR_HV_BYTECHAN
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "ePAPR hypervisor byte channel driver"
+=======
+	bool "ePAPR hypervisor byte channel driver"
+>>>>>>> v3.18
 =======
 	bool "ePAPR hypervisor byte channel driver"
 >>>>>>> v3.18

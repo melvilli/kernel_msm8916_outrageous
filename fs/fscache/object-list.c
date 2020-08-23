@@ -51,6 +51,11 @@ void fscache_objlist_add(struct fscache_object *obj)
 	struct rb_node **p = &fscache_object_list.rb_node, *parent = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ASSERT(RB_EMPTY_NODE(&obj->objlist_link));
+
+>>>>>>> v3.18
 =======
 	ASSERT(RB_EMPTY_NODE(&obj->objlist_link));
 
@@ -76,6 +81,7 @@ void fscache_objlist_add(struct fscache_object *obj)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * fscache_object_destroy - Note that a cache object is about to be destroyed
  * @object: The object to be destroyed
@@ -85,6 +91,8 @@ void fscache_objlist_add(struct fscache_object *obj)
 void fscache_object_destroy(struct fscache_object *obj)
 {
 =======
+=======
+>>>>>>> v3.18
 /*
  * Remove an object from the object list.
  */
@@ -93,6 +101,9 @@ void fscache_objlist_remove(struct fscache_object *obj)
 	if (RB_EMPTY_NODE(&obj->objlist_link))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	write_lock(&fscache_object_list_lock);
 
@@ -102,7 +113,10 @@ void fscache_objlist_remove(struct fscache_object *obj)
 	write_unlock(&fscache_object_list_lock);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(fscache_object_destroy);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -186,10 +200,16 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 	struct fscache_objlist_data *data = m->private;
 	struct fscache_object *obj = v;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long config = data->config;
 	uint16_t keylen, auxlen;
 	char _type[3], *type;
 	bool no_cookie;
+=======
+	struct fscache_cookie *cookie;
+	unsigned long config = data->config;
+	char _type[3], *type;
+>>>>>>> v3.18
 =======
 	struct fscache_cookie *cookie;
 	unsigned long config = data->config;
@@ -200,7 +220,11 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 	if ((unsigned long) v == 1) {
 		seq_puts(m, "OBJECT   PARENT   STAT CHLDN OPS OOP IPR EX READS"
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 " EM EV F S"
+=======
+			 " EM EV FL S"
+>>>>>>> v3.18
 =======
 			 " EM EV FL S"
 >>>>>>> v3.18
@@ -223,7 +247,11 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 	if ((unsigned long) v == 2) {
 		seq_puts(m, "======== ======== ==== ===== === === === == ====="
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 " == == = ="
+=======
+			 " == == == ="
+>>>>>>> v3.18
 =======
 			 " == == == ="
 >>>>>>> v3.18
@@ -250,16 +278,22 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 	} while(0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (~config) {
 		FILTER(obj->cookie,
 		       COOKIE, NOCOOKIE);
 		FILTER(obj->state != FSCACHE_OBJECT_ACTIVE ||
 =======
+=======
+>>>>>>> v3.18
 	cookie = obj->cookie;
 	if (~config) {
 		FILTER(cookie->def,
 		       COOKIE, NOCOOKIE);
 		FILTER(fscache_object_is_active(obj) ||
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		       obj->n_ops != 0 ||
 		       obj->n_obj_ops != 0 ||
@@ -277,15 +311,21 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 
 	seq_printf(m,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   "%8x %8x %s %5u %3u %3u %3u %2u %5u %2lx %2lx %1lx %1x | ",
 		   obj->debug_id,
 		   obj->parent ? obj->parent->debug_id : -1,
 		   fscache_object_states_short[obj->state],
 =======
+=======
+>>>>>>> v3.18
 		   "%8x %8x %s %5u %3u %3u %3u %2u %5u %2lx %2lx %2lx %1x | ",
 		   obj->debug_id,
 		   obj->parent ? obj->parent->debug_id : -1,
 		   obj->state->short_name,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		   obj->n_children,
 		   obj->n_ops,
@@ -298,6 +338,7 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 		   obj->flags,
 		   work_busy(&obj->work));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	no_cookie = true;
 	keylen = auxlen = 0;
@@ -343,6 +384,8 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 		if (!no_cookie && (keylen > 0 || auxlen > 0)) {
 			seq_printf(m, " ");
 =======
+=======
+>>>>>>> v3.18
 	if (fscache_use_cookie(obj)) {
 		uint16_t keylen = 0, auxlen = 0;
 
@@ -378,13 +421,20 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 
 		if (keylen > 0 || auxlen > 0) {
 			seq_puts(m, " ");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			for (p = buf; keylen > 0; keylen--)
 				seq_printf(m, "%02x", *p++);
 			if (auxlen > 0) {
 				if (config & FSCACHE_OBJLIST_CONFIG_KEY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					seq_printf(m, ", ");
+=======
+					seq_puts(m, ", ");
+>>>>>>> v3.18
 =======
 					seq_puts(m, ", ");
 >>>>>>> v3.18
@@ -393,6 +443,7 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 	if (no_cookie)
@@ -400,11 +451,16 @@ static int fscache_objlist_show(struct seq_file *m, void *v)
 	else
 		seq_printf(m, "\n");
 =======
+=======
+>>>>>>> v3.18
 
 		seq_puts(m, "\n");
 	} else {
 		seq_puts(m, "<no_netfs>\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -437,6 +493,7 @@ static void fscache_objlist_config(struct fscache_objlist_data *data)
 
 	confkey = key->payload.data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!confkey) {
 		/* key was revoked */
 		rcu_read_unlock();
@@ -444,6 +501,8 @@ static void fscache_objlist_config(struct fscache_objlist_data *data)
 		goto no_config;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	buf = confkey->data;
@@ -497,6 +556,7 @@ static int fscache_objlist_open(struct inode *inode, struct file *file)
 {
 	struct fscache_objlist_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct seq_file *m;
 	int ret;
 
@@ -513,17 +573,25 @@ static int fscache_objlist_open(struct inode *inode, struct file *file)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	data = __seq_open_private(file, &fscache_objlist_ops, sizeof(*data));
 	if (!data)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* get the configuration key */
 	fscache_objlist_config(data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	m->private = data;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

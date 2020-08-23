@@ -16,8 +16,13 @@ Debugfs is typically mounted with a command like:
 
 (Or an equivalent /etc/fstab line).
 <<<<<<< HEAD
+<<<<<<< HEAD
 The debugfs root directory is accessible by anyone by default. To
 restrict access to the tree the "uid", "gid" and "mode" mount
+=======
+The debugfs root directory is accessible only to the root user by
+default. To change access to the tree the "uid", "gid" and "mode" mount
+>>>>>>> v3.18
 =======
 The debugfs root directory is accessible only to the root user by
 default. To change access to the tree the "uid", "gid" and "mode" mount

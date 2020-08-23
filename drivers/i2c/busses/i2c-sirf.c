@@ -13,7 +13,10 @@
 #include <linux/platform_device.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/clk.h>
@@ -69,6 +72,11 @@
 
 #define SIRFSOC_I2C_DEFAULT_SPEED 100000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define SIRFSOC_I2C_ERR_NOACK      1
+#define SIRFSOC_I2C_ERR_TIMEOUT    2
+>>>>>>> v3.18
 =======
 #define SIRFSOC_I2C_ERR_NOACK      1
 #define SIRFSOC_I2C_ERR_TIMEOUT    2
@@ -152,6 +160,7 @@ static irqreturn_t i2c_sirfsoc_irq(int irq, void *dev_id)
 	if (i2c_stat & SIRFSOC_I2C_STAT_ERR) {
 		/* Error conditions */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		siic->err_status = 1;
 		writel(SIRFSOC_I2C_STAT_ERR, siic->base + SIRFSOC_I2C_STATUS);
 
@@ -161,6 +170,8 @@ static irqreturn_t i2c_sirfsoc_irq(int irq, void *dev_id)
 			dev_err(&siic->adapter.dev, "I2C error\n");
 
 =======
+=======
+>>>>>>> v3.18
 		siic->err_status = SIRFSOC_I2C_ERR_NOACK;
 		writel(SIRFSOC_I2C_STAT_ERR, siic->base + SIRFSOC_I2C_STATUS);
 
@@ -179,6 +190,9 @@ static irqreturn_t i2c_sirfsoc_irq(int irq, void *dev_id)
 		while (readl(siic->base + SIRFSOC_I2C_CTRL) & SIRFSOC_I2C_RESET)
 			cpu_relax();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		complete(&siic->done);
 	} else if (i2c_stat & SIRFSOC_I2C_STAT_CMD_DONE) {
@@ -213,11 +227,17 @@ static void i2c_sirfsoc_set_address(struct sirfsoc_i2c *siic,
 		addr |= 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Reverse direction bit */
 	if (msg->flags & I2C_M_REV_DIR_ADDR)
 		addr ^= 1;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(addr, siic->base + SIRFSOC_I2C_CMD(siic->cmd_ptr++));
 }
@@ -228,7 +248,10 @@ static int i2c_sirfsoc_xfer_msg(struct sirfsoc_i2c *siic, struct i2c_msg *msg)
 	/* timeout waiting for the xfer to finish or fail */
 	int timeout = msecs_to_jiffies((msg->len + 1) * 50);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -240,7 +263,11 @@ static int i2c_sirfsoc_xfer_msg(struct sirfsoc_i2c *siic, struct i2c_msg *msg)
 
 	if (wait_for_completion_timeout(&siic->done, timeout) == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		siic->err_status = 1;
+=======
+		siic->err_status = SIRFSOC_I2C_ERR_TIMEOUT;
+>>>>>>> v3.18
 =======
 		siic->err_status = SIRFSOC_I2C_ERR_TIMEOUT;
 >>>>>>> v3.18
@@ -252,7 +279,12 @@ static int i2c_sirfsoc_xfer_msg(struct sirfsoc_i2c *siic, struct i2c_msg *msg)
 	writel(0, siic->base + SIRFSOC_I2C_CMD_START);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (siic->err_status) {
+=======
+	/* i2c control doesn't response, reset it */
+	if (siic->err_status == SIRFSOC_I2C_ERR_TIMEOUT) {
+>>>>>>> v3.18
 =======
 	/* i2c control doesn't response, reset it */
 	if (siic->err_status == SIRFSOC_I2C_ERR_TIMEOUT) {
@@ -262,11 +294,16 @@ static int i2c_sirfsoc_xfer_msg(struct sirfsoc_i2c *siic, struct i2c_msg *msg)
 		while (readl(siic->base + SIRFSOC_I2C_CTRL) & SIRFSOC_I2C_RESET)
 			cpu_relax();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		ret = -EIO;
 	}
 
 	return ret;
+=======
+	}
+	return siic->err_status ? -EAGAIN : 0;
+>>>>>>> v3.18
 =======
 	}
 	return siic->err_status ? -EAGAIN : 0;
@@ -349,7 +386,10 @@ static int i2c_sirfsoc_probe(struct platform_device *pdev)
 	siic = devm_kzalloc(&pdev->dev, sizeof(*siic), GFP_KERNEL);
 	if (!siic) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&pdev->dev, "Can't allocate driver data\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		err = -ENOMEM;
@@ -357,7 +397,11 @@ static int i2c_sirfsoc_probe(struct platform_device *pdev)
 	}
 	adap = &siic->adapter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adap->class = I2C_CLASS_HWMON;
+=======
+	adap->class = I2C_CLASS_DEPRECATED;
+>>>>>>> v3.18
 =======
 	adap->class = I2C_CLASS_DEPRECATED;
 >>>>>>> v3.18
@@ -382,6 +426,10 @@ static int i2c_sirfsoc_probe(struct platform_device *pdev)
 	adap->algo = &i2c_sirfsoc_algo;
 	adap->algo_data = siic;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	adap->retries = 3;
+>>>>>>> v3.18
 =======
 	adap->retries = 3;
 >>>>>>> v3.18
@@ -413,7 +461,11 @@ static int i2c_sirfsoc_probe(struct platform_device *pdev)
 	if (bitrate < 100000)
 		regval =
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(2 * ctrl_speed) / (2 * bitrate * 11);
+=======
+			(2 * ctrl_speed) / (bitrate * 11);
+>>>>>>> v3.18
 =======
 			(2 * ctrl_speed) / (bitrate * 11);
 >>>>>>> v3.18
@@ -435,8 +487,11 @@ static int i2c_sirfsoc_probe(struct platform_device *pdev)
 	clk_disable(clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(adap);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev_info(&pdev->dev, " I2C adapter ready to operate\n");
@@ -488,6 +543,11 @@ static int i2c_sirfsoc_resume(struct device *dev)
 	clk_enable(siic->clk);
 	writel(SIRFSOC_I2C_RESET, siic->base + SIRFSOC_I2C_CTRL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	while (readl(siic->base + SIRFSOC_I2C_CTRL) & SIRFSOC_I2C_RESET)
+		cpu_relax();
+>>>>>>> v3.18
 =======
 	while (readl(siic->base + SIRFSOC_I2C_CTRL) & SIRFSOC_I2C_RESET)
 		cpu_relax();

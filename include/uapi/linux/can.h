@@ -9,11 +9,14 @@
  * All rights reserved.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #ifndef CAN_H
 #define CAN_H
 =======
+=======
+>>>>>>> v3.18
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -50,6 +53,9 @@
 
 #ifndef _UAPI_CAN_H
 #define _UAPI_CAN_H
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include <linux/types.h>
@@ -198,9 +204,14 @@ struct can_filter {
 
 #define CAN_INV_FILTER 0x20000000U /* to be set in can_filter.can_id */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CAN_RAW_FILTER_MAX 512 /* maximum number of can_filter set via setsockopt() */
 
 #endif /* CAN_H */
+=======
+
+#endif /* !_UAPI_CAN_H */
+>>>>>>> v3.18
 =======
 
 #endif /* !_UAPI_CAN_H */

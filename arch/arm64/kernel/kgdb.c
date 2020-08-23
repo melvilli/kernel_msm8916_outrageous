@@ -236,7 +236,11 @@ static int kgdb_step_brk_fn(struct pt_regs *regs, unsigned int esr)
 static struct break_hook kgdb_brkpt_hook = {
 	.esr_mask	= 0xffffffff,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.esr_val	= DBG_ESR_VAL_BRK(KGDB_DYN_DGB_BRK_IMM),
+=======
+	.esr_val	= DBG_ESR_VAL_BRK(KGDB_DYN_DBG_BRK_IMM),
+>>>>>>> v3.18
 =======
 	.esr_val	= DBG_ESR_VAL_BRK(KGDB_DYN_DBG_BRK_IMM),
 >>>>>>> v3.18
@@ -246,7 +250,11 @@ static struct break_hook kgdb_brkpt_hook = {
 static struct break_hook kgdb_compiled_brkpt_hook = {
 	.esr_mask	= 0xffffffff,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.esr_val	= DBG_ESR_VAL_BRK(KDBG_COMPILED_DBG_BRK_IMM),
+=======
+	.esr_val	= DBG_ESR_VAL_BRK(KGDB_COMPILED_DBG_BRK_IMM),
+>>>>>>> v3.18
 =======
 	.esr_val	= DBG_ESR_VAL_BRK(KGDB_COMPILED_DBG_BRK_IMM),
 >>>>>>> v3.18

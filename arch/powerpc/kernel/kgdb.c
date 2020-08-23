@@ -16,7 +16,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kgdb.h>
@@ -155,24 +158,33 @@ static int kgdb_handle_breakpoint(struct pt_regs *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int kgdb_singlestep(struct pt_regs *regs)
 {
 	struct thread_info *thread_info, *exception_thread_info;
 	struct thread_info *backup_current_thread_info;
 =======
+=======
+>>>>>>> v3.18
 static DEFINE_PER_CPU(struct thread_info, kgdb_thread_info);
 static int kgdb_singlestep(struct pt_regs *regs)
 {
 	struct thread_info *thread_info, *exception_thread_info;
 	struct thread_info *backup_current_thread_info =
 		&__get_cpu_var(kgdb_thread_info);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (user_mode(regs))
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backup_current_thread_info = kmalloc(sizeof(struct thread_info), GFP_KERNEL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -201,7 +213,10 @@ static int kgdb_singlestep(struct pt_regs *regs)
 		memcpy(exception_thread_info, backup_current_thread_info, sizeof *thread_info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(backup_current_thread_info);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 1;

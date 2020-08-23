@@ -55,10 +55,14 @@ static int __init omap2_init_pmu(unsigned oh_num, char *oh_names[])
 	     dev_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_ERR(omap_pmu_dev))
 		return PTR_ERR(omap_pmu_dev);
 
 	return 0;
+=======
+	return PTR_RET(omap_pmu_dev);
+>>>>>>> v3.18
 =======
 	return PTR_RET(omap_pmu_dev);
 >>>>>>> v3.18

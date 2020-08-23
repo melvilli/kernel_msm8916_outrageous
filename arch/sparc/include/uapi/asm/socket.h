@@ -71,13 +71,19 @@
 #define SO_SELECT_ERR_QUEUE	0x0029
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SO_BUSY_POLL		0x0030
 
 #define SO_MAX_PACING_RATE	0x0031
 
 #define SO_BPF_EXTENSIONS	0x0032
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Security levels - as per NRL IPv6 - don't actually do anything */
 #define SO_SECURITY_AUTHENTICATION		0x5001

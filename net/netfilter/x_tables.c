@@ -72,6 +72,7 @@ static const unsigned int xt_jumpstack_multiplier = 2;
 
 /* Registration hooks for targets. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 xt_register_target(struct xt_target *target)
 {
@@ -85,6 +86,8 @@ xt_register_target(struct xt_target *target)
 	mutex_unlock(&xt[af].mutex);
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 int xt_register_target(struct xt_target *target)
 {
 	u_int8_t af = target->family;
@@ -93,6 +96,9 @@ int xt_register_target(struct xt_target *target)
 	list_add(&target->list, &xt[af].target);
 	mutex_unlock(&xt[af].mutex);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(xt_register_target);
@@ -137,6 +143,7 @@ xt_unregister_targets(struct xt_target *target, unsigned int n)
 EXPORT_SYMBOL(xt_unregister_targets);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int
 xt_register_match(struct xt_match *match)
 {
@@ -152,6 +159,8 @@ xt_register_match(struct xt_match *match)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 int xt_register_match(struct xt_match *match)
 {
 	u_int8_t af = match->family;
@@ -160,6 +169,9 @@ int xt_register_match(struct xt_match *match)
 	list_add(&match->list, &xt[af].match);
 	mutex_unlock(&xt[af].mutex);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(xt_register_match);
@@ -217,9 +229,13 @@ struct xt_match *xt_find_match(u8 af, const char *name, u8 revision)
 	int err = -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mutex_lock_interruptible(&xt[af].mutex) != 0)
 		return ERR_PTR(-EINTR);
 
+=======
+	mutex_lock(&xt[af].mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&xt[af].mutex);
 >>>>>>> v3.18
@@ -266,9 +282,13 @@ struct xt_target *xt_find_target(u8 af, const char *name, u8 revision)
 	int err = -ENOENT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mutex_lock_interruptible(&xt[af].mutex) != 0)
 		return ERR_PTR(-EINTR);
 
+=======
+	mutex_lock(&xt[af].mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&xt[af].mutex);
 >>>>>>> v3.18
@@ -354,10 +374,14 @@ int xt_find_revision(u8 af, const char *name, u8 revision, int target,
 	int have_rev, best = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mutex_lock_interruptible(&xt[af].mutex) != 0) {
 		*err = -EINTR;
 		return 1;
 	}
+=======
+	mutex_lock(&xt[af].mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&xt[af].mutex);
 >>>>>>> v3.18
@@ -470,6 +494,7 @@ int xt_check_match(struct xt_mtchk_param *par,
 EXPORT_SYMBOL_GPL(xt_check_match);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** xt_check_entry_match - check that matches end before start of target
  *
  * @match: beginning of xt_entry_match
@@ -511,6 +536,8 @@ static int xt_check_entry_match(const char *match, const char *target,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_COMPAT
@@ -583,8 +610,13 @@ int xt_compat_match_offset(const struct xt_match *match)
 EXPORT_SYMBOL_GPL(xt_compat_match_offset);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xt_compat_match_from_user(struct xt_entry_match *m, void **dstptr,
 			       unsigned int *size)
+=======
+int xt_compat_match_from_user(struct xt_entry_match *m, void **dstptr,
+			      unsigned int *size)
+>>>>>>> v3.18
 =======
 int xt_compat_match_from_user(struct xt_entry_match *m, void **dstptr,
 			      unsigned int *size)
@@ -595,7 +627,10 @@ int xt_compat_match_from_user(struct xt_entry_match *m, void **dstptr,
 	int pad, off = xt_compat_match_offset(match);
 	u_int16_t msize = cm->u.user.match_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[sizeof(m->u.user.name)];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -612,6 +647,7 @@ int xt_compat_match_from_user(struct xt_entry_match *m, void **dstptr,
 	msize += off;
 	m->u.user.match_size = msize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(name, match->name, sizeof(name));
 	module_put(match->me);
 	strncpy(m->u.user.name, name, sizeof(m->u.user.name));
@@ -619,10 +655,15 @@ int xt_compat_match_from_user(struct xt_entry_match *m, void **dstptr,
 	*size += off;
 	*dstptr += msize;
 =======
+=======
+>>>>>>> v3.18
 
 	*size += off;
 	*dstptr += msize;
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(xt_compat_match_from_user);
@@ -654,6 +695,7 @@ int xt_compat_match_to_user(const struct xt_entry_match *m,
 	return 0;
 }
 EXPORT_SYMBOL_GPL(xt_compat_match_to_user);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* non-compat version may have padding after verdict */
@@ -778,6 +820,10 @@ EXPORT_SYMBOL(xt_check_entry_offsets);
 #endif /* CONFIG_COMPAT */
 
 >>>>>>> v3.18
+=======
+#endif /* CONFIG_COMPAT */
+
+>>>>>>> v3.18
 int xt_check_target(struct xt_tgchk_param *par,
 		    unsigned int size, u_int8_t proto, bool inv_proto)
 {
@@ -828,6 +874,7 @@ int xt_check_target(struct xt_tgchk_param *par,
 }
 EXPORT_SYMBOL_GPL(xt_check_target);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * xt_copy_counters_from_user - copy counters and metadata from userspace
@@ -905,6 +952,8 @@ EXPORT_SYMBOL_GPL(xt_copy_counters_from_user);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_COMPAT
 int xt_compat_target_offset(const struct xt_target *target)
 {
@@ -921,7 +970,10 @@ void xt_compat_target_from_user(struct xt_entry_target *t, void **dstptr,
 	int pad, off = xt_compat_target_offset(target);
 	u_int16_t tsize = ct->u.user.target_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char name[sizeof(t->u.user.name)];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -938,9 +990,12 @@ void xt_compat_target_from_user(struct xt_entry_target *t, void **dstptr,
 	tsize += off;
 	t->u.user.target_size = tsize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strlcpy(name, target->name, sizeof(name));
 	module_put(target->me);
 	strncpy(t->u.user.name, name, sizeof(t->u.user.name));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -983,10 +1038,13 @@ struct xt_table_info *xt_alloc_table_info(unsigned int size)
 	struct xt_table_info *newinfo;
 	int cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	size_t sz = sizeof(*newinfo) + size;
 
 	if (sz < sizeof(*newinfo))
 		return NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1024,6 +1082,7 @@ void xt_free_table_info(struct xt_table_info *info)
 	int cpu;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_possible_cpu(cpu) {
 		if (info->size <= PAGE_SIZE)
 			kfree(info->entries[cpu]);
@@ -1047,6 +1106,8 @@ void xt_free_table_info(struct xt_table_info *info)
 		kfree(info->jumpstack);
 
 =======
+=======
+>>>>>>> v3.18
 	for_each_possible_cpu(cpu)
 		kvfree(info->entries[cpu]);
 
@@ -1056,6 +1117,9 @@ void xt_free_table_info(struct xt_table_info *info)
 		kvfree(info->jumpstack);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	free_percpu(info->stackptr);
 
@@ -1070,9 +1134,13 @@ struct xt_table *xt_find_table_lock(struct net *net, u_int8_t af,
 	struct xt_table *t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mutex_lock_interruptible(&xt[af].mutex) != 0)
 		return ERR_PTR(-EINTR);
 
+=======
+	mutex_lock(&xt[af].mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&xt[af].mutex);
 >>>>>>> v3.18
@@ -1225,10 +1293,14 @@ struct xt_table *xt_register_table(struct net *net,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = mutex_lock_interruptible(&xt[table->af].mutex);
 	if (ret != 0)
 		goto out_free;
 
+=======
+	mutex_lock(&xt[table->af].mutex);
+>>>>>>> v3.18
 =======
 	mutex_lock(&xt[table->af].mutex);
 >>>>>>> v3.18
@@ -1257,9 +1329,14 @@ struct xt_table *xt_register_table(struct net *net,
 	return table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  unlock:
 	mutex_unlock(&xt[table->af].mutex);
 out_free:
+=======
+unlock:
+	mutex_unlock(&xt[table->af].mutex);
+>>>>>>> v3.18
 =======
 unlock:
 	mutex_unlock(&xt[table->af].mutex);
@@ -1475,6 +1552,7 @@ static const struct seq_operations xt_match_seq_ops = {
 static int xt_match_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct seq_file *seq;
 	struct nf_mttg_trav *trav;
 	int ret;
@@ -1492,11 +1570,16 @@ static int xt_match_open(struct inode *inode, struct file *file)
 	seq = file->private_data;
 	seq->private = trav;
 =======
+=======
+>>>>>>> v3.18
 	struct nf_mttg_trav *trav;
 	trav = __seq_open_private(file, &xt_match_seq_ops, sizeof(*trav));
 	if (!trav)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trav->nfproto = (unsigned long)PDE_DATA(inode);
 	return 0;
@@ -1547,6 +1630,7 @@ static const struct seq_operations xt_target_seq_ops = {
 static int xt_target_open(struct inode *inode, struct file *file)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct seq_file *seq;
 	struct nf_mttg_trav *trav;
 	int ret;
@@ -1564,11 +1648,16 @@ static int xt_target_open(struct inode *inode, struct file *file)
 	seq = file->private_data;
 	seq->private = trav;
 =======
+=======
+>>>>>>> v3.18
 	struct nf_mttg_trav *trav;
 	trav = __seq_open_private(file, &xt_target_seq_ops, sizeof(*trav));
 	if (!trav)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	trav->nfproto = (unsigned long)PDE_DATA(inode);
 	return 0;

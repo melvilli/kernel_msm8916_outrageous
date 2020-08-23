@@ -1455,6 +1455,7 @@ dsp_cmx_send_member(struct dsp *dsp, int len, s32 *c, int members)
 	if (0) {
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (members == 2) {
 #endif
 			/* "other" becomes other party */
@@ -1516,6 +1517,8 @@ dsp_cmx_send_member(struct dsp *dsp, int len, s32 *c, int members)
 	}
 #endif
 =======
+=======
+>>>>>>> v3.18
 	if (members == 2) {
 #endif
 		/* "other" becomes other party */
@@ -1573,6 +1576,9 @@ dsp_cmx_send_member(struct dsp *dsp, int len, s32 *c, int members)
 		dsp->tx_R = t;
 		goto send_packet;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* PROCESS DATA (three or more members) */
 	/* -> if echo is NOT enabled */

@@ -2268,8 +2268,11 @@ static unsigned int tomoyo_stat_modified[TOMOYO_MAX_POLICY_STAT];
 void tomoyo_update_stat(const u8 index)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timeval tv;
 	do_gettimeofday(&tv);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -2277,7 +2280,11 @@ void tomoyo_update_stat(const u8 index)
 	 */
 	tomoyo_stat_updated[index]++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tomoyo_stat_modified[index] = tv.tv_sec;
+=======
+	tomoyo_stat_modified[index] = get_seconds();
+>>>>>>> v3.18
 =======
 	tomoyo_stat_modified[index] = get_seconds();
 >>>>>>> v3.18

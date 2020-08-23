@@ -120,7 +120,11 @@
 	  <row>
 	    <entry>&v4l2-rect;</entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    <entry><structfield>rect</structfield></entry>
+=======
+	    <entry><structfield>r</structfield></entry>
+>>>>>>> v3.18
 =======
 	    <entry><structfield>r</structfield></entry>
 >>>>>>> v3.18

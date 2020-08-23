@@ -82,7 +82,10 @@ void speakup_fake_down_arrow(void)
 	input_report_key(virt_keyboard, KEY_DOWN, PRESSED);
 	input_report_key(virt_keyboard, KEY_DOWN, RELEASED);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input_sync(virt_keyboard);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__this_cpu_write(reporting_keystroke, false);

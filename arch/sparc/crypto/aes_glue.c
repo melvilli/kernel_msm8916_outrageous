@@ -125,7 +125,11 @@ extern void aes_sparc64_ctr_crypt_256(const u64 *key, const u64 *input,
 				      u64 *iv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct aes_ops aes128_ops = {
+=======
+static struct aes_ops aes128_ops = {
+>>>>>>> v3.18
 =======
 static struct aes_ops aes128_ops = {
 >>>>>>> v3.18
@@ -141,7 +145,11 @@ static struct aes_ops aes128_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct aes_ops aes192_ops = {
+=======
+static struct aes_ops aes192_ops = {
+>>>>>>> v3.18
 =======
 static struct aes_ops aes192_ops = {
 >>>>>>> v3.18
@@ -157,7 +165,11 @@ static struct aes_ops aes192_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct aes_ops aes256_ops = {
+=======
+static struct aes_ops aes256_ops = {
+>>>>>>> v3.18
 =======
 static struct aes_ops aes256_ops = {
 >>>>>>> v3.18
@@ -446,7 +458,10 @@ static struct crypto_alg algs[] = { {
 			.min_keysize	= AES_MIN_KEY_SIZE,
 			.max_keysize	= AES_MAX_KEY_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.ivsize		= AES_BLOCK_SIZE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			.setkey		= aes_set_key,
@@ -469,7 +484,10 @@ static struct crypto_alg algs[] = { {
 			.min_keysize	= AES_MIN_KEY_SIZE,
 			.max_keysize	= AES_MAX_KEY_SIZE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			.ivsize		= AES_BLOCK_SIZE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			.setkey		= aes_set_key,
@@ -520,7 +538,11 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("AES Secure Hash Algorithm, sparc64 aes opcode accelerated");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("aes");
+=======
+MODULE_ALIAS("aes");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("aes");
 >>>>>>> v3.18

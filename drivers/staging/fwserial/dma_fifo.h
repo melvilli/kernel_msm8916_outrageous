@@ -13,10 +13,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -89,6 +92,7 @@ static inline bool dp_is_completed(struct dma_pending *dp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void dma_fifo_init(struct dma_fifo *fifo);
 extern int dma_fifo_alloc(struct dma_fifo *fifo, int size, unsigned align,
 			  int tx_limit, int open_limit, gfp_t gfp_mask);
@@ -99,6 +103,8 @@ extern int dma_fifo_out_pend(struct dma_fifo *fifo, struct dma_pending *pended);
 extern int dma_fifo_out_complete(struct dma_fifo *fifo,
 				 struct dma_pending *complete);
 =======
+=======
+>>>>>>> v3.18
 void dma_fifo_init(struct dma_fifo *fifo);
 int dma_fifo_alloc(struct dma_fifo *fifo, int size, unsigned align,
 		   int tx_limit, int open_limit, gfp_t gfp_mask);
@@ -108,6 +114,9 @@ int dma_fifo_in(struct dma_fifo *fifo, const void *src, int n);
 int dma_fifo_out_pend(struct dma_fifo *fifo, struct dma_pending *pended);
 int dma_fifo_out_complete(struct dma_fifo *fifo,
 			  struct dma_pending *complete);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* returns the # of used bytes in the fifo */

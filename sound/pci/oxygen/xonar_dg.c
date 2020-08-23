@@ -3,7 +3,11 @@
  *
  * Copyright (c) Clemens Ladisch <clemens@ladisch.de>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
+=======
+ * Copyright (c) Roman Volkov <v1ron@mail.ru>
+>>>>>>> v3.18
 =======
  * Copyright (c) Roman Volkov <v1ron@mail.ru>
 >>>>>>> v3.18
@@ -25,6 +29,12 @@
  * ------------
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * CS4245 and CS4361 both will mute all outputs if any clock ratio
+ * is invalid.
+ *
+>>>>>>> v3.18
 =======
  * CS4245 and CS4361 both will mute all outputs if any clock ratio
  * is invalid.
@@ -35,6 +45,10 @@
  *   SPI 0 -> CS4245
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *   Playback:
+>>>>>>> v3.18
 =======
  *   Playback:
 >>>>>>> v3.18
@@ -43,6 +57,7 @@
  *   I²S 3 -> CS4361 (surround)
  *   I²S 4 -> CS4361 (front)
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *   GPIO 3 <- ?
  *   GPIO 4 <- headphone detect
@@ -50,6 +65,8 @@
  *   GPIO 6 -> route input jack to line-in (0) or mic-in (1)
  *   GPIO 7 -> enable rear headphone amp
 =======
+=======
+>>>>>>> v3.18
  *   Capture:
  *   I²S ADC 1 <- CS4245
  *
@@ -59,20 +76,29 @@
  *   GPIO 6 -> enable ADC analog circuit for the right channel
  *   GPIO 7 -> switch green rear output jack between CS4245 and and the first
  *             channel of CS4361 (mechanical relay)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *   GPIO 8 -> enable output to speakers
  *
  * CS4245:
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   input 1 <- aux
  *   input 2 <- front mic
  *   input 4 <- line/mic
 =======
+=======
+>>>>>>> v3.18
  *   input 0 <- mic
  *   input 1 <- aux
  *   input 2 <- front mic
  *   input 4 <- line
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *   DAC out -> headphones
  *   aux out -> front panel headphones
@@ -89,6 +115,7 @@
 #include "xonar_dg.h"
 #include "cs4245.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define GPIO_MAGIC		0x0008
 #define GPIO_HP_DETECT		0x0010
@@ -153,6 +180,8 @@ static void cs4245_registers_init(struct oxygen *chip)
 	cs4245_write(chip, CS4245_INT_MASK, 0);
 	cs4245_write(chip, CS4245_POWER_CTRL, 0);
 =======
+=======
+>>>>>>> v3.18
 int cs4245_write_spi(struct oxygen *chip, u8 reg)
 {
 	struct dg *data = chip->model_data;
@@ -210,6 +239,9 @@ int cs4245_shadow_control(struct oxygen *chip, enum cs4245_shadow_operation op)
 			return ret;
 	}
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -217,6 +249,7 @@ static void cs4245_init(struct oxygen *chip)
 {
 	struct dg *data = chip->model_data;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	data->cs4245_regs[CS4245_DAC_CTRL_1] =
 		CS4245_DAC_FM_SINGLE | CS4245_DAC_DIF_LJUST;
@@ -261,6 +294,8 @@ static void dg_init(struct oxygen *chip)
 
 static void dg_cleanup(struct oxygen *chip)
 =======
+=======
+>>>>>>> v3.18
 	/* save the initial state: codec version, registers */
 	cs4245_shadow_control(chip, CS4245_SAVE_TO_SHADOW);
 
@@ -306,13 +341,20 @@ void dg_init(struct oxygen *chip)
 }
 
 void dg_cleanup(struct oxygen *chip)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	oxygen_clear_bits16(chip, OXYGEN_GPIO_DATA, GPIO_OUTPUT_ENABLE);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void dg_suspend(struct oxygen *chip)
+=======
+void dg_suspend(struct oxygen *chip)
+>>>>>>> v3.18
 =======
 void dg_suspend(struct oxygen *chip)
 >>>>>>> v3.18
@@ -320,6 +362,7 @@ void dg_suspend(struct oxygen *chip)
 	dg_cleanup(chip);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void dg_resume(struct oxygen *chip)
 {
@@ -358,6 +401,8 @@ static void set_cs4245_adc_params(struct oxygen *chip,
 		value |= CS4245_ADC_FM_QUAD;
 	cs4245_write_cached(chip, CS4245_ADC_CTRL, value);
 =======
+=======
+>>>>>>> v3.18
 void dg_resume(struct oxygen *chip)
 {
 	cs4245_shadow_control(chip, CS4245_LOAD_FROM_SHADOW);
@@ -413,6 +458,9 @@ void set_cs4245_adc_params(struct oxygen *chip,
 	data->cs4245_shadow[CS4245_MCLK_FREQ] = mclk_freq;
 	cs4245_write_spi(chip, CS4245_ADC_CTRL);
 	cs4245_write_spi(chip, CS4245_MCLK_FREQ);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -428,10 +476,13 @@ static inline unsigned int shift_bits(unsigned int value,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned int adjust_dg_dac_routing(struct oxygen *chip,
 					  unsigned int play_routing)
 {
 =======
+=======
+>>>>>>> v3.18
 unsigned int adjust_dg_dac_routing(struct oxygen *chip,
 					  unsigned int play_routing)
 {
@@ -449,6 +500,9 @@ unsigned int adjust_dg_dac_routing(struct oxygen *chip,
 			OXYGEN_PLAY_MUTE01, OXYGEN_PLAY_MUTE_MASK);
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return (play_routing & OXYGEN_PLAY_DAC0_SOURCE_MASK) |
 	       shift_bits(play_routing,
@@ -465,6 +519,7 @@ unsigned int adjust_dg_dac_routing(struct oxygen *chip,
 			  OXYGEN_PLAY_DAC3_SOURCE_MASK);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int output_switch_info(struct snd_kcontrol *ctl,
 			      struct snd_ctl_elem_info *info)
@@ -841,6 +896,8 @@ struct oxygen_model model_xonar_dg = {
 	.adc_i2s_format = OXYGEN_I2S_FORMAT_LJUST,
 };
 =======
+=======
+>>>>>>> v3.18
 void dump_cs4245_registers(struct oxygen *chip,
 				  struct snd_info_buffer *buffer)
 {
@@ -853,4 +910,7 @@ void dump_cs4245_registers(struct oxygen *chip,
 		snd_iprintf(buffer, " %02x", data->cs4245_shadow[addr]);
 	snd_iprintf(buffer, "\n");
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

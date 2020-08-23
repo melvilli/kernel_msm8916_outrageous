@@ -1,7 +1,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2007-2011 Nicira Networks.
+=======
+ * Copyright (c) 2007-2013 Nicira, Inc.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2007-2013 Nicira, Inc.
 >>>>>>> v3.18
@@ -45,8 +49,11 @@ struct ovs_header {
 #define OVS_DATAPATH_FAMILY  "ovs_datapath"
 #define OVS_DATAPATH_MCGROUP "ovs_datapath"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define OVS_DATAPATH_VERSION 0x1
 =======
+=======
+>>>>>>> v3.18
 
 /* V2:
  *   - API users are expected to provide OVS_DP_ATTR_USER_FEATURES
@@ -56,6 +63,9 @@ struct ovs_header {
 
 /* First OVS datapath version to support features */
 #define OVS_DP_VER_FEATURES 2
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 enum ovs_datapath_cmd {
@@ -80,6 +90,11 @@ enum ovs_datapath_cmd {
  * @OVS_DP_ATTR_STATS: Statistics about packets that have passed through the
  * datapath.  Always present in notifications.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @OVS_DP_ATTR_MEGAFLOW_STATS: Statistics about mega flow masks usage for the
+ * datapath. Always present in notifications.
+>>>>>>> v3.18
 =======
  * @OVS_DP_ATTR_MEGAFLOW_STATS: Statistics about mega flow masks usage for the
  * datapath. Always present in notifications.
@@ -91,15 +106,21 @@ enum ovs_datapath_cmd {
 enum ovs_datapath_attr {
 	OVS_DP_ATTR_UNSPEC,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OVS_DP_ATTR_NAME,       /* name of dp_ifindex netdev */
 	OVS_DP_ATTR_UPCALL_PID, /* Netlink PID to receive upcalls */
 	OVS_DP_ATTR_STATS,      /* struct ovs_dp_stats */
 =======
+=======
+>>>>>>> v3.18
 	OVS_DP_ATTR_NAME,		/* name of dp_ifindex netdev */
 	OVS_DP_ATTR_UPCALL_PID,		/* Netlink PID to receive upcalls */
 	OVS_DP_ATTR_STATS,		/* struct ovs_dp_stats */
 	OVS_DP_ATTR_MEGAFLOW_STATS,	/* struct ovs_dp_megaflow_stats */
 	OVS_DP_ATTR_USER_FEATURES,	/* OVS_DP_F_*  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__OVS_DP_ATTR_MAX
 };
@@ -114,7 +135,10 @@ struct ovs_dp_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ovs_dp_megaflow_stats {
 	__u64 n_mask_hit;	 /* Number of masks used for flow lookups. */
 	__u32 n_masks;		 /* Number of masks for the datapath. */
@@ -123,6 +147,9 @@ struct ovs_dp_megaflow_stats {
 	__u64 pad2;		 /* Pad for future expension. */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ovs_vport_stats {
 	__u64   rx_packets;		/* total packets received       */
@@ -136,13 +163,19 @@ struct ovs_vport_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Allow last Netlink attribute to be unaligned */
 #define OVS_DP_F_UNALIGNED	(1 << 0)
 
 /* Allow datapath to associate multiple Netlink PIDs to each vport */
 #define OVS_DP_F_VPORT_PIDS	(1 << 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Fixed logical ports. */
 #define OVSP_LOCAL      ((__u32)0)
@@ -214,6 +247,12 @@ enum ovs_vport_type {
 	OVS_VPORT_TYPE_NETDEV,   /* network device */
 	OVS_VPORT_TYPE_INTERNAL, /* network device implemented by datapath */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	OVS_VPORT_TYPE_GRE,      /* GRE tunnel. */
+	OVS_VPORT_TYPE_VXLAN,	 /* VXLAN tunnel. */
+	OVS_VPORT_TYPE_GENEVE,	 /* Geneve tunnel. */
+>>>>>>> v3.18
 =======
 	OVS_VPORT_TYPE_GRE,      /* GRE tunnel. */
 	OVS_VPORT_TYPE_VXLAN,	 /* VXLAN tunnel. */
@@ -234,14 +273,20 @@ enum ovs_vport_type {
  * plus a null terminator.
  * @OVS_VPORT_ATTR_OPTIONS: Vport-specific configuration information.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @OVS_VPORT_ATTR_UPCALL_PID: The Netlink socket in userspace that
  * OVS_PACKET_CMD_MISS upcalls will be directed to for packets received on
  * this port.  A value of zero indicates that upcalls should not be sent.
 =======
+=======
+>>>>>>> v3.18
  * @OVS_VPORT_ATTR_UPCALL_PID: The array of Netlink socket pids in userspace
  * among which OVS_PACKET_CMD_MISS upcalls will be distributed for packets
  * received on this port.  If this is a single-element array of value 0,
  * upcalls should not be sent.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * @OVS_VPORT_ATTR_STATS: A &struct ovs_vport_stats giving statistics for
  * packets sent or received through the vport.
@@ -255,7 +300,10 @@ enum ovs_vport_type {
  * Whether %OVS_VPORT_ATTR_OPTIONS is required or optional depends on the type
  * of vport.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * and other attributes are ignored.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -270,7 +318,12 @@ enum ovs_vport_attr {
 	OVS_VPORT_ATTR_NAME,	/* string name, up to IFNAMSIZ bytes long */
 	OVS_VPORT_ATTR_OPTIONS, /* nested attributes, varies by vport type */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	OVS_VPORT_ATTR_UPCALL_PID, /* u32 Netlink PID to receive upcalls */
+=======
+	OVS_VPORT_ATTR_UPCALL_PID, /* array of u32 Netlink socket PIDs for */
+				/* receiving upcalls */
+>>>>>>> v3.18
 =======
 	OVS_VPORT_ATTR_UPCALL_PID, /* array of u32 Netlink socket PIDs for */
 				/* receiving upcalls */
@@ -282,7 +335,10 @@ enum ovs_vport_attr {
 #define OVS_VPORT_ATTR_MAX (__OVS_VPORT_ATTR_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* OVS_VPORT_ATTR_OPTIONS attributes for tunnels.
  */
 enum {
@@ -293,6 +349,9 @@ enum {
 
 #define OVS_TUNNEL_ATTR_MAX (__OVS_TUNNEL_ATTR_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Flows. */
 
@@ -331,7 +390,10 @@ enum ovs_key_attr {
 	OVS_KEY_ATTR_ND,        /* struct ovs_key_nd */
 	OVS_KEY_ATTR_SKB_MARK,  /* u32 skb mark */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	OVS_KEY_ATTR_TUNNEL,    /* Nested set of ovs_tunnel attributes */
 	OVS_KEY_ATTR_SCTP,      /* struct ovs_key_sctp */
 	OVS_KEY_ATTR_TCP_FLAGS,	/* be16 TCP flags. */
@@ -342,6 +404,9 @@ enum ovs_key_attr {
 #ifdef __KERNEL__
 	OVS_KEY_ATTR_TUNNEL_INFO,  /* struct ovs_tunnel_info */
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__OVS_KEY_ATTR_MAX
 };
@@ -349,7 +414,10 @@ enum ovs_key_attr {
 #define OVS_KEY_ATTR_MAX (__OVS_KEY_ATTR_MAX - 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum ovs_tunnel_key_attr {
 	OVS_TUNNEL_KEY_ATTR_ID,                 /* be64 Tunnel ID */
 	OVS_TUNNEL_KEY_ATTR_IPV4_SRC,           /* be32 src IP address. */
@@ -365,6 +433,9 @@ enum ovs_tunnel_key_attr {
 
 #define OVS_TUNNEL_KEY_ATTR_MAX (__OVS_TUNNEL_KEY_ATTR_MAX - 1)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * enum ovs_frag_type - IPv4 and IPv6 fragment type
@@ -419,12 +490,18 @@ struct ovs_key_udp {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ovs_key_sctp {
 	__be16 sctp_src;
 	__be16 sctp_dst;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct ovs_key_icmp {
 	__u8 icmp_type;
@@ -459,7 +536,13 @@ struct ovs_key_nd {
  * the actions to take for packets that match the key.  Always present in
  * notifications.  Required for %OVS_FLOW_CMD_NEW requests, optional for
 <<<<<<< HEAD
+<<<<<<< HEAD
  * %OVS_FLOW_CMD_SET requests.
+=======
+ * %OVS_FLOW_CMD_SET requests.  An %OVS_FLOW_CMD_SET without
+ * %OVS_FLOW_ATTR_ACTIONS will not modify the actions.  To clear the actions,
+ * an %OVS_FLOW_ATTR_ACTIONS without any nested attributes must be given.
+>>>>>>> v3.18
 =======
  * %OVS_FLOW_CMD_SET requests.  An %OVS_FLOW_CMD_SET without
  * %OVS_FLOW_ATTR_ACTIONS will not modify the actions.  To clear the actions,
@@ -479,13 +562,19 @@ struct ovs_key_nd {
  * last-used time, accumulated TCP flags, and statistics for this flow.
  * Otherwise ignored in requests.  Never present in notifications.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * @OVS_FLOW_ATTR_MASK: Nested %OVS_KEY_ATTR_* attributes specifying the
  * mask bits for wildcarded flow match. Mask bit value '1' specifies exact
  * match with corresponding flow key bit, while mask bit value '0' specifies
  * a wildcarded match. Omitting attribute is treated as wildcarding all
  * corresponding fields. Optional for all requests. If not present,
  * all flow key bits are exact match bits.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * These attributes follow the &struct ovs_header within the Generic Netlink
@@ -500,6 +589,10 @@ enum ovs_flow_attr {
 	OVS_FLOW_ATTR_USED,      /* u64 msecs last used in monotonic time. */
 	OVS_FLOW_ATTR_CLEAR,     /* Flag to clear stats, tcp_flags, used. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	OVS_FLOW_ATTR_MASK,      /* Sequence of OVS_KEY_ATTR_* attributes. */
+>>>>>>> v3.18
 =======
 	OVS_FLOW_ATTR_MASK,      /* Sequence of OVS_KEY_ATTR_* attributes. */
 >>>>>>> v3.18
@@ -562,7 +655,10 @@ struct ovs_action_push_vlan {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Data path hash algorithm for computing Datapath hash.
  *
  * The algorithm type only specifies the fields in a flow
@@ -584,6 +680,9 @@ struct ovs_action_hash {
 	uint32_t  hash_basis;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * enum ovs_action_attr - Action types.
@@ -614,6 +713,11 @@ enum ovs_action_attr {
 	OVS_ACTION_ATTR_POP_VLAN,     /* No argument. */
 	OVS_ACTION_ATTR_SAMPLE,       /* Nested OVS_SAMPLE_ATTR_*. */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	OVS_ACTION_ATTR_RECIRC,       /* u32 recirc_id. */
+	OVS_ACTION_ATTR_HASH,	      /* struct ovs_action_hash. */
+>>>>>>> v3.18
 =======
 	OVS_ACTION_ATTR_RECIRC,       /* u32 recirc_id. */
 	OVS_ACTION_ATTR_HASH,	      /* struct ovs_action_hash. */

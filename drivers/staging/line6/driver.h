@@ -191,9 +191,12 @@ extern char *line6_alloc_sysex_buffer(struct usb_line6 *line6, int code1,
 extern ssize_t line6_nop_read(struct device *dev,
 			      struct device_attribute *attr, char *buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern ssize_t line6_nop_write(struct device *dev,
 			       struct device_attribute *attr,
 			       const char *buf, size_t count);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern int line6_read_data(struct usb_line6 *line6, int address, void *data,
@@ -211,7 +214,11 @@ extern ssize_t line6_set_raw(struct device *dev, struct device_attribute *attr,
 			     const char *buf, size_t count);
 extern void line6_start_timer(struct timer_list *timer, unsigned int msecs,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      void (*function) (unsigned long),
+=======
+			      void (*function)(unsigned long),
+>>>>>>> v3.18
 =======
 			      void (*function)(unsigned long),
 >>>>>>> v3.18

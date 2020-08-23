@@ -21,7 +21,10 @@
 #include <linux/errno.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/list.h>
@@ -29,6 +32,10 @@
 #include <linux/of_address.h>
 #include <linux/of_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -243,7 +250,10 @@ static void sxps2_close(struct serio *pserio)
 static int xps2_of_probe(struct platform_device *ofdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource r_irq; /* Interrupt resources */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct resource r_mem; /* IO mem resources */
@@ -252,6 +262,10 @@ static int xps2_of_probe(struct platform_device *ofdev)
 	struct device *dev = &ofdev->dev;
 	resource_size_t remap_size, phys_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int irq;
+>>>>>>> v3.18
 =======
 	unsigned int irq;
 >>>>>>> v3.18
@@ -269,7 +283,12 @@ static int xps2_of_probe(struct platform_device *ofdev)
 
 	/* Get IRQ for the device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!of_irq_to_resource(ofdev->dev.of_node, 0, &r_irq)) {
+=======
+	irq = irq_of_parse_and_map(ofdev->dev.of_node, 0);
+	if (!irq) {
+>>>>>>> v3.18
 =======
 	irq = irq_of_parse_and_map(ofdev->dev.of_node, 0);
 	if (!irq) {
@@ -287,7 +306,11 @@ static int xps2_of_probe(struct platform_device *ofdev)
 
 	spin_lock_init(&drvdata->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drvdata->irq = r_irq.start;
+=======
+	drvdata->irq = irq;
+>>>>>>> v3.18
 =======
 	drvdata->irq = irq;
 >>>>>>> v3.18
@@ -373,8 +396,11 @@ static int xps2_of_remove(struct platform_device *of_dev)
 	kfree(drvdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(of_dev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

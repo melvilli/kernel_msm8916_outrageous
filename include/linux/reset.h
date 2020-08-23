@@ -3,14 +3,20 @@
 
 struct device;
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct reset_control;
 
 =======
+=======
+>>>>>>> v3.18
 struct device_node;
 struct reset_control;
 
 #ifdef CONFIG_RESET_CONTROLLER
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int reset_control_reset(struct reset_control *rstc);
 int reset_control_assert(struct reset_control *rstc);
@@ -21,8 +27,11 @@ void reset_control_put(struct reset_control *rstc);
 struct reset_control *devm_reset_control_get(struct device *dev, const char *id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int device_reset(struct device *dev);
 =======
+=======
+>>>>>>> v3.18
 int __must_check device_reset(struct device *dev);
 
 static inline int device_reset_optional(struct device *dev)
@@ -94,6 +103,9 @@ static inline struct reset_control *of_reset_control_get(
 }
 
 #endif /* CONFIG_RESET_CONTROLLER */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

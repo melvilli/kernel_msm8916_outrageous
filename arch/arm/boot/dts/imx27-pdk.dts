@@ -18,9 +18,12 @@
 
 	memory {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg = <0x0 0x0>;
 	};
 =======
+=======
+>>>>>>> v3.18
 		reg = <0xa0000000 0x08000000>;
 	};
 
@@ -107,11 +110,15 @@
 	nand-ecc-mode = "hw";
 	nand-on-flash-bbt;
 	status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 &uart1 {
 	fsl,uart-has-rtscts;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	status = "okay";
 };
@@ -120,6 +127,8 @@
 	status = "okay";
 };
 =======
+=======
+>>>>>>> v3.18
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart1>;
 	status = "okay";
@@ -208,4 +217,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

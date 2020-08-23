@@ -26,7 +26,11 @@ static void pci_note_irq_problem(struct pci_dev *pdev, const char *reason)
  * pci_lost_interrupt - reports a lost PCI interrupt
  * @pdev:	device whose interrupt is lost
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 
+=======
+ *
+>>>>>>> v3.18
 =======
  *
 >>>>>>> v3.18

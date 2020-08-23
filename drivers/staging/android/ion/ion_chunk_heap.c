@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * drivers/gpu/ion/ion_chunk_heap.c
+=======
+ * drivers/staging/android/ion/ion_chunk_heap.c
+>>>>>>> v3.18
 =======
  * drivers/staging/android/ion/ion_chunk_heap.c
 >>>>>>> v3.18
@@ -60,7 +64,11 @@ static int ion_chunk_heap_allocate(struct ion_heap *heap,
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	table = kzalloc(sizeof(struct sg_table), GFP_KERNEL);
+=======
+	table = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	table = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
 >>>>>>> v3.18
@@ -115,11 +123,17 @@ static void ion_chunk_heap_free(struct ion_buffer *buffer)
 	if (ion_buffer_cached(buffer))
 		dma_sync_sg_for_device(NULL, table->sgl, table->nents,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                        DMA_BIDIRECTIONAL);
 
 	for_each_sg(table->sgl, sg, table->nents, i) {
 		if (ion_buffer_cached(buffer))
 			dma_sync_sg_for_device(NULL, sg, 1, DMA_BIDIRECTIONAL);
+=======
+							DMA_BIDIRECTIONAL);
+
+	for_each_sg(table->sgl, sg, table->nents, i) {
+>>>>>>> v3.18
 =======
 							DMA_BIDIRECTIONAL);
 
@@ -143,7 +157,10 @@ static void ion_chunk_heap_unmap_dma(struct ion_heap *heap,
 				     struct ion_buffer *buffer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -162,11 +179,14 @@ struct ion_heap *ion_chunk_heap_create(struct ion_platform_heap *heap_data)
 {
 	struct ion_chunk_heap *chunk_heap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct vm_struct *vm_struct;
 	pgprot_t pgprot = pgprot_writecombine(PAGE_KERNEL);
 	int i, ret;
 
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 	struct page *page;
 	size_t size;
@@ -179,6 +199,9 @@ struct ion_heap *ion_chunk_heap_create(struct ion_platform_heap *heap_data)
 	ret = ion_heap_pages_zero(page, size, pgprot_writecombine(PAGE_KERNEL));
 	if (ret)
 		return ERR_PTR(ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chunk_heap = kzalloc(sizeof(struct ion_chunk_heap), GFP_KERNEL);
@@ -196,6 +219,7 @@ struct ion_heap *ion_chunk_heap_create(struct ion_platform_heap *heap_data)
 	chunk_heap->size = heap_data->size;
 	chunk_heap->allocated = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	vm_struct = get_vm_area(PAGE_SIZE, VM_ALLOC);
 	if (!vm_struct) {
@@ -219,10 +243,13 @@ struct ion_heap *ion_chunk_heap_create(struct ion_platform_heap *heap_data)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	gen_pool_add(chunk_heap->pool, chunk_heap->base, heap_data->size, -1);
 	chunk_heap->heap.ops = &chunk_heap_ops;
 	chunk_heap->heap.type = ION_HEAP_TYPE_CHUNK;
 	chunk_heap->heap.flags = ION_HEAP_FLAG_DEFER_FREE;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pr_info("%s: base %pa size %zu align %pa\n", __func__,
 		&chunk_heap->base, heap_data->size, &heap_data->align);
@@ -234,11 +261,16 @@ error_map_vm_area:
 error:
 	gen_pool_destroy(chunk_heap->pool);
 =======
+=======
+>>>>>>> v3.18
 	pr_info("%s: base %lu size %zu align %ld\n", __func__, chunk_heap->base,
 		heap_data->size, heap_data->align);
 
 	return &chunk_heap->heap;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 error_gen_pool_create:
 	kfree(chunk_heap);

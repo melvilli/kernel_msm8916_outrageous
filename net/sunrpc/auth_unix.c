@@ -34,7 +34,11 @@ static const struct rpc_credops	unix_credops;
 
 static struct rpc_auth *
 <<<<<<< HEAD
+<<<<<<< HEAD
 unx_create(struct rpc_clnt *clnt, rpc_authflavor_t flavor)
+=======
+unx_create(struct rpc_auth_create_args *args, struct rpc_clnt *clnt)
+>>>>>>> v3.18
 =======
 unx_create(struct rpc_auth_create_args *args, struct rpc_clnt *clnt)
 >>>>>>> v3.18
@@ -197,7 +201,11 @@ unx_validate(struct rpc_task *task, __be32 *p)
 	    flavor != RPC_AUTH_SHORT) {
 		printk("RPC: bad verf flavor: %u\n", flavor);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-EIO);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-EIO);
 >>>>>>> v3.18
@@ -207,7 +215,11 @@ unx_validate(struct rpc_task *task, __be32 *p)
 	if (size > RPC_MAX_AUTH_SIZE) {
 		printk("RPC: giant verf size: %u\n", size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
+=======
+		return ERR_PTR(-EIO);
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-EIO);
 >>>>>>> v3.18

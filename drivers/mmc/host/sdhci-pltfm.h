@@ -19,6 +19,10 @@ struct sdhci_pltfm_data {
 	const struct sdhci_ops *ops;
 	unsigned int quirks;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int quirks2;
+>>>>>>> v3.18
 =======
 	unsigned int quirks2;
 >>>>>>> v3.18
@@ -32,6 +36,11 @@ struct sdhci_pltfm_host {
 	unsigned int clock;
 	u16 xfer_mode_shadow;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	unsigned long private[0] ____cacheline_aligned;
+>>>>>>> v3.18
 =======
 
 	unsigned long private[0] ____cacheline_aligned;
@@ -101,12 +110,15 @@ extern void sdhci_get_of_property(struct platform_device *pdev);
 
 extern struct sdhci_host *sdhci_pltfm_init(struct platform_device *pdev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					  const struct sdhci_pltfm_data *pdata);
 extern void sdhci_pltfm_free(struct platform_device *pdev);
 
 extern int sdhci_pltfm_register(struct platform_device *pdev,
 				const struct sdhci_pltfm_data *pdata);
 =======
+=======
+>>>>>>> v3.18
 					  const struct sdhci_pltfm_data *pdata,
 					  size_t priv_size);
 extern void sdhci_pltfm_free(struct platform_device *pdev);
@@ -114,14 +126,20 @@ extern void sdhci_pltfm_free(struct platform_device *pdev);
 extern int sdhci_pltfm_register(struct platform_device *pdev,
 				const struct sdhci_pltfm_data *pdata,
 				size_t priv_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int sdhci_pltfm_unregister(struct platform_device *pdev);
 
 extern unsigned int sdhci_pltfm_clk_get_max_clock(struct sdhci_host *host);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 =======
+=======
+>>>>>>> v3.18
 static inline void *sdhci_pltfm_priv(struct sdhci_pltfm_host *host)
 {
 	return (void *)host->private;
@@ -130,6 +148,9 @@ static inline void *sdhci_pltfm_priv(struct sdhci_pltfm_host *host)
 #ifdef CONFIG_PM
 extern int sdhci_pltfm_suspend(struct device *dev);
 extern int sdhci_pltfm_resume(struct device *dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern const struct dev_pm_ops sdhci_pltfm_pmops;
 #define SDHCI_PLTFM_PMOPS (&sdhci_pltfm_pmops)

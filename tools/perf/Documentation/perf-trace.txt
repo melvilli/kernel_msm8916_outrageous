@@ -10,6 +10,10 @@ SYNOPSIS
 [verse]
 'perf trace'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+'perf trace record'
+>>>>>>> v3.18
 =======
 'perf trace record'
 >>>>>>> v3.18
@@ -21,10 +25,13 @@ syscalls, but other system events like pagefaults, task lifetime events,
 scheduling events, etc.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Initially this is a live mode only tool, but eventually will work with
 perf.data files like the other tools, allowing a detached 'record' from
 analysis phases.
 =======
+=======
+>>>>>>> v3.18
 This is a live mode tool in addition to working with perf.data files like
 the other perf tools. Files can be generated using the 'perf record' command
 but the session needs to include the raw_syscalls events (-e 'raw_syscalls:*').
@@ -33,16 +40,22 @@ automatically include the raw_syscalls events when writing events to a file.
 
 The following options apply to perf trace; options to perf trace record are
 found in the perf record man page.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 OPTIONS
 -------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 --all-cpus::
         System-wide collection from all CPUs.
 
 =======
+=======
+>>>>>>> v3.18
 -a::
 --all-cpus::
         System-wide collection from all CPUs.
@@ -57,11 +70,15 @@ OPTIONS
 --output=::
 	Output file name.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 -p::
 --pid=::
 	Record events on existing process ID (comma separated list).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 --tid=::
         Record events on existing thread ID (comma separated list).
@@ -76,6 +93,8 @@ OPTIONS
 	Number of mmap data pages. Must be a power of two.
 
 =======
+=======
+>>>>>>> v3.18
 -t::
 --tid=::
         Record events on existing thread ID (comma separated list).
@@ -99,6 +118,9 @@ OPTIONS
 	size is rounded up to have nearest pages power of two value.
 
 -C::
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 --cpu::
 Collect samples only on the list of CPUs provided. Multiple CPUs can be provided as a
@@ -113,7 +135,10 @@ the thread executes on the designated CPUs. Default is to monitor all CPUs.
 	Accrue thread runtime and provide a summary at the end of the session.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 -i
 --input
 	Process events from a given perf data file.
@@ -185,6 +210,9 @@ Trace syscalls, major and minor pagefaults:
   As you can see, there was major pagefault in python process, from
   CRYPTO_push_info_ routine which faulted somewhere in libcrypto.so.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 SEE ALSO
 --------

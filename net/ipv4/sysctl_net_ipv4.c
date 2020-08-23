@@ -42,6 +42,7 @@ static int tcp_syn_retries_max = MAX_TCP_SYNCNT;
 static int ip_ping_group_range_min[] = { 0, 0 };
 static int ip_ping_group_range_max[] = { GID_T_MAX, GID_T_MAX };
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int tcp_delack_seg_min = TCP_DELACK_MIN;
 static int tcp_delack_seg_max = 60;
 static int tcp_use_userconfig_min;
@@ -65,6 +66,8 @@ static int ipv4_local_port_range(ctl_table *table, int write,
 	int range[2];
 	ctl_table tmp = {
 =======
+=======
+>>>>>>> v3.18
 
 /* Update system visible IP port range */
 static void set_local_port_range(struct net *net, int range[2])
@@ -85,6 +88,9 @@ static int ipv4_local_port_range(struct ctl_table *table, int write,
 	int ret;
 	int range[2];
 	struct ctl_table tmp = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.data = &range,
 		.maxlen = sizeof(range),
@@ -94,7 +100,12 @@ static int ipv4_local_port_range(struct ctl_table *table, int write,
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inet_get_local_port_range(range, range + 1);
+=======
+	inet_get_local_port_range(net, &range[0], &range[1]);
+
+>>>>>>> v3.18
 =======
 	inet_get_local_port_range(net, &range[0], &range[1]);
 
@@ -106,7 +117,11 @@ static int ipv4_local_port_range(struct ctl_table *table, int write,
 			ret = -EINVAL;
 		else
 <<<<<<< HEAD
+<<<<<<< HEAD
 			set_local_port_range(range);
+=======
+			set_local_port_range(net, range);
+>>>>>>> v3.18
 =======
 			set_local_port_range(net, range);
 >>>>>>> v3.18
@@ -120,6 +135,7 @@ static void inet_get_ping_group_range_table(struct ctl_table *table, kgid_t *low
 {
 	kgid_t *data = table->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int seq;
 	do {
 		seq = read_seqbegin(&sysctl_local_ports.lock);
@@ -128,6 +144,8 @@ static void inet_get_ping_group_range_table(struct ctl_table *table, kgid_t *low
 		*high = data[1];
 	} while (read_seqretry(&sysctl_local_ports.lock, seq));
 =======
+=======
+>>>>>>> v3.18
 	struct net *net =
 		container_of(table->data, struct net, ipv4.ping_group_range.range);
 	unsigned int seq;
@@ -137,6 +155,9 @@ static void inet_get_ping_group_range_table(struct ctl_table *table, kgid_t *low
 		*low = data[0];
 		*high = data[1];
 	} while (read_seqretry(&net->ipv4.ip_local_ports.lock, seq));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -144,6 +165,7 @@ static void inet_get_ping_group_range_table(struct ctl_table *table, kgid_t *low
 static void set_ping_group_range(struct ctl_table *table, kgid_t low, kgid_t high)
 {
 	kgid_t *data = table->data;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	write_seqlock(&sysctl_local_ports.lock);
 	data[0] = low;
@@ -154,6 +176,8 @@ static void set_ping_group_range(struct ctl_table *table, kgid_t low, kgid_t hig
 /* Validate changes from /proc interface. */
 static int ipv4_ping_group_range(ctl_table *table, int write,
 =======
+=======
+>>>>>>> v3.18
 	struct net *net =
 		container_of(table->data, struct net, ipv4.ping_group_range.range);
 	write_seqlock(&net->ipv4.ip_local_ports.lock);
@@ -164,6 +188,9 @@ static int ipv4_ping_group_range(ctl_table *table, int write,
 
 /* Validate changes from /proc interface. */
 static int ipv4_ping_group_range(struct ctl_table *table, int write,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 void __user *buffer,
 				 size_t *lenp, loff_t *ppos)
@@ -173,7 +200,11 @@ static int ipv4_ping_group_range(struct ctl_table *table, int write,
 	gid_t urange[2];
 	kgid_t low, high;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctl_table tmp = {
+=======
+	struct ctl_table tmp = {
+>>>>>>> v3.18
 =======
 	struct ctl_table tmp = {
 >>>>>>> v3.18
@@ -204,6 +235,7 @@ static int ipv4_ping_group_range(struct ctl_table *table, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Validate changes from /proc interface. */
 static int proc_tcp_default_init_rwnd(ctl_table *ctl, int write,
 				      void __user *buffer,
@@ -225,11 +257,16 @@ static int proc_tcp_congestion_control(ctl_table *ctl, int write,
 	char val[TCP_CA_NAME_MAX];
 	ctl_table tbl = {
 =======
+=======
+>>>>>>> v3.18
 static int proc_tcp_congestion_control(struct ctl_table *ctl, int write,
 				       void __user *buffer, size_t *lenp, loff_t *ppos)
 {
 	char val[TCP_CA_NAME_MAX];
 	struct ctl_table tbl = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.data = val,
 		.maxlen = TCP_CA_NAME_MAX,
@@ -245,7 +282,11 @@ static int proc_tcp_congestion_control(struct ctl_table *ctl, int write,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_tcp_available_congestion_control(ctl_table *ctl,
+=======
+static int proc_tcp_available_congestion_control(struct ctl_table *ctl,
+>>>>>>> v3.18
 =======
 static int proc_tcp_available_congestion_control(struct ctl_table *ctl,
 >>>>>>> v3.18
@@ -254,7 +295,11 @@ static int proc_tcp_available_congestion_control(struct ctl_table *ctl,
 						 loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctl_table tbl = { .maxlen = TCP_CA_BUF_MAX, };
+=======
+	struct ctl_table tbl = { .maxlen = TCP_CA_BUF_MAX, };
+>>>>>>> v3.18
 =======
 	struct ctl_table tbl = { .maxlen = TCP_CA_BUF_MAX, };
 >>>>>>> v3.18
@@ -270,7 +315,11 @@ static int proc_tcp_available_congestion_control(struct ctl_table *ctl,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int proc_allowed_congestion_control(ctl_table *ctl,
+=======
+static int proc_allowed_congestion_control(struct ctl_table *ctl,
+>>>>>>> v3.18
 =======
 static int proc_allowed_congestion_control(struct ctl_table *ctl,
 >>>>>>> v3.18
@@ -279,7 +328,11 @@ static int proc_allowed_congestion_control(struct ctl_table *ctl,
 					   loff_t *ppos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctl_table tbl = { .maxlen = TCP_CA_BUF_MAX };
+=======
+	struct ctl_table tbl = { .maxlen = TCP_CA_BUF_MAX };
+>>>>>>> v3.18
 =======
 	struct ctl_table tbl = { .maxlen = TCP_CA_BUF_MAX };
 >>>>>>> v3.18
@@ -297,6 +350,7 @@ static int proc_allowed_congestion_control(struct ctl_table *ctl,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int ipv4_tcp_mem(ctl_table *ctl, int write,
 			   void __user *buffer, size_t *lenp,
@@ -346,11 +400,16 @@ static int proc_tcp_fastopen_key(ctl_table *ctl, int write, void __user *buffer,
 {
 	ctl_table tbl = { .maxlen = (TCP_FASTOPEN_KEY_LENGTH * 2 + 10) };
 =======
+=======
+>>>>>>> v3.18
 static int proc_tcp_fastopen_key(struct ctl_table *ctl, int write,
 				 void __user *buffer, size_t *lenp,
 				 loff_t *ppos)
 {
 	struct ctl_table tbl = { .maxlen = (TCP_FASTOPEN_KEY_LENGTH * 2 + 10) };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct tcp_fastopen_context *ctxt;
 	int ret;
@@ -379,12 +438,18 @@ static int proc_tcp_fastopen_key(struct ctl_table *ctl, int write,
 			goto bad_key;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Generate a dummy secret but don't publish it. This
 		 * is needed so we don't regenerate a new key on the
 		 * first invocation of tcp_fastopen_cookie_gen
 		 */
 		tcp_fastopen_init_key_once(false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tcp_fastopen_reset_cipher(user_key, TCP_FASTOPEN_KEY_LENGTH);
 	}
@@ -437,6 +502,7 @@ static struct ctl_table ipv4_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.procname	= "ip_no_pmtu_disc",
 		.data		= &ipv4_config.no_pmtu_disc,
 		.maxlen		= sizeof(int),
@@ -451,6 +517,8 @@ static struct ctl_table ipv4_table[] = {
 		.proc_handler	= proc_dointvec
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.procname	= "tcp_syn_retries",
@@ -598,6 +666,7 @@ static struct ctl_table ipv4_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.procname	= "ip_local_port_range",
 		.data		= &sysctl_local_ports.range,
 		.maxlen		= sizeof(sysctl_local_ports.range),
@@ -614,6 +683,8 @@ static struct ctl_table ipv4_table[] = {
 	{
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 		.procname	= "igmp_max_memberships",
 		.data		= &sysctl_igmp_max_memberships,
 		.maxlen		= sizeof(int),
@@ -628,7 +699,10 @@ static struct ctl_table ipv4_table[] = {
 		.proc_handler	= proc_dointvec
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_IP_MULTICAST
 	{
 		.procname	= "igmp_qrv",
@@ -639,6 +713,9 @@ static struct ctl_table ipv4_table[] = {
 		.extra1		= &one
 	},
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 		.procname	= "inet_peer_threshold",
@@ -691,7 +768,10 @@ static struct ctl_table ipv4_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.procname	= "tcp_mem",
 		.maxlen		= sizeof(sysctl_tcp_mem),
 		.data		= &sysctl_tcp_mem,
@@ -699,6 +779,9 @@ static struct ctl_table ipv4_table[] = {
 		.proc_handler	= proc_doulongvec_minmax,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.procname	= "tcp_wmem",
 		.data		= &sysctl_tcp_wmem,
@@ -709,7 +792,10 @@ static struct ctl_table ipv4_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		.procname	= "tcp_notsent_lowat",
 		.data		= &sysctl_tcp_notsent_lowat,
 		.maxlen		= sizeof(sysctl_tcp_notsent_lowat),
@@ -717,6 +803,9 @@ static struct ctl_table ipv4_table[] = {
 		.proc_handler	= proc_dointvec,
 	},
 	{
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		.procname	= "tcp_rmem",
 		.data		= &sysctl_tcp_rmem,
@@ -825,6 +914,7 @@ static struct ctl_table ipv4_table[] = {
 		.proc_handler	= proc_dointvec
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_NET_DMA
 	{
 		.procname	= "tcp_dma_copybreak",
@@ -834,6 +924,8 @@ static struct ctl_table ipv4_table[] = {
 		.proc_handler	= proc_dointvec
 	},
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{
@@ -887,6 +979,7 @@ static struct ctl_table ipv4_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.procname	= "tcp_max_ssthresh",
 		.data		= &sysctl_tcp_max_ssthresh,
 		.maxlen		= sizeof(int),
@@ -894,6 +987,8 @@ static struct ctl_table ipv4_table[] = {
 		.proc_handler	= proc_dointvec,
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.procname       = "tcp_thin_linear_timeouts",
@@ -929,12 +1024,15 @@ static struct ctl_table ipv4_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.procname       = "tcp_default_init_rwnd",
 		.data           = &sysctl_tcp_default_init_rwnd,
 		.maxlen         = sizeof(int),
 		.mode           = 0644,
 		.proc_handler   = proc_tcp_default_init_rwnd
 =======
+=======
+>>>>>>> v3.18
 		.procname	= "tcp_autocorking",
 		.data		= &sysctl_tcp_autocorking,
 		.maxlen		= sizeof(int),
@@ -958,6 +1056,9 @@ static struct ctl_table ipv4_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec_minmax,
 		.extra1		= &zero,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -984,6 +1085,7 @@ static struct ctl_table ipv4_table[] = {
 		.extra1		= &one
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{
 		.procname	= "tcp_delack_seg",
 		.data		= &sysctl_tcp_delack_seg,
@@ -1003,6 +1105,8 @@ static struct ctl_table ipv4_table[] = {
 		.extra2		= &tcp_use_userconfig_max,
 	},
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ }
@@ -1054,7 +1158,11 @@ static struct ctl_table ipv4_net_table[] = {
 	{
 		.procname	= "ping_group_range",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.data		= &init_net.ipv4.sysctl_ping_group_range,
+=======
+		.data		= &init_net.ipv4.ping_group_range.range,
+>>>>>>> v3.18
 =======
 		.data		= &init_net.ipv4.ping_group_range.range,
 >>>>>>> v3.18
@@ -1071,11 +1179,14 @@ static struct ctl_table ipv4_net_table[] = {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.procname	= "tcp_mem",
 		.maxlen		= sizeof(init_net.ipv4.sysctl_tcp_mem),
 		.mode		= 0644,
 		.proc_handler	= ipv4_tcp_mem,
 =======
+=======
+>>>>>>> v3.18
 		.procname	= "ip_local_port_range",
 		.maxlen		= sizeof(init_net.ipv4.ip_local_ports.range),
 		.data		= &init_net.ipv4.ip_local_ports.range,
@@ -1109,6 +1220,9 @@ static struct ctl_table ipv4_net_table[] = {
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	{
@@ -1135,6 +1249,11 @@ static __net_init int ipv4_sysctl_init_net(struct net *net)
 	table = ipv4_net_table;
 	if (!net_eq(net, &init_net)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		int i;
+
+>>>>>>> v3.18
 =======
 		int i;
 
@@ -1143,6 +1262,7 @@ static __net_init int ipv4_sysctl_init_net(struct net *net)
 		if (table == NULL)
 			goto err_alloc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		table[0].data =
 			&net->ipv4.sysctl_icmp_echo_ignore_all;
@@ -1176,20 +1296,28 @@ static __net_init int ipv4_sysctl_init_net(struct net *net)
 	tcp_init_mem(net);
 
 =======
+=======
+>>>>>>> v3.18
 		/* Update the variables to point into the current struct net */
 		for (i = 0; i < ARRAY_SIZE(ipv4_net_table) - 1; i++)
 			table[i].data += (void *)net - (void *)&init_net;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	net->ipv4.ipv4_hdr = register_net_sysctl(net, "net/ipv4", table);
 	if (net->ipv4.ipv4_hdr == NULL)
 		goto err_reg;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	net->ipv4.sysctl_local_reserved_ports = kzalloc(65536 / 8, GFP_KERNEL);
 	if (!net->ipv4.sysctl_local_reserved_ports)
 		goto err_ports;
@@ -1198,6 +1326,9 @@ static __net_init int ipv4_sysctl_init_net(struct net *net)
 
 err_ports:
 	unregister_net_sysctl_table(net->ipv4.ipv4_hdr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_reg:
 	if (!net_eq(net, &init_net))
@@ -1211,6 +1342,10 @@ static __net_exit void ipv4_sysctl_exit_net(struct net *net)
 	struct ctl_table *table;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(net->ipv4.sysctl_local_reserved_ports);
+>>>>>>> v3.18
 =======
 	kfree(net->ipv4.sysctl_local_reserved_ports);
 >>>>>>> v3.18
@@ -1228,6 +1363,7 @@ static __init int sysctl_ipv4_init(void)
 {
 	struct ctl_table_header *hdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ctl_table *i;
 
 	for (i = ipv4_table; i->procname; i++) {
@@ -1238,6 +1374,8 @@ static __init int sysctl_ipv4_init(void)
 	}
 	if (!i->procname)
 		return -EINVAL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

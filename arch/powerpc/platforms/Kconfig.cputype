@@ -62,7 +62,11 @@ choice
 	  There are two families of 64 bit PowerPC chips supported.
 	  The most common ones are the desktop and server CPUs
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  (POWER3, RS64, POWER4, POWER5, POWER5+, POWER6, ...)
+=======
+	  (POWER4, POWER5, 970, POWER5+, POWER6, POWER7, POWER8 ...)
+>>>>>>> v3.18
 =======
 	  (POWER4, POWER5, 970, POWER5+, POWER6, POWER7, POWER8 ...)
 >>>>>>> v3.18
@@ -76,6 +80,12 @@ config PPC_BOOK3S_64
 	select PPC_HAVE_PMU_SUPPORT
 	select SYS_SUPPORTS_HUGETLBFS
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select HAVE_ARCH_TRANSPARENT_HUGEPAGE if PPC_64K_PAGES
+	select ARCH_SUPPORTS_NUMA_BALANCING
+	select IRQ_WORK
+>>>>>>> v3.18
 =======
 	select HAVE_ARCH_TRANSPARENT_HUGEPAGE if PPC_64K_PAGES
 	select ARCH_SUPPORTS_NUMA_BALANCING
@@ -103,6 +113,7 @@ choice
 config GENERIC_CPU
 	bool "Generic"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config CELL_CPU
 	bool "Cell Broadband Engine"
@@ -119,6 +130,8 @@ config POWER6_CPU
 config POWER7_CPU
 	bool "POWER7"
 =======
+=======
+>>>>>>> v3.18
 	depends on !CPU_LITTLE_ENDIAN
 
 config CELL_CPU
@@ -154,6 +167,9 @@ config E5500_CPU
 config E6500_CPU
 	bool "Freescale e6500"
 	depends on E500
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endchoice
@@ -172,6 +188,7 @@ config 6xx
 	select PPC_HAVE_PMU_SUPPORT
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config POWER3
 	depends on PPC64 && PPC_BOOK3S
 	def_bool y
@@ -184,6 +201,8 @@ config PPC_A2
 	bool
 	depends on PPC_BOOK3E_64
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config TUNE_CELL
@@ -210,6 +229,10 @@ config PPC_E500MC
 	bool "e500mc Support"
 	select PPC_FPU
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select COMMON_CLK
+>>>>>>> v3.18
 =======
 	select COMMON_CLK
 >>>>>>> v3.18
@@ -286,7 +309,11 @@ config PHYS_64BIT
 config ALTIVEC
 	bool "AltiVec Support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on 6xx || POWER4 || (PPC_E500MC && PPC64)
+=======
+	depends on 6xx || PPC_BOOK3S_64 || (PPC_E500MC && PPC64)
+>>>>>>> v3.18
 =======
 	depends on 6xx || PPC_BOOK3S_64 || (PPC_E500MC && PPC64)
 >>>>>>> v3.18
@@ -306,7 +333,11 @@ config ALTIVEC
 config VSX
 	bool "VSX Support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on POWER4 && ALTIVEC && PPC_FPU
+=======
+	depends on PPC_BOOK3S_64 && ALTIVEC && PPC_FPU
+>>>>>>> v3.18
 =======
 	depends on PPC_BOOK3S_64 && ALTIVEC && PPC_FPU
 >>>>>>> v3.18
@@ -326,7 +357,11 @@ config VSX
 config PPC_ICSWX
 	bool "Support for PowerPC icswx coprocessor instruction"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on POWER4 || PPC_A2
+=======
+	depends on PPC_BOOK3S_64
+>>>>>>> v3.18
 =======
 	depends on PPC_BOOK3S_64
 >>>>>>> v3.18
@@ -348,7 +383,11 @@ config PPC_ICSWX
 config PPC_ICSWX_PID
 	bool "icswx requires direct PID management"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PPC_ICSWX && POWER4
+=======
+	depends on PPC_ICSWX
+>>>>>>> v3.18
 =======
 	depends on PPC_ICSWX
 >>>>>>> v3.18
@@ -369,10 +408,13 @@ config PPC_ICSWX_USE_SIGILL
 	  If in doubt, say N here.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config SPE
 	bool "SPE Support"
 	depends on E200 || (E500 && !PPC_E500MC)
 =======
+=======
+>>>>>>> v3.18
 config SPE_POSSIBLE
 	def_bool y
 	depends on E200 || (E500 && !PPC_E500MC)
@@ -380,6 +422,9 @@ config SPE_POSSIBLE
 config SPE
 	bool "SPE Support"
 	depends on SPE_POSSIBLE
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default y
 	---help---
@@ -469,7 +514,10 @@ config PPC_DOORBELL
 
 endmenu
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 choice
 	prompt "Endianness selection"
@@ -500,4 +548,7 @@ endchoice
 config PPC64_BOOT_WRAPPER
 	def_bool n
 	depends on CPU_LITTLE_ENDIAN
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

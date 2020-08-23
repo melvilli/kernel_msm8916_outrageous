@@ -13,7 +13,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/leds.h>
@@ -650,12 +653,18 @@ static struct attribute_group lm3533_led_attribute_group = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct attribute_group *lm3533_led_attribute_groups[] = {
 	&lm3533_led_attribute_group,
 	NULL
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int lm3533_led_setup(struct lm3533_led *led,
 					struct lm3533_led_platform_data *pdata)
@@ -683,7 +692,11 @@ static int lm3533_led_probe(struct platform_device *pdev)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -709,6 +722,10 @@ static int lm3533_led_probe(struct platform_device *pdev)
 	led->cdev.blink_set = lm3533_led_blink_set;
 	led->cdev.brightness = LED_OFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	led->cdev.groups = lm3533_led_attribute_groups,
+>>>>>>> v3.18
 =======
 	led->cdev.groups = lm3533_led_attribute_groups,
 >>>>>>> v3.18
@@ -736,6 +753,7 @@ static int lm3533_led_probe(struct platform_device *pdev)
 	led->cb.dev = led->cdev.dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = sysfs_create_group(&led->cdev.dev->kobj,
 						&lm3533_led_attribute_group);
 	if (ret < 0) {
@@ -756,6 +774,8 @@ static int lm3533_led_probe(struct platform_device *pdev)
 err_sysfs_remove:
 	sysfs_remove_group(&led->cdev.dev->kobj, &lm3533_led_attribute_group);
 =======
+=======
+>>>>>>> v3.18
 	ret = lm3533_led_setup(led, pdata);
 	if (ret)
 		goto err_unregister;
@@ -766,6 +786,9 @@ err_sysfs_remove:
 
 	return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 err_unregister:
 	led_classdev_unregister(&led->cdev);
@@ -782,7 +805,10 @@ static int lm3533_led_remove(struct platform_device *pdev)
 
 	lm3533_ctrlbank_disable(&led->cb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_group(&led->cdev.dev->kobj, &lm3533_led_attribute_group);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	led_classdev_unregister(&led->cdev);

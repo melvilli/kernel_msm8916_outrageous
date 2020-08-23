@@ -22,7 +22,10 @@ OPTIONS
 --add=::
         Add specified file to the cache.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 -k::
 --kcore::
         Add specified kcore file to the cache. For the current host that is
@@ -36,6 +39,9 @@ OPTIONS
         kcore in the cache (with the same build-id) that has the same modules at
         the same addresses. Use the -v option to see if a copy of kcore is
         actually made.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 -r::
 --remove=::

@@ -7,7 +7,11 @@
  */
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9g20.dtsi"
+=======
+#include "at91sam9g20.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91sam9g20.dtsi"
 >>>>>>> v3.18
@@ -35,11 +39,17 @@
 			clock-frequency = <18432000>;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		main_xtal {
 			clock-frequency = <18432000>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -65,13 +75,19 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			watchdog@fffffd40 {
 				timeout-sec = <15>;
 				atmel,max-heartbeat-sec = <16>;
 				atmel,min-heartbeat-sec = <0>;
 				status = "okay";
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 
@@ -115,7 +131,11 @@
 		led1g {
 			label = "led1:green";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 0 1>;
+=======
+			gpios = <&pioB 0 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 0 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -125,7 +145,11 @@
 		led1r {
 			label = "led1:red";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 1 1>;
+=======
+			gpios = <&pioB 1 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 1 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -135,7 +159,11 @@
 		led2g {
 			label = "led2:green";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 2 1>;
+=======
+			gpios = <&pioB 2 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 2 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -146,7 +174,11 @@
 		led2r {
 			label = "led2:red";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 3 1>;
+=======
+			gpios = <&pioB 3 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 3 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -162,7 +194,11 @@
 		reset {
 			label = "reset";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 30 1>;
+=======
+			gpios = <&pioB 30 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 30 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -173,7 +209,11 @@
 		mode {
 			label = "mode";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gpios = <&pioB 31 1>;
+=======
+			gpios = <&pioB 31 GPIO_ACTIVE_LOW>;
+>>>>>>> v3.18
 =======
 			gpios = <&pioB 31 GPIO_ACTIVE_LOW>;
 >>>>>>> v3.18
@@ -182,7 +222,11 @@
 		};
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> v3.18
 =======
 };
 >>>>>>> v3.18

@@ -198,9 +198,14 @@ static int __init cs553x_init_one(int cs, int mmio, unsigned long adr)
 
 	/* Allocate memory for MTD device structure and private data */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	new_mtd = kmalloc(sizeof(struct mtd_info) + sizeof(struct nand_chip), GFP_KERNEL);
 	if (!new_mtd) {
 		printk(KERN_WARNING "Unable to allocate CS553X NAND MTD device structure.\n");
+=======
+	new_mtd = kzalloc(sizeof(struct mtd_info) + sizeof(struct nand_chip), GFP_KERNEL);
+	if (!new_mtd) {
+>>>>>>> v3.18
 =======
 	new_mtd = kzalloc(sizeof(struct mtd_info) + sizeof(struct nand_chip), GFP_KERNEL);
 	if (!new_mtd) {
@@ -213,10 +218,13 @@ static int __init cs553x_init_one(int cs, int mmio, unsigned long adr)
 	this = (struct nand_chip *)(&new_mtd[1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Initialize structures */
 	memset(new_mtd, 0, sizeof(struct mtd_info));
 	memset(this, 0, sizeof(struct nand_chip));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Link the private data with the MTD structure */

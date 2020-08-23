@@ -34,6 +34,10 @@
 #define CTL_DMA_ENABLE 0xd8
 #define CTL_RESET_SD 0xe0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define CTL_VERSION 0xe2
+>>>>>>> v3.18
 =======
 #define CTL_VERSION 0xe2
 >>>>>>> v3.18

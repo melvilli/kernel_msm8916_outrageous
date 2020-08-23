@@ -25,6 +25,12 @@
 #include <linux/io.h>
 #include <linux/of.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_address.h>
+#include <linux/list.h>
+#include <linux/list_sort.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_address.h>
 #include <linux/list.h>
@@ -43,7 +49,10 @@ struct sram_dev {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct sram_reserve {
 	struct list_head list;
 	u32 start;
@@ -59,12 +68,16 @@ static int sram_reserve_cmp(void *priv, struct list_head *a,
 	return ra->start - rb->start;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int sram_probe(struct platform_device *pdev)
 {
 	void __iomem *virt_base;
 	struct sram_dev *sram;
 	struct resource *res;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long size;
 	int ret;
@@ -80,6 +93,8 @@ static int sram_probe(struct platform_device *pdev)
 		return -EADDRNOTAVAIL;
 
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np = pdev->dev.of_node, *child;
 	unsigned long size, cur_start, cur_size;
 	struct sram_reserve *rblocks, *block;
@@ -96,6 +111,9 @@ static int sram_probe(struct platform_device *pdev)
 
 	size = resource_size(res);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sram = devm_kzalloc(&pdev->dev, sizeof(*sram), GFP_KERNEL);
 	if (!sram)
@@ -112,6 +130,7 @@ static int sram_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = gen_pool_add_virt(sram->pool, (unsigned long)virt_base,
 				res->start, size, -1);
 	if (ret < 0) {
@@ -120,6 +139,8 @@ static int sram_probe(struct platform_device *pdev)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We need an additional block to mark the end of the memory region
 	 * after the reserved blocks from the dt are processed.
@@ -208,6 +229,9 @@ static int sram_probe(struct platform_device *pdev)
 
 	kfree(rblocks);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	platform_set_drvdata(pdev, sram);
 
@@ -215,7 +239,10 @@ static int sram_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 err_chunks:
 	kfree(rblocks);
@@ -223,6 +250,9 @@ err_alloc:
 	if (sram->clk)
 		clk_disable_unprepare(sram->clk);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -234,8 +264,11 @@ static int sram_remove(struct platform_device *pdev)
 		dev_dbg(&pdev->dev, "removed while SRAM allocated\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gen_pool_destroy(sram->pool);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sram->clk)

@@ -43,6 +43,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -71,16 +76,22 @@
 #include <linux/highmem.h>
 #include <linux/syscalls.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/capability.h>
 #include <linux/fs_struct.h>
 #include <linux/compat.h>
 #include <linux/uaccess.h>
 =======
+=======
+>>>>>>> v3.18
 #include <asm/syscall.h>
 #include <linux/capability.h>
 #include <linux/fs_struct.h>
 #include <linux/compat.h>
 #include <linux/ctype.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #include "audit.h"
@@ -91,17 +102,23 @@
 #define AUDITSC_FAILURE 2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* no execve audit message should be longer than this (userspace limits),
  * see the note near the top of audit_log_execve_info() about this value */
 #define MAX_EXECVE_AUDIT_LEN 7500
 
 =======
+=======
+>>>>>>> v3.18
 /* no execve audit message should be longer than this (userspace limits) */
 #define MAX_EXECVE_AUDIT_LEN 7500
 
 /* max length to print of cmdline/proctitle value during audit */
 #define MAX_PROCTITLE_AUDIT_LEN 128
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* number of audit rules */
 int audit_n_rules;
@@ -120,6 +137,7 @@ struct audit_aux_data {
 #define AUDIT_AUX_PIDS	16
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct audit_aux_data_execve {
 	struct audit_aux_data	d;
 	int argc;
@@ -127,6 +145,8 @@ struct audit_aux_data_execve {
 	struct mm_struct *mm;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct audit_aux_data_pids {
@@ -149,6 +169,7 @@ struct audit_aux_data_bprm_fcaps {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct audit_aux_data_capset {
 	struct audit_aux_data	d;
 	pid_t			pid;
@@ -157,11 +178,14 @@ struct audit_aux_data_capset {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct audit_tree_refs {
 	struct audit_tree_refs *next;
 	struct audit_chunk *c[31];
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static inline int open_arg(int flags, int mask)
 {
@@ -171,6 +195,8 @@ static inline int open_arg(int flags, int mask)
 	return n & mask;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int audit_match_perm(struct audit_context *ctx, int mask)
@@ -498,24 +524,34 @@ static int audit_filter_rules(struct task_struct *tsk,
 		struct audit_names *n;
 		int result = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		switch (f->type) {
 		case AUDIT_PID:
 			result = audit_comparator(tsk->pid, f->op, f->val);
 =======
+=======
+>>>>>>> v3.18
 		pid_t pid;
 
 		switch (f->type) {
 		case AUDIT_PID:
 			pid = task_pid_nr(tsk);
 			result = audit_comparator(pid, f->op, f->val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 		case AUDIT_PPID:
 			if (ctx) {
 				if (!ctx->ppid)
 <<<<<<< HEAD
+<<<<<<< HEAD
 					ctx->ppid = sys_getppid();
+=======
+					ctx->ppid = task_ppid_nr(tsk);
+>>>>>>> v3.18
 =======
 					ctx->ppid = task_ppid_nr(tsk);
 >>>>>>> v3.18
@@ -613,7 +649,11 @@ static int audit_filter_rules(struct task_struct *tsk,
 		case AUDIT_INODE:
 			if (name)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				result = (name->ino == f->val);
+=======
+				result = audit_comparator(name->ino, f->op, f->val);
+>>>>>>> v3.18
 =======
 				result = audit_comparator(name->ino, f->op, f->val);
 >>>>>>> v3.18
@@ -878,7 +918,12 @@ void audit_filter_inodes(struct task_struct *tsk, struct audit_context *ctx)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline struct audit_context *audit_get_context(struct task_struct *tsk,
+=======
+/* Transfer the audit context pointer to the caller, clearing it in the tsk's struct */
+static inline struct audit_context *audit_take_context(struct task_struct *tsk,
+>>>>>>> v3.18
 =======
 /* Transfer the audit context pointer to the caller, clearing it in the tsk's struct */
 static inline struct audit_context *audit_take_context(struct task_struct *tsk,
@@ -920,7 +965,10 @@ static inline struct audit_context *audit_take_context(struct task_struct *tsk,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void audit_proctitle_free(struct audit_context *context)
 {
 	kfree(context->proctitle.value);
@@ -928,6 +976,9 @@ static inline void audit_proctitle_free(struct audit_context *context)
 	context->proctitle.len = 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void audit_free_names(struct audit_context *context)
 {
@@ -938,10 +989,16 @@ static inline void audit_free_names(struct audit_context *context)
 		int i = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s:%d(:%d): major=%d in_syscall=%d"
 		       " name_count=%d put_count=%d"
 		       " ino_count=%d [NOT freeing]\n",
 		       __FILE__, __LINE__,
+=======
+		pr_err("%s:%d(:%d): major=%d in_syscall=%d"
+		       " name_count=%d put_count=%d ino_count=%d"
+		       " [NOT freeing]\n", __FILE__, __LINE__,
+>>>>>>> v3.18
 =======
 		pr_err("%s:%d(:%d): major=%d in_syscall=%d"
 		       " name_count=%d put_count=%d ino_count=%d"
@@ -952,8 +1009,13 @@ static inline void audit_free_names(struct audit_context *context)
 		       context->ino_count);
 		list_for_each_entry(n, &context->names_list, list) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "names[%d] = %p = %s\n", i++,
 			       n->name, n->name->name ?: "(null)");
+=======
+			pr_err("names[%d] = %p = %s\n", i++, n->name,
+			       n->name->name ?: "(null)");
+>>>>>>> v3.18
 =======
 			pr_err("names[%d] = %p = %s\n", i++, n->name,
 			       n->name->name ?: "(null)");
@@ -1029,13 +1091,19 @@ int audit_alloc(struct task_struct *tsk)
 
 	state = audit_filter_task(tsk, &key);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (state == AUDIT_DISABLED)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (state == AUDIT_DISABLED) {
 		clear_tsk_thread_flag(tsk, TIF_SYSCALL_AUDIT);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!(context = audit_alloc_context(state))) {
@@ -1059,6 +1127,10 @@ static inline void audit_free_context(struct audit_context *context)
 	kfree(context->filterkey);
 	kfree(context->sockaddr);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	audit_proctitle_free(context);
+>>>>>>> v3.18
 =======
 	audit_proctitle_free(context);
 >>>>>>> v3.18
@@ -1097,6 +1169,7 @@ static int audit_log_pid_context(struct audit_context *context, pid_t pid,
 	return rc;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void audit_log_execve_info(struct audit_context *context,
 				  struct audit_buffer **ab,
@@ -1277,6 +1350,8 @@ static void audit_log_execve_info(struct audit_context *context,
 out:
 	kfree(buf_head);
 =======
+=======
+>>>>>>> v3.18
 /*
  * to_send and len_sent accounting are very loose estimates.  We aren't
  * really worried about a hard cap to MAX_EXECVE_AUDIT_LEN so much as being
@@ -1456,6 +1531,9 @@ static void audit_log_execve_info(struct audit_context *context,
 		p += len;
 	}
 	kfree(buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1553,8 +1631,11 @@ static void show_special(struct audit_context *context, int *call_panic)
 				 context->mmap.flags);
 		break; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
+=======
+>>>>>>> v3.18
 	case AUDIT_EXECVE: {
 		audit_log_execve_info(context, &ab);
 		break; }
@@ -1612,6 +1693,9 @@ static void audit_log_proctitle(struct task_struct *tsk,
 	len = context->proctitle.len;
 out:
 	audit_log_n_untrustedstring(ab, msg, len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	audit_log_end(ab);
 }
@@ -1659,11 +1743,14 @@ static void audit_log_exit(struct audit_context *context, struct task_struct *ts
 		switch (aux->type) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case AUDIT_EXECVE: {
 			struct audit_aux_data_execve *axi = (void *)aux;
 			audit_log_execve_info(context, &ab, axi);
 			break; }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		case AUDIT_BPRM_FCAPS: {
@@ -1742,6 +1829,11 @@ static void audit_log_exit(struct audit_context *context, struct task_struct *ts
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	audit_log_proctitle(tsk, context);
+
+>>>>>>> v3.18
 =======
 	audit_log_proctitle(tsk, context);
 
@@ -1765,7 +1857,11 @@ void __audit_free(struct task_struct *tsk)
 	struct audit_context *context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	context = audit_get_context(tsk, 0, 0);
+=======
+	context = audit_take_context(tsk, 0, 0);
+>>>>>>> v3.18
 =======
 	context = audit_take_context(tsk, 0, 0);
 >>>>>>> v3.18
@@ -1788,7 +1884,10 @@ void __audit_free(struct task_struct *tsk)
 /**
  * audit_syscall_entry - fill in an audit record at syscall entry
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @arch: architecture type
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @major: major syscall type (function)
@@ -1806,9 +1905,14 @@ void __audit_free(struct task_struct *tsk)
  * be written).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __audit_syscall_entry(int arch, int major,
 			 unsigned long a1, unsigned long a2,
 			 unsigned long a3, unsigned long a4)
+=======
+void __audit_syscall_entry(int major, unsigned long a1, unsigned long a2,
+			   unsigned long a3, unsigned long a4)
+>>>>>>> v3.18
 =======
 void __audit_syscall_entry(int major, unsigned long a1, unsigned long a2,
 			   unsigned long a3, unsigned long a4)
@@ -1827,7 +1931,11 @@ void __audit_syscall_entry(int major, unsigned long a1, unsigned long a2,
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	context->arch	    = arch;
+=======
+	context->arch	    = syscall_get_arch();
+>>>>>>> v3.18
 =======
 	context->arch	    = syscall_get_arch();
 >>>>>>> v3.18
@@ -1875,7 +1983,11 @@ void __audit_syscall_exit(int success, long return_code)
 		success = AUDITSC_FAILURE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	context = audit_get_context(tsk, success, return_code);
+=======
+	context = audit_take_context(tsk, success, return_code);
+>>>>>>> v3.18
 =======
 	context = audit_take_context(tsk, success, return_code);
 >>>>>>> v3.18
@@ -1929,7 +2041,11 @@ static inline void handle_one(const struct inode *inode)
 		return;
 	if (unlikely(!grow_tree_refs(context))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING "out of memory, audit has lost a tree reference\n");
+=======
+		pr_warn("out of memory, audit has lost a tree reference\n");
+>>>>>>> v3.18
 =======
 		pr_warn("out of memory, audit has lost a tree reference\n");
 >>>>>>> v3.18
@@ -1992,8 +2108,12 @@ retry:
 		}
 		/* too bad */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_WARNING
 			"out of memory, audit has lost a tree reference\n");
+=======
+		pr_warn("out of memory, audit has lost a tree reference\n");
+>>>>>>> v3.18
 =======
 		pr_warn("out of memory, audit has lost a tree reference\n");
 >>>>>>> v3.18
@@ -2069,7 +2189,11 @@ void __audit_getname(struct filename *name)
 	if (!context->in_syscall) {
 #if AUDIT_DEBUG == 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s:%d(:%d): ignoring getname(%p)\n",
+=======
+		pr_err("%s:%d(:%d): ignoring getname(%p)\n",
+>>>>>>> v3.18
 =======
 		pr_err("%s:%d(:%d): ignoring getname(%p)\n",
 >>>>>>> v3.18
@@ -2110,9 +2234,15 @@ void audit_putname(struct filename *name)
 
 	BUG_ON(!context);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!context->in_syscall) {
 #if AUDIT_DEBUG == 2
 		printk(KERN_ERR "%s:%d(:%d): final_putname(%p)\n",
+=======
+	if (!name->aname || !context->in_syscall) {
+#if AUDIT_DEBUG == 2
+		pr_err("%s:%d(:%d): final_putname(%p)\n",
+>>>>>>> v3.18
 =======
 	if (!name->aname || !context->in_syscall) {
 #if AUDIT_DEBUG == 2
@@ -2125,8 +2255,13 @@ void audit_putname(struct filename *name)
 
 			list_for_each_entry(n, &context->names_list, list)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk(KERN_ERR "name[%d] = %p = %s\n", i++,
 				       n->name, n->name->name ?: "(null)");
+=======
+				pr_err("name[%d] = %p = %s\n", i++, n->name,
+				       n->name->name ?: "(null)");
+>>>>>>> v3.18
 =======
 				pr_err("name[%d] = %p = %s\n", i++, n->name,
 				       n->name->name ?: "(null)");
@@ -2140,9 +2275,14 @@ void audit_putname(struct filename *name)
 		++context->put_count;
 		if (context->put_count > context->name_count) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk(KERN_ERR "%s:%d(:%d): major=%d"
 			       " in_syscall=%d putname(%p) name_count=%d"
 			       " put_count=%d\n",
+=======
+			pr_err("%s:%d(:%d): major=%d in_syscall=%d putname(%p)"
+			       " name_count=%d put_count=%d\n",
+>>>>>>> v3.18
 =======
 			pr_err("%s:%d(:%d): major=%d in_syscall=%d putname(%p)"
 			       " name_count=%d put_count=%d\n",
@@ -2354,7 +2494,10 @@ int auditsc_get_stamp(struct audit_context *ctx,
 static atomic_t session_id = ATOMIC_INIT(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int audit_set_loginuid_perm(kuid_t loginuid)
 {
 	/* if we are unset, we don't need privs */
@@ -2396,6 +2539,9 @@ static void audit_log_set_loginuid(kuid_t koldloginuid, kuid_t kloginuid,
 	audit_log_end(ab);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * audit_set_loginuid - set current task's audit_context loginuid
@@ -2408,6 +2554,7 @@ static void audit_log_set_loginuid(kuid_t koldloginuid, kuid_t kloginuid,
 int audit_set_loginuid(kuid_t loginuid)
 {
 	struct task_struct *task = current;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct audit_context *context = task->audit_context;
 	unsigned int sessionid;
@@ -2441,6 +2588,8 @@ int audit_set_loginuid(kuid_t loginuid)
 	task->loginuid = loginuid;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int oldsessionid, sessionid = (unsigned int)-1;
 	kuid_t oldloginuid;
 	int rc;
@@ -2461,6 +2610,9 @@ int audit_set_loginuid(kuid_t loginuid)
 out:
 	audit_log_set_loginuid(oldloginuid, loginuid, oldsessionid, sessionid, rc);
 	return rc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2583,6 +2735,7 @@ void __audit_ipc_set_perm(unsigned long qbytes, uid_t uid, gid_t gid, umode_t mo
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __audit_bprm(struct linux_binprm *bprm)
 {
 	struct audit_aux_data_execve *ax;
@@ -2600,12 +2753,17 @@ int __audit_bprm(struct linux_binprm *bprm)
 	context->aux = (void *)ax;
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 void __audit_bprm(struct linux_binprm *bprm)
 {
 	struct audit_context *context = current->audit_context;
 
 	context->type = AUDIT_EXECVE;
 	context->execve.argc = bprm->argc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -2669,7 +2827,11 @@ void __audit_ptrace(struct task_struct *t)
 	struct audit_context *context = current->audit_context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	context->target_pid = t->pid;
+=======
+	context->target_pid = task_pid_nr(t);
+>>>>>>> v3.18
 =======
 	context->target_pid = task_pid_nr(t);
 >>>>>>> v3.18
@@ -2698,7 +2860,11 @@ int __audit_signal_info(int sig, struct task_struct *t)
 	if (audit_pid && t->tgid == audit_pid) {
 		if (sig == SIGTERM || sig == SIGHUP || sig == SIGUSR1 || sig == SIGUSR2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			audit_sig_pid = tsk->pid;
+=======
+			audit_sig_pid = task_pid_nr(tsk);
+>>>>>>> v3.18
 =======
 			audit_sig_pid = task_pid_nr(tsk);
 >>>>>>> v3.18
@@ -2716,7 +2882,11 @@ int __audit_signal_info(int sig, struct task_struct *t)
 	 * in audit_context */
 	if (!ctx->target_pid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ctx->target_pid = t->tgid;
+=======
+		ctx->target_pid = task_tgid_nr(t);
+>>>>>>> v3.18
 =======
 		ctx->target_pid = task_tgid_nr(t);
 >>>>>>> v3.18
@@ -2741,7 +2911,11 @@ int __audit_signal_info(int sig, struct task_struct *t)
 	BUG_ON(axp->pid_count >= AUDIT_AUX_PIDS);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	axp->target_pid[axp->pid_count] = t->tgid;
+=======
+	axp->target_pid[axp->pid_count] = task_tgid_nr(t);
+>>>>>>> v3.18
 =======
 	axp->target_pid[axp->pid_count] = task_tgid_nr(t);
 >>>>>>> v3.18
@@ -2804,6 +2978,7 @@ int __audit_log_bprm_fcaps(struct linux_binprm *bprm,
 /**
  * __audit_log_capset - store information about the arguments to the capset syscall
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pid: target pid of the capset call
  * @new: the new credentials
  * @old: the old (current) credentials
@@ -2817,6 +2992,8 @@ void __audit_log_capset(pid_t pid,
 	struct audit_context *context = current->audit_context;
 	context->capset.pid = pid;
 =======
+=======
+>>>>>>> v3.18
  * @new: the new credentials
  * @old: the old (current) credentials
  *
@@ -2827,6 +3004,9 @@ void __audit_log_capset(const struct cred *new, const struct cred *old)
 {
 	struct audit_context *context = current->audit_context;
 	context->capset.pid = task_pid_nr(current);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	context->capset.cap.effective   = new->cap_effective;
 	context->capset.cap.inheritable = new->cap_effective;
@@ -2848,6 +3028,11 @@ static void audit_log_task(struct audit_buffer *ab)
 	kgid_t gid;
 	unsigned int sessionid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct mm_struct *mm = current->mm;
+	char comm[sizeof(current->comm)];
+>>>>>>> v3.18
 =======
 	struct mm_struct *mm = current->mm;
 	char comm[sizeof(current->comm)];
@@ -2864,6 +3049,7 @@ static void audit_log_task(struct audit_buffer *ab)
 			 sessionid);
 	audit_log_task_context(ab);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_log_format(ab, " pid=%d comm=", current->pid);
 	audit_log_untrustedstring(ab, current->comm);
 }
@@ -2876,6 +3062,8 @@ static void audit_log_abend(struct audit_buffer *ab, char *reason, long signr)
 	audit_log_format(ab, " sig=%ld", signr);
 }
 =======
+=======
+>>>>>>> v3.18
 	audit_log_format(ab, " pid=%d comm=", task_pid_nr(current));
 	audit_log_untrustedstring(ab, get_task_comm(comm, current));
 	if (mm) {
@@ -2887,6 +3075,9 @@ static void audit_log_abend(struct audit_buffer *ab, char *reason, long signr)
 		audit_log_format(ab, " exe=(null)");
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * audit_core_dumps - record information about processes that end abnormally
@@ -2909,7 +3100,12 @@ void audit_core_dumps(long signr)
 	if (unlikely(!ab))
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_log_abend(ab, "memory violation", signr);
+=======
+	audit_log_task(ab);
+	audit_log_format(ab, " sig=%ld", signr);
+>>>>>>> v3.18
 =======
 	audit_log_task(ab);
 	audit_log_format(ab, " sig=%ld", signr);
@@ -2926,11 +3122,17 @@ void __audit_seccomp(unsigned long syscall, long signr, int code)
 		return;
 	audit_log_task(ab);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_log_format(ab, " sig=%ld", signr);
 	audit_log_format(ab, " syscall=%ld", syscall);
 	audit_log_format(ab, " compat=%d", is_compat_task());
 	audit_log_format(ab, " ip=0x%lx", KSTK_EIP(current));
 	audit_log_format(ab, " code=0x%x", code);
+=======
+	audit_log_format(ab, " sig=%ld arch=%x syscall=%ld compat=%d ip=0x%lx code=0x%x",
+			 signr, syscall_get_arch(), syscall, is_compat_task(),
+			 KSTK_EIP(current), code);
+>>>>>>> v3.18
 =======
 	audit_log_format(ab, " sig=%ld arch=%x syscall=%ld compat=%d ip=0x%lx code=0x%x",
 			 signr, syscall_get_arch(), syscall, is_compat_task(),

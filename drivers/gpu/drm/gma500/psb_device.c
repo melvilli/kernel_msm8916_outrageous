@@ -26,7 +26,12 @@
 #include "psb_intel_reg.h"
 #include "intel_bios.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+#include "psb_device.h"
+#include "gma_device.h"
+>>>>>>> v3.18
 =======
 #include "psb_device.h"
 #include "gma_device.h"
@@ -263,6 +268,7 @@ static int psb_power_up(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void psb_get_core_freq(struct drm_device *dev)
 {
 	uint32_t clock;
@@ -302,6 +308,8 @@ static void psb_get_core_freq(struct drm_device *dev)
 	}
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Poulsbo */
@@ -361,7 +369,11 @@ static int psb_chip_setup(struct drm_device *dev)
 	struct drm_psb_private *dev_priv = dev->dev_private;
 	dev_priv->regmap = psb_regmap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	psb_get_core_freq(dev);
+=======
+	gma_get_core_freq(dev);
+>>>>>>> v3.18
 =======
 	gma_get_core_freq(dev);
 >>>>>>> v3.18
@@ -386,6 +398,10 @@ const struct psb_ops psb_chip_ops = {
 	.hdmi_mask = (1 << 0),
 	.lvds_mask = (1 << 1),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.sdvo_mask = (1 << 0),
+>>>>>>> v3.18
 =======
 	.sdvo_mask = (1 << 0),
 >>>>>>> v3.18
@@ -397,6 +413,10 @@ const struct psb_ops psb_chip_ops = {
 	.crtc_helper = &psb_intel_helper_funcs,
 	.crtc_funcs = &psb_intel_crtc_funcs,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.clock_funcs = &psb_clock_funcs,
+>>>>>>> v3.18
 =======
 	.clock_funcs = &psb_clock_funcs,
 >>>>>>> v3.18

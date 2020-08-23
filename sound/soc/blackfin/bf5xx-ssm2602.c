@@ -41,7 +41,10 @@
 #include "../codecs/ssm2602.h"
 #include "bf5xx-sport.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "bf5xx-i2s-pcm.h"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

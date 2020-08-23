@@ -26,6 +26,10 @@
 #include <linux/kernel.h>
 #include <linux/enclosure.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 =======
 #include <asm/unaligned.h>
 >>>>>>> v3.18
@@ -75,7 +79,10 @@ static int ses_recv_diag(struct scsi_device *sdev, int page_code,
 			 void *buf, int bufflen)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char cmd[] = {
@@ -86,6 +93,7 @@ static int ses_recv_diag(struct scsi_device *sdev, int page_code,
 		bufflen & 0xff,
 		0
 	};
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned char recv_page_code;
 
@@ -107,6 +115,11 @@ static int ses_recv_diag(struct scsi_device *sdev, int page_code,
 		    page_code, recv_page_code);
 
 	return -EINVAL;
+=======
+
+	return scsi_execute_req(sdev, cmd, DMA_FROM_DEVICE, buf, bufflen,
+				NULL, SES_TIMEOUT, SES_RETRIES, NULL);
+>>>>>>> v3.18
 =======
 
 	return scsi_execute_req(sdev, cmd, DMA_FROM_DEVICE, buf, bufflen,
@@ -468,6 +481,7 @@ static void ses_enclosure_data_process(struct enclosure_device *edev,
 				desc_ptr += len;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (addl_desc_ptr &&
 			    /* only find additional descriptions for specific devices */
 			    (type_ptr[0] == ENCLOSURE_COMPONENT_DEVICE ||
@@ -477,6 +491,9 @@ static void ses_enclosure_data_process(struct enclosure_device *edev,
 			     type_ptr[0] == ENCLOSURE_COMPONENT_SCSI_TARGET_PORT ||
 			     type_ptr[0] == ENCLOSURE_COMPONENT_SCSI_INITIATOR_PORT ||
 			     type_ptr[0] == ENCLOSURE_COMPONENT_CONTROLLER_ELECTRONICS))
+=======
+			if (addl_desc_ptr)
+>>>>>>> v3.18
 =======
 			if (addl_desc_ptr)
 >>>>>>> v3.18
@@ -492,9 +509,13 @@ static void ses_match_to_enclosure(struct enclosure_device *edev,
 				   struct scsi_device *sdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *buf;
 	unsigned char *desc;
 	unsigned int vpd_len;
+=======
+	unsigned char *desc;
+>>>>>>> v3.18
 =======
 	unsigned char *desc;
 >>>>>>> v3.18
@@ -502,6 +523,7 @@ static void ses_match_to_enclosure(struct enclosure_device *edev,
 		.addr = 0,
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	buf = kmalloc(INIT_ALLOC_SIZE, GFP_KERNEL);
 	if (!buf || scsi_get_vpd_page(sdev, 0x83, buf, INIT_ALLOC_SIZE))
@@ -518,6 +540,8 @@ static void ses_match_to_enclosure(struct enclosure_device *edev,
 	desc = buf + 4;
 	while (desc < buf + vpd_len) {
 =======
+=======
+>>>>>>> v3.18
 	ses_enclosure_data_process(edev, to_scsi_device(edev->edev.parent), 0);
 
 	if (!sdev->vpd_pg83_len)
@@ -525,6 +549,9 @@ static void ses_match_to_enclosure(struct enclosure_device *edev,
 
 	desc = sdev->vpd_pg83 + 4;
 	while (desc < sdev->vpd_pg83 + sdev->vpd_pg83_len) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		enum scsi_protocol proto = desc[0] >> 4;
 		u8 code_set = desc[0] & 0x0f;
@@ -535,6 +562,7 @@ static void ses_match_to_enclosure(struct enclosure_device *edev,
 
 		if (piv && code_set == 1 && assoc == 1
 		    && proto == SCSI_PROTOCOL_SAS && type == 3 && len == 8)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			efd.addr = (u64)desc[4] << 56 |
 				(u64)desc[5] << 48 |
@@ -556,6 +584,8 @@ static void ses_match_to_enclosure(struct enclosure_device *edev,
  free:
 	kfree(buf);
 =======
+=======
+>>>>>>> v3.18
 			efd.addr = get_unaligned_be64(&desc[4]);
 
 		desc += len + 4;
@@ -565,6 +595,9 @@ static void ses_match_to_enclosure(struct enclosure_device *edev,
 
 		enclosure_for_each_device(ses_enclosure_find_by_addr, &efd);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

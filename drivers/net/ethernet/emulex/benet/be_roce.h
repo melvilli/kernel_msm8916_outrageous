@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2005 - 2013 Emulex
+=======
+ * Copyright (C) 2005 - 2014 Emulex
+>>>>>>> v3.18
 =======
  * Copyright (C) 2005 - 2014 Emulex
 >>>>>>> v3.18
@@ -26,6 +30,11 @@
 #include <linux/netdevice.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define BE_ROCE_ABI_VERSION	1
+
+>>>>>>> v3.18
 =======
 #define BE_ROCE_ABI_VERSION	1
 
@@ -39,7 +48,11 @@ enum be_interrupt_mode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_ROCE_MSIX_VECTORS   16
+=======
+#define MAX_MSIX_VECTORS		32
+>>>>>>> v3.18
 =======
 #define MAX_MSIX_VECTORS		32
 >>>>>>> v3.18
@@ -59,7 +72,11 @@ struct be_dev_info {
 		int num_vectors;
 		int start_vector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		u32 vector_list[MAX_ROCE_MSIX_VECTORS];
+=======
+		u32 vector_list[MAX_MSIX_VECTORS];
+>>>>>>> v3.18
 =======
 		u32 vector_list[MAX_MSIX_VECTORS];
 >>>>>>> v3.18
@@ -70,6 +87,10 @@ struct be_dev_info {
 struct ocrdma_driver {
 	unsigned char name[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32 be_abi_version;
+>>>>>>> v3.18
 =======
 	u32 be_abi_version;
 >>>>>>> v3.18
@@ -81,7 +102,12 @@ struct ocrdma_driver {
 enum {
 	BE_DEV_UP	= 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BE_DEV_DOWN	= 1
+=======
+	BE_DEV_DOWN	= 1,
+	BE_DEV_SHUTDOWN = 2
+>>>>>>> v3.18
 =======
 	BE_DEV_DOWN	= 1,
 	BE_DEV_SHUTDOWN = 2

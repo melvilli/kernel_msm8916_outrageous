@@ -571,7 +571,10 @@ int radio_tea5777_init(struct radio_tea5777 *tea, struct module *owner)
 	tea->fops.owner = owner;
 	tea->vd.fops = &tea->fops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &tea->vd.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

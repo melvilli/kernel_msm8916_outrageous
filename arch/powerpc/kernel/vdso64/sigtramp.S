@@ -143,7 +143,10 @@ V_FUNCTION_END(__kernel_sigtramp_rt64)
 #define CRSIZE	4
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* Offset of CR reg within a full word. */
 #ifdef __LITTLE_ENDIAN__
 #define CROFF 0
@@ -151,6 +154,9 @@ V_FUNCTION_END(__kernel_sigtramp_rt64)
 #define CROFF (RSIZE - CRSIZE)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* This is the offset of the VMX reg pointer.  */
 #define VREGS	48*RSIZE+33*8
@@ -192,8 +198,11 @@ V_FUNCTION_END(__kernel_sigtramp_rt64)
   rsave (67, 32*RSIZE);		/* ap, used as temp for nip */		\
   rsave (65, 36*RSIZE);		/* lr */				\
 <<<<<<< HEAD
+<<<<<<< HEAD
   rsave (70, 38*RSIZE + (RSIZE - CRSIZE)) /* cr */
 =======
+=======
+>>>>>>> v3.18
   rsave (68, 38*RSIZE + CROFF);	/* cr fields */				\
   rsave (69, 38*RSIZE + CROFF);						\
   rsave (70, 38*RSIZE + CROFF);						\
@@ -202,6 +211,9 @@ V_FUNCTION_END(__kernel_sigtramp_rt64)
   rsave (73, 38*RSIZE + CROFF);						\
   rsave (74, 38*RSIZE + CROFF);						\
   rsave (75, 38*RSIZE + CROFF)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Describe where the FP regs are saved.  */

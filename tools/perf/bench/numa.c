@@ -430,7 +430,11 @@ static int parse_cpu_list(const char *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void parse_setup_cpu_list(void)
+=======
+static int parse_setup_cpu_list(void)
+>>>>>>> v3.18
 =======
 static int parse_setup_cpu_list(void)
 >>>>>>> v3.18
@@ -441,7 +445,11 @@ static int parse_setup_cpu_list(void)
 
 	if (!g->p.cpu_list_str)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -509,15 +517,21 @@ static int parse_setup_cpu_list(void)
 		dprintf("CPUs: %d_%d-%d#%dx%d\n", bind_cpu_0, bind_len, bind_cpu_1, step, mul);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(bind_cpu_0 < 0 || bind_cpu_0 >= g->p.nr_cpus);
 		BUG_ON(bind_cpu_1 < 0 || bind_cpu_1 >= g->p.nr_cpus);
 =======
+=======
+>>>>>>> v3.18
 		if (bind_cpu_0 >= g->p.nr_cpus || bind_cpu_1 >= g->p.nr_cpus) {
 			printf("\nTest not applicable, system has only %d CPUs.\n", g->p.nr_cpus);
 			return -1;
 		}
 
 		BUG_ON(bind_cpu_0 < 0 || bind_cpu_1 < 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		BUG_ON(bind_cpu_0 > bind_cpu_1);
 
@@ -559,6 +573,10 @@ out:
 
 	free(str0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -583,7 +601,11 @@ static int parse_node_list(const char *arg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void parse_setup_node_list(void)
+=======
+static int parse_setup_node_list(void)
+>>>>>>> v3.18
 =======
 static int parse_setup_node_list(void)
 >>>>>>> v3.18
@@ -594,7 +616,11 @@ static int parse_setup_node_list(void)
 
 	if (!g->p.node_list_str)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return;
+=======
+		return 0;
+>>>>>>> v3.18
 =======
 		return 0;
 >>>>>>> v3.18
@@ -649,15 +675,21 @@ static int parse_setup_node_list(void)
 		dprintf("NODEs: %d-%d #%d\n", bind_node_0, bind_node_1, step);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(bind_node_0 < 0 || bind_node_0 >= g->p.nr_nodes);
 		BUG_ON(bind_node_1 < 0 || bind_node_1 >= g->p.nr_nodes);
 =======
+=======
+>>>>>>> v3.18
 		if (bind_node_0 >= g->p.nr_nodes || bind_node_1 >= g->p.nr_nodes) {
 			printf("\nTest not applicable, system has only %d nodes.\n", g->p.nr_nodes);
 			return -1;
 		}
 
 		BUG_ON(bind_node_0 < 0 || bind_node_1 < 0);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		BUG_ON(bind_node_0 > bind_node_1);
 
@@ -690,6 +722,10 @@ out:
 
 	free(str0);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -1153,7 +1189,11 @@ static void *worker_thread(void *__tdata)
 		if (g->p.nr_secs) {
 			timersub(&stop, &start0, &diff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (diff.tv_sec >= g->p.nr_secs) {
+=======
+			if ((u32)diff.tv_sec >= g->p.nr_secs) {
+>>>>>>> v3.18
 =======
 			if ((u32)diff.tv_sec >= g->p.nr_secs) {
 >>>>>>> v3.18
@@ -1204,7 +1244,11 @@ static void *worker_thread(void *__tdata)
 
 			if (details >= 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printf(" #%2d / %2d: %14.2lf nsecs/op [val: %016lx]\n",
+=======
+				printf(" #%2d / %2d: %14.2lf nsecs/op [val: %016"PRIx64"]\n",
+>>>>>>> v3.18
 =======
 				printf(" #%2d / %2d: %14.2lf nsecs/op [val: %016"PRIx64"]\n",
 >>>>>>> v3.18
@@ -1407,8 +1451,13 @@ static int init(void)
 
 	tprintf("#\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	parse_setup_cpu_list();
 	parse_setup_node_list();
+=======
+	if (parse_setup_cpu_list() || parse_setup_node_list())
+		return -1;
+>>>>>>> v3.18
 =======
 	if (parse_setup_cpu_list() || parse_setup_node_list())
 		return -1;
@@ -1639,12 +1688,18 @@ static void init_params(struct params *p, const char *name, int argc, const char
 	p->nr_loops			= -1;
 	p->init_random			= true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	p->mb_global_str		= "1";
 	p->nr_proc			= 1;
 	p->nr_threads			= 1;
 	p->nr_secs			= 5;
 	p->run_all			= argc == 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1664,7 +1719,10 @@ static int run_bench_numa(const char *name, const char **argv)
 
 err:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	usage_with_options(numa_usage, options);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return -1;
@@ -1768,8 +1826,12 @@ static int bench_all(void)
 
 	for (i = 0; i < nr; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (run_bench_numa(tests[i][0], tests[i] + 1))
 			return -1;
+=======
+		run_bench_numa(tests[i][0], tests[i] + 1);
+>>>>>>> v3.18
 =======
 		run_bench_numa(tests[i][0], tests[i] + 1);
 >>>>>>> v3.18

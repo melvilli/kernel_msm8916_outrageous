@@ -34,7 +34,11 @@
 #define BCSR_USB_EN	0x11
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __initdata struct of_device_id ppc460ex_of_bus[] = {
+=======
+static const struct of_device_id ppc460ex_of_bus[] __initconst = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id ppc460ex_of_bus[] __initconst = {
 >>>>>>> v3.18

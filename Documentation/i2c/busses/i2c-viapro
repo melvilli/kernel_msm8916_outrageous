@@ -29,7 +29,11 @@ Authors:
 	Kyösti Mälkki <kmalkki@cc.hut.fi>,
 	Mark D. Studebaker <mdsxyz123@yahoo.com>,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Jean Delvare <khali@linux-fr.org>
+=======
+	Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
 	Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18

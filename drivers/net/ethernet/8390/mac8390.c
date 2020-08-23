@@ -168,6 +168,10 @@ static void slow_sane_block_output(struct net_device *dev, int count,
 static void word_memcpy_tocard(unsigned long tp, const void *fp, int count);
 static void word_memcpy_fromcard(void *tp, unsigned long fp, int count);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static u32 mac8390_msg_enable;
+>>>>>>> v3.18
 =======
 static u32 mac8390_msg_enable;
 >>>>>>> v3.18
@@ -182,10 +186,15 @@ static enum mac8390_type __init mac8390_ident(struct nubus_dev *dev)
 		case NUBUS_DRHW_SONNET:
 			return MAC8390_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		default:
 			return MAC8390_APPLE;
 			break;
+=======
+		default:
+			return MAC8390_APPLE;
+>>>>>>> v3.18
 =======
 		default:
 			return MAC8390_APPLE;
@@ -198,6 +207,7 @@ static enum mac8390_type __init mac8390_ident(struct nubus_dev *dev)
 		case NUBUS_DRHW_ASANTE_LC:
 			return MAC8390_NONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		case NUBUS_DRHW_CABLETRON:
 			return MAC8390_CABLETRON;
@@ -205,6 +215,12 @@ static enum mac8390_type __init mac8390_ident(struct nubus_dev *dev)
 		default:
 			return MAC8390_APPLE;
 			break;
+=======
+		case NUBUS_DRHW_CABLETRON:
+			return MAC8390_CABLETRON;
+		default:
+			return MAC8390_APPLE;
+>>>>>>> v3.18
 =======
 		case NUBUS_DRHW_CABLETRON:
 			return MAC8390_CABLETRON;
@@ -236,10 +252,15 @@ static enum mac8390_type __init mac8390_ident(struct nubus_dev *dev)
 		case NUBUS_DRHW_INTERLAN:
 			return MAC8390_INTERLAN;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
 		default:
 			return MAC8390_KINETICS;
 			break;
+=======
+		default:
+			return MAC8390_KINETICS;
+>>>>>>> v3.18
 =======
 		default:
 			return MAC8390_KINETICS;
@@ -424,6 +445,10 @@ struct net_device * __init mac8390_probe(int unit)
 	struct nubus_dev *ndev = NULL;
 	int err = -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ei_device *ei_local;
+>>>>>>> v3.18
 =======
 	struct ei_device *ei_local;
 >>>>>>> v3.18
@@ -466,11 +491,17 @@ struct net_device * __init mac8390_probe(int unit)
 	if (!ndev)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	 ei_local = netdev_priv(dev);
 	 ei_local->msg_enable = mac8390_msg_enable;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = register_netdev(dev);
 	if (err)
@@ -590,7 +621,10 @@ static int __init mac8390_initdev(struct net_device *dev,
 			pr_err("Don't know how to access card memory!\n");
 			return -ENODEV;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -696,14 +730,20 @@ static int mac8390_close(struct net_device *dev)
 static void mac8390_no_reset(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ei_status.txing = 0;
 	if (ei_debug > 1)
 		pr_info("reset not supported\n");
 =======
+=======
+>>>>>>> v3.18
 	struct ei_device *ei_local = netdev_priv(dev);
 
 	ei_status.txing = 0;
 	netif_info(ei_local, hw, dev, "reset not supported\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -711,12 +751,15 @@ static void interlan_reset(struct net_device *dev)
 {
 	unsigned char *target = nubus_slot_addr(IRQ2SLOT(dev->irq));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ei_debug > 1)
 		pr_info("Need to reset the NS8390 t=%lu...", jiffies);
 	ei_status.txing = 0;
 	target[0xC0000] = 0;
 	if (ei_debug > 1)
 =======
+=======
+>>>>>>> v3.18
 	struct ei_device *ei_local = netdev_priv(dev);
 
 	netif_info(ei_local, hw, dev, "Need to reset the NS8390 t=%lu...",
@@ -724,6 +767,9 @@ static void interlan_reset(struct net_device *dev)
 	ei_status.txing = 0;
 	target[0xC0000] = 0;
 	if (netif_msg_hw(ei_local))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pr_cont("reset complete\n");
 }

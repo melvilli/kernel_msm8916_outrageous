@@ -23,8 +23,12 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -2036,7 +2040,11 @@ static int ns83820_init_one(struct pci_dev *pci_dev,
 
 	ndev->netdev_ops = &netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(ndev, &ops);
+=======
+	ndev->ethtool_ops = &ops;
+>>>>>>> v3.18
 =======
 	ndev->ethtool_ops = &ops;
 >>>>>>> v3.18
@@ -2245,7 +2253,10 @@ out_disable:
 out_free:
 	free_netdev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 out:
@@ -2272,10 +2283,16 @@ static void ns83820_remove_one(struct pci_dev *pci_dev)
 	pci_disable_device(dev->pci_dev);
 	free_netdev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci_dev, NULL);
 }
 
 static DEFINE_PCI_DEVICE_TABLE(ns83820_pci_tbl) = {
+=======
+}
+
+static const struct pci_device_id ns83820_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 }
 

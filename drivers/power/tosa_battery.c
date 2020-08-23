@@ -151,7 +151,11 @@ static void tosa_bat_external_power_changed(struct power_supply *psy)
 static irqreturn_t tosa_bat_gpio_isr(int irq, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pr_info("tosa_bat_gpio irq: %d\n", gpio_get_value(irq_to_gpio(irq)));
+=======
+	pr_info("tosa_bat_gpio irq\n");
+>>>>>>> v3.18
 =======
 	pr_info("tosa_bat_gpio irq\n");
 >>>>>>> v3.18

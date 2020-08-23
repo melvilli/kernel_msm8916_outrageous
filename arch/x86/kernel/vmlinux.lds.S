@@ -148,7 +148,10 @@ SECTIONS
 	} :data
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_64
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -169,20 +172,29 @@ SECTIONS
 #undef EMIT_VVAR
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Pad the rest of the page with zeros.  Otherwise the loader
 		 * can leave garbage here.
 		 */
 		. = __vvar_beginning_hack + PAGE_SIZE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	} :data
 
        . = ALIGN(__vvar_page + PAGE_SIZE, PAGE_SIZE);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* CONFIG_X86_64 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Init code and data - will be freed after init */
@@ -214,7 +226,10 @@ SECTIONS
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_X86_INTEL_MID
 	.x86_intel_mid_dev.init : AT(ADDR(.x86_intel_mid_dev.init) - \
 								LOAD_OFFSET) {
@@ -224,6 +239,9 @@ SECTIONS
 	}
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * start address and size of operations which during runtime

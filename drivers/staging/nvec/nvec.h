@@ -24,6 +24,10 @@
 #include <linux/mutex.h>
 #include <linux/notifier.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/reset.h>
+>>>>>>> v3.18
 =======
 #include <linux/reset.h>
 >>>>>>> v3.18
@@ -108,6 +112,7 @@ struct nvec_msg {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * struct nvec_subdev - A subdevice of nvec, such as nvec_kbd
  * @name: The name of the sub device
  * @platform_data: Platform data
@@ -135,6 +140,8 @@ struct nvec_platform_data {
 /**
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * struct nvec_chip - A single connection to an NVIDIA Embedded controller
  * @dev: The device
  * @gpio: The same as for &struct nvec_platform_data
@@ -142,7 +149,12 @@ struct nvec_platform_data {
  * @i2c_addr: The address of the I2C slave
  * @base: The base of the memory mapped region of the I2C device
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @clk: The clock of the I2C device
+=======
+ * @i2c_clk: The clock of the I2C device
+ * @rst: The reset of the I2C device
+>>>>>>> v3.18
 =======
  * @i2c_clk: The clock of the I2C device
  * @rst: The reset of the I2C device
@@ -177,6 +189,10 @@ struct nvec_chip {
 	void __iomem *base;
 	struct clk *i2c_clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct reset_control *rst;
+>>>>>>> v3.18
 =======
 	struct reset_control *rst;
 >>>>>>> v3.18

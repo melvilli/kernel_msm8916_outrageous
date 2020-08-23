@@ -4,7 +4,10 @@
   (C) 2001 by Andreas Gruenbacher, <a.gruenbacher@computer.org>
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct mb_cache_entry {
@@ -12,6 +15,7 @@ struct mb_cache_entry {
 	struct mb_cache			*e_cache;
 	unsigned short			e_used;
 	unsigned short			e_queued;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct block_device		*e_bdev;
 	sector_t			e_block;
@@ -21,6 +25,8 @@ struct mb_cache_entry {
 		unsigned int		o_key;
 	} e_index;
 =======
+=======
+>>>>>>> v3.18
 	atomic_t			e_refcnt;
 	struct block_device		*e_bdev;
 	sector_t			e_block;
@@ -31,6 +37,9 @@ struct mb_cache_entry {
 	} e_index;
 	struct hlist_bl_head		*e_block_hash_p;
 	struct hlist_bl_head		*e_index_hash_p;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -42,8 +51,13 @@ struct mb_cache {
 	int				c_bucket_bits;
 	struct kmem_cache		*c_entry_cache;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head		*c_block_hash;
 	struct list_head		*c_index_hash;
+=======
+	struct hlist_bl_head		*c_block_hash;
+	struct hlist_bl_head		*c_index_hash;
+>>>>>>> v3.18
 =======
 	struct hlist_bl_head		*c_block_hash;
 	struct hlist_bl_head		*c_index_hash;

@@ -25,7 +25,11 @@
 
 #include <media/soc_camera.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <media/v4l2-chip-ident.h>
+=======
+#include <media/v4l2-clk.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-clk.h>
 >>>>>>> v3.18
@@ -615,6 +619,10 @@ struct ov5642 {
 	const struct ov5642_datafmt	*fmt;
 	struct v4l2_rect                crop_rect;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_clk			*clk;
+>>>>>>> v3.18
 =======
 	struct v4l2_clk			*clk;
 >>>>>>> v3.18
@@ -650,7 +658,11 @@ static int reg_read(struct i2c_client *client, u16 reg, u8 *val)
 {
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We have 16-bit i2c addresses - care for endianess */
+=======
+	/* We have 16-bit i2c addresses - care for endianness */
+>>>>>>> v3.18
 =======
 	/* We have 16-bit i2c addresses - care for endianness */
 >>>>>>> v3.18
@@ -861,6 +873,7 @@ static int ov5642_enum_fmt(struct v4l2_subdev *sd, unsigned int index,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ov5642_g_chip_ident(struct v4l2_subdev *sd,
 			       struct v4l2_dbg_chip_ident *id)
 {
@@ -878,6 +891,8 @@ static int ov5642_g_chip_ident(struct v4l2_subdev *sd,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ov5642_s_crop(struct v4l2_subdev *sd, const struct v4l2_crop *a)
@@ -951,6 +966,7 @@ static int ov5642_s_power(struct v4l2_subdev *sd, int on)
 	struct i2c_client *client = v4l2_get_subdevdata(sd);
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	if (!on)
@@ -958,6 +974,8 @@ static int ov5642_s_power(struct v4l2_subdev *sd, int on)
 
 	ret = soc_camera_power_on(&client->dev, ssdd);
 =======
+=======
+>>>>>>> v3.18
 	struct ov5642 *priv = to_ov5642(client);
 	int ret;
 
@@ -965,6 +983,9 @@ static int ov5642_s_power(struct v4l2_subdev *sd, int on)
 		return soc_camera_power_off(&client->dev, ssdd, priv->clk);
 
 	ret = soc_camera_power_on(&client->dev, ssdd, priv->clk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (ret < 0)
 		return ret;
@@ -992,7 +1013,10 @@ static struct v4l2_subdev_video_ops ov5642_subdev_video_ops = {
 static struct v4l2_subdev_core_ops ov5642_subdev_core_ops = {
 	.s_power	= ov5642_s_power,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.g_chip_ident	= ov5642_g_chip_ident,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
@@ -1050,6 +1074,10 @@ static int ov5642_probe(struct i2c_client *client,
 	struct ov5642 *priv;
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret;
+>>>>>>> v3.18
 =======
 	int ret;
 >>>>>>> v3.18
@@ -1075,8 +1103,11 @@ static int ov5642_probe(struct i2c_client *client,
 	priv->total_height = BLANKING_MIN_HEIGHT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ov5642_video_probe(client);
 =======
+=======
+>>>>>>> v3.18
 	priv->clk = v4l2_clk_get(&client->dev, "mclk");
 	if (IS_ERR(priv->clk))
 		return PTR_ERR(priv->clk);
@@ -1086,6 +1117,9 @@ static int ov5642_probe(struct i2c_client *client,
 		v4l2_clk_put(priv->clk);
 
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1093,7 +1127,13 @@ static int ov5642_remove(struct i2c_client *client)
 {
 	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct ov5642 *priv = to_ov5642(client);
+
+	v4l2_clk_put(priv->clk);
+>>>>>>> v3.18
 =======
 	struct ov5642 *priv = to_ov5642(client);
 

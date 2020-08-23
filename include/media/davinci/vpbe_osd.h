@@ -83,9 +83,15 @@ enum osd_pix_format {
 	PIXFMT_8BPP,
 	PIXFMT_RGB565,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	PIXFMT_YCbCrI,
 	PIXFMT_RGB888,
 	PIXFMT_YCrCbI,
+=======
+	PIXFMT_YCBCRI,
+	PIXFMT_RGB888,
+	PIXFMT_YCRCBI,
+>>>>>>> v3.18
 =======
 	PIXFMT_YCBCRI,
 	PIXFMT_RGB888,

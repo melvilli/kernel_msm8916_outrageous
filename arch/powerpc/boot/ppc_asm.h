@@ -60,7 +60,10 @@
 #define	r31	31
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SPRN_TBRL	268
 #define SPRN_TBRU	269
 
@@ -76,5 +79,8 @@
 	.long 0xa6037b7d; /* mtsrr1 r11				*/ \
 	.long 0x2400004c  /* rfid				*/
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _PPC64_PPC_ASM_H */

@@ -16,6 +16,10 @@
 #define __APPARMOR_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -69,9 +73,12 @@ extern int apparmor_initialized __initdata;
 char *aa_split_fqname(char *args, char **ns_name);
 void aa_info_message(const char *str);
 <<<<<<< HEAD
+<<<<<<< HEAD
 void *kvmalloc(size_t size);
 
 =======
+=======
+>>>>>>> v3.18
 void *__aa_kvmalloc(size_t size, gfp_t flags);
 
 static inline void *kvmalloc(size_t size)
@@ -89,6 +96,9 @@ static inline int kref_get_not0(struct kref *kref)
 {
 	return atomic_inc_not_zero(&kref->refcount);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**

@@ -25,7 +25,12 @@
  */
 struct splice_desc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int len, total_len;	/* current and remaining length */
+=======
+	size_t total_len;		/* remaining length */
+	unsigned int len;		/* current length */
+>>>>>>> v3.18
 =======
 	size_t total_len;		/* remaining length */
 	unsigned int len;		/* current length */
@@ -75,6 +80,7 @@ extern ssize_t splice_from_pipe(struct pipe_inode_info *, struct file *,
 extern ssize_t __splice_from_pipe(struct pipe_inode_info *,
 				  struct splice_desc *, splice_actor *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int splice_from_pipe_feed(struct pipe_inode_info *, struct splice_desc *,
 				 splice_actor *);
 extern int splice_from_pipe_next(struct pipe_inode_info *,
@@ -85,6 +91,8 @@ extern void splice_from_pipe_end(struct pipe_inode_info *,
 extern int pipe_to_file(struct pipe_inode_info *, struct pipe_buffer *,
 			struct splice_desc *);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern ssize_t splice_to_pipe(struct pipe_inode_info *,

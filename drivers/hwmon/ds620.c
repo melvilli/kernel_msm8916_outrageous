@@ -68,7 +68,11 @@ static const u8 DS620_REG_TEMP[3] = {
 /* Each client has this additional data */
 struct ds620_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ struct ds620_data {
 static void ds620_init_client(struct i2c_client *client)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ds620_platform_data *ds620_info = client->dev.platform_data;
+=======
+	struct ds620_platform_data *ds620_info = dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct ds620_platform_data *ds620_info = dev_get_platdata(&client->dev);
 >>>>>>> v3.18
@@ -115,8 +123,13 @@ static void ds620_init_client(struct i2c_client *client)
 static struct ds620_data *ds620_update_client(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ds620_data *data = i2c_get_clientdata(client);
+=======
+	struct ds620_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ds620_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -172,8 +185,13 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *da,
 
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct ds620_data *data = i2c_get_clientdata(client);
+=======
+	struct ds620_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct ds620_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -185,7 +203,11 @@ static ssize_t set_temp(struct device *dev, struct device_attribute *da,
 		return res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = (clamp_val(val, -128000, 128000) * 10 / 625) * 8;
+=======
+	val = (val * 10 / 625) * 8;
+>>>>>>> v3.18
 =======
 	val = (val * 10 / 625) * 8;
 >>>>>>> v3.18
@@ -204,7 +226,11 @@ static ssize_t show_alarm(struct device *dev, struct device_attribute *da,
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(da);
 	struct ds620_data *data = ds620_update_client(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -215,6 +241,11 @@ static ssize_t show_alarm(struct device *dev, struct device_attribute *da,
 		return PTR_ERR(data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	client = data->client;
+
+>>>>>>> v3.18
 =======
 	client = data->client;
 
@@ -245,7 +276,11 @@ static SENSOR_DEVICE_ATTR(temp1_max_alarm, S_IRUGO, show_alarm, NULL,
 			  DS620_REG_CONFIG_THF);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *ds620_attributes[] = {
+=======
+static struct attribute *ds620_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *ds620_attrs[] = {
 >>>>>>> v3.18
@@ -258,9 +293,13 @@ static struct attribute *ds620_attrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct attribute_group ds620_group = {
 	.attrs = ds620_attributes,
 };
+=======
+ATTRIBUTE_GROUPS(ds620);
+>>>>>>> v3.18
 =======
 ATTRIBUTE_GROUPS(ds620);
 >>>>>>> v3.18
@@ -268,6 +307,7 @@ ATTRIBUTE_GROUPS(ds620);
 static int ds620_probe(struct i2c_client *client,
 		       const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct ds620_data *data;
 	int err;
@@ -279,6 +319,8 @@ static int ds620_probe(struct i2c_client *client,
 
 	i2c_set_clientdata(client, data);
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = &client->dev;
 	struct device *hwmon_dev;
 	struct ds620_data *data;
@@ -288,12 +330,16 @@ static int ds620_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 	data->client = client;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_init(&data->update_lock);
 
 	/* Initialize the DS620 chip */
 	ds620_init_client(client);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Register sysfs hooks */
 	err = sysfs_create_group(&client->dev.kobj, &ds620_group);
@@ -328,6 +374,11 @@ static int ds620_remove(struct i2c_client *client)
 							   data, ds620_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
 >>>>>>> v3.18
+=======
+	hwmon_dev = devm_hwmon_device_register_with_groups(dev, client->name,
+							   data, ds620_groups);
+	return PTR_ERR_OR_ZERO(hwmon_dev);
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id ds620_id[] = {
@@ -345,7 +396,10 @@ static struct i2c_driver ds620_driver = {
 	},
 	.probe = ds620_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = ds620_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table = ds620_id,

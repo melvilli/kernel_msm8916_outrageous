@@ -70,15 +70,21 @@ static unsigned int posix_clock_poll(struct file *fp, poll_table *wait)
 {
 	struct posix_clock *clk = get_posix_clock(fp);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int result = 0;
 
 	if (!clk)
 		return POLLERR;
 =======
+=======
+>>>>>>> v3.18
 	int result = 0;
 
 	if (!clk)
 		return -ENODEV;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (clk->ops.poll)

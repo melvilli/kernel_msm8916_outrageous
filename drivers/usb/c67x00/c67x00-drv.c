@@ -132,7 +132,11 @@ static int c67x00_drv_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -159,7 +163,11 @@ static int c67x00_drv_probe(struct platform_device *pdev)
 	spin_lock_init(&c67x00->hpi.lock);
 	c67x00->hpi.regstep = pdata->hpi_regstep;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	c67x00->pdata = pdev->dev.platform_data;
+=======
+	c67x00->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	c67x00->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

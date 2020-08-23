@@ -884,6 +884,7 @@ void picolcd_exit_devfs(struct picolcd_data *data)
 	dent = data->debug_reset;
 	data->debug_reset = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dent)
 		debugfs_remove(dent);
 	dent = data->debug_eeprom;
@@ -895,6 +896,8 @@ void picolcd_exit_devfs(struct picolcd_data *data)
 	if (dent)
 		debugfs_remove(dent);
 =======
+=======
+>>>>>>> v3.18
 	debugfs_remove(dent);
 	dent = data->debug_eeprom;
 	data->debug_eeprom = NULL;
@@ -902,6 +905,9 @@ void picolcd_exit_devfs(struct picolcd_data *data)
 	dent = data->debug_flash;
 	data->debug_flash = NULL;
 	debugfs_remove(dent);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_destroy(&data->mutex_flash);
 }

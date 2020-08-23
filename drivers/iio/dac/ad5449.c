@@ -102,7 +102,10 @@ static int ad5449_read(struct iio_dev *indio_dev, unsigned int addr,
 	struct ad5449 *st = iio_priv(indio_dev);
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct spi_message msg;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct spi_transfer t[] = {
@@ -118,10 +121,13 @@ static int ad5449_read(struct iio_dev *indio_dev, unsigned int addr,
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spi_message_init(&msg);
 	spi_message_add_tail(&t[0], &msg);
 	spi_message_add_tail(&t[1], &msg);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_lock(&indio_dev->mlock);
@@ -129,7 +135,11 @@ static int ad5449_read(struct iio_dev *indio_dev, unsigned int addr,
 	st->data[1] = cpu_to_be16(AD5449_CMD_NOOP);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = spi_sync(st->spi, &msg);
+=======
+	ret = spi_sync_transfer(st->spi, t, ARRAY_SIZE(t));
+>>>>>>> v3.18
 =======
 	ret = spi_sync_transfer(st->spi, t, ARRAY_SIZE(t));
 >>>>>>> v3.18
@@ -220,14 +230,20 @@ static const struct iio_info ad5449_info = {
 		BIT(IIO_CHAN_INFO_SCALE),			\
 	.address = (chan),					\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.scan_type = IIO_ST('u', (bits), 16, 12 - (bits)),	\
 =======
+=======
+>>>>>>> v3.18
 	.scan_type = {						\
 		.sign = 'u',					\
 		.realbits = (bits),				\
 		.storagebits = 16,				\
 		.shift = 12 - (bits),				\
 	},							\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -295,7 +311,11 @@ static int ad5449_spi_probe(struct spi_device *spi)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	indio_dev = iio_device_alloc(sizeof(*st));
+=======
+	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
+>>>>>>> v3.18
 =======
 	indio_dev = devm_iio_device_alloc(&spi->dev, sizeof(*st));
 >>>>>>> v3.18
@@ -312,6 +332,7 @@ static int ad5449_spi_probe(struct spi_device *spi)
 		st->vref_reg[i].supply = ad5449_vref_name(st, i);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = regulator_bulk_get(&spi->dev, st->chip_info->num_channels,
 				st->vref_reg);
 	if (ret)
@@ -321,6 +342,8 @@ static int ad5449_spi_probe(struct spi_device *spi)
 	if (ret)
 		goto error_free_reg;
 =======
+=======
+>>>>>>> v3.18
 	ret = devm_regulator_bulk_get(&spi->dev, st->chip_info->num_channels,
 				st->vref_reg);
 	if (ret)
@@ -329,6 +352,9 @@ static int ad5449_spi_probe(struct spi_device *spi)
 	ret = regulator_bulk_enable(st->chip_info->num_channels, st->vref_reg);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	indio_dev->dev.parent = &spi->dev;
@@ -360,10 +386,13 @@ static int ad5449_spi_probe(struct spi_device *spi)
 error_disable_reg:
 	regulator_bulk_disable(st->chip_info->num_channels, st->vref_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_free_reg:
 	regulator_bulk_free(st->chip_info->num_channels, st->vref_reg);
 error_free:
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -379,9 +408,12 @@ static int ad5449_spi_remove(struct spi_device *spi)
 
 	regulator_bulk_disable(st->chip_info->num_channels, st->vref_reg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	regulator_bulk_free(st->chip_info->num_channels, st->vref_reg);
 
 	iio_device_free(indio_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

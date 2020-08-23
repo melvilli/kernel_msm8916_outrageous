@@ -18,6 +18,7 @@
 #include <asm/alternative.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init no_387(char *s)
 {
 	boot_cpu_data.hard_math = 0;
@@ -27,6 +28,8 @@ static int __init no_387(char *s)
 
 __setup("no387", no_387);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static double __initdata x = 4195835.0;
@@ -48,6 +51,7 @@ static void __init check_fpu(void)
 	s32 fdiv_bug;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!boot_cpu_data.hard_math) {
 #ifndef CONFIG_MATH_EMULATION
 		pr_emerg("No coprocessor found and no math emulation present\n");
@@ -57,6 +61,8 @@ static void __init check_fpu(void)
 		return;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kernel_fpu_begin();
@@ -114,7 +120,12 @@ void __init check_bugs(void)
 	 * alternative instructions.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	check_fpu();
+=======
+	if (cpu_has_fpu)
+		check_fpu();
+>>>>>>> v3.18
 =======
 	if (cpu_has_fpu)
 		check_fpu();

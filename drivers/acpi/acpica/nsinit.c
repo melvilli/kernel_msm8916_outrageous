@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -116,9 +120,14 @@ acpi_status acpi_ns_initialize_objects(void)
 
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  "%u Control Methods found\n", info.method_count));
 	ACPI_DEBUG_PRINT((ACPI_DB_DISPATCH,
 			  "%u Op Regions found\n", info.op_region_count));
+=======
+			  "%u Control Methods found\n%u Op Regions found\n",
+			  info.method_count, info.op_region_count));
+>>>>>>> v3.18
 =======
 			  "%u Control Methods found\n%u Op Regions found\n",
 			  info.method_count, info.op_region_count));
@@ -186,7 +195,11 @@ acpi_status acpi_ns_initialize_devices(void)
 	 */
 	info.evaluate_info->prefix_node = acpi_gbl_root_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info.evaluate_info->pathname = METHOD_NAME__INI;
+=======
+	info.evaluate_info->relative_pathname = METHOD_NAME__INI;
+>>>>>>> v3.18
 =======
 	info.evaluate_info->relative_pathname = METHOD_NAME__INI;
 >>>>>>> v3.18
@@ -227,7 +240,11 @@ acpi_status acpi_ns_initialize_devices(void)
 	return_ACPI_STATUS(status);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       error_exit:
+=======
+error_exit:
+>>>>>>> v3.18
 =======
 error_exit:
 >>>>>>> v3.18
@@ -284,6 +301,10 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 	switch (type) {
 	case ACPI_TYPE_REGION:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -292,6 +313,10 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 
 	case ACPI_TYPE_BUFFER_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -300,6 +325,10 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 
 	case ACPI_TYPE_LOCAL_BANK_FIELD:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -308,6 +337,10 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 
 	case ACPI_TYPE_BUFFER:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -316,6 +349,10 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 
 	case ACPI_TYPE_PACKAGE:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -326,6 +363,10 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 
 		/* No init required, just exit now */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -379,7 +420,13 @@ acpi_ns_init_one_object(acpi_handle obj_handle,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* No other types can get here */
+=======
+
+		/* No other types can get here */
+
+>>>>>>> v3.18
 =======
 
 		/* No other types can get here */
@@ -464,6 +511,10 @@ acpi_ns_find_ini_methods(acpi_handle obj_handle,
 
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -612,7 +663,11 @@ acpi_ns_init_one_device(acpi_handle obj_handle,
 	ACPI_MEMSET(info, 0, sizeof(struct acpi_evaluate_info));
 	info->prefix_node = device_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	info->pathname = METHOD_NAME__INI;
+=======
+	info->relative_pathname = METHOD_NAME__INI;
+>>>>>>> v3.18
 =======
 	info->relative_pathname = METHOD_NAME__INI;
 >>>>>>> v3.18
@@ -630,8 +685,12 @@ acpi_ns_init_one_device(acpi_handle obj_handle,
 		/* Ignore error and move on to next device */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		char *scope_name =
 		    acpi_ns_get_external_pathname(info->resolved_node);
+=======
+		char *scope_name = acpi_ns_get_external_pathname(info->node);
+>>>>>>> v3.18
 =======
 		char *scope_name = acpi_ns_get_external_pathname(info->node);
 >>>>>>> v3.18

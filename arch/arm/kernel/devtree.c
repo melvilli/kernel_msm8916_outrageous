@@ -19,6 +19,10 @@
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/smp.h>
+>>>>>>> v3.18
 =======
 #include <linux/smp.h>
 >>>>>>> v3.18
@@ -31,11 +35,14 @@
 #include <asm/mach-types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void * __init early_init_dt_alloc_memory_arch(u64 size, u64 align)
 {
 	return alloc_bootmem_align(size, align);
 }
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_SMP
 extern struct of_cpu_method __cpu_method_of_table[];
@@ -67,6 +74,9 @@ static inline int set_smp_ops_by_method(struct device_node *node)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -86,6 +96,10 @@ void __init arm_dt_init_cpu_maps(void)
 	 */
 	struct device_node *cpu, *cpus;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int found_method = 0;
+>>>>>>> v3.18
 =======
 	int found_method = 0;
 >>>>>>> v3.18
@@ -101,8 +115,11 @@ void __init arm_dt_init_cpu_maps(void)
 
 	for_each_child_of_node(cpus, cpu) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		const __be32 *cell;
 		int prop_bytes;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		u32 hwid;
@@ -117,8 +134,12 @@ void __init arm_dt_init_cpu_maps(void)
 		 * cpu_logical_map.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cell = of_get_property(cpu, "reg", &prop_bytes);
 		if (!cell || prop_bytes < sizeof(*cell)) {
+=======
+		if (of_property_read_u32(cpu, "reg", &hwid)) {
+>>>>>>> v3.18
 =======
 		if (of_property_read_u32(cpu, "reg", &hwid)) {
 >>>>>>> v3.18
@@ -128,6 +149,7 @@ void __init arm_dt_init_cpu_maps(void)
 		}
 
 		/*
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 * Bits n:24 must be set to 0 in the DT since the reg property
 		 * defines the MPIDR[23:0].
@@ -139,10 +161,15 @@ void __init arm_dt_init_cpu_maps(void)
 
 		if (prop_bytes || (hwid & ~MPIDR_HWID_BITMASK))
 =======
+=======
+>>>>>>> v3.18
 		 * 8 MSBs must be set to 0 in the DT since the reg property
 		 * defines the MPIDR[23:0].
 		 */
 		if (hwid & ~MPIDR_HWID_BITMASK)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return;
 
@@ -183,9 +210,12 @@ void __init arm_dt_init_cpu_maps(void)
 
 		tmp_map[i] = hwid;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 
 =======
+=======
+>>>>>>> v3.18
 
 		if (!found_method)
 			found_method = set_smp_ops_by_method(cpu);
@@ -198,6 +228,9 @@ void __init arm_dt_init_cpu_maps(void)
 	if (!found_method)
 		set_smp_ops_by_method(cpus);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!bootcpu_valid) {
 		pr_warn("DT missing boot CPU MPIDR[23:0], fall back to default cpu_logical_map\n");
@@ -210,6 +243,7 @@ void __init arm_dt_init_cpu_maps(void)
 	 * logical map created in smp_setup_processor_id() can be overridden
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < nr_cpu_ids; i++) {
 		if (i < cpuidx) {
 			set_cpu_possible(i, true);
@@ -219,10 +253,15 @@ void __init arm_dt_init_cpu_maps(void)
 			set_cpu_possible(i, false);
 		}
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < cpuidx; i++) {
 		set_cpu_possible(i, true);
 		cpu_logical_map(i) = tmp_map[i];
 		pr_debug("cpu logical map 0x%x\n", cpu_logical_map(i));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -233,7 +272,10 @@ bool arch_match_cpu_phys_id(int cpu, u64 phys_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const void * __init arch_get_next_mach(const char *const **match)
 {
 	static const struct machine_desc *mdesc = __arch_info_begin;
@@ -247,6 +289,9 @@ static const void * __init arch_get_next_mach(const char *const **match)
 	return m;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * setup_machine_fdt - Machine setup when an dtb was passed to the kernel
@@ -258,11 +303,15 @@ static const void * __init arch_get_next_mach(const char *const **match)
 const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct boot_param_header *devtree;
 	const struct machine_desc *mdesc, *mdesc_best = NULL;
 	unsigned int score, mdesc_score = ~1;
 	unsigned long dt_root;
 	const char *model;
+=======
+	const struct machine_desc *mdesc, *mdesc_best = NULL;
+>>>>>>> v3.18
 =======
 	const struct machine_desc *mdesc, *mdesc_best = NULL;
 >>>>>>> v3.18
@@ -274,6 +323,7 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 	mdesc_best = &__mach_desc_GENERIC_DT;
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!dt_phys)
 		return NULL;
@@ -298,6 +348,8 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 		const char *prop;
 		int size;
 =======
+=======
+>>>>>>> v3.18
 	if (!dt_phys || !early_init_dt_verify(phys_to_virt(dt_phys)))
 		return NULL;
 
@@ -307,12 +359,19 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 		const char *prop;
 		int size;
 		unsigned long dt_root;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		early_print("\nError: unrecognized/unsupported "
 			    "device tree compatible list:\n[ ");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		dt_root = of_get_flat_dt_root();
+>>>>>>> v3.18
 =======
 		dt_root = of_get_flat_dt_root();
 >>>>>>> v3.18
@@ -327,6 +386,7 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 		dump_machine_table(); /* does not return */
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	model = of_get_flat_dt_prop(dt_root, "model", NULL);
 	if (!model)
@@ -347,6 +407,8 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 
 	return mdesc_best;
 =======
+=======
+>>>>>>> v3.18
 	/* We really don't want to do this, but sometimes firmware provides buggy data */
 	if (mdesc->dt_fixup)
 		mdesc->dt_fixup();
@@ -357,5 +419,8 @@ const struct machine_desc * __init setup_machine_fdt(unsigned int dt_phys)
 	__machine_arch_type = mdesc->nr;
 
 	return mdesc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

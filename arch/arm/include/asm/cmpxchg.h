@@ -3,6 +3,10 @@
 
 #include <linux/irqflags.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/prefetch.h>
+>>>>>>> v3.18
 =======
 #include <linux/prefetch.h>
 >>>>>>> v3.18
@@ -40,6 +44,10 @@ static inline unsigned long __xchg(unsigned long x, volatile void *ptr, int size
 
 	smp_mb();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw((const void *)ptr);
+>>>>>>> v3.18
 =======
 	prefetchw((const void *)ptr);
 >>>>>>> v3.18
@@ -147,6 +155,11 @@ static inline unsigned long __cmpxchg(volatile void *ptr, unsigned long old,
 	unsigned long oldval, res;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	prefetchw((const void *)ptr);
+
+>>>>>>> v3.18
 =======
 	prefetchw((const void *)ptr);
 
@@ -237,7 +250,10 @@ static inline unsigned long __cmpxchg_local(volatile void *ptr,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline unsigned long long __cmpxchg64(unsigned long long *ptr,
 					     unsigned long long old,
 					     unsigned long long new)
@@ -276,6 +292,9 @@ static inline unsigned long long __cmpxchg64_mb(unsigned long long *ptr,
 	return ret;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define cmpxchg_local(ptr,o,n)						\
 	((__typeof__(*(ptr)))__cmpxchg_local((ptr),			\
@@ -284,6 +303,7 @@ static inline unsigned long long __cmpxchg64_mb(unsigned long long *ptr,
 				       sizeof(*(ptr))))
 
 #define cmpxchg64(ptr, o, n)						\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	((__typeof__(*(ptr)))atomic64_cmpxchg(container_of((ptr),	\
 						atomic64_t,		\
@@ -298,6 +318,8 @@ static inline unsigned long long __cmpxchg64_mb(unsigned long long *ptr,
 					     (unsigned long long)(o),	\
 					     (unsigned long long)(n)))
 =======
+=======
+>>>>>>> v3.18
 	((__typeof__(*(ptr)))__cmpxchg64_mb((ptr),			\
 					(unsigned long long)(o),	\
 					(unsigned long long)(n)))
@@ -308,6 +330,9 @@ static inline unsigned long long __cmpxchg64_mb(unsigned long long *ptr,
 					(unsigned long long)(n)))
 
 #define cmpxchg64_local(ptr, o, n)	cmpxchg64_relaxed((ptr), (o), (n))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif	/* __LINUX_ARM_ARCH__ >= 6 */

@@ -127,7 +127,10 @@ struct tc_prio_qopt {
 	int	bands;			/* Number of bands */
 	__u8	priomap[TC_PRIO_MAX+1];	/* Map: logical priority -> PRIO band */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8	enable_flow;		/* Enable dequeue */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -176,11 +179,17 @@ enum {
 	TCA_TBF_RTAB,
 	TCA_TBF_PTAB,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	TCA_TBF_RATE64,
 	TCA_TBF_PRATE64,
 	TCA_TBF_BURST,
 	TCA_TBF_PBURST,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__TCA_TBF_MAX,
 };
@@ -369,6 +378,11 @@ enum {
 	TCA_HTB_RTAB,
 	TCA_HTB_DIRECT_QLEN,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TCA_HTB_RATE64,
+	TCA_HTB_CEIL64,
+>>>>>>> v3.18
 =======
 	TCA_HTB_RATE64,
 	TCA_HTB_CEIL64,
@@ -536,6 +550,10 @@ enum {
 	TCA_NETEM_RATE,
 	TCA_NETEM_ECN,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	TCA_NETEM_RATE64,
+>>>>>>> v3.18
 =======
 	TCA_NETEM_RATE64,
 >>>>>>> v3.18
@@ -765,7 +783,10 @@ struct tc_fq_codel_xstats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* FQ */
 
 enum {
@@ -858,5 +879,8 @@ struct tc_pie_xstats {
 	__u32 maxq;             /* maximum queue size */
 	__u32 ecn_mark;         /* packets marked with ecn*/
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

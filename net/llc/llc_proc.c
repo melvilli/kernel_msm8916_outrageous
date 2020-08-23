@@ -148,7 +148,11 @@ static int llc_seq_socket_show(struct seq_file *seq, void *v)
 	seq_printf(seq, "@%02X ", llc->sap->laddr.lsap);
 	llc_ui_format_mac(seq, llc->daddr.mac);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	seq_printf(seq, "@%02X %8d %8d %2d %3d %4d\n", llc->daddr.lsap,
+=======
+	seq_printf(seq, "@%02X %8d %8d %2d %3u %4d\n", llc->daddr.lsap,
+>>>>>>> v3.18
 =======
 	seq_printf(seq, "@%02X %8d %8d %2d %3u %4d\n", llc->daddr.lsap,
 >>>>>>> v3.18

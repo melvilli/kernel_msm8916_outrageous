@@ -166,9 +166,14 @@ static bool match_ids(const struct ieee1394_device_id *id_table, int *id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static bool is_fw_unit(struct device *dev);
 
 static int fw_unit_match(struct device *dev, struct device_driver *drv)
+=======
+static const struct ieee1394_device_id *unit_match(struct device *dev,
+						   struct device_driver *drv)
+>>>>>>> v3.18
 =======
 static const struct ieee1394_device_id *unit_match(struct device *dev,
 						   struct device_driver *drv)
@@ -179,10 +184,13 @@ static const struct ieee1394_device_id *unit_match(struct device *dev,
 	int id[] = {0, 0, 0, 0};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We only allow binding to fw_units. */
 	if (!is_fw_unit(dev))
 		return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	get_modalias_ids(fw_unit(dev), id);
@@ -190,10 +198,13 @@ static const struct ieee1394_device_id *unit_match(struct device *dev,
 	for (; id_table->match_flags != 0; id_table++)
 		if (match_ids(id_table, id))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return 1;
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 			return id_table;
 
 	return NULL;
@@ -221,6 +232,9 @@ static int fw_unit_remove(struct device *dev)
 			container_of(dev->driver, struct fw_driver, driver);
 
 	return driver->remove(fw_unit(dev)), 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -252,6 +266,11 @@ struct bus_type fw_bus_type = {
 	.name = "firewire",
 	.match = fw_unit_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.probe = fw_unit_probe,
+	.remove = fw_unit_remove,
+>>>>>>> v3.18
 =======
 	.probe = fw_unit_probe,
 	.remove = fw_unit_remove,

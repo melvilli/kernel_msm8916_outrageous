@@ -23,9 +23,12 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <core/object.h>
 #include <core/class.h>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "nouveau_drm.h"
@@ -40,7 +43,11 @@ nv10_fence_emit(struct nouveau_fence *fence)
 	if (ret == 0) {
 		BEGIN_NV04(chan, 0, NV10_SUBCHAN_REF_CNT, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OUT_RING  (chan, fence->sequence);
+=======
+		OUT_RING  (chan, fence->base.seqno);
+>>>>>>> v3.18
 =======
 		OUT_RING  (chan, fence->base.seqno);
 >>>>>>> v3.18
@@ -61,7 +68,11 @@ u32
 nv10_fence_read(struct nouveau_channel *chan)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return nv_ro32(chan->object, 0x0048);
+=======
+	return nvif_rd32(chan, 0x0048);
+>>>>>>> v3.18
 =======
 	return nvif_rd32(chan, 0x0048);
 >>>>>>> v3.18
@@ -72,10 +83,13 @@ nv10_fence_context_del(struct nouveau_channel *chan)
 {
 	struct nv10_fence_chan *fctx = chan->fence;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_fence_context_del(&fctx->base);
 	chan->fence = NULL;
 	kfree(fctx);
 =======
+=======
+>>>>>>> v3.18
 	int i;
 	nouveau_fence_context_del(&fctx->base);
 	for (i = 0; i < ARRAY_SIZE(fctx->head); i++)
@@ -83,6 +97,9 @@ nv10_fence_context_del(struct nouveau_channel *chan)
 	nvif_object_fini(&fctx->sema);
 	chan->fence = NULL;
 	nouveau_fence_context_free(&fctx->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -96,7 +113,11 @@ nv10_fence_context_new(struct nouveau_channel *chan)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nouveau_fence_context_new(&fctx->base);
+=======
+	nouveau_fence_context_new(chan, &fctx->base);
+>>>>>>> v3.18
 =======
 	nouveau_fence_context_new(chan, &fctx->base);
 >>>>>>> v3.18
@@ -131,6 +152,11 @@ nv10_fence_create(struct nouveau_drm *drm)
 	priv->base.context_new = nv10_fence_context_new;
 	priv->base.context_del = nv10_fence_context_del;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	priv->base.contexts = 31;
+	priv->base.context_base = fence_context_alloc(priv->base.contexts);
+>>>>>>> v3.18
 =======
 	priv->base.contexts = 31;
 	priv->base.context_base = fence_context_alloc(priv->base.contexts);

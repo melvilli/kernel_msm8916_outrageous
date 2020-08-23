@@ -86,7 +86,11 @@ static const char *const dsi_errors[] = {
 	"HS Generic Write FIFO Full",
 	"LP Generic Write FIFO Full",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"Generic Read Data Avail",
+=======
+	"Generic Read Data Avail"
+>>>>>>> v3.18
 =======
 	"Generic Read Data Avail"
 >>>>>>> v3.18
@@ -153,7 +157,11 @@ static int handle_dsi_error(struct mdfld_dsi_pkg_sender *sender, u32 mask)
 	case BIT(14):
 		/*wait for all fifo empty*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*wait_for_all_fifos_empty(sender)*/;
+=======
+		/*wait_for_all_fifos_empty(sender)*/
+>>>>>>> v3.18
 =======
 		/*wait_for_all_fifos_empty(sender)*/
 >>>>>>> v3.18

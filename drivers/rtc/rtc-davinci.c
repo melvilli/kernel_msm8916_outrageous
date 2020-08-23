@@ -118,10 +118,15 @@ static DEFINE_SPINLOCK(davinci_rtc_lock);
 
 struct davinci_rtc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rtc_device 		*rtc;
 	void __iomem			*base;
 	resource_size_t			pbase;
 	size_t				base_size;
+=======
+	struct rtc_device		*rtc;
+	void __iomem			*base;
+>>>>>>> v3.18
 =======
 	struct rtc_device		*rtc;
 	void __iomem			*base;
@@ -488,6 +493,7 @@ static int __init davinci_rtc_probe(struct platform_device *pdev)
 	struct device *dev = &pdev->dev;
 	struct davinci_rtc *davinci_rtc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct resource *res, *mem;
 	int ret = 0;
 
@@ -497,12 +503,17 @@ static int __init davinci_rtc_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct resource *res;
 	int ret = 0;
 
 	davinci_rtc = devm_kzalloc(&pdev->dev, sizeof(struct davinci_rtc), GFP_KERNEL);
 	if (!davinci_rtc)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	davinci_rtc->irq = platform_get_irq(pdev, 0);
@@ -512,6 +523,7 @@ static int __init davinci_rtc_probe(struct platform_device *pdev)
 	}
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		dev_err(dev, "no mem resource\n");
@@ -540,6 +552,11 @@ static int __init davinci_rtc_probe(struct platform_device *pdev)
 	if (IS_ERR(davinci_rtc->base))
 		return PTR_ERR(davinci_rtc->base);
 >>>>>>> v3.18
+=======
+	davinci_rtc->base = devm_ioremap_resource(dev, res);
+	if (IS_ERR(davinci_rtc->base))
+		return PTR_ERR(davinci_rtc->base);
+>>>>>>> v3.18
 
 	platform_set_drvdata(pdev, davinci_rtc);
 
@@ -547,10 +564,16 @@ static int __init davinci_rtc_probe(struct platform_device *pdev)
 				    &davinci_rtc_ops, THIS_MODULE);
 	if (IS_ERR(davinci_rtc->rtc)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = PTR_ERR(davinci_rtc->rtc);
 		dev_err(dev, "unable to register RTC device, err %d\n",
 				ret);
 		goto fail1;
+=======
+		dev_err(dev, "unable to register RTC device, err %d\n",
+				ret);
+		return PTR_ERR(davinci_rtc->rtc);
+>>>>>>> v3.18
 =======
 		dev_err(dev, "unable to register RTC device, err %d\n",
 				ret);
@@ -570,7 +593,11 @@ static int __init davinci_rtc_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_err(dev, "unable to register davinci RTC interrupt\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto fail1;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -587,10 +614,13 @@ static int __init davinci_rtc_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 fail1:
 	platform_set_drvdata(pdev, NULL);
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -604,8 +634,11 @@ static int __exit davinci_rtc_remove(struct platform_device *pdev)
 	rtcif_write(davinci_rtc, 0, PRTCIF_INTEN);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

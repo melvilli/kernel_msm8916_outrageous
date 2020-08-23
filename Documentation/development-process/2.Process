@@ -277,7 +277,11 @@ The current -mm patch is available in the "mmotm" (-mm of the moment)
 directory at:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	http://userweb.kernel.org/~akpm/mmotm/
+=======
+	http://www.ozlabs.org/~akpm/mmotm/
+>>>>>>> v3.18
 =======
 	http://www.ozlabs.org/~akpm/mmotm/
 >>>>>>> v3.18
@@ -292,11 +296,15 @@ Linux-next trees are announced on the linux-kernel and linux-next mailing
 lists when they are assembled; they can be downloaded from:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	http://www.kernel.org/pub/linux/kernel/people/sfr/linux-next/
 
 Some information about linux-next has been gathered at:
 
 	http://linux.f-seidel.de/linux-next/pmwiki/
+=======
+	http://www.kernel.org/pub/linux/kernel/next/
+>>>>>>> v3.18
 =======
 	http://www.kernel.org/pub/linux/kernel/next/
 >>>>>>> v3.18

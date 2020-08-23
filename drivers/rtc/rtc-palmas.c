@@ -239,7 +239,10 @@ static int palmas_rtc_probe(struct platform_device *pdev)
 	struct palmas_rtc *palmas_rtc = NULL;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bool enable_bb_charging = false;
 	bool high_bb_charging;
 
@@ -249,6 +252,9 @@ static int palmas_rtc_probe(struct platform_device *pdev)
 		high_bb_charging = of_property_read_bool(pdev->dev.of_node,
 					"ti,backup-battery-charge-high-current");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	palmas_rtc = devm_kzalloc(&pdev->dev, sizeof(struct palmas_rtc),
@@ -267,7 +273,10 @@ static int palmas_rtc_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, palmas_rtc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (enable_bb_charging) {
 		unsigned reg = PALMAS_BACKUP_BATTERY_CTRL_BBS_BBC_LOW_ICHRG;
 
@@ -294,6 +303,9 @@ static int palmas_rtc_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Start RTC */
 	ret = palmas_update_bits(palmas, PALMAS_RTC_BASE, PALMAS_RTC_CTRL_REG,
@@ -307,6 +319,10 @@ static int palmas_rtc_probe(struct platform_device *pdev)
 	palmas_rtc->irq = platform_get_irq(pdev, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_init_wakeup(&pdev->dev, 1);
+>>>>>>> v3.18
 =======
 	device_init_wakeup(&pdev->dev, 1);
 >>>>>>> v3.18
@@ -329,7 +345,10 @@ static int palmas_rtc_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_set_wakeup_capable(&pdev->dev, 1);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -362,6 +381,7 @@ static int palmas_rtc_resume(struct device *dev)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct dev_pm_ops palmas_rtc_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(palmas_rtc_suspend, palmas_rtc_resume)
 };
@@ -369,11 +389,16 @@ static const struct dev_pm_ops palmas_rtc_pm_ops = {
 #ifdef CONFIG_OF
 static struct of_device_id of_palmas_rtc_match[] = {
 =======
+=======
+>>>>>>> v3.18
 static SIMPLE_DEV_PM_OPS(palmas_rtc_pm_ops, palmas_rtc_suspend,
 			 palmas_rtc_resume);
 
 #ifdef CONFIG_OF
 static const struct of_device_id of_palmas_rtc_match[] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{ .compatible = "ti,palmas-rtc"},
 	{ },

@@ -13,7 +13,10 @@
 #include <linux/clk.h>
 #include <linux/clkdev.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clocksource.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/cpu.h>
@@ -29,6 +32,10 @@
 #include <linux/of_platform.h>
 #include <linux/pm_opp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/pci.h>
+>>>>>>> v3.18
 =======
 #include <linux/pci.h>
 >>>>>>> v3.18
@@ -38,7 +45,11 @@
 #include <linux/micrel_phy.h>
 #include <linux/mfd/syscon.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/hardware/cache-l2x0.h>
+=======
+#include <linux/mfd/syscon/imx6q-iomuxc-gpr.h>
+>>>>>>> v3.18
 =======
 #include <linux/mfd/syscon/imx6q-iomuxc-gpr.h>
 >>>>>>> v3.18
@@ -50,6 +61,7 @@
 #include "cpuidle.h"
 #include "hardware.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u32 chip_revision;
 
@@ -123,6 +135,8 @@ static int ksz9021rn_phy_fixup(struct phy_device *phydev)
 		phy_write(phydev, 0x0b, 0x104);
 	}
 =======
+=======
+>>>>>>> v3.18
 /* For imx6q sabrelite board: set KSZ9021RN RGMII pad skew */
 static int ksz9021rn_phy_fixup(struct phy_device *phydev)
 {
@@ -211,11 +225,15 @@ static int ar8031_phy_fixup(struct phy_device *dev)
 	val = phy_read(dev, 0x1e);
 	val |= 0x0100;
 	phy_write(dev, 0x1e, val);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init imx6q_sabrelite_cko1_setup(void)
 {
@@ -248,6 +266,8 @@ static void __init imx6q_sabrelite_init(void)
 				ksz9021rn_phy_fixup);
 	imx6q_sabrelite_cko1_setup();
 =======
+=======
+>>>>>>> v3.18
 #define PHY_ID_AR8031	0x004dd074
 
 static int ar8035_phy_fixup(struct phy_device *dev)
@@ -295,11 +315,15 @@ static void __init imx6q_enet_phy_init(void)
 		phy_register_fixup_for_uid(PHY_ID_AR8035, 0xffffffef,
 				ar8035_phy_fixup);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __init imx6q_1588_init(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct regmap *gpr;
 
@@ -314,6 +338,8 @@ static void __init imx6q_usb_init(void)
 {
 	imx_anatop_usb_chrg_detect_disable();
 =======
+=======
+>>>>>>> v3.18
 	struct device_node *np;
 	struct clk *ptp_clk;
 	struct clk *enet_ref;
@@ -391,11 +417,15 @@ static void __init imx6q_axi_init(void)
 	} else {
 		pr_warn("failed to find fsl,imx6q-iomuxc-gpr regmap\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __init imx6q_init_machine(void)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (of_machine_is_compatible("fsl,imx6q-sabrelite"))
 		imx6q_sabrelite_init();
@@ -407,6 +437,8 @@ static void __init imx6q_init_machine(void)
 	imx6q_usb_init();
 	imx6q_1588_init();
 =======
+=======
+>>>>>>> v3.18
 	struct device *parent;
 
 	imx_print_silicon_rev(cpu_is_imx6dl() ? "i.MX6DL" : "i.MX6Q",
@@ -426,6 +458,9 @@ static void __init imx6q_init_machine(void)
 	cpu_is_imx6q() ?  imx6q_pm_init() : imx6dl_pm_init();
 	imx6q_1588_init();
 	imx6q_axi_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -433,13 +468,19 @@ static void __init imx6q_init_machine(void)
 #define OCOTP_CFG3_SPEED_SHIFT		16
 #define OCOTP_CFG3_SPEED_1P2GHZ		0x3
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static void __init imx6q_opp_check_1p2ghz(struct device *cpu_dev)
 =======
+=======
+>>>>>>> v3.18
 #define OCOTP_CFG3_SPEED_996MHZ		0x2
 #define OCOTP_CFG3_SPEED_852MHZ		0x1
 
 static void __init imx6q_opp_check_speed_grading(struct device *cpu_dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct device_node *np;
@@ -459,12 +500,15 @@ static void __init imx6q_opp_check_speed_grading(struct device *cpu_dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val = readl_relaxed(base + OCOTP_CFG3);
 	val >>= OCOTP_CFG3_SPEED_SHIFT;
 	if ((val & 0x3) != OCOTP_CFG3_SPEED_1P2GHZ)
 		if (dev_pm_opp_disable(cpu_dev, 1200000000))
 			pr_warn("failed to disable 1.2 GHz OPP\n");
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * SPEED_GRADING[1:0] defines the max speed of ARM:
 	 * 2b'11: 1200000000Hz;
@@ -488,6 +532,9 @@ static void __init imx6q_opp_check_speed_grading(struct device *cpu_dev)
 			if (dev_pm_opp_disable(cpu_dev, 852000000))
 				pr_warn("failed to disable 852 MHz OPP\n");
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 put_node:
@@ -495,12 +542,15 @@ put_node:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init imx6q_opp_init(struct device *cpu_dev)
 {
 	struct device_node *np;
 
 	np = of_find_node_by_path("/cpus/cpu@0");
 =======
+=======
+>>>>>>> v3.18
 static void __init imx6q_opp_init(void)
 {
 	struct device_node *np;
@@ -511,6 +561,9 @@ static void __init imx6q_opp_init(void)
 		return;
 	}
 	np = of_node_get(cpu_dev->of_node);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!np) {
 		pr_warn("failed to find cpu0 node\n");
@@ -518,7 +571,10 @@ static void __init imx6q_opp_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_dev->of_node = np;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (of_init_opp_table(cpu_dev)) {
@@ -527,7 +583,11 @@ static void __init imx6q_opp_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx6q_opp_check_1p2ghz(cpu_dev);
+=======
+	imx6q_opp_check_speed_grading(cpu_dev);
+>>>>>>> v3.18
 =======
 	imx6q_opp_check_speed_grading(cpu_dev);
 >>>>>>> v3.18
@@ -547,17 +607,23 @@ static void __init imx6q_init_late(void)
 	 * to run cpuidle on them.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (imx6q_revision() > IMX_CHIP_REVISION_1_1)
 		imx6q_cpuidle_init();
 
 	if (IS_ENABLED(CONFIG_ARM_IMX6Q_CPUFREQ)) {
 		imx6q_opp_init(&imx6q_cpufreq_pdev.dev);
 =======
+=======
+>>>>>>> v3.18
 	if (imx_get_soc_revision() > IMX_CHIP_REVISION_1_1)
 		imx6q_cpuidle_init();
 
 	if (IS_ENABLED(CONFIG_ARM_IMX6Q_CPUFREQ)) {
 		imx6q_opp_init();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		platform_device_register(&imx6q_cpufreq_pdev);
 	}
@@ -572,8 +638,13 @@ static void __init imx6q_map_io(void)
 static void __init imx6q_init_irq(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	imx6q_init_revision();
 	l2x0_of_init(0, ~0UL);
+=======
+	imx_init_revision_from_anatop();
+	imx_init_l2cache();
+>>>>>>> v3.18
 =======
 	imx_init_revision_from_anatop();
 	imx_init_l2cache();
@@ -583,6 +654,7 @@ static void __init imx6q_init_irq(void)
 	irqchip_init();
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init imx6q_timer_init(void)
 {
@@ -596,6 +668,9 @@ static const char *imx6q_dt_compat[] __initdata = {
 =======
 static const char * const imx6q_dt_compat[] __initconst = {
 >>>>>>> v3.18
+=======
+static const char * const imx6q_dt_compat[] __initconst = {
+>>>>>>> v3.18
 	"fsl,imx6dl",
 	"fsl,imx6q",
 	NULL,
@@ -606,15 +681,21 @@ DT_MACHINE_START(IMX6Q, "Freescale i.MX6 Quad/DualLite (Device Tree)")
 	.map_io		= imx6q_map_io,
 	.init_irq	= imx6q_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.init_time	= imx6q_timer_init,
 	.init_machine	= imx6q_init_machine,
 	.init_late      = imx6q_init_late,
 	.dt_compat	= imx6q_dt_compat,
 	.restart	= imx6q_restart,
 =======
+=======
+>>>>>>> v3.18
 	.init_machine	= imx6q_init_machine,
 	.init_late      = imx6q_init_late,
 	.dt_compat	= imx6q_dt_compat,
 	.restart	= mxc_restart,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MACHINE_END

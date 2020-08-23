@@ -79,11 +79,14 @@ struct clk_notifier_data {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int clk_notifier_register(struct clk *clk, struct notifier_block *nb);
 
 int clk_notifier_unregister(struct clk *clk, struct notifier_block *nb);
 
 =======
+=======
+>>>>>>> v3.18
 /**
  * clk_notifier_register: register a clock rate-change notifier callback
  * @clk: clock whose rate we are interested in
@@ -148,6 +151,9 @@ static inline long clk_get_phase(struct clk *clk)
 	return -ENOTSUPP;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -275,7 +281,11 @@ void clk_put(struct clk *clk);
 /**
  * devm_clk_put	- "free" a managed clock source
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @dev: device used to acuqire the clock
+=======
+ * @dev: device used to acquire the clock
+>>>>>>> v3.18
 =======
  * @dev: device used to acquire the clock
 >>>>>>> v3.18
@@ -436,7 +446,11 @@ struct device_node;
 struct of_phandle_args;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_OF)
+=======
+#if defined(CONFIG_OF) && defined(CONFIG_COMMON_CLK)
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_OF) && defined(CONFIG_COMMON_CLK)
 >>>>>>> v3.18

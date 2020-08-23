@@ -16,6 +16,10 @@
 #include <linux/device.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -26,6 +30,10 @@
 #include <linux/spinlock.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/string.h>
+>>>>>>> v3.18
 =======
 #include <linux/string.h>
 >>>>>>> v3.18
@@ -34,8 +42,11 @@
 #define HWMON_ID_FORMAT HWMON_ID_PREFIX "%d"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct class *hwmon_class;
 =======
+=======
+>>>>>>> v3.18
 struct hwmon_device {
 	const char *name;
 	struct device dev;
@@ -86,20 +97,29 @@ static struct class hwmon_class = {
 	.dev_groups = hwmon_dev_attr_groups,
 	.dev_release = hwmon_dev_release,
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static DEFINE_IDA(hwmon_ida);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * hwmon_device_register - register w/ hwmon
  * @dev: the device to register
 =======
+=======
+>>>>>>> v3.18
  * hwmon_device_register_with_groups - register w/ hwmon
  * @dev: the parent device
  * @name: hwmon name attribute
  * @drvdata: driver data to attach to created device
  * @groups: List of attribute groups to create
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * hwmon_device_unregister() must be called when the device is no
@@ -108,11 +128,14 @@ static DEFINE_IDA(hwmon_ida);
  * Returns the pointer to the new device.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct device *hwmon_device_register(struct device *dev)
 {
 	struct device *hwdev;
 	int id;
 =======
+=======
+>>>>>>> v3.18
 struct device *
 hwmon_device_register_with_groups(struct device *dev, const char *name,
 				  void *drvdata,
@@ -124,12 +147,16 @@ hwmon_device_register_with_groups(struct device *dev, const char *name,
 	/* Do not accept invalid characters in hwmon name attribute */
 	if (name && (!strlen(name) || strpbrk(name, "-* \t\n")))
 		return ERR_PTR(-EINVAL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	id = ida_simple_get(&hwmon_ida, 0, 0, GFP_KERNEL);
 	if (id < 0)
 		return ERR_PTR(id);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hwdev = device_create(hwmon_class, dev, MKDEV(0, 0), NULL,
 			      HWMON_ID_FORMAT, id);
@@ -139,6 +166,8 @@ hwmon_device_register_with_groups(struct device *dev, const char *name,
 
 	return hwdev;
 =======
+=======
+>>>>>>> v3.18
 	hwdev = kzalloc(sizeof(*hwdev), GFP_KERNEL);
 	if (hwdev == NULL) {
 		err = -ENOMEM;
@@ -178,6 +207,9 @@ EXPORT_SYMBOL_GPL(hwmon_device_register_with_groups);
 struct device *hwmon_device_register(struct device *dev)
 {
 	return hwmon_device_register_with_groups(dev, NULL, NULL, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(hwmon_device_register);
@@ -201,7 +233,10 @@ void hwmon_device_unregister(struct device *dev)
 EXPORT_SYMBOL_GPL(hwmon_device_unregister);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void devm_hwmon_release(struct device *dev, void *res)
 {
 	struct device *hwdev = *(struct device **)res;
@@ -265,6 +300,9 @@ void devm_hwmon_device_unregister(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(devm_hwmon_device_unregister);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void __init hwmon_pci_quirks(void)
 {
@@ -297,6 +335,7 @@ static void __init hwmon_pci_quirks(void)
 static int __init hwmon_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hwmon_pci_quirks();
 
 	hwmon_class = class_create(THIS_MODULE, "hwmon");
@@ -304,6 +343,8 @@ static int __init hwmon_init(void)
 		pr_err("couldn't create sysfs class\n");
 		return PTR_ERR(hwmon_class);
 =======
+=======
+>>>>>>> v3.18
 	int err;
 
 	hwmon_pci_quirks();
@@ -312,6 +353,9 @@ static int __init hwmon_init(void)
 	if (err) {
 		pr_err("couldn't register hwmon sysfs class\n");
 		return err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -320,7 +364,11 @@ static int __init hwmon_init(void)
 static void __exit hwmon_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	class_destroy(hwmon_class);
+=======
+	class_unregister(&hwmon_class);
+>>>>>>> v3.18
 =======
 	class_unregister(&hwmon_class);
 >>>>>>> v3.18

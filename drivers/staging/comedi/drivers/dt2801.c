@@ -30,9 +30,15 @@ Configuration options:
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "../comedidev.h"
 #include <linux/delay.h>
 #include <linux/ioport.h>
+=======
+#include <linux/module.h>
+#include "../comedidev.h"
+#include <linux/delay.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 #include "../comedidev.h"
@@ -47,9 +53,12 @@ Configuration options:
 #define DT2801_MAX_DMA_SIZE (64 * 1024)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Ports */
 #define DT2801_IOSIZE 2
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* define's */
@@ -100,6 +109,7 @@ Configuration options:
 #if 0
 /* ignore 'defined but not used' warning */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct comedi_lrange range_dt2801_ai_pgh_bipolar = { 4, {
 								      RANGE(-10,
 									    10),
@@ -127,6 +137,8 @@ static const struct comedi_lrange range_dt2801_ai_pgl_bipolar = { 4, {
 								       0.02),
 								      }
 =======
+=======
+>>>>>>> v3.18
 static const struct comedi_lrange range_dt2801_ai_pgh_bipolar = {
 	4, {
 		BIP_RANGE(10),
@@ -143,11 +155,15 @@ static const struct comedi_lrange range_dt2801_ai_pgl_bipolar = {
 		BIP_RANGE(0.1),
 		BIP_RANGE(0.02)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 #if 0
 /* ignore 'defined but not used' warning */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const struct comedi_lrange range_dt2801_ai_pgh_unipolar = { 4, {
 								       RANGE(0,
@@ -172,6 +188,8 @@ static const struct comedi_lrange range_dt2801_ai_pgl_unipolar = { 4, {
 									     0.02),
 								       }
 =======
+=======
+>>>>>>> v3.18
 static const struct comedi_lrange range_dt2801_ai_pgh_unipolar = {
 	4, {
 		UNI_RANGE(10),
@@ -188,6 +206,9 @@ static const struct comedi_lrange range_dt2801_ai_pgl_unipolar = {
 		UNI_RANGE(0.1),
 		UNI_RANGE(0.02)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -274,9 +295,13 @@ static const struct dt2801_board boardtypes[] = {
 
 struct dt2801_private {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	const struct comedi_lrange *dac_range_types[2];
 	unsigned int ao_readback[2];
+=======
+	const struct comedi_lrange *dac_range_types[2];
+>>>>>>> v3.18
 =======
 	const struct comedi_lrange *dac_range_types[2];
 >>>>>>> v3.18
@@ -312,7 +337,12 @@ static int dt2801_readdata(struct comedi_device *dev, int *data)
 static int dt2801_readdata2(struct comedi_device *dev, int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int lb, hb;
+=======
+	int lb = 0;
+	int hb = 0;
+>>>>>>> v3.18
 =======
 	int lb = 0;
 	int hb = 0;
@@ -345,6 +375,7 @@ static int dt2801_writedata(struct comedi_device *dev, unsigned int data)
 			return 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if 0
 		if (stat & DT_S_READY) {
 			printk
@@ -352,6 +383,8 @@ static int dt2801_writedata(struct comedi_device *dev, unsigned int data)
 			return -EIO;
 		}
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} while (--timeout > 0);
@@ -394,7 +427,11 @@ static int dt2801_wait_for_ready(struct comedi_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dt2801_writecmd(struct comedi_device *dev, int command)
+=======
+static void dt2801_writecmd(struct comedi_device *dev, int command)
+>>>>>>> v3.18
 =======
 static void dt2801_writecmd(struct comedi_device *dev, int command)
 >>>>>>> v3.18
@@ -406,6 +443,7 @@ static void dt2801_writecmd(struct comedi_device *dev, int command)
 	stat = inb_p(dev->iobase + DT2801_STATUS);
 	if (stat & DT_S_COMPOSITE_ERROR) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk
 		    ("dt2801: composite-error in dt2801_writecmd(), ignoring\n");
 	}
@@ -415,12 +453,17 @@ static void dt2801_writecmd(struct comedi_device *dev, int command)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev->class_dev,
 			"composite-error in %s, ignoring\n", __func__);
 	}
 	if (!(stat & DT_S_READY))
 		dev_dbg(dev->class_dev, "!ready in %s, ignoring\n", __func__);
 	outb_p(command, dev->iobase + DT2801_CMD);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -431,10 +474,13 @@ static int dt2801_reset(struct comedi_device *dev)
 	int timeout;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DPRINTK("dt2801: resetting board...\n");
 	DPRINTK("fingerprint: 0x%02x 0x%02x\n", inb_p(dev->iobase),
 		inb_p(dev->iobase + 1));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* pull random data from data port */
@@ -444,7 +490,10 @@ static int dt2801_reset(struct comedi_device *dev)
 	inb_p(dev->iobase + DT2801_DATA);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DPRINTK("dt2801: stop\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* dt2801_writecmd(dev,DT_C_STOP); */
@@ -460,6 +509,7 @@ static int dt2801_reset(struct comedi_device *dev)
 	} while (timeout--);
 	if (!timeout)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("dt2801: timeout 1 status=0x%02x\n", stat);
 
 	/* printk("dt2801: reading dummy\n"); */
@@ -467,10 +517,15 @@ static int dt2801_reset(struct comedi_device *dev)
 
 	DPRINTK("dt2801: reset\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev->class_dev, "timeout 1 status=0x%02x\n", stat);
 
 	/* dt2801_readdata(dev,&board_code); */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	outb_p(DT_C_RESET, dev->iobase + DT2801_CMD);
 	/* dt2801_writecmd(dev,DT_C_RESET); */
@@ -484,6 +539,7 @@ static int dt2801_reset(struct comedi_device *dev)
 	} while (timeout--);
 	if (!timeout)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("dt2801: timeout 2 status=0x%02x\n", stat);
 
 	DPRINTK("dt2801: reading code\n");
@@ -492,10 +548,15 @@ static int dt2801_reset(struct comedi_device *dev)
 	DPRINTK("dt2801: ok.  code=0x%02x\n", board_code);
 
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(dev->class_dev, "timeout 2 status=0x%02x\n", stat);
 
 	dt2801_readdata(dev, &board_code);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return board_code;
 }
@@ -508,7 +569,11 @@ static int probe_number_of_ai_chans(struct comedi_device *dev)
 
 	for (n_chans = 0; n_chans < 16; n_chans++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		stat = dt2801_writecmd(dev, DT_C_READ_ADIM);
+=======
+		dt2801_writecmd(dev, DT_C_READ_ADIM);
+>>>>>>> v3.18
 =======
 		dt2801_writecmd(dev, DT_C_READ_ADIM);
 >>>>>>> v3.18
@@ -561,6 +626,7 @@ static int dt2801_error(struct comedi_device *dev, int stat)
 	if (stat < 0) {
 		if (stat == -ETIME)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("dt2801: timeout\n");
 		else
 			printk("dt2801: error %d\n", stat);
@@ -568,12 +634,17 @@ static int dt2801_error(struct comedi_device *dev, int stat)
 	}
 	printk("dt2801: error status 0x%02x, resetting...\n", stat);
 =======
+=======
+>>>>>>> v3.18
 			dev_dbg(dev->class_dev, "timeout\n");
 		else
 			dev_dbg(dev->class_dev, "error %d\n", stat);
 		return stat;
 	}
 	dev_dbg(dev->class_dev, "error status 0x%02x, resetting...\n", stat);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dt2801_reset(dev);
@@ -592,7 +663,11 @@ static int dt2801_ai_insn_read(struct comedi_device *dev,
 
 	for (i = 0; i < insn->n; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		stat = dt2801_writecmd(dev, DT_C_READ_ADIM);
+=======
+		dt2801_writecmd(dev, DT_C_READ_ADIM);
+>>>>>>> v3.18
 =======
 		dt2801_writecmd(dev, DT_C_READ_ADIM);
 >>>>>>> v3.18
@@ -609,6 +684,7 @@ static int dt2801_ai_insn_read(struct comedi_device *dev,
 	return i;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int dt2801_ao_insn_read(struct comedi_device *dev,
 			       struct comedi_subdevice *s,
@@ -633,6 +709,8 @@ static int dt2801_ao_insn_write(struct comedi_device *dev,
 
 	devpriv->ao_readback[CR_CHAN(insn->chanspec)] = data[0];
 =======
+=======
+>>>>>>> v3.18
 static int dt2801_ao_insn_write(struct comedi_device *dev,
 				struct comedi_subdevice *s,
 				struct comedi_insn *insn,
@@ -645,6 +723,9 @@ static int dt2801_ao_insn_write(struct comedi_device *dev,
 	dt2801_writedata2(dev, data[0]);
 
 	s->readback[chan] = data[0];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -652,6 +733,7 @@ static int dt2801_ao_insn_write(struct comedi_device *dev,
 
 static int dt2801_dio_insn_bits(struct comedi_device *dev,
 				struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				struct comedi_insn *insn, unsigned int *data)
 {
@@ -664,6 +746,8 @@ static int dt2801_dio_insn_bits(struct comedi_device *dev,
 		s->state &= ~data[0];
 		s->state |= (data[0] & data[1]);
 =======
+=======
+>>>>>>> v3.18
 				struct comedi_insn *insn,
 				unsigned int *data)
 {
@@ -671,22 +755,31 @@ static int dt2801_dio_insn_bits(struct comedi_device *dev,
 	unsigned int val = 0;
 
 	if (comedi_dio_update_state(s, data)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dt2801_writecmd(dev, DT_C_WRITE_DIG);
 		dt2801_writedata(dev, which);
 		dt2801_writedata(dev, s->state);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dt2801_writecmd(dev, DT_C_READ_DIG);
 	dt2801_writedata(dev, which);
 	dt2801_readdata(dev, data + 1);
 =======
+=======
+>>>>>>> v3.18
 
 	dt2801_writecmd(dev, DT_C_READ_DIG);
 	dt2801_writedata(dev, which);
 	dt2801_readdata(dev, &val);
 
 	data[1] = val;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return insn->n;
@@ -694,6 +787,7 @@ static int dt2801_dio_insn_bits(struct comedi_device *dev,
 
 static int dt2801_dio_insn_config(struct comedi_device *dev,
 				  struct comedi_subdevice *s,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				  struct comedi_insn *insn, unsigned int *data)
 {
@@ -722,6 +816,8 @@ static int dt2801_dio_insn_config(struct comedi_device *dev,
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 				  struct comedi_insn *insn,
 				  unsigned int *data)
 {
@@ -735,6 +831,9 @@ static int dt2801_dio_insn_config(struct comedi_device *dev,
 	dt2801_writedata(dev, (s == &dev->subdevices[3]) ? 1 : 0);
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -750,7 +849,11 @@ static int dt2801_dio_insn_config(struct comedi_device *dev,
 static int dt2801_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dt2801_board *board = comedi_board(dev);
+=======
+	const struct dt2801_board *board;
+>>>>>>> v3.18
 =======
 	const struct dt2801_board *board;
 >>>>>>> v3.18
@@ -761,7 +864,11 @@ static int dt2801_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	int n_ai_chans;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = comedi_request_region(dev, it->options[0], DT2801_IOSIZE);
+=======
+	ret = comedi_request_region(dev, it->options[0], 0x2);
+>>>>>>> v3.18
 =======
 	ret = comedi_request_region(dev, it->options[0], 0x2);
 >>>>>>> v3.18
@@ -781,8 +888,13 @@ static int dt2801_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 			goto havetype;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("dt2801: unrecognized board code=0x%02x, contact author\n",
 	       board_code);
+=======
+	dev_dbg(dev->class_dev,
+		"unrecognized board code=0x%02x, contact author\n", board_code);
+>>>>>>> v3.18
 =======
 	dev_dbg(dev->class_dev,
 		"unrecognized board code=0x%02x, contact author\n", board_code);
@@ -792,7 +904,11 @@ static int dt2801_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 havetype:
 	dev->board_ptr = boardtypes + type;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	board = comedi_board(dev);
+=======
+	board = dev->board_ptr;
+>>>>>>> v3.18
 =======
 	board = dev->board_ptr;
 >>>>>>> v3.18
@@ -804,10 +920,16 @@ havetype:
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	devpriv = kzalloc(sizeof(*devpriv), GFP_KERNEL);
 	if (!devpriv)
 		return -ENOMEM;
 	dev->private = devpriv;
+=======
+	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
+	if (!devpriv)
+		return -ENOMEM;
+>>>>>>> v3.18
 =======
 	devpriv = comedi_alloc_devpriv(dev, sizeof(*devpriv));
 	if (!devpriv)
@@ -842,15 +964,21 @@ havetype:
 	devpriv->dac_range_types[0] = dac_range_lkup(it->options[4]);
 	devpriv->dac_range_types[1] = dac_range_lkup(it->options[5]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->insn_read = dt2801_ao_insn_read;
 	s->insn_write = dt2801_ao_insn_write;
 =======
+=======
+>>>>>>> v3.18
 	s->insn_write = dt2801_ao_insn_write;
 	s->insn_read = comedi_readback_insn_read;
 
 	ret = comedi_alloc_subdev_readback(s);
 	if (ret)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	s = &dev->subdevices[2];

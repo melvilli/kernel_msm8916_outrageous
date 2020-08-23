@@ -10,7 +10,10 @@ config FIREWIRE_SERIAL
 	  To compile this driver as a module, say M here:  the module will
 	  be called firewire-serial.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 if FIREWIRE_SERIAL
 
@@ -31,4 +34,7 @@ config FWTTY_MAX_CARD_PORTS
 	  is set with the module parameter "ttys".
 
 endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

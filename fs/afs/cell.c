@@ -180,7 +180,11 @@ struct afs_cell *afs_cell_create(const char *name, unsigned namesz,
 	cell->cache = fscache_acquire_cookie(afs_cache_netfs.primary_index,
 					     &afs_cell_cache_index_def,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					     cell);
+=======
+					     cell, true);
+>>>>>>> v3.18
 =======
 					     cell, true);
 >>>>>>> v3.18

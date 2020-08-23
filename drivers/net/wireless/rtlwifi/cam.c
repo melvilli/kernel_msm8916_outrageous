@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -30,10 +33,16 @@
  *
  *****************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/export.h>
 #include "wifi.h"
 #include "cam.h"
+=======
+#include "wifi.h"
+#include "cam.h"
+#include <linux/export.h>
+>>>>>>> v3.18
 =======
 #include "wifi.h"
 #include "cam.h"
@@ -62,8 +71,13 @@ static void rtl_cam_program_entry(struct ieee80211_hw *hw, u32 entry_no,
 	u8 entry_i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD, "key_cont_128: %6phC\n",
 		 key_cont_128);
+=======
+	RT_PRINT_DATA(rtlpriv, COMP_SEC, DBG_DMESG, "Key content :",
+		      key_cont_128, 16);
+>>>>>>> v3.18
 =======
 	RT_PRINT_DATA(rtlpriv, COMP_SEC, DBG_DMESG, "Key content :",
 		      key_cont_128, 16);
@@ -83,12 +97,15 @@ static void rtl_cam_program_entry(struct ieee80211_hw *hw, u32 entry_no,
 					target_command);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD, "WRITE %x: %x\n",
 				 rtlpriv->cfg->maps[WCAMI], target_content);
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
 				 "The Key ID is %d\n", entry_no);
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD, "WRITE %x: %x\n",
 =======
+=======
+>>>>>>> v3.18
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
 				 "WRITE %x: %x\n",
 				 rtlpriv->cfg->maps[WCAMI], target_content);
@@ -96,6 +113,9 @@ static void rtl_cam_program_entry(struct ieee80211_hw *hw, u32 entry_no,
 				 "The Key ID is %d\n", entry_no);
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
 				 "WRITE %x: %x\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 rtlpriv->cfg->maps[RWCAM], target_command);
 
@@ -112,15 +132,21 @@ static void rtl_cam_program_entry(struct ieee80211_hw *hw, u32 entry_no,
 					target_command);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD, "WRITE A4: %x\n",
 				 target_content);
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD, "WRITE A0: %x\n",
 				 target_command);
 =======
+=======
+>>>>>>> v3.18
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
 				 "WRITE A4: %x\n", target_content);
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
 				 "WRITE A0: %x\n", target_command);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		} else {
@@ -139,6 +165,7 @@ static void rtl_cam_program_entry(struct ieee80211_hw *hw, u32 entry_no,
 			udelay(100);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD, "WRITE A4: %x\n",
 				 target_content);
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD, "WRITE A0: %x\n",
@@ -149,6 +176,8 @@ static void rtl_cam_program_entry(struct ieee80211_hw *hw, u32 entry_no,
 	RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD, "after set key, usconfig:%x\n",
 		 us_config);
 =======
+=======
+>>>>>>> v3.18
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
 				 "WRITE A4: %x\n", target_content);
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
@@ -158,6 +187,9 @@ static void rtl_cam_program_entry(struct ieee80211_hw *hw, u32 entry_no,
 
 	RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
 		 "after set key, usconfig:%x\n", us_config);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -169,7 +201,11 @@ u8 rtl_cam_add_one_entry(struct ieee80211_hw *hw, u8 *mac_addr,
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
+=======
+	RT_TRACE(rtlpriv, COMP_SEC, DBG_DMESG,
+>>>>>>> v3.18
 =======
 	RT_TRACE(rtlpriv, COMP_SEC, DBG_DMESG,
 >>>>>>> v3.18
@@ -179,6 +215,7 @@ u8 rtl_cam_add_one_entry(struct ieee80211_hw *hw, u8 *mac_addr,
 
 	if (ul_key_id == TOTAL_CAM_ENTRY) {
 		RT_TRACE(rtlpriv, COMP_ERR, DBG_WARNING,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			 "<=== ulKeyId exceed!\n");
 		return 0;
@@ -195,6 +232,8 @@ u8 rtl_cam_add_one_entry(struct ieee80211_hw *hw, u8 *mac_addr,
 
 	RT_TRACE(rtlpriv, COMP_SEC, DBG_DMESG, "<===\n");
 =======
+=======
+>>>>>>> v3.18
 			 "ulKeyId exceed!\n");
 		return 0;
 	}
@@ -208,6 +247,9 @@ u8 rtl_cam_add_one_entry(struct ieee80211_hw *hw, u8 *mac_addr,
 			      (u8 *)key_content, us_config);
 
 	RT_TRACE(rtlpriv, COMP_SEC, DBG_DMESG, "end\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 1;
@@ -353,7 +395,12 @@ u8 rtl_cam_get_free_entry(struct ieee80211_hw *hw, u8 *sta_addr)
 
 	if (NULL == sta_addr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RT_TRACE(rtlpriv, COMP_SEC, DBG_EMERG, "sta_addr is NULL\n");
+=======
+		RT_TRACE(rtlpriv, COMP_SEC, DBG_EMERG,
+			 "sta_addr is NULL.\n");
+>>>>>>> v3.18
 =======
 		RT_TRACE(rtlpriv, COMP_SEC, DBG_EMERG,
 			 "sta_addr is NULL.\n");
@@ -364,7 +411,11 @@ u8 rtl_cam_get_free_entry(struct ieee80211_hw *hw, u8 *sta_addr)
 	for (i = 4; i < TOTAL_CAM_ENTRY; i++) {
 		addr = rtlpriv->sec.hwsec_cam_sta_addr[i];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (memcmp(addr, sta_addr, ETH_ALEN) == 0)
+=======
+		if (ether_addr_equal_unaligned(addr, sta_addr))
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal_unaligned(addr, sta_addr))
 >>>>>>> v3.18
@@ -395,7 +446,13 @@ void rtl_cam_del_entry(struct ieee80211_hw *hw, u8 *sta_addr)
 
 	if (NULL == sta_addr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		RT_TRACE(rtlpriv, COMP_SEC, DBG_EMERG, "sta_addr is NULL\n");
+=======
+		RT_TRACE(rtlpriv, COMP_SEC, DBG_EMERG,
+			 "sta_addr is NULL.\n");
+		return;
+>>>>>>> v3.18
 =======
 		RT_TRACE(rtlpriv, COMP_SEC, DBG_EMERG,
 			 "sta_addr is NULL.\n");
@@ -414,6 +471,7 @@ void rtl_cam_del_entry(struct ieee80211_hw *hw, u8 *sta_addr)
 		bitmap = (rtlpriv->sec.hwsec_cam_bitmap) >> i;
 		if (((bitmap & BIT(0)) == BIT(0)) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    (memcmp(addr, sta_addr, ETH_ALEN) == 0)) {
 			/* Remove from HW Security CAM */
 			eth_zero_addr(rtlpriv->sec.hwsec_cam_sta_addr[i]);
@@ -421,12 +479,17 @@ void rtl_cam_del_entry(struct ieee80211_hw *hw, u8 *sta_addr)
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_LOUD,
 				 "del CAM entry %d\n", i);
 =======
+=======
+>>>>>>> v3.18
 		    (ether_addr_equal_unaligned(addr, sta_addr))) {
 			/* Remove from HW Security CAM */
 			eth_zero_addr(rtlpriv->sec.hwsec_cam_sta_addr[i]);
 			rtlpriv->sec.hwsec_cam_bitmap &= ~(BIT(0) << i);
 			RT_TRACE(rtlpriv, COMP_SEC, DBG_DMESG,
 				 "&&&&&&&&&del entry %d\n", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}

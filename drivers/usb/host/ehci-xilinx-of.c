@@ -32,6 +32,10 @@
 #include <linux/of_platform.h>
 #include <linux/of_address.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_irq.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_irq.h>
 >>>>>>> v3.18
@@ -84,7 +88,11 @@ static const struct hc_driver ehci_xilinx_of_hc_driver = {
 	 */
 	.irq			= ehci_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.flags			= HCD_MEMORY | HCD_USB2,
+=======
+	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
+>>>>>>> v3.18
 =======
 	.flags			= HCD_MEMORY | HCD_USB2 | HCD_BH,
 >>>>>>> v3.18
@@ -164,7 +172,12 @@ static int ehci_hcd_xilinx_of_probe(struct platform_device *op)
 	irq = irq_of_parse_and_map(dn, 0);
 	if (!irq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "%s: irq_of_parse_and_map failed\n", __FILE__);
+=======
+		dev_err(&op->dev, "%s: irq_of_parse_and_map failed\n",
+			__FILE__);
+>>>>>>> v3.18
 =======
 		dev_err(&op->dev, "%s: irq_of_parse_and_map failed\n",
 			__FILE__);
@@ -205,13 +218,19 @@ static int ehci_hcd_xilinx_of_probe(struct platform_device *op)
 
 	rv = usb_add_hcd(hcd, irq, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (rv == 0)
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (rv == 0) {
 		device_wakeup_enable(hcd->self.controller);
 		return 0;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 err_irq:
@@ -230,8 +249,12 @@ err_irq:
 static int ehci_hcd_xilinx_of_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct usb_hcd *hcd = dev_get_drvdata(&op->dev);
 	dev_set_drvdata(&op->dev, NULL);
+=======
+	struct usb_hcd *hcd = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct usb_hcd *hcd = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -245,6 +268,7 @@ static int ehci_hcd_xilinx_of_remove(struct platform_device *op)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /**
  * ehci_hcd_xilinx_of_shutdown - shutdown the hcd
@@ -263,6 +287,8 @@ static void ehci_hcd_xilinx_of_shutdown(struct platform_device *op)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static const struct of_device_id ehci_hcd_xilinx_of_match[] = {
 		{.compatible = "xlnx,xps-usb-host-1.00.a",},
 	{},
@@ -273,7 +299,11 @@ static struct platform_driver ehci_hcd_xilinx_of_driver = {
 	.probe		= ehci_hcd_xilinx_of_probe,
 	.remove		= ehci_hcd_xilinx_of_remove,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.shutdown	= ehci_hcd_xilinx_of_shutdown,
+=======
+	.shutdown	= usb_hcd_platform_shutdown,
+>>>>>>> v3.18
 =======
 	.shutdown	= usb_hcd_platform_shutdown,
 >>>>>>> v3.18

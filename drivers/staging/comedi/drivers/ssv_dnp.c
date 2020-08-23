@@ -16,11 +16,14 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 */
@@ -35,6 +38,10 @@ Status: unknown
 /* include files ----------------------------------------------------------- */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
 #include <linux/module.h>
 >>>>>>> v3.18
@@ -57,6 +64,7 @@ Status: unknown
 #define PCMR  0xa3		/* Port C Mode Register                      */
 #define PCDR  0xa7		/* Port C Data Register                      */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* ------------------------------------------------------------------------- */
 /* The insn_bits interface allows packed reading/writing of DIO channels.    */
@@ -168,6 +176,8 @@ static int dnp_dio_insn_config(struct comedi_device *dev,
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 static int dnp_dio_insn_bits(struct comedi_device *dev,
 			     struct comedi_subdevice *s,
 			     struct comedi_insn *insn,
@@ -249,6 +259,9 @@ static int dnp_dio_insn_config(struct comedi_device *dev,
 	outb(val, CSCDR);
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 }
@@ -285,8 +298,12 @@ static int dnp_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	outb((inb(CSCDR) & 0xAA), CSCDR);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_info(dev->class_dev, "%s: attached\n", dev->board_name);
 	return 1;
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18

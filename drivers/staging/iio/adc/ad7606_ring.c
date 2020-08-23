@@ -47,7 +47,10 @@ static void ad7606_poll_bh_to_ring(struct work_struct *work_s)
 						poll_work);
 	struct iio_dev *indio_dev = iio_priv_to_dev(st);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s64 time_ns;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	__u8 *buf;
@@ -82,12 +85,16 @@ static void ad7606_poll_bh_to_ring(struct work_struct *work_s)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	time_ns = iio_get_time_ns();
 
 	if (indio_dev->scan_timestamp)
 		*((s64 *)(buf + indio_dev->scan_bytes - sizeof(s64))) = time_ns;
 
 	iio_push_to_buffers(indio_dev, buf);
+=======
+	iio_push_to_buffers_with_timestamp(indio_dev, buf, iio_get_time_ns());
+>>>>>>> v3.18
 =======
 	iio_push_to_buffers_with_timestamp(indio_dev, buf, iio_get_time_ns());
 >>>>>>> v3.18

@@ -47,7 +47,11 @@
 static cycle_t au1x_counter1_read(struct clocksource *cs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return au_readl(SYS_RTCREAD);
+=======
+	return alchemy_rdsys(AU1000_SYS_RTCREAD);
+>>>>>>> v3.18
 =======
 	return alchemy_rdsys(AU1000_SYS_RTCREAD);
 >>>>>>> v3.18
@@ -65,6 +69,7 @@ static int au1x_rtcmatch2_set_next_event(unsigned long delta,
 					 struct clock_event_device *cd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	delta += au_readl(SYS_RTCREAD);
 	/* wait for register access */
 	while (au_readl(SYS_COUNTER_CNTRL) & SYS_CNTRL_M21)
@@ -72,11 +77,16 @@ static int au1x_rtcmatch2_set_next_event(unsigned long delta,
 	au_writel(delta, SYS_RTCMATCH2);
 	au_sync();
 =======
+=======
+>>>>>>> v3.18
 	delta += alchemy_rdsys(AU1000_SYS_RTCREAD);
 	/* wait for register access */
 	while (alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_M21)
 		;
 	alchemy_wrsys(delta, AU1000_SYS_RTCMATCH2);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -125,7 +135,11 @@ static int __init alchemy_time_init(unsigned int m2int)
 	 * edge is detected, hence the timeouts).
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (CNTR_OK != (au_readl(SYS_COUNTER_CNTRL) & CNTR_OK))
+=======
+	if (CNTR_OK != (alchemy_rdsys(AU1000_SYS_CNTRCTRL) & CNTR_OK))
+>>>>>>> v3.18
 =======
 	if (CNTR_OK != (alchemy_rdsys(AU1000_SYS_CNTRCTRL) & CNTR_OK))
 >>>>>>> v3.18
@@ -136,7 +150,11 @@ static int __init alchemy_time_init(unsigned int m2int)
 	 */
 	t = 0xffffff;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while ((au_readl(SYS_COUNTER_CNTRL) & SYS_CNTRL_T1S) && --t)
+=======
+	while ((alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_T1S) && --t)
+>>>>>>> v3.18
 =======
 	while ((alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_T1S) && --t)
 >>>>>>> v3.18
@@ -144,6 +162,7 @@ static int __init alchemy_time_init(unsigned int m2int)
 	if (!t)
 		goto cntr_err;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	au_writel(0, SYS_RTCTRIM);	/* 32.768 kHz */
 	au_sync();
@@ -159,6 +178,8 @@ static int __init alchemy_time_init(unsigned int m2int)
 	t = 0xffffff;
 	while ((au_readl(SYS_COUNTER_CNTRL) & SYS_CNTRL_C1S) && --t)
 =======
+=======
+>>>>>>> v3.18
 	alchemy_wrsys(0, AU1000_SYS_RTCTRIM);	/* 32.768 kHz */
 
 	t = 0xffffff;
@@ -170,6 +191,9 @@ static int __init alchemy_time_init(unsigned int m2int)
 
 	t = 0xffffff;
 	while ((alchemy_rdsys(AU1000_SYS_CNTRCTRL) & SYS_CNTRL_C1S) && --t)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		asm volatile ("nop");
 	if (!t)

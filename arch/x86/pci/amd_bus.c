@@ -12,6 +12,7 @@
 #include "bus_numa.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * This discovers the pcibus <-> node mapping on AMD K8.
  * also get peer root bus resource for io,mmio
@@ -34,6 +35,8 @@ static struct pci_hostbridge_probe pci_probes[] __initdata = {
 #define RANGE_NUM 16
 
 =======
+=======
+>>>>>>> v3.18
 #define AMD_NB_F0_NODE_ID			0x60
 #define AMD_NB_F0_UNIT_ID			0x64
 #define AMD_NB_F1_CONFIG_MAP_REG		0xe0
@@ -61,6 +64,9 @@ static struct amd_hostbridge hb_probes[] __initdata = {
 	{ 0, 0x18, 0x1600 }, /* Family15h */
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct pci_root_info __init *find_pci_root_info(int node, int link)
 {
@@ -74,6 +80,7 @@ static struct pci_root_info __init *find_pci_root_info(int node, int link)
 	return NULL;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void __init set_mp_bus_range_to_node(int min_bus, int max_bus, int node)
 {
@@ -92,6 +99,8 @@ static void __init set_mp_bus_range_to_node(int min_bus, int max_bus, int node)
  */
 static int __init early_fill_mp_bus_info(void)
 =======
+=======
+>>>>>>> v3.18
 /**
  * early_root_info_init()
  * called before pcibios_scan_root and pci_scan_bus
@@ -99,6 +108,9 @@ static int __init early_fill_mp_bus_info(void)
  * to the LDT Bus Number Registers found in the northbridge.
  */
 static int __init early_root_info_init(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	int i;
@@ -125,7 +137,11 @@ static int __init early_root_info_init(void)
 
 	found = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < ARRAY_SIZE(pci_probes); i++) {
+=======
+	for (i = 0; i < ARRAY_SIZE(hb_probes); i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < ARRAY_SIZE(hb_probes); i++) {
 >>>>>>> v3.18
@@ -133,6 +149,7 @@ static int __init early_root_info_init(void)
 		u16 device;
 		u16 vendor;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		bus = pci_probes[i].bus;
 		slot = pci_probes[i].slot;
@@ -143,6 +160,8 @@ static int __init early_root_info_init(void)
 		if (pci_probes[i].vendor == vendor &&
 		    pci_probes[i].device == device) {
 =======
+=======
+>>>>>>> v3.18
 		bus = hb_probes[i].bus;
 		slot = hb_probes[i].slot;
 		id = read_pci_config(bus, slot, 0, PCI_VENDOR_ID);
@@ -153,6 +172,9 @@ static int __init early_root_info_init(void)
 			continue;
 
 		if (hb_probes[i].device == device) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			found = true;
 			break;
@@ -163,11 +185,14 @@ static int __init early_root_info_init(void)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 0; i < 4; i++) {
 		int min_bus;
 		int max_bus;
 		reg = read_pci_config(bus, slot, 1, 0xe0 + (i << 2));
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * We should learn topology and routing information from _PXM and
 	 * _CRS methods in the ACPI namespace.  We extract node numbers
@@ -178,6 +203,9 @@ static int __init early_root_info_init(void)
 		int max_bus;
 		reg = read_pci_config(bus, slot, 1,
 				AMD_NB_F1_CONFIG_MAP_REG + (i << 2));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* Check if that register is enabled for bus range */
@@ -188,7 +216,10 @@ static int __init early_root_info_init(void)
 		max_bus = (reg >> 24) & 0xff;
 		node = (reg >> 4) & 0x07;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		set_mp_bus_range_to_node(min_bus, max_bus, node);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		link = (reg >> 8) & 0x03;
@@ -197,11 +228,14 @@ static int __init early_root_info_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* get the default node and link for left over res */
 	reg = read_pci_config(bus, slot, 0, 0x60);
 	def_node = (reg >> 8) & 0x07;
 	reg = read_pci_config(bus, slot, 0, 0x64);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The following code extracts routing information for use on old
 	 * systems where Linux doesn't automatically use host bridge _CRS
@@ -217,6 +251,9 @@ static int __init early_root_info_init(void)
 	reg = read_pci_config(bus, slot, 0, AMD_NB_F0_NODE_ID);
 	def_node = (reg >> 8) & 0x07;
 	reg = read_pci_config(bus, slot, 0, AMD_NB_F0_UNIT_ID);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	def_link = (reg >> 8) & 0x03;
 
@@ -404,7 +441,11 @@ static int __init early_root_info_init(void)
 #define ENABLE_CF8_EXT_CFG      (1ULL << 46)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit enable_pci_io_ecs(void *unused)
+=======
+static void enable_pci_io_ecs(void *unused)
+>>>>>>> v3.18
 =======
 static void enable_pci_io_ecs(void *unused)
 >>>>>>> v3.18
@@ -418,8 +459,13 @@ static void enable_pci_io_ecs(void *unused)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit amd_cpu_notify(struct notifier_block *self,
 				    unsigned long action, void *hcpu)
+=======
+static int amd_cpu_notify(struct notifier_block *self, unsigned long action,
+			  void *hcpu)
+>>>>>>> v3.18
 =======
 static int amd_cpu_notify(struct notifier_block *self, unsigned long action,
 			  void *hcpu)
@@ -438,7 +484,11 @@ static int amd_cpu_notify(struct notifier_block *self, unsigned long action,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata amd_cpu_notifier = {
+=======
+static struct notifier_block amd_cpu_notifier = {
+>>>>>>> v3.18
 =======
 static struct notifier_block amd_cpu_notifier = {
 >>>>>>> v3.18
@@ -478,7 +528,11 @@ static int __init pci_io_ecs_init(void)
 
 	/* assume all cpus from fam10h have IO ECS */
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (boot_cpu_data.x86 < 0x10)
+=======
+	if (boot_cpu_data.x86 < 0x10)
+>>>>>>> v3.18
 =======
 	if (boot_cpu_data.x86 < 0x10)
 >>>>>>> v3.18
@@ -489,11 +543,14 @@ static int __init pci_io_ecs_init(void)
 		pci_enable_pci_io_ecs();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_cpu_notifier(&amd_cpu_notifier);
 	for_each_online_cpu(cpu)
 		amd_cpu_notify(&amd_cpu_notifier, (unsigned long)CPU_ONLINE,
 			       (void *)(long)cpu);
 =======
+=======
+>>>>>>> v3.18
 	cpu_notifier_register_begin();
 	for_each_online_cpu(cpu)
 		amd_cpu_notify(&amd_cpu_notifier, (unsigned long)CPU_ONLINE,
@@ -501,6 +558,9 @@ static int __init pci_io_ecs_init(void)
 	__register_cpu_notifier(&amd_cpu_notifier);
 	cpu_notifier_register_done();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pci_probe |= PCI_HAS_IO_ECS;
 
@@ -513,7 +573,11 @@ static int __init amd_postcore_init(void)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	early_fill_mp_bus_info();
+=======
+	early_root_info_init();
+>>>>>>> v3.18
 =======
 	early_root_info_init();
 >>>>>>> v3.18

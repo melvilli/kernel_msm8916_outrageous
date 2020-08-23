@@ -138,6 +138,11 @@ MODULE_PARM_DESC(max_rds_errors, "RDS maximum block errors: *1*");
 #define UNUSED_REPORT		23
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MAX_REPORT_SIZE		64
+
+>>>>>>> v3.18
 =======
 #define MAX_REPORT_SIZE		64
 
@@ -148,8 +153,11 @@ MODULE_PARM_DESC(max_rds_errors, "RDS maximum block errors: *1*");
  * Software/Hardware Versions from Scratch Page
  **************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RADIO_SW_VERSION_NOT_BOOTLOADABLE	6
 #define RADIO_SW_VERSION			1
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define RADIO_HW_VERSION			1
@@ -219,7 +227,11 @@ MODULE_PARM_DESC(max_rds_errors, "RDS maximum block errors: *1*");
 static int si470x_get_report(struct si470x_device *radio, void *buf, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *report = (unsigned char *) buf;
+=======
+	unsigned char *report = buf;
+>>>>>>> v3.18
 =======
 	unsigned char *report = buf;
 >>>>>>> v3.18
@@ -246,7 +258,11 @@ static int si470x_get_report(struct si470x_device *radio, void *buf, int size)
 static int si470x_set_report(struct si470x_device *radio, void *buf, int size)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char *report = (unsigned char *) buf;
+=======
+	unsigned char *report = buf;
+>>>>>>> v3.18
 =======
 	unsigned char *report = buf;
 >>>>>>> v3.18
@@ -273,6 +289,7 @@ static int si470x_set_report(struct si470x_device *radio, void *buf, int size)
 int si470x_get_register(struct si470x_device *radio, int regnr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char buf[REGISTER_REPORT_SIZE];
 	int retval;
 
@@ -283,6 +300,8 @@ int si470x_get_register(struct si470x_device *radio, int regnr)
 	if (retval >= 0)
 		radio->registers[regnr] = get_unaligned_be16(&buf[1]);
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 
 	radio->usb_buf[0] = REGISTER_REPORT(regnr);
@@ -291,6 +310,9 @@ int si470x_get_register(struct si470x_device *radio, int regnr)
 
 	if (retval >= 0)
 		radio->registers[regnr] = get_unaligned_be16(&radio->usb_buf[1]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return (retval < 0) ? -EINVAL : 0;
@@ -303,6 +325,7 @@ int si470x_get_register(struct si470x_device *radio, int regnr)
 int si470x_set_register(struct si470x_device *radio, int regnr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char buf[REGISTER_REPORT_SIZE];
 	int retval;
 
@@ -311,12 +334,17 @@ int si470x_set_register(struct si470x_device *radio, int regnr)
 
 	retval = si470x_set_report(radio, (void *) &buf, sizeof(buf));
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 
 	radio->usb_buf[0] = REGISTER_REPORT(regnr);
 	put_unaligned_be16(radio->registers[regnr], &radio->usb_buf[1]);
 
 	retval = si470x_set_report(radio, radio->usb_buf, REGISTER_REPORT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return (retval < 0) ? -EINVAL : 0;
@@ -334,6 +362,7 @@ int si470x_set_register(struct si470x_device *radio, int regnr)
 static int si470x_get_all_registers(struct si470x_device *radio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char buf[ENTIRE_REPORT_SIZE];
 	int retval;
 	unsigned char regnr;
@@ -342,19 +371,28 @@ static int si470x_get_all_registers(struct si470x_device *radio)
 
 	retval = si470x_get_report(radio, (void *) &buf, sizeof(buf));
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 	unsigned char regnr;
 
 	radio->usb_buf[0] = ENTIRE_REPORT;
 
 	retval = si470x_get_report(radio, radio->usb_buf, ENTIRE_REPORT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (retval >= 0)
 		for (regnr = 0; regnr < RADIO_REGISTER_NUM; regnr++)
 			radio->registers[regnr] = get_unaligned_be16(
 <<<<<<< HEAD
+<<<<<<< HEAD
 				&buf[regnr * RADIO_REGISTER_SIZE + 1]);
+=======
+				&radio->usb_buf[regnr * RADIO_REGISTER_SIZE + 1]);
+>>>>>>> v3.18
 =======
 				&radio->usb_buf[regnr * RADIO_REGISTER_SIZE + 1]);
 >>>>>>> v3.18
@@ -375,6 +413,7 @@ static int si470x_set_led_state(struct si470x_device *radio,
 		unsigned char led_state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char buf[LED_REPORT_SIZE];
 	int retval;
 
@@ -384,6 +423,8 @@ static int si470x_set_led_state(struct si470x_device *radio,
 
 	retval = si470x_set_report(radio, (void *) &buf, sizeof(buf));
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 
 	radio->usb_buf[0] = LED_REPORT;
@@ -391,6 +432,9 @@ static int si470x_set_led_state(struct si470x_device *radio,
 	radio->usb_buf[2] = led_state;
 
 	retval = si470x_set_report(radio, radio->usb_buf, LED_REPORT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return (retval < 0) ? -EINVAL : 0;
@@ -408,6 +452,7 @@ static int si470x_set_led_state(struct si470x_device *radio,
 static int si470x_get_scratch_page_versions(struct si470x_device *radio)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char buf[SCRATCH_REPORT_SIZE];
 	int retval;
 
@@ -415,11 +460,16 @@ static int si470x_get_scratch_page_versions(struct si470x_device *radio)
 
 	retval = si470x_get_report(radio, (void *) &buf, sizeof(buf));
 =======
+=======
+>>>>>>> v3.18
 	int retval;
 
 	radio->usb_buf[0] = SCRATCH_REPORT;
 
 	retval = si470x_get_report(radio, radio->usb_buf, SCRATCH_REPORT_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (retval < 0)
@@ -427,8 +477,13 @@ static int si470x_get_scratch_page_versions(struct si470x_device *radio)
 			"si470x_get_report returned %d\n", retval);
 	else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		radio->software_version = buf[1];
 		radio->hardware_version = buf[2];
+=======
+		radio->software_version = radio->usb_buf[1];
+		radio->hardware_version = radio->usb_buf[2];
+>>>>>>> v3.18
 =======
 		radio->software_version = radio->usb_buf[1];
 		radio->hardware_version = radio->usb_buf[2];
@@ -584,6 +639,10 @@ static void si470x_usb_release(struct v4l2_device *v4l2_dev)
 	kfree(radio->int_in_buffer);
 	kfree(radio->buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	kfree(radio->usb_buf);
+>>>>>>> v3.18
 =======
 	kfree(radio->usb_buf);
 >>>>>>> v3.18
@@ -672,12 +731,18 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 		goto err_initial;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	radio->usb_buf = kmalloc(MAX_REPORT_SIZE, GFP_KERNEL);
 	if (radio->usb_buf == NULL) {
 		retval = -ENOMEM;
 		goto err_radio;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	radio->usbdev = interface_to_usbdev(intf);
 	radio->intf = intf;
@@ -691,9 +756,13 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 	for (i = 0; i < iface_desc->desc.bNumEndpoints; ++i) {
 		endpoint = &iface_desc->endpoint[i].desc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (((endpoint->bEndpointAddress & USB_ENDPOINT_DIR_MASK) ==
 		 USB_DIR_IN) && ((endpoint->bmAttributes &
 		 USB_ENDPOINT_XFERTYPE_MASK) == USB_ENDPOINT_XFER_INT))
+=======
+		if (usb_endpoint_is_int_in(endpoint))
+>>>>>>> v3.18
 =======
 		if (usb_endpoint_is_int_in(endpoint))
 >>>>>>> v3.18
@@ -703,7 +772,11 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 		dev_info(&intf->dev, "could not find interrupt in endpoint\n");
 		retval = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_radio;
+=======
+		goto err_usbbuf;
+>>>>>>> v3.18
 =======
 		goto err_usbbuf;
 >>>>>>> v3.18
@@ -716,7 +789,11 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 		dev_info(&intf->dev, "could not allocate int_in_buffer");
 		retval = -ENOMEM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err_radio;
+=======
+		goto err_usbbuf;
+>>>>>>> v3.18
 =======
 		goto err_usbbuf;
 >>>>>>> v3.18
@@ -731,7 +808,10 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 
 	radio->v4l2_dev.release = si470x_usb_release;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * The si470x SiLabs reference design uses the same USB IDs as
@@ -756,6 +836,9 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	retval = v4l2_device_register(&intf->dev, &radio->v4l2_dev);
 	if (retval < 0) {
@@ -779,7 +862,10 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 	radio->videodev.v4l2_dev = &radio->v4l2_dev;
 	radio->videodev.release = video_device_release_empty;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_bit(V4L2_FL_USE_FH_PRIO, &radio->videodev.flags);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	video_set_drvdata(&radio->videodev, radio);
@@ -809,6 +895,7 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 	dev_info(&intf->dev, "software version %d, hardware version %d\n",
 			radio->software_version, radio->hardware_version);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (radio->software_version < RADIO_SW_VERSION) {
 		dev_warn(&intf->dev,
 			"This driver is known to work with "
@@ -818,6 +905,8 @@ static int si470x_usb_driver_probe(struct usb_interface *intf,
 			radio->software_version);
 		version_warning = 1;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (radio->hardware_version < RADIO_HW_VERSION) {
@@ -884,6 +973,11 @@ err_urb:
 err_intbuffer:
 	kfree(radio->int_in_buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_usbbuf:
+	kfree(radio->usb_buf);
+>>>>>>> v3.18
 =======
 err_usbbuf:
 	kfree(radio->usb_buf);

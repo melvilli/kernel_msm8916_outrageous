@@ -98,8 +98,12 @@ static irqreturn_t avr32_perf_counter_interrupt(int irq, void *dev_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int avr32_perf_counter_create_files(struct super_block *sb,
 		struct dentry *root)
+=======
+static int avr32_perf_counter_create_files(struct dentry *root)
+>>>>>>> v3.18
 =======
 static int avr32_perf_counter_create_files(struct dentry *root)
 >>>>>>> v3.18
@@ -110,6 +114,7 @@ static int avr32_perf_counter_create_files(struct dentry *root)
 
 	for (i = 0; i < NR_counter; i++) {
 		snprintf(filename, sizeof(filename), "%u", i);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dir = oprofilefs_mkdir(sb, root, filename);
 
@@ -127,6 +132,8 @@ static int avr32_perf_counter_create_files(struct dentry *root)
 				&counter[i].user);
 		oprofilefs_create_ulong(sb, dir, "unit_mask",
 =======
+=======
+>>>>>>> v3.18
 		dir = oprofilefs_mkdir(root, filename);
 
 		oprofilefs_create_ulong(dir, "enabled",
@@ -142,6 +149,9 @@ static int avr32_perf_counter_create_files(struct dentry *root)
 		oprofilefs_create_ulong(dir, "user",
 				&counter[i].user);
 		oprofilefs_create_ulong(dir, "unit_mask",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				&counter[i].unit_mask);
 	}

@@ -76,7 +76,11 @@ int dccp_v4_connect(struct sock *sk, struct sockaddr *uaddr, int addr_len)
 			      RT_CONN_FLAGS(sk), sk->sk_bound_dev_if,
 			      IPPROTO_DCCP,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      orig_sport, orig_dport, sk, true);
+=======
+			      orig_sport, orig_dport, sk);
+>>>>>>> v3.18
 =======
 			      orig_sport, orig_dport, sk);
 >>>>>>> v3.18
@@ -179,6 +183,10 @@ static inline void dccp_do_pmtu_discovery(struct sock *sk,
 
 	if (inet->pmtudisc != IP_PMTUDISC_DONT &&
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	    ip_sk_accept_pmtu(sk) &&
+>>>>>>> v3.18
 =======
 	    ip_sk_accept_pmtu(sk) &&
 >>>>>>> v3.18
@@ -221,7 +229,11 @@ static void dccp_v4_err(struct sk_buff *skb, u32 info)
 	const struct iphdr *iph = (struct iphdr *)skb->data;
 	const u8 offset = iph->ihl << 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct dccp_hdr *dh;
+=======
+	const struct dccp_hdr *dh = (struct dccp_hdr *)(skb->data + offset);
+>>>>>>> v3.18
 =======
 	const struct dccp_hdr *dh = (struct dccp_hdr *)(skb->data + offset);
 >>>>>>> v3.18
@@ -235,6 +247,7 @@ static void dccp_v4_err(struct sk_buff *skb, u32 info)
 	struct net *net = dev_net(skb->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Only need dccph_dport & dccph_sport which are the first
 	 * 4 bytes in dccp header.
 	 * Our caller (icmp_socket_deliver()) already pulled 8 bytes for us.
@@ -243,11 +256,16 @@ static void dccp_v4_err(struct sk_buff *skb, u32 info)
 	BUILD_BUG_ON(offsetofend(struct dccp_hdr, dccph_dport) > 8);
 	dh = (struct dccp_hdr *)(skb->data + offset);
 =======
+=======
+>>>>>>> v3.18
 	if (skb->len < offset + sizeof(*dh) ||
 	    skb->len < offset + __dccp_basic_hdr_len(dh)) {
 		ICMP_INC_STATS_BH(net, ICMP_MIB_INERRORS);
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sk = inet_lookup(net, &dccp_hashinfo,
@@ -284,8 +302,12 @@ static void dccp_v4_err(struct sk_buff *skb, u32 info)
 	switch (type) {
 	case ICMP_REDIRECT:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!sock_owned_by_user(sk))
 			dccp_do_redirect(skb, sk);
+=======
+		dccp_do_redirect(skb, sk);
+>>>>>>> v3.18
 =======
 		dccp_do_redirect(skb, sk);
 >>>>>>> v3.18
@@ -437,9 +459,15 @@ struct sock *dccp_v4_request_recv_sock(struct sock *sk, struct sk_buff *skb,
 	newinet		   = inet_sk(newsk);
 	ireq		   = inet_rsk(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	newinet->inet_daddr	= ireq->rmt_addr;
 	newinet->inet_rcv_saddr = ireq->loc_addr;
 	newinet->inet_saddr	= ireq->loc_addr;
+=======
+	newinet->inet_daddr	= ireq->ir_rmt_addr;
+	newinet->inet_rcv_saddr = ireq->ir_loc_addr;
+	newinet->inet_saddr	= ireq->ir_loc_addr;
+>>>>>>> v3.18
 =======
 	newinet->inet_daddr	= ireq->ir_rmt_addr;
 	newinet->inet_rcv_saddr = ireq->ir_loc_addr;
@@ -550,15 +578,21 @@ static int dccp_v4_send_response(struct sock *sk, struct request_sock *req)
 		struct dccp_hdr *dh = dccp_hdr(skb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dh->dccph_checksum = dccp_v4_csum_finish(skb, ireq->loc_addr,
 							      ireq->rmt_addr);
 		err = ip_build_and_send_pkt(skb, sk, ireq->loc_addr,
 					    ireq->rmt_addr,
 =======
+=======
+>>>>>>> v3.18
 		dh->dccph_checksum = dccp_v4_csum_finish(skb, ireq->ir_loc_addr,
 							      ireq->ir_rmt_addr);
 		err = ip_build_and_send_pkt(skb, sk, ireq->ir_loc_addr,
 					    ireq->ir_rmt_addr,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					    ireq->opt);
 		err = net_xmit_eval(err);
@@ -682,8 +716,13 @@ int dccp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
 
 	ireq = inet_rsk(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ireq->loc_addr = ip_hdr(skb)->daddr;
 	ireq->rmt_addr = ip_hdr(skb)->saddr;
+=======
+	ireq->ir_loc_addr = ip_hdr(skb)->daddr;
+	ireq->ir_rmt_addr = ip_hdr(skb)->saddr;
+>>>>>>> v3.18
 =======
 	ireq->ir_loc_addr = ip_hdr(skb)->daddr;
 	ireq->ir_rmt_addr = ip_hdr(skb)->saddr;
@@ -1034,6 +1073,10 @@ static const struct net_protocol dccp_v4_protocol = {
 	.no_policy	= 1,
 	.netns_ok	= 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.icmp_strict_tag_validation = 1,
+>>>>>>> v3.18
 =======
 	.icmp_strict_tag_validation = 1,
 >>>>>>> v3.18
@@ -1072,7 +1115,10 @@ static struct inet_protosw dccp_v4_protosw = {
 	.prot		= &dccp_v4_prot,
 	.ops		= &inet_dccp_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.no_check	= 0,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.flags		= INET_PROTOSW_ICSK,

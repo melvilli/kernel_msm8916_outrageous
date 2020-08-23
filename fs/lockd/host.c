@@ -117,7 +117,11 @@ static struct nlm_host *nlm_alloc_host(struct nlm_lookup_host_info *ni,
 	else {
 		host = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		nsm = nsm_get_handle(ni->net, ni->sap, ni->salen,
+=======
+		nsm = nsm_get_handle(ni->sap, ni->salen,
+>>>>>>> v3.18
 =======
 		nsm = nsm_get_handle(ni->sap, ni->salen,
 >>>>>>> v3.18
@@ -539,7 +543,10 @@ static struct nlm_host *next_host_state(struct hlist_head *cache,
 /**
  * nlm_host_rebooted - Release all resources held by rebooted host
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @net:  network namespace
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * @info: pointer to decoded results of NLM_SM_NOTIFY call
@@ -548,7 +555,11 @@ static struct nlm_host *next_host_state(struct hlist_head *cache,
  * all resources held by that peer.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void nlm_host_rebooted(const struct net *net, const struct nlm_reboot *info)
+=======
+void nlm_host_rebooted(const struct nlm_reboot *info)
+>>>>>>> v3.18
 =======
 void nlm_host_rebooted(const struct nlm_reboot *info)
 >>>>>>> v3.18
@@ -557,7 +568,11 @@ void nlm_host_rebooted(const struct nlm_reboot *info)
 	struct nlm_host	*host;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nsm = nsm_reboot_lookup(net, info);
+=======
+	nsm = nsm_reboot_lookup(info);
+>>>>>>> v3.18
 =======
 	nsm = nsm_reboot_lookup(info);
 >>>>>>> v3.18

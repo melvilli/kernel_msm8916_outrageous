@@ -17,6 +17,7 @@ struct inode;
 struct gfs2_inode;
 struct gfs2_inum;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extern struct inode *gfs2_dir_search(struct inode *dir,
 				     const struct qstr *filename);
@@ -28,6 +29,8 @@ extern int gfs2_dir_del(struct gfs2_inode *dip, const struct dentry *dentry);
 extern int gfs2_dir_read(struct inode *inode, u64 *offset, void *opaque,
 			 filldir_t filldir, struct file_ra_state *f_ra);
 =======
+=======
+>>>>>>> v3.18
 struct buffer_head;
 struct gfs2_dirent;
 
@@ -54,6 +57,9 @@ static inline void gfs2_dir_no_add(struct gfs2_diradd *da)
 extern int gfs2_dir_del(struct gfs2_inode *dip, const struct dentry *dentry);
 extern int gfs2_dir_read(struct inode *inode, struct dir_context *ctx,
 			 struct file_ra_state *f_ra);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern int gfs2_dir_mvino(struct gfs2_inode *dip, const struct qstr *filename,
 			  const struct gfs2_inode *nip, unsigned int new_type);
@@ -62,7 +68,12 @@ extern int gfs2_dir_exhash_dealloc(struct gfs2_inode *dip);
 
 extern int gfs2_diradd_alloc_required(struct inode *dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      const struct qstr *filename);
+=======
+				      const struct qstr *filename,
+				      struct gfs2_diradd *da);
+>>>>>>> v3.18
 =======
 				      const struct qstr *filename,
 				      struct gfs2_diradd *da);

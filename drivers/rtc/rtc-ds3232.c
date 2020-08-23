@@ -58,6 +58,10 @@ struct ds3232 {
 	 */
 	struct mutex mutex;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool suspended;
+>>>>>>> v3.18
 =======
 	bool suspended;
 >>>>>>> v3.18
@@ -350,8 +354,11 @@ static irqreturn_t ds3232_irq(int irq, void *dev_id)
 
 	disable_irq_nosync(irq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_work(&ds3232->work);
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * If rtc as a wakeup source, can't schedule the work
@@ -361,6 +368,9 @@ static irqreturn_t ds3232_irq(int irq, void *dev_id)
 	if (!ds3232->suspended)
 		schedule_work(&ds3232->work);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return IRQ_HANDLED;
 }
@@ -380,6 +390,7 @@ static void ds3232_work(struct work_struct *work)
 	if (stat & DS3232_REG_SR_A1F) {
 		control = i2c_smbus_read_byte_data(client, DS3232_REG_CR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (control < 0)
 			goto out;
 		/* disable alarm1 interrupt */
@@ -397,6 +408,8 @@ out:
 	if (!ds3232->exiting)
 		enable_irq(client->irq);
 =======
+=======
+>>>>>>> v3.18
 		if (control < 0) {
 			pr_warn("Read DS3232 Control Register error."
 				"Disable IRQ%d.\n", client->irq);
@@ -417,6 +430,9 @@ out:
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unlock:
 	mutex_unlock(&ds3232->mutex);
@@ -451,6 +467,7 @@ static int ds3232_probe(struct i2c_client *client,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ds3232->rtc = devm_rtc_device_register(&client->dev, client->name,
 					  &ds3232_rtc_ops, THIS_MODULE);
 	if (IS_ERR(ds3232->rtc)) {
@@ -469,6 +486,8 @@ static int ds3232_probe(struct i2c_client *client,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (client->irq > 0) {
 		ret = devm_request_irq(&client->dev, client->irq, ds3232_irq,
 				       IRQF_SHARED, "ds3232", client);
@@ -480,6 +499,9 @@ static int ds3232_probe(struct i2c_client *client,
 	ds3232->rtc = devm_rtc_device_register(&client->dev, client->name,
 					  &ds3232_rtc_ops, THIS_MODULE);
 	return PTR_ERR_OR_ZERO(ds3232->rtc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -500,7 +522,10 @@ static int ds3232_remove(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int ds3232_suspend(struct device *dev)
 {
@@ -537,6 +562,9 @@ static const struct dev_pm_ops ds3232_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(ds3232_suspend, ds3232_resume)
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static const struct i2c_device_id ds3232_id[] = {
 	{ "ds3232", 0 },
@@ -549,6 +577,10 @@ static struct i2c_driver ds3232_driver = {
 		.name = "rtc-ds3232",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm	= &ds3232_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &ds3232_pm_ops,
 >>>>>>> v3.18

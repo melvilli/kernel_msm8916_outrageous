@@ -53,6 +53,10 @@
 #include <net/ip.h>
 #include <net/udp.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <net/udp_tunnel.h>
+>>>>>>> v3.18
 =======
 #include <net/udp_tunnel.h>
 >>>>>>> v3.18
@@ -117,7 +121,10 @@ struct l2tp_net {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void l2tp_session_set_header_len(struct l2tp_session *session, int version);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void l2tp_tunnel_free(struct l2tp_tunnel *tunnel);
@@ -156,7 +163,11 @@ do {									\
 	l2tp_tunnel_inc_refcount_1(_t);					\
 } while (0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define l2tp_tunnel_dec_refcount(_t)
+=======
+#define l2tp_tunnel_dec_refcount(_t)					\
+>>>>>>> v3.18
 =======
 #define l2tp_tunnel_dec_refcount(_t)					\
 >>>>>>> v3.18
@@ -188,7 +199,11 @@ l2tp_session_id_hash_2(struct l2tp_net *pn, u32 session_id)
  * released using l2tp_tunnel_sock_put once you're done with it.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct sock *l2tp_tunnel_sock_lookup(struct l2tp_tunnel *tunnel)
+=======
+static struct sock *l2tp_tunnel_sock_lookup(struct l2tp_tunnel *tunnel)
+>>>>>>> v3.18
 =======
 static struct sock *l2tp_tunnel_sock_lookup(struct l2tp_tunnel *tunnel)
 >>>>>>> v3.18
@@ -218,10 +233,16 @@ out:
 	return sk;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(l2tp_tunnel_sock_lookup);
 
 /* Drop a reference to a tunnel socket obtained via. l2tp_tunnel_sock_put */
 void l2tp_tunnel_sock_put(struct sock *sk)
+=======
+
+/* Drop a reference to a tunnel socket obtained via. l2tp_tunnel_sock_put */
+static void l2tp_tunnel_sock_put(struct sock *sk)
+>>>>>>> v3.18
 =======
 
 /* Drop a reference to a tunnel socket obtained via. l2tp_tunnel_sock_put */
@@ -239,7 +260,10 @@ static void l2tp_tunnel_sock_put(struct sock *sk)
 	sock_put(sk);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(l2tp_tunnel_sock_put);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -305,8 +329,12 @@ struct l2tp_session *l2tp_session_find(struct net *net, struct l2tp_tunnel *tunn
 EXPORT_SYMBOL_GPL(l2tp_session_find);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct l2tp_session *l2tp_session_get_nth(struct l2tp_tunnel *tunnel, int nth,
 					  bool do_ref)
+=======
+struct l2tp_session *l2tp_session_find_nth(struct l2tp_tunnel *tunnel, int nth)
+>>>>>>> v3.18
 =======
 struct l2tp_session *l2tp_session_find_nth(struct l2tp_tunnel *tunnel, int nth)
 >>>>>>> v3.18
@@ -320,9 +348,12 @@ struct l2tp_session *l2tp_session_find_nth(struct l2tp_tunnel *tunnel, int nth)
 		hlist_for_each_entry(session, &tunnel->session_hlist[hash], hlist) {
 			if (++count > nth) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				l2tp_session_inc_refcount(session);
 				if (do_ref && session->ref)
 					session->ref(session);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				read_unlock_bh(&tunnel->hlist_lock);
@@ -336,7 +367,11 @@ struct l2tp_session *l2tp_session_find_nth(struct l2tp_tunnel *tunnel, int nth)
 	return NULL;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(l2tp_session_get_nth);
+=======
+EXPORT_SYMBOL_GPL(l2tp_session_find_nth);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(l2tp_session_find_nth);
 >>>>>>> v3.18
@@ -459,10 +494,14 @@ static void l2tp_recv_dequeue_skb(struct l2tp_session *session, struct sk_buff *
 		/* Bump our Nr */
 		session->nr++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tunnel->version == L2TP_HDR_VER_2)
 			session->nr &= 0xffff;
 		else
 			session->nr &= 0xffffff;
+=======
+		session->nr &= session->nr_max;
+>>>>>>> v3.18
 =======
 		session->nr &= session->nr_max;
 >>>>>>> v3.18
@@ -545,6 +584,7 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int l2tp_verify_udp_checksum(struct sock *sk,
 					   struct sk_buff *skb)
 {
@@ -590,6 +630,8 @@ static inline int l2tp_verify_udp_checksum(struct sock *sk,
 
 	return __skb_checksum_complete(skb);
 =======
+=======
+>>>>>>> v3.18
 static int l2tp_seq_check_rx_window(struct l2tp_session *session, u32 nr)
 {
 	u32 nws;
@@ -666,6 +708,9 @@ out:
 
 discard:
 	return 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -885,6 +930,7 @@ void l2tp_recv_common(struct l2tp_session *session, struct sk_buff *skb,
 	 */
 	if (L2TP_SKB_CB(skb)->has_seq) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (session->reorder_timeout != 0) {
 			/* Packet reordering enabled. Add skb to session's
 			 * reorder queue, in order of ns.
@@ -905,6 +951,10 @@ void l2tp_recv_common(struct l2tp_session *session, struct sk_buff *skb,
 			}
 			skb_queue_tail(&session->reorder_q, skb);
 		}
+=======
+		if (l2tp_recv_data_seq(session, skb))
+			goto discard;
+>>>>>>> v3.18
 =======
 		if (l2tp_recv_data_seq(session, skb))
 			goto discard;
@@ -969,8 +1019,12 @@ static int l2tp_udp_recv_core(struct l2tp_tunnel *tunnel, struct sk_buff *skb,
 	int length;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tunnel->sock && l2tp_verify_udp_checksum(tunnel->sock, skb))
 		goto discard_bad_csum;
+=======
+	/* UDP has verifed checksum */
+>>>>>>> v3.18
 =======
 	/* UDP has verifed checksum */
 >>>>>>> v3.18
@@ -1057,6 +1111,7 @@ static int l2tp_udp_recv_core(struct l2tp_tunnel *tunnel, struct sk_buff *skb,
 	return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 discard_bad_csum:
 	LIMIT_NETDEBUG("%s: UDP: bad checksum\n", tunnel->name);
 	UDP_INC_STATS_USER(tunnel->l2tp_net, UDP_MIB_INERRORS, 0);
@@ -1065,6 +1120,8 @@ discard_bad_csum:
 
 	return 0;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 error:
@@ -1209,6 +1266,7 @@ static int l2tp_xmit_core(struct l2tp_session *session, struct sk_buff *skb,
 
 	/* Queue the packet to IP for output */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->local_df = 1;
 #if IS_ENABLED(CONFIG_IPV6)
 	if (skb->sk->sk_family == PF_INET6 && !tunnel->v4mapped)
@@ -1217,6 +1275,8 @@ static int l2tp_xmit_core(struct l2tp_session *session, struct sk_buff *skb,
 #endif
 		error = ip_queue_xmit(skb, fl);
 =======
+=======
+>>>>>>> v3.18
 	skb->ignore_df = 1;
 #if IS_ENABLED(CONFIG_IPV6)
 	if (tunnel->sock->sk_family == PF_INET6 && !tunnel->v4mapped)
@@ -1224,6 +1284,9 @@ static int l2tp_xmit_core(struct l2tp_session *session, struct sk_buff *skb,
 	else
 #endif
 		error = ip_queue_xmit(tunnel->sock, skb, fl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Update stats */
@@ -1240,6 +1303,7 @@ static int l2tp_xmit_core(struct l2tp_session *session, struct sk_buff *skb,
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Automatically called when the skb is freed.
  */
@@ -1285,6 +1349,8 @@ static void l2tp_xmit_ipv6_csum(struct sock *sk, struct sk_buff *skb,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* If caller requires the skb to have a ppp header, the header must be
  * inserted in the skb data before calling this function.
  */
@@ -1297,7 +1363,10 @@ int l2tp_xmit_skb(struct l2tp_session *session, struct sk_buff *skb, int hdr_len
 	struct udphdr *uh;
 	struct inet_sock *inet;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__wsum csum;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int headroom;
@@ -1317,7 +1386,10 @@ int l2tp_xmit_skb(struct l2tp_session *session, struct sk_buff *skb, int hdr_len
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_orphan(skb);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Setup L2TP header */
@@ -1353,13 +1425,17 @@ int l2tp_xmit_skb(struct l2tp_session *session, struct sk_buff *skb, int hdr_len
 		udp_len = uhlen + hdr_len + data_len;
 		uh->len = htons(udp_len);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		uh->check = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 		/* Calculate UDP checksum if configured to do so */
 #if IS_ENABLED(CONFIG_IPV6)
 		if (sk->sk_family == PF_INET6 && !tunnel->v4mapped)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			l2tp_xmit_ipv6_csum(sk, skb, udp_len);
 		else
@@ -1384,6 +1460,8 @@ int l2tp_xmit_skb(struct l2tp_session *session, struct sk_buff *skb, int hdr_len
 						       udp_len, IPPROTO_UDP, 0);
 		}
 =======
+=======
+>>>>>>> v3.18
 			udp6_set_csum(udp_get_no_check6_tx(sk),
 				      skb, &inet6_sk(sk)->saddr,
 				      &sk->sk_v6_daddr, udp_len);
@@ -1391,6 +1469,9 @@ int l2tp_xmit_skb(struct l2tp_session *session, struct sk_buff *skb, int hdr_len
 #endif
 		udp_set_csum(sk->sk_no_check_tx, skb, inet->inet_saddr,
 			     inet->inet_daddr, udp_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 
@@ -1399,8 +1480,11 @@ int l2tp_xmit_skb(struct l2tp_session *session, struct sk_buff *skb, int hdr_len
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l2tp_skb_set_owner_w(skb, sk);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	l2tp_xmit_core(session, skb, fl, data_len);
@@ -1551,7 +1635,11 @@ static void l2tp_tunnel_del_work(struct work_struct *work)
 	sk = l2tp_tunnel_sock_lookup(tunnel);
 	if (!sk)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out;
+=======
+		return;
+>>>>>>> v3.18
 =======
 		return;
 >>>>>>> v3.18
@@ -1576,8 +1664,11 @@ static void l2tp_tunnel_del_work(struct work_struct *work)
 
 	l2tp_tunnel_sock_put(sk);
 <<<<<<< HEAD
+<<<<<<< HEAD
 out:
 	l2tp_tunnel_dec_refcount(tunnel);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -1599,6 +1690,7 @@ static int l2tp_tunnel_sock_create(struct net *net,
 {
 	int err = -EINVAL;
 	struct socket *sock = NULL;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct sockaddr_in udp_addr = {0};
 	struct sockaddr_l2tpip ip_addr = {0};
@@ -1665,6 +1757,8 @@ static int l2tp_tunnel_sock_create(struct net *net,
 		if (!cfg->use_udp_checksums)
 			sock->sk->sk_no_check = UDP_CSUM_NOXMIT;
 =======
+=======
+>>>>>>> v3.18
 	struct udp_port_cfg udp_conf;
 
 	switch (cfg->encap) {
@@ -1697,6 +1791,9 @@ static int l2tp_tunnel_sock_create(struct net *net,
 		err = udp_sock_create(net, &udp_conf, &sock);
 		if (err < 0)
 			goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		break;
@@ -1705,6 +1802,11 @@ static int l2tp_tunnel_sock_create(struct net *net,
 #if IS_ENABLED(CONFIG_IPV6)
 		if (cfg->local_ip6 && cfg->peer_ip6) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			struct sockaddr_l2tpip6 ip6_addr = {0};
+
+>>>>>>> v3.18
 =======
 			struct sockaddr_l2tpip6 ip6_addr = {0};
 
@@ -1738,6 +1840,11 @@ static int l2tp_tunnel_sock_create(struct net *net,
 #endif
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			struct sockaddr_l2tpip ip_addr = {0};
+
+>>>>>>> v3.18
 =======
 			struct sockaddr_l2tpip ip_addr = {0};
 
@@ -1880,7 +1987,11 @@ int l2tp_tunnel_create(struct net *net, int fd, int version, u32 tunnel_id, u32 
 
 		if (ipv6_addr_v4mapped(&np->saddr) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    ipv6_addr_v4mapped(&np->daddr)) {
+=======
+		    ipv6_addr_v4mapped(&sk->sk_v6_daddr)) {
+>>>>>>> v3.18
 =======
 		    ipv6_addr_v4mapped(&sk->sk_v6_daddr)) {
 >>>>>>> v3.18
@@ -1889,8 +2000,13 @@ int l2tp_tunnel_create(struct net *net, int fd, int version, u32 tunnel_id, u32 
 			tunnel->v4mapped = true;
 			inet->inet_saddr = np->saddr.s6_addr32[3];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			inet->inet_rcv_saddr = np->rcv_saddr.s6_addr32[3];
 			inet->inet_daddr = np->daddr.s6_addr32[3];
+=======
+			inet->inet_rcv_saddr = sk->sk_v6_rcv_saddr.s6_addr32[3];
+			inet->inet_daddr = sk->sk_v6_daddr.s6_addr32[3];
+>>>>>>> v3.18
 =======
 			inet->inet_rcv_saddr = sk->sk_v6_rcv_saddr.s6_addr32[3];
 			inet->inet_daddr = sk->sk_v6_daddr.s6_addr32[3];
@@ -1904,6 +2020,7 @@ int l2tp_tunnel_create(struct net *net, int fd, int version, u32 tunnel_id, u32 
 	/* Mark socket as an encapsulation socket. See net/ipv4/udp.c */
 	tunnel->encap = encap;
 	if (encap == L2TP_ENCAPTYPE_UDP) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Mark socket as an encapsulation socket. See net/ipv4/udp.c */
 		udp_sk(sk)->encap_type = UDP_ENCAP_L2TPINUDP;
@@ -1919,6 +2036,8 @@ int l2tp_tunnel_create(struct net *net, int fd, int version, u32 tunnel_id, u32 
 
 	sk->sk_user_data = tunnel;
 =======
+=======
+>>>>>>> v3.18
 		struct udp_tunnel_sock_cfg udp_cfg;
 
 		udp_cfg.sk_user_data = tunnel;
@@ -1930,6 +2049,9 @@ int l2tp_tunnel_create(struct net *net, int fd, int version, u32 tunnel_id, u32 
 	} else {
 		sk->sk_user_data = tunnel;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Hook on the tunnel socket destructor so that we can cleanup
@@ -1978,6 +2100,7 @@ EXPORT_SYMBOL_GPL(l2tp_tunnel_create);
 int l2tp_tunnel_delete(struct l2tp_tunnel *tunnel)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l2tp_tunnel_inc_refcount(tunnel);
 	l2tp_tunnel_closeall(tunnel);
 	if (false == queue_work(l2tp_wq, &tunnel->del_work)) {
@@ -1985,6 +2108,10 @@ int l2tp_tunnel_delete(struct l2tp_tunnel *tunnel)
 		return 1;
 	}
 	return 0;
+=======
+	l2tp_tunnel_closeall(tunnel);
+	return (false == queue_work(l2tp_wq, &tunnel->del_work));
+>>>>>>> v3.18
 =======
 	l2tp_tunnel_closeall(tunnel);
 	return (false == queue_work(l2tp_wq, &tunnel->del_work));
@@ -2011,8 +2138,11 @@ void l2tp_session_free(struct l2tp_session *session)
 
 	kfree(session);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	return;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -2068,7 +2198,11 @@ EXPORT_SYMBOL_GPL(l2tp_session_delete);
  * l2specific_len parameters are set.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void l2tp_session_set_header_len(struct l2tp_session *session, int version)
+=======
+void l2tp_session_set_header_len(struct l2tp_session *session, int version)
+>>>>>>> v3.18
 =======
 void l2tp_session_set_header_len(struct l2tp_session *session, int version)
 >>>>>>> v3.18
@@ -2085,6 +2219,10 @@ void l2tp_session_set_header_len(struct l2tp_session *session, int version)
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(l2tp_session_set_header_len);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(l2tp_session_set_header_len);
 >>>>>>> v3.18
@@ -2102,7 +2240,10 @@ struct l2tp_session *l2tp_session_create(int priv_size, struct l2tp_tunnel *tunn
 		session->peer_session_id = peer_session_id;
 		session->nr = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		if (tunnel->version == L2TP_HDR_VER_2)
 			session->nr_max = 0xffff;
 		else
@@ -2112,6 +2253,9 @@ struct l2tp_session *l2tp_session_create(int priv_size, struct l2tp_tunnel *tunn
 
 		/* Use NR of first received packet */
 		session->reorder_skip = 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		sprintf(&session->name[0], "sess %u/%u",
@@ -2232,7 +2376,11 @@ static int __init l2tp_init(void)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	l2tp_wq = alloc_workqueue("l2tp", WQ_NON_REENTRANT | WQ_UNBOUND, 0);
+=======
+	l2tp_wq = alloc_workqueue("l2tp", WQ_UNBOUND, 0);
+>>>>>>> v3.18
 =======
 	l2tp_wq = alloc_workqueue("l2tp", WQ_UNBOUND, 0);
 >>>>>>> v3.18

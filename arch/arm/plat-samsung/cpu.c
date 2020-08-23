@@ -16,8 +16,12 @@
 #include <linux/io.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <mach/map.h>
+=======
+#include <plat/map-base.h>
+>>>>>>> v3.18
 =======
 #include <plat/map-base.h>
 >>>>>>> v3.18
@@ -33,6 +37,7 @@ unsigned int samsung_rev(void)
 EXPORT_SYMBOL(samsung_rev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init s3c24xx_init_cpu(void)
 {
 	/* nothing here yet */
@@ -40,6 +45,8 @@ void __init s3c24xx_init_cpu(void)
 	samsung_cpu_rev = 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init s3c64xx_init_cpu(void)

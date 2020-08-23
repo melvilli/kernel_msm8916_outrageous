@@ -7,7 +7,11 @@
 config PLAT_SAMSUNG
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PLAT_S3C24XX || ARCH_S3C64XX || PLAT_S5P
+=======
+	depends on PLAT_S3C24XX || ARCH_S3C64XX || ARCH_EXYNOS || ARCH_S5PV210
+>>>>>>> v3.18
 =======
 	depends on PLAT_S3C24XX || ARCH_S3C64XX || ARCH_EXYNOS || ARCH_S5PV210
 >>>>>>> v3.18
@@ -17,6 +21,7 @@ config PLAT_SAMSUNG
 	help
 	  Base platform code for all Samsung SoC based systems
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config PLAT_S5P
 	bool
@@ -38,6 +43,8 @@ config PLAT_S5P
 
 if PLAT_SAMSUNG
 =======
+=======
+>>>>>>> v3.18
 config SAMSUNG_PM
 	bool
 	depends on PM && (PLAT_S3C24XX || ARCH_S3C64XX)
@@ -47,12 +54,16 @@ config SAMSUNG_PM
 
 if PLAT_SAMSUNG
 menu "Samsung Common options"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 # boot configurations
 
 comment "Boot options"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config S3C_BOOT_ERROR_RESET
 	bool "S3C Reboot on decompression error"
@@ -75,6 +86,11 @@ config S3C_LOWLEVEL_UART_PORT
 	int "S3C UART to use for low-level messages"
 	depends on ARCH_S3C64XX
 >>>>>>> v3.18
+=======
+config S3C_LOWLEVEL_UART_PORT
+	int "S3C UART to use for low-level messages"
+	depends on ARCH_S3C64XX
+>>>>>>> v3.18
 	default 0
 	help
 	  Choice of which UART port to use for the low-level messages,
@@ -82,6 +98,7 @@ config S3C_LOWLEVEL_UART_PORT
 	  this configuration should be between zero and two. The port
 	  must have been initialised by the boot-loader before use.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # timer options
 
@@ -162,6 +179,8 @@ config SAMSUNG_GPIO_EXTRA64
 config SAMSUNG_GPIO_EXTRA128
 	bool
 =======
+=======
+>>>>>>> v3.18
 config SAMSUNG_ATAGS
 	def_bool n
 	depends on !ARCH_MULTIPLATFORM
@@ -175,6 +194,9 @@ config SAMSUNG_ATAGS
 	   this option.
 
 if SAMSUNG_ATAGS
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config S3C_GPIO_SPACE
@@ -193,12 +215,15 @@ config S3C_GPIO_TRACK
 	  chip tracking if the platform requires it.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # uart options
 
 config S5P_DEV_UART
 	def_bool y
 	depends on (ARCH_S5P64X0 || ARCH_S5PC100 || ARCH_S5PV210)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # ADC driver
@@ -359,6 +384,7 @@ config SAMSUNG_DEV_BACKLIGHT
 	  Compile in platform device definition LCD backlight with PWM Timer
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config S5P_DEV_CSIS0
 	bool
 	help
@@ -431,6 +457,8 @@ config S5P_DEV_USB_EHCI
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config S3C24XX_PWM
 	bool "PWM device support"
 	select PWM
@@ -440,11 +468,14 @@ config S3C24XX_PWM
 	  system
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config S5P_SETUP_MIPIPHY
 	bool
 	help
 	  Compile in common setup code for MIPI-CSIS and MIPI-DSIM devices
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config S3C_SETUP_CAMIF
@@ -459,6 +490,7 @@ config S3C_DMA
 	help
 	  Internal configuration for S3C DMA core
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SAMSUNG_DMADEV
 	bool
@@ -476,6 +508,8 @@ config SAMSUNG_PM_DEBUG
 	depends on PM
 	select DEBUG_LL
 =======
+=======
+>>>>>>> v3.18
 config SAMSUNG_PM_GPIO
 	bool
 	default y if GPIO_SAMSUNG && PM
@@ -504,6 +538,9 @@ config SAMSUNG_PM_DEBUG
 	bool "Samsung PM Suspend debug"
 	depends on PM && DEBUG_KERNEL
 	depends on DEBUG_EXYNOS_UART || DEBUG_S3C24XX_UART || DEBUG_S3C2410_UART
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say Y here if you want verbose debugging from the PM Suspend and
@@ -522,7 +559,12 @@ config S3C_PM_DEBUG_LED_SMDK
 config SAMSUNG_PM_CHECK
 	bool "S3C2410 PM Suspend Memory CRC"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PM && CRC32
+=======
+	depends on PM
+	select CRC32
+>>>>>>> v3.18
 =======
 	depends on PM
 	select CRC32
@@ -559,6 +601,7 @@ config SAMSUNG_WAKEMASK
 	  mappings. See <plat/wakeup-mask.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config S5P_PM
 	bool
 	help
@@ -571,11 +614,16 @@ config S5P_SLEEP
 	  Internal config node to apply common S5P sleep management code.
 	  Can be selected by S5P and newer SoCs with similar sleep procedure.
 =======
+=======
+>>>>>>> v3.18
 config SAMSUNG_WDT_RESET
 	bool
 	help
 	  Compile support for system restart by triggering watchdog reset.
 	  Used on SoCs that do not provide dedicated reset control.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config DEBUG_S3C_UART
@@ -587,6 +635,10 @@ config DEBUG_S3C_UART
 	default "3" if DEBUG_S3C_UART3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+endmenu
+>>>>>>> v3.18
 =======
 endmenu
 >>>>>>> v3.18

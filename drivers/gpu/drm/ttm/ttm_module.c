@@ -36,7 +36,11 @@
 
 static DECLARE_WAIT_QUEUE_HEAD(exit_q);
 <<<<<<< HEAD
+<<<<<<< HEAD
 atomic_t device_released;
+=======
+static atomic_t device_released;
+>>>>>>> v3.18
 =======
 static atomic_t device_released;
 >>>>>>> v3.18

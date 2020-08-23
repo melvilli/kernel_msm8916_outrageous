@@ -122,6 +122,12 @@ void mpi_free(MPI a)
 }
 EXPORT_SYMBOL_GPL(mpi_free);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+MODULE_DESCRIPTION("Multiprecision maths library");
+MODULE_LICENSE("GPL");
+>>>>>>> v3.18
 =======
 
 MODULE_DESCRIPTION("Multiprecision maths library");

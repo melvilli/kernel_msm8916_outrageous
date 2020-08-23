@@ -4,7 +4,11 @@
 
 obj-$(CONFIG_MEMSTICK)		+= memstick.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+obj-$(CONFIG_MS_BLOCK)		+= ms_block.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_MS_BLOCK)		+= ms_block.o
 >>>>>>> v3.18

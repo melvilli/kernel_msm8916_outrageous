@@ -34,8 +34,13 @@
 #include <linux/slab.h>
 #include <linux/clk.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/platform_device.h>
 #include <linux/of.h>
+=======
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -84,7 +89,10 @@
 #define TX_FIFO_INTS	(TXFAE | TXFE | TXUDR)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Line control bits
  */
@@ -110,6 +118,9 @@
 
 #define VT8500_RECOMMENDED_CLK		12000000
 #define VT8500_OVERSAMPLING_DIVISOR	13
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define VT8500_MAX_PORTS	6
 
@@ -118,7 +129,13 @@ struct vt8500_port {
 	char			name[16];
 	struct clk		*clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int		ier;
+=======
+	unsigned int		clk_predivisor;
+	unsigned int		ier;
+	unsigned int		vt8500_uart_flags;
+>>>>>>> v3.18
 =======
 	unsigned int		clk_predivisor;
 	unsigned int		ier;
@@ -210,7 +227,13 @@ static void handle_rx(struct uart_port *port)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tty_flip_buffer_push(tport);
+=======
+	spin_unlock(&port->lock);
+	tty_flip_buffer_push(tport);
+	spin_lock(&port->lock);
+>>>>>>> v3.18
 =======
 	spin_unlock(&port->lock);
 	tty_flip_buffer_push(tport);
@@ -311,7 +334,10 @@ static unsigned int vt8500_get_mctrl(struct uart_port *port)
 static void vt8500_set_mctrl(struct uart_port *port, unsigned int mctrl)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	unsigned int lcr = vt8500_read(port, VT8500_URLCR);
 
 	if (mctrl & TIOCM_RTS)
@@ -320,6 +346,9 @@ static void vt8500_set_mctrl(struct uart_port *port, unsigned int mctrl)
 		lcr &= ~VT8500_RTS;
 
 	vt8500_write(port, lcr, VT8500_URLCR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -327,7 +356,12 @@ static void vt8500_break_ctl(struct uart_port *port, int break_ctl)
 {
 	if (break_ctl)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vt8500_write(port, vt8500_read(port, VT8500_URLCR) | (1 << 9),
+=======
+		vt8500_write(port,
+			     vt8500_read(port, VT8500_URLCR) | VT8500_BREAK,
+>>>>>>> v3.18
 =======
 		vt8500_write(port,
 			     vt8500_read(port, VT8500_URLCR) | VT8500_BREAK,
@@ -337,6 +371,7 @@ static void vt8500_break_ctl(struct uart_port *port, int break_ctl)
 
 static int vt8500_set_baud_rate(struct uart_port *port, unsigned int baud)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	unsigned long div;
 	unsigned int loops = 1000;
@@ -353,6 +388,8 @@ static int vt8500_set_baud_rate(struct uart_port *port, unsigned int baud)
 	vt8500_write(port, div, VT8500_URDIV);
 
 =======
+=======
+>>>>>>> v3.18
 	struct vt8500_port *vt8500_port =
 			container_of(port, struct vt8500_port, uart);
 	unsigned long div;
@@ -372,6 +409,9 @@ static int vt8500_set_baud_rate(struct uart_port *port, unsigned int baud)
 	/* Break signal timing depends on baud rate, update accordingly */
 	vt8500_write(port, mult_frac(baud, 4096, 1000000), VT8500_URBKR);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return baud;
 }
@@ -429,6 +469,7 @@ static void vt8500_set_termios(struct uart_port *port,
 	/* calculate parity */
 	lcr = vt8500_read(&vt8500_port->uart, VT8500_URLCR);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcr &= ~((1 << 5) | (1 << 4));
 	if (termios->c_cflag & PARENB) {
 		lcr |= (1 << 4);
@@ -440,6 +481,8 @@ static void vt8500_set_termios(struct uart_port *port,
 	/* calculate bits per char */
 	lcr &= ~(1 << 2);
 =======
+=======
+>>>>>>> v3.18
 	lcr &= ~(VT8500_PARENB | VT8500_PARODD);
 	if (termios->c_cflag & PARENB) {
 		lcr |= VT8500_PARENB;
@@ -450,6 +493,9 @@ static void vt8500_set_termios(struct uart_port *port,
 
 	/* calculate bits per char */
 	lcr &= ~VT8500_CS8;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	switch (termios->c_cflag & CSIZE) {
 	case CS7:
@@ -457,7 +503,11 @@ static void vt8500_set_termios(struct uart_port *port,
 	case CS8:
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lcr |= (1 << 2);
+=======
+		lcr |= VT8500_CS8;
+>>>>>>> v3.18
 =======
 		lcr |= VT8500_CS8;
 >>>>>>> v3.18
@@ -468,10 +518,13 @@ static void vt8500_set_termios(struct uart_port *port,
 
 	/* calculate stop bits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcr &= ~(1 << 3);
 	if (termios->c_cflag & CSTOPB)
 		lcr |= (1 << 3);
 =======
+=======
+>>>>>>> v3.18
 	lcr &= ~VT8500_CSTOPB;
 	if (termios->c_cflag & CSTOPB)
 		lcr |= VT8500_CSTOPB;
@@ -479,6 +532,9 @@ static void vt8500_set_termios(struct uart_port *port,
 	lcr &= ~VT8500_SWRTSCTS;
 	if (vt8500_port->vt8500_uart_flags & VT8500_HAS_SWRTSCTS_SWITCH)
 		lcr |= VT8500_SWRTSCTS;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* set parity, bits per char, and stop bit */
@@ -630,7 +686,10 @@ static struct console vt8500_console = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CONSOLE_POLL
 static int vt8500_get_poll_char(struct uart_port *port)
 {
@@ -658,6 +717,9 @@ static void vt8500_put_poll_char(struct uart_port *port, unsigned char c)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct uart_ops vt8500_uart_pops = {
 	.tx_empty	= vt8500_tx_empty,
@@ -677,11 +739,17 @@ static struct uart_ops vt8500_uart_pops = {
 	.config_port	= vt8500_config_port,
 	.verify_port	= vt8500_verify_port,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_CONSOLE_POLL
 	.poll_get_char	= vt8500_get_poll_char,
 	.poll_put_char	= vt8500_put_poll_char,
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -694,7 +762,10 @@ static struct uart_driver vt8500_uart_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned int vt8500_flags; /* none required so far */
 static unsigned int wm8880_flags = VT8500_HAS_SWRTSCTS_SWITCH;
 
@@ -704,6 +775,9 @@ static const struct of_device_id wmt_dt_ids[] = {
 	{}
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int vt8500_serial_probe(struct platform_device *pdev)
 {
@@ -711,10 +785,13 @@ static int vt8500_serial_probe(struct platform_device *pdev)
 	struct resource *mmres, *irqres;
 	struct device_node *np = pdev->dev.of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 	int port;
 
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *match;
 	const unsigned int *flags;
 	int ret;
@@ -726,6 +803,9 @@ static int vt8500_serial_probe(struct platform_device *pdev)
 
 	flags = match->data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mmres = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	irqres = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
@@ -777,12 +857,18 @@ static int vt8500_serial_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	vt8500_port->vt8500_uart_flags = *flags;
 	vt8500_port->clk_predivisor = DIV_ROUND_CLOSEST(
 					clk_get_rate(vt8500_port->clk),
 					VT8500_RECOMMENDED_CLK
 				      );
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	vt8500_port->uart.type = PORT_VT8500;
 	vt8500_port->uart.iotype = UPIO_MEM;
@@ -795,12 +881,18 @@ static int vt8500_serial_probe(struct platform_device *pdev)
 	vt8500_port->uart.flags = UPF_IOREMAP | UPF_BOOT_AUTOCONF;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	vt8500_port->uart.uartclk = clk_get_rate(vt8500_port->clk);
 =======
+=======
+>>>>>>> v3.18
 	/* Serial core uses the magic "16" everywhere - adjust for it */
 	vt8500_port->uart.uartclk = 16 * clk_get_rate(vt8500_port->clk) /
 					vt8500_port->clk_predivisor /
 					VT8500_OVERSAMPLING_DIVISOR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	snprintf(vt8500_port->name, sizeof(vt8500_port->name),
@@ -820,7 +912,10 @@ static int vt8500_serial_remove(struct platform_device *pdev)
 	struct vt8500_port *vt8500_port = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	clk_disable_unprepare(vt8500_port->clk);
@@ -830,11 +925,14 @@ static int vt8500_serial_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id wmt_dt_ids[] = {
 	{ .compatible = "via,vt8500-uart", },
 	{}
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver vt8500_platform_driver = {
@@ -844,7 +942,11 @@ static struct platform_driver vt8500_platform_driver = {
 		.name = "vt8500_serial",
 		.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(wmt_dt_ids),
+=======
+		.of_match_table = wmt_dt_ids,
+>>>>>>> v3.18
 =======
 		.of_match_table = wmt_dt_ids,
 >>>>>>> v3.18

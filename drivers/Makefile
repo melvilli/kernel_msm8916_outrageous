@@ -20,7 +20,10 @@ obj-$(CONFIG_RAPIDIO)		+= rapidio/
 obj-y				+= video/
 obj-y				+= idle/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y				+= soc/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -38,6 +41,12 @@ obj-y				+= amba/
 obj-$(CONFIG_DMADEVICES)	+= dma/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+# SOC specific infrastructure drivers.
+obj-y				+= soc/
+
+>>>>>>> v3.18
 =======
 # SOC specific infrastructure drivers.
 obj-y				+= soc/
@@ -64,18 +73,24 @@ obj-$(CONFIG_CONNECTOR)		+= connector/
 
 # i810fb and intelfb depend on char/agp/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_FB_I810)           += video/i810/
 obj-$(CONFIG_FB_INTEL)          += video/intelfb/
 
 obj-$(CONFIG_PARPORT)		+= parport/
 obj-y				+= base/ block/ misc/ mfd/ nfc/ soc/
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_FB_I810)           += video/fbdev/i810/
 obj-$(CONFIG_FB_INTEL)          += video/fbdev/intelfb/
 
 obj-$(CONFIG_PARPORT)		+= parport/
 obj-y				+= base/ block/ misc/ mfd/ nfc/
 obj-$(CONFIG_DMA_SHARED_BUFFER) += dma-buf/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 obj-$(CONFIG_NUBUS)		+= nubus/
 obj-y				+= macintosh/
@@ -87,8 +102,11 @@ obj-$(CONFIG_MTD)		+= mtd/
 obj-$(CONFIG_SPI)		+= spi/
 obj-$(CONFIG_SPMI)		+= spmi/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SLIMBUS)		+= slimbus/
 obj-$(CONFIG_SOUNDWIRE)     += soundwire/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-y				+= hsi/
@@ -105,7 +123,10 @@ obj-$(CONFIG_DIO)		+= dio/
 obj-$(CONFIG_SBUS)		+= sbus/
 obj-$(CONFIG_ZORRO)		+= zorro/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_MAC)		+= macintosh/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_ATA_OVER_ETH)	+= block/aoe/
@@ -142,7 +163,10 @@ obj-y				+= mmc/
 obj-$(CONFIG_MEMSTICK)		+= memstick/
 obj-y				+= leds/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SWITCH)		+= switch/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_INFINIBAND)	+= infiniband/
@@ -152,7 +176,10 @@ obj-$(CONFIG_CRYPTO)		+= crypto/
 obj-$(CONFIG_SUPERH)		+= sh/
 obj-$(CONFIG_ARCH_SHMOBILE)	+= sh/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_SSBI)		+= ssbi/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 ifndef CONFIG_ARCH_USES_GETTIMEOFFSET
@@ -174,7 +201,10 @@ obj-y				+= clk/
 obj-$(CONFIG_MAILBOX)		+= mailbox/
 obj-$(CONFIG_HWSPINLOCK)	+= hwspinlock/
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_NFC)		+= nfc/
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 obj-$(CONFIG_IOMMU_SUPPORT)	+= iommu/
@@ -193,6 +223,7 @@ obj-$(CONFIG_VME_BUS)		+= vme/
 obj-$(CONFIG_IPACK_BUS)		+= ipack/
 obj-$(CONFIG_NTB)		+= ntb/
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 obj-$(CONFIG_CORESIGHT)		+= coresight/
 obj-$(CONFIG_ESOC)		+= esoc/
@@ -201,9 +232,14 @@ obj-$(CONFIG_BIF)		+= bif/
 obj-$(CONFIG_SENSORS)		+= sensors/
 obj-$(CONFIG_SENSORS_SSC)	+= sensors/
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_FMC)		+= fmc/
 obj-$(CONFIG_POWERCAP)		+= powercap/
 obj-$(CONFIG_MCB)		+= mcb/
 obj-$(CONFIG_RAS)		+= ras/
 obj-$(CONFIG_THUNDERBOLT)	+= thunderbolt/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -97,7 +97,11 @@ unsigned long minix_count_free_blocks(struct super_block *sb)
 {
 	struct minix_sb_info *sbi = minix_sb(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 bits = sbi->s_nzones - (sbi->s_firstdatazone + 1);
+=======
+	u32 bits = sbi->s_nzones - sbi->s_firstdatazone + 1;
+>>>>>>> v3.18
 =======
 	u32 bits = sbi->s_nzones - sbi->s_firstdatazone + 1;
 >>>>>>> v3.18

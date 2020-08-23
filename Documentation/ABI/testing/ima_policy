@@ -24,14 +24,20 @@ Description:
 			lsm:	[[subj_user=] [subj_role=] [subj_type=]
 				 [obj_user=] [obj_role=] [obj_type=]]
 <<<<<<< HEAD
+<<<<<<< HEAD
 			option:	[[appraise_type=]]
 
 		base: 	func:= [BPRM_CHECK][MMAP_CHECK][FILE_CHECK][MODULE_CHECK]
 =======
+=======
+>>>>>>> v3.18
 			option:	[[appraise_type=]] [permit_directio]
 
 		base: 	func:= [BPRM_CHECK][MMAP_CHECK][FILE_CHECK][MODULE_CHECK]
 				[FIRMWARE_CHECK]
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mask:= [MAY_READ] [MAY_WRITE] [MAY_APPEND] [MAY_EXEC]
 			fsmagic:= hex value
@@ -65,7 +71,12 @@ Description:
 			measure func=FILE_MMAP mask=MAY_EXEC
 			measure func=FILE_CHECK mask=MAY_READ uid=0
 <<<<<<< HEAD
+<<<<<<< HEAD
 			measure func=MODULE_CHECK uid=0
+=======
+			measure func=MODULE_CHECK
+			measure func=FIRMWARE_CHECK
+>>>>>>> v3.18
 =======
 			measure func=MODULE_CHECK
 			measure func=FIRMWARE_CHECK

@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * QNAP Turbo NAS Board power off
+=======
+ * QNAP Turbo NAS Board power off. Can also be used on Synology devices.
+>>>>>>> v3.18
 =======
  * QNAP Turbo NAS Board power off. Can also be used on Synology devices.
 >>>>>>> v3.18
@@ -30,6 +34,7 @@
 #define UART1_REG(x)	(base + ((UART_##x) << 2))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __iomem *base;
 static unsigned long tclk;
 
@@ -42,6 +47,8 @@ static void qnap_power_off(void)
 
 	/* hijack UART1 and reset into sane state (19200,8n1) */
 =======
+=======
+>>>>>>> v3.18
 struct power_off_cfg {
 	u32 baud;
 	char cmd;
@@ -79,6 +86,9 @@ static void qnap_power_off(void)
 	pr_err("%s: triggering power-off...\n", __func__);
 
 	/* hijack UART1 and reset into sane state */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	writel(0x83, UART1_REG(LCR));
 	writel(divisor & 0xff, UART1_REG(DLL));
@@ -89,8 +99,13 @@ static void qnap_power_off(void)
 	writel(0x00, UART1_REG(MCR));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* send the power-off command 'A' to PIC */
 	writel('A', UART1_REG(TX));
+=======
+	/* send the power-off command to PIC */
+	writel(cfg->cmd, UART1_REG(TX));
+>>>>>>> v3.18
 =======
 	/* send the power-off command to PIC */
 	writel(cfg->cmd, UART1_REG(TX));
@@ -100,6 +115,10 @@ static void qnap_power_off(void)
 static int qnap_power_off_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct device_node *np = pdev->dev.of_node;
+>>>>>>> v3.18
 =======
 	struct device_node *np = pdev->dev.of_node;
 >>>>>>> v3.18
@@ -108,11 +127,17 @@ static int qnap_power_off_probe(struct platform_device *pdev)
 	char symname[KSYM_NAME_LEN];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	const struct of_device_id *match =
 		of_match_node(qnap_power_off_of_match_table, np);
 	cfg = match->data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res) {
@@ -155,12 +180,15 @@ static int qnap_power_off_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct of_device_id qnap_power_off_of_match_table[] = {
 	{ .compatible = "qnap,power-off", },
 	{}
 };
 MODULE_DEVICE_TABLE(of, qnap_power_off_of_match_table);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct platform_driver qnap_power_off_driver = {

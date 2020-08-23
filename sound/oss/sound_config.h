@@ -124,10 +124,13 @@ static inline int translate_mode(struct file *file)
 #include "dev_table.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef DEB
 #define DEB(x)
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef DDB

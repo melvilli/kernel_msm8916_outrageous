@@ -17,7 +17,10 @@
 #include <linux/device.h>
 #include <linux/memory.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/kobject.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/memory_hotplug.h>
@@ -34,6 +37,11 @@ static DEFINE_MUTEX(mem_sysfs_mutex);
 #define MEMORY_CLASS_NAME	"memory"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define to_memory_block(dev) container_of(dev, struct memory_block, dev)
+
+>>>>>>> v3.18
 =======
 #define to_memory_block(dev) container_of(dev, struct memory_block, dev)
 
@@ -46,10 +54,13 @@ static inline int base_memory_block_id(int section_nr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct bus_type memory_subsys = {
 	.name = MEMORY_CLASS_NAME,
 	.dev_name = MEMORY_CLASS_NAME,
 =======
+=======
+>>>>>>> v3.18
 static int memory_subsys_online(struct device *dev);
 static int memory_subsys_offline(struct device *dev);
 
@@ -58,6 +69,9 @@ static struct bus_type memory_subsys = {
 	.dev_name = MEMORY_CLASS_NAME,
 	.online = memory_subsys_online,
 	.offline = memory_subsys_offline,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -92,7 +106,11 @@ EXPORT_SYMBOL(unregister_memory_isolate_notifier);
 static void memory_block_release(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct memory_block *mem = container_of(dev, struct memory_block, dev);
+=======
+	struct memory_block *mem = to_memory_block(dev);
+>>>>>>> v3.18
 =======
 	struct memory_block *mem = to_memory_block(dev);
 >>>>>>> v3.18
@@ -100,6 +118,7 @@ static void memory_block_release(struct device *dev)
 	kfree(mem);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * register_memory - Setup a sysfs device for a memory block
@@ -117,6 +136,8 @@ int register_memory(struct memory_block *memory)
 	return error;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 unsigned long __weak memory_block_size_bytes(void)
@@ -148,8 +169,12 @@ static ssize_t show_mem_start_phys_index(struct device *dev,
 			struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct memory_block *mem =
 		container_of(dev, struct memory_block, dev);
+=======
+	struct memory_block *mem = to_memory_block(dev);
+>>>>>>> v3.18
 =======
 	struct memory_block *mem = to_memory_block(dev);
 >>>>>>> v3.18
@@ -159,6 +184,7 @@ static ssize_t show_mem_start_phys_index(struct device *dev,
 	return sprintf(buf, "%08lx\n", phys_index);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t show_mem_end_phys_index(struct device *dev,
 			struct device_attribute *attr, char *buf)
@@ -173,6 +199,8 @@ static ssize_t show_mem_end_phys_index(struct device *dev,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Show whether the section of memory is likely to be hot-removable
  */
@@ -182,8 +210,12 @@ static ssize_t show_mem_removable(struct device *dev,
 	unsigned long i, pfn;
 	int ret = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct memory_block *mem =
 		container_of(dev, struct memory_block, dev);
+=======
+	struct memory_block *mem = to_memory_block(dev);
+>>>>>>> v3.18
 =======
 	struct memory_block *mem = to_memory_block(dev);
 >>>>>>> v3.18
@@ -205,8 +237,12 @@ static ssize_t show_mem_state(struct device *dev,
 			struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct memory_block *mem =
 		container_of(dev, struct memory_block, dev);
+=======
+	struct memory_block *mem = to_memory_block(dev);
+>>>>>>> v3.18
 =======
 	struct memory_block *mem = to_memory_block(dev);
 >>>>>>> v3.18
@@ -316,6 +352,7 @@ memory_block_action(unsigned long phys_index, unsigned long action, int online_t
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __memory_block_change_state(struct memory_block *mem,
 		unsigned long to_state, unsigned long from_state_req,
 		int online_type)
@@ -327,6 +364,8 @@ static int __memory_block_change_state(struct memory_block *mem,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 static int memory_block_change_state(struct memory_block *mem,
 		unsigned long to_state, unsigned long from_state_req)
 {
@@ -334,11 +373,15 @@ static int memory_block_change_state(struct memory_block *mem,
 
 	if (mem->state != from_state_req)
 		return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (to_state == MEM_OFFLINE)
 		mem->state = MEM_GOING_OFFLINE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = memory_block_action(mem->start_section_nr, to_state, online_type);
 
@@ -376,6 +419,8 @@ static int memory_block_change_state(struct memory_block *mem,
 	return ret;
 }
 =======
+=======
+>>>>>>> v3.18
 	ret = memory_block_action(mem->start_section_nr, to_state,
 				mem->online_type);
 
@@ -419,11 +464,15 @@ static int memory_subsys_offline(struct device *dev)
 	return memory_block_change_state(mem, MEM_OFFLINE, MEM_ONLINE);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static ssize_t
 store_mem_state(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct memory_block *mem;
 	int ret = -EINVAL;
@@ -443,6 +492,8 @@ store_mem_state(struct device *dev,
 		ret = memory_block_change_state(mem, MEM_OFFLINE,
 						MEM_ONLINE, -1);
 =======
+=======
+>>>>>>> v3.18
 	struct memory_block *mem = to_memory_block(dev);
 	int ret, online_type;
 
@@ -486,6 +537,9 @@ store_mem_state(struct device *dev,
 
 err:
 	unlock_device_hotplug();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret)
@@ -506,6 +560,7 @@ static ssize_t show_phys_device(struct device *dev,
 				struct device_attribute *attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct memory_block *mem =
 		container_of(dev, struct memory_block, dev);
 	return sprintf(buf, "%d\n", mem->phys_device);
@@ -514,6 +569,8 @@ static ssize_t show_phys_device(struct device *dev,
 static DEVICE_ATTR(phys_index, 0444, show_mem_start_phys_index, NULL);
 static DEVICE_ATTR(end_phys_index, 0444, show_mem_end_phys_index, NULL);
 =======
+=======
+>>>>>>> v3.18
 	struct memory_block *mem = to_memory_block(dev);
 	return sprintf(buf, "%d\n", mem->phys_device);
 }
@@ -558,17 +615,23 @@ static DEVICE_ATTR(valid_zones, 0444, show_valid_zones, NULL);
 #endif
 
 static DEVICE_ATTR(phys_index, 0444, show_mem_start_phys_index, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static DEVICE_ATTR(state, 0644, show_mem_state, store_mem_state);
 static DEVICE_ATTR(phys_device, 0444, show_phys_device, NULL);
 static DEVICE_ATTR(removable, 0444, show_mem_removable, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define mem_create_simple_file(mem, attr_name)	\
 	device_create_file(&mem->dev, &dev_attr_##attr_name)
 #define mem_remove_simple_file(mem, attr_name)	\
 	device_remove_file(&mem->dev, &dev_attr_##attr_name)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -584,12 +647,15 @@ print_block_size(struct device *dev, struct device_attribute *attr,
 static DEVICE_ATTR(block_size_bytes, 0444, print_block_size, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int block_size_init(void)
 {
 	return device_create_file(memory_subsys.dev_root,
 				  &dev_attr_block_size_bytes);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -609,7 +675,13 @@ memory_probe_store(struct device *dev, struct device_attribute *attr,
 	unsigned long pages_per_block = PAGES_PER_SECTION * sections_per_block;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phys_addr = simple_strtoull(buf, NULL, 0);
+=======
+	ret = kstrtoull(buf, 0, &phys_addr);
+	if (ret)
+		return ret;
+>>>>>>> v3.18
 =======
 	ret = kstrtoull(buf, 0, &phys_addr);
 	if (ret)
@@ -634,6 +706,7 @@ out:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(probe, S_IWUSR, NULL, memory_probe_store);
 
 static int memory_probe_init(void)
@@ -645,6 +718,10 @@ static inline int memory_probe_init(void)
 {
 	return 0;
 }
+=======
+
+static DEVICE_ATTR(probe, S_IWUSR, NULL, memory_probe_store);
+>>>>>>> v3.18
 =======
 
 static DEVICE_ATTR(probe, S_IWUSR, NULL, memory_probe_store);
@@ -667,7 +744,11 @@ store_soft_offline_page(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoull(buf, 0, &pfn) < 0)
+=======
+	if (kstrtoull(buf, 0, &pfn) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoull(buf, 0, &pfn) < 0)
 >>>>>>> v3.18
@@ -690,7 +771,11 @@ store_hard_offline_page(struct device *dev,
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (strict_strtoull(buf, 0, &pfn) < 0)
+=======
+	if (kstrtoull(buf, 0, &pfn) < 0)
+>>>>>>> v3.18
 =======
 	if (kstrtoull(buf, 0, &pfn) < 0)
 >>>>>>> v3.18
@@ -702,6 +787,7 @@ store_hard_offline_page(struct device *dev,
 
 static DEVICE_ATTR(soft_offline_page, S_IWUSR, NULL, store_soft_offline_page);
 static DEVICE_ATTR(hard_offline_page, S_IWUSR, NULL, store_hard_offline_page);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static __init int memory_fail_init(void)
@@ -720,6 +806,8 @@ static inline int memory_fail_init(void)
 {
 	return 0;
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -751,7 +839,11 @@ struct memory_block *find_memory_block_hinted(struct mem_section *section,
 	if (!dev)
 		return NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return container_of(dev, struct memory_block, dev);
+=======
+	return to_memory_block(dev);
+>>>>>>> v3.18
 =======
 	return to_memory_block(dev);
 >>>>>>> v3.18
@@ -771,7 +863,10 @@ struct memory_block *find_memory_block(struct mem_section *section)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *memory_memblk_attrs[] = {
 	&dev_attr_phys_index.attr,
 	&dev_attr_state.attr,
@@ -807,6 +902,9 @@ int register_memory(struct memory_block *memory)
 	return device_register(&memory->dev);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int init_memory_block(struct memory_block **memory,
 			     struct mem_section *section, unsigned long state)
@@ -827,13 +925,17 @@ static int init_memory_block(struct memory_block **memory,
 	mem->state = state;
 	mem->section_count++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_init(&mem->state_mutex);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	start_pfn = section_nr_to_pfn(mem->start_section_nr);
 	mem->phys_device = arch_get_memory_phys_device(start_pfn);
 
 	ret = register_memory(mem);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ret)
 		ret = mem_create_simple_file(mem, phys_index);
@@ -847,11 +949,14 @@ static int init_memory_block(struct memory_block **memory,
 		ret = mem_create_simple_file(mem, removable);
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 	*memory = mem;
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int add_memory_section(int nid, struct mem_section *section,
 			struct memory_block **mem_p,
@@ -896,6 +1001,8 @@ static int add_memory_section(int nid, struct mem_section *section,
 }
 
 =======
+=======
+>>>>>>> v3.18
 static int add_memory_block(int base_section_nr)
 {
 	struct memory_block *mem;
@@ -921,6 +1028,9 @@ static int add_memory_block(int base_section_nr)
 }
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * need an interface for the VM to add new memory regions,
@@ -929,8 +1039,11 @@ static int add_memory_block(int base_section_nr)
 int register_new_memory(int nid, struct mem_section *section)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return add_memory_section(nid, section, NULL, MEM_OFFLINE, HOTPLUG);
 =======
+=======
+>>>>>>> v3.18
 	int ret = 0;
 	struct memory_block *mem;
 
@@ -951,6 +1064,9 @@ int register_new_memory(int nid, struct mem_section *section)
 out:
 	mutex_unlock(&mem_sysfs_mutex);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -962,7 +1078,11 @@ unregister_memory(struct memory_block *memory)
 
 	/* drop the ref. we got in remove_memory_block() */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kobject_put(&memory->dev.kobj);
+=======
+	put_device(&memory->dev);
+>>>>>>> v3.18
 =======
 	put_device(&memory->dev);
 >>>>>>> v3.18
@@ -980,6 +1100,7 @@ static int remove_memory_block(unsigned long node_id,
 
 	mem->section_count--;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mem->section_count == 0) {
 		mem_remove_simple_file(mem, phys_index);
 		mem_remove_simple_file(mem, end_phys_index);
@@ -990,10 +1111,15 @@ static int remove_memory_block(unsigned long node_id,
 	} else
 		kobject_put(&mem->dev.kobj);
 =======
+=======
+>>>>>>> v3.18
 	if (mem->section_count == 0)
 		unregister_memory(mem);
 	else
 		put_device(&mem->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mutex_unlock(&mem_sysfs_mutex);
@@ -1009,6 +1135,7 @@ int unregister_memory_section(struct mem_section *section)
 }
 #endif /* CONFIG_MEMORY_HOTREMOVE */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*
  * offline one memory block. If the memory block has been offlined, do nothing.
@@ -1027,6 +1154,8 @@ int offline_memory_block(struct memory_block *mem)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /* return true if the memory block is offlined, otherwise, return false */
 bool is_memblock_offlined(struct memory_block *mem)
 {
@@ -1034,7 +1163,10 @@ bool is_memblock_offlined(struct memory_block *mem)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct attribute *memory_root_attrs[] = {
 #ifdef CONFIG_ARCH_MEMORY_PROBE
 	&dev_attr_probe.attr,
@@ -1058,6 +1190,9 @@ static const struct attribute_group *memory_root_attr_groups[] = {
 	NULL,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Initialize the sysfs support for memory devices...
@@ -1069,9 +1204,14 @@ int __init memory_dev_init(void)
 	int err;
 	unsigned long block_sz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct memory_block *mem = NULL;
 
 	ret = subsys_system_register(&memory_subsys, NULL);
+=======
+
+	ret = subsys_system_register(&memory_subsys, memory_root_attr_groups);
+>>>>>>> v3.18
 =======
 
 	ret = subsys_system_register(&memory_subsys, memory_root_attr_groups);
@@ -1086,6 +1226,7 @@ int __init memory_dev_init(void)
 	 * Create entries for memory sections that were found
 	 * during boot and have been initialized
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	for (i = 0; i < NR_MEM_SECTIONS; i++) {
 		if (!present_section_nr(i))
@@ -1109,6 +1250,8 @@ int __init memory_dev_init(void)
 	if (!ret)
 		ret = err;
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&mem_sysfs_mutex);
 	for (i = 0; i < NR_MEM_SECTIONS; i += sections_per_block) {
 		err = add_memory_block(i);
@@ -1117,6 +1260,9 @@ int __init memory_dev_init(void)
 	}
 	mutex_unlock(&mem_sysfs_mutex);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	if (ret)

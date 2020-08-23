@@ -21,6 +21,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bitmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/bitmap.h>
 >>>>>>> v3.18
@@ -126,7 +130,10 @@ static struct media_entity *stack_pop(struct media_entity_graph *graph)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define stack_peek(en)	((en)->stack[(en)->top - 1].entity)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define link_top(en)	((en)->stack[(en)->top].link)
@@ -148,13 +155,19 @@ void media_entity_graph_walk_start(struct media_entity_graph *graph,
 	graph->top = 0;
 	graph->stack[graph->top].entity = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	bitmap_zero(graph->entities, MEDIA_ENTITY_ENUM_MAX_ID);
 
 	if (WARN_ON(entity->id >= MEDIA_ENTITY_ENUM_MAX_ID))
 		return;
 
 	__set_bit(entity->id, graph->entities);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stack_push(graph, entity);
 }
@@ -197,15 +210,21 @@ media_entity_graph_walk_next(struct media_entity_graph *graph)
 		/* Get the entity in the other end of the link . */
 		next = media_entity_other(entity, link);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Was it the entity we came here from? */
 		if (next == stack_peek(graph)) {
 =======
+=======
+>>>>>>> v3.18
 		if (WARN_ON(next->id >= MEDIA_ENTITY_ENUM_MAX_ID))
 			return NULL;
 
 		/* Has the entity already been visited? */
 		if (__test_and_set_bit(next->id, graph->entities)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			link_top(graph)++;
 			continue;
@@ -252,6 +271,11 @@ __must_check int media_entity_pipeline_start(struct media_entity *entity,
 
 	while ((entity = media_entity_graph_walk_next(&graph))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		DECLARE_BITMAP(active, entity->num_pads);
+		DECLARE_BITMAP(has_no_links, entity->num_pads);
+>>>>>>> v3.18
 =======
 		DECLARE_BITMAP(active, entity->num_pads);
 		DECLARE_BITMAP(has_no_links, entity->num_pads);
@@ -270,6 +294,7 @@ __must_check int media_entity_pipeline_start(struct media_entity *entity,
 			continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < entity->num_links; i++) {
 			struct media_link *link = &entity->links[i];
 
@@ -280,6 +305,8 @@ __must_check int media_entity_pipeline_start(struct media_entity *entity,
 			/* Are we the sink or not? */
 			if (link->sink->entity != entity)
 =======
+=======
+>>>>>>> v3.18
 		bitmap_zero(active, entity->num_pads);
 		bitmap_fill(has_no_links, entity->num_pads);
 
@@ -306,6 +333,9 @@ __must_check int media_entity_pipeline_start(struct media_entity *entity,
 			 */
 			if (link->sink != pad ||
 			    !(link->flags & MEDIA_LNK_FL_ENABLED))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				continue;
 
@@ -314,7 +344,10 @@ __must_check int media_entity_pipeline_start(struct media_entity *entity,
 				goto error;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		/* Either no links or validated links are fine. */
 		bitmap_or(active, active, has_no_links, entity->num_pads);
@@ -323,6 +356,9 @@ __must_check int media_entity_pipeline_start(struct media_entity *entity,
 			ret = -EPIPE;
 			goto error;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -499,7 +535,10 @@ media_entity_create_link(struct media_entity *source, u16 source_pad,
 EXPORT_SYMBOL_GPL(media_entity_create_link);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void __media_entity_remove_links(struct media_entity *entity)
 {
 	unsigned int i;
@@ -550,6 +589,9 @@ void media_entity_remove_links(struct media_entity *entity)
 }
 EXPORT_SYMBOL_GPL(media_entity_remove_links);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __media_entity_setup_link_notify(struct media_link *link, u32 flags)
 {
@@ -619,9 +661,15 @@ int __media_entity_setup_link(struct media_link *link, u32 flags)
 	mdev = source->parent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((flags & MEDIA_LNK_FL_ENABLED) && mdev->link_notify) {
 		ret = mdev->link_notify(link->source, link->sink,
 					MEDIA_LNK_FL_ENABLED);
+=======
+	if (mdev->link_notify) {
+		ret = mdev->link_notify(link, flags,
+					MEDIA_DEV_NOTIFY_PRE_LINK_CH);
+>>>>>>> v3.18
 =======
 	if (mdev->link_notify) {
 		ret = mdev->link_notify(link, flags,
@@ -632,6 +680,7 @@ int __media_entity_setup_link(struct media_link *link, u32 flags)
 	}
 
 	ret = __media_entity_setup_link_notify(link, flags);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (ret < 0)
 		goto err;
@@ -644,6 +693,11 @@ int __media_entity_setup_link(struct media_link *link, u32 flags)
 err:
 	if ((flags & MEDIA_LNK_FL_ENABLED) && mdev->link_notify)
 		mdev->link_notify(link->source, link->sink, 0);
+=======
+
+	if (mdev->link_notify)
+		mdev->link_notify(link, flags, MEDIA_DEV_NOTIFY_POST_LINK_CH);
+>>>>>>> v3.18
 =======
 
 	if (mdev->link_notify)
@@ -695,6 +749,7 @@ EXPORT_SYMBOL_GPL(media_entity_find_link);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * media_entity_remote_source - Find the source pad at the remote end of a link
  * @pad: Sink pad at the local end of the link
  *
@@ -702,18 +757,27 @@ EXPORT_SYMBOL_GPL(media_entity_find_link);
  * over all links originating or terminating at that pad until an enabled link
  * is found.
 =======
+=======
+>>>>>>> v3.18
  * media_entity_remote_pad - Find the pad at the remote end of a link
  * @pad: Pad at the local end of the link
  *
  * Search for a remote pad connected to the given pad by iterating over all
  * links originating or terminating at that pad until an enabled link is found.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Return a pointer to the pad at the remote end of the first found enabled
  * link, or NULL if no enabled link has been found.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct media_pad *media_entity_remote_source(struct media_pad *pad)
+=======
+struct media_pad *media_entity_remote_pad(struct media_pad *pad)
+>>>>>>> v3.18
 =======
 struct media_pad *media_entity_remote_pad(struct media_pad *pad)
 >>>>>>> v3.18
@@ -737,7 +801,11 @@ struct media_pad *media_entity_remote_pad(struct media_pad *pad)
 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL_GPL(media_entity_remote_source);
+=======
+EXPORT_SYMBOL_GPL(media_entity_remote_pad);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(media_entity_remote_pad);
 >>>>>>> v3.18

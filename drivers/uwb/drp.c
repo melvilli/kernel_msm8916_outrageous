@@ -30,7 +30,11 @@ enum uwb_drp_conflict_action {
 	/* Reservation is maintained, no action needed */
 	UWB_DRP_CONFLICT_MANTAIN = 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -41,7 +45,11 @@ enum uwb_drp_conflict_action {
 	 */
 	UWB_DRP_CONFLICT_ACT1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -50,7 +58,11 @@ enum uwb_drp_conflict_action {
 	 * device is the reservation target, it shall also set the
 	 * Reason Code in its DRP IE to Conflict.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */	
+=======
+	 */
+>>>>>>> v3.18
 =======
 	 */
 >>>>>>> v3.18
@@ -72,6 +84,10 @@ static void uwb_rc_set_drp_cmd_done(struct uwb_rc *rc, void *arg,
 {
 	struct uwb_rc_evt_set_drp_ie *r = (struct uwb_rc_evt_set_drp_ie *)reply;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long flags;
+>>>>>>> v3.18
 =======
 	unsigned long flags;
 >>>>>>> v3.18
@@ -84,6 +100,7 @@ static void uwb_rc_set_drp_cmd_done(struct uwb_rc *rc, void *arg,
 		dev_err(&rc->uwb_dev.dev, "SET-DRP-IE: timeout\n");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_bh(&rc->rsvs_lock);
 	if (rc->set_drp_ie_pending > 1) {
 		rc->set_drp_ie_pending = 0;
@@ -93,6 +110,8 @@ static void uwb_rc_set_drp_cmd_done(struct uwb_rc *rc, void *arg,
 	}
 	spin_unlock_bh(&rc->rsvs_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_lock_irqsave(&rc->rsvs_lock, flags);
 	if (rc->set_drp_ie_pending > 1) {
 		rc->set_drp_ie_pending = 0;
@@ -101,6 +120,9 @@ static void uwb_rc_set_drp_cmd_done(struct uwb_rc *rc, void *arg,
 		rc->set_drp_ie_pending = 0;
 	}
 	spin_unlock_irqrestore(&rc->rsvs_lock, flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -142,7 +164,12 @@ int uwb_rc_send_all_drp_ie(struct uwb_rc *rc)
 				(rsv->mv.companion_drp_ie != NULL)) {
 				mv = &rsv->mv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				num_bytes += mv->companion_drp_ie->hdr.length + 2;	
+=======
+				num_bytes +=
+					mv->companion_drp_ie->hdr.length + 2;
+>>>>>>> v3.18
 =======
 				num_bytes +=
 					mv->companion_drp_ie->hdr.length + 2;
@@ -171,7 +198,11 @@ int uwb_rc_send_all_drp_ie(struct uwb_rc *rc)
 			       rsv->drp_ie->hdr.length + 2);
 			IEDataptr += rsv->drp_ie->hdr.length + 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -181,7 +212,12 @@ int uwb_rc_send_all_drp_ie(struct uwb_rc *rc)
 				memcpy(IEDataptr, mv->companion_drp_ie,
 				       mv->companion_drp_ie->hdr.length + 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IEDataptr += mv->companion_drp_ie->hdr.length + 2;	
+=======
+				IEDataptr +=
+					mv->companion_drp_ie->hdr.length + 2;
+>>>>>>> v3.18
 =======
 				IEDataptr +=
 					mv->companion_drp_ie->hdr.length + 2;
@@ -191,16 +227,22 @@ int uwb_rc_send_all_drp_ie(struct uwb_rc *rc)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	result = uwb_rc_cmd_async(rc, "SET-DRP-IE", &cmd->rccb, sizeof(*cmd) + num_bytes,
 				  UWB_RC_CET_GENERAL, UWB_RC_CMD_SET_DRP_IE,
 				  uwb_rc_set_drp_cmd_done, NULL);
 	
 =======
+=======
+>>>>>>> v3.18
 	result = uwb_rc_cmd_async(rc, "SET-DRP-IE",
 				&cmd->rccb, sizeof(*cmd) + num_bytes,
 				UWB_RC_CET_GENERAL, UWB_RC_CMD_SET_DRP_IE,
 				uwb_rc_set_drp_cmd_done, NULL);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rc->set_drp_ie_pending = 1;
 
@@ -225,8 +267,13 @@ static int evaluate_conflict_action(struct uwb_ie_drp *ext_drp_ie, int ext_beaco
 	int ext_status      = uwb_ie_drp_status(ext_drp_ie);
 	int ext_type        = uwb_ie_drp_type(ext_drp_ie);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	
+=======
+
+
+>>>>>>> v3.18
 =======
 
 
@@ -241,7 +288,11 @@ static int evaluate_conflict_action(struct uwb_ie_drp *ext_drp_ie, int ext_beaco
 		return UWB_DRP_CONFLICT_MANTAIN;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -273,7 +324,11 @@ static int evaluate_conflict_action(struct uwb_ie_drp *ext_drp_ie, int ext_beaco
 		return UWB_DRP_CONFLICT_MANTAIN;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -306,9 +361,15 @@ static int evaluate_conflict_action(struct uwb_ie_drp *ext_drp_ie, int ext_beaco
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void handle_conflict_normal(struct uwb_ie_drp *drp_ie, 
 				   int ext_beacon_slot, 
 				   struct uwb_rsv *rsv, 
+=======
+static void handle_conflict_normal(struct uwb_ie_drp *drp_ie,
+				   int ext_beacon_slot,
+				   struct uwb_rsv *rsv,
+>>>>>>> v3.18
 =======
 static void handle_conflict_normal(struct uwb_ie_drp *drp_ie,
 				   int ext_beacon_slot,
@@ -331,7 +392,11 @@ static void handle_conflict_normal(struct uwb_ie_drp *drp_ie,
 			if (bow->can_reserve_extra_mases == false)
 				uwb_rsv_backoff_win_increment(rc);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -350,7 +415,11 @@ static void handle_conflict_normal(struct uwb_ie_drp *drp_ie,
 		case UWB_DRP_CONFLICT_ACT2:
 		case UWB_DRP_CONFLICT_ACT3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			uwb_rsv_set_state(rsv, UWB_RSV_STATE_T_CONFLICT);	
+=======
+			uwb_rsv_set_state(rsv, UWB_RSV_STATE_T_CONFLICT);
+>>>>>>> v3.18
 =======
 			uwb_rsv_set_state(rsv, UWB_RSV_STATE_T_CONFLICT);
 >>>>>>> v3.18
@@ -360,7 +429,11 @@ static void handle_conflict_normal(struct uwb_ie_drp *drp_ie,
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -375,7 +448,11 @@ static void handle_conflict_expanding(struct uwb_ie_drp *drp_ie, int ext_beacon_
 	struct uwb_rsv_move *mv = &rsv->mv;
 	int action;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -386,6 +463,7 @@ static void handle_conflict_expanding(struct uwb_ie_drp *drp_ie, int ext_beacon_
 			switch(action) {
 			case UWB_DRP_CONFLICT_ACT2:
 			case UWB_DRP_CONFLICT_ACT3:
+<<<<<<< HEAD
 <<<<<<< HEAD
 				uwb_rsv_set_state(rsv, UWB_RSV_STATE_O_ESTABLISHED);
 				rsv->needs_release_companion_mas = false;
@@ -403,6 +481,8 @@ static void handle_conflict_expanding(struct uwb_ie_drp *drp_ie, int ext_beacon_
 		}
 	} else { /* also base part of the reservation is conflicting */		
 =======
+=======
+>>>>>>> v3.18
 				uwb_rsv_set_state(rsv,
 						UWB_RSV_STATE_O_ESTABLISHED);
 				rsv->needs_release_companion_mas = false;
@@ -421,6 +501,9 @@ static void handle_conflict_expanding(struct uwb_ie_drp *drp_ie, int ext_beacon_
 			}
 		}
 	} else { /* also base part of the reservation is conflicting */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (uwb_rsv_is_owner(rsv)) {
 			uwb_rsv_backoff_win_increment(rc);
@@ -431,7 +514,12 @@ static void handle_conflict_expanding(struct uwb_ie_drp *drp_ie, int ext_beacon_
 
 			/* put in the companion the mases to be dropped */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bitmap_andnot(mv->companion_mas.bm, rsv->mas.bm, conflicting_mas->bm, UWB_NUM_MAS);
+=======
+			bitmap_andnot(mv->companion_mas.bm, rsv->mas.bm,
+					conflicting_mas->bm, UWB_NUM_MAS);
+>>>>>>> v3.18
 =======
 			bitmap_andnot(mv->companion_mas.bm, rsv->mas.bm,
 					conflicting_mas->bm, UWB_NUM_MAS);
@@ -446,7 +534,11 @@ static void handle_conflict_expanding(struct uwb_ie_drp *drp_ie, int ext_beacon_
 
 static void uwb_drp_handle_conflict_rsv(struct uwb_rc *rc, struct uwb_rsv *rsv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					struct uwb_rc_evt_drp *drp_evt, 
+=======
+					struct uwb_rc_evt_drp *drp_evt,
+>>>>>>> v3.18
 =======
 					struct uwb_rc_evt_drp *drp_evt,
 >>>>>>> v3.18
@@ -458,6 +550,7 @@ static void uwb_drp_handle_conflict_rsv(struct uwb_rc *rc, struct uwb_rsv *rsv,
 	/* check if the conflicting reservation has two drp_ies */
 	if (uwb_rsv_has_two_drp_ies(rsv)) {
 		mv = &rsv->mv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (bitmap_intersects(rsv->mas.bm, conflicting_mas->bm, UWB_NUM_MAS)) {
 			handle_conflict_expanding(drp_ie, drp_evt->beacon_slot_number,
@@ -471,6 +564,8 @@ static void uwb_drp_handle_conflict_rsv(struct uwb_rc *rc, struct uwb_rsv *rsv,
 	} else if (bitmap_intersects(rsv->mas.bm, conflicting_mas->bm, UWB_NUM_MAS)) {
 		handle_conflict_normal(drp_ie, drp_evt->beacon_slot_number, rsv, conflicting_mas);
 =======
+=======
+>>>>>>> v3.18
 		if (bitmap_intersects(rsv->mas.bm, conflicting_mas->bm,
 								UWB_NUM_MAS)) {
 			handle_conflict_expanding(drp_ie,
@@ -488,13 +583,20 @@ static void uwb_drp_handle_conflict_rsv(struct uwb_rc *rc, struct uwb_rsv *rsv,
 							UWB_NUM_MAS)) {
 		handle_conflict_normal(drp_ie, drp_evt->beacon_slot_number,
 					rsv, conflicting_mas);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
 
 static void uwb_drp_handle_all_conflict_rsv(struct uwb_rc *rc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					    struct uwb_rc_evt_drp *drp_evt, 
+=======
+					    struct uwb_rc_evt_drp *drp_evt,
+>>>>>>> v3.18
 =======
 					    struct uwb_rc_evt_drp *drp_evt,
 >>>>>>> v3.18
@@ -503,6 +605,7 @@ static void uwb_drp_handle_all_conflict_rsv(struct uwb_rc *rc,
 {
 	struct uwb_rsv *rsv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	list_for_each_entry(rsv, &rc->reservations, rc_node) {
 		uwb_drp_handle_conflict_rsv(rc, rsv, drp_evt, drp_ie, conflicting_mas);	
@@ -510,6 +613,8 @@ static void uwb_drp_handle_all_conflict_rsv(struct uwb_rc *rc,
 }
 	
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry(rsv, &rc->reservations, rc_node) {
 		uwb_drp_handle_conflict_rsv(rc, rsv, drp_evt, drp_ie,
@@ -565,6 +670,9 @@ static void uwb_drp_process_target_accepted(struct uwb_rc *rc,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Based on the DRP IE, transition a target reservation to a new
@@ -572,7 +680,11 @@ static void uwb_drp_process_target_accepted(struct uwb_rc *rc,
  */
 static void uwb_drp_process_target(struct uwb_rc *rc, struct uwb_rsv *rsv,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				   struct uwb_ie_drp *drp_ie, struct uwb_rc_evt_drp *drp_evt)
+=======
+		   struct uwb_ie_drp *drp_ie, struct uwb_rc_evt_drp *drp_evt)
+>>>>>>> v3.18
 =======
 		   struct uwb_ie_drp *drp_ie, struct uwb_rc_evt_drp *drp_evt)
 >>>>>>> v3.18
@@ -583,7 +695,11 @@ static void uwb_drp_process_target(struct uwb_rc *rc, struct uwb_rsv *rsv,
 	enum uwb_drp_reason reason_code;
 	struct uwb_mas_bm mas;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -593,6 +709,7 @@ static void uwb_drp_process_target(struct uwb_rc *rc, struct uwb_rsv *rsv,
 
 	switch (reason_code) {
 	case UWB_DRP_REASON_ACCEPTED:
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (rsv->state == UWB_RSV_STATE_T_CONFLICT) {
@@ -629,6 +746,9 @@ static void uwb_drp_process_target(struct uwb_rc *rc, struct uwb_rsv *rsv,
 =======
 		uwb_drp_process_target_accepted(rc, rsv, drp_evt, drp_ie, &mas);
 >>>>>>> v3.18
+=======
+		uwb_drp_process_target_accepted(rc, rsv, drp_evt, drp_ie, &mas);
+>>>>>>> v3.18
 		break;
 
 	case UWB_DRP_REASON_MODIFIED:
@@ -642,7 +762,12 @@ static void uwb_drp_process_target(struct uwb_rc *rc, struct uwb_rsv *rsv,
 		if (bitmap_subset(mas.bm, rsv->mas.bm, UWB_NUM_MAS)) {
 			/* owner is reducing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			bitmap_andnot(mv->companion_mas.bm, rsv->mas.bm, mas.bm, UWB_NUM_MAS);
+=======
+			bitmap_andnot(mv->companion_mas.bm, rsv->mas.bm, mas.bm,
+				UWB_NUM_MAS);
+>>>>>>> v3.18
 =======
 			bitmap_andnot(mv->companion_mas.bm, rsv->mas.bm, mas.bm,
 				UWB_NUM_MAS);
@@ -660,7 +785,10 @@ static void uwb_drp_process_target(struct uwb_rc *rc, struct uwb_rsv *rsv,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void uwb_drp_process_owner_accepted(struct uwb_rsv *rsv,
 						struct uwb_mas_bm *mas)
 {
@@ -703,6 +831,9 @@ static void uwb_drp_process_owner_accepted(struct uwb_rsv *rsv,
 		break;
 	}
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Based on the DRP IE, transition an owner reservation to a new
@@ -714,7 +845,10 @@ static void uwb_drp_process_owner(struct uwb_rc *rc, struct uwb_rsv *rsv,
 {
 	struct device *dev = &rc->uwb_dev.dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uwb_rsv_move *mv = &rsv->mv;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int status;
@@ -728,6 +862,7 @@ static void uwb_drp_process_owner(struct uwb_rc *rc, struct uwb_rsv *rsv,
 	if (status) {
 		switch (reason_code) {
 		case UWB_DRP_REASON_ACCEPTED:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			switch (rsv->state) {
 			case UWB_RSV_STATE_O_PENDING:
@@ -767,6 +902,9 @@ static void uwb_drp_process_owner(struct uwb_rc *rc, struct uwb_rsv *rsv,
 			default:
 				break;	
 			}
+=======
+			uwb_drp_process_owner_accepted(rsv, &mas);
+>>>>>>> v3.18
 =======
 			uwb_drp_process_owner_accepted(rsv, &mas);
 >>>>>>> v3.18
@@ -810,9 +948,15 @@ static void uwb_cnflt_update_work(struct work_struct *work)
 	struct uwb_cnflt_alien *c;
 	struct uwb_rc *rc = cnflt->rc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	unsigned long delay_us = UWB_MAS_LENGTH_US * UWB_MAS_PER_ZONE;
 	
+=======
+
+	unsigned long delay_us = UWB_MAS_LENGTH_US * UWB_MAS_PER_ZONE;
+
+>>>>>>> v3.18
 =======
 
 	unsigned long delay_us = UWB_MAS_LENGTH_US * UWB_MAS_PER_ZONE;
@@ -827,17 +971,23 @@ static void uwb_cnflt_update_work(struct work_struct *work)
 
 	list_for_each_entry(c, &rc->cnflt_alien_list, rc_node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bitmap_or(rc->cnflt_alien_bitmap.bm, rc->cnflt_alien_bitmap.bm, c->mas.bm, UWB_NUM_MAS);			
 	}
 	
 	queue_delayed_work(rc->rsv_workq, &rc->rsv_alien_bp_work, usecs_to_jiffies(delay_us));
 =======
+=======
+>>>>>>> v3.18
 		bitmap_or(rc->cnflt_alien_bitmap.bm, rc->cnflt_alien_bitmap.bm,
 						c->mas.bm, UWB_NUM_MAS);
 	}
 
 	queue_delayed_work(rc->rsv_workq, &rc->rsv_alien_bp_work,
 					usecs_to_jiffies(delay_us));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	kfree(cnflt);
@@ -863,15 +1013,21 @@ static void uwb_drp_handle_alien_drp(struct uwb_rc *rc, struct uwb_ie_drp *drp_i
 	char buf[72];
 	unsigned long delay_us = UWB_MAS_LENGTH_US * UWB_MAS_PER_ZONE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	uwb_drp_ie_to_bm(&mas, drp_ie);
 	bitmap_scnprintf(buf, sizeof(buf), mas.bm, UWB_NUM_MAS);
 	
 =======
+=======
+>>>>>>> v3.18
 
 	uwb_drp_ie_to_bm(&mas, drp_ie);
 	bitmap_scnprintf(buf, sizeof(buf), mas.bm, UWB_NUM_MAS);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	list_for_each_entry(cnflt, &rc->cnflt_alien_list, rc_node) {
 		if (bitmap_equal(cnflt->mas.bm, mas.bm, UWB_NUM_MAS)) {
@@ -887,14 +1043,20 @@ static void uwb_drp_handle_alien_drp(struct uwb_rc *rc, struct uwb_ie_drp *drp_i
 	/* alloc and initialize new uwb_cnflt_alien */
 	cnflt = kzalloc(sizeof(struct uwb_cnflt_alien), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!cnflt)
 		dev_err(dev, "failed to alloc uwb_cnflt_alien struct\n");
 =======
+=======
+>>>>>>> v3.18
 	if (!cnflt) {
 		dev_err(dev, "failed to alloc uwb_cnflt_alien struct\n");
 		return;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	INIT_LIST_HEAD(&cnflt->rc_node);
 	init_timer(&cnflt->timer);
@@ -904,7 +1066,11 @@ static void uwb_drp_handle_alien_drp(struct uwb_rc *rc, struct uwb_ie_drp *drp_i
 	cnflt->rc = rc;
 	INIT_WORK(&cnflt->cnflt_update_work, uwb_cnflt_update_work);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -917,7 +1083,11 @@ static void uwb_drp_handle_alien_drp(struct uwb_rc *rc, struct uwb_ie_drp *drp_i
 
 	queue_delayed_work(rc->rsv_workq, &rc->rsv_alien_bp_work, usecs_to_jiffies(delay_us));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -927,17 +1097,23 @@ static void uwb_drp_handle_alien_drp(struct uwb_rc *rc, struct uwb_ie_drp *drp_i
 
 static void uwb_drp_process_not_involved(struct uwb_rc *rc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 struct uwb_rc_evt_drp *drp_evt, 
 					 struct uwb_ie_drp *drp_ie)
 {
 	struct uwb_mas_bm mas;
 	
 =======
+=======
+>>>>>>> v3.18
 					 struct uwb_rc_evt_drp *drp_evt,
 					 struct uwb_ie_drp *drp_ie)
 {
 	struct uwb_mas_bm mas;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uwb_drp_ie_to_bm(&mas, drp_ie);
 	uwb_drp_handle_all_conflict_rsv(rc, drp_evt, drp_ie, &mas);
@@ -959,7 +1135,11 @@ static void uwb_drp_process_involved(struct uwb_rc *rc, struct uwb_dev *src,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -972,7 +1152,11 @@ static void uwb_drp_process_involved(struct uwb_rc *rc, struct uwb_dev *src,
 		return;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -981,7 +1165,11 @@ static void uwb_drp_process_involved(struct uwb_rc *rc, struct uwb_dev *src,
 	else
 		uwb_drp_process_owner(rc, rsv, src, drp_ie, drp_evt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

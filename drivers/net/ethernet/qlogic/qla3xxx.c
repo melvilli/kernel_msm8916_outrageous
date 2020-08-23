@@ -9,7 +9,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/types.h>
@@ -70,7 +73,11 @@ module_param(msi, int, 0);
 MODULE_PARM_DESC(msi, "Turn on Message Signaled Interrupts.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(ql3xxx_pci_tbl) = {
+=======
+static const struct pci_device_id ql3xxx_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id ql3xxx_pci_tbl[] = {
 >>>>>>> v3.18
@@ -3847,7 +3854,11 @@ static int ql3xxx_probe(struct pci_dev *pdev,
 	/* Set driver entry points */
 	ndev->netdev_ops = &ql3xxx_netdev_ops;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(ndev, &ql3xxx_ethtool_ops);
+=======
+	ndev->ethtool_ops = &ql3xxx_ethtool_ops;
+>>>>>>> v3.18
 =======
 	ndev->ethtool_ops = &ql3xxx_ethtool_ops;
 >>>>>>> v3.18
@@ -3928,7 +3939,10 @@ err_out_free_regions:
 err_out_disable_pdev:
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 err_out:
@@ -3954,7 +3968,10 @@ static void ql3xxx_remove(struct pci_dev *pdev)
 	iounmap(qdev->mem_map_registers);
 	pci_release_regions(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(ndev);

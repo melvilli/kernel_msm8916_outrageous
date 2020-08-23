@@ -291,6 +291,10 @@ static int add_del_listener(pid_t pid, const struct cpumask *mask, int isadd)
 	struct listener *s, *tmp, *s2;
 	unsigned int cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int ret = 0;
+>>>>>>> v3.18
 =======
 	int ret = 0;
 >>>>>>> v3.18
@@ -309,14 +313,20 @@ static int add_del_listener(pid_t pid, const struct cpumask *mask, int isadd)
 			s = kmalloc_node(sizeof(struct listener),
 					GFP_KERNEL, cpu_to_node(cpu));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!s)
 				goto cleanup;
 
 =======
+=======
+>>>>>>> v3.18
 			if (!s) {
 				ret = -ENOMEM;
 				goto cleanup;
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			s->pid = pid;
 			s->valid = 1;
@@ -351,7 +361,11 @@ cleanup:
 		up_write(&listeners->sem);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return ret;
+>>>>>>> v3.18
 =======
 	return ret;
 >>>>>>> v3.18
@@ -420,12 +434,15 @@ static struct taskstats *mk_reply(struct sk_buff *skb, int type, u32 pid)
 		goto err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nla_put(skb, type, sizeof(pid), &pid) < 0)
 		goto err;
 	ret = nla_reserve(skb, TASKSTATS_TYPE_STATS, sizeof(struct taskstats));
 	if (!ret)
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 	if (nla_put(skb, type, sizeof(pid), &pid) < 0) {
 		nla_nest_cancel(skb, na);
 		goto err;
@@ -435,6 +452,9 @@ static struct taskstats *mk_reply(struct sk_buff *skb, int type, u32 pid)
 		nla_nest_cancel(skb, na);
 		goto err;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	nla_nest_end(skb, na);
 
@@ -660,7 +680,11 @@ void taskstats_exit(struct task_struct *tsk, int group_dead)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	listeners = __this_cpu_ptr(&listener_array);
+=======
+	listeners = raw_cpu_ptr(&listener_array);
+>>>>>>> v3.18
 =======
 	listeners = raw_cpu_ptr(&listener_array);
 >>>>>>> v3.18
@@ -699,6 +723,7 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct genl_ops taskstats_ops = {
 	.cmd		= TASKSTATS_CMD_GET,
 	.doit		= taskstats_user_cmd,
@@ -711,6 +736,8 @@ static struct genl_ops cgroupstats_ops = {
 	.doit		= cgroupstats_user_cmd,
 	.policy		= cgroupstats_cmd_get_policy,
 =======
+=======
+>>>>>>> v3.18
 static const struct genl_ops taskstats_ops[] = {
 	{
 		.cmd		= TASKSTATS_CMD_GET,
@@ -723,6 +750,9 @@ static const struct genl_ops taskstats_ops[] = {
 		.doit		= cgroupstats_user_cmd,
 		.policy		= cgroupstats_cmd_get_policy,
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -742,6 +772,7 @@ static int __init taskstats_init(void)
 {
 	int rc;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rc = genl_register_family(&family);
 	if (rc)
@@ -764,6 +795,8 @@ err:
 	genl_unregister_family(&family);
 	return rc;
 =======
+=======
+>>>>>>> v3.18
 	rc = genl_register_family_with_ops(&family, taskstats_ops);
 	if (rc)
 		return rc;
@@ -771,6 +804,9 @@ err:
 	family_registered = 1;
 	pr_info("registered taskstats version %d\n", TASKSTATS_GENL_VERSION);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

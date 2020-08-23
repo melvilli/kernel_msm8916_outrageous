@@ -174,6 +174,7 @@ static loff_t
 bfad_debugfs_lseek(struct file *file, loff_t offset, int orig)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bfad_debug_info *debug;
 	loff_t pos = file->f_pos;
 
@@ -199,6 +200,11 @@ bfad_debugfs_lseek(struct file *file, loff_t offset, int orig)
 	}
 
 	return file->f_pos;
+=======
+	struct bfad_debug_info *debug = file->private_data;
+	return fixed_size_llseek(file, offset, orig,
+				debug->buffer_len);
+>>>>>>> v3.18
 =======
 	struct bfad_debug_info *debug = file->private_data;
 	return fixed_size_llseek(file, offset, orig,

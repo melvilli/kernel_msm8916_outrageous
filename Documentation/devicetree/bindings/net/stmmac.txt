@@ -11,12 +11,15 @@ Required properties:
   "eth_wake_irq" if this interrupt is supported in the "interrupts"
   property
 <<<<<<< HEAD
+<<<<<<< HEAD
 - phy-mode: String, operation mode of the PHY interface.
   Supported values are: "mii", "rmii", "gmii", "rgmii".
 
 Optional properties:
 - mac-address: 6 bytes, mac address
 =======
+=======
+>>>>>>> v3.18
 - phy-mode: See ethernet.txt file in the same directory.
 - snps,reset-gpio 	gpio number for phy reset.
 - snps,reset-active-low boolean flag to indicate if phy reset is active low.
@@ -50,6 +53,9 @@ Optional properties:
   available this clock is used for programming the Timestamp Addend Register.
   If not passed then the system clock will be used and this is fine on some
   platforms.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Examples:
@@ -62,13 +68,19 @@ Examples:
 		interrupt-names = "macirq", "eth_wake_irq";
 		mac-address = [000000000000]; /* Filled in by U-Boot */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		phy-mode = "gmii";
 =======
+=======
+>>>>>>> v3.18
 		max-frame-size = <3800>;
 		phy-mode = "gmii";
 		snps,multicast-filter-bins = <256>;
 		snps,perfect-filter-entries = <128>;
 		clocks = <&clock>;
 		clock-names = "stmmaceth";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

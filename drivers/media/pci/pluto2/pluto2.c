@@ -402,7 +402,11 @@ static int pluto_hw_init(struct pluto *pluto)
 	pluto_rw(pluto, REG_MISC, MISC_ALED, MISC_ALED);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* set data endianess */
+=======
+	/* set data endianness */
+>>>>>>> v3.18
 =======
 	/* set data endianness */
 >>>>>>> v3.18
@@ -741,7 +745,10 @@ err_pci_disable_device:
 	pci_disable_device(pdev);
 err_kfree:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(pluto);
@@ -773,7 +780,10 @@ static void pluto2_remove(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(pluto);
@@ -807,6 +817,7 @@ static struct pci_driver pluto2_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init pluto2_init(void)
 {
 	return pci_register_driver(&pluto2_driver);
@@ -819,6 +830,9 @@ static void __exit pluto2_exit(void)
 
 module_init(pluto2_init);
 module_exit(pluto2_exit);
+=======
+module_pci_driver(pluto2_driver);
+>>>>>>> v3.18
 =======
 module_pci_driver(pluto2_driver);
 >>>>>>> v3.18

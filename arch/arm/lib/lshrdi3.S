@@ -28,6 +28,10 @@ Boston, MA 02110-1301, USA.  */
 
 #include <linux/linkage.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/assembler.h>
+>>>>>>> v3.18
 =======
 #include <asm/assembler.h>
 >>>>>>> v3.18
@@ -52,7 +56,11 @@ ENTRY(__aeabi_llsr)
  THUMB(	orrmi	al, al, r3		)
 	mov	ah, ah, lsr r2
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mov	pc, lr
+=======
+	ret	lr
+>>>>>>> v3.18
 =======
 	ret	lr
 >>>>>>> v3.18

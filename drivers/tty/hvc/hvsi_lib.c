@@ -1,6 +1,9 @@
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -13,7 +16,11 @@
 static int hvsi_send_packet(struct hvsi_priv *pv, struct hvsi_header *packet)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	packet->seqno = atomic_inc_return(&pv->seqno);
+=======
+	packet->seqno = cpu_to_be16(atomic_inc_return(&pv->seqno));
+>>>>>>> v3.18
 =======
 	packet->seqno = cpu_to_be16(atomic_inc_return(&pv->seqno));
 >>>>>>> v3.18
@@ -36,7 +43,11 @@ static void hvsi_start_handshake(struct hvsi_priv *pv)
 	q.hdr.type = VS_QUERY_PACKET_HEADER;
 	q.hdr.len = sizeof(struct hvsi_query);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q.verb = VSV_SEND_VERSION_NUMBER;
+=======
+	q.verb = cpu_to_be16(VSV_SEND_VERSION_NUMBER);
+>>>>>>> v3.18
 =======
 	q.verb = cpu_to_be16(VSV_SEND_VERSION_NUMBER);
 >>>>>>> v3.18
@@ -52,7 +63,11 @@ static int hvsi_send_close(struct hvsi_priv *pv)
 	ctrl.hdr.type = VS_CONTROL_PACKET_HEADER;
 	ctrl.hdr.len = sizeof(struct hvsi_control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctrl.verb = VSV_CLOSE_PROTOCOL;
+=======
+	ctrl.verb = cpu_to_be16(VSV_CLOSE_PROTOCOL);
+>>>>>>> v3.18
 =======
 	ctrl.verb = cpu_to_be16(VSV_CLOSE_PROTOCOL);
 >>>>>>> v3.18
@@ -85,7 +100,11 @@ static void hvsi_got_control(struct hvsi_priv *pv)
 	struct hvsi_control *pkt = (struct hvsi_control *)pv->inbuf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (pkt->verb) {
+=======
+	switch (be16_to_cpu(pkt->verb)) {
+>>>>>>> v3.18
 =======
 	switch (be16_to_cpu(pkt->verb)) {
 >>>>>>> v3.18
@@ -96,7 +115,11 @@ static void hvsi_got_control(struct hvsi_priv *pv)
 	case VSV_MODEM_CTL_UPDATE:
 		/* Transition of carrier detect */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hvsi_cd_change(pv, pkt->word & HVSI_TSCD);
+=======
+		hvsi_cd_change(pv, be32_to_cpu(pkt->word) & HVSI_TSCD);
+>>>>>>> v3.18
 =======
 		hvsi_cd_change(pv, be32_to_cpu(pkt->word) & HVSI_TSCD);
 >>>>>>> v3.18
@@ -111,7 +134,11 @@ static void hvsi_got_query(struct hvsi_priv *pv)
 
 	/* We only handle version queries */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pkt->verb != VSV_SEND_VERSION_NUMBER)
+=======
+	if (be16_to_cpu(pkt->verb) != VSV_SEND_VERSION_NUMBER)
+>>>>>>> v3.18
 =======
 	if (be16_to_cpu(pkt->verb) != VSV_SEND_VERSION_NUMBER)
 >>>>>>> v3.18
@@ -124,7 +151,11 @@ static void hvsi_got_query(struct hvsi_priv *pv)
 	r.hdr.type = VS_QUERY_RESPONSE_PACKET_HEADER;
 	r.hdr.len = sizeof(struct hvsi_query_response);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r.verb = VSV_SEND_VERSION_NUMBER;
+=======
+	r.verb = cpu_to_be16(VSV_SEND_VERSION_NUMBER);
+>>>>>>> v3.18
 =======
 	r.verb = cpu_to_be16(VSV_SEND_VERSION_NUMBER);
 >>>>>>> v3.18
@@ -144,7 +175,11 @@ static void hvsi_got_response(struct hvsi_priv *pv)
 	switch(r->verb) {
 	case VSV_SEND_MODEM_CTL_STATUS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hvsi_cd_change(pv, r->u.mctrl_word & HVSI_TSCD);
+=======
+		hvsi_cd_change(pv, be32_to_cpu(r->u.mctrl_word) & HVSI_TSCD);
+>>>>>>> v3.18
 =======
 		hvsi_cd_change(pv, be32_to_cpu(r->u.mctrl_word) & HVSI_TSCD);
 >>>>>>> v3.18
@@ -301,8 +336,12 @@ int hvsilib_read_mctrl(struct hvsi_priv *pv)
 	q.hdr.type = VS_QUERY_PACKET_HEADER;
 	q.hdr.len = sizeof(struct hvsi_query);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	q.hdr.seqno = atomic_inc_return(&pv->seqno);
 	q.verb = VSV_SEND_MODEM_CTL_STATUS;
+=======
+	q.verb = cpu_to_be16(VSV_SEND_MODEM_CTL_STATUS);
+>>>>>>> v3.18
 =======
 	q.verb = cpu_to_be16(VSV_SEND_MODEM_CTL_STATUS);
 >>>>>>> v3.18
@@ -344,9 +383,15 @@ int hvsilib_write_mctrl(struct hvsi_priv *pv, int dtr)
 	ctrl.hdr.type = VS_CONTROL_PACKET_HEADER,
 	ctrl.hdr.len = sizeof(struct hvsi_control);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctrl.verb = VSV_SET_MODEM_CTL;
 	ctrl.mask = HVSI_TSDTR;
 	ctrl.word = dtr ? HVSI_TSDTR : 0;
+=======
+	ctrl.verb = cpu_to_be16(VSV_SET_MODEM_CTL);
+	ctrl.mask = cpu_to_be32(HVSI_TSDTR);
+	ctrl.word = cpu_to_be32(dtr ? HVSI_TSDTR : 0);
+>>>>>>> v3.18
 =======
 	ctrl.verb = cpu_to_be16(VSV_SET_MODEM_CTL);
 	ctrl.mask = cpu_to_be32(HVSI_TSDTR);

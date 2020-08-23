@@ -30,6 +30,11 @@
 #include <asm/ccwdev.h>
 #include <asm/itcw.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/schid.h>
+#include <asm/chpid.h>
+>>>>>>> v3.18
 =======
 #include <asm/schid.h>
 #include <asm/chpid.h>
@@ -91,6 +96,11 @@ MODULE_DEVICE_TABLE(ccw, dasd_eckd_ids);
 static struct ccw_driver dasd_eckd_driver; /* see below */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static void *rawpadpage;
+
+>>>>>>> v3.18
 =======
 static void *rawpadpage;
 
@@ -121,13 +131,19 @@ static struct path_verification_work_data *path_verification_worker;
 static DEFINE_MUTEX(dasd_path_verification_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct check_attention_work_data {
 	struct work_struct worker;
 	struct dasd_device *device;
 	__u8 lpum;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* initial attempt at a probe function. this can be simplified once
  * the other detection code is gone */
@@ -1144,6 +1160,10 @@ static int dasd_eckd_read_conf(struct dasd_device *device)
 					print_path_uid, print_device_uid);
 				path_err = -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				path_data->cablepm |= lpm;
+>>>>>>> v3.18
 =======
 				path_data->cablepm |= lpm;
 >>>>>>> v3.18
@@ -1163,7 +1183,10 @@ static int dasd_eckd_read_conf(struct dasd_device *device)
 		}
 		path_data->opm |= lpm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * if the path is used
 		 * it should not be in one of the negative lists
@@ -1171,6 +1194,9 @@ static int dasd_eckd_read_conf(struct dasd_device *device)
 		path_data->cablepm &= ~lpm;
 		path_data->hpfpm &= ~lpm;
 		path_data->cuirpm &= ~lpm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (conf_data != private->conf_data)
@@ -1262,7 +1288,11 @@ static void do_path_verification_work(struct work_struct *work)
 	struct dasd_uid *uid;
 	__u8 path_rcd_buf[DASD_ECKD_RCD_DATA_SIZE];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__u8 lpm, opm, npm, ppm, epm;
+=======
+	__u8 lpm, opm, npm, ppm, epm, hpfpm, cablepm;
+>>>>>>> v3.18
 =======
 	__u8 lpm, opm, npm, ppm, epm, hpfpm, cablepm;
 >>>>>>> v3.18
@@ -1284,6 +1314,12 @@ static void do_path_verification_work(struct work_struct *work)
 	ppm = 0;
 	epm = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	hpfpm = 0;
+	cablepm = 0;
+
+>>>>>>> v3.18
 =======
 	hpfpm = 0;
 	cablepm = 0;
@@ -1331,6 +1367,10 @@ static void do_path_verification_work(struct work_struct *work)
 			npm &= ~lpm;
 			ppm &= ~lpm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			hpfpm |= lpm;
+>>>>>>> v3.18
 =======
 			hpfpm |= lpm;
 >>>>>>> v3.18
@@ -1396,6 +1436,10 @@ static void do_path_verification_work(struct work_struct *work)
 				npm &= ~lpm;
 				ppm &= ~lpm;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				cablepm |= lpm;
+>>>>>>> v3.18
 =======
 				cablepm |= lpm;
 >>>>>>> v3.18
@@ -1414,6 +1458,7 @@ static void do_path_verification_work(struct work_struct *work)
 		if (!device->path_data.opm && opm) {
 			device->path_data.opm = opm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dasd_generic_path_operational(device);
 		} else
 			device->path_data.opm |= opm;
@@ -1421,6 +1466,8 @@ static void do_path_verification_work(struct work_struct *work)
 		device->path_data.ppm |= ppm;
 		device->path_data.tbvpm |= epm;
 =======
+=======
+>>>>>>> v3.18
 			device->path_data.cablepm &= ~opm;
 			device->path_data.cuirpm &= ~opm;
 			device->path_data.hpfpm &= ~opm;
@@ -1436,6 +1483,9 @@ static void do_path_verification_work(struct work_struct *work)
 		device->path_data.tbvpm |= epm;
 		device->path_data.cablepm |= cablepm;
 		device->path_data.hpfpm |= hpfpm;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		spin_unlock_irqrestore(get_ccwdev_lock(device->cdev), flags);
 	}
@@ -1752,6 +1802,12 @@ dasd_eckd_check_characteristics(struct dasd_device *device)
 	/* set default timeout */
 	device->default_expires = DASD_EXPIRES;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* set default retry count */
+	device->default_retries = DASD_RETRIES;
+
+>>>>>>> v3.18
 =======
 	/* set default retry count */
 	device->default_retries = DASD_RETRIES;
@@ -2110,7 +2166,11 @@ static int dasd_eckd_online_to_ready(struct dasd_device *device)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dasd_eckd_ready_to_basic(struct dasd_device *device)
+=======
+static int dasd_eckd_basic_to_known(struct dasd_device *device)
+>>>>>>> v3.18
 =======
 static int dasd_eckd_basic_to_known(struct dasd_device *device)
 >>>>>>> v3.18
@@ -2136,18 +2196,24 @@ dasd_eckd_fill_geometry(struct dasd_block *block, struct hd_geometry *geo)
 static struct dasd_ccw_req *
 dasd_eckd_build_format(struct dasd_device *base,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       struct format_data_t *fdata)
 {
 	struct dasd_eckd_private *base_priv;
 	struct dasd_eckd_private *start_priv;
 	struct dasd_device *startdev;
 =======
+=======
+>>>>>>> v3.18
 		       struct format_data_t *fdata,
 		       int enable_pav)
 {
 	struct dasd_eckd_private *base_priv;
 	struct dasd_eckd_private *start_priv;
 	struct dasd_device *startdev = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct dasd_ccw_req *fcp;
 	struct eckd_count *ect;
@@ -2161,14 +2227,20 @@ dasd_eckd_build_format(struct dasd_device *base,
 	int r0_perm;
 	int nr_tracks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	startdev = dasd_alias_get_start_dev(base);
 =======
+=======
+>>>>>>> v3.18
 	int use_prefix;
 
 	if (enable_pav)
 		startdev = dasd_alias_get_start_dev(base);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!startdev)
 		startdev = base;
@@ -2198,6 +2270,11 @@ dasd_eckd_build_format(struct dasd_device *base,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	use_prefix = base_priv->features.feature[8] & 0x01;
+
+>>>>>>> v3.18
 =======
 	use_prefix = base_priv->features.feature[8] & 0x01;
 
@@ -2207,10 +2284,13 @@ dasd_eckd_build_format(struct dasd_device *base,
 	case 0x08:	/* Normal format, use cdl. */
 		cplength = 2 + (rpt*nr_tracks);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		datasize = sizeof(struct PFX_eckd_data) +
 			sizeof(struct LO_eckd_data) +
 			rpt * nr_tracks * sizeof(struct eckd_count);
 =======
+=======
+>>>>>>> v3.18
 		if (use_prefix)
 			datasize = sizeof(struct PFX_eckd_data) +
 				sizeof(struct LO_eckd_data) +
@@ -2219,17 +2299,23 @@ dasd_eckd_build_format(struct dasd_device *base,
 			datasize = sizeof(struct DE_eckd_data) +
 				sizeof(struct LO_eckd_data) +
 				rpt * nr_tracks * sizeof(struct eckd_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 0x01:	/* Write record zero and format track. */
 	case 0x09:	/* Write record zero and format track, use cdl. */
 		cplength = 2 + rpt * nr_tracks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		datasize = sizeof(struct PFX_eckd_data) +
 			sizeof(struct LO_eckd_data) +
 			sizeof(struct eckd_count) +
 			rpt * nr_tracks * sizeof(struct eckd_count);
 =======
+=======
+>>>>>>> v3.18
 		if (use_prefix)
 			datasize = sizeof(struct PFX_eckd_data) +
 				sizeof(struct LO_eckd_data) +
@@ -2240,16 +2326,22 @@ dasd_eckd_build_format(struct dasd_device *base,
 				sizeof(struct LO_eckd_data) +
 				sizeof(struct eckd_count) +
 				rpt * nr_tracks * sizeof(struct eckd_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	case 0x04:	/* Invalidate track. */
 	case 0x0c:	/* Invalidate track, use cdl. */
 		cplength = 3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		datasize = sizeof(struct PFX_eckd_data) +
 			sizeof(struct LO_eckd_data) +
 			sizeof(struct eckd_count);
 =======
+=======
+>>>>>>> v3.18
 		if (use_prefix)
 			datasize = sizeof(struct PFX_eckd_data) +
 				sizeof(struct LO_eckd_data) +
@@ -2258,6 +2350,9 @@ dasd_eckd_build_format(struct dasd_device *base,
 			datasize = sizeof(struct DE_eckd_data) +
 				sizeof(struct LO_eckd_data) +
 				sizeof(struct eckd_count);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		break;
 	default:
@@ -2279,6 +2374,7 @@ dasd_eckd_build_format(struct dasd_device *base,
 	switch (intensity & ~0x08) {
 	case 0x00: /* Normal format. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prefix(ccw++, (struct PFX_eckd_data *) data,
 		       fdata->start_unit, fdata->stop_unit,
 		       DASD_ECKD_CCW_WRITE_CKD, base, startdev);
@@ -2288,6 +2384,8 @@ dasd_eckd_build_format(struct dasd_device *base,
 				->define_extent.ga_extended |= 0x04;
 		data += sizeof(struct PFX_eckd_data);
 =======
+=======
+>>>>>>> v3.18
 		if (use_prefix) {
 			prefix(ccw++, (struct PFX_eckd_data *) data,
 			       fdata->start_unit, fdata->stop_unit,
@@ -2307,6 +2405,9 @@ dasd_eckd_build_format(struct dasd_device *base,
 					->ga_extended |= 0x04;
 			data += sizeof(struct DE_eckd_data);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ccw[-1].flags |= CCW_FLAG_CC;
 		locate_record(ccw++, (struct LO_eckd_data *) data,
@@ -2317,12 +2418,15 @@ dasd_eckd_build_format(struct dasd_device *base,
 		break;
 	case 0x01: /* Write record zero + format track. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prefix(ccw++, (struct PFX_eckd_data *) data,
 		       fdata->start_unit, fdata->stop_unit,
 		       DASD_ECKD_CCW_WRITE_RECORD_ZERO,
 		       base, startdev);
 		data += sizeof(struct PFX_eckd_data);
 =======
+=======
+>>>>>>> v3.18
 		if (use_prefix) {
 			prefix(ccw++, (struct PFX_eckd_data *) data,
 			       fdata->start_unit, fdata->stop_unit,
@@ -2335,6 +2439,9 @@ dasd_eckd_build_format(struct dasd_device *base,
 			       DASD_ECKD_CCW_WRITE_RECORD_ZERO, startdev);
 			data += sizeof(struct DE_eckd_data);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ccw[-1].flags |= CCW_FLAG_CC;
 		locate_record(ccw++, (struct LO_eckd_data *) data,
@@ -2345,11 +2452,14 @@ dasd_eckd_build_format(struct dasd_device *base,
 		break;
 	case 0x04: /* Invalidate track. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		prefix(ccw++, (struct PFX_eckd_data *) data,
 		       fdata->start_unit, fdata->stop_unit,
 		       DASD_ECKD_CCW_WRITE_CKD, base, startdev);
 		data += sizeof(struct PFX_eckd_data);
 =======
+=======
+>>>>>>> v3.18
 		if (use_prefix) {
 			prefix(ccw++, (struct PFX_eckd_data *) data,
 			       fdata->start_unit, fdata->stop_unit,
@@ -2361,6 +2471,9 @@ dasd_eckd_build_format(struct dasd_device *base,
 			       DASD_ECKD_CCW_WRITE_CKD, startdev);
 			data += sizeof(struct DE_eckd_data);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ccw[-1].flags |= CCW_FLAG_CC;
 		locate_record(ccw++, (struct LO_eckd_data *) data,
@@ -2448,6 +2561,10 @@ dasd_eckd_build_format(struct dasd_device *base,
 	fcp->startdev = startdev;
 	fcp->memdev = startdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	fcp->basedev = base;
+>>>>>>> v3.18
 =======
 	fcp->basedev = base;
 >>>>>>> v3.18
@@ -2462,7 +2579,12 @@ dasd_eckd_build_format(struct dasd_device *base,
 static int
 dasd_eckd_format_device(struct dasd_device *base,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct format_data_t *fdata)
+=======
+			struct format_data_t *fdata,
+			int enable_pav)
+>>>>>>> v3.18
 =======
 			struct format_data_t *fdata,
 			int enable_pav)
@@ -2475,7 +2597,11 @@ dasd_eckd_format_device(struct dasd_device *base,
 	struct dasd_device *device;
 	int old_stop, format_step;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int step, rc = 0;
+=======
+	int step, rc = 0, sleep_rc;
+>>>>>>> v3.18
 =======
 	int step, rc = 0, sleep_rc;
 >>>>>>> v3.18
@@ -2513,17 +2639,23 @@ dasd_eckd_format_device(struct dasd_device *base,
 
 	INIT_LIST_HEAD(&format_queue);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	old_stop = fdata->stop_unit;
 
 	while (fdata->start_unit <= 1) {
 		fdata->stop_unit = fdata->start_unit;
 		cqr = dasd_eckd_build_format(base, fdata);
 =======
+=======
+>>>>>>> v3.18
 
 	old_stop = fdata->stop_unit;
 	while (fdata->start_unit <= 1) {
 		fdata->stop_unit = fdata->start_unit;
 		cqr = dasd_eckd_build_format(base, fdata, enable_pav);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		list_add(&cqr->blocklist, &format_queue);
 
@@ -2543,7 +2675,11 @@ retry:
 			fdata->stop_unit = fdata->start_unit + format_step - 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cqr = dasd_eckd_build_format(base, fdata);
+=======
+		cqr = dasd_eckd_build_format(base, fdata, enable_pav);
+>>>>>>> v3.18
 =======
 		cqr = dasd_eckd_build_format(base, fdata, enable_pav);
 >>>>>>> v3.18
@@ -2567,7 +2703,11 @@ retry:
 
 sleep:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dasd_sleep_on_queue(&format_queue);
+=======
+	sleep_rc = dasd_sleep_on_queue(&format_queue);
+>>>>>>> v3.18
 =======
 	sleep_rc = dasd_sleep_on_queue(&format_queue);
 >>>>>>> v3.18
@@ -2583,6 +2723,12 @@ sleep:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (sleep_rc)
+		return sleep_rc;
+
+>>>>>>> v3.18
 =======
 	if (sleep_rc)
 		return sleep_rc;
@@ -2601,11 +2747,17 @@ sleep:
 static void dasd_eckd_handle_terminated_request(struct dasd_ccw_req *cqr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (cqr->retries < 0) {
 		cqr->status = DASD_CQR_FAILED;
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cqr->status = DASD_CQR_FILLED;
 	if (cqr->block && (cqr->startdev != cqr->block->base)) {
@@ -2728,7 +2880,11 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_single(
 	struct ccw1 *ccw;
 	struct req_iterator iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 =======
 	struct bio_vec bv;
 >>>>>>> v3.18
@@ -2754,6 +2910,7 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_single(
 	cidaw = 0;
 	rq_for_each_segment(bv, req, iter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (bv->bv_len & (blksize - 1))
 			/* Eckd can only do full blocks. */
 			return ERR_PTR(-EINVAL);
@@ -2762,6 +2919,8 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_single(
 		if (idal_is_needed (page_address(bv->bv_page), bv->bv_len))
 			cidaw += bv->bv_len >> (block->s2b_shift + 9);
 =======
+=======
+>>>>>>> v3.18
 		if (bv.bv_len & (blksize - 1))
 			/* Eckd can only do full blocks. */
 			return ERR_PTR(-EINVAL);
@@ -2769,6 +2928,9 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_single(
 #if defined(CONFIG_64BIT)
 		if (idal_is_needed (page_address(bv.bv_page), bv.bv_len))
 			cidaw += bv.bv_len >> (block->s2b_shift + 9);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	}
@@ -2841,7 +3003,11 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_single(
 	}
 	rq_for_each_segment(bv, req, iter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dst = page_address(bv->bv_page) + bv->bv_offset;
+=======
+		dst = page_address(bv.bv_page) + bv.bv_offset;
+>>>>>>> v3.18
 =======
 		dst = page_address(bv.bv_page) + bv.bv_offset;
 >>>>>>> v3.18
@@ -2850,17 +3016,23 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_single(
 						      GFP_DMA | __GFP_NOWARN);
 			if (copy && rq_data_dir(req) == WRITE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				memcpy(copy + bv->bv_offset, dst, bv->bv_len);
 			if (copy)
 				dst = copy + bv->bv_offset;
 		}
 		for (off = 0; off < bv->bv_len; off += blksize) {
 =======
+=======
+>>>>>>> v3.18
 				memcpy(copy + bv.bv_offset, dst, bv.bv_len);
 			if (copy)
 				dst = copy + bv.bv_offset;
 		}
 		for (off = 0; off < bv.bv_len; off += blksize) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			sector_t trkid = recid;
 			unsigned int recoffs = sector_div(trkid, blk_per_trk);
@@ -2915,7 +3087,11 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_single(
 	cqr->expires = startdev->default_expires * HZ;	/* default 5 minutes */
 	cqr->lpm = startdev->path_data.ppm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cqr->retries = 256;
+=======
+	cqr->retries = startdev->default_retries;
+>>>>>>> v3.18
 =======
 	cqr->retries = startdev->default_retries;
 >>>>>>> v3.18
@@ -2942,7 +3118,11 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_track(
 	struct ccw1 *ccw;
 	struct req_iterator iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 =======
 	struct bio_vec bv;
 >>>>>>> v3.18
@@ -3024,8 +3204,13 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_track(
 	idaw_len = 0;
 	rq_for_each_segment(bv, req, iter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dst = page_address(bv->bv_page) + bv->bv_offset;
 		seg_len = bv->bv_len;
+=======
+		dst = page_address(bv.bv_page) + bv.bv_offset;
+		seg_len = bv.bv_len;
+>>>>>>> v3.18
 =======
 		dst = page_address(bv.bv_page) + bv.bv_offset;
 		seg_len = bv.bv_len;
@@ -3103,7 +3288,11 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_cmd_track(
 	cqr->expires = startdev->default_expires * HZ;	/* default 5 minutes */
 	cqr->lpm = startdev->path_data.ppm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cqr->retries = 256;
+=======
+	cqr->retries = startdev->default_retries;
+>>>>>>> v3.18
 =======
 	cqr->retries = startdev->default_retries;
 >>>>>>> v3.18
@@ -3241,7 +3430,11 @@ static int prepare_itcw(struct itcw *itcw,
 	dcw = itcw_add_dcw(itcw, pfx_cmd, 0,
 		     &pfxdata, sizeof(pfxdata), total_data_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return IS_ERR(dcw) ? PTR_ERR(dcw) : 0;
+=======
+	return PTR_RET(dcw);
+>>>>>>> v3.18
 =======
 	return PTR_RET(dcw);
 >>>>>>> v3.18
@@ -3263,7 +3456,11 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_tpm_track(
 	struct dasd_ccw_req *cqr;
 	struct req_iterator iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 =======
 	struct bio_vec bv;
 >>>>>>> v3.18
@@ -3353,8 +3550,13 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_tpm_track(
 		recid = first_rec;
 		rq_for_each_segment(bv, req, iter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dst = page_address(bv->bv_page) + bv->bv_offset;
 			seg_len = bv->bv_len;
+=======
+			dst = page_address(bv.bv_page) + bv.bv_offset;
+			seg_len = bv.bv_len;
+>>>>>>> v3.18
 =======
 			dst = page_address(bv.bv_page) + bv.bv_offset;
 			seg_len = bv.bv_len;
@@ -3391,9 +3593,15 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_tpm_track(
 	} else {
 		rq_for_each_segment(bv, req, iter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dst = page_address(bv->bv_page) + bv->bv_offset;
 			last_tidaw = itcw_add_tidaw(itcw, 0x00,
 						    dst, bv->bv_len);
+=======
+			dst = page_address(bv.bv_page) + bv.bv_offset;
+			last_tidaw = itcw_add_tidaw(itcw, 0x00,
+						    dst, bv.bv_len);
+>>>>>>> v3.18
 =======
 			dst = page_address(bv.bv_page) + bv.bv_offset;
 			last_tidaw = itcw_add_tidaw(itcw, 0x00,
@@ -3419,7 +3627,11 @@ static struct dasd_ccw_req *dasd_eckd_build_cp_tpm_track(
 	cqr->expires = startdev->default_expires * HZ;	/* default 5 minutes */
 	cqr->lpm = startdev->path_data.ppm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cqr->retries = 256;
+=======
+	cqr->retries = startdev->default_retries;
+>>>>>>> v3.18
 =======
 	cqr->retries = startdev->default_retries;
 >>>>>>> v3.18
@@ -3467,6 +3679,11 @@ static struct dasd_ccw_req *dasd_eckd_build_cp(struct dasd_device *startdev,
 	fcx_multitrack = private->features.feature[40] & 0x20;
 	data_size = blk_rq_bytes(req);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (data_size % blksize)
+		return ERR_PTR(-EINVAL);
+>>>>>>> v3.18
 =======
 	if (data_size % blksize)
 		return ERR_PTR(-EINVAL);
@@ -3524,7 +3741,11 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 	struct ccw1 *ccw;
 	struct req_iterator iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 =======
 	struct bio_vec bv;
 >>>>>>> v3.18
@@ -3535,7 +3756,12 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 	unsigned int first_offs;
 	unsigned int cidaw, cplength, datasize;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sector_t first_trk, last_trk;
+=======
+	sector_t first_trk, last_trk, sectors;
+	sector_t start_padding_sectors, end_sector_offset, end_padding_sectors;
+>>>>>>> v3.18
 =======
 	sector_t first_trk, last_trk, sectors;
 	sector_t start_padding_sectors, end_sector_offset, end_padding_sectors;
@@ -3545,6 +3771,7 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 	/*
 	 * raw track access needs to be mutiple of 64k and on 64k boundary
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 */
 	if ((blk_rq_pos(req) % DASD_RAW_SECTORS_PER_TRACK) != 0) {
 		cqr = ERR_PTR(-EINVAL);
@@ -3553,6 +3780,8 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 	if (((blk_rq_pos(req) + blk_rq_sectors(req)) %
 	     DASD_RAW_SECTORS_PER_TRACK) != 0) {
 =======
+=======
+>>>>>>> v3.18
 	 * For read requests we can fix an incorrect alignment by padding
 	 * the request with dummy pages.
 	 */
@@ -3567,6 +3796,9 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 		DBF_DEV_EVENT(DBF_ERR, basedev,
 			      "raw write not track aligned (%lu,%lu) req %p",
 			      start_padding_sectors, end_padding_sectors, req);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		cqr = ERR_PTR(-EINVAL);
 		goto out;
@@ -3578,7 +3810,10 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 	trkcount = last_trk - first_trk + 1;
 	first_offs = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	basedev = block->base;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3630,6 +3865,7 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 
 	idaws = (unsigned long *)(cqr->data + pfx_datasize);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	len_to_track_end = 0;
 
@@ -3637,6 +3873,8 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 		dst = page_address(bv->bv_page) + bv->bv_offset;
 		seg_len = bv->bv_len;
 =======
+=======
+>>>>>>> v3.18
 	len_to_track_end = 0;
 	if (start_padding_sectors) {
 		ccw[-1].flags |= CCW_FLAG_CC;
@@ -3657,6 +3895,9 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 		seg_len = bv.bv_len;
 		if (cmd == DASD_ECKD_CCW_READ_TRACK)
 			memset(dst, 0, seg_len);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (!len_to_track_end) {
 			ccw[-1].flags |= CCW_FLAG_CC;
@@ -3674,7 +3915,12 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 		idaws = idal_create_words(idaws, dst, seg_len);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	for (sectors = 0; sectors < end_padding_sectors; sectors += 8)
+		idaws = idal_create_words(idaws, rawpadpage, PAGE_SIZE);
+>>>>>>> v3.18
 =======
 	for (sectors = 0; sectors < end_padding_sectors; sectors += 8)
 		idaws = idal_create_words(idaws, rawpadpage, PAGE_SIZE);
@@ -3688,7 +3934,11 @@ static struct dasd_ccw_req *dasd_raw_build_cp(struct dasd_device *startdev,
 	cqr->expires = startdev->default_expires * HZ;
 	cqr->lpm = startdev->path_data.ppm;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cqr->retries = 256;
+=======
+	cqr->retries = startdev->default_retries;
+>>>>>>> v3.18
 =======
 	cqr->retries = startdev->default_retries;
 >>>>>>> v3.18
@@ -3709,7 +3959,11 @@ dasd_eckd_free_cp(struct dasd_ccw_req *cqr, struct request *req)
 	struct ccw1 *ccw;
 	struct req_iterator iter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bv;
+=======
+	struct bio_vec bv;
+>>>>>>> v3.18
 =======
 	struct bio_vec bv;
 >>>>>>> v3.18
@@ -3731,8 +3985,13 @@ dasd_eckd_free_cp(struct dasd_ccw_req *cqr, struct request *req)
 		ccw++;
 	rq_for_each_segment(bv, req, iter) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dst = page_address(bv->bv_page) + bv->bv_offset;
 		for (off = 0; off < bv->bv_len; off += blksize) {
+=======
+		dst = page_address(bv.bv_page) + bv.bv_offset;
+		for (off = 0; off < bv.bv_len; off += blksize) {
+>>>>>>> v3.18
 =======
 		dst = page_address(bv.bv_page) + bv.bv_offset;
 		for (off = 0; off < bv.bv_len; off += blksize) {
@@ -3748,7 +4007,11 @@ dasd_eckd_free_cp(struct dasd_ccw_req *cqr, struct request *req)
 				if (dst != cda) {
 					if (rq_data_dir(req) == READ)
 <<<<<<< HEAD
+<<<<<<< HEAD
 						memcpy(dst, cda, bv->bv_len);
+=======
+						memcpy(dst, cda, bv.bv_len);
+>>>>>>> v3.18
 =======
 						memcpy(dst, cda, bv.bv_len);
 >>>>>>> v3.18
@@ -4765,7 +5028,10 @@ out_err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dasd_eckd_read_message_buffer(struct dasd_device *device,
 					 struct dasd_rssd_messages *messages,
 					 __u8 lpum)
@@ -5103,6 +5369,9 @@ static int dasd_eckd_check_attention(struct dasd_device *device, __u8 lpum)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct ccw_driver dasd_eckd_driver = {
 	.driver = {
@@ -5149,7 +5418,11 @@ static struct dasd_discipline dasd_eckd_discipline = {
 	.basic_to_ready = dasd_eckd_basic_to_ready,
 	.online_to_ready = dasd_eckd_online_to_ready,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ready_to_basic = dasd_eckd_ready_to_basic,
+=======
+	.basic_to_known = dasd_eckd_basic_to_known,
+>>>>>>> v3.18
 =======
 	.basic_to_known = dasd_eckd_basic_to_known,
 >>>>>>> v3.18
@@ -5173,6 +5446,10 @@ static struct dasd_discipline dasd_eckd_discipline = {
 	.get_uid = dasd_eckd_get_uid,
 	.kick_validate = dasd_eckd_kick_validate_server,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.check_attention = dasd_eckd_check_attention,
+>>>>>>> v3.18
 =======
 	.check_attention = dasd_eckd_check_attention,
 >>>>>>> v3.18
@@ -5195,13 +5472,19 @@ dasd_eckd_init(void)
 		return -ENOMEM;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	rawpadpage = (void *)__get_free_page(GFP_KERNEL);
 	if (!rawpadpage) {
 		kfree(path_verification_worker);
 		kfree(dasd_reserve_req);
 		return -ENOMEM;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = ccw_driver_register(&dasd_eckd_driver);
 	if (!ret)
@@ -5210,6 +5493,10 @@ dasd_eckd_init(void)
 		kfree(path_verification_worker);
 		kfree(dasd_reserve_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		free_page((unsigned long)rawpadpage);
+>>>>>>> v3.18
 =======
 		free_page((unsigned long)rawpadpage);
 >>>>>>> v3.18
@@ -5224,6 +5511,10 @@ dasd_eckd_cleanup(void)
 	kfree(path_verification_worker);
 	kfree(dasd_reserve_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	free_page((unsigned long)rawpadpage);
+>>>>>>> v3.18
 =======
 	free_page((unsigned long)rawpadpage);
 >>>>>>> v3.18

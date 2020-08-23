@@ -54,7 +54,10 @@ CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
 # CONFIG_FW_LOADER is not set
 CONFIG_MTD=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_MTD_CHAR=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_MTD_BLOCK=y
@@ -67,6 +70,10 @@ CONFIG_MTD_PHYSMAP=y
 CONFIG_MTD_M25P80=y
 CONFIG_MTD_NAND=m
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+CONFIG_MTD_SPI_NOR=y
+>>>>>>> v3.18
 =======
 CONFIG_MTD_SPI_NOR=y
 >>>>>>> v3.18
@@ -131,7 +138,10 @@ CONFIG_HID_SONY=y
 CONFIG_HID_SUNPLUS=y
 CONFIG_USB=y
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # CONFIG_USB_DEVICE_CLASS is not set

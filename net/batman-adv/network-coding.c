@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Copyright (C) 2012-2013 B.A.T.M.A.N. contributors:
+=======
+/* Copyright (C) 2012-2014 B.A.T.M.A.N. contributors:
+>>>>>>> v3.18
 =======
 /* Copyright (C) 2012-2014 B.A.T.M.A.N. contributors:
 >>>>>>> v3.18
@@ -17,9 +21,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -68,7 +76,10 @@ static void batadv_nc_start_timer(struct batadv_priv *bat_priv)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * batadv_nc_tvlv_container_update - update the network coding tvlv container
  *  after network coding setting change
  * @bat_priv: the bat priv with all the soft interface information
@@ -123,6 +134,9 @@ static void batadv_nc_tvlv_ogm_handler_v1(struct batadv_priv *bat_priv,
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * batadv_nc_mesh_init - initialise coding hash table and start house keeping
  * @bat_priv: the bat priv with all the soft interface information
@@ -153,11 +167,17 @@ int batadv_nc_mesh_init(struct batadv_priv *bat_priv)
 	batadv_nc_start_timer(bat_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	batadv_tvlv_handler_register(bat_priv, batadv_nc_tvlv_ogm_handler_v1,
 				     NULL, BATADV_TVLV_NC, 1,
 				     BATADV_TVLV_HANDLER_OGM_CIFNOTFND);
 	batadv_nc_tvlv_container_update(bat_priv);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -736,10 +756,13 @@ static bool batadv_can_nc_with_orig(struct batadv_priv *bat_priv,
 				    struct batadv_ogm_packet *ogm_packet)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (orig_node->last_real_seqno != ntohl(ogm_packet->seqno))
 		return false;
 	if (orig_node->last_ttl != ogm_packet->header.ttl + 1)
 =======
+=======
+>>>>>>> v3.18
 	struct batadv_orig_ifinfo *orig_ifinfo;
 	uint32_t last_real_seqno;
 	uint8_t last_ttl;
@@ -755,6 +778,9 @@ static bool batadv_can_nc_with_orig(struct batadv_priv *bat_priv,
 	if (last_real_seqno != ntohl(ogm_packet->seqno))
 		return false;
 	if (last_ttl != ogm_packet->ttl + 1)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return false;
 	if (!batadv_compare_eth(ogm_packet->orig, ogm_packet->prev_sender))
@@ -843,7 +869,11 @@ static struct batadv_nc_node
 	/* Initialize nc_node */
 	INIT_LIST_HEAD(&nc_node->list);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(nc_node->addr, orig_node->orig, ETH_ALEN);
+=======
+	ether_addr_copy(nc_node->addr, orig_node->orig);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(nc_node->addr, orig_node->orig);
 >>>>>>> v3.18
@@ -897,11 +927,17 @@ void batadv_nc_update_nc_node(struct batadv_priv *bat_priv,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* check if orig node is network coding enabled */
 	if (!(orig_node->capabilities & BATADV_ORIG_CAPA_HAS_NC))
 		goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* accept ogms from 'good' neighbors and single hop neighbors */
 	if (!batadv_can_nc_with_orig(bat_priv, orig_node, ogm_packet) &&
@@ -972,8 +1008,13 @@ static struct batadv_nc_path *batadv_nc_get_path(struct batadv_priv *bat_priv,
 	atomic_set(&nc_path->refcount, 2);
 	nc_path->last_valid = jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(nc_path->next_hop, dst, ETH_ALEN);
 	memcpy(nc_path->prev_hop, src, ETH_ALEN);
+=======
+	ether_addr_copy(nc_path->next_hop, dst);
+	ether_addr_copy(nc_path->prev_hop, src);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(nc_path->next_hop, dst);
 	ether_addr_copy(nc_path->prev_hop, src);
@@ -1049,7 +1090,11 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 				   struct batadv_neigh_node *neigh_node)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t tq_weighted_neigh, tq_weighted_coding;
+=======
+	uint8_t tq_weighted_neigh, tq_weighted_coding, tq_tmp;
+>>>>>>> v3.18
 =======
 	uint8_t tq_weighted_neigh, tq_weighted_coding, tq_tmp;
 >>>>>>> v3.18
@@ -1060,6 +1105,11 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 	struct batadv_neigh_node *neigh_tmp, *router_neigh;
 	struct batadv_neigh_node *router_coding = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct batadv_neigh_ifinfo *router_neigh_ifinfo = NULL;
+	struct batadv_neigh_ifinfo *router_coding_ifinfo = NULL;
+>>>>>>> v3.18
 =======
 	struct batadv_neigh_ifinfo *router_neigh_ifinfo = NULL;
 	struct batadv_neigh_ifinfo *router_coding_ifinfo = NULL;
@@ -1074,6 +1124,7 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 	int header_add = coded_size - unicast_size;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	router_neigh = batadv_orig_node_get_router(neigh_node->orig_node);
 	if (!router_neigh)
 		goto out;
@@ -1086,6 +1137,8 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 	tq_weighted_neigh = batadv_nc_random_weight_tq(router_neigh->tq_avg);
 	tq_weighted_coding = batadv_nc_random_weight_tq(router_coding->tq_avg);
 =======
+=======
+>>>>>>> v3.18
 	/* TODO: do we need to consider the outgoing interface for
 	 * coded packets?
 	 */
@@ -1114,6 +1167,9 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 	tq_weighted_neigh = batadv_nc_random_weight_tq(tq_tmp);
 	tq_tmp = router_coding_ifinfo->bat_iv.tq_avg;
 	tq_weighted_coding = batadv_nc_random_weight_tq(tq_tmp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Select one destination for the MAC-header dst-field based on
@@ -1166,6 +1222,7 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 	skb_reset_mac_header(skb_dest);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	coded_packet->header.packet_type = BATADV_CODED;
 	coded_packet->header.version = BATADV_COMPAT_VERSION;
 	coded_packet->header.ttl = packet1->header.ttl;
@@ -1174,6 +1231,8 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 	memcpy(coded_packet->first_source, first_source, ETH_ALEN);
 	memcpy(coded_packet->first_orig_dest, packet1->dest, ETH_ALEN);
 =======
+=======
+>>>>>>> v3.18
 	coded_packet->packet_type = BATADV_CODED;
 	coded_packet->version = BATADV_COMPAT_VERSION;
 	coded_packet->ttl = packet1->ttl;
@@ -1181,11 +1240,15 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 	/* Info about first unicast packet */
 	ether_addr_copy(coded_packet->first_source, first_source);
 	ether_addr_copy(coded_packet->first_orig_dest, packet1->dest);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	coded_packet->first_crc = packet_id1;
 	coded_packet->first_ttvn = packet1->ttvn;
 
 	/* Info about second unicast packet */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	memcpy(coded_packet->second_dest, second_dest, ETH_ALEN);
 	memcpy(coded_packet->second_source, second_source, ETH_ALEN);
@@ -1193,11 +1256,16 @@ static bool batadv_nc_code_packets(struct batadv_priv *bat_priv,
 	coded_packet->second_crc = packet_id2;
 	coded_packet->second_ttl = packet2->header.ttl;
 =======
+=======
+>>>>>>> v3.18
 	ether_addr_copy(coded_packet->second_dest, second_dest);
 	ether_addr_copy(coded_packet->second_source, second_source);
 	ether_addr_copy(coded_packet->second_orig_dest, packet2->dest);
 	coded_packet->second_crc = packet_id2;
 	coded_packet->second_ttl = packet2->ttl;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	coded_packet->second_ttvn = packet2->ttvn;
 	coded_packet->coded_len = htons(coding_len);
@@ -1257,11 +1325,17 @@ out:
 	if (router_coding)
 		batadv_neigh_node_free_ref(router_coding);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (router_neigh_ifinfo)
 		batadv_neigh_ifinfo_free_ref(router_neigh_ifinfo);
 	if (router_coding_ifinfo)
 		batadv_neigh_ifinfo_free_ref(router_coding_ifinfo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return res;
 }
@@ -1421,7 +1495,11 @@ static void batadv_nc_skb_store_before_coding(struct batadv_priv *bat_priv,
 
 	/* Copy skb header to change the mac header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb = pskb_copy(skb, GFP_ATOMIC);
+=======
+	skb = pskb_copy_for_clone(skb, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	skb = pskb_copy_for_clone(skb, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -1430,9 +1508,15 @@ static void batadv_nc_skb_store_before_coding(struct batadv_priv *bat_priv,
 
 	/* Set the mac header as if we actually sent the packet uncoded */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ethhdr = (struct ethhdr *)skb_mac_header(skb);
 	memcpy(ethhdr->h_source, ethhdr->h_dest, ETH_ALEN);
 	memcpy(ethhdr->h_dest, eth_dst_new, ETH_ALEN);
+=======
+	ethhdr = eth_hdr(skb);
+	ether_addr_copy(ethhdr->h_source, ethhdr->h_dest);
+	ether_addr_copy(ethhdr->h_dest, eth_dst_new);
+>>>>>>> v3.18
 =======
 	ethhdr = eth_hdr(skb);
 	ether_addr_copy(ethhdr->h_source, ethhdr->h_dest);
@@ -1550,7 +1634,10 @@ static bool batadv_nc_skb_add_to_path(struct sk_buff *skb,
  * @skb: data skb to forward
  * @neigh_node: next hop to forward packet to
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @ethhdr: pointer to the ethernet header inside the skb
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -1558,8 +1645,12 @@ static bool batadv_nc_skb_add_to_path(struct sk_buff *skb,
  */
 bool batadv_nc_skb_forward(struct sk_buff *skb,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			   struct batadv_neigh_node *neigh_node,
 			   struct ethhdr *ethhdr)
+=======
+			   struct batadv_neigh_node *neigh_node)
+>>>>>>> v3.18
 =======
 			   struct batadv_neigh_node *neigh_node)
 >>>>>>> v3.18
@@ -1569,6 +1660,10 @@ bool batadv_nc_skb_forward(struct sk_buff *skb,
 	struct batadv_unicast_packet *packet;
 	struct batadv_nc_path *nc_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ethhdr *ethhdr = eth_hdr(skb);
+>>>>>>> v3.18
 =======
 	struct ethhdr *ethhdr = eth_hdr(skb);
 >>>>>>> v3.18
@@ -1583,7 +1678,11 @@ bool batadv_nc_skb_forward(struct sk_buff *skb,
 	payload = skb_network_header(skb);
 	packet = (struct batadv_unicast_packet *)payload;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (packet->header.packet_type != BATADV_UNICAST)
+=======
+	if (packet->packet_type != BATADV_UNICAST)
+>>>>>>> v3.18
 =======
 	if (packet->packet_type != BATADV_UNICAST)
 >>>>>>> v3.18
@@ -1629,7 +1728,11 @@ void batadv_nc_skb_store_for_decoding(struct batadv_priv *bat_priv,
 	struct batadv_unicast_packet *packet;
 	struct batadv_nc_path *nc_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ethhdr *ethhdr = (struct ethhdr *)skb_mac_header(skb);
+=======
+	struct ethhdr *ethhdr = eth_hdr(skb);
+>>>>>>> v3.18
 =======
 	struct ethhdr *ethhdr = eth_hdr(skb);
 >>>>>>> v3.18
@@ -1644,7 +1747,11 @@ void batadv_nc_skb_store_for_decoding(struct batadv_priv *bat_priv,
 	payload = skb_network_header(skb);
 	packet = (struct batadv_unicast_packet *)payload;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (packet->header.packet_type != BATADV_UNICAST)
+=======
+	if (packet->packet_type != BATADV_UNICAST)
+>>>>>>> v3.18
 =======
 	if (packet->packet_type != BATADV_UNICAST)
 >>>>>>> v3.18
@@ -1696,7 +1803,11 @@ void batadv_nc_skb_store_sniffed_unicast(struct batadv_priv *bat_priv,
 					 struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ethhdr *ethhdr = (struct ethhdr *)skb_mac_header(skb);
+=======
+	struct ethhdr *ethhdr = eth_hdr(skb);
+>>>>>>> v3.18
 =======
 	struct ethhdr *ethhdr = eth_hdr(skb);
 >>>>>>> v3.18
@@ -1751,8 +1862,13 @@ batadv_nc_skb_decode_packet(struct batadv_priv *bat_priv, struct sk_buff *skb,
 
 	/* Reconstruct original mac header */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ethhdr = (struct ethhdr *)skb_mac_header(skb);
 	memcpy(ethhdr, &ethhdr_tmp, sizeof(*ethhdr));
+=======
+	ethhdr = eth_hdr(skb);
+	*ethhdr = ethhdr_tmp;
+>>>>>>> v3.18
 =======
 	ethhdr = eth_hdr(skb);
 	*ethhdr = ethhdr_tmp;
@@ -1767,7 +1883,11 @@ batadv_nc_skb_decode_packet(struct batadv_priv *bat_priv, struct sk_buff *skb,
 		 * pkt_type changed from PACKET_OTHERHOST to PACKET_HOST
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy(ethhdr->h_dest, coded_packet_tmp.second_dest, ETH_ALEN);
+=======
+		ether_addr_copy(ethhdr->h_dest, coded_packet_tmp.second_dest);
+>>>>>>> v3.18
 =======
 		ether_addr_copy(ethhdr->h_dest, coded_packet_tmp.second_dest);
 >>>>>>> v3.18
@@ -1779,7 +1899,11 @@ batadv_nc_skb_decode_packet(struct batadv_priv *bat_priv, struct sk_buff *skb,
 	} else {
 		orig_dest = coded_packet_tmp.first_orig_dest;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ttl = coded_packet_tmp.header.ttl;
+=======
+		ttl = coded_packet_tmp.ttl;
+>>>>>>> v3.18
 =======
 		ttl = coded_packet_tmp.ttl;
 >>>>>>> v3.18
@@ -1808,15 +1932,21 @@ batadv_nc_skb_decode_packet(struct batadv_priv *bat_priv, struct sk_buff *skb,
 	/* Create decoded unicast packet */
 	unicast_packet = (struct batadv_unicast_packet *)skb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unicast_packet->header.packet_type = BATADV_UNICAST;
 	unicast_packet->header.version = BATADV_COMPAT_VERSION;
 	unicast_packet->header.ttl = ttl;
 	memcpy(unicast_packet->dest, orig_dest, ETH_ALEN);
 =======
+=======
+>>>>>>> v3.18
 	unicast_packet->packet_type = BATADV_UNICAST;
 	unicast_packet->version = BATADV_COMPAT_VERSION;
 	unicast_packet->ttl = ttl;
 	ether_addr_copy(unicast_packet->dest, orig_dest);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unicast_packet->ttvn = ttvn;
 
@@ -1915,7 +2045,11 @@ static int batadv_nc_recv_coded_packet(struct sk_buff *skb,
 
 	coded_packet = (struct batadv_coded_packet *)skb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ethhdr = (struct ethhdr *)skb_mac_header(skb);
+=======
+	ethhdr = eth_hdr(skb);
+>>>>>>> v3.18
 =======
 	ethhdr = eth_hdr(skb);
 >>>>>>> v3.18
@@ -1969,6 +2103,11 @@ free_nc_packet:
 void batadv_nc_mesh_free(struct batadv_priv *bat_priv)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	batadv_tvlv_container_unregister(bat_priv, BATADV_TVLV_NC, 1);
+	batadv_tvlv_handler_unregister(bat_priv, BATADV_TVLV_NC, 1);
+>>>>>>> v3.18
 =======
 	batadv_tvlv_container_unregister(bat_priv, BATADV_TVLV_NC, 1);
 	batadv_tvlv_handler_unregister(bat_priv, BATADV_TVLV_NC, 1);
@@ -2009,7 +2148,10 @@ int batadv_nc_nodes_seq_print_text(struct seq_file *seq, void *offset)
 		rcu_read_lock();
 		hlist_for_each_entry_rcu(orig_node, head, hash_entry) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			/* no need to print the orig node if it does not have
 			 * network coding neighbors
 			 */
@@ -2017,6 +2159,9 @@ int batadv_nc_nodes_seq_print_text(struct seq_file *seq, void *offset)
 			    list_empty(&orig_node->out_coding_list))
 				continue;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			seq_printf(seq, "Node:      %pM\n", orig_node->orig);
 

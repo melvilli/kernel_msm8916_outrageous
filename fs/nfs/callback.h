@@ -33,6 +33,11 @@ enum nfs4_callback_opnum {
 	OP_CB_NOTIFY_LOCK   = 13,
 	OP_CB_NOTIFY_DEVICEID = 14,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/* Callback operations new to NFSv4.2 */
+	OP_CB_OFFLOAD = 15,
+>>>>>>> v3.18
 =======
 /* Callback operations new to NFSv4.2 */
 	OP_CB_OFFLOAD = 15,
@@ -45,6 +50,10 @@ struct cb_process_state {
 	struct nfs_client	*clp;
 	u32			slotid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	u32			minorversion;
+>>>>>>> v3.18
 =======
 	u32			minorversion;
 >>>>>>> v3.18

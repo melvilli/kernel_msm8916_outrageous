@@ -29,7 +29,10 @@ for arch in ${archs}; do
 	esac
 done
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

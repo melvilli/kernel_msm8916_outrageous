@@ -30,6 +30,7 @@ void jfs_set_inode_flags(struct inode *inode)
 {
 	unsigned int flags = JFS_IP(inode)->mode2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	inode->i_flags &= ~(S_IMMUTABLE | S_APPEND |
 		S_NOATIME | S_DIRSYNC | S_SYNC);
@@ -45,6 +46,8 @@ void jfs_set_inode_flags(struct inode *inode)
 	if (flags & JFS_SYNC_FL)
 		inode->i_flags |= S_SYNC;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int new_fl = 0;
 
 	if (flags & JFS_IMMUTABLE_FL)
@@ -59,6 +62,9 @@ void jfs_set_inode_flags(struct inode *inode)
 		new_fl |= S_SYNC;
 	inode_set_flags(inode, new_fl, S_IMMUTABLE | S_APPEND | S_NOATIME |
 			S_DIRSYNC | S_SYNC);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -38,6 +38,10 @@
 #include <asm/pgtable.h>
 #include <mach/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "gpio-iop32x.h"
+>>>>>>> v3.18
 =======
 #include "gpio-iop32x.h"
 >>>>>>> v3.18
@@ -288,6 +292,10 @@ void ep80219_power_off(void)
 static void __init iq31244_init_machine(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	register_iop32x_gpio();
+>>>>>>> v3.18
 =======
 	register_iop32x_gpio();
 >>>>>>> v3.18

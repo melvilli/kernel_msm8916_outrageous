@@ -37,6 +37,10 @@
 #include <linux/mtd/lpc32xx_slc.h>
 #include <linux/mtd/lpc32xx_mlc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/gpio-lpc32xx.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/gpio-lpc32xx.h>
 >>>>>>> v3.18
@@ -49,7 +53,10 @@
 #include <mach/platform.h>
 #include <mach/board.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <mach/gpio-lpc32xx.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include "common.h"
@@ -190,8 +197,13 @@ static struct pl08x_platform_data pl08x_pd = {
 	.slave_channels = &pl08x_slave_channels[0],
 	.num_slave_channels = ARRAY_SIZE(pl08x_slave_channels),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_signal = pl08x_get_signal,
 	.put_signal = pl08x_put_signal,
+=======
+	.get_xfer_signal = pl08x_get_signal,
+	.put_xfer_signal = pl08x_put_signal,
+>>>>>>> v3.18
 =======
 	.get_xfer_signal = pl08x_get_signal,
 	.put_xfer_signal = pl08x_put_signal,
@@ -215,9 +227,12 @@ static struct mmci_platform_data lpc32xx_mmci_data = {
 			  MMC_VDD_32_33 | MMC_VDD_33_34,
 	.ios_handler	= mmc_handle_ios,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dma_filter	= NULL,
 	/* No DMA for now since AMBA PL080 dmaengine driver only does scatter
 	 * gather, and the MMCI driver doesn't do it this way */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

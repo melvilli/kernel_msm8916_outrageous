@@ -330,7 +330,10 @@ EXPORT_SYMBOL(__frontswap_invalidate_area);
 static unsigned long __frontswap_curr_pages(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int type;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long totalpages = 0;
@@ -338,10 +341,15 @@ static unsigned long __frontswap_curr_pages(void)
 
 	assert_spin_locked(&swap_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (type = swap_list.head; type >= 0; type = si->next) {
 		si = swap_info[type];
 		totalpages += atomic_read(&si->frontswap_pages);
 	}
+=======
+	plist_for_each_entry(si, &swap_active_head, list)
+		totalpages += atomic_read(&si->frontswap_pages);
+>>>>>>> v3.18
 =======
 	plist_for_each_entry(si, &swap_active_head, list)
 		totalpages += atomic_read(&si->frontswap_pages);
@@ -358,11 +366,17 @@ static int __frontswap_unuse_pages(unsigned long total, unsigned long *unused,
 	unsigned long total_pages_to_unuse = total;
 	unsigned long pages = 0, pages_to_unuse = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int type;
 
 	assert_spin_locked(&swap_lock);
 	for (type = swap_list.head; type >= 0; type = si->next) {
 		si = swap_info[type];
+=======
+
+	assert_spin_locked(&swap_lock);
+	plist_for_each_entry(si, &swap_active_head, list) {
+>>>>>>> v3.18
 =======
 
 	assert_spin_locked(&swap_lock);
@@ -383,7 +397,11 @@ static int __frontswap_unuse_pages(unsigned long total, unsigned long *unused,
 		vm_unacct_memory(pages);
 		*unused = pages_to_unuse;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		*swapid = type;
+=======
+		*swapid = si->type;
+>>>>>>> v3.18
 =======
 		*swapid = si->type;
 >>>>>>> v3.18
@@ -434,7 +452,11 @@ void frontswap_shrink(unsigned long target_pages)
 	 * we don't want to hold swap_lock while doing a very
 	 * lengthy try_to_unuse, but swap_list may change
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * so restart scan from swap_list.head each time
+=======
+	 * so restart scan from swap_active_head each time
+>>>>>>> v3.18
 =======
 	 * so restart scan from swap_active_head each time
 >>>>>>> v3.18

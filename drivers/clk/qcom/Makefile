@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-y				+= clock.o
 obj-y				+= clock-dummy.o
 obj-y				+= clock-generic.o
@@ -53,6 +54,8 @@ obj-$(CONFIG_ARCH_MSM8974)	+= clock-krait-8974.o
 obj-y				+= gdsc.o
 obj-y				+= mdss/
 =======
+=======
+>>>>>>> v3.18
 obj-$(CONFIG_COMMON_CLK_QCOM) += clk-qcom.o
 
 clk-qcom-y += common.o
@@ -71,4 +74,7 @@ obj-$(CONFIG_MSM_GCC_8960) += gcc-msm8960.o
 obj-$(CONFIG_MSM_GCC_8974) += gcc-msm8974.o
 obj-$(CONFIG_MSM_MMCC_8960) += mmcc-msm8960.o
 obj-$(CONFIG_MSM_MMCC_8974) += mmcc-msm8974.o
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -403,7 +403,11 @@ int rds_recvmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg,
 	long timeo;
 	int ret = 0, nonblock = msg_flags & MSG_DONTWAIT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sockaddr_in *sin;
+=======
+	DECLARE_SOCKADDR(struct sockaddr_in *, sin, msg->msg_name);
+>>>>>>> v3.18
 =======
 	DECLARE_SOCKADDR(struct sockaddr_in *, sin, msg->msg_name);
 >>>>>>> v3.18
@@ -484,7 +488,10 @@ int rds_recvmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg,
 		rds_stats_inc(s_recv_delivered);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sin = (struct sockaddr_in *)msg->msg_name;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (sin) {

@@ -50,7 +50,11 @@
 
 static struct dentry *	vxfs_lookup(struct inode *, struct dentry *, unsigned int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int		vxfs_readdir(struct file *, void *, filldir_t);
+=======
+static int		vxfs_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 =======
 static int		vxfs_readdir(struct file *, struct dir_context *);
 >>>>>>> v3.18
@@ -63,7 +67,11 @@ const struct file_operations vxfs_dir_operations = {
 	.llseek =		generic_file_llseek,
 	.read =			generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir =		vxfs_readdir,
+=======
+	.iterate =		vxfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate =		vxfs_readdir,
 >>>>>>> v3.18
@@ -201,7 +209,11 @@ vxfs_inode_by_name(struct inode *dip, struct dentry *dp)
  * @dip:	dir in which we lookup
  * @dp:		dentry we lookup
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @nd:		lookup nameidata
+=======
+ * @flags:	lookup flags
+>>>>>>> v3.18
 =======
  * @flags:	lookup flags
 >>>>>>> v3.18
@@ -248,7 +260,11 @@ vxfs_lookup(struct inode *dip, struct dentry *dp, unsigned int flags)
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 vxfs_readdir(struct file *fp, void *retp, filldir_t filler)
+=======
+vxfs_readdir(struct file *fp, struct dir_context *ctx)
+>>>>>>> v3.18
 =======
 vxfs_readdir(struct file *fp, struct dir_context *ctx)
 >>>>>>> v3.18
@@ -259,6 +275,7 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 	u_long			page, npages, block, pblocks, nblocks, offset;
 	loff_t			pos;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	switch ((long)fp->f_pos) {
 	case 0:
@@ -275,6 +292,8 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 
 	pos = fp->f_pos - 2;
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->pos == 0) {
 		if (!dir_emit_dot(fp, ctx))
 			return 0;
@@ -286,6 +305,9 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 		ctx->pos = 2;
 	}
 	pos = ctx->pos - 2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	
 	if (pos > VXFS_DIRROUND(ip->i_size))
@@ -301,7 +323,11 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 
 	for (; page < npages; page++, block = 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		caddr_t			kaddr;
+=======
+		char			*kaddr;
+>>>>>>> v3.18
 =======
 		char			*kaddr;
 >>>>>>> v3.18
@@ -311,15 +337,21 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 		if (IS_ERR(pp))
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		kaddr = (caddr_t)page_address(pp);
 
 		for (; block <= nblocks && block <= pblocks; block++) {
 			caddr_t			baddr, limit;
 =======
+=======
+>>>>>>> v3.18
 		kaddr = (char *)page_address(pp);
 
 		for (; block <= nblocks && block <= pblocks; block++) {
 			char			*baddr, *limit;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			struct vxfs_dirblk	*dbp;
 			struct vxfs_direct	*de;
@@ -334,9 +366,13 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 				 (baddr + VXFS_DIRBLKOV(dbp)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (; (caddr_t)de <= limit; de = vxfs_next_entry(de)) {
 				int	over;
 
+=======
+			for (; (char *)de <= limit; de = vxfs_next_entry(de)) {
+>>>>>>> v3.18
 =======
 			for (; (char *)de <= limit; de = vxfs_next_entry(de)) {
 >>>>>>> v3.18
@@ -346,6 +382,7 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 					continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				offset = (caddr_t)de - kaddr;
 				over = filler(retp, de->d_name, de->d_namelen,
 					((page << PAGE_CACHE_SHIFT) | offset) + 2,
@@ -354,12 +391,17 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 					vxfs_put_page(pp);
 					goto done;
 =======
+=======
+>>>>>>> v3.18
 				offset = (char *)de - kaddr;
 				ctx->pos = ((page << PAGE_CACHE_SHIFT) | offset) + 2;
 				if (!dir_emit(ctx, de->d_name, de->d_namelen,
 					de->d_ino, DT_UNKNOWN)) {
 					vxfs_put_page(pp);
 					return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				}
 			}
@@ -369,10 +411,14 @@ vxfs_readdir(struct file *fp, struct dir_context *ctx)
 		offset = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 done:
 	fp->f_pos = ((page << PAGE_CACHE_SHIFT) | offset) + 2;
 out:
+=======
+	ctx->pos = ((page << PAGE_CACHE_SHIFT) | offset) + 2;
+>>>>>>> v3.18
 =======
 	ctx->pos = ((page << PAGE_CACHE_SHIFT) | offset) + 2;
 >>>>>>> v3.18

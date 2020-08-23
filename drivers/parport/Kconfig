@@ -6,13 +6,19 @@
 #
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config ARCH_MIGHT_HAVE_PC_PARPORT
 	bool
 	help
 	  Select this config option from the architecture Kconfig if
 	  the architecture might have PC parallel port hardware.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 menuconfig PARPORT
 	tristate "Parallel port support"
@@ -45,11 +51,16 @@ if PARPORT
 config PARPORT_PC
 	tristate "PC-style hardware"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on (!SPARC64 || PCI) && !SPARC32 && !M32R && !FRV && !S390 && \
 		(!M68K || ISA) && !MN10300 && !AVR32 && !BLACKFIN && \
 		!XTENSA && !CRIS && !H8300 && !ARM64
 
 	---help---
+=======
+	depends on ARCH_MIGHT_HAVE_PC_PARPORT
+	help
+>>>>>>> v3.18
 =======
 	depends on ARCH_MIGHT_HAVE_PC_PARPORT
 	help

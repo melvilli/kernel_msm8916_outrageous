@@ -37,7 +37,11 @@ out:
 
 out_rt:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	inet6_del_offload(&rthdr_offload, IPPROTO_ROUTING);
+=======
+	inet_del_offload(&rthdr_offload, IPPROTO_ROUTING);
+>>>>>>> v3.18
 =======
 	inet_del_offload(&rthdr_offload, IPPROTO_ROUTING);
 >>>>>>> v3.18

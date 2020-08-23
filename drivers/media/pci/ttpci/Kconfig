@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+config DVB_AV7110_IR
+	bool
+
+>>>>>>> v3.18
 =======
 config DVB_AV7110_IR
 	bool
@@ -10,6 +16,10 @@ config DVB_AV7110
 	select TTPCI_EEPROM
 	select VIDEO_SAA7146_VV
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DVB_AV7110_IR if INPUT_EVDEV=y || INPUT_EVDEV=DVB_AV7110
+>>>>>>> v3.18
 =======
 	select DVB_AV7110_IR if INPUT_EVDEV=y || INPUT_EVDEV=DVB_AV7110
 >>>>>>> v3.18

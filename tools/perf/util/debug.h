@@ -4,6 +4,10 @@
 
 #include <stdbool.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <string.h>
+>>>>>>> v3.18
 =======
 #include <string.h>
 >>>>>>> v3.18
@@ -15,7 +19,10 @@
 extern int verbose;
 extern bool quiet, dump_trace;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int debug_ordered_events;
 
 #ifndef pr_fmt
@@ -43,6 +50,9 @@ extern int debug_ordered_events;
 #define pr_oe_time2(t, fmt, ...) pr_time_N(2, debug_ordered_events, t, pr_fmt(fmt), ##__VA_ARGS__)
 
 #define STRERR_BUFSIZE	128	/* For the buffer size of strerror_r */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 int dump_printf(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
@@ -52,7 +62,10 @@ int ui__error(const char *format, ...) __attribute__((format(printf, 1, 2)));
 int ui__warning(const char *format, ...) __attribute__((format(printf, 1, 2)));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void pr_stat(const char *fmt, ...);
 
 int eprintf(int level, int var, const char *fmt, ...) __attribute__((format(printf, 3, 4)));
@@ -60,5 +73,8 @@ int eprintf_time(int level, int var, u64 t, const char *fmt, ...) __attribute__(
 
 int perf_debug_option(const char *str);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* __PERF_DEBUG_H */

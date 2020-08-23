@@ -14,9 +14,13 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
  * USA
+=======
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -758,7 +762,11 @@ struct amd8111e_priv{
 	struct pci_dev *pci_dev;	/* Ptr to the associated pci_dev */
 	struct net_device* amd8111e_net_dev; 	/* ptr to associated net_device */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Transmit and recive skbs */
+=======
+	/* Transmit and receive skbs */
+>>>>>>> v3.18
 =======
 	/* Transmit and receive skbs */
 >>>>>>> v3.18

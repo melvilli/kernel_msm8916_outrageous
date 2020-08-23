@@ -13,6 +13,12 @@
 #define __ARCH_ASM_MACH_OMAP2_PRMINST44XX_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define PRM_INSTANCE_UNKNOWN	-1
+extern s32 omap4_prmst_get_prm_dev_inst(void);
+
+>>>>>>> v3.18
 =======
 #define PRM_INSTANCE_UNKNOWN	-1
 extern s32 omap4_prmst_get_prm_dev_inst(void);

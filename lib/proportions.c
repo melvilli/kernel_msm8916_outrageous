@@ -74,7 +74,11 @@
 #include <linux/rcupdate.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int prop_descriptor_init(struct prop_descriptor *pd, int shift)
+=======
+int prop_descriptor_init(struct prop_descriptor *pd, int shift, gfp_t gfp)
+>>>>>>> v3.18
 =======
 int prop_descriptor_init(struct prop_descriptor *pd, int shift, gfp_t gfp)
 >>>>>>> v3.18
@@ -88,17 +92,23 @@ int prop_descriptor_init(struct prop_descriptor *pd, int shift, gfp_t gfp)
 	pd->pg[0].shift = shift;
 	mutex_init(&pd->mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = percpu_counter_init(&pd->pg[0].events, 0);
 	if (err)
 		goto out;
 
 	err = percpu_counter_init(&pd->pg[1].events, 0);
 =======
+=======
+>>>>>>> v3.18
 	err = percpu_counter_init(&pd->pg[0].events, 0, gfp);
 	if (err)
 		goto out;
 
 	err = percpu_counter_init(&pd->pg[1].events, 0, gfp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		percpu_counter_destroy(&pd->pg[0].events);
@@ -201,7 +211,11 @@ prop_adjust_shift(int *pl_shift, unsigned long *pl_period, int new_shift)
 #define PROP_BATCH (8*(1+ilog2(nr_cpu_ids)))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int prop_local_init_percpu(struct prop_local_percpu *pl)
+=======
+int prop_local_init_percpu(struct prop_local_percpu *pl, gfp_t gfp)
+>>>>>>> v3.18
 =======
 int prop_local_init_percpu(struct prop_local_percpu *pl, gfp_t gfp)
 >>>>>>> v3.18
@@ -210,7 +224,11 @@ int prop_local_init_percpu(struct prop_local_percpu *pl, gfp_t gfp)
 	pl->shift = 0;
 	pl->period = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return percpu_counter_init(&pl->events, 0);
+=======
+	return percpu_counter_init(&pl->events, 0, gfp);
+>>>>>>> v3.18
 =======
 	return percpu_counter_init(&pl->events, 0, gfp);
 >>>>>>> v3.18

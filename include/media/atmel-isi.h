@@ -57,6 +57,10 @@
 #define		ISI_CFG1_FRATE_DIV_7		(6 << 8)
 #define		ISI_CFG1_FRATE_DIV_8		(7 << 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define		ISI_CFG1_FRATE_DIV_MASK		(7 << 8)
+>>>>>>> v3.18
 =======
 #define		ISI_CFG1_FRATE_DIV_MASK		(7 << 8)
 >>>>>>> v3.18
@@ -71,6 +75,10 @@
 #define		ISI_CFG2_YCC_SWAP_MODE_2	(2 << 28)
 #define		ISI_CFG2_YCC_SWAP_MODE_3	(3 << 28)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define		ISI_CFG2_YCC_SWAP_MODE_MASK	(3 << 28)
+>>>>>>> v3.18
 =======
 #define		ISI_CFG2_YCC_SWAP_MODE_MASK	(3 << 28)
 >>>>>>> v3.18
@@ -113,6 +121,11 @@
 #define ISI_DATAWIDTH_10			0x02
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct v4l2_async_subdev;
+
+>>>>>>> v3.18
 =======
 struct v4l2_async_subdev;
 
@@ -130,6 +143,11 @@ struct isi_platform_data {
 	/* Using for ISI_MCK */
 	u32 mck_hz;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct v4l2_async_subdev **asd;	/* Flat array, arranged in groups */
+	int *asd_sizes;		/* 0-terminated array of asd group sizes */
+>>>>>>> v3.18
 =======
 	struct v4l2_async_subdev **asd;	/* Flat array, arranged in groups */
 	int *asd_sizes;		/* 0-terminated array of asd group sizes */

@@ -68,7 +68,11 @@ pthread_cond_wait_pi(cond, mutex)
 	} while(...)
 	unlock(cond->__data.__lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
         /* the kernel acquired the the mutex for us */
+=======
+        /* the kernel acquired the mutex for us */
+>>>>>>> v3.18
 =======
         /* the kernel acquired the mutex for us */
 >>>>>>> v3.18

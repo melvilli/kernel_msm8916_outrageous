@@ -14,12 +14,18 @@
 #include <linux/types.h>
 #include <linux/bootmem.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/initrd.h>
 #include <linux/debugfs.h>
 #include <linux/of.h>
 #include <linux/of_fdt.h>
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
+=======
+#include <linux/debugfs.h>
+#include <linux/of.h>
+#include <linux/of_fdt.h>
+>>>>>>> v3.18
 =======
 #include <linux/debugfs.h>
 #include <linux/of.h>
@@ -37,7 +43,11 @@ __init void mips_set_machine_name(const char *name)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	strncpy(mips_machine_name, name, sizeof(mips_machine_name));
+=======
+	strlcpy(mips_machine_name, name, sizeof(mips_machine_name));
+>>>>>>> v3.18
 =======
 	strlcpy(mips_machine_name, name, sizeof(mips_machine_name));
 >>>>>>> v3.18
@@ -51,6 +61,7 @@ char *mips_get_machine_name(void)
 
 #ifdef CONFIG_OF
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init early_init_dt_scan_memory_arch(unsigned long node,
 					  const char *uname, int depth,
 					  void *data)
@@ -58,6 +69,8 @@ int __init early_init_dt_scan_memory_arch(unsigned long node,
 	return early_init_dt_scan_memory(node, uname, depth, data);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 void __init early_init_dt_add_memory_arch(u64 base, u64 size)
@@ -70,6 +83,7 @@ void * __init early_init_dt_alloc_memory_arch(u64 size, u64 align)
 	return __alloc_bootmem(size, align, __pa(MAX_DMA_ADDRESS));
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef CONFIG_BLK_DEV_INITRD
 void __init early_init_dt_setup_initrd_arch(u64 start, u64 end)
@@ -124,12 +138,17 @@ void __init __dt_setup_arch(struct boot_param_header *bph)
 
 	early_init_devtree(initial_boot_params);
 =======
+=======
+>>>>>>> v3.18
 void __init __dt_setup_arch(void *bph)
 {
 	if (!early_init_dt_scan(bph))
 		return;
 
 	mips_set_machine_name(of_flat_dt_get_machine_name());
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 #endif

@@ -21,6 +21,10 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/slab.h>
+>>>>>>> v3.18
 =======
 #include <linux/slab.h>
 >>>>>>> v3.18
@@ -143,9 +147,12 @@ static int pch_gpio_direction_output(struct gpio_chip *gpio, unsigned nr,
 
 	spin_lock_irqsave(&chip->spinlock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pm = ioread32(&chip->reg->pm) & ((1 << gpio_pins[chip->ioh]) - 1);
 	pm |= (1 << nr);
 	iowrite32(pm, &chip->reg->pm);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -156,12 +163,18 @@ static int pch_gpio_direction_output(struct gpio_chip *gpio, unsigned nr,
 		reg_val &= ~(1 << nr);
 	iowrite32(reg_val, &chip->reg->po);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	pm = ioread32(&chip->reg->pm) & ((1 << gpio_pins[chip->ioh]) - 1);
 	pm |= (1 << nr);
 	iowrite32(pm, &chip->reg->pm);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_unlock_irqrestore(&chip->spinlock, flags);
 
@@ -184,6 +197,10 @@ static int pch_gpio_direction_input(struct gpio_chip *gpio, unsigned nr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_PM
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM
 >>>>>>> v3.18
@@ -223,6 +240,10 @@ static void pch_gpio_restore_reg_conf(struct pch_gpio *chip)
 			  &chip->reg->gpio_use_sel);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> v3.18
 =======
 #endif
 >>>>>>> v3.18
@@ -248,7 +269,11 @@ static void pch_gpio_setup(struct pch_gpio *chip)
 	gpio->base = -1;
 	gpio->ngpio = gpio_pins[chip->ioh];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio->can_sleep = 0;
+=======
+	gpio->can_sleep = false;
+>>>>>>> v3.18
 =======
 	gpio->can_sleep = false;
 >>>>>>> v3.18
@@ -451,9 +476,13 @@ end:
 err_request_irq:
 	irq_free_descs(irq_base, gpio_pins[chip->ioh]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (gpiochip_remove(&chip->gpio))
 		dev_err(&pdev->dev, "%s gpiochip_remove failed\n", __func__);
+=======
+	gpiochip_remove(&chip->gpio);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&chip->gpio);
 >>>>>>> v3.18
@@ -476,7 +505,10 @@ err_pci_enable:
 static void pch_gpio_remove(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct pch_gpio *chip = pci_get_drvdata(pdev);
@@ -488,10 +520,14 @@ static void pch_gpio_remove(struct pci_dev *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = gpiochip_remove(&chip->gpio);
 	if (err)
 		dev_err(&pdev->dev, "Failed gpiochip_remove\n");
 
+=======
+	gpiochip_remove(&chip->gpio);
+>>>>>>> v3.18
 =======
 	gpiochip_remove(&chip->gpio);
 >>>>>>> v3.18
@@ -557,7 +593,11 @@ static int pch_gpio_resume(struct pci_dev *pdev)
 
 #define PCI_VENDOR_ID_ROHM             0x10DB
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pch_gpio_pcidev_id) = {
+=======
+static const struct pci_device_id pch_gpio_pcidev_id[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pch_gpio_pcidev_id[] = {
 >>>>>>> v3.18

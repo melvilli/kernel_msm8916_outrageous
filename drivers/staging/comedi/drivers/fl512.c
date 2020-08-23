@@ -1,5 +1,6 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
     comedi/drivers/fl512.c
     Anders Gnistrup <ex18@kalman.iau.dtu.dk>
 */
@@ -108,6 +109,8 @@ static int fl512_ao_insn_readback(struct comedi_device *dev,
 
 	return n;
 =======
+=======
+>>>>>>> v3.18
  * fl512.c
  * Anders Gnistrup <ex18@kalman.iau.dtu.dk>
  *
@@ -212,11 +215,15 @@ static int fl512_ao_insn_write(struct comedi_device *dev,
 	s->readback[chan] = val;
 
 	return insn->n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int fl512_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct fl512_private *devpriv;
 	struct comedi_subdevice *s;
@@ -232,6 +239,8 @@ static int fl512_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	dev->private = devpriv;
 
 =======
+=======
+>>>>>>> v3.18
 	struct comedi_subdevice *s;
 	int ret;
 
@@ -239,11 +248,15 @@ static int fl512_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = comedi_alloc_subdevices(dev, 2);
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * this if the definitions of the supdevices, 2 have been defined
@@ -282,6 +295,8 @@ static int fl512_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 
 	return 1;
 =======
+=======
+>>>>>>> v3.18
 	/* Analog Input subdevice */
 	s = &dev->subdevices[0];
 	s->type		= COMEDI_SUBD_AI;
@@ -306,6 +321,9 @@ static int fl512_attach(struct comedi_device *dev, struct comedi_devconfig *it)
 		return ret;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

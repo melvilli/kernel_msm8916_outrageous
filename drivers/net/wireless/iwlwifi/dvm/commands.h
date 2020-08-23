@@ -6,7 +6,11 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -35,7 +39,11 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
 >>>>>>> v3.18
@@ -847,10 +855,13 @@ struct iwl_qosparam_cmd {
 #define STA_MODIFY_SLEEP_TX_COUNT_MSK	0x20
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Receiver address (actually, Rx station's index into station table),
  * combined with Traffic ID (QOS priority), in format used by Tx Scheduler */
 #define BUILD_RAxTID(sta_id, tid)	(((sta_id) << 4) + (tid))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* agn */
@@ -1237,6 +1248,7 @@ struct iwl_rx_mpdu_res_start {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * security overhead sizes
  */
 #define WEP_IV_LEN 4
@@ -1245,6 +1257,8 @@ struct iwl_rx_mpdu_res_start {
 #define TKIP_ICV_LEN 4
 
 /*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * REPLY_TX = 0x1c (command)

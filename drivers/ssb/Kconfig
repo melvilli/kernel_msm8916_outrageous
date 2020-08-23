@@ -139,7 +139,11 @@ config SSB_DRIVER_MIPS
 config SSB_SFLASH
 	bool "SSB serial flash support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SSB_DRIVER_MIPS && BROKEN
+=======
+	depends on SSB_DRIVER_MIPS
+>>>>>>> v3.18
 =======
 	depends on SSB_DRIVER_MIPS
 >>>>>>> v3.18
@@ -149,7 +153,11 @@ config SSB_SFLASH
 config SSB_EMBEDDED
 	bool
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SSB_DRIVER_MIPS
+=======
+	depends on SSB_DRIVER_MIPS && SSB_PCICORE_HOSTMODE
+>>>>>>> v3.18
 =======
 	depends on SSB_DRIVER_MIPS && SSB_PCICORE_HOSTMODE
 >>>>>>> v3.18
@@ -177,6 +185,10 @@ config SSB_DRIVER_GPIO
 	bool "SSB GPIO driver"
 	depends on SSB && GPIOLIB
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select IRQ_DOMAIN if SSB_EMBEDDED
+>>>>>>> v3.18
 =======
 	select IRQ_DOMAIN if SSB_EMBEDDED
 >>>>>>> v3.18

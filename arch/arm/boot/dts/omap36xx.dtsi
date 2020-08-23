@@ -9,7 +9,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap3.dtsi"
+=======
+#include "omap3.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap3.dtsi"
 >>>>>>> v3.18
@@ -36,12 +40,15 @@
 		uart4: serial@49042000 {
 			compatible = "ti,omap3-uart";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ti,hwmods = "uart4";
 			clock-frequency = <48000000>;
 		};
 	};
 };
 =======
+=======
+>>>>>>> v3.18
 			reg = <0x49042000 0x400>;
 			interrupts = <80>;
 			dmas = <&sdma 81 &sdma 82>;
@@ -104,4 +111,7 @@
 /include/ "omap36xx-omap3430es2plus-clocks.dtsi"
 /include/ "omap36xx-am35xx-omap3430es2plus-clocks.dtsi"
 /include/ "omap36xx-clocks.dtsi"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

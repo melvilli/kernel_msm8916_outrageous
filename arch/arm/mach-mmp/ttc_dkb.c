@@ -16,7 +16,11 @@
 #include <linux/mtd/onenand.h>
 #include <linux/interrupt.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/i2c/pca953x.h>
+=======
+#include <linux/platform_data/pca953x.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/pca953x.h>
 >>>>>>> v3.18
@@ -169,8 +173,13 @@ static struct i2c_board_info ttc_dkb_i2c_info[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_SUPPORT
 #if defined(CONFIG_USB_MV_UDC) || defined(CONFIG_USB_EHCI_MV_U2O)
+=======
+#if IS_ENABLED(CONFIG_USB_SUPPORT)
+#if IS_ENABLED(CONFIG_USB_MV_UDC) || IS_ENABLED(CONFIG_USB_EHCI_MV_U2O)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_SUPPORT)
 #if IS_ENABLED(CONFIG_USB_MV_UDC) || IS_ENABLED(CONFIG_USB_EHCI_MV_U2O)
@@ -188,7 +197,11 @@ static struct mv_usb_platform_data ttc_usb_pdata = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MTD_NAND_PXA3xx
+=======
+#if IS_ENABLED(CONFIG_MTD_NAND_PXA3xx)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_NAND_PXA3xx)
 >>>>>>> v3.18
@@ -199,7 +212,11 @@ static struct pxa3xx_nand_platform_data dkb_nand_info = {
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMP_DISP
+=======
+#if IS_ENABLED(CONFIG_MMP_DISP)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MMP_DISP)
 >>>>>>> v3.18
@@ -209,7 +226,10 @@ static struct pxa3xx_nand_platform_data dkb_nand_info = {
 /* link config */
 #define CFG_DUMBMODE(mode)     (mode << 28) /* 0x0 ~ 0x6*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CFG_GRA_SWAPRB(x)      (x << 0) /* 1: rbswap enabled */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct mmp_mach_path_config dkb_disp_config[] = {
@@ -220,8 +240,12 @@ static struct mmp_mach_path_config dkb_disp_config[] = {
 		.path_config = CFG_IOPADMODE(0x1)
 			| SCLK_SOURCE_SELECT(0x1),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.link_config = CFG_DUMBMODE(0x2)
 			| CFG_GRA_SWAPRB(0x1),
+=======
+		.link_config = CFG_DUMBMODE(0x2),
+>>>>>>> v3.18
 =======
 		.link_config = CFG_DUMBMODE(0x2),
 >>>>>>> v3.18
@@ -302,7 +326,11 @@ static void __init ttc_dkb_init(void)
 	/* on-chip devices */
 	pxa910_add_uart(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MTD_NAND_PXA3xx
+=======
+#if IS_ENABLED(CONFIG_MTD_NAND_PXA3xx)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MTD_NAND_PXA3xx)
 >>>>>>> v3.18
@@ -316,7 +344,11 @@ static void __init ttc_dkb_init(void)
 	platform_add_devices(ARRAY_AND_SIZE(ttc_dkb_devices));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_MV_UDC
+=======
+#if IS_ENABLED(CONFIG_USB_MV_UDC)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_MV_UDC)
 >>>>>>> v3.18
@@ -325,7 +357,11 @@ static void __init ttc_dkb_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_EHCI_MV_U2O
+=======
+#if IS_ENABLED(CONFIG_USB_EHCI_MV_U2O)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_EHCI_MV_U2O)
 >>>>>>> v3.18
@@ -334,7 +370,11 @@ static void __init ttc_dkb_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_USB_MV_OTG
+=======
+#if IS_ENABLED(CONFIG_USB_MV_OTG)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_USB_MV_OTG)
 >>>>>>> v3.18
@@ -343,7 +383,11 @@ static void __init ttc_dkb_init(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_MMP_DISP
+=======
+#if IS_ENABLED(CONFIG_MMP_DISP)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_MMP_DISP)
 >>>>>>> v3.18

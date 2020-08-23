@@ -1,7 +1,11 @@
 /*
  * QLogic iSCSI HBA Driver
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c)  2003-2012 QLogic Corporation
+=======
+ * Copyright (c)  2003-2013 QLogic Corporation
+>>>>>>> v3.18
 =======
  * Copyright (c)  2003-2013 QLogic Corporation
 >>>>>>> v3.18
@@ -395,6 +399,10 @@ struct qla_flt_region {
 #define MBOX_CMD_CONN_OPEN			0x0074
 #define MBOX_CMD_CONN_CLOSE_SESS_LOGOUT		0x0056
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DDB_NOT_LOGGED_IN			0x09
+>>>>>>> v3.18
 =======
 #define DDB_NOT_LOGGED_IN			0x09
 >>>>>>> v3.18
@@ -419,6 +427,10 @@ struct qla_flt_region {
 #define MBOX_CMD_GET_FW_STATE			0x0069
 #define MBOX_CMD_GET_INIT_FW_CTRL_BLOCK_DEFAULTS 0x006A
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MBOX_CMD_DIAG_TEST			0x0075
+>>>>>>> v3.18
 =======
 #define MBOX_CMD_DIAG_TEST			0x0075
 >>>>>>> v3.18
@@ -438,9 +450,12 @@ struct qla_flt_region {
 #define MBOX_CMD_SEND_IPV6_ROUTER_SOL		0x0092
 #define MBOX_CMD_GET_DB_ENTRY_CURRENT_IP_ADDR	0x0093
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MBOX_CMD_MINIDUMP			0x0129
 
 =======
+=======
+>>>>>>> v3.18
 #define MBOX_CMD_SET_PORT_CONFIG		0x0122
 #define MBOX_CMD_GET_PORT_CONFIG		0x0123
 #define MBOX_CMD_SET_LED_CONFIG			0x0125
@@ -452,6 +467,9 @@ struct qla_flt_region {
 #define ENABLE_EXTERNAL_LOOPBACK		0x08
 #define ENABLE_DCBX				0x10
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Minidump subcommand */
 #define MINIDUMP_GET_SIZE_SUBCOMMAND		0x00
@@ -485,6 +503,10 @@ struct qla_flt_region {
 
 #define MBOX_CMD_IDC_ACK			0x0101
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MBOX_CMD_IDC_TIME_EXTEND		0x0102
+>>>>>>> v3.18
 =======
 #define MBOX_CMD_IDC_TIME_EXTEND		0x0102
 >>>>>>> v3.18
@@ -525,9 +547,15 @@ struct qla_flt_region {
 #define MBOX_ASTS_IP_ADDR_STATE_CHANGED		0x8029
 #define MBOX_ASTS_IPV6_DEFAULT_ROUTER_CHANGED	0x802A
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MBOX_ASTS_IPV6_PREFIX_EXPIRED		0x802B
 #define MBOX_ASTS_IPV6_ND_PREFIX_IGNORED	0x802C
 #define MBOX_ASTS_IPV6_LCL_PREFIX_IGNORED	0x802D
+=======
+#define MBOX_ASTS_IPV6_LINK_MTU_CHANGE		0x802B
+#define MBOX_ASTS_IPV6_AUTO_PREFIX_IGNORED	0x802C
+#define MBOX_ASTS_IPV6_ND_LOCAL_PREFIX_IGNORED	0x802D
+>>>>>>> v3.18
 =======
 #define MBOX_ASTS_IPV6_LINK_MTU_CHANGE		0x802B
 #define MBOX_ASTS_IPV6_AUTO_PREFIX_IGNORED	0x802C
@@ -539,6 +567,10 @@ struct qla_flt_region {
 #define MBOX_ASTS_IDC_COMPLETE			0x8100
 #define MBOX_ASTS_IDC_REQUEST_NOTIFICATION	0x8101
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MBOX_ASTS_IDC_TIME_EXTEND_NOTIFICATION	0x8102
+>>>>>>> v3.18
 =======
 #define MBOX_ASTS_IDC_TIME_EXTEND_NOTIFICATION	0x8102
 >>>>>>> v3.18
@@ -553,6 +585,7 @@ struct qla_flt_region {
 #define MBOX_ASTS_SUBNET_STATE_CHANGE		0x8027
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* ACB State Defines */
 #define ACB_STATE_UNCONFIGURED	0x00
 #define ACB_STATE_INVALID	0x01
@@ -562,6 +595,8 @@ struct qla_flt_region {
 #define ACB_STATE_VALID		0x05
 #define ACB_STATE_DISABLING	0x06
 =======
+=======
+>>>>>>> v3.18
 /* ACB Configuration Defines */
 #define ACB_CONFIG_DISABLE		0x00
 #define ACB_CONFIG_SET			0x01
@@ -574,6 +609,9 @@ struct qla_flt_region {
 #define IP_ADDRSTATE_DEPRICATED		4
 #define IP_ADDRSTATE_PREFERRED		5
 #define IP_ADDRSTATE_DISABLING		6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* FLASH offsets */
@@ -585,9 +623,15 @@ struct qla_flt_region {
 #define FLASH_OPT_RMW_COMMIT	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Loopback type */
 #define ENABLE_INTERNAL_LOOPBACK	0x04
 #define ENABLE_EXTERNAL_LOOPBACK	0x08
+=======
+/* generic defines to enable/disable params */
+#define QL4_PARAM_DISABLE	0
+#define QL4_PARAM_ENABLE	1
+>>>>>>> v3.18
 =======
 /* generic defines to enable/disable params */
 #define QL4_PARAM_DISABLE	0
@@ -603,6 +647,10 @@ struct addr_ctrl_blk {
 #define  IFCB_VER_MAX			0x02
 	uint8_t control;	/* 01 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define	 CTRLOPT_NEW_CONN_DISABLE	0x0002
+>>>>>>> v3.18
 =======
 #define	 CTRLOPT_NEW_CONN_DISABLE	0x0002
 >>>>>>> v3.18
@@ -638,12 +686,15 @@ struct addr_ctrl_blk {
 
 	uint16_t iscsi_opts;	/* 30-31 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint16_t ipv4_tcp_opts;	/* 32-33 */
 #define TCPOPT_DHCP_ENABLE		0x0200
 	uint16_t ipv4_ip_opts;	/* 34-35 */
 #define IPOPT_IPV4_PROTOCOL_ENABLE	0x8000
 #define IPOPT_VLAN_TAGGING_ENABLE	0x2000
 =======
+=======
+>>>>>>> v3.18
 #define ISCSIOPTS_HEADER_DIGEST_EN		0x2000
 #define ISCSIOPTS_DATA_DIGEST_EN		0x1000
 #define ISCSIOPTS_IMMEDIATE_DATA_EN		0x0800
@@ -678,6 +729,9 @@ struct addr_ctrl_blk {
 #define IPOPT_FRAGMENTATION_DISABLE	0x0010
 #define IPOPT_IN_FORWARD_EN		0x0008
 #define IPOPT_ARP_REDIRECT_EN		0x0004
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	uint16_t iscsi_max_pdu_size;	/* 36-37 */
@@ -730,11 +784,14 @@ struct addr_ctrl_blk {
 	uint16_t ipv6_port;	/* 204-205 */
 	uint16_t ipv6_opts;	/* 206-207 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IPV6_OPT_IPV6_PROTOCOL_ENABLE	0x8000
 #define IPV6_OPT_VLAN_TAGGING_ENABLE	0x2000
 
 	uint16_t ipv6_addtl_opts;	/* 208-209 */
 =======
+=======
+>>>>>>> v3.18
 #define IPV6_OPT_IPV6_PROTOCOL_ENABLE		0x8000
 #define IPV6_OPT_VLAN_TAGGING_ENABLE		0x2000
 #define IPV6_OPT_GRAT_NEIGHBOR_ADV_EN		0x1000
@@ -743,6 +800,9 @@ struct addr_ctrl_blk {
 	uint16_t ipv6_addtl_opts;	/* 208-209 */
 #define IPV6_ADDOPT_IGNORE_ICMP_ECHO_REQ		0x0040
 #define IPV6_ADDOPT_MLD_EN				0x0004
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IPV6_ADDOPT_NEIGHBOR_DISCOVERY_ADDR_ENABLE	0x0002 /* Pri ACB
 								  Only */
@@ -750,12 +810,18 @@ struct addr_ctrl_blk {
 
 	uint16_t ipv6_tcp_opts;	/* 20A-20B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define IPV6_TCPOPT_DELAYED_ACK_DISABLE		0x8000
 #define IPV6_TCPOPT_NAGLE_ALGO_DISABLE		0x0020
 #define IPV6_TCPOPT_WINDOW_SCALE_DISABLE	0x0010
 #define IPV6_TCPOPT_TIMER_SCALE			0x000E
 #define IPV6_TCPOPT_TIMESTAMP_EN		0x0001
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint8_t ipv6_tcp_wsf;	/* 20C */
 	uint16_t ipv6_flow_lbl;	/* 20D-20F */
@@ -765,6 +831,7 @@ struct addr_ctrl_blk {
 	uint8_t ipv6_addr0_state;	/* 223 */
 	uint8_t ipv6_addr1_state;	/* 224 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IP_ADDRSTATE_UNCONFIGURED	0
 #define IP_ADDRSTATE_INVALID		1
 #define IP_ADDRSTATE_ACQUIRING		2
@@ -773,6 +840,8 @@ struct addr_ctrl_blk {
 #define IP_ADDRSTATE_PREFERRED		5
 #define IP_ADDRSTATE_DISABLING		6
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	uint8_t ipv6_dflt_rtr_state;    /* 225 */
@@ -1080,7 +1149,11 @@ struct about_fw_info {
 	uint16_t bootload_patch;	/* 48 - 49 */
 	uint16_t bootload_build;	/* 4A - 4B */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t reserved2[180];		/* 4C - FF */
+=======
+	uint8_t extended_timestamp[180];/* 4C - FF */
+>>>>>>> v3.18
 =======
 	uint8_t extended_timestamp[180];/* 4C - FF */
 >>>>>>> v3.18
@@ -1371,8 +1444,11 @@ struct response {
 
 struct ql_iscsi_stats {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint8_t reserved1[656]; /* 0000-028F */
 =======
+=======
+>>>>>>> v3.18
 	uint64_t mac_tx_frames; /* 0000–0007 */
 	uint64_t mac_tx_bytes; /* 0008–000F */
 	uint64_t mac_tx_multicast_frames; /* 0010–0017 */
@@ -1455,6 +1531,9 @@ struct ql_iscsi_stats {
 	uint64_t iscsi_hdr_digest_error; /* 0278-027F */
 	uint64_t iscsi_data_digest_error; /* 0280-0287 */
 	uint64_t iscsi_sequence_error; /* 0288-028F */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	uint32_t tx_cmd_pdu; /* 0290-0293 */
 	uint32_t tx_resp_pdu; /* 0294-0297 */
@@ -1500,6 +1579,12 @@ struct ql_iscsi_stats {
 #define QLA83XX_SS_OCM_WNDREG_INDEX		3
 #define QLA83XX_SS_PCI_INDEX			0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLA8022_TEMPLATE_CAP_OFFSET		172
+#define QLA83XX_TEMPLATE_CAP_OFFSET		268
+#define QLA80XX_TEMPLATE_RESERVED_BITS		16
+>>>>>>> v3.18
 =======
 #define QLA8022_TEMPLATE_CAP_OFFSET		172
 #define QLA83XX_TEMPLATE_CAP_OFFSET		268
@@ -1525,6 +1610,10 @@ struct qla4_8xxx_minidump_template_hdr {
 	uint32_t capture_size_array[QLA8XXX_DBG_CAP_SIZE_ARRAY_LEN];
 	uint32_t ocm_window_reg[QLA83XX_DBG_OCM_WNDREG_ARRAY_LEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	uint32_t capabilities[QLA80XX_TEMPLATE_RESERVED_BITS];
+>>>>>>> v3.18
 =======
 	uint32_t capabilities[QLA80XX_TEMPLATE_RESERVED_BITS];
 >>>>>>> v3.18

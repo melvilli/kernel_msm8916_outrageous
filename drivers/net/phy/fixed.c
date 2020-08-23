@@ -22,6 +22,10 @@
 #include <linux/err.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -36,7 +40,11 @@ struct fixed_mdio_bus {
 
 struct fixed_phy {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int id;
+=======
+	int addr;
+>>>>>>> v3.18
 =======
 	int addr;
 >>>>>>> v3.18
@@ -113,8 +121,13 @@ static int fixed_phy_update_regs(struct fixed_phy *fp)
 		lpa |= LPA_PAUSE_ASYM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fp->regs[MII_PHYSID1] = fp->id >> 16;
 	fp->regs[MII_PHYSID2] = fp->id;
+=======
+	fp->regs[MII_PHYSID1] = 0;
+	fp->regs[MII_PHYSID2] = 0;
+>>>>>>> v3.18
 =======
 	fp->regs[MII_PHYSID1] = 0;
 	fp->regs[MII_PHYSID2] = 0;
@@ -129,7 +142,11 @@ static int fixed_phy_update_regs(struct fixed_phy *fp)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fixed_mdio_read(struct mii_bus *bus, int phy_id, int reg_num)
+=======
+static int fixed_mdio_read(struct mii_bus *bus, int phy_addr, int reg_num)
+>>>>>>> v3.18
 =======
 static int fixed_mdio_read(struct mii_bus *bus, int phy_addr, int reg_num)
 >>>>>>> v3.18
@@ -141,9 +158,12 @@ static int fixed_mdio_read(struct mii_bus *bus, int phy_addr, int reg_num)
 		return -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(fp, &fmb->phys, node) {
 		if (fp->id == phy_id) {
 =======
+=======
+>>>>>>> v3.18
 	/* We do not support emulating Clause 45 over Clause 22 register reads
 	 * return an error instead of bogus data.
 	 */
@@ -157,6 +177,9 @@ static int fixed_mdio_read(struct mii_bus *bus, int phy_addr, int reg_num)
 
 	list_for_each_entry(fp, &fmb->phys, node) {
 		if (fp->addr == phy_addr) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/* Issue callback if user registered it. */
 			if (fp->link_update) {
@@ -172,7 +195,11 @@ static int fixed_mdio_read(struct mii_bus *bus, int phy_addr, int reg_num)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fixed_mdio_write(struct mii_bus *bus, int phy_id, int reg_num,
+=======
+static int fixed_mdio_write(struct mii_bus *bus, int phy_addr, int reg_num,
+>>>>>>> v3.18
 =======
 static int fixed_mdio_write(struct mii_bus *bus, int phy_addr, int reg_num,
 >>>>>>> v3.18
@@ -198,7 +225,11 @@ int fixed_phy_set_link_update(struct phy_device *phydev,
 
 	list_for_each_entry(fp, &fmb->phys, node) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (fp->id == phydev->phy_id) {
+=======
+		if (fp->addr == phydev->addr) {
+>>>>>>> v3.18
 =======
 		if (fp->addr == phydev->addr) {
 >>>>>>> v3.18
@@ -213,7 +244,11 @@ int fixed_phy_set_link_update(struct phy_device *phydev,
 EXPORT_SYMBOL_GPL(fixed_phy_set_link_update);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int fixed_phy_add(unsigned int irq, int phy_id,
+=======
+int fixed_phy_add(unsigned int irq, int phy_addr,
+>>>>>>> v3.18
 =======
 int fixed_phy_add(unsigned int irq, int phy_addr,
 >>>>>>> v3.18
@@ -230,9 +265,15 @@ int fixed_phy_add(unsigned int irq, int phy_addr,
 	memset(fp->regs, 0xFF,  sizeof(fp->regs[0]) * MII_REGS_NUM);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fmb->irqs[phy_id] = irq;
 
 	fp->id = phy_id;
+=======
+	fmb->irqs[phy_addr] = irq;
+
+	fp->addr = phy_addr;
+>>>>>>> v3.18
 =======
 	fmb->irqs[phy_addr] = irq;
 
@@ -255,7 +296,10 @@ err_regs:
 EXPORT_SYMBOL_GPL(fixed_phy_add);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void fixed_phy_del(int phy_addr)
 {
 	struct fixed_mdio_bus *fmb = &platform_fmb;
@@ -316,6 +360,9 @@ struct phy_device *fixed_phy_register(unsigned int irq,
 	return phy;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init fixed_mdio_bus_init(void)
 {

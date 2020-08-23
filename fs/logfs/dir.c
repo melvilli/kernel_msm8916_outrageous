@@ -282,6 +282,7 @@ static int logfs_rmdir(struct inode *dir, struct dentry *dentry)
 /* FIXME: readdir currently has it's own dir_walk code.  I don't see a good
  * way to combine the two copies */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IMPLICIT_NODES 2
 static int __logfs_readdir(struct file *file, void *buf, filldir_t filldir)
 {
@@ -294,6 +295,8 @@ static int __logfs_readdir(struct file *file, void *buf, filldir_t filldir)
 	BUG_ON(pos < 0);
 	for (;; pos++) {
 =======
+=======
+>>>>>>> v3.18
 static int logfs_readdir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *dir = file_inode(file);
@@ -311,6 +314,9 @@ static int logfs_readdir(struct file *file, struct dir_context *ctx)
 	BUG_ON(pos < 0);
 	for (;; pos++, ctx->pos++) {
 		bool full;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (beyond_eof(dir, pos))
 			break;
@@ -327,8 +333,14 @@ static int logfs_readdir(struct file *file, struct dir_context *ctx)
 		BUG_ON(dd->namelen == 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		full = filldir(buf, (char *)dd->name, be16_to_cpu(dd->namelen),
 				pos, be64_to_cpu(dd->ino), dd->type);
+=======
+		full = !dir_emit(ctx, (char *)dd->name,
+				be16_to_cpu(dd->namelen),
+				be64_to_cpu(dd->ino), dd->type);
+>>>>>>> v3.18
 =======
 		full = !dir_emit(ctx, (char *)dd->name,
 				be16_to_cpu(dd->namelen),
@@ -339,6 +351,7 @@ static int logfs_readdir(struct file *file, struct dir_context *ctx)
 		if (full)
 			break;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	file->f_pos = pos + IMPLICIT_NODES;
@@ -369,6 +382,11 @@ static int logfs_readdir(struct file *file, void *buf, filldir_t filldir)
 	return err;
 }
 
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 =======
 	return 0;
 }
@@ -847,7 +865,11 @@ const struct file_operations logfs_dir_fops = {
 	.fsync		= logfs_fsync,
 	.unlocked_ioctl	= logfs_ioctl,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= logfs_readdir,
+=======
+	.iterate	= logfs_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= logfs_readdir,
 >>>>>>> v3.18

@@ -54,6 +54,7 @@ static int osdmap_show(struct seq_file *s, void *p)
 	int i;
 	struct ceph_client *client = s->private;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct rb_node *n;
 
 	if (client->osdc.osdmap == NULL)
@@ -83,6 +84,8 @@ static int osdmap_show(struct seq_file *s, void *p)
 			   ceph_osdmap_state_str(sb, sizeof(sb), state));
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct ceph_osdmap *map = client->osdc.osdmap;
 	struct rb_node *n;
 
@@ -132,6 +135,9 @@ static int osdmap_show(struct seq_file *s, void *p)
 			   pg->pgid.seed, pg->primary_temp.osd);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -158,10 +164,13 @@ static int monc_show(struct seq_file *s, void *p)
 		op = le16_to_cpu(req->request->hdr.type);
 		if (op == CEPH_MSG_STATFS)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(s, "%lld statfs\n", req->tid);
 		else
 			seq_printf(s, "%lld unknown\n", req->tid);
 =======
+=======
+>>>>>>> v3.18
 			seq_printf(s, "%llu statfs\n", req->tid);
 		else if (op == CEPH_MSG_POOLOP)
 			seq_printf(s, "%llu poolop\n", req->tid);
@@ -169,6 +178,9 @@ static int monc_show(struct seq_file *s, void *p)
 			seq_printf(s, "%llu mon_get_version", req->tid);
 		else
 			seq_printf(s, "%llu unknown\n", req->tid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -195,7 +207,12 @@ static int osdc_show(struct seq_file *s, void *pp)
 			   req->r_pgid.pool, req->r_pgid.seed);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		seq_printf(s, "%.*s", req->r_oid_len, req->r_oid);
+=======
+		seq_printf(s, "%.*s", req->r_base_oid.name_len,
+			   req->r_base_oid.name);
+>>>>>>> v3.18
 =======
 		seq_printf(s, "%.*s", req->r_base_oid.name_len,
 			   req->r_base_oid.name);
@@ -211,7 +228,12 @@ static int osdc_show(struct seq_file *s, void *pp)
 		for (i = 0; i < req->r_num_ops; i++) {
 			opcode = req->r_ops[i].op;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			seq_printf(s, "\t%s", ceph_osd_op_name(opcode));
+=======
+			seq_printf(s, "%s%s", (i == 0 ? "\t" : ","),
+				   ceph_osd_op_name(opcode));
+>>>>>>> v3.18
 =======
 			seq_printf(s, "%s%s", (i == 0 ? "\t" : ","),
 				   ceph_osd_op_name(opcode));

@@ -44,14 +44,20 @@ struct net_protocol {
 	void			(*err_handler)(struct sk_buff *skb, u32 info);
 	unsigned int		no_policy:1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				netns_ok:1;
 =======
+=======
+>>>>>>> v3.18
 				netns_ok:1,
 				/* does the protocol do more stringent
 				 * icmp tag validation than simple
 				 * socket lookup?
 				 */
 				icmp_strict_tag_validation:1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -91,7 +97,10 @@ struct inet_protosw {
 	const struct proto_ops *ops;
   
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char             no_check;   /* checksum on rcv/xmit/none? */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned char	 flags;      /* See INET_PROTOSW_* below.  */
@@ -109,6 +118,7 @@ extern const struct inet6_protocol __rcu *inet6_protos[MAX_INET_PROTOS];
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int	inet_add_protocol(const struct net_protocol *prot, unsigned char num);
 extern int	inet_del_protocol(const struct net_protocol *prot, unsigned char num);
 extern int	inet_add_offload(const struct net_offload *prot, unsigned char num);
@@ -125,6 +135,8 @@ extern void	inet6_unregister_protosw(struct inet_protosw *p);
 extern int	inet6_add_offload(const struct net_offload *prot, unsigned char num);
 extern int	inet6_del_offload(const struct net_offload *prot, unsigned char num);
 =======
+=======
+>>>>>>> v3.18
 int inet_add_protocol(const struct net_protocol *prot, unsigned char num);
 int inet_del_protocol(const struct net_protocol *prot, unsigned char num);
 int inet_add_offload(const struct net_offload *prot, unsigned char num);
@@ -143,6 +155,9 @@ void inet6_unregister_protosw(struct inet_protosw *p);
 #endif
 int inet6_add_offload(const struct net_offload *prot, unsigned char num);
 int inet6_del_offload(const struct net_offload *prot, unsigned char num);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif	/* _PROTOCOL_H */

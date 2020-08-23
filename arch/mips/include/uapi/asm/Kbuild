@@ -2,12 +2,18 @@
 include include/uapi/asm-generic/Kbuild.asm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += auxvec.h
 =======
+=======
+>>>>>>> v3.18
 generic-y += auxvec.h
 generic-y += ipcbuf.h
 
 header-y += bitfield.h
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 header-y += bitsperlong.h
 header-y += break.h
@@ -19,7 +25,10 @@ header-y += inst.h
 header-y += ioctl.h
 header-y += ioctls.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += ipcbuf.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += kvm_para.h

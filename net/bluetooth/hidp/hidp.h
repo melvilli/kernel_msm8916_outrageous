@@ -25,6 +25,10 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/hid.h>
+>>>>>>> v3.18
 =======
 #include <linux/hid.h>
 >>>>>>> v3.18
@@ -133,6 +137,10 @@ int hidp_get_conninfo(struct hidp_conninfo *ci);
 enum hidp_session_state {
 	HIDP_SESSION_IDLING,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	HIDP_SESSION_PREPARING,
+>>>>>>> v3.18
 =======
 	HIDP_SESSION_PREPARING,
 >>>>>>> v3.18
@@ -165,6 +173,10 @@ struct hidp_session {
 
 	/* device management */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct work_struct dev_init;
+>>>>>>> v3.18
 =======
 	struct work_struct dev_init;
 >>>>>>> v3.18
@@ -190,12 +202,15 @@ struct hidp_session {
 	/* Used in hidp_output_raw_report() */
 	int output_report_success; /* boolean */
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 /* HIDP init defines */
 extern int __init hidp_init_sockets(void);
 extern void __exit hidp_cleanup_sockets(void);
 =======
+=======
+>>>>>>> v3.18
 
 	/* temporary input buffer */
 	u8 input_buf[HID_MAX_BUFFER_SIZE];
@@ -204,6 +219,9 @@ extern void __exit hidp_cleanup_sockets(void);
 /* HIDP init defines */
 int __init hidp_init_sockets(void);
 void __exit hidp_cleanup_sockets(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __HIDP_H */

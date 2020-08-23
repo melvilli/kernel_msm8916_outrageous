@@ -1,7 +1,11 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Driver for the LCD display on the Tensilica XTFPGA board family.
  * http://www.mytechcorp.com/cfdata/productFile/File1/MOC-16216B-B-A0A04.pdf
+=======
+ * Driver for the LCD display on the Tensilica LX60 Board.
+>>>>>>> v3.18
 =======
  * Driver for the LCD display on the Tensilica LX60 Board.
 >>>>>>> v3.18
@@ -12,11 +16,14 @@
  *
  * Copyright (C) 2001, 2006 Tensilica Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2015 Cadence Design Systems Inc.
  */
 
 #include <linux/delay.h>
 =======
+=======
+>>>>>>> v3.18
  */
 
 /*
@@ -28,12 +35,16 @@
  * change the hardware to not need to wait.
  */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/init.h>
 #include <linux/io.h>
 
 #include <platform/hardware.h>
 #include <platform/lcd.h>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /* LCD instruction and data addresses. */
@@ -45,19 +56,28 @@
 
 #define LCD_PAUSE_ITERATIONS	4000
 >>>>>>> v3.18
+=======
+#include <linux/delay.h>
+
+#define LCD_PAUSE_ITERATIONS	4000
+>>>>>>> v3.18
 #define LCD_CLEAR		0x1
 #define LCD_DISPLAY_ON		0xc
 
 /* 8bit and 2 lines display */
 #define LCD_DISPLAY_MODE8BIT	0x38
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LCD_DISPLAY_MODE4BIT	0x28
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define LCD_DISPLAY_POS		0x80
 #define LCD_SHIFT_LEFT		0x18
 #define LCD_SHIFT_RIGHT		0x1c
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void lcd_put_byte(u8 *addr, u8 data)
 {
@@ -87,6 +107,8 @@ static int __init lcd_init(void)
 	udelay(50);
 	lcd_put_byte(LCD_INSTR_ADDR, LCD_CLEAR);
 =======
+=======
+>>>>>>> v3.18
 static int __init lcd_init(void)
 {
 	*LCD_INSTR_ADDR = LCD_DISPLAY_MODE8BIT;
@@ -98,6 +120,9 @@ static int __init lcd_init(void)
 	*LCD_INSTR_ADDR = LCD_DISPLAY_ON;
 	udelay(50);
 	*LCD_INSTR_ADDR = LCD_CLEAR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mdelay(10);
 	lcd_disp_at_pos("XTENSA LINUX", 0);
@@ -107,15 +132,21 @@ static int __init lcd_init(void)
 void lcd_disp_at_pos(char *str, unsigned char pos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_put_byte(LCD_INSTR_ADDR, LCD_DISPLAY_POS | pos);
 	udelay(100);
 	while (*str != 0) {
 		lcd_put_byte(LCD_DATA_ADDR, *str);
 =======
+=======
+>>>>>>> v3.18
 	*LCD_INSTR_ADDR = LCD_DISPLAY_POS | pos;
 	udelay(100);
 	while (*str != 0) {
 		*LCD_DATA_ADDR = *str;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		udelay(200);
 		str++;
@@ -125,7 +156,11 @@ void lcd_disp_at_pos(char *str, unsigned char pos)
 void lcd_shiftleft(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_put_byte(LCD_INSTR_ADDR, LCD_SHIFT_LEFT);
+=======
+	*LCD_INSTR_ADDR = LCD_SHIFT_LEFT;
+>>>>>>> v3.18
 =======
 	*LCD_INSTR_ADDR = LCD_SHIFT_LEFT;
 >>>>>>> v3.18
@@ -135,7 +170,11 @@ void lcd_shiftleft(void)
 void lcd_shiftright(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lcd_put_byte(LCD_INSTR_ADDR, LCD_SHIFT_RIGHT);
+=======
+	*LCD_INSTR_ADDR = LCD_SHIFT_RIGHT;
+>>>>>>> v3.18
 =======
 	*LCD_INSTR_ADDR = LCD_SHIFT_RIGHT;
 >>>>>>> v3.18

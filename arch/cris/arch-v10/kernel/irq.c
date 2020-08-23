@@ -6,7 +6,11 @@
  *      Authors: Bjorn Wesen (bjornw@axis.com)
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *      This file contains the interrupt vectors and some 
+=======
+ *      This file contains the interrupt vectors and some
+>>>>>>> v3.18
 =======
  *      This file contains the interrupt vectors and some
 >>>>>>> v3.18
@@ -187,8 +191,12 @@ void do_multiple_IRQ(struct pt_regs* regs)
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init
 init_IRQ(void)
+=======
+void __init init_IRQ(void)
+>>>>>>> v3.18
 =======
 void __init init_IRQ(void)
 >>>>>>> v3.18
@@ -197,6 +205,7 @@ void __init init_IRQ(void)
 
 	/* clear all interrupt masks */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #ifndef CONFIG_SVINTO_SIM
 	*R_IRQ_MASK0_CLR = 0xffffffff;
@@ -204,6 +213,11 @@ void __init init_IRQ(void)
 	*R_IRQ_MASK2_CLR = 0xffffffff;
 #endif
 
+=======
+	*R_IRQ_MASK0_CLR = 0xffffffff;
+	*R_IRQ_MASK1_CLR = 0xffffffff;
+	*R_IRQ_MASK2_CLR = 0xffffffff;
+>>>>>>> v3.18
 =======
 	*R_IRQ_MASK0_CLR = 0xffffffff;
 	*R_IRQ_MASK1_CLR = 0xffffffff;
@@ -226,6 +240,7 @@ void __init init_IRQ(void)
            address. therefore we need to setup a default breakpoint handler
            for all breakpoints */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	for (i = 0; i < 16; i++)
                 set_break_vector(i, do_sigtrap);
@@ -237,6 +252,8 @@ void __init init_IRQ(void)
 	/* 0 and 1 which are special breakpoint/NMI traps */
 
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < 16; i++)
                 set_break_vector(i, do_sigtrap);
 
@@ -244,17 +261,26 @@ void __init init_IRQ(void)
 	set_int_vector(15, multiple_interrupt);
 
 	/* 0 and 1 which are special breakpoint/NMI traps */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	set_int_vector(0, hwbreakpoint);
 	set_int_vector(1, IRQ1_interrupt);
 
 	/* and irq 14 which is the mmu bus fault handler */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	set_int_vector(14, mmu_bus_fault);
 
 	/* setup the system-call trap, which is reached by BREAK 13 */
 
+=======
+	set_int_vector(14, mmu_bus_fault);
+
+	/* setup the system-call trap, which is reached by BREAK 13 */
+>>>>>>> v3.18
 =======
 	set_int_vector(14, mmu_bus_fault);
 

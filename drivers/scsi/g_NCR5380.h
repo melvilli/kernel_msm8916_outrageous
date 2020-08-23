@@ -26,10 +26,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * $Log: generic_NCR5380.h,v $
  */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef GENERIC_NCR5380_H
@@ -62,8 +65,11 @@ static const char* generic_NCR5380_info(struct Scsi_Host *);
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef HOSTS_C
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define __STRVAL(x) #x
@@ -138,7 +144,10 @@ static const char* generic_NCR5380_info(struct Scsi_Host *);
 #define BOARD_DTC3181E	3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif /* else def HOSTS_C */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* ndef ASM */

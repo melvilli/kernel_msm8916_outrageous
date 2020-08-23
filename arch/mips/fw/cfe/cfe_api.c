@@ -407,7 +407,11 @@ int cfe_setenv(char *name, char *val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cfe_write(int handle, unsigned char *buffer, int length)
+=======
+int cfe_write(int handle, const char *buffer, int length)
+>>>>>>> v3.18
 =======
 int cfe_write(int handle, const char *buffer, int length)
 >>>>>>> v3.18
@@ -416,7 +420,11 @@ int cfe_write(int handle, const char *buffer, int length)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int cfe_writeblk(int handle, s64 offset, unsigned char *buffer, int length)
+=======
+int cfe_writeblk(int handle, s64 offset, const char *buffer, int length)
+>>>>>>> v3.18
 =======
 int cfe_writeblk(int handle, s64 offset, const char *buffer, int length)
 >>>>>>> v3.18

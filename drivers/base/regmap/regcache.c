@@ -122,8 +122,11 @@ int regcache_init(struct regmap *map, const struct regmap_config *config)
 	map->cache_word_size = DIV_ROUND_UP(config->val_bits, 8);
 	map->cache_size_raw = map->cache_word_size * config->num_reg_defaults_raw;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	map->cache_present = NULL;
 	map->cache_present_nbits = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -185,7 +188,10 @@ void regcache_exit(struct regmap *map)
 	BUG_ON(!map->cache_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(map->cache_present);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(map->reg_defaults);
@@ -248,9 +254,12 @@ int regcache_write(struct regmap *map,
 	BUG_ON(!map->cache_ops);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!regmap_writeable(map, reg))
 		return -EIO;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!regmap_volatile(map, reg))
@@ -260,7 +269,10 @@ int regcache_write(struct regmap *map,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int regcache_default_sync(struct regmap *map, unsigned int min,
 				 unsigned int max)
 {
@@ -297,6 +309,9 @@ static int regcache_default_sync(struct regmap *map, unsigned int min,
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * regcache_sync: Sync the register cache with the hardware.
@@ -317,7 +332,11 @@ int regcache_sync(struct regmap *map)
 	unsigned int bypass;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!map->cache_ops || !map->cache_ops->sync);
+=======
+	BUG_ON(!map->cache_ops);
+>>>>>>> v3.18
 =======
 	BUG_ON(!map->cache_ops);
 >>>>>>> v3.18
@@ -334,6 +353,7 @@ int regcache_sync(struct regmap *map)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Apply any patch first */
 	map->cache_bypass = 1;
 	for (i = 0; i < map->patch_regs; i++) {
@@ -342,11 +362,16 @@ int regcache_sync(struct regmap *map)
 			goto out;
 		}
 =======
+=======
+>>>>>>> v3.18
 	map->async = true;
 
 	/* Apply any patch first */
 	map->cache_bypass = 1;
 	for (i = 0; i < map->patch_regs; i++) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ret = _regmap_write(map, map->patch[i].reg, map->patch[i].def);
 		if (ret != 0) {
@@ -358,12 +383,18 @@ int regcache_sync(struct regmap *map)
 	map->cache_bypass = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = map->cache_ops->sync(map, 0, map->max_register);
 =======
+=======
+>>>>>>> v3.18
 	if (map->cache_ops->sync)
 		ret = map->cache_ops->sync(map, 0, map->max_register);
 	else
 		ret = regcache_default_sync(map, 0, map->max_register);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (ret == 0)
@@ -371,12 +402,15 @@ int regcache_sync(struct regmap *map)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	trace_regcache_sync(map->dev, name, "stop");
 	/* Restore the bypass state */
 	map->cache_bypass = bypass;
 	map->unlock(map->lock_arg);
 
 =======
+=======
+>>>>>>> v3.18
 	/* Restore the bypass state */
 	map->async = false;
 	map->cache_bypass = bypass;
@@ -386,6 +420,9 @@ out:
 
 	trace_regcache_sync(map->dev, name, "stop");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -411,7 +448,11 @@ int regcache_sync_region(struct regmap *map, unsigned int min,
 	unsigned int bypass;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!map->cache_ops || !map->cache_ops->sync);
+=======
+	BUG_ON(!map->cache_ops);
+>>>>>>> v3.18
 =======
 	BUG_ON(!map->cache_ops);
 >>>>>>> v3.18
@@ -430,6 +471,7 @@ int regcache_sync_region(struct regmap *map, unsigned int min,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = map->cache_ops->sync(map, min, max);
 
 out:
@@ -439,6 +481,8 @@ out:
 	map->unlock(map->lock_arg);
 
 =======
+=======
+>>>>>>> v3.18
 	map->async = true;
 
 	if (map->cache_ops->sync)
@@ -456,6 +500,9 @@ out:
 
 	trace_regcache_sync(map->dev, name, "stop region");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -463,7 +510,10 @@ EXPORT_SYMBOL_GPL(regcache_sync_region);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * regcache_drop_region: Discard part of the register cache
  *
  * @map: map to operate on
@@ -495,6 +545,9 @@ int regcache_drop_region(struct regmap *map, unsigned int min,
 EXPORT_SYMBOL_GPL(regcache_drop_region);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * regcache_cache_only: Put a register map into cache only mode
  *
@@ -556,6 +609,7 @@ void regcache_cache_bypass(struct regmap *map, bool enable)
 EXPORT_SYMBOL_GPL(regcache_cache_bypass);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int regcache_set_reg_present(struct regmap *map, unsigned int reg)
 {
 	unsigned long *cache_present;
@@ -592,6 +646,8 @@ int regcache_set_reg_present(struct regmap *map, unsigned int reg)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 bool regcache_set_val(struct regmap *map, void *base, unsigned int idx,
@@ -686,8 +742,11 @@ int regcache_lookup_reg(struct regmap *map, unsigned int reg)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int regcache_sync_block_single(struct regmap *map, void *block,
 =======
+=======
+>>>>>>> v3.18
 static bool regcache_reg_present(unsigned long *cache_present, unsigned int idx)
 {
 	if (!cache_present)
@@ -698,6 +757,9 @@ static bool regcache_reg_present(unsigned long *cache_present, unsigned int idx)
 
 static int regcache_sync_block_single(struct regmap *map, void *block,
 				      unsigned long *cache_present,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				      unsigned int block_base,
 				      unsigned int start, unsigned int end)
@@ -709,7 +771,11 @@ static int regcache_sync_block_single(struct regmap *map, void *block,
 		regtmp = block_base + (i * map->reg_stride);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!regcache_reg_present(map, regtmp))
+=======
+		if (!regcache_reg_present(cache_present, i))
+>>>>>>> v3.18
 =======
 		if (!regcache_reg_present(cache_present, i))
 >>>>>>> v3.18
@@ -728,14 +794,20 @@ static int regcache_sync_block_single(struct regmap *map, void *block,
 
 		map->cache_bypass = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ret != 0)
 			return ret;
 =======
+=======
+>>>>>>> v3.18
 		if (ret != 0) {
 			dev_err(map->dev, "Unable to sync register %#x. %d\n",
 				regtmp, ret);
 			return ret;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_dbg(map->dev, "Synced register %#x, value %#x\n",
 			regtmp, val);
@@ -754,6 +826,7 @@ static int regcache_sync_block_raw_flush(struct regmap *map, const void **data,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	count = cur - base;
 
 	dev_dbg(map->dev, "Writing %zu bytes for %d registers from 0x%x-0x%x\n",
@@ -764,6 +837,8 @@ static int regcache_sync_block_raw_flush(struct regmap *map, const void **data,
 	ret = _regmap_raw_write(map, base, *data, count * val_bytes,
 				false);
 =======
+=======
+>>>>>>> v3.18
 	count = (cur - base) / map->reg_stride;
 
 	dev_dbg(map->dev, "Writing %zu bytes for %d registers from 0x%x-0x%x\n",
@@ -775,6 +850,9 @@ static int regcache_sync_block_raw_flush(struct regmap *map, const void **data,
 	if (ret)
 		dev_err(map->dev, "Unable to sync registers %#x-%#x. %d\n",
 			base, cur - map->reg_stride, ret);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	map->cache_bypass = 0;
@@ -784,6 +862,7 @@ static int regcache_sync_block_raw_flush(struct regmap *map, const void **data,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int regcache_sync_block_raw_multi_reg(struct regmap *map, void *block,
 					unsigned int block_base,
@@ -835,6 +914,10 @@ static int regcache_sync_block_raw(struct regmap *map, void *block,
 static int regcache_sync_block_raw(struct regmap *map, void *block,
 			    unsigned long *cache_present,
 >>>>>>> v3.18
+=======
+static int regcache_sync_block_raw(struct regmap *map, void *block,
+			    unsigned long *cache_present,
+>>>>>>> v3.18
 			    unsigned int block_base, unsigned int start,
 			    unsigned int end)
 {
@@ -848,7 +931,11 @@ static int regcache_sync_block_raw(struct regmap *map, void *block,
 		regtmp = block_base + (i * map->reg_stride);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!regcache_reg_present(map, regtmp)) {
+=======
+		if (!regcache_reg_present(cache_present, i)) {
+>>>>>>> v3.18
 =======
 		if (!regcache_reg_present(cache_present, i)) {
 >>>>>>> v3.18
@@ -883,6 +970,7 @@ static int regcache_sync_block_raw(struct regmap *map, void *block,
 
 int regcache_sync_block(struct regmap *map, void *block,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unsigned int block_base, unsigned int start,
 			unsigned int end)
 {
@@ -897,6 +985,8 @@ int regcache_sync_block(struct regmap *map, void *block,
 		return regcache_sync_block_single(map, block, block_base,
 						  start, end);
 =======
+=======
+>>>>>>> v3.18
 			unsigned long *cache_present,
 			unsigned int block_base, unsigned int start,
 			unsigned int end)
@@ -907,5 +997,8 @@ int regcache_sync_block(struct regmap *map, void *block,
 	else
 		return regcache_sync_block_single(map, block, cache_present,
 						  block_base, start, end);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

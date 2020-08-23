@@ -39,7 +39,11 @@ tcpoptstrip_mangle_packet(struct sk_buff *skb,
 	u_int16_t n, o;
 	u_int8_t *opt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int len;
+=======
+	int len, tcp_hdrlen;
+>>>>>>> v3.18
 =======
 	int len, tcp_hdrlen;
 >>>>>>> v3.18
@@ -57,7 +61,13 @@ tcpoptstrip_mangle_packet(struct sk_buff *skb,
 
 	tcph = (struct tcphdr *)(skb_network_header(skb) + tcphoff);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tcph->doff * 4 > len)
+=======
+	tcp_hdrlen = tcph->doff * 4;
+
+	if (len < tcp_hdrlen)
+>>>>>>> v3.18
 =======
 	tcp_hdrlen = tcph->doff * 4;
 
@@ -72,15 +82,21 @@ tcpoptstrip_mangle_packet(struct sk_buff *skb,
 	 * set all octets to %TCPOPT_NOP and adjust checksum.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = sizeof(struct tcphdr); i < tcp_hdrlen(skb); i += optl) {
 		optl = optlen(opt, i);
 
 		if (i + optl > tcp_hdrlen(skb))
 =======
+=======
+>>>>>>> v3.18
 	for (i = sizeof(struct tcphdr); i < tcp_hdrlen - 1; i += optl) {
 		optl = optlen(opt, i);
 
 		if (i + optl > tcp_hdrlen)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 

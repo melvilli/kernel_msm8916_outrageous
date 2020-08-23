@@ -14,7 +14,10 @@
 #define ASM_PPC_RIO_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void platform_rio_init(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_FSL_RIO

@@ -68,9 +68,12 @@
 	US_FLAG(WRITE_CACHE,	0x00200000)			\
 		/* Write Cache status is not available */	\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	US_FLAG(NEEDS_CAP16,	0x00400000)
 		/* cannot handle READ_CAPACITY_10 */
 =======
+=======
+>>>>>>> v3.18
 	US_FLAG(NEEDS_CAP16,	0x00400000)			\
 		/* cannot handle READ_CAPACITY_10 */		\
 	US_FLAG(IGNORE_UAS,	0x00800000)			\
@@ -81,6 +84,9 @@
 		/* Cannot handle ATA_12 or ATA_16 CDBs */	\
 	US_FLAG(NO_REPORT_OPCODES,	0x04000000)		\
 		/* Cannot handle MI_REPORT_SUPPORTED_OPERATION_CODES */	\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define US_FLAG(name, value)	US_FL_##name = value ,

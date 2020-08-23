@@ -6,7 +6,11 @@
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (C) 2000 - 2013, Intel Corp.
+=======
+ * Copyright (C) 2000 - 2014, Intel Corp.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2000 - 2014, Intel Corp.
 >>>>>>> v3.18
@@ -51,6 +55,7 @@
 /* Method names - these methods can appear anywhere in the namespace */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define METHOD_NAME__SB_        "_SB_"
 #define METHOD_NAME__HID        "_HID"
 #define METHOD_NAME__CID        "_CID"
@@ -71,6 +76,8 @@
 #define METHOD_NAME__CBA        "_CBA"
 #define METHOD_NAME__PLD        "_PLD"
 =======
+=======
+>>>>>>> v3.18
 #define METHOD_NAME__ADR        "_ADR"
 #define METHOD_NAME__AEI        "_AEI"
 #define METHOD_NAME__BBN        "_BBN"
@@ -96,6 +103,9 @@
 #define METHOD_NAME__STA        "_STA"
 #define METHOD_NAME__SUB        "_SUB"
 #define METHOD_NAME__UID        "_UID"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Method names - these methods must appear at the namespace root */

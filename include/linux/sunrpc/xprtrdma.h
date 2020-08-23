@@ -63,8 +63,11 @@
 
 /* memory registration strategies */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RPCRDMA_PERSISTENT_REGISTRATION (1)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 enum rpcrdma_memreg {

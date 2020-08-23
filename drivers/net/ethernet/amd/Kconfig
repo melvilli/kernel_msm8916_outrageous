@@ -8,7 +8,11 @@ config NET_VENDOR_AMD
 	depends on DIO || MACH_DECSTATION || MVME147 || ATARI || SUN3 || \
 		   SUN3X || SBUS || PCI || ZORRO || (ISA && ISA_DMA_API) || \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   (ARM && ARCH_EBSA110) || ISA || EISA || PCMCIA
+=======
+		   (ARM && ARCH_EBSA110) || ISA || EISA || PCMCIA || ARM64
+>>>>>>> v3.18
 =======
 		   (ARM && ARCH_EBSA110) || ISA || EISA || PCMCIA || ARM64
 >>>>>>> v3.18
@@ -39,7 +43,10 @@ config AMD8111_ETH
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -68,7 +75,10 @@ config PCNET32
 	depends on PCI
 	select CRC32
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -190,7 +200,10 @@ config SUNLANCE
 	  will be called sunlance.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config AMD_XGBE
 	tristate "AMD 10GbE Ethernet driver"
 	depends on OF_NET
@@ -216,5 +229,8 @@ config AMD_XGBE_DCB
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif # NET_VENDOR_AMD

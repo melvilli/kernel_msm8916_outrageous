@@ -17,10 +17,13 @@
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define AT803X_INTR_ENABLE			0x12
 #define AT803X_INTR_STATUS			0x13
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_gpio.h>
 #include <linux/gpio/consumer.h>
 
@@ -28,6 +31,9 @@
 #define AT803X_INTR_STATUS			0x13
 #define AT803X_SMART_SPEED			0x14
 #define AT803X_LED_CONTROL			0x18
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define AT803X_WOL_ENABLE			0x01
 #define AT803X_DEVICE_ADDR			0x03
@@ -38,7 +44,10 @@
 #define AT803X_MMD_ACCESS_CONTROL_DATA		0x0E
 #define AT803X_FUNC_DATA			0x4003
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define AT803X_INER				0x0012
 #define AT803X_INER_INIT			0xec00
 #define AT803X_INSR				0x0013
@@ -50,6 +59,9 @@
 #define ATH8030_PHY_ID 0x004dd076
 #define ATH8031_PHY_ID 0x004dd074
 #define ATH8035_PHY_ID 0x004dd072
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 MODULE_DESCRIPTION("Atheros 803x PHY driver");
@@ -57,11 +69,14 @@ MODULE_AUTHOR("Matus Ujhelyi");
 MODULE_LICENSE("GPL");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void at803x_set_wol_mac_addr(struct phy_device *phydev)
 {
 	struct net_device *ndev = phydev->attached_dev;
 	const u8 *mac;
 =======
+=======
+>>>>>>> v3.18
 struct at803x_priv {
 	bool phy_reset:1;
 	struct gpio_desc *gpiod_reset;
@@ -107,6 +122,9 @@ static int at803x_set_wol(struct phy_device *phydev,
 	const u8 *mac;
 	int ret;
 	u32 value;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned int i, offsets[] = {
 		AT803X_LOC_MAC_ADDR_32_47_OFFSET,
@@ -115,6 +133,7 @@ static int at803x_set_wol(struct phy_device *phydev,
 	};
 
 	if (!ndev)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return;
 
@@ -178,6 +197,8 @@ static int at803x_config_init(struct phy_device *phydev)
 	status = phy_write(phydev, AT803X_INTR_ENABLE, AT803X_WOL_ENABLE);
 	status = phy_read(phydev, AT803X_INTR_STATUS);
 =======
+=======
+>>>>>>> v3.18
 		return -ENODEV;
 
 	if (wol->wolopts & WAKE_MAGIC) {
@@ -248,11 +269,15 @@ static int at803x_suspend(struct phy_device *phydev)
 	phy_write(phydev, MII_BMCR, value);
 
 	mutex_unlock(&phydev->lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* ATHEROS 8035 */
 static struct phy_driver at8035_driver = {
@@ -303,6 +328,8 @@ err2:
 err1:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static int at803x_resume(struct phy_device *phydev)
 {
 	int value;
@@ -486,14 +513,21 @@ static int __init atheros_init(void)
 {
 	return phy_drivers_register(at803x_driver,
 				    ARRAY_SIZE(at803x_driver));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void __exit atheros_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phy_driver_unregister(&at8035_driver);
 	phy_driver_unregister(&at8030_driver);
+=======
+	phy_drivers_unregister(at803x_driver, ARRAY_SIZE(at803x_driver));
+>>>>>>> v3.18
 =======
 	phy_drivers_unregister(at803x_driver, ARRAY_SIZE(at803x_driver));
 >>>>>>> v3.18
@@ -504,8 +538,14 @@ module_exit(atheros_exit);
 
 static struct mdio_device_id __maybe_unused atheros_tbl[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ 0x004dd076, 0xffffffef },
 	{ 0x004dd072, 0xffffffef },
+=======
+	{ ATH8030_PHY_ID, 0xffffffef },
+	{ ATH8031_PHY_ID, 0xffffffef },
+	{ ATH8035_PHY_ID, 0xffffffef },
+>>>>>>> v3.18
 =======
 	{ ATH8030_PHY_ID, 0xffffffef },
 	{ ATH8031_PHY_ID, 0xffffffef },

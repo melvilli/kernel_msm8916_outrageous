@@ -19,7 +19,11 @@
 #include "sysv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sysv_readdir(struct file *, void *, filldir_t);
+=======
+static int sysv_readdir(struct file *, struct dir_context *);
+>>>>>>> v3.18
 =======
 static int sysv_readdir(struct file *, struct dir_context *);
 >>>>>>> v3.18
@@ -28,7 +32,11 @@ const struct file_operations sysv_dir_operations = {
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= sysv_readdir,
+=======
+	.iterate	= sysv_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= sysv_readdir,
 >>>>>>> v3.18
@@ -74,6 +82,7 @@ static struct page * dir_get_page(struct inode *dir, unsigned long n)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int sysv_readdir(struct file * filp, void * dirent, filldir_t filldir)
 {
 	unsigned long pos = filp->f_pos;
@@ -87,6 +96,8 @@ static int sysv_readdir(struct file * filp, void * dirent, filldir_t filldir)
 	if (pos >= inode->i_size)
 		goto done;
 =======
+=======
+>>>>>>> v3.18
 static int sysv_readdir(struct file *file, struct dir_context *ctx)
 {
 	unsigned long pos = ctx->pos;
@@ -102,6 +113,9 @@ static int sysv_readdir(struct file *file, struct dir_context *ctx)
 
 	offset = pos & ~PAGE_CACHE_MASK;
 	n = pos >> PAGE_CACHE_SHIFT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	for ( ; n < npages; n++, offset = 0) {
@@ -115,9 +129,14 @@ static int sysv_readdir(struct file *file, struct dir_context *ctx)
 		de = (struct sysv_dir_entry *)(kaddr+offset);
 		limit = kaddr + PAGE_CACHE_SIZE - SYSV_DIRSIZE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ( ;(char*)de <= limit; de++) {
 			char *name = de->name;
 			int over;
+=======
+		for ( ;(char*)de <= limit; de++, ctx->pos += sizeof(*de)) {
+			char *name = de->name;
+>>>>>>> v3.18
 =======
 		for ( ;(char*)de <= limit; de++, ctx->pos += sizeof(*de)) {
 			char *name = de->name;
@@ -126,6 +145,7 @@ static int sysv_readdir(struct file *file, struct dir_context *ctx)
 			if (!de->inode)
 				continue;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			offset = (char *)de - kaddr;
 
@@ -137,20 +157,28 @@ static int sysv_readdir(struct file *file, struct dir_context *ctx)
 				dir_put_page(page);
 				goto done;
 =======
+=======
+>>>>>>> v3.18
 			if (!dir_emit(ctx, name, strnlen(name,SYSV_NAMELEN),
 					fs16_to_cpu(SYSV_SB(sb), de->inode),
 					DT_UNKNOWN)) {
 				dir_put_page(page);
 				return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			}
 		}
 		dir_put_page(page);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 done:
 	filp->f_pos = ((loff_t)n << PAGE_CACHE_SHIFT) | offset;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

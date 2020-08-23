@@ -21,6 +21,10 @@
 
   Contact Information:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  Linux NICS <linux.nics@intel.com>
+>>>>>>> v3.18
 =======
   Linux NICS <linux.nics@intel.com>
 >>>>>>> v3.18
@@ -33,8 +37,11 @@
 #define _IXGBE_SRIOV_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ixgbe_restore_vf_multicasts(struct ixgbe_adapter *adapter);
 =======
+=======
+>>>>>>> v3.18
 /*  ixgbe driver limit the max number of VFs could be enabled to
  *  63 (IXGBE_MAX_VF_FUNCTIONS - 1)
  */
@@ -43,6 +50,9 @@ void ixgbe_restore_vf_multicasts(struct ixgbe_adapter *adapter);
 #ifdef CONFIG_PCI_IOV
 void ixgbe_restore_vf_multicasts(struct ixgbe_adapter *adapter);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void ixgbe_msg_task(struct ixgbe_adapter *adapter);
 int ixgbe_vf_configuration(struct pci_dev *pdev, unsigned int event_mask);
@@ -52,7 +62,12 @@ int ixgbe_ndo_set_vf_mac(struct net_device *netdev, int queue, u8 *mac);
 int ixgbe_ndo_set_vf_vlan(struct net_device *netdev, int queue, u16 vlan,
 			   u8 qos);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ixgbe_ndo_set_vf_bw(struct net_device *netdev, int vf, int tx_rate);
+=======
+int ixgbe_ndo_set_vf_bw(struct net_device *netdev, int vf, int min_tx_rate,
+			int max_tx_rate);
+>>>>>>> v3.18
 =======
 int ixgbe_ndo_set_vf_bw(struct net_device *netdev, int vf, int min_tx_rate,
 			int max_tx_rate);

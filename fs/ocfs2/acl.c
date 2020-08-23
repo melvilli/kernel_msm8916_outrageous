@@ -52,10 +52,13 @@ static struct posix_acl *ocfs2_acl_from_xattr(const void *value, size_t size)
 
 	count = size / sizeof(struct posix_acl_entry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (count < 0)
 		return ERR_PTR(-EINVAL);
 	if (count == 0)
 		return NULL;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -168,6 +171,7 @@ static struct posix_acl *ocfs2_get_acl_nolock(struct inode *inode,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /*
  * Get posix acl.
@@ -198,6 +202,8 @@ static struct posix_acl *ocfs2_get_acl(struct inode *inode, int type)
 	return acl;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -246,6 +252,10 @@ static int ocfs2_acl_set_mode(struct inode *inode, struct buffer_head *di_bh,
 	di->i_ctime = cpu_to_le64(inode->i_ctime.tv_sec);
 	di->i_ctime_nsec = cpu_to_le32(inode->i_ctime.tv_nsec);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ocfs2_update_inode_fsync_trans(handle, inode, 0);
+>>>>>>> v3.18
 =======
 	ocfs2_update_inode_fsync_trans(handle, inode, 0);
 >>>>>>> v3.18
@@ -265,7 +275,11 @@ out:
  * Set the access or default ACL of an inode.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ocfs2_set_acl(handle_t *handle,
+=======
+int ocfs2_set_acl(handle_t *handle,
+>>>>>>> v3.18
 =======
 int ocfs2_set_acl(handle_t *handle,
 >>>>>>> v3.18
@@ -289,6 +303,7 @@ int ocfs2_set_acl(handle_t *handle,
 		name_index = OCFS2_XATTR_INDEX_POSIX_ACL_ACCESS;
 		if (acl) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			umode_t mode;
 			ret = posix_acl_update_mode(inode, &mode, &acl);
 			if (ret)
@@ -298,6 +313,8 @@ int ocfs2_set_acl(handle_t *handle,
 			if (ret)
 				return ret;
 =======
+=======
+>>>>>>> v3.18
 			umode_t mode = inode->i_mode;
 			ret = posix_acl_equiv_mode(acl, &mode);
 			if (ret < 0)
@@ -312,6 +329,9 @@ int ocfs2_set_acl(handle_t *handle,
 					return ret;
 
 			}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		break;
@@ -343,12 +363,18 @@ int ocfs2_set_acl(handle_t *handle,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ocfs2_iop_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 {
 	return ocfs2_set_acl(NULL, inode, NULL, type, acl, NULL, NULL);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct posix_acl *ocfs2_iop_get_acl(struct inode *inode, int type)
 {
@@ -371,6 +397,7 @@ struct posix_acl *ocfs2_iop_get_acl(struct inode *inode, int type)
 
 	return acl;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 int ocfs2_acl_chmod(struct inode *inode)
@@ -569,5 +596,7 @@ const struct xattr_handler ocfs2_xattr_acl_default_handler = {
 	.get	= ocfs2_xattr_get_acl,
 	.set	= ocfs2_xattr_set_acl,
 };
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

@@ -19,7 +19,10 @@
 #include <linux/serio.h>
 #include <linux/i8042.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/libps2.h>
@@ -61,14 +64,20 @@ EXPORT_SYMBOL(ps2_sendbyte);
 void ps2_begin_command(struct ps2dev *ps2dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex *m = ps2dev->serio->ps2_cmd_mutex ?: &ps2dev->cmd_mutex;
 
 	mutex_lock(m);
 =======
+=======
+>>>>>>> v3.18
 	mutex_lock(&ps2dev->cmd_mutex);
 
 	if (i8042_check_port_owner(ps2dev->serio))
 		i8042_lock_chip();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(ps2_begin_command);
@@ -76,14 +85,20 @@ EXPORT_SYMBOL(ps2_begin_command);
 void ps2_end_command(struct ps2dev *ps2dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex *m = ps2dev->serio->ps2_cmd_mutex ?: &ps2dev->cmd_mutex;
 
 	mutex_unlock(m);
 =======
+=======
+>>>>>>> v3.18
 	if (i8042_check_port_owner(ps2dev->serio))
 		i8042_unlock_chip();
 
 	mutex_unlock(&ps2dev->cmd_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(ps2_end_command);

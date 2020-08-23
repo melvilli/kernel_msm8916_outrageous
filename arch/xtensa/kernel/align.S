@@ -9,6 +9,10 @@
  *
  * Copyright (C) 2001 - 2005 Tensilica, Inc.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2014 Cadence Design Systems Inc.
+>>>>>>> v3.18
 =======
  * Copyright (C) 2014 Cadence Design Systems Inc.
 >>>>>>> v3.18
@@ -151,9 +155,15 @@
  *   a1:	a1
  *   a2:	new stack pointer, original in DEPC
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   a3:	dispatch table
  *   depc:	a2, original value saved on stack (PT_DEPC)
  *   excsave_1:	a3
+=======
+ *   a3:	a3
+ *   depc:	a2, original value saved on stack (PT_DEPC)
+ *   excsave_1:	dispatch table
+>>>>>>> v3.18
 =======
  *   a3:	a3
  *   depc:	a2, original value saved on stack (PT_DEPC)
@@ -182,11 +192,14 @@ ENTRY(fast_unaligned)
 
 	rsr	a0, depc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	xsr	a3, excsave1
 	s32i	a0, a2, PT_AREG2
 	s32i	a3, a2, PT_AREG3
 
 =======
+=======
+>>>>>>> v3.18
 	s32i	a0, a2, PT_AREG2
 	s32i	a3, a2, PT_AREG3
 
@@ -194,6 +207,9 @@ ENTRY(fast_unaligned)
 	movi	a4, fast_unaligned_fixup
 	s32i	a4, a3, EXC_TABLE_FIXUP
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Keep value of SAR in a0 */
 
@@ -247,10 +263,13 @@ ENTRY(fast_unaligned)
 	jx	a5			# jump into table
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Invalid instruction, CRITICAL! */
 .Linvalid_instruction_load:
 	j	.Linvalid_instruction
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* Load: Load memory address. */
@@ -297,6 +316,7 @@ ENTRY(fast_unaligned)
 
 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #if XCHAL_HAVE_LOOPS
 	rsr	a5, lend		# check if we reached LEND
@@ -309,6 +329,8 @@ ENTRY(fast_unaligned)
 #endif
 
 1:	wsr	a7, epc1		# skip load instruction
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	extui	a4, a4, INSN_T, 4	# extract target register
@@ -354,7 +376,10 @@ ENTRY(fast_unaligned)
 	mov	a3, a15		;	_j 1f;	.align 8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* We cannot handle this exception. */
 
 	.extern _kernel_exception
@@ -384,6 +409,9 @@ ENTRY(fast_unaligned)
 2:	movi	a0, _user_exception
 	jx	a0
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 1: 	# a7: instruction pointer, a4: instruction, a3: value
 
@@ -413,6 +441,7 @@ ENTRY(fast_unaligned)
 
 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if XCHAL_HAVE_LOOPS
 	rsr	a4, lend		# check if we reached LEND
 	bne	a7, a4, 1f
@@ -424,6 +453,8 @@ ENTRY(fast_unaligned)
 #endif
 
 1:	wsr	a7, epc1		# skip store instruction
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	movi	a4, ~3
@@ -438,7 +469,11 @@ ENTRY(fast_unaligned)
 
 	__ssa8r a8
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__src_b	a7, a5, a6		# lo-mask  F..F0..0 (BE) 0..0F..F (LE)
+=======
+	__src_b	a8, a5, a6		# lo-mask  F..F0..0 (BE) 0..0F..F (LE)
+>>>>>>> v3.18
 =======
 	__src_b	a8, a5, a6		# lo-mask  F..F0..0 (BE) 0..0F..F (LE)
 >>>>>>> v3.18
@@ -448,6 +483,7 @@ ENTRY(fast_unaligned)
 #else
 	l32i	a5, a4, 0		# load lower address word
 #endif
+<<<<<<< HEAD
 <<<<<<< HEAD
 	and	a5, a5, a7		# mask
 	__sh	a7, a3 			# shift value
@@ -462,6 +498,8 @@ ENTRY(fast_unaligned)
 	__sl	a5, a3
 	and	a6, a7, a6
 =======
+=======
+>>>>>>> v3.18
 	and	a5, a5, a8		# mask
 	__sh	a8, a3 			# shift value
 	or	a5, a5, a8		# or with original value
@@ -474,6 +512,9 @@ ENTRY(fast_unaligned)
 #endif
 	__sl	a5, a3
 	and	a6, a8, a6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	or	a6, a6, a5
 #ifdef UNALIGNED_USER_EXCEPTION
@@ -483,10 +524,13 @@ ENTRY(fast_unaligned)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Done. restore stack and return */
 
 .Lexit:
 =======
+=======
+>>>>>>> v3.18
 .Lexit:
 #if XCHAL_HAVE_LOOPS
 	rsr	a4, lend		# check if we reached LEND
@@ -508,6 +552,9 @@ ENTRY(fast_unaligned)
 	addi	a4, a4, 1
 	wsr	a4, icount
 1:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	movi	a4, 0
 	rsr	a3, excsave1
@@ -530,6 +577,7 @@ ENTRY(fast_unaligned)
 	rfe
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We cannot handle this exception. */
 
 	.extern _kernel_exception
@@ -538,12 +586,17 @@ ENTRY(fast_unaligned)
 
 	/* Restore a4...a8 and SAR, set SP, and jump to default exception. */
 =======
+=======
+>>>>>>> v3.18
 ENDPROC(fast_unaligned)
 
 ENTRY(fast_unaligned_fixup)
 
 	l32i	a2, a3, EXC_TABLE_DOUBLE_SAVE
 	wsr	a3, excsave1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	l32i	a8, a2, PT_AREG8
@@ -551,6 +604,7 @@ ENTRY(fast_unaligned_fixup)
 	l32i	a6, a2, PT_AREG6
 	l32i	a5, a2, PT_AREG5
 	l32i	a4, a2, PT_AREG4
+<<<<<<< HEAD
 <<<<<<< HEAD
 	wsr	a0, sar
 	mov	a1, a2
@@ -566,6 +620,8 @@ ENTRY(fast_unaligned_fixup)
 
 ENDPROC(fast_unaligned)
 =======
+=======
+>>>>>>> v3.18
 	l32i	a0, a2, PT_AREG2
 	xsr	a0, depc			# restore depc and a0
 	wsr	a0, sar
@@ -589,6 +645,9 @@ ENDPROC(fast_unaligned)
 	jx	a0
 
 ENDPROC(fast_unaligned_fixup)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* XCHAL_UNALIGNED_LOAD_EXCEPTION || XCHAL_UNALIGNED_STORE_EXCEPTION */

@@ -25,6 +25,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/unaligned.h>
+>>>>>>> v3.18
 =======
 #include <asm/unaligned.h>
 >>>>>>> v3.18
@@ -44,7 +48,11 @@
 #include <net/bluetooth/hci_core.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define VERSION "1.3"
+=======
+#define VERSION "1.5"
+>>>>>>> v3.18
 =======
 #define VERSION "1.5"
 >>>>>>> v3.18
@@ -55,15 +63,21 @@ struct vhci_data {
 	struct hci_dev *hdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
 
 	wait_queue_head_t read_wait;
 	struct sk_buff_head readq;
 =======
+=======
+>>>>>>> v3.18
 	wait_queue_head_t read_wait;
 	struct sk_buff_head readq;
 
 	struct delayed_work open_timeout;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -96,6 +110,7 @@ static int vhci_flush(struct hci_dev *hdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vhci_send_frame(struct sk_buff *skb)
 {
 	struct hci_dev* hdev = (struct hci_dev *) skb->dev;
@@ -117,6 +132,8 @@ static int vhci_send_frame(struct sk_buff *skb)
 	wake_up_interruptible(&data->read_wait);
 
 =======
+=======
+>>>>>>> v3.18
 static int vhci_send_frame(struct hci_dev *hdev, struct sk_buff *skb)
 {
 	struct vhci_data *data = hci_get_drvdata(hdev);
@@ -192,11 +209,15 @@ static int vhci_create_device(struct vhci_data *data, __u8 opcode)
 	skb_queue_tail(&data->readq, skb);
 
 	wake_up_interruptible(&data->read_wait);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 static inline ssize_t vhci_get_user(struct vhci_data *data,
+<<<<<<< HEAD
 <<<<<<< HEAD
 					const char __user *buf, size_t count)
 {
@@ -211,6 +232,8 @@ static inline ssize_t vhci_get_user(struct vhci_data *data,
 
 	if (copy_from_user(skb_put(skb, count), buf, count)) {
 =======
+=======
+>>>>>>> v3.18
 				    struct iov_iter *from)
 {
 	size_t len = iov_iter_count(from);
@@ -226,11 +249,15 @@ static inline ssize_t vhci_get_user(struct vhci_data *data,
 		return -ENOMEM;
 
 	if (copy_from_iter(skb_put(skb, len), len, from) != len) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree_skb(skb);
 		return -EFAULT;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	skb->dev = (void *) data->hdev;
 	bt_cb(skb)->pkt_type = *((__u8 *) skb->data);
@@ -247,6 +274,8 @@ static inline ssize_t vhci_put_user(struct vhci_data *data,
 	char __user *ptr = buf;
 	int len, total = 0;
 =======
+=======
+>>>>>>> v3.18
 	pkt_type = *((__u8 *) skb->data);
 	skb_pull(skb, 1);
 
@@ -299,6 +328,9 @@ static inline ssize_t vhci_put_user(struct vhci_data *data,
 {
 	char __user *ptr = buf;
 	int len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	len = min_t(unsigned int, skb->len, count);
@@ -307,7 +339,12 @@ static inline ssize_t vhci_put_user(struct vhci_data *data,
 		return -EFAULT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	total += len;
+=======
+	if (!data->hdev)
+		return len;
+>>>>>>> v3.18
 =======
 	if (!data->hdev)
 		return len;
@@ -320,11 +357,17 @@ static inline ssize_t vhci_put_user(struct vhci_data *data,
 		data->hdev->stat.cmd_tx++;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	case HCI_ACLDATA_PKT:
 		data->hdev->stat.acl_tx++;
 		break;
 
+=======
+	case HCI_ACLDATA_PKT:
+		data->hdev->stat.acl_tx++;
+		break;
+>>>>>>> v3.18
 =======
 	case HCI_ACLDATA_PKT:
 		data->hdev->stat.acl_tx++;
@@ -336,17 +379,23 @@ static inline ssize_t vhci_put_user(struct vhci_data *data,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return total;
 }
 
 static ssize_t vhci_read(struct file *file,
 				char __user *buf, size_t count, loff_t *pos)
 =======
+=======
+>>>>>>> v3.18
 	return len;
 }
 
 static ssize_t vhci_read(struct file *file,
 			 char __user *buf, size_t count, loff_t *pos)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct vhci_data *data = file->private_data;
@@ -371,7 +420,11 @@ static ssize_t vhci_read(struct file *file,
 
 		ret = wait_event_interruptible(data->read_wait,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					!skb_queue_empty(&data->readq));
+=======
+					       !skb_queue_empty(&data->readq));
+>>>>>>> v3.18
 =======
 					       !skb_queue_empty(&data->readq));
 >>>>>>> v3.18
@@ -383,6 +436,7 @@ static ssize_t vhci_read(struct file *file,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static ssize_t vhci_write(struct file *file,
 			const char __user *buf, size_t count, loff_t *pos)
 {
@@ -390,12 +444,17 @@ static ssize_t vhci_write(struct file *file,
 
 	return vhci_get_user(data, buf, count);
 =======
+=======
+>>>>>>> v3.18
 static ssize_t vhci_write(struct kiocb *iocb, struct iov_iter *from)
 {
 	struct file *file = iocb->ki_filp;
 	struct vhci_data *data = file->private_data;
 
 	return vhci_get_user(data, from);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -412,11 +471,14 @@ static unsigned int vhci_poll(struct file *file, poll_table *wait)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int vhci_open(struct inode *inode, struct file *file)
 {
 	struct vhci_data *data;
 	struct hci_dev *hdev;
 =======
+=======
+>>>>>>> v3.18
 static void vhci_open_timeout(struct work_struct *work)
 {
 	struct vhci_data *data = container_of(work, struct vhci_data,
@@ -428,6 +490,9 @@ static void vhci_open_timeout(struct work_struct *work)
 static int vhci_open(struct inode *inode, struct file *file)
 {
 	struct vhci_data *data;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data = kzalloc(sizeof(struct vhci_data), GFP_KERNEL);
@@ -437,6 +502,7 @@ static int vhci_open(struct inode *inode, struct file *file)
 	skb_queue_head_init(&data->readq);
 	init_waitqueue_head(&data->read_wait);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hdev = hci_alloc_dev();
 	if (!hdev) {
@@ -466,11 +532,19 @@ static int vhci_open(struct inode *inode, struct file *file)
 =======
 	INIT_DELAYED_WORK(&data->open_timeout, vhci_open_timeout);
 >>>>>>> v3.18
+=======
+	INIT_DELAYED_WORK(&data->open_timeout, vhci_open_timeout);
+>>>>>>> v3.18
 
 	file->private_data = data;
 	nonseekable_open(inode, file);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	schedule_delayed_work(&data->open_timeout, msecs_to_jiffies(1000));
+
+>>>>>>> v3.18
 =======
 	schedule_delayed_work(&data->open_timeout, msecs_to_jiffies(1000));
 
@@ -484,11 +558,14 @@ static int vhci_release(struct inode *inode, struct file *file)
 	struct hci_dev *hdev = data->hdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hci_unregister_dev(hdev);
 	hci_free_dev(hdev);
 
 	skb_queue_purge(&data->readq);
 =======
+=======
+>>>>>>> v3.18
 	cancel_delayed_work_sync(&data->open_timeout);
 
 	if (hdev) {
@@ -496,6 +573,9 @@ static int vhci_release(struct inode *inode, struct file *file)
 		hci_free_dev(hdev);
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	file->private_data = NULL;
 	kfree(data);
@@ -507,7 +587,11 @@ static const struct file_operations vhci_fops = {
 	.owner		= THIS_MODULE,
 	.read		= vhci_read,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.write		= vhci_write,
+=======
+	.write_iter	= vhci_write,
+>>>>>>> v3.18
 =======
 	.write_iter	= vhci_write,
 >>>>>>> v3.18
@@ -521,7 +605,11 @@ static struct miscdevice vhci_miscdev= {
 	.name	= "vhci",
 	.fops	= &vhci_fops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.minor	= MISC_DYNAMIC_MINOR,
+=======
+	.minor	= VHCI_MINOR,
+>>>>>>> v3.18
 =======
 	.minor	= VHCI_MINOR,
 >>>>>>> v3.18
@@ -550,6 +638,11 @@ MODULE_DESCRIPTION("Bluetooth virtual HCI driver ver " VERSION);
 MODULE_VERSION(VERSION);
 MODULE_LICENSE("GPL");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("devname:vhci");
+MODULE_ALIAS_MISCDEV(VHCI_MINOR);
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("devname:vhci");
 MODULE_ALIAS_MISCDEV(VHCI_MINOR);

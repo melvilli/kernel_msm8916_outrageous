@@ -7,9 +7,12 @@
 6pack.txt
 	- info on the 6pack protocol, an alternative to KISS for AX.25
 <<<<<<< HEAD
+<<<<<<< HEAD
 DLINK.txt
 	- info on the D-Link DE-600/DE-620 parallel port pocket adapters
 =======
+=======
+>>>>>>> v3.18
 LICENSE.qla3xxx
 	- GPLv2 for QLogic Linux Networking HBA Driver
 LICENSE.qlge
@@ -18,6 +21,9 @@ LICENSE.qlcnic
 	- GPLv2 for QLogic Linux qlcnic NIC Driver
 Makefile
 	- Makefile for docsrc.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 PLIP.txt
 	- PLIP: The Parallel Line Internet Protocol device driver
@@ -29,7 +35,11 @@ README.sb1000
 	- info on General Instrument/NextLevel SURFboard1000 cable modem.
 alias.txt
 <<<<<<< HEAD
+<<<<<<< HEAD
 	- info on using alias network devices 
+=======
+	- info on using alias network devices.
+>>>>>>> v3.18
 =======
 	- info on using alias network devices.
 >>>>>>> v3.18
@@ -96,7 +106,11 @@ framerelay.txt
 gen_stats.txt
 	- Generic networking statistics for netlink users.
 <<<<<<< HEAD
+<<<<<<< HEAD
 generic_hdlc.txt
+=======
+generic-hdlc.txt
+>>>>>>> v3.18
 =======
 generic-hdlc.txt
 >>>>>>> v3.18
@@ -106,17 +120,23 @@ generic_netlink.txt
 gianfar.txt
 	- Gianfar Ethernet Driver.
 <<<<<<< HEAD
+<<<<<<< HEAD
 ieee802154.txt
 	- Linux IEEE 802.15.4 implementation, API and drivers
 ifenslave.c
 	- Configure network interfaces for parallel routing (bonding).
 =======
+=======
+>>>>>>> v3.18
 i40e.txt
 	- README for the Intel Ethernet Controller XL710 Driver (i40e).
 i40evf.txt
 	- Short note on the Driver for the Intel(R) XL710 X710 Virtual Function
 ieee802154.txt
 	- Linux IEEE 802.15.4 implementation, API and drivers
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 igb.txt
 	- README for the Intel Gigabit Ethernet Driver (igb).
@@ -131,6 +151,11 @@ ipddp.txt
 iphase.txt
 	- Interphase PCI ATM (i)Chip IA Linux driver info.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ipsec.txt
+	- Note on not compressing IPSec payload and resulting failed policy check.
+>>>>>>> v3.18
 =======
 ipsec.txt
 	- Note on not compressing IPSec payload and resulting failed policy check.
@@ -154,6 +179,11 @@ lapb-module.txt
 ltpc.txt
 	- the Apple or Farallon LocalTalk PC card driver
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+mac80211-auth-assoc-deauth.txt
+	- authentication and association / deauth-disassoc with max80211
+>>>>>>> v3.18
 =======
 mac80211-auth-assoc-deauth.txt
 	- authentication and association / deauth-disassoc with max80211
@@ -165,6 +195,11 @@ multiqueue.txt
 netconsole.txt
 	- The network console module netconsole.ko: configuration and notes.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+netdev-FAQ.txt
+	- FAQ describing how to submit net changes to netdev mailing list.
+>>>>>>> v3.18
 =======
 netdev-FAQ.txt
 	- FAQ describing how to submit net changes to netdev mailing list.
@@ -176,11 +211,17 @@ netdevices.txt
 netif-msg.txt
 	- Design of the network interface message level setting (NETIF_MSG_*).
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 netlink_mmap.txt
 	- memory mapped I/O with netlink
 nf_conntrack-sysctl.txt
 	- list of netfilter-sysctl knobs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 nfc.txt
 	- The Linux Near Field Communication (NFS) subsystem.
@@ -225,7 +266,11 @@ skfp.txt
 smc9.txt
 	- the driver for SMC's 9000 series of Ethernet cards
 <<<<<<< HEAD
+<<<<<<< HEAD
 spider-net.txt
+=======
+spider_net.txt
+>>>>>>> v3.18
 =======
 spider_net.txt
 >>>>>>> v3.18
@@ -241,6 +286,11 @@ tcp.txt
 tcp-thin.txt
 	- kernel tuning options for low rate 'thin' TCP streams.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+team.txt
+	- pointer to information for ethernet teaming devices.
+>>>>>>> v3.18
 =======
 team.txt
 	- pointer to information for ethernet teaming devices.
@@ -258,6 +308,11 @@ vortex.txt
 vxge.txt
 	- README for the Neterion X3100 PCIe Server Adapter.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+vxlan.txt
+	- Virtual extensible LAN overview
+>>>>>>> v3.18
 =======
 vxlan.txt
 	- Virtual extensible LAN overview

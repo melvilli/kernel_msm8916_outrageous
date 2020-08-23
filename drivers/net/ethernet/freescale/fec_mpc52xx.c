@@ -982,7 +982,11 @@ static int mpc52xx_fec_probe(struct platform_device *op)
 
 	/* We're done ! */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, ndev);
+=======
+	platform_set_drvdata(op, ndev);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(op, ndev);
 >>>>>>> v3.18
@@ -1015,7 +1019,11 @@ mpc52xx_fec_remove(struct platform_device *op)
 	struct mpc52xx_fec_priv *priv;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ndev = dev_get_drvdata(&op->dev);
+=======
+	ndev = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	ndev = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1024,8 +1032,12 @@ mpc52xx_fec_remove(struct platform_device *op)
 	unregister_netdev(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (priv->phy_node)
 		of_node_put(priv->phy_node);
+=======
+	of_node_put(priv->phy_node);
+>>>>>>> v3.18
 =======
 	of_node_put(priv->phy_node);
 >>>>>>> v3.18
@@ -1043,7 +1055,10 @@ mpc52xx_fec_remove(struct platform_device *op)
 	free_netdev(ndev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -1053,7 +1068,11 @@ mpc52xx_fec_remove(struct platform_device *op)
 static int mpc52xx_fec_of_suspend(struct platform_device *op, pm_message_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&op->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(op);
 >>>>>>> v3.18
@@ -1067,7 +1086,11 @@ static int mpc52xx_fec_of_suspend(struct platform_device *op, pm_message_t state
 static int mpc52xx_fec_of_resume(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = dev_get_drvdata(&op->dev);
+=======
+	struct net_device *dev = platform_get_drvdata(op);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = platform_get_drvdata(op);
 >>>>>>> v3.18

@@ -27,6 +27,10 @@
 #include <linux/raid/pq.h>
 #include <linux/async_tx.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/dmaengine.h>
+>>>>>>> v3.18
 =======
 #include <linux/dmaengine.h>
 >>>>>>> v3.18
@@ -39,6 +43,10 @@ async_sum_product(struct page *dest, struct page **srcs, unsigned char *coef,
 						      &dest, 1, srcs, 2, len);
 	struct dma_device *dma = chan ? chan->device : NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct dmaengine_unmap_data *unmap = NULL;
+>>>>>>> v3.18
 =======
 	struct dmaengine_unmap_data *unmap = NULL;
 >>>>>>> v3.18
@@ -47,23 +55,30 @@ async_sum_product(struct page *dest, struct page **srcs, unsigned char *coef,
 	u8 *a, *b, *c;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dma) {
 		dma_addr_t dma_dest[2];
 		dma_addr_t dma_src[2];
 		struct device *dev = dma->dev;
 =======
+=======
+>>>>>>> v3.18
 	if (dma)
 		unmap = dmaengine_get_unmap_data(dma->dev, 3, GFP_NOIO);
 
 	if (unmap) {
 		struct device *dev = dma->dev;
 		dma_addr_t pq[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct dma_async_tx_descriptor *tx;
 		enum dma_ctrl_flags dma_flags = DMA_PREP_PQ_DISABLE_P;
 
 		if (submit->flags & ASYNC_TX_FENCE)
 			dma_flags |= DMA_PREP_FENCE;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dma_dest[1] = dma_map_page(dev, dest, 0, len, DMA_BIDIRECTIONAL);
 		dma_src[0] = dma_map_page(dev, srcs[0], 0, len, DMA_TO_DEVICE);
@@ -73,6 +88,8 @@ async_sum_product(struct page *dest, struct page **srcs, unsigned char *coef,
 		if (tx) {
 			async_tx_submit(chan, tx, submit);
 =======
+=======
+>>>>>>> v3.18
 		unmap->addr[0] = dma_map_page(dev, srcs[0], 0, len, DMA_TO_DEVICE);
 		unmap->addr[1] = dma_map_page(dev, srcs[1], 0, len, DMA_TO_DEVICE);
 		unmap->to_cnt = 2;
@@ -89,6 +106,9 @@ async_sum_product(struct page *dest, struct page **srcs, unsigned char *coef,
 			dma_set_unmap(tx, unmap);
 			async_tx_submit(chan, tx, submit);
 			dmaengine_unmap_put(unmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return tx;
 		}
@@ -97,9 +117,13 @@ async_sum_product(struct page *dest, struct page **srcs, unsigned char *coef,
 		 * the synchronous path
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_unmap_page(dev, dma_dest[1], len, DMA_BIDIRECTIONAL);
 		dma_unmap_page(dev, dma_src[0], len, DMA_TO_DEVICE);
 		dma_unmap_page(dev, dma_src[1], len, DMA_TO_DEVICE);
+=======
+		dmaengine_unmap_put(unmap);
+>>>>>>> v3.18
 =======
 		dmaengine_unmap_put(unmap);
 >>>>>>> v3.18
@@ -130,6 +154,7 @@ async_mult(struct page *dest, struct page *src, u8 coef, size_t len,
 						      &dest, 1, &src, 1, len);
 	struct dma_device *dma = chan ? chan->device : NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const u8 *qmul; /* Q multiplier table */
 	u8 *d, *s;
 
@@ -137,6 +162,8 @@ async_mult(struct page *dest, struct page *src, u8 coef, size_t len,
 		dma_addr_t dma_dest[2];
 		dma_addr_t dma_src[1];
 =======
+=======
+>>>>>>> v3.18
 	struct dmaengine_unmap_data *unmap = NULL;
 	const u8 *qmul; /* Q multiplier table */
 	u8 *d, *s;
@@ -146,6 +173,9 @@ async_mult(struct page *dest, struct page *src, u8 coef, size_t len,
 
 	if (unmap) {
 		dma_addr_t dma_dest[2];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		struct device *dev = dma->dev;
 		struct dma_async_tx_descriptor *tx;
@@ -154,12 +184,15 @@ async_mult(struct page *dest, struct page *src, u8 coef, size_t len,
 		if (submit->flags & ASYNC_TX_FENCE)
 			dma_flags |= DMA_PREP_FENCE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_dest[1] = dma_map_page(dev, dest, 0, len, DMA_BIDIRECTIONAL);
 		dma_src[0] = dma_map_page(dev, src, 0, len, DMA_TO_DEVICE);
 		tx = dma->device_prep_dma_pq(chan, dma_dest, dma_src, 1, &coef,
 					     len, dma_flags);
 		if (tx) {
 =======
+=======
+>>>>>>> v3.18
 		unmap->addr[0] = dma_map_page(dev, src, 0, len, DMA_TO_DEVICE);
 		unmap->to_cnt++;
 		unmap->addr[1] = dma_map_page(dev, dest, 0, len, DMA_BIDIRECTIONAL);
@@ -177,6 +210,9 @@ async_mult(struct page *dest, struct page *src, u8 coef, size_t len,
 		if (tx) {
 			dma_set_unmap(tx, unmap);
 			dmaengine_unmap_put(unmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			async_tx_submit(chan, tx, submit);
 			return tx;
@@ -186,8 +222,12 @@ async_mult(struct page *dest, struct page *src, u8 coef, size_t len,
 		 * the synchronous path
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dma_unmap_page(dev, dma_dest[1], len, DMA_BIDIRECTIONAL);
 		dma_unmap_page(dev, dma_src[0], len, DMA_TO_DEVICE);
+=======
+		dmaengine_unmap_put(unmap);
+>>>>>>> v3.18
 =======
 		dmaengine_unmap_put(unmap);
 >>>>>>> v3.18

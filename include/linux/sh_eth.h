@@ -3,6 +3,7 @@
 
 #include <linux/phy.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 enum {EDMAC_LITTLE_ENDIAN, EDMAC_BIG_ENDIAN};
 enum {
@@ -21,6 +22,8 @@ struct sh_eth_plat_data {
 
 	unsigned char mac_addr[6];
 =======
+=======
+>>>>>>> v3.18
 #include <linux/if_ether.h>
 
 enum {EDMAC_LITTLE_ENDIAN, EDMAC_BIG_ENDIAN};
@@ -33,6 +36,9 @@ struct sh_eth_plat_data {
 	void (*set_mdio_gate)(void *addr);
 
 	unsigned char mac_addr[ETH_ALEN];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	unsigned no_ether_link:1;
 	unsigned ether_link_active_low:1;

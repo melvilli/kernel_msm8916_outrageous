@@ -582,6 +582,7 @@
 #define                  BV_TRANS  0xff0000   /* Transparent Color - B/V Component */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Bit masks for HOST_CONTROL */
 
 #define                   HOST_EN  0x1        /* Host Enable */
@@ -612,6 +613,8 @@
 
 #define             COUNT_TIMEOUT  0x7ff      /* Host Timeout count */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Bit masks for KPAD_CTL */

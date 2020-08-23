@@ -22,6 +22,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/proc_fs.h>
 #include <linux/init.h>
@@ -58,12 +59,17 @@ struct snd_mem_list {
 #define SNDRV_DMA_DEVICE_UNUSED (unsigned int)-1
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/slab.h>
 #include <linux/mm.h>
 #include <linux/dma-mapping.h>
 #include <linux/genalloc.h>
 #include <sound/memalloc.h>
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *
@@ -71,6 +77,7 @@ struct snd_mem_list {
  *
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static long snd_allocated_pages; /* holding the number of allocated pages */
 
@@ -86,6 +93,8 @@ static inline void dec_snd_pages(int order)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  * snd_malloc_pages - allocate pages with the given size
  * @size: the size to allocate in bytes
@@ -99,7 +108,10 @@ void *snd_malloc_pages(size_t size, gfp_t gfp_flags)
 {
 	int pg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -110,9 +122,13 @@ void *snd_malloc_pages(size_t size, gfp_t gfp_flags)
 	gfp_flags |= __GFP_COMP;	/* compound page lets parts be mapped */
 	pg = get_order(size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((res = (void *) __get_free_pages(gfp_flags, pg)) != NULL)
 		inc_snd_pages(pg);
 	return res;
+=======
+	return (void *) __get_free_pages(gfp_flags, pg);
+>>>>>>> v3.18
 =======
 	return (void *) __get_free_pages(gfp_flags, pg);
 >>>>>>> v3.18
@@ -133,7 +149,10 @@ void snd_free_pages(void *ptr, size_t size)
 		return;
 	pg = get_order(size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dec_snd_pages(pg);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_pages((unsigned long) ptr, pg);
@@ -151,7 +170,10 @@ static void *snd_malloc_dev_pages(struct device *dev, size_t size, dma_addr_t *d
 {
 	int pg;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *res;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	gfp_t gfp_flags;
@@ -164,11 +186,15 @@ static void *snd_malloc_dev_pages(struct device *dev, size_t size, dma_addr_t *d
 		| __GFP_NORETRY /* don't trigger OOM-killer */
 		| __GFP_NOWARN; /* no stack trace print - this call is non-critical */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = dma_alloc_coherent(dev, PAGE_SIZE << pg, dma, gfp_flags);
 	if (res != NULL)
 		inc_snd_pages(pg);
 
 	return res;
+=======
+	return dma_alloc_coherent(dev, PAGE_SIZE << pg, dma, gfp_flags);
+>>>>>>> v3.18
 =======
 	return dma_alloc_coherent(dev, PAGE_SIZE << pg, dma, gfp_flags);
 >>>>>>> v3.18
@@ -184,10 +210,13 @@ static void snd_free_dev_pages(struct device *dev, size_t size, void *ptr,
 		return;
 	pg = get_order(size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dec_snd_pages(pg);
 	dma_free_coherent(dev, PAGE_SIZE << pg, ptr, dma);
 }
 =======
+=======
+>>>>>>> v3.18
 	dma_free_coherent(dev, PAGE_SIZE << pg, ptr, dma);
 }
 
@@ -231,6 +260,9 @@ static void snd_free_dev_iram(struct snd_dma_buffer *dmab)
 		gen_pool_free(pool, (unsigned long)dmab->area, dmab->bytes);
 }
 #endif /* CONFIG_GENERIC_ALLOCATOR */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_HAS_DMA */
 
@@ -273,7 +305,10 @@ int snd_dma_alloc_pages(int type, struct device *device, size_t size,
 		break;
 #ifdef CONFIG_HAS_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_GENERIC_ALLOCATOR
 	case SNDRV_DMA_TYPE_DEV_IRAM:
 		snd_malloc_dev_iram(dmab, size);
@@ -284,6 +319,9 @@ int snd_dma_alloc_pages(int type, struct device *device, size_t size,
 		 */
 		dmab->dev.type = SNDRV_DMA_TYPE_DEV;
 #endif /* CONFIG_GENERIC_ALLOCATOR */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SNDRV_DMA_TYPE_DEV:
 		dmab->area = snd_malloc_dev_pages(device, size, &dmab->addr);
@@ -296,7 +334,11 @@ int snd_dma_alloc_pages(int type, struct device *device, size_t size,
 #endif
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "snd-malloc: invalid device type %d\n", type);
+=======
+		pr_err("snd-malloc: invalid device type %d\n", type);
+>>>>>>> v3.18
 =======
 		pr_err("snd-malloc: invalid device type %d\n", type);
 >>>>>>> v3.18
@@ -362,12 +404,18 @@ void snd_dma_free_pages(struct snd_dma_buffer *dmab)
 		break;
 #ifdef CONFIG_HAS_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_GENERIC_ALLOCATOR
 	case SNDRV_DMA_TYPE_DEV_IRAM:
 		snd_free_dev_iram(dmab);
 		break;
 #endif /* CONFIG_GENERIC_ALLOCATOR */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case SNDRV_DMA_TYPE_DEV:
 		snd_free_dev_pages(dmab->dev.dev, dmab->bytes, dmab->area, dmab->addr);
@@ -379,6 +427,7 @@ void snd_dma_free_pages(struct snd_dma_buffer *dmab)
 		break;
 #endif
 	default:
+<<<<<<< HEAD
 <<<<<<< HEAD
 		printk(KERN_ERR "snd-malloc: invalid device type %d\n", dmab->dev.type);
 	}
@@ -638,6 +687,11 @@ module_exit(snd_mem_exit)
 	}
 }
 >>>>>>> v3.18
+=======
+		pr_err("snd-malloc: invalid device type %d\n", dmab->dev.type);
+	}
+}
+>>>>>>> v3.18
 
 /*
  * exports
@@ -647,9 +701,12 @@ EXPORT_SYMBOL(snd_dma_alloc_pages_fallback);
 EXPORT_SYMBOL(snd_dma_free_pages);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(snd_dma_get_reserved_buf);
 EXPORT_SYMBOL(snd_dma_reserve_buf);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 EXPORT_SYMBOL(snd_malloc_pages);

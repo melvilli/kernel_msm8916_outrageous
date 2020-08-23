@@ -2,7 +2,11 @@
  *   fs/cifs/smbfsctl.h: SMB, CIFS, SMB2 FSCTL definitions
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   Copyright (c) International Business Machines  Corp., 2002,2009
+=======
+ *   Copyright (c) International Business Machines  Corp., 2002,2013
+>>>>>>> v3.18
 =======
  *   Copyright (c) International Business Machines  Corp., 2002,2013
 >>>>>>> v3.18
@@ -27,7 +31,11 @@
 /*
  * List of ioctl/fsctl function codes that are or could be useful in the
 <<<<<<< HEAD
+<<<<<<< HEAD
  * future to remote clients like cifs or SMB2 client.  There is probably
+=======
+ * future to remote clients like cifs or SMB2/SMB3 client.  This is probably
+>>>>>>> v3.18
 =======
  * future to remote clients like cifs or SMB2/SMB3 client.  This is probably
 >>>>>>> v3.18
@@ -39,8 +47,11 @@
  * could be invoked from tools via a specialized hook into the VFS rather
  * than via the standard vfs entry points
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 =======
+=======
+>>>>>>> v3.18
  *
  * See MS-SMB2 Section 2.2.31 (last checked June 2013, all of that list are
  * below). Additional detail on less common ones can be found in MS-FSCC
@@ -48,6 +59,9 @@
  */
 #define FSCTL_DFS_GET_REFERRALS      0x00060194
 #define FSCTL_DFS_GET_REFERRALS_EX   0x000601B0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define FSCTL_REQUEST_OPLOCK_LEVEL_1 0x00090000
 #define FSCTL_REQUEST_OPLOCK_LEVEL_2 0x00090004
@@ -76,7 +90,11 @@
 #define FSCTL_CREATE_OR_GET_OBJECT_ID 0x000900C0 /* BB add struct */
 #define FSCTL_SET_SPARSE             0x000900C4 /* BB add struct */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSCTL_SET_ZERO_DATA          0x000900C8 /* BB add struct */
+=======
+#define FSCTL_SET_ZERO_DATA          0x000980C8
+>>>>>>> v3.18
 =======
 #define FSCTL_SET_ZERO_DATA          0x000980C8
 >>>>>>> v3.18
@@ -94,6 +112,10 @@
 #define FSCTL_QUERY_ALLOCATED_RANGES 0x000940CF /* BB add struct */
 #define FSCTL_SET_DEFECT_MANAGEMENT  0x00098134 /* BB add struct */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define FSCTL_FILE_LEVEL_TRIM        0x00098208 /* BB add struct */
+>>>>>>> v3.18
 =======
 #define FSCTL_FILE_LEVEL_TRIM        0x00098208 /* BB add struct */
 >>>>>>> v3.18
@@ -103,6 +125,7 @@
 /* strange that the number for this op is not sequential with previous op */
 #define FSCTL_PIPE_WAIT              0x00110018 /* BB add struct */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FSCTL_LMR_GET_LINK_TRACK_INF 0x001400E8 /* BB add struct */
 #define FSCTL_LMR_SET_LINK_TRACK_INF 0x001400EC /* BB add struct */
 
@@ -110,6 +133,8 @@
 #define IO_REPARSE_TAG_HSM           0xC0000004
 #define IO_REPARSE_TAG_SIS           0x80000007
 =======
+=======
+>>>>>>> v3.18
 /* Enumerate previous versions of a file */
 #define FSCTL_SRV_ENUMERATE_SNAPSHOTS 0x00144064
 /* Retrieve an opaque file reference for server-side data movement ie copy */
@@ -146,4 +171,7 @@
 /* If Flags is set to this value, the request is an FSCTL not ioctl request */
 #define SMB2_0_IOCTL_IS_FSCTL		0x00000001
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

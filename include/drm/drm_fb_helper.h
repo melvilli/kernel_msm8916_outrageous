@@ -56,7 +56,11 @@ struct drm_fb_helper_surface_size {
  *             kdbg.
  * @fb_probe: Driver callback to allocate and initialize the fbdev info
 <<<<<<< HEAD
+<<<<<<< HEAD
  *            structure. Futhermore it also needs to allocate the drm
+=======
+ *            structure. Furthermore it also needs to allocate the drm
+>>>>>>> v3.18
 =======
  *            structure. Furthermore it also needs to allocate the drm
 >>>>>>> v3.18
@@ -82,7 +86,10 @@ struct drm_fb_helper_funcs {
 struct drm_fb_helper_connector {
 	struct drm_connector *connector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_cmdline_mode cmdline_mode;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -94,8 +101,14 @@ struct drm_fb_helper {
 	struct drm_fb_helper_crtc *crtc_info;
 	int connector_count;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct drm_fb_helper_connector **connector_info;
 	struct drm_fb_helper_funcs *funcs;
+=======
+	int connector_info_alloc_count;
+	struct drm_fb_helper_connector **connector_info;
+	const struct drm_fb_helper_funcs *funcs;
+>>>>>>> v3.18
 =======
 	int connector_info_alloc_count;
 	struct drm_fb_helper_connector **connector_info;
@@ -111,6 +124,11 @@ struct drm_fb_helper {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void drm_fb_helper_prepare(struct drm_device *dev, struct drm_fb_helper *helper,
+			   const struct drm_fb_helper_funcs *funcs);
+>>>>>>> v3.18
 =======
 void drm_fb_helper_prepare(struct drm_device *dev, struct drm_fb_helper *helper,
 			   const struct drm_fb_helper_funcs *funcs);
@@ -127,7 +145,11 @@ int drm_fb_helper_check_var(struct fb_var_screeninfo *var,
 			    struct fb_info *info);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool drm_fb_helper_restore_fbdev_mode(struct drm_fb_helper *fb_helper);
+=======
+bool drm_fb_helper_restore_fbdev_mode_unlocked(struct drm_fb_helper *fb_helper);
+>>>>>>> v3.18
 =======
 bool drm_fb_helper_restore_fbdev_mode_unlocked(struct drm_fb_helper *fb_helper);
 >>>>>>> v3.18
@@ -144,8 +166,11 @@ int drm_fb_helper_single_add_all_connectors(struct drm_fb_helper *fb_helper);
 int drm_fb_helper_debug_enter(struct fb_info *info);
 int drm_fb_helper_debug_leave(struct fb_info *info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> v3.18
 struct drm_display_mode *
 drm_has_preferred_mode(struct drm_fb_helper_connector *fb_connector,
 			int width, int height);
@@ -156,5 +181,8 @@ drm_pick_cmdline_mode(struct drm_fb_helper_connector *fb_helper_conn,
 int drm_fb_helper_add_one_connector(struct drm_fb_helper *fb_helper, struct drm_connector *connector);
 int drm_fb_helper_remove_one_connector(struct drm_fb_helper *fb_helper,
 				       struct drm_connector *connector);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

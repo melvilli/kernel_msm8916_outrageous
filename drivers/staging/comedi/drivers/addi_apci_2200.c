@@ -21,6 +21,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
@@ -30,6 +31,11 @@
  * this source code.
  */
 
+=======
+ */
+
+#include <linux/module.h>
+>>>>>>> v3.18
 =======
  */
 
@@ -63,6 +69,7 @@ static int apci2200_do_insn_bits(struct comedi_device *dev,
 				 unsigned int *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int mask = data[0];
 	unsigned int bits = data[1];
 
@@ -74,10 +81,15 @@ static int apci2200_do_insn_bits(struct comedi_device *dev,
 		outw(s->state, dev->iobase + APCI2200_DO_REG);
 	}
 =======
+=======
+>>>>>>> v3.18
 	s->state = inw(dev->iobase + APCI2200_DO_REG);
 
 	if (comedi_dio_update_state(s, data))
 		outw(s->state, dev->iobase + APCI2200_DO_REG);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	data[1] = s->state;
@@ -144,8 +156,12 @@ static void apci2200_detach(struct comedi_device *dev)
 	if (dev->iobase)
 		apci2200_reset(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	comedi_spriv_free(dev, 2);
 	comedi_pci_disable(dev);
+=======
+	comedi_pci_detach(dev);
+>>>>>>> v3.18
 =======
 	comedi_pci_detach(dev);
 >>>>>>> v3.18
@@ -165,7 +181,11 @@ static int apci2200_pci_probe(struct pci_dev *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(apci2200_pci_table) = {
+=======
+static const struct pci_device_id apci2200_pci_table[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id apci2200_pci_table[] = {
 >>>>>>> v3.18

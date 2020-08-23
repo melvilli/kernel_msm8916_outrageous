@@ -26,6 +26,10 @@
 #include <linux/amba/bus.h>
 #include <linux/amba/clcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/video-clcd-versatile.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/video-clcd-versatile.h>
 >>>>>>> v3.18
@@ -36,6 +40,10 @@
 #include <linux/gfp.h>
 #include <linux/mtd/physmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/memblock.h>
+>>>>>>> v3.18
 =======
 #include <linux/memblock.h>
 >>>>>>> v3.18
@@ -56,7 +64,10 @@
 #include <asm/hardware/timer-sp.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <plat/clcd.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <plat/sched_clock.h>
@@ -160,7 +171,10 @@ struct platform_device realview_cf_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct resource realview_leds_resources[] = {
 	{
 		.start	= REALVIEW_SYS_BASE + REALVIEW_SYS_LED_OFFSET,
@@ -176,6 +190,9 @@ struct platform_device realview_leds_device = {
 	.resource	= realview_leds_resources,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct resource realview_i2c_resource = {
 	.start		= REALVIEW_I2C_BASE,
@@ -400,7 +417,11 @@ void __init realview_timer_init(unsigned int timer_irq)
  * Setup the memory banks.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void realview_fixup(struct tag *tags, char **from, struct meminfo *meminfo)
+=======
+void realview_fixup(struct tag *tags, char **from)
+>>>>>>> v3.18
 =======
 void realview_fixup(struct tag *tags, char **from)
 >>>>>>> v3.18
@@ -411,6 +432,7 @@ void realview_fixup(struct tag *tags, char **from)
 	 */
 #ifdef CONFIG_REALVIEW_HIGH_PHYS_OFFSET
 <<<<<<< HEAD
+<<<<<<< HEAD
 	meminfo->bank[0].start = 0x70000000;
 	meminfo->bank[0].size = SZ_512M;
 	meminfo->nr_banks = 1;
@@ -418,6 +440,11 @@ void realview_fixup(struct tag *tags, char **from)
 	meminfo->bank[0].start = 0;
 	meminfo->bank[0].size = SZ_256M;
 	meminfo->nr_banks = 1;
+=======
+	memblock_add(0x70000000, SZ_512M);
+#else
+	memblock_add(0, SZ_256M);
+>>>>>>> v3.18
 =======
 	memblock_add(0x70000000, SZ_512M);
 #else

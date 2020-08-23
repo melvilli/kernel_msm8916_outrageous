@@ -14,15 +14,21 @@
 #include <linux/firmware.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/leds.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/leds.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/platform_data/leds-lp55xx.h>
 #include <linux/slab.h>
@@ -354,9 +360,15 @@ static void lp5562_write_program_memory(struct lp55xx_chip *chip,
 static inline bool _is_pc_overflow(struct lp55xx_predef_pattern *ptn)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (ptn->size_r >= LP5562_PROGRAM_LENGTH ||
 		ptn->size_g >= LP5562_PROGRAM_LENGTH ||
 		ptn->size_b >= LP5562_PROGRAM_LENGTH);
+=======
+	return ptn->size_r >= LP5562_PROGRAM_LENGTH ||
+	       ptn->size_g >= LP5562_PROGRAM_LENGTH ||
+	       ptn->size_b >= LP5562_PROGRAM_LENGTH;
+>>>>>>> v3.18
 =======
 	return ptn->size_r >= LP5562_PROGRAM_LENGTH ||
 	       ptn->size_g >= LP5562_PROGRAM_LENGTH ||
@@ -491,8 +503,13 @@ static ssize_t lp5562_store_engine_mux(struct device *dev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEVICE_ATTR(led_pattern, S_IWUSR, NULL, lp5562_store_pattern);
 static DEVICE_ATTR(engine_mux, S_IWUSR, NULL, lp5562_store_engine_mux);
+=======
+static LP55XX_DEV_ATTR_WO(led_pattern, lp5562_store_pattern);
+static LP55XX_DEV_ATTR_WO(engine_mux, lp5562_store_engine_mux);
+>>>>>>> v3.18
 =======
 static LP55XX_DEV_ATTR_WO(led_pattern, lp5562_store_pattern);
 static LP55XX_DEV_ATTR_WO(engine_mux, lp5562_store_engine_mux);
@@ -534,6 +551,7 @@ static int lp5562_probe(struct i2c_client *client,
 	struct lp55xx_chip *chip;
 	struct lp55xx_led *led;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct lp55xx_platform_data *pdata = client->dev.platform_data;
 
 	if (!pdata) {
@@ -541,6 +559,8 @@ static int lp5562_probe(struct i2c_client *client,
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	struct lp55xx_platform_data *pdata;
 	struct device_node *np = client->dev.of_node;
 
@@ -555,6 +575,9 @@ static int lp5562_probe(struct i2c_client *client,
 		}
 	}
 	pdata = dev_get_platdata(&client->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
@@ -619,10 +642,13 @@ static const struct i2c_device_id lp5562_id[] = {
 MODULE_DEVICE_TABLE(i2c, lp5562_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i2c_driver lp5562_driver = {
 	.driver = {
 		.name	= "lp5562",
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static const struct of_device_id of_lp5562_leds_match[] = {
 	{ .compatible = "ti,lp5562", },
@@ -636,6 +662,9 @@ static struct i2c_driver lp5562_driver = {
 	.driver = {
 		.name	= "lp5562",
 		.of_match_table = of_match_ptr(of_lp5562_leds_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.probe		= lp5562_probe,

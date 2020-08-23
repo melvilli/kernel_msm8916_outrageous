@@ -74,6 +74,7 @@ static void clk_reg_write_mask(u32 reg, uint32_t val, uint32_t mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void clk_reg_set_bits(u32 reg, uint32_t mask)
 {
 	u32 val;
@@ -92,6 +93,8 @@ static void clk_reg_clear_bits(u32 reg, uint32_t mask)
 	bfin_write32(reg, val);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 int wait_for_pll_align(void)
@@ -124,6 +127,10 @@ void clk_disable(struct clk *clk)
 EXPORT_SYMBOL(clk_disable);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -139,7 +146,11 @@ EXPORT_SYMBOL(clk_get_rate);
 long clk_round_rate(struct clk *clk, unsigned long rate)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	long ret = -EIO;
+=======
+	long ret = 0;
+>>>>>>> v3.18
 =======
 	long ret = 0;
 >>>>>>> v3.18
@@ -232,13 +243,19 @@ unsigned long sys_clk_get_rate(struct clk *clk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 unsigned long dummy_get_rate(struct clk *clk)
 {
 	clk->parent->rate = clk_get_rate(clk->parent);
 	return clk->parent->rate;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 unsigned long sys_clk_round_rate(struct clk *clk, unsigned long rate)
 {
@@ -304,11 +321,17 @@ static struct clk_ops sys_clk_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct clk_ops dummy_clk_ops = {
 	.get_rate = dummy_get_rate,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clk sys_clkin = {
 	.name       = "SYS_CLKIN",
@@ -392,7 +415,10 @@ static struct clk oclk = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct clk ethclk = {
 	.name       = "stmmaceth",
 	.parent     = &sclk0,
@@ -405,6 +431,9 @@ static struct clk spiclk = {
 	.ops        = &dummy_clk_ops,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct clk_lookup bf609_clks[] = {
 	CLK(sys_clkin, NULL, "SYS_CLKIN"),
@@ -418,6 +447,11 @@ static struct clk_lookup bf609_clks[] = {
 	CLK(dclk, NULL, "DCLK"),
 	CLK(oclk, NULL, "OCLK"),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CLK(ethclk, NULL, "stmmaceth"),
+	CLK(spiclk, NULL, "spi"),
+>>>>>>> v3.18
 =======
 	CLK(ethclk, NULL, "stmmaceth"),
 	CLK(spiclk, NULL, "spi"),

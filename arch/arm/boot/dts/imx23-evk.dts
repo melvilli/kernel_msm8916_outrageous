@@ -11,7 +11,11 @@
 
 /dts-v1/;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "imx23.dtsi"
+=======
+#include "imx23.dtsi"
+>>>>>>> v3.18
 =======
 #include "imx23.dtsi"
 >>>>>>> v3.18
@@ -50,6 +54,7 @@
 					reg = <0>;
 					fsl,pinmux-ids = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 						0x1123 /* MX23_PAD_LCD_RESET__GPIO_1_18 */
 						0x11d3 /* MX23_PAD_PWM3__GPIO_1_29 */
 						0x11e3 /* MX23_PAD_PWM4__GPIO_1_30 */
@@ -59,6 +64,8 @@
 					fsl,voltage = <1>;
 					fsl,pull-up = <0>;
 =======
+=======
+>>>>>>> v3.18
 						MX23_PAD_LCD_RESET__GPIO_1_18
 						MX23_PAD_PWM3__GPIO_1_29
 						MX23_PAD_PWM4__GPIO_1_30
@@ -67,6 +74,9 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				};
 			};
@@ -76,15 +86,21 @@
 				pinctrl-0 = <&lcdif_24bit_pins_a>;
 				lcd-supply = <&reg_lcd_3v3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				display = <&display>;
 				status = "okay";
 
 				display: display {
 =======
+=======
+>>>>>>> v3.18
 				display = <&display0>;
 				status = "okay";
 
 				display0: display0 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 					bits-per-pixel = <32>;
 					bus-width = <24>;
@@ -113,12 +129,18 @@
 
 		apbx@80040000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 			lradc@80050000 {
 				status = "okay";
 				fsl,lradc-touchscreen-wires = <4>;
 			};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pwm: pwm@80064000 {
 				pinctrl-names = "default";
@@ -138,7 +160,10 @@
 				status = "okay";
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 			usbphy0: usbphy@8007c000 {
 				status = "okay";
@@ -149,6 +174,9 @@
 	ahb@80080000 {
 		usb0: usb@80080000 {
 			status = "okay";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};
@@ -156,16 +184,22 @@
 	regulators {
 		compatible = "simple-bus";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		reg_vddio_sd0: vddio-sd0 {
 			compatible = "regulator-fixed";
 =======
+=======
+>>>>>>> v3.18
 		#address-cells = <1>;
 		#size-cells = <0>;
 
 		reg_vddio_sd0: regulator@0 {
 			compatible = "regulator-fixed";
 			reg = <0>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			regulator-name = "vddio-sd0";
 			regulator-min-microvolt = <3300000>;
@@ -174,8 +208,14 @@
 		};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reg_lcd_3v3: lcd-3v3 {
 			compatible = "regulator-fixed";
+=======
+		reg_lcd_3v3: regulator@1 {
+			compatible = "regulator-fixed";
+			reg = <1>;
+>>>>>>> v3.18
 =======
 		reg_lcd_3v3: regulator@1 {
 			compatible = "regulator-fixed";

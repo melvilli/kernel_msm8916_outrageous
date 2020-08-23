@@ -44,6 +44,7 @@ imx35_sdhci_esdhc_imx_data[] __initconst = {
 #endif /* ifdef CONFIG_SOC_IMX35 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SOC_IMX51
 const struct imx_sdhci_esdhc_imx_data
 imx51_sdhci_esdhc_imx_data[] __initconst = {
@@ -68,6 +69,8 @@ imx53_sdhci_esdhc_imx_data[] __initconst = {
 };
 #endif /* ifdef CONFIG_SOC_IMX53 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct esdhc_platform_data default_esdhc_pdata __initconst = {

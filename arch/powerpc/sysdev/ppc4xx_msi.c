@@ -86,15 +86,21 @@ static int ppc4xx_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 	struct ppc4xx_msi *msi_data = &ppc4xx_msi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	msi_data->msi_virqs = kmalloc((msi_irqs) * sizeof(int),
 					    GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 	dev_dbg(&dev->dev, "PCIE-MSI:%s called. vec %x type %d\n",
 		__func__, nvec, type);
 	if (type == PCI_CAP_ID_MSIX)
 		pr_debug("ppc4xx msi: MSI-X untested, trying anyway.\n");
 
 	msi_data->msi_virqs = kmalloc((msi_irqs) * sizeof(int), GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!msi_data->msi_virqs)
 		return -ENOMEM;
@@ -131,7 +137,10 @@ void ppc4xx_teardown_msi_irqs(struct pci_dev *dev)
 	struct msi_desc *entry;
 	struct ppc4xx_msi *msi_data = &ppc4xx_msi;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq_hw_number_t hwirq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -140,6 +149,7 @@ void ppc4xx_teardown_msi_irqs(struct pci_dev *dev)
 	list_for_each_entry(entry, &dev->msi_list, list) {
 		if (entry->irq == NO_IRQ)
 			continue;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		hwirq = virq_to_hw(entry->irq);
 		irq_set_msi_desc(entry->irq, NULL);
@@ -159,6 +169,8 @@ static int ppc4xx_msi_check_device(struct pci_dev *pdev, int nvec, int type)
 }
 
 =======
+=======
+>>>>>>> v3.18
 		irq_set_msi_desc(entry->irq, NULL);
 		msi_bitmap_free_hwirqs(&msi_data->bitmap,
 				virq_to_hw(entry->irq), 1);
@@ -166,6 +178,9 @@ static int ppc4xx_msi_check_device(struct pci_dev *pdev, int nvec, int type)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ppc4xx_setup_pcieh_hw(struct platform_device *dev,
 				 struct resource res, struct ppc4xx_msi *msi)
@@ -283,7 +298,10 @@ static int ppc4xx_msi_probe(struct platform_device *dev)
 	ppc_md.setup_msi_irqs = ppc4xx_setup_msi_irqs;
 	ppc_md.teardown_msi_irqs = ppc4xx_teardown_msi_irqs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ppc_md.msi_check_device = ppc4xx_msi_check_device;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return err;

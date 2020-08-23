@@ -15,6 +15,7 @@ config EARLY_PRINTK
 	  unless you want to debug such a crash.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config DEBUG_STACKOVERFLOW
 	bool "Check for stack overflows"
 	depends on DEBUG_KERNEL
@@ -32,6 +33,8 @@ config DEBUG_EXTRA_FLAGS
 	  size and build time noticeably.  Such flags are often
 	  helpful if the main use of debug info is line number info.
 =======
+=======
+>>>>>>> v3.18
 config TILE_HVGLUE_TRACE
 	bool "Provide wrapper functions for hypervisor ABI calls"
 	default n
@@ -39,6 +42,9 @@ config TILE_HVGLUE_TRACE
 	  Provide wrapper functions for the hypervisor ABI calls
 	  defined in arch/tile/kernel/hvglue.S.  This allows tracing
 	  mechanisms, etc., to have visibility into those calls.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 endmenu

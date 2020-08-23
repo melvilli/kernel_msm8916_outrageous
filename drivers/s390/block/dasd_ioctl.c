@@ -142,7 +142,10 @@ static int dasd_ioctl_resume(struct dasd_block *block)
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Abort all failfast I/O on a device.
  */
 static int dasd_ioctl_abortio(struct dasd_block *block)
@@ -196,6 +199,9 @@ static int dasd_ioctl_allowio(struct dasd_block *block)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * performs formatting of _device_ according to _fdata_
  * Note: The discipline's format_function is assumed to deliver formatting
@@ -207,7 +213,13 @@ dasd_format(struct dasd_block *block, struct format_data_t *fdata)
 {
 	struct dasd_device *base;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int rc;
+=======
+	int enable_pav = 1;
+	int rc, retries;
+	int start, stop;
+>>>>>>> v3.18
 =======
 	int enable_pav = 1;
 	int rc, retries;
@@ -241,12 +253,15 @@ dasd_format(struct dasd_block *block, struct format_data_t *fdata)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = base->discipline->format_device(base, fdata);
 	if (rc)
 		return rc;
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	retries = 255;
 	/* backup start- and endtrack for retries */
 	start = fdata->start_unit;
@@ -271,6 +286,9 @@ dasd_format(struct dasd_block *block, struct format_data_t *fdata)
 		return -EIO;
 	else
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -548,13 +566,19 @@ int dasd_ioctl(struct block_device *bdev, fmode_t mode,
 		rc = dasd_ioctl_resume(block);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case BIODASDABORTIO:
 		rc = dasd_ioctl_abortio(block);
 		break;
 	case BIODASDALLOWIO:
 		rc = dasd_ioctl_allowio(block);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case BIODASDFMT:
 		rc = dasd_ioctl_format(bdev, argp);

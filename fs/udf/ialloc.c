@@ -31,16 +31,22 @@ void udf_free_inode(struct inode *inode)
 	struct super_block *sb = inode->i_sb;
 	struct udf_sb_info *sbi = UDF_SB(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mutex_lock(&sbi->s_alloc_mutex);
 	if (sbi->s_lvid_bh) {
 		struct logicalVolIntegrityDescImpUse *lvidiu =
 							udf_sb_lvidiu(sbi);
 =======
+=======
+>>>>>>> v3.18
 	struct logicalVolIntegrityDescImpUse *lvidiu = udf_sb_lvidiu(sb);
 
 	if (lvidiu) {
 		mutex_lock(&sbi->s_alloc_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (S_ISDIR(inode->i_mode))
 			le32_add_cpu(&lvidiu->numDirs, -1);
@@ -48,8 +54,13 @@ void udf_free_inode(struct inode *inode)
 			le32_add_cpu(&lvidiu->numFiles, -1);
 		udf_updated_lvid(sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	mutex_unlock(&sbi->s_alloc_mutex);
+=======
+		mutex_unlock(&sbi->s_alloc_mutex);
+	}
+>>>>>>> v3.18
 =======
 		mutex_unlock(&sbi->s_alloc_mutex);
 	}
@@ -59,7 +70,11 @@ void udf_free_inode(struct inode *inode)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct inode *udf_new_inode(struct inode *dir, umode_t mode, int *err)
+=======
+struct inode *udf_new_inode(struct inode *dir, umode_t mode)
+>>>>>>> v3.18
 =======
 struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 >>>>>>> v3.18
@@ -72,6 +87,7 @@ struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 	struct udf_inode_info *iinfo;
 	struct udf_inode_info *dinfo = UDF_I(dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	inode = new_inode(sb);
 
@@ -81,6 +97,8 @@ struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 	}
 	*err = -ENOSPC;
 =======
+=======
+>>>>>>> v3.18
 	struct logicalVolIntegrityDescImpUse *lvidiu;
 	int err;
 
@@ -88,6 +106,9 @@ struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 
 	if (!inode)
 		return ERR_PTR(-ENOMEM);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	iinfo = UDF_I(inode);
@@ -106,6 +127,7 @@ struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 	}
 	if (!iinfo->i_ext.i_data) {
 		iput(inode);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		*err = -ENOMEM;
 		return NULL;
@@ -126,6 +148,8 @@ struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 		mutex_lock(&sbi->s_alloc_mutex);
 		lvidiu = udf_sb_lvidiu(sbi);
 =======
+=======
+>>>>>>> v3.18
 		return ERR_PTR(-ENOMEM);
 	}
 
@@ -143,6 +167,9 @@ struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 		iinfo->i_unique = lvid_get_unique_id(sb);
 		inode->i_generation = iinfo->i_unique;
 		mutex_lock(&sbi->s_alloc_mutex);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (S_ISDIR(mode))
 			le32_add_cpu(&lvidiu->numDirs, 1);
@@ -172,11 +199,14 @@ struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 	inode->i_mtime = inode->i_atime = inode->i_ctime =
 		iinfo->i_crtime = current_fs_time(inode->i_sb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	insert_inode_hash(inode);
 	mark_inode_dirty(inode);
 
 	*err = 0;
 =======
+=======
+>>>>>>> v3.18
 	if (unlikely(insert_inode_locked(inode) < 0)) {
 		make_bad_inode(inode);
 		iput(inode);
@@ -184,6 +214,9 @@ struct inode *udf_new_inode(struct inode *dir, umode_t mode)
 	}
 	mark_inode_dirty(inode);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return inode;
 }

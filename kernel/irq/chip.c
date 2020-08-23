@@ -41,10 +41,16 @@ int irq_set_chip(unsigned int irq, struct irq_chip *chip)
 	/*
 	 * For !CONFIG_SPARSE_IRQ make the irq show up in
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * allocated_irqs. For the CONFIG_SPARSE_IRQ case, it is
 	 * already marked, and this call is harmless.
 	 */
 	irq_reserve_irq(irq);
+=======
+	 * allocated_irqs.
+	 */
+	irq_mark_irq(irq);
+>>>>>>> v3.18
 =======
 	 * allocated_irqs.
 	 */
@@ -220,7 +226,10 @@ void irq_enable(struct irq_desc *desc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * irq_disable - Mark interrupt disabled
  * @desc:	irq descriptor which should be disabled
@@ -234,6 +243,9 @@ void irq_enable(struct irq_desc *desc)
  * handler masks the line at the hardware level and marks it
  * pending.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void irq_disable(struct irq_desc *desc)
 {
@@ -291,7 +303,10 @@ void unmask_irq(struct irq_desc *desc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void unmask_threaded_irq(struct irq_desc *desc)
 {
 	struct irq_chip *chip = desc->irq_data.chip;
@@ -305,6 +320,9 @@ void unmask_threaded_irq(struct irq_desc *desc)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  *	handle_nested_irq - Handle a nested irq from a irq thread
@@ -319,7 +337,10 @@ void handle_nested_irq(unsigned int irq)
 	struct irq_desc *desc = irq_to_desc(irq);
 	struct irqaction *action;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int mask_this_irq = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irqreturn_t action_ret;
@@ -335,7 +356,10 @@ void handle_nested_irq(unsigned int irq)
 	if (unlikely(!action || irqd_irq_disabled(&desc->irq_data))) {
 		desc->istate |= IRQS_PENDING;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mask_this_irq = 1;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		goto out_unlock;
@@ -354,11 +378,14 @@ void handle_nested_irq(unsigned int irq)
 out_unlock:
 	raw_spin_unlock_irq(&desc->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(mask_this_irq)) {
 		chip_bus_lock(desc);
 		mask_irq(desc);
 		chip_bus_sync_unlock(desc);
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -372,7 +399,10 @@ static bool irq_check_poll(struct irq_desc *desc)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool irq_may_run(struct irq_desc *desc)
 {
 	unsigned int mask = IRQD_IRQ_INPROGRESS | IRQD_WAKEUP_ARMED;
@@ -398,6 +428,9 @@ static bool irq_may_run(struct irq_desc *desc)
 	return irq_check_poll(desc);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  *	handle_simple_irq - Simple and software-decoded IRQs.
@@ -417,9 +450,14 @@ handle_simple_irq(unsigned int irq, struct irq_desc *desc)
 	raw_spin_lock(&desc->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(irqd_irq_inprogress(&desc->irq_data)))
 		if (!irq_check_poll(desc))
 			goto out_unlock;
+=======
+	if (!irq_may_run(desc))
+		goto out_unlock;
+>>>>>>> v3.18
 =======
 	if (!irq_may_run(desc))
 		goto out_unlock;
@@ -475,9 +513,14 @@ handle_level_irq(unsigned int irq, struct irq_desc *desc)
 	mask_ack_irq(desc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(irqd_irq_inprogress(&desc->irq_data)))
 		if (!irq_check_poll(desc))
 			goto out_unlock;
+=======
+	if (!irq_may_run(desc))
+		goto out_unlock;
+>>>>>>> v3.18
 =======
 	if (!irq_may_run(desc))
 		goto out_unlock;
@@ -515,7 +558,10 @@ static inline void preflow_handler(struct irq_desc *desc) { }
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void cond_unmask_eoi_irq(struct irq_desc *desc, struct irq_chip *chip)
 {
 	if (!(desc->istate & IRQS_ONESHOT)) {
@@ -537,6 +583,9 @@ static void cond_unmask_eoi_irq(struct irq_desc *desc, struct irq_chip *chip)
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  *	handle_fasteoi_irq - irq handler for transparent controllers
@@ -552,18 +601,24 @@ void
 handle_fasteoi_irq(unsigned int irq, struct irq_desc *desc)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raw_spin_lock(&desc->lock);
 
 	if (unlikely(irqd_irq_inprogress(&desc->irq_data)))
 		if (!irq_check_poll(desc))
 			goto out;
 =======
+=======
+>>>>>>> v3.18
 	struct irq_chip *chip = desc->irq_data.chip;
 
 	raw_spin_lock(&desc->lock);
 
 	if (!irq_may_run(desc))
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	desc->istate &= ~(IRQS_REPLAY | IRQS_WAITING);
@@ -575,8 +630,12 @@ handle_fasteoi_irq(unsigned int irq, struct irq_desc *desc)
 	 */
 	if (unlikely(!desc->action || irqd_irq_disabled(&desc->irq_data))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!irq_settings_is_level(desc))
 			desc->istate |= IRQS_PENDING;
+=======
+		desc->istate |= IRQS_PENDING;
+>>>>>>> v3.18
 =======
 		desc->istate |= IRQS_PENDING;
 >>>>>>> v3.18
@@ -590,6 +649,7 @@ handle_fasteoi_irq(unsigned int irq, struct irq_desc *desc)
 	preflow_handler(desc);
 	handle_irq_event(desc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (desc->istate & IRQS_ONESHOT)
 		cond_unmask_irq(desc);
@@ -605,6 +665,8 @@ out:
 	goto out_unlock;
 }
 =======
+=======
+>>>>>>> v3.18
 	cond_unmask_eoi_irq(desc, chip);
 
 	raw_spin_unlock(&desc->lock);
@@ -615,6 +677,9 @@ out:
 	raw_spin_unlock(&desc->lock);
 }
 EXPORT_SYMBOL_GPL(handle_fasteoi_irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /**
@@ -640,6 +705,7 @@ handle_edge_irq(unsigned int irq, struct irq_desc *desc)
 
 	desc->istate &= ~(IRQS_REPLAY | IRQS_WAITING);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * If we're currently running this IRQ, or its disabled,
 	 * we shouldn't process the IRQ. Mark it pending, handle
@@ -654,6 +720,8 @@ handle_edge_irq(unsigned int irq, struct irq_desc *desc)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	if (!irq_may_run(desc)) {
 		desc->istate |= IRQS_PENDING;
@@ -671,6 +739,9 @@ handle_edge_irq(unsigned int irq, struct irq_desc *desc)
 		goto out_unlock;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kstat_incr_irqs_this_cpu(irq, desc);
 
@@ -721,6 +792,7 @@ void handle_edge_eoi_irq(unsigned int irq, struct irq_desc *desc)
 
 	desc->istate &= ~(IRQS_REPLAY | IRQS_WAITING);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * If we're currently running this IRQ, or its disabled,
 	 * we shouldn't process the IRQ. Mark it pending, handle
@@ -734,6 +806,8 @@ void handle_edge_eoi_irq(unsigned int irq, struct irq_desc *desc)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	if (!irq_may_run(desc)) {
 		desc->istate |= IRQS_PENDING;
@@ -749,6 +823,9 @@ void handle_edge_eoi_irq(unsigned int irq, struct irq_desc *desc)
 		goto out_eoi;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kstat_incr_irqs_this_cpu(irq, desc);
 
@@ -807,7 +884,11 @@ void handle_percpu_devid_irq(unsigned int irq, struct irq_desc *desc)
 	struct irq_chip *chip = irq_desc_get_chip(desc);
 	struct irqaction *action = desc->action;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *dev_id = __this_cpu_ptr(action->percpu_dev_id);
+=======
+	void *dev_id = raw_cpu_ptr(action->percpu_dev_id);
+>>>>>>> v3.18
 =======
 	void *dev_id = raw_cpu_ptr(action->percpu_dev_id);
 >>>>>>> v3.18

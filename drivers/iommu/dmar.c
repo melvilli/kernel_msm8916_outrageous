@@ -39,6 +39,10 @@
 #include <linux/dmi.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/iommu.h>
+>>>>>>> v3.18
 =======
 #include <linux/iommu.h>
 >>>>>>> v3.18
@@ -48,11 +52,14 @@
 #include "irq_remapping.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* No locks are needed as DMA remapping hardware unit
  * list is constructed at boot time and hotplug of
  * these units are not supported by the architecture.
  */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Assumptions:
  * 1) The hotplug framework guarentees that DMAR unit will be hot-added
@@ -66,17 +73,26 @@
  * 2) Use RCU in interrupt context
  */
 DECLARE_RWSEM(dmar_global_lock);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 LIST_HEAD(dmar_drhd_units);
 
 struct acpi_table_header * __initdata dmar_tbl;
 static acpi_size dmar_tbl_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int dmar_dev_scope_status = 1;
 
 static int alloc_iommu(struct dmar_drhd_unit *drhd);
 static void free_iommu(struct intel_iommu *iommu);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __init dmar_register_drhd_unit(struct dmar_drhd_unit *drhd)
@@ -86,6 +102,7 @@ static void __init dmar_register_drhd_unit(struct dmar_drhd_unit *drhd)
 	 * the very end.
 	 */
 	if (drhd->include_all)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		list_add_tail(&drhd->list, &dmar_drhd_units);
 	else
@@ -151,6 +168,8 @@ int __init dmar_parse_dev_scope(void *start, void *end, int *cnt,
 	int index;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 		list_add_tail_rcu(&drhd->list, &dmar_drhd_units);
 	else
 		list_add_rcu(&drhd->list, &dmar_drhd_units);
@@ -159,13 +178,21 @@ int __init dmar_parse_dev_scope(void *start, void *end, int *cnt,
 void *dmar_alloc_dev_scope(void *start, void *end, int *cnt)
 {
 	struct acpi_dmar_device_scope *scope;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*cnt = 0;
 	while (start < end) {
 		scope = start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (scope->entry_type == ACPI_DMAR_SCOPE_TYPE_ENDPOINT ||
+=======
+		if (scope->entry_type == ACPI_DMAR_SCOPE_TYPE_NAMESPACE ||
+		    scope->entry_type == ACPI_DMAR_SCOPE_TYPE_ENDPOINT ||
+>>>>>>> v3.18
 =======
 		if (scope->entry_type == ACPI_DMAR_SCOPE_TYPE_NAMESPACE ||
 		    scope->entry_type == ACPI_DMAR_SCOPE_TYPE_ENDPOINT ||
@@ -179,6 +206,7 @@ void *dmar_alloc_dev_scope(void *start, void *end, int *cnt)
 		start += scope->length;
 	}
 	if (*cnt == 0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return 0;
 
@@ -202,6 +230,8 @@ void *dmar_alloc_dev_scope(void *start, void *end, int *cnt)
 		}
 		start += scope->length;
 =======
+=======
+>>>>>>> v3.18
 		return NULL;
 
 	return kcalloc(*cnt, sizeof(struct dmar_dev_scope), GFP_KERNEL);
@@ -354,6 +384,9 @@ int dmar_insert_dev_scope(struct dmar_pci_notify_info *info,
 				return 1;
 			}
 		BUG_ON(i >= devices_cnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -361,7 +394,10 @@ int dmar_insert_dev_scope(struct dmar_pci_notify_info *info,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int dmar_remove_dev_scope(struct dmar_pci_notify_info *info, u16 segment,
 			  struct dmar_dev_scope *devices, int count)
 {
@@ -453,6 +489,9 @@ static struct notifier_block dmar_pci_bus_nb = {
 	.priority = INT_MIN,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * dmar_parse_one_drhd - parses exactly one DMA remapping hardware definition
@@ -476,10 +515,13 @@ dmar_parse_one_drhd(struct acpi_dmar_header *header)
 	dmaru->segment = drhd->segment;
 	dmaru->include_all = drhd->flags & 0x1; /* BIT0: INCLUDE_ALL */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = alloc_iommu(dmaru);
 	if (ret) {
 =======
+=======
+>>>>>>> v3.18
 	dmaru->devices = dmar_alloc_dev_scope((void *)(drhd + 1),
 					      ((void *)drhd) + drhd->header.length,
 					      &dmaru->devices_cnt);
@@ -492,6 +534,9 @@ dmar_parse_one_drhd(struct acpi_dmar_header *header)
 	if (ret) {
 		dmar_free_dev_scope(&dmaru->devices,
 				    &dmaru->devices_cnt);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kfree(dmaru);
 		return ret;
@@ -500,6 +545,7 @@ dmar_parse_one_drhd(struct acpi_dmar_header *header)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int __init dmar_parse_dev(struct dmar_drhd_unit *dmaru)
 {
@@ -521,6 +567,8 @@ static int __init dmar_parse_dev(struct dmar_drhd_unit *dmaru)
 	}
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 static void dmar_free_drhd(struct dmar_drhd_unit *dmaru)
 {
 	if (dmaru->devices && dmaru->devices_cnt)
@@ -548,6 +596,9 @@ static int __init dmar_parse_one_andd(struct acpi_dmar_header *header)
 		andd->device_name);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -605,17 +656,23 @@ dmar_table_print_dmar_entry(struct acpi_dmar_header *header)
 			(unsigned long long)rmrr->end_address);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case ACPI_DMAR_TYPE_ATSR:
 		atsr = container_of(header, struct acpi_dmar_atsr, header);
 		pr_info("ATSR flags: %#x\n", atsr->flags);
 		break;
 	case ACPI_DMAR_HARDWARE_AFFINITY:
 =======
+=======
+>>>>>>> v3.18
 	case ACPI_DMAR_TYPE_ROOT_ATS:
 		atsr = container_of(header, struct acpi_dmar_atsr, header);
 		pr_info("ATSR flags: %#x\n", atsr->flags);
 		break;
 	case ACPI_DMAR_TYPE_HARDWARE_AFFINITY:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rhsa = container_of(header, struct acpi_dmar_rhsa, header);
 		pr_info("RHSA base: %#016Lx proximity domain: %#x\n",
@@ -623,11 +680,17 @@ dmar_table_print_dmar_entry(struct acpi_dmar_header *header)
 		       rhsa->proximity_domain);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case ACPI_DMAR_TYPE_NAMESPACE:
 		/* We don't print this here because we need to sanity-check
 		   it first. So print it in dmar_parse_one_andd() instead. */
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -662,6 +725,10 @@ parse_dmar_table(void)
 	struct acpi_dmar_header *entry_header;
 	int ret = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int drhd_count = 0;
+>>>>>>> v3.18
 =======
 	int drhd_count = 0;
 >>>>>>> v3.18
@@ -704,6 +771,10 @@ parse_dmar_table(void)
 		switch (entry_header->type) {
 		case ACPI_DMAR_TYPE_HARDWARE_UNIT:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			drhd_count++;
+>>>>>>> v3.18
 =======
 			drhd_count++;
 >>>>>>> v3.18
@@ -713,21 +784,33 @@ parse_dmar_table(void)
 			ret = dmar_parse_one_rmrr(entry_header);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case ACPI_DMAR_TYPE_ATSR:
 			ret = dmar_parse_one_atsr(entry_header);
 			break;
 		case ACPI_DMAR_HARDWARE_AFFINITY:
 =======
+=======
+>>>>>>> v3.18
 		case ACPI_DMAR_TYPE_ROOT_ATS:
 			ret = dmar_parse_one_atsr(entry_header);
 			break;
 		case ACPI_DMAR_TYPE_HARDWARE_AFFINITY:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_ACPI_NUMA
 			ret = dmar_parse_one_rhsa(entry_header);
 #endif
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case ACPI_DMAR_TYPE_NAMESPACE:
+			ret = dmar_parse_one_andd(entry_header);
+			break;
+>>>>>>> v3.18
 =======
 		case ACPI_DMAR_TYPE_NAMESPACE:
 			ret = dmar_parse_one_andd(entry_header);
@@ -745,6 +828,7 @@ parse_dmar_table(void)
 		entry_header = ((void *)entry_header + entry_header->length);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ret;
 }
 
@@ -757,6 +841,8 @@ static int dmar_pci_device_match(struct pci_dev *devices[], int cnt,
 		for (index = 0; index < cnt; index++)
 			if (dev == devices[index])
 =======
+=======
+>>>>>>> v3.18
 	if (drhd_count == 0)
 		pr_warn(FW_BUG "No DRHD structure found in DMAR table\n");
 	return ret;
@@ -771,6 +857,9 @@ static int dmar_pci_device_match(struct dmar_dev_scope devices[],
 	while (dev) {
 		for_each_active_dev_scope(devices, cnt, index, tmp)
 			if (dev_is_pci(tmp) && dev == to_pci_dev(tmp))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				return 1;
 
@@ -785,7 +874,11 @@ struct dmar_drhd_unit *
 dmar_find_matched_drhd_unit(struct pci_dev *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dmar_drhd_unit *dmaru = NULL;
+=======
+	struct dmar_drhd_unit *dmaru;
+>>>>>>> v3.18
 =======
 	struct dmar_drhd_unit *dmaru;
 >>>>>>> v3.18
@@ -794,7 +887,12 @@ dmar_find_matched_drhd_unit(struct pci_dev *dev)
 	dev = pci_physfn(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_for_each_entry(dmaru, &dmar_drhd_units, list) {
+=======
+	rcu_read_lock();
+	for_each_drhd_unit(dmaru) {
+>>>>>>> v3.18
 =======
 	rcu_read_lock();
 	for_each_drhd_unit(dmaru) {
@@ -805,6 +903,7 @@ dmar_find_matched_drhd_unit(struct pci_dev *dev)
 
 		if (dmaru->include_all &&
 		    drhd->segment == pci_domain_nr(dev->bus))
+<<<<<<< HEAD
 <<<<<<< HEAD
 			return dmaru;
 
@@ -845,6 +944,8 @@ fail:
 	dmar_dev_scope_initialized = ret;
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 			goto out;
 
 		if (dmar_pci_device_match(dmaru->devices,
@@ -966,6 +1067,9 @@ int __init dmar_dev_scope_init(void)
 	}
 
 	return dmar_dev_scope_status;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -975,6 +1079,7 @@ int __init dmar_table_init(void)
 	static int dmar_table_initialized;
 	int ret;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dmar_table_initialized)
 		return 0;
@@ -995,6 +1100,8 @@ int __init dmar_table_init(void)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	if (dmar_table_initialized == 0) {
 		ret = parse_dmar_table();
 		if (ret < 0) {
@@ -1012,6 +1119,9 @@ int __init dmar_table_init(void)
 	}
 
 	return dmar_table_initialized < 0 ? dmar_table_initialized : 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1028,7 +1138,11 @@ static void warn_invalid_dmar(u64 addr, const char *message)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __init check_zero_address(void)
+=======
+static int __init check_zero_address(void)
+>>>>>>> v3.18
 =======
 static int __init check_zero_address(void)
 >>>>>>> v3.18
@@ -1086,6 +1200,10 @@ int __init detect_intel_iommu(void)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	down_write(&dmar_global_lock);
+>>>>>>> v3.18
 =======
 	down_write(&dmar_global_lock);
 >>>>>>> v3.18
@@ -1093,6 +1211,7 @@ int __init detect_intel_iommu(void)
 	if (ret)
 		ret = check_zero_address();
 	{
+<<<<<<< HEAD
 <<<<<<< HEAD
 		struct acpi_table_dmar *dmar;
 
@@ -1102,6 +1221,8 @@ int __init detect_intel_iommu(void)
 		    dmar->flags & 0x1)
 			pr_info("Queued invalidation will be enabled to support x2apic and Intr-remapping.\n");
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		if (ret && !no_iommu && !iommu_detected && !dmar_disabled) {
@@ -1116,8 +1237,14 @@ int __init detect_intel_iommu(void)
 #endif
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	early_acpi_os_unmap_memory(dmar_tbl, dmar_tbl_size);
 	dmar_tbl = NULL;
+=======
+	early_acpi_os_unmap_memory((void __iomem *)dmar_tbl, dmar_tbl_size);
+	dmar_tbl = NULL;
+	up_write(&dmar_global_lock);
+>>>>>>> v3.18
 =======
 	early_acpi_os_unmap_memory((void __iomem *)dmar_tbl, dmar_tbl_size);
 	dmar_tbl = NULL;
@@ -1204,7 +1331,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int alloc_iommu(struct dmar_drhd_unit *drhd)
+=======
+static int alloc_iommu(struct dmar_drhd_unit *drhd)
+>>>>>>> v3.18
 =======
 static int alloc_iommu(struct dmar_drhd_unit *drhd)
 >>>>>>> v3.18
@@ -1250,6 +1381,10 @@ static int alloc_iommu(struct dmar_drhd_unit *drhd)
 	iommu->agaw = agaw;
 	iommu->msagaw = msagaw;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	iommu->segment = drhd->segment;
+>>>>>>> v3.18
 =======
 	iommu->segment = drhd->segment;
 >>>>>>> v3.18
@@ -1277,13 +1412,19 @@ static int alloc_iommu(struct dmar_drhd_unit *drhd)
 
 	drhd->iommu = iommu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (intel_iommu_enabled)
 		iommu->iommu_dev = iommu_device_create(NULL, iommu,
 						       intel_iommu_groups,
 						       iommu->name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -1295,6 +1436,7 @@ static int alloc_iommu(struct dmar_drhd_unit *drhd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void free_iommu(struct intel_iommu *iommu)
 {
 	if (!iommu)
@@ -1302,6 +1444,8 @@ void free_iommu(struct intel_iommu *iommu)
 
 	free_dmar_iommu(iommu);
 =======
+=======
+>>>>>>> v3.18
 static void free_iommu(struct intel_iommu *iommu)
 {
 	iommu_device_destroy(iommu->iommu_dev);
@@ -1317,6 +1461,9 @@ static void free_iommu(struct intel_iommu *iommu)
 		kfree(iommu->qi->desc_status);
 		kfree(iommu->qi);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (iommu->reg)
@@ -1564,7 +1711,11 @@ void dmar_disable_qi(struct intel_iommu *iommu)
 	raw_spin_lock_irqsave(&iommu->register_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sts =  readl(iommu->reg + DMAR_GSTS_REG);
+=======
+	sts =  dmar_readq(iommu->reg + DMAR_GSTS_REG);
+>>>>>>> v3.18
 =======
 	sts =  dmar_readq(iommu->reg + DMAR_GSTS_REG);
 >>>>>>> v3.18
@@ -1646,7 +1797,11 @@ int dmar_enable_qi(struct intel_iommu *iommu)
 	if (!desc_page) {
 		kfree(qi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iommu->qi = 0;
+=======
+		iommu->qi = NULL;
+>>>>>>> v3.18
 =======
 		iommu->qi = NULL;
 >>>>>>> v3.18
@@ -1660,6 +1815,7 @@ int dmar_enable_qi(struct intel_iommu *iommu)
 		free_page((unsigned long) qi->desc);
 		kfree(qi);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iommu->qi = 0;
 		return -ENOMEM;
 	}
@@ -1668,10 +1824,15 @@ int dmar_enable_qi(struct intel_iommu *iommu)
 	qi->free_cnt = QI_LENGTH;
 
 =======
+=======
+>>>>>>> v3.18
 		iommu->qi = NULL;
 		return -ENOMEM;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	raw_spin_lock_init(&qi->q_lock);
 
@@ -1718,9 +1879,13 @@ static const char *irq_remap_fault_reasons[] =
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define MAX_FAULT_REASON_IDX 	(ARRAY_SIZE(fault_reason_strings) - 1)
 
 const char *dmar_get_fault_reason(u8 fault_reason, int *fault_type)
+=======
+static const char *dmar_get_fault_reason(u8 fault_reason, int *fault_type)
+>>>>>>> v3.18
 =======
 static const char *dmar_get_fault_reason(u8 fault_reason, int *fault_type)
 >>>>>>> v3.18
@@ -1888,8 +2053,13 @@ int dmar_set_interrupt(struct intel_iommu *iommu)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	irq = create_irq();
 	if (!irq) {
+=======
+	irq = dmar_alloc_hwirq();
+	if (irq <= 0) {
+>>>>>>> v3.18
 =======
 	irq = dmar_alloc_hwirq();
 	if (irq <= 0) {
@@ -1906,7 +2076,11 @@ int dmar_set_interrupt(struct intel_iommu *iommu)
 		irq_set_handler_data(irq, NULL);
 		iommu->irq = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		destroy_irq(irq);
+=======
+		dmar_free_hwirq(irq);
+>>>>>>> v3.18
 =======
 		dmar_free_hwirq(irq);
 >>>>>>> v3.18
@@ -1923,6 +2097,10 @@ int __init enable_drhd_fault_handling(void)
 {
 	struct dmar_drhd_unit *drhd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct intel_iommu *iommu;
+>>>>>>> v3.18
 =======
 	struct intel_iommu *iommu;
 >>>>>>> v3.18
@@ -1931,11 +2109,17 @@ int __init enable_drhd_fault_handling(void)
 	 * Enable fault control interrupt.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for_each_drhd_unit(drhd) {
 		int ret;
 		struct intel_iommu *iommu = drhd->iommu;
 		u32 fault_status;
 		ret = dmar_set_interrupt(iommu);
+=======
+	for_each_iommu(iommu, drhd) {
+		u32 fault_status;
+		int ret = dmar_set_interrupt(iommu);
+>>>>>>> v3.18
 =======
 	for_each_iommu(iommu, drhd) {
 		u32 fault_status;
@@ -1996,7 +2180,10 @@ int __init dmar_ir_support(void)
 	return dmar->flags & 0x1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int __init dmar_free_unused_resources(void)
 {
@@ -2020,5 +2207,8 @@ static int __init dmar_free_unused_resources(void)
 }
 
 late_initcall(dmar_free_unused_resources);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 IOMMU_INIT_POST(detect_intel_iommu);

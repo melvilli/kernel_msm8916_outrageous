@@ -32,7 +32,11 @@ __setup("lpj=", lpj_setup);
 #define MAX_DIRECT_CALIBRATION_RETRIES		5
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long __cpuinit calibrate_delay_direct(void)
+=======
+static unsigned long calibrate_delay_direct(void)
+>>>>>>> v3.18
 =======
 static unsigned long calibrate_delay_direct(void)
 >>>>>>> v3.18
@@ -171,12 +175,18 @@ static unsigned long calibrate_delay_direct(void)
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long __cpuinit calibrate_delay_direct(void) {return 0;}
 =======
+=======
+>>>>>>> v3.18
 static unsigned long calibrate_delay_direct(void)
 {
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -192,7 +202,11 @@ static unsigned long calibrate_delay_direct(void)
 #define LPS_PREC 8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static unsigned long __cpuinit calibrate_delay_converge(void)
+=======
+static unsigned long calibrate_delay_converge(void)
+>>>>>>> v3.18
 =======
 static unsigned long calibrate_delay_converge(void)
 >>>>>>> v3.18
@@ -270,7 +284,11 @@ static DEFINE_PER_CPU(unsigned long, cpu_loops_per_jiffy) = { 0 };
  * method is available.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long __attribute__((weak)) __cpuinit calibrate_delay_is_known(void)
+=======
+unsigned long __attribute__((weak)) calibrate_delay_is_known(void)
+>>>>>>> v3.18
 =======
 unsigned long __attribute__((weak)) calibrate_delay_is_known(void)
 >>>>>>> v3.18
@@ -279,8 +297,11 @@ unsigned long __attribute__((weak)) calibrate_delay_is_known(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit calibrate_delay(void)
 =======
+=======
+>>>>>>> v3.18
 /*
  * Indicate the cpu delay calibration is done. This can be used by
  * architectures to stop accepting delay timer registrations after this point.
@@ -291,6 +312,9 @@ void __attribute__((weak)) calibration_delay_done(void)
 }
 
 void calibrate_delay(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	unsigned long lpj;
@@ -331,6 +355,11 @@ void calibrate_delay(void)
 	loops_per_jiffy = lpj;
 	printed = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	calibration_delay_done();
+>>>>>>> v3.18
 =======
 
 	calibration_delay_done();

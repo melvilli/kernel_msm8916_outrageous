@@ -2,7 +2,11 @@
  * This file is part of the Chelsio T4 Ethernet driver for Linux.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright (c) 2003-2010 Chelsio Communications, Inc. All rights reserved.
+=======
+ * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
+>>>>>>> v3.18
 =======
  * Copyright (c) 2003-2014 Chelsio Communications, Inc. All rights reserved.
 >>>>>>> v3.18
@@ -80,6 +84,10 @@ enum {
 	CPL_PASS_ACCEPT_REQ   = 0x44,
 	CPL_TRACE_PKT_T5      = 0x48,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CPL_RX_ISCSI_DDP      = 0x49,
+>>>>>>> v3.18
 =======
 	CPL_RX_ISCSI_DDP      = 0x49,
 >>>>>>> v3.18
@@ -95,6 +103,10 @@ enum {
 
 	CPL_TRACE_PKT         = 0xB0,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CPL_ISCSI_DATA	      = 0xB2,
+>>>>>>> v3.18
 =======
 	CPL_ISCSI_DATA	      = 0xB2,
 >>>>>>> v3.18
@@ -129,6 +141,10 @@ enum CPL_error {
 	CPL_ERR_RTX_NEG_ADVICE     = 35,
 	CPL_ERR_PERSIST_NEG_ADVICE = 36,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	CPL_ERR_KEEPALV_NEG_ADVICE = 37,
+>>>>>>> v3.18
 =======
 	CPL_ERR_KEEPALV_NEG_ADVICE = 37,
 >>>>>>> v3.18
@@ -243,6 +259,10 @@ struct cpl_pass_open_req {
 #define ULP_MODE(x)   ((x) << 8)
 #define RCV_BUFSIZ(x) ((x) << 12)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RCV_BUFSIZ_MASK 0x3FFU
+>>>>>>> v3.18
 =======
 #define RCV_BUFSIZ_MASK 0x3FFU
 >>>>>>> v3.18
@@ -289,6 +309,11 @@ struct cpl_pass_accept_rpl {
 #define RX_COALESCE(x)       ((x) << 12)
 #define PACE(x)	      ((x) << 16)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RX_FC_VALID	     ((1U) << 19)
+#define RX_FC_DISABLE	     ((1U) << 20)
+>>>>>>> v3.18
 =======
 #define RX_FC_VALID	     ((1U) << 19)
 #define RX_FC_DISABLE	     ((1U) << 20)
@@ -300,10 +325,13 @@ struct cpl_pass_accept_rpl {
 #define TSTAMPS_EN(x)        ((x) << 29)
 #define SACK_EN(x)           ((x) << 30)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be64 opt0;
 };
 
 =======
+=======
+>>>>>>> v3.18
 #define T5_OPT_2_VALID	     ((1U) << 31)
 	__be64 opt0;
 };
@@ -317,6 +345,9 @@ struct cpl_t5_pass_accept_rpl {
 	__be32 rsvd;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cpl_act_open_req {
 	WR_HDR;
@@ -362,7 +393,10 @@ struct cpl_act_open_req6 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct cpl_t5_act_open_req6 {
 	WR_HDR;
 	union opcode_tid ot;
@@ -378,6 +412,9 @@ struct cpl_t5_act_open_req6 {
 	__be64 params;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct cpl_act_open_rpl {
 	union opcode_tid ot;
@@ -465,7 +502,11 @@ struct cpl_close_listsvr_req {
 	union opcode_tid ot;
 	__be16 reply_ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LISTSVR_IPV6 (1 << 14)
+=======
+#define LISTSVR_IPV6(x) ((x) << 14)
+>>>>>>> v3.18
 =======
 #define LISTSVR_IPV6(x) ((x) << 14)
 >>>>>>> v3.18
@@ -560,6 +601,10 @@ struct cpl_tx_pkt_lso_core {
 #define LSO_FIRST_SLICE   (1 << 23)
 #define LSO_OPCODE(x)     ((x) << 24)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define LSO_T5_XFER_SIZE(x) ((x) << 0)
+>>>>>>> v3.18
 =======
 #define LSO_T5_XFER_SIZE(x) ((x) << 0)
 >>>>>>> v3.18

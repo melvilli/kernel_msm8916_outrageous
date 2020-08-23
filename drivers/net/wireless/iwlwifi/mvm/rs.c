@@ -1,7 +1,12 @@
 /******************************************************************************
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -30,7 +35,10 @@
  *****************************************************************************/
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/skbuff.h>
@@ -51,6 +59,7 @@
 #define RS_NAME "iwl-mvm-rs"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define NUM_TRY_BEFORE_ANT_TOGGLE 1
 #define IWL_NUMBER_TRY      1
 #define IWL_HT_NUMBER_TRY   3
@@ -58,6 +67,8 @@
 #define IWL_RATE_MAX_WINDOW		62	/* # tx in history window */
 #define IWL_RATE_MIN_FAILURE_TH		6	/* min failures to calc tpt */
 =======
+=======
+>>>>>>> v3.18
 #define NUM_TRY_BEFORE_ANT_TOGGLE       1
 #define RS_LEGACY_RETRIES_PER_RATE      1
 #define RS_HT_VHT_RETRIES_PER_RATE      2
@@ -71,11 +82,15 @@
 
 #define IWL_RATE_MAX_WINDOW		62	/* # tx in history window */
 #define IWL_RATE_MIN_FAILURE_TH		3	/* min failures to calc tpt */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IWL_RATE_MIN_SUCCESS_TH		8	/* min successes to calc tpt */
 
 /* max allowed rate miss before sync LQ cmd */
 #define IWL_MISSED_RATE_MAX		15
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* max time to accum history 2 seconds */
 #define IWL_RATE_SCALE_FLUSH_INTVL   (3*HZ)
@@ -118,6 +133,8 @@ static const u8 ant_toggle_lookup[] = {
  * Parameter order:
  *   rate, ht rate, prev rate, next rate, prev tgg rate, next tgg rate
 =======
+=======
+>>>>>>> v3.18
 #define RS_STAY_IN_COLUMN_TIMEOUT       (5*HZ)
 #define RS_IDLE_TIMEOUT                 (5*HZ)
 
@@ -166,6 +183,9 @@ static const u8 ant_toggle_lookup[] = {
 /*
  * Parameter order:
  *   rate, ht rate, prev rate, next rate
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * If there isn't a valid next or previous rate then INV is used which
@@ -173,6 +193,7 @@ static const u8 ant_toggle_lookup[] = {
  *
  */
 static const struct iwl_rs_rate_info iwl_rates[IWL_RATE_COUNT] = {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	IWL_DECLARE_RATE_INFO(1, INV, INV, 2, INV, 2, INV, 2),    /*  1mbps */
 	IWL_DECLARE_RATE_INFO(2, INV, 1, 5, 1, 5, 1, 5),          /*  2mbps */
@@ -189,6 +210,8 @@ static const struct iwl_rs_rate_info iwl_rates[IWL_RATE_COUNT] = {
 	IWL_DECLARE_RATE_INFO(60, 60, 48, INV, 48, INV, 48, INV),/* 60mbps */
 	/* FIXME:RS:          ^^    should be INV (legacy) */
 =======
+=======
+>>>>>>> v3.18
 	IWL_DECLARE_RATE_INFO(1, INV, INV, 2),   /*  1mbps */
 	IWL_DECLARE_RATE_INFO(2, INV, 1, 5),     /*  2mbps */
 	IWL_DECLARE_RATE_INFO(5, INV, 2, 11),    /*5.5mbps */
@@ -410,6 +433,9 @@ static const struct rs_tx_column rs_tx_columns[] = {
 			rs_sgi_allow,
 		},
 	},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -423,6 +449,7 @@ static int iwl_hwrate_to_plcp_idx(u32 rate_n_flags)
 {
 	int idx = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* HT rate format */
 	if (rate_n_flags & RATE_MCS_HT_MSK) {
@@ -470,6 +497,8 @@ static void rs_dbgfs_set_mcs(struct iwl_lq_sta *lq_sta,
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 	if (rate_n_flags & RATE_MCS_HT_MSK) {
 		idx = rate_n_flags & RATE_HT_MCS_RATE_CODE_MSK;
 		idx += IWL_RATE_MCS_0_INDEX;
@@ -510,6 +539,9 @@ static void rs_fill_lq_cmd(struct iwl_mvm *mvm,
 			   const struct rs_rate *initial_rate);
 static void rs_stay_in_table(struct iwl_lq_sta *lq_sta, bool force_search);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * The following tables contain the expected throughput metrics for all rates
@@ -522,6 +554,7 @@ static void rs_stay_in_table(struct iwl_lq_sta *lq_sta, bool force_search);
  * (2.4 GHz) band.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static s32 expected_tpt_legacy[IWL_RATE_COUNT] = {
 	7, 13, 35, 58, 40, 57, 72, 98, 121, 154, 177, 186, 0
@@ -568,6 +601,8 @@ static s32 expected_tpt_mimo3_40MHz[4][IWL_RATE_COUNT] = {
 	{0, 0, 0, 0, 254, 0, 443, 584, 695, 868,  984, 1030, 1070}, /* AGG */
 	{0, 0, 0, 0, 277, 0, 478, 624, 737, 911, 1026, 1070, 1109}, /* AGG+SGI */
 =======
+=======
+>>>>>>> v3.18
 static const u16 expected_tpt_legacy[IWL_RATE_COUNT] = {
 	7, 13, 35, 58, 40, 57, 72, 98, 121, 154, 177, 186, 0, 0, 0
 };
@@ -615,6 +650,9 @@ static const u16 expected_tpt_mimo2_80MHz[4][IWL_RATE_COUNT] = {
 	{0, 0, 0, 0, 190, 0, 247,  269,  282,  302,  310,  313,  315,  319,  320},
 	{0, 0, 0, 0, 428, 0, 833, 1215, 1577, 2254, 2863, 3147, 3418, 3913, 4219},
 	{0, 0, 0, 0, 474, 0, 920, 1338, 1732, 2464, 3116, 3418, 3705, 4225, 4545},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -637,6 +675,7 @@ static const struct iwl_rate_mcs_info iwl_rate_mcs[IWL_RATE_COUNT] = {
 
 #define MCS_INDEX_PER_STREAM	(8)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void rs_rate_scale_clear_window(struct iwl_rate_scale_data *window)
 {
@@ -784,6 +823,8 @@ static u32 rs_tl_get_load(struct iwl_lq_sta *lq_data, u8 tid)
 
 	return tl->total;
 =======
+=======
+>>>>>>> v3.18
 static const char *rs_pretty_ant(u8 ant)
 {
 	static const char * const ant_name[] = {
@@ -855,6 +896,9 @@ static void rs_rate_scale_clear_tbl_windows(struct iwl_mvm *mvm,
 static inline u8 rs_is_valid_ant(u8 valid_antenna, u8 ant_type)
 {
 	return (ant_type & valid_antenna) == ant_type;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -863,6 +907,7 @@ static int rs_tl_turn_on_agg_for_tid(struct iwl_mvm *mvm,
 				      struct ieee80211_sta *sta)
 {
 	int ret = -EAGAIN;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 load;
 
@@ -887,6 +932,8 @@ static int rs_tl_turn_on_agg_for_tid(struct iwl_mvm *mvm,
 			     "Aggregation not enabled for tid %d because load = %u\n",
 			     tid, load);
 =======
+=======
+>>>>>>> v3.18
 
 	IWL_DEBUG_HT(mvm, "Starting Tx agg: STA: %pM tid: %d\n",
 		     sta->addr, tid);
@@ -900,6 +947,9 @@ static int rs_tl_turn_on_agg_for_tid(struct iwl_mvm *mvm,
 		IWL_ERR(mvm, "Fail start Tx agg on tid: %d\n",
 			tid);
 		ieee80211_stop_tx_ba_session(sta, tid);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return ret;
@@ -942,6 +992,7 @@ static s32 get_expected_tpt(struct iwl_scale_tbl_info *tbl, int rs_index)
  * packets.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int rs_collect_tx_data(struct iwl_scale_tbl_info *tbl,
 			      int scale_index, int attempts, int successes)
 {
@@ -956,6 +1007,8 @@ static int rs_collect_tx_data(struct iwl_scale_tbl_info *tbl,
 	window = &(tbl->win[scale_index]);
 
 =======
+=======
+>>>>>>> v3.18
 static int _rs_collect_tx_data(struct iwl_scale_tbl_info *tbl,
 			       int scale_index, int attempts, int successes,
 			       struct iwl_rate_scale_data *window)
@@ -963,6 +1016,9 @@ static int _rs_collect_tx_data(struct iwl_scale_tbl_info *tbl,
 	static const u64 mask = (((u64)1) << (IWL_RATE_MAX_WINDOW - 1));
 	s32 fail_count, tpt;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Get expected throughput */
 	tpt = get_expected_tpt(tbl, scale_index);
@@ -1018,6 +1074,7 @@ static int _rs_collect_tx_data(struct iwl_scale_tbl_info *tbl,
 	else
 		window->average_tpt = IWL_INVALID_VALUE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Tag this window as having been updated */
 	window->stamp = jiffies;
@@ -1137,6 +1194,8 @@ static int rs_get_tbl_info_from_mcs(const u32 rate_n_flags,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	return 0;
 }
 
@@ -1300,12 +1359,16 @@ static int rs_rate_from_ucode_rate(const u32 ucode_rate,
 	WARN_ON_ONCE(rate->bw == RATE_MCS_CHAN_WIDTH_80 &&
 		     !is_vht(rate));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
 
 /* switch to another antenna/antennas and return 1 */
 /* if no other valid antenna found, return 0 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int rs_toggle_antenna(u32 valid_ant, u32 *rate_n_flags,
 			     struct iwl_scale_tbl_info *tbl)
@@ -1371,6 +1434,8 @@ static u16 rs_get_supported_rates(struct iwl_lq_sta *lq_sta,
 			return lq_sta->active_mimo3_rate;
 	}
 =======
+=======
+>>>>>>> v3.18
 static int rs_toggle_antenna(u32 valid_ant, struct rs_rate *rate)
 {
 	u8 new_ant_type;
@@ -1407,6 +1472,9 @@ static u16 rs_get_supported_rates(struct iwl_lq_sta *lq_sta,
 
 	WARN_ON_ONCE(1);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -1419,7 +1487,11 @@ static u16 rs_get_adjacent_rate(struct iwl_mvm *mvm, u8 index, u16 rate_mask,
 	/* 802.11A or ht walks to the next literal adjacent rate in
 	 * the rate table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_a_band(rate_type) || !is_legacy(rate_type)) {
+=======
+	if (is_type_a_band(rate_type) || !is_type_legacy(rate_type)) {
+>>>>>>> v3.18
 =======
 	if (is_type_a_band(rate_type) || !is_type_legacy(rate_type)) {
 >>>>>>> v3.18
@@ -1470,6 +1542,7 @@ static u16 rs_get_adjacent_rate(struct iwl_mvm *mvm, u8 index, u16 rate_mask,
 	return (high << 8) | low;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u32 rs_get_lower_rate(struct iwl_lq_sta *lq_sta,
 			     struct iwl_scale_tbl_info *tbl,
@@ -1565,6 +1638,8 @@ static void rs_tx_status(void *mvm_r, struct ieee80211_supported_band *sband,
 	IWL_DEBUG_RATE_LIMIT(mvm,
 			     "get frame ack response, update rate scale window\n");
 =======
+=======
+>>>>>>> v3.18
 static inline bool rs_rate_supported(struct iwl_lq_sta *lq_sta,
 				     struct rs_rate *rate)
 {
@@ -1682,6 +1757,9 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	u8 reduced_txp = (uintptr_t)info->status.status_driver_data[0];
 	struct iwl_mvm_sta *mvmsta = iwl_mvm_sta_from_mac80211(sta);
 	struct iwl_lq_sta *lq_sta = &mvmsta->lq_sta;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Treat uninitialized rate scaling data same as non-existing. */
@@ -1689,7 +1767,11 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		IWL_DEBUG_RATE(mvm, "Station rate scaling not created yet.\n");
 		return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else if (!lq_sta->drv) {
+=======
+	} else if (!lq_sta->pers.drv) {
+>>>>>>> v3.18
 =======
 	} else if (!lq_sta->pers.drv) {
 >>>>>>> v3.18
@@ -1698,11 +1780,14 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!ieee80211_is_data(hdr->frame_control) ||
 	    info->flags & IEEE80211_TX_CTL_NO_ACK)
 		return;
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_MAC80211_DEBUGFS
 	/* Disable last tx check if we are debugging with fixed rate */
 	if (lq_sta->pers.dbg_fixed_rate) {
@@ -1710,6 +1795,9 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		return;
 	}
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* This packet was aggregated but doesn't carry status info */
 	if ((info->flags & IEEE80211_TX_CTL_AMPDU) &&
@@ -1726,15 +1814,21 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	 */
 	table = &lq_sta->lq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tx_rate = le32_to_cpu(table->rs_table[0]);
 	rs_get_tbl_info_from_mcs(tx_rate, info->band, &tbl_type, &rs_index);
 	if (info->band == IEEE80211_BAND_5GHZ)
 		rs_index -= IWL_FIRST_OFDM_RATE;
 =======
+=======
+>>>>>>> v3.18
 	ucode_rate = le32_to_cpu(table->rs_table[0]);
 	rs_rate_from_ucode_rate(ucode_rate, info->band, &rate);
 	if (info->band == IEEE80211_BAND_5GHZ)
 		rate.index -= IWL_FIRST_OFDM_RATE;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mac_flags = info->status.rates[0].flags;
 	mac_index = info->status.rates[0].idx;
@@ -1751,6 +1845,7 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		if (info->band == IEEE80211_BAND_2GHZ)
 			mac_index += IWL_FIRST_OFDM_RATE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	/* Here we actually compare this rate to the latest LQ command */
 	if ((mac_index < 0) ||
@@ -1766,6 +1861,8 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 			       "initial rate %d does not match %d (0x%x)\n",
 			       mac_index, rs_index, tx_rate);
 =======
+=======
+>>>>>>> v3.18
 	} else if (mac_flags & IEEE80211_TX_RC_VHT_MCS) {
 		mac_index &= RATE_VHT_MCS_RATE_CODE_MSK;
 		if (mac_index >= (IWL_RATE_9M_INDEX - IWL_FIRST_OFDM_RATE))
@@ -1799,6 +1896,9 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		IWL_DEBUG_RATE(mvm,
 			       "initial rate %d does not match %d (0x%x)\n",
 			       mac_index, rate.index, ucode_rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * Since rates mis-match, the last LQ command may have failed.
@@ -1809,12 +1909,18 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		if (lq_sta->missed_rate_counter > IWL_MISSED_RATE_MAX) {
 			lq_sta->missed_rate_counter = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			iwl_mvm_send_lq_cmd(mvm, &lq_sta->lq, CMD_ASYNC, false);
 =======
+=======
+>>>>>>> v3.18
 			IWL_DEBUG_RATE(mvm,
 				       "Too many rates mismatch. Send sync LQ. rs_state %d\n",
 				       lq_sta->rs_state);
 			iwl_mvm_send_lq_cmd(mvm, &lq_sta->lq, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		/* Regardless, ignore this status info for outdated rate */
@@ -1825,6 +1931,7 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 
 	/* Figure out if rate scale algorithm is in active or search table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (table_type_matches(&tbl_type,
 			       &(lq_sta->lq_info[lq_sta->active_tbl]))) {
 		curr_tbl = &(lq_sta->lq_info[lq_sta->active_tbl]);
@@ -1832,12 +1939,17 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	} else if (table_type_matches(
 			&tbl_type, &lq_sta->lq_info[1 - lq_sta->active_tbl])) {
 =======
+=======
+>>>>>>> v3.18
 	if (rs_rate_match(&rate,
 			  &(lq_sta->lq_info[lq_sta->active_tbl].rate))) {
 		curr_tbl = &(lq_sta->lq_info[lq_sta->active_tbl]);
 		other_tbl = &(lq_sta->lq_info[1 - lq_sta->active_tbl]);
 	} else if (rs_rate_match(&rate,
 			 &lq_sta->lq_info[1 - lq_sta->active_tbl].rate)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		curr_tbl = &(lq_sta->lq_info[1 - lq_sta->active_tbl]);
 		other_tbl = &(lq_sta->lq_info[lq_sta->active_tbl]);
@@ -1845,6 +1957,7 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		IWL_DEBUG_RATE(mvm,
 			       "Neither active nor search matches tx rate\n");
 		tmp_tbl = &(lq_sta->lq_info[lq_sta->active_tbl]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		IWL_DEBUG_RATE(mvm, "active- lq:%x, ant:%x, SGI:%d\n",
 			       tmp_tbl->lq_type, tmp_tbl->ant_type,
@@ -1857,11 +1970,16 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 			       tbl_type.lq_type, tbl_type.ant_type,
 			       tbl_type.is_SGI);
 =======
+=======
+>>>>>>> v3.18
 		rs_dump_rate(mvm, &tmp_tbl->rate, "ACTIVE");
 		tmp_tbl = &(lq_sta->lq_info[1 - lq_sta->active_tbl]);
 		rs_dump_rate(mvm, &tmp_tbl->rate, "SEARCH");
 		rs_dump_rate(mvm, &rate, "ACTUAL");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/*
 		 * no matching table found, let's by-pass the data collection
@@ -1880,6 +1998,7 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	 */
 	if (info->flags & IEEE80211_TX_STAT_AMPDU) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tx_rate = le32_to_cpu(table->rs_table[0]);
 		rs_get_tbl_info_from_mcs(tx_rate, info->band, &tbl_type,
 					 &rs_index);
@@ -1890,6 +2009,8 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		/* Update success/fail counts if not searching for new mode */
 		if (lq_sta->stay_in_tbl) {
 =======
+=======
+>>>>>>> v3.18
 		ucode_rate = le32_to_cpu(table->rs_table[0]);
 		rs_rate_from_ucode_rate(ucode_rate, info->band, &rate);
 		rs_collect_tx_data(lq_sta, curr_tbl, rate.index,
@@ -1899,6 +2020,9 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 
 		/* Update success/fail counts if not searching for new mode */
 		if (lq_sta->rs_state == RS_STATE_STAY_IN_COLUMN) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			lq_sta->total_success += info->status.ampdu_ack_len;
 			lq_sta->total_failed += (info->status.ampdu_len -
@@ -1917,9 +2041,14 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		/* Collect data for each rate used during failed TX attempts */
 		for (i = 0; i <= retries; ++i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tx_rate = le32_to_cpu(table->rs_table[i]);
 			rs_get_tbl_info_from_mcs(tx_rate, info->band,
 						 &tbl_type, &rs_index);
+=======
+			ucode_rate = le32_to_cpu(table->rs_table[i]);
+			rs_rate_from_ucode_rate(ucode_rate, info->band, &rate);
+>>>>>>> v3.18
 =======
 			ucode_rate = le32_to_cpu(table->rs_table[i]);
 			rs_rate_from_ucode_rate(ucode_rate, info->band, &rate);
@@ -1928,6 +2057,7 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 			 * Only collect stats if retried rate is in the same RS
 			 * table as active/search.
 			 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (table_type_matches(&tbl_type, curr_tbl))
 				tmp_tbl = curr_tbl;
@@ -1942,6 +2072,8 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		/* Update success/fail counts if not searching for new mode */
 		if (lq_sta->stay_in_tbl) {
 =======
+=======
+>>>>>>> v3.18
 			if (rs_rate_match(&rate, &curr_tbl->rate))
 				tmp_tbl = curr_tbl;
 			else if (rs_rate_match(&rate, &other_tbl->rate))
@@ -1956,12 +2088,16 @@ void iwl_mvm_rs_tx_status(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 
 		/* Update success/fail counts if not searching for new mode */
 		if (lq_sta->rs_state == RS_STATE_STAY_IN_COLUMN) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			lq_sta->total_success += legacy_success;
 			lq_sta->total_failed += retries + (1 - legacy_success);
 		}
 	}
 	/* The last TX rate is cached in lq_sta; it's set in if/else above */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	lq_sta->last_rate_n_flags = tx_rate;
 done:
@@ -1974,6 +2110,8 @@ done:
  * Begin a period of staying with a selected modulation mode.
  * Set "stay_in_tbl" flag to prevent any mode switches.
 =======
+=======
+>>>>>>> v3.18
 	lq_sta->last_rate_n_flags = ucode_rate;
 	IWL_DEBUG_RATE(mvm, "reduced txpower: %d\n", reduced_txp);
 done:
@@ -1993,6 +2131,7 @@ static void rs_mac80211_tx_status(void *mvm_r,
 	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *)skb->data;
 	struct iwl_op_mode *op_mode = (struct iwl_op_mode *)mvm_r;
 	struct iwl_mvm *mvm = IWL_OP_MODE_GET_MVM(op_mode);
+<<<<<<< HEAD
 	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(skb);
 
 	if (!ieee80211_is_data(hdr->frame_control) ||
@@ -2987,6 +3126,43 @@ static void rs_update_rate_tbl(struct iwl_mvm *mvm,
 	rs_fill_link_cmd(mvm, lq_sta, rate);
 	iwl_mvm_send_lq_cmd(mvm, &lq_sta->lq, CMD_ASYNC, false);
 =======
+=======
+	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(skb);
+
+	if (!ieee80211_is_data(hdr->frame_control) ||
+	    info->flags & IEEE80211_TX_CTL_NO_ACK)
+		return;
+
+	iwl_mvm_rs_tx_status(mvm, sta, rs_get_tid(hdr), info);
+}
+
+/*
+ * Begin a period of staying with a selected modulation mode.
+ * Set "stay_in_tbl" flag to prevent any mode switches.
+ * Set frame tx success limits according to legacy vs. high-throughput,
+ * and reset overall (spanning all rates) tx success history statistics.
+ * These control how long we stay using same modulation mode before
+ * searching for a new mode.
+ */
+static void rs_set_stay_in_table(struct iwl_mvm *mvm, u8 is_legacy,
+				 struct iwl_lq_sta *lq_sta)
+{
+	IWL_DEBUG_RATE(mvm, "Moving to RS_STATE_STAY_IN_COLUMN\n");
+	lq_sta->rs_state = RS_STATE_STAY_IN_COLUMN;
+	if (is_legacy) {
+		lq_sta->table_count_limit = IWL_LEGACY_TABLE_COUNT;
+		lq_sta->max_failure_limit = IWL_LEGACY_FAILURE_LIMIT;
+		lq_sta->max_success_limit = IWL_LEGACY_SUCCESS_LIMIT;
+	} else {
+		lq_sta->table_count_limit = IWL_NONE_LEGACY_TABLE_COUNT;
+		lq_sta->max_failure_limit = IWL_NONE_LEGACY_FAILURE_LIMIT;
+		lq_sta->max_success_limit = IWL_NONE_LEGACY_SUCCESS_LIMIT;
+	}
+	lq_sta->table_count = 0;
+	lq_sta->total_failed = 0;
+	lq_sta->total_success = 0;
+	lq_sta->flush_timer = jiffies;
+>>>>>>> v3.18
 	lq_sta->visited_columns = 0;
 }
 
@@ -3661,6 +3837,9 @@ static bool rs_tpc_perform(struct iwl_mvm *mvm,
 		break;
 	}
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -3668,6 +3847,7 @@ static bool rs_tpc_perform(struct iwl_mvm *mvm,
  * Do rate scaling and search for new modulation mode.
  */
 static void rs_rate_scale_perform(struct iwl_mvm *mvm,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				  struct sk_buff *skb,
 				  struct ieee80211_sta *sta,
@@ -3680,6 +3860,8 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	int index;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 				  struct ieee80211_sta *sta,
 				  struct iwl_lq_sta *lq_sta,
 				  int tid)
@@ -3687,12 +3869,16 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	int low = IWL_RATE_INVALID;
 	int high = IWL_RATE_INVALID;
 	int index;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct iwl_rate_scale_data *window = NULL;
 	int current_tpt = IWL_INVALID_VALUE;
 	int low_tpt = IWL_INVALID_VALUE;
 	int high_tpt = IWL_INVALID_VALUE;
 	u32 fail_count;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	s8 scale_action = 0;
 	u16 rate_mask;
@@ -3701,15 +3887,21 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	u16 rate_scale_index_msk = 0;
 	u8 is_green = 0;
 =======
+=======
+>>>>>>> v3.18
 	enum rs_action scale_action = RS_ACTION_STAY;
 	u16 rate_mask;
 	u8 update_lq = 0;
 	struct iwl_scale_tbl_info *tbl, *tbl1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8 active_tbl = 0;
 	u8 done_search = 0;
 	u16 high_low;
 	s32 sr;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u8 tid = IWL_MAX_TID_COUNT;
 	struct iwl_mvm_sta *sta_priv = (void *)sta->drv_priv;
@@ -3737,12 +3929,17 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 		lq_sta->is_agg = 0;
 	}
 =======
+=======
+>>>>>>> v3.18
 	u8 prev_agg = lq_sta->is_agg;
 	struct iwl_mvm_sta *sta_priv = (void *)sta->drv_priv;
 	struct iwl_mvm_tid_data *tid_data;
 	struct rs_rate *rate;
 
 	lq_sta->is_agg = !!sta_priv->agg_tids;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -3757,12 +3954,15 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 
 	tbl = &(lq_sta->lq_info[active_tbl]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_legacy(tbl->lq_type))
 		lq_sta->is_green = 0;
 	else
 		lq_sta->is_green = rs_use_green(sta);
 	is_green = lq_sta->is_green;
 =======
+=======
+>>>>>>> v3.18
 	rate = &tbl->rate;
 
 	if (prev_agg != lq_sta->is_agg) {
@@ -3772,11 +3972,15 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 		rs_set_expected_tpt_table(lq_sta, tbl);
 		rs_rate_scale_clear_tbl_windows(mvm, tbl);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* current tx rate */
 	index = lq_sta->last_txrate_idx;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	IWL_DEBUG_RATE(mvm, "Rate scale index %d for type %d\n", index,
 		       tbl->lq_type);
@@ -3814,6 +4018,8 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 			index = iwl_hwrate_to_plcp_idx(tbl->current_rate);
 			rs_update_rate_tbl(mvm, lq_sta, tbl, index, is_green);
 =======
+=======
+>>>>>>> v3.18
 	/* rates available for this association, and for modulation mode */
 	rate_mask = rs_get_supported_rates(lq_sta, rate);
 
@@ -3825,6 +4031,9 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 			lq_sta->search_better_tbl = 0;
 			tbl = &(lq_sta->lq_info[lq_sta->active_tbl]);
 			rs_update_rate_tbl(mvm, sta, lq_sta, &tbl->rate);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		return;
@@ -3837,6 +4046,7 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* force user max rate if set by user */
 	if ((lq_sta->max_rate_idx != -1) &&
 	    (lq_sta->max_rate_idx < index)) {
@@ -3846,6 +4056,9 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 		goto lq_update;
 	}
 
+=======
+	/* TODO: handle rate_idx_mask and rate_idx_mcs_mask */
+>>>>>>> v3.18
 =======
 	/* TODO: handle rate_idx_mask and rate_idx_mcs_mask */
 >>>>>>> v3.18
@@ -3863,8 +4076,14 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	    (window->success_counter < IWL_RATE_MIN_SUCCESS_TH)) {
 		IWL_DEBUG_RATE(mvm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			       "LQ: still below TH. succ=%d total=%d for index %d\n",
 			       window->success_counter, window->counter, index);
+=======
+			       "(%s: %d): Test Window: succ %d total %d\n",
+			       rs_pretty_lq_type(rate->type),
+			       index, window->success_counter, window->counter);
+>>>>>>> v3.18
 =======
 			       "(%s: %d): Test Window: succ %d total %d\n",
 			       rs_pretty_lq_type(rate->type),
@@ -3885,8 +4104,11 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	if (window->average_tpt != ((window->success_ratio *
 			tbl->expected_tpt[index] + 64) / 128)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IWL_ERR(mvm,
 			"expected_tpt should have been calculated by now\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		window->average_tpt = ((window->success_ratio *
@@ -3901,7 +4123,12 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 		if (window->average_tpt > lq_sta->last_tpt) {
 			IWL_DEBUG_RATE(mvm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       "LQ: SWITCHING TO NEW TABLE suc=%d cur-tpt=%d old-tpt=%d\n",
+=======
+				       "SWITCHING TO NEW TABLE SR: %d "
+				       "cur-tpt %d old-tpt %d\n",
+>>>>>>> v3.18
 =======
 				       "SWITCHING TO NEW TABLE SR: %d "
 				       "cur-tpt %d old-tpt %d\n",
@@ -3911,9 +4138,12 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 				       lq_sta->last_tpt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!is_legacy(tbl->lq_type))
 				lq_sta->enable_counter = 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			/* Swap tables; "search" becomes "active" */
@@ -3923,7 +4153,12 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 		} else {
 			IWL_DEBUG_RATE(mvm,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				       "LQ: GOING BACK TO THE OLD TABLE suc=%d cur-tpt=%d old-tpt=%d\n",
+=======
+				       "GOING BACK TO THE OLD TABLE: SR %d "
+				       "cur-tpt %d old-tpt %d\n",
+>>>>>>> v3.18
 =======
 				       "GOING BACK TO THE OLD TABLE: SR %d "
 				       "cur-tpt %d old-tpt %d\n",
@@ -3934,7 +4169,11 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 
 			/* Nullify "search" table */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tbl->lq_type = LQ_NONE;
+=======
+			rate->type = LQ_NONE;
+>>>>>>> v3.18
 =======
 			rate->type = LQ_NONE;
 >>>>>>> v3.18
@@ -3945,7 +4184,11 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 
 			/* Revert to "active" rate and throughput info */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			index = iwl_hwrate_to_plcp_idx(tbl->current_rate);
+=======
+			index = tbl->rate.index;
+>>>>>>> v3.18
 =======
 			index = tbl->rate.index;
 >>>>>>> v3.18
@@ -3965,6 +4208,7 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	/* (Else) not in search of better modulation mode, try for better
 	 * starting rate, while staying in this mode. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	high_low = rs_get_adjacent_rate(mvm, index, rate_scale_index_msk,
 					tbl->lq_type);
 	low = high_low & 0xff;
@@ -3975,11 +4219,16 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	    (lq_sta->max_rate_idx < high))
 		high = IWL_RATE_INVALID;
 =======
+=======
+>>>>>>> v3.18
 	high_low = rs_get_adjacent_rate(mvm, index, rate_mask, rate->type);
 	low = high_low & 0xff;
 	high = (high_low >> 8) & 0xff;
 
 	/* TODO: handle rate_idx_mask and rate_idx_mcs_mask */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	sr = window->success_ratio;
@@ -3991,6 +4240,7 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	if (high != IWL_RATE_INVALID)
 		high_tpt = tbl->win[high].average_tpt;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	scale_action = 0;
 
@@ -4052,6 +4302,8 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	switch (scale_action) {
 	case -1:
 =======
+=======
+>>>>>>> v3.18
 	IWL_DEBUG_RATE(mvm,
 		       "(%s: %d): cur_tpt %d SR %d low %d high %d low_tpt %d high_tpt %d\n",
 		       rs_pretty_lq_type(rate->type), index, current_tpt, sr,
@@ -4071,17 +4323,23 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 
 	switch (scale_action) {
 	case RS_ACTION_DOWNSCALE:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Decrease starting rate, update uCode's rate table */
 		if (low != IWL_RATE_INVALID) {
 			update_lq = 1;
 			index = low;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 
 		break;
 	case 1:
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			IWL_DEBUG_RATE(mvm,
 				       "At the bottom rate. Can't decrease\n");
@@ -4089,11 +4347,15 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 
 		break;
 	case RS_ACTION_UPSCALE:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Increase starting rate, update uCode's rate table */
 		if (high != IWL_RATE_INVALID) {
 			update_lq = 1;
 			index = high;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		}
 
@@ -4101,6 +4363,8 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 	case 0:
 		/* No change */
 =======
+=======
+>>>>>>> v3.18
 		} else {
 			IWL_DEBUG_RATE(mvm,
 				       "At the top rate. Can't increase\n");
@@ -4112,11 +4376,15 @@ static void rs_rate_scale_perform(struct iwl_mvm *mvm,
 		if (lq_sta->rs_state == RS_STATE_STAY_IN_COLUMN)
 			update_lq = rs_tpc_perform(mvm, sta, lq_sta, tbl);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		break;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	IWL_DEBUG_RATE(mvm,
 		       "choose rate scale index %d action %d low %d high %d type %d\n",
@@ -4127,12 +4395,17 @@ lq_update:
 	if (update_lq)
 		rs_update_rate_tbl(mvm, lq_sta, tbl, index, is_green);
 =======
+=======
+>>>>>>> v3.18
 lq_update:
 	/* Replace uCode's rate table for the destination station. */
 	if (update_lq) {
 		tbl->rate.index = index;
 		rs_update_rate_tbl(mvm, sta, lq_sta, &tbl->rate);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	rs_stay_in_table(lq_sta, false);
@@ -4144,6 +4417,7 @@ lq_update:
 	 * 3)  Allowing a new search
 	 */
 	if (!update_lq && !done_search &&
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    !lq_sta->stay_in_tbl && window->counter) {
 		/* Save current throughput to compare with "search" throughput*/
@@ -4160,6 +4434,8 @@ lq_update:
 		else
 			rs_move_mimo3_to_other(mvm, lq_sta, sta, index);
 =======
+=======
+>>>>>>> v3.18
 	    lq_sta->rs_state == RS_STATE_SEARCH_CYCLE_STARTED
 	    && window->counter) {
 		enum rs_column next_column;
@@ -4183,12 +4459,16 @@ lq_update:
 				       "No more columns to explore in search cycle. Go to RS_STATE_SEARCH_CYCLE_ENDED\n");
 			lq_sta->rs_state = RS_STATE_SEARCH_CYCLE_ENDED;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/* If new "search" mode was selected, set up in uCode table */
 		if (lq_sta->search_better_tbl) {
 			/* Access the "search" table, clear its history. */
 			tbl = &(lq_sta->lq_info[(1 - lq_sta->active_tbl)]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			for (i = 0; i < IWL_RATE_COUNT; i++)
 				rs_rate_scale_clear_window(&(tbl->win[i]));
@@ -4202,6 +4482,8 @@ lq_update:
 			rs_fill_link_cmd(mvm, lq_sta, tbl->current_rate);
 			iwl_mvm_send_lq_cmd(mvm, &lq_sta->lq, CMD_ASYNC, false);
 =======
+=======
+>>>>>>> v3.18
 			rs_rate_scale_clear_tbl_windows(mvm, tbl);
 
 			/* Use new "search" start rate */
@@ -4211,6 +4493,9 @@ lq_update:
 				     "Switch to SEARCH TABLE:");
 			rs_fill_lq_cmd(mvm, sta, lq_sta, &tbl->rate);
 			iwl_mvm_send_lq_cmd(mvm, &lq_sta->lq, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			done_search = 1;
@@ -4218,7 +4503,11 @@ lq_update:
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (done_search && !lq_sta->stay_in_tbl) {
+=======
+	if (done_search && lq_sta->rs_state == RS_STATE_SEARCH_CYCLE_ENDED) {
+>>>>>>> v3.18
 =======
 	if (done_search && lq_sta->rs_state == RS_STATE_SEARCH_CYCLE_ENDED) {
 >>>>>>> v3.18
@@ -4228,6 +4517,7 @@ lq_update:
 		 * stay with best antenna legacy modulation for a while
 		 * before next round of mode comparisons. */
 		tbl1 = &(lq_sta->lq_info[lq_sta->active_tbl]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (is_legacy(tbl1->lq_type) && !sta->ht_cap.ht_supported &&
 		    lq_sta->action_counter > tbl1->max_search) {
@@ -4241,6 +4531,8 @@ lq_update:
 		if (lq_sta->enable_counter &&
 		    (lq_sta->action_counter >= tbl1->max_search)) {
 =======
+=======
+>>>>>>> v3.18
 		if (is_legacy(&tbl1->rate)) {
 			IWL_DEBUG_RATE(mvm, "LQ: STAY in legacy table\n");
 
@@ -4258,6 +4550,9 @@ lq_update:
 		/* If we're in an HT mode, and all 3 mode switch actions
 		 * have been tried and compared, stay in this best modulation
 		 * mode for a while before next round of mode comparisons. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((lq_sta->last_tpt > IWL_AGG_TPT_THREHOLD) &&
 			    (lq_sta->tx_agg_tid_en & (1 << tid)) &&
@@ -4277,11 +4572,14 @@ lq_update:
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tbl->current_rate = rate_n_flags_from_tbl(mvm, tbl, index, is_green);
 	lq_sta->last_txrate_idx = index;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	lq_sta->last_txrate_idx = index;
 }
 
@@ -4389,6 +4687,9 @@ void rs_update_last_rssi(struct iwl_mvm *mvm,
 	lq_sta->pers.chain_signal[2] = rx_status->chain_signal[2];
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * rs_initialize_lq - Initialize a station's hardware rate table
@@ -4408,6 +4709,7 @@ static void rs_initialize_lq(struct iwl_mvm *mvm,
 			     struct ieee80211_sta *sta,
 			     struct iwl_lq_sta *lq_sta,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			     enum ieee80211_band band)
 {
 	struct iwl_scale_tbl_info *tbl;
@@ -4418,22 +4720,30 @@ static void rs_initialize_lq(struct iwl_mvm *mvm,
 	u8 active_tbl = 0;
 	u8 valid_tx_ant;
 =======
+=======
+>>>>>>> v3.18
 			     enum ieee80211_band band,
 			     bool init)
 {
 	struct iwl_scale_tbl_info *tbl;
 	struct rs_rate *rate;
 	u8 active_tbl = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (!sta || !lq_sta)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i = lq_sta->last_txrate_idx;
 
 	valid_tx_ant = iwl_fw_valid_tx_ant(mvm->fw);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (!lq_sta->search_better_tbl)
@@ -4442,6 +4752,7 @@ static void rs_initialize_lq(struct iwl_mvm *mvm,
 		active_tbl = 1 - lq_sta->active_tbl;
 
 	tbl = &(lq_sta->lq_info[active_tbl]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if ((i < 0) || (i >= IWL_RATE_COUNT))
@@ -4465,6 +4776,8 @@ static void rs_initialize_lq(struct iwl_mvm *mvm,
 	/* TODO restore station should remember the lq cmd */
 	iwl_mvm_send_lq_cmd(mvm, &lq_sta->lq, CMD_SYNC, true);
 =======
+=======
+>>>>>>> v3.18
 	rate = &tbl->rate;
 
 	rs_get_initial_rate(mvm, lq_sta, band, rate);
@@ -4480,6 +4793,9 @@ static void rs_initialize_lq(struct iwl_mvm *mvm,
 	rs_fill_lq_cmd(mvm, sta, lq_sta, rate);
 	/* TODO restore station should remember the lq cmd */
 	iwl_mvm_send_lq_cmd(mvm, &lq_sta->lq, init);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -4488,7 +4804,10 @@ static void rs_get_rate(void *mvm_r, struct ieee80211_sta *sta, void *mvm_sta,
 {
 	struct sk_buff *skb = txrc->skb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_supported_band *sband = txrc->sband;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct iwl_op_mode *op_mode __maybe_unused =
@@ -4496,6 +4815,7 @@ static void rs_get_rate(void *mvm_r, struct ieee80211_sta *sta, void *mvm_sta,
 	struct iwl_mvm *mvm __maybe_unused = IWL_OP_MODE_GET_MVM(op_mode);
 	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(skb);
 	struct iwl_lq_sta *lq_sta = mvm_sta;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int rate_idx;
 
@@ -4515,11 +4835,16 @@ static void rs_get_rate(void *mvm_r, struct ieee80211_sta *sta, void *mvm_sta,
 	/* Treat uninitialized rate scaling data same as non-existing. */
 	if (lq_sta && !lq_sta->drv) {
 =======
+=======
+>>>>>>> v3.18
 
 	/* TODO: handle rate_idx_mask and rate_idx_mcs_mask */
 
 	/* Treat uninitialized rate scaling data same as non-existing. */
 	if (lq_sta && !lq_sta->pers.drv) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		IWL_DEBUG_RATE(mvm, "Rate scaling not initialized yet.\n");
 		mvm_sta = NULL;
@@ -4529,6 +4854,7 @@ static void rs_get_rate(void *mvm_r, struct ieee80211_sta *sta, void *mvm_sta,
 	if (rate_control_send_low(sta, mvm_sta, txrc))
 		return;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rate_idx  = lq_sta->last_txrate_idx;
 
@@ -4566,6 +4892,11 @@ static void rs_get_rate(void *mvm_r, struct ieee80211_sta *sta, void *mvm_sta,
 				  info->band, &info->control.rates[0]);
 
 >>>>>>> v3.18
+=======
+	iwl_mvm_hwrate_to_tx_rate(lq_sta->last_rate_n_flags,
+				  info->band, &info->control.rates[0]);
+
+>>>>>>> v3.18
 	info->control.rates[0].count = 1;
 }
 
@@ -4573,6 +4904,7 @@ static void *rs_alloc_sta(void *mvm_rate, struct ieee80211_sta *sta,
 			  gfp_t gfp)
 {
 	struct iwl_mvm_sta *sta_priv = (struct iwl_mvm_sta *)sta->drv_priv;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct iwl_op_mode *op_mode __maybe_unused =
 			(struct iwl_op_mode *)mvm_rate;
@@ -4584,6 +4916,8 @@ static void *rs_alloc_sta(void *mvm_rate, struct ieee80211_sta *sta,
 }
 
 =======
+=======
+>>>>>>> v3.18
 	struct iwl_op_mode *op_mode = (struct iwl_op_mode *)mvm_rate;
 	struct iwl_mvm *mvm  = IWL_OP_MODE_GET_MVM(op_mode);
 	struct iwl_lq_sta *lq_sta = &sta_priv->lq_sta;
@@ -4726,13 +5060,20 @@ void iwl_mvm_update_frame_stats(struct iwl_mvm *mvm,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Called after adding a new station to initialize rate scaling
  */
 void iwl_mvm_rs_rate_init(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			  enum ieee80211_band band)
+=======
+			  enum ieee80211_band band, bool init)
+>>>>>>> v3.18
 =======
 			  enum ieee80211_band band, bool init)
 >>>>>>> v3.18
@@ -4741,6 +5082,10 @@ void iwl_mvm_rs_rate_init(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	struct ieee80211_hw *hw = mvm->hw;
 	struct ieee80211_sta_ht_cap *ht_cap = &sta->ht_cap;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct ieee80211_sta_vht_cap *vht_cap = &sta->vht_cap;
+>>>>>>> v3.18
 =======
 	struct ieee80211_sta_vht_cap *vht_cap = &sta->vht_cap;
 >>>>>>> v3.18
@@ -4752,17 +5097,24 @@ void iwl_mvm_rs_rate_init(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	sta_priv = (struct iwl_mvm_sta *)sta->drv_priv;
 	lq_sta = &sta_priv->lq_sta;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* clear all non-persistent lq data */
 	memset(lq_sta, 0, offsetof(typeof(*lq_sta), pers));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sband = hw->wiphy->bands[band];
 
 	lq_sta->lq.sta_id = sta_priv->sta_id;
 
 	for (j = 0; j < LQ_SIZE; j++)
+<<<<<<< HEAD
 <<<<<<< HEAD
 		for (i = 0; i < IWL_RATE_COUNT; i++)
 			rs_rate_scale_clear_window(&lq_sta->lq_info[j].win[i]);
@@ -4773,10 +5125,15 @@ void iwl_mvm_rs_rate_init(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		for (i = 0; i < IWL_RATE_COUNT; i++)
 			rs_rate_scale_clear_window(&lq_sta->lq_info[j].win[i]);
 =======
+=======
+>>>>>>> v3.18
 		rs_rate_scale_clear_tbl_windows(mvm, &lq_sta->lq_info[j]);
 
 	lq_sta->flush_timer = 0;
 	lq_sta->last_tx = jiffies;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	IWL_DEBUG_RATE(mvm,
@@ -4788,9 +5145,13 @@ void iwl_mvm_rs_rate_init(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	 * after assoc.. */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	lq_sta->max_rate_idx = -1;
 	lq_sta->missed_rate_counter = IWL_MISSED_RATE_MAX;
 	lq_sta->is_green = rs_use_green(sta);
+=======
+	lq_sta->missed_rate_counter = IWL_MISSED_RATE_MAX;
+>>>>>>> v3.18
 =======
 	lq_sta->missed_rate_counter = IWL_MISSED_RATE_MAX;
 >>>>>>> v3.18
@@ -4803,6 +5164,7 @@ void iwl_mvm_rs_rate_init(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 	for_each_set_bit(i, &supp, BITS_PER_LONG)
 		lq_sta->active_legacy_rate |= BIT(sband->bitrates[i].hw_value);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/*
 	 * active_siso_rate mask includes 9 MBits (bit 5), and CCK (bits 0-3),
@@ -4976,6 +5338,8 @@ static void rs_fill_link_cmd(struct iwl_mvm *mvm,
 	lq_cmd->agg_time_limit =
 		cpu_to_le16(LINK_QUAL_AGG_TIME_LIMIT_DEF);
 =======
+=======
+>>>>>>> v3.18
 	/* TODO: should probably account for rx_highest for both HT/VHT */
 	if (!vht_cap || !vht_cap->vht_supported) {
 		/* active_siso_rate mask includes 9 MBits (bit 5),
@@ -5257,6 +5621,9 @@ static void rs_fill_lq_cmd(struct iwl_mvm *mvm,
 
 	lq_cmd->agg_time_limit =
 			cpu_to_le16(iwl_mvm_coex_agg_time_limit(mvm, sta));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -5281,6 +5648,7 @@ static void rs_free_sta(void *mvm_r, struct ieee80211_sta *sta,
 }
 
 #ifdef CONFIG_MAC80211_DEBUGFS
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void rs_dbgfs_set_mcs(struct iwl_lq_sta *lq_sta,
 			     u32 *rate_n_flags, int index)
@@ -5308,6 +5676,8 @@ static void rs_dbgfs_set_mcs(struct iwl_lq_sta *lq_sta,
 	} else {
 		IWL_DEBUG_RATE(mvm, "Fixed rate OFF\n");
 =======
+=======
+>>>>>>> v3.18
 int rs_pretty_print_rate(char *buf, const u32 rate)
 {
 
@@ -5382,6 +5752,9 @@ static void rs_program_fix_rate(struct iwl_mvm *mvm,
 	if (lq_sta->pers.dbg_fixed_rate) {
 		rs_fill_lq_cmd(mvm, NULL, lq_sta, NULL);
 		iwl_mvm_send_lq_cmd(lq_sta->pers.drv, &lq_sta->lq, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -5396,8 +5769,12 @@ static ssize_t rs_sta_dbgfs_scale_table_write(struct file *file,
 	u32 parsed_rate;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	mvm = lq_sta->drv;
+=======
+	mvm = lq_sta->pers.drv;
+>>>>>>> v3.18
 =======
 	mvm = lq_sta->pers.drv;
 >>>>>>> v3.18
@@ -5408,9 +5785,15 @@ static ssize_t rs_sta_dbgfs_scale_table_write(struct file *file,
 
 	if (sscanf(buf, "%x", &parsed_rate) == 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		lq_sta->dbg_fixed_rate = parsed_rate;
 	else
 		lq_sta->dbg_fixed_rate = 0;
+=======
+		lq_sta->pers.dbg_fixed_rate = parsed_rate;
+	else
+		lq_sta->pers.dbg_fixed_rate = 0;
+>>>>>>> v3.18
 =======
 		lq_sta->pers.dbg_fixed_rate = parsed_rate;
 	else
@@ -5429,7 +5812,10 @@ static ssize_t rs_sta_dbgfs_scale_table_read(struct file *file,
 	int desc = 0;
 	int i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int index = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ssize_t ret;
@@ -5437,6 +5823,7 @@ static ssize_t rs_sta_dbgfs_scale_table_read(struct file *file,
 	struct iwl_lq_sta *lq_sta = file->private_data;
 	struct iwl_mvm *mvm;
 	struct iwl_scale_tbl_info *tbl = &(lq_sta->lq_info[lq_sta->active_tbl]);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	mvm = lq_sta->drv;
@@ -5446,10 +5833,16 @@ static ssize_t rs_sta_dbgfs_scale_table_read(struct file *file,
 	mvm = lq_sta->pers.drv;
 	buff = kmalloc(2048, GFP_KERNEL);
 >>>>>>> v3.18
+=======
+	struct rs_rate *rate = &tbl->rate;
+	mvm = lq_sta->pers.drv;
+	buff = kmalloc(2048, GFP_KERNEL);
+>>>>>>> v3.18
 	if (!buff)
 		return -ENOMEM;
 
 	desc += sprintf(buff+desc, "sta_id %d\n", lq_sta->lq.sta_id);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	desc += sprintf(buff+desc, "failed=%d success=%d rate=0%X\n",
 			lq_sta->total_failed, lq_sta->total_success,
@@ -5473,6 +5866,8 @@ static ssize_t rs_sta_dbgfs_scale_table_read(struct file *file,
 		   (lq_sta->is_green) ? "GF enabled" : "",
 		   (lq_sta->is_agg) ? "AGG on" : "");
 =======
+=======
+>>>>>>> v3.18
 	desc += sprintf(buff+desc, "failed=%d success=%d rate=0%lX\n",
 			lq_sta->total_failed, lq_sta->total_success,
 			lq_sta->active_legacy_rate);
@@ -5496,13 +5891,20 @@ static ssize_t rs_sta_dbgfs_scale_table_read(struct file *file,
 				   (rate->sgi) ? "SGI" : "NGI",
 				   (rate->ldpc) ? "LDPC" : "BCC",
 				   (lq_sta->is_agg) ? "AGG on" : "");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	desc += sprintf(buff+desc, "last tx rate=0x%X\n",
 			lq_sta->last_rate_n_flags);
 	desc += sprintf(buff+desc,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"general: flags=0x%X mimo-d=%d s-ant0x%x d-ant=0x%x\n",
+=======
+			"general: flags=0x%X mimo-d=%d s-ant=0x%x d-ant=0x%x\n",
+>>>>>>> v3.18
 =======
 			"general: flags=0x%X mimo-d=%d s-ant=0x%x d-ant=0x%x\n",
 >>>>>>> v3.18
@@ -5518,6 +5920,10 @@ static ssize_t rs_sta_dbgfs_scale_table_read(struct file *file,
 			lq_sta->lq.agg_frame_cnt_limit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	desc += sprintf(buff+desc, "reduced tpc=%d\n", lq_sta->lq.reduced_tpc);
+>>>>>>> v3.18
 =======
 	desc += sprintf(buff+desc, "reduced tpc=%d\n", lq_sta->lq.reduced_tpc);
 >>>>>>> v3.18
@@ -5529,6 +5935,7 @@ static ssize_t rs_sta_dbgfs_scale_table_read(struct file *file,
 			lq_sta->lq.initial_rate_index[3]);
 
 	for (i = 0; i < LINK_QUAL_MAX_RETRY_NUM; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		index = iwl_hwrate_to_plcp_idx(
 			le32_to_cpu(lq_sta->lq.rs_table[i]));
@@ -5544,10 +5951,15 @@ static ssize_t rs_sta_dbgfs_scale_table_read(struct file *file,
 					iwl_rate_mcs[index].mcs);
 		}
 =======
+=======
+>>>>>>> v3.18
 		u32 r = le32_to_cpu(lq_sta->lq.rs_table[i]);
 
 		desc += sprintf(buff+desc, " rate[%d] 0x%X ", i, r);
 		desc += rs_pretty_print_rate(buff+desc, r);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -5570,7 +5982,12 @@ static ssize_t rs_sta_dbgfs_stats_table_read(struct file *file,
 	int i, j;
 	ssize_t ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	struct iwl_scale_tbl_info *tbl;
+	struct rs_rate *rate;
+>>>>>>> v3.18
 =======
 	struct iwl_scale_tbl_info *tbl;
 	struct rs_rate *rate;
@@ -5582,6 +5999,7 @@ static ssize_t rs_sta_dbgfs_stats_table_read(struct file *file,
 		return -ENOMEM;
 
 	for (i = 0; i < LQ_SIZE; i++) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		desc += sprintf(buff+desc,
 				"%s type=%d SGI=%d HT40=%d DUP=0 GF=%d\n"
@@ -5599,6 +6017,8 @@ static ssize_t rs_sta_dbgfs_stats_table_read(struct file *file,
 				lq_sta->lq_info[i].win[j].success_counter,
 				lq_sta->lq_info[i].win[j].success_ratio);
 =======
+=======
+>>>>>>> v3.18
 		tbl = &(lq_sta->lq_info[i]);
 		rate = &tbl->rate;
 		desc += sprintf(buff+desc,
@@ -5617,6 +6037,9 @@ static ssize_t rs_sta_dbgfs_stats_table_read(struct file *file,
 				tbl->win[j].counter,
 				tbl->win[j].success_counter,
 				tbl->win[j].success_ratio);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -5631,6 +6054,7 @@ static const struct file_operations rs_sta_dbgfs_stats_table_ops = {
 	.llseek = default_llseek,
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t rs_sta_dbgfs_rate_scale_data_read(struct file *file,
 			char __user *user_buf, size_t count, loff_t *ppos)
@@ -5655,6 +6079,8 @@ static ssize_t rs_sta_dbgfs_rate_scale_data_read(struct file *file,
 static const struct file_operations rs_sta_dbgfs_rate_scale_data_ops = {
 	.read = rs_sta_dbgfs_rate_scale_data_read,
 =======
+=======
+>>>>>>> v3.18
 static ssize_t rs_sta_dbgfs_drv_tx_stats_read(struct file *file,
 					      char __user *user_buf,
 					      size_t count, loff_t *ppos)
@@ -5739,6 +6165,9 @@ static ssize_t rs_sta_dbgfs_drv_tx_stats_write(struct file *file,
 static const struct file_operations rs_sta_dbgfs_drv_tx_stats_ops = {
 	.read = rs_sta_dbgfs_drv_tx_stats_read,
 	.write = rs_sta_dbgfs_drv_tx_stats_write,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.open = simple_open,
 	.llseek = default_llseek,
@@ -5747,6 +6176,7 @@ static const struct file_operations rs_sta_dbgfs_drv_tx_stats_ops = {
 static void rs_add_debugfs(void *mvm, void *mvm_sta, struct dentry *dir)
 {
 	struct iwl_lq_sta *lq_sta = mvm_sta;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	lq_sta->rs_sta_dbgfs_scale_table_file =
 		debugfs_create_file("rate_scale_table", S_IRUSR | S_IWUSR, dir,
@@ -5761,6 +6191,8 @@ static void rs_add_debugfs(void *mvm, void *mvm_sta, struct dentry *dir)
 		debugfs_create_u8("tx_agg_tid_enable", S_IRUSR | S_IWUSR, dir,
 				  &lq_sta->tx_agg_tid_en);
 =======
+=======
+>>>>>>> v3.18
 	debugfs_create_file("rate_scale_table", S_IRUSR | S_IWUSR, dir,
 			    lq_sta, &rs_sta_dbgfs_scale_table_ops);
 	debugfs_create_file("rate_stats_table", S_IRUSR, dir,
@@ -5771,17 +6203,23 @@ static void rs_add_debugfs(void *mvm, void *mvm_sta, struct dentry *dir)
 			  &lq_sta->tx_agg_tid_en);
 	debugfs_create_u8("reduced_tpc", S_IRUSR | S_IWUSR, dir,
 			  &lq_sta->pers.dbg_fixed_txp_reduction);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void rs_remove_debugfs(void *mvm, void *mvm_sta)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct iwl_lq_sta *lq_sta = mvm_sta;
 	debugfs_remove(lq_sta->rs_sta_dbgfs_scale_table_file);
 	debugfs_remove(lq_sta->rs_sta_dbgfs_stats_table_file);
 	debugfs_remove(lq_sta->rs_sta_dbgfs_rate_scale_data_file);
 	debugfs_remove(lq_sta->rs_sta_dbgfs_tx_agg_tid_en_file);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -5794,6 +6232,7 @@ static void rs_remove_debugfs(void *mvm, void *mvm_sta)
  */
 static void rs_rate_init_stub(void *mvm_r,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 struct ieee80211_supported_band *sband,
 				 struct ieee80211_sta *sta, void *mvm_sta)
 {
@@ -5803,6 +6242,8 @@ static struct rate_control_ops rs_mvm_ops = {
 	.name = RS_NAME,
 	.tx_status = rs_tx_status,
 =======
+=======
+>>>>>>> v3.18
 			      struct ieee80211_supported_band *sband,
 			      struct cfg80211_chan_def *chandef,
 			      struct ieee80211_sta *sta, void *mvm_sta)
@@ -5812,6 +6253,9 @@ static struct rate_control_ops rs_mvm_ops = {
 static const struct rate_control_ops rs_mvm_ops = {
 	.name = RS_NAME,
 	.tx_status = rs_mac80211_tx_status,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.get_rate = rs_get_rate,
 	.rate_init = rs_rate_init_stub,
@@ -5820,6 +6264,10 @@ static const struct rate_control_ops rs_mvm_ops = {
 	.alloc_sta = rs_alloc_sta,
 	.free_sta = rs_free_sta,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.rate_update = rs_rate_update,
+>>>>>>> v3.18
 =======
 	.rate_update = rs_rate_update,
 >>>>>>> v3.18
@@ -5839,7 +6287,10 @@ void iwl_mvm_rate_control_unregister(void)
 	ieee80211_rate_control_unregister(&rs_mvm_ops);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /**
  * iwl_mvm_tx_protection - Gets LQ command, change it to enable/disable
@@ -5867,4 +6318,7 @@ int iwl_mvm_tx_protection(struct iwl_mvm *mvm, struct iwl_mvm_sta *mvmsta,
 
 	return iwl_mvm_send_lq_cmd(mvm, lq, false);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

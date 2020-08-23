@@ -35,7 +35,11 @@
 #include "hopper_vp3028.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct zl10353_config hopper_vp3028_config = {
+=======
+static struct zl10353_config hopper_vp3028_config = {
+>>>>>>> v3.18
 =======
 static struct zl10353_config hopper_vp3028_config = {
 >>>>>>> v3.18

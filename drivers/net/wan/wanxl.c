@@ -55,9 +55,15 @@ static const char* version = "wanXL serial card driver version: 0.48";
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 typedef struct {
 	struct net_device *dev;
 	struct card_t *card;
+=======
+struct port {
+	struct net_device *dev;
+	struct card *card;
+>>>>>>> v3.18
 =======
 struct port {
 	struct net_device *dev;
@@ -68,6 +74,7 @@ struct port {
 	unsigned int clock_type;
 	int tx_in, tx_out;
 	struct sk_buff *tx_skbs[TX_BUFFERS];
+<<<<<<< HEAD
 <<<<<<< HEAD
 }port_t;
 
@@ -80,6 +87,8 @@ typedef struct {
 
 typedef struct card_t {
 =======
+=======
+>>>>>>> v3.18
 };
 
 
@@ -90,6 +99,9 @@ struct card_status {
 
 
 struct card {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int n_ports;		/* 1, 2 or 4 ports */
 	u8 irq;
@@ -98,6 +110,7 @@ struct card {
 	struct pci_dev *pdev;	/* for pci_name(pdev) */
 	int rx_in;
 	struct sk_buff *rx_skbs[RX_QUEUE_LENGTH];
+<<<<<<< HEAD
 <<<<<<< HEAD
 	card_status_t *status;	/* shared between host and card */
 	dma_addr_t status_address;
@@ -114,6 +127,8 @@ static inline port_t* dev_to_port(struct net_device *dev)
 
 static inline port_status_t* get_status(port_t *port)
 =======
+=======
+>>>>>>> v3.18
 	struct card_status *status;	/* shared between host and card */
 	dma_addr_t status_address;
 	struct port ports[0];	/* 1 - 4 port structures follow */
@@ -128,6 +143,9 @@ static inline struct port *dev_to_port(struct net_device *dev)
 
 
 static inline port_status_t *get_status(struct port *port)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return &port->card->status->port_status[port->node];
@@ -152,7 +170,11 @@ static inline dma_addr_t pci_map_single_debug(struct pci_dev *pdev, void *ptr,
 
 /* Cable and/or personality module change interrupt service */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void wanxl_cable_intr(port_t *port)
+=======
+static inline void wanxl_cable_intr(struct port *port)
+>>>>>>> v3.18
 =======
 static inline void wanxl_cable_intr(struct port *port)
 >>>>>>> v3.18
@@ -201,7 +223,11 @@ static inline void wanxl_cable_intr(struct port *port)
 
 /* Transmit complete interrupt service */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void wanxl_tx_intr(port_t *port)
+=======
+static inline void wanxl_tx_intr(struct port *port)
+>>>>>>> v3.18
 =======
 static inline void wanxl_tx_intr(struct port *port)
 >>>>>>> v3.18
@@ -238,7 +264,11 @@ static inline void wanxl_tx_intr(struct port *port)
 
 /* Receive complete interrupt service */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void wanxl_rx_intr(card_t *card)
+=======
+static inline void wanxl_rx_intr(struct card *card)
+>>>>>>> v3.18
 =======
 static inline void wanxl_rx_intr(struct card *card)
 >>>>>>> v3.18
@@ -252,7 +282,11 @@ static inline void wanxl_rx_intr(struct card *card)
 		else {
 			struct sk_buff *skb = card->rx_skbs[card->rx_in];
 <<<<<<< HEAD
+<<<<<<< HEAD
 			port_t *port = &card->ports[desc->stat &
+=======
+			struct port *port = &card->ports[desc->stat &
+>>>>>>> v3.18
 =======
 			struct port *port = &card->ports[desc->stat &
 >>>>>>> v3.18
@@ -298,7 +332,11 @@ static inline void wanxl_rx_intr(struct card *card)
 static irqreturn_t wanxl_intr(int irq, void* dev_id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         card_t *card = dev_id;
+=======
+	struct card *card = dev_id;
+>>>>>>> v3.18
 =======
 	struct card *card = dev_id;
 >>>>>>> v3.18
@@ -329,7 +367,11 @@ static irqreturn_t wanxl_intr(int irq, void* dev_id)
 static netdev_tx_t wanxl_xmit(struct sk_buff *skb, struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         port_t *port = dev_to_port(dev);
+=======
+	struct port *port = dev_to_port(dev);
+>>>>>>> v3.18
 =======
 	struct port *port = dev_to_port(dev);
 >>>>>>> v3.18
@@ -380,7 +422,11 @@ static int wanxl_attach(struct net_device *dev, unsigned short encoding,
 			unsigned short parity)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_t *port = dev_to_port(dev);
+=======
+	struct port *port = dev_to_port(dev);
+>>>>>>> v3.18
 =======
 	struct port *port = dev_to_port(dev);
 >>>>>>> v3.18
@@ -408,7 +454,11 @@ static int wanxl_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 	const size_t size = sizeof(sync_serial_settings);
 	sync_serial_settings line;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_t *port = dev_to_port(dev);
+=======
+	struct port *port = dev_to_port(dev);
+>>>>>>> v3.18
 =======
 	struct port *port = dev_to_port(dev);
 >>>>>>> v3.18
@@ -462,7 +512,11 @@ static int wanxl_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 static int wanxl_open(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_t *port = dev_to_port(dev);
+=======
+	struct port *port = dev_to_port(dev);
+>>>>>>> v3.18
 =======
 	struct port *port = dev_to_port(dev);
 >>>>>>> v3.18
@@ -502,7 +556,11 @@ static int wanxl_open(struct net_device *dev)
 static int wanxl_close(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_t *port = dev_to_port(dev);
+=======
+	struct port *port = dev_to_port(dev);
+>>>>>>> v3.18
 =======
 	struct port *port = dev_to_port(dev);
 >>>>>>> v3.18
@@ -544,7 +602,11 @@ static int wanxl_close(struct net_device *dev)
 static struct net_device_stats *wanxl_get_stats(struct net_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	port_t *port = dev_to_port(dev);
+=======
+	struct port *port = dev_to_port(dev);
+>>>>>>> v3.18
 =======
 	struct port *port = dev_to_port(dev);
 >>>>>>> v3.18
@@ -559,7 +621,11 @@ static struct net_device_stats *wanxl_get_stats(struct net_device *dev)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wanxl_puts_command(card_t *card, u32 cmd)
+=======
+static int wanxl_puts_command(struct card *card, u32 cmd)
+>>>>>>> v3.18
 =======
 static int wanxl_puts_command(struct card *card, u32 cmd)
 >>>>>>> v3.18
@@ -580,7 +646,11 @@ static int wanxl_puts_command(struct card *card, u32 cmd)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void wanxl_reset(card_t *card)
+=======
+static void wanxl_reset(struct card *card)
+>>>>>>> v3.18
 =======
 static void wanxl_reset(struct card *card)
 >>>>>>> v3.18
@@ -600,7 +670,11 @@ static void wanxl_reset(struct card *card)
 static void wanxl_pci_remove_one(struct pci_dev *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card_t *card = pci_get_drvdata(pdev);
+=======
+	struct card *card = pci_get_drvdata(pdev);
+>>>>>>> v3.18
 =======
 	struct card *card = pci_get_drvdata(pdev);
 >>>>>>> v3.18
@@ -630,7 +704,11 @@ static void wanxl_pci_remove_one(struct pci_dev *pdev)
 
 	if (card->status)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_free_consistent(pdev, sizeof(card_status_t),
+=======
+		pci_free_consistent(pdev, sizeof(struct card_status),
+>>>>>>> v3.18
 =======
 		pci_free_consistent(pdev, sizeof(struct card_status),
 >>>>>>> v3.18
@@ -639,7 +717,10 @@ static void wanxl_pci_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	kfree(card);
@@ -661,7 +742,11 @@ static int wanxl_pci_init_one(struct pci_dev *pdev,
 			      const struct pci_device_id *ent)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card_t *card;
+=======
+	struct card *card;
+>>>>>>> v3.18
 =======
 	struct card *card;
 >>>>>>> v3.18
@@ -706,7 +791,11 @@ static int wanxl_pci_init_one(struct pci_dev *pdev,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	alloc_size = sizeof(card_t) + ports * sizeof(port_t);
+=======
+	alloc_size = sizeof(struct card) + ports * sizeof(struct port);
+>>>>>>> v3.18
 =======
 	alloc_size = sizeof(struct card) + ports * sizeof(struct port);
 >>>>>>> v3.18
@@ -721,7 +810,12 @@ static int wanxl_pci_init_one(struct pci_dev *pdev,
 	card->pdev = pdev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	card->status = pci_alloc_consistent(pdev, sizeof(card_status_t),
+=======
+	card->status = pci_alloc_consistent(pdev,
+					    sizeof(struct card_status),
+>>>>>>> v3.18
 =======
 	card->status = pci_alloc_consistent(pdev,
 					    sizeof(struct card_status),
@@ -880,7 +974,11 @@ static int wanxl_pci_init_one(struct pci_dev *pdev,
 	for (i = 0; i < ports; i++) {
 		hdlc_device *hdlc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		port_t *port = &card->ports[i];
+=======
+		struct port *port = &card->ports[i];
+>>>>>>> v3.18
 =======
 		struct port *port = &card->ports[i];
 >>>>>>> v3.18
@@ -925,7 +1023,11 @@ static int wanxl_pci_init_one(struct pci_dev *pdev,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(wanxl_pci_tbl) = {
+=======
+static const struct pci_device_id wanxl_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id wanxl_pci_tbl[] = {
 >>>>>>> v3.18

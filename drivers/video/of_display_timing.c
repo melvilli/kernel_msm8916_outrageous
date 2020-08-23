@@ -24,7 +24,11 @@
  * a range consisting of min/typ/max. This function helps handling this
  **/
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int parse_timing_property(struct device_node *np, const char *name,
+=======
+static int parse_timing_property(const struct device_node *np, const char *name,
+>>>>>>> v3.18
 =======
 static int parse_timing_property(const struct device_node *np, const char *name,
 >>>>>>> v3.18
@@ -58,6 +62,7 @@ static int parse_timing_property(const struct device_node *np, const char *name,
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * of_get_display_timing - parse display_timing entry from device_node
  * @np: device_node with the properties
  **/
@@ -74,6 +79,8 @@ static struct display_timing *of_get_display_timing(struct device_node *np)
 		return NULL;
 	}
 =======
+=======
+>>>>>>> v3.18
  * of_parse_display_timing - parse display_timing entry from device_node
  * @np: device_node with the properties
  **/
@@ -84,6 +91,9 @@ static int of_parse_display_timing(const struct device_node *np,
 	int ret = 0;
 
 	memset(dt, 0, sizeof(*dt));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret |= parse_timing_property(np, "hback-porch", &dt->hback_porch);
@@ -115,6 +125,11 @@ static int of_parse_display_timing(const struct device_node *np,
 	if (of_property_read_bool(np, "doublescan"))
 		dt->flags |= DISPLAY_FLAGS_DOUBLESCAN;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (of_property_read_bool(np, "doubleclk"))
+		dt->flags |= DISPLAY_FLAGS_DOUBLECLK;
+>>>>>>> v3.18
 =======
 	if (of_property_read_bool(np, "doubleclk"))
 		dt->flags |= DISPLAY_FLAGS_DOUBLECLK;
@@ -123,6 +138,7 @@ static int of_parse_display_timing(const struct device_node *np,
 	if (ret) {
 		pr_err("%s: error reading timing properties\n",
 			of_node_full_name(np));
+<<<<<<< HEAD
 <<<<<<< HEAD
 		kfree(dt);
 		return NULL;
@@ -133,6 +149,8 @@ static int of_parse_display_timing(const struct device_node *np,
 
 /**
 =======
+=======
+>>>>>>> v3.18
 		return -EINVAL;
 	}
 
@@ -165,6 +183,9 @@ int of_get_display_timing(struct device_node *np, const char *name,
 EXPORT_SYMBOL_GPL(of_get_display_timing);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * of_get_display_timings - parse all display_timing entries from a device_node
  * @np: device_node with the subnodes
@@ -177,6 +198,7 @@ struct display_timings *of_get_display_timings(struct device_node *np)
 	struct display_timings *disp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!np) {
 		pr_err("%s: no devicenode given\n", of_node_full_name(np));
 		return NULL;
@@ -184,10 +206,15 @@ struct display_timings *of_get_display_timings(struct device_node *np)
 
 	timings_np = of_find_node_by_name(np, "display-timings");
 =======
+=======
+>>>>>>> v3.18
 	if (!np)
 		return NULL;
 
 	timings_np = of_get_child_by_name(np, "display-timings");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!timings_np) {
 		pr_err("%s: could not find display-timings node\n",
@@ -206,7 +233,11 @@ struct display_timings *of_get_display_timings(struct device_node *np)
 	/* assume first child as native mode if none provided */
 	if (!entry)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		entry = of_get_next_child(np, NULL);
+=======
+		entry = of_get_next_child(timings_np, NULL);
+>>>>>>> v3.18
 =======
 		entry = of_get_next_child(timings_np, NULL);
 >>>>>>> v3.18
@@ -243,10 +274,13 @@ struct display_timings *of_get_display_timings(struct device_node *np)
 	for_each_child_of_node(timings_np, entry) {
 		struct display_timing *dt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		dt = of_get_display_timing(entry);
 		if (!dt) {
 =======
+=======
+>>>>>>> v3.18
 		int r;
 
 		dt = kzalloc(sizeof(*dt), GFP_KERNEL);
@@ -258,6 +292,9 @@ struct display_timings *of_get_display_timings(struct device_node *np)
 
 		r = of_parse_display_timing(entry, dt);
 		if (r) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			/*
 			 * to not encourage wrong devicetrees, fail in case of
@@ -289,9 +326,15 @@ struct display_timings *of_get_display_timings(struct device_node *np)
 
 timingfail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (native_mode)
 		of_node_put(native_mode);
 	display_timings_release(disp);
+=======
+	of_node_put(native_mode);
+	display_timings_release(disp);
+	disp = NULL;
+>>>>>>> v3.18
 =======
 	of_node_put(native_mode);
 	display_timings_release(disp);

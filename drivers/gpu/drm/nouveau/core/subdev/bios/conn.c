@@ -29,6 +29,7 @@
 #include <subdev/bios/conn.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u16
 dcb_conntab(struct nouveau_bios *bios, u8 *ver, u8 *hdr, u8 *cnt, u8 *len)
 {
@@ -36,12 +37,17 @@ dcb_conntab(struct nouveau_bios *bios, u8 *ver, u8 *hdr, u8 *cnt, u8 *len)
 	if (dcb && *ver >= 0x30 && *hdr >= 0x16) {
 		u16 data = nv_ro16(bios, dcb + 0x14);
 =======
+=======
+>>>>>>> v3.18
 u32
 nvbios_connTe(struct nouveau_bios *bios, u8 *ver, u8 *hdr, u8 *cnt, u8 *len)
 {
 	u32 dcb = dcb_table(bios, ver, hdr, cnt, len);
 	if (dcb && *ver >= 0x30 && *hdr >= 0x16) {
 		u32 data = nv_ro16(bios, dcb + 0x14);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (data) {
 			*ver = nv_ro08(bios, data + 0);
@@ -51,6 +57,7 @@ nvbios_connTe(struct nouveau_bios *bios, u8 *ver, u8 *hdr, u8 *cnt, u8 *len)
 			return data;
 		}
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return 0x0000;
 }
@@ -64,6 +71,8 @@ dcb_conn(struct nouveau_bios *bios, u8 idx, u8 *ver, u8 *len)
 		return data + hdr + (idx * *len);
 	return 0x0000;
 =======
+=======
+>>>>>>> v3.18
 	return 0x00000000;
 }
 
@@ -119,5 +128,8 @@ nvbios_connEp(struct nouveau_bios *bios, u8 idx, u8 *ver, u8 *len,
 		break;
 	}
 	return 0x00000000;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

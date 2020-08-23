@@ -6,6 +6,10 @@ config HAVE_AT91_DATAFLASH_CARD
 choice
 	prompt "Atmel AT91 Processor Devices for non DT boards"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on !ARCH_AT91X40
+>>>>>>> v3.18
 =======
 	depends on !ARCH_AT91X40
 >>>>>>> v3.18
@@ -16,6 +20,7 @@ config ARCH_AT91_NONE
 config ARCH_AT91RM9200
 	bool "AT91RM9200"
 	select SOC_AT91RM9200
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 config ARCH_AT91SAM9260
@@ -30,6 +35,8 @@ config ARCH_AT91SAM9G10
 	bool "AT91SAM9G10"
 	select SOC_AT91SAM9261
 =======
+=======
+>>>>>>> v3.18
 	select AT91_USE_OLD_CLK
 	select OLD_IRQ_AT91
 
@@ -44,12 +51,20 @@ config ARCH_AT91SAM9261
 	select SOC_AT91SAM9261
 	select AT91_USE_OLD_CLK
 	select OLD_IRQ_AT91
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config ARCH_AT91SAM9263
 	bool "AT91SAM9263"
 	select SOC_AT91SAM9263
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select AT91_USE_OLD_CLK
+	select OLD_IRQ_AT91
+>>>>>>> v3.18
 =======
 	select AT91_USE_OLD_CLK
 	select OLD_IRQ_AT91
@@ -59,6 +74,7 @@ config ARCH_AT91SAM9RL
 	bool "AT91SAM9RL"
 	select SOC_AT91SAM9RL
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config ARCH_AT91SAM9G20
 	bool "AT91SAM9G20"
@@ -67,10 +83,15 @@ config ARCH_AT91SAM9G20
 	select AT91_USE_OLD_CLK
 	select OLD_IRQ_AT91
 >>>>>>> v3.18
+=======
+	select AT91_USE_OLD_CLK
+	select OLD_IRQ_AT91
+>>>>>>> v3.18
 
 config ARCH_AT91SAM9G45
 	bool "AT91SAM9G45"
 	select SOC_AT91SAM9G45
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 config ARCH_AT91X40
@@ -83,6 +104,8 @@ config ARCH_AT91X40
 endchoice
 
 =======
+=======
+>>>>>>> v3.18
 	select AT91_USE_OLD_CLK
 	select OLD_IRQ_AT91
 
@@ -96,6 +119,9 @@ config ARCH_AT91SAM9G10
 	bool
 	select ARCH_AT91SAM9261
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 # ----------------------------------------------------------
 
@@ -110,6 +136,7 @@ config MACH_ONEARM
 	  <http://www.ajeco.fi/>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_AT91RM9200DK
 	bool "Atmel AT91RM9200-DK Development board"
 	select HAVE_AT91_DATAFLASH_CARD
@@ -117,6 +144,8 @@ config ARCH_AT91RM9200DK
 	  Select this if you are using Atmel's AT91RM9200-DK Development board.
 	  (Discontinued)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_AT91RM9200EK
@@ -190,12 +219,15 @@ config MACH_ECO920
 	help
 	  Select this if you are using the eco920 board
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 config MACH_RSI_EWS
 	bool "RSI Embedded Webserver"
 	depends on ARCH_AT91RM9200
 	help
 	  Select this if you are using RSIs EWS board.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif
@@ -237,6 +269,7 @@ config MACH_AFEB9260
 	  <http://groups.google.com/group/arm9fpga-evolution-board>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_USB_A9260
 	bool "CALAO USB-A9260"
 	help
@@ -251,6 +284,8 @@ config MACH_QIL_A9260
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config MACH_CPU9260
 	bool "Eukrea CPU9260 board"
 	help
@@ -263,6 +298,7 @@ config MACH_FLEXIBITY
 	  Select this if you are using Flexibity Connect board
 	  <http://www.flexibity.com>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 endif
 
@@ -336,6 +372,8 @@ if ARCH_AT91SAM9G20
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 comment "AT91SAM9G20 Board Type"
 
 config MACH_AT91SAM9G20EK
@@ -361,12 +399,15 @@ config MACH_CPU9G20
 	  CPU9G20 Board <http://www.eukrea.com/>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_ACMENETUSFOXG20
 	bool "Acme Systems srl FOX Board G20"
 	help
 	  Select this if you are using Acme Systems
 	  FOX Board G20 <http://www.acmesystems.it>
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_PORTUXG20
@@ -387,7 +428,11 @@ config MACH_PCONTROL_G20
 	help
 	  Select this if you are using taskit's Stamp9G20 CPU module on this
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  carrier board, beeing the decentralized unit of a building automation
+=======
+	  carrier board, being the decentralized unit of a building automation
+>>>>>>> v3.18
 =======
 	  carrier board, being the decentralized unit of a building automation
 >>>>>>> v3.18
@@ -400,6 +445,7 @@ config MACH_GSIA18S
 	  produced by GeoSIG Ltd company. This is an internet accelerograph.
 	  <http://www.geosig.com>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MACH_USB_A9G20
 	bool "CALAO USB-A9G20"
@@ -420,6 +466,8 @@ config MACH_SNAPPER_9260
           Snapper 9G20 modules.
           <http://www.bluewatersys.com/>
 =======
+=======
+>>>>>>> v3.18
 config MACH_SNAPPER_9260
 	bool "Bluewater Systems Snapper 9260/9G20 module"
 	help
@@ -478,6 +526,9 @@ config MACH_AT91SAM9RLEK
 	help
 	  Select this if you are using Atmel's AT91SAM9RL-EK Evaluation Kit.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 

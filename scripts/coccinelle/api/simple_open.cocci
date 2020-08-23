@@ -5,7 +5,11 @@
 // Confidence: High
 // Comments:
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Options: -no_includes -include_headers
+=======
+// Options: --no-includes --include-headers
+>>>>>>> v3.18
 =======
 // Options: --no-includes --include-headers
 >>>>>>> v3.18

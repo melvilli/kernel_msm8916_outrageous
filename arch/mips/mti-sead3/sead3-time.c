@@ -8,6 +8,10 @@
 #include <linux/init.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/cpu.h>
+>>>>>>> v3.18
 =======
 #include <asm/cpu.h>
 >>>>>>> v3.18
@@ -17,8 +21,11 @@
 #include <asm/mips-boards/generic.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long cpu_khz;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int mips_cpu_timer_irq;
@@ -42,7 +49,11 @@ static void __iomem *status_reg = (void __iomem *)0xbf000410;
 static unsigned int __init estimate_cpu_frequency(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int prid = read_c0_prid() & 0xffff00;
+=======
+	unsigned int prid = read_c0_prid() & (PRID_COMP_MASK | PRID_IMP_MASK);
+>>>>>>> v3.18
 =======
 	unsigned int prid = read_c0_prid() & (PRID_COMP_MASK | PRID_IMP_MASK);
 >>>>>>> v3.18
@@ -103,7 +114,11 @@ static void __init plat_perf_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned int __cpuinit get_c0_compare_int(void)
+=======
+unsigned int get_c0_compare_int(void)
+>>>>>>> v3.18
 =======
 unsigned int get_c0_compare_int(void)
 >>>>>>> v3.18
@@ -124,8 +139,11 @@ void __init plat_time_init(void)
 		(est_freq % 1000000) * 100 / 1000000);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cpu_khz = est_freq / 1000;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mips_scroll_message();

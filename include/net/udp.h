@@ -80,7 +80,11 @@ struct udp_table {
 };
 extern struct udp_table udp_table;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void udp_table_init(struct udp_table *, const char *);
+=======
+void udp_table_init(struct udp_table *, const char *);
+>>>>>>> v3.18
 =======
 void udp_table_init(struct udp_table *, const char *);
 >>>>>>> v3.18
@@ -100,6 +104,7 @@ static inline struct udp_hslot *udp_hashslot2(struct udp_table *table,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Note: this must match 'valbool' in sock_setsockopt */
 #define UDP_CSUM_NOXMIT		1
 
@@ -109,6 +114,8 @@ static inline struct udp_hslot *udp_hashslot2(struct udp_table *table,
 /* Default, as per the RFC, is to always do csums. */
 #define UDP_CSUM_DEFAULT	0
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct proto udp_prot;
@@ -128,7 +135,13 @@ struct sk_buff;
 static inline __sum16 __udp_lib_checksum_complete(struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __skb_checksum_complete_head(skb, UDP_SKB_CB(skb)->cscov);
+=======
+	return (UDP_SKB_CB(skb)->cscov == skb->len ?
+		__skb_checksum_complete(skb) :
+		__skb_checksum_complete_head(skb, UDP_SKB_CB(skb)->cscov));
+>>>>>>> v3.18
 =======
 	return (UDP_SKB_CB(skb)->cscov == skb->len ?
 		__skb_checksum_complete(skb) :
@@ -170,7 +183,10 @@ static inline __wsum udp_csum(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline __sum16 udp_v4_check(int len, __be32 saddr,
 				   __be32 daddr, __wsum base)
 {
@@ -198,6 +214,9 @@ static inline struct udphdr *udp_gro_udphdr(struct sk_buff *skb)
 	return uh;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* hash routines shared between UDPv4/6 and UDP-Litev4/6 */
 static inline void udp_lib_hash(struct sock *sk)
@@ -206,8 +225,13 @@ static inline void udp_lib_hash(struct sock *sk)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void udp_lib_unhash(struct sock *sk);
 extern void udp_lib_rehash(struct sock *sk, u16 new_hash);
+=======
+void udp_lib_unhash(struct sock *sk);
+void udp_lib_rehash(struct sock *sk, u16 new_hash);
+>>>>>>> v3.18
 =======
 void udp_lib_unhash(struct sock *sk);
 void udp_lib_rehash(struct sock *sk, u16 new_hash);
@@ -218,6 +242,7 @@ static inline void udp_lib_close(struct sock *sk, long timeout)
 	sk_common_release(sk);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern int udp_lib_get_port(struct sock *sk, unsigned short snum,
 			    int (*)(const struct sock *,const struct sock *),
@@ -255,6 +280,8 @@ extern struct sock *__udp6_lib_lookup(struct net *net, const struct in6_addr *sa
 				    const struct in6_addr *daddr, __be16 dport,
 				    int dif, struct udp_table *tbl);
 =======
+=======
+>>>>>>> v3.18
 int udp_lib_get_port(struct sock *sk, unsigned short snum,
 		     int (*)(const struct sock *, const struct sock *),
 		     unsigned int hash2_nulladdr);
@@ -324,6 +351,9 @@ struct sock *__udp6_lib_lookup(struct net *net,
 			       const struct in6_addr *saddr, __be16 sport,
 			       const struct in6_addr *daddr, __be16 dport,
 			       int dif, struct udp_table *tbl);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -347,6 +377,7 @@ struct sock *__udp6_lib_lookup(struct net *net,
 
 #if IS_ENABLED(CONFIG_IPV6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define UDPX_INC_STATS_BH(sk, field) \
 	do { \
 		if ((sk)->sk_family == AF_INET) \
@@ -355,6 +386,8 @@ struct sock *__udp6_lib_lookup(struct net *net,
 			UDP6_INC_STATS_BH(sock_net(sk), field, 0); \
 	} while (0);
 =======
+=======
+>>>>>>> v3.18
 #define UDPX_INC_STATS_BH(sk, field)					\
 do {									\
 	if ((sk)->sk_family == AF_INET)					\
@@ -362,6 +395,9 @@ do {									\
 	else								\
 		UDP6_INC_STATS_BH(sock_net(sk), field, 0);		\
 } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 #define UDPX_INC_STATS_BH(sk, field) UDP_INC_STATS_BH(sock_net(sk), field, 0)
@@ -387,6 +423,7 @@ struct udp_iter_state {
 
 #ifdef CONFIG_PROC_FS
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int udp_proc_register(struct net *net, struct udp_seq_afinfo *afinfo);
 extern void udp_proc_unregister(struct net *net, struct udp_seq_afinfo *afinfo);
 
@@ -403,6 +440,8 @@ extern void udp_encap_enable(void);
 #if IS_ENABLED(CONFIG_IPV6)
 extern void udpv6_encap_enable(void);
 =======
+=======
+>>>>>>> v3.18
 int udp_proc_register(struct net *net, struct udp_seq_afinfo *afinfo);
 void udp_proc_unregister(struct net *net, struct udp_seq_afinfo *afinfo);
 
@@ -417,6 +456,9 @@ void udp_init(void);
 void udp_encap_enable(void);
 #if IS_ENABLED(CONFIG_IPV6)
 void udpv6_encap_enable(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 #endif	/* _UDP_H */

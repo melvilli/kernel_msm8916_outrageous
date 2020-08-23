@@ -6,7 +6,12 @@
  * GPL LICENSE SUMMARY
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2008 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2008 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -36,7 +41,12 @@
  * BSD LICENSE
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright(c) 2005 - 2013 Intel Corporation. All rights reserved.
+=======
+ * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
+>>>>>>> v3.18
 =======
  * Copyright(c) 2005 - 2014 Intel Corporation. All rights reserved.
  * Copyright(c) 2013 - 2014 Intel Mobile Communications GmbH
@@ -73,6 +83,11 @@
 #include <linux/slab.h>
 #include <linux/export.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/etherdevice.h>
+#include <linux/pci.h>
+>>>>>>> v3.18
 =======
 #include <linux/etherdevice.h>
 #include <linux/pci.h>
@@ -87,7 +102,11 @@ enum wkp_nvm_offsets {
 	HW_ADDR = 0x15,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* NVM SW-Section offset (in words) definitions */
+=======
+	/* NVM SW-Section offset (in words) definitions */
+>>>>>>> v3.18
 =======
 	/* NVM SW-Section offset (in words) definitions */
 >>>>>>> v3.18
@@ -99,7 +118,11 @@ enum wkp_nvm_offsets {
 	NVM_CHANNELS = 0x1E0 - NVM_SW_SECTION,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* NVM calibration section offset (in words) definitions */
+=======
+	/* NVM calibration section offset (in words) definitions */
+>>>>>>> v3.18
 =======
 	/* NVM calibration section offset (in words) definitions */
 >>>>>>> v3.18
@@ -108,7 +131,10 @@ enum wkp_nvm_offsets {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum family_8000_nvm_offsets {
 	/* NVM HW-Section offset (in words) definitions */
 	HW_ADDR0_WFPM_FAMILY_8000 = 0x12,
@@ -132,12 +158,16 @@ enum family_8000_nvm_offsets {
 	XTAL_CALIB_FAMILY_8000 = 0x316 - NVM_CALIB_SECTION_FAMILY_8000
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* SKU Capabilities (actual values from NVM definition) */
 enum nvm_sku_bits {
 	NVM_SKU_CAP_BAND_24GHZ	= BIT(0),
 	NVM_SKU_CAP_BAND_52GHZ	= BIT(1),
 	NVM_SKU_CAP_11N_ENABLE	= BIT(2),
+<<<<<<< HEAD
 <<<<<<< HEAD
 };
 
@@ -149,6 +179,11 @@ enum nvm_sku_bits {
 #define NVM_RF_CFG_TX_ANT_MSK(x) ((x >> 8)  & 0xF) /* bits 8-11  */
 #define NVM_RF_CFG_RX_ANT_MSK(x) ((x >> 12) & 0xF) /* bits 12-15 */
 
+=======
+	NVM_SKU_CAP_11AC_ENABLE	= BIT(3),
+};
+
+>>>>>>> v3.18
 =======
 	NVM_SKU_CAP_11AC_ENABLE	= BIT(3),
 };
@@ -167,6 +202,7 @@ static const u8 iwl_nvm_channels[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define IWL_NUM_CHANNELS	ARRAY_SIZE(iwl_nvm_channels)
 #define NUM_2GHZ_CHANNELS	14
 #define FIRST_2GHZ_HT_MINUS	5
@@ -174,6 +210,8 @@ static const u8 iwl_nvm_channels[] = {
 #define LAST_5GHZ_HT		161
 
 =======
+=======
+>>>>>>> v3.18
 static const u8 iwl_nvm_channels_family_8000[] = {
 	/* 2.4 GHz */
 	1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
@@ -190,6 +228,9 @@ static const u8 iwl_nvm_channels_family_8000[] = {
 #define FIRST_2GHZ_HT_MINUS		5
 #define LAST_2GHZ_HT_PLUS		9
 #define LAST_5GHZ_HT			161
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* rate data (static) */
@@ -222,7 +263,13 @@ static struct ieee80211_rate iwl_cfg80211_rates[] = {
  * @NVM_CHANNEL_ACTIVE: active scanning allowed
  * @NVM_CHANNEL_RADAR: radar detection required
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @NVM_CHANNEL_DFS: dynamic freq selection candidate
+=======
+ * @NVM_CHANNEL_INDOOR_ONLY: only indoor use is allowed
+ * @NVM_CHANNEL_GO_CONCURRENT: GO operation is allowed when connected to BSS
+ *	on same channel on 2.4 or same UNII band on 5.2
+>>>>>>> v3.18
 =======
  * @NVM_CHANNEL_INDOOR_ONLY: only indoor use is allowed
  * @NVM_CHANNEL_GO_CONCURRENT: GO operation is allowed when connected to BSS
@@ -239,7 +286,12 @@ enum iwl_nvm_channel_flags {
 	NVM_CHANNEL_ACTIVE = BIT(3),
 	NVM_CHANNEL_RADAR = BIT(4),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	NVM_CHANNEL_DFS = BIT(7),
+=======
+	NVM_CHANNEL_INDOOR_ONLY = BIT(5),
+	NVM_CHANNEL_GO_CONCURRENT = BIT(6),
+>>>>>>> v3.18
 =======
 	NVM_CHANNEL_INDOOR_ONLY = BIT(5),
 	NVM_CHANNEL_GO_CONCURRENT = BIT(6),
@@ -263,12 +315,15 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 	u16 ch_flags;
 	bool is_5ghz;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	for (ch_idx = 0; ch_idx < IWL_NUM_CHANNELS; ch_idx++) {
 		ch_flags = __le16_to_cpup(nvm_ch_flags + ch_idx);
 
 		if (ch_idx >= NUM_2GHZ_CHANNELS &&
 =======
+=======
+>>>>>>> v3.18
 	int num_of_ch, num_2ghz_channels;
 	const u8 *nvm_chan;
 
@@ -286,6 +341,9 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 		ch_flags = __le16_to_cpup(nvm_ch_flags + ch_idx);
 
 		if (ch_idx >= num_2ghz_channels &&
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    !data->sku_cap_band_52GHz_enable)
 			ch_flags &= ~NVM_CHANNEL_VALID;
@@ -294,9 +352,15 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 			IWL_DEBUG_EEPROM(dev,
 					 "Ch. %d Flags %x [%sGHz] - No traffic\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 					 iwl_nvm_channels[ch_idx],
 					 ch_flags,
 					 (ch_idx >= NUM_2GHZ_CHANNELS) ?
+=======
+					 nvm_chan[ch_idx],
+					 ch_flags,
+					 (ch_idx >= num_2ghz_channels) ?
+>>>>>>> v3.18
 =======
 					 nvm_chan[ch_idx],
 					 ch_flags,
@@ -310,8 +374,13 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 		n_channels++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		channel->hw_value = iwl_nvm_channels[ch_idx];
 		channel->band = (ch_idx < NUM_2GHZ_CHANNELS) ?
+=======
+		channel->hw_value = nvm_chan[ch_idx];
+		channel->band = (ch_idx < num_2ghz_channels) ?
+>>>>>>> v3.18
 =======
 		channel->hw_value = nvm_chan[ch_idx];
 		channel->band = (ch_idx < num_2ghz_channels) ?
@@ -324,6 +393,7 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 		/* TODO: Need to be dependent to the NVM */
 		channel->flags = IEEE80211_CHAN_NO_HT40;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (ch_idx < NUM_2GHZ_CHANNELS &&
 		    (ch_flags & NVM_CHANNEL_40MHZ)) {
 			if (iwl_nvm_channels[ch_idx] <= LAST_2GHZ_HT_PLUS)
@@ -334,6 +404,8 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 			   (ch_flags & NVM_CHANNEL_40MHZ)) {
 			if ((ch_idx - NUM_2GHZ_CHANNELS) % 2 == 0)
 =======
+=======
+>>>>>>> v3.18
 		if (ch_idx < num_2ghz_channels &&
 		    (ch_flags & NVM_CHANNEL_40MHZ)) {
 			if (nvm_chan[ch_idx] <= LAST_2GHZ_HT_PLUS)
@@ -343,6 +415,9 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 		} else if (nvm_chan[ch_idx] <= LAST_5GHZ_HT &&
 			   (ch_flags & NVM_CHANNEL_40MHZ)) {
 			if ((ch_idx - num_2ghz_channels) % 2 == 0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				channel->flags &= ~IEEE80211_CHAN_NO_HT40PLUS;
 			else
@@ -355,20 +430,27 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 
 		if (!(ch_flags & NVM_CHANNEL_IBSS))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			channel->flags |= IEEE80211_CHAN_NO_IBSS;
 
 		if (!(ch_flags & NVM_CHANNEL_ACTIVE))
 			channel->flags |= IEEE80211_CHAN_PASSIVE_SCAN;
 =======
+=======
+>>>>>>> v3.18
 			channel->flags |= IEEE80211_CHAN_NO_IR;
 
 		if (!(ch_flags & NVM_CHANNEL_ACTIVE))
 			channel->flags |= IEEE80211_CHAN_NO_IR;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (ch_flags & NVM_CHANNEL_RADAR)
 			channel->flags |= IEEE80211_CHAN_RADAR;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		/* Initialize regulatory-based run-time data */
 
@@ -378,6 +460,8 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 		IWL_DEBUG_EEPROM(dev,
 				 "Ch. %d [%sGHz] %s%s%s%s%s%s(0x%02x %ddBm): Ad-Hoc %ssupported\n",
 =======
+=======
+>>>>>>> v3.18
 		if (ch_flags & NVM_CHANNEL_INDOOR_ONLY)
 			channel->flags |= IEEE80211_CHAN_INDOOR_ONLY;
 
@@ -398,6 +482,9 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 		is_5ghz = channel->band == IEEE80211_BAND_5GHZ;
 		IWL_DEBUG_EEPROM(dev,
 				 "Ch. %d [%sGHz] %s%s%s%s%s%s%s(0x%02x %ddBm): Ad-Hoc %ssupported\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				 channel->hw_value,
 				 is_5ghz ? "5.2" : "2.4",
@@ -407,7 +494,12 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 				 CHECK_AND_PRINT_I(RADAR),
 				 CHECK_AND_PRINT_I(WIDE),
 <<<<<<< HEAD
+<<<<<<< HEAD
 				 CHECK_AND_PRINT_I(DFS),
+=======
+				 CHECK_AND_PRINT_I(INDOOR_ONLY),
+				 CHECK_AND_PRINT_I(GO_CONCURRENT),
+>>>>>>> v3.18
 =======
 				 CHECK_AND_PRINT_I(INDOOR_ONLY),
 				 CHECK_AND_PRINT_I(GO_CONCURRENT),
@@ -425,15 +517,21 @@ static int iwl_init_channel_map(struct device *dev, const struct iwl_cfg *cfg,
 static void iwl_init_vht_hw_capab(const struct iwl_cfg *cfg,
 				  struct iwl_nvm_data *data,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				  struct ieee80211_sta_vht_cap *vht_cap)
 {
 	/* For now, assume new devices with NVM are VHT capable */
 =======
+=======
+>>>>>>> v3.18
 				  struct ieee80211_sta_vht_cap *vht_cap,
 				  u8 tx_chains, u8 rx_chains)
 {
 	int num_rx_ants = num_of_ant(rx_chains);
 	int num_tx_ants = num_of_ant(tx_chains);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	vht_cap->vht_supported = true;
@@ -442,9 +540,12 @@ static void iwl_init_vht_hw_capab(const struct iwl_cfg *cfg,
 		       IEEE80211_VHT_CAP_RXSTBC_1 |
 		       IEEE80211_VHT_CAP_SU_BEAMFORMEE_CAPABLE |
 <<<<<<< HEAD
+<<<<<<< HEAD
 		       7 << IEEE80211_VHT_CAP_MAX_A_MPDU_LENGTH_EXPONENT_SHIFT;
 
 =======
+=======
+>>>>>>> v3.18
 		       3 << IEEE80211_VHT_CAP_BEAMFORMEE_STS_SHIFT |
 		       7 << IEEE80211_VHT_CAP_MAX_A_MPDU_LENGTH_EXPONENT_SHIFT;
 
@@ -456,6 +557,9 @@ static void iwl_init_vht_hw_capab(const struct iwl_cfg *cfg,
 	else
 		vht_cap->cap |= IEEE80211_VHT_CAP_TX_ANTENNA_PATTERN;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (iwlwifi_mod_params.amsdu_size_8K)
 		vht_cap->cap |= IEEE80211_VHT_CAP_MAX_MPDU_LENGTH_7991;
@@ -471,9 +575,14 @@ static void iwl_init_vht_hw_capab(const struct iwl_cfg *cfg,
 			    IEEE80211_VHT_MCS_NOT_SUPPORTED << 14);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (data->valid_rx_ant == 1 || cfg->rx_with_siso_diversity) {
 		vht_cap->cap |= IEEE80211_VHT_CAP_RX_ANTENNA_PATTERN |
 				IEEE80211_VHT_CAP_TX_ANTENNA_PATTERN;
+=======
+	if (num_rx_ants == 1 || cfg->rx_with_siso_diversity) {
+		vht_cap->cap |= IEEE80211_VHT_CAP_RX_ANTENNA_PATTERN;
+>>>>>>> v3.18
 =======
 	if (num_rx_ants == 1 || cfg->rx_with_siso_diversity) {
 		vht_cap->cap |= IEEE80211_VHT_CAP_RX_ANTENNA_PATTERN;
@@ -488,6 +597,7 @@ static void iwl_init_vht_hw_capab(const struct iwl_cfg *cfg,
 
 static void iwl_init_sbands(struct device *dev, const struct iwl_cfg *cfg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    struct iwl_nvm_data *data, const __le16 *nvm_sw)
 {
 	int n_channels = iwl_init_channel_map(dev, cfg, data,
@@ -496,6 +606,8 @@ static void iwl_init_sbands(struct device *dev, const struct iwl_cfg *cfg,
 	struct ieee80211_supported_band *sband;
 
 =======
+=======
+>>>>>>> v3.18
 			    struct iwl_nvm_data *data,
 			    const __le16 *ch_section, bool enable_vht,
 			    u8 tx_chains, u8 rx_chains)
@@ -513,6 +625,9 @@ static void iwl_init_sbands(struct device *dev, const struct iwl_cfg *cfg,
 				dev, cfg, data,
 				&ch_section[NVM_CHANNELS_FAMILY_8000]);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	sband = &data->bands[IEEE80211_BAND_2GHZ];
 	sband->band = IEEE80211_BAND_2GHZ;
@@ -521,7 +636,12 @@ static void iwl_init_sbands(struct device *dev, const struct iwl_cfg *cfg,
 	n_used += iwl_init_sband_channels(data, sband, n_channels,
 					  IEEE80211_BAND_2GHZ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_2GHZ);
+=======
+	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_2GHZ,
+			     tx_chains, rx_chains);
+>>>>>>> v3.18
 =======
 	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_2GHZ,
 			     tx_chains, rx_chains);
@@ -534,14 +654,20 @@ static void iwl_init_sbands(struct device *dev, const struct iwl_cfg *cfg,
 	n_used += iwl_init_sband_channels(data, sband, n_channels,
 					  IEEE80211_BAND_5GHZ);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_5GHZ);
 	iwl_init_vht_hw_capab(cfg, data, &sband->vht_cap);
 =======
+=======
+>>>>>>> v3.18
 	iwl_init_ht_hw_capab(cfg, data, &sband->ht_cap, IEEE80211_BAND_5GHZ,
 			     tx_chains, rx_chains);
 	if (enable_vht)
 		iwl_init_vht_hw_capab(cfg, data, &sband->vht_cap,
 				      tx_chains, rx_chains);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (n_channels != n_used)
@@ -549,6 +675,7 @@ static void iwl_init_sbands(struct device *dev, const struct iwl_cfg *cfg,
 			    n_used, n_channels);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct iwl_nvm_data *
 iwl_parse_nvm_data(struct device *dev, const struct iwl_cfg *cfg,
@@ -617,6 +744,8 @@ iwl_parse_nvm_data(struct device *dev, const struct iwl_cfg *cfg,
 					field is still needed, and if it does,
 					where is it in the NVM*/
 =======
+=======
+>>>>>>> v3.18
 static int iwl_get_sku(const struct iwl_cfg *cfg,
 		       const __le16 *nvm_sw)
 {
@@ -838,6 +967,9 @@ iwl_parse_nvm_data(struct device *dev, const struct iwl_cfg *cfg,
 	}
 
 	data->calib_version = 255;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return data;

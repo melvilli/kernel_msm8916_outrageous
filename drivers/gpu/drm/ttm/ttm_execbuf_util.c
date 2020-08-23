@@ -33,6 +33,7 @@
 #include <linux/module.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void ttm_eu_backoff_reservation_locked(struct list_head *list)
 {
 	struct ttm_validate_buffer *entry;
@@ -51,6 +52,8 @@ static void ttm_eu_backoff_reservation_locked(struct list_head *list)
 		atomic_set(&bo->reserved, 0);
 		wake_up_all(&bo->event_queue);
 =======
+=======
+>>>>>>> v3.18
 static void ttm_eu_backoff_reservation_reverse(struct list_head *list,
 					      struct ttm_validate_buffer *entry)
 {
@@ -58,6 +61,9 @@ static void ttm_eu_backoff_reservation_reverse(struct list_head *list,
 		struct ttm_buffer_object *bo = entry->bo;
 
 		__ttm_bo_unreserve(bo);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -68,6 +74,7 @@ static void ttm_eu_del_from_lru_locked(struct list_head *list)
 
 	list_for_each_entry(entry, list, head) {
 		struct ttm_buffer_object *bo = entry->bo;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (!entry->reserved)
 			continue;
@@ -95,6 +102,8 @@ static void ttm_eu_list_ref_sub(struct list_head *list)
 
 void ttm_eu_backoff_reservation(struct list_head *list)
 =======
+=======
+>>>>>>> v3.18
 		unsigned put_count = ttm_bo_del_from_lru(bo);
 
 		ttm_bo_list_ref_sub(bo, put_count, true);
@@ -103,6 +112,9 @@ void ttm_eu_backoff_reservation(struct list_head *list)
 
 void ttm_eu_backoff_reservation(struct ww_acquire_ctx *ticket,
 				struct list_head *list)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ttm_validate_buffer *entry;
@@ -114,10 +126,13 @@ void ttm_eu_backoff_reservation(struct ww_acquire_ctx *ticket,
 	entry = list_first_entry(list, struct ttm_validate_buffer, head);
 	glob = entry->bo->glob;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&glob->lru_lock);
 	ttm_eu_backoff_reservation_locked(list);
 	spin_unlock(&glob->lru_lock);
 =======
+=======
+>>>>>>> v3.18
 
 	spin_lock(&glob->lru_lock);
 	list_for_each_entry(entry, list, head) {
@@ -130,6 +145,9 @@ void ttm_eu_backoff_reservation(struct ww_acquire_ctx *ticket,
 
 	if (ticket)
 		ww_acquire_fini(ticket);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(ttm_eu_backoff_reservation);
@@ -147,7 +165,12 @@ EXPORT_SYMBOL(ttm_eu_backoff_reservation);
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ttm_eu_reserve_buffers(struct list_head *list)
+=======
+int ttm_eu_reserve_buffers(struct ww_acquire_ctx *ticket,
+			   struct list_head *list, bool intr)
+>>>>>>> v3.18
 =======
 int ttm_eu_reserve_buffers(struct ww_acquire_ctx *ticket,
 			   struct list_head *list, bool intr)
@@ -157,13 +180,17 @@ int ttm_eu_reserve_buffers(struct ww_acquire_ctx *ticket,
 	struct ttm_validate_buffer *entry;
 	int ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uint32_t val_seq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
 	if (list_empty(list))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	list_for_each_entry(entry, list, head) {
 		entry->reserved = false;
@@ -252,6 +279,8 @@ EXPORT_SYMBOL(ttm_eu_reserve_buffers);
 
 void ttm_eu_fence_buffer_objects(struct list_head *list, void *sync_obj)
 =======
+=======
+>>>>>>> v3.18
 	entry = list_first_entry(list, struct ttm_validate_buffer, head);
 	glob = entry->bo->glob;
 
@@ -323,6 +352,9 @@ EXPORT_SYMBOL(ttm_eu_reserve_buffers);
 
 void ttm_eu_fence_buffer_objects(struct ww_acquire_ctx *ticket,
 				 struct list_head *list, struct fence *fence)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct ttm_validate_buffer *entry;
@@ -341,6 +373,7 @@ void ttm_eu_fence_buffer_objects(struct ww_acquire_ctx *ticket,
 
 	spin_lock(&glob->lru_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock(&bdev->fence_lock);
 
 	list_for_each_entry(entry, list, head) {
@@ -358,6 +391,8 @@ void ttm_eu_fence_buffer_objects(struct ww_acquire_ctx *ticket,
 			driver->sync_obj_unref(&entry->old_sync_obj);
 	}
 =======
+=======
+>>>>>>> v3.18
 
 	list_for_each_entry(entry, list, head) {
 		bo = entry->bo;
@@ -371,6 +406,9 @@ void ttm_eu_fence_buffer_objects(struct ww_acquire_ctx *ticket,
 	spin_unlock(&glob->lru_lock);
 	if (ticket)
 		ww_acquire_fini(ticket);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL(ttm_eu_fence_buffer_objects);

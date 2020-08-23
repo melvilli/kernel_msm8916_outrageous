@@ -24,6 +24,10 @@
 #include <linux/of_fdt.h>
 #include <linux/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_device.h>
 >>>>>>> v3.18
@@ -39,10 +43,13 @@ struct efi __read_mostly efi = {
 	.uga        = EFI_INVALID_TABLE_ADDR,
 	.uv_systab  = EFI_INVALID_TABLE_ADDR,
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 EXPORT_SYMBOL(efi);
 
 =======
+=======
+>>>>>>> v3.18
 	.fw_vendor  = EFI_INVALID_TABLE_ADDR,
 	.runtime    = EFI_INVALID_TABLE_ADDR,
 	.config_table  = EFI_INVALID_TABLE_ADDR,
@@ -71,6 +78,9 @@ static int __init parse_efi_cmdline(char *str)
 }
 early_param("efi", parse_efi_cmdline);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct kobject *efi_kobj;
 static struct kobject *efivars_kobj;
@@ -109,6 +119,7 @@ static struct kobj_attribute efi_attr_systab =
 			__ATTR(systab, 0400, systab_show, NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *efi_subsys_attrs[] = {
 	&efi_attr_systab.attr,
 	NULL,	/* maybe more in the future? */
@@ -117,6 +128,8 @@ static struct attribute *efi_subsys_attrs[] = {
 static struct attribute_group efi_subsys_attr_group = {
 	.attrs = efi_subsys_attrs,
 =======
+=======
+>>>>>>> v3.18
 #define EFI_FIELD(var) efi.var
 
 #define EFI_ATTR_SHOW(name) \
@@ -163,6 +176,9 @@ static umode_t efi_attr_is_visible(struct kobject *kobj,
 static struct attribute_group efi_subsys_attr_group = {
 	.attrs = efi_subsys_attrs,
 	.is_visible = efi_attr_is_visible,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -215,11 +231,17 @@ static int __init efisubsys_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	error = efi_runtime_map_init(efi_kobj);
 	if (error)
 		goto err_remove_group;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* and the standard mountpoint for efivarfs */
 	efivars_kobj = kobject_create_and_add("efivars", efi_kobj);
@@ -284,7 +306,11 @@ static __initdata efi_config_table_type_t common_tables[] = {
 	{SMBIOS_TABLE_GUID, "SMBIOS", &efi.smbios},
 	{UGA_IO_PROTOCOL_GUID, "UGA", &efi.uga},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{NULL_GUID, NULL, 0},
+=======
+	{NULL_GUID, NULL, NULL},
+>>>>>>> v3.18
 =======
 	{NULL_GUID, NULL, NULL},
 >>>>>>> v3.18
@@ -351,7 +377,11 @@ int __init efi_config_init(efi_config_table_type_t *arch_tables)
 				pr_cont("\n");
 				pr_err("Table located above 4GB, disabling EFI.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				early_iounmap(config_tables,
+=======
+				early_memunmap(config_tables,
+>>>>>>> v3.18
 =======
 				early_memunmap(config_tables,
 >>>>>>> v3.18
@@ -371,11 +401,14 @@ int __init efi_config_init(efi_config_table_type_t *arch_tables)
 	}
 	pr_cont("\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	early_iounmap(config_tables, efi.systab->nr_tables * sz);
 	return 0;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	early_memunmap(config_tables, efi.systab->nr_tables * sz);
 
 	set_bit(EFI_CONFIG_TABLES, &efi.flags);
@@ -397,6 +430,9 @@ static int __init efi_load_efivars(void)
 device_initcall(efi_load_efivars);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_EFI_PARAMS_FROM_FDT
 
@@ -424,6 +460,10 @@ static __initdata struct {
 struct param_info {
 	int verbose;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int found;
+>>>>>>> v3.18
 =======
 	int found;
 >>>>>>> v3.18
@@ -435,21 +475,28 @@ static int __init fdt_find_uefi_params(unsigned long node, const char *uname,
 {
 	struct param_info *info = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *prop, *dest;
 	unsigned long len;
 	u64 val;
 	int i;
 =======
+=======
+>>>>>>> v3.18
 	const void *prop;
 	void *dest;
 	u64 val;
 	int i, len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (depth != 1 ||
 	    (strcmp(uname, "chosen") != 0 && strcmp(uname, "chosen@0") != 0))
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	pr_info("Getting parameters from FDT:\n");
 
@@ -462,12 +509,17 @@ static int __init fdt_find_uefi_params(unsigned long node, const char *uname,
 		}
 		dest = info->params + dt_params[i].offset;
 =======
+=======
+>>>>>>> v3.18
 	for (i = 0; i < ARRAY_SIZE(dt_params); i++) {
 		prop = of_get_flat_dt_prop(node, dt_params[i].propname, &len);
 		if (!prop)
 			return 0;
 		dest = info->params + dt_params[i].offset;
 		info->found++;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		val = of_read_number(prop, len / sizeof(u32));
@@ -488,6 +540,7 @@ int __init efi_get_fdt_params(struct efi_fdt_params *params, int verbose)
 {
 	struct param_info info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	info.verbose = verbose;
 	info.params = params;
@@ -496,6 +549,8 @@ int __init efi_get_fdt_params(struct efi_fdt_params *params, int verbose)
 }
 #endif /* CONFIG_EFI_PARAMS_FROM_FDT */
 =======
+=======
+>>>>>>> v3.18
 	int ret;
 
 	pr_info("Getting EFI parameters from FDT:\n");
@@ -571,4 +626,7 @@ char * __init efi_md_typeattr_format(char *buf, size_t size,
 			 attr & EFI_MEMORY_UC      ? "UC"  : "");
 	return buf;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

@@ -26,6 +26,10 @@
 #include <linux/delay.h>
 #include <linux/time.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/time64.h>
+>>>>>>> v3.18
 =======
 #include <linux/time64.h>
 >>>>>>> v3.18
@@ -113,7 +117,11 @@ struct ab8500_fg_avg_cap {
 	int avg;
 	int samples[NBR_AVG_SAMPLES];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__kernel_time_t time_stamps[NBR_AVG_SAMPLES];
+=======
+	time64_t time_stamps[NBR_AVG_SAMPLES];
+>>>>>>> v3.18
 =======
 	time64_t time_stamps[NBR_AVG_SAMPLES];
 >>>>>>> v3.18
@@ -395,22 +403,32 @@ static int ab8500_fg_is_low_curr(struct ab8500_fg *di, int curr)
 static int ab8500_fg_add_cap_sample(struct ab8500_fg *di, int sample)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
 	struct ab8500_fg_avg_cap *avg = &di->avg_cap;
 
 	getnstimeofday(&ts);
 =======
+=======
+>>>>>>> v3.18
 	struct timespec64 ts64;
 	struct ab8500_fg_avg_cap *avg = &di->avg_cap;
 
 	getnstimeofday64(&ts64);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	do {
 		avg->sum += sample - avg->samples[avg->pos];
 		avg->samples[avg->pos] = sample;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		avg->time_stamps[avg->pos] = ts.tv_sec;
+=======
+		avg->time_stamps[avg->pos] = ts64.tv_sec;
+>>>>>>> v3.18
 =======
 		avg->time_stamps[avg->pos] = ts64.tv_sec;
 >>>>>>> v3.18
@@ -427,7 +445,11 @@ static int ab8500_fg_add_cap_sample(struct ab8500_fg *di, int sample)
 		 * replace with latest sample
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} while (ts.tv_sec - VALID_CAPACITY_SEC > avg->time_stamps[avg->pos]);
+=======
+	} while (ts64.tv_sec - VALID_CAPACITY_SEC > avg->time_stamps[avg->pos]);
+>>>>>>> v3.18
 =======
 	} while (ts64.tv_sec - VALID_CAPACITY_SEC > avg->time_stamps[avg->pos]);
 >>>>>>> v3.18
@@ -470,6 +492,7 @@ static void ab8500_fg_fill_cap_sample(struct ab8500_fg *di, int sample)
 {
 	int i;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct timespec ts;
 	struct ab8500_fg_avg_cap *avg = &di->avg_cap;
 
@@ -479,6 +502,8 @@ static void ab8500_fg_fill_cap_sample(struct ab8500_fg *di, int sample)
 		avg->samples[i] = sample;
 		avg->time_stamps[i] = ts.tv_sec;
 =======
+=======
+>>>>>>> v3.18
 	struct timespec64 ts64;
 	struct ab8500_fg_avg_cap *avg = &di->avg_cap;
 
@@ -487,6 +512,9 @@ static void ab8500_fg_fill_cap_sample(struct ab8500_fg *di, int sample)
 	for (i = 0; i < NBR_AVG_SAMPLES; i++) {
 		avg->samples[i] = sample;
 		avg->time_stamps[i] = ts64.tv_sec;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -609,8 +637,13 @@ int ab8500_fg_inst_curr_start(struct ab8500_fg *di)
 
 	/* Return and WFI */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(di->ab8500_fg_started);
 	INIT_COMPLETION(di->ab8500_fg_complete);
+=======
+	reinit_completion(&di->ab8500_fg_started);
+	reinit_completion(&di->ab8500_fg_complete);
+>>>>>>> v3.18
 =======
 	reinit_completion(&di->ab8500_fg_started);
 	reinit_completion(&di->ab8500_fg_complete);
@@ -2505,9 +2538,15 @@ static ssize_t charge_full_store(struct ab8500_fg *di, const char *buf,
 {
 	unsigned long charge_full;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssize_t ret = -EINVAL;
 
 	ret = strict_strtoul(buf, 10, &charge_full);
+=======
+	ssize_t ret;
+
+	ret = kstrtoul(buf, 10, &charge_full);
+>>>>>>> v3.18
 =======
 	ssize_t ret;
 
@@ -2535,7 +2574,11 @@ static ssize_t charge_now_store(struct ab8500_fg *di, const char *buf,
 	ssize_t ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = strict_strtoul(buf, 10, &charge_now);
+=======
+	ret = kstrtoul(buf, 10, &charge_now);
+>>>>>>> v3.18
 =======
 	ret = kstrtoul(buf, 10, &charge_now);
 >>>>>>> v3.18
@@ -3019,7 +3062,11 @@ static struct device_attribute ab8505_fg_sysfs_psy_attrs[] = {
 static int ab8500_fg_sysfs_psy_create_attrs(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int i, j;
+=======
+	unsigned int i;
+>>>>>>> v3.18
 =======
 	unsigned int i;
 >>>>>>> v3.18
@@ -3032,8 +3079,14 @@ static int ab8500_fg_sysfs_psy_create_attrs(struct device *dev)
 	     abx500_get_chip_id(dev->parent) >= AB8500_CUT2P0)
 	    || is_ab8540(di->parent)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (j = 0; j < ARRAY_SIZE(ab8505_fg_sysfs_psy_attrs); j++)
 			if (device_create_file(dev, &ab8505_fg_sysfs_psy_attrs[j]))
+=======
+		for (i = 0; i < ARRAY_SIZE(ab8505_fg_sysfs_psy_attrs); i++)
+			if (device_create_file(dev,
+					       &ab8505_fg_sysfs_psy_attrs[i]))
+>>>>>>> v3.18
 =======
 		for (i = 0; i < ARRAY_SIZE(ab8505_fg_sysfs_psy_attrs); i++)
 			if (device_create_file(dev,
@@ -3045,7 +3098,11 @@ static int ab8500_fg_sysfs_psy_create_attrs(struct device *dev)
 sysfs_psy_create_attrs_failed_ab8505:
 	dev_err(dev, "Failed creating sysfs psy attrs for ab8505.\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	while (j--)
+=======
+	while (i--)
+>>>>>>> v3.18
 =======
 	while (i--)
 >>>>>>> v3.18
@@ -3134,7 +3191,10 @@ static int ab8500_fg_remove(struct platform_device *pdev)
 	ab8500_fg_sysfs_psy_remove_attrs(di->fg_psy.dev);
 	power_supply_unregister(&di->fg_psy);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;

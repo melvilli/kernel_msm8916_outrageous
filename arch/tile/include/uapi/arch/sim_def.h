@@ -361,6 +361,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Use with with SIM_PROFILER_CHIP_xxx to control the memory controllers. */
 #define SIM_CHIP_MEMCTL        0x001
 
@@ -375,6 +376,8 @@
 
 /** Use with with SIM_PROFILER_CHIP_xxx to control the TRIO interface. */
 =======
+=======
+>>>>>>> v3.18
 /** Use with SIM_PROFILER_CHIP_xxx to control the memory controllers. */
 #define SIM_CHIP_MEMCTL        0x001
 
@@ -388,6 +391,9 @@
 #define SIM_CHIP_MPIPE         0x008
 
 /** Use with SIM_PROFILER_CHIP_xxx to control the TRIO interface. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SIM_CHIP_TRIO          0x010
 

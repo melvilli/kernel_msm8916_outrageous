@@ -8,6 +8,7 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <drm/drm_usb.h>
 #include <drm/drm_crtc_helper.h>
 #include "udl_drv.h"
@@ -51,6 +52,8 @@ static void udl_usb_disconnect(struct usb_interface *interface)
 	udl_drop_usb(dev);
 	drm_unplug_dev(dev);
 =======
+=======
+>>>>>>> v3.18
 #include <drm/drmP.h>
 #include <drm/drm_crtc_helper.h>
 #include "udl_drv.h"
@@ -58,6 +61,9 @@ static void udl_usb_disconnect(struct usb_interface *interface)
 static int udl_driver_set_busid(struct drm_device *d, struct drm_master *m)
 {
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -76,7 +82,10 @@ static const struct file_operations udl_driver_fops = {
 	.unlocked_ioctl	= drm_ioctl,
 	.release = drm_release,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.fasync = drm_fasync,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_COMPAT
@@ -90,9 +99,15 @@ static struct drm_driver driver = {
 	.load = udl_driver_load,
 	.unload = udl_driver_unload,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* gem hooks */
 	.gem_init_object = udl_gem_init_object,
+=======
+	.set_busid = udl_driver_set_busid,
+
+	/* gem hooks */
+>>>>>>> v3.18
 =======
 	.set_busid = udl_driver_set_busid,
 
@@ -104,7 +119,11 @@ static struct drm_driver driver = {
 	.dumb_create = udl_dumb_create,
 	.dumb_map_offset = udl_gem_mmap,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dumb_destroy = udl_dumb_destroy,
+=======
+	.dumb_destroy = drm_gem_dumb_destroy,
+>>>>>>> v3.18
 =======
 	.dumb_destroy = drm_gem_dumb_destroy,
 >>>>>>> v3.18
@@ -122,7 +141,10 @@ static struct drm_driver driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int udl_usb_probe(struct usb_interface *interface,
 			 const struct usb_device_id *id)
 {
@@ -178,6 +200,9 @@ static struct usb_device_id id_table[] = {
 };
 MODULE_DEVICE_TABLE(usb, id_table);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct usb_driver udl_driver = {
 	.name = "udl",
@@ -189,7 +214,11 @@ static struct usb_driver udl_driver = {
 static int __init udl_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return drm_usb_init(&driver, &udl_driver);
+=======
+	return usb_register(&udl_driver);
+>>>>>>> v3.18
 =======
 	return usb_register(&udl_driver);
 >>>>>>> v3.18
@@ -198,7 +227,11 @@ static int __init udl_init(void)
 static void __exit udl_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	drm_usb_exit(&driver, &udl_driver);
+=======
+	usb_deregister(&udl_driver);
+>>>>>>> v3.18
 =======
 	usb_deregister(&udl_driver);
 >>>>>>> v3.18
@@ -207,6 +240,10 @@ static void __exit udl_exit(void)
 module_init(udl_init);
 module_exit(udl_exit);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_LICENSE("GPL");
+>>>>>>> v3.18
 =======
 MODULE_LICENSE("GPL");
 >>>>>>> v3.18

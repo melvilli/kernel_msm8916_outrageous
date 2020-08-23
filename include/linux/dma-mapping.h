@@ -9,13 +9,19 @@
 #include <linux/scatterlist.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * A dma_addr_t can hold any valid DMA or bus address for the platform.
  * It can be given to a device to use as a DMA source or target.  A CPU cannot
  * reference a dma_addr_t directly because there may be translation between
  * its physical address space and the bus address space.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct dma_map_ops {
 	void* (*alloc)(struct device *dev, size_t size,
@@ -60,11 +66,14 @@ struct dma_map_ops {
 	int (*dma_supported)(struct device *dev, u64 mask);
 	int (*set_dma_mask)(struct device *dev, u64 mask);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *(*remap)(struct device *dev, void *cpu_addr,
 			dma_addr_t dma_handle, size_t size,
 			struct dma_attrs *attrs);
 	void (*unremap)(struct device *dev, void *remapped_address,
 			size_t size);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef ARCH_HAS_DMA_GET_REQUIRED_MASK
@@ -95,6 +104,7 @@ static inline int is_device_dma_capable(struct device *dev)
 #include <asm-generic/dma-mapping-broken.h>
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifndef CONFIG_NO_DMA
 static inline void *dma_remap(struct device *dev, void *cpu_addr,
@@ -131,6 +141,8 @@ static inline void dma_unremap(struct device *dev, void *remapped_addr,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static inline u64 dma_get_mask(struct device *dev)
 {
 	if (dev && dev->dma_mask && *dev->dma_mask)
@@ -151,9 +163,12 @@ static inline int dma_set_coherent_mask(struct device *dev, u64 mask)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern u64 dma_get_required_mask(struct device *dev);
 
 =======
+=======
+>>>>>>> v3.18
 /*
  * Set both the DMA mask and the coherent DMA mask to the same thing.
  * Note that we don't check the return value from dma_set_coherent_mask()
@@ -187,6 +202,9 @@ static inline int set_arch_dma_coherent_ops(struct device *dev)
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int dma_get_max_seg_size(struct device *dev)
 {
@@ -219,6 +237,7 @@ static inline int dma_set_seg_boundary(struct device *dev, unsigned long mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void *dma_zalloc_coherent(struct device *dev, size_t size,
 					dma_addr_t *dma_handle, gfp_t flag)
 {
@@ -226,6 +245,8 @@ static inline void *dma_zalloc_coherent(struct device *dev, size_t size,
 	if (ret)
 		memset(ret, 0, size);
 =======
+=======
+>>>>>>> v3.18
 #ifndef dma_max_pfn
 static inline unsigned long dma_max_pfn(struct device *dev)
 {
@@ -238,6 +259,9 @@ static inline void *dma_zalloc_coherent(struct device *dev, size_t size,
 {
 	void *ret = dma_alloc_coherent(dev, size, dma_handle,
 				       flag | __GFP_ZERO);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
@@ -261,7 +285,11 @@ static inline int dma_get_cache_alignment(void)
 #ifndef ARCH_HAS_DMA_DECLARE_COHERENT_MEMORY
 static inline int
 <<<<<<< HEAD
+<<<<<<< HEAD
 dma_declare_coherent_memory(struct device *dev, dma_addr_t bus_addr,
+=======
+dma_declare_coherent_memory(struct device *dev, phys_addr_t phys_addr,
+>>>>>>> v3.18
 =======
 dma_declare_coherent_memory(struct device *dev, phys_addr_t phys_addr,
 >>>>>>> v3.18
@@ -296,7 +324,12 @@ extern void dmam_free_noncoherent(struct device *dev, size_t size, void *vaddr,
 				  dma_addr_t dma_handle);
 #ifdef ARCH_HAS_DMA_DECLARE_COHERENT_MEMORY
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int dmam_declare_coherent_memory(struct device *dev, dma_addr_t bus_addr,
+=======
+extern int dmam_declare_coherent_memory(struct device *dev,
+					phys_addr_t phys_addr,
+>>>>>>> v3.18
 =======
 extern int dmam_declare_coherent_memory(struct device *dev,
 					phys_addr_t phys_addr,
@@ -307,7 +340,11 @@ extern void dmam_release_declared_memory(struct device *dev);
 #else /* ARCH_HAS_DMA_DECLARE_COHERENT_MEMORY */
 static inline int dmam_declare_coherent_memory(struct device *dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				dma_addr_t bus_addr, dma_addr_t device_addr,
+=======
+				phys_addr_t phys_addr, dma_addr_t device_addr,
+>>>>>>> v3.18
 =======
 				phys_addr_t phys_addr, dma_addr_t device_addr,
 >>>>>>> v3.18
@@ -337,7 +374,10 @@ struct dma_attrs;
 	dma_unmap_sg(dev, sgl, nents, dir)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 static inline void *dma_alloc_writecombine(struct device *dev, size_t size,
 					   dma_addr_t *dma_addr, gfp_t gfp)
@@ -364,6 +404,9 @@ static inline int dma_mmap_writecombine(struct device *dev,
 	dma_set_attr(DMA_ATTR_WRITE_COMBINE, &attrs);
 	return dma_mmap_attrs(dev, vma, cpu_addr, dma_addr, size, &attrs);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_HAVE_DMA_ATTRS */
 

@@ -5,6 +5,11 @@ zImage
 zImage.tmp
 calc_vmlinuz_load_addr
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+uImage
+*.dtb
+>>>>>>> v3.18
 =======
 uImage
 *.dtb

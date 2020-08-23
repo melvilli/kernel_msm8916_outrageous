@@ -24,22 +24,29 @@
 #include "ksyms.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(find_next_zero_bit);
 EXPORT_SYMBOL(find_next_bit);
 
 EXPORT_SYMBOL(__backtrace);
 
 =======
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(find_first_bit);
 EXPORT_SYMBOL(find_first_zero_bit);
 EXPORT_SYMBOL(find_next_zero_bit);
 EXPORT_SYMBOL(find_next_bit);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* platform dependent support */
 EXPORT_SYMBOL(__udelay);
 EXPORT_SYMBOL(__const_udelay);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* networking */
 EXPORT_SYMBOL(csum_partial);
@@ -69,6 +76,8 @@ EXPORT_SYMBOL(__raw_writesl);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	/* string / mem functions */
 EXPORT_SYMBOL(strchr);
 EXPORT_SYMBOL(strrchr);
@@ -88,6 +97,7 @@ EXPORT_SYMBOL(__copy_to_user);
 EXPORT_SYMBOL(__clear_user);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__get_user_1);
 EXPORT_SYMBOL(__get_user_2);
 EXPORT_SYMBOL(__get_user_4);
@@ -99,17 +109,25 @@ EXPORT_SYMBOL(__put_user_8);
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 EXPORT_SYMBOL(__ashldi3);
 EXPORT_SYMBOL(__ashrdi3);
 EXPORT_SYMBOL(__divsi3);
 EXPORT_SYMBOL(__lshrdi3);
 EXPORT_SYMBOL(__modsi3);
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(__muldi3);
 EXPORT_SYMBOL(__ucmpdi2);
 EXPORT_SYMBOL(__udivsi3);
 EXPORT_SYMBOL(__umodsi3);
 EXPORT_SYMBOL(__bswapsi2);
+=======
+EXPORT_SYMBOL(__ucmpdi2);
+EXPORT_SYMBOL(__udivsi3);
+EXPORT_SYMBOL(__umodsi3);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(__ucmpdi2);
 EXPORT_SYMBOL(__udivsi3);

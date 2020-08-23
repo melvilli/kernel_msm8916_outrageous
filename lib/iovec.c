@@ -52,7 +52,10 @@ int memcpy_toiovec(struct iovec *iov, unsigned char *kdata, int len)
 }
 EXPORT_SYMBOL(memcpy_toiovec);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 /*
  *	Copy kernel to iovec. Returns -EFAULT on error.
@@ -112,4 +115,7 @@ int memcpy_fromiovecend(unsigned char *kdata, const struct iovec *iov,
 	return 0;
 }
 EXPORT_SYMBOL(memcpy_fromiovecend);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

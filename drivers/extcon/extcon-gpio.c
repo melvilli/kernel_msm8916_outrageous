@@ -21,6 +21,7 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/init.h>
@@ -36,6 +37,8 @@ struct gpio_extcon_data {
 	struct extcon_dev edev;
 	unsigned gpio;
 =======
+=======
+>>>>>>> v3.18
 #include <linux/extcon.h>
 #include <linux/extcon/extcon-gpio.h>
 #include <linux/gpio.h>
@@ -51,6 +54,9 @@ struct gpio_extcon_data {
 	struct extcon_dev *edev;
 	unsigned gpio;
 	bool gpio_active_low;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	const char *state_on;
 	const char *state_off;
@@ -58,6 +64,10 @@ struct gpio_extcon_data {
 	struct delayed_work work;
 	unsigned long debounce_jiffies;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool check_on_resume;
+>>>>>>> v3.18
 =======
 	bool check_on_resume;
 >>>>>>> v3.18
@@ -72,7 +82,13 @@ static void gpio_extcon_work(struct work_struct *work)
 
 	state = gpio_get_value(data->gpio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extcon_set_state(&data->edev, state);
+=======
+	if (data->gpio_active_low)
+		state = !state;
+	extcon_set_state(data->edev, state);
+>>>>>>> v3.18
 =======
 	if (data->gpio_active_low)
 		state = !state;
@@ -85,7 +101,11 @@ static irqreturn_t gpio_irq_handler(int irq, void *dev_id)
 	struct gpio_extcon_data *extcon_data = dev_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	schedule_delayed_work(&extcon_data->work,
+=======
+	queue_delayed_work(system_power_efficient_wq, &extcon_data->work,
+>>>>>>> v3.18
 =======
 	queue_delayed_work(system_power_efficient_wq, &extcon_data->work,
 >>>>>>> v3.18
@@ -96,14 +116,20 @@ static irqreturn_t gpio_irq_handler(int irq, void *dev_id)
 static ssize_t extcon_gpio_print_state(struct extcon_dev *edev, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gpio_extcon_data	*extcon_data =
 		container_of(edev, struct gpio_extcon_data, edev);
 	const char *state;
 =======
+=======
+>>>>>>> v3.18
 	struct device *dev = edev->dev.parent;
 	struct gpio_extcon_data *extcon_data = dev_get_drvdata(dev);
 	const char *state;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (extcon_get_state(edev))
 		state = extcon_data->state_on;
@@ -118,9 +144,15 @@ static ssize_t extcon_gpio_print_state(struct extcon_dev *edev, char *buf)
 static int gpio_extcon_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct gpio_extcon_platform_data *pdata = pdev->dev.platform_data;
 	struct gpio_extcon_data *extcon_data;
 	int ret = 0;
+=======
+	struct gpio_extcon_platform_data *pdata = dev_get_platdata(&pdev->dev);
+	struct gpio_extcon_data *extcon_data;
+	int ret;
+>>>>>>> v3.18
 =======
 	struct gpio_extcon_platform_data *pdata = dev_get_platdata(&pdev->dev);
 	struct gpio_extcon_data *extcon_data;
@@ -140,6 +172,7 @@ static int gpio_extcon_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extcon_data->edev.name = pdata->name;
 	extcon_data->gpio = pdata->gpio;
 	extcon_data->state_on = pdata->state_on;
@@ -157,6 +190,8 @@ static int gpio_extcon_probe(struct platform_device *pdev)
 	if (ret < 0)
 		goto err;
 =======
+=======
+>>>>>>> v3.18
 	extcon_data->edev = devm_extcon_dev_allocate(&pdev->dev, NULL);
 	if (IS_ERR(extcon_data->edev)) {
 		dev_err(&pdev->dev, "failed to allocate extcon device\n");
@@ -188,16 +223,24 @@ static int gpio_extcon_probe(struct platform_device *pdev)
 	ret = devm_extcon_dev_register(&pdev->dev, extcon_data->edev);
 	if (ret < 0)
 		return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INIT_DELAYED_WORK(&extcon_data->work, gpio_extcon_work);
 
 	extcon_data->irq = gpio_to_irq(extcon_data->gpio);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (extcon_data->irq < 0) {
 		ret = extcon_data->irq;
 		goto err;
 	}
+=======
+	if (extcon_data->irq < 0)
+		return extcon_data->irq;
+>>>>>>> v3.18
 =======
 	if (extcon_data->irq < 0)
 		return extcon_data->irq;
@@ -208,7 +251,11 @@ static int gpio_extcon_probe(struct platform_device *pdev)
 				      extcon_data);
 	if (ret < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err;
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -219,11 +266,14 @@ static int gpio_extcon_probe(struct platform_device *pdev)
 
 	return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 err:
 	extcon_dev_unregister(&extcon_data->edev);
 
 	return ret;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }
@@ -235,7 +285,10 @@ static int gpio_extcon_remove(struct platform_device *pdev)
 	cancel_delayed_work_sync(&extcon_data->work);
 	free_irq(extcon_data->irq, extcon_data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extcon_dev_unregister(&extcon_data->edev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -243,7 +296,10 @@ static int gpio_extcon_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 static int gpio_extcon_resume(struct device *dev)
 {
@@ -260,6 +316,9 @@ static int gpio_extcon_resume(struct device *dev)
 
 static SIMPLE_DEV_PM_OPS(gpio_extcon_pm_ops, NULL, gpio_extcon_resume);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static struct platform_driver gpio_extcon_driver = {
 	.probe		= gpio_extcon_probe,
@@ -268,6 +327,10 @@ static struct platform_driver gpio_extcon_driver = {
 		.name	= "extcon-gpio",
 		.owner	= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.pm	= &gpio_extcon_pm_ops,
+>>>>>>> v3.18
 =======
 		.pm	= &gpio_extcon_pm_ops,
 >>>>>>> v3.18

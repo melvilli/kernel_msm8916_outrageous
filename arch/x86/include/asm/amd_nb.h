@@ -20,7 +20,11 @@ extern void amd_flush_garts(void);
 extern int amd_numa_init(void);
 extern int amd_get_subcaches(int);
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int amd_set_subcaches(int, int);
+=======
+extern int amd_set_subcaches(int, unsigned long);
+>>>>>>> v3.18
 =======
 extern int amd_set_subcaches(int, unsigned long);
 >>>>>>> v3.18

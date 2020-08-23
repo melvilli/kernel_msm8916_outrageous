@@ -39,7 +39,11 @@ static inline int fsnotify_perm(struct file *file, int mask)
 {
 	struct path *path = &file->f_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = path->dentry->d_inode;
+=======
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 	struct inode *inode = file_inode(file);
 >>>>>>> v3.18
@@ -106,10 +110,15 @@ static inline void fsnotify_move(struct inode *old_dir, struct inode *new_dir,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fsnotify(old_dir, old_dir_mask, source, FSNOTIFY_EVENT_INODE, old_name,
 		 fs_cookie);
 	fsnotify(new_dir, new_dir_mask, source, FSNOTIFY_EVENT_INODE, new_name,
 		 fs_cookie);
+=======
+	fsnotify(old_dir, old_dir_mask, old_dir, FSNOTIFY_EVENT_INODE, old_name, fs_cookie);
+	fsnotify(new_dir, new_dir_mask, new_dir, FSNOTIFY_EVENT_INODE, new_name, fs_cookie);
+>>>>>>> v3.18
 =======
 	fsnotify(old_dir, old_dir_mask, old_dir, FSNOTIFY_EVENT_INODE, old_name, fs_cookie);
 	fsnotify(new_dir, new_dir_mask, new_dir, FSNOTIFY_EVENT_INODE, new_name, fs_cookie);
@@ -204,7 +213,11 @@ static inline void fsnotify_access(struct file *file)
 {
 	struct path *path = &file->f_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = path->dentry->d_inode;
+=======
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 	struct inode *inode = file_inode(file);
 >>>>>>> v3.18
@@ -226,7 +239,11 @@ static inline void fsnotify_modify(struct file *file)
 {
 	struct path *path = &file->f_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = path->dentry->d_inode;
+=======
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 	struct inode *inode = file_inode(file);
 >>>>>>> v3.18
@@ -248,7 +265,11 @@ static inline void fsnotify_open(struct file *file)
 {
 	struct path *path = &file->f_path;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct inode *inode = path->dentry->d_inode;
+=======
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 	struct inode *inode = file_inode(file);
 >>>>>>> v3.18
@@ -332,7 +353,10 @@ static inline void fsnotify_change(struct dentry *dentry, unsigned int ia_valid)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_FSNOTIFY)	/* notify helpers */
 
 /*
@@ -364,5 +388,8 @@ static inline void fsnotify_oldname_free(const unsigned char *old_name)
 
 #endif	/*  CONFIG_FSNOTIFY */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif	/* _LINUX_FS_NOTIFY_H */

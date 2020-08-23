@@ -140,7 +140,11 @@ static int sd_config(struct gspca_dev *gspca_dev,
 	struct cam *cam = &gspca_dev->cam;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Give the camera some time to settle, otherwise initalization will
+=======
+	/* Give the camera some time to settle, otherwise initialization will
+>>>>>>> v3.18
 =======
 	/* Give the camera some time to settle, otherwise initialization will
 >>>>>>> v3.18

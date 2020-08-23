@@ -3,6 +3,10 @@ obj-$(CONFIG_IEEE802154_FAKELB) += fakelb.o
 obj-$(CONFIG_IEEE802154_AT86RF230) += at86rf230.o
 obj-$(CONFIG_IEEE802154_MRF24J40) += mrf24j40.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_IEEE802154_CC2520) += cc2520.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_IEEE802154_CC2520) += cc2520.o
 >>>>>>> v3.18

@@ -10,6 +10,10 @@
 #include <linux/kgdb.h>
 #include <linux/uaccess.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/irq_regs.h>
+>>>>>>> v3.18
 =======
 #include <asm/irq_regs.h>
 >>>>>>> v3.18

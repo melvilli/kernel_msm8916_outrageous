@@ -18,10 +18,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * ----------------------------------------------------------------------------
@@ -42,10 +45,14 @@
 #include <linux/cpufreq.h>
 #include <linux/gpio.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/of_i2c.h>
 #include <linux/of_device.h>
 
 #include <mach/hardware.h>
+=======
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 >>>>>>> v3.18
@@ -136,7 +143,11 @@ static inline void davinci_i2c_write_reg(struct davinci_i2c_dev *i2c_dev,
 					 int reg, u16 val)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__raw_writew(val, i2c_dev->base + reg);
+=======
+	writew_relaxed(val, i2c_dev->base + reg);
+>>>>>>> v3.18
 =======
 	writew_relaxed(val, i2c_dev->base + reg);
 >>>>>>> v3.18
@@ -145,7 +156,11 @@ static inline void davinci_i2c_write_reg(struct davinci_i2c_dev *i2c_dev,
 static inline u16 davinci_i2c_read_reg(struct davinci_i2c_dev *i2c_dev, int reg)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return __raw_readw(i2c_dev->base + reg);
+=======
+	return readw_relaxed(i2c_dev->base + reg);
+>>>>>>> v3.18
 =======
 	return readw_relaxed(i2c_dev->base + reg);
 >>>>>>> v3.18
@@ -342,7 +357,11 @@ i2c_davinci_xfer_msg(struct i2c_adapter *adap, struct i2c_msg *msg, int stop)
 	davinci_i2c_write_reg(dev, DAVINCI_I2C_CNT_REG, dev->buf_len);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	INIT_COMPLETION(dev->cmd_complete);
+=======
+	reinit_completion(&dev->cmd_complete);
+>>>>>>> v3.18
 =======
 	reinit_completion(&dev->cmd_complete);
 >>>>>>> v3.18
@@ -664,6 +683,7 @@ static int davinci_i2c_probe(struct platform_device *pdev)
 	int r;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* NOTE: driver uses the static register mapping */
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!mem) {
@@ -671,6 +691,8 @@ static int davinci_i2c_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irq = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
@@ -693,7 +715,11 @@ static int davinci_i2c_probe(struct platform_device *pdev)
 	dev->dev = &pdev->dev;
 	dev->irq = irq->start;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->pdata = dev->dev->platform_data;
+=======
+	dev->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	dev->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -722,6 +748,10 @@ static int davinci_i2c_probe(struct platform_device *pdev)
 	clk_prepare_enable(dev->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> v3.18
 =======
 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 >>>>>>> v3.18
@@ -750,7 +780,11 @@ static int davinci_i2c_probe(struct platform_device *pdev)
 	i2c_set_adapdata(adap, dev);
 	adap->owner = THIS_MODULE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adap->class = I2C_CLASS_HWMON;
+=======
+	adap->class = I2C_CLASS_DEPRECATED;
+>>>>>>> v3.18
 =======
 	adap->class = I2C_CLASS_DEPRECATED;
 >>>>>>> v3.18
@@ -767,7 +801,10 @@ static int davinci_i2c_probe(struct platform_device *pdev)
 		goto err_unuse_clocks;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(adap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -841,7 +878,11 @@ static struct platform_driver davinci_i2c_driver = {
 		.owner	= THIS_MODULE,
 		.pm	= davinci_i2c_pm_ops,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.of_match_table = of_match_ptr(davinci_i2c_of_match),
+=======
+		.of_match_table = davinci_i2c_of_match,
+>>>>>>> v3.18
 =======
 		.of_match_table = davinci_i2c_of_match,
 >>>>>>> v3.18

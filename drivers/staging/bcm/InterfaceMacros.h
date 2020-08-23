@@ -11,7 +11,11 @@
 #define MAX_DATA_BUFFER_SIZE    2048
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Num of Asynchronous reads pending
+=======
+/* Num of Asynchronous reads pending */
+>>>>>>> v3.18
 =======
 /* Num of Asynchronous reads pending */
 >>>>>>> v3.18

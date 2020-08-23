@@ -27,6 +27,11 @@
 #include <linux/string.h>
 #include <linux/notifier.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -39,12 +44,15 @@ static ssize_t modalias_show(struct device *dev,
 	return sprintf(buf, "hsi:%s\n", dev_name(dev));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static struct device_attribute hsi_bus_dev_attrs[] = {
 	__ATTR_RO(modalias),
 	__ATTR_NULL,
 };
 =======
+=======
+>>>>>>> v3.18
 static DEVICE_ATTR_RO(modalias);
 
 static struct attribute *hsi_bus_dev_attrs[] = {
@@ -52,6 +60,9 @@ static struct attribute *hsi_bus_dev_attrs[] = {
 	NULL,
 };
 ATTRIBUTE_GROUPS(hsi_bus_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int hsi_bus_uevent(struct device *dev, struct kobj_uevent_env *env)
@@ -64,8 +75,11 @@ static int hsi_bus_uevent(struct device *dev, struct kobj_uevent_env *env)
 static int hsi_bus_match(struct device *dev, struct device_driver *driver)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return strcmp(dev_name(dev), driver->name) == 0;
 =======
+=======
+>>>>>>> v3.18
 	if (of_driver_match_device(dev, driver))
 		return true;
 
@@ -73,13 +87,20 @@ static int hsi_bus_match(struct device *dev, struct device_driver *driver)
 		return true;
 
 	return false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct bus_type hsi_bus_type = {
 	.name		= "hsi",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.dev_attrs	= hsi_bus_dev_attrs,
+=======
+	.dev_groups	= hsi_bus_dev_groups,
+>>>>>>> v3.18
 =======
 	.dev_groups	= hsi_bus_dev_groups,
 >>>>>>> v3.18
@@ -89,6 +110,7 @@ static struct bus_type hsi_bus_type = {
 
 static void hsi_client_release(struct device *dev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kfree(to_hsi_client(dev));
 }
@@ -107,6 +129,8 @@ static void hsi_new_client(struct hsi_port *port, struct hsi_board_info *info)
 	cl->device.release = hsi_client_release;
 	dev_set_name(&cl->device, info->name);
 =======
+=======
+>>>>>>> v3.18
 	struct hsi_client *cl = to_hsi_client(dev);
 
 	kfree(cl->tx_cfg.channels);
@@ -142,6 +166,9 @@ struct hsi_client *hsi_new_client(struct hsi_port *port,
 	cl->device.parent = &port->device;
 	cl->device.release = hsi_client_release;
 	dev_set_name(&cl->device, "%s", info->name);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	cl->device.platform_data = info->platform_data;
 	if (info->archdata)
@@ -151,12 +178,18 @@ struct hsi_client *hsi_new_client(struct hsi_port *port,
 		put_device(&cl->device);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
+=======
+>>>>>>> v3.18
 
 	return cl;
 }
 EXPORT_SYMBOL_GPL(hsi_new_client);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void hsi_scan_board_info(struct hsi_controller *hsi)
@@ -174,8 +207,11 @@ static void hsi_scan_board_info(struct hsi_controller *hsi)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int hsi_remove_client(struct device *dev, void *data __maybe_unused)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_OF
 static struct hsi_board_info hsi_char_dev_info = {
 	.name = "hsi_char",
@@ -373,6 +409,9 @@ EXPORT_SYMBOL_GPL(hsi_add_clients_from_dt);
 #endif
 
 int hsi_remove_client(struct device *dev, void *data __maybe_unused)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	device_unregister(dev);
@@ -380,6 +419,10 @@ int hsi_remove_client(struct device *dev, void *data __maybe_unused)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(hsi_remove_client);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL_GPL(hsi_remove_client);
 >>>>>>> v3.18
@@ -407,7 +450,10 @@ static void hsi_port_release(struct device *dev)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * hsi_unregister_port - Unregister an HSI port
  * @port: The HSI port to unregister
  */
@@ -418,6 +464,9 @@ void hsi_port_unregister_clients(struct hsi_port *port)
 EXPORT_SYMBOL_GPL(hsi_port_unregister_clients);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * hsi_unregister_controller - Unregister an HSI controller
  * @hsi: The HSI controller to register
@@ -762,7 +811,11 @@ EXPORT_SYMBOL_GPL(hsi_unregister_port_event);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * hsi_event -Notifies clients about port events
+=======
+ * hsi_event - Notifies clients about port events
+>>>>>>> v3.18
 =======
  * hsi_event - Notifies clients about port events
 >>>>>>> v3.18
@@ -786,7 +839,10 @@ int hsi_event(struct hsi_port *port, unsigned long event)
 EXPORT_SYMBOL_GPL(hsi_event);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /**
  * hsi_get_channel_id_by_name - acquire channel id by channel name
  * @cl: HSI client, which uses the channel
@@ -813,6 +869,9 @@ int hsi_get_channel_id_by_name(struct hsi_client *cl, char *name)
 }
 EXPORT_SYMBOL_GPL(hsi_get_channel_id_by_name);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int __init hsi_init(void)
 {

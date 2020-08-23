@@ -13,7 +13,10 @@
 
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/tty.h>
@@ -143,17 +146,23 @@ static int opticon_open(struct tty_struct *tty, struct usb_serial_port *port)
 	send_control_msg(port, CONTROL_RTS, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* clear the halt status of the enpoint */
 	usb_clear_halt(port->serial->dev, port->read_urb->pipe);
 
 	res = usb_serial_generic_open(tty, port);
 	if (res)
 =======
+=======
+>>>>>>> v3.18
 	/* clear the halt status of the endpoint */
 	usb_clear_halt(port->serial->dev, port->read_urb->pipe);
 
 	res = usb_serial_generic_open(tty, port);
 	if (!res)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return res;
 
@@ -212,9 +221,13 @@ static int opticon_write(struct tty_struct *tty, struct usb_serial_port *port,
 	buffer = kmalloc(count, GFP_ATOMIC);
 	if (!buffer) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&port->dev, "out of memory\n");
 		count = -ENOMEM;
 
+=======
+		count = -ENOMEM;
+>>>>>>> v3.18
 =======
 		count = -ENOMEM;
 >>>>>>> v3.18
@@ -224,7 +237,10 @@ static int opticon_write(struct tty_struct *tty, struct usb_serial_port *port,
 	urb = usb_alloc_urb(0, GFP_ATOMIC);
 	if (!urb) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_err(&port->dev, "no more free urbs\n");
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		count = -ENOMEM;
@@ -236,16 +252,22 @@ static int opticon_write(struct tty_struct *tty, struct usb_serial_port *port,
 	usb_serial_debug_data(&port->dev, __func__, count, buffer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* The conncected devices do not have a bulk write endpoint,
 	 * to transmit data to de barcode device the control endpoint is used */
 	dr = kmalloc(sizeof(struct usb_ctrlrequest), GFP_ATOMIC);
 	if (!dr) {
 		dev_err(&port->dev, "out of memory\n");
 =======
+=======
+>>>>>>> v3.18
 	/* The connected devices do not have a bulk write endpoint,
 	 * to transmit data to de barcode device the control endpoint is used */
 	dr = kmalloc(sizeof(struct usb_ctrlrequest), GFP_ATOMIC);
 	if (!dr) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		count = -ENOMEM;
 		goto error_no_dr;
@@ -374,7 +396,11 @@ static int get_serial_info(struct usb_serial_port *port,
 	/* fake emulate a 16550 uart to make userspace code happy */
 	tmp.type		= PORT_16550A;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tmp.line		= port->serial->minor;
+=======
+	tmp.line		= port->minor;
+>>>>>>> v3.18
 =======
 	tmp.line		= port->minor;
 >>>>>>> v3.18
@@ -397,8 +423,11 @@ static int opticon_ioctl(struct tty_struct *tty,
 	struct usb_serial_port *port = tty->driver_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(&port->dev, "%s - port %d, cmd = 0x%x\n", __func__, port->number, cmd);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (cmd) {

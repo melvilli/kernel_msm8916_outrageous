@@ -243,8 +243,13 @@ static int snd_gusextreme_probe(struct device *dev, unsigned int n)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = snd_card_create(index[n], id[n], THIS_MODULE,
 				sizeof(struct snd_es1688), &card);
+=======
+	error = snd_card_new(dev, index[n], id[n], THIS_MODULE,
+			     sizeof(struct snd_es1688), &card);
+>>>>>>> v3.18
 =======
 	error = snd_card_new(dev, index[n], id[n], THIS_MODULE,
 			     sizeof(struct snd_es1688), &card);
@@ -334,8 +339,11 @@ static int snd_gusextreme_probe(struct device *dev, unsigned int n)
 		gus->gf1.irq, es1688->irq, gus->gf1.dma1, es1688->dma8);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	error = snd_card_register(card);
@@ -353,7 +361,10 @@ static int snd_gusextreme_remove(struct device *dev, unsigned int n)
 {
 	snd_card_free(dev_get_drvdata(dev));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(dev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

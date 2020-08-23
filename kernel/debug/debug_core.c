@@ -50,6 +50,10 @@
 #include <linux/smp.h>
 #include <linux/mm.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/vmacache.h>
+>>>>>>> v3.18
 =======
 #include <linux/vmacache.h>
 >>>>>>> v3.18
@@ -91,10 +95,13 @@ bool dbg_is_early = true;
 /* Next cpu to become the master debug core */
 int dbg_switch_cpu;
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Flag for entering kdb when a panic occurs */
 static bool break_on_panic = true;
 /* Flag for entering kdb when an exception occurs */
 static bool break_on_exception = true;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -112,8 +119,11 @@ early_param("kgdbcon", opt_kgdb_con);
 module_param(kgdb_use_con, int, 0644);
 module_param(kgdbreboot, int, 0644);
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(break_on_panic, bool, 0644);
 module_param(break_on_exception, bool, 0644);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -241,11 +251,14 @@ static void kgdb_flush_swbreak_addr(unsigned long addr)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (current->mm && current->mm->mmap_cache) {
 		flush_cache_range(current->mm->mmap_cache,
 				  addr, addr + BREAK_INSTR_SIZE);
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (current->mm) {
 		int i;
 
@@ -257,6 +270,9 @@ static void kgdb_flush_swbreak_addr(unsigned long addr)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Force flush instruction cache if it was outside the mm */
 	flush_icache_range(addr, addr + BREAK_INSTR_SIZE);
@@ -606,15 +622,21 @@ return_normal:
 
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Signal the other CPUs to enter kgdb_wait() */
 	if ((!kgdb_single_step) && kgdb_do_roundup)
 =======
+=======
+>>>>>>> v3.18
 	/* If send_ready set, slaves are already waiting */
 	if (ks->send_ready)
 		atomic_set(ks->send_ready, 1);
 
 	/* Signal the other CPUs to enter kgdb_wait() */
 	else if ((!kgdb_single_step) && kgdb_do_roundup)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kgdb_roundup_cpus(flags);
 #endif
@@ -718,9 +740,13 @@ kgdb_handle_exception(int evector, int signo, int ecode, struct pt_regs *regs)
 		arch_kgdb_ops.enable_nmi(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(signo != SIGTRAP && !break_on_exception))
 		return 1;
 
+=======
+	memset(ks, 0, sizeof(struct kgdb_state));
+>>>>>>> v3.18
 =======
 	memset(ks, 0, sizeof(struct kgdb_state));
 >>>>>>> v3.18
@@ -729,7 +755,10 @@ kgdb_handle_exception(int evector, int signo, int ecode, struct pt_regs *regs)
 	ks->signo		= signo;
 	ks->err_code		= ecode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ks->kgdb_usethreadid	= 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ks->linux_regs		= regs;
@@ -782,7 +811,10 @@ int kgdb_nmicallback(int cpu, void *regs)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int kgdb_nmicallin(int cpu, int trapnr, void *regs, int err_code,
 							atomic_t *send_ready)
 {
@@ -808,6 +840,9 @@ int kgdb_nmicallin(int cpu, int trapnr, void *regs, int err_code,
 	return 1;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void kgdb_console_write(struct console *co, const char *s,
    unsigned count)
@@ -862,9 +897,12 @@ static int kgdb_panic_event(struct notifier_block *self,
 			    void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!break_on_panic)
 		return NOTIFY_DONE;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (dbg_kdb_mode)
@@ -1090,7 +1128,11 @@ int dbg_io_get_char(void)
  * the debugger.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void kgdb_breakpoint(void)
+=======
+noinline void kgdb_breakpoint(void)
+>>>>>>> v3.18
 =======
 noinline void kgdb_breakpoint(void)
 >>>>>>> v3.18

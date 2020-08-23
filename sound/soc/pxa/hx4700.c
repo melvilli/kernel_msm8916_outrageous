@@ -153,7 +153,10 @@ static int hx4700_ak4641_init(struct snd_soc_pcm_runtime *rtd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int hx4700_card_remove(struct snd_soc_card *card)
 {
 	snd_soc_jack_free_gpios(&hs_jack, 1, &hs_jack_gpio);
@@ -161,6 +164,9 @@ static int hx4700_card_remove(struct snd_soc_card *card)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* hx4700 digital audio interface glue - connects codec <--> CPU */
 static struct snd_soc_dai_link hx4700_dai = {
@@ -181,6 +187,10 @@ static struct snd_soc_card snd_soc_card_hx4700 = {
 	.name			= "iPAQ hx4700",
 	.owner			= THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.remove			= hx4700_card_remove,
+>>>>>>> v3.18
 =======
 	.remove			= hx4700_card_remove,
 >>>>>>> v3.18
@@ -221,7 +231,10 @@ static int hx4700_audio_probe(struct platform_device *pdev)
 static int hx4700_audio_remove(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_jack_free_gpios(&hs_jack, 1, &hs_jack_gpio);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	snd_soc_unregister_card(&snd_soc_card_hx4700);

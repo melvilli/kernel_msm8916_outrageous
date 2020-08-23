@@ -44,6 +44,10 @@
 #include <linux/spinlock.h> 		/* spinlock_t, etc */
 #include <linux/atomic.h>			/* atomic_t, etc */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/workqueue.h>		/* struct work_struct */
+>>>>>>> v3.18
 =======
 #include <linux/workqueue.h>		/* struct work_struct */
 >>>>>>> v3.18
@@ -55,6 +59,10 @@
 #include <linux/sunrpc/rpc_rdma.h> 	/* RPC/RDMA protocol */
 #include <linux/sunrpc/xprtrdma.h> 	/* xprt parameters */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sunrpc/svc.h>		/* RPCSVC_MAXPAYLOAD */
+>>>>>>> v3.18
 =======
 #include <linux/sunrpc/svc.h>		/* RPCSVC_MAXPAYLOAD */
 >>>>>>> v3.18
@@ -67,6 +75,10 @@
  */
 struct rpcrdma_ia {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	rwlock_t		ri_qplock;
+>>>>>>> v3.18
 =======
 	rwlock_t		ri_qplock;
 >>>>>>> v3.18
@@ -79,6 +91,10 @@ struct rpcrdma_ia {
 	int			ri_async_rc;
 	enum rpcrdma_memreg	ri_memreg_strategy;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int		ri_max_frmr_depth;
+>>>>>>> v3.18
 =======
 	unsigned int		ri_max_frmr_depth;
 >>>>>>> v3.18
@@ -89,6 +105,12 @@ struct rpcrdma_ia {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RPCRDMA_WC_BUDGET	(128)
+#define RPCRDMA_POLLSIZE	(16)
+
+>>>>>>> v3.18
 =======
 #define RPCRDMA_WC_BUDGET	(128)
 #define RPCRDMA_POLLSIZE	(16)
@@ -100,7 +122,10 @@ struct rpcrdma_ep {
 	int			rep_connected;
 	struct rpcrdma_ia	*rep_ia;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ib_cq		*rep_cq;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ib_qp_init_attr	rep_attr;
@@ -112,6 +137,12 @@ struct rpcrdma_ep {
 	struct rdma_conn_param	rep_remote_cma;
 	struct sockaddr_storage	rep_remote_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct delayed_work	rep_connect_worker;
+	struct ib_wc		rep_send_wcs[RPCRDMA_POLLSIZE];
+	struct ib_wc		rep_recv_wcs[RPCRDMA_POLLSIZE];
+>>>>>>> v3.18
 =======
 	struct delayed_work	rep_connect_worker;
 	struct ib_wc		rep_send_wcs[RPCRDMA_POLLSIZE];
@@ -123,7 +154,10 @@ struct rpcrdma_ep {
 #define DECR_CQCOUNT(ep) atomic_sub_return(1, &(ep)->rep_cqcount)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum rpcrdma_chunktype {
 	rpcrdma_noch = 0,
 	rpcrdma_readch,
@@ -132,6 +166,9 @@ enum rpcrdma_chunktype {
 	rpcrdma_replych
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * struct rpcrdma_rep -- this structure encapsulates state required to recv
@@ -167,7 +204,10 @@ struct rpcrdma_rep {
 	void (*rr_func)(struct rpcrdma_rep *);/* called by tasklet in softint */
 	struct list_head rr_list;	/* tasklet list */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wait_queue_head_t rr_unbind;	/* optional unbind wait */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct ib_sge	rr_iov;		/* for posting */
@@ -177,7 +217,10 @@ struct rpcrdma_rep {
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * struct rpcrdma_mw - external memory region metadata
  *
  * An external memory region is any buffer or page that is registered
@@ -212,6 +255,9 @@ struct rpcrdma_mw {
 };
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * struct rpcrdma_req -- structure central to the request/reply sequence.
  *
@@ -240,6 +286,7 @@ struct rpcrdma_mr_seg {		/* chunk descriptors */
 	union {				/* chunk memory handles */
 		struct ib_mr	*rl_mr;		/* if registered directly */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct rpcrdma_mw {		/* if registered from region */
 			union {
 				struct ib_mw	*mw;
@@ -252,6 +299,9 @@ struct rpcrdma_mr_seg {		/* chunk descriptors */
 			} r;
 			struct list_head mw_list;
 		} *rl_mw;
+=======
+		struct rpcrdma_mw *rl_mw;	/* if registered from region */
+>>>>>>> v3.18
 =======
 		struct rpcrdma_mw *rl_mw;	/* if registered from region */
 >>>>>>> v3.18
@@ -273,6 +323,10 @@ struct rpcrdma_req {
 	unsigned int	rl_nchunks;	/* non-zero if chunks */
 	unsigned int	rl_connect_cookie;	/* retry detection */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum rpcrdma_chunktype	rl_rtype, rl_wtype;
+>>>>>>> v3.18
 =======
 	enum rpcrdma_chunktype	rl_rtype, rl_wtype;
 >>>>>>> v3.18
@@ -298,9 +352,15 @@ struct rpcrdma_buffer {
 	spinlock_t	rb_lock;	/* protects indexes */
 	atomic_t	rb_credits;	/* most recent server credits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	rb_cwndscale;	/* cached framework rpc_cwndscale */
 	int		rb_max_requests;/* client max requests */
 	struct list_head rb_mws;	/* optional memory windows/fmrs/frmrs */
+=======
+	int		rb_max_requests;/* client max requests */
+	struct list_head rb_mws;	/* optional memory windows/fmrs/frmrs */
+	struct list_head rb_all;
+>>>>>>> v3.18
 =======
 	int		rb_max_requests;/* client max requests */
 	struct list_head rb_mws;	/* optional memory windows/fmrs/frmrs */
@@ -397,9 +457,15 @@ void rpcrdma_ia_close(struct rpcrdma_ia *);
 int rpcrdma_ep_create(struct rpcrdma_ep *, struct rpcrdma_ia *,
 				struct rpcrdma_create_data_internal *);
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rpcrdma_ep_destroy(struct rpcrdma_ep *, struct rpcrdma_ia *);
 int rpcrdma_ep_connect(struct rpcrdma_ep *, struct rpcrdma_ia *);
 int rpcrdma_ep_disconnect(struct rpcrdma_ep *, struct rpcrdma_ia *);
+=======
+void rpcrdma_ep_destroy(struct rpcrdma_ep *, struct rpcrdma_ia *);
+int rpcrdma_ep_connect(struct rpcrdma_ep *, struct rpcrdma_ia *);
+void rpcrdma_ep_disconnect(struct rpcrdma_ep *, struct rpcrdma_ia *);
+>>>>>>> v3.18
 =======
 void rpcrdma_ep_destroy(struct rpcrdma_ep *, struct rpcrdma_ia *);
 int rpcrdma_ep_connect(struct rpcrdma_ep *, struct rpcrdma_ia *);
@@ -433,7 +499,11 @@ int rpcrdma_register_external(struct rpcrdma_mr_seg *,
 				int, int, struct rpcrdma_xprt *);
 int rpcrdma_deregister_external(struct rpcrdma_mr_seg *,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct rpcrdma_xprt *, void *);
+=======
+				struct rpcrdma_xprt *);
+>>>>>>> v3.18
 =======
 				struct rpcrdma_xprt *);
 >>>>>>> v3.18
@@ -442,6 +512,10 @@ int rpcrdma_deregister_external(struct rpcrdma_mr_seg *,
  * RPC/RDMA connection management calls - xprtrdma/rpc_rdma.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void rpcrdma_connect_worker(struct work_struct *);
+>>>>>>> v3.18
 =======
 void rpcrdma_connect_worker(struct work_struct *);
 >>>>>>> v3.18
@@ -452,7 +526,13 @@ void rpcrdma_reply_handler(struct rpcrdma_rep *);
  * RPC/RDMA protocol calls - xprtrdma/rpc_rdma.c
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int rpcrdma_marshal_req(struct rpc_rqst *);
+=======
+ssize_t rpcrdma_marshal_chunks(struct rpc_rqst *, ssize_t);
+int rpcrdma_marshal_req(struct rpc_rqst *);
+size_t rpcrdma_max_payload(struct rpcrdma_xprt *);
+>>>>>>> v3.18
 =======
 ssize_t rpcrdma_marshal_chunks(struct rpc_rqst *, ssize_t);
 int rpcrdma_marshal_req(struct rpc_rqst *);
@@ -467,12 +547,18 @@ extern struct kmem_cache *svc_rdma_ctxt_cachep;
 extern struct workqueue_struct *svc_rdma_wq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if RPCSVC_MAXPAYLOAD < (RPCRDMA_MAX_DATA_SEGS << PAGE_SHIFT)
 #define RPCSVC_MAXPAYLOAD_RDMA RPCSVC_MAXPAYLOAD
 #else
 #define RPCSVC_MAXPAYLOAD_RDMA (RPCRDMA_MAX_DATA_SEGS << PAGE_SHIFT)
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif				/* _LINUX_SUNRPC_XPRT_RDMA_H */

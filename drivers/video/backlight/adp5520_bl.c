@@ -68,6 +68,10 @@ static int adp5520_bl_update_status(struct backlight_device *bl)
 {
 	int brightness = bl->props.brightness;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -302,7 +306,11 @@ static int adp5520_bl_probe(struct platform_device *pdev)
 
 	data->master = pdev->dev.parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data->pdata = pdev->dev.platform_data;
+=======
+	data->pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	data->pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -321,8 +329,14 @@ static int adp5520_bl_probe(struct platform_device *pdev)
 	props.type = BACKLIGHT_RAW;
 	props.max_brightness = ADP5020_MAX_BRIGHTNESS;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl = backlight_device_register(pdev->name, data->master, data,
 				       &adp5520_bl_ops, &props);
+=======
+	bl = devm_backlight_device_register(&pdev->dev, pdev->name,
+					data->master, data, &adp5520_bl_ops,
+					&props);
+>>>>>>> v3.18
 =======
 	bl = devm_backlight_device_register(&pdev->dev, pdev->name,
 					data->master, data, &adp5520_bl_ops,
@@ -341,7 +355,11 @@ static int adp5520_bl_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to register sysfs\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		backlight_device_unregister(bl);
+=======
+		return ret;
+>>>>>>> v3.18
 =======
 		return ret;
 >>>>>>> v3.18
@@ -366,8 +384,11 @@ static int adp5520_bl_remove(struct platform_device *pdev)
 				&adp5520_bl_attr_group);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	backlight_device_unregister(bl);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;
@@ -397,7 +418,10 @@ static struct platform_driver adp5520_bl_driver = {
 	.driver		= {
 		.name	= "adp5520-backlight",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.owner	= THIS_MODULE,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.pm	= &adp5520_bl_pm_ops,

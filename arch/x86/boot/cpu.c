@@ -17,7 +17,13 @@
 
 #include "boot.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "cpustr.h"
+=======
+#ifdef CONFIG_X86_FEATURE_NAMES
+#include "cpustr.h"
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_X86_FEATURE_NAMES
 #include "cpustr.h"
@@ -39,7 +45,10 @@ static char *cpu_name(int level)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void show_cap_strs(u32 *err_flags)
 {
 	int i, j;
@@ -78,13 +87,19 @@ static void show_cap_strs(u32 *err_flags)
 #endif
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int validate_cpu(void)
 {
 	u32 *err_flags;
 	int cpu_level, req_level;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned char *msg_strs;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -99,6 +114,7 @@ int validate_cpu(void)
 	}
 
 	if (err_flags) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		int i, j;
 		puts("This kernel requires the following features "
@@ -128,6 +144,11 @@ int validate_cpu(void)
 				e >>= 1;
 			}
 		}
+=======
+		puts("This kernel requires the following features "
+		     "not present on the CPU:\n");
+		show_cap_strs(err_flags);
+>>>>>>> v3.18
 =======
 		puts("This kernel requires the following features "
 		     "not present on the CPU:\n");

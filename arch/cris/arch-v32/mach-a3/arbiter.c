@@ -257,17 +257,23 @@ static void crisv32_arbiter_init(void)
 
 	if (request_irq(MEMARB_FOO_INTR_VECT, crisv32_foo_arbiter_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IRQF_DISABLED, "arbiter", NULL))
 		printk(KERN_ERR "Couldn't allocate arbiter IRQ\n");
 
 	if (request_irq(MEMARB_BAR_INTR_VECT, crisv32_bar_arbiter_irq,
 			IRQF_DISABLED, "arbiter", NULL))
 =======
+=======
+>>>>>>> v3.18
 			0, "arbiter", NULL))
 		printk(KERN_ERR "Couldn't allocate arbiter IRQ\n");
 
 	if (request_irq(MEMARB_BAR_INTR_VECT, crisv32_bar_arbiter_irq,
 			0, "arbiter", NULL))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		printk(KERN_ERR "Couldn't allocate arbiter IRQ\n");
 

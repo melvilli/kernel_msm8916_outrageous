@@ -113,6 +113,12 @@ void prepare_ftrace_return(unsigned long *parent, unsigned long self_addr)
 	struct ftrace_graph_ent trace;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (unlikely(ftrace_graph_is_dead()))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (unlikely(ftrace_graph_is_dead()))
 		return;
@@ -159,9 +165,12 @@ void ftrace_function_trampoline(unsigned long parent,
 	extern ftrace_func_t ftrace_trace_function;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (function_trace_stop)
 		return;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ftrace_trace_function != ftrace_stub) {

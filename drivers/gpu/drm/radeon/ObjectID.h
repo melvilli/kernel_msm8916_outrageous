@@ -70,6 +70,11 @@
 #define ENCODER_OBJECT_ID_TRAVIS                  0x23
 #define ENCODER_OBJECT_ID_NUTMEG                  0x22
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ENCODER_OBJECT_ID_HDMI_ANX9805            0x26
+
+>>>>>>> v3.18
 =======
 #define ENCODER_OBJECT_ID_HDMI_ANX9805            0x26
 
@@ -92,6 +97,11 @@
 #define ENCODER_OBJECT_ID_INTERNAL_UNIPHY2        0x21
 #define ENCODER_OBJECT_ID_INTERNAL_VCE            0x24
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define ENCODER_OBJECT_ID_INTERNAL_UNIPHY3        0x25
+#define ENCODER_OBJECT_ID_INTERNAL_AMCLK          0x27
+>>>>>>> v3.18
 =======
 #define ENCODER_OBJECT_ID_INTERNAL_UNIPHY3        0x25
 #define ENCODER_OBJECT_ID_INTERNAL_AMCLK          0x27
@@ -375,7 +385,10 @@
                                                  ENCODER_OBJECT_ID_INTERNAL_UNIPHY2 << OBJECT_ID_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ENCODER_INTERNAL_UNIPHY3_ENUM_ID1         ( GRAPH_OBJECT_TYPE_ENCODER << OBJECT_TYPE_SHIFT |\
                                                  GRAPH_OBJECT_ENUM_ID1 << ENUM_ID_SHIFT |\
                                                  ENCODER_OBJECT_ID_INTERNAL_UNIPHY3 << OBJECT_ID_SHIFT)
@@ -384,6 +397,9 @@
                                                  GRAPH_OBJECT_ENUM_ID2 << ENUM_ID_SHIFT |\
                                                  ENCODER_OBJECT_ID_INTERNAL_UNIPHY3 << OBJECT_ID_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define ENCODER_GENERAL_EXTERNAL_DVO_ENUM_ID1    ( GRAPH_OBJECT_TYPE_ENCODER << OBJECT_TYPE_SHIFT |\
                                                   GRAPH_OBJECT_ENUM_ID1 << ENUM_ID_SHIFT |\
@@ -414,11 +430,17 @@
                                                   ENCODER_OBJECT_ID_INTERNAL_VCE << OBJECT_ID_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define ENCODER_HDMI_ANX9805_ENUM_ID1            ( GRAPH_OBJECT_TYPE_ENCODER << OBJECT_TYPE_SHIFT |\
                                                   GRAPH_OBJECT_ENUM_ID1 << ENUM_ID_SHIFT |\
                                                   ENCODER_OBJECT_ID_HDMI_ANX9805 << OBJECT_ID_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /****************************************************/
 /* Connector Object ID definition - Shared with BIOS */
@@ -490,7 +512,10 @@
                                                  CONNECTOR_OBJECT_ID_SINGLE_LINK_DVI_D << OBJECT_ID_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CONNECTOR_SINGLE_LINK_DVI_D_ENUM_ID5   ( GRAPH_OBJECT_TYPE_CONNECTOR << OBJECT_TYPE_SHIFT |\
                                                  GRAPH_OBJECT_ENUM_ID5 << ENUM_ID_SHIFT |\
                                                  CONNECTOR_OBJECT_ID_SINGLE_LINK_DVI_D << OBJECT_ID_SHIFT)
@@ -499,6 +524,9 @@
                                                  GRAPH_OBJECT_ENUM_ID6 << ENUM_ID_SHIFT |\
                                                  CONNECTOR_OBJECT_ID_SINGLE_LINK_DVI_D << OBJECT_ID_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CONNECTOR_DUAL_LINK_DVI_D_ENUM_ID1     ( GRAPH_OBJECT_TYPE_CONNECTOR << OBJECT_TYPE_SHIFT |\
                                                  GRAPH_OBJECT_ENUM_ID1 << ENUM_ID_SHIFT |\
@@ -513,11 +541,17 @@
                                                  CONNECTOR_OBJECT_ID_DUAL_LINK_DVI_D << OBJECT_ID_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CONNECTOR_DUAL_LINK_DVI_D_ENUM_ID4     ( GRAPH_OBJECT_TYPE_CONNECTOR << OBJECT_TYPE_SHIFT |\
                                                  GRAPH_OBJECT_ENUM_ID4 << ENUM_ID_SHIFT |\
                                                  CONNECTOR_OBJECT_ID_DUAL_LINK_DVI_D << OBJECT_ID_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CONNECTOR_VGA_ENUM_ID1                 ( GRAPH_OBJECT_TYPE_CONNECTOR << OBJECT_TYPE_SHIFT |\
                                                  GRAPH_OBJECT_ENUM_ID1 << ENUM_ID_SHIFT |\
@@ -588,7 +622,10 @@
                                                  CONNECTOR_OBJECT_ID_HDMI_TYPE_A << OBJECT_ID_SHIFT)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define CONNECTOR_HDMI_TYPE_A_ENUM_ID4         ( GRAPH_OBJECT_TYPE_CONNECTOR << OBJECT_TYPE_SHIFT |\
                                                  GRAPH_OBJECT_ENUM_ID4 << ENUM_ID_SHIFT |\
                                                  CONNECTOR_OBJECT_ID_HDMI_TYPE_A << OBJECT_ID_SHIFT)
@@ -601,6 +638,9 @@
                                                  GRAPH_OBJECT_ENUM_ID6 << ENUM_ID_SHIFT |\
                                                  CONNECTOR_OBJECT_ID_HDMI_TYPE_A << OBJECT_ID_SHIFT)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define CONNECTOR_HDMI_TYPE_B_ENUM_ID1         ( GRAPH_OBJECT_TYPE_CONNECTOR << OBJECT_TYPE_SHIFT |\
                                                  GRAPH_OBJECT_ENUM_ID1 << ENUM_ID_SHIFT |\

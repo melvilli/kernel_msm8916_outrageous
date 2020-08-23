@@ -73,7 +73,11 @@ static int dm9161_config_intr(struct phy_device *phydev)
 		return temp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if(PHY_INTERRUPT_ENABLED == phydev->interrupts )
+=======
+	if (PHY_INTERRUPT_ENABLED == phydev->interrupts)
+>>>>>>> v3.18
 =======
 	if (PHY_INTERRUPT_ENABLED == phydev->interrupts)
 >>>>>>> v3.18

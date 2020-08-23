@@ -28,7 +28,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -37,6 +40,10 @@
 #include <linux/i2c/twl.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 >>>>>>> v3.18
@@ -68,6 +75,10 @@ struct twl4030_keypad {
 	unsigned short	keymap[TWL4030_KEYMAP_SIZE];
 	u16		kp_state[TWL4030_MAX_ROWS];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool		autorepeat;
+>>>>>>> v3.18
 =======
 	bool		autorepeat;
 >>>>>>> v3.18
@@ -342,8 +353,13 @@ static int twl4030_kp_program(struct twl4030_keypad *kp)
 static int twl4030_kp_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct twl4030_keypad_data *pdata = pdev->dev.platform_data;
 	const struct matrix_keymap_data *keymap_data;
+=======
+	struct twl4030_keypad_data *pdata = dev_get_platdata(&pdev->dev);
+	const struct matrix_keymap_data *keymap_data = NULL;
+>>>>>>> v3.18
 =======
 	struct twl4030_keypad_data *pdata = dev_get_platdata(&pdev->dev);
 	const struct matrix_keymap_data *keymap_data = NULL;
@@ -353,6 +369,7 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	u8 reg;
 	int error;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!pdata || !pdata->rows || !pdata->cols || !pdata->keymap_data ||
 	    pdata->rows > TWL4030_MAX_ROWS || pdata->cols > TWL4030_MAX_COLS) {
@@ -377,6 +394,8 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	kp->n_cols = pdata->cols;
 	kp->irq = platform_get_irq(pdev, 0);
 =======
+=======
+>>>>>>> v3.18
 	kp = devm_kzalloc(&pdev->dev, sizeof(*kp), GFP_KERNEL);
 	if (!kp)
 		return -ENOMEM;
@@ -388,13 +407,19 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	/* get the debug device */
 	kp->dbg_dev		= &pdev->dev;
 	kp->input		= input;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* setup input device */
 	input->name		= "TWL4030 Keypad";
 	input->phys		= "twl4030_keypad/input0";
 <<<<<<< HEAD
+<<<<<<< HEAD
 	input->dev.parent	= &pdev->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -404,7 +429,10 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	input->id.version	= 0x0003;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (pdata) {
 		if (!pdata->rows || !pdata->cols || !pdata->keymap_data) {
 			dev_err(&pdev->dev, "Missing platform_data\n");
@@ -436,6 +464,9 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	error = matrix_keypad_build_keymap(keymap_data, NULL,
 					   TWL4030_MAX_ROWS,
@@ -444,7 +475,11 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	if (error) {
 		dev_err(kp->dbg_dev, "Failed to build keymap\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err1;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -453,7 +488,11 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	input_set_capability(input, EV_MSC, MSC_SCAN);
 	/* Enable auto repeat feature of Linux input subsystem */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pdata->rep)
+=======
+	if (kp->autorepeat)
+>>>>>>> v3.18
 =======
 	if (kp->autorepeat)
 >>>>>>> v3.18
@@ -464,7 +503,11 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 		dev_err(kp->dbg_dev,
 			"Unable to register twl4030 keypad device\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err1;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -473,7 +516,11 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	error = twl4030_kp_program(kp);
 	if (error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto err2;
+=======
+		return error;
+>>>>>>> v3.18
 =======
 		return error;
 >>>>>>> v3.18
@@ -485,6 +532,7 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	 * NOTE:  we assume this host is wired to TWL4040 INT1, not INT2 ...
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = request_threaded_irq(kp->irq, NULL, do_kp_irq,
 			0, pdev->name, kp);
 	if (error) {
@@ -492,12 +540,17 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 			kp->irq);
 		goto err2;
 =======
+=======
+>>>>>>> v3.18
 	error = devm_request_threaded_irq(&pdev->dev, kp->irq, NULL, do_kp_irq,
 					  0, pdev->name, kp);
 	if (error) {
 		dev_info(kp->dbg_dev, "request_irq failed for irq no=%d: %d\n",
 			kp->irq, error);
 		return error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -505,8 +558,14 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 	reg = (u8) ~(KEYP_IMR1_KP | KEYP_IMR1_TO);
 	if (twl4030_kpwrite_u8(kp, reg, KEYP_IMR1)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		error = -EIO;
 		goto err3;
+=======
+		/* mask all events - we don't care about the result */
+		(void) twl4030_kpwrite_u8(kp, 0xff, KEYP_IMR1);
+		return -EIO;
+>>>>>>> v3.18
 =======
 		/* mask all events - we don't care about the result */
 		(void) twl4030_kpwrite_u8(kp, 0xff, KEYP_IMR1);
@@ -516,6 +575,7 @@ static int twl4030_kp_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, kp);
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err3:
@@ -543,6 +603,8 @@ static int twl4030_kp_remove(struct platform_device *pdev)
 	return 0;
 }
 =======
+=======
+>>>>>>> v3.18
 }
 
 #ifdef CONFIG_OF
@@ -552,6 +614,9 @@ static const struct of_device_id twl4030_keypad_dt_match_table[] = {
 };
 MODULE_DEVICE_TABLE(of, twl4030_keypad_dt_match_table);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -563,15 +628,21 @@ MODULE_DEVICE_TABLE(of, twl4030_keypad_dt_match_table);
 static struct platform_driver twl4030_kp_driver = {
 	.probe		= twl4030_kp_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= twl4030_kp_remove,
 	.driver		= {
 		.name	= "twl4030_keypad",
 		.owner	= THIS_MODULE,
 =======
+=======
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "twl4030_keypad",
 		.owner	= THIS_MODULE,
 		.of_match_table = of_match_ptr(twl4030_keypad_dt_match_table),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };

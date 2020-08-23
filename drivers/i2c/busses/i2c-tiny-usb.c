@@ -55,6 +55,7 @@ static int usb_write(struct i2c_adapter *adapter, int cmd,
 static int usb_xfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int num)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char status;
 	struct i2c_msg *pmsg;
 	int i;
@@ -62,6 +63,8 @@ static int usb_xfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int num)
 	dev_dbg(&adapter->dev, "master xfer %d messages:\n", num);
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned char *pstatus;
 	struct i2c_msg *pmsg;
 	int i, ret;
@@ -72,6 +75,9 @@ static int usb_xfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int num)
 	if (!pstatus)
 		return -ENOMEM;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (i = 0 ; i < num ; i++) {
 		int cmd = CMD_I2C_IO;
@@ -98,7 +104,12 @@ static int usb_xfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int num)
 				dev_err(&adapter->dev,
 					"failure reading data\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return -EREMOTEIO;
+=======
+				ret = -EREMOTEIO;
+				goto out;
+>>>>>>> v3.18
 =======
 				ret = -EREMOTEIO;
 				goto out;
@@ -112,7 +123,12 @@ static int usb_xfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int num)
 				dev_err(&adapter->dev,
 					"failure writing data\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				return -EREMOTEIO;
+=======
+				ret = -EREMOTEIO;
+				goto out;
+>>>>>>> v3.18
 =======
 				ret = -EREMOTEIO;
 				goto out;
@@ -121,6 +137,7 @@ static int usb_xfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int num)
 		}
 
 		/* read status */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (usb_read(adapter, CMD_GET_STATUS, 0, 0, &status, 1) != 1) {
 			dev_err(&adapter->dev, "failure reading status\n");
@@ -134,6 +151,8 @@ static int usb_xfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int num)
 
 	return i;
 =======
+=======
+>>>>>>> v3.18
 		if (usb_read(adapter, CMD_GET_STATUS, 0, 0, pstatus, 1) != 1) {
 			dev_err(&adapter->dev, "failure reading status\n");
 			ret = -EREMOTEIO;
@@ -151,11 +170,15 @@ static int usb_xfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int num)
 out:
 	kfree(pstatus);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static u32 usb_func(struct i2c_adapter *adapter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__le32 func;
 
@@ -168,6 +191,8 @@ static u32 usb_func(struct i2c_adapter *adapter)
 
 	return le32_to_cpu(func);
 =======
+=======
+>>>>>>> v3.18
 	__le32 *pfunc;
 	u32 ret;
 
@@ -185,6 +210,9 @@ static u32 usb_func(struct i2c_adapter *adapter)
 out:
 	kfree(pfunc);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -207,7 +235,10 @@ static const struct usb_device_id i2c_tiny_usb_table[] = {
 	{ USB_DEVICE(0x0403, 0xc631) },   /* FTDI */
 	{ USB_DEVICE(0x1c40, 0x0534) },   /* EZPrototypes */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ USB_DEVICE(0x1964, 0x0001) },   /* Robofuzz OSIF */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	{ }                               /* Terminating entry */

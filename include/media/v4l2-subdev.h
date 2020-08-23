@@ -25,6 +25,10 @@
 #include <linux/v4l2-subdev.h>
 #include <media/media-entity.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <media/v4l2-async.h>
+>>>>>>> v3.18
 =======
 #include <media/v4l2-async.h>
 >>>>>>> v3.18
@@ -93,7 +97,10 @@ struct v4l2_decode_vbi_line {
 /* Core ops: it is highly recommended to implement at least these ops:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    g_chip_ident
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
    log_status
@@ -153,7 +160,10 @@ struct v4l2_subdev_io_pin_config {
  */
 struct v4l2_subdev_core_ops {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*g_chip_ident)(struct v4l2_subdev *sd, struct v4l2_dbg_chip_ident *chip);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int (*log_status)(struct v4l2_subdev *sd);
@@ -171,15 +181,21 @@ struct v4l2_subdev_core_ops {
 	int (*try_ext_ctrls)(struct v4l2_subdev *sd, struct v4l2_ext_controls *ctrls);
 	int (*querymenu)(struct v4l2_subdev *sd, struct v4l2_querymenu *qm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*g_std)(struct v4l2_subdev *sd, v4l2_std_id *norm);
 	int (*s_std)(struct v4l2_subdev *sd, v4l2_std_id norm);
 	long (*ioctl)(struct v4l2_subdev *sd, unsigned int cmd, void *arg);
 =======
+=======
+>>>>>>> v3.18
 	long (*ioctl)(struct v4l2_subdev *sd, unsigned int cmd, void *arg);
 #ifdef CONFIG_COMPAT
 	long (*compat_ioctl32)(struct v4l2_subdev *sd, unsigned int cmd,
 			       unsigned long arg);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_VIDEO_ADV_DEBUG
 	int (*g_register)(struct v4l2_subdev *sd, struct v4l2_dbg_register *reg);
@@ -212,6 +228,10 @@ struct v4l2_subdev_tuner_ops {
 	int (*s_frequency)(struct v4l2_subdev *sd, const struct v4l2_frequency *freq);
 	int (*g_frequency)(struct v4l2_subdev *sd, struct v4l2_frequency *freq);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int (*enum_freq_bands)(struct v4l2_subdev *sd, struct v4l2_frequency_band *band);
+>>>>>>> v3.18
 =======
 	int (*enum_freq_bands)(struct v4l2_subdev *sd, struct v4l2_frequency_band *band);
 >>>>>>> v3.18
@@ -253,12 +273,18 @@ struct v4l2_subdev_audio_ops {
 /* Indicates the @length field specifies maximum data length. */
 #define V4L2_MBUS_FRAME_DESC_FL_LEN_MAX		(1U << 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Indicates user defined data format, i.e. non standard frame format. */
 =======
+=======
+>>>>>>> v3.18
 /*
  * Indicates that the format does not have line offsets, i.e. the
  * receiver should use 1D DMA.
  */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define V4L2_MBUS_FRAME_DESC_FL_BLOB		(1U << 1)
 
@@ -267,8 +293,13 @@ struct v4l2_subdev_audio_ops {
  * @flags: V4L2_MBUS_FRAME_DESC_FL_* flags
  * @pixelcode: media bus pixel code, valid if FRAME_DESC_FL_BLOB is not set
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @length: number of octets per frame, valid for compressed or unspecified
  *          formats
+=======
+ * @length: number of octets per frame, valid if V4L2_MBUS_FRAME_DESC_FL_BLOB
+ *	    is set
+>>>>>>> v3.18
 =======
  * @length: number of octets per frame, valid if V4L2_MBUS_FRAME_DESC_FL_BLOB
  *	    is set
@@ -300,14 +331,20 @@ struct v4l2_mbus_frame_desc {
 	by video input devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    g_tvnorms_output: get v4l2_std_id with all standards supported by video
 	OUTPUT device. This is ignored by video input devices.
 =======
+=======
+>>>>>>> v3.18
    g_tvnorms: get v4l2_std_id with all standards supported by the video
 	CAPTURE device. This is ignored by video output devices.
 
    g_tvnorms_output: get v4l2_std_id with all standards supported by the video
 	OUTPUT device. This is ignored by video capture devices.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
    s_crystal_freq: sets the frequency of the crystal used to generate the
@@ -349,16 +386,22 @@ struct v4l2_subdev_video_ops {
 	int (*s_routing)(struct v4l2_subdev *sd, u32 input, u32 output, u32 config);
 	int (*s_crystal_freq)(struct v4l2_subdev *sd, u32 freq, u32 flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*s_std_output)(struct v4l2_subdev *sd, v4l2_std_id std);
 	int (*g_std_output)(struct v4l2_subdev *sd, v4l2_std_id *std);
 	int (*querystd)(struct v4l2_subdev *sd, v4l2_std_id *std);
 =======
+=======
+>>>>>>> v3.18
 	int (*g_std)(struct v4l2_subdev *sd, v4l2_std_id *norm);
 	int (*s_std)(struct v4l2_subdev *sd, v4l2_std_id norm);
 	int (*s_std_output)(struct v4l2_subdev *sd, v4l2_std_id std);
 	int (*g_std_output)(struct v4l2_subdev *sd, v4l2_std_id *std);
 	int (*querystd)(struct v4l2_subdev *sd, v4l2_std_id *std);
 	int (*g_tvnorms)(struct v4l2_subdev *sd, v4l2_std_id *std);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int (*g_tvnorms_output)(struct v4l2_subdev *sd, v4l2_std_id *std);
 	int (*g_input_status)(struct v4l2_subdev *sd, u32 *status);
@@ -379,12 +422,17 @@ struct v4l2_subdev_video_ops {
 	int (*g_dv_timings)(struct v4l2_subdev *sd,
 			struct v4l2_dv_timings *timings);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*enum_dv_timings)(struct v4l2_subdev *sd,
 			struct v4l2_enum_dv_timings *timings);
 	int (*query_dv_timings)(struct v4l2_subdev *sd,
 			struct v4l2_dv_timings *timings);
 	int (*dv_timings_cap)(struct v4l2_subdev *sd,
 			struct v4l2_dv_timings_cap *cap);
+=======
+	int (*query_dv_timings)(struct v4l2_subdev *sd,
+			struct v4l2_dv_timings *timings);
+>>>>>>> v3.18
 =======
 	int (*query_dv_timings)(struct v4l2_subdev *sd,
 			struct v4l2_dv_timings *timings);
@@ -561,15 +609,21 @@ struct v4l2_subdev_pad_ops {
 	int (*set_selection)(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh,
 			     struct v4l2_subdev_selection *sel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*get_edid)(struct v4l2_subdev *sd, struct v4l2_subdev_edid *edid);
 	int (*set_edid)(struct v4l2_subdev *sd, struct v4l2_subdev_edid *edid);
 =======
+=======
+>>>>>>> v3.18
 	int (*get_edid)(struct v4l2_subdev *sd, struct v4l2_edid *edid);
 	int (*set_edid)(struct v4l2_subdev *sd, struct v4l2_edid *edid);
 	int (*dv_timings_cap)(struct v4l2_subdev *sd,
 			      struct v4l2_dv_timings_cap *cap);
 	int (*enum_dv_timings)(struct v4l2_subdev *sd,
 			       struct v4l2_enum_dv_timings *timings);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_MEDIA_CONTROLLER
 	int (*link_validate)(struct v4l2_subdev *sd, struct media_link *link,
@@ -626,7 +680,10 @@ struct v4l2_subdev_internal_ops {
 #define V4L2_SUBDEV_FL_HAS_EVENTS		(1U << 3)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct regulator_bulk_data;
 
 struct v4l2_subdev_platform_data {
@@ -638,6 +695,9 @@ struct v4l2_subdev_platform_data {
 	void *host_priv;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Each instance of a subdev driver should create this struct, either
    stand-alone or embedded in a larger struct.
@@ -649,6 +709,10 @@ struct v4l2_subdev {
 	struct list_head list;
 	struct module *owner;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool owner_v4l2_dev;
+>>>>>>> v3.18
 =======
 	bool owner_v4l2_dev;
 >>>>>>> v3.18
@@ -669,7 +733,10 @@ struct v4l2_subdev {
 	/* subdev device node */
 	struct video_device *devnode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* pointer to the physical device, if any */
 	struct device *dev;
 	/* Links this subdev to a global subdev_list or @notifier->done list. */
@@ -680,6 +747,9 @@ struct v4l2_subdev {
 	struct v4l2_async_notifier *notifier;
 	/* common part of subdevice platform data */
 	struct v4l2_subdev_platform_data *pdata;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -712,8 +782,13 @@ struct v4l2_subdev_fh {
 				       unsigned int pad)		\
 	{								\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG_ON(unlikely(pad >= vdev_to_v4l2_subdev(		\
 					fh->vfh.vdev)->entity.num_pads)); \
+=======
+		BUG_ON(pad >= vdev_to_v4l2_subdev(			\
+					fh->vfh.vdev)->entity.num_pads); \
+>>>>>>> v3.18
 =======
 		BUG_ON(pad >= vdev_to_v4l2_subdev(			\
 					fh->vfh.vdev)->entity.num_pads); \
@@ -723,7 +798,11 @@ struct v4l2_subdev_fh {
 
 __V4L2_SUBDEV_MK_GET_TRY(v4l2_mbus_framefmt, format, try_fmt)
 <<<<<<< HEAD
+<<<<<<< HEAD
 __V4L2_SUBDEV_MK_GET_TRY(v4l2_rect, crop, try_compose)
+=======
+__V4L2_SUBDEV_MK_GET_TRY(v4l2_rect, crop, try_crop)
+>>>>>>> v3.18
 =======
 __V4L2_SUBDEV_MK_GET_TRY(v4l2_rect, crop, try_crop)
 >>>>>>> v3.18
@@ -766,7 +845,11 @@ void v4l2_subdev_init(struct v4l2_subdev *sd,
    NULL pointers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    Example: err = v4l2_subdev_call(sd, core, g_chip_ident, &chip);
+=======
+   Example: err = v4l2_subdev_call(sd, video, s_std, norm);
+>>>>>>> v3.18
 =======
    Example: err = v4l2_subdev_call(sd, video, s_std, norm);
 >>>>>>> v3.18
@@ -776,11 +859,14 @@ void v4l2_subdev_init(struct v4l2_subdev *sd,
 		(sd)->ops->o->f((sd) , ##args) : -ENOIOCTLCMD))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Send a notification to v4l2_device. */
 #define v4l2_subdev_notify(sd, notification, arg)			   \
 	((!(sd) || !(sd)->v4l2_dev || !(sd)->v4l2_dev->notify) ? -ENODEV : \
 	 (sd)->v4l2_dev->notify((sd), (notification), (arg)))
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define v4l2_subdev_has_op(sd, o, f) \

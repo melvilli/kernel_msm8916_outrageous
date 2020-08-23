@@ -14,6 +14,11 @@
 #define __ASM_MACH_CAVIUM_OCTEON_DMA_COHERENCE_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bug.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/bug.h>
 
@@ -27,6 +32,10 @@ static inline dma_addr_t plat_map_dma_mem(struct device *dev, void *addr,
 {
 	BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -37,6 +46,10 @@ static inline dma_addr_t plat_map_dma_mem_page(struct device *dev,
 {
 	BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -47,6 +60,10 @@ static inline unsigned long plat_dma_addr_to_phys(struct device *dev,
 {
 	BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -62,11 +79,15 @@ static inline int plat_dma_supported(struct device *dev, u64 mask)
 {
 	BUG();
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 static inline void plat_extra_sync_for_device(struct device *dev)
 {
 	BUG();
+=======
+	return 0;
+>>>>>>> v3.18
 =======
 	return 0;
 >>>>>>> v3.18
@@ -78,12 +99,15 @@ static inline int plat_device_is_coherent(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int plat_dma_mapping_error(struct device *dev,
 					 dma_addr_t dma_addr)
 {
 	BUG();
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 dma_addr_t phys_to_dma(struct device *dev, phys_addr_t paddr);

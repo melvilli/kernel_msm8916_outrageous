@@ -39,6 +39,7 @@ static void _init_stainfo(struct sta_info *psta)
 	memset((u8 *)psta, 0, sizeof(struct sta_info));
 	 spin_lock_init(&psta->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	_init_listhead(&psta->list);
 	_init_listhead(&psta->hash_list);
 	_r8712_init_sta_xmit_priv(&psta->sta_xmitpriv);
@@ -46,12 +47,17 @@ static void _init_stainfo(struct sta_info *psta)
 	_init_listhead(&psta->asoc_list);
 	_init_listhead(&psta->auth_list);
 =======
+=======
+>>>>>>> v3.18
 	INIT_LIST_HEAD(&psta->list);
 	INIT_LIST_HEAD(&psta->hash_list);
 	_r8712_init_sta_xmit_priv(&psta->sta_xmitpriv);
 	_r8712_init_sta_recv_priv(&psta->sta_recvpriv);
 	INIT_LIST_HEAD(&psta->asoc_list);
 	INIT_LIST_HEAD(&psta->auth_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -61,8 +67,13 @@ u32 _r8712_init_sta_priv(struct	sta_priv *pstapriv)
 	s32 i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pstapriv->pallocated_stainfo_buf = _malloc(sizeof(struct sta_info) *
 						   NUM_STA + 4);
+=======
+	pstapriv->pallocated_stainfo_buf = kmalloc(sizeof(struct sta_info) *
+						   NUM_STA + 4, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	pstapriv->pallocated_stainfo_buf = kmalloc(sizeof(struct sta_info) *
 						   NUM_STA + 4, GFP_ATOMIC);
@@ -80,6 +91,7 @@ u32 _r8712_init_sta_priv(struct	sta_priv *pstapriv)
 	for (i = 0; i < NUM_STA; i++) {
 		_init_stainfo(psta);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_init_listhead(&(pstapriv->sta_hash[i]));
 		list_insert_tail(&psta->list,
 				 get_list_head(&pstapriv->free_sta_queue));
@@ -88,12 +100,17 @@ u32 _r8712_init_sta_priv(struct	sta_priv *pstapriv)
 	_init_listhead(&pstapriv->asoc_list);
 	_init_listhead(&pstapriv->auth_list);
 =======
+=======
+>>>>>>> v3.18
 		INIT_LIST_HEAD(&(pstapriv->sta_hash[i]));
 		list_add_tail(&psta->list, &pstapriv->free_sta_queue.queue);
 		psta++;
 	}
 	INIT_LIST_HEAD(&pstapriv->asoc_list);
 	INIT_LIST_HEAD(&pstapriv->auth_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return _SUCCESS;
 }
@@ -107,17 +124,23 @@ static void mfree_all_stainfo(struct sta_priv *pstapriv)
 
 	spin_lock_irqsave(&pstapriv->sta_hash_lock, irqL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phead = get_list_head(&pstapriv->free_sta_queue);
 	plist = get_next(phead);
 	while ((end_of_queue_search(phead, plist)) == false) {
 		psta = LIST_CONTAINOR(plist, struct sta_info, list);
 		plist = get_next(plist);
 =======
+=======
+>>>>>>> v3.18
 	phead = &pstapriv->free_sta_queue.queue;
 	plist = phead->next;
 	while ((end_of_queue_search(phead, plist)) == false) {
 		psta = LIST_CONTAINOR(plist, struct sta_info, list);
 		plist = plist->next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -154,6 +177,7 @@ struct sta_info *r8712_alloc_stainfo(struct sta_priv *pstapriv, u8 *hwaddr)
 	pfree_sta_queue = &pstapriv->free_sta_queue;
 	spin_lock_irqsave(&(pfree_sta_queue->lock), flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (_queue_empty(pfree_sta_queue) == true)
 		psta = NULL;
 	else {
@@ -161,12 +185,17 @@ struct sta_info *r8712_alloc_stainfo(struct sta_priv *pstapriv, u8 *hwaddr)
 				      struct sta_info, list);
 		list_delete(&(psta->list));
 =======
+=======
+>>>>>>> v3.18
 	if (list_empty(&pfree_sta_queue->queue))
 		psta = NULL;
 	else {
 		psta = LIST_CONTAINOR(pfree_sta_queue->queue.next,
 				      struct sta_info, list);
 		list_del_init(&(psta->list));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		tmp_aid = psta->aid;
 		_init_stainfo(psta);
@@ -178,8 +207,13 @@ struct sta_info *r8712_alloc_stainfo(struct sta_priv *pstapriv, u8 *hwaddr)
 		}
 		phash_list = &(pstapriv->sta_hash[index]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		list_insert_tail(&psta->hash_list, phash_list);
 		pstapriv->asoc_sta_count++ ;
+=======
+		list_add_tail(&psta->hash_list, phash_list);
+		pstapriv->asoc_sta_count++;
+>>>>>>> v3.18
 =======
 		list_add_tail(&psta->hash_list, phash_list);
 		pstapriv->asoc_sta_count++;
@@ -195,7 +229,11 @@ struct sta_info *r8712_alloc_stainfo(struct sta_priv *pstapriv, u8 *hwaddr)
 				&wRxSeqInitialValue, 2);
 		/* for A-MPDU Rx reordering buffer control */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (i = 0; i < 16 ; i++) {
+=======
+		for (i = 0; i < 16; i++) {
+>>>>>>> v3.18
 =======
 		for (i = 0; i < 16; i++) {
 >>>>>>> v3.18
@@ -231,6 +269,7 @@ void r8712_free_stainfo(struct _adapter *padapter, struct sta_info *psta)
 	spin_lock_irqsave(&(pxmitpriv->vo_pending.lock), irqL0);
 	r8712_free_xmitframe_queue(pxmitpriv, &pstaxmitpriv->vo_q.sta_pending);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_delete(&(pstaxmitpriv->vo_q.tx_pending));
 	spin_unlock_irqrestore(&(pxmitpriv->vo_pending.lock), irqL0);
 	spin_lock_irqsave(&(pxmitpriv->vi_pending.lock), irqL0);
@@ -247,6 +286,8 @@ void r8712_free_stainfo(struct _adapter *padapter, struct sta_info *psta)
 	spin_unlock_irqrestore(&(pxmitpriv->be_pending.lock), irqL0);
 	list_delete(&psta->hash_list);
 =======
+=======
+>>>>>>> v3.18
 	list_del_init(&(pstaxmitpriv->vo_q.tx_pending));
 	spin_unlock_irqrestore(&(pxmitpriv->vo_pending.lock), irqL0);
 	spin_lock_irqsave(&(pxmitpriv->vi_pending.lock), irqL0);
@@ -262,6 +303,9 @@ void r8712_free_stainfo(struct _adapter *padapter, struct sta_info *psta)
 	list_del_init(&(pstaxmitpriv->be_q.tx_pending));
 	spin_unlock_irqrestore(&(pxmitpriv->be_pending.lock), irqL0);
 	list_del_init(&psta->hash_list);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pstapriv->asoc_sta_count--;
 	/* re-init sta_info; 20061114 */
@@ -276,7 +320,11 @@ void r8712_free_stainfo(struct _adapter *padapter, struct sta_info *psta)
 	spin_lock(&(pfree_sta_queue->lock));
 	/* insert into free_sta_queue; 20061114 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_insert_tail(&psta->list, get_list_head(pfree_sta_queue));
+=======
+	list_add_tail(&psta->list, &pfree_sta_queue->queue);
+>>>>>>> v3.18
 =======
 	list_add_tail(&psta->list, &pfree_sta_queue->queue);
 >>>>>>> v3.18
@@ -299,17 +347,23 @@ void r8712_free_all_stainfo(struct _adapter *padapter)
 	for (index = 0; index < NUM_STA; index++) {
 		phead = &(pstapriv->sta_hash[index]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		plist = get_next(phead);
 		while ((end_of_queue_search(phead, plist)) == false) {
 			psta = LIST_CONTAINOR(plist,
 					      struct sta_info, hash_list);
 			plist = get_next(plist);
 =======
+=======
+>>>>>>> v3.18
 		plist = phead->next;
 		while ((end_of_queue_search(phead, plist)) == false) {
 			psta = LIST_CONTAINOR(plist,
 					      struct sta_info, hash_list);
 			plist = plist->next;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (pbcmc_stainfo != psta)
 				r8712_free_stainfo(padapter , psta);
@@ -332,7 +386,11 @@ struct sta_info *r8712_get_stainfo(struct sta_priv *pstapriv, u8 *hwaddr)
 	spin_lock_irqsave(&pstapriv->sta_hash_lock, irqL);
 	phead = &(pstapriv->sta_hash[index]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	plist = get_next(phead);
+=======
+	plist = phead->next;
+>>>>>>> v3.18
 =======
 	plist = phead->next;
 >>>>>>> v3.18
@@ -344,7 +402,11 @@ struct sta_info *r8712_get_stainfo(struct sta_priv *pstapriv, u8 *hwaddr)
 		}
 		psta = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		plist = get_next(plist);
+=======
+		plist = plist->next;
+>>>>>>> v3.18
 =======
 		plist = plist->next;
 >>>>>>> v3.18

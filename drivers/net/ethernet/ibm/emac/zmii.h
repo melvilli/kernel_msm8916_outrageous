@@ -54,6 +54,7 @@ struct zmii_instance {
 #ifdef CONFIG_IBM_EMAC_ZMII
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int zmii_init(void);
 extern void zmii_exit(void);
 extern int zmii_attach(struct platform_device *ofdev, int input, int *mode);
@@ -64,6 +65,8 @@ extern void zmii_set_speed(struct platform_device *ofdev, int input, int speed);
 extern int zmii_get_regs_len(struct platform_device *ocpdev);
 extern void *zmii_dump_regs(struct platform_device *ofdev, void *buf);
 =======
+=======
+>>>>>>> v3.18
 int zmii_init(void);
 void zmii_exit(void);
 int zmii_attach(struct platform_device *ofdev, int input, int *mode);
@@ -73,6 +76,9 @@ void zmii_put_mdio(struct platform_device *ofdev, int input);
 void zmii_set_speed(struct platform_device *ofdev, int input, int speed);
 int zmii_get_regs_len(struct platform_device *ocpdev);
 void *zmii_dump_regs(struct platform_device *ofdev, void *buf);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #else

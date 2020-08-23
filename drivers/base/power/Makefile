@@ -1,7 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_PM)	+= sysfs.o generic_ops.o common.o qos.o
 obj-$(CONFIG_PM_SLEEP)	+= main.o wakeup.o
 obj-$(CONFIG_PM_RUNTIME)	+= runtime.o
+=======
+obj-$(CONFIG_PM)	+= sysfs.o generic_ops.o common.o qos.o runtime.o
+obj-$(CONFIG_PM_SLEEP)	+= main.o wakeup.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_PM)	+= sysfs.o generic_ops.o common.o qos.o runtime.o
 obj-$(CONFIG_PM_SLEEP)	+= main.o wakeup.o

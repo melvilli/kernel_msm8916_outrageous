@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Qualcomm Standard Secure Digital Host Controller (SDHC)
 
 Secure Digital Host Controller provides standard host interface to SD/MMC/SDIO cards.
@@ -238,6 +239,8 @@ Example:
 		qcom,bus-bw-vectors-bps = <0 13631488 27262976 54525952 109051904 218103808 4294967295>;
 		qcom,dat1-mpm-int = <44>;
 =======
+=======
+>>>>>>> v3.18
 * Qualcomm SDHCI controller (sdhci-msm)
 
 This file documents differences between the core properties in mmc.txt
@@ -292,5 +295,8 @@ Example:
 
 		clocks = <&gcc GCC_SDCC2_APPS_CLK>, <&gcc GCC_SDCC2_AHB_CLK>;
 		clock-names = "core", "iface";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};

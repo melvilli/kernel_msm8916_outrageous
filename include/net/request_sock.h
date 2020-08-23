@@ -44,7 +44,11 @@ struct request_sock_ops {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int inet_rtx_syn_ack(struct sock *parent, struct request_sock *req);
+=======
+int inet_rtx_syn_ack(struct sock *parent, struct request_sock *req);
+>>>>>>> v3.18
 =======
 int inet_rtx_syn_ack(struct sock *parent, struct request_sock *req);
 >>>>>>> v3.18
@@ -53,6 +57,10 @@ int inet_rtx_syn_ack(struct sock *parent, struct request_sock *req);
  */
 struct request_sock {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct sock_common		__req_common;
+>>>>>>> v3.18
 =======
 	struct sock_common		__req_common;
 >>>>>>> v3.18
@@ -171,6 +179,7 @@ struct request_sock_queue {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int reqsk_queue_alloc(struct request_sock_queue *queue,
 			     unsigned int nr_table_entries);
 
@@ -179,6 +188,8 @@ extern void reqsk_queue_destroy(struct request_sock_queue *queue);
 extern void reqsk_fastopen_remove(struct sock *sk,
 				  struct request_sock *req, bool reset);
 =======
+=======
+>>>>>>> v3.18
 int reqsk_queue_alloc(struct request_sock_queue *queue,
 		      unsigned int nr_table_entries);
 
@@ -186,6 +197,9 @@ void __reqsk_queue_destroy(struct request_sock_queue *queue);
 void reqsk_queue_destroy(struct request_sock_queue *queue);
 void reqsk_fastopen_remove(struct sock *sk, struct request_sock *req,
 			   bool reset);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct request_sock *

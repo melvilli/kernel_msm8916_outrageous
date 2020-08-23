@@ -18,6 +18,7 @@
 
 #define L1_CACHE_BYTES		(1 << L1_CACHE_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #define ARC_ICACHE_WAYS	2
 #define ARC_DCACHE_WAYS	4
@@ -35,6 +36,8 @@
 #define is_not_cache_aligned(p)	((unsigned long)p & (~DCACHE_LINE_MASK))
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define CACHE_LINE_MASK		(~(L1_CACHE_BYTES - 1))
 
 /*
@@ -43,6 +46,9 @@
  * explicit uncached accesses (LD.di/ST.di) hence more portable drivers
  */
 #define ARC_UNCACHED_ADDR_SPACE	0xc0000000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef __ASSEMBLY__
@@ -69,6 +75,7 @@
 #define ARCH_DMA_MINALIGN      L1_CACHE_BYTES
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * ARC700 doesn't cache any access in top 256M.
  * Ideal for wiring memory mapped peripherals as we don't need to do
@@ -82,6 +89,8 @@ extern void __init read_decode_cache_bcr(void);
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 extern void arc_cache_init(void);
 extern char *arc_cache_mumbojumbo(int cpu_id, char *buf, int len);
 extern void read_decode_cache_bcr(void);
@@ -115,5 +124,8 @@ extern void read_decode_cache_bcr(void);
 #define DC_CTRL_INV_MODE_FLUSH  0x40
 #define DC_CTRL_FLUSH_STATUS    0x100
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* _ASM_CACHE_H */

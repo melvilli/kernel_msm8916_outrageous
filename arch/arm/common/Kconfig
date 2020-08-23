@@ -19,9 +19,14 @@ config SHARP_SCOOP
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config FIQ_GLUE
 	bool
 	select FIQ
+=======
+config TI_PRIV_EDMA
+	bool
+>>>>>>> v3.18
 =======
 config TI_PRIV_EDMA
 	bool

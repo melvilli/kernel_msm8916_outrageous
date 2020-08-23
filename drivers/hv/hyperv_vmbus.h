@@ -511,7 +511,10 @@ struct hv_context {
 	 */
 	struct tasklet_struct *event_dpc[NR_CPUS];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * To optimize the mapping of relid to channel, maintain
 	 * per-cpu list of the channels based on their CPU affinity.
@@ -521,13 +524,19 @@ struct hv_context {
 	 * buffer to post messages to the host.
 	 */
 	void *post_msg_page[NR_CPUS];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 extern struct hv_context hv_context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct hv_ring_buffer_debug_info {
 	u32 current_interrupt_mask;
 	u32 current_read_index;
@@ -535,6 +544,9 @@ struct hv_ring_buffer_debug_info {
 	u32 bytes_avail_toread;
 	u32 bytes_avail_towrite;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Hv Interface */
@@ -542,7 +554,11 @@ struct hv_ring_buffer_debug_info {
 extern int hv_init(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void hv_cleanup(bool crash);
+=======
+extern void hv_cleanup(void);
+>>>>>>> v3.18
 =======
 extern void hv_cleanup(void);
 >>>>>>> v3.18
@@ -554,11 +570,17 @@ extern int hv_post_message(union hv_connection_id connection_id,
 extern u16 hv_signal_event(void *con_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern int hv_synic_alloc(void);
 
 extern void hv_synic_free(void);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void hv_synic_init(void *irqarg);
 
@@ -582,8 +604,13 @@ void hv_ringbuffer_cleanup(struct hv_ring_buffer_info *ring_info);
 
 int hv_ringbuffer_write(struct hv_ring_buffer_info *ring_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    struct scatterlist *sglist,
 		    u32 sgcount, bool *signal);
+=======
+		    struct kvec *kv_list,
+		    u32 kv_count, bool *signal);
+>>>>>>> v3.18
 =======
 		    struct kvec *kv_list,
 		    u32 kv_count, bool *signal);
@@ -647,7 +674,11 @@ struct vmbus_connection {
 	 * is child->parent notification
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void *monitor_pages;
+=======
+	struct hv_monitor_page *monitor_pages[2];
+>>>>>>> v3.18
 =======
 	struct hv_monitor_page *monitor_pages[2];
 >>>>>>> v3.18
@@ -676,9 +707,15 @@ extern struct vmbus_connection vmbus_connection;
 /* General vmbus interface */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct hv_device *vmbus_device_create(uuid_le *type,
 					 uuid_le *instance,
 					 struct vmbus_channel *channel);
+=======
+struct hv_device *vmbus_device_create(const uuid_le *type,
+				      const uuid_le *instance,
+				      struct vmbus_channel *channel);
+>>>>>>> v3.18
 =======
 struct hv_device *vmbus_device_create(const uuid_le *type,
 				      const uuid_le *instance,
@@ -707,11 +744,17 @@ int vmbus_set_event(struct vmbus_channel *channel);
 void vmbus_on_event(unsigned long data);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int hv_fcopy_init(struct hv_util_service *);
 void hv_fcopy_deinit(void);
 void hv_fcopy_onchannelcallback(void *);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* _HYPERV_VMBUS_H */

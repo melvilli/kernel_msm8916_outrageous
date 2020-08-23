@@ -17,12 +17,16 @@
 #include <linux/jiffies.h>
 #include <linux/err.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <acpi/acpi.h>
 #include <acpi/acpixf.h>
 #include <acpi/acpi_drivers.h>
 #include <acpi/acpi_bus.h>
 
+=======
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/acpi.h>
 >>>>>>> v3.18
@@ -124,7 +128,11 @@ struct atk_data {
 	acpi_handle rvlt_handle;
 	acpi_handle rfan_handle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* new inteface */
+=======
+	/* new interface */
+>>>>>>> v3.18
 =======
 	/* new interface */
 >>>>>>> v3.18
@@ -702,7 +710,11 @@ DEFINE_SIMPLE_ATTRIBUTE(atk_debugfs_gitm,
 			atk_debugfs_gitm_get,
 			NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"0x%08llx\n")
+=======
+			"0x%08llx\n");
+>>>>>>> v3.18
 =======
 			"0x%08llx\n");
 >>>>>>> v3.18

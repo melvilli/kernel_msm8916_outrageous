@@ -142,6 +142,7 @@ static int ipcomp_compress(struct xfrm_state *x, struct sk_buff *skb)
 	int dlen = IPCOMP_SCRATCH_SIZE;
 	u8 *start = skb->data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const int cpu = get_cpu();
 	u8 *scratch = *per_cpu_ptr(ipcomp_scratches, cpu);
 	struct crypto_comp *tfm = *per_cpu_ptr(ipcd->tfms, cpu);
@@ -151,6 +152,8 @@ static int ipcomp_compress(struct xfrm_state *x, struct sk_buff *skb)
 	err = crypto_comp_compress(tfm, start, plen, scratch, &dlen);
 	local_bh_enable();
 =======
+=======
+>>>>>>> v3.18
 	struct crypto_comp *tfm;
 	u8 *scratch;
 	int err;
@@ -159,6 +162,9 @@ static int ipcomp_compress(struct xfrm_state *x, struct sk_buff *skb)
 	scratch = *this_cpu_ptr(ipcomp_scratches);
 	tfm = *this_cpu_ptr(ipcd->tfms);
 	err = crypto_comp_compress(tfm, start, plen, scratch, &dlen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		goto out;
@@ -170,7 +176,11 @@ static int ipcomp_compress(struct xfrm_state *x, struct sk_buff *skb)
 
 	memcpy(start + sizeof(struct ip_comp_hdr), scratch, dlen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_cpu();
+=======
+	local_bh_enable();
+>>>>>>> v3.18
 =======
 	local_bh_enable();
 >>>>>>> v3.18
@@ -180,7 +190,11 @@ static int ipcomp_compress(struct xfrm_state *x, struct sk_buff *skb)
 
 out:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	put_cpu();
+=======
+	local_bh_enable();
+>>>>>>> v3.18
 =======
 	local_bh_enable();
 >>>>>>> v3.18
@@ -240,8 +254,13 @@ static void ipcomp_free_scratches(void)
 static void * __percpu *ipcomp_alloc_scratches(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i;
 	void * __percpu *scratches;
+=======
+	void * __percpu *scratches;
+	int i;
+>>>>>>> v3.18
 =======
 	void * __percpu *scratches;
 	int i;
@@ -258,7 +277,13 @@ static void * __percpu *ipcomp_alloc_scratches(void)
 
 	for_each_possible_cpu(i) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		void *scratch = vmalloc(IPCOMP_SCRATCH_SIZE);
+=======
+		void *scratch;
+
+		scratch = vmalloc_node(IPCOMP_SCRATCH_SIZE, cpu_to_node(i));
+>>>>>>> v3.18
 =======
 		void *scratch;
 

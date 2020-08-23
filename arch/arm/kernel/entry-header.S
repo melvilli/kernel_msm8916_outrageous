@@ -6,6 +6,10 @@
 #include <asm/errno.h>
 #include <asm/thread_info.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/v7m.h>
+>>>>>>> v3.18
 =======
 #include <asm/v7m.h>
 >>>>>>> v3.18
@@ -41,6 +45,7 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	alignment_trap, rtemp
 #ifdef CONFIG_ALIGNMENT_TRAP
 	ldr	\rtemp, .LCcralign
@@ -50,6 +55,8 @@
 	.endm
 
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_ALIGNMENT_TRAP
 #define ATRAP(x...) x
 #else
@@ -180,6 +187,9 @@
 	.endm
 #endif	/* CONFIG_CPU_V7M */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	@
 	@ Store/load the USER SP and LR registers by switching to the SYS
@@ -231,6 +241,7 @@
 	.endif
 	msr	spsr_cxsf, \rpsr
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_V6)
 	ldr	r0, [sp]
 	strex	r1, r2, [sp]			@ clear the exclusive monitor
@@ -242,6 +253,8 @@
 	ldmia	sp, {r0 - pc}^			@ load r0 - pc, cpsr
 #endif
 =======
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_CPU_V6) || defined(CONFIG_CPU_32v6K)
 	@ We must avoid clrex due to Cortex-A15 erratum #830321
 	sub	r0, sp, #4			@ uninhabited address
@@ -276,6 +289,9 @@
 	msr	spsr_cxsf, r9
 	ldr	r0, [r0, #S_R0]
 	ldmia	r8, {pc}^
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endm
 
@@ -284,10 +300,16 @@
 	ldr	lr, [sp, #\offset + S_PC]!	@ get pc
 	msr	spsr_cxsf, r1			@ save in spsr_svc
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_CPU_V6)
 	strex	r1, r2, [sp]			@ clear the exclusive monitor
 #elif defined(CONFIG_CPU_32v6K)
 	clrex					@ clear the exclusive monitor
+=======
+#if defined(CONFIG_CPU_V6) || defined(CONFIG_CPU_32v6K)
+	@ We must avoid clrex due to Cortex-A15 erratum #830321
+	strex	r1, r2, [sp]			@ clear the exclusive monitor
+>>>>>>> v3.18
 =======
 #if defined(CONFIG_CPU_V6) || defined(CONFIG_CPU_32v6K)
 	@ We must avoid clrex due to Cortex-A15 erratum #830321
@@ -306,12 +328,15 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@
 	@ 32-bit wide "mov pc, reg"
 	@
 	.macro	movw_pc, reg
 	mov	pc, \reg
 	.endm
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #else	/* CONFIG_THUMB2_KERNEL */
@@ -336,12 +361,18 @@
 	ldr	lr, [sp, #S_SP]			@ top of the stack
 	ldrd	r0, r1, [sp, #S_LR]		@ calling lr and pc
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clrex					@ clear the exclusive monitor
 =======
+=======
+>>>>>>> v3.18
 
 	@ We must avoid clrex due to Cortex-A15 erratum #830321
 	strex	r2, r1, [sp, #S_LR]		@ clear the exclusive monitor
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	stmdb	lr!, {r0, r1, \rpsr}		@ calling lr and rfe context
 	ldmia	sp, {r0 - r12}
@@ -351,9 +382,12 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro	restore_user_regs, fast = 0, offset = 0
 	clrex					@ clear the exclusive monitor
 =======
+=======
+>>>>>>> v3.18
 	@
 	@ svc_exit_via_fiq - like svc_exit but switches to FIQ mode before exit
 	@
@@ -386,6 +420,9 @@
 	.endm
 #else	/* ifdef CONFIG_CPU_V7M */
 	.macro	restore_user_regs, fast = 0, offset = 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mov	r2, sp
 	load_user_sp_lr r2, r3, \offset + S_SP	@ calling sp, lr
@@ -394,11 +431,17 @@
 	add	sp, sp, #\offset + S_SP
 	msr	spsr_cxsf, r1			@ save in spsr_svc
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	@ We must avoid clrex due to Cortex-A15 erratum #830321
 	strex	r1, r2, [sp]			@ clear the exclusive monitor
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.if	\fast
 	ldmdb	sp, {r1 - r12}			@ get calling r1 - r12
@@ -409,6 +452,7 @@
 	movs	pc, lr				@ return & move spsr_svc into cpsr
 	.endm
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	@
 	@ 32-bit wide "mov pc, reg"
@@ -417,6 +461,9 @@
 	mov	pc, \reg
 	nop
 	.endm
+=======
+#endif	/* ifdef CONFIG_CPU_V7M / else */
+>>>>>>> v3.18
 =======
 #endif	/* ifdef CONFIG_CPU_V7M / else */
 >>>>>>> v3.18
@@ -431,15 +478,21 @@
 	.if	\save
 	stmdb   sp!, {r0-r3, ip, lr}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	user_exit
 	ldmia	sp!, {r0-r3, ip, lr}
 	.else
 	bl	user_exit
 =======
+=======
+>>>>>>> v3.18
 	bl	context_tracking_user_exit
 	ldmia	sp!, {r0-r3, ip, lr}
 	.else
 	bl	context_tracking_user_exit
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endif
 #endif
@@ -450,15 +503,21 @@
 	.if	\save
 	stmdb   sp!, {r0-r3, ip, lr}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bl	user_enter
 	ldmia	sp!, {r0-r3, ip, lr}
 	.else
 	bl	user_enter
 =======
+=======
+>>>>>>> v3.18
 	bl	context_tracking_user_enter
 	ldmia	sp!, {r0-r3, ip, lr}
 	.else
 	bl	context_tracking_user_enter
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endif
 #endif

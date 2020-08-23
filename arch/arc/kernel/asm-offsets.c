@@ -25,9 +25,12 @@ int main(void)
 	DEFINE(THREAD_KSP, offsetof(struct thread_struct, ksp));
 	DEFINE(THREAD_CALLEE_REG, offsetof(struct thread_struct, callee_reg));
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_ARC_CURR_IN_REG
 	DEFINE(THREAD_USER_R25, offsetof(struct thread_struct, user_r25));
 #endif
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	DEFINE(THREAD_FAULT_ADDR,
@@ -53,7 +56,11 @@ int main(void)
 
 	DEFINE(PT_status32, offsetof(struct pt_regs, status32));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DEFINE(PT_orig_r8, offsetof(struct pt_regs, orig_r8_word));
+=======
+	DEFINE(PT_event, offsetof(struct pt_regs, event));
+>>>>>>> v3.18
 =======
 	DEFINE(PT_event, offsetof(struct pt_regs, event));
 >>>>>>> v3.18
@@ -68,6 +75,11 @@ int main(void)
 	DEFINE(PT_r7, offsetof(struct pt_regs, r7));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DEFINE(SZ_CALLEE_REGS, sizeof(struct callee_regs));
+	DEFINE(SZ_PT_REGS, sizeof(struct pt_regs));
+>>>>>>> v3.18
 =======
 	DEFINE(SZ_CALLEE_REGS, sizeof(struct callee_regs));
 	DEFINE(SZ_PT_REGS, sizeof(struct pt_regs));

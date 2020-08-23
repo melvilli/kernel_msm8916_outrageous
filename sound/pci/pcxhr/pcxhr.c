@@ -103,7 +103,11 @@ enum {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(pcxhr_ids) = {
+=======
+static const struct pci_device_id pcxhr_ids[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id pcxhr_ids[] = {
 >>>>>>> v3.18
@@ -289,7 +293,11 @@ static int pcxhr_get_clock_reg(struct pcxhr_mgr *mgr, unsigned int rate,
 			err = pcxhr_send_msg(mgr, &rmh);
 			if (err < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				snd_printk(KERN_ERR
+=======
+				dev_err(&mgr->pci->dev,
+>>>>>>> v3.18
 =======
 				dev_err(&mgr->pci->dev,
 >>>>>>> v3.18
@@ -366,7 +374,11 @@ static int pcxhr_sub_set_clock(struct pcxhr_mgr *mgr,
 	}
 	/* set the new frequency */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("clock register : set %x\n", val);
+=======
+	dev_dbg(&mgr->pci->dev, "clock register : set %x\n", val);
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "clock register : set %x\n", val);
 >>>>>>> v3.18
@@ -393,7 +405,11 @@ static int pcxhr_sub_set_clock(struct pcxhr_mgr *mgr,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("pcxhr_sub_set_clock to %dHz (realfreq=%d)\n",
+=======
+	dev_dbg(&mgr->pci->dev, "pcxhr_sub_set_clock to %dHz (realfreq=%d)\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "pcxhr_sub_set_clock to %dHz (realfreq=%d)\n",
 >>>>>>> v3.18
@@ -497,7 +513,11 @@ static int pcxhr_sub_get_external_clock(struct pcxhr_mgr *mgr,
 	default: rate = 0;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("External clock is at %d Hz\n", rate);
+=======
+	dev_dbg(&mgr->pci->dev, "External clock is at %d Hz\n", rate);
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "External clock is at %d Hz\n", rate);
 >>>>>>> v3.18
@@ -558,8 +578,13 @@ static int pcxhr_set_stream_state(struct pcxhr_stream *stream)
 	err = pcxhr_send_msg(chip->mgr, &rmh);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ERROR pcxhr_set_stream_state err=%x;\n",
 			   err);
+=======
+		dev_err(chip->card->dev,
+			"ERROR pcxhr_set_stream_state err=%x;\n", err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"ERROR pcxhr_set_stream_state err=%x;\n", err);
@@ -654,7 +679,12 @@ static int pcxhr_set_format(struct pcxhr_stream *stream)
 	err = pcxhr_send_msg(chip->mgr, &rmh);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "ERROR pcxhr_set_format err=%x;\n", err);
+=======
+		dev_err(chip->card->dev,
+			"ERROR pcxhr_set_format err=%x;\n", err);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 			"ERROR pcxhr_set_format err=%x;\n", err);
@@ -696,7 +726,11 @@ static int pcxhr_update_r_buffer(struct pcxhr_stream *stream)
 	err = pcxhr_send_msg(chip->mgr, &rmh);
 	if (err)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR
+=======
+		dev_err(chip->card->dev,
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev,
 >>>>>>> v3.18
@@ -736,6 +770,7 @@ static inline int pcxhr_stream_scheduled_get_pipe(struct pcxhr_stream *stream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void pcxhr_trigger_tasklet(unsigned long arg)
 {
 	unsigned long flags;
@@ -744,11 +779,16 @@ static void pcxhr_trigger_tasklet(unsigned long arg)
 	struct snd_pcxhr *chip;
 	struct pcxhr_mgr *mgr = (struct pcxhr_mgr*)(arg);
 =======
+=======
+>>>>>>> v3.18
 static void pcxhr_start_linked_stream(struct pcxhr_mgr *mgr)
 {
 	int i, j, err;
 	struct pcxhr_pipe *pipe;
 	struct snd_pcxhr *chip;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int capture_mask = 0;
 	int playback_mask = 0;
@@ -778,17 +818,23 @@ static void pcxhr_start_linked_stream(struct pcxhr_mgr *mgr)
 	if (capture_mask == 0 && playback_mask == 0) {
 		mutex_unlock(&mgr->setup_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "pcxhr_trigger_tasklet : no pipes\n");
 		return;
 	}
 
 	snd_printdd("pcxhr_trigger_tasklet : "
 =======
+=======
+>>>>>>> v3.18
 		dev_err(&mgr->pci->dev, "pcxhr_start_linked_stream : no pipes\n");
 		return;
 	}
 
 	dev_dbg(&mgr->pci->dev, "pcxhr_start_linked_stream : "
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		    "playback_mask=%x capture_mask=%x\n",
 		    playback_mask, capture_mask);
@@ -798,7 +844,11 @@ static void pcxhr_start_linked_stream(struct pcxhr_mgr *mgr)
 	if (err) {
 		mutex_unlock(&mgr->setup_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "pcxhr_trigger_tasklet : "
+=======
+		dev_err(&mgr->pci->dev, "pcxhr_start_linked_stream : "
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "pcxhr_start_linked_stream : "
 >>>>>>> v3.18
@@ -847,7 +897,11 @@ static void pcxhr_start_linked_stream(struct pcxhr_mgr *mgr)
 	if (err) {
 		mutex_unlock(&mgr->setup_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "pcxhr_trigger_tasklet : "
+=======
+		dev_err(&mgr->pci->dev, "pcxhr_start_linked_stream : "
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "pcxhr_start_linked_stream : "
 >>>>>>> v3.18
@@ -860,7 +914,11 @@ static void pcxhr_start_linked_stream(struct pcxhr_mgr *mgr)
 	 * (increment pointer by interrupt)
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&mgr->lock, flags);
+=======
+	mutex_lock(&mgr->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&mgr->lock);
 >>>>>>> v3.18
@@ -882,7 +940,11 @@ static void pcxhr_start_linked_stream(struct pcxhr_mgr *mgr)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&mgr->lock, flags);
+=======
+	mutex_unlock(&mgr->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&mgr->lock);
 >>>>>>> v3.18
@@ -892,7 +954,11 @@ static void pcxhr_start_linked_stream(struct pcxhr_mgr *mgr)
 #ifdef CONFIG_SND_DEBUG_VERBOSE
 	do_gettimeofday(&my_tv2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("***TRIGGER TASKLET*** TIME = %ld (err = %x)\n",
+=======
+	dev_dbg(&mgr->pci->dev, "***TRIGGER START*** TIME = %ld (err = %x)\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(&mgr->pci->dev, "***TRIGGER START*** TIME = %ld (err = %x)\n",
 >>>>>>> v3.18
@@ -923,7 +989,11 @@ static int pcxhr_trigger(struct snd_pcm_substream *subs, int cmd)
 				snd_pcm_trigger_done(s, subs);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			tasklet_schedule(&chip->mgr->trigger_taskq);
+=======
+			pcxhr_start_linked_stream(chip->mgr);
+>>>>>>> v3.18
 =======
 			pcxhr_start_linked_stream(chip->mgr);
 >>>>>>> v3.18
@@ -977,7 +1047,11 @@ static int pcxhr_hardware_timer(struct pcxhr_mgr *mgr, int start)
 	err = pcxhr_send_msg(mgr, &rmh);
 	if (err < 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "error pcxhr_hardware_timer err(%x)\n",
+=======
+		dev_err(&mgr->pci->dev, "error pcxhr_hardware_timer err(%x)\n",
+>>>>>>> v3.18
 =======
 		dev_err(&mgr->pci->dev, "error pcxhr_hardware_timer err(%x)\n",
 >>>>>>> v3.18
@@ -995,7 +1069,12 @@ static int pcxhr_prepare(struct snd_pcm_substream *subs)
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("pcxhr_prepare : period_size(%lx) periods(%x) buffer_size(%lx)\n",
+=======
+	dev_dbg(chip->card->dev,
+		"pcxhr_prepare : period_size(%lx) periods(%x) buffer_size(%lx)\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev,
 		"pcxhr_prepare : period_size(%lx) periods(%x) buffer_size(%lx)\n",
@@ -1109,17 +1188,23 @@ static int pcxhr_open(struct snd_pcm_substream *subs)
 
 	if( subs->stream == SNDRV_PCM_STREAM_PLAYBACK ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("pcxhr_open playback chip%d subs%d\n",
 			    chip->chip_idx, subs->number);
 		stream = &chip->playback_stream[subs->number];
 	} else {
 		snd_printdd("pcxhr_open capture chip%d subs%d\n",
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(chip->card->dev, "pcxhr_open playback chip%d subs%d\n",
 			    chip->chip_idx, subs->number);
 		stream = &chip->playback_stream[subs->number];
 	} else {
 		dev_dbg(chip->card->dev, "pcxhr_open capture chip%d subs%d\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			    chip->chip_idx, subs->number);
 		if (mgr->mono_capture)
@@ -1131,7 +1216,11 @@ static int pcxhr_open(struct snd_pcm_substream *subs)
 	if (stream->status != PCXHR_STREAM_STATUS_FREE){
 		/* streams in use */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "pcxhr_open chip%d subs%d in use\n",
+=======
+		dev_err(chip->card->dev, "pcxhr_open chip%d subs%d in use\n",
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "pcxhr_open chip%d subs%d in use\n",
 >>>>>>> v3.18
@@ -1201,7 +1290,11 @@ static int pcxhr_close(struct snd_pcm_substream *subs)
 	mutex_lock(&mgr->setup_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_printdd("pcxhr_close chip%d subs%d\n",
+=======
+	dev_dbg(chip->card->dev, "pcxhr_close chip%d subs%d\n",
+>>>>>>> v3.18
 =======
 	dev_dbg(chip->card->dev, "pcxhr_close chip%d subs%d\n",
 >>>>>>> v3.18
@@ -1225,7 +1318,10 @@ static int pcxhr_close(struct snd_pcm_substream *subs)
 static snd_pcm_uframes_t pcxhr_stream_pointer(struct snd_pcm_substream *subs)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	u_int32_t timer_period_frag;
@@ -1235,7 +1331,11 @@ static snd_pcm_uframes_t pcxhr_stream_pointer(struct snd_pcm_substream *subs)
 	struct pcxhr_stream *stream  = runtime->private_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_lock_irqsave(&chip->mgr->lock, flags);
+=======
+	mutex_lock(&chip->mgr->lock);
+>>>>>>> v3.18
 =======
 	mutex_lock(&chip->mgr->lock);
 >>>>>>> v3.18
@@ -1245,7 +1345,11 @@ static snd_pcm_uframes_t pcxhr_stream_pointer(struct snd_pcm_substream *subs)
 	timer_buf_periods = stream->timer_buf_periods;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	spin_unlock_irqrestore(&chip->mgr->lock, flags);
+=======
+	mutex_unlock(&chip->mgr->lock);
+>>>>>>> v3.18
 =======
 	mutex_unlock(&chip->mgr->lock);
 >>>>>>> v3.18
@@ -1279,7 +1383,11 @@ int pcxhr_create_pcm(struct snd_pcxhr *chip)
 			       chip->nb_streams_play,
 			       chip->nb_streams_capt, &pcm)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "cannot create pcm %s\n", name);
+=======
+		dev_err(chip->card->dev, "cannot create pcm %s\n", name);
+>>>>>>> v3.18
 =======
 		dev_err(chip->card->dev, "cannot create pcm %s\n", name);
 >>>>>>> v3.18
@@ -1294,6 +1402,10 @@ int pcxhr_create_pcm(struct snd_pcxhr *chip)
 
 	pcm->info_flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pcm->nonatomic = true;
+>>>>>>> v3.18
 =======
 	pcm->nonatomic = true;
 >>>>>>> v3.18
@@ -1333,7 +1445,11 @@ static int pcxhr_create(struct pcxhr_mgr *mgr,
 	chip = kzalloc(sizeof(*chip), GFP_KERNEL);
 	if (! chip) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "cannot allocate chip\n");
+=======
+		dev_err(card->dev, "cannot allocate chip\n");
+>>>>>>> v3.18
 =======
 		dev_err(card->dev, "cannot allocate chip\n");
 >>>>>>> v3.18
@@ -1362,7 +1478,10 @@ static int pcxhr_create(struct pcxhr_mgr *mgr,
 
 	mgr->chip[idx] = chip;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &mgr->pci->dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1614,7 +1733,11 @@ static int pcxhr_free(struct pcxhr_mgr *mgr)
 	if(mgr->dsp_loaded) {
 		pcxhr_reset_board(mgr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printdd("reset pcxhr !\n");
+=======
+		dev_dbg(&mgr->pci->dev, "reset pcxhr !\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(&mgr->pci->dev, "reset pcxhr !\n");
 >>>>>>> v3.18
@@ -1667,8 +1790,13 @@ static int pcxhr_probe(struct pci_dev *pci,
 	/* check if we can restrict PCI DMA transfers to 32 bits */
 	if (pci_set_dma_mask(pci, DMA_BIT_MASK(32)) < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		snd_printk(KERN_ERR "architecture does not support "
 			   "32bit PCI busmaster DMA\n");
+=======
+		dev_err(&pci->dev,
+			"architecture does not support 32bit PCI busmaster DMA\n");
+>>>>>>> v3.18
 =======
 		dev_err(&pci->dev,
 			"architecture does not support 32bit PCI busmaster DMA\n");
@@ -1722,14 +1850,20 @@ static int pcxhr_probe(struct pci_dev *pci,
 	mgr->irq = -1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (request_irq(pci->irq, pcxhr_interrupt, IRQF_SHARED,
 			KBUILD_MODNAME, mgr)) {
 		snd_printk(KERN_ERR "unable to grab IRQ %d\n", pci->irq);
 =======
+=======
+>>>>>>> v3.18
 	if (request_threaded_irq(pci->irq, pcxhr_interrupt,
 				 pcxhr_threaded_irq, IRQF_SHARED,
 				 KBUILD_MODNAME, mgr)) {
 		dev_err(&pci->dev, "unable to grab IRQ %d\n", pci->irq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		pcxhr_free(mgr);
 		return -EBUSY;
@@ -1742,9 +1876,15 @@ static int pcxhr_probe(struct pci_dev *pci,
 		mgr->port[0], mgr->port[1], mgr->port[2], mgr->irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* ISR spinlock  */
 	spin_lock_init(&mgr->lock);
 	spin_lock_init(&mgr->msg_lock);
+=======
+	/* ISR lock  */
+	mutex_init(&mgr->lock);
+	mutex_init(&mgr->msg_lock);
+>>>>>>> v3.18
 =======
 	/* ISR lock  */
 	mutex_init(&mgr->lock);
@@ -1755,12 +1895,15 @@ static int pcxhr_probe(struct pci_dev *pci,
 	mutex_init(&mgr->setup_mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* init taslket */
 	tasklet_init(&mgr->msg_taskq, pcxhr_msg_tasklet,
 		     (unsigned long) mgr);
 	tasklet_init(&mgr->trigger_taskq, pcxhr_trigger_tasklet,
 		     (unsigned long) mgr);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mgr->prmh = kmalloc(sizeof(*mgr->prmh) + 
@@ -1789,16 +1932,22 @@ static int pcxhr_probe(struct pci_dev *pci,
 		snprintf(tmpid, sizeof(tmpid), "%s-%d",
 			 id[dev] ? id[dev] : card_name, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = snd_card_create(idx, tmpid, THIS_MODULE, 0, &card);
 
 		if (err < 0) {
 			snd_printk(KERN_ERR "cannot allocate the card %d\n", i);
 =======
+=======
+>>>>>>> v3.18
 		err = snd_card_new(&pci->dev, idx, tmpid, THIS_MODULE,
 				   0, &card);
 
 		if (err < 0) {
 			dev_err(card->dev, "cannot allocate the card %d\n", i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			pcxhr_free(mgr);
 			return err;
@@ -1850,7 +1999,10 @@ static void pcxhr_remove(struct pci_dev *pci)
 {
 	pcxhr_free(pci_get_drvdata(pci));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pci, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

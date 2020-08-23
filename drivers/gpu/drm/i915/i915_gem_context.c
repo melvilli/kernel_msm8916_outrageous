@@ -74,7 +74,11 @@
  * There are two confusing terms used above:
  *  The "current context" means the context which is currently running on the
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  GPU. The GPU has loaded it's state already and has stored away the gtt
+=======
+ *  GPU. The GPU has loaded its state already and has stored away the gtt
+>>>>>>> v3.18
 =======
  *  GPU. The GPU has loaded its state already and has stored away the gtt
 >>>>>>> v3.18
@@ -98,12 +102,15 @@
  * part. It should be safe to decrease this, but it's more future proof as is.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CONTEXT_ALIGN (64<<10)
 
 static struct i915_hw_context *
 i915_gem_context_get(struct drm_i915_file_private *file_priv, u32 id);
 static int do_switch(struct i915_hw_context *to);
 =======
+=======
+>>>>>>> v3.18
 #define GEN6_CONTEXT_ALIGN (64<<10)
 #define GEN7_CONTEXT_ALIGN 4096
 
@@ -114,6 +121,9 @@ static size_t get_context_alignment(struct drm_device *dev)
 
 	return GEN7_CONTEXT_ALIGN;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int get_context_size(struct drm_device *dev)
@@ -135,6 +145,12 @@ static int get_context_size(struct drm_device *dev)
 			ret = GEN7_CXT_TOTAL_SIZE(reg) * 64;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case 8:
+		ret = GEN8_CXT_TOTAL_SIZE;
+		break;
+>>>>>>> v3.18
 =======
 	case 8:
 		ret = GEN8_CXT_TOTAL_SIZE;
@@ -147,6 +163,7 @@ static int get_context_size(struct drm_device *dev)
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void do_destroy(struct i915_hw_context *ctx)
 {
@@ -164,6 +181,8 @@ create_hw_context(struct drm_device *dev,
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	struct i915_hw_context *ctx;
 =======
+=======
+>>>>>>> v3.18
 void i915_gem_context_free(struct kref *ctx_ref)
 {
 	struct intel_context *ctx = container_of(ctx_ref,
@@ -216,6 +235,9 @@ __create_hw_context(struct drm_device *dev,
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	struct intel_context *ctx;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -223,6 +245,7 @@ __create_hw_context(struct drm_device *dev,
 	if (ctx == NULL)
 		return ERR_PTR(-ENOMEM);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ctx->obj = i915_gem_alloc_object(dev, dev_priv->hw_context_size);
 	if (ctx->obj == NULL) {
@@ -256,6 +279,8 @@ __create_hw_context(struct drm_device *dev,
 		goto err_out;
 	ctx->id = ret;
 =======
+=======
+>>>>>>> v3.18
 	kref_init(&ctx->ref);
 	list_add_tail(&ctx->link, &dev_priv->context_list);
 
@@ -284,11 +309,15 @@ __create_hw_context(struct drm_device *dev,
 	 * loads it will restore whatever remap state already exists. If there
 	 * is no remap info, it will be a NOP. */
 	ctx->remap_slice = (1 << NUM_L3_SLICES(dev)) - 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return ctx;
 
 err_out:
+<<<<<<< HEAD
 <<<<<<< HEAD
 	do_destroy(ctx);
 	return ERR_PTR(ret);
@@ -300,16 +329,22 @@ static inline bool is_default_context(struct i915_hw_context *ctx)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	i915_gem_context_unreference(ctx);
 	return ERR_PTR(ret);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * The default context needs to exist per ring that uses contexts. It stores the
  * context state of the GPU for applications that don't utilize HW contexts, as
  * well as an idle case.
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int create_default_context(struct drm_i915_private *dev_priv)
 {
@@ -375,6 +410,8 @@ void i915_gem_context_init(struct drm_device *dev)
 
 	DRM_DEBUG_DRIVER("HW context support initialized\n");
 =======
+=======
+>>>>>>> v3.18
 static struct intel_context *
 i915_gem_create_context(struct drm_device *dev,
 			struct drm_i915_file_private *file_priv)
@@ -495,12 +532,16 @@ int i915_gem_context_init(struct drm_device *dev)
 			i915.enable_execlists ? "LR" :
 			dev_priv->hw_context_size ? "HW" : "fake");
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 void i915_gem_context_fini(struct drm_device *dev)
 {
 	struct drm_i915_private *dev_priv = dev->dev_private;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	if (dev_priv->hw_contexts_disabled)
@@ -515,6 +556,8 @@ void i915_gem_context_fini(struct drm_device *dev)
 
 	do_destroy(dev_priv->ring[RCS].default_context);
 =======
+=======
+>>>>>>> v3.18
 	struct intel_context *dctx = dev_priv->ring[RCS].default_context;
 	int i;
 
@@ -572,11 +615,15 @@ int i915_gem_context_enable(struct drm_i915_private *dev_priv)
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int context_idr_cleanup(int id, void *p, void *data)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct i915_hw_context *ctx = p;
 
@@ -584,6 +631,8 @@ static int context_idr_cleanup(int id, void *p, void *data)
 
 	do_destroy(ctx);
 =======
+=======
+>>>>>>> v3.18
 	struct intel_context *ctx = p;
 
 	i915_gem_context_unreference(ctx);
@@ -605,6 +654,9 @@ int i915_gem_context_open(struct drm_device *dev, struct drm_file *file)
 		idr_destroy(&file_priv->context_idr);
 		return PTR_ERR(ctx);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -619,6 +671,7 @@ void i915_gem_context_close(struct drm_device *dev, struct drm_file *file)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct i915_hw_context *
 i915_gem_context_get(struct drm_i915_file_private *file_priv, u32 id)
 {
@@ -631,6 +684,8 @@ mi_set_context(struct intel_ring_buffer *ring,
 	       u32 hw_flags)
 {
 =======
+=======
+>>>>>>> v3.18
 struct intel_context *
 i915_gem_context_get(struct drm_i915_file_private *file_priv, u32 id)
 {
@@ -649,6 +704,9 @@ mi_set_context(struct intel_engine_cs *ring,
 	       u32 hw_flags)
 {
 	u32 flags = hw_flags | MI_MM_SPACE_GTT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int ret;
 
@@ -658,7 +716,11 @@ mi_set_context(struct intel_engine_cs *ring,
 	 * itlb_before_ctx_switch.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_GEN6(ring->dev) && ring->itlb_before_ctx_switch) {
+=======
+	if (IS_GEN6(ring->dev)) {
+>>>>>>> v3.18
 =======
 	if (IS_GEN6(ring->dev)) {
 >>>>>>> v3.18
@@ -668,18 +730,29 @@ mi_set_context(struct intel_engine_cs *ring,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* These flags are for resource streamer on HSW+ */
 	if (!IS_HASWELL(ring->dev) && INTEL_INFO(ring->dev)->gen < 8)
 		flags |= (MI_SAVE_EXT_STATE_EN | MI_RESTORE_EXT_STATE_EN);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = intel_ring_begin(ring, 6);
 	if (ret)
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (IS_GEN7(ring->dev))
+=======
+	/* WaProgramMiArbOnOffAroundMiSetContext:ivb,vlv,hsw,bdw,chv */
+	if (INTEL_INFO(ring->dev)->gen >= 7)
+>>>>>>> v3.18
 =======
 	/* WaProgramMiArbOnOffAroundMiSetContext:ivb,vlv,hsw,bdw,chv */
 	if (INTEL_INFO(ring->dev)->gen >= 7)
@@ -691,6 +764,7 @@ mi_set_context(struct intel_engine_cs *ring,
 	intel_ring_emit(ring, MI_NOOP);
 	intel_ring_emit(ring, MI_SET_CONTEXT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	intel_ring_emit(ring, new_context->obj->gtt_offset |
 			MI_MM_SPACE_GTT |
 			MI_SAVE_EXT_STATE_EN |
@@ -701,6 +775,8 @@ mi_set_context(struct intel_engine_cs *ring,
 
 	if (IS_GEN7(ring->dev))
 =======
+=======
+>>>>>>> v3.18
 	intel_ring_emit(ring, i915_gem_obj_ggtt_offset(new_context->legacy_hw_ctx.rcs_state) |
 			flags);
 	/*
@@ -710,6 +786,9 @@ mi_set_context(struct intel_engine_cs *ring,
 	intel_ring_emit(ring, MI_NOOP);
 
 	if (INTEL_INFO(ring->dev)->gen >= 7)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		intel_ring_emit(ring, MI_ARB_ON_OFF | MI_ARB_ENABLE);
 	else
@@ -720,6 +799,7 @@ mi_set_context(struct intel_engine_cs *ring,
 	return ret;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int do_switch(struct i915_hw_context *to)
 {
@@ -761,6 +841,8 @@ static int do_switch(struct i915_hw_context *to)
 		i915_gem_object_unpin(to->obj);
 		return ret;
 =======
+=======
+>>>>>>> v3.18
 static int do_switch(struct intel_engine_cs *ring,
 		     struct intel_context *to)
 {
@@ -840,6 +922,9 @@ static int do_switch(struct intel_engine_cs *ring,
 			DRM_DEBUG_DRIVER("L3 remapping failed\n");
 		else
 			to->remap_slice &= ~(1<<i);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -850,9 +935,15 @@ static int do_switch(struct intel_engine_cs *ring,
 	 * MI_SET_CONTEXT instead of when the next seqno has completed.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (from_obj != NULL) {
 		from_obj->base.read_domains = I915_GEM_DOMAIN_INSTRUCTION;
 		i915_gem_object_move_to_active(from_obj, ring);
+=======
+	if (from != NULL) {
+		from->legacy_hw_ctx.rcs_state->base.read_domains = I915_GEM_DOMAIN_INSTRUCTION;
+		i915_vma_move_to_active(i915_gem_obj_to_ggtt(from->legacy_hw_ctx.rcs_state), ring);
+>>>>>>> v3.18
 =======
 	if (from != NULL) {
 		from->legacy_hw_ctx.rcs_state->base.read_domains = I915_GEM_DOMAIN_INSTRUCTION;
@@ -865,6 +956,7 @@ static int do_switch(struct intel_engine_cs *ring,
 		 * able to defer doing this until we know the object would be
 		 * swapped, but there is no way to do that yet.
 		 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		from_obj->dirty = 1;
 		BUG_ON(from_obj->ring != ring);
@@ -879,6 +971,8 @@ static int do_switch(struct intel_engine_cs *ring,
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 		from->legacy_hw_ctx.rcs_state->dirty = 1;
 		BUG_ON(from->legacy_hw_ctx.rcs_state->ring != ring);
 
@@ -912,12 +1006,16 @@ unpin_out:
 	if (ring->id == RCS)
 		i915_gem_object_ggtt_unpin(to->legacy_hw_ctx.rcs_state);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /**
  * i915_switch_context() - perform a GPU context switch.
  * @ring: ring for which we'll execute the context switch
+<<<<<<< HEAD
 <<<<<<< HEAD
  * @file_priv: file_priv associated with the context, may be NULL
  * @id: context id number
@@ -955,6 +1053,8 @@ int i915_switch_context(struct intel_ring_buffer *ring,
 
 	return do_switch(to);
 =======
+=======
+>>>>>>> v3.18
  * @to: the context to switch to
  *
  * The context life cycle is simple. The context refcount is incremented and
@@ -990,12 +1090,16 @@ int i915_switch_context(struct intel_engine_cs *ring,
 static bool contexts_enabled(struct drm_device *dev)
 {
 	return i915.enable_execlists || to_i915(dev)->hw_context_size;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 int i915_gem_context_create_ioctl(struct drm_device *dev, void *data,
 				  struct drm_file *file)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct drm_i915_private *dev_priv = dev->dev_private;
 	struct drm_i915_gem_context_create *args = data;
@@ -1008,12 +1112,17 @@ int i915_gem_context_create_ioctl(struct drm_device *dev, void *data,
 
 	if (dev_priv->hw_contexts_disabled)
 =======
+=======
+>>>>>>> v3.18
 	struct drm_i915_gem_context_create *args = data;
 	struct drm_i915_file_private *file_priv = file->driver_priv;
 	struct intel_context *ctx;
 	int ret;
 
 	if (!contexts_enabled(dev))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 
@@ -1022,7 +1131,11 @@ int i915_gem_context_create_ioctl(struct drm_device *dev, void *data,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ctx = create_hw_context(dev, file_priv);
+=======
+	ctx = i915_gem_create_context(dev, file_priv);
+>>>>>>> v3.18
 =======
 	ctx = i915_gem_create_context(dev, file_priv);
 >>>>>>> v3.18
@@ -1031,7 +1144,11 @@ int i915_gem_context_create_ioctl(struct drm_device *dev, void *data,
 		return PTR_ERR(ctx);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	args->ctx_id = ctx->id;
+=======
+	args->ctx_id = ctx->user_handle;
+>>>>>>> v3.18
 =======
 	args->ctx_id = ctx->user_handle;
 >>>>>>> v3.18
@@ -1046,17 +1163,23 @@ int i915_gem_context_destroy_ioctl(struct drm_device *dev, void *data,
 	struct drm_i915_gem_context_destroy *args = data;
 	struct drm_i915_file_private *file_priv = file->driver_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i915_hw_context *ctx;
 	int ret;
 
 	if (!(dev->driver->driver_features & DRIVER_GEM))
 		return -ENODEV;
 =======
+=======
+>>>>>>> v3.18
 	struct intel_context *ctx;
 	int ret;
 
 	if (args->ctx_id == DEFAULT_CONTEXT_HANDLE)
 		return -ENOENT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = i915_mutex_lock_interruptible(dev);
@@ -1064,6 +1187,7 @@ int i915_gem_context_destroy_ioctl(struct drm_device *dev, void *data,
 		return ret;
 
 	ctx = i915_gem_context_get(file_priv, args->ctx_id);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!ctx) {
 		mutex_unlock(&dev->struct_mutex);
@@ -1073,6 +1197,8 @@ int i915_gem_context_destroy_ioctl(struct drm_device *dev, void *data,
 	do_destroy(ctx);
 
 =======
+=======
+>>>>>>> v3.18
 	if (IS_ERR(ctx)) {
 		mutex_unlock(&dev->struct_mutex);
 		return PTR_ERR(ctx);
@@ -1080,6 +1206,9 @@ int i915_gem_context_destroy_ioctl(struct drm_device *dev, void *data,
 
 	idr_remove(&ctx->file_priv->context_idr, ctx->user_handle);
 	i915_gem_context_unreference(ctx);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev->struct_mutex);
 

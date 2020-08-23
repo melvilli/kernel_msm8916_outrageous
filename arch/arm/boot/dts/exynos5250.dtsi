@@ -18,6 +18,7 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "skeleton.dtsi"
 /include/ "exynos5250-pinctrl.dtsi"
 
@@ -25,6 +26,8 @@
 	compatible = "samsung,exynos5250";
 	interrupt-parent = <&gic>;
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/clock/exynos5250.h>
 #include "exynos5.dtsi"
 #include "exynos5250-pinctrl.dtsi"
@@ -33,6 +36,9 @@
 
 / {
 	compatible = "samsung,exynos5250", "samsung,exynos5";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	aliases {
@@ -44,15 +50,21 @@
 		gsc2 = &gsc_2;
 		gsc3 = &gsc_3;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		mshc0 = &dwmmc_0;
 		mshc1 = &dwmmc_1;
 		mshc2 = &dwmmc_2;
 		mshc3 = &dwmmc_3;
 =======
+=======
+>>>>>>> v3.18
 		mshc0 = &mmc_0;
 		mshc1 = &mmc_1;
 		mshc2 = &mmc_2;
 		mshc3 = &mmc_3;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		i2c0 = &i2c_0;
 		i2c1 = &i2c_1;
@@ -64,6 +76,10 @@
 		i2c7 = &i2c_7;
 		i2c8 = &i2c_8;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		i2c9 = &i2c_9;
+>>>>>>> v3.18
 =======
 		i2c9 = &i2c_9;
 >>>>>>> v3.18
@@ -74,6 +90,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chipid@10000000 {
 		compatible = "samsung,exynos4210-chipid";
 		reg = <0x10000000 0x100>;
@@ -81,6 +98,8 @@
 
 	pd_gsc: gsc-power-domain@0x10044000 {
 =======
+=======
+>>>>>>> v3.18
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -118,13 +137,20 @@
 	};
 
 	pd_gsc: gsc-power-domain@10044000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "samsung,exynos4210-pd";
 		reg = <0x10044000 0x20>;
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pd_mfc: mfc-power-domain@0x10044040 {
+=======
+	pd_mfc: mfc-power-domain@10044040 {
+>>>>>>> v3.18
 =======
 	pd_mfc: mfc-power-domain@10044040 {
 >>>>>>> v3.18
@@ -133,7 +159,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clock: clock-controller@0x10010000 {
+=======
+	clock: clock-controller@10010000 {
+>>>>>>> v3.18
 =======
 	clock: clock-controller@10010000 {
 >>>>>>> v3.18
@@ -142,6 +172,7 @@
 		#clock-cells = <1>;
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	gic:interrupt-controller@10481000 {
 		compatible = "arm,cortex-a15-gic", "arm,cortex-a9-gic";
@@ -153,6 +184,8 @@
 		      <0x10486000 0x2000>;
 		interrupts = <1 9 0xf04>;
 =======
+=======
+>>>>>>> v3.18
 	clock_audss: audss-clock-controller@3810000 {
 		compatible = "samsung,exynos5250-audss-clock";
 		reg = <0x03810000 0x0C>;
@@ -160,6 +193,9 @@
 		clocks = <&clock CLK_FIN_PLL>, <&clock CLK_FOUT_EPLL>,
 			 <&clock CLK_SCLK_AUDIO0>, <&clock CLK_DIV_PCM0>;
 		clock-names = "pll_ref", "pll_in", "sclk_audio", "sclk_pcm_in";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -169,6 +205,7 @@
 			     <1 14 0xf08>,
 			     <1 11 0xf08>,
 			     <1 10 0xf08>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	};
 
@@ -187,11 +224,16 @@
 			     <0 24 0>, <0 25 0>, <0 26 0>, <0 27 0>,
 			     <0 28 0>, <0 29 0>, <0 30 0>, <0 31 0>;
 =======
+=======
+>>>>>>> v3.18
 		/* Unfortunately we need this since some versions of U-Boot
 		 * on Exynos don't set the CNTFRQ register, so we need the
 		 * value from DT.
 		 */
 		clock-frequency = <24000000>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -204,7 +246,11 @@
 		interrupts = <0 0>, <1 0>, <2 0>, <3 0>,
 			     <4 0>, <5 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 1>, <&clock 335>;
+=======
+		clocks = <&clock CLK_FIN_PLL>, <&clock CLK_MCT>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_FIN_PLL>, <&clock CLK_MCT>;
 >>>>>>> v3.18
@@ -260,6 +306,7 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	watchdog {
 		compatible = "samsung,s3c2410-wdt";
 		reg = <0x101D0000 0x100>;
@@ -267,6 +314,8 @@
 		clocks = <&clock 336>;
 		clock-names = "watchdog";
 =======
+=======
+>>>>>>> v3.18
 	pmu_system_controller: system-controller@10040000 {
 		compatible = "samsung,exynos5250-pmu", "syscon";
 		reg = <0x10040000 0x5000>;
@@ -295,6 +344,9 @@
 		interrupts = <0 91 0>;
 		clocks = <&clock CLK_G2D>;
 		clock-names = "fimg2d";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -304,6 +356,7 @@
 		interrupts = <0 96 0>;
 		samsung,power-domain = <&pd_mfc>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
 
 	rtc {
@@ -312,12 +365,17 @@
 		interrupts = <0 43 0>, <0 44 0>;
 		clocks = <&clock 337>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_MFC>;
 		clock-names = "mfc";
 	};
 
 	rtc@101E0000 {
 		clocks = <&clock CLK_RTC>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		clock-names = "rtc";
 		status = "disabled";
@@ -328,7 +386,11 @@
 		reg = <0x10060000 0x100>;
 		interrupts = <0 65 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 338>;
+=======
+		clocks = <&clock CLK_TMU>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_TMU>;
 >>>>>>> v3.18
@@ -337,10 +399,14 @@
 
 	serial@12C00000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,exynos4210-uart";
 		reg = <0x12C00000 0x100>;
 		interrupts = <0 51 0>;
 		clocks = <&clock 289>, <&clock 146>;
+=======
+		clocks = <&clock CLK_UART0>, <&clock CLK_SCLK_UART0>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_UART0>, <&clock CLK_SCLK_UART0>;
 >>>>>>> v3.18
@@ -349,10 +415,14 @@
 
 	serial@12C10000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,exynos4210-uart";
 		reg = <0x12C10000 0x100>;
 		interrupts = <0 52 0>;
 		clocks = <&clock 290>, <&clock 147>;
+=======
+		clocks = <&clock CLK_UART1>, <&clock CLK_SCLK_UART1>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_UART1>, <&clock CLK_SCLK_UART1>;
 >>>>>>> v3.18
@@ -361,10 +431,14 @@
 
 	serial@12C20000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,exynos4210-uart";
 		reg = <0x12C20000 0x100>;
 		interrupts = <0 53 0>;
 		clocks = <&clock 291>, <&clock 148>;
+=======
+		clocks = <&clock CLK_UART2>, <&clock CLK_SCLK_UART2>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_UART2>, <&clock CLK_SCLK_UART2>;
 >>>>>>> v3.18
@@ -373,6 +447,7 @@
 
 	serial@12C30000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,exynos4210-uart";
 		reg = <0x12C30000 0x100>;
 		interrupts = <0 54 0>;
@@ -380,10 +455,14 @@
 =======
 		clocks = <&clock CLK_UART3>, <&clock CLK_SCLK_UART3>;
 >>>>>>> v3.18
+=======
+		clocks = <&clock CLK_UART3>, <&clock CLK_SCLK_UART3>;
+>>>>>>> v3.18
 		clock-names = "uart", "clk_uart_baud0";
 	};
 
 	sata@122F0000 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		compatible = "samsung,exynos5-sata-ahci";
 		reg = <0x122F0000 0x1ff>;
@@ -396,6 +475,8 @@
 		compatible = "samsung,exynos5-sata-phy";
 		reg = <0x12170000 0x1ff>;
 =======
+=======
+>>>>>>> v3.18
 		compatible = "snps,dwc-ahci";
 		samsung,sata-freq = <66>;
 		reg = <0x122F0000 0x1ff>;
@@ -415,6 +496,9 @@
 		#phy-cells = <0>;
 		samsung,syscon-phandle = <&pmu_system_controller>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -425,16 +509,22 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 294>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c0_bus>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C0>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c0_bus>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -445,16 +535,22 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 295>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c1_bus>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C1>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c1_bus>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -465,16 +561,22 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 296>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c2_bus>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C2>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c2_bus>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -485,16 +587,22 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 297>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c3_bus>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C3>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c3_bus>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -505,16 +613,22 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 298>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c4_bus>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C4>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c4_bus>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -525,16 +639,22 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 299>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c5_bus>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C5>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c5_bus>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -545,16 +665,22 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 300>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c6_bus>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C6>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c6_bus>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -565,16 +691,22 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 301>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c7_bus>;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C7>;
 		clock-names = "i2c";
 		pinctrl-names = "default";
 		pinctrl-0 = <&i2c7_bus>;
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -585,26 +717,38 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 302>;
 		clock-names = "i2c";
 	};
 
 	i2c@121D0000 {
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_I2C_HDMI>;
 		clock-names = "i2c";
 		status = "disabled";
 	};
 
 	i2c_9: i2c@121D0000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
                 compatible = "samsung,exynos5-sata-phy-i2c";
                 reg = <0x121D0000 0x100>;
                 #address-cells = <1>;
                 #size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 288>;
 		clock-names = "i2c";
+=======
+		clocks = <&clock CLK_SATA_PHYI2C>;
+		clock-names = "i2c";
+		status = "disabled";
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_SATA_PHYI2C>;
 		clock-names = "i2c";
@@ -615,6 +759,10 @@
 	spi_0: spi@12d20000 {
 		compatible = "samsung,exynos4210-spi";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		status = "disabled";
+>>>>>>> v3.18
 =======
 		status = "disabled";
 >>>>>>> v3.18
@@ -626,7 +774,11 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 304>, <&clock 154>;
+=======
+		clocks = <&clock CLK_SPI0>, <&clock CLK_SCLK_SPI0>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_SPI0>, <&clock CLK_SCLK_SPI0>;
 >>>>>>> v3.18
@@ -638,6 +790,10 @@
 	spi_1: spi@12d30000 {
 		compatible = "samsung,exynos4210-spi";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		status = "disabled";
+>>>>>>> v3.18
 =======
 		status = "disabled";
 >>>>>>> v3.18
@@ -649,7 +805,11 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 305>, <&clock 155>;
+=======
+		clocks = <&clock CLK_SPI1>, <&clock CLK_SCLK_SPI1>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_SPI1>, <&clock CLK_SCLK_SPI1>;
 >>>>>>> v3.18
@@ -661,6 +821,10 @@
 	spi_2: spi@12d40000 {
 		compatible = "samsung,exynos4210-spi";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		status = "disabled";
+>>>>>>> v3.18
 =======
 		status = "disabled";
 >>>>>>> v3.18
@@ -672,7 +836,11 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 306>, <&clock 156>;
+=======
+		clocks = <&clock CLK_SPI2>, <&clock CLK_SCLK_SPI2>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_SPI2>, <&clock CLK_SCLK_SPI2>;
 >>>>>>> v3.18
@@ -681,6 +849,7 @@
 		pinctrl-0 = <&spi2_bus>;
 	};
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dwmmc_0: dwmmc0@12200000 {
 		compatible = "samsung,exynos5250-dw-mshc";
@@ -714,6 +883,8 @@
 
 	dwmmc_3: dwmmc3@12230000 {
 =======
+=======
+>>>>>>> v3.18
 	mmc_0: mmc@12200000 {
 		compatible = "samsung,exynos5250-dw-mshc";
 		interrupts = <0 75 0>;
@@ -751,12 +922,16 @@
 	};
 
 	mmc_3: mmc@12230000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "samsung,exynos5250-dw-mshc";
 		reg = <0x12230000 0x1000>;
 		interrupts = <0 78 0>;
 		#address-cells = <1>;
 		#size-cells = <0>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		clocks = <&clock 283>, <&clock 142>;
 		clock-names = "biu", "ciu";
@@ -765,6 +940,8 @@
 	i2s0: i2s@03830000 {
 		compatible = "samsung,i2s-v5";
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_SDMMC3>, <&clock CLK_SCLK_MMC3>;
 		clock-names = "biu", "ciu";
 		fifo-depth = <0x80>;
@@ -774,6 +951,9 @@
 	i2s0: i2s@03830000 {
 		compatible = "samsung,s5pv210-i2s";
 		status = "disabled";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		reg = <0x03830000 0x100>;
 		dmas = <&pdma0 10
@@ -781,14 +961,20 @@
 			&pdma0 8>;
 		dma-names = "tx", "rx", "tx-sec";
 <<<<<<< HEAD
+<<<<<<< HEAD
 		samsung,supports-6ch;
 		samsung,supports-rstclr;
 		samsung,supports-secdai;
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock_audss EXYNOS_I2S_BUS>,
 			<&clock_audss EXYNOS_I2S_BUS>,
 			<&clock_audss EXYNOS_SCLK_I2S>;
 		clock-names = "iis", "i2s_opclk0", "i2s_opclk1";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		samsung,idma-addr = <0x03000000>;
 		pinctrl-names = "default";
@@ -797,7 +983,12 @@
 
 	i2s1: i2s@12D60000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,i2s-v5";
+=======
+		compatible = "samsung,s3c6410-i2s";
+		status = "disabled";
+>>>>>>> v3.18
 =======
 		compatible = "samsung,s3c6410-i2s";
 		status = "disabled";
@@ -807,6 +998,11 @@
 			&pdma1 11>;
 		dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&clock CLK_I2S1>, <&clock CLK_DIV_I2S1>;
+		clock-names = "iis", "i2s_opclk0";
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_I2S1>, <&clock CLK_DIV_I2S1>;
 		clock-names = "iis", "i2s_opclk0";
@@ -817,7 +1013,12 @@
 
 	i2s2: i2s@12D70000 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,i2s-v5";
+=======
+		compatible = "samsung,s3c6410-i2s";
+		status = "disabled";
+>>>>>>> v3.18
 =======
 		compatible = "samsung,s3c6410-i2s";
 		status = "disabled";
@@ -827,6 +1028,11 @@
 			&pdma0 11>;
 		dma-names = "tx", "rx";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		clocks = <&clock CLK_I2S2>, <&clock CLK_DIV_I2S2>;
+		clock-names = "iis", "i2s_opclk0";
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_I2S2>, <&clock CLK_DIV_I2S2>;
 		clock-names = "iis", "i2s_opclk0";
@@ -836,7 +1042,10 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	usb@12000000 {
 		compatible = "samsung,exynos5250-dwusb3";
 		clocks = <&clock CLK_USB3>;
@@ -863,6 +1072,9 @@
 		#phy-cells = <1>;
 	};
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	usb@12110000 {
 		compatible = "samsung,exynos4210-ehci";
@@ -870,9 +1082,12 @@
 		interrupts = <0 71 0>;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 285>;
 		clock-names = "usbhost";
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_USB2>;
 		clock-names = "usbhost";
 		#address-cells = <1>;
@@ -881,6 +1096,9 @@
 			reg = <0>;
 			phys = <&usb2_phy_gen 1>;
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -889,6 +1107,7 @@
 		reg = <0x12120000 0x100>;
 		interrupts = <0 71 0>;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		clocks = <&clock 285>;
 		clock-names = "usbhost";
@@ -908,6 +1127,8 @@
 			      <0x10050230 0x4>;
 		};
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_USB2>;
 		clock-names = "usbhost";
 		#address-cells = <1>;
@@ -935,6 +1156,9 @@
 		#pwm-cells = <3>;
 		clocks = <&clock CLK_PWM>;
 		clock-names = "timers";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 
@@ -950,7 +1174,11 @@
 			reg = <0x121A0000 0x1000>;
 			interrupts = <0 34 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clocks = <&clock 275>;
+=======
+			clocks = <&clock CLK_PDMA0>;
+>>>>>>> v3.18
 =======
 			clocks = <&clock CLK_PDMA0>;
 >>>>>>> v3.18
@@ -965,7 +1193,11 @@
 			reg = <0x121B0000 0x1000>;
 			interrupts = <0 35 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clocks = <&clock 276>;
+=======
+			clocks = <&clock CLK_PDMA1>;
+>>>>>>> v3.18
 =======
 			clocks = <&clock CLK_PDMA1>;
 >>>>>>> v3.18
@@ -980,7 +1212,11 @@
 			reg = <0x10800000 0x1000>;
 			interrupts = <0 33 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clocks = <&clock 346>;
+=======
+			clocks = <&clock CLK_MDMA0>;
+>>>>>>> v3.18
 =======
 			clocks = <&clock CLK_MDMA0>;
 >>>>>>> v3.18
@@ -995,7 +1231,11 @@
 			reg = <0x11C10000 0x1000>;
 			interrupts = <0 124 0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			clocks = <&clock 271>;
+=======
+			clocks = <&clock CLK_MDMA1>;
+>>>>>>> v3.18
 =======
 			clocks = <&clock CLK_MDMA1>;
 >>>>>>> v3.18
@@ -1007,7 +1247,11 @@
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gsc_0:  gsc@0x13e00000 {
+=======
+	gsc_0:  gsc@13e00000 {
+>>>>>>> v3.18
 =======
 	gsc_0:  gsc@13e00000 {
 >>>>>>> v3.18
@@ -1016,22 +1260,29 @@
 		interrupts = <0 85 0>;
 		samsung,power-domain = <&pd_gsc>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 256>;
 		clock-names = "gscl";
 	};
 
 	gsc_1:  gsc@0x13e10000 {
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_GSCL0>;
 		clock-names = "gscl";
 	};
 
 	gsc_1:  gsc@13e10000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "samsung,exynos5-gsc";
 		reg = <0x13e10000 0x1000>;
 		interrupts = <0 86 0>;
 		samsung,power-domain = <&pd_gsc>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		clocks = <&clock 257>;
 		clock-names = "gscl";
@@ -1039,16 +1290,22 @@
 
 	gsc_2:  gsc@0x13e20000 {
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_GSCL1>;
 		clock-names = "gscl";
 	};
 
 	gsc_2:  gsc@13e20000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "samsung,exynos5-gsc";
 		reg = <0x13e20000 0x1000>;
 		interrupts = <0 87 0>;
 		samsung,power-domain = <&pd_gsc>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		clocks = <&clock 258>;
 		clock-names = "gscl";
@@ -1056,18 +1313,27 @@
 
 	gsc_3:  gsc@0x13e30000 {
 =======
+=======
+>>>>>>> v3.18
 		clocks = <&clock CLK_GSCL2>;
 		clock-names = "gscl";
 	};
 
 	gsc_3:  gsc@13e30000 {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		compatible = "samsung,exynos5-gsc";
 		reg = <0x13e30000 0x1000>;
 		interrupts = <0 88 0>;
 		samsung,power-domain = <&pd_gsc>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clocks = <&clock 259>;
+=======
+		clocks = <&clock CLK_GSCL3>;
+>>>>>>> v3.18
 =======
 		clocks = <&clock CLK_GSCL3>;
 >>>>>>> v3.18
@@ -1075,6 +1341,7 @@
 	};
 
 	hdmi {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		compatible = "samsung,exynos5-hdmi";
 		reg = <0x14530000 0x70000>;
@@ -1115,6 +1382,8 @@
 		clock-names = "sclk_fimd", "fimd";
 	};
 =======
+=======
+>>>>>>> v3.18
 		compatible = "samsung,exynos4212-hdmi";
 		reg = <0x14530000 0x70000>;
 		interrupts = <0 95 0>;
@@ -1170,5 +1439,8 @@
 		clocks = <&clock CLK_SSS>;
 		clock-names = "secss";
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

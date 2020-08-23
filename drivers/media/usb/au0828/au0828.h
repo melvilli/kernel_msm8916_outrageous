@@ -20,6 +20,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
@@ -48,7 +53,10 @@
 #include "au0828-cards.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DRIVER_NAME "au0828"
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define URB_COUNT   16
@@ -97,6 +105,11 @@ struct au0828_board {
 	unsigned char tuner_addr;
 	unsigned char i2c_clk_divider;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned char has_ir_i2c:1;
+	unsigned char has_analog:1;
+>>>>>>> v3.18
 =======
 	unsigned char has_ir_i2c:1;
 	unsigned char has_analog:1;
@@ -116,11 +129,17 @@ struct au0828_dvb {
 	struct dvb_net net;
 	int feeding;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int start_count;
 	int stop_count;
 
 	int (*set_frontend)(struct dvb_frontend *fe);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -230,11 +249,17 @@ struct au0828_dev {
 	struct v4l2_ctrl_handler v4l2_ctrl_hdl;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_AU0828_RC
 	struct au0828_rc *ir;
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int users;
 	unsigned int resources;	/* resources in use */
@@ -285,10 +310,13 @@ struct au0828_dev {
 						   transfer */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* USB / URB Related */
 	int		urb_streaming;
 	struct urb	*urbs[URB_COUNT];
 =======
+=======
+>>>>>>> v3.18
 	/* DVB USB / URB Related */
 	bool		urb_streaming, need_urb_start;
 	struct urb	*urbs[URB_COUNT];
@@ -296,6 +324,9 @@ struct au0828_dev {
 	/* Preallocated transfer digital transfer buffers */
 
 	char *dig_transfer_buffer[URB_COUNT];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -336,7 +367,10 @@ int au0828_analog_register(struct au0828_dev *dev,
 int au0828_analog_stream_disable(struct au0828_dev *d);
 void au0828_analog_unregister(struct au0828_dev *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_VIDEO_AU0828_V4L2
 void au0828_v4l2_suspend(struct au0828_dev *dev);
 void au0828_v4l2_resume(struct au0828_dev *dev);
@@ -344,6 +378,9 @@ void au0828_v4l2_resume(struct au0828_dev *dev);
 static inline void au0828_v4l2_suspend(struct au0828_dev *dev) { };
 static inline void au0828_v4l2_resume(struct au0828_dev *dev) { };
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* ----------------------------------------------------------- */
@@ -351,6 +388,11 @@ static inline void au0828_v4l2_resume(struct au0828_dev *dev) { };
 extern int au0828_dvb_register(struct au0828_dev *dev);
 extern void au0828_dvb_unregister(struct au0828_dev *dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void au0828_dvb_suspend(struct au0828_dev *dev);
+void au0828_dvb_resume(struct au0828_dev *dev);
+>>>>>>> v3.18
 =======
 void au0828_dvb_suspend(struct au0828_dev *dev);
 void au0828_dvb_resume(struct au0828_dev *dev);
@@ -362,9 +404,12 @@ extern struct videobuf_queue_ops au0828_vbi_qops;
 #define dprintk(level, fmt, arg...)\
 	do { if (au0828_debug & level)\
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_DEBUG DRIVER_NAME "/0: " fmt, ## arg);\
 	} while (0)
 =======
+=======
+>>>>>>> v3.18
 		printk(KERN_DEBUG pr_fmt(fmt), ## arg);\
 	} while (0)
 
@@ -380,4 +425,7 @@ static inline void au0828_rc_unregister(struct au0828_dev *dev) { }
 static inline int au0828_rc_suspend(struct au0828_dev *dev) { return 0; }
 static inline int au0828_rc_resume(struct au0828_dev *dev) { return 0; }
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

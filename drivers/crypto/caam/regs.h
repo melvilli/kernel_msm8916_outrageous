@@ -75,15 +75,21 @@
 #else
 #ifdef __LITTLE_ENDIAN
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define wr_reg32(reg, data) __raw_writel(reg, data)
 #define rd_reg32(reg) __raw_readl(reg)
 #ifdef CONFIG_64BIT
 #define wr_reg64(reg, data) __raw_writeq(reg, data)
 =======
+=======
+>>>>>>> v3.18
 #define wr_reg32(reg, data) __raw_writel(data, reg)
 #define rd_reg32(reg) __raw_readl(reg)
 #ifdef CONFIG_64BIT
 #define wr_reg64(reg, data) __raw_writeq(data, reg)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define rd_reg64(reg) __raw_readq(reg)
 #endif
@@ -92,6 +98,10 @@
 
 #ifndef CONFIG_64BIT
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef __BIG_ENDIAN
+>>>>>>> v3.18
 =======
 #ifdef __BIG_ENDIAN
 >>>>>>> v3.18
@@ -107,7 +117,10 @@ static inline u64 rd_reg64(u64 __iomem *reg)
 		((u64)rd_reg32((u32 __iomem *)reg + 1));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 #ifdef __LITTLE_ENDIAN
 static inline void wr_reg64(u64 __iomem *reg, u64 data)
@@ -123,6 +136,9 @@ static inline u64 rd_reg64(u64 __iomem *reg)
 }
 #endif
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -144,9 +160,12 @@ struct jr_outentry {
 
 /* Number of DECOs */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CHA_NUM_DECONUM_SHIFT	56
 #define CHA_NUM_DECONUM_MASK	(0xfull << CHA_NUM_DECONUM_SHIFT)
 =======
+=======
+>>>>>>> v3.18
 #define CHA_NUM_MS_DECONUM_SHIFT	24
 #define CHA_NUM_MS_DECONUM_MASK	(0xfull << CHA_NUM_MS_DECONUM_SHIFT)
 
@@ -186,6 +205,9 @@ struct jr_outentry {
 
 #define CHA_ID_MS_JR_SHIFT	28
 #define CHA_ID_MS_JR_MASK	(0xfull << CHA_ID_MS_JR_SHIFT)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 struct sec_vid {
@@ -207,11 +229,14 @@ struct caam_perfmon {
 
 	/* CAAM Hardware Instantiation Parameters		fa0-fbf */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 cha_rev;		/* CRNR - CHA Revision Number		*/
 #define CTPR_QI_SHIFT		57
 #define CTPR_QI_MASK		(0x1ull << CTPR_QI_SHIFT)
 	u64 comp_parms;	/* CTPR - Compile Parameters Register	*/
 =======
+=======
+>>>>>>> v3.18
 	u32 cha_rev_ms;		/* CRNR - CHA Rev No. Most significant half*/
 	u32 cha_rev_ls;		/* CRNR - CHA Rev No. Least significant half*/
 #define CTPR_MS_QI_SHIFT	25
@@ -222,6 +247,9 @@ struct caam_perfmon {
 #define CTPR_MS_PG_SZ_SHIFT	4
 	u32 comp_parms_ms;	/* CTPR - Compile Parameters Register	*/
 	u32 comp_parms_ls;	/* CTPR - Compile Parameters Register	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u64 rsvd1[2];
 
@@ -237,16 +265,22 @@ struct caam_perfmon {
 	u32 rtic_id;		/* RVID - RTIC Version ID	*/
 	u32 ccb_id;		/* CCBVID - CCB Version ID	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 cha_id;		/* CHAVID - CHA Version ID	*/
 	u64 cha_num;		/* CHANUM - CHA Number		*/
 	u64 caam_id;		/* CAAMVID - CAAM Version ID	*/
 =======
+=======
+>>>>>>> v3.18
 	u32 cha_id_ms;		/* CHAVID - CHA Version ID Most Significant*/
 	u32 cha_id_ls;		/* CHAVID - CHA Version ID Least Significant*/
 	u32 cha_num_ms;		/* CHANUM - CHA Number Most Significant	*/
 	u32 cha_num_ls;		/* CHANUM - CHA Number Least Significant*/
 	u32 caam_id_ms;		/* CAAMVID - CAAM Version ID MS	*/
 	u32 caam_id_ls;		/* CAAMVID - CAAM Version ID LS	*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -302,8 +336,11 @@ struct rngtst {
 /* RNG4 TRNG test registers */
 struct rng4tst {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTMCTL_PRGM 0x00010000	/* 1 -> program mode, 0 -> run mode */
 =======
+=======
+>>>>>>> v3.18
 #define RTMCTL_PRGM	0x00010000	/* 1 -> program mode, 0 -> run mode */
 #define RTMCTL_SAMP_MODE_VON_NEUMANN_ES_SC	0 /* use von Neumann data in
 						     both entropy shifter and
@@ -315,6 +352,9 @@ struct rng4tst {
 						     entropy shifter, raw data
 						     in statistical checker */
 #define RTMCTL_SAMP_MODE_INVALID		3 /* invalid combination */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 rtmctl;		/* misc. control register */
 	u32 rtscmisc;		/* statistical check misc. register */
@@ -326,6 +366,11 @@ struct rng4tst {
 #define RTSDCTL_ENT_DLY_SHIFT 16
 #define RTSDCTL_ENT_DLY_MASK (0xffff << RTSDCTL_ENT_DLY_SHIFT)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RTSDCTL_ENT_DLY_MIN 3200
+#define RTSDCTL_ENT_DLY_MAX 12800
+>>>>>>> v3.18
 =======
 #define RTSDCTL_ENT_DLY_MIN 3200
 #define RTSDCTL_ENT_DLY_MAX 12800
@@ -337,6 +382,10 @@ struct rng4tst {
 	};
 	u32 rtfrqmin;		/* frequency count min. limit register */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define RTFRQMAX_DISABLE	(1 << 20)
+>>>>>>> v3.18
 =======
 #define RTFRQMAX_DISABLE	(1 << 20)
 >>>>>>> v3.18
@@ -345,8 +394,11 @@ struct rng4tst {
 		u32 rtfrqcnt;	/* PRGM=0: freq. count register */
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rsvd1[56];
 =======
+=======
+>>>>>>> v3.18
 	u32 rsvd1[40];
 #define RDSTA_SKVT 0x80000000
 #define RDSTA_SKVN 0x40000000
@@ -355,6 +407,9 @@ struct rng4tst {
 #define RDSTA_IFMASK (RDSTA_IF1 | RDSTA_IF0)
 	u32 rdsta;
 	u32 rsvd2[15];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -386,16 +441,22 @@ struct caam_ctrl {
 	/* Read/Writable                                                */
 	struct masterid jr_mid[4];	/* JRxLIODNR - JobR LIODN setup */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 rsvd3[12];
 	struct masterid rtic_mid[4];	/* RTICxLIODNR - RTIC LIODN setup */
 	u32 rsvd4[7];
 =======
+=======
+>>>>>>> v3.18
 	u32 rsvd3[11];
 	u32 jrstart;			/* JRSTART - Job Ring Start Register */
 	struct masterid rtic_mid[4];	/* RTICxLIODNR - RTIC LIODN setup */
 	u32 rsvd4[5];
 	u32 deco_rsr;			/* DECORSR - Deco Request Source */
 	u32 rsvd11;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32 deco_rq;			/* DECORR - DECO Request */
 	struct partid deco_mid[5];	/* DECOxLIODNR - 1 per DECO */
@@ -438,12 +499,18 @@ struct caam_ctrl {
 #define MCFGR_LONG_PTR		0x00010000 /* Use >32-bit desc addressing */
 #define SCFGR_RDBENABLE		0x00000400
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SCFGR_VIRT_EN		0x00008000
 #define DECORR_RQD0ENABLE	0x00000001 /* Enable DECO0 for direct access */
 #define DECORSR_JR0		0x00000001 /* JR to supply TZ, SDID, ICID */
 #define DECORSR_VALID		0x80000000
 #define DECORR_DEN0		0x00010000 /* DECO0 available for access*/
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* AXI read cache control */
@@ -462,13 +529,19 @@ struct caam_ctrl {
 #define MCFGR_BURST_64		0x00000001 /* Max burst size */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* JRSTART register offsets */
 #define JRSTART_JR0_START       0x00000001 /* Start Job ring 0 */
 #define JRSTART_JR1_START       0x00000002 /* Start Job ring 1 */
 #define JRSTART_JR2_START       0x00000004 /* Start Job ring 2 */
 #define JRSTART_JR3_START       0x00000008 /* Start Job ring 3 */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * caam_job_ring - direct job ring setup
@@ -804,6 +877,10 @@ struct caam_deco {
 	u32 jr_ctl_lo;
 	u64 jr_descaddr;	/* CxDADR - JobR Descriptor Address */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define DECO_OP_STATUS_HI_ERR_MASK 0xF00000FF
+>>>>>>> v3.18
 =======
 #define DECO_OP_STATUS_HI_ERR_MASK 0xF00000FF
 >>>>>>> v3.18
@@ -820,6 +897,7 @@ struct caam_deco {
 	struct deco_sg_table sctr_tbl[4];	/* DxSTR - Scatter Tables */
 	u32 rsvd29[48];
 	u32 descbuf[64];	/* DxDESB - Descriptor buffer */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 rsvd30[320];
 };
@@ -854,6 +932,8 @@ struct caam_full {
 };
 
 =======
+=======
+>>>>>>> v3.18
 	u32 rscvd30[193];
 #define DESC_DBG_DECO_STAT_HOST_ERR	0x00D00000
 #define DESC_DBG_DECO_STAT_VALID	0x80000000
@@ -871,5 +951,8 @@ struct caam_full {
 #define DECO_BLOCK_NUMBER	8
 #define PG_SIZE_4K		0x1000
 #define PG_SIZE_64K		0x10000
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* REGS_H */

@@ -9,7 +9,11 @@
 menuconfig ARC_PLAT_FPGA_LEGACY
 	bool "\"Legacy\" ARC FPGA dev Boards"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ISS_SMP_EXTN if SMP
+=======
+	select ARC_HAS_COH_CACHES if SMP
+>>>>>>> v3.18
 =======
 	select ARC_HAS_COH_CACHES if SMP
 >>>>>>> v3.18
@@ -22,6 +26,7 @@ menuconfig ARC_PLAT_FPGA_LEGACY
 
 if ARC_PLAT_FPGA_LEGACY
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARC_BOARD_ANGEL4
 	bool "ARC Angel4"
@@ -36,12 +41,17 @@ config ARC_BOARD_ML509
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config ISS_SMP_EXTN
 	bool "ARC SMP Extensions (ISS Models only)"
 	default n
 	depends on SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select ARC_HAS_COH_RTSC
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	help
@@ -52,6 +62,7 @@ config ISS_SMP_EXTN
 	  -XTL (To enable CPU start/stop/set-PC for another CPU)
 	  It doesn't provide coherent Caches and/or Atomic Ops (LLOCK/SCOND)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config ARC_SERIAL_BAUD
 	int "UART Baud rate"
@@ -92,6 +103,8 @@ config BVCI_LAT_CYCLES
 	default "30"
 	depends on ARC_HAS_BVCI_LAT_UNIT
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 endif

@@ -246,7 +246,12 @@ static const char *smii0_parents[] = { "smii_125m_pad", "ras_pll2_clk",
 static const char *uartx_parents[] = { "ras_syn1_gclk", "ras_apb_clk", };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init spear320_clk_init(void __iomem *soc_config_base)
+=======
+static void __init spear320_clk_init(void __iomem *soc_config_base,
+				     struct clk *ras_apb_clk)
+>>>>>>> v3.18
 =======
 static void __init spear320_clk_init(void __iomem *soc_config_base,
 				     struct clk *ras_apb_clk)
@@ -300,7 +305,12 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 
 	clk = clk_register_mux(NULL, "i2s_ref_clk", i2s_ref_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(i2s_ref_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(i2s_ref_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(i2s_ref_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -324,7 +334,12 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 
 	clk = clk_register_mux(NULL, "rs485_clk", uartx_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(uartx_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(uartx_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(uartx_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -335,7 +350,12 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 
 	clk = clk_register_mux(NULL, "sdhci_clk", sdhci_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(sdhci_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(sdhci_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(sdhci_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -346,8 +366,14 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 
 	clk = clk_register_mux(NULL, "smii_pclk", smii0_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(smii0_parents), 0, SPEAR320_CONTROL_REG,
 			SMII_PCLK_SHIFT, SMII_PCLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(smii0_parents), CLK_SET_RATE_NO_REPARENT,
+			SPEAR320_CONTROL_REG, SMII_PCLK_SHIFT, SMII_PCLK_MASK,
+			0, &_lock);
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(smii0_parents), CLK_SET_RATE_NO_REPARENT,
 			SPEAR320_CONTROL_REG, SMII_PCLK_SHIFT, SMII_PCLK_MASK,
@@ -360,6 +386,7 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 
 	clk = clk_register_mux(NULL, "uart1_clk", uartx_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(uartx_parents), CLK_SET_RATE_PARENT,
 			SPEAR320_CONTROL_REG, UART1_PCLK_SHIFT, UART1_PCLK_MASK,
 			0, &_lock);
@@ -374,6 +401,8 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 	clk = clk_register_mux(NULL, "uart3_clk", uartx_parents,
 			ARRAY_SIZE(uartx_parents), CLK_SET_RATE_PARENT,
 =======
+=======
+>>>>>>> v3.18
 			ARRAY_SIZE(uartx_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
 			SPEAR320_CONTROL_REG, UART1_PCLK_SHIFT, UART1_PCLK_MASK,
@@ -394,6 +423,9 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 	clk = clk_register_mux(NULL, "uart3_clk", uartx_parents,
 			ARRAY_SIZE(uartx_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			SPEAR320_EXT_CTRL_REG, SPEAR320_UART3_PCLK_SHIFT,
 			SPEAR320_UARTX_PCLK_MASK, 0, &_lock);
@@ -401,7 +433,12 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 
 	clk = clk_register_mux(NULL, "uart4_clk", uartx_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(uartx_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(uartx_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(uartx_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -412,7 +449,12 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 
 	clk = clk_register_mux(NULL, "uart5_clk", uartx_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(uartx_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(uartx_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(uartx_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -423,7 +465,12 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 
 	clk = clk_register_mux(NULL, "uart6_clk", uartx_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(uartx_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(uartx_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(uartx_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -434,7 +481,11 @@ static void __init spear320_clk_init(void __iomem *soc_config_base,
 }
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void spear320_clk_init(void __iomem *soc_config_base) { }
+=======
+static inline void spear320_clk_init(void __iomem *sb, struct clk *rc) { }
+>>>>>>> v3.18
 =======
 static inline void spear320_clk_init(void __iomem *sb, struct clk *rc) { }
 >>>>>>> v3.18
@@ -443,7 +494,11 @@ static inline void spear320_clk_init(void __iomem *sb, struct clk *rc) { }
 void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_base)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct clk *clk, *clk1;
+=======
+	struct clk *clk, *clk1, *ras_apb_clk;
+>>>>>>> v3.18
 =======
 	struct clk *clk, *clk1, *ras_apb_clk;
 >>>>>>> v3.18
@@ -500,7 +555,12 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 
 	clk = clk_register_mux(NULL, "uart0_mclk", uart0_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(uart0_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(uart0_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(uart0_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -522,7 +582,12 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 
 	clk = clk_register_mux(NULL, "firda_mclk", firda_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(firda_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(firda_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(firda_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -541,7 +606,12 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 			ARRAY_SIZE(gpt_rtbl), &_lock);
 	clk = clk_register_mux(NULL, "gpt0_clk", gpt0_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(gpt0_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(gpt0_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(gpt0_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -553,7 +623,12 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 			ARRAY_SIZE(gpt_rtbl), &_lock);
 	clk = clk_register_mux(NULL, "gpt1_mclk", gpt1_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(gpt1_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(gpt1_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(gpt1_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -569,7 +644,12 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 			ARRAY_SIZE(gpt_rtbl), &_lock);
 	clk = clk_register_mux(NULL, "gpt2_mclk", gpt2_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(gpt2_parents), CLK_SET_RATE_PARENT,
+=======
+			ARRAY_SIZE(gpt2_parents),
+			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(gpt2_parents),
 			CLK_SET_RATE_PARENT | CLK_SET_RATE_NO_REPARENT,
@@ -596,9 +676,15 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 
 	clk = clk_register_mux(NULL, "gen2_3_par_clk", gen2_3_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(gen2_3_parents), 0, CORE_CLK_CFG,
 			GEN_SYNTH2_3_CLK_SHIFT, GEN_SYNTH2_3_CLK_MASK, 0,
 			&_lock);
+=======
+			ARRAY_SIZE(gen2_3_parents), CLK_SET_RATE_NO_REPARENT,
+			CORE_CLK_CFG, GEN_SYNTH2_3_CLK_SHIFT,
+			GEN_SYNTH2_3_CLK_MASK, 0, &_lock);
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(gen2_3_parents), CLK_SET_RATE_NO_REPARENT,
 			CORE_CLK_CFG, GEN_SYNTH2_3_CLK_SHIFT,
@@ -644,8 +730,13 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 
 	clk = clk_register_mux(NULL, "ddr_clk", ddr_parents,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			ARRAY_SIZE(ddr_parents), 0, PLL_CLK_CFG, MCTR_CLK_SHIFT,
 			MCTR_CLK_MASK, 0, &_lock);
+=======
+			ARRAY_SIZE(ddr_parents), CLK_SET_RATE_NO_REPARENT,
+			PLL_CLK_CFG, MCTR_CLK_SHIFT, MCTR_CLK_MASK, 0, &_lock);
+>>>>>>> v3.18
 =======
 			ARRAY_SIZE(ddr_parents), CLK_SET_RATE_NO_REPARENT,
 			PLL_CLK_CFG, MCTR_CLK_SHIFT, MCTR_CLK_MASK, 0, &_lock);
@@ -707,6 +798,10 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 			RAS_APB_CLK_ENB, 0, &_lock);
 	clk_register_clkdev(clk, "ras_apb_clk", NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ras_apb_clk = clk;
+>>>>>>> v3.18
 =======
 	ras_apb_clk = clk;
 >>>>>>> v3.18
@@ -757,7 +852,11 @@ void __init spear3xx_clk_init(void __iomem *misc_base, void __iomem *soc_config_
 		spear310_clk_init();
 	else if (of_machine_is_compatible("st,spear320"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		spear320_clk_init(soc_config_base);
+=======
+		spear320_clk_init(soc_config_base, ras_apb_clk);
+>>>>>>> v3.18
 =======
 		spear320_clk_init(soc_config_base, ras_apb_clk);
 >>>>>>> v3.18

@@ -29,6 +29,10 @@
 #include <linux/of_device.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -102,7 +106,11 @@
 
 /* TIMER */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define ZTM(param)	((param & 0x3) << 4) /* ALC Zoro Crossing TimeOut */
+=======
+#define ZTM(param)	((param & 0x3) << 4) /* ALC Zero Crossing TimeOut */
+>>>>>>> v3.18
 =======
 #define ZTM(param)	((param & 0x3) << 4) /* ALC Zero Crossing TimeOut */
 >>>>>>> v3.18
@@ -142,7 +150,10 @@
 #define DACH		(1 << 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct ak4642_drvdata {
 	const struct regmap_config *regmap_config;
 	int extended_frequencies;
@@ -152,6 +163,9 @@ struct ak4642_priv {
 	const struct ak4642_drvdata *drvdata;
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Playback Volume (table 39)
@@ -168,6 +182,11 @@ static const struct snd_kcontrol_new ak4642_snd_controls[] = {
 	SOC_DOUBLE_R_TLV("Digital Playback Volume", L_DVC, R_DVC,
 			 0, 0xFF, 1, out_tlv),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	SOC_SINGLE("ALC Capture Switch", ALC_CTL1, 5, 1, 0),
+	SOC_SINGLE("ALC Capture ZC Switch", ALC_CTL1, 4, 1, 1),
+>>>>>>> v3.18
 =======
 	SOC_SINGLE("ALC Capture Switch", ALC_CTL1, 5, 1, 0),
 	SOC_SINGLE("ALC Capture ZC Switch", ALC_CTL1, 4, 1, 1),
@@ -224,6 +243,7 @@ static const struct snd_soc_dapm_route ak4642_intercon[] = {
  * ak4642 register cache
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const u8 ak4642_reg[] = {
 	0x00, 0x00, 0x01, 0x00,
 	0x02, 0x00, 0x00, 0x00,
@@ -249,6 +269,8 @@ static const u8 ak4648_reg[] = {
 	0x00, 0x00, 0x00, 0x00,
 	0x00, 0x88, 0x88, 0x08,
 =======
+=======
+>>>>>>> v3.18
 static const struct reg_default ak4642_reg[] = {
 	{  0, 0x00 }, {  1, 0x00 }, {  2, 0x01 }, {  3, 0x00 },
 	{  4, 0x02 }, {  5, 0x00 }, {  6, 0x00 }, {  7, 0x00 },
@@ -273,6 +295,9 @@ static const struct reg_default ak4648_reg[] = {
 	{ 28, 0x00 }, { 29, 0x00 }, { 30, 0x00 }, { 31, 0x00 },
 	{ 32, 0x00 }, { 33, 0x00 }, { 34, 0x00 }, { 35, 0x00 },
 	{ 36, 0x00 }, { 37, 0x88 }, { 38, 0x88 }, { 39, 0x08 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -339,7 +364,13 @@ static int ak4642_dai_set_sysclk(struct snd_soc_dai *codec_dai,
 {
 	struct snd_soc_codec *codec = codec_dai->codec;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 pll;
+=======
+	struct ak4642_priv *priv = snd_soc_codec_get_drvdata(codec);
+	u8 pll;
+	int extended_freq = 0;
+>>>>>>> v3.18
 =======
 	struct ak4642_priv *priv = snd_soc_codec_get_drvdata(codec);
 	u8 pll;
@@ -366,10 +397,13 @@ static int ak4642_dai_set_sysclk(struct snd_soc_dai *codec_dai,
 		pll = PLL3 | PLL2 | PLL0;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default:
 		return -EINVAL;
 	}
 =======
+=======
+>>>>>>> v3.18
 	case 19200000:
 		pll = PLL3;
 		extended_freq = 1;
@@ -389,6 +423,9 @@ static int ak4642_dai_set_sysclk(struct snd_soc_dai *codec_dai,
 	if (extended_freq && !priv->drvdata->extended_frequencies)
 		return -EINVAL;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	snd_soc_update_bits(codec, MD_CTL1, PLL_MASK, pll);
 
@@ -433,7 +470,10 @@ static int ak4642_dai_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -489,7 +529,10 @@ static int ak4642_dai_hw_params(struct snd_pcm_substream *substream,
 	default:
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -543,12 +586,18 @@ static struct snd_soc_dai_driver ak4642_dai = {
 static int ak4642_resume(struct snd_soc_codec *codec)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_soc_cache_sync(codec);
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regmap = dev_get_regmap(codec->dev, NULL);
 
 	regcache_mark_dirty(regmap);
 	regcache_sync(regmap);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -556,6 +605,7 @@ static int ak4642_resume(struct snd_soc_codec *codec)
 
 static int ak4642_probe(struct snd_soc_codec *codec)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int ret;
 
@@ -568,6 +618,8 @@ static int ak4642_probe(struct snd_soc_codec *codec)
 	snd_soc_add_codec_controls(codec, ak4642_snd_controls,
 			     ARRAY_SIZE(ak4642_snd_controls));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ak4642_set_bias_level(codec, SND_SOC_BIAS_STANDBY);
@@ -586,6 +638,7 @@ static struct snd_soc_codec_driver soc_codec_dev_ak4642 = {
 	.remove			= ak4642_remove,
 	.resume			= ak4642_resume,
 	.set_bias_level		= ak4642_set_bias_level,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.reg_cache_default	= ak4642_reg,			/* ak4642 reg */
 	.reg_cache_size		= ARRAY_SIZE(ak4642_reg),	/* ak4642 reg */
@@ -609,15 +662,22 @@ static struct snd_soc_codec_driver soc_codec_dev_ak4648 = {
 	.reg_cache_default	= ak4648_reg,			/* ak4648 reg */
 	.reg_cache_size		= ARRAY_SIZE(ak4648_reg),	/* ak4648 reg */
 	.reg_word_size		= sizeof(u8),
+=======
+	.controls		= ak4642_snd_controls,
+	.num_controls		= ARRAY_SIZE(ak4642_snd_controls),
+>>>>>>> v3.18
 	.dapm_widgets		= ak4642_dapm_widgets,
 	.num_dapm_widgets	= ARRAY_SIZE(ak4642_dapm_widgets),
 	.dapm_routes		= ak4642_intercon,
 	.num_dapm_routes	= ARRAY_SIZE(ak4642_intercon),
 };
 
+<<<<<<< HEAD
 #if defined(CONFIG_I2C) || defined(CONFIG_I2C_MODULE)
 static struct of_device_id ak4642_of_match[];
 =======
+=======
+>>>>>>> v3.18
 static const struct regmap_config ak4642_regmap = {
 	.reg_bits		= 8,
 	.val_bits		= 8,
@@ -648,26 +708,36 @@ static const struct ak4642_drvdata ak4648_drvdata = {
 };
 
 static const struct of_device_id ak4642_of_match[];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ak4642_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
 	struct device_node *np = i2c->dev.of_node;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct snd_soc_codec_driver *driver;
 
 	driver = NULL;
 =======
+=======
+>>>>>>> v3.18
 	const struct ak4642_drvdata *drvdata = NULL;
 	struct regmap *regmap;
 	struct ak4642_priv *priv;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (np) {
 		const struct of_device_id *of_id;
 
 		of_id = of_match_device(ak4642_of_match, &i2c->dev);
 		if (of_id)
+<<<<<<< HEAD
 <<<<<<< HEAD
 			driver = of_id->data;
 	} else {
@@ -682,6 +752,8 @@ static int ak4642_i2c_probe(struct i2c_client *i2c,
 	return snd_soc_register_codec(&i2c->dev,
 				      driver, &ak4642_dai, 1);
 =======
+=======
+>>>>>>> v3.18
 			drvdata = of_id->data;
 	} else {
 		drvdata = (const struct ak4642_drvdata *)id->driver_data;
@@ -706,6 +778,9 @@ static int ak4642_i2c_probe(struct i2c_client *i2c,
 
 	return snd_soc_register_codec(&i2c->dev,
 				      &soc_codec_dev_ak4642, &ak4642_dai, 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -716,15 +791,21 @@ static int ak4642_i2c_remove(struct i2c_client *client)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id ak4642_of_match[] = {
 	{ .compatible = "asahi-kasei,ak4642",	.data = &soc_codec_dev_ak4642},
 	{ .compatible = "asahi-kasei,ak4643",	.data = &soc_codec_dev_ak4642},
 	{ .compatible = "asahi-kasei,ak4648",	.data = &soc_codec_dev_ak4648},
 =======
+=======
+>>>>>>> v3.18
 static const struct of_device_id ak4642_of_match[] = {
 	{ .compatible = "asahi-kasei,ak4642",	.data = &ak4642_drvdata},
 	{ .compatible = "asahi-kasei,ak4643",	.data = &ak4643_drvdata},
 	{ .compatible = "asahi-kasei,ak4648",	.data = &ak4648_drvdata},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{},
 };
@@ -732,9 +813,15 @@ MODULE_DEVICE_TABLE(of, ak4642_of_match);
 
 static const struct i2c_device_id ak4642_i2c_id[] = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ "ak4642", (kernel_ulong_t)&soc_codec_dev_ak4642 },
 	{ "ak4643", (kernel_ulong_t)&soc_codec_dev_ak4642 },
 	{ "ak4648", (kernel_ulong_t)&soc_codec_dev_ak4648 },
+=======
+	{ "ak4642", (kernel_ulong_t)&ak4642_drvdata },
+	{ "ak4643", (kernel_ulong_t)&ak4643_drvdata },
+	{ "ak4648", (kernel_ulong_t)&ak4648_drvdata },
+>>>>>>> v3.18
 =======
 	{ "ak4642", (kernel_ulong_t)&ak4642_drvdata },
 	{ "ak4643", (kernel_ulong_t)&ak4643_drvdata },
@@ -754,6 +841,7 @@ static struct i2c_driver ak4642_i2c_driver = {
 	.remove		= ak4642_i2c_remove,
 	.id_table	= ak4642_i2c_id,
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 
@@ -776,6 +864,10 @@ static void __exit ak4642_exit(void)
 
 }
 module_exit(ak4642_exit);
+=======
+
+module_i2c_driver(ak4642_i2c_driver);
+>>>>>>> v3.18
 =======
 
 module_i2c_driver(ak4642_i2c_driver);

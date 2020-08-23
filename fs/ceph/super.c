@@ -18,6 +18,10 @@
 #include "super.h"
 #include "mds_client.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "cache.h"
+>>>>>>> v3.18
 =======
 #include "cache.h"
 >>>>>>> v3.18
@@ -147,13 +151,19 @@ enum {
 	Opt_ino32,
 	Opt_noino32,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	Opt_fscache,
 	Opt_nofscache,
 #ifdef CONFIG_CEPH_FS_POSIX_ACL
 	Opt_acl,
 #endif
 	Opt_noacl
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -181,13 +191,19 @@ static match_table_t fsopt_tokens = {
 	{Opt_ino32, "ino32"},
 	{Opt_noino32, "noino32"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	{Opt_fscache, "fsc"},
 	{Opt_nofscache, "nofsc"},
 #ifdef CONFIG_CEPH_FS_POSIX_ACL
 	{Opt_acl, "acl"},
 #endif
 	{Opt_noacl, "noacl"},
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{-1, NULL}
 };
@@ -283,7 +299,10 @@ static int parse_fsopt_token(char *c, void *private)
 		fsopt->flags &= ~CEPH_MOUNT_OPT_INO32;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case Opt_fscache:
 		fsopt->flags |= CEPH_MOUNT_OPT_FSCACHE;
 		break;
@@ -298,6 +317,9 @@ static int parse_fsopt_token(char *c, void *private)
 	case Opt_noacl:
 		fsopt->sb_flags &= ~MS_POSIXACL;
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	default:
 		BUG_ON(token);
@@ -462,7 +484,10 @@ static int ceph_show_options(struct seq_file *m, struct dentry *root)
 	else
 		seq_puts(m, ",nodcache");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (fsopt->flags & CEPH_MOUNT_OPT_FSCACHE)
 		seq_puts(m, ",fsc");
 	else
@@ -474,6 +499,9 @@ static int ceph_show_options(struct seq_file *m, struct dentry *root)
 	else
 		seq_puts(m, ",noacl");
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (fsopt->wsize)
@@ -529,15 +557,21 @@ static struct ceph_fs_client *create_fs_client(struct ceph_mount_options *fsopt,
 {
 	struct ceph_fs_client *fsc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const unsigned supported_features =
 		CEPH_FEATURE_FLOCK |
 		CEPH_FEATURE_DIRLAYOUTHASH;
 	const unsigned required_features = 0;
 =======
+=======
+>>>>>>> v3.18
 	const u64 supported_features =
 		CEPH_FEATURE_FLOCK |
 		CEPH_FEATURE_DIRLAYOUTHASH;
 	const u64 required_features = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int page_count;
 	size_t size;
@@ -591,12 +625,18 @@ static struct ceph_fs_client *create_fs_client(struct ceph_mount_options *fsopt,
 		goto fail_trunc_wq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* setup fscache */
 	if ((fsopt->flags & CEPH_MOUNT_OPT_FSCACHE) &&
 	    (ceph_fscache_register_fs(fsc) != 0))
 		goto fail_fscache;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* caps */
 	fsc->min_caps = fsopt->max_readdir;
@@ -604,6 +644,11 @@ static struct ceph_fs_client *create_fs_client(struct ceph_mount_options *fsopt,
 	return fsc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+fail_fscache:
+	ceph_fscache_unregister_fs(fsc);
+>>>>>>> v3.18
 =======
 fail_fscache:
 	ceph_fscache_unregister_fs(fsc);
@@ -628,6 +673,11 @@ static void destroy_fs_client(struct ceph_fs_client *fsc)
 	dout("destroy_fs_client %p\n", fsc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ceph_fscache_unregister_fs(fsc);
+
+>>>>>>> v3.18
 =======
 	ceph_fscache_unregister_fs(fsc);
 
@@ -667,6 +717,11 @@ static void ceph_inode_init_once(void *foo)
 static int __init init_caches(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int error = -ENOMEM;
+
+>>>>>>> v3.18
 =======
 	int error = -ENOMEM;
 
@@ -695,13 +750,19 @@ static int __init init_caches(void)
 		goto bad_file;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 
 =======
+=======
+>>>>>>> v3.18
 	if ((error = ceph_fscache_register()))
 		goto bad_file;
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 bad_file:
 	kmem_cache_destroy(ceph_dentry_cachep);
@@ -710,7 +771,11 @@ bad_dentry:
 bad_cap:
 	kmem_cache_destroy(ceph_inode_cachep);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -ENOMEM;
+=======
+	return error;
+>>>>>>> v3.18
 =======
 	return error;
 >>>>>>> v3.18
@@ -724,6 +789,10 @@ static void destroy_caches(void)
 	 */
 	rcu_barrier();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -732,6 +801,11 @@ static void destroy_caches(void)
 	kmem_cache_destroy(ceph_dentry_cachep);
 	kmem_cache_destroy(ceph_file_cachep);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	ceph_fscache_unregister();
+>>>>>>> v3.18
 =======
 
 	ceph_fscache_unregister();
@@ -759,6 +833,10 @@ static const struct super_operations ceph_super_ops = {
 	.destroy_inode	= ceph_destroy_inode,
 	.write_inode    = ceph_write_inode,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.drop_inode	= ceph_drop_inode,
+>>>>>>> v3.18
 =======
 	.drop_inode	= ceph_drop_inode,
 >>>>>>> v3.18
@@ -808,7 +886,11 @@ static struct dentry *open_root_dentry(struct ceph_fs_client *fsc,
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			root = d_obtain_alias(inode);
+=======
+			root = d_obtain_root(inode);
+>>>>>>> v3.18
 =======
 			root = d_obtain_root(inode);
 >>>>>>> v3.18
@@ -900,6 +982,10 @@ static int ceph_set_super(struct super_block *s, void *data)
 	s->s_maxbytes = 1ULL << 40;  /* temp value until we get mdsmap */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	s->s_xattr = ceph_xattr_handlers;
+>>>>>>> v3.18
 =======
 	s->s_xattr = ceph_xattr_handlers;
 >>>>>>> v3.18
@@ -991,11 +1077,17 @@ static struct dentry *ceph_mount(struct file_system_type *fs_type,
 
 	dout("ceph_mount\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef CONFIG_CEPH_FS_POSIX_ACL
 	flags |= MS_POSIXACL;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = parse_mount_options(&fsopt, &opt, flags, data, dev_name, &path);
 	if (err < 0) {
@@ -1089,6 +1181,10 @@ static int __init init_ceph(void)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ceph_flock_init();
+>>>>>>> v3.18
 =======
 	ceph_flock_init();
 >>>>>>> v3.18

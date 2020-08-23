@@ -195,8 +195,11 @@ static int sha512_ssse3_import(struct shash_desc *desc, const void *in)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct shash_alg alg = {
 =======
+=======
+>>>>>>> v3.18
 static int sha384_ssse3_init(struct shash_desc *desc)
 {
 	struct sha512_state *sctx = shash_desc_ctx(desc);
@@ -228,6 +231,9 @@ static int sha384_ssse3_final(struct shash_desc *desc, u8 *hash)
 }
 
 static struct shash_alg algs[] = { {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.digestsize	=	SHA512_DIGEST_SIZE,
 	.init		=	sha512_ssse3_init,
@@ -246,8 +252,11 @@ static struct shash_alg algs[] = { {
 		.cra_module	=	THIS_MODULE,
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
+=======
+>>>>>>> v3.18
 },  {
 	.digestsize	=	SHA384_DIGEST_SIZE,
 	.init		=	sha384_ssse3_init,
@@ -266,6 +275,9 @@ static struct shash_alg algs[] = { {
 		.cra_module	=	THIS_MODULE,
 	}
 } };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_AS_AVX
@@ -290,7 +302,11 @@ static bool __init avx_usable(void)
 static int __init sha512_ssse3_mod_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* test for SSE3 first */
+=======
+	/* test for SSSE3 first */
+>>>>>>> v3.18
 =======
 	/* test for SSSE3 first */
 >>>>>>> v3.18
@@ -321,7 +337,11 @@ static int __init sha512_ssse3_mod_init(void)
 #endif
 			pr_info("Using SSSE3 optimized SHA-512 implementation\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return crypto_register_shash(&alg);
+=======
+		return crypto_register_shashes(algs, ARRAY_SIZE(algs));
+>>>>>>> v3.18
 =======
 		return crypto_register_shashes(algs, ARRAY_SIZE(algs));
 >>>>>>> v3.18
@@ -334,7 +354,11 @@ static int __init sha512_ssse3_mod_init(void)
 static void __exit sha512_ssse3_mod_fini(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crypto_unregister_shash(&alg);
+=======
+	crypto_unregister_shashes(algs, ARRAY_SIZE(algs));
+>>>>>>> v3.18
 =======
 	crypto_unregister_shashes(algs, ARRAY_SIZE(algs));
 >>>>>>> v3.18
@@ -347,7 +371,12 @@ MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("SHA512 Secure Hash Algorithm, Supplemental SSE3 accelerated");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 MODULE_ALIAS_CRYPTO("sha512");
+=======
+MODULE_ALIAS("sha512");
+MODULE_ALIAS("sha384");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("sha512");
 MODULE_ALIAS("sha384");

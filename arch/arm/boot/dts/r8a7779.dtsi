@@ -12,15 +12,21 @@
 /include/ "skeleton.dtsi"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 / {
 	compatible = "renesas,r8a7779";
 =======
+=======
+>>>>>>> v3.18
 #include <dt-bindings/clock/r8a7779-clock.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 
 / {
 	compatible = "renesas,r8a7779";
 	interrupt-parent = <&gic>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cpus {
@@ -32,6 +38,10 @@
 			compatible = "arm,cortex-a9";
 			reg = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-frequency = <1000000000>;
+>>>>>>> v3.18
 =======
 			clock-frequency = <1000000000>;
 >>>>>>> v3.18
@@ -41,6 +51,10 @@
 			compatible = "arm,cortex-a9";
 			reg = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-frequency = <1000000000>;
+>>>>>>> v3.18
 =======
 			clock-frequency = <1000000000>;
 >>>>>>> v3.18
@@ -50,6 +64,10 @@
 			compatible = "arm,cortex-a9";
 			reg = <2>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			clock-frequency = <1000000000>;
+>>>>>>> v3.18
 =======
 			clock-frequency = <1000000000>;
 >>>>>>> v3.18
@@ -58,6 +76,7 @@
 			device_type = "cpu";
 			compatible = "arm,cortex-a9";
 			reg = <3>;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		};
 	};
@@ -117,6 +136,8 @@
 		interrupt-parent = <&gic>;
 		interrupts = <0 100 0x4>;
 =======
+=======
+>>>>>>> v3.18
 			clock-frequency = <1000000000>;
 		};
 	};
@@ -593,6 +614,9 @@
 				"sdhi3", "sdhi2", "sdhi1", "sdhi0",
 				"mmc1", "mmc0";
 		};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	};
 };

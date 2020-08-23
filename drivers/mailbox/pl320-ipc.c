@@ -27,7 +27,11 @@
 #include <linux/amba/bus.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/mailbox.h>
+=======
+#include <linux/pl320-ipc.h>
+>>>>>>> v3.18
 =======
 #include <linux/pl320-ipc.h>
 >>>>>>> v3.18

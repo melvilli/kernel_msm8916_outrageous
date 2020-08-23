@@ -37,6 +37,10 @@
 #include "octeon-ethernet.h"
 #include "ethernet-util.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "ethernet-mdio.h"
+>>>>>>> v3.18
 =======
 #include "ethernet-mdio.h"
 >>>>>>> v3.18
@@ -48,7 +52,11 @@
 #include <asm/octeon/cvmx-gmxx-defs.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DEFINE_SPINLOCK(global_register_lock);
+=======
+static DEFINE_SPINLOCK(global_register_lock);
+>>>>>>> v3.18
 =======
 static DEFINE_SPINLOCK(global_register_lock);
 >>>>>>> v3.18
@@ -81,7 +89,12 @@ static void cvm_oct_rgmii_poll(struct net_device *dev)
 		 * at 10Mbps we may need to do some special checking.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (USE_10MBPS_PREAMBLE_WORKAROUND && (link_info.s.speed == 10)) {
+=======
+		if (USE_10MBPS_PREAMBLE_WORKAROUND &&
+				(link_info.s.speed == 10)) {
+>>>>>>> v3.18
 =======
 		if (USE_10MBPS_PREAMBLE_WORKAROUND &&
 				(link_info.s.speed == 10)) {
@@ -95,6 +108,10 @@ static void cvm_oct_rgmii_poll(struct net_device *dev)
 			int index = INDEX(priv->port);
 			union cvmx_gmxx_rxx_int_reg gmxx_rxx_int_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -136,8 +153,12 @@ static void cvm_oct_rgmii_poll(struct net_device *dev)
 					       (index, interface),
 					       gmxx_rxx_int_reg.u64);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk_ratelimited("%s: Using 10Mbps with software "
 						   "preamble removal\n",
+=======
+				printk_ratelimited("%s: Using 10Mbps with software preamble removal\n",
+>>>>>>> v3.18
 =======
 				printk_ratelimited("%s: Using 10Mbps with software preamble removal\n",
 >>>>>>> v3.18
@@ -188,9 +209,14 @@ static void cvm_oct_rgmii_poll(struct net_device *dev)
 	if (use_global_register_lock)
 		spin_unlock_irqrestore(&global_register_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else {
 		mutex_unlock(&priv->phydev->bus->mdio_lock);
 	}
+=======
+	else
+		mutex_unlock(&priv->phydev->bus->mdio_lock);
+>>>>>>> v3.18
 =======
 	else
 		mutex_unlock(&priv->phydev->bus->mdio_lock);
@@ -203,8 +229,12 @@ static void cvm_oct_rgmii_poll(struct net_device *dev)
 				netif_carrier_on(dev);
 			if (priv->queue != -1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk_ratelimited("%s: %u Mbps %s duplex, "
 						   "port %2d, queue %2d\n",
+=======
+				printk_ratelimited("%s: %u Mbps %s duplex, port %2d, queue %2d\n",
+>>>>>>> v3.18
 =======
 				printk_ratelimited("%s: %u Mbps %s duplex, port %2d, queue %2d\n",
 >>>>>>> v3.18
@@ -214,8 +244,12 @@ static void cvm_oct_rgmii_poll(struct net_device *dev)
 						   priv->port, priv->queue);
 			else
 <<<<<<< HEAD
+<<<<<<< HEAD
 				printk_ratelimited("%s: %u Mbps %s duplex, "
 						   "port %2d, POW\n",
+=======
+				printk_ratelimited("%s: %u Mbps %s duplex, port %2d, POW\n",
+>>>>>>> v3.18
 =======
 				printk_ratelimited("%s: %u Mbps %s duplex, port %2d, POW\n",
 >>>>>>> v3.18
@@ -251,6 +285,10 @@ static irqreturn_t cvm_oct_rgmii_rml_interrupt(int cpl, void *dev_id)
 			/* Read the GMX interrupt status bits */
 			union cvmx_gmxx_rxx_int_reg gmx_rx_int_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -271,13 +309,19 @@ static irqreturn_t cvm_oct_rgmii_rml_interrupt(int cpl, void *dev_id)
 				struct octeon_ethernet *priv = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (dev && !atomic_read(&cvm_oct_poll_queue_stopping))
 					queue_work(cvm_oct_poll_queue, &priv->port_work);
 =======
+=======
+>>>>>>> v3.18
 				if (dev &&
 				!atomic_read(&cvm_oct_poll_queue_stopping))
 					queue_work(cvm_oct_poll_queue,
 						&priv->port_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				gmx_rx_int_reg.u64 = 0;
@@ -304,6 +348,10 @@ static irqreturn_t cvm_oct_rgmii_rml_interrupt(int cpl, void *dev_id)
 			/* Read the GMX interrupt status bits */
 			union cvmx_gmxx_rxx_int_reg gmx_rx_int_reg;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -324,13 +372,19 @@ static irqreturn_t cvm_oct_rgmii_rml_interrupt(int cpl, void *dev_id)
 				struct octeon_ethernet *priv = netdev_priv(dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (dev && !atomic_read(&cvm_oct_poll_queue_stopping))
 					queue_work(cvm_oct_poll_queue, &priv->port_work);
 =======
+=======
+>>>>>>> v3.18
 				if (dev &&
 				!atomic_read(&cvm_oct_poll_queue_stopping))
 					queue_work(cvm_oct_poll_queue,
 						&priv->port_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				gmx_rx_int_reg.u64 = 0;
@@ -355,12 +409,18 @@ int cvm_oct_rgmii_open(struct net_device *dev)
 	int index = INDEX(priv->port);
 	cvmx_helper_link_info_t link_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int rv;
 
 	rv = cvm_oct_phy_setup_device(dev);
 	if (rv)
 		return rv;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gmx_cfg.u64 = cvmx_read_csr(CVMX_GMXX_PRTX_CFG(index, interface));
@@ -369,10 +429,13 @@ int cvm_oct_rgmii_open(struct net_device *dev)
 
 	if (!octeon_is_simulation()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		link_info = cvmx_helper_link_get(priv->port);
 		if (!link_info.s.link_up)
 			netif_carrier_off(dev);
 =======
+=======
+>>>>>>> v3.18
 		if (priv->phydev) {
 			int r = phy_read_status(priv->phydev);
 
@@ -385,6 +448,9 @@ int cvm_oct_rgmii_open(struct net_device *dev)
 				netif_carrier_off(dev);
 			priv->poll = cvm_oct_rgmii_poll;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -402,7 +468,11 @@ int cvm_oct_rgmii_stop(struct net_device *dev)
 	gmx_cfg.s.en = 0;
 	cvmx_write_csr(CVMX_GMXX_PRTX_CFG(index, interface), gmx_cfg.u64);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
+=======
+	return cvm_oct_common_stop(dev);
+>>>>>>> v3.18
 =======
 	return cvm_oct_common_stop(dev);
 >>>>>>> v3.18
@@ -411,7 +481,12 @@ int cvm_oct_rgmii_stop(struct net_device *dev)
 static void cvm_oct_rgmii_immediate_poll(struct work_struct *work)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct octeon_ethernet *priv = container_of(work, struct octeon_ethernet, port_work);
+=======
+	struct octeon_ethernet *priv =
+		container_of(work, struct octeon_ethernet, port_work);
+>>>>>>> v3.18
 =======
 	struct octeon_ethernet *priv =
 		container_of(work, struct octeon_ethernet, port_work);
@@ -462,9 +537,13 @@ int cvm_oct_rgmii_init(struct net_device *dev)
 			 * for this port.
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			gmx_rx_int_en.u64 =
 			    cvmx_read_csr(CVMX_GMXX_RXX_INT_EN
 					  (index, interface));
+=======
+			gmx_rx_int_en.u64 = 0;
+>>>>>>> v3.18
 =======
 			gmx_rx_int_en.u64 = 0;
 >>>>>>> v3.18
@@ -474,7 +553,10 @@ int cvm_oct_rgmii_init(struct net_device *dev)
 			cvmx_write_csr(CVMX_GMXX_RXX_INT_EN(index, interface),
 				       gmx_rx_int_en.u64);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			priv->poll = cvm_oct_rgmii_poll;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		}
@@ -487,6 +569,10 @@ void cvm_oct_rgmii_uninit(struct net_device *dev)
 {
 	struct octeon_ethernet *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

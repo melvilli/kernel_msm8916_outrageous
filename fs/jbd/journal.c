@@ -91,7 +91,10 @@ static void __journal_abort_soft (journal_t *journal, int errno);
 static const char *journal_dev_name(journal_t *journal, char *buffer);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_JBD_DEBUG
 void __jbd_debug(int level, const char *file, const char *func,
 		 unsigned int line, const char *fmt, ...)
@@ -110,6 +113,9 @@ void __jbd_debug(int level, const char *file, const char *func,
 EXPORT_SYMBOL(__jbd_debug);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Helper function used to manage commit timeouts
@@ -577,7 +583,11 @@ int log_wait_commit(journal_t *journal, tid_t tid)
 	spin_lock(&journal->j_state_lock);
 	if (!tid_geq(journal->j_commit_request, tid)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG
+=======
+		printk(KERN_ERR
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR
 >>>>>>> v3.18
@@ -612,10 +622,15 @@ out_unlock:
 	spin_unlock(&journal->j_state_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(is_journal_aborted(journal))) {
 		printk(KERN_EMERG "journal commit I/O error\n");
 		err = -EIO;
 	}
+=======
+	if (unlikely(is_journal_aborted(journal)))
+		err = -EIO;
+>>>>>>> v3.18
 =======
 	if (unlikely(is_journal_aborted(journal)))
 		err = -EIO;
@@ -901,7 +916,11 @@ journal_t * journal_init_inode (struct inode *inode)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bh = __getblk(journal->j_dev, blocknr, journal->j_blocksize);
+=======
+	bh = getblk_unmovable(journal->j_dev, blocknr, journal->j_blocksize);
+>>>>>>> v3.18
 =======
 	bh = getblk_unmovable(journal->j_dev, blocknr, journal->j_blocksize);
 >>>>>>> v3.18
@@ -2153,7 +2172,11 @@ static void __exit journal_exit(void)
 	int n = atomic_read(&nr_journal_heads);
 	if (n)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG "JBD: leaked %d journal_heads!\n", n);
+=======
+		printk(KERN_ERR "JBD: leaked %d journal_heads!\n", n);
+>>>>>>> v3.18
 =======
 		printk(KERN_ERR "JBD: leaked %d journal_heads!\n", n);
 >>>>>>> v3.18

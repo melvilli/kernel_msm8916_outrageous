@@ -58,7 +58,11 @@ long nouveau_compat_ioctl(struct file *filp, unsigned int cmd,
 
 #if 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (nr < DRM_COMMAND_BASE + DRM_ARRAY_SIZE(mga_compat_ioctls))
+=======
+	if (nr < DRM_COMMAND_BASE + ARRAY_SIZE(mga_compat_ioctls))
+>>>>>>> v3.18
 =======
 	if (nr < DRM_COMMAND_BASE + ARRAY_SIZE(mga_compat_ioctls))
 >>>>>>> v3.18
@@ -68,7 +72,11 @@ long nouveau_compat_ioctl(struct file *filp, unsigned int cmd,
 		ret = (*fn)(filp, cmd, arg);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = drm_ioctl(filp, cmd, arg);
+=======
+		ret = nouveau_drm_ioctl(filp, cmd, arg);
+>>>>>>> v3.18
 =======
 		ret = nouveau_drm_ioctl(filp, cmd, arg);
 >>>>>>> v3.18

@@ -88,9 +88,15 @@ void ip_options_build(struct sk_buff *skb, struct ip_options *opt,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ip_options_echo(struct ip_options *dopt, struct sk_buff *skb)
 {
 	const struct ip_options *sopt;
+=======
+int __ip_options_echo(struct ip_options *dopt, struct sk_buff *skb,
+		      const struct ip_options *sopt)
+{
+>>>>>>> v3.18
 =======
 int __ip_options_echo(struct ip_options *dopt, struct sk_buff *skb,
 		      const struct ip_options *sopt)
@@ -103,8 +109,11 @@ int __ip_options_echo(struct ip_options *dopt, struct sk_buff *skb,
 	memset(dopt, 0, sizeof(struct ip_options));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sopt = &(IPCB(skb)->opt);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (sopt->optlen == 0)
@@ -177,7 +186,11 @@ int __ip_options_echo(struct ip_options *dopt, struct sk_buff *skb,
 		if (soffset > 3) {
 			memcpy(&faddr, &start[soffset-1], 4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (soffset-=4, doffset=4; soffset > 3; soffset-=4, doffset+=4)
+=======
+			for (soffset -= 4, doffset = 4; soffset > 3; soffset -= 4, doffset += 4)
+>>>>>>> v3.18
 =======
 			for (soffset -= 4, doffset = 4; soffset > 3; soffset -= 4, doffset += 4)
 >>>>>>> v3.18
@@ -241,7 +254,11 @@ void ip_options_fragment(struct sk_buff *skb)
 		}
 		optlen = optptr[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (optlen<2 || optlen>l)
+=======
+		if (optlen < 2 || optlen > l)
+>>>>>>> v3.18
 =======
 		if (optlen < 2 || optlen > l)
 >>>>>>> v3.18
@@ -293,8 +310,13 @@ int ip_options_compile(struct net *net,
 	for (l = opt->optlen; l > 0; ) {
 		switch (*optptr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      case IPOPT_END:
 			for (optptr++, l--; l>0; optptr++, l--) {
+=======
+		case IPOPT_END:
+			for (optptr++, l--; l > 0; optptr++, l--) {
+>>>>>>> v3.18
 =======
 		case IPOPT_END:
 			for (optptr++, l--; l > 0; optptr++, l--) {
@@ -306,7 +328,11 @@ int ip_options_compile(struct net *net,
 			}
 			goto eol;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      case IPOPT_NOOP:
+=======
+		case IPOPT_NOOP:
+>>>>>>> v3.18
 =======
 		case IPOPT_NOOP:
 >>>>>>> v3.18
@@ -320,7 +346,11 @@ int ip_options_compile(struct net *net,
 		}
 		optlen = optptr[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (optlen<2 || optlen>l) {
+=======
+		if (optlen < 2 || optlen > l) {
+>>>>>>> v3.18
 =======
 		if (optlen < 2 || optlen > l) {
 >>>>>>> v3.18
@@ -329,8 +359,13 @@ int ip_options_compile(struct net *net,
 		}
 		switch (*optptr) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      case IPOPT_SSRR:
 		      case IPOPT_LSRR:
+=======
+		case IPOPT_SSRR:
+		case IPOPT_LSRR:
+>>>>>>> v3.18
 =======
 		case IPOPT_SSRR:
 		case IPOPT_LSRR:
@@ -361,7 +396,11 @@ int ip_options_compile(struct net *net,
 			opt->srr = optptr - iph;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      case IPOPT_RR:
+=======
+		case IPOPT_RR:
+>>>>>>> v3.18
 =======
 		case IPOPT_RR:
 >>>>>>> v3.18
@@ -393,7 +432,11 @@ int ip_options_compile(struct net *net,
 			opt->rr = optptr - iph;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      case IPOPT_TIMESTAMP:
+=======
+		case IPOPT_TIMESTAMP:
+>>>>>>> v3.18
 =======
 		case IPOPT_TIMESTAMP:
 >>>>>>> v3.18
@@ -412,7 +455,11 @@ int ip_options_compile(struct net *net,
 			if (optptr[2] <= optlen) {
 				unsigned char *timeptr = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (optptr[2]+3 > optptr[1]) {
+=======
+				if (optptr[2]+3 > optlen) {
+>>>>>>> v3.18
 =======
 				if (optptr[2]+3 > optlen) {
 >>>>>>> v3.18
@@ -421,7 +468,11 @@ int ip_options_compile(struct net *net,
 				}
 				switch (optptr[3]&0xF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      case IPOPT_TS_TSONLY:
+=======
+				case IPOPT_TS_TSONLY:
+>>>>>>> v3.18
 =======
 				case IPOPT_TS_TSONLY:
 >>>>>>> v3.18
@@ -431,8 +482,13 @@ int ip_options_compile(struct net *net,
 					optptr[2] += 4;
 					break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      case IPOPT_TS_TSANDADDR:
 					if (optptr[2]+7 > optptr[1]) {
+=======
+				case IPOPT_TS_TSANDADDR:
+					if (optptr[2]+7 > optlen) {
+>>>>>>> v3.18
 =======
 				case IPOPT_TS_TSANDADDR:
 					if (optptr[2]+7 > optlen) {
@@ -450,8 +506,13 @@ int ip_options_compile(struct net *net,
 					optptr[2] += 8;
 					break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      case IPOPT_TS_PRESPEC:
 					if (optptr[2]+7 > optptr[1]) {
+=======
+				case IPOPT_TS_PRESPEC:
+					if (optptr[2]+7 > optlen) {
+>>>>>>> v3.18
 =======
 				case IPOPT_TS_PRESPEC:
 					if (optptr[2]+7 > optlen) {
@@ -471,7 +532,11 @@ int ip_options_compile(struct net *net,
 					optptr[2] += 8;
 					break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				      default:
+=======
+				default:
+>>>>>>> v3.18
 =======
 				default:
 >>>>>>> v3.18
@@ -503,7 +568,11 @@ int ip_options_compile(struct net *net,
 			opt->ts = optptr - iph;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      case IPOPT_RA:
+=======
+		case IPOPT_RA:
+>>>>>>> v3.18
 =======
 		case IPOPT_RA:
 >>>>>>> v3.18
@@ -515,7 +584,11 @@ int ip_options_compile(struct net *net,
 				opt->router_alert = optptr - iph;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      case IPOPT_CIPSO:
+=======
+		case IPOPT_CIPSO:
+>>>>>>> v3.18
 =======
 		case IPOPT_CIPSO:
 >>>>>>> v3.18
@@ -530,9 +603,15 @@ int ip_options_compile(struct net *net,
 			}
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      case IPOPT_SEC:
 		      case IPOPT_SID:
 		      default:
+=======
+		case IPOPT_SEC:
+		case IPOPT_SID:
+		default:
+>>>>>>> v3.18
 =======
 		case IPOPT_SEC:
 		case IPOPT_SID:
@@ -656,7 +735,11 @@ void ip_forward_options(struct sk_buff *skb)
 		optptr = raw + opt->srr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for ( srrptr=optptr[2], srrspace = optptr[1];
+=======
+		for ( srrptr = optptr[2], srrspace = optptr[1];
+>>>>>>> v3.18
 =======
 		for ( srrptr = optptr[2], srrspace = optptr[1];
 >>>>>>> v3.18
@@ -716,7 +799,11 @@ int ip_options_rcv_srr(struct sk_buff *skb)
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (srrptr=optptr[2], srrspace = optptr[1]; srrptr <= srrspace; srrptr += 4) {
+=======
+	for (srrptr = optptr[2], srrspace = optptr[1]; srrptr <= srrspace; srrptr += 4) {
+>>>>>>> v3.18
 =======
 	for (srrptr = optptr[2], srrspace = optptr[1]; srrptr <= srrspace; srrptr += 4) {
 >>>>>>> v3.18

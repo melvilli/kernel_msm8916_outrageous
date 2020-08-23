@@ -35,6 +35,10 @@
 #include <stdio.h>
 #include <errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <tools/endian.h>
+>>>>>>> v3.18
 =======
 #include <tools/endian.h>
 >>>>>>> v3.18
@@ -82,7 +86,11 @@ struct hdr {
 #define ROUND_UP(x)	((x + ALIGN - 1) & ~(ALIGN - 1))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t do_read(int fd, void *buf, size_t count)
+=======
+static ssize_t do_read(int fd, void *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t do_read(int fd, void *buf, size_t count)
 >>>>>>> v3.18
@@ -107,7 +115,11 @@ static ssize_t do_read(int fd, void *buf, size_t count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t do_write(int fd, const void *buf, size_t count)
+=======
+static ssize_t do_write(int fd, const void *buf, size_t count)
+>>>>>>> v3.18
 =======
 static ssize_t do_write(int fd, const void *buf, size_t count)
 >>>>>>> v3.18
@@ -130,7 +142,11 @@ static ssize_t do_write(int fd, const void *buf, size_t count)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ssize_t write_zero(int fd, size_t len)
+=======
+static ssize_t write_zero(int fd, size_t len)
+>>>>>>> v3.18
 =======
 static ssize_t write_zero(int fd, size_t len)
 >>>>>>> v3.18

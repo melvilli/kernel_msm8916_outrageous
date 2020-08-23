@@ -29,7 +29,13 @@ static const struct address_space_operations swap_aops = {
 	.writepage	= swap_writepage,
 	.set_page_dirty	= swap_set_page_dirty,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.migratepage	= migrate_page,
+=======
+#ifdef CONFIG_MIGRATION
+	.migratepage	= migrate_page,
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_MIGRATION
 	.migratepage	= migrate_page,
@@ -46,6 +52,10 @@ struct address_space swapper_spaces[MAX_SWAPFILES] = {
 	[0 ... MAX_SWAPFILES - 1] = {
 		.page_tree	= RADIX_TREE_INIT(GFP_ATOMIC|__GFP_NOWARN),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.i_mmap_writable = ATOMIC_INIT(0),
+>>>>>>> v3.18
 =======
 		.i_mmap_writable = ATOMIC_INIT(0),
 >>>>>>> v3.18
@@ -74,6 +84,11 @@ unsigned long total_swapcache_pages(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+static atomic_t swapin_readahead_hits = ATOMIC_INIT(4);
+
+>>>>>>> v3.18
 =======
 static atomic_t swapin_readahead_hits = ATOMIC_INIT(4);
 
@@ -99,9 +114,15 @@ int __add_to_swap_cache(struct page *page, swp_entry_t entry)
 	struct address_space *address_space;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageLocked(page));
 	VM_BUG_ON(PageSwapCache(page));
 	VM_BUG_ON(!PageSwapBacked(page));
+=======
+	VM_BUG_ON_PAGE(!PageLocked(page), page);
+	VM_BUG_ON_PAGE(PageSwapCache(page), page);
+	VM_BUG_ON_PAGE(!PageSwapBacked(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageLocked(page), page);
 	VM_BUG_ON_PAGE(PageSwapCache(page), page);
@@ -120,7 +141,10 @@ int __add_to_swap_cache(struct page *page, swp_entry_t entry)
 		address_space->nrpages++;
 		__inc_zone_page_state(page, NR_FILE_PAGES);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__inc_zone_page_state(page, NR_SWAPCACHE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		INC_CACHE_INFO(add_total);
@@ -148,7 +172,11 @@ int add_to_swap_cache(struct page *page, swp_entry_t entry, gfp_t gfp_mask)
 	int error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = radix_tree_preload(gfp_mask);
+=======
+	error = radix_tree_maybe_preload(gfp_mask);
+>>>>>>> v3.18
 =======
 	error = radix_tree_maybe_preload(gfp_mask);
 >>>>>>> v3.18
@@ -169,9 +197,15 @@ void __delete_from_swap_cache(struct page *page)
 	struct address_space *address_space;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageLocked(page));
 	VM_BUG_ON(!PageSwapCache(page));
 	VM_BUG_ON(PageWriteback(page));
+=======
+	VM_BUG_ON_PAGE(!PageLocked(page), page);
+	VM_BUG_ON_PAGE(!PageSwapCache(page), page);
+	VM_BUG_ON_PAGE(PageWriteback(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageLocked(page), page);
 	VM_BUG_ON_PAGE(!PageSwapCache(page), page);
@@ -186,7 +220,10 @@ void __delete_from_swap_cache(struct page *page)
 	address_space->nrpages--;
 	__dec_zone_page_state(page, NR_FILE_PAGES);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__dec_zone_page_state(page, NR_SWAPCACHE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INC_CACHE_INFO(del_total);
@@ -205,8 +242,13 @@ int add_to_swap(struct page *page, struct list_head *list)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VM_BUG_ON(!PageLocked(page));
 	VM_BUG_ON(!PageUptodate(page));
+=======
+	VM_BUG_ON_PAGE(!PageLocked(page), page);
+	VM_BUG_ON_PAGE(!PageUptodate(page), page);
+>>>>>>> v3.18
 =======
 	VM_BUG_ON_PAGE(!PageLocked(page), page);
 	VM_BUG_ON_PAGE(!PageUptodate(page), page);
@@ -219,7 +261,11 @@ int add_to_swap(struct page *page, struct list_head *list)
 	if (unlikely(PageTransHuge(page)))
 		if (unlikely(split_huge_page_to_list(page, list))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			swapcache_free(entry, NULL);
+=======
+			swapcache_free(entry);
+>>>>>>> v3.18
 =======
 			swapcache_free(entry);
 >>>>>>> v3.18
@@ -249,7 +295,11 @@ int add_to_swap(struct page *page, struct list_head *list)
 		 * clear SWAP_HAS_CACHE flag.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		swapcache_free(entry, NULL);
+=======
+		swapcache_free(entry);
+>>>>>>> v3.18
 =======
 		swapcache_free(entry);
 >>>>>>> v3.18
@@ -276,7 +326,11 @@ void delete_from_swap_cache(struct page *page)
 	spin_unlock_irq(&address_space->tree_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	swapcache_free(entry, page);
+=======
+	swapcache_free(entry);
+>>>>>>> v3.18
 =======
 	swapcache_free(entry);
 >>>>>>> v3.18
@@ -317,6 +371,7 @@ void free_pages_and_swap_cache(struct page **pages, int nr)
 {
 	struct page **pagep = pages;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	lru_add_drain();
 	while (nr) {
@@ -330,12 +385,17 @@ void free_pages_and_swap_cache(struct page **pages, int nr)
 		nr -= todo;
 	}
 =======
+=======
+>>>>>>> v3.18
 	int i;
 
 	lru_add_drain();
 	for (i = 0; i < nr; i++)
 		free_swap_cache(pagep[i]);
 	release_pages(pagep, nr, false);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -352,14 +412,20 @@ struct page * lookup_swap_cache(swp_entry_t entry)
 	page = find_get_page(swap_address_space(entry), entry.val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (page)
 		INC_CACHE_INFO(find_success);
 =======
+=======
+>>>>>>> v3.18
 	if (page) {
 		INC_CACHE_INFO(find_success);
 		if (TestClearPageReadahead(page))
 			atomic_inc(&swapin_readahead_hits);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	INC_CACHE_INFO(find_total);
@@ -402,7 +468,11 @@ struct page *read_swap_cache_async(swp_entry_t entry, gfp_t gfp_mask,
 		 * call radix_tree_preload() while we can wait.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		err = radix_tree_preload(gfp_mask & GFP_KERNEL);
+=======
+		err = radix_tree_maybe_preload(gfp_mask & GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		err = radix_tree_maybe_preload(gfp_mask & GFP_KERNEL);
 >>>>>>> v3.18
@@ -459,7 +529,11 @@ struct page *read_swap_cache_async(swp_entry_t entry, gfp_t gfp_mask,
 		 * clear SWAP_HAS_CACHE flag.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		swapcache_free(entry, NULL);
+=======
+		swapcache_free(entry);
+>>>>>>> v3.18
 =======
 		swapcache_free(entry);
 >>>>>>> v3.18
@@ -471,7 +545,10 @@ struct page *read_swap_cache_async(swp_entry_t entry, gfp_t gfp_mask,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static unsigned long swapin_nr_pages(unsigned long offset)
 {
 	static unsigned long prev_offset;
@@ -516,6 +593,9 @@ static unsigned long swapin_nr_pages(unsigned long offset)
 	return pages;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /**
  * swapin_readahead - swap in pages in hope we need them soon
@@ -541,6 +621,7 @@ struct page *swapin_readahead(swp_entry_t entry, gfp_t gfp_mask,
 {
 	struct page *page;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long offset = swp_offset(entry);
 	unsigned long start_offset, end_offset;
 	unsigned long mask = is_swap_fast(entry) ? 0 :
@@ -548,6 +629,8 @@ struct page *swapin_readahead(swp_entry_t entry, gfp_t gfp_mask,
 	struct blk_plug plug;
 
 =======
+=======
+>>>>>>> v3.18
 	unsigned long entry_offset = swp_offset(entry);
 	unsigned long offset = entry_offset;
 	unsigned long start_offset, end_offset;
@@ -558,6 +641,9 @@ struct page *swapin_readahead(swp_entry_t entry, gfp_t gfp_mask,
 	if (!mask)
 		goto skip;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Read a page_cluster sized and aligned cluster around offset. */
 	start_offset = offset & ~mask;
@@ -573,6 +659,11 @@ struct page *swapin_readahead(swp_entry_t entry, gfp_t gfp_mask,
 		if (!page)
 			continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		if (offset != entry_offset)
+			SetPageReadahead(page);
+>>>>>>> v3.18
 =======
 		if (offset != entry_offset)
 			SetPageReadahead(page);
@@ -583,6 +674,10 @@ struct page *swapin_readahead(swp_entry_t entry, gfp_t gfp_mask,
 
 	lru_add_drain();	/* Push any new pages onto the LRU now */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+skip:
+>>>>>>> v3.18
 =======
 skip:
 >>>>>>> v3.18

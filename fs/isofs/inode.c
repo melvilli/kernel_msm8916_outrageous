@@ -29,6 +29,7 @@
 #define BEQUIET
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int isofs_hashi(const struct dentry *parent, const struct inode *inode,
 		struct qstr *qstr);
 static int isofs_hash(const struct dentry *parent, const struct inode *inode,
@@ -55,6 +56,8 @@ static int isofs_dentry_cmp_ms(const struct dentry *parent,
 		const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
 =======
+=======
+>>>>>>> v3.18
 static int isofs_hashi(const struct dentry *parent, struct qstr *qstr);
 static int isofs_dentry_cmpi(const struct dentry *parent,
 		const struct dentry *dentry,
@@ -68,6 +71,9 @@ static int isofs_dentry_cmpi_ms(const struct dentry *parent,
 		unsigned int len, const char *str, const struct qstr *name);
 static int isofs_dentry_cmp_ms(const struct dentry *parent,
 		const struct dentry *dentry,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned int len, const char *str, const struct qstr *name);
 #endif
@@ -118,7 +124,11 @@ static void init_once(void *foo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int init_inodecache(void)
+=======
+static int __init init_inodecache(void)
+>>>>>>> v3.18
 =======
 static int __init init_inodecache(void)
 >>>>>>> v3.18
@@ -146,6 +156,10 @@ static void destroy_inodecache(void)
 static int isofs_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18
@@ -167,10 +181,13 @@ static const struct super_operations isofs_sops = {
 static const struct dentry_operations isofs_dentry_ops[] = {
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.d_hash		= isofs_hash,
 		.d_compare	= isofs_dentry_cmp,
 	},
 	{
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		.d_hash		= isofs_hashi,
@@ -217,6 +234,7 @@ struct iso9660_options{
  */
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 isofs_hash_common(const struct dentry *dentry, struct qstr *qstr, int ms)
 {
 	const char *name;
@@ -239,6 +257,9 @@ isofs_hash_common(const struct dentry *dentry, struct qstr *qstr, int ms)
  */
 static int
 isofs_hashi_common(const struct dentry *dentry, struct qstr *qstr, int ms)
+=======
+isofs_hashi_common(struct qstr *qstr, int ms)
+>>>>>>> v3.18
 =======
 isofs_hashi_common(struct qstr *qstr, int ms)
 >>>>>>> v3.18
@@ -286,7 +307,11 @@ static int isofs_dentry_cmp_common(
 	if (alen == blen) {
 		if (ci) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (strnicmp(name->name, str, alen) == 0)
+=======
+			if (strncasecmp(name->name, str, alen) == 0)
+>>>>>>> v3.18
 =======
 			if (strncasecmp(name->name, str, alen) == 0)
 >>>>>>> v3.18
@@ -300,6 +325,7 @@ static int isofs_dentry_cmp_common(
 }
 
 static int
+<<<<<<< HEAD
 <<<<<<< HEAD
 isofs_hash(const struct dentry *dentry, const struct inode *inode,
 		struct qstr *qstr)
@@ -349,6 +375,8 @@ static int
 isofs_dentry_cmp_ms(const struct dentry *parent, const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
 =======
+=======
+>>>>>>> v3.18
 isofs_hashi(const struct dentry *dentry, struct qstr *qstr)
 {
 	return isofs_hashi_common(qstr, 0);
@@ -397,6 +425,9 @@ isofs_hashi_ms(const struct dentry *dentry, struct qstr *qstr)
 
 static int
 isofs_dentry_cmp_ms(const struct dentry *parent, const struct dentry *dentry,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		unsigned int len, const char *str, const struct qstr *name)
 {
@@ -405,8 +436,12 @@ isofs_dentry_cmp_ms(const struct dentry *parent, const struct dentry *dentry,
 
 static int
 <<<<<<< HEAD
+<<<<<<< HEAD
 isofs_dentry_cmpi_ms(const struct dentry *parent, const struct inode *pinode,
 		const struct dentry *dentry, const struct inode *inode,
+=======
+isofs_dentry_cmpi_ms(const struct dentry *parent, const struct dentry *dentry,
+>>>>>>> v3.18
 =======
 isofs_dentry_cmpi_ms(const struct dentry *parent, const struct dentry *dentry,
 >>>>>>> v3.18
@@ -817,11 +852,14 @@ static int isofs_fill_super(struct super_block *s, void *data, int silent)
 
 root_found:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* We don't support read-write mounts */
 	if (!(s->s_flags & MS_RDONLY)) {
 		error = -EACCES;
 		goto out_freebh;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1044,7 +1082,12 @@ root_found:
 		table++;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	s->s_d_op = &isofs_dentry_ops[table];
+=======
+	if (table)
+		s->s_d_op = &isofs_dentry_ops[table - 1];
+>>>>>>> v3.18
 =======
 	if (table)
 		s->s_d_op = &isofs_dentry_ops[table - 1];
@@ -1642,6 +1685,12 @@ static struct dentry *isofs_mount(struct file_system_type *fs_type,
 	int flags, const char *dev_name, void *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* We don't support read-write mounts */
+	if (!(flags & MS_RDONLY))
+		return ERR_PTR(-EACCES);
+>>>>>>> v3.18
 =======
 	/* We don't support read-write mounts */
 	if (!(flags & MS_RDONLY))

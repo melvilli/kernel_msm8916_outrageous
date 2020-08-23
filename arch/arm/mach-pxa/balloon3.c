@@ -91,7 +91,11 @@ int __init parse_balloon3_features(char *arg)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return strict_strtoul(arg, 0, &balloon3_features_present);
+=======
+	return kstrtoul(arg, 0, &balloon3_features_present);
+>>>>>>> v3.18
 =======
 	return kstrtoul(arg, 0, &balloon3_features_present);
 >>>>>>> v3.18
@@ -336,7 +340,10 @@ static void __init balloon3_udc_init(void)
 {
 	pxa_set_udc_info(&balloon3_udc_info);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_device_register(&balloon3_gpio_vbus);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 }

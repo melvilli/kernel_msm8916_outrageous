@@ -10,10 +10,13 @@ struct fixed_phy_status {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_FIXED_PHY
 extern int fixed_phy_add(unsigned int irq, int phy_id,
 			 struct fixed_phy_status *status);
 =======
+=======
+>>>>>>> v3.18
 struct device_node;
 
 #ifdef CONFIG_FIXED_PHY
@@ -26,6 +29,9 @@ extern void fixed_phy_del(int phy_addr);
 extern int fixed_phy_set_link_update(struct phy_device *phydev,
 			int (*link_update)(struct net_device *,
 					   struct fixed_phy_status *));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #else
 static inline int fixed_phy_add(unsigned int irq, int phy_id,
@@ -33,6 +39,7 @@ static inline int fixed_phy_add(unsigned int irq, int phy_id,
 {
 	return -ENODEV;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif /* CONFIG_FIXED_PHY */
 
@@ -44,6 +51,8 @@ extern int fixed_phy_set_link_update(struct phy_device *phydev,
 			int (*link_update)(struct net_device *,
 					   struct fixed_phy_status *));
 =======
+=======
+>>>>>>> v3.18
 static inline struct phy_device *fixed_phy_register(unsigned int irq,
 						struct fixed_phy_status *status,
 						struct device_node *np)
@@ -61,6 +70,9 @@ static inline int fixed_phy_set_link_update(struct phy_device *phydev,
 	return -ENODEV;
 }
 #endif /* CONFIG_FIXED_PHY */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* __PHY_FIXED_H */

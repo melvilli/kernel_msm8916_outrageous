@@ -38,7 +38,11 @@ struct wpan_phy {
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * This is a PIB according to 802.15.4-2006.
+=======
+	 * This is a PIB according to 802.15.4-2011.
+>>>>>>> v3.18
 =======
 	 * This is a PIB according to 802.15.4-2011.
 >>>>>>> v3.18
@@ -49,9 +53,12 @@ struct wpan_phy {
 	u8 current_page;
 	u32 channels_supported[32];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 transmit_power;
 	u8 cca_mode;
 =======
+=======
+>>>>>>> v3.18
 	s8 transmit_power;
 	u8 cca_mode;
 	u8 min_be;
@@ -61,6 +68,9 @@ struct wpan_phy {
 
 	bool lbt;
 	s32 cca_ed_level;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	struct device dev;
@@ -71,7 +81,10 @@ struct wpan_phy {
 	void (*del_iface)(struct wpan_phy *phy, struct net_device *dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int (*set_txpower)(struct wpan_phy *phy, int db);
 	int (*set_lbt)(struct wpan_phy *phy, bool on);
 	int (*set_cca_mode)(struct wpan_phy *phy, u8 cca_mode);
@@ -80,6 +93,9 @@ struct wpan_phy {
 			       u8 retries);
 	int (*set_frame_retries)(struct wpan_phy *phy, s8 retries);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	char priv[0] __attribute__((__aligned__(NETDEV_ALIGN)));
 };

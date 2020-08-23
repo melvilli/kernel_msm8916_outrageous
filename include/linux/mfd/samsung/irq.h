@@ -14,7 +14,10 @@
 #define __LINUX_MFD_SEC_IRQ_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum s2mpa01_irq {
 	S2MPA01_IRQ_PWRONF,
 	S2MPA01_IRQ_PWRONR,
@@ -65,6 +68,9 @@ enum s2mpa01_irq {
 #define S2MPA01_IRQ_B24_TSD_MASK	(1 << 4)
 #define S2MPA01_IRQ_B35_TSD_MASK	(1 << 5)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum s2mps11_irq {
 	S2MPS11_IRQ_PWRONF,
@@ -78,8 +84,13 @@ enum s2mps11_irq {
 
 	S2MPS11_IRQ_RTC60S,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	S2MPS11_IRQ_RTCA1,
 	S2MPS11_IRQ_RTCA2,
+=======
+	S2MPS11_IRQ_RTCA0,
+	S2MPS11_IRQ_RTCA1,
+>>>>>>> v3.18
 =======
 	S2MPS11_IRQ_RTCA0,
 	S2MPS11_IRQ_RTCA1,
@@ -106,7 +117,11 @@ enum s2mps11_irq {
 #define S2MPS11_IRQ_RTC60S_MASK		(1 << 0)
 #define S2MPS11_IRQ_RTCA1_MASK		(1 << 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S2MPS11_IRQ_RTCA2_MASK		(1 << 2)
+=======
+#define S2MPS11_IRQ_RTCA0_MASK		(1 << 2)
+>>>>>>> v3.18
 =======
 #define S2MPS11_IRQ_RTCA0_MASK		(1 << 2)
 >>>>>>> v3.18
@@ -118,7 +133,10 @@ enum s2mps11_irq {
 #define S2MPS11_IRQ_INT140C_MASK	(1 << 1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 enum s2mps14_irq {
 	S2MPS14_IRQ_PWRONF,
 	S2MPS14_IRQ_PWRONR,
@@ -170,6 +188,9 @@ enum s2mpu02_irq {
 /* Masks for interrupts are the same as in s2mps11 */
 #define S2MPS14_IRQ_TSD_MASK		(1 << 2)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 enum s5m8767_irq {
 	S5M8767_IRQ_PWRR,

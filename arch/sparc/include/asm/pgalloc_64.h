@@ -16,7 +16,10 @@
 extern struct kmem_cache *pgtable_cache;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline void __pgd_populate(pgd_t *pgd, pud_t *pud)
 {
 	pgd_set(pgd, pud);
@@ -24,6 +27,9 @@ static inline void __pgd_populate(pgd_t *pgd, pud_t *pud)
 
 #define pgd_populate(MM, PGD, PUD)	__pgd_populate(PGD, PUD)
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline pgd_t *pgd_alloc(struct mm_struct *mm)
 {
@@ -36,8 +42,11 @@ static inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define pud_populate(MM, PUD, PMD)	pud_set(PUD, PMD)
 =======
+=======
+>>>>>>> v3.18
 static inline void __pud_populate(pud_t *pud, pmd_t *pmd)
 {
 	pud_set(pud, pmd);
@@ -55,6 +64,9 @@ static inline void pud_free(struct mm_struct *mm, pud_t *pud)
 {
 	kmem_cache_free(pgtable_cache, pud);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline pmd_t *pmd_alloc_one(struct mm_struct *mm, unsigned long addr)
@@ -69,6 +81,7 @@ static inline void pmd_free(struct mm_struct *mm, pmd_t *pmd)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 				   unsigned long address);
 extern pgtable_t pte_alloc_one(struct mm_struct *mm,
@@ -76,12 +89,17 @@ extern pgtable_t pte_alloc_one(struct mm_struct *mm,
 extern void pte_free_kernel(struct mm_struct *mm, pte_t *pte);
 extern void pte_free(struct mm_struct *mm, pgtable_t ptepage);
 =======
+=======
+>>>>>>> v3.18
 pte_t *pte_alloc_one_kernel(struct mm_struct *mm,
 			    unsigned long address);
 pgtable_t pte_alloc_one(struct mm_struct *mm,
 			unsigned long address);
 void pte_free_kernel(struct mm_struct *mm, pte_t *pte);
 void pte_free(struct mm_struct *mm, pgtable_t ptepage);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define pmd_populate_kernel(MM, PMD, PTE)	pmd_set(MM, PMD, PTE)
@@ -91,7 +109,11 @@ void pte_free(struct mm_struct *mm, pgtable_t ptepage);
 #define check_pgt_cache()	do { } while (0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void pgtable_free(void *table, bool is_page);
+=======
+void pgtable_free(void *table, bool is_page);
+>>>>>>> v3.18
 =======
 void pgtable_free(void *table, bool is_page);
 >>>>>>> v3.18
@@ -100,7 +122,11 @@ void pgtable_free(void *table, bool is_page);
 
 struct mmu_gather;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void tlb_remove_table(struct mmu_gather *, void *);
+=======
+void tlb_remove_table(struct mmu_gather *, void *);
+>>>>>>> v3.18
 =======
 void tlb_remove_table(struct mmu_gather *, void *);
 >>>>>>> v3.18
@@ -139,6 +165,12 @@ static inline void __pte_free_tlb(struct mmu_gather *tlb, pte_t *pte,
 	pgtable_free_tlb(tlb, pmd, false)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define __pud_free_tlb(tlb, pud, addr)		      \
+	pgtable_free_tlb(tlb, pud, false)
+
+>>>>>>> v3.18
 =======
 #define __pud_free_tlb(tlb, pud, addr)		      \
 	pgtable_free_tlb(tlb, pud, false)

@@ -398,7 +398,11 @@ static void garp_join_timer_arm(struct garp_applicant *app)
 	unsigned long delay;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	delay = (u64)msecs_to_jiffies(garp_join_time) * net_random() >> 32;
+=======
+	delay = (u64)msecs_to_jiffies(garp_join_time) * prandom_u32() >> 32;
+>>>>>>> v3.18
 =======
 	delay = (u64)msecs_to_jiffies(garp_join_time) * prandom_u32() >> 32;
 >>>>>>> v3.18

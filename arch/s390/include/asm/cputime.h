@@ -9,6 +9,7 @@
 
 #include <linux/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/percpu.h>
 #include <linux/spinlock.h>
 #include <asm/div64.h>
@@ -22,12 +23,22 @@
 
 
 >>>>>>> v3.18
+=======
+#include <asm/div64.h>
+
+
+>>>>>>> v3.18
 /* We want to use full resolution of the CPU timer: 2**-12 micro-seconds. */
 
 typedef unsigned long long __nocast cputime_t;
 typedef unsigned long long __nocast cputime64_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cmpxchg_cputime(ptr, old, new) cmpxchg64(ptr, old, new)
+
+>>>>>>> v3.18
 =======
 #define cmpxchg_cputime(ptr, old, new) cmpxchg64(ptr, old, new)
 
@@ -180,6 +191,7 @@ static inline clock_t cputime64_to_clock_t(cputime64_t cputime)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct s390_idle_data {
 	int nohz_delay;
 	unsigned int sequence;
@@ -203,6 +215,11 @@ static inline int s390_nohz_delay(int cpu)
 }
 
 #define arch_needs_cpu(cpu) s390_nohz_delay(cpu)
+=======
+cputime64_t arch_cpu_idle_time(int cpu);
+
+#define arch_idle_time(cpu) arch_cpu_idle_time(cpu)
+>>>>>>> v3.18
 =======
 cputime64_t arch_cpu_idle_time(int cpu);
 

@@ -125,6 +125,7 @@
 struct brcms_phy;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct phy_shim_info *wlc_phy_shim_attach(struct brcms_hardware *wlc_hw,
 						 struct brcms_info *wl,
 						 struct brcms_c_info *wlc);
@@ -177,6 +178,8 @@ extern void wlapi_high_update_phy_mode(struct phy_shim_info *physhim,
 				       u32 phy_mode);
 extern u16 wlapi_bmac_get_txant(struct phy_shim_info *physhim);
 =======
+=======
+>>>>>>> v3.18
 struct phy_shim_info *wlc_phy_shim_attach(struct brcms_hardware *wlc_hw,
 					  struct brcms_info *wl,
 					  struct brcms_c_info *wlc);
@@ -221,6 +224,9 @@ void wlapi_copyto_objmem(struct phy_shim_info *physhim, uint, const void *buf,
 
 void wlapi_high_update_phy_mode(struct phy_shim_info *physhim, u32 phy_mode);
 u16 wlapi_bmac_get_txant(struct phy_shim_info *physhim);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif				/* _BRCM_PHY_SHIM_H_ */

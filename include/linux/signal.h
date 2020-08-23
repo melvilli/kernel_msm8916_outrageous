@@ -3,6 +3,10 @@
 
 #include <linux/list.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/bug.h>
+>>>>>>> v3.18
 =======
 #include <linux/bug.h>
 >>>>>>> v3.18
@@ -68,6 +72,7 @@ static inline int sigismember(sigset_t *set, int _sig)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int sigfindinword(unsigned long word)
 {
 	return ffz(~word);
@@ -75,12 +80,17 @@ static inline int sigfindinword(unsigned long word)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #endif /* __HAVE_ARCH_SIG_BITOPS */
 
 static inline int sigisemptyset(sigset_t *set)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern void _NSIG_WORDS_is_unsupported_size(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	switch (_NSIG_WORDS) {
@@ -93,7 +103,11 @@ static inline int sigisemptyset(sigset_t *set)
 		return set->sig[0] == 0;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_NSIG_WORDS_is_unsupported_size();
+=======
+		BUILD_BUG();
+>>>>>>> v3.18
 =======
 		BUILD_BUG();
 >>>>>>> v3.18
@@ -110,21 +124,28 @@ static inline int sigisemptyset(sigset_t *set)
 static inline void name(sigset_t *r, const sigset_t *a, const sigset_t *b) \
 {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern void _NSIG_WORDS_is_unsupported_size(void);		\
 	unsigned long a0, a1, a2, a3, b0, b1, b2, b3;			\
 									\
 	switch (_NSIG_WORDS) {						\
 	    case 4:							\
 =======
+=======
+>>>>>>> v3.18
 	unsigned long a0, a1, a2, a3, b0, b1, b2, b3;			\
 									\
 	switch (_NSIG_WORDS) {						\
 	case 4:								\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		a3 = a->sig[3]; a2 = a->sig[2];				\
 		b3 = b->sig[3]; b2 = b->sig[2];				\
 		r->sig[3] = op(a3, b3);					\
 		r->sig[2] = op(a2, b2);					\
+<<<<<<< HEAD
 <<<<<<< HEAD
 	    case 2:							\
 		a1 = a->sig[1]; b1 = b->sig[1];				\
@@ -136,6 +157,8 @@ static inline void name(sigset_t *r, const sigset_t *a, const sigset_t *b) \
 	    default:							\
 		_NSIG_WORDS_is_unsupported_size();			\
 =======
+=======
+>>>>>>> v3.18
 	case 2:								\
 		a1 = a->sig[1]; b1 = b->sig[1];				\
 		r->sig[1] = op(a1, b1);					\
@@ -145,6 +168,9 @@ static inline void name(sigset_t *r, const sigset_t *a, const sigset_t *b) \
 		break;							\
 	default:							\
 		BUILD_BUG();						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 }
@@ -167,6 +193,7 @@ _SIG_SET_BINOP(sigandnsets, _sig_andn)
 static inline void name(sigset_t *set)					\
 {									\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	extern void _NSIG_WORDS_is_unsupported_size(void);		\
 									\
 	switch (_NSIG_WORDS) {						\
@@ -178,6 +205,8 @@ static inline void name(sigset_t *set)					\
 	    default:							\
 		_NSIG_WORDS_is_unsupported_size();			\
 =======
+=======
+>>>>>>> v3.18
 	switch (_NSIG_WORDS) {						\
 	case 4:	set->sig[3] = op(set->sig[3]);				\
 		set->sig[2] = op(set->sig[2]);				\
@@ -186,6 +215,9 @@ static inline void name(sigset_t *set)					\
 		    break;						\
 	default:							\
 		BUILD_BUG();						\
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}								\
 }
@@ -292,6 +324,10 @@ extern void set_current_blocked(sigset_t *);
 extern void __set_current_blocked(const sigset_t *);
 extern int show_unhandled_signals;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+extern int sigsuspend(sigset_t *);
+>>>>>>> v3.18
 =======
 extern int sigsuspend(sigset_t *);
 >>>>>>> v3.18
@@ -333,6 +369,7 @@ struct ksignal {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int get_signal_to_deliver(siginfo_t *info, struct k_sigaction *return_ka, struct pt_regs *regs, void *cookie);
 extern void signal_setup_done(int failed, struct ksignal *ksig, int stepping);
 extern void signal_delivered(int sig, siginfo_t *info, struct k_sigaction *ka, struct pt_regs *regs, int stepping);
@@ -350,6 +387,8 @@ extern void exit_signals(struct task_struct *tsk);
 	p->sig > 0;						\
 })
 =======
+=======
+>>>>>>> v3.18
 extern int get_signal(struct ksignal *ksig);
 extern void signal_setup_done(int failed, struct ksignal *ksig, int stepping);
 extern void exit_signals(struct task_struct *tsk);
@@ -369,6 +408,9 @@ static inline void disallow_signal(int sig)
 {
 	kernel_sigaction(sig, SIG_IGN);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 extern struct kmem_cache *sighand_cachep;

@@ -127,7 +127,11 @@
 #include <linux/types.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int verbose = 0;
+=======
+static bool verbose = 0;
+>>>>>>> v3.18
 =======
 static bool verbose = 0;
 >>>>>>> v3.18
@@ -166,7 +170,11 @@ static DEFINE_MUTEX(pd_mutex);
 static DEFINE_SPINLOCK(pd_lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_param(verbose, int, 0);
+=======
+module_param(verbose, bool, 0);
+>>>>>>> v3.18
 =======
 module_param(verbose, bool, 0);
 >>>>>>> v3.18
@@ -463,7 +471,11 @@ static enum action do_pd_io_start(void)
 			return Fail;
 		pd_run = blk_rq_sectors(pd_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pd_buf = pd_req->buffer;
+=======
+		pd_buf = bio_data(pd_req->bio);
+>>>>>>> v3.18
 =======
 		pd_buf = bio_data(pd_req->bio);
 >>>>>>> v3.18
@@ -498,7 +510,11 @@ static int pd_next_buf(void)
 	__blk_end_request_cur(pd_req, 0);
 	pd_count = blk_rq_cur_sectors(pd_req);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pd_buf = pd_req->buffer;
+=======
+	pd_buf = bio_data(pd_req->bio);
+>>>>>>> v3.18
 =======
 	pd_buf = bio_data(pd_req->bio);
 >>>>>>> v3.18
@@ -739,6 +755,11 @@ static int pd_special_command(struct pd_unit *disk,
 
 	rq = blk_get_request(disk->gd->queue, READ, __GFP_WAIT);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (IS_ERR(rq))
+		return PTR_ERR(rq);
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rq))
 		return PTR_ERR(rq);

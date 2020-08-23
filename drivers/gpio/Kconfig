@@ -31,10 +31,13 @@ config ARCH_REQUIRE_GPIOLIB
 	  code to always get built in.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_DEVRES
 	def_bool y
 	depends on HAS_IOMEM
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -51,11 +54,17 @@ menuconfig GPIOLIB
 if GPIOLIB
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIO_DEVRES
 	def_bool y
 	depends on HAS_IOMEM
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config OF_GPIO
 	def_bool y
@@ -66,11 +75,17 @@ config GPIO_ACPI
 	depends on ACPI
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIOLIB_IRQCHIP
 	select IRQ_DOMAIN
 	bool
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config DEBUG_GPIO
 	bool "Debug GPIO calls"
@@ -127,9 +142,12 @@ comment "Memory mapped GPIO drivers:"
 
 config GPIO_CLPS711X
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def_bool y
 	depends on ARCH_CLPS711X
 =======
+=======
+>>>>>>> v3.18
 	tristate "CLPS711X GPIO support"
 	depends on ARCH_CLPS711X || COMPILE_TEST
 	select GPIO_GENERIC
@@ -142,6 +160,9 @@ config GPIO_DAVINCI
 	depends on ARM && (ARCH_DAVINCI || ARCH_KEYSTONE)
 	help
 	  Say yes here to enable GPIO support for TI Davinci/Keystone SoCs.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config GPIO_GENERIC_PLATFORM
@@ -151,7 +172,10 @@ config GPIO_GENERIC_PLATFORM
 	  Say yes here to support basic platform_device memory-mapped GPIO controllers.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIO_DWAPB
 	tristate "Synopsys DesignWare APB GPIO driver"
 	select GPIO_GENERIC
@@ -160,6 +184,9 @@ config GPIO_DWAPB
 	  Say Y or M here to build support for the Synopsys DesignWare APB
 	  GPIO block.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config GPIO_IT8761E
 	tristate "IT8761E GPIO support"
@@ -170,7 +197,11 @@ config GPIO_IT8761E
 config GPIO_EM
 	tristate "Emma Mobile GPIO"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM
+=======
+	depends on ARM && OF_GPIO
+>>>>>>> v3.18
 =======
 	depends on ARM && OF_GPIO
 >>>>>>> v3.18
@@ -183,13 +214,19 @@ config GPIO_EP93XX
 	select GPIO_GENERIC
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIO_ZEVIO
 	bool "LSI ZEVIO SoC memory mapped GPIOs"
 	depends on ARM && OF_GPIO
 	help
 	  Say yes here to support the GPIO controller in LSI ZEVIO SoCs.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config GPIO_MM_LANTIQ
 	bool "Lantiq Memory mapped GPIOs"
@@ -200,7 +237,10 @@ config GPIO_MM_LANTIQ
 	  created by attaching a 16bit latch to the bus.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIO_F7188X
 	tristate "F71882FG and F71889F GPIO support"
 	depends on X86
@@ -218,6 +258,9 @@ config GPIO_MOXART
 	  Select this option to enable GPIO driver for
 	  MOXA ART SoC devices.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config GPIO_MPC5200
 	def_bool y
@@ -232,6 +275,7 @@ config GPIO_MPC8XXX
 	  MPC512x/831x/834x/837x/8572/8610 GPIOs.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_MSM_V3
 	tristate "Qualcomm MSM GPIO v3"
 	depends on GPIOLIB && ARCH_MSM
@@ -241,6 +285,8 @@ config GPIO_MSM_V3
 	  the pins on the MSM can be selected for GPIO, and are
 	  controlled by this driver.
 =======
+=======
+>>>>>>> v3.18
 config GPIO_MSM_V1
 	tristate "Qualcomm MSM GPIO v1"
 	depends on GPIOLIB && ARCH_MSM && (ARCH_MSM7X00A || ARCH_MSM7X30 || ARCH_QSD8X50)
@@ -256,6 +302,9 @@ config GPIO_MSM_V2
 	  Say yes here to support the GPIO interface on ARM v7 based
 	  Qualcomm MSM chips.  Most of the pins on the MSM can be
 	  selected for GPIO, and are controlled by this driver.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config GPIO_MVEBU
@@ -278,11 +327,14 @@ config GPIO_MXS
 	select GENERIC_IRQ_CHIP
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_PL061
 	bool "PrimeCell PL061 GPIO support"
 	depends on ARM && ARM_AMBA
 	select GENERIC_IRQ_CHIP
 =======
+=======
+>>>>>>> v3.18
 config GPIO_OCTEON
 	tristate "Cavium OCTEON GPIO"
 	depends on GPIOLIB && CAVIUM_OCTEON_SOC
@@ -305,6 +357,9 @@ config GPIO_PL061
 	depends on ARM_AMBA
 	select IRQ_DOMAIN
 	select GPIOLIB_IRQCHIP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say yes here to support the PrimeCell PL061 GPIO device
@@ -318,11 +373,14 @@ config GPIO_PXA
 config GPIO_RCAR
 	tristate "Renesas R-Car GPIO"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARM
 	help
 	  Say yes here to support GPIO on Renesas R-Car SoCs.
 
 =======
+=======
+>>>>>>> v3.18
 	depends on ARM && (ARCH_SHMOBILE || COMPILE_TEST)
 	help
 	  Say yes here to support GPIO on Renesas R-Car SoCs.
@@ -343,6 +401,9 @@ config GPIO_SCH311X
 	  To compile this driver as a module, choose M here: the module will
 	  be called gpio-sch311x.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config GPIO_SPEAR_SPICS
 	bool "ST SPEAr13xx SPI Chip Select as GPIO support"
@@ -360,9 +421,12 @@ config GPIO_STA2X11
 	  The GPIO module has 128 GPIO pins with alternate functions.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_TS5500
 	tristate "TS-5500 DIO blocks and compatibles"
 =======
+=======
+>>>>>>> v3.18
 config GPIO_SYSCON
 	tristate "GPIO based on SYSCON"
 	depends on MFD_SYSCON && OF
@@ -372,6 +436,9 @@ config GPIO_SYSCON
 config GPIO_TS5500
 	tristate "TS-5500 DIO blocks and compatibles"
 	depends on TS5500 || COMPILE_TEST
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  This driver supports Digital I/O exposed by pin blocks found on some
@@ -380,6 +447,7 @@ config GPIO_TS5500
 	  LCD port.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_XILINX
 	bool "Xilinx GPIO support"
 	depends on PPC_OF || MICROBLAZE
@@ -387,6 +455,8 @@ config GPIO_XILINX
 	  Say yes here to support the Xilinx FPGA GPIO device
 
 =======
+=======
+>>>>>>> v3.18
 config GPIO_TZ1090
 	bool "Toumaz Xenif TZ1090 GPIO support"
 	depends on SOC_TZ1090
@@ -433,6 +503,9 @@ config GPIO_XTENSA
 	  Say yes here to support the Xtensa internal GPIO32 IMPWIRE (input)
 	  and EXPSTATE (output) ports
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config GPIO_VR41XX
 	tristate "NEC VR4100 series General-purpose I/O Uint support"
@@ -474,7 +547,10 @@ config GPIO_ICH
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIO_IOP
 	tristate "Intel IOP GPIO"
 	depends on ARM && (ARCH_IOP32X || ARCH_IOP33X)
@@ -484,6 +560,9 @@ config GPIO_IOP
 
 	  If unsure, say N.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config GPIO_VX855
 	tristate "VIA VX855/VX875 GPIO"
@@ -510,9 +589,15 @@ config GPIO_GE_FPGA
 
 config GPIO_LYNXPOINT
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Intel Lynxpoint GPIO support"
 	depends on ACPI && X86
 	select IRQ_DOMAIN
+=======
+	tristate "Intel Lynxpoint GPIO support"
+	depends on ACPI && X86
+	select GPIOLIB_IRQCHIP
+>>>>>>> v3.18
 =======
 	tristate "Intel Lynxpoint GPIO support"
 	depends on ACPI && X86
@@ -532,12 +617,18 @@ config GPIO_GRGPIO
 	  VHDL IP core library.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIO_TB10X
 	bool
 	select GENERIC_IRQ_CHIP
 	select OF_GPIO
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 comment "I2C GPIO expanders:"
 
@@ -548,7 +639,10 @@ config GPIO_ARIZONA
 	  Support for GPIOs on Wolfson Arizona class devices.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config GPIO_CRYSTAL_COVE
 	tristate "GPIO support for Crystal Cove PMIC"
 	depends on INTEL_SOC_PMIC
@@ -570,6 +664,9 @@ config GPIO_LP3943
 	  LP3943 can be used as a GPIO expander which provides up to 16 GPIOs.
 	  Open drain outputs are required for this usage.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config GPIO_MAX7300
 	tristate "Maxim MAX7300 GPIO expander"
@@ -577,7 +674,11 @@ config GPIO_MAX7300
 	select GPIO_MAX730X
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  GPIO driver for Maxim MAX7301 I2C-based GPIO expander.
+=======
+	  GPIO driver for Maxim MAX7300 I2C-based GPIO expander.
+>>>>>>> v3.18
 =======
 	  GPIO driver for Maxim MAX7300 I2C-based GPIO expander.
 >>>>>>> v3.18
@@ -616,7 +717,11 @@ config GPIO_MC9S08DZ60
 
 config GPIO_PCA953X
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "PCA953x, PCA955x, PCA957x, TCA64xx, and MAX7310 I/O ports"
+=======
+	tristate "PCA95[357]x, PCA9698, TCA64xx, and MAX7310 I/O ports"
+>>>>>>> v3.18
 =======
 	tristate "PCA95[357]x, PCA9698, TCA64xx, and MAX7310 I/O ports"
 >>>>>>> v3.18
@@ -630,7 +735,11 @@ config GPIO_PCA953X
 
 	  8 bits:	max7310, max7315, pca6107, pca9534, pca9538, pca9554,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pca9556, pca9557, pca9574, tca6408
+=======
+			pca9556, pca9557, pca9574, tca6408, xra1202
+>>>>>>> v3.18
 =======
 			pca9556, pca9557, pca9574, tca6408, xra1202
 >>>>>>> v3.18
@@ -639,10 +748,13 @@ config GPIO_PCA953X
 			tca6416
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_PCA953X_IRQ
 	bool "Interrupt controller support for PCA953x"
 	depends on GPIO_PCA953X=y
 =======
+=======
+>>>>>>> v3.18
 	  24 bits:	tca6424
 
 	  40 bits:	pca9505, pca9698
@@ -651,6 +763,9 @@ config GPIO_PCA953X_IRQ
 	bool "Interrupt controller support for PCA953x"
 	depends on GPIO_PCA953X=y
 	select GPIOLIB_IRQCHIP
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	help
 	  Say yes here to enable the pca953x to be used as an interrupt
@@ -705,6 +820,10 @@ config GPIO_STMPE
 	bool "STMPE GPIOs"
 	depends on MFD_STMPE
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GPIOLIB_IRQCHIP
+>>>>>>> v3.18
 =======
 	select GPIOLIB_IRQCHIP
 >>>>>>> v3.18
@@ -726,6 +845,10 @@ config GPIO_TC3589X
 	bool "TC3589X GPIOs"
 	depends on MFD_TC3589X
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GPIOLIB_IRQCHIP
+>>>>>>> v3.18
 =======
 	select GPIOLIB_IRQCHIP
 >>>>>>> v3.18
@@ -799,6 +922,10 @@ config GPIO_ADNP
 	tristate "Avionic Design N-bit GPIO expander"
 	depends on I2C && OF_GPIO
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select GPIOLIB_IRQCHIP
+>>>>>>> v3.18
 =======
 	select GPIOLIB_IRQCHIP
 >>>>>>> v3.18
@@ -815,7 +942,11 @@ comment "PCI GPIO expanders:"
 config GPIO_CS5535
 	tristate "AMD CS5535/CS5536 GPIO support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on PCI && X86 && MFD_CS5535
+=======
+	depends on MFD_CS5535
+>>>>>>> v3.18
 =======
 	depends on MFD_CS5535
 >>>>>>> v3.18
@@ -831,7 +962,11 @@ config GPIO_BT8XX
 	depends on PCI && VIDEO_BT848=n
 	help
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  The BT8xx frame grabber chip has 24 GPIO pins than can be abused
+=======
+	  The BT8xx frame grabber chip has 24 GPIO pins that can be abused
+>>>>>>> v3.18
 =======
 	  The BT8xx frame grabber chip has 24 GPIO pins that can be abused
 >>>>>>> v3.18
@@ -859,6 +994,7 @@ config GPIO_AMD8111
 	  If unsure, say N
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_LANGWELL
 	bool "Intel Langwell/Penwell GPIO support"
 	depends on PCI && X86
@@ -870,6 +1006,8 @@ config GPIO_PCH
 	tristate "Intel EG20T PCH/LAPIS Semiconductor IOH(ML7223/ML7831) GPIO"
 	depends on PCI && X86
 =======
+=======
+>>>>>>> v3.18
 config GPIO_INTEL_MID
 	bool "Intel Mid GPIO support"
 	depends on PCI && X86
@@ -880,6 +1018,9 @@ config GPIO_INTEL_MID
 config GPIO_PCH
 	tristate "Intel EG20T PCH/LAPIS Semiconductor IOH(ML7223/ML7831) GPIO"
 	depends on PCI && (X86_32 || COMPILE_TEST)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select GENERIC_IRQ_CHIP
 	help
@@ -915,7 +1056,11 @@ config GPIO_SODAVILLE
 config GPIO_TIMBERDALE
 	bool "Support for timberdale GPIO IP"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on MFD_TIMBERDALE && HAS_IOMEM
+=======
+	depends on MFD_TIMBERDALE
+>>>>>>> v3.18
 =======
 	depends on MFD_TIMBERDALE
 >>>>>>> v3.18
@@ -948,6 +1093,10 @@ config GPIO_MCP23S08
 	  I/O expanders.
 	  This provides a GPIO interface supporting inputs and outputs.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  The I2C versions of the chips can be used as interrupt-controller.
+>>>>>>> v3.18
 =======
 	  The I2C versions of the chips can be used as interrupt-controller.
 >>>>>>> v3.18
@@ -962,15 +1111,21 @@ config GPIO_MC33880
 config GPIO_74X164
 	tristate "74x164 serial-in/parallel-out 8-bits shift register"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on SPI_MASTER
 	help
 	  Platform driver for 74x164 compatible serial-in/parallel-out
 	  8-outputs shift registers. This driver can be used to provide access
 =======
+=======
+>>>>>>> v3.18
 	depends on SPI_MASTER && OF
 	help
 	  Driver for 74x164 compatible serial-in/parallel-out 8-outputs
 	  shift registers. This driver can be used to provide access
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	  to more gpio outputs.
 
@@ -978,7 +1133,11 @@ comment "AC97 GPIO expanders:"
 
 config GPIO_UCB1400
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool "Philips UCB1400 GPIO"
+=======
+	tristate "Philips UCB1400 GPIO"
+>>>>>>> v3.18
 =======
 	tristate "Philips UCB1400 GPIO"
 >>>>>>> v3.18
@@ -988,7 +1147,10 @@ config GPIO_UCB1400
 	  The UCB1400 is an AC97 audio codec.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 comment "LPC GPIO expanders:"
 
 config GPIO_KEMPLD
@@ -1001,6 +1163,9 @@ config GPIO_KEMPLD
 	  This driver can also be built as a module. If so, the module will be
 	  called gpio-kempld.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 comment "MODULbus GPIO expanders:"
 
@@ -1041,6 +1206,7 @@ config GPIO_MSIC
 	  intel MID devices
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config GPIO_QPNP_PIN
 	depends on SPMI
 	depends on OF_SPMI
@@ -1061,11 +1227,16 @@ config GPIO_QPNP_PIN_DEBUG
 	  Say 'y' here to include debug support for the Qualcomm
 	  QPNP gpio driver.
 =======
+=======
+>>>>>>> v3.18
 config GPIO_BCM_KONA
 	bool "Broadcom Kona GPIO"
 	depends on OF_GPIO && (ARCH_BCM_MOBILE || COMPILE_TEST)
 	help
 	  Turn on GPIO support for Broadcom "Kona" chips.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 comment "USB GPIO expanders:"

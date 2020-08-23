@@ -1,6 +1,10 @@
 #include <linux/init.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/mips-boards/piix4.h>
+>>>>>>> v3.18
 =======
 #include <asm/mips-boards/piix4.h>
 >>>>>>> v3.18
@@ -55,11 +59,14 @@ int pcibios_plat_dev_init(struct pci_dev *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void malta_piix_func0_fixup(struct pci_dev *pdev)
 {
 	unsigned char reg_val;
 	static int piixirqmap[16] = {  /* PIIX PIRQC[A:D] irq mappings */
 =======
+=======
+>>>>>>> v3.18
 static void malta_piix_func3_base_fixup(struct pci_dev *dev)
 {
 	/* Set a sane PM I/O base address */
@@ -80,6 +87,9 @@ static void malta_piix_func0_fixup(struct pci_dev *pdev)
 	u16 reg_val16;
 	/* PIIX PIRQC[A:D] irq mappings */
 	static int piixirqmap[PIIX4_FUNC0_PIRQRC_IRQ_ROUTING_MAX] = {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		0,  0,	0,  3,
 		4,  5,	6,  7,
@@ -91,18 +101,24 @@ static void malta_piix_func0_fixup(struct pci_dev *pdev)
 	/* Interrogate PIIX4 to get PCI IRQ mapping */
 	for (i = 0; i <= 3; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_read_config_byte(pdev, 0x60+i, &reg_val);
 		if (reg_val & 0x80)
 			pci_irq[PCIA+i] = 0;	/* Disabled */
 		else
 			pci_irq[PCIA+i] = piixirqmap[reg_val & 15];
 =======
+=======
+>>>>>>> v3.18
 		pci_read_config_byte(pdev, PIIX4_FUNC0_PIRQRC+i, &reg_val);
 		if (reg_val & PIIX4_FUNC0_PIRQRC_IRQ_ROUTING_DISABLE)
 			pci_irq[PCIA+i] = 0;	/* Disabled */
 		else
 			pci_irq[PCIA+i] = piixirqmap[reg_val &
 				PIIX4_FUNC0_PIRQRC_IRQ_ROUTING_MASK];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -113,10 +129,13 @@ static void malta_piix_func0_fixup(struct pci_dev *pdev)
 		 * devices to 16 Mb.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_read_config_byte(pdev, 0x69, &reg_val);
 		pci_write_config_byte(pdev, 0x69, reg_val | 0xf0);
 	}
 =======
+=======
+>>>>>>> v3.18
 		pci_read_config_byte(pdev, PIIX4_FUNC0_TOM, &reg_val);
 		pci_write_config_byte(pdev, PIIX4_FUNC0_TOM, reg_val |
 				PIIX4_FUNC0_TOM_TOP_OF_MEMORY_MASK);
@@ -136,6 +155,9 @@ static void malta_piix_func0_fixup(struct pci_dev *pdev)
 	pci_read_config_word(pdev, PCI_COMMAND, &reg_val16);
 	pci_write_config_word(pdev, PCI_COMMAND,
 			      reg_val16 | PCI_COMMAND_SPECIAL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -152,11 +174,14 @@ static void malta_piix_func1_fixup(struct pci_dev *pdev)
 		 * IDE Decode enable.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pci_read_config_byte(pdev, 0x41, &reg_val);
 		pci_write_config_byte(pdev, 0x41, reg_val|0x80);
 		pci_read_config_byte(pdev, 0x43, &reg_val);
 		pci_write_config_byte(pdev, 0x43, reg_val|0x80);
 =======
+=======
+>>>>>>> v3.18
 		pci_read_config_byte(pdev, PIIX4_FUNC1_IDETIM_PRIMARY_HI,
 			&reg_val);
 		pci_write_config_byte(pdev, PIIX4_FUNC1_IDETIM_PRIMARY_HI,
@@ -165,6 +190,9 @@ static void malta_piix_func1_fixup(struct pci_dev *pdev)
 			&reg_val);
 		pci_write_config_byte(pdev, PIIX4_FUNC1_IDETIM_SECONDARY_HI,
 			reg_val|PIIX4_FUNC1_IDETIM_SECONDARY_HI_IDE_DECODE_EN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -178,17 +206,23 @@ static void quirk_dlcsetup(struct pci_dev *dev)
 	u8 odlc, ndlc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(void) pci_read_config_byte(dev, 0x82, &odlc);
 	/* Enable passive releases and delayed transaction */
 	ndlc = odlc | 7;
 	(void) pci_write_config_byte(dev, 0x82, ndlc);
 =======
+=======
+>>>>>>> v3.18
 	(void) pci_read_config_byte(dev, PIIX4_FUNC0_DLC, &odlc);
 	/* Enable passive releases and delayed transaction */
 	ndlc = odlc | PIIX4_FUNC0_DLC_USBPR_EN |
 		      PIIX4_FUNC0_DLC_PASSIVE_RELEASE_EN |
 		      PIIX4_FUNC0_DLC_DELAYED_TRANSACTION_EN;
 	(void) pci_write_config_byte(dev, PIIX4_FUNC0_DLC, ndlc);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

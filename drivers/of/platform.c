@@ -52,10 +52,13 @@ struct platform_device *of_find_device_by_node(struct device_node *np)
 EXPORT_SYMBOL(of_find_device_by_node);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if defined(CONFIG_PPC_DCR)
 #include <asm/dcr.h>
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_OF_ADDRESS
@@ -71,6 +74,7 @@ EXPORT_SYMBOL(of_find_device_by_node);
  * of_device_make_bus_id - Use the device node data to assign a unique name
  * @dev: pointer to device structure that is linked to a device tree node
  *
+<<<<<<< HEAD
 <<<<<<< HEAD
  * This routine will first try using either the dcr-reg or the reg property
  * value to derive a unique name.  As a last resort it will use the node
@@ -133,6 +137,8 @@ void of_device_make_bus_id(struct device *dev)
 	magic = atomic_add_return(1, &bus_no_reg_magic);
 	dev_set_name(dev, "%s.%d", node->name, magic - 1);
 =======
+=======
+>>>>>>> v3.18
  * This routine will first try using the translated bus address to
  * derive a unique name. If it cannot, then it will prepend names from
  * parent nodes until a unique name can be derived.
@@ -162,6 +168,9 @@ void of_device_make_bus_id(struct device *dev)
 			     strrchr(node->full_name, '/') + 1, dev_name(dev));
 		node = node->parent;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -185,9 +194,14 @@ struct platform_device *of_device_alloc(struct device_node *np,
 
 	/* count the io and irq resources */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (of_can_translate_address(np))
 		while (of_address_to_resource(np, num_reg, &temp_res) == 0)
 			num_reg++;
+=======
+	while (of_address_to_resource(np, num_reg, &temp_res) == 0)
+		num_reg++;
+>>>>>>> v3.18
 =======
 	while (of_address_to_resource(np, num_reg, &temp_res) == 0)
 		num_reg++;
@@ -209,6 +223,7 @@ struct platform_device *of_device_alloc(struct device_node *np,
 			WARN_ON(rc);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN_ON(of_irq_to_resource_table(np, res, num_irq) != num_irq);
 	}
 
@@ -217,12 +232,17 @@ struct platform_device *of_device_alloc(struct device_node *np,
 	dev->dev.dma_mask = &dev->archdata.dma_mask;
 #endif
 =======
+=======
+>>>>>>> v3.18
 		if (of_irq_to_resource_table(np, res, num_irq) != num_irq)
 			pr_debug("not all legacy IRQ resources mapped for %s\n",
 				 np->name);
 	}
 
 	dev->dev.of_node = of_node_get(np);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->dev.parent = parent;
 
@@ -237,7 +257,10 @@ EXPORT_SYMBOL(of_device_alloc);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * of_dma_configure - Setup DMA configuration
  * @dev:	Device to apply DMA configuration
  *
@@ -291,6 +314,9 @@ static void of_dma_configure(struct device *dev)
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * of_platform_device_create_pdata - Alloc, initialize and register an of_device
  * @np: pointer to node to create device for
@@ -302,7 +328,11 @@ static void of_dma_configure(struct device *dev)
  * registered.  Unavailable devices will not get registered.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct platform_device *of_platform_device_create_pdata(
+=======
+static struct platform_device *of_platform_device_create_pdata(
+>>>>>>> v3.18
 =======
 static struct platform_device *of_platform_device_create_pdata(
 >>>>>>> v3.18
@@ -314,7 +344,12 @@ static struct platform_device *of_platform_device_create_pdata(
 	struct platform_device *dev;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!of_device_is_available(np))
+=======
+	if (!of_device_is_available(np) ||
+	    of_node_test_and_set_flag(np, OF_POPULATED))
+>>>>>>> v3.18
 =======
 	if (!of_device_is_available(np) ||
 	    of_node_test_and_set_flag(np, OF_POPULATED))
@@ -324,12 +359,18 @@ static struct platform_device *of_platform_device_create_pdata(
 	dev = of_device_alloc(np, bus_id, parent);
 	if (!dev)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
 
 #if defined(CONFIG_MICROBLAZE)
 	dev->archdata.dma_mask = 0xffffffffUL;
 #endif
 	dev->dev.coherent_dma_mask = DMA_BIT_MASK(sizeof(dma_addr_t) * 8);
+=======
+		goto err_clear_flag;
+
+	of_dma_configure(&dev->dev);
+>>>>>>> v3.18
 =======
 		goto err_clear_flag;
 
@@ -346,11 +387,14 @@ static struct platform_device *of_platform_device_create_pdata(
 	if (of_device_add(dev) != 0) {
 		platform_device_put(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return NULL;
 	}
 
 	return dev;
 =======
+=======
+>>>>>>> v3.18
 		goto err_clear_flag;
 	}
 
@@ -359,6 +403,9 @@ static struct platform_device *of_platform_device_create_pdata(
 err_clear_flag:
 	of_node_clear_flag(np, OF_POPULATED);
 	return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -392,6 +439,7 @@ static struct amba_device *of_amba_device_create(struct device_node *node,
 	pr_debug("Creating amba device %s\n", node->full_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!of_device_is_available(node))
 		return NULL;
 
@@ -402,6 +450,8 @@ static struct amba_device *of_amba_device_create(struct device_node *node,
 	/* setup generic device info */
 	dev->dev.coherent_dma_mask = ~0;
 =======
+=======
+>>>>>>> v3.18
 	if (!of_device_is_available(node) ||
 	    of_node_test_and_set_flag(node, OF_POPULATED))
 		return NULL;
@@ -414,6 +464,9 @@ static struct amba_device *of_amba_device_create(struct device_node *node,
 	}
 
 	/* setup generic device info */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dev->dev.of_node = of_node_get(node);
 	dev->dev.parent = parent;
@@ -423,9 +476,13 @@ static struct amba_device *of_amba_device_create(struct device_node *node,
 	else
 		of_device_make_bus_id(&dev->dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* setup amba-specific device info */
 	dev->dma_mask = ~0;
+=======
+	of_dma_configure(&dev->dev);
+>>>>>>> v3.18
 =======
 	of_dma_configure(&dev->dev);
 >>>>>>> v3.18
@@ -441,6 +498,7 @@ static struct amba_device *of_amba_device_create(struct device_node *node,
 
 	ret = of_address_to_resource(node, 0, &dev->res);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ret)
 		goto err_free;
 
@@ -448,6 +506,8 @@ static struct amba_device *of_amba_device_create(struct device_node *node,
 	if (ret)
 		goto err_free;
 =======
+=======
+>>>>>>> v3.18
 	if (ret) {
 		pr_err("%s(): of_address_to_resource() failed (%d) for %s\n",
 		       __func__, ret, node->full_name);
@@ -460,6 +520,9 @@ static struct amba_device *of_amba_device_create(struct device_node *node,
 		       __func__, ret, node->full_name);
 		goto err_free;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return dev;
@@ -467,6 +530,11 @@ static struct amba_device *of_amba_device_create(struct device_node *node,
 err_free:
 	amba_device_put(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+err_clear_flag:
+	of_node_clear_flag(node, OF_POPULATED);
+>>>>>>> v3.18
 =======
 err_clear_flag:
 	of_node_clear_flag(node, OF_POPULATED);
@@ -545,11 +613,17 @@ static int of_platform_bus_create(struct device_node *bus,
 
 	if (of_device_is_compatible(bus, "arm,primecell")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/*
 		 * Don't return an error here to keep compatibility with older
 		 * device tree files.
 		 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		of_amba_device_create(bus, bus_id, platform_data, parent);
 		return 0;
@@ -568,6 +642,10 @@ static int of_platform_bus_create(struct device_node *bus,
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	of_node_set_flag(bus, OF_POPULATED_BUS);
+>>>>>>> v3.18
 =======
 	of_node_set_flag(bus, OF_POPULATED_BUS);
 >>>>>>> v3.18
@@ -655,7 +733,10 @@ int of_platform_populate(struct device_node *root,
 }
 EXPORT_SYMBOL_GPL(of_platform_populate);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static int of_platform_device_destroy(struct device *dev, void *data)
 {
@@ -697,5 +778,8 @@ void of_platform_depopulate(struct device *parent)
 }
 EXPORT_SYMBOL_GPL(of_platform_depopulate);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif /* CONFIG_OF_ADDRESS */

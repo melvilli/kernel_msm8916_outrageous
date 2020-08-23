@@ -559,7 +559,11 @@ SYM53C500_queue_lck(struct scsi_cmnd *SCpnt, void (*done)(struct scsi_cmnd *))
 	DEB(printk("cmd=%02x, cmd_len=%02x, target=%02x, lun=%02x, bufflen=%d\n", 
 	    SCpnt->cmnd[0], SCpnt->cmd_len, SCpnt->device->id, 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    SCpnt->device->lun,  scsi_bufflen(SCpnt)));
+=======
+		   (u8)SCpnt->device->lun,  scsi_bufflen(SCpnt)));
+>>>>>>> v3.18
 =======
 		   (u8)SCpnt->device->lun,  scsi_bufflen(SCpnt)));
 >>>>>>> v3.18

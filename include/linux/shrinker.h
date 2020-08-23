@@ -5,6 +5,12 @@
  * This struct is used to pass information from page reclaim to the shrinkers.
  * We consolidate the values for easier extention later.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * The 'gfpmask' refers to the allocation we are currently trying to
+ * fulfil.
+>>>>>>> v3.18
 =======
  *
  * The 'gfpmask' refers to the allocation we are currently trying to
@@ -14,6 +20,7 @@
 struct shrink_control {
 	gfp_t gfp_mask;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* How many slab objects shrinker() should scan and try to reclaim */
 	unsigned long nr_to_scan;
@@ -46,6 +53,8 @@ struct shrinker {
 #define DEFAULT_SEEKS 2 /* A good number if you don't know better. */
 extern void register_shrinker(struct shrinker *);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * How many objects scan_objects should scan and try to reclaim.
 	 * This is reset before every call, so it is safe for callees
@@ -101,6 +110,9 @@ struct shrinker {
 #define SHRINKER_NUMA_AWARE (1 << 0)
 
 extern int register_shrinker(struct shrinker *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void unregister_shrinker(struct shrinker *);
 #endif

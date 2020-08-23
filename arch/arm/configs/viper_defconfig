@@ -128,7 +128,10 @@ CONFIG_SND_PCM_OSS=m
 CONFIG_SND_PXA2XX_AC97=m
 CONFIG_USB=m
 <<<<<<< HEAD
+<<<<<<< HEAD
 CONFIG_USB_DEVICEFS=y
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 CONFIG_USB_ISP116X_HCD=m

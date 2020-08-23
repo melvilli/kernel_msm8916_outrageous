@@ -337,7 +337,11 @@ static int __init early_touchbook_revision(char *p)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return strict_strtoul(p, 10, &touchbook_revision);
+=======
+	return kstrtoul(p, 10, &touchbook_revision);
+>>>>>>> v3.18
 =======
 	return kstrtoul(p, 10, &touchbook_revision);
 >>>>>>> v3.18
@@ -393,7 +397,10 @@ MACHINE_START(TOUCHBOOK, "OMAP3 touchbook Board")
 	.init_early	= omap3430_init_early,
 	.init_irq	= omap3_init_irq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.handle_irq	= omap3_intc_handle_irq,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.init_machine	= omap3_touchbook_init,

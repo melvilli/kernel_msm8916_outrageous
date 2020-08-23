@@ -51,6 +51,7 @@ static const struct snd_soc_dapm_route intercon[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int dmic_probe(struct snd_soc_codec *codec)
 {
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
@@ -66,11 +67,16 @@ static int dmic_probe(struct snd_soc_codec *codec)
 static struct snd_soc_codec_driver soc_dmic = {
 	.probe	= dmic_probe,
 =======
+=======
+>>>>>>> v3.18
 static struct snd_soc_codec_driver soc_dmic = {
 	.dapm_widgets = dmic_dapm_widgets,
 	.num_dapm_widgets = ARRAY_SIZE(dmic_dapm_widgets),
 	.dapm_routes = intercon,
 	.num_dapm_routes = ARRAY_SIZE(intercon),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

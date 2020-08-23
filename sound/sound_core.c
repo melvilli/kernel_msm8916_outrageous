@@ -293,7 +293,11 @@ retry:
 
 	device_create(sound_class, dev, MKDEV(SOUND_MAJOR, s->unit_minor),
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      NULL, s->name+6);
+=======
+		      NULL, "%s", s->name+6);
+>>>>>>> v3.18
 =======
 		      NULL, "%s", s->name+6);
 >>>>>>> v3.18
@@ -631,6 +635,7 @@ static int soundcore_open(struct inode *inode, struct file *file)
 			new_fops = fops_get(s->unit_fops);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_fops) {
 		/*
 		 * We rely upon the fact that we can't be unloaded while the
@@ -644,6 +649,8 @@ static int soundcore_open(struct inode *inode, struct file *file)
 		file->f_op = new_fops;
 		spin_unlock(&sound_loader_lock);
 =======
+=======
+>>>>>>> v3.18
 	spin_unlock(&sound_loader_lock);
 	if (new_fops) {
 		/*
@@ -652,11 +659,15 @@ static int soundcore_open(struct inode *inode, struct file *file)
 		 */
 		int err = 0;
 		replace_fops(file, new_fops);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (file->f_op->open)
 			err = file->f_op->open(inode,file);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (err) {
 			fops_put(file->f_op);
@@ -667,6 +678,10 @@ static int soundcore_open(struct inode *inode, struct file *file)
 		return err;
 	}
 	spin_unlock(&sound_loader_lock);
+=======
+		return err;
+	}
+>>>>>>> v3.18
 =======
 		return err;
 	}

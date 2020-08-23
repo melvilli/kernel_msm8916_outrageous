@@ -25,7 +25,11 @@ obj-$(CONFIG_HOTPLUG_PCI_S390)		+= s390_pci_hpc.o
 obj-$(CONFIG_HOTPLUG_PCI_ACPI_IBM)	+= acpiphp_ibm.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 pci_hotplug-objs	:=	pci_hotplug_core.o pcihp_slot.o
+=======
+pci_hotplug-objs	:=	pci_hotplug_core.o
+>>>>>>> v3.18
 =======
 pci_hotplug-objs	:=	pci_hotplug_core.o
 >>>>>>> v3.18
@@ -36,7 +40,11 @@ pci_hotplug-objs	+=	cpci_hotplug_core.o	\
 endif
 ifdef CONFIG_ACPI
 <<<<<<< HEAD
+<<<<<<< HEAD
 pci_hotplug-objs 	+= 	acpi_pcihp.o
+=======
+pci_hotplug-objs	+=	acpi_pcihp.o
+>>>>>>> v3.18
 =======
 pci_hotplug-objs	+=	acpi_pcihp.o
 >>>>>>> v3.18

@@ -39,9 +39,12 @@
 #include <asm/cacheflush.h>
 #include <asm/fixmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 static pgd_t *save_pgd __initdata;
 =======
+=======
+>>>>>>> v3.18
 #include <asm/realmode.h>
 #include <asm/time.h>
 
@@ -65,6 +68,9 @@ struct efi_scratch {
 	bool use_pgd;
 	u64 phys_stack;
 } __packed;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static void __init early_code_mapping_set_exec(int executable)
@@ -85,7 +91,11 @@ static void __init early_code_mapping_set_exec(int executable)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __init efi_call_phys_prelog(void)
+=======
+void __init efi_call_phys_prolog(void)
+>>>>>>> v3.18
 =======
 void __init efi_call_phys_prolog(void)
 >>>>>>> v3.18
@@ -95,13 +105,19 @@ void __init efi_call_phys_prolog(void)
 	int n_pgds;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	early_code_mapping_set_exec(1);
 =======
+=======
+>>>>>>> v3.18
 	if (!efi_enabled(EFI_OLD_MEMMAP))
 		return;
 
 	early_code_mapping_set_exec(1);
 	local_irq_save(efi_flags);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	n_pgds = DIV_ROUND_UP((max_pfn << PAGE_SHIFT), PGDIR_SIZE);
@@ -123,21 +139,30 @@ void __init efi_call_phys_epilog(void)
 	int pgd;
 	int n_pgds = DIV_ROUND_UP((max_pfn << PAGE_SHIFT) , PGDIR_SIZE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (!efi_enabled(EFI_OLD_MEMMAP))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	for (pgd = 0; pgd < n_pgds; pgd++)
 		set_pgd(pgd_offset_k(pgd * PGDIR_SIZE), save_pgd[pgd]);
 	kfree(save_pgd);
 	__flush_tlb_all();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	early_code_mapping_set_exec(0);
 }
 
 =======
+=======
+>>>>>>> v3.18
 	local_irq_restore(efi_flags);
 	early_code_mapping_set_exec(0);
 }
@@ -294,6 +319,9 @@ void __init efi_map_region_fixed(efi_memory_desc_t *md)
 	__map_region(md, md->virt_addr);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void __iomem *__init efi_ioremap(unsigned long phys_addr, unsigned long size,
 				 u32 type, u64 attribute)
@@ -315,7 +343,10 @@ void __iomem *__init efi_ioremap(unsigned long phys_addr, unsigned long size,
 	return (void __iomem *)__va(phys_addr);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 void __init parse_efi_setup(u64 phys_addr, u32 data_len)
 {
@@ -626,4 +657,7 @@ void efi_thunk_runtime_setup(void)
 	efi.query_capsule_caps = efi_thunk_query_capsule_caps;
 }
 #endif /* CONFIG_EFI_MIXED */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

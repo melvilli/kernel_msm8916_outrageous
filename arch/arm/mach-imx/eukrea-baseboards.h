@@ -28,6 +28,7 @@
  * its own devices, it calls baseboard's init function.
  * TODO: Add your own baseboard init function and call it from
 <<<<<<< HEAD
+<<<<<<< HEAD
  * inside eukrea_cpuimx25_init() eukrea_cpuimx27_init()
  * eukrea_cpuimx35_init() eukrea_cpuimx51_init()
  * or eukrea_cpuimx51sd_init().
@@ -46,6 +47,8 @@ extern void eukrea_mbimxsd35_baseboard_init(void);
 extern void eukrea_mbimx51_baseboard_init(void);
 extern void eukrea_mbimxsd51_baseboard_init(void);
 =======
+=======
+>>>>>>> v3.18
  * inside eukrea_cpuimx25_init() or eukrea_cpuimx35_init()
  *
  * This example here is for the development board. Refer
@@ -55,6 +58,9 @@ extern void eukrea_mbimxsd51_baseboard_init(void);
 
 extern void eukrea_mbimxsd25_baseboard_init(void);
 extern void eukrea_mbimxsd35_baseboard_init(void);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif

@@ -12,10 +12,13 @@
  * more details.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * The full GNU General Public License is included in this distribution in the
@@ -39,6 +42,7 @@
 #define  RTL8188EEPHY_REG_1TARRAYLEN	382
 extern u32 RTL8188EEPHY_REG_1TARRAY[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define RTL8188EEPHY_REG_ARRAY_PGLEN	264
 extern u32 RTL8188EEPHY_REG_ARRAY_PG[];
 #define	RTL8188EE_RADIOA_1TARRAYLEN	190
@@ -47,6 +51,8 @@ extern u32 RTL8188EE_RADIOA_1TARRAY[];
 extern u32 RTL8188EEMAC_1T_ARRAY[];
 #define RTL8188EEAGCTAB_1TARRAYLEN	256
 =======
+=======
+>>>>>>> v3.18
 #define RTL8188EEPHY_REG_ARRAY_PGLEN 264
 extern u32 RTL8188EEPHY_REG_ARRAY_PG[];
 #define	RTL8188EE_RADIOA_1TARRAYLEN 190
@@ -54,6 +60,9 @@ extern u32 RTL8188EE_RADIOA_1TARRAY[];
 #define RTL8188EEMAC_1T_ARRAYLEN  180
 extern u32 RTL8188EEMAC_1T_ARRAY[];
 #define RTL8188EEAGCTAB_1TARRAYLEN 256
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern u32 RTL8188EEAGCTAB_1TARRAY[];
 

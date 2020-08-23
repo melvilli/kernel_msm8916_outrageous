@@ -33,6 +33,10 @@
 #include "powerdomain.h"
 #include "clockdomain.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "voltage.h"
+>>>>>>> v3.18
 =======
 #include "voltage.h"
 >>>>>>> v3.18
@@ -107,11 +111,17 @@ static int _pwrdm_register(struct powerdomain *pwrdm)
 		return -EEXIST;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (arch_pwrdm && arch_pwrdm->pwrdm_has_voltdm)
 		if (!arch_pwrdm->pwrdm_has_voltdm())
 			goto skip_voltdm;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	voltdm = voltdm_lookup(pwrdm->voltdm.name);
 	if (!voltdm) {
@@ -123,6 +133,10 @@ static int _pwrdm_register(struct powerdomain *pwrdm)
 	INIT_LIST_HEAD(&pwrdm->voltdm_node);
 	voltdm_add_pwrdm(voltdm, pwrdm);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+skip_voltdm:
+>>>>>>> v3.18
 =======
 skip_voltdm:
 >>>>>>> v3.18
@@ -139,7 +153,12 @@ skip_voltdm:
 		pwrdm->ret_mem_off_counter[i] = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	arch_pwrdm->pwrdm_wait_transition(pwrdm);
+=======
+	if (arch_pwrdm && arch_pwrdm->pwrdm_wait_transition)
+		arch_pwrdm->pwrdm_wait_transition(pwrdm);
+>>>>>>> v3.18
 =======
 	if (arch_pwrdm && arch_pwrdm->pwrdm_wait_transition)
 		arch_pwrdm->pwrdm_wait_transition(pwrdm);
@@ -560,7 +579,12 @@ int pwrdm_for_each_clkdm(struct powerdomain *pwrdm,
 
 	for (i = 0; i < PWRDM_MAX_CLKDMS && !ret; i++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret = (*fn)(pwrdm, pwrdm->pwrdm_clkdms[i]);
+=======
+		if (pwrdm->pwrdm_clkdms[i])
+			ret = (*fn)(pwrdm, pwrdm->pwrdm_clkdms[i]);
+>>>>>>> v3.18
 =======
 		if (pwrdm->pwrdm_clkdms[i])
 			ret = (*fn)(pwrdm, pwrdm->pwrdm_clkdms[i]);
@@ -1099,7 +1123,10 @@ int pwrdm_post_transition(struct powerdomain *pwrdm)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * pwrdm_get_valid_lp_state() - Find best match deep power state
  * @pwrdm:	power domain for which we want to find best match
  * @is_logic_state: Are we looking for logic state match here? Should
@@ -1176,6 +1203,9 @@ done:
 }
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * omap_set_pwrdm_state - change a powerdomain's current power state
  * @pwrdm: struct powerdomain * to change the power state of

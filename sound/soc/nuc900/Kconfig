@@ -5,6 +5,10 @@ config SND_SOC_NUC900
 	tristate "SoC Audio for NUC900 series"
 	depends on ARCH_W90X900
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SND_SOC_NUC900_AC97
+>>>>>>> v3.18
 =======
 	select SND_SOC_NUC900_AC97
 >>>>>>> v3.18

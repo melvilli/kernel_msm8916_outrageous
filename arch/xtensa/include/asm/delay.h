@@ -13,7 +13,11 @@
 #define _XTENSA_DELAY_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/processor.h>
+=======
+#include <asm/timex.h>
+>>>>>>> v3.18
 =======
 #include <asm/timex.h>
 >>>>>>> v3.18
@@ -23,6 +27,7 @@ extern unsigned long loops_per_jiffy;
 
 static inline void __delay(unsigned long loops)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* 2 cycles per loop. */
 	__asm__ __volatile__ ("1: addi %0, %0, -2; bgeui %0, 2, 1b"
@@ -49,6 +54,8 @@ static __inline__ void udelay (unsigned long usecs)
 	while (((unsigned long)xtensa_get_ccount()) - start < cycles)
 		;
 =======
+=======
+>>>>>>> v3.18
 	if (__builtin_constant_p(loops) && loops < 2)
 		__asm__ __volatile__ ("nop");
 	else if (loops >= 2)
@@ -100,6 +107,9 @@ static inline void ndelay(unsigned long nsec)
 		__bad_ndelay();
 	else
 		__ndelay(nsec);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

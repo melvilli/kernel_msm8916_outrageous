@@ -34,6 +34,7 @@
 #include "intel_drv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PCI_LBPC 0xf4 /* legacy/combination backlight modes */
 
 void
@@ -52,6 +53,8 @@ intel_fixed_panel_mode(struct drm_display_mode *fixed_mode,
 
 	adjusted_mode->clock = fixed_mode->clock;
 =======
+=======
+>>>>>>> v3.18
 void
 intel_fixed_panel_mode(const struct drm_display_mode *fixed_mode,
 		       struct drm_display_mode *adjusted_mode)
@@ -112,11 +115,15 @@ intel_find_panel_downclock(struct drm_device *dev,
 		return drm_mode_duplicate(dev, tmp_mode);
 	else
 		return NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 /* adjusted_mode has been preset to be the panel's fixed mode */
 void
+<<<<<<< HEAD
 <<<<<<< HEAD
 intel_pch_panel_fitting(struct drm_device *dev,
 			int fitting_mode,
@@ -132,6 +139,8 @@ intel_pch_panel_fitting(struct drm_device *dev,
 	if (adjusted_mode->hdisplay == mode->hdisplay &&
 	    adjusted_mode->vdisplay == mode->vdisplay)
 =======
+=======
+>>>>>>> v3.18
 intel_pch_panel_fitting(struct intel_crtc *intel_crtc,
 			struct intel_crtc_config *pipe_config,
 			int fitting_mode)
@@ -146,14 +155,22 @@ intel_pch_panel_fitting(struct intel_crtc *intel_crtc,
 	/* Native modes don't need fitting */
 	if (adjusted_mode->hdisplay == pipe_config->pipe_src_w &&
 	    adjusted_mode->vdisplay == pipe_config->pipe_src_h)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto done;
 
 	switch (fitting_mode) {
 	case DRM_MODE_SCALE_CENTER:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		width = mode->hdisplay;
 		height = mode->vdisplay;
+=======
+		width = pipe_config->pipe_src_w;
+		height = pipe_config->pipe_src_h;
+>>>>>>> v3.18
 =======
 		width = pipe_config->pipe_src_w;
 		height = pipe_config->pipe_src_h;
@@ -166,17 +183,23 @@ intel_pch_panel_fitting(struct intel_crtc *intel_crtc,
 		/* Scale but preserve the aspect ratio */
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			u32 scaled_width = adjusted_mode->hdisplay * mode->vdisplay;
 			u32 scaled_height = mode->hdisplay * adjusted_mode->vdisplay;
 			if (scaled_width > scaled_height) { /* pillar */
 				width = scaled_height / mode->vdisplay;
 =======
+=======
+>>>>>>> v3.18
 			u32 scaled_width = adjusted_mode->hdisplay
 				* pipe_config->pipe_src_h;
 			u32 scaled_height = pipe_config->pipe_src_w
 				* adjusted_mode->vdisplay;
 			if (scaled_width > scaled_height) { /* pillar */
 				width = scaled_height / pipe_config->pipe_src_h;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if (width & 1)
 					width++;
@@ -185,7 +208,11 @@ intel_pch_panel_fitting(struct intel_crtc *intel_crtc,
 				height = adjusted_mode->vdisplay;
 			} else if (scaled_width < scaled_height) { /* letter */
 <<<<<<< HEAD
+<<<<<<< HEAD
 				height = scaled_width / mode->hdisplay;
+=======
+				height = scaled_width / pipe_config->pipe_src_w;
+>>>>>>> v3.18
 =======
 				height = scaled_width / pipe_config->pipe_src_w;
 >>>>>>> v3.18
@@ -203,7 +230,10 @@ intel_pch_panel_fitting(struct intel_crtc *intel_crtc,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	default:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case DRM_MODE_SCALE_FULLSCREEN:
@@ -211,6 +241,7 @@ intel_pch_panel_fitting(struct intel_crtc *intel_crtc,
 		width = adjusted_mode->hdisplay;
 		height = adjusted_mode->vdisplay;
 		break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}
 
@@ -322,6 +353,8 @@ static u32 intel_panel_compute_brightness(struct drm_device *dev, u32 val)
 	    dev_priv->quirks & QUIRK_INVERT_BRIGHTNESS)
 		return intel_panel_get_max_backlight(dev) - val;
 =======
+=======
+>>>>>>> v3.18
 
 	default:
 		WARN(1, "bad panel fit mode: %d\n", fitting_mode);
@@ -643,11 +676,15 @@ static u32 intel_panel_compute_brightness(struct intel_connector *connector,
 	    dev_priv->quirks & QUIRK_INVERT_BRIGHTNESS) {
 		return panel->backlight.max - val;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return val;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static u32 intel_panel_get_backlight(struct drm_device *dev)
 {
@@ -671,6 +708,8 @@ static u32 intel_panel_get_backlight(struct drm_device *dev)
 
 	val = intel_panel_compute_brightness(dev, val);
 =======
+=======
+>>>>>>> v3.18
 static u32 bdw_get_backlight(struct intel_connector *connector)
 {
 	struct drm_device *dev = connector->base.dev;
@@ -737,11 +776,15 @@ static u32 intel_panel_get_backlight(struct intel_connector *connector)
 
 	spin_unlock_irqrestore(&dev_priv->backlight_lock, flags);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	DRM_DEBUG_DRIVER("get backlight PWM = %d\n", val);
 	return val;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void intel_pch_panel_set_backlight(struct drm_device *dev, u32 level)
 {
@@ -767,6 +810,8 @@ static void intel_panel_actually_set_backlight(struct drm_device *dev, u32 level
 
 		lbpc = level * 0xfe / max + 1;
 =======
+=======
+>>>>>>> v3.18
 static void bdw_set_backlight(struct intel_connector *connector, u32 level)
 {
 	struct drm_device *dev = connector->base.dev;
@@ -798,11 +843,15 @@ static void i9xx_set_backlight(struct intel_connector *connector, u32 level)
 		u8 lbpc;
 
 		lbpc = level * 0xfe / panel->backlight.max + 1;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		level /= lbpc;
 		pci_write_config_byte(dev->pdev, PCI_LBPC, lbpc);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	tmp = I915_READ(BLC_PWM_CTL);
 	if (INTEL_INFO(dev)->gen < 4)
@@ -979,6 +1028,8 @@ int intel_panel_setup_backlight(struct drm_connector *connector)
 			  PTR_ERR(dev_priv->backlight.device));
 		dev_priv->backlight.device = NULL;
 =======
+=======
+>>>>>>> v3.18
 	if (IS_GEN4(dev)) {
 		mask = BACKLIGHT_DUTY_CYCLE_MASK;
 	} else {
@@ -1457,12 +1508,16 @@ static int intel_backlight_device_register(struct intel_connector *connector)
 		DRM_ERROR("Failed to register backlight: %ld\n",
 			  PTR_ERR(panel->backlight.device));
 		panel->backlight.device = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -ENODEV;
 	}
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void intel_panel_destroy_backlight(struct drm_device *dev)
 {
@@ -1490,6 +1545,8 @@ int intel_panel_init(struct intel_panel *panel,
 {
 	panel->fixed_mode = fixed_mode;
 =======
+=======
+>>>>>>> v3.18
 static void intel_backlight_device_unregister(struct intel_connector *connector)
 {
 	struct intel_panel *panel = &connector->panel;
@@ -1790,6 +1847,9 @@ int intel_panel_init(struct intel_panel *panel,
 {
 	panel->fixed_mode = fixed_mode;
 	panel->downclock_mode = downclock_mode;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1803,10 +1863,16 @@ void intel_panel_fini(struct intel_panel *panel)
 	if (panel->fixed_mode)
 		drm_mode_destroy(intel_connector->base.dev, panel->fixed_mode);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	if (panel->downclock_mode)
 		drm_mode_destroy(intel_connector->base.dev,
 				panel->downclock_mode);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

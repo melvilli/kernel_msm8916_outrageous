@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/bitops.h>
@@ -19,7 +22,11 @@
  * Read NSC/Cyrix DEVID registers (DIR) to get more detailed info. about the CPU
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit __do_cyrix_devid(unsigned char *dir0, unsigned char *dir1)
+=======
+static void __do_cyrix_devid(unsigned char *dir0, unsigned char *dir1)
+>>>>>>> v3.18
 =======
 static void __do_cyrix_devid(unsigned char *dir0, unsigned char *dir1)
 >>>>>>> v3.18
@@ -52,7 +59,11 @@ static void __do_cyrix_devid(unsigned char *dir0, unsigned char *dir1)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit do_cyrix_devid(unsigned char *dir0, unsigned char *dir1)
+=======
+static void do_cyrix_devid(unsigned char *dir0, unsigned char *dir1)
+>>>>>>> v3.18
 =======
 static void do_cyrix_devid(unsigned char *dir0, unsigned char *dir1)
 >>>>>>> v3.18
@@ -70,6 +81,7 @@ static void do_cyrix_devid(unsigned char *dir0, unsigned char *dir1)
  * Actually since bugs.h doesn't even reference this perhaps someone should
  * fix the documentation ???
  */
+<<<<<<< HEAD
 <<<<<<< HEAD
 static unsigned char Cx86_dir0_msb __cpuinitdata = 0;
 
@@ -91,6 +103,8 @@ static char Cx86_cb[] __cpuinitdata = "?.5x Core/Bus Clock";
 static const char __cpuinitconst cyrix_model_mult1[] = "12??43";
 static const char __cpuinitconst cyrix_model_mult2[] = "12233445";
 =======
+=======
+>>>>>>> v3.18
 static unsigned char Cx86_dir0_msb = 0;
 
 static const char Cx86_model[][9] = {
@@ -110,6 +124,9 @@ static const char Cx486D_name[][4] = {
 static char Cx86_cb[] = "?.5x Core/Bus Clock";
 static const char cyrix_model_mult1[] = "12??43";
 static const char cyrix_model_mult2[] = "12233445";
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -121,7 +138,11 @@ static const char cyrix_model_mult2[] = "12233445";
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit check_cx686_slop(struct cpuinfo_x86 *c)
+=======
+static void check_cx686_slop(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void check_cx686_slop(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -150,7 +171,11 @@ static void check_cx686_slop(struct cpuinfo_x86 *c)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit set_cx86_reorder(void)
+=======
+static void set_cx86_reorder(void)
+>>>>>>> v3.18
 =======
 static void set_cx86_reorder(void)
 >>>>>>> v3.18
@@ -169,7 +194,11 @@ static void set_cx86_reorder(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit set_cx86_memwb(void)
+=======
+static void set_cx86_memwb(void)
+>>>>>>> v3.18
 =======
 static void set_cx86_memwb(void)
 >>>>>>> v3.18
@@ -189,7 +218,11 @@ static void set_cx86_memwb(void)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit geode_configure(void)
+=======
+static void geode_configure(void)
+>>>>>>> v3.18
 =======
 static void geode_configure(void)
 >>>>>>> v3.18
@@ -216,7 +249,11 @@ static void geode_configure(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit early_init_cyrix(struct cpuinfo_x86 *c)
+=======
+static void early_init_cyrix(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void early_init_cyrix(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -239,7 +276,11 @@ static void early_init_cyrix(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit init_cyrix(struct cpuinfo_x86 *c)
+=======
+static void init_cyrix(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void init_cyrix(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -391,7 +432,11 @@ static void init_cyrix(struct cpuinfo_x86 *c)
 		case 0xd:  /* either a 486SLC or DLC w/o DEVID */
 			dir0_msn = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			p = Cx486_name[(c->hard_math) ? 1 : 0];
+=======
+			p = Cx486_name[(cpu_has_fpu ? 1 : 0)];
+>>>>>>> v3.18
 =======
 			p = Cx486_name[(cpu_has_fpu ? 1 : 0)];
 >>>>>>> v3.18
@@ -418,7 +463,11 @@ static void init_cyrix(struct cpuinfo_x86 *c)
  * Handle National Semiconductor branded processors
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit init_nsc(struct cpuinfo_x86 *c)
+=======
+static void init_nsc(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void init_nsc(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -471,7 +520,11 @@ static inline int test_cyrix_52div(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit cyrix_identify(struct cpuinfo_x86 *c)
+=======
+static void cyrix_identify(struct cpuinfo_x86 *c)
+>>>>>>> v3.18
 =======
 static void cyrix_identify(struct cpuinfo_x86 *c)
 >>>>>>> v3.18
@@ -511,7 +564,11 @@ static void cyrix_identify(struct cpuinfo_x86 *c)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpu_dev __cpuinitconst cyrix_cpu_dev = {
+=======
+static const struct cpu_dev cyrix_cpu_dev = {
+>>>>>>> v3.18
 =======
 static const struct cpu_dev cyrix_cpu_dev = {
 >>>>>>> v3.18
@@ -526,7 +583,11 @@ static const struct cpu_dev cyrix_cpu_dev = {
 cpu_dev_register(cyrix_cpu_dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct cpu_dev __cpuinitconst nsc_cpu_dev = {
+=======
+static const struct cpu_dev nsc_cpu_dev = {
+>>>>>>> v3.18
 =======
 static const struct cpu_dev nsc_cpu_dev = {
 >>>>>>> v3.18

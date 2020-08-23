@@ -69,6 +69,10 @@ config AGP_INTEL
 	tristate "Intel 440LX/BX/GX, I8xx and E7x05 chipset support"
 	depends on AGP && X86
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select INTEL_GTT
+>>>>>>> v3.18
 =======
 	select INTEL_GTT
 >>>>>>> v3.18
@@ -160,9 +164,15 @@ config AGP_SGI_TIOCA
           for IA64 processors.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config INTEL_GTT
 	tristate
 	depends on X86 && PCI
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

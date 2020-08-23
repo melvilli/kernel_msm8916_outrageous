@@ -21,6 +21,10 @@
  *
  * Authors: Dave Airlie
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *          Christian König
+>>>>>>> v3.18
 =======
  *          Christian König
 >>>>>>> v3.18
@@ -29,6 +33,11 @@
 #define DRM_FIXED_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/math64.h>
+
+>>>>>>> v3.18
 =======
 #include <linux/math64.h>
 
@@ -75,7 +84,10 @@ static inline u32 dfixed_div(fixed20_12 A, fixed20_12 B)
 	return lower_32_bits(tmp);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #define DRM_FIXED_POINT		32
 #define DRM_FIXED_ONE		(1ULL << DRM_FIXED_POINT)
@@ -167,5 +179,8 @@ static inline s64 drm_fixp_exp(s64 x)
 	return sum;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif

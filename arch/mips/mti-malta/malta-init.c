@@ -15,6 +15,10 @@
 #include <linux/string.h>
 #include <linux/kernel.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/serial_8250.h>
+>>>>>>> v3.18
 =======
 #include <linux/serial_8250.h>
 >>>>>>> v3.18
@@ -24,7 +28,12 @@
 #include <asm/traps.h>
 #include <asm/fw/fw.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/gcmpregs.h>
+=======
+#include <asm/mips-cm.h>
+#include <asm/mips-cpc.h>
+>>>>>>> v3.18
 =======
 #include <asm/mips-cm.h>
 #include <asm/mips-cpc.h>
@@ -54,6 +63,7 @@ static void __init console_config(void)
 	char *s;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((strstr(fw_getcmdline(), "console=")) == NULL) {
 		s = fw_getenv("modetty0");
 		if (s) {
@@ -81,6 +91,8 @@ static void __init console_config(void)
 		if (flow == '\0')
 			flow = 'r';
 =======
+=======
+>>>>>>> v3.18
 	s = fw_getenv("modetty0");
 	if (s) {
 		while (*s >= '0' && *s <= '9')
@@ -114,6 +126,9 @@ static void __init console_config(void)
 	}
 
 	if ((strstr(fw_getcmdline(), "console=")) == NULL) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sprintf(console_string, " console=ttyS0,%d%c%c%c", baud,
 			parity, bits, flow);
@@ -148,12 +163,18 @@ static void __init mips_ejtag_setup(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct plat_smp_ops msmtc_smp_ops;
 =======
+=======
+>>>>>>> v3.18
 phys_t mips_cpc_default_phys_base(void)
 {
 	return CPC_BASE_ADDR;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void __init prom_init(void)
@@ -283,11 +304,14 @@ mips_pci_controller:
 			  MSC01_PCI_SWAP_BYTESWAP << MSC01_PCI_SWAP_BAR0_SHF);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Fix up target memory mapping.  */
 		MSC_READ(MSC01_PCI_BAR0, mask);
 		MSC_WRITE(MSC01_PCI_P2SCMSKL, mask & MSC01_PCI_BAR0_SIZE_MSK);
 
 =======
+=======
+>>>>>>> v3.18
 #ifndef CONFIG_EVA
 		/* Fix up target memory mapping.  */
 		MSC_READ(MSC01_PCI_BAR0, mask);
@@ -305,6 +329,9 @@ mips_pci_controller:
 		MSC_WRITE(MSC01_PCI_P2SCMSKL, mask);
 		MSC_WRITE(MSC01_PCI_P2SCMAPL, mask);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		/* Don't handle target retries indefinitely.  */
 		if ((data & MSC01_PCI_CFG_MAXRTRY_MSK) ==
@@ -341,6 +368,7 @@ mips_pci_controller:
 #endif
 	/* Early detection of CMP support */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gcmp_probe(GCMP_BASE_ADDR, GCMP_ADDRSPACE_SZ))
 		if (!register_cmp_smp_ops())
 			return;
@@ -352,6 +380,8 @@ mips_pci_controller:
 	register_smp_ops(&msmtc_smp_ops);
 #endif
 =======
+=======
+>>>>>>> v3.18
 	mips_cm_probe();
 	mips_cpc_probe();
 
@@ -361,5 +391,8 @@ mips_pci_controller:
 		return;
 	if (!register_vsmp_smp_ops())
 		return;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }

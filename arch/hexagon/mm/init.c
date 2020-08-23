@@ -72,9 +72,13 @@ void __init mem_init(void)
 	/*  No idea where this is actually declared.  Seems to evade LXR.  */
 	free_all_bootmem();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages = bootmem_lastpg-ARCH_PFN_OFFSET;
 
 	printk(KERN_INFO "totalram_pages = %ld\n", totalram_pages);
+=======
+	mem_init_print_info(NULL);
+>>>>>>> v3.18
 =======
 	mem_init_print_info(NULL);
 >>>>>>> v3.18

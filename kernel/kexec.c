@@ -7,6 +7,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define pr_fmt(fmt)	"kexec: " fmt
+
+>>>>>>> v3.18
 =======
 #define pr_fmt(fmt)	"kexec: " fmt
 
@@ -38,6 +43,11 @@
 #include <linux/swap.h>
 #include <linux/syscore_ops.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/compiler.h>
+#include <linux/hugetlb.h>
+>>>>>>> v3.18
 =======
 #include <linux/compiler.h>
 #include <linux/hugetlb.h>
@@ -49,6 +59,12 @@
 #include <asm/sections.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <crypto/hash.h>
+#include <crypto/sha.h>
+
+>>>>>>> v3.18
 =======
 #include <crypto/hash.h>
 #include <crypto/sha.h>
@@ -67,7 +83,10 @@ size_t vmcoreinfo_max_size = sizeof(vmcoreinfo_data);
 bool kexec_in_progress = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Declare these symbols weak so that if architecture provides a purgatory,
  * these will be overridden.
@@ -79,6 +98,9 @@ size_t __weak kexec_purgatory_size = 0;
 static int kexec_calculate_store_digests(struct kimage *image);
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Location of the reserved area for the crash kernel */
 struct resource crashk_res = {
@@ -154,6 +176,7 @@ static struct page *kimage_alloc_page(struct kimage *image,
 				       unsigned long dest);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int do_kimage_alloc(struct kimage **rimage, unsigned long entry,
 	                    unsigned long nr_segments,
                             struct kexec_segment __user *segments)
@@ -185,17 +208,23 @@ static int do_kimage_alloc(struct kimage **rimage, unsigned long entry,
 	/* Initialize the list of unusable pages */
 	INIT_LIST_HEAD(&image->unuseable_pages);
 =======
+=======
+>>>>>>> v3.18
 static int copy_user_segment_list(struct kimage *image,
 				  unsigned long nr_segments,
 				  struct kexec_segment __user *segments)
 {
 	int ret;
 	size_t segment_bytes;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Read in the segments */
 	image->nr_segments = nr_segments;
 	segment_bytes = nr_segments * sizeof(*segments);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	result = copy_from_user(image->segment, segments, segment_bytes);
 	if (result) {
@@ -203,6 +232,8 @@ static int copy_user_segment_list(struct kimage *image,
 		goto out;
 	}
 =======
+=======
+>>>>>>> v3.18
 	ret = copy_from_user(image->segment, segments, segment_bytes);
 	if (ret)
 		ret = -EFAULT;
@@ -214,6 +245,9 @@ static int sanity_check_segment_list(struct kimage *image)
 {
 	int result, i;
 	unsigned long nr_segments = image->nr_segments;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -237,9 +271,15 @@ static int sanity_check_segment_list(struct kimage *image)
 		mend   = mstart + image->segment[i].memsz;
 		if ((mstart & ~PAGE_MASK) || (mend & ~PAGE_MASK))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
 		if (mend >= KEXEC_DESTINATION_MEMORY_LIMIT)
 			goto out;
+=======
+			return result;
+		if (mend >= KEXEC_DESTINATION_MEMORY_LIMIT)
+			return result;
+>>>>>>> v3.18
 =======
 			return result;
 		if (mend >= KEXEC_DESTINATION_MEMORY_LIMIT)
@@ -266,7 +306,11 @@ static int sanity_check_segment_list(struct kimage *image)
 			/* Do the segments overlap ? */
 			if ((mend > pstart) && (mstart < pend))
 <<<<<<< HEAD
+<<<<<<< HEAD
 				goto out;
+=======
+				return result;
+>>>>>>> v3.18
 =======
 				return result;
 >>>>>>> v3.18
@@ -282,6 +326,7 @@ static int sanity_check_segment_list(struct kimage *image)
 	for (i = 0; i < nr_segments; i++) {
 		if (image->segment[i].bufsz > image->segment[i].memsz)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto out;
 	}
 
@@ -295,6 +340,8 @@ out:
 	return result;
 
 =======
+=======
+>>>>>>> v3.18
 			return result;
 	}
 
@@ -350,11 +397,15 @@ static struct kimage *do_kimage_alloc_init(void)
 	INIT_LIST_HEAD(&image->unusable_pages);
 
 	return image;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static void kimage_free_page_list(struct list_head *list);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static int kimage_normal_alloc(struct kimage **rimage, unsigned long entry,
 				unsigned long nr_segments,
@@ -369,6 +420,8 @@ static int kimage_normal_alloc(struct kimage **rimage, unsigned long entry,
 	if (result)
 		goto out;
 =======
+=======
+>>>>>>> v3.18
 static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
 			     unsigned long nr_segments,
 			     struct kexec_segment __user *segments,
@@ -404,6 +457,9 @@ static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
 		image->control_page = crashk_res.start;
 		image->type = KEXEC_TYPE_CRASH;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -411,6 +467,7 @@ static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
 	 * the vector of segments so that it's pages will also be
 	 * counted as destination pages.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	result = -ENOMEM;
 	image->control_code_page = kimage_alloc_control_pages(image,
@@ -425,6 +482,8 @@ static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
 		printk(KERN_ERR "Could not allocate swap buffer\n");
 		goto out_free;
 =======
+=======
+>>>>>>> v3.18
 	ret = -ENOMEM;
 	image->control_code_page = kimage_alloc_control_pages(image,
 					   get_order(KEXEC_CONTROL_PAGE_SIZE));
@@ -439,11 +498,15 @@ static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
 			pr_err("Could not allocate swap buffer\n");
 			goto out_free_control_pages;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	*rimage = image;
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 out_free:
@@ -511,6 +574,8 @@ static int kimage_crash_alloc(struct kimage **rimage, unsigned long entry,
 		printk(KERN_ERR "Could not allocate control_code_buffer\n");
 		goto out_free;
 =======
+=======
+>>>>>>> v3.18
 out_free_control_pages:
 	kimage_free_page_list(&image->control_pages);
 out_free_image:
@@ -778,11 +843,15 @@ kimage_file_alloc_init(struct kimage **rimage, int kernel_fd,
 			pr_err(KERN_ERR "Could not allocate swap buffer\n");
 			goto out_free_control_pages;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
 	*rimage = image;
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 out_free:
@@ -791,6 +860,8 @@ out:
 	return result;
 }
 =======
+=======
+>>>>>>> v3.18
 out_free_control_pages:
 	kimage_free_page_list(&image->control_pages);
 out_free_post_load_bufs:
@@ -802,6 +873,9 @@ out_free_image:
 #else /* CONFIG_KEXEC_FILE */
 static inline void kimage_file_post_load_cleanup(struct kimage *image) { }
 #endif /* CONFIG_KEXEC_FILE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int kimage_is_destination_range(struct kimage *image,
@@ -1068,7 +1142,11 @@ static void kimage_free_extra_pages(struct kimage *image)
 
 	/* Walk through and free any unusable pages I have cached */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kimage_free_page_list(&image->unuseable_pages);
+=======
+	kimage_free_page_list(&image->unusable_pages);
+>>>>>>> v3.18
 =======
 	kimage_free_page_list(&image->unusable_pages);
 >>>>>>> v3.18
@@ -1085,8 +1163,13 @@ static void kimage_terminate(struct kimage *image)
 #define for_each_kimage_entry(image, ptr, entry) \
 	for (ptr = &image->head; (entry = *ptr) && !(entry & IND_DONE); \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ptr = (entry & IND_INDIRECTION)? \
 			phys_to_virt((entry & PAGE_MASK)): ptr +1)
+=======
+		ptr = (entry & IND_INDIRECTION) ? \
+			phys_to_virt((entry & PAGE_MASK)) : ptr + 1)
+>>>>>>> v3.18
 =======
 		ptr = (entry & IND_INDIRECTION) ? \
 			phys_to_virt((entry & PAGE_MASK)) : ptr + 1)
@@ -1119,8 +1202,12 @@ static void kimage_free(struct kimage *image)
 			 */
 			ind = entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else if (entry & IND_SOURCE)
+=======
+		} else if (entry & IND_SOURCE)
+>>>>>>> v3.18
 =======
 		} else if (entry & IND_SOURCE)
 >>>>>>> v3.18
@@ -1136,7 +1223,10 @@ static void kimage_free(struct kimage *image)
 	/* Free the kexec control pages... */
 	kimage_free_page_list(&image->control_pages);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/*
 	 * Free up any temporary buffers allocated. This might hit if
@@ -1145,6 +1235,9 @@ static void kimage_free(struct kimage *image)
 	if (image->file_mode)
 		kimage_file_post_load_cleanup(image);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	kfree(image);
 }
@@ -1216,7 +1309,11 @@ static struct page *kimage_alloc_page(struct kimage *image,
 		if (page_to_pfn(page) >
 				(KEXEC_SOURCE_MEMORY_LIMIT >> PAGE_SHIFT)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			list_add(&page->lru, &image->unuseable_pages);
+=======
+			list_add(&page->lru, &image->unusable_pages);
+>>>>>>> v3.18
 =======
 			list_add(&page->lru, &image->unusable_pages);
 >>>>>>> v3.18
@@ -1262,8 +1359,12 @@ static struct page *kimage_alloc_page(struct kimage *image,
 			page = old_page;
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else {
+=======
+		} else {
+>>>>>>> v3.18
 =======
 		} else {
 >>>>>>> v3.18
@@ -1284,11 +1385,14 @@ static int kimage_load_normal_segment(struct kimage *image,
 	size_t ubytes, mbytes;
 	int result;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char __user *buf;
 
 	result = 0;
 	buf = segment->buf;
 =======
+=======
+>>>>>>> v3.18
 	unsigned char __user *buf = NULL;
 	unsigned char *kbuf = NULL;
 
@@ -1297,6 +1401,9 @@ static int kimage_load_normal_segment(struct kimage *image,
 		kbuf = segment->kbuf;
 	else
 		buf = segment->buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ubytes = segment->bufsz;
 	mbytes = segment->memsz;
@@ -1330,13 +1437,19 @@ static int kimage_load_normal_segment(struct kimage *image,
 		uchunk = min(ubytes, mchunk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = copy_from_user(ptr, buf, uchunk);
 =======
+=======
+>>>>>>> v3.18
 		/* For file based kexec, source pages are in kernel memory */
 		if (image->file_mode)
 			memcpy(ptr, kbuf, uchunk);
 		else
 			result = copy_from_user(ptr, buf, uchunk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kunmap(page);
 		if (result) {
@@ -1346,12 +1459,18 @@ static int kimage_load_normal_segment(struct kimage *image,
 		ubytes -= uchunk;
 		maddr  += mchunk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf    += mchunk;
 =======
+=======
+>>>>>>> v3.18
 		if (image->file_mode)
 			kbuf += mchunk;
 		else
 			buf += mchunk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mbytes -= mchunk;
 	}
@@ -1370,11 +1489,14 @@ static int kimage_load_crash_segment(struct kimage *image,
 	size_t ubytes, mbytes;
 	int result;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char __user *buf;
 
 	result = 0;
 	buf = segment->buf;
 =======
+=======
+>>>>>>> v3.18
 	unsigned char __user *buf = NULL;
 	unsigned char *kbuf = NULL;
 
@@ -1383,6 +1505,9 @@ static int kimage_load_crash_segment(struct kimage *image,
 		kbuf = segment->kbuf;
 	else
 		buf = segment->buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ubytes = segment->bufsz;
 	mbytes = segment->memsz;
@@ -1407,14 +1532,20 @@ static int kimage_load_crash_segment(struct kimage *image,
 			memset(ptr + uchunk, 0, mchunk - uchunk);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		result = copy_from_user(ptr, buf, uchunk);
 =======
+=======
+>>>>>>> v3.18
 
 		/* For file based kexec, source pages are in kernel memory */
 		if (image->file_mode)
 			memcpy(ptr, kbuf, uchunk);
 		else
 			result = copy_from_user(ptr, buf, uchunk);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		kexec_flush_icache_page(page);
 		kunmap(page);
@@ -1425,12 +1556,18 @@ static int kimage_load_crash_segment(struct kimage *image,
 		ubytes -= uchunk;
 		maddr  += mchunk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buf    += mchunk;
 =======
+=======
+>>>>>>> v3.18
 		if (image->file_mode)
 			kbuf += mchunk;
 		else
 			buf += mchunk;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mbytes -= mchunk;
 	}
@@ -1470,7 +1607,11 @@ static int kimage_load_segment(struct kimage *image,
  *
  * - A machine specific part that includes the syscall number
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   and the copies the image to it's final destination.  And
+=======
+ *   and then copies the image to it's final destination.  And
+>>>>>>> v3.18
 =======
  *   and then copies the image to it's final destination.  And
 >>>>>>> v3.18
@@ -1482,6 +1623,10 @@ static int kimage_load_segment(struct kimage *image,
 struct kimage *kexec_image;
 struct kimage *kexec_crash_image;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+int kexec_load_disabled;
+>>>>>>> v3.18
 =======
 int kexec_load_disabled;
 >>>>>>> v3.18
@@ -1496,7 +1641,11 @@ SYSCALL_DEFINE4(kexec_load, unsigned long, entry, unsigned long, nr_segments,
 
 	/* We only trust the superuser with rebooting the system. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!capable(CAP_SYS_BOOT))
+=======
+	if (!capable(CAP_SYS_BOOT) || kexec_load_disabled)
+>>>>>>> v3.18
 =======
 	if (!capable(CAP_SYS_BOOT) || kexec_load_disabled)
 >>>>>>> v3.18
@@ -1543,8 +1692,13 @@ SYSCALL_DEFINE4(kexec_load, unsigned long, entry, unsigned long, nr_segments,
 		/* Loading another kernel to reboot into */
 		if ((flags & KEXEC_ON_CRASH) == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			result = kimage_normal_alloc(&image, entry,
 							nr_segments, segments);
+=======
+			result = kimage_alloc_init(&image, entry, nr_segments,
+						   segments, flags);
+>>>>>>> v3.18
 =======
 			result = kimage_alloc_init(&image, entry, nr_segments,
 						   segments, flags);
@@ -1556,8 +1710,13 @@ SYSCALL_DEFINE4(kexec_load, unsigned long, entry, unsigned long, nr_segments,
 			 */
 			kimage_free(xchg(&kexec_crash_image, NULL));
 <<<<<<< HEAD
+<<<<<<< HEAD
 			result = kimage_crash_alloc(&image, entry,
 						     nr_segments, segments);
+=======
+			result = kimage_alloc_init(&image, entry, nr_segments,
+						   segments, flags);
+>>>>>>> v3.18
 =======
 			result = kimage_alloc_init(&image, entry, nr_segments,
 						   segments, flags);
@@ -1606,15 +1765,21 @@ void __weak crash_unmap_reserved_pages(void)
 
 #ifdef CONFIG_COMPAT
 <<<<<<< HEAD
+<<<<<<< HEAD
 asmlinkage long compat_sys_kexec_load(unsigned long entry,
 				unsigned long nr_segments,
 				struct compat_kexec_segment __user *segments,
 				unsigned long flags)
 =======
+=======
+>>>>>>> v3.18
 COMPAT_SYSCALL_DEFINE4(kexec_load, compat_ulong_t, entry,
 		       compat_ulong_t, nr_segments,
 		       struct compat_kexec_segment __user *, segments,
 		       compat_ulong_t, flags)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct compat_kexec_segment in;
@@ -1632,7 +1797,11 @@ COMPAT_SYSCALL_DEFINE4(kexec_load, compat_ulong_t, entry,
 
 	ksegments = compat_alloc_user_space(nr_segments * sizeof(out));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i=0; i < nr_segments; i++) {
+=======
+	for (i = 0; i < nr_segments; i++) {
+>>>>>>> v3.18
 =======
 	for (i = 0; i < nr_segments; i++) {
 >>>>>>> v3.18
@@ -1655,6 +1824,7 @@ COMPAT_SYSCALL_DEFINE4(kexec_load, compat_ulong_t, entry,
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void crash_kexec(struct pt_regs *regs)
 {
 	/* Take the kexec_mutex here to prevent sys_kexec_load
@@ -1675,6 +1845,8 @@ void crash_kexec(struct pt_regs *regs)
 			machine_kexec(kexec_crash_image);
 		}
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_KEXEC_FILE
 SYSCALL_DEFINE5(kexec_file_load, int, kernel_fd, int, initrd_fd,
 		unsigned long, cmdline_len, const char __user *, cmdline_ptr,
@@ -1773,6 +1945,9 @@ void crash_kexec(struct pt_regs *regs)
 			machine_crash_shutdown(&fixed_regs);
 			machine_kexec(kexec_crash_image);
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mutex_unlock(&kexec_mutex);
 	}
@@ -1892,7 +2067,11 @@ void crash_save_cpu(struct pt_regs *regs, int cpu)
 	 * all of that, so there is no need to invent something new.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf = (u32*)per_cpu_ptr(crash_notes, cpu);
+=======
+	buf = (u32 *)per_cpu_ptr(crash_notes, cpu);
+>>>>>>> v3.18
 =======
 	buf = (u32 *)per_cpu_ptr(crash_notes, cpu);
 >>>>>>> v3.18
@@ -1903,7 +2082,11 @@ void crash_save_cpu(struct pt_regs *regs, int cpu)
 	elf_core_copy_kernel_regs(&prstatus.pr_reg, regs);
 	buf = append_elf_note(buf, KEXEC_CORE_NOTE_NAME, NT_PRSTATUS,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		      	      &prstatus, sizeof(prstatus));
+=======
+			      &prstatus, sizeof(prstatus));
+>>>>>>> v3.18
 =======
 			      &prstatus, sizeof(prstatus));
 >>>>>>> v3.18
@@ -1916,8 +2099,12 @@ static int __init crash_notes_memory_init(void)
 	crash_notes = alloc_percpu(note_buf_t);
 	if (!crash_notes) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("Kexec: Memory allocation for saving cpu register"
 		" states failed\n");
+=======
+		pr_warn("Kexec: Memory allocation for saving cpu register states failed\n");
+>>>>>>> v3.18
 =======
 		pr_warn("Kexec: Memory allocation for saving cpu register states failed\n");
 >>>>>>> v3.18
@@ -1926,7 +2113,11 @@ static int __init crash_notes_memory_init(void)
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(crash_notes_memory_init)
+=======
+subsys_initcall(crash_notes_memory_init);
+>>>>>>> v3.18
 =======
 subsys_initcall(crash_notes_memory_init);
 >>>>>>> v3.18
@@ -1947,15 +2138,21 @@ subsys_initcall(crash_notes_memory_init);
  * The function returns 0 on success and -EINVAL on failure.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init parse_crashkernel_mem(char 			*cmdline,
 					unsigned long long	system_ram,
 					unsigned long long	*crash_size,
 					unsigned long long	*crash_base)
 =======
+=======
+>>>>>>> v3.18
 static int __init parse_crashkernel_mem(char *cmdline,
 					unsigned long long system_ram,
 					unsigned long long *crash_size,
 					unsigned long long *crash_base)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char *cur = cmdline, *tmp;
@@ -1968,7 +2165,11 @@ static int __init parse_crashkernel_mem(char *cmdline,
 		start = memparse(cur, &tmp);
 		if (cur == tmp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("crashkernel: Memory value expected\n");
+=======
+			pr_warn("crashkernel: Memory value expected\n");
+>>>>>>> v3.18
 =======
 			pr_warn("crashkernel: Memory value expected\n");
 >>>>>>> v3.18
@@ -1977,7 +2178,11 @@ static int __init parse_crashkernel_mem(char *cmdline,
 		cur = tmp;
 		if (*cur != '-') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("crashkernel: '-' expected\n");
+=======
+			pr_warn("crashkernel: '-' expected\n");
+>>>>>>> v3.18
 =======
 			pr_warn("crashkernel: '-' expected\n");
 >>>>>>> v3.18
@@ -1990,8 +2195,12 @@ static int __init parse_crashkernel_mem(char *cmdline,
 			end = memparse(cur, &tmp);
 			if (cur == tmp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning("crashkernel: Memory "
 						"value expected\n");
+=======
+				pr_warn("crashkernel: Memory value expected\n");
+>>>>>>> v3.18
 =======
 				pr_warn("crashkernel: Memory value expected\n");
 >>>>>>> v3.18
@@ -2000,7 +2209,11 @@ static int __init parse_crashkernel_mem(char *cmdline,
 			cur = tmp;
 			if (end <= start) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning("crashkernel: end <= start\n");
+=======
+				pr_warn("crashkernel: end <= start\n");
+>>>>>>> v3.18
 =======
 				pr_warn("crashkernel: end <= start\n");
 >>>>>>> v3.18
@@ -2010,7 +2223,11 @@ static int __init parse_crashkernel_mem(char *cmdline,
 
 		if (*cur != ':') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("crashkernel: ':' expected\n");
+=======
+			pr_warn("crashkernel: ':' expected\n");
+>>>>>>> v3.18
 =======
 			pr_warn("crashkernel: ':' expected\n");
 >>>>>>> v3.18
@@ -2021,7 +2238,11 @@ static int __init parse_crashkernel_mem(char *cmdline,
 		size = memparse(cur, &tmp);
 		if (cur == tmp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("Memory value expected\n");
+=======
+			pr_warn("Memory value expected\n");
+>>>>>>> v3.18
 =======
 			pr_warn("Memory value expected\n");
 >>>>>>> v3.18
@@ -2030,7 +2251,11 @@ static int __init parse_crashkernel_mem(char *cmdline,
 		cur = tmp;
 		if (size >= system_ram) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("crashkernel: invalid size\n");
+=======
+			pr_warn("crashkernel: invalid size\n");
+>>>>>>> v3.18
 =======
 			pr_warn("crashkernel: invalid size\n");
 >>>>>>> v3.18
@@ -2052,8 +2277,12 @@ static int __init parse_crashkernel_mem(char *cmdline,
 			*crash_base = memparse(cur, &tmp);
 			if (cur == tmp) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pr_warning("Memory value expected "
 						"after '@'\n");
+=======
+				pr_warn("Memory value expected after '@'\n");
+>>>>>>> v3.18
 =======
 				pr_warn("Memory value expected after '@'\n");
 >>>>>>> v3.18
@@ -2069,6 +2298,7 @@ static int __init parse_crashkernel_mem(char *cmdline,
  * That function parses "simple" (old) crashkernel command lines like
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 	crashkernel=size[@offset]
  *
  * It returns 0 on success and -EINVAL on failure.
@@ -2077,6 +2307,8 @@ static int __init parse_crashkernel_simple(char 		*cmdline,
 					   unsigned long long 	*crash_size,
 					   unsigned long long 	*crash_base)
 =======
+=======
+>>>>>>> v3.18
  *	crashkernel=size[@offset]
  *
  * It returns 0 on success and -EINVAL on failure.
@@ -2084,6 +2316,9 @@ static int __init parse_crashkernel_simple(char 		*cmdline,
 static int __init parse_crashkernel_simple(char *cmdline,
 					   unsigned long long *crash_size,
 					   unsigned long long *crash_base)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	char *cur = cmdline;
@@ -2091,7 +2326,11 @@ static int __init parse_crashkernel_simple(char *cmdline,
 	*crash_size = memparse(cmdline, &cur);
 	if (cmdline == cur) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("crashkernel: memory value expected\n");
+=======
+		pr_warn("crashkernel: memory value expected\n");
+>>>>>>> v3.18
 =======
 		pr_warn("crashkernel: memory value expected\n");
 >>>>>>> v3.18
@@ -2102,7 +2341,11 @@ static int __init parse_crashkernel_simple(char *cmdline,
 		*crash_base = memparse(cur+1, &cur);
 	else if (*cur != ' ' && *cur != '\0') {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_warning("crashkernel: unrecognized char\n");
+=======
+		pr_warn("crashkernel: unrecognized char\n");
+>>>>>>> v3.18
 =======
 		pr_warn("crashkernel: unrecognized char\n");
 >>>>>>> v3.18
@@ -2131,7 +2374,10 @@ static __initdata char *suffix_tbl[] = {
 static int __init parse_crashkernel_suffix(char *cmdline,
 					   unsigned long long	*crash_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					   unsigned long long	*crash_base,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 					   const char *suffix)
@@ -2223,7 +2469,11 @@ static int __init __parse_crashkernel(char *cmdline,
 	if (suffix)
 		return parse_crashkernel_suffix(ck_cmdline, crash_size,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				crash_base, suffix);
+=======
+				suffix);
+>>>>>>> v3.18
 =======
 				suffix);
 >>>>>>> v3.18
@@ -2237,11 +2487,16 @@ static int __init __parse_crashkernel(char *cmdline,
 		return parse_crashkernel_mem(ck_cmdline, system_ram,
 				crash_size, crash_base);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	else
 		return parse_crashkernel_simple(ck_cmdline, crash_size,
 				crash_base);
 
 	return 0;
+=======
+
+	return parse_crashkernel_simple(ck_cmdline, crash_size, crash_base);
+>>>>>>> v3.18
 =======
 
 	return parse_crashkernel_simple(ck_cmdline, crash_size, crash_base);
@@ -2304,7 +2559,11 @@ void vmcoreinfo_append_str(const char *fmt, ...)
 
 	va_start(args, fmt);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = vsnprintf(buf, sizeof(buf), fmt, args);
+=======
+	r = vscnprintf(buf, sizeof(buf), fmt, args);
+>>>>>>> v3.18
 =======
 	r = vscnprintf(buf, sizeof(buf), fmt, args);
 >>>>>>> v3.18
@@ -2322,15 +2581,21 @@ void vmcoreinfo_append_str(const char *fmt, ...)
  * code may override this
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __attribute__ ((weak)) arch_crash_save_vmcoreinfo(void)
 {}
 
 unsigned long __attribute__ ((weak)) paddr_vmcoreinfo_note(void)
 =======
+=======
+>>>>>>> v3.18
 void __weak arch_crash_save_vmcoreinfo(void)
 {}
 
 unsigned long __weak paddr_vmcoreinfo_note(void)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	return __pa((unsigned long)(char *)&vmcoreinfo_note);
@@ -2399,13 +2664,19 @@ static int __init crash_save_vmcoreinfo_init(void)
 	VMCOREINFO_NUMBER(PG_hwpoison);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	VMCOREINFO_NUMBER(PAGE_BUDDY_MAPCOUNT_VALUE);
 =======
+=======
+>>>>>>> v3.18
 	VMCOREINFO_NUMBER(PG_head_mask);
 	VMCOREINFO_NUMBER(PAGE_BUDDY_MAPCOUNT_VALUE);
 #ifdef CONFIG_HUGETLBFS
 	VMCOREINFO_SYMBOL(free_huge_page);
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	arch_crash_save_vmcoreinfo();
@@ -2415,8 +2686,11 @@ static int __init crash_save_vmcoreinfo_init(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_init(crash_save_vmcoreinfo_init)
 =======
+=======
+>>>>>>> v3.18
 subsys_initcall(crash_save_vmcoreinfo_init);
 
 #ifdef CONFIG_KEXEC_FILE
@@ -3084,6 +3358,9 @@ int kexec_purgatory_get_set_symbol(struct kimage *image, const char *name,
 	return 0;
 }
 #endif /* CONFIG_KEXEC_FILE */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /*
@@ -3137,8 +3414,11 @@ int kernel_kexec(void)
 		kexec_in_progress = true;
 		kernel_restart_prepare(NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_EMERG "Starting new kernel\n");
 =======
+=======
+>>>>>>> v3.18
 		migrate_to_reboot_cpu();
 
 		/*
@@ -3149,6 +3429,9 @@ int kernel_kexec(void)
 		 */
 		cpu_hotplug_enable();
 		pr_emerg("Starting new kernel\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		machine_shutdown();
 	}

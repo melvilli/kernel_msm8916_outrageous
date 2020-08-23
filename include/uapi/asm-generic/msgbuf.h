@@ -36,6 +36,7 @@ struct msqid64_ds {
 	unsigned long	__unused3;
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long  msg_cbytes;	/* current number of bytes on queue */
 	unsigned long  msg_qnum;	/* number of messages in queue */
 	unsigned long  msg_qbytes;	/* max number of bytes on queue */
@@ -44,6 +45,8 @@ struct msqid64_ds {
 	unsigned long  __unused4;
 	unsigned long  __unused5;
 =======
+=======
+>>>>>>> v3.18
 	__kernel_ulong_t msg_cbytes;	/* current number of bytes on queue */
 	__kernel_ulong_t msg_qnum;	/* number of messages in queue */
 	__kernel_ulong_t msg_qbytes;	/* max number of bytes on queue */
@@ -51,6 +54,9 @@ struct msqid64_ds {
 	__kernel_pid_t msg_lrpid;	/* last receive pid */
 	__kernel_ulong_t __unused4;
 	__kernel_ulong_t __unused5;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

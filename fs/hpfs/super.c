@@ -53,6 +53,7 @@ static void unmark_dirty(struct super_block *s)
 
 /* Filesystem error... */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void hpfs_error(struct super_block *s, const char *fmt, ...)
 {
 	struct va_format vaf;
@@ -83,6 +84,8 @@ void hpfs_error(struct super_block *s, const char *fmt, ...)
 		else printk("; corrupted filesystem mounted read/write - your computer will explode within 20 seconds ... but you wanted it so!\n");
 	} else printk("\n");
 =======
+=======
+>>>>>>> v3.18
 static char err_buf[1024];
 
 void hpfs_error(struct super_block *s, const char *fmt, ...)
@@ -113,6 +116,9 @@ void hpfs_error(struct super_block *s, const char *fmt, ...)
 			pr_cont("; corrupted filesystem mounted read/write - your computer will explode within 20 seconds ... but you wanted it so!\n");
 	} else
 		pr_cont("\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	hpfs_sb(s)->sb_was_error = 1;
 }
@@ -138,6 +144,7 @@ int hpfs_stop_cycles(struct super_block *s, int key, int *c1, int *c2,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void hpfs_put_super(struct super_block *s)
 {
 	struct hpfs_sb_info *sbi = hpfs_sb(s);
@@ -154,6 +161,8 @@ static void hpfs_put_super(struct super_block *s)
 
 unsigned hpfs_count_one_bitmap(struct super_block *s, secno secno)
 =======
+=======
+>>>>>>> v3.18
 static void free_sbi(struct hpfs_sb_info *sbi)
 {
 	kfree(sbi->sb_cp_table);
@@ -175,6 +184,9 @@ static void hpfs_put_super(struct super_block *s)
 }
 
 static unsigned hpfs_count_one_bitmap(struct super_block *s, secno secno)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct quad_buffer_head qbh;
@@ -182,9 +194,15 @@ static unsigned hpfs_count_one_bitmap(struct super_block *s, secno secno)
 	unsigned count;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bits = hpfs_map_4sectors(s, secno, &qbh, 4);
 	if (!bits)
 		return 0;
+=======
+	bits = hpfs_map_4sectors(s, secno, &qbh, 0);
+	if (!bits)
+		return (unsigned)-1;
+>>>>>>> v3.18
 =======
 	bits = hpfs_map_4sectors(s, secno, &qbh, 0);
 	if (!bits)
@@ -201,12 +219,15 @@ static unsigned count_bitmaps(struct super_block *s)
 	n_bands = (hpfs_sb(s)->sb_fs_size + 0x3fff) >> 14;
 	count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (n = 0; n < n_bands; n++)
 		count += hpfs_count_one_bitmap(s, le32_to_cpu(hpfs_sb(s)->sb_bmp_dir[n]));
 	return count;
 }
 
 =======
+=======
+>>>>>>> v3.18
 	for (n = 0; n < COUNT_RD_AHEAD; n++) {
 		hpfs_prefetch_bitmap(s, n);
 	}
@@ -232,12 +253,16 @@ unsigned hpfs_get_free_dnodes(struct super_block *s)
 	return sbi->sb_n_free_dnodes;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int hpfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 {
 	struct super_block *s = dentry->d_sb;
 	struct hpfs_sb_info *sbi = hpfs_sb(s);
 	u64 id = huge_encode_dev(s->s_bdev->bd_dev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	hpfs_lock(s);
 
@@ -246,12 +271,17 @@ static int hpfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 		sbi->sb_n_free_dnodes = hpfs_count_one_bitmap(s, sbi->sb_dmap);
 	/*}*/
 =======
+=======
+>>>>>>> v3.18
 
 	hpfs_lock(s);
 
 	if (sbi->sb_n_free == (unsigned)-1)
 		sbi->sb_n_free = count_bitmaps(s);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	buf->f_type = s->s_magic;
 	buf->f_bsize = 512;
@@ -260,7 +290,11 @@ static int hpfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 	buf->f_bavail = sbi->sb_n_free;
 	buf->f_files = sbi->sb_dirband_size / 4;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	buf->f_ffree = sbi->sb_n_free_dnodes;
+=======
+	buf->f_ffree = hpfs_get_free_dnodes(s);
+>>>>>>> v3.18
 =======
 	buf->f_ffree = hpfs_get_free_dnodes(s);
 >>>>>>> v3.18
@@ -374,7 +408,11 @@ static int parse_opts(char *opts, kuid_t *uid, kgid_t *gid, umode_t *umask,
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*printk("Parsing opts: '%s'\n",opts);*/
+=======
+	/*pr_info("Parsing opts: '%s'\n",opts);*/
+>>>>>>> v3.18
 =======
 	/*pr_info("Parsing opts: '%s'\n",opts);*/
 >>>>>>> v3.18
@@ -473,7 +511,11 @@ static int parse_opts(char *opts, kuid_t *uid, kgid_t *gid, umode_t *umask,
 static inline void hpfs_help(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("\n\
+=======
+	pr_info("\n\
+>>>>>>> v3.18
 =======
 	pr_info("\n\
 >>>>>>> v3.18
@@ -511,6 +553,11 @@ static int hpfs_remount_fs(struct super_block *s, int *flags, char *data)
 	char *new_opts = kstrdup(data, GFP_KERNEL);
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(s);
+
+>>>>>>> v3.18
 =======
 	sync_filesystem(s);
 
@@ -527,7 +574,11 @@ static int hpfs_remount_fs(struct super_block *s, int *flags, char *data)
 	if (!(o = parse_opts(data, &uid, &gid, &umask, &lowercase,
 	    &eas, &chk, &errs, &chkdsk, &timeshift))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: bad mount options.\n");
+=======
+		pr_err("bad mount options.\n");
+>>>>>>> v3.18
 =======
 		pr_err("bad mount options.\n");
 >>>>>>> v3.18
@@ -539,7 +590,11 @@ static int hpfs_remount_fs(struct super_block *s, int *flags, char *data)
 	}
 	if (timeshift != sbi->sb_timeshift) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: timeshift can't be changed using remount.\n");
+=======
+		pr_err("timeshift can't be changed using remount.\n");
+>>>>>>> v3.18
 =======
 		pr_err("timeshift can't be changed using remount.\n");
 >>>>>>> v3.18
@@ -609,9 +664,12 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 	s->s_fs_info = sbi;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sbi->sb_bmp_dir = NULL;
 	sbi->sb_cp_table = NULL;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	mutex_init(&sbi->hpfs_mutex);
@@ -630,7 +688,11 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 	if (!(o = parse_opts(options, &uid, &gid, &umask, &lowercase,
 	    &eas, &chk, &errs, &chkdsk, &timeshift))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: bad mount options.\n");
+=======
+		pr_err("bad mount options.\n");
+>>>>>>> v3.18
 =======
 		pr_err("bad mount options.\n");
 >>>>>>> v3.18
@@ -653,7 +715,12 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 	    ||*/ le32_to_cpu(superblock->magic) != SB_MAGIC
 	    || le32_to_cpu(spareblock->magic) != SP_MAGIC) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!silent) printk("HPFS: Bad magic ... probably not HPFS\n");
+=======
+		if (!silent)
+			pr_err("Bad magic ... probably not HPFS\n");
+>>>>>>> v3.18
 =======
 		if (!silent)
 			pr_err("Bad magic ... probably not HPFS\n");
@@ -665,9 +732,15 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 	if (!(s->s_flags & MS_RDONLY) &&
 	      superblock->funcversion != 2 && superblock->funcversion != 3) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: Bad version %d,%d. Mount readonly to go around\n",
 			(int)superblock->version, (int)superblock->funcversion);
 		printk("HPFS: please try recent version of HPFS driver at http://artax.karlin.mff.cuni.cz/~mikulas/vyplody/hpfs/index-e.cgi and if it still can't understand this format, contact author - mikulas@artax.karlin.mff.cuni.cz\n");
+=======
+		pr_err("Bad version %d,%d. Mount readonly to go around\n",
+			(int)superblock->version, (int)superblock->funcversion);
+		pr_err("please try recent version of HPFS driver at http://artax.karlin.mff.cuni.cz/~mikulas/vyplody/hpfs/index-e.cgi and if it still can't understand this format, contact author - mikulas@artax.karlin.mff.cuni.cz\n");
+>>>>>>> v3.18
 =======
 		pr_err("Bad version %d,%d. Mount readonly to go around\n",
 			(int)superblock->version, (int)superblock->funcversion);
@@ -719,7 +792,11 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 	if (spareblock->dirty && !spareblock->old_wrote) {
 		if (errs == 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("HPFS: Improperly stopped, not mounted\n");
+=======
+			pr_err("Improperly stopped, not mounted\n");
+>>>>>>> v3.18
 =======
 			pr_err("Improperly stopped, not mounted\n");
 >>>>>>> v3.18
@@ -737,7 +814,11 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 	if (spareblock->hotfixes_used || spareblock->n_spares_used) {
 		if (errs >= 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("HPFS: Hotfixes not supported here, try chkdsk\n");
+=======
+			pr_err("Hotfixes not supported here, try chkdsk\n");
+>>>>>>> v3.18
 =======
 			pr_err("Hotfixes not supported here, try chkdsk\n");
 >>>>>>> v3.18
@@ -746,6 +827,7 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 		}
 		hpfs_error(s, "hotfixes not supported here, try chkdsk");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (errs == 0) printk("HPFS: Proceeding, but your filesystem will be probably corrupted by this driver...\n");
 		else printk("HPFS: This driver may read bad files or crash when operating on disk with hotfixes.\n");
 	}
@@ -753,6 +835,8 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 		if (errs >= 2) {
 			printk("HPFS: Spare dnodes used, try chkdsk\n");
 =======
+=======
+>>>>>>> v3.18
 		if (errs == 0)
 			pr_err("Proceeding, but your filesystem will be probably corrupted by this driver...\n");
 		else
@@ -761,13 +845,21 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 	if (le32_to_cpu(spareblock->n_dnode_spares) != le32_to_cpu(spareblock->n_dnode_spares_free)) {
 		if (errs >= 2) {
 			pr_err("Spare dnodes used, try chkdsk\n");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			mark_dirty(s, 0);
 			goto bail4;
 		}
 		hpfs_error(s, "warning: spare dnodes used, try chkdsk");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (errs == 0) printk("HPFS: Proceeding, but your filesystem could be corrupted if you delete files or directories\n");
+=======
+		if (errs == 0)
+			pr_err("Proceeding, but your filesystem could be corrupted if you delete files or directories\n");
+>>>>>>> v3.18
 =======
 		if (errs == 0)
 			pr_err("Proceeding, but your filesystem could be corrupted if you delete files or directories\n");
@@ -791,7 +883,12 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 		}
 		sbi->sb_dirband_size = a;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else printk("HPFS: You really don't want any checks? You are crazy...\n");
+=======
+	} else
+		pr_err("You really don't want any checks? You are crazy...\n");
+>>>>>>> v3.18
 =======
 	} else
 		pr_err("You really don't want any checks? You are crazy...\n");
@@ -801,7 +898,11 @@ static int hpfs_fill_super(struct super_block *s, void *options, int silent)
 	if (le32_to_cpu(spareblock->n_code_pages))
 		if (!(sbi->sb_cp_table = hpfs_load_code_page(s, le32_to_cpu(spareblock->code_page_dir))))
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("HPFS: Warning: code page support is disabled\n");
+=======
+			pr_err("code page support is disabled\n");
+>>>>>>> v3.18
 =======
 			pr_err("code page support is disabled\n");
 >>>>>>> v3.18
@@ -854,10 +955,14 @@ bail1:
 bail0:
 	hpfs_unlock(s);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	kfree(sbi->sb_bmp_dir);
 	kfree(sbi->sb_cp_table);
 	s->s_fs_info = NULL;
 	kfree(sbi);
+=======
+	free_sbi(sbi);
+>>>>>>> v3.18
 =======
 	free_sbi(sbi);
 >>>>>>> v3.18

@@ -17,18 +17,24 @@
 #include <linux/module.h>
 #include <linux/sched.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
 #include <linux/of_platform.h>
 #include <linux/of_i2c.h>
 #include <linux/slab.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/of_address.h>
 #include <linux/of_irq.h>
 #include <linux/of_platform.h>
 #include <linux/slab.h>
 
 #include <linux/clk.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <linux/io.h>
 #include <linux/fsl_devices.h>
@@ -74,14 +80,20 @@ struct mpc_i2c {
 	int irq;
 	u32 real_clk;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 	u8 fdr, dfsrr;
 #endif
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_PM_SLEEP
 	u8 fdr, dfsrr;
 #endif
 	struct clk *clk_per;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -130,7 +142,11 @@ static void mpc_i2c_fixup(struct mpc_i2c *i2c)
 		writeccr(i2c, 0);
 		writeccr(i2c, CCR_MSTA | CCR_MTX | CCR_MEN);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		udelay(delay_val);
+=======
+		readb(i2c->base + MPC_I2C_DR);
+>>>>>>> v3.18
 =======
 		readb(i2c->base + MPC_I2C_DR);
 >>>>>>> v3.18
@@ -360,8 +376,12 @@ static u32 mpc_i2c_get_sec_cfg_8xxx(void)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (node)
 		of_node_put(node);
+=======
+	of_node_put(node);
+>>>>>>> v3.18
 =======
 	of_node_put(node);
 >>>>>>> v3.18
@@ -634,7 +654,10 @@ static const struct i2c_algorithm mpc_algo = {
 static struct i2c_adapter mpc_ops = {
 	.owner = THIS_MODULE,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = "MPC adapter",
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.algo = &mpc_algo,
@@ -651,6 +674,12 @@ static int fsl_i2c_probe(struct platform_device *op)
 	int result = 0;
 	int plen;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct resource res;
+	struct clk *clk;
+	int err;
+>>>>>>> v3.18
 =======
 	struct resource res;
 	struct clk *clk;
@@ -687,7 +716,10 @@ static int fsl_i2c_probe(struct platform_device *op)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * enable clock for the I2C peripheral (non fatal),
 	 * keep a reference upon successful allocation
@@ -703,6 +735,9 @@ static int fsl_i2c_probe(struct platform_device *op)
 		}
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (of_get_property(op->dev.of_node, "fsl,preserve-clocking", NULL)) {
 		clock = MPC_I2C_CLOCK_PRESERVE;
@@ -731,16 +766,22 @@ static int fsl_i2c_probe(struct platform_device *op)
 	dev_info(i2c->dev, "timeout %u us\n", mpc_ops.timeout * 1000000 / HZ);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&op->dev, i2c);
 
 	i2c->adap = mpc_ops;
 =======
+=======
+>>>>>>> v3.18
 	platform_set_drvdata(op, i2c);
 
 	i2c->adap = mpc_ops;
 	of_address_to_resource(op->dev.of_node, 0, &res);
 	scnprintf(i2c->adap.name, sizeof(i2c->adap.name),
 		  "MPC adapter at 0x%llx", (unsigned long long)res.start);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	i2c_set_adapdata(&i2c->adap, i2c);
 	i2c->adap.dev.parent = &op->dev;
@@ -752,7 +793,10 @@ static int fsl_i2c_probe(struct platform_device *op)
 		goto fail_add;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	of_i2c_register_devices(&i2c->adap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -760,6 +804,11 @@ static int fsl_i2c_probe(struct platform_device *op)
 
  fail_add:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (i2c->clk_per)
+		clk_disable_unprepare(i2c->clk_per);
+>>>>>>> v3.18
 =======
 	if (i2c->clk_per)
 		clk_disable_unprepare(i2c->clk_per);
@@ -776,11 +825,14 @@ static int fsl_i2c_probe(struct platform_device *op)
 static int fsl_i2c_remove(struct platform_device *op)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mpc_i2c *i2c = dev_get_drvdata(&op->dev);
 
 	i2c_del_adapter(&i2c->adap);
 
 =======
+=======
+>>>>>>> v3.18
 	struct mpc_i2c *i2c = platform_get_drvdata(op);
 
 	i2c_del_adapter(&i2c->adap);
@@ -788,6 +840,9 @@ static int fsl_i2c_remove(struct platform_device *op)
 	if (i2c->clk_per)
 		clk_disable_unprepare(i2c->clk_per);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (i2c->irq)
 		free_irq(i2c->irq, i2c);
@@ -799,7 +854,11 @@ static int fsl_i2c_remove(struct platform_device *op)
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18
@@ -824,12 +883,18 @@ static int mpc_i2c_resume(struct device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SIMPLE_DEV_PM_OPS(mpc_i2c_pm_ops, mpc_i2c_suspend, mpc_i2c_resume);
 =======
+=======
+>>>>>>> v3.18
 static SIMPLE_DEV_PM_OPS(mpc_i2c_pm_ops, mpc_i2c_suspend, mpc_i2c_resume);
 #define MPC_I2C_PM_OPS	(&mpc_i2c_pm_ops)
 #else
 #define MPC_I2C_PM_OPS	NULL
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -878,9 +943,13 @@ static struct platform_driver mpc_i2c_driver = {
 		.name = DRV_NAME,
 		.of_match_table = mpc_i2c_of_match,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
 		.pm = &mpc_i2c_pm_ops,
 #endif
+=======
+		.pm = MPC_I2C_PM_OPS,
+>>>>>>> v3.18
 =======
 		.pm = MPC_I2C_PM_OPS,
 >>>>>>> v3.18

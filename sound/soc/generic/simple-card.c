@@ -9,6 +9,7 @@
  * published by the Free Software Foundation.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <linux/platform_device.h>
 #include <linux/module.h>
@@ -32,6 +33,8 @@ static int __asoc_simple_card_dai_init(struct snd_soc_dai *dai,
 		ret = snd_soc_dai_set_sysclk(dai, 0, set->sysclk, 0);
 
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk.h>
 #include <linux/device.h>
 #include <linux/gpio.h>
@@ -143,12 +146,16 @@ static int __asoc_simple_card_dai_init(struct snd_soc_dai *dai,
 	ret = 0;
 
 err:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ret;
 }
 
 static int asoc_simple_card_dai_init(struct snd_soc_pcm_runtime *rtd)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct asoc_simple_card_info *info = asoc_simple_get_card_info(rtd);
 	struct snd_soc_dai *codec = rtd->codec_dai;
@@ -209,6 +216,8 @@ static int asoc_simple_card_probe(struct platform_device *pdev)
 
 	return snd_soc_register_card(&cinfo->snd_card);
 =======
+=======
+>>>>>>> v3.18
 	struct simple_card_data *priv =	snd_soc_card_get_drvdata(rtd->card);
 	struct snd_soc_dai *codec = rtd->codec_dai;
 	struct snd_soc_dai *cpu = rtd->cpu_dai;
@@ -649,11 +658,15 @@ static int asoc_simple_card_probe(struct platform_device *pdev)
 err:
 	asoc_simple_card_unref(pdev);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int asoc_simple_card_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct asoc_simple_card_info *cinfo = pdev->dev.platform_data;
 
@@ -667,6 +680,8 @@ static struct platform_driver asoc_simple_card = {
 	.probe		= asoc_simple_card_probe,
 	.remove		= asoc_simple_card_remove,
 =======
+=======
+>>>>>>> v3.18
 	struct snd_soc_card *card = platform_get_drvdata(pdev);
 	struct simple_card_data *priv = snd_soc_card_get_drvdata(card);
 
@@ -694,12 +709,19 @@ static struct platform_driver asoc_simple_card = {
 	},
 	.probe = asoc_simple_card_probe,
 	.remove = asoc_simple_card_remove,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
 module_platform_driver(asoc_simple_card);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("platform:asoc-simple-card");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("platform:asoc-simple-card");
 >>>>>>> v3.18

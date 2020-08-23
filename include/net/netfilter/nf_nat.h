@@ -14,6 +14,7 @@ enum nf_nat_manip_type {
 			     (hooknum) != NF_INET_LOCAL_IN)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* NAT sequence number modifications */
 struct nf_nat_seq {
 	/* position of the last TCP sequence number modification (if any) */
@@ -23,6 +24,8 @@ struct nf_nat_seq {
 	int16_t offset_before, offset_after;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/list.h>
@@ -43,6 +46,7 @@ struct nf_conn;
 struct nf_conn_nat {
 	struct hlist_node bysource;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct nf_nat_seq seq[IP_CT_DIR_MAX];
 	struct nf_conn *ct;
 	union nf_conntrack_nat_help help;
@@ -51,16 +55,22 @@ struct nf_conn_nat {
     defined(CONFIG_IP6_NF_TARGET_MASQUERADE) || \
     defined(CONFIG_IP6_NF_TARGET_MASQUERADE_MODULE)
 =======
+=======
+>>>>>>> v3.18
 	struct nf_conn *ct;
 	union nf_conntrack_nat_help help;
 #if IS_ENABLED(CONFIG_NF_NAT_MASQUERADE_IPV4) || \
     IS_ENABLED(CONFIG_NF_NAT_MASQUERADE_IPV6)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int masq_index;
 #endif
 };
 
 /* Set up the info structure to map into this range. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 extern unsigned int nf_nat_setup_info(struct nf_conn *ct,
 				      const struct nf_nat_range *range,
@@ -70,6 +80,8 @@ extern unsigned int nf_nat_setup_info(struct nf_conn *ct,
 extern int nf_nat_used_tuple(const struct nf_conntrack_tuple *tuple,
 			     const struct nf_conn *ignored_conntrack);
 =======
+=======
+>>>>>>> v3.18
 unsigned int nf_nat_setup_info(struct nf_conn *ct,
 			       const struct nf_nat_range *range,
 			       enum nf_nat_manip_type maniptype);
@@ -82,6 +94,9 @@ struct nf_conn_nat *nf_ct_nat_ext_add(struct nf_conn *ct);
 /* Is this tuple already taken? (not by us)*/
 int nf_nat_used_tuple(const struct nf_conntrack_tuple *tuple,
 		      const struct nf_conn *ignored_conntrack);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static inline struct nf_conn_nat *nfct_nat(const struct nf_conn *ct)
@@ -99,8 +114,13 @@ static inline bool nf_nat_oif_changed(unsigned int hooknum,
 				      const struct net_device *out)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if IS_ENABLED(CONFIG_IP_NF_TARGET_MASQUERADE) || \
     IS_ENABLED(CONFIG_IP6_NF_TARGET_MASQUERADE)
+=======
+#if IS_ENABLED(CONFIG_NF_NAT_MASQUERADE_IPV4) || \
+    IS_ENABLED(CONFIG_NF_NAT_MASQUERADE_IPV6)
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_NF_NAT_MASQUERADE_IPV4) || \
     IS_ENABLED(CONFIG_NF_NAT_MASQUERADE_IPV6)

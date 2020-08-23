@@ -57,6 +57,7 @@ unsigned int i;
 int fb_fd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if (-1 == ioctl (fd, VIDIOC_G_FBUF, &amp;fbuf)) {
 	perror ("VIDIOC_G_FBUF");
 	exit (EXIT_FAILURE);
@@ -70,6 +71,8 @@ for (i = 0; i &gt; 30; ++i) {
 
 	fb_fd = open (dev_name, O_RDWR);
 =======
+=======
+>>>>>>> v3.18
 if (-1 == ioctl(fd, VIDIOC_G_FBUF, &amp;fbuf)) {
 	perror("VIDIOC_G_FBUF");
 	exit(EXIT_FAILURE);
@@ -82,6 +85,9 @@ for (i = 0; i &lt; 30; i++) {
 	snprintf(dev_name, sizeof(dev_name), "/dev/fb%u", i);
 
 	fb_fd = open(dev_name, O_RDWR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (-1 == fb_fd) {
 		switch (errno) {
@@ -91,6 +97,7 @@ for (i = 0; i &lt; 30; i++) {
 
 		default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			perror ("open");
 			exit (EXIT_FAILURE);
 		}
@@ -99,6 +106,8 @@ for (i = 0; i &lt; 30; i++) {
 	if (0 == ioctl (fb_fd, FBIOGET_FSCREENINFO, &amp;si)) {
 		if (si.smem_start == (unsigned long) fbuf.base)
 =======
+=======
+>>>>>>> v3.18
 			perror("open");
 			exit(EXIT_FAILURE);
 		}
@@ -106,6 +115,9 @@ for (i = 0; i &lt; 30; i++) {
 
 	if (0 == ioctl(fb_fd, FBIOGET_FSCREENINFO, &amp;si)) {
 		if (si.smem_start == (unsigned long)fbuf.base)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			break;
 	} else {
@@ -113,7 +125,11 @@ for (i = 0; i &lt; 30; i++) {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	close (fb_fd);
+=======
+	close(fb_fd);
+>>>>>>> v3.18
 =======
 	close(fb_fd);
 >>>>>>> v3.18

@@ -392,6 +392,10 @@ static void sdh_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		cfg &= ~SD4E;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bfin_write_SDH_CFG(cfg);
+>>>>>>> v3.18
 =======
 	bfin_write_SDH_CFG(cfg);
 >>>>>>> v3.18
@@ -420,7 +424,10 @@ static void sdh_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 # endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (ios->power_mode != MMC_POWER_OFF)
@@ -441,7 +448,10 @@ static void sdh_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 		host->clk_div = clk_div;
 		bfin_write_SDH_CLK_CTL(clk_ctl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else
@@ -632,8 +642,11 @@ static int sdh_remove(struct platform_device *pdev)
 	struct mmc_host *mmc = platform_get_drvdata(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (mmc) {
@@ -656,6 +669,7 @@ static int sdh_remove(struct platform_device *pdev)
 static int sdh_suspend(struct platform_device *dev, pm_message_t state)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mmc_host *mmc = platform_get_drvdata(dev);
 	struct bfin_sd_host *drv_data = get_sdh_data(dev);
 	int ret = 0;
@@ -667,18 +681,26 @@ static int sdh_suspend(struct platform_device *dev, pm_message_t state)
 
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 	struct bfin_sd_host *drv_data = get_sdh_data(dev);
 
 	peripheral_free_list(drv_data->pin_req);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int sdh_resume(struct platform_device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mmc_host *mmc = platform_get_drvdata(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct bfin_sd_host *drv_data = get_sdh_data(dev);
@@ -692,10 +714,13 @@ static int sdh_resume(struct platform_device *dev)
 
 	sdh_reset();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (mmc)
 		ret = mmc_resume_host(mmc);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return ret;

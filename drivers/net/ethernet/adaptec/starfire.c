@@ -286,7 +286,11 @@ enum chipset {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static DEFINE_PCI_DEVICE_TABLE(starfire_pci_tbl) = {
+=======
+static const struct pci_device_id starfire_pci_tbl[] = {
+>>>>>>> v3.18
 =======
 static const struct pci_device_id starfire_pci_tbl[] = {
 >>>>>>> v3.18
@@ -789,7 +793,11 @@ static int starfire_init_one(struct pci_dev *pdev,
 	dev->netdev_ops = &netdev_ops;
 	dev->watchdog_timeo = TX_TIMEOUT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SET_ETHTOOL_OPS(dev, &ethtool_ops);
+=======
+	dev->ethtool_ops = &ethtool_ops;
+>>>>>>> v3.18
 =======
 	dev->ethtool_ops = &ethtool_ops;
 >>>>>>> v3.18
@@ -844,7 +852,10 @@ static int starfire_init_one(struct pci_dev *pdev,
 
 err_out_cleardev:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(base);
@@ -2024,7 +2035,10 @@ static void starfire_remove_one(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	free_netdev(dev);			/* Will also free np!! */

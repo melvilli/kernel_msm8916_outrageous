@@ -346,9 +346,15 @@ The implementation is simple.
 
 Setting the flag 'cpuset.memory_spread_page' turns on a per-process flag
 <<<<<<< HEAD
+<<<<<<< HEAD
 PF_SPREAD_PAGE for each task that is in that cpuset or subsequently
 joins that cpuset.  The page allocation calls for the page cache
 is modified to perform an inline check for this PF_SPREAD_PAGE task
+=======
+PFA_SPREAD_PAGE for each task that is in that cpuset or subsequently
+joins that cpuset.  The page allocation calls for the page cache
+is modified to perform an inline check for this PFA_SPREAD_PAGE task
+>>>>>>> v3.18
 =======
 PFA_SPREAD_PAGE for each task that is in that cpuset or subsequently
 joins that cpuset.  The page allocation calls for the page cache
@@ -359,7 +365,11 @@ returns the node to prefer for the allocation.
 
 Similarly, setting 'cpuset.memory_spread_slab' turns on the flag
 <<<<<<< HEAD
+<<<<<<< HEAD
 PF_SPREAD_SLAB, and appropriately marked slab caches will allocate
+=======
+PFA_SPREAD_SLAB, and appropriately marked slab caches will allocate
+>>>>>>> v3.18
 =======
 PFA_SPREAD_SLAB, and appropriately marked slab caches will allocate
 >>>>>>> v3.18
@@ -384,7 +394,11 @@ can become very uneven.
 --------------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The kernel scheduler (kernel/sched.c) automatically load balances
+=======
+The kernel scheduler (kernel/sched/core.c) automatically load balances
+>>>>>>> v3.18
 =======
 The kernel scheduler (kernel/sched/core.c) automatically load balances
 >>>>>>> v3.18

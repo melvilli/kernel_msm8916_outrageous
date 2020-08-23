@@ -322,7 +322,11 @@ static LIST_HEAD(aha152x_host_list);
 			(cmd) ? ((cmd)->device->host->host_no) : -1, \
                         (cmd) ? ((cmd)->device->id & 0x0f) : -1, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 			(cmd) ? ((cmd)->device->lun & 0x07) : -1
+=======
+			(cmd) ? ((u8)(cmd)->device->lun & 0x07) : -1
+>>>>>>> v3.18
 =======
 			(cmd) ? ((u8)(cmd)->device->lun & 0x07) : -1
 >>>>>>> v3.18
@@ -862,7 +866,11 @@ struct Scsi_Host *aha152x_probe_one(struct aha152x_setup *setup)
 	SETPORT(SIMODE1, 0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if( request_irq(shpnt->irq, swintr, IRQF_DISABLED|IRQF_SHARED, "aha152x", shpnt) ) {
+=======
+	if (request_irq(shpnt->irq, swintr, IRQF_SHARED, "aha152x", shpnt)) {
+>>>>>>> v3.18
 =======
 	if (request_irq(shpnt->irq, swintr, IRQF_SHARED, "aha152x", shpnt)) {
 >>>>>>> v3.18
@@ -900,7 +908,11 @@ struct Scsi_Host *aha152x_probe_one(struct aha152x_setup *setup)
 	SETPORT(SSTAT1, 0xef);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ( request_irq(shpnt->irq, intr, IRQF_DISABLED|IRQF_SHARED, "aha152x", shpnt) ) {
+=======
+	if (request_irq(shpnt->irq, intr, IRQF_SHARED, "aha152x", shpnt)) {
+>>>>>>> v3.18
 =======
 	if (request_irq(shpnt->irq, intr, IRQF_SHARED, "aha152x", shpnt)) {
 >>>>>>> v3.18
@@ -1615,7 +1627,11 @@ static void busfree_run(struct Scsi_Host *shpnt)
 			int hostno=DONE_SC->device->host->host_no;
 			int id=DONE_SC->device->id & 0xf;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			int lun=DONE_SC->device->lun & 0x7;
+=======
+			int lun=((u8)DONE_SC->device->lun) & 0x7;
+>>>>>>> v3.18
 =======
 			int lun=((u8)DONE_SC->device->lun) & 0x7;
 >>>>>>> v3.18
@@ -3001,7 +3017,11 @@ static void get_command(struct seq_file *m, Scsi_Cmnd * ptr)
 
 	SPRINTF("%p: target=%d; lun=%d; cmnd=( ",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ptr, ptr->device->id, ptr->device->lun);
+=======
+		ptr, ptr->device->id, (u8)ptr->device->lun);
+>>>>>>> v3.18
 =======
 		ptr, ptr->device->id, (u8)ptr->device->lun);
 >>>>>>> v3.18

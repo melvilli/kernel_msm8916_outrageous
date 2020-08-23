@@ -1,6 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Device Tree Source for IGEP Technology devices
+=======
+ * Common device tree for IGEP boards based on AM/DM37x
+>>>>>>> v3.18
 =======
  * Common device tree for IGEP boards based on AM/DM37x
 >>>>>>> v3.18
@@ -15,7 +19,11 @@
 /dts-v1/;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "omap34xx.dtsi"
+=======
+#include "omap36xx.dtsi"
+>>>>>>> v3.18
 =======
 #include "omap36xx.dtsi"
 >>>>>>> v3.18
@@ -33,7 +41,10 @@
 		ti,codec = <&twl_audio>;
 	};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	vdd33: regulator-vdd33 {
 		compatible = "regulator-fixed";
@@ -53,6 +64,9 @@
 		enable-active-high;
 		vin-supply = <&vdd33>;
 	};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -60,8 +74,13 @@
 	uart1_pins: pinmux_uart1_pins {
 		pinctrl-single,pins = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 			0x152 0x100	/* uart1_rx.uart1_rx INPUT | MODE0 */
 			0x14c 0		/* uart1_tx.uart1_tx OUTPUT | MODE0 */
+=======
+			0x152 (PIN_INPUT | MUX_MODE0)		/* uart1_rx.uart1_rx */
+			0x14c (PIN_OUTPUT |MUX_MODE0)		/* uart1_tx.uart1_tx */
+>>>>>>> v3.18
 =======
 			0x152 (PIN_INPUT | MUX_MODE0)		/* uart1_rx.uart1_rx */
 			0x14c (PIN_OUTPUT |MUX_MODE0)		/* uart1_tx.uart1_tx */
@@ -72,8 +91,13 @@
 	uart2_pins: pinmux_uart2_pins {
 		pinctrl-single,pins = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 			0x14a 0x100	/* uart2_rx.uart2_rx INPUT | MODE0 */
 			0x148 0		/* uart2_tx.uart2_tx OUTPUT | MODE0 */
+=======
+			0x14a (PIN_INPUT | MUX_MODE0)		/* uart2_rx.uart2_rx */
+			0x148 (PIN_OUTPUT | MUX_MODE0)		/* uart2_tx.uart2_tx */
+>>>>>>> v3.18
 =======
 			0x14a (PIN_INPUT | MUX_MODE0)		/* uart2_rx.uart2_rx */
 			0x148 (PIN_OUTPUT | MUX_MODE0)		/* uart2_tx.uart2_tx */
@@ -84,9 +108,12 @@
 	uart3_pins: pinmux_uart3_pins {
 		pinctrl-single,pins = <
 <<<<<<< HEAD
+<<<<<<< HEAD
 			0x16e 0x100	/* uart3_rx.uart3_rx INPUT | MODE0 */
 			0x170 0		/* uart3_tx.uart3_tx OUTPUT | MODE0 */
 =======
+=======
+>>>>>>> v3.18
 			0x16e (PIN_INPUT | MUX_MODE0)		/* uart3_rx.uart3_rx */
 			0x170 (PIN_OUTPUT | MUX_MODE0)		/* uart3_tx.uart3_tx */
 		>;
@@ -107,12 +134,16 @@
 			0x10e (PIN_INPUT | MUX_MODE0)		/* mcbsp2_clkx.mcbsp2_clkx */
 			0x110 (PIN_INPUT | MUX_MODE0)		/* mcbsp2_dr.mcbsp2.dr */
 			0x112 (PIN_OUTPUT | MUX_MODE0)		/* mcbsp2_dx.mcbsp2_dx */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		>;
 	};
 
 	mmc1_pins: pinmux_mmc1_pins {
 		pinctrl-single,pins = <
+<<<<<<< HEAD
 <<<<<<< HEAD
 			0x114 0x0118    /* sdmmc1_clk.sdmmc1_clk INPUT PULLUP | MODE 0 */
 			0x116 0x0118    /* sdmmc1_cmd.sdmmc1_cmd INPUT PULLUP | MODE 0 */
@@ -125,6 +156,8 @@
 			0x124 0x0100	/* sdmmc1_dat6.sdmmc1_dat6 INPUT | MODE 0 */
 			0x126 0x0100	/* sdmmc1_dat7.sdmmc1_dat7 INPUT | MODE 0 */
 =======
+=======
+>>>>>>> v3.18
 			0x114 (PIN_INPUT_PULLUP | MUX_MODE0)	/* sdmmc1_clk.sdmmc1_clk */
 			0x116 (PIN_INPUT_PULLUP | MUX_MODE0)	/* sdmmc1_cmd.sdmmc1_cmd */
 			0x118 (PIN_INPUT_PULLUP | MUX_MODE0) 	/* sdmmc1_dat0.sdmmc1_dat0 */
@@ -169,6 +202,9 @@
 		pinctrl-single,pins = <
 			0x192 (PIN_INPUT | MUX_MODE0)   /* i2c3_scl.i2c3_scl */
 			0x194 (PIN_INPUT | MUX_MODE0)   /* i2c3_sda.i2c3_sda */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		>;
 	};
@@ -176,6 +212,11 @@
 
 &i2c1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c1_pins>;
+>>>>>>> v3.18
 =======
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2c1_pins>;
@@ -196,6 +237,7 @@
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "twl4030.dtsi"
 
 &i2c2 {
@@ -203,6 +245,8 @@
 };
 
 =======
+=======
+>>>>>>> v3.18
 #include "twl4030.dtsi"
 #include "twl4030_omap3.dtsi"
 
@@ -223,6 +267,9 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 &mmc1 {
       pinctrl-names = "default";
@@ -230,12 +277,15 @@
       vmmc-supply = <&vmmc1>;
       vmmc_aux-supply = <&vsim>;
 <<<<<<< HEAD
+<<<<<<< HEAD
       bus-width = <8>;
 };
 
 &mmc2 {
 	status = "disabled";
 =======
+=======
+>>>>>>> v3.18
       bus-width = <4>;
 };
 
@@ -245,6 +295,9 @@
 	vmmc-supply = <&lbee1usjyc_vmmc>;
 	bus-width = <4>;
 	non-removable;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -271,7 +324,10 @@
 	ti,use-leds;
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 &usb_otg_hs {
 	interface-type = <0>;
@@ -281,4 +337,7 @@
 	mode = <3>;
 	power = <50>;
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

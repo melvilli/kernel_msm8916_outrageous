@@ -16,7 +16,10 @@ header-y += ipcbuf.h
 header-y += kvm.h
 header-y += kvm_para.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 header-y += linkage.h
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 header-y += mman.h
@@ -24,6 +27,10 @@ header-y += msgbuf.h
 header-y += nvram.h
 header-y += param.h
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+header-y += perf_event.h
+>>>>>>> v3.18
 =======
 header-y += perf_event.h
 >>>>>>> v3.18

@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 s390 SCSI dump tool (zfcpdump)
+=======
+The s390 SCSI dump tool (zfcpdump)
+>>>>>>> v3.18
 =======
 The s390 SCSI dump tool (zfcpdump)
 >>>>>>> v3.18
@@ -9,7 +13,11 @@ dumps on SCSI disks. The dump process is initiated by booting a dump tool, which
 has to create a dump of the current (probably crashed) Linux image. In order to
 not overwrite memory of the crashed Linux with data of the dump tool, the
 <<<<<<< HEAD
+<<<<<<< HEAD
 hardware saves some memory plus the register sets of the boot cpu before the
+=======
+hardware saves some memory plus the register sets of the boot CPU before the
+>>>>>>> v3.18
 =======
 hardware saves some memory plus the register sets of the boot CPU before the
 >>>>>>> v3.18
@@ -18,7 +26,11 @@ memory afterwards. Currently 32 MB are saved.
 
 This zfcpdump implementation consists of a Linux dump kernel together with
 <<<<<<< HEAD
+<<<<<<< HEAD
 a userspace dump tool, which are loaded together into the saved memory region
+=======
+a user space dump tool, which are loaded together into the saved memory region
+>>>>>>> v3.18
 =======
 a user space dump tool, which are loaded together into the saved memory region
 >>>>>>> v3.18
@@ -32,9 +44,15 @@ which exports memory and registers of the crashed Linux in an s390
 standalone dump format. It can be used in the same way as e.g. /dev/mem. The
 dump format defines a 4K header followed by plain uncompressed memory. The
 <<<<<<< HEAD
+<<<<<<< HEAD
 register sets are stored in the prefix pages of the respective cpus. To build a
 dump enabled kernel with the zcore driver, the kernel config option
 CONFIG_ZFCPDUMP has to be set. When reading from "zcore/mem", the part of
+=======
+register sets are stored in the prefix pages of the respective CPUs. To build a
+dump enabled kernel with the zcore driver, the kernel config option
+CONFIG_CRASH_DUMP has to be set. When reading from "zcore/mem", the part of
+>>>>>>> v3.18
 =======
 register sets are stored in the prefix pages of the respective CPUs. To build a
 dump enabled kernel with the zcore driver, the kernel config option
@@ -44,6 +62,7 @@ memory, which has been saved by hardware is read by the driver via the SCLP
 hardware interface. The second part is just copied from the non overwritten real
 memory.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 The userspace application of zfcpdump can reside e.g. in an intitramfs or an
 initrd. It reads from zcore/mem and writes the system dump to a file on a
@@ -101,6 +120,8 @@ dump kernel when preparing a SCSI dump disk.
 
 If you use a ramdisk copy it to "/usr/share/zfcpdump/zfcpdump.rd".
 =======
+=======
+>>>>>>> v3.18
 Since kernel version 3.12 also the /proc/vmcore file can also be used to access
 the dump.
 
@@ -121,6 +142,9 @@ reads from /proc/vmcore or zcore/mem and writes the system dump to a SCSI disk.
 The s390-tools package version 1.24.0 and above builds an external zfcpdump
 initramfs with a user space application that writes the dump to a SCSI
 partition.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 For more information on how to use zfcpdump refer to the s390 'Using the Dump

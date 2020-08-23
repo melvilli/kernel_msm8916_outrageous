@@ -4,7 +4,11 @@ config MWIFIEX
 	---help---
 	  This adds support for wireless adapters based on Marvell
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  802.11n chipsets.
+=======
+	  802.11n/ac chipsets.
+>>>>>>> v3.18
 =======
 	  802.11n/ac chipsets.
 >>>>>>> v3.18
@@ -14,7 +18,11 @@ config MWIFIEX
 
 config MWIFIEX_SDIO
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Marvell WiFi-Ex Driver for SD8786/SD8787/SD8797"
+=======
+	tristate "Marvell WiFi-Ex Driver for SD8786/SD8787/SD8797/SD8887/SD8897"
+>>>>>>> v3.18
 =======
 	tristate "Marvell WiFi-Ex Driver for SD8786/SD8787/SD8797/SD8887/SD8897"
 >>>>>>> v3.18
@@ -23,7 +31,11 @@ config MWIFIEX_SDIO
 	---help---
 	  This adds support for wireless adapters based on Marvell
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  8786/8787/8797 chipsets with SDIO interface.
+=======
+	  8786/8787/8797/8887/8897 chipsets with SDIO interface.
+>>>>>>> v3.18
 =======
 	  8786/8787/8797/8887/8897 chipsets with SDIO interface.
 >>>>>>> v3.18
@@ -44,7 +56,11 @@ config MWIFIEX_PCIE
 
 config MWIFIEX_USB
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Marvell WiFi-Ex Driver for USB8797"
+=======
+	tristate "Marvell WiFi-Ex Driver for USB8797/8897"
+>>>>>>> v3.18
 =======
 	tristate "Marvell WiFi-Ex Driver for USB8797/8897"
 >>>>>>> v3.18
@@ -53,7 +69,11 @@ config MWIFIEX_USB
 	---help---
 	  This adds support for wireless adapters based on Marvell
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  Avastar 88W8797 chipset with USB interface.
+=======
+	  8797/8897 chipset with USB interface.
+>>>>>>> v3.18
 =======
 	  8797/8897 chipset with USB interface.
 >>>>>>> v3.18

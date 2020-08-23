@@ -7,7 +7,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /include/ "at91sam9260.dtsi"
+=======
+#include "at91sam9260.dtsi"
+>>>>>>> v3.18
 =======
 #include "at91sam9260.dtsi"
 >>>>>>> v3.18
@@ -27,10 +31,13 @@
 			};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			adc0: adc@fffe0000 {
 				atmel,adc-startup-time = <40>;
 			};
 =======
+=======
+>>>>>>> v3.18
 			ssc0: ssc@fffbc000 {
 				compatible = "atmel,at91sam9rl-ssc";
 			};
@@ -63,6 +70,9 @@
 					atmel,clk-divisors = <1 2 4 6>;
 				};
 			};
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		};
 	};

@@ -2,7 +2,10 @@ config STMMAC_ETH
 	tristate "STMicroelectronics 10/100/1000 Ethernet driver"
 	depends on HAS_IOMEM && HAS_DMA
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select NET_CORE
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	select MII
@@ -10,6 +13,10 @@ config STMMAC_ETH
 	select CRC32
 	select PTP_1588_CLOCK
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select RESET_CONTROLLER
+>>>>>>> v3.18
 =======
 	select RESET_CONTROLLER
 >>>>>>> v3.18
@@ -34,7 +41,10 @@ config STMMAC_PLATFORM
 	  If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config DWMAC_MESON
 	bool "Amlogic Meson dwmac support"
 	depends on STMMAC_PLATFORM && ARCH_MESON
@@ -77,6 +87,9 @@ config DWMAC_STI
 	  device driver. This driver is used on for the STi series
 	  SOCs GMAC ethernet controller.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config STMMAC_PCI
 	bool "STMMAC PCI bus support"

@@ -31,8 +31,11 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 u32 booke_wdt_enabled;
 u32 booke_wdt_period = CONFIG_BOOKE_WDT_DEFAULT_TIMEOUT;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -45,12 +48,18 @@ u32 booke_wdt_period = CONFIG_BOOKE_WDT_DEFAULT_TIMEOUT;
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static bool booke_wdt_enabled;
 module_param(booke_wdt_enabled, bool, 0);
 static int  booke_wdt_period = CONFIG_BOOKE_WDT_DEFAULT_TIMEOUT;
 module_param(booke_wdt_period, int, 0);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_FSL_BOOK3E
 
@@ -115,25 +124,37 @@ static void __booke_wdt_set(void *data)
 {
 	u32 val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	val = mfspr(SPRN_TCR);
 	val &= ~WDTP_MASK;
 	val |= WDTP(booke_wdt_period);
 =======
+=======
+>>>>>>> v3.18
 	struct watchdog_device *wdog = data;
 
 	val = mfspr(SPRN_TCR);
 	val &= ~WDTP_MASK;
 	val |= WDTP(sec_to_period(wdog->timeout));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	mtspr(SPRN_TCR, val);
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void booke_wdt_set(void)
 {
 	on_each_cpu(__booke_wdt_set, NULL, 0);
+=======
+static void booke_wdt_set(void *data)
+{
+	on_each_cpu(__booke_wdt_set, data, 0);
+>>>>>>> v3.18
 =======
 static void booke_wdt_set(void *data)
 {
@@ -157,6 +178,10 @@ static void __booke_wdt_enable(void *data)
 {
 	u32 val;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct watchdog_device *wdog = data;
+>>>>>>> v3.18
 =======
 	struct watchdog_device *wdog = data;
 >>>>>>> v3.18
@@ -166,7 +191,11 @@ static void __booke_wdt_enable(void *data)
 	val = mfspr(SPRN_TCR);
 	val &= ~WDTP_MASK;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	val |= (TCR_WIE|TCR_WRC(WRC_CHIP)|WDTP(booke_wdt_period));
+=======
+	val |= (TCR_WIE|TCR_WRC(WRC_CHIP)|WDTP(sec_to_period(wdog->timeout)));
+>>>>>>> v3.18
 =======
 	val |= (TCR_WIE|TCR_WRC(WRC_CHIP)|WDTP(sec_to_period(wdog->timeout)));
 >>>>>>> v3.18
@@ -196,6 +225,7 @@ static void __booke_wdt_disable(void *data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __booke_wdt_start(struct watchdog_device *wdog)
 {
 	on_each_cpu(__booke_wdt_enable, NULL, 0);
@@ -209,11 +239,16 @@ static int booke_wdt_start(struct watchdog_device *wdog)
 		__booke_wdt_start(wdog);
 	}
 =======
+=======
+>>>>>>> v3.18
 static int booke_wdt_start(struct watchdog_device *wdog)
 {
 	on_each_cpu(__booke_wdt_enable, wdog, 0);
 	pr_debug("watchdog enabled (timeout = %u sec)\n", wdog->timeout);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -222,7 +257,10 @@ static int booke_wdt_stop(struct watchdog_device *wdog)
 {
 	on_each_cpu(__booke_wdt_disable, NULL, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	booke_wdt_enabled = 0;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	pr_debug("watchdog disabled\n");
@@ -236,9 +274,14 @@ static int booke_wdt_set_timeout(struct watchdog_device *wdt_dev,
 	if (timeout > MAX_WDT_TIMEOUT)
 		return -EINVAL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	booke_wdt_period = sec_to_period(timeout);
 	wdt_dev->timeout = timeout;
 	booke_wdt_set();
+=======
+	wdt_dev->timeout = timeout;
+	booke_wdt_set(wdt_dev);
+>>>>>>> v3.18
 =======
 	wdt_dev->timeout = timeout;
 	booke_wdt_set(wdt_dev);
@@ -281,15 +324,21 @@ static int __init booke_wdt_init(void)
 	booke_wdt_info.firmware_version = cur_cpu_spec->pvr_value;
 	booke_wdt_set_timeout(&booke_wdt_dev,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			      period_to_sec(CONFIG_BOOKE_WDT_DEFAULT_TIMEOUT));
 	watchdog_set_nowayout(&booke_wdt_dev, nowayout);
 	if (booke_wdt_enabled)
 		__booke_wdt_start(&booke_wdt_dev);
 =======
+=======
+>>>>>>> v3.18
 			      period_to_sec(booke_wdt_period));
 	watchdog_set_nowayout(&booke_wdt_dev, nowayout);
 	if (booke_wdt_enabled)
 		booke_wdt_start(&booke_wdt_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = watchdog_register_device(&booke_wdt_dev);
@@ -301,6 +350,10 @@ module_init(booke_wdt_init);
 module_exit(booke_wdt_exit);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+MODULE_ALIAS("booke_wdt");
+>>>>>>> v3.18
 =======
 MODULE_ALIAS("booke_wdt");
 >>>>>>> v3.18

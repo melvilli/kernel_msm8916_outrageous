@@ -139,7 +139,11 @@ typedef struct p80211_frmrx_t {
 
 /* called by /proc/net/wireless */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct iw_statistics *p80211wext_get_wireless_stats(netdevice_t * dev);
+=======
+struct iw_statistics *p80211wext_get_wireless_stats(netdevice_t *dev);
+>>>>>>> v3.18
 =======
 struct iw_statistics *p80211wext_get_wireless_stats(netdevice_t *dev);
 >>>>>>> v3.18
@@ -185,6 +189,7 @@ typedef struct wlandevice {
 
 	/* device methods (init by MSD, used by p80211 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int (*open) (struct wlandevice *wlandev);
 	int (*close) (struct wlandevice *wlandev);
 	void (*reset) (struct wlandevice *wlandev);
@@ -196,6 +201,8 @@ typedef struct wlandevice {
 				   netdevice_t *dev);
 	void (*tx_timeout) (struct wlandevice *wlandev);
 =======
+=======
+>>>>>>> v3.18
 	int (*open)(struct wlandevice *wlandev);
 	int (*close)(struct wlandevice *wlandev);
 	void (*reset)(struct wlandevice *wlandev);
@@ -206,6 +213,9 @@ typedef struct wlandevice {
 	int (*set_multicast_list)(struct wlandevice *wlandev,
 				   netdevice_t *dev);
 	void (*tx_timeout)(struct wlandevice *wlandev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* 802.11 State */
@@ -227,7 +237,10 @@ typedef struct wlandevice {
 	/* Linux netdevice and support */
 	netdevice_t *netdev;	/* ptr to linux netdevice */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device_stats linux_stats;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

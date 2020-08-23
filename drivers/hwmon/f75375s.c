@@ -276,7 +276,11 @@ static bool duty_mode_enabled(u8 pwm_enable)
 		return false;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Unexpected pwm_enable value %d\n", pwm_enable);
+>>>>>>> v3.18
 =======
 		WARN(1, "Unexpected pwm_enable value %d\n", pwm_enable);
 >>>>>>> v3.18
@@ -296,7 +300,11 @@ static bool auto_mode_enabled(u8 pwm_enable)
 		return true;
 	default:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		BUG();
+=======
+		WARN(1, "Unexpected pwm_enable value %d\n", pwm_enable);
+>>>>>>> v3.18
 =======
 		WARN(1, "Unexpected pwm_enable value %d\n", pwm_enable);
 >>>>>>> v3.18
@@ -841,7 +849,12 @@ static int f75375_probe(struct i2c_client *client,
 {
 	struct f75375_data *data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct f75375s_platform_data *f75375s_pdata = client->dev.platform_data;
+=======
+	struct f75375s_platform_data *f75375s_pdata =
+			dev_get_platdata(&client->dev);
+>>>>>>> v3.18
 =======
 	struct f75375s_platform_data *f75375s_pdata =
 			dev_get_platdata(&client->dev);

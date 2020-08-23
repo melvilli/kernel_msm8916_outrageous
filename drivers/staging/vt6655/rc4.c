@@ -83,6 +83,10 @@ void rc4_encrypt(PRC4Ext pRC4, unsigned char *pbyDest,
 {
 	unsigned int ii;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

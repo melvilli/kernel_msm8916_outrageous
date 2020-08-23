@@ -24,8 +24,11 @@
 static void early_hv_write(struct console *con, const char *s, unsigned n)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	hv_console_write((HV_VirtAddr) s, n);
 =======
+=======
+>>>>>>> v3.18
 	tile_console_write(s, n);
 
 	/*
@@ -35,12 +38,16 @@ static void early_hv_write(struct console *con, const char *s, unsigned n)
 	 */
 	if (n && s[n-1] == '\n')
 		tile_console_write("\r", 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static struct console early_hv_console = {
 	.name =		"earlyhv",
 	.write =	early_hv_write,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	.flags =	CON_PRINTBUFFER,
 	.index =	-1,
@@ -50,10 +57,15 @@ static struct console early_hv_console = {
 static int early_console_complete;
 
 =======
+=======
+>>>>>>> v3.18
 	.flags =	CON_PRINTBUFFER | CON_BOOT,
 	.index =	-1,
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void early_panic(const char *fmt, ...)
 {
@@ -63,7 +75,11 @@ void early_panic(const char *fmt, ...)
 	early_printk("Kernel panic - not syncing: ");
 	early_vprintk(fmt, ap);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	early_console->write(early_console, "\n", 1);
+=======
+	early_printk("\n");
+>>>>>>> v3.18
 =======
 	early_printk("\n");
 >>>>>>> v3.18
@@ -73,8 +89,11 @@ void early_panic(const char *fmt, ...)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __initdata keep_early;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int __init setup_early_printk(char *str)
@@ -83,9 +102,12 @@ static int __init setup_early_printk(char *str)
 		return 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (str != NULL && strncmp(str, "keep", 4) == 0)
 		keep_early = 1;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	early_console = &early_hv_console;
@@ -94,6 +116,7 @@ static int __init setup_early_printk(char *str)
 	return 0;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void __init disable_early_printk(void)
 {
@@ -120,6 +143,8 @@ boot command line to see any diagnostic early console output.\n\
 ");
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 early_param("earlyprintk", setup_early_printk);

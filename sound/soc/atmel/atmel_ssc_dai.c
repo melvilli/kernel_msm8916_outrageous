@@ -74,6 +74,10 @@ static struct atmel_ssc_mask ssc_tx_mask = {
 	.ssc_endx	= SSC_BIT(SR_ENDTX),
 	.ssc_endbuf	= SSC_BIT(SR_TXBUFE),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ssc_error	= SSC_BIT(SR_OVRUN),
+>>>>>>> v3.18
 =======
 	.ssc_error	= SSC_BIT(SR_OVRUN),
 >>>>>>> v3.18
@@ -87,6 +91,10 @@ static struct atmel_ssc_mask ssc_rx_mask = {
 	.ssc_endx	= SSC_BIT(SR_ENDRX),
 	.ssc_endbuf	= SSC_BIT(SR_RXBUFF),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ssc_error	= SSC_BIT(SR_OVRUN),
+>>>>>>> v3.18
 =======
 	.ssc_error	= SSC_BIT(SR_OVRUN),
 >>>>>>> v3.18
@@ -205,7 +213,12 @@ static int atmel_ssc_startup(struct snd_pcm_substream *substream,
 {
 	struct atmel_ssc_info *ssc_p = &ssc_info[dai->id];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int dir_mask;
+=======
+	struct atmel_pcm_dma_params *dma_params;
+	int dir, dir_mask;
+>>>>>>> v3.18
 =======
 	struct atmel_pcm_dma_params *dma_params;
 	int dir, dir_mask;
@@ -215,11 +228,14 @@ static int atmel_ssc_startup(struct snd_pcm_substream *substream,
 		ssc_readl(ssc_p->ssc->regs, SR));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK)
 		dir_mask = SSC_DIR_MASK_PLAYBACK;
 	else
 		dir_mask = SSC_DIR_MASK_CAPTURE;
 =======
+=======
+>>>>>>> v3.18
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
 		dir = 0;
 		dir_mask = SSC_DIR_MASK_PLAYBACK;
@@ -235,6 +251,9 @@ static int atmel_ssc_startup(struct snd_pcm_substream *substream,
 	ssc_p->dma_params[dir] = dma_params;
 
 	snd_soc_dai_set_dma_data(dai, substream, dma_params);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_irq(&ssc_p->lock);
@@ -357,6 +376,7 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_dai *dai)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct snd_soc_pcm_runtime *rtd = snd_pcm_substream_chip(substream);
 	int id = dai->id;
 	struct atmel_ssc_info *ssc_p = &ssc_info[id];
@@ -365,6 +385,8 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 	u32 tfmr, rfmr, tcmr, rcmr;
 	int ret;
 =======
+=======
+>>>>>>> v3.18
 	int id = dai->id;
 	struct atmel_ssc_info *ssc_p = &ssc_info[id];
 	struct ssc_device *ssc = ssc_p->ssc;
@@ -374,6 +396,9 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 	int start_event;
 	int ret;
 	int fslen, fslen_ext;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -386,6 +411,7 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 	else
 		dir = 1;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dma_params = &ssc_dma_params[id][dir];
 	dma_params->ssc = ssc_p->ssc;
@@ -400,6 +426,9 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 	 * as it is common to all substreams.
 	 */
 	snd_soc_dai_set_dma_data(rtd->cpu_dai, substream, dma_params);
+=======
+	dma_params = ssc_p->dma_params[dir];
+>>>>>>> v3.18
 =======
 	dma_params = ssc_p->dma_params[dir];
 >>>>>>> v3.18
@@ -433,6 +462,7 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 
 	/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * The SSC only supports up to 16-bit samples in I2S format, due
 	 * to the size of the Frame Mode Register FSLEN field.
 	 */
@@ -445,6 +475,8 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 	}
 
 	/*
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	 * Compute SSC register settings.
@@ -461,7 +493,10 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 		 * is output on the SSC TK line.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 		if (bits > 16 && !ssc->pdata->has_fslen_ext) {
 			dev_err(dai->dev,
@@ -473,6 +508,9 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 		fslen_ext = (bits - 1) / 16;
 		fslen = (bits - 1) % 16;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		rcmr =	  SSC_BF(RCMR_PERIOD, ssc_p->rcmr_period)
 			| SSC_BF(RCMR_STTDLY, START_DELAY)
@@ -482,14 +520,20 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 			| SSC_BF(RCMR_CKS, SSC_CKS_DIV);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rfmr =	  SSC_BF(RFMR_FSEDGE, SSC_FSEDGE_POSITIVE)
 			| SSC_BF(RFMR_FSOS, SSC_FSOS_NEGATIVE)
 			| SSC_BF(RFMR_FSLEN, (bits - 1))
 =======
+=======
+>>>>>>> v3.18
 		rfmr =    SSC_BF(RFMR_FSLEN_EXT, fslen_ext)
 			| SSC_BF(RFMR_FSEDGE, SSC_FSEDGE_POSITIVE)
 			| SSC_BF(RFMR_FSOS, SSC_FSOS_NEGATIVE)
 			| SSC_BF(RFMR_FSLEN, fslen)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			| SSC_BF(RFMR_DATNB, (channels - 1))
 			| SSC_BIT(RFMR_MSBF)
@@ -504,16 +548,22 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 			| SSC_BF(TCMR_CKS, SSC_CKS_DIV);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		tfmr =	  SSC_BF(TFMR_FSEDGE, SSC_FSEDGE_POSITIVE)
 			| SSC_BF(TFMR_FSDEN, 0)
 			| SSC_BF(TFMR_FSOS, SSC_FSOS_NEGATIVE)
 			| SSC_BF(TFMR_FSLEN, (bits - 1))
 =======
+=======
+>>>>>>> v3.18
 		tfmr =    SSC_BF(TFMR_FSLEN_EXT, fslen_ext)
 			| SSC_BF(TFMR_FSEDGE, SSC_FSEDGE_POSITIVE)
 			| SSC_BF(TFMR_FSDEN, 0)
 			| SSC_BF(TFMR_FSOS, SSC_FSOS_NEGATIVE)
 			| SSC_BF(TFMR_FSLEN, fslen)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			| SSC_BF(TFMR_DATNB, (channels - 1))
 			| SSC_BIT(TFMR_MSBF)
@@ -529,6 +579,7 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 		 * on the TK line, and the SSC receive clock is
 		 * generated from the transmit clock.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 */
 		rcmr =	  SSC_BF(RCMR_PERIOD, 0)
 			| SSC_BF(RCMR_STTDLY, START_DELAY)
@@ -537,6 +588,8 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 			| SSC_BF(RCMR_CKO, SSC_CKO_NONE)
 			| SSC_BF(RCMR_CKS, SSC_CKS_CLOCK);
 =======
+=======
+>>>>>>> v3.18
 		 *
 		 *  For single channel data, one sample is transferred
 		 * on the falling edge of the LRC clock.
@@ -554,13 +607,20 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 			| SSC_BF(RCMR_CKO, SSC_CKO_NONE)
 			| SSC_BF(RCMR_CKS, ssc->clk_from_rk_pin ?
 					   SSC_CKS_PIN : SSC_CKS_CLOCK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		rfmr =	  SSC_BF(RFMR_FSEDGE, SSC_FSEDGE_POSITIVE)
 			| SSC_BF(RFMR_FSOS, SSC_FSOS_NONE)
 			| SSC_BF(RFMR_FSLEN, 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			| SSC_BF(RFMR_DATNB, (channels - 1))
+=======
+			| SSC_BF(RFMR_DATNB, 0)
+>>>>>>> v3.18
 =======
 			| SSC_BF(RFMR_DATNB, 0)
 >>>>>>> v3.18
@@ -571,16 +631,22 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 		tcmr =	  SSC_BF(TCMR_PERIOD, 0)
 			| SSC_BF(TCMR_STTDLY, START_DELAY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			| SSC_BF(TCMR_START, SSC_START_FALLING_RF)
 			| SSC_BF(TCMR_CKI, SSC_CKI_FALLING)
 			| SSC_BF(TCMR_CKO, SSC_CKO_NONE)
 			| SSC_BF(TCMR_CKS, SSC_CKS_PIN);
 =======
+=======
+>>>>>>> v3.18
 			| SSC_BF(TCMR_START, start_event)
 			| SSC_BF(TCMR_CKI, SSC_CKI_FALLING)
 			| SSC_BF(TCMR_CKO, SSC_CKO_NONE)
 			| SSC_BF(TCMR_CKS, ssc->clk_from_rk_pin ?
 					   SSC_CKS_CLOCK : SSC_CKS_PIN);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		tfmr =	  SSC_BF(TFMR_FSEDGE, SSC_FSEDGE_POSITIVE)
@@ -588,7 +654,11 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 			| SSC_BF(TFMR_FSOS, SSC_FSOS_NONE)
 			| SSC_BF(TFMR_FSLEN, 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			| SSC_BF(TFMR_DATNB, (channels - 1))
+=======
+			| SSC_BF(TFMR_DATNB, 0)
+>>>>>>> v3.18
 =======
 			| SSC_BF(TFMR_DATNB, 0)
 >>>>>>> v3.18
@@ -655,7 +725,12 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 			| SSC_BF(RCMR_CKI, SSC_CKI_RISING)
 			| SSC_BF(RCMR_CKO, SSC_CKO_NONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			| SSC_BF(RCMR_CKS, SSC_CKS_PIN);
+=======
+			| SSC_BF(RCMR_CKS, ssc->clk_from_rk_pin ?
+					   SSC_CKS_PIN : SSC_CKS_CLOCK);
+>>>>>>> v3.18
 =======
 			| SSC_BF(RCMR_CKS, ssc->clk_from_rk_pin ?
 					   SSC_CKS_PIN : SSC_CKS_CLOCK);
@@ -675,7 +750,12 @@ static int atmel_ssc_hw_params(struct snd_pcm_substream *substream,
 			| SSC_BF(TCMR_CKI, SSC_CKI_FALLING)
 			| SSC_BF(TCMR_CKO, SSC_CKO_NONE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			| SSC_BF(TCMR_CKS, SSC_CKS_PIN);
+=======
+			| SSC_BF(RCMR_CKS, ssc->clk_from_rk_pin ?
+					   SSC_CKS_CLOCK : SSC_CKS_PIN);
+>>>>>>> v3.18
 =======
 			| SSC_BF(RCMR_CKS, ssc->clk_from_rk_pin ?
 					   SSC_CKS_CLOCK : SSC_CKS_PIN);
@@ -763,7 +843,12 @@ static int atmel_ssc_prepare(struct snd_pcm_substream *substream,
 	dma_params = ssc_p->dma_params[dir];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ssc_writel(ssc_p->ssc->regs, CR, dma_params->mask->ssc_enable);
+=======
+	ssc_writel(ssc_p->ssc->regs, CR, dma_params->mask->ssc_disable);
+	ssc_writel(ssc_p->ssc->regs, IDR, dma_params->mask->ssc_error);
+>>>>>>> v3.18
 =======
 	ssc_writel(ssc_p->ssc->regs, CR, dma_params->mask->ssc_disable);
 	ssc_writel(ssc_p->ssc->regs, IDR, dma_params->mask->ssc_error);
@@ -776,7 +861,10 @@ static int atmel_ssc_prepare(struct snd_pcm_substream *substream,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int atmel_ssc_trigger(struct snd_pcm_substream *substream,
 			     int cmd, struct snd_soc_dai *dai)
 {
@@ -804,6 +892,9 @@ static int atmel_ssc_trigger(struct snd_pcm_substream *substream,
 
 	return 0;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef CONFIG_PM
@@ -880,6 +971,10 @@ static const struct snd_soc_dai_ops atmel_ssc_dai_ops = {
 	.shutdown	= atmel_ssc_shutdown,
 	.prepare	= atmel_ssc_prepare,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.trigger	= atmel_ssc_trigger,
+>>>>>>> v3.18
 =======
 	.trigger	= atmel_ssc_trigger,
 >>>>>>> v3.18
@@ -930,7 +1025,11 @@ static int asoc_ssc_init(struct device *dev)
 		dev_err(dev, "Could not register PCM: %d\n", ret);
 		goto err_unregister_dai;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	};
+=======
+	}
+>>>>>>> v3.18
 =======
 	}
 >>>>>>> v3.18

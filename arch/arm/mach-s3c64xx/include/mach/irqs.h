@@ -108,6 +108,7 @@
 #define IRQ_ADC			S3C64XX_IRQ_VIC1(31)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define S3C64XX_TIMER_IRQ(x)	S3C_IRQ(64 + (x))
 
 #define IRQ_TIMER0		S3C64XX_TIMER_IRQ(0)
@@ -116,6 +117,8 @@
 #define IRQ_TIMER3		S3C64XX_TIMER_IRQ(3)
 #define IRQ_TIMER4		S3C64XX_TIMER_IRQ(4)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* compatibility for device defines */

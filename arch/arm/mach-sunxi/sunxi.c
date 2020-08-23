@@ -11,6 +11,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/clocksource.h>
 #include <linux/delay.h>
 #include <linux/kernel.h>
@@ -123,6 +124,8 @@ DT_MACHINE_START(SUNXI_DT, "Allwinner A1X (Device Tree)")
 	.init_time	= sunxi_timer_init,
 	.dt_compat	= sunxi_board_dt_compat,
 =======
+=======
+>>>>>>> v3.18
 #include <linux/clk-provider.h>
 #include <linux/clocksource.h>
 #include <linux/init.h>
@@ -175,5 +178,8 @@ static const char * const sun8i_board_dt_compat[] = {
 
 DT_MACHINE_START(SUN8I_DT, "Allwinner sun8i (A23) Family")
 	.dt_compat	= sun8i_board_dt_compat,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 MACHINE_END

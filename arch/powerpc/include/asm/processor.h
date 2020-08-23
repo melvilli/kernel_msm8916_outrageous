@@ -15,9 +15,12 @@
 #ifdef CONFIG_VSX
 #define TS_FPRWIDTH 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 #define TS_FPRWIDTH 1
 =======
+=======
+>>>>>>> v3.18
 
 #ifdef __BIG_ENDIAN__
 #define TS_FPROFFSET 0
@@ -30,6 +33,9 @@
 #else
 #define TS_FPRWIDTH 1
 #define TS_FPROFFSET 0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -158,6 +164,7 @@ typedef struct {
 } mm_segment_t;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TS_FPROFFSET 0
 #define TS_VSRLOWOFFSET 1
 #define TS_FPR(i) fpr[i][TS_FPROFFSET]
@@ -180,6 +187,8 @@ struct thread_struct {
 	void		*pgdir;		/* root of page-table tree */
 #endif
 =======
+=======
+>>>>>>> v3.18
 #define TS_FPR(i) fp_state.fpr[i][TS_FPROFFSET]
 #define TS_TRANS_FPR(i) transact_fp.fpr[i][TS_FPROFFSET]
 
@@ -196,6 +205,9 @@ struct thread_vr_state {
 };
 
 struct debug_reg {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #ifdef CONFIG_PPC_ADV_DEBUG_REGS
 	/*
@@ -203,15 +215,21 @@ struct debug_reg {
 	 * om the BookE platforms.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	dbcr0;
 	unsigned long	dbcr1;
 #ifdef CONFIG_BOOKE
 	unsigned long	dbcr2;
 =======
+=======
+>>>>>>> v3.18
 	uint32_t	dbcr0;
 	uint32_t	dbcr1;
 #ifdef CONFIG_BOOKE
 	uint32_t	dbcr2;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 	/*
@@ -221,7 +239,11 @@ struct debug_reg {
 	 * describe the reason for the last debug trap.  Torez
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	dbsr;
+=======
+	uint32_t	dbsr;
+>>>>>>> v3.18
 =======
 	uint32_t	dbsr;
 >>>>>>> v3.18
@@ -245,6 +267,7 @@ struct debug_reg {
 #endif
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* FP and VSX 0-31 register set */
 	double		fpr[32][TS_FPRWIDTH];
 	struct {
@@ -253,6 +276,8 @@ struct debug_reg {
 		unsigned int val;	/* Floating point status */
 	} fpscr;
 =======
+=======
+>>>>>>> v3.18
 };
 
 struct thread_struct {
@@ -275,6 +300,9 @@ struct thread_struct {
 	struct debug_reg debug;
 	struct thread_fp_state	fp_state;
 	struct thread_fp_state	*fp_save_area;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int		fpexc_mode;	/* floating-point exception mode */
 	unsigned int	align_ctl;	/* alignment handling control */
@@ -294,10 +322,15 @@ struct thread_struct {
 	unsigned long	trap_nr;	/* last trap # on this thread */
 #ifdef CONFIG_ALTIVEC
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Complete AltiVec register set */
 	vector128	vr[32] __attribute__((aligned(16)));
 	/* AltiVec status */
 	vector128	vscr __attribute__((aligned(16)));
+=======
+	struct thread_vr_state vr_state;
+	struct thread_vr_state *vr_save_area;
+>>>>>>> v3.18
 =======
 	struct thread_vr_state vr_state;
 	struct thread_vr_state *vr_save_area;
@@ -314,6 +347,11 @@ struct thread_struct {
 	u64		acc;		/* Accumulator */
 	unsigned long	spefscr;	/* SPE & eFP status */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long	spefscr_last;	/* SPEFSCR value on last prctl
+					   call or trap return */
+>>>>>>> v3.18
 =======
 	unsigned long	spefscr_last;	/* SPEFSCR value on last prctl
 					   call or trap return */
@@ -344,6 +382,7 @@ struct thread_struct {
 	 * VRs work the same way.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	double		transact_fpr[32][TS_FPRWIDTH];
 	struct {
 		unsigned int pad;
@@ -351,6 +390,10 @@ struct thread_struct {
 	} transact_fpscr;
 	vector128	transact_vr[32] __attribute__((aligned(16)));
 	vector128	transact_vscr __attribute__((aligned(16)));
+=======
+	struct thread_fp_state transact_fp;
+	struct thread_vr_state transact_vr;
+>>>>>>> v3.18
 =======
 	struct thread_fp_state transact_fp;
 	struct thread_vr_state transact_vr;
@@ -377,9 +420,15 @@ struct thread_struct {
 	unsigned long	sdar;
 	unsigned long	sier;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long	mmcr0;
 	unsigned long	mmcr2;
 	unsigned long	mmcra;
+=======
+	unsigned long	mmcr2;
+	unsigned 	mmcr0;
+	unsigned 	used_ebb;
+>>>>>>> v3.18
 =======
 	unsigned long	mmcr2;
 	unsigned 	mmcr0;
@@ -396,7 +445,13 @@ struct thread_struct {
 
 #ifdef CONFIG_SPE
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define SPEFSCR_INIT .spefscr = SPEFSCR_FINVE | SPEFSCR_FDBZE | SPEFSCR_FUNFE | SPEFSCR_FOVFE,
+=======
+#define SPEFSCR_INIT \
+	.spefscr = SPEFSCR_FINVE | SPEFSCR_FDBZE | SPEFSCR_FUNFE | SPEFSCR_FOVFE, \
+	.spefscr_last = SPEFSCR_FINVE | SPEFSCR_FDBZE | SPEFSCR_FUNFE | SPEFSCR_FOVFE,
+>>>>>>> v3.18
 =======
 #define SPEFSCR_INIT \
 	.spefscr = SPEFSCR_FINVE | SPEFSCR_FDBZE | SPEFSCR_FUNFE | SPEFSCR_FOVFE, \
@@ -419,11 +474,16 @@ struct thread_struct {
 #define INIT_THREAD  { \
 	.ksp = INIT_SP, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ksp_limit = INIT_SP_LIMIT, \
 	.regs = (struct pt_regs *)INIT_SP - 1, /* XXX bogus, I think */ \
 	.fs = KERNEL_DS, \
 	.fpr = {{0}}, \
 	.fpscr = { .val = 0, }, \
+=======
+	.regs = (struct pt_regs *)INIT_SP - 1, /* XXX bogus, I think */ \
+	.fs = KERNEL_DS, \
+>>>>>>> v3.18
 =======
 	.regs = (struct pt_regs *)INIT_SP - 1, /* XXX bogus, I think */ \
 	.fs = KERNEL_DS, \
@@ -466,7 +526,10 @@ extern int get_unalign_ctl(struct task_struct *tsk, unsigned long adr);
 extern int set_unalign_ctl(struct task_struct *tsk, unsigned int val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 extern void fp_enable(void);
 extern void vec_enable(void);
 extern void load_fp_state(struct thread_fp_state *fp);
@@ -474,6 +537,9 @@ extern void store_fp_state(struct thread_fp_state *fp);
 extern void load_vr_state(struct thread_vr_state *vr);
 extern void store_vr_state(struct thread_vr_state *vr);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline unsigned int __unpack_fe01(unsigned long msr_bits)
 {
@@ -492,6 +558,11 @@ static inline unsigned long __pack_fe01(unsigned int fpmode)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cpu_relax_lowlatency() cpu_relax()
+
+>>>>>>> v3.18
 =======
 #define cpu_relax_lowlatency() cpu_relax()
 
@@ -526,9 +597,13 @@ static inline void prefetchw(const void *x)
 #define spin_lock_prefetch(x)	prefetchw(x)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PPC64
 #define HAVE_ARCH_PICK_MMAP_LAYOUT
 #endif
+=======
+#define HAVE_ARCH_PICK_MMAP_LAYOUT
+>>>>>>> v3.18
 =======
 #define HAVE_ARCH_PICK_MMAP_LAYOUT
 >>>>>>> v3.18
@@ -552,6 +627,7 @@ enum idle_boot_override {IDLE_NO_OVERRIDE = 0, IDLE_POWERSAVE_OFF};
 
 extern int powersave_nap;	/* set if nap mode can be used in idle loop */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void power7_nap(void);
 
 #ifdef CONFIG_PSERIES_IDLE
@@ -560,6 +636,10 @@ extern void update_smt_snooze_delay(int cpu, int residency);
 static inline void update_smt_snooze_delay(int cpu, int residency) {}
 #endif
 
+=======
+extern void power7_nap(int check_irq);
+extern void power7_sleep(void);
+>>>>>>> v3.18
 =======
 extern void power7_nap(int check_irq);
 extern void power7_sleep(void);

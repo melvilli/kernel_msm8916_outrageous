@@ -11,7 +11,10 @@
 #include <linux/module.h>
 #include <linux/pci.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/blkdev.h>
@@ -148,7 +151,10 @@ static int jmicron_init_one (struct pci_dev *pdev, const struct pci_device_id *i
 	const struct ata_port_info *ppi[] = { &info, NULL };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The JMicron chip 361/363 contains one SATA controller and one
 	 * PATA controller,for powering on these both controllers, we must
@@ -161,6 +167,9 @@ static int jmicron_init_one (struct pci_dev *pdev, const struct pci_device_id *i
 		pdev->device == PCI_DEVICE_ID_JMICRON_JMB361))
 		device_disable_async_suspend(&pdev->dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return ata_pci_bmdma_init_one(pdev, ppi, &jmicron_sht, NULL, 0);
 }
@@ -177,7 +186,11 @@ static struct pci_driver jmicron_pci_driver = {
 	.probe			= jmicron_init_one,
 	.remove			= ata_pci_remove_one,
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PM
+=======
+#ifdef CONFIG_PM_SLEEP
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_PM_SLEEP
 >>>>>>> v3.18

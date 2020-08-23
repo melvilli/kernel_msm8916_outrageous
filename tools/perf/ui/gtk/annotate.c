@@ -155,9 +155,15 @@ static int perf_gtk__annotate_symbol(GtkWidget *window, struct symbol *sym,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int symbol__gtk_annotate(struct symbol *sym, struct map *map,
 			 struct perf_evsel *evsel,
 			 struct hist_browser_timer *hbt)
+=======
+static int symbol__gtk_annotate(struct symbol *sym, struct map *map,
+				struct perf_evsel *evsel,
+				struct hist_browser_timer *hbt)
+>>>>>>> v3.18
 =======
 static int symbol__gtk_annotate(struct symbol *sym, struct map *map,
 				struct perf_evsel *evsel,
@@ -233,7 +239,10 @@ static int symbol__gtk_annotate(struct symbol *sym, struct map *map,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int hist_entry__gtk_annotate(struct hist_entry *he,
 			     struct perf_evsel *evsel,
 			     struct hist_browser_timer *hbt)
@@ -241,6 +250,9 @@ int hist_entry__gtk_annotate(struct hist_entry *he,
 	return symbol__gtk_annotate(he->ms.sym, he->ms.map, evsel, hbt);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 void perf_gtk__show_annotations(void)
 {

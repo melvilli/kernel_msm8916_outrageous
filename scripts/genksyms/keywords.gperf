@@ -24,6 +24,11 @@ __inline__, INLINE_KEYW
 __signed, SIGNED_KEYW
 __signed__, SIGNED_KEYW
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__typeof, TYPEOF_KEYW
+__typeof__, TYPEOF_KEYW
+>>>>>>> v3.18
 =======
 __typeof, TYPEOF_KEYW
 __typeof__, TYPEOF_KEYW
@@ -57,6 +62,10 @@ static, STATIC_KEYW
 struct, STRUCT_KEYW
 typedef, TYPEDEF_KEYW
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+typeof, TYPEOF_KEYW
+>>>>>>> v3.18
 =======
 typeof, TYPEOF_KEYW
 >>>>>>> v3.18
@@ -65,7 +74,10 @@ unsigned, UNSIGNED_KEYW
 void, VOID_KEYW
 volatile, VOLATILE_KEYW
 <<<<<<< HEAD
+<<<<<<< HEAD
 typeof, TYPEOF_KEYW
 __typeof__, TYPEOF_KEYW
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

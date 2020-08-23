@@ -217,6 +217,10 @@ struct mipi_dsim_config {
  * @e_clk_src: select byte clock source.
  * @pd: pointer to MIPI-DSI driver platform data.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * @phy: pointer to the MIPI-DSI PHY
+>>>>>>> v3.18
 =======
  * @phy: pointer to the MIPI-DSI PHY
 >>>>>>> v3.18
@@ -241,6 +245,10 @@ struct mipi_dsim_device {
 
 	struct mipi_dsim_platform_data	*pd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct phy			*phy;
+>>>>>>> v3.18
 =======
 	struct phy			*phy;
 >>>>>>> v3.18
@@ -257,7 +265,10 @@ struct mipi_dsim_device {
  * @lcd_panel_info: pointer for lcd panel specific structure.
  *	this structure specifies width, height, timing and polarity and so on.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @phy_enable: pointer to a callback controlling D-PHY enable/reset
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -268,8 +279,11 @@ struct mipi_dsim_platform_data {
 	unsigned int			enabled;
 	void				*lcd_panel_info;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	int (*phy_enable)(struct platform_device *pdev, bool on);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };

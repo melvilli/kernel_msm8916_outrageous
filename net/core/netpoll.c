@@ -13,6 +13,10 @@
 
 #include <linux/moduleparam.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/kernel.h>
+>>>>>>> v3.18
 =======
 #include <linux/kernel.h>
 >>>>>>> v3.18
@@ -50,6 +54,7 @@
 static struct sk_buff_head skb_pool;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static atomic_t trapped;
 
 DEFINE_STATIC_SRCU(netpoll_srcu);
@@ -57,6 +62,11 @@ DEFINE_STATIC_SRCU(netpoll_srcu);
 #define USEC_PER_POLL	50
 #define NETPOLL_RX_ENABLED  1
 #define NETPOLL_RX_DROP     2
+=======
+DEFINE_STATIC_SRCU(netpoll_srcu);
+
+#define USEC_PER_POLL	50
+>>>>>>> v3.18
 =======
 DEFINE_STATIC_SRCU(netpoll_srcu);
 
@@ -71,7 +81,10 @@ DEFINE_STATIC_SRCU(netpoll_srcu);
 
 static void zap_completion_queue(void);
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void netpoll_neigh_reply(struct sk_buff *skb, struct netpoll_info *npinfo);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void netpoll_async_cleanup(struct work_struct *work);
@@ -87,7 +100,10 @@ module_param(carrier_timeout, uint, 0644);
 	pr_notice("%s: " fmt, np->name, ##__VA_ARGS__)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int netpoll_start_xmit(struct sk_buff *skb, struct net_device *dev,
 			      struct netdev_queue *txq)
 {
@@ -116,6 +132,9 @@ out:
 	return status;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void queue_process(struct work_struct *work)
 {
@@ -126,6 +145,7 @@ static void queue_process(struct work_struct *work)
 
 	while ((skb = skb_dequeue(&npinfo->txq))) {
 		struct net_device *dev = skb->dev;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		const struct net_device_ops *ops = dev->netdev_ops;
 		struct netdev_queue *txq;
@@ -144,6 +164,8 @@ static void queue_process(struct work_struct *work)
 			skb_queue_head(&npinfo->txq, skb);
 			__netif_tx_unlock(txq);
 =======
+=======
+>>>>>>> v3.18
 		struct netdev_queue *txq;
 
 		if (!netif_device_present(dev) || !netif_running(dev)) {
@@ -159,6 +181,9 @@ static void queue_process(struct work_struct *work)
 		    netpoll_start_xmit(skb, dev, txq) != NETDEV_TX_OK) {
 			skb_queue_head(&npinfo->txq, skb);
 			HARD_TX_UNLOCK(dev, txq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			local_irq_restore(flags);
 
@@ -166,7 +191,11 @@ static void queue_process(struct work_struct *work)
 			return;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__netif_tx_unlock(txq);
+=======
+		HARD_TX_UNLOCK(dev, txq);
+>>>>>>> v3.18
 =======
 		HARD_TX_UNLOCK(dev, txq);
 >>>>>>> v3.18
@@ -174,6 +203,7 @@ static void queue_process(struct work_struct *work)
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static __sum16 checksum_udp(struct sk_buff *skb, struct udphdr *uh,
 			    unsigned short ulen, __be32 saddr, __be32 daddr)
@@ -196,6 +226,8 @@ static __sum16 checksum_udp(struct sk_buff *skb, struct udphdr *uh,
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Check whether delayed processing was scheduled for our NIC. If so,
  * we attempt to grab the poll lock and use ->poll() to pump the card.
@@ -207,6 +239,7 @@ static __sum16 checksum_udp(struct sk_buff *skb, struct udphdr *uh,
  * case. Further, we test the poll_owner to avoid recursion on UP
  * systems where the lock doesn't exist.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * In cases where there is bi-directional communications, reading only
  * one message at a time can lead to packets being dropped by the
@@ -215,6 +248,10 @@ static __sum16 checksum_udp(struct sk_buff *skb, struct udphdr *uh,
  */
 static int poll_one_napi(struct netpoll_info *npinfo,
 			 struct napi_struct *napi, int budget)
+=======
+ */
+static int poll_one_napi(struct napi_struct *napi, int budget)
+>>>>>>> v3.18
 =======
  */
 static int poll_one_napi(struct napi_struct *napi, int budget)
@@ -230,6 +267,7 @@ static int poll_one_napi(struct napi_struct *napi, int budget)
 		return budget;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	npinfo->rx_flags |= NETPOLL_RX_DROP;
 	atomic_inc(&trapped);
 	set_bit(NAPI_STATE_NPSVC, &napi->state);
@@ -241,6 +279,8 @@ static int poll_one_napi(struct napi_struct *napi, int budget)
 	atomic_dec(&trapped);
 	npinfo->rx_flags &= ~NETPOLL_RX_DROP;
 =======
+=======
+>>>>>>> v3.18
 	set_bit(NAPI_STATE_NPSVC, &napi->state);
 
 	work = napi->poll(napi, budget);
@@ -248,11 +288,15 @@ static int poll_one_napi(struct napi_struct *napi, int budget)
 	trace_napi_poll(napi);
 
 	clear_bit(NAPI_STATE_NPSVC, &napi->state);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return budget - work;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void poll_napi(struct net_device *dev)
 {
@@ -263,10 +307,16 @@ static void poll_napi(struct net_device *dev, int budget)
 {
 	struct napi_struct *napi;
 >>>>>>> v3.18
+=======
+static void poll_napi(struct net_device *dev, int budget)
+{
+	struct napi_struct *napi;
+>>>>>>> v3.18
 
 	list_for_each_entry(napi, &dev->napi_list, dev_list) {
 		if (napi->poll_owner != smp_processor_id() &&
 		    spin_trylock(&napi->poll_lock)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			budget = poll_one_napi(rcu_dereference_bh(dev->npinfo),
 					       napi, budget);
@@ -278,10 +328,15 @@ static void poll_napi(struct net_device *dev, int budget)
 			budget = poll_one_napi(napi, budget);
 			spin_unlock(&napi->poll_lock);
 >>>>>>> v3.18
+=======
+			budget = poll_one_napi(napi, budget);
+			spin_unlock(&napi->poll_lock);
+>>>>>>> v3.18
 		}
 	}
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void service_neigh_queue(struct netpoll_info *npi)
 {
@@ -295,11 +350,17 @@ static void service_neigh_queue(struct netpoll_info *npi)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void netpoll_poll_dev(struct net_device *dev)
 {
 	const struct net_device_ops *ops;
 	struct netpoll_info *ni = rcu_dereference_bh(dev->npinfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int budget = 0;
+>>>>>>> v3.18
 =======
 	int budget = 0;
 >>>>>>> v3.18
@@ -325,6 +386,7 @@ static void netpoll_poll_dev(struct net_device *dev)
 	/* Process pending work on NIC */
 	ops->ndo_poll_controller(dev);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	poll_napi(dev);
 
@@ -352,6 +414,8 @@ static void netpoll_poll_dev(struct net_device *dev)
 
 int netpoll_rx_disable(struct net_device *dev)
 =======
+=======
+>>>>>>> v3.18
 	poll_napi(dev, budget);
 
 	up(&ni->dev_lock);
@@ -360,6 +424,9 @@ int netpoll_rx_disable(struct net_device *dev)
 }
 
 void netpoll_poll_disable(struct net_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct netpoll_info *ni;
@@ -371,16 +438,22 @@ void netpoll_poll_disable(struct net_device *dev)
 		down(&ni->dev_lock);
 	srcu_read_unlock(&netpoll_srcu, idx);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return 0;
 }
 EXPORT_SYMBOL(netpoll_rx_disable);
 
 void netpoll_rx_enable(struct net_device *dev)
 =======
+=======
+>>>>>>> v3.18
 }
 EXPORT_SYMBOL(netpoll_poll_disable);
 
 void netpoll_poll_enable(struct net_device *dev)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct netpoll_info *ni;
@@ -391,7 +464,11 @@ void netpoll_poll_enable(struct net_device *dev)
 	rcu_read_unlock();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(netpoll_rx_enable);
+=======
+EXPORT_SYMBOL(netpoll_poll_enable);
+>>>>>>> v3.18
 =======
 EXPORT_SYMBOL(netpoll_poll_enable);
 >>>>>>> v3.18
@@ -429,7 +506,11 @@ static void zap_completion_queue(void)
 			struct sk_buff *skb = clist;
 			clist = clist->next;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (skb->destructor) {
+=======
+			if (!skb_irq_freeable(skb)) {
+>>>>>>> v3.18
 =======
 			if (!skb_irq_freeable(skb)) {
 >>>>>>> v3.18
@@ -488,7 +569,10 @@ void netpoll_send_skb_on_dev(struct netpoll *np, struct sk_buff *skb,
 	int status = NETDEV_TX_BUSY;
 	unsigned long tries;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct net_device_ops *ops = dev->netdev_ops;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* It is up to the caller to keep npinfo alive. */
@@ -499,7 +583,11 @@ void netpoll_send_skb_on_dev(struct netpoll *np, struct sk_buff *skb,
 	npinfo = rcu_dereference_bh(np->dev->npinfo);
 	if (!npinfo || !netif_running(dev) || !netif_device_present(dev)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__kfree_skb(skb);
+=======
+		dev_kfree_skb_irq(skb);
+>>>>>>> v3.18
 =======
 		dev_kfree_skb_irq(skb);
 >>>>>>> v3.18
@@ -511,7 +599,11 @@ void netpoll_send_skb_on_dev(struct netpoll *np, struct sk_buff *skb,
 		struct netdev_queue *txq;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		txq = netdev_pick_tx(dev, skb);
+=======
+		txq = netdev_pick_tx(dev, skb, NULL);
+>>>>>>> v3.18
 =======
 		txq = netdev_pick_tx(dev, skb, NULL);
 >>>>>>> v3.18
@@ -519,6 +611,7 @@ void netpoll_send_skb_on_dev(struct netpoll *np, struct sk_buff *skb,
 		/* try until next clock tick */
 		for (tries = jiffies_to_usecs(1)/USEC_PER_POLL;
 		     tries > 0; --tries) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if (__netif_tx_trylock(txq)) {
 				if (!netif_xmit_stopped(txq)) {
@@ -544,11 +637,16 @@ void netpoll_send_skb_on_dev(struct netpoll *np, struct sk_buff *skb,
 			unlock_txq:
 				__netif_tx_unlock(txq);
 =======
+=======
+>>>>>>> v3.18
 			if (HARD_TX_TRYLOCK(dev, txq)) {
 				if (!netif_xmit_stopped(txq))
 					status = netpoll_start_xmit(skb, dev, txq);
 
 				HARD_TX_UNLOCK(dev, txq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 				if (status == NETDEV_TX_OK)
@@ -565,7 +663,11 @@ void netpoll_send_skb_on_dev(struct netpoll *np, struct sk_buff *skb,
 		WARN_ONCE(!irqs_disabled(),
 			"netpoll_send_skb_on_dev(): %s enabled interrupts in poll (%pF)\n",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev->name, ops->ndo_start_xmit);
+=======
+			dev->name, dev->netdev_ops->ndo_start_xmit);
+>>>>>>> v3.18
 =======
 			dev->name, dev->netdev_ops->ndo_start_xmit);
 >>>>>>> v3.18
@@ -672,8 +774,13 @@ void netpoll_send_udp(struct netpoll *np, const char *msg, int len)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memcpy(eth->h_source, np->dev->dev_addr, ETH_ALEN);
 	memcpy(eth->h_dest, np->remote_mac, ETH_ALEN);
+=======
+	ether_addr_copy(eth->h_source, np->dev->dev_addr);
+	ether_addr_copy(eth->h_dest, np->remote_mac);
+>>>>>>> v3.18
 =======
 	ether_addr_copy(eth->h_source, np->dev->dev_addr);
 	ether_addr_copy(eth->h_dest, np->remote_mac);
@@ -685,6 +792,7 @@ void netpoll_send_udp(struct netpoll *np, const char *msg, int len)
 }
 EXPORT_SYMBOL(netpoll_send_udp);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void netpoll_neigh_reply(struct sk_buff *skb, struct netpoll_info *npinfo)
 {
@@ -1066,6 +1174,8 @@ out:
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 void netpoll_print_options(struct netpoll *np)
 {
 	np_info(np, "local port %d\n", np->local_port);
@@ -1186,16 +1296,22 @@ int netpoll_parse_options(struct netpoll *np, char *opt)
 EXPORT_SYMBOL(netpoll_parse_options);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int __netpoll_setup(struct netpoll *np, struct net_device *ndev, gfp_t gfp)
 {
 	struct netpoll_info *npinfo;
 	const struct net_device_ops *ops;
 	unsigned long flags;
 =======
+=======
+>>>>>>> v3.18
 int __netpoll_setup(struct netpoll *np, struct net_device *ndev)
 {
 	struct netpoll_info *npinfo;
 	const struct net_device_ops *ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 
@@ -1213,7 +1329,11 @@ int __netpoll_setup(struct netpoll *np, struct net_device *ndev)
 
 	if (!ndev->npinfo) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		npinfo = kmalloc(sizeof(*npinfo), gfp);
+=======
+		npinfo = kmalloc(sizeof(*npinfo), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 		npinfo = kmalloc(sizeof(*npinfo), GFP_KERNEL);
 >>>>>>> v3.18
@@ -1223,12 +1343,16 @@ int __netpoll_setup(struct netpoll *np, struct net_device *ndev)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		npinfo->rx_flags = 0;
 		INIT_LIST_HEAD(&npinfo->rx_np);
 
 		spin_lock_init(&npinfo->rx_lock);
 		sema_init(&npinfo->dev_lock, 1);
 		skb_queue_head_init(&npinfo->neigh_tx);
+=======
+		sema_init(&npinfo->dev_lock, 1);
+>>>>>>> v3.18
 =======
 		sema_init(&npinfo->dev_lock, 1);
 >>>>>>> v3.18
@@ -1240,7 +1364,11 @@ int __netpoll_setup(struct netpoll *np, struct net_device *ndev)
 		ops = np->dev->netdev_ops;
 		if (ops->ndo_netpoll_setup) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			err = ops->ndo_netpoll_setup(ndev, npinfo, gfp);
+=======
+			err = ops->ndo_netpoll_setup(ndev, npinfo);
+>>>>>>> v3.18
 =======
 			err = ops->ndo_netpoll_setup(ndev, npinfo);
 >>>>>>> v3.18
@@ -1255,6 +1383,7 @@ int __netpoll_setup(struct netpoll *np, struct net_device *ndev)
 	npinfo->netpoll = np;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (np->rx_hook) {
 		spin_lock_irqsave(&npinfo->rx_lock, flags);
 		npinfo->rx_flags |= NETPOLL_RX_ENABLED;
@@ -1262,6 +1391,8 @@ int __netpoll_setup(struct netpoll *np, struct net_device *ndev)
 		spin_unlock_irqrestore(&npinfo->rx_lock, flags);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* last thing to do is link it to the net device structure */
@@ -1386,7 +1517,11 @@ int netpoll_setup(struct netpoll *np)
 	refill_skbs();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = __netpoll_setup(np, ndev, GFP_KERNEL);
+=======
+	err = __netpoll_setup(np, ndev);
+>>>>>>> v3.18
 =======
 	err = __netpoll_setup(np, ndev);
 >>>>>>> v3.18
@@ -1417,7 +1552,10 @@ static void rcu_cleanup_netpoll_info(struct rcu_head *rcu_head)
 			container_of(rcu_head, struct netpoll_info, rcu);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_queue_purge(&npinfo->neigh_tx);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	skb_queue_purge(&npinfo->txq);
@@ -1436,7 +1574,10 @@ void __netpoll_cleanup(struct netpoll *np)
 {
 	struct netpoll_info *npinfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long flags;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1449,6 +1590,7 @@ void __netpoll_cleanup(struct netpoll *np)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!list_empty(&npinfo->rx_np)) {
 		spin_lock_irqsave(&npinfo->rx_lock, flags);
 		list_del(&np->rx);
@@ -1457,6 +1599,8 @@ void __netpoll_cleanup(struct netpoll *np)
 		spin_unlock_irqrestore(&npinfo->rx_lock, flags);
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	synchronize_srcu(&netpoll_srcu);
@@ -1469,14 +1613,20 @@ void __netpoll_cleanup(struct netpoll *np)
 			ops->ndo_netpoll_cleanup(np->dev);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rcu_assign_pointer(np->dev->npinfo, NULL);
 		call_rcu_bh(&npinfo->rcu, rcu_cleanup_netpoll_info);
 	}
 =======
+=======
+>>>>>>> v3.18
 		RCU_INIT_POINTER(np->dev->npinfo, NULL);
 		call_rcu_bh(&npinfo->rcu, rcu_cleanup_netpoll_info);
 	} else
 		RCU_INIT_POINTER(np->dev->npinfo, NULL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(__netpoll_cleanup);
@@ -1510,6 +1660,7 @@ out:
 }
 EXPORT_SYMBOL(netpoll_cleanup);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int netpoll_trap(void)
 {
@@ -1525,5 +1676,7 @@ void netpoll_set_trap(int trap)
 		atomic_dec(&trapped);
 }
 EXPORT_SYMBOL(netpoll_set_trap);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

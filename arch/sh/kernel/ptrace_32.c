@@ -118,11 +118,15 @@ void user_enable_single_step(struct task_struct *child)
 	set_tsk_thread_flag(child, TIF_SINGLESTEP);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (ptrace_get_breakpoints(child) < 0)
 		return;
 
 	set_single_step(child, pc);
 	ptrace_put_breakpoints(child);
+=======
+	set_single_step(child, pc);
+>>>>>>> v3.18
 =======
 	set_single_step(child, pc);
 >>>>>>> v3.18
@@ -493,6 +497,7 @@ long arch_ptrace(struct task_struct *child, long request,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline int audit_arch(void)
 {
 	int arch = EM_SH;
@@ -504,6 +509,8 @@ static inline int audit_arch(void)
 	return arch;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 asmlinkage long do_syscall_trace_enter(struct pt_regs *regs)
@@ -525,8 +532,12 @@ asmlinkage long do_syscall_trace_enter(struct pt_regs *regs)
 		trace_sys_enter(regs, regs->regs[0]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	audit_syscall_entry(audit_arch(), regs->regs[3],
 			    regs->regs[4], regs->regs[5],
+=======
+	audit_syscall_entry(regs->regs[3], regs->regs[4], regs->regs[5],
+>>>>>>> v3.18
 =======
 	audit_syscall_entry(regs->regs[3], regs->regs[4], regs->regs[5],
 >>>>>>> v3.18

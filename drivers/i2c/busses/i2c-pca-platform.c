@@ -13,7 +13,10 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/slab.h>
@@ -140,7 +143,11 @@ static int i2c_pca_pf_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct i2c_pca9564_pf_platform_data *platform_data =
 <<<<<<< HEAD
+<<<<<<< HEAD
 				pdev->dev.platform_data;
+=======
+				dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 				dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

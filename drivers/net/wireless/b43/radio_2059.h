@@ -11,7 +11,10 @@
 #define R2059_ALL			0xC00
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define R2059_RCAL_CONFIG			0x004
 #define R2059_RFPLL_MASTER			0x011
 #define R2059_RFPLL_MISC_EN			0x02b
@@ -24,6 +27,9 @@
 #define R2059_RCAL_STATUS			0x145
 #define R2059_RCCAL_MASTER			0x17f
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Values for various registers uploaded on channel switching */
 struct b43_phy_ht_channeltab_e_radio2059 {
@@ -56,6 +62,11 @@ struct b43_phy_ht_channeltab_e_radio2059 {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+void r2059_upload_inittabs(struct b43_wldev *dev);
+
+>>>>>>> v3.18
 =======
 void r2059_upload_inittabs(struct b43_wldev *dev);
 

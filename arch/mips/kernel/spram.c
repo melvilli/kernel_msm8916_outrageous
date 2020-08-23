@@ -9,7 +9,10 @@
  * Copyright (C) 2007, 2008 MIPS Technologies, Inc.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -41,7 +44,11 @@
  * Different semantics to the set_c0_* function built by __BUILD_SET_C0
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit unsigned int bis_c0_errctl(unsigned int set)
+=======
+static unsigned int bis_c0_errctl(unsigned int set)
+>>>>>>> v3.18
 =======
 static unsigned int bis_c0_errctl(unsigned int set)
 >>>>>>> v3.18
@@ -53,7 +60,11 @@ static unsigned int bis_c0_errctl(unsigned int set)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void ispram_store_tag(unsigned int offset, unsigned int data)
+=======
+static void ispram_store_tag(unsigned int offset, unsigned int data)
+>>>>>>> v3.18
 =======
 static void ispram_store_tag(unsigned int offset, unsigned int data)
 >>>>>>> v3.18
@@ -76,7 +87,11 @@ static void ispram_store_tag(unsigned int offset, unsigned int data)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit unsigned int ispram_load_tag(unsigned int offset)
+=======
+static unsigned int ispram_load_tag(unsigned int offset)
+>>>>>>> v3.18
 =======
 static unsigned int ispram_load_tag(unsigned int offset)
 >>>>>>> v3.18
@@ -98,7 +113,11 @@ static unsigned int ispram_load_tag(unsigned int offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void dspram_store_tag(unsigned int offset, unsigned int data)
+=======
+static void dspram_store_tag(unsigned int offset, unsigned int data)
+>>>>>>> v3.18
 =======
 static void dspram_store_tag(unsigned int offset, unsigned int data)
 >>>>>>> v3.18
@@ -118,7 +137,11 @@ static void dspram_store_tag(unsigned int offset, unsigned int data)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit unsigned int dspram_load_tag(unsigned int offset)
+=======
+static unsigned int dspram_load_tag(unsigned int offset)
+>>>>>>> v3.18
 =======
 static unsigned int dspram_load_tag(unsigned int offset)
 >>>>>>> v3.18
@@ -139,7 +162,11 @@ static unsigned int dspram_load_tag(unsigned int offset)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static __cpuinit void probe_spram(char *type,
+=======
+static void probe_spram(char *type,
+>>>>>>> v3.18
 =======
 static void probe_spram(char *type,
 >>>>>>> v3.18
@@ -224,6 +251,7 @@ static void probe_spram(char *type,
 	}
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 void __cpuinit spram_config(void)
 {
 	struct cpuinfo_mips *c = &current_cpu_data;
@@ -231,22 +259,33 @@ void __cpuinit spram_config(void)
 
 	switch (c->cputype) {
 =======
+=======
+>>>>>>> v3.18
 void spram_config(void)
 {
 	unsigned int config0;
 
 	switch (current_cpu_type()) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case CPU_24K:
 	case CPU_34K:
 	case CPU_74K:
 	case CPU_1004K:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	case CPU_1074K:
 	case CPU_INTERAPTIV:
 	case CPU_PROAPTIV:
 	case CPU_P5600:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		config0 = read_c0_config();
 		/* FIXME: addresses are Malta specific */

@@ -171,7 +171,11 @@ static struct resource bss_resource = {
 #ifdef CONFIG_X86_32
 /* cpu data as detected by the assembly code in head.S */
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct cpuinfo_x86 new_cpu_data __cpuinitdata = {
+=======
+struct cpuinfo_x86 new_cpu_data = {
+>>>>>>> v3.18
 =======
 struct cpuinfo_x86 new_cpu_data = {
 >>>>>>> v3.18
@@ -211,9 +215,15 @@ EXPORT_SYMBOL(boot_cpu_data);
 
 #if !defined(CONFIG_X86_PAE) || defined(CONFIG_X86_64)
 <<<<<<< HEAD
+<<<<<<< HEAD
 unsigned long mmu_cr4_features;
 #else
 unsigned long mmu_cr4_features = X86_CR4_PAE;
+=======
+__visible unsigned long mmu_cr4_features;
+#else
+__visible unsigned long mmu_cr4_features = X86_CR4_PAE;
+>>>>>>> v3.18
 =======
 __visible unsigned long mmu_cr4_features;
 #else
@@ -306,6 +316,11 @@ static void __init reserve_brk(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+u64 relocated_ramdisk;
+
+>>>>>>> v3.18
 =======
 u64 relocated_ramdisk;
 
@@ -337,13 +352,17 @@ static void __init relocate_initrd(void)
 	u64 ramdisk_size  = get_ramdisk_size();
 	u64 area_size     = PAGE_ALIGN(ramdisk_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u64 ramdisk_here;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned long slop, clen, mapaddr;
 	char *p, *q;
 
 	/* We need to move the initrd down into directly mapped mem */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ramdisk_here = memblock_find_in_range(0, PFN_PHYS(max_pfn_mapped),
 						 area_size, PAGE_SIZE);
@@ -360,6 +379,8 @@ static void __init relocate_initrd(void)
 	printk(KERN_INFO "Allocated new RAMDISK: [mem %#010llx-%#010llx]\n",
 			 ramdisk_here, ramdisk_here + ramdisk_size - 1);
 =======
+=======
+>>>>>>> v3.18
 	relocated_ramdisk = memblock_find_in_range(0, PFN_PHYS(max_pfn_mapped),
 						   area_size, PAGE_SIZE);
 
@@ -374,6 +395,9 @@ static void __init relocate_initrd(void)
 	initrd_end   = initrd_start + ramdisk_size;
 	printk(KERN_INFO "Allocated new RAMDISK: [mem %#010llx-%#010llx]\n",
 	       relocated_ramdisk, relocated_ramdisk + ramdisk_size - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	q = (char *)initrd_start;
@@ -399,7 +423,11 @@ static void __init relocate_initrd(void)
 		" [mem %#010llx-%#010llx]\n",
 		ramdisk_image, ramdisk_image + ramdisk_size - 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ramdisk_here, ramdisk_here + ramdisk_size - 1);
+=======
+		relocated_ramdisk, relocated_ramdisk + ramdisk_size - 1);
+>>>>>>> v3.18
 =======
 		relocated_ramdisk, relocated_ramdisk + ramdisk_size - 1);
 >>>>>>> v3.18
@@ -487,6 +515,12 @@ static void __init parse_setup_data(void)
 			add_dtb(pa_data);
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		case SETUP_EFI:
+			parse_efi_setup(pa_data, data_len);
+			break;
+>>>>>>> v3.18
 =======
 		case SETUP_EFI:
 			parse_efi_setup(pa_data, data_len);
@@ -870,7 +904,10 @@ static void __init trim_low_memory_range(void)
 	
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * Dump out kernel offset information on panic.
  */
 static int
@@ -885,6 +922,9 @@ dump_kernel_offset(struct notifier_block *self, unsigned long v, void *p)
 }
 
 /*
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * Determine if we were loaded by an EFI loader.  If so, then we have also been
  * passed the efi memmap, systab, etc., so we should use these data structures
@@ -914,7 +954,10 @@ void __init setup_arch(char **cmdline_p)
 #ifdef CONFIG_X86_32
 	memcpy(&boot_cpu_data, &new_cpu_data, sizeof(new_cpu_data));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	visws_early_detect();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -928,7 +971,10 @@ void __init setup_arch(char **cmdline_p)
 
 	load_cr3(swapper_pg_dir);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Note: Quark X1000 CPUs advertise PGE incorrectly and require
 	 * a cr3 based tlb flush, so the following __flush_tlb_all()
@@ -938,6 +984,9 @@ void __init setup_arch(char **cmdline_p)
 	 * quirk is invoked before subsequent calls to __flush_tlb_all()
 	 * so proper operation is guaranteed.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	__flush_tlb_all();
 #else
@@ -985,15 +1034,21 @@ void __init setup_arch(char **cmdline_p)
 #ifdef CONFIG_EFI
 	if (!strncmp((char *)&boot_params.efi_info.efi_loader_signature,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     "EL32", 4)) {
 		set_bit(EFI_BOOT, &efi.flags);
 	} else if (!strncmp((char *)&boot_params.efi_info.efi_loader_signature,
 		     "EL64", 4)) {
 =======
+=======
+>>>>>>> v3.18
 		     EFI32_LOADER_SIGNATURE, 4)) {
 		set_bit(EFI_BOOT, &efi.flags);
 	} else if (!strncmp((char *)&boot_params.efi_info.efi_loader_signature,
 		     EFI64_LOADER_SIGNATURE, 4)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		set_bit(EFI_BOOT, &efi.flags);
 		set_bit(EFI_64BIT, &efi.flags);
@@ -1009,8 +1064,11 @@ void __init setup_arch(char **cmdline_p)
 	setup_memory_map();
 	parse_setup_data();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* update the e820_saved too */
 	e820_reserve_setup_data();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1075,6 +1133,11 @@ void __init setup_arch(char **cmdline_p)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* update the e820_saved too */
+	e820_reserve_setup_data();
+>>>>>>> v3.18
 =======
 	/* update the e820_saved too */
 	e820_reserve_setup_data();
@@ -1086,6 +1149,10 @@ void __init setup_arch(char **cmdline_p)
 
 	dmi_scan_machine();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	dmi_memdev_walk();
+>>>>>>> v3.18
 =======
 	dmi_memdev_walk();
 >>>>>>> v3.18
@@ -1134,8 +1201,11 @@ void __init setup_arch(char **cmdline_p)
 	find_low_pfn_range();
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	num_physpages = max_pfn;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	check_x2apic();
@@ -1169,7 +1239,11 @@ void __init setup_arch(char **cmdline_p)
 	cleanup_highmap();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memblock.current_limit = ISA_END_ADDRESS;
+=======
+	memblock_set_current_limit(ISA_END_ADDRESS);
+>>>>>>> v3.18
 =======
 	memblock_set_current_limit(ISA_END_ADDRESS);
 >>>>>>> v3.18
@@ -1206,8 +1280,12 @@ void __init setup_arch(char **cmdline_p)
 	setup_real_mode();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memblock.current_limit = get_max_mapped();
 	dma_contiguous_reserve(0);
+=======
+	memblock_set_current_limit(get_max_mapped());
+>>>>>>> v3.18
 =======
 	memblock_set_current_limit(get_max_mapped());
 >>>>>>> v3.18
@@ -1230,8 +1308,11 @@ void __init setup_arch(char **cmdline_p)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	reserve_crashkernel();
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	vsmp_init();
@@ -1247,7 +1328,10 @@ void __init setup_arch(char **cmdline_p)
 
 	initmem_init();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	dma_contiguous_reserve(max_pfn_mapped << PAGE_SHIFT);
 
 	/*
@@ -1256,6 +1340,9 @@ void __init setup_arch(char **cmdline_p)
 	 */
 	reserve_crashkernel();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	memblock_find_dma_reserve();
 
@@ -1278,6 +1365,7 @@ void __init setup_arch(char **cmdline_p)
 			swapper_pg_dir     + KERNEL_PGD_BOUNDARY,
 			KERNEL_PGD_PTRS);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * sync back low identity map too.  It is used for example
@@ -1286,6 +1374,8 @@ void __init setup_arch(char **cmdline_p)
 	clone_pgd_range(initial_page_table,
 			swapper_pg_dir     + KERNEL_PGD_BOUNDARY,
 			min(KERNEL_PGD_PTRS, KERNEL_PGD_BOUNDARY));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif
@@ -1350,6 +1440,7 @@ void __init setup_arch(char **cmdline_p)
 
 #ifdef CONFIG_EFI
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Once setup is done above, unmap the EFI memory map on
 	 * mismatched firmware/kernel archtectures since there is no
 	 * support for runtime services.
@@ -1358,6 +1449,10 @@ void __init setup_arch(char **cmdline_p)
 		pr_info("efi: Setup done, disabling due to 32/64-bit mismatch\n");
 		efi_unmap_memmap();
 	}
+=======
+	if (efi_enabled(EFI_BOOT))
+		efi_apply_memmap_quirks();
+>>>>>>> v3.18
 =======
 	if (efi_enabled(EFI_BOOT))
 		efi_apply_memmap_quirks();
@@ -1382,7 +1477,10 @@ void __init i386_reserve_resources(void)
 
 #endif /* CONFIG_X86_32 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 static struct notifier_block kernel_offset_notifier = {
 	.notifier_call = dump_kernel_offset
@@ -1395,4 +1493,7 @@ static int __init register_kernel_offset_dumper(void)
 	return 0;
 }
 __initcall(register_kernel_offset_dumper);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

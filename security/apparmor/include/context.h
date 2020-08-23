@@ -22,6 +22,12 @@
 #include "policy.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define cred_cxt(X) (X)->security
+#define current_cxt() cred_cxt(current_cred())
+
+>>>>>>> v3.18
 =======
 #define cred_cxt(X) (X)->security
 #define current_cxt() cred_cxt(current_cred())
@@ -87,6 +93,7 @@ int aa_set_current_onexec(struct aa_profile *profile);
 int aa_set_current_hat(struct aa_profile *profile, u64 token);
 int aa_restore_previous_profile(u64 cookie);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * __aa_task_is_confined - determine if @task has any confinement
@@ -108,6 +115,10 @@ static inline bool __aa_task_is_confined(struct task_struct *task)
 struct aa_profile *aa_get_task_profile(struct task_struct *task);
 
 >>>>>>> v3.18
+=======
+struct aa_profile *aa_get_task_profile(struct task_struct *task);
+
+>>>>>>> v3.18
 
 /**
  * aa_cred_profile - obtain cred's profiles
@@ -120,10 +131,13 @@ struct aa_profile *aa_get_task_profile(struct task_struct *task);
 static inline struct aa_profile *aa_cred_profile(const struct cred *cred)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct aa_task_cxt *cxt = cred->security;
 	BUG_ON(!cxt || !cxt->profile);
 	return aa_newest_version(cxt->profile);
 =======
+=======
+>>>>>>> v3.18
 	struct aa_task_cxt *cxt = cred_cxt(cred);
 	BUG_ON(!cxt || !cxt->profile);
 	return cxt->profile;
@@ -151,6 +165,9 @@ static inline struct aa_profile *__aa_task_profile(struct task_struct *task)
 static inline bool __aa_task_is_confined(struct task_struct *task)
 {
 	return !unconfined(__aa_task_profile(task));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -178,6 +195,7 @@ static inline struct aa_profile *__aa_current_profile(void)
 static inline struct aa_profile *aa_current_profile(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const struct aa_task_cxt *cxt = current_cred()->security;
 	struct aa_profile *profile;
 	BUG_ON(!cxt || !cxt->profile);
@@ -192,6 +210,8 @@ static inline struct aa_profile *aa_current_profile(void)
 
 	return profile;
 =======
+=======
+>>>>>>> v3.18
 	const struct aa_task_cxt *cxt = current_cxt();
 	struct aa_profile *profile;
 	BUG_ON(!cxt || !cxt->profile);
@@ -217,6 +237,9 @@ static inline void aa_clear_task_cxt_trans(struct aa_task_cxt *cxt)
 	cxt->previous = NULL;
 	cxt->onexec = NULL;
 	cxt->token = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

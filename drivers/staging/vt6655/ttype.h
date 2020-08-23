@@ -32,10 +32,13 @@
 /******* Common definitions and typedefs ***********************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef TxInSleep
 #define TxInSleep
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifndef WPA_SM_Transtatus
@@ -46,6 +49,7 @@
 #define Calcu_LinkQual
 #endif
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /****** Simple typedefs  ***************************************************/
 
@@ -70,6 +74,8 @@ typedef UQuadWord       QWORD;          // 64-bit
 
 typedef QWORD *PQWORD;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif // __TTYPE_H__

@@ -117,7 +117,11 @@ struct aoa_card {
 };
         
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int aoa_snd_device_new(snd_device_type_t type,
+=======
+extern int aoa_snd_device_new(enum snd_device_type type,
+>>>>>>> v3.18
 =======
 extern int aoa_snd_device_new(enum snd_device_type type,
 >>>>>>> v3.18

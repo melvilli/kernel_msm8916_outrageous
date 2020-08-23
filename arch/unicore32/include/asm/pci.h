@@ -19,11 +19,14 @@
 #include <mach/hardware.h> /* for PCIBIOS_MIN_* */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void pcibios_penalize_isa_irq(int irq, int active)
 {
 	/* We don't do dynamic PCI IRQ allocation */
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #ifdef CONFIG_PCI

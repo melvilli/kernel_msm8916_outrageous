@@ -29,6 +29,7 @@ const struct imx_pata_imx_data imx35_pata_imx_data __initconst =
 #endif /* ifdef CONFIG_SOC_IMX35 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_SOC_IMX51
 const struct imx_pata_imx_data imx51_pata_imx_data __initconst =
 	imx_pata_imx_data_entry_single(MX51, SZ_16K);
@@ -39,6 +40,8 @@ const struct imx_pata_imx_data imx53_pata_imx_data __initconst =
 	imx_pata_imx_data_entry_single(MX53, SZ_16K);
 #endif /* ifdef CONFIG_SOC_IMX53 */
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct platform_device *__init imx_add_pata_imx(

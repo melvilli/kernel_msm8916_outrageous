@@ -2,12 +2,18 @@ Device-Tree bindings for hdmiddc driver
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible: value should be "samsung,exynos5-hdmiddc".
 =======
+=======
+>>>>>>> v3.18
 - compatible: value should be one of the following
 	1) "samsung,exynos5-hdmiddc" <DEPRECATED>
 	2) "samsung,exynos4210-hdmiddc"
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg: I2C address of the hdmiddc device.
 
@@ -15,7 +21,11 @@ Example:
 
 	hdmiddc {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		compatible = "samsung,exynos5-hdmiddc";
+=======
+		compatible = "samsung,exynos4210-hdmiddc";
+>>>>>>> v3.18
 =======
 		compatible = "samsung,exynos4210-hdmiddc";
 >>>>>>> v3.18

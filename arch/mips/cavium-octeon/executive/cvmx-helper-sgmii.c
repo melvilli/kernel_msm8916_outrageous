@@ -318,11 +318,14 @@ static int __cvmx_helper_sgmii_hardware_init(int interface, int num_ports)
 		int ipd_port = cvmx_helper_get_ipd_port(interface, index);
 		__cvmx_helper_sgmii_hardware_init_one_time(interface, index);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__cvmx_helper_sgmii_link_set(ipd_port,
 					     __cvmx_helper_sgmii_link_get
 					     (ipd_port));
 
 =======
+=======
+>>>>>>> v3.18
 		/* Linux kernel driver will call ....link_set with the
 		 * proper link state. In the simulator there is no
 		 * link state polling and hence it is set from
@@ -331,6 +334,9 @@ static int __cvmx_helper_sgmii_hardware_init(int interface, int num_ports)
 		if (cvmx_sysinfo_get()->board_type == CVMX_BOARD_TYPE_SIM)
 			__cvmx_helper_sgmii_link_set(ipd_port,
 				       __cvmx_helper_sgmii_link_get(ipd_port));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

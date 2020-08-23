@@ -36,7 +36,11 @@
 #define DRIVER_NAME	"mvsdio"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int maxfreq = MVSD_CLOCKRATE_MAX;
+=======
+static int maxfreq;
+>>>>>>> v3.18
 =======
 static int maxfreq;
 >>>>>>> v3.18
@@ -84,6 +88,10 @@ static int mvsd_setup_data(struct mvsd_host *host, struct mmc_data *data)
 		unsigned int hw_state,  count = 0;
 		do {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			hw_state = mvsd_read(MVSD_HW_STATE);
+>>>>>>> v3.18
 =======
 			hw_state = mvsd_read(MVSD_HW_STATE);
 >>>>>>> v3.18
@@ -92,7 +100,10 @@ static int mvsd_setup_data(struct mvsd_host *host, struct mmc_data *data)
 				break;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hw_state = mvsd_read(MVSD_HW_STATE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 			count++;
@@ -366,7 +377,10 @@ static irqreturn_t mvsd_irq(int irq, void *dev)
 		mvsd_read(MVSD_HW_STATE));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * It looks like, SDIO IP can issue one late, spurious irq
 	 * although all irqs should be disabled. To work around this,
@@ -381,6 +395,9 @@ static irqreturn_t mvsd_irq(int irq, void *dev)
 		return IRQ_HANDLED;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock(&host->lock);
 
@@ -684,7 +701,11 @@ static const struct mmc_host_ops mvsd_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init
+=======
+static void
+>>>>>>> v3.18
 =======
 static void
 >>>>>>> v3.18
@@ -710,7 +731,11 @@ mv_conf_mbus_windows(struct mvsd_host *host,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __init mvsd_probe(struct platform_device *pdev)
+=======
+static int mvsd_probe(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static int mvsd_probe(struct platform_device *pdev)
 >>>>>>> v3.18
@@ -722,7 +747,10 @@ static int mvsd_probe(struct platform_device *pdev)
 	struct resource *r;
 	int ret, irq;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int gpio_card_detect, gpio_write_protect;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct pinctrl *pinctrl;
@@ -758,7 +786,10 @@ static int mvsd_probe(struct platform_device *pdev)
 		clk_prepare_enable(host->clk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	mmc->ops = &mvsd_ops;
 
 	mmc->ocr_avail = MMC_VDD_32_33 | MMC_VDD_33_34;
@@ -773,6 +804,9 @@ static int mvsd_probe(struct platform_device *pdev)
 	mmc->max_seg_size = mmc->max_blk_size * mmc->max_blk_count;
 	mmc->max_req_size = mmc->max_blk_size * mmc->max_blk_count;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (np) {
 		if (IS_ERR(host->clk)) {
@@ -783,23 +817,30 @@ static int mvsd_probe(struct platform_device *pdev)
 
 		host->base_clock = clk_get_rate(host->clk) / 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpio_card_detect = of_get_named_gpio(np, "cd-gpios", 0);
 		gpio_write_protect = of_get_named_gpio(np, "wp-gpios", 0);
 	} else {
 		const struct mvsdio_platform_data *mvsd_data;
 =======
+=======
+>>>>>>> v3.18
 		ret = mmc_of_parse(mmc);
 		if (ret < 0)
 			goto out;
 	} else {
 		const struct mvsdio_platform_data *mvsd_data;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		mvsd_data = pdev->dev.platform_data;
 		if (!mvsd_data) {
 			ret = -ENXIO;
 			goto out;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		host->base_clock = mvsd_data->clock / 2;
 		gpio_card_detect = mvsd_data->gpio_card_detect ? : -EINVAL;
@@ -828,6 +869,8 @@ static int mvsd_probe(struct platform_device *pdev)
 	if (!host->base) {
 		ret = -ENOMEM;
 =======
+=======
+>>>>>>> v3.18
 		mmc->caps = MMC_CAP_4_BIT_DATA | MMC_CAP_SDIO_IRQ |
 			    MMC_CAP_SD_HIGHSPEED | MMC_CAP_MMC_HIGHSPEED;
 		host->base_clock = mvsd_data->clock / 2;
@@ -856,6 +899,9 @@ static int mvsd_probe(struct platform_device *pdev)
 	host->base = devm_ioremap_resource(&pdev->dev, r);
 	if (IS_ERR(host->base)) {
 		ret = PTR_ERR(host->base);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto out;
 	}
@@ -874,6 +920,7 @@ static int mvsd_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio_is_valid(gpio_card_detect)) {
 		ret = mmc_gpio_request_cd(mmc, gpio_card_detect);
 		if (ret)
@@ -885,6 +932,8 @@ static int mvsd_probe(struct platform_device *pdev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	setup_timer(&host->timer, mvsd_timeout_timer, (unsigned long)host);
 	platform_set_drvdata(pdev, mmc);
 	ret = mmc_add_host(mmc);
@@ -893,15 +942,21 @@ static int mvsd_probe(struct platform_device *pdev)
 
 	if (!(mmc->caps & MMC_CAP_NEEDS_POLL))
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_notice(&pdev->dev, "using GPIO %d for card detection\n",
 			   gpio_card_detect);
 	else
 		dev_notice(&pdev->dev, "lacking card detect (fall back to polling)\n");
 =======
+=======
+>>>>>>> v3.18
 		dev_dbg(&pdev->dev, "using GPIO for card detection\n");
 	else
 		dev_dbg(&pdev->dev, "lacking card detect (fall back to polling)\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 
@@ -918,7 +973,11 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __exit mvsd_remove(struct platform_device *pdev)
+=======
+static int mvsd_remove(struct platform_device *pdev)
+>>>>>>> v3.18
 =======
 static int mvsd_remove(struct platform_device *pdev)
 >>>>>>> v3.18
@@ -937,6 +996,7 @@ static int mvsd_remove(struct platform_device *pdev)
 		clk_disable_unprepare(host->clk);
 	mmc_free_host(mmc);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 	return 0;
@@ -974,6 +1034,11 @@ static int mvsd_resume(struct platform_device *dev)
 }
 
 >>>>>>> v3.18
+=======
+	return 0;
+}
+
+>>>>>>> v3.18
 static const struct of_device_id mvsdio_dt_ids[] = {
 	{ .compatible = "marvell,orion-sdio" },
 	{ /* sentinel */ }
@@ -982,9 +1047,14 @@ MODULE_DEVICE_TABLE(of, mvsdio_dt_ids);
 
 static struct platform_driver mvsd_driver = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= __exit_p(mvsd_remove),
 	.suspend	= mvsd_suspend,
 	.resume		= mvsd_resume,
+=======
+	.probe		= mvsd_probe,
+	.remove		= mvsd_remove,
+>>>>>>> v3.18
 =======
 	.probe		= mvsd_probe,
 	.remove		= mvsd_remove,
@@ -996,7 +1066,11 @@ static struct platform_driver mvsd_driver = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module_platform_driver_probe(mvsd_driver, mvsd_probe);
+=======
+module_platform_driver(mvsd_driver);
+>>>>>>> v3.18
 =======
 module_platform_driver(mvsd_driver);
 >>>>>>> v3.18

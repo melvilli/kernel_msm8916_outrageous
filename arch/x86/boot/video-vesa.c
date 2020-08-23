@@ -17,6 +17,10 @@
 #include "video.h"
 #include "vesa.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "string.h"
+>>>>>>> v3.18
 =======
 #include "string.h"
 >>>>>>> v3.18

@@ -36,7 +36,12 @@
 #include <linux/debugfs.h>
 #include <linux/seq_file.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/tegra-ahb.h>
+=======
+
+#include <soc/tegra/ahb.h>
+>>>>>>> v3.18
 =======
 
 #include <soc/tegra/ahb.h>
@@ -737,7 +742,11 @@ static int smmu_iommu_map(struct iommu_domain *domain, unsigned long iova,
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_dbg(as->smmu->dev, "[%d] %08lx:%08x\n", as->asid, iova, pa);
+=======
+	dev_dbg(as->smmu->dev, "[%d] %08lx:%pa\n", as->asid, iova, &pa);
+>>>>>>> v3.18
 =======
 	dev_dbg(as->smmu->dev, "[%d] %08lx:%pa\n", as->asid, iova, &pa);
 >>>>>>> v3.18
@@ -789,10 +798,16 @@ static phys_addr_t smmu_iommu_iova_to_phys(struct iommu_domain *domain,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int smmu_iommu_domain_has_cap(struct iommu_domain *domain,
 				     unsigned long cap)
 {
 	return 0;
+=======
+static bool smmu_iommu_capable(enum iommu_cap cap)
+{
+	return false;
+>>>>>>> v3.18
 =======
 static bool smmu_iommu_capable(enum iommu_cap cap)
 {
@@ -963,7 +978,12 @@ static void smmu_iommu_domain_destroy(struct iommu_domain *domain)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct iommu_ops smmu_iommu_ops = {
+=======
+static const struct iommu_ops smmu_iommu_ops = {
+	.capable	= smmu_iommu_capable,
+>>>>>>> v3.18
 =======
 static const struct iommu_ops smmu_iommu_ops = {
 	.capable	= smmu_iommu_capable,
@@ -976,7 +996,10 @@ static const struct iommu_ops smmu_iommu_ops = {
 	.unmap		= smmu_iommu_unmap,
 	.iova_to_phys	= smmu_iommu_iova_to_phys,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.domain_has_cap	= smmu_iommu_domain_has_cap,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.pgsize_bitmap	= SMMU_IOMMU_PGSIZES,
@@ -1201,8 +1224,11 @@ static int tegra_smmu_probe(struct platform_device *pdev)
 
 		res = platform_get_resource(pdev, IORESOURCE_MEM, i);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!res)
 			return -ENODEV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		smmu->regs[i] = devm_ioremap_resource(&pdev->dev, res);
@@ -1283,7 +1309,11 @@ static int tegra_smmu_remove(struct platform_device *pdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const struct dev_pm_ops tegra_smmu_pm_ops = {
+=======
+static const struct dev_pm_ops tegra_smmu_pm_ops = {
+>>>>>>> v3.18
 =======
 static const struct dev_pm_ops tegra_smmu_pm_ops = {
 >>>>>>> v3.18
@@ -1292,7 +1322,11 @@ static const struct dev_pm_ops tegra_smmu_pm_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct of_device_id tegra_smmu_of_match[] = {
+=======
+static const struct of_device_id tegra_smmu_of_match[] = {
+>>>>>>> v3.18
 =======
 static const struct of_device_id tegra_smmu_of_match[] = {
 >>>>>>> v3.18

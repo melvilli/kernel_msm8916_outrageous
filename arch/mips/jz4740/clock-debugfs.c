@@ -88,8 +88,12 @@ void jz4740_clock_debugfs_add_clk(struct clk *clk)
 void jz4740_clock_debugfs_update_parent(struct clk *clk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (clk->debugfs_parent_entry)
 		debugfs_remove(clk->debugfs_parent_entry);
+=======
+	debugfs_remove(clk->debugfs_parent_entry);
+>>>>>>> v3.18
 =======
 	debugfs_remove(clk->debugfs_parent_entry);
 >>>>>>> v3.18

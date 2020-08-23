@@ -16,6 +16,10 @@
 #include <linux/slab.h>
 #include <linux/string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/sysfs.h>
+>>>>>>> v3.18
 =======
 #include <linux/sysfs.h>
 >>>>>>> v3.18
@@ -128,6 +132,7 @@ void driver_remove_file(struct device_driver *drv,
 EXPORT_SYMBOL_GPL(driver_remove_file);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int driver_add_groups(struct device_driver *drv,
 			     const struct attribute_group **groups)
 {
@@ -157,6 +162,8 @@ static void driver_remove_groups(struct device_driver *drv,
 		for (i = 0; groups[i]; i++)
 			sysfs_remove_group(&drv->p->kobj, groups[i]);
 =======
+=======
+>>>>>>> v3.18
 int driver_add_groups(struct device_driver *drv,
 		      const struct attribute_group **groups)
 {
@@ -167,6 +174,9 @@ void driver_remove_groups(struct device_driver *drv,
 			  const struct attribute_group **groups)
 {
 	sysfs_remove_groups(&drv->p->kobj, groups);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

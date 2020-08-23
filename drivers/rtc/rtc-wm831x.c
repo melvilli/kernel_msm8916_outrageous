@@ -461,11 +461,14 @@ err:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int wm831x_rtc_remove(struct platform_device *pdev)
 {
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static const struct dev_pm_ops wm831x_rtc_pm_ops = {
@@ -482,7 +485,10 @@ static const struct dev_pm_ops wm831x_rtc_pm_ops = {
 static struct platform_driver wm831x_rtc_driver = {
 	.probe = wm831x_rtc_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = wm831x_rtc_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.driver = {

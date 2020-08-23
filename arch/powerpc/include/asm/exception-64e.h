@@ -47,9 +47,14 @@
 #define EX_R10		(2 * 8)
 #define EX_R11		(3 * 8)
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define EX_R13		(4 * 8)
 #define EX_R14		(5 * 8)
 #define EX_R15		(6 * 8)
+=======
+#define EX_R14		(4 * 8)
+#define EX_R15		(5 * 8)
+>>>>>>> v3.18
 =======
 #define EX_R14		(4 * 8)
 #define EX_R15		(5 * 8)
@@ -179,6 +184,7 @@ exc_##label##_book3e:
 	ld	r8,EX_TLB_R8(r12);					    \
 	mtlr	r16;
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define TLB_MISS_PROLOG_STATS_BOLTED						    \
 	mflr	r10;							    \
 	std	r8,PACA_EXTLB+EX_TLB_R8(r13);				    \
@@ -196,12 +202,17 @@ exc_##label##_book3e:
 	addi	r9,r13,MMSTAT_ISTATS+name;				    \
 	bl	.tlb_stat_inc;
 =======
+=======
+>>>>>>> v3.18
 #define TLB_MISS_STATS_D(name)						    \
 	addi	r9,r13,MMSTAT_DSTATS+name;				    \
 	bl	tlb_stat_inc;
 #define TLB_MISS_STATS_I(name)						    \
 	addi	r9,r13,MMSTAT_ISTATS+name;				    \
 	bl	tlb_stat_inc;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define TLB_MISS_STATS_X(name)						    \
 	ld	r8,PACA_EXTLB+EX_TLB_ESR(r13);				    \
@@ -211,7 +222,11 @@ exc_##label##_book3e:
 	b	62f;							    \
 61:	addi	r9,r13,MMSTAT_ISTATS+name;				    \
 <<<<<<< HEAD
+<<<<<<< HEAD
 62:	bl	.tlb_stat_inc;
+=======
+62:	bl	tlb_stat_inc;
+>>>>>>> v3.18
 =======
 62:	bl	tlb_stat_inc;
 >>>>>>> v3.18

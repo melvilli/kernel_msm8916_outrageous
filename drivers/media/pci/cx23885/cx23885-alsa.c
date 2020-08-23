@@ -16,10 +16,13 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -88,7 +91,10 @@ MODULE_PARM_DESC(audio_debug, "enable debug messages [analog audio]");
 #define GP_COUNT_CONTROL_RESET	0x3
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int cx23885_alsa_dma_init(struct cx23885_audio_dev *chip, int nr_pages)
 {
 	struct cx23885_audio_buffer *buf = chip->buf;
@@ -165,6 +171,9 @@ static int cx23885_alsa_dma_free(struct cx23885_audio_buffer *buf)
 	return 0;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * BOARD Specific: Sets audio DMA
@@ -281,6 +290,7 @@ int cx23885_audio_irq(struct cx23885_dev *dev, u32 status, u32 mask)
 static int dsp_buffer_free(struct cx23885_audio_dev *chip)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	BUG_ON(!chip->dma_size);
 
 	dprintk(2, "Freeing buffer\n");
@@ -291,6 +301,8 @@ static int dsp_buffer_free(struct cx23885_audio_dev *chip)
 
 	chip->dma_risc = NULL;
 =======
+=======
+>>>>>>> v3.18
 	struct cx23885_riscmem *risc;
 
 	BUG_ON(!chip->dma_size);
@@ -303,6 +315,9 @@ static int dsp_buffer_free(struct cx23885_audio_dev *chip)
 	kfree(chip->buf);
 
 	chip->buf = NULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	chip->dma_size = 0;
 
@@ -387,6 +402,10 @@ static int snd_cx23885_close(struct snd_pcm_substream *substream)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -398,8 +417,11 @@ static int snd_cx23885_hw_params(struct snd_pcm_substream *substream,
 {
 	struct cx23885_audio_dev *chip = snd_pcm_substream_chip(substream);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct videobuf_dmabuf *dma;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct cx23885_audio_buffer *buf;
@@ -423,10 +445,16 @@ static int snd_cx23885_hw_params(struct snd_pcm_substream *substream,
 
 	buf->bpl = chip->period_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	dma = &buf->dma;
 	videobuf_dma_init(dma);
 	ret = videobuf_dma_init_kernel(dma, PCI_DMA_FROMDEVICE,
+=======
+	chip->buf = buf;
+
+	ret = cx23885_alsa_dma_init(chip,
+>>>>>>> v3.18
 =======
 	chip->buf = buf;
 
@@ -437,17 +465,23 @@ static int snd_cx23885_hw_params(struct snd_pcm_substream *substream,
 		goto error;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = videobuf_dma_map(&chip->pci->dev, dma);
 	if (ret < 0)
 		goto error;
 
 	ret = cx23885_risc_databuffer(chip->pci, &buf->risc, dma->sglist,
 =======
+=======
+>>>>>>> v3.18
 	ret = cx23885_alsa_dma_map(chip);
 	if (ret < 0)
 		goto error;
 
 	ret = cx23885_risc_databuffer(chip->pci, &buf->risc, buf->sglist,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				   chip->period_size, chip->num_periods, 1);
 	if (ret < 0)
@@ -459,10 +493,14 @@ static int snd_cx23885_hw_params(struct snd_pcm_substream *substream,
 	buf->risc.jmp[2] = cpu_to_le32(0); /* bits 63-32 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	chip->buf = buf;
 	chip->dma_risc = dma;
 
 	substream->runtime->dma_area = chip->dma_risc->vaddr;
+=======
+	substream->runtime->dma_area = chip->buf->vaddr;
+>>>>>>> v3.18
 =======
 	substream->runtime->dma_area = chip->buf->vaddr;
 >>>>>>> v3.18
@@ -474,6 +512,10 @@ static int snd_cx23885_hw_params(struct snd_pcm_substream *substream,
 error:
 	kfree(buf);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	chip->buf = NULL;
+>>>>>>> v3.18
 =======
 	chip->buf = NULL;
 >>>>>>> v3.18
@@ -616,7 +658,12 @@ struct cx23885_audio_dev *cx23885_audio_register(struct cx23885_dev *dev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = snd_card_create(SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
+=======
+	err = snd_card_new(&dev->pci->dev,
+			   SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
+>>>>>>> v3.18
 =======
 	err = snd_card_new(&dev->pci->dev,
 			   SNDRV_DEFAULT_IDX1, SNDRV_DEFAULT_STR1,
@@ -632,8 +679,11 @@ struct cx23885_audio_dev *cx23885_audio_register(struct cx23885_dev *dev)
 	spin_lock_init(&chip->lock);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	snd_card_set_dev(card, &dev->pci->dev);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	err = snd_cx23885_pcm(chip, 0, "CX23885 Digital");

@@ -3,7 +3,11 @@
  *
  *    Copyright (C) 2005 Kirk Lapray <kirk.lapray@gmail.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *    Copyright (C) 2006 Michael Krufky <mkrufky@m1k.net>
+=======
+ *    Copyright (C) 2006-2014 Michael Krufky <mkrufky@linuxtv.org>
+>>>>>>> v3.18
 =======
  *    Copyright (C) 2006-2014 Michael Krufky <mkrufky@linuxtv.org>
 >>>>>>> v3.18

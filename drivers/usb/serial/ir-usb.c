@@ -378,6 +378,7 @@ static void ir_set_termios(struct tty_struct *tty,
 	 */
 	urb = usb_alloc_urb(0, GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!urb) {
 		dev_err(&port->dev, "%s - no more urbs\n", __func__);
 		return;
@@ -388,12 +389,17 @@ static void ir_set_termios(struct tty_struct *tty,
 		goto err_buf;
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (!urb)
 		return;
 
 	transfer_buffer = kmalloc(1, GFP_KERNEL);
 	if (!transfer_buffer)
 		goto err_buf;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	*transfer_buffer = ir_xbof | ir_baud;

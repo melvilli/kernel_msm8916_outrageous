@@ -29,6 +29,10 @@
 
 #define CNT_INTVAL 0x10000
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define MASCHINE_BANK_SIZE 32
+>>>>>>> v3.18
 =======
 #define MASCHINE_BANK_SIZE 32
 >>>>>>> v3.18
@@ -104,12 +108,15 @@ static int control_put(struct snd_kcontrol *kcontrol,
 	int pos = kcontrol->private_value;
 	int v = ucontrol->value.integer.value[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned char cmd = EP1_CMD_WRITE_IO;
 
 	if (cdev->chip.usb_id ==
 		USB_ID(USB_VID_NATIVEINSTRUMENTS, USB_PID_TRAKTORKONTROLX1))
 		cmd = EP1_CMD_DIMM_LEDS;
 =======
+=======
+>>>>>>> v3.18
 	unsigned char cmd;
 
 	switch (cdev->chip.usb_id) {
@@ -123,6 +130,9 @@ static int control_put(struct snd_kcontrol *kcontrol,
 		cmd = EP1_CMD_WRITE_IO;
 		break;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (pos & CNT_INTVAL) {
@@ -142,7 +152,10 @@ static int control_put(struct snd_kcontrol *kcontrol,
 				     cdev->ep8_out_buf, sizeof(cdev->ep8_out_buf),
 				     &actual_len, 200);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		} else if (cdev->chip.usb_id ==
 			USB_ID(USB_VID_NATIVEINSTRUMENTS, USB_PID_MASCHINECONTROLLER)) {
 
@@ -157,6 +170,9 @@ static int control_put(struct snd_kcontrol *kcontrol,
 			snd_usb_caiaq_send_command_bank(cdev, cmd, bank,
 					cdev->control_state + offset,
 					MASCHINE_BANK_SIZE);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		} else {
 			snd_usb_caiaq_send_command(cdev, cmd,
@@ -528,7 +544,10 @@ static struct caiaq_controller kontrols4_controller[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct caiaq_controller maschine_controller[] = {
 	{ "LED: Pad 1",				3  | CNT_INTVAL },
 	{ "LED: Pad 2",				2  | CNT_INTVAL },
@@ -597,6 +616,9 @@ static struct caiaq_controller maschine_controller[] = {
 	{ "Backlight Display",			59 | CNT_INTVAL }
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int add_controls(struct caiaq_controller *c, int num,
 			struct snd_usb_caiaqdev *cdev)
@@ -662,12 +684,18 @@ int snd_usb_caiaq_control_init(struct snd_usb_caiaqdev *cdev)
 			ARRAY_SIZE(kontrols4_controller), cdev);
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	case USB_ID(USB_VID_NATIVEINSTRUMENTS, USB_PID_MASCHINECONTROLLER):
 		ret = add_controls(maschine_controller,
 			ARRAY_SIZE(maschine_controller), cdev);
 		break;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

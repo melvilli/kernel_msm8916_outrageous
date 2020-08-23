@@ -3,7 +3,11 @@
  *
  * Based on the r8180 driver, which is:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Copyright 2004-2005 Andrea Merello <andreamrl@tiscali.it>, et al.
+=======
+ * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
+>>>>>>> v3.18
 =======
  * Copyright 2004-2005 Andrea Merello <andrea.merello@gmail.com>, et al.
 >>>>>>> v3.18
@@ -33,6 +37,7 @@
 #include <linux/pci.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static inline void NdisRawWritePortUlong(u32 port,  u32 val)
 {
 	outl(val, port);
@@ -60,6 +65,8 @@ static inline void NdisRawReadPortUlong(u32 port, u32 *pval)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 struct mp_adapter {
 	u8		LinkCtrlReg;
 
@@ -77,6 +84,7 @@ struct mp_adapter {
 	u8		PciBridgeLinkCtrlReg;
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 struct rt_pci_capab_header {
 	unsigned char   CapabilityID;
@@ -105,6 +113,8 @@ struct rt_pci_capab_header {
 
 #define PCI_CAPABILITY_ID_PCI_EXPRESS		0x10
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct net_device;

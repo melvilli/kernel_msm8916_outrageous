@@ -267,7 +267,11 @@ static int mt9m111_set_hvflip(struct gspca_dev *gspca_dev)
 
 	data[0] = MT9M111_RMB_OVER_SIZED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gspca_dev->width == 640) {
+=======
+	if (gspca_dev->pixfmt.width == 640) {
+>>>>>>> v3.18
 =======
 	if (gspca_dev->pixfmt.width == 640) {
 >>>>>>> v3.18

@@ -2,6 +2,11 @@
 #define _SPARC64_MM_INIT_H
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/page.h>
+
+>>>>>>> v3.18
 =======
 #include <asm/page.h>
 
@@ -10,6 +15,7 @@
  * marked non-static so that assembler code can get at them.
  */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define MAX_PHYS_ADDRESS	(1UL << 41UL)
 #define KPTE_BITMAP_CHUNK_SZ		(256UL * 1024UL * 1024UL)
@@ -26,12 +32,21 @@ extern unsigned long kpte_linear_bitmap[KPTE_BITMAP_BYTES / sizeof(unsigned long
 
 extern unsigned long kern_linear_pte_xor[4];
 >>>>>>> v3.18
+=======
+#define MAX_PHYS_ADDRESS	(1UL << MAX_PHYS_ADDRESS_BITS)
+
+extern unsigned long kern_linear_pte_xor[4];
+>>>>>>> v3.18
 extern unsigned int sparc64_highest_unlocked_tlb_ent;
 extern unsigned long sparc64_kern_pri_context;
 extern unsigned long sparc64_kern_pri_nuc_bits;
 extern unsigned long sparc64_kern_sec_context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void mmu_info(struct seq_file *m);
+=======
+void mmu_info(struct seq_file *m);
+>>>>>>> v3.18
 =======
 void mmu_info(struct seq_file *m);
 >>>>>>> v3.18
@@ -50,6 +65,7 @@ extern unsigned int prom_trans_ents;
 extern unsigned long kern_locked_tte_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void prom_world(int enter);
 
 #ifdef CONFIG_SPARSEMEM_VMEMMAP
@@ -62,6 +78,9 @@ extern void prom_world(int enter);
 			  sizeof(struct page)) >> VMEMMAP_CHUNK_SHIFT)
 extern unsigned long vmemmap_table[VMEMMAP_SIZE];
 #endif
+=======
+void prom_world(int enter);
+>>>>>>> v3.18
 =======
 void prom_world(int enter);
 >>>>>>> v3.18

@@ -15,6 +15,10 @@ obj-$(CONFIG_RT2X00_LIB_SOC)		+= rt2x00soc.o
 obj-$(CONFIG_RT2X00_LIB_USB)		+= rt2x00usb.o
 obj-$(CONFIG_RT2800_LIB)		+= rt2800lib.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_RT2800_LIB_MMIO)		+= rt2800mmio.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_RT2800_LIB_MMIO)		+= rt2800mmio.o
 >>>>>>> v3.18
@@ -26,6 +30,10 @@ obj-$(CONFIG_RT2500USB)			+= rt2500usb.o
 obj-$(CONFIG_RT73USB)			+= rt73usb.o
 obj-$(CONFIG_RT2800USB)			+= rt2800usb.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_RT2800SOC)			+= rt2800soc.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_RT2800SOC)			+= rt2800soc.o
 >>>>>>> v3.18

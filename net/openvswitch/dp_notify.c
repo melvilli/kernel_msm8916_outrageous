@@ -35,6 +35,7 @@ static void dp_detach_port_notify(struct vport *vport)
 	ovs_dp_detach_port(vport);
 	if (IS_ERR(notify)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		netlink_set_err(ovs_dp_get_net(dp)->genl_sock, 0,
 				ovs_dp_vport_multicast_group.id,
 				PTR_ERR(notify));
@@ -45,6 +46,8 @@ static void dp_detach_port_notify(struct vport *vport)
 				ovs_dp_vport_multicast_group.id,
 				GFP_KERNEL);
 =======
+=======
+>>>>>>> v3.18
 		genl_set_err(&dp_vport_genl_family, ovs_dp_get_net(dp), 0,
 			     0, PTR_ERR(notify));
 		return;
@@ -53,6 +56,9 @@ static void dp_detach_port_notify(struct vport *vport)
 	genlmsg_multicast_netns(&dp_vport_genl_family,
 				ovs_dp_get_net(dp), notify, 0,
 				0, GFP_KERNEL);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -77,8 +83,12 @@ void ovs_dp_notify_wq(struct work_struct *work)
 
 				netdev_vport = netdev_vport_priv(vport);
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (netdev_vport->dev->reg_state == NETREG_UNREGISTERED ||
 				    netdev_vport->dev->reg_state == NETREG_UNREGISTERING)
+=======
+				if (!(netdev_vport->dev->priv_flags & IFF_OVS_DATAPATH))
+>>>>>>> v3.18
 =======
 				if (!(netdev_vport->dev->priv_flags & IFF_OVS_DATAPATH))
 >>>>>>> v3.18
@@ -94,7 +104,11 @@ static int dp_device_event(struct notifier_block *unused, unsigned long event,
 {
 	struct ovs_net *ovs_net;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct net_device *dev = ptr;
+=======
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
 >>>>>>> v3.18
@@ -108,11 +122,17 @@ static int dp_device_event(struct notifier_block *unused, unsigned long event,
 
 	if (event == NETDEV_UNREGISTER) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* upper_dev_unlink and decrement promisc immediately */
 		ovs_netdev_detach_dev(vport);
 
 		/* schedule vport destroy, dev_put and genl notification */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ovs_net = net_generic(dev_net(dev), ovs_net_id);
 		queue_work(system_wq, &ovs_net->dp_notify_work);

@@ -103,10 +103,13 @@ ip_set_get_ip4_port(const struct sk_buff *skb, bool src,
 
 	/* See comments at tcp_match in ip_tables.c */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (protocol <= 0 || (ntohs(iph->frag_off) & IP_OFFSET))
 		return false;
 
 =======
+=======
+>>>>>>> v3.18
 	if (protocol <= 0)
 		return false;
 
@@ -126,6 +129,9 @@ ip_set_get_ip4_port(const struct sk_buff *skb, bool src,
 			return true;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return get_port(skb, protocol, protooff, src, port, proto);
 }
@@ -139,7 +145,11 @@ ip_set_get_ip6_port(const struct sk_buff *skb, bool src,
 	int protoff;
 	u8 nexthdr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	__be16 frag_off;
+=======
+	__be16 frag_off = 0;
+>>>>>>> v3.18
 =======
 	__be16 frag_off = 0;
 >>>>>>> v3.18
@@ -148,7 +158,11 @@ ip_set_get_ip6_port(const struct sk_buff *skb, bool src,
 	protoff = ipv6_skip_exthdr(skb, sizeof(struct ipv6hdr), &nexthdr,
 				   &frag_off);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (protoff < 0)
+=======
+	if (protoff < 0 || (frag_off & htons(~0x7)) != 0)
+>>>>>>> v3.18
 =======
 	if (protoff < 0 || (frag_off & htons(~0x7)) != 0)
 >>>>>>> v3.18

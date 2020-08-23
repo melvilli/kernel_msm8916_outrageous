@@ -115,6 +115,10 @@ pll_map(struct nouveau_bios *bios)
 	case NV_04:
 	case NV_10:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case NV_11:
+>>>>>>> v3.18
 =======
 	case NV_11:
 >>>>>>> v3.18

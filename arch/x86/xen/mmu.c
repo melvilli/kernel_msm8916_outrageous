@@ -400,6 +400,7 @@ static pteval_t pte_pfn_to_mfn(pteval_t val)
 			mfn = 0;
 			flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		} else {
 			/*
 			 * Paramount to do this test _after_ the
@@ -416,12 +417,17 @@ static pteval_t pte_pfn_to_mfn(pteval_t val)
 		} else
 			mfn &= ~(FOREIGN_FRAME_BIT | IDENTITY_FRAME_BIT);
 >>>>>>> v3.18
+=======
+		} else
+			mfn &= ~(FOREIGN_FRAME_BIT | IDENTITY_FRAME_BIT);
+>>>>>>> v3.18
 		val = ((pteval_t)mfn << PAGE_SHIFT) | flags;
 	}
 
 	return val;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static pteval_t iomap_pte(pteval_t val)
 {
@@ -441,6 +447,9 @@ static pteval_t xen_pte_val(pte_t pte)
 =======
 __visible pteval_t xen_pte_val(pte_t pte)
 >>>>>>> v3.18
+=======
+__visible pteval_t xen_pte_val(pte_t pte)
+>>>>>>> v3.18
 {
 	pteval_t pteval = pte.pte;
 #if 0
@@ -451,9 +460,12 @@ __visible pteval_t xen_pte_val(pte_t pte)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xen_initial_domain() && (pteval & _PAGE_IOMAP))
 		return pteval;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return pte_mfn_to_pfn(pteval);
@@ -461,7 +473,11 @@ __visible pteval_t xen_pte_val(pte_t pte)
 PV_CALLEE_SAVE_REGS_THUNK(xen_pte_val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pgdval_t xen_pgd_val(pgd_t pgd)
+=======
+__visible pgdval_t xen_pgd_val(pgd_t pgd)
+>>>>>>> v3.18
 =======
 __visible pgdval_t xen_pgd_val(pgd_t pgd)
 >>>>>>> v3.18
@@ -485,8 +501,13 @@ PV_CALLEE_SAVE_REGS_THUNK(xen_pgd_val);
  * 4    PAT              WB       WC     WB
  * 5    PAT     PWT      WC       WP     WT
 <<<<<<< HEAD
+<<<<<<< HEAD
  * 6    PAT PCD          UC-      UC     UC-
  * 7    PAT PCD PWT      UC       UC     UC
+=======
+ * 6    PAT PCD          UC-      rsv    UC-
+ * 7    PAT PCD PWT      UC       rsv    UC
+>>>>>>> v3.18
 =======
  * 6    PAT PCD          UC-      rsv    UC-
  * 7    PAT PCD PWT      UC       rsv    UC
@@ -501,9 +522,14 @@ void xen_set_pat(u64 pat)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pte_t xen_make_pte(pteval_t pte)
 {
 	phys_addr_t addr = (pte & PTE_PFN_MASK);
+=======
+__visible pte_t xen_make_pte(pteval_t pte)
+{
+>>>>>>> v3.18
 =======
 __visible pte_t xen_make_pte(pteval_t pte)
 {
@@ -523,6 +549,7 @@ __visible pte_t xen_make_pte(pteval_t pte)
 	}
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Unprivileged domains are allowed to do IOMAPpings for
 	 * PCI passthrough, but not map ISA space.  The ISA
@@ -539,13 +566,20 @@ __visible pte_t xen_make_pte(pteval_t pte)
 =======
 	pte = pte_pfn_to_mfn(pte);
 >>>>>>> v3.18
+=======
+	pte = pte_pfn_to_mfn(pte);
+>>>>>>> v3.18
 
 	return native_make_pte(pte);
 }
 PV_CALLEE_SAVE_REGS_THUNK(xen_make_pte);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pgd_t xen_make_pgd(pgdval_t pgd)
+=======
+__visible pgd_t xen_make_pgd(pgdval_t pgd)
+>>>>>>> v3.18
 =======
 __visible pgd_t xen_make_pgd(pgdval_t pgd)
 >>>>>>> v3.18
@@ -556,7 +590,11 @@ __visible pgd_t xen_make_pgd(pgdval_t pgd)
 PV_CALLEE_SAVE_REGS_THUNK(xen_make_pgd);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pmdval_t xen_pmd_val(pmd_t pmd)
+=======
+__visible pmdval_t xen_pmd_val(pmd_t pmd)
+>>>>>>> v3.18
 =======
 __visible pmdval_t xen_pmd_val(pmd_t pmd)
 >>>>>>> v3.18
@@ -619,7 +657,11 @@ static void xen_pmd_clear(pmd_t *pmdp)
 #endif	/* CONFIG_X86_PAE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pmd_t xen_make_pmd(pmdval_t pmd)
+=======
+__visible pmd_t xen_make_pmd(pmdval_t pmd)
+>>>>>>> v3.18
 =======
 __visible pmd_t xen_make_pmd(pmdval_t pmd)
 >>>>>>> v3.18
@@ -631,7 +673,11 @@ PV_CALLEE_SAVE_REGS_THUNK(xen_make_pmd);
 
 #if PAGETABLE_LEVELS == 4
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pudval_t xen_pud_val(pud_t pud)
+=======
+__visible pudval_t xen_pud_val(pud_t pud)
+>>>>>>> v3.18
 =======
 __visible pudval_t xen_pud_val(pud_t pud)
 >>>>>>> v3.18
@@ -641,7 +687,11 @@ __visible pudval_t xen_pud_val(pud_t pud)
 PV_CALLEE_SAVE_REGS_THUNK(xen_pud_val);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static pud_t xen_make_pud(pudval_t pud)
+=======
+__visible pud_t xen_make_pud(pudval_t pud)
+>>>>>>> v3.18
 =======
 __visible pud_t xen_make_pud(pudval_t pud)
 >>>>>>> v3.18
@@ -847,8 +897,13 @@ static spinlock_t *xen_pte_lock(struct page *page, struct mm_struct *mm)
 	spinlock_t *ptl = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #if USE_SPLIT_PTLOCKS
 	ptl = __pte_lockptr(page);
+=======
+#if USE_SPLIT_PTE_PTLOCKS
+	ptl = ptlock_ptr(page);
+>>>>>>> v3.18
 =======
 #if USE_SPLIT_PTE_PTLOCKS
 	ptl = ptlock_ptr(page);
@@ -1243,7 +1298,11 @@ static void __init xen_cleanhighmap(unsigned long vaddr,
 	/* NOTE: The loop is more greedy than the cleanup_highmap variant.
 	 * We include the PMD passed in on _both_ boundaries. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (; vaddr <= vaddr_end && (pmd < (level2_kernel_pgt + PTRS_PER_PMD));
+=======
+	for (; vaddr <= vaddr_end && (pmd < (level2_kernel_pgt + PAGE_SIZE));
+>>>>>>> v3.18
 =======
 	for (; vaddr <= vaddr_end && (pmd < (level2_kernel_pgt + PAGE_SIZE));
 >>>>>>> v3.18
@@ -1257,6 +1316,7 @@ static void __init xen_cleanhighmap(unsigned long vaddr,
 	 * instead of somewhere later and be confusing. */
 	xen_mc_flush();
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 #endif
 static void __init xen_pagetable_init(void)
@@ -1297,6 +1357,8 @@ static void __init xen_pagetable_init(void)
 			goto skip;
 	}
 =======
+=======
+>>>>>>> v3.18
 static void __init xen_pagetable_p2m_copy(void)
 {
 	unsigned long size;
@@ -1331,6 +1393,9 @@ static void __init xen_pagetable_p2m_copy(void)
 	/* And revector! Bye bye old array */
 	xen_start_info->mfn_list = new_mfn_list;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* At this stage, cleanup_highmap has already cleaned __ka space
 	 * from _brk_limit way up to the max_pfn_mapped (which is the end of
@@ -1352,9 +1417,12 @@ static void __init xen_pagetable_p2m_copy(void)
 	xen_cleanhighmap(MODULES_VADDR, roundup(MODULES_VADDR, PUD_SIZE) - 1);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 skip:
 #endif
 =======
+=======
+>>>>>>> v3.18
 }
 #endif
 
@@ -1368,6 +1436,9 @@ static void __init xen_pagetable_init(void)
 	xen_build_mfn_list_list();
 
 	xen_setup_shared_info();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	xen_post_allocator_init();
 }
@@ -1603,7 +1674,11 @@ static int xen_pgd_alloc(struct mm_struct *mm)
 
 		if (user_pgd != NULL) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			user_pgd[pgd_index(VSYSCALL_START)] =
+=======
+			user_pgd[pgd_index(VSYSCALL_ADDR)] =
+>>>>>>> v3.18
 =======
 			user_pgd[pgd_index(VSYSCALL_ADDR)] =
 >>>>>>> v3.18
@@ -1754,7 +1829,11 @@ static inline void xen_alloc_ptpage(struct mm_struct *mm, unsigned long pfn,
 			__set_pfn_prot(pfn, PAGE_KERNEL_RO);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (level == PT_PTE && USE_SPLIT_PTLOCKS)
+=======
+			if (level == PT_PTE && USE_SPLIT_PTE_PTLOCKS)
+>>>>>>> v3.18
 =======
 			if (level == PT_PTE && USE_SPLIT_PTE_PTLOCKS)
 >>>>>>> v3.18
@@ -1792,7 +1871,11 @@ static inline void xen_release_ptpage(unsigned long pfn, unsigned level)
 			xen_mc_batch();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (level == PT_PTE && USE_SPLIT_PTLOCKS)
+=======
+			if (level == PT_PTE && USE_SPLIT_PTE_PTLOCKS)
+>>>>>>> v3.18
 =======
 			if (level == PT_PTE && USE_SPLIT_PTE_PTLOCKS)
 >>>>>>> v3.18
@@ -1878,11 +1961,17 @@ static void set_page_prot_flags(void *addr, pgprot_t prot, unsigned long flags)
 	pte_t pte = pfn_pte(pfn, prot);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* For PVH no need to set R/O or R/W to pin them or unpin them. */
 	if (xen_feature(XENFEAT_auto_translated_physmap))
 		return;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (HYPERVISOR_update_va_mapping((unsigned long)addr, pte, flags))
 		BUG();
@@ -1990,17 +2079,23 @@ static void __init check_pt_base(unsigned long *pt_base, unsigned long *pt_end,
  * We can construct this by grafting the Xen provided pagetable into
  * head_64.S's preconstructed pagetables.  We copy the Xen L2's into
 <<<<<<< HEAD
+<<<<<<< HEAD
  * level2_ident_pgt, level2_kernel_pgt and level2_fixmap_pgt.  This
  * means that only the kernel has a physical mapping to start with -
  * but that's enough to get __va working.  We need to fill in the rest
  * of the physical mapping once some sort of allocator has been set
  * up.
 =======
+=======
+>>>>>>> v3.18
  * level2_ident_pgt, and level2_kernel_pgt.  This means that only the
  * kernel has a physical mapping to start with - but that's enough to
  * get __va working.  We need to fill in the rest of the physical
  * mapping once some sort of allocator has been set up.  NOTE: for
  * PVH, the page tables are native.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
@@ -2024,6 +2119,7 @@ void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
 	init_level4_pgt[0] = __pgd(0);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Pre-constructed entries are in pfn, so convert to mfn */
 	/* L4[272] -> level3_ident_pgt
 	 * L4[511] -> level3_kernel_pgt */
@@ -2036,6 +2132,8 @@ void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
 	convert_pfn_mfn(level3_kernel_pgt);
 
 =======
+=======
+>>>>>>> v3.18
 	if (!xen_feature(XENFEAT_auto_translated_physmap)) {
 		/* Pre-constructed entries are in pfn, so convert to mfn */
 		/* L4[272] -> level3_ident_pgt
@@ -2051,6 +2149,9 @@ void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
 		/* L3_k[511][506] -> level1_fixmap_pgt */
 		convert_pfn_mfn(level2_fixmap_pgt);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* We get [511][511] and have Xen's version of level2_kernel_pgt */
 	l3 = m2v(pgd[pgd_index(__START_KERNEL_map)].pgd);
@@ -2061,7 +2162,11 @@ void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
 	addr[2] = (unsigned long)l2;
 	/* Graft it onto L4[272][0]. Note that we creating an aliasing problem:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Both L4[272][0] and L4[511][511] have entries that point to the same
+=======
+	 * Both L4[272][0] and L4[511][510] have entries that point to the same
+>>>>>>> v3.18
 =======
 	 * Both L4[272][0] and L4[511][510] have entries that point to the same
 >>>>>>> v3.18
@@ -2070,6 +2175,7 @@ void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
 	 * modify the PMD table to point to other PTE's or none, then you
 	 * are OK - which is what cleanup_highmap does) */
 	copy_page(level2_ident_pgt, l2);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Graft it onto L4[511][511] */
 	copy_page(level2_kernel_pgt, l2);
@@ -2106,6 +2212,8 @@ void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
 	__xen_write_cr3(true, __pa(init_level4_pgt));
 	xen_mc_issue(PARAVIRT_LAZY_CPU);
 =======
+=======
+>>>>>>> v3.18
 	/* Graft it onto L4[511][510] */
 	copy_page(level2_kernel_pgt, l2);
 
@@ -2137,6 +2245,9 @@ void __init xen_setup_kernel_pagetable(pgd_t *pgd, unsigned long max_pfn)
 		xen_mc_issue(PARAVIRT_LAZY_CPU);
 	} else
 		native_write_cr3(__pa(init_level4_pgt));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* We can't that easily rip out L3 and L2, as the Xen pagetables are
@@ -2242,7 +2353,10 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
 #ifdef CONFIG_X86_32
 	case FIX_WP_TEST:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case FIX_VDSO:
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 # ifdef CONFIG_HIGHMEM
@@ -2250,8 +2364,12 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
 # endif
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case VSYSCALL_LAST_PAGE ... VSYSCALL_FIRST_PAGE:
 	case VVAR_PAGE:
+=======
+	case VSYSCALL_PAGE:
+>>>>>>> v3.18
 =======
 	case VSYSCALL_PAGE:
 >>>>>>> v3.18
@@ -2287,7 +2405,11 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
 	default:
 		/* By default, set_fixmap is used for hardware mappings */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pte = mfn_pte(phys, __pgprot(pgprot_val(prot) | _PAGE_IOMAP));
+=======
+		pte = mfn_pte(phys, prot);
+>>>>>>> v3.18
 =======
 		pte = mfn_pte(phys, prot);
 >>>>>>> v3.18
@@ -2300,8 +2422,12 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
 	/* Replicate changes to map the vsyscall page into the user
 	   pagetable vsyscall mapping. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((idx >= VSYSCALL_LAST_PAGE && idx <= VSYSCALL_FIRST_PAGE) ||
 	    idx == VVAR_PAGE) {
+=======
+	if (idx == VSYSCALL_PAGE) {
+>>>>>>> v3.18
 =======
 	if (idx == VSYSCALL_PAGE) {
 >>>>>>> v3.18
@@ -2314,6 +2440,12 @@ static void xen_set_fixmap(unsigned idx, phys_addr_t phys, pgprot_t prot)
 static void __init xen_post_allocator_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (xen_feature(XENFEAT_auto_translated_physmap))
+		return;
+
+>>>>>>> v3.18
 =======
 	if (xen_feature(XENFEAT_auto_translated_physmap))
 		return;
@@ -2424,7 +2556,10 @@ void __init xen_init_mmu_ops(void)
 {
 	x86_init.paging.pagetable_init = xen_pagetable_init;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	/* Optimization - we can use the HVM one but it has no idea which
 	 * VCPUs are descheduled - which means that it will needlessly IPI
@@ -2434,6 +2569,9 @@ void __init xen_init_mmu_ops(void)
 		pv_mmu_ops.flush_tlb_others = xen_flush_tlb_others;
 		return;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pv_mmu_ops = xen_mmu_ops;
 
@@ -2557,8 +2695,14 @@ static int xen_exchange_memory(unsigned long extents_in, unsigned int order_in,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int xen_create_contiguous_region(unsigned long vstart, unsigned int order,
 				 unsigned int address_bits)
+=======
+int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
+				 unsigned int address_bits,
+				 dma_addr_t *dma_handle)
+>>>>>>> v3.18
 =======
 int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
 				 unsigned int address_bits,
@@ -2569,6 +2713,10 @@ int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
 	unsigned long  flags;
 	int            success;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long vstart = (unsigned long)phys_to_virt(pstart);
+>>>>>>> v3.18
 =======
 	unsigned long vstart = (unsigned long)phys_to_virt(pstart);
 >>>>>>> v3.18
@@ -2607,6 +2755,10 @@ int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
 	spin_unlock_irqrestore(&xen_reservation_lock, flags);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	*dma_handle = virt_to_machine(vstart).maddr;
+>>>>>>> v3.18
 =======
 	*dma_handle = virt_to_machine(vstart).maddr;
 >>>>>>> v3.18
@@ -2615,7 +2767,11 @@ int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
 EXPORT_SYMBOL_GPL(xen_create_contiguous_region);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void xen_destroy_contiguous_region(unsigned long vstart, unsigned int order)
+=======
+void xen_destroy_contiguous_region(phys_addr_t pstart, unsigned int order)
+>>>>>>> v3.18
 =======
 void xen_destroy_contiguous_region(phys_addr_t pstart, unsigned int order)
 >>>>>>> v3.18
@@ -2624,6 +2780,10 @@ void xen_destroy_contiguous_region(phys_addr_t pstart, unsigned int order)
 	unsigned long  flags;
 	int success;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned long vstart;
+>>>>>>> v3.18
 =======
 	unsigned long vstart;
 >>>>>>> v3.18
@@ -2635,6 +2795,10 @@ void xen_destroy_contiguous_region(phys_addr_t pstart, unsigned int order)
 		return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	vstart = (unsigned long)phys_to_virt(pstart);
+>>>>>>> v3.18
 =======
 	vstart = (unsigned long)phys_to_virt(pstart);
 >>>>>>> v3.18
@@ -2737,7 +2901,10 @@ void __init xen_hvm_init_mmu_ops(void)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_XEN_PVH
 /*
  * Map foreign gfn (fgfn), to local pfn (lpfn). This for the user
@@ -2827,6 +2994,9 @@ static int xlate_remap_gfn_range(struct vm_area_struct *vma,
 }
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define REMAP_BATCH_SIZE 16
 
@@ -2841,7 +3011,11 @@ static int remap_area_mfn_pte_fn(pte_t *ptep, pgtable_t token,
 {
 	struct remap_data *rmd = data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pte_t pte = pte_mkspecial(pfn_pte(rmd->mfn++, rmd->prot));
+=======
+	pte_t pte = pte_mkspecial(mfn_pte(rmd->mfn++, rmd->prot));
+>>>>>>> v3.18
 =======
 	pte_t pte = pte_mkspecial(mfn_pte(rmd->mfn++, rmd->prot));
 >>>>>>> v3.18
@@ -2867,6 +3041,7 @@ int xen_remap_domain_mfn_range(struct vm_area_struct *vma,
 	int err = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (xen_feature(XENFEAT_auto_translated_physmap))
 		return -EINVAL;
 
@@ -2875,6 +3050,8 @@ int xen_remap_domain_mfn_range(struct vm_area_struct *vma,
 	BUG_ON(!((vma->vm_flags & (VM_PFNMAP | VM_IO)) == (VM_PFNMAP | VM_IO)));
 
 =======
+=======
+>>>>>>> v3.18
 	BUG_ON(!((vma->vm_flags & (VM_PFNMAP | VM_IO)) == (VM_PFNMAP | VM_IO)));
 
 	if (xen_feature(XENFEAT_auto_translated_physmap)) {
@@ -2887,6 +3064,9 @@ int xen_remap_domain_mfn_range(struct vm_area_struct *vma,
 #endif
         }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	rmd.mfn = mfn;
 	rmd.prot = prot;
@@ -2926,8 +3106,11 @@ int xen_unmap_domain_mfn_range(struct vm_area_struct *vma,
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_XEN_PVH
 	while (numpgs--) {
 		/*
@@ -2948,6 +3131,9 @@ int xen_unmap_domain_mfn_range(struct vm_area_struct *vma,
 #else
 	return -EINVAL;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 EXPORT_SYMBOL_GPL(xen_unmap_domain_mfn_range);

@@ -9,7 +9,10 @@
 #include <asm/cio.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct channel_path_desc {
 	u8 flags;
 	u8 lsn;
@@ -21,6 +24,9 @@ struct channel_path_desc {
 	u8 chpp;
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline void chp_id_init(struct chp_id *chpid)
 {

@@ -9,9 +9,12 @@
 #include <linux/binfmts.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct rq;
 extern const char *task_event_names[];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -57,6 +60,7 @@ TRACE_EVENT(sched_kthread_stop_ret,
 );
 
 /*
+<<<<<<< HEAD
 <<<<<<< HEAD
  * Tracepoint for task enqueue/dequeue:
  */
@@ -444,6 +448,8 @@ TRACE_EVENT(sched_freq_alert,
 /*
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
  * Tracepoint for waking up a task:
  */
 DECLARE_EVENT_CLASS(sched_wakeup_template,
@@ -451,7 +457,11 @@ DECLARE_EVENT_CLASS(sched_wakeup_template,
 	TP_PROTO(struct task_struct *p, int success),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_ARGS(p, success),
+=======
+	TP_ARGS(__perf_task(p), success),
+>>>>>>> v3.18
 =======
 	TP_ARGS(__perf_task(p), success),
 >>>>>>> v3.18
@@ -471,9 +481,12 @@ DECLARE_EVENT_CLASS(sched_wakeup_template,
 		__entry->success	= success;
 		__entry->target_cpu	= task_cpu(p);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	)
 	TP_perf_assign(
 		__perf_task(p);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	),
@@ -504,7 +517,11 @@ static inline long __trace_sched_switch_state(struct task_struct *p)
 	 * For all intents and purposes a preempted task is a running task.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (task_thread_info(p)->preempt_count & PREEMPT_ACTIVE)
+=======
+	if (task_preempt_count(p) & PREEMPT_ACTIVE)
+>>>>>>> v3.18
 =======
 	if (task_preempt_count(p) & PREEMPT_ACTIVE)
 >>>>>>> v3.18
@@ -562,10 +579,16 @@ TRACE_EVENT(sched_switch,
 TRACE_EVENT(sched_migrate_task,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_PROTO(struct task_struct *p, int dest_cpu,
 		 unsigned int load),
 
 	TP_ARGS(p, dest_cpu, load),
+=======
+	TP_PROTO(struct task_struct *p, int dest_cpu),
+
+	TP_ARGS(p, dest_cpu),
+>>>>>>> v3.18
 =======
 	TP_PROTO(struct task_struct *p, int dest_cpu),
 
@@ -577,7 +600,10 @@ TRACE_EVENT(sched_migrate_task,
 		__field(	pid_t,	pid			)
 		__field(	int,	prio			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__field(unsigned int,	load			)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		__field(	int,	orig_cpu		)
@@ -589,13 +615,17 @@ TRACE_EVENT(sched_migrate_task,
 		__entry->pid		= p->pid;
 		__entry->prio		= p->prio;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__entry->load		= load;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		__entry->orig_cpu	= task_cpu(p);
 		__entry->dest_cpu	= dest_cpu;
 	),
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	TP_printk("comm=%s pid=%d prio=%d load=%d orig_cpu=%d dest_cpu=%d",
 		  __entry->comm, __entry->pid, __entry->prio,  __entry->load,
@@ -678,11 +708,16 @@ TRACE_EVENT(sched_load_balance,
 );
 
 =======
+=======
+>>>>>>> v3.18
 	TP_printk("comm=%s pid=%d prio=%d orig_cpu=%d dest_cpu=%d",
 		  __entry->comm, __entry->pid, __entry->prio,
 		  __entry->orig_cpu, __entry->dest_cpu)
 );
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 DECLARE_EVENT_CLASS(sched_process_template,
 
@@ -816,7 +851,11 @@ DECLARE_EVENT_CLASS(sched_stat_template,
 	TP_PROTO(struct task_struct *tsk, u64 delay),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	TP_ARGS(tsk, delay),
+=======
+	TP_ARGS(__perf_task(tsk), __perf_count(delay)),
+>>>>>>> v3.18
 =======
 	TP_ARGS(__perf_task(tsk), __perf_count(delay)),
 >>>>>>> v3.18
@@ -832,10 +871,13 @@ DECLARE_EVENT_CLASS(sched_stat_template,
 		__entry->pid	= tsk->pid;
 		__entry->delay	= delay;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	)
 	TP_perf_assign(
 		__perf_count(delay);
 		__perf_task(tsk);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	),
@@ -882,17 +924,23 @@ DEFINE_EVENT(sched_stat_template, sched_stat_blocked,
  * on a CPU).
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(sched_stat_runtime,
 
 	TP_PROTO(struct task_struct *tsk, u64 runtime, u64 vruntime),
 
 	TP_ARGS(tsk, runtime, vruntime),
 =======
+=======
+>>>>>>> v3.18
 DECLARE_EVENT_CLASS(sched_stat_runtime,
 
 	TP_PROTO(struct task_struct *tsk, u64 runtime, u64 vruntime),
 
 	TP_ARGS(tsk, __perf_count(runtime), vruntime),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	TP_STRUCT__entry(
@@ -908,9 +956,12 @@ DECLARE_EVENT_CLASS(sched_stat_runtime,
 		__entry->runtime	= runtime;
 		__entry->vruntime	= vruntime;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	)
 	TP_perf_assign(
 		__perf_count(runtime);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	),
@@ -922,11 +973,17 @@ DECLARE_EVENT_CLASS(sched_stat_runtime,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 DEFINE_EVENT(sched_stat_runtime, sched_stat_runtime,
 	     TP_PROTO(struct task_struct *tsk, u64 runtime, u64 vruntime),
 	     TP_ARGS(tsk, runtime, vruntime));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * Tracepoint for showing priority inheritance modifying a tasks
@@ -958,6 +1015,7 @@ TRACE_EVENT(sched_pi_setprio,
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 TRACE_EVENT(sched_get_nr_running_avg,
 
 	TP_PROTO(int avg, int big_avg, int iowait_avg),
@@ -979,6 +1037,8 @@ TRACE_EVENT(sched_get_nr_running_avg,
 	TP_printk("avg=%d big_avg=%d iowait_avg=%d",
 		__entry->avg, __entry->big_avg, __entry->iowait_avg)
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DETECT_HUNG_TASK
 TRACE_EVENT(sched_process_hang,
 	TP_PROTO(struct task_struct *tsk),
@@ -1104,6 +1164,9 @@ TRACE_EVENT(sched_wake_idle_without_ipi,
 	),
 
 	TP_printk("cpu=%d", __entry->cpu)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 );
 #endif /* _TRACE_SCHED_H */

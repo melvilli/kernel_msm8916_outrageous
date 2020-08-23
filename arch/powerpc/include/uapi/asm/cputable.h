@@ -32,7 +32,10 @@
 					0x00000040
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Reserved - do not use		0x00000004 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PPC_FEATURE_TRUE_LE		0x00000002

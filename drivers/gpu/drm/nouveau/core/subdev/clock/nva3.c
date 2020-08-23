@@ -21,6 +21,7 @@
  *
  * Authors: Ben Skeggs
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 
 #include <subdev/clock.h>
@@ -85,6 +86,8 @@ nva3_clock_pll_calc(struct nouveau_clock *clock, struct nvbios_pll *info,
 }
 
 =======
+=======
+>>>>>>> v3.18
  *          Roy Spliet
  */
 
@@ -565,6 +568,9 @@ nva3_domain[] = {
 	{ nv_clk_src_core_intm, 0x06 },
 	{ nv_clk_src_max }
 };
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 static int
@@ -576,7 +582,12 @@ nva3_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = nouveau_clock_create(parent, engine, oclass, &priv);
+=======
+	ret = nouveau_clock_create(parent, engine, oclass, nva3_domain, NULL, 0,
+				   false, &priv);
+>>>>>>> v3.18
 =======
 	ret = nouveau_clock_create(parent, engine, oclass, nva3_domain, NULL, 0,
 				   false, &priv);
@@ -586,13 +597,19 @@ nva3_clock_ctor(struct nouveau_object *parent, struct nouveau_object *engine,
 		return ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->base.pll_set = nva3_clock_pll_set;
 	priv->base.pll_calc = nva3_clock_pll_calc;
 =======
+=======
+>>>>>>> v3.18
 	priv->base.read = nva3_clock_read;
 	priv->base.calc = nva3_clock_calc;
 	priv->base.prog = nva3_clock_prog;
 	priv->base.tidy = nva3_clock_tidy;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

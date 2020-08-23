@@ -29,6 +29,12 @@ struct dev_archdata {
 	} dma_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_IOMMU_API
+	void			*iommu_domain;
+#endif
+>>>>>>> v3.18
 =======
 #ifdef CONFIG_IOMMU_API
 	void			*iommu_domain;

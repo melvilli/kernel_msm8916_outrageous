@@ -1,4 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#ifndef __SAMSUNG_H
+#define __SAMSUNG_H
+
+>>>>>>> v3.18
 =======
 #ifndef __SAMSUNG_H
 #define __SAMSUNG_H
@@ -70,7 +76,11 @@ struct s3c24xx_uart_port {
 /* conversion functions */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define s3c24xx_dev_to_port(__dev) (struct uart_port *)dev_get_drvdata(__dev)
+=======
+#define s3c24xx_dev_to_port(__dev) dev_get_drvdata(__dev)
+>>>>>>> v3.18
 =======
 #define s3c24xx_dev_to_port(__dev) dev_get_drvdata(__dev)
 >>>>>>> v3.18
@@ -79,7 +89,12 @@ struct s3c24xx_uart_port {
 
 #define portaddr(port, reg) ((port)->membase + (reg))
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define portaddrl(port, reg) ((unsigned long *)((port)->membase + (reg)))
+=======
+#define portaddrl(port, reg) \
+	((unsigned long *)(unsigned long)((port)->membase + (reg)))
+>>>>>>> v3.18
 =======
 #define portaddrl(port, reg) \
 	((unsigned long *)(unsigned long)((port)->membase + (reg)))
@@ -91,6 +106,7 @@ struct s3c24xx_uart_port {
 #define wr_regb(port, reg, val) __raw_writeb(val, portaddr(port, reg))
 #define wr_regl(port, reg, val) __raw_writel(val, portaddr(port, reg))
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #if defined(CONFIG_SERIAL_SAMSUNG_DEBUG) && \
     defined(CONFIG_DEBUG_LL) && \
@@ -112,6 +128,8 @@ static void dbg(const char *fmt, ...)
 
 #else
 #define dbg(x...) do { } while (0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif

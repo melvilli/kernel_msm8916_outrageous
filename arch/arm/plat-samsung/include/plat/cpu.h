@@ -21,6 +21,12 @@
 extern unsigned long samsung_cpu_id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define S3C2410_CPU_ID		0x32410000
+#define S3C2410_CPU_MASK	0xFFFFFFFF
+
+>>>>>>> v3.18
 =======
 #define S3C2410_CPU_ID		0x32410000
 #define S3C2410_CPU_MASK	0xFFFFFFFF
@@ -36,6 +42,7 @@ extern unsigned long samsung_cpu_id;
 #define S3C6410_CPU_ID		0x36410000
 #define S3C64XX_CPU_MASK	0xFFFFF000
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define S5P6440_CPU_ID		0x56440000
 #define S5P6450_CPU_ID		0x36450000
@@ -61,6 +68,11 @@ extern unsigned long samsung_cpu_id;
 #define S5PV210_CPU_MASK	0xFFFFF000
 
 >>>>>>> v3.18
+=======
+#define S5PV210_CPU_ID		0x43110000
+#define S5PV210_CPU_MASK	0xFFFFF000
+
+>>>>>>> v3.18
 #define IS_SAMSUNG_CPU(name, id, mask)		\
 static inline int is_samsung_##name(void)	\
 {						\
@@ -68,6 +80,10 @@ static inline int is_samsung_##name(void)	\
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+IS_SAMSUNG_CPU(s3c2410, S3C2410_CPU_ID, S3C2410_CPU_MASK)
+>>>>>>> v3.18
 =======
 IS_SAMSUNG_CPU(s3c2410, S3C2410_CPU_ID, S3C2410_CPU_MASK)
 >>>>>>> v3.18
@@ -75,6 +91,7 @@ IS_SAMSUNG_CPU(s3c24xx, S3C24XX_CPU_ID, S3C24XX_CPU_MASK)
 IS_SAMSUNG_CPU(s3c2412, S3C2412_CPU_ID, S3C2412_CPU_MASK)
 IS_SAMSUNG_CPU(s3c6400, S3C6400_CPU_ID, S3C64XX_CPU_MASK)
 IS_SAMSUNG_CPU(s3c6410, S3C6410_CPU_ID, S3C64XX_CPU_MASK)
+<<<<<<< HEAD
 <<<<<<< HEAD
 IS_SAMSUNG_CPU(s5p6440, S5P6440_CPU_ID, S5P64XX_CPU_MASK)
 IS_SAMSUNG_CPU(s5p6450, S5P6450_CPU_ID, S5P64XX_CPU_MASK)
@@ -87,6 +104,8 @@ IS_SAMSUNG_CPU(exynos5250, EXYNOS5250_SOC_ID, EXYNOS5_SOC_MASK)
 IS_SAMSUNG_CPU(exynos5440, EXYNOS5440_SOC_ID, EXYNOS5_SOC_MASK)
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 
 #if defined(CONFIG_CPU_S3C2410) || defined(CONFIG_CPU_S3C2412) || \
     defined(CONFIG_CPU_S3C2416) || defined(CONFIG_CPU_S3C2440) || \
@@ -94,13 +113,19 @@ IS_SAMSUNG_CPU(exynos5440, EXYNOS5440_SOC_ID, EXYNOS5_SOC_MASK)
     defined(CONFIG_CPU_S3C2443)
 # define soc_is_s3c24xx()	is_samsung_s3c24xx()
 <<<<<<< HEAD
+<<<<<<< HEAD
 #else
 # define soc_is_s3c24xx()	0
 =======
+=======
+>>>>>>> v3.18
 # define soc_is_s3c2410()	is_samsung_s3c2410()
 #else
 # define soc_is_s3c24xx()	0
 # define soc_is_s3c2410()	0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 
@@ -111,6 +136,7 @@ IS_SAMSUNG_CPU(exynos5440, EXYNOS5440_SOC_ID, EXYNOS5_SOC_MASK)
 #endif
 
 #if defined(CONFIG_CPU_S3C6400) || defined(CONFIG_CPU_S3C6410)
+<<<<<<< HEAD
 <<<<<<< HEAD
 # define soc_is_s3c64xx()	(is_samsung_s3c6400() || is_samsung_s3c6410())
 #else
@@ -176,6 +202,8 @@ IS_SAMSUNG_CPU(exynos5440, EXYNOS5440_SOC_ID, EXYNOS5_SOC_MASK)
 #endif
 
 =======
+=======
+>>>>>>> v3.18
 # define soc_is_s3c6400()	is_samsung_s3c6400()
 # define soc_is_s3c6410()	is_samsung_s3c6410()
 # define soc_is_s3c64xx()	(is_samsung_s3c6400() || is_samsung_s3c6410())
@@ -185,6 +213,9 @@ IS_SAMSUNG_CPU(exynos5440, EXYNOS5440_SOC_ID, EXYNOS5_SOC_MASK)
 # define soc_is_s3c64xx()	0
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define IODESC_ENT(x) { (unsigned long)S3C24XX_VA_##x, __phys_to_pfn(S3C24XX_PA_##x), S3C24XX_SZ_##x, MT_DEVICE }
 
@@ -222,6 +253,7 @@ extern void s3c_init_cpu(unsigned long idcode,
 /* core initialisation functions */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void s5p_init_irq(u32 *vic, u32 num_vic);
 
 extern void s3c24xx_init_io(struct map_desc *mach_desc, int size);
@@ -229,6 +261,11 @@ extern void s3c24xx_init_io(struct map_desc *mach_desc, int size);
 extern void s3c24xx_init_cpu(void);
 extern void s3c64xx_init_cpu(void);
 extern void s5p_init_cpu(void __iomem *cpuid_addr);
+=======
+extern void s3c24xx_init_io(struct map_desc *mach_desc, int size);
+
+extern void s3c64xx_init_cpu(void);
+>>>>>>> v3.18
 =======
 extern void s3c24xx_init_io(struct map_desc *mach_desc, int size);
 
@@ -261,11 +298,14 @@ extern struct bus_type s3c2442_subsys;
 extern struct bus_type s3c2443_subsys;
 extern struct bus_type s3c6410_subsys;
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct bus_type s5p64x0_subsys;
 extern struct bus_type s5pv210_subsys;
 extern struct bus_type exynos_subsys;
 
 extern void (*s5pc1xx_idle)(void);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

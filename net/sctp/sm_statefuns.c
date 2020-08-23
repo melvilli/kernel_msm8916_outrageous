@@ -23,6 +23,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -34,12 +35,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -55,9 +61,12 @@
  *    Ryan Layer	    <rmlayer@us.ibm.com>
  *    Kevin Gao		    <kevin.gao@intel.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -844,7 +853,11 @@ sctp_disposition_t sctp_sf_do_5_1D_ce(struct net *net,
 	sctp_add_cmd_sf(commands, SCTP_CMD_HB_TIMERS_START, SCTP_NULL());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (new_asoc->autoclose)
+=======
+	if (new_asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE])
+>>>>>>> v3.18
 =======
 	if (new_asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE])
 >>>>>>> v3.18
@@ -936,7 +949,11 @@ sctp_disposition_t sctp_sf_do_5_1E_ca(struct net *net,
 	SCTP_INC_STATS(net, SCTP_MIB_ACTIVEESTABS);
 	sctp_add_cmd_sf(commands, SCTP_CMD_HB_TIMERS_START, SCTP_NULL());
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (asoc->autoclose)
+=======
+	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE])
+>>>>>>> v3.18
 =======
 	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE])
 >>>>>>> v3.18
@@ -1205,9 +1222,15 @@ sctp_disposition_t sctp_sf_backbeat_8_3(struct net *net,
 	if (time_after(hbinfo->sent_at, jiffies) ||
 	    time_after(jiffies, hbinfo->sent_at + max_interval)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("%s: HEARTBEAT ACK with invalid timestamp "
 				  "received for transport: %p\n",
 				   __func__, link);
+=======
+		pr_debug("%s: HEARTBEAT ACK with invalid timestamp received "
+			 "for transport:%p\n", __func__, link);
+
+>>>>>>> v3.18
 =======
 		pr_debug("%s: HEARTBEAT ACK with invalid timestamp received "
 			 "for transport:%p\n", __func__, link);
@@ -2607,7 +2630,12 @@ static sctp_disposition_t sctp_stop_t1_and_abort(struct net *net,
 					   struct sctp_transport *transport)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("ABORT received (INIT).\n");
+=======
+	pr_debug("%s: ABORT received (INIT)\n", __func__);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: ABORT received (INIT)\n", __func__);
 
@@ -2622,6 +2650,10 @@ static sctp_disposition_t sctp_stop_t1_and_abort(struct net *net,
 	sctp_add_cmd_sf(commands, SCTP_CMD_INIT_FAILED,
 			SCTP_PERR(error));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -2691,8 +2723,14 @@ sctp_disposition_t sctp_sf_do_9_2_shutdown(struct net *net,
 
 	if (TSN_lt(ctsn, asoc->ctsn_ack_point)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("ctsn %x\n", ctsn);
 		SCTP_DEBUG_PRINTK("ctsn_ack_point %x\n", asoc->ctsn_ack_point);
+=======
+		pr_debug("%s: ctsn:%x, ctsn_ack_point:%x\n", __func__, ctsn,
+			 asoc->ctsn_ack_point);
+
+>>>>>>> v3.18
 =======
 		pr_debug("%s: ctsn:%x, ctsn_ack_point:%x\n", __func__, ctsn,
 			 asoc->ctsn_ack_point);
@@ -2781,8 +2819,14 @@ sctp_disposition_t sctp_sf_do_9_2_shut_ctsn(struct net *net,
 
 	if (TSN_lt(ctsn, asoc->ctsn_ack_point)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("ctsn %x\n", ctsn);
 		SCTP_DEBUG_PRINTK("ctsn_ack_point %x\n", asoc->ctsn_ack_point);
+=======
+		pr_debug("%s: ctsn:%x, ctsn_ack_point:%x\n", __func__, ctsn,
+			 asoc->ctsn_ack_point);
+
+>>>>>>> v3.18
 =======
 		pr_debug("%s: ctsn:%x, ctsn_ack_point:%x\n", __func__, ctsn,
 			 asoc->ctsn_ack_point);
@@ -3014,7 +3058,11 @@ sctp_disposition_t sctp_sf_eat_data_6_2(struct net *net,
 						  commands);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = sctp_eat_data(asoc, chunk, commands );
+=======
+	error = sctp_eat_data(asoc, chunk, commands);
+>>>>>>> v3.18
 =======
 	error = sctp_eat_data(asoc, chunk, commands);
 >>>>>>> v3.18
@@ -3042,7 +3090,11 @@ sctp_disposition_t sctp_sf_eat_data_6_2(struct net *net,
 		force = SCTP_FORCE();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (asoc->autoclose) {
+=======
+	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE]) {
+>>>>>>> v3.18
 =======
 	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE]) {
 >>>>>>> v3.18
@@ -3143,7 +3195,11 @@ sctp_disposition_t sctp_sf_eat_data_fast_4_4(struct net *net,
 						  commands);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	error = sctp_eat_data(asoc, chunk, commands );
+=======
+	error = sctp_eat_data(asoc, chunk, commands);
+>>>>>>> v3.18
 =======
 	error = sctp_eat_data(asoc, chunk, commands);
 >>>>>>> v3.18
@@ -3252,8 +3308,14 @@ sctp_disposition_t sctp_sf_eat_sack_6_2(struct net *net,
 	 */
 	if (TSN_lt(ctsn, asoc->ctsn_ack_point)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("ctsn %x\n", ctsn);
 		SCTP_DEBUG_PRINTK("ctsn_ack_point %x\n", asoc->ctsn_ack_point);
+=======
+		pr_debug("%s: ctsn:%x, ctsn_ack_point:%x\n", __func__, ctsn,
+			 asoc->ctsn_ack_point);
+
+>>>>>>> v3.18
 =======
 		pr_debug("%s: ctsn:%x, ctsn_ack_point:%x\n", __func__, ctsn,
 			 asoc->ctsn_ack_point);
@@ -3494,12 +3556,15 @@ sctp_disposition_t sctp_sf_ootb(struct net *net,
 						  commands);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* Report violation if chunk len overflows */
 		ch_end = ((__u8 *)ch) + WORD_ROUND(ntohs(ch->length));
 		if (ch_end > skb_tail_pointer(skb))
 			return sctp_sf_violation_chunklen(net, ep, asoc, type, arg,
 						  commands);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* Now that we know we at least have a chunk header,
@@ -3534,13 +3599,19 @@ sctp_disposition_t sctp_sf_ootb(struct net *net,
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Report violation if chunk len overflows */
 		ch_end = ((__u8 *)ch) + WORD_ROUND(ntohs(ch->length));
 		if (ch_end > skb_tail_pointer(skb))
 			return sctp_sf_violation_chunklen(net, ep, asoc, type, arg,
 						  commands);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		ch = (sctp_chunkhdr_t *) ch_end;
 	} while (ch_end < skb_tail_pointer(skb));
@@ -3768,8 +3839,12 @@ sctp_disposition_t sctp_sf_do_asconf(struct net *net,
 	sctp_add_cmd_sf(commands, SCTP_CMD_REPLY, SCTP_CHUNK(asconf_ack));
 	if (asoc->new_transport) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	        sctp_sf_heartbeat(ep, asoc, type, asoc->new_transport,
                     commands);
+=======
+		sctp_sf_heartbeat(ep, asoc, type, asoc->new_transport, commands);
+>>>>>>> v3.18
 =======
 		sctp_sf_heartbeat(ep, asoc, type, asoc->new_transport, commands);
 >>>>>>> v3.18
@@ -3853,7 +3928,11 @@ sctp_disposition_t sctp_sf_do_asconf_ack(struct net *net,
 		sctp_add_cmd_sf(commands, SCTP_CMD_TIMER_STOP,
 				SCTP_TO(SCTP_EVENT_TIMEOUT_T4_RTO));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET,SCTP_NULL());
+=======
+		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET, SCTP_NULL());
+>>>>>>> v3.18
 =======
 		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET, SCTP_NULL());
 >>>>>>> v3.18
@@ -3891,7 +3970,11 @@ sctp_disposition_t sctp_sf_do_asconf_ack(struct net *net,
 		 * processing the rest of the chunks in the packet.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET,SCTP_NULL());
+=======
+		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET, SCTP_NULL());
+>>>>>>> v3.18
 =======
 		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET, SCTP_NULL());
 >>>>>>> v3.18
@@ -3953,7 +4036,11 @@ sctp_disposition_t sctp_sf_eat_fwd_tsn(struct net *net,
 
 	tsn = ntohl(fwdtsn_hdr->new_cum_tsn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: TSN 0x%x.\n", __func__, tsn);
+=======
+	pr_debug("%s: TSN 0x%x\n", __func__, tsn);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: TSN 0x%x\n", __func__, tsn);
 >>>>>>> v3.18
@@ -3977,7 +4064,11 @@ sctp_disposition_t sctp_sf_eat_fwd_tsn(struct net *net,
 
 	/* Count this as receiving DATA. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (asoc->autoclose) {
+=======
+	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE]) {
+>>>>>>> v3.18
 =======
 	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE]) {
 >>>>>>> v3.18
@@ -4029,7 +4120,11 @@ sctp_disposition_t sctp_sf_eat_fwd_tsn_fast(
 
 	tsn = ntohl(fwdtsn_hdr->new_cum_tsn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: TSN 0x%x.\n", __func__, tsn);
+=======
+	pr_debug("%s: TSN 0x%x\n", __func__, tsn);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: TSN 0x%x\n", __func__, tsn);
 >>>>>>> v3.18
@@ -4272,7 +4367,11 @@ sctp_disposition_t sctp_sf_unk_chunk(struct net *net,
 	sctp_chunkhdr_t *hdr;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Processing the unknown chunk id %d.\n", type.chunk);
+=======
+	pr_debug("%s: processing unknown chunk id:%d\n", __func__, type.chunk);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: processing unknown chunk id:%d\n", __func__, type.chunk);
 >>>>>>> v3.18
@@ -4293,7 +4392,10 @@ sctp_disposition_t sctp_sf_unk_chunk(struct net *net,
 		/* Discard the packet.  */
 		return sctp_sf_pdiscard(net, ep, asoc, type, arg, commands);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	case SCTP_CID_ACTION_DISCARD_ERR:
@@ -4312,11 +4414,17 @@ sctp_disposition_t sctp_sf_unk_chunk(struct net *net,
 		sctp_sf_pdiscard(net, ep, asoc, type, arg, commands);
 		return SCTP_DISPOSITION_CONSUME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
 	case SCTP_CID_ACTION_SKIP:
 		/* Skip the chunk.  */
 		return SCTP_DISPOSITION_DISCARD;
 		break;
+=======
+	case SCTP_CID_ACTION_SKIP:
+		/* Skip the chunk.  */
+		return SCTP_DISPOSITION_DISCARD;
+>>>>>>> v3.18
 =======
 	case SCTP_CID_ACTION_SKIP:
 		/* Skip the chunk.  */
@@ -4336,7 +4444,10 @@ sctp_disposition_t sctp_sf_unk_chunk(struct net *net,
 		/* Skip the chunk.  */
 		return SCTP_DISPOSITION_CONSUME;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		break;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	default:
@@ -4378,7 +4489,12 @@ sctp_disposition_t sctp_sf_discard_chunk(struct net *net,
 						  commands);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Chunk %d is discarded\n", type.chunk);
+=======
+	pr_debug("%s: chunk:%d is discarded\n", __func__, type.chunk);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: chunk:%d is discarded\n", __func__, type.chunk);
 
@@ -4579,7 +4695,11 @@ static sctp_disposition_t sctp_sf_violation_chunklen(
 				     sctp_cmd_seq_t *commands)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const char err_str[]="The following chunk had invalid length:";
+=======
+	static const char err_str[] = "The following chunk had invalid length:";
+>>>>>>> v3.18
 =======
 	static const char err_str[] = "The following chunk had invalid length:";
 >>>>>>> v3.18
@@ -4646,7 +4766,11 @@ static sctp_disposition_t sctp_sf_violation_ctsn(
 				     sctp_cmd_seq_t *commands)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const char err_str[]="The cumulative tsn ack beyond the max tsn currently sent:";
+=======
+	static const char err_str[] = "The cumulative tsn ack beyond the max tsn currently sent:";
+>>>>>>> v3.18
 =======
 	static const char err_str[] = "The cumulative tsn ack beyond the max tsn currently sent:";
 >>>>>>> v3.18
@@ -4670,7 +4794,11 @@ static sctp_disposition_t sctp_sf_violation_chunk(
 				     sctp_cmd_seq_t *commands)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static const char err_str[]="The following chunk violates protocol:";
+=======
+	static const char err_str[] = "The following chunk violates protocol:";
+>>>>>>> v3.18
 =======
 	static const char err_str[] = "The following chunk violates protocol:";
 >>>>>>> v3.18
@@ -4750,7 +4878,11 @@ sctp_disposition_t sctp_sf_do_prm_asoc(struct net *net,
 {
 	struct sctp_chunk *repl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct sctp_association* my_asoc;
+=======
+	struct sctp_association *my_asoc;
+>>>>>>> v3.18
 =======
 	struct sctp_association *my_asoc;
 >>>>>>> v3.18
@@ -4775,11 +4907,17 @@ sctp_disposition_t sctp_sf_do_prm_asoc(struct net *net,
 		goto nomem;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Choose transport for INIT. */
 	sctp_add_cmd_sf(commands, SCTP_CMD_INIT_CHOOSE_TRANSPORT,
 			SCTP_CHUNK(repl));
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/* Cast away the const modifier, as we want to just
 	 * rerun it through as a sideffect.
@@ -4788,10 +4926,13 @@ sctp_disposition_t sctp_sf_do_prm_asoc(struct net *net,
 	sctp_add_cmd_sf(commands, SCTP_CMD_NEW_ASOC, SCTP_ASOC(my_asoc));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Choose transport for INIT. */
 	sctp_add_cmd_sf(commands, SCTP_CMD_INIT_CHOOSE_TRANSPORT,
 			SCTP_CHUNK(repl));
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* After sending the INIT, "A" starts the T1-init timer and
@@ -4984,8 +5125,12 @@ sctp_disposition_t sctp_sf_do_9_1_prm_abort(
 	retval = SCTP_DISPOSITION_CONSUME;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (abort)
 		sctp_add_cmd_sf(commands, SCTP_CMD_REPLY, SCTP_CHUNK(abort));
+=======
+	sctp_add_cmd_sf(commands, SCTP_CMD_REPLY, SCTP_CHUNK(abort));
+>>>>>>> v3.18
 =======
 	sctp_add_cmd_sf(commands, SCTP_CMD_REPLY, SCTP_CHUNK(abort));
 >>>>>>> v3.18
@@ -5126,8 +5271,12 @@ sctp_disposition_t sctp_sf_cookie_wait_prm_abort(
 	retval = SCTP_DISPOSITION_CONSUME;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (abort)
 		sctp_add_cmd_sf(commands, SCTP_CMD_REPLY, SCTP_CHUNK(abort));
+=======
+	sctp_add_cmd_sf(commands, SCTP_CMD_REPLY, SCTP_CHUNK(abort));
+>>>>>>> v3.18
 =======
 	sctp_add_cmd_sf(commands, SCTP_CMD_REPLY, SCTP_CHUNK(abort));
 >>>>>>> v3.18
@@ -5347,7 +5496,13 @@ sctp_disposition_t sctp_sf_ignore_primitive(
 	sctp_cmd_seq_t *commands)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Primitive type %d is ignored.\n", type.primitive);
+=======
+	pr_debug("%s: primitive type:%d is ignored\n", __func__,
+		 type.primitive);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: primitive type:%d is ignored\n", __func__,
 		 type.primitive);
@@ -5434,7 +5589,11 @@ sctp_disposition_t sctp_sf_do_9_2_start_shutdown(
 			SCTP_TO(SCTP_EVENT_TIMEOUT_T5_SHUTDOWN_GUARD));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (asoc->autoclose)
+=======
+	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE])
+>>>>>>> v3.18
 =======
 	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE])
 >>>>>>> v3.18
@@ -5517,7 +5676,11 @@ sctp_disposition_t sctp_sf_do_9_2_shutdown_ack(
 			SCTP_TO(SCTP_EVENT_TIMEOUT_T2_SHUTDOWN));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (asoc->autoclose)
+=======
+	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE])
+>>>>>>> v3.18
 =======
 	if (asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE])
 >>>>>>> v3.18
@@ -5556,7 +5719,13 @@ sctp_disposition_t sctp_sf_ignore_other(struct net *net,
 					sctp_cmd_seq_t *commands)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("The event other type %d is ignored\n", type.other);
+=======
+	pr_debug("%s: the event other type:%d is ignored\n",
+		 __func__, type.other);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: the event other type:%d is ignored\n",
 		 __func__, type.other);
@@ -5710,7 +5879,12 @@ sctp_disposition_t sctp_sf_t1_init_timer_expire(struct net *net,
 	int attempts = asoc->init_err_counter + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Timer T1 expired (INIT).\n");
+=======
+	pr_debug("%s: timer T1 expired (INIT)\n", __func__);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: timer T1 expired (INIT)\n", __func__);
 
@@ -5734,14 +5908,20 @@ sctp_disposition_t sctp_sf_t1_init_timer_expire(struct net *net,
 		sctp_add_cmd_sf(commands, SCTP_CMD_REPLY, SCTP_CHUNK(repl));
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SCTP_DEBUG_PRINTK("Giving up on INIT, attempts: %d"
 				  " max_init_attempts: %d\n",
 				  attempts, asoc->max_init_attempts);
 =======
+=======
+>>>>>>> v3.18
 		pr_debug("%s: giving up on INIT, attempts:%d "
 			 "max_init_attempts:%d\n", __func__, attempts,
 			 asoc->max_init_attempts);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		sctp_add_cmd_sf(commands, SCTP_CMD_SET_SK_ERR,
 				SCTP_ERROR(ETIMEDOUT));
@@ -5783,7 +5963,12 @@ sctp_disposition_t sctp_sf_t1_cookie_timer_expire(struct net *net,
 	int attempts = asoc->init_err_counter + 1;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Timer T1 expired (COOKIE-ECHO).\n");
+=======
+	pr_debug("%s: timer T1 expired (COOKIE-ECHO)\n", __func__);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: timer T1 expired (COOKIE-ECHO)\n", __func__);
 
@@ -5836,7 +6021,12 @@ sctp_disposition_t sctp_sf_t2_timer_expire(struct net *net,
 	struct sctp_chunk *reply = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Timer T2 expired.\n");
+=======
+	pr_debug("%s: timer T2 expired\n", __func__);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: timer T2 expired\n", __func__);
 
@@ -5982,7 +6172,12 @@ sctp_disposition_t sctp_sf_t5_timer_expire(struct net *net,
 	struct sctp_chunk *reply = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Timer T5 expired.\n");
+=======
+	pr_debug("%s: timer T5 expired\n", __func__);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: timer T5 expired\n", __func__);
 
@@ -6102,7 +6297,12 @@ sctp_disposition_t sctp_sf_timer_ignore(struct net *net,
 					sctp_cmd_seq_t *commands)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("Timer %d ignored.\n", type.chunk);
+=======
+	pr_debug("%s: timer %d ignored\n", __func__, type.chunk);
+
+>>>>>>> v3.18
 =======
 	pr_debug("%s: timer %d ignored\n", __func__, type.chunk);
 
@@ -6206,7 +6406,11 @@ static struct sctp_packet *sctp_ootb_pkt_new(struct net *net,
 		 * yet.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch(chunk->chunk_hdr->type) {
+=======
+		switch (chunk->chunk_hdr->type) {
+>>>>>>> v3.18
 =======
 		switch (chunk->chunk_hdr->type) {
 >>>>>>> v3.18
@@ -6227,7 +6431,11 @@ static struct sctp_packet *sctp_ootb_pkt_new(struct net *net,
 		 * vtag yet.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		switch(chunk->chunk_hdr->type) {
+=======
+		switch (chunk->chunk_hdr->type) {
+>>>>>>> v3.18
 =======
 		switch (chunk->chunk_hdr->type) {
 >>>>>>> v3.18
@@ -6325,7 +6533,11 @@ static int sctp_eat_data(const struct sctp_association *asoc,
 
 	tsn = ntohl(data_hdr->tsn);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("eat_data: TSN 0x%x.\n", tsn);
+=======
+	pr_debug("%s: TSN 0x%x\n", __func__, tsn);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: TSN 0x%x\n", __func__, tsn);
 >>>>>>> v3.18
@@ -6406,6 +6618,7 @@ static int sctp_eat_data(const struct sctp_association *asoc,
 		if (sctp_tsnmap_has_gap(map) &&
 		    (sctp_tsnmap_get_ctsn(map) + 1) == tsn) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SCTP_DEBUG_PRINTK("Reneging for tsn:%u\n", tsn);
 			deliver = SCTP_CMD_RENEGE;
 		} else {
@@ -6413,12 +6626,17 @@ static int sctp_eat_data(const struct sctp_association *asoc,
 					  "rwnd: %d\n", tsn, datalen,
 					  asoc->rwnd);
 =======
+=======
+>>>>>>> v3.18
 			pr_debug("%s: reneging for tsn:%u\n", __func__, tsn);
 			deliver = SCTP_CMD_RENEGE;
 		} else {
 			pr_debug("%s: discard tsn:%u len:%zu, rwnd:%d\n",
 				 __func__, tsn, datalen, asoc->rwnd);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return SCTP_IERROR_IGNORE_TSN;
 		}
@@ -6434,8 +6652,14 @@ static int sctp_eat_data(const struct sctp_association *asoc,
 	if (*sk->sk_prot_creator->memory_pressure) {
 		if (sctp_tsnmap_has_gap(map) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 	           (sctp_tsnmap_get_ctsn(map) + 1) == tsn) {
 			SCTP_DEBUG_PRINTK("Under Pressure! Reneging for tsn:%u\n", tsn);
+=======
+		    (sctp_tsnmap_get_ctsn(map) + 1) == tsn) {
+			pr_debug("%s: under pressure, reneging for tsn:%u\n",
+				 __func__, tsn);
+>>>>>>> v3.18
 =======
 		    (sctp_tsnmap_get_ctsn(map) + 1) == tsn) {
 			pr_debug("%s: under pressure, reneging for tsn:%u\n",
@@ -6463,7 +6687,11 @@ static int sctp_eat_data(const struct sctp_association *asoc,
 		 * processing the rest of the chunks in the packet.
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET,SCTP_NULL());
+=======
+		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET, SCTP_NULL());
+>>>>>>> v3.18
 =======
 		sctp_add_cmd_sf(commands, SCTP_CMD_DISCARD_PACKET, SCTP_NULL());
 >>>>>>> v3.18

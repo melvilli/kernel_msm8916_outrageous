@@ -94,7 +94,11 @@ static int vmw_ldu_commit_list(struct vmw_private *dev_priv)
 		if (crtc == NULL)
 			return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fb = entry->base.crtc.fb;
+=======
+		fb = entry->base.crtc.primary->fb;
+>>>>>>> v3.18
 =======
 		fb = entry->base.crtc.primary->fb;
 >>>>>>> v3.18
@@ -106,7 +110,11 @@ static int vmw_ldu_commit_list(struct vmw_private *dev_priv)
 	if (!list_empty(&lds->active)) {
 		entry = list_entry(lds->active.next, typeof(*entry), active);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		fb = entry->base.crtc.fb;
+=======
+		fb = entry->base.crtc.primary->fb;
+>>>>>>> v3.18
 =======
 		fb = entry->base.crtc.primary->fb;
 >>>>>>> v3.18
@@ -268,7 +276,12 @@ static int vmw_ldu_crtc_set_config(struct drm_mode_set *set)
 		connector->encoder = NULL;
 		encoder->crtc = NULL;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		crtc->fb = NULL;
+=======
+		crtc->primary->fb = NULL;
+		crtc->enabled = false;
+>>>>>>> v3.18
 =======
 		crtc->primary->fb = NULL;
 		crtc->enabled = false;
@@ -293,7 +306,11 @@ static int vmw_ldu_crtc_set_config(struct drm_mode_set *set)
 	vmw_fb_off(dev_priv);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	crtc->fb = fb;
+=======
+	crtc->primary->fb = fb;
+>>>>>>> v3.18
 =======
 	crtc->primary->fb = fb;
 >>>>>>> v3.18
@@ -303,6 +320,10 @@ static int vmw_ldu_crtc_set_config(struct drm_mode_set *set)
 	crtc->y = set->y;
 	crtc->mode = *mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	crtc->enabled = true;
+>>>>>>> v3.18
 =======
 	crtc->enabled = true;
 >>>>>>> v3.18
@@ -391,6 +412,11 @@ static int vmw_ldu_init(struct vmw_private *dev_priv, unsigned unit)
 	encoder->possible_clones = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	(void) drm_connector_register(connector);
+
+>>>>>>> v3.18
 =======
 	(void) drm_connector_register(connector);
 

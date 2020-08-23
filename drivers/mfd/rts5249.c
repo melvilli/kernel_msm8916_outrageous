@@ -18,7 +18,10 @@
  * Author:
  *   Wei WANG <wei_wang@realsil.com.cn>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   No. 128, West Shenhu Road, Suzhou Industry Park, Suzhou, China
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -38,7 +41,10 @@ static u8 rts5249_get_ic_version(struct rtsx_pcr *pcr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void rts5249_fill_driving(struct rtsx_pcr *pcr, u8 voltage)
 {
 	u8 driving_3v3[4][3] = {
@@ -106,6 +112,9 @@ static void rts5249_force_power_down(struct rtsx_pcr *pcr, u8 pm_state)
 	rtsx_pci_write_register(pcr, FPDCTL, 0x03, 0x03);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int rts5249_extra_init_hw(struct rtsx_pcr *pcr)
 {
@@ -114,6 +123,11 @@ static int rts5249_extra_init_hw(struct rtsx_pcr *pcr)
 	/* Configure GPIO as output */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, GPIO_CTL, 0x02, 0x02);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Reset ASPM state to default value */
+	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, ASPM_FORCE_CTL, 0x3F, 0);
+>>>>>>> v3.18
 =======
 	/* Reset ASPM state to default value */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, ASPM_FORCE_CTL, 0x3F, 0);
@@ -124,6 +138,7 @@ static int rts5249_extra_init_hw(struct rtsx_pcr *pcr)
 	/* LED shine disabled, set initial shine cycle period */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, OLT_LED_CTL, 0x0F, 0x02);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Correct driving */
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD,
 			SD30_CLK_DRIVE_SEL, 0xFF, 0x99);
@@ -132,6 +147,8 @@ static int rts5249_extra_init_hw(struct rtsx_pcr *pcr)
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD,
 			SD30_DAT_DRIVE_SEL, 0xFF, 0x92);
 =======
+=======
+>>>>>>> v3.18
 	/* Configure driving */
 	rts5249_fill_driving(pcr, OUTPUT_3V3);
 	if (pcr->flags & PCR_REVERSE_SOCKET)
@@ -141,6 +158,9 @@ static int rts5249_extra_init_hw(struct rtsx_pcr *pcr)
 		rtsx_pci_add_cmd(pcr, WRITE_REG_CMD,
 				AUTOLOAD_CFG_BASE + 3, 0xB0, 0x80);
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, PM_CTRL3, 0x10, 0x00);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return rtsx_pci_send_cmd(pcr, 100);
@@ -151,13 +171,19 @@ static int rts5249_optimize_phy(struct rtsx_pcr *pcr)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = rtsx_pci_write_phy_register(pcr, PHY_REG_REV, 0xFE46);
 =======
+=======
+>>>>>>> v3.18
 	err = rtsx_pci_write_phy_register(pcr, PHY_REG_REV,
 			PHY_REG_REV_RESV | PHY_REG_REV_RXIDLE_LATCHED |
 			PHY_REG_REV_P1_EN | PHY_REG_REV_RXIDLE_EN |
 			PHY_REG_REV_RX_PWST | PHY_REG_REV_CLKREQ_DLY_TIMER_1_0 |
 			PHY_REG_REV_STOP_CLKRD | PHY_REG_REV_STOP_CLKWR);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err < 0)
 		return err;
@@ -165,8 +191,11 @@ static int rts5249_optimize_phy(struct rtsx_pcr *pcr)
 	msleep(1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return rtsx_pci_write_phy_register(pcr, PHY_BPCR, 0x05C0);
 =======
+=======
+>>>>>>> v3.18
 	err = rtsx_pci_write_phy_register(pcr, PHY_BPCR,
 			PHY_BPCR_IBRXSEL | PHY_BPCR_IBTXSEL |
 			PHY_BPCR_IB_FILTER | PHY_BPCR_CMIRROR_EN);
@@ -208,6 +237,9 @@ static int rts5249_optimize_phy(struct rtsx_pcr *pcr)
 			PHY_TUNE_TUNEREF_1_0 | PHY_TUNE_VBGSEL_1252 |
 			PHY_TUNE_SDBUS_33 | PHY_TUNE_TUNED18 |
 			PHY_TUNE_TUNED12);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -272,7 +304,10 @@ static int rts5249_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 {
 	int err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8 clk_drive, cmd_drive, dat_drive;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -281,9 +316,12 @@ static int rts5249_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 		if (err < 0)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_drive = 0x99;
 		cmd_drive = 0x99;
 		dat_drive = 0x92;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else if (voltage == OUTPUT_1V8) {
@@ -294,9 +332,12 @@ static int rts5249_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 		if (err < 0)
 			return err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		clk_drive = 0xb3;
 		cmd_drive = 0xb3;
 		dat_drive = 0xb3;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	} else {
@@ -305,6 +346,7 @@ static int rts5249_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 
 	/* set pad drive */
 	rtsx_pci_init_cmd(pcr);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	rtsx_pci_add_cmd(pcr, WRITE_REG_CMD, SD30_CLK_DRIVE_SEL,
 			0xFF, clk_drive);
@@ -315,11 +357,18 @@ static int rts5249_switch_output_voltage(struct rtsx_pcr *pcr, u8 voltage)
 =======
 	rts5249_fill_driving(pcr, voltage);
 >>>>>>> v3.18
+=======
+	rts5249_fill_driving(pcr, voltage);
+>>>>>>> v3.18
 	return rtsx_pci_send_cmd(pcr, 100);
 }
 
 static const struct pcr_ops rts5249_pcr_ops = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.fetch_vendor_settings = rts5249_fetch_vendor_settings,
+>>>>>>> v3.18
 =======
 	.fetch_vendor_settings = rts5249_fetch_vendor_settings,
 >>>>>>> v3.18
@@ -333,6 +382,10 @@ static const struct pcr_ops rts5249_pcr_ops = {
 	.card_power_off = rts5249_card_power_off,
 	.switch_output_voltage = rts5249_switch_output_voltage,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.force_power_down = rts5249_force_power_down,
+>>>>>>> v3.18
 =======
 	.force_power_down = rts5249_force_power_down,
 >>>>>>> v3.18
@@ -397,7 +450,10 @@ void rts5249_init_params(struct rtsx_pcr *pcr)
 	pcr->ops = &rts5249_pcr_ops;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	pcr->flags = 0;
 	pcr->card_drive_sel = RTSX_CARD_DRIVE_DEFAULT;
 	pcr->sd30_drive_sel_1v8 = CFG_DRIVER_TYPE_C;
@@ -406,6 +462,9 @@ void rts5249_init_params(struct rtsx_pcr *pcr)
 	pcr->tx_initial_phase = SET_CLOCK_PHASE(1, 29, 16);
 	pcr->rx_initial_phase = SET_CLOCK_PHASE(24, 6, 5);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	pcr->ic_version = rts5249_get_ic_version(pcr);
 	pcr->sd_pull_ctl_enable_tbl = rts5249_sd_pull_ctl_enable_tbl;

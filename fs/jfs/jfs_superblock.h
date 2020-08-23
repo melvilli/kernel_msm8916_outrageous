@@ -109,6 +109,10 @@ struct jfs_superblock {
 extern int readSuper(struct super_block *, struct buffer_head **);
 extern int updateSuper(struct super_block *, uint);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+__printf(2, 3)
+>>>>>>> v3.18
 =======
 __printf(2, 3)
 >>>>>>> v3.18

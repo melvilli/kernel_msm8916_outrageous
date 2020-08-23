@@ -29,6 +29,10 @@ struct platform_device {
 
 	const struct platform_device_id	*id_entry;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	char *driver_override; /* Driver name to force a match */
+>>>>>>> v3.18
 =======
 	char *driver_override; /* Driver name to force a match */
 >>>>>>> v3.18
@@ -183,10 +187,13 @@ struct platform_driver {
 	struct device_driver driver;
 	const struct platform_device_id *id_table;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 extern int platform_driver_register(struct platform_driver *);
 =======
+=======
+>>>>>>> v3.18
 	bool prevent_deferred_probe;
 };
 
@@ -200,6 +207,9 @@ extern int platform_driver_register(struct platform_driver *);
 	__platform_driver_register(drv, THIS_MODULE)
 extern int __platform_driver_register(struct platform_driver *,
 					struct module *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 extern void platform_driver_unregister(struct platform_driver *);
 

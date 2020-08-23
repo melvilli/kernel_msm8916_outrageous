@@ -42,7 +42,11 @@ struct x25_asy {
 #define X25_ASY_MAGIC 0x5303
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern int x25_asy_init(struct net_device *dev);
+=======
+int x25_asy_init(struct net_device *dev);
+>>>>>>> v3.18
 =======
 int x25_asy_init(struct net_device *dev);
 >>>>>>> v3.18

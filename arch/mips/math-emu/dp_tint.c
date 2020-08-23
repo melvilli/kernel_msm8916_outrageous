@@ -6,8 +6,11 @@
  * Copyright (C) 1994-2000 Algorithmics Ltd.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * ########################################################################
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *  This program is free software; you can distribute it and/or modify it
@@ -21,6 +24,7 @@
  *
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
+<<<<<<< HEAD
 <<<<<<< HEAD
  *  59 Temple Place - Suite 330, Boston MA 02111-1307, USA.
  *
@@ -37,6 +41,8 @@ int ieee754dp_tint(ieee754dp x)
 
 	CLEARCX;
 =======
+=======
+>>>>>>> v3.18
  *  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.
  */
 
@@ -52,6 +58,9 @@ int ieee754dp_tint(union ieee754dp x)
 	COMPXDP;
 
 	ieee754_clearcx();
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	EXPLODEXDP;
@@ -62,17 +71,23 @@ int ieee754dp_tint(union ieee754dp x)
 	case IEEE754_CLASS_QNAN:
 	case IEEE754_CLASS_INF:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754si_xcpt(ieee754si_indef(), "dp_tint", x);
 	case IEEE754_CLASS_ZERO:
 		return 0;
 =======
+=======
+>>>>>>> v3.18
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754si_indef();
 
 	case IEEE754_CLASS_ZERO:
 		return 0;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	case IEEE754_CLASS_DNORM:
 	case IEEE754_CLASS_NORM:
@@ -81,6 +96,7 @@ int ieee754dp_tint(union ieee754dp x)
 	if (xe > 31) {
 		/* Set invalid. We will only use overflow for floating
 		   point overflow */
+<<<<<<< HEAD
 <<<<<<< HEAD
 		SETCX(IEEE754_INVALID_OPERATION);
 		return ieee754si_xcpt(ieee754si_indef(), "dp_tint", x);
@@ -95,6 +111,8 @@ int ieee754dp_tint(union ieee754dp x)
 		int odd;
 
 =======
+=======
+>>>>>>> v3.18
 		ieee754_setcx(IEEE754_INVALID_OPERATION);
 		return ieee754si_indef();
 	}
@@ -102,6 +120,9 @@ int ieee754dp_tint(union ieee754dp x)
 	if (xe > DP_FBITS) {
 		xm <<= xe - DP_FBITS;
 	} else if (xe < DP_FBITS) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (xe < -1) {
 			residue = xm;
@@ -110,21 +131,28 @@ int ieee754dp_tint(union ieee754dp x)
 			xm = 0;
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			residue = xm << (64 - DP_MBITS + xe);
 			round = (residue >> 63) != 0;
 			sticky = (residue << 1) != 0;
 			xm >>= DP_MBITS - xe;
 =======
+=======
+>>>>>>> v3.18
 			residue = xm << (64 - DP_FBITS + xe);
 			round = (residue >> 63) != 0;
 			sticky = (residue << 1) != 0;
 			xm >>= DP_FBITS - xe;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 		/* Note: At this point upper 32 bits of xm are guaranteed
 		   to be zero */
 		odd = (xm & 0x1) != 0x0;
 		switch (ieee754_csr.rm) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		case IEEE754_RN:
 			if (round && (sticky || odd))
@@ -138,6 +166,8 @@ int ieee754dp_tint(union ieee754dp x)
 			break;
 		case IEEE754_RD:	/* toward -Infinity */
 =======
+=======
+>>>>>>> v3.18
 		case FPU_CSR_RN:
 			if (round && (sticky || odd))
 				xm++;
@@ -149,6 +179,9 @@ int ieee754dp_tint(union ieee754dp x)
 				xm++;
 			break;
 		case FPU_CSR_RD:	/* toward -Infinity */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((round || sticky) && xs)
 				xm++;
@@ -158,17 +191,23 @@ int ieee754dp_tint(union ieee754dp x)
 		if ((xm >> 31) != 0 && (xs == 0 || xm != 0x80000000)) {
 			/* This can happen after rounding */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			SETCX(IEEE754_INVALID_OPERATION);
 			return ieee754si_xcpt(ieee754si_indef(), "dp_tint", x);
 		}
 		if (round || sticky)
 			SETCX(IEEE754_INEXACT);
 =======
+=======
+>>>>>>> v3.18
 			ieee754_setcx(IEEE754_INVALID_OPERATION);
 			return ieee754si_indef();
 		}
 		if (round || sticky)
 			ieee754_setcx(IEEE754_INEXACT);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (xs)
@@ -176,6 +215,7 @@ int ieee754dp_tint(union ieee754dp x)
 	else
 		return xm;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -190,5 +230,7 @@ unsigned int ieee754dp_tuns(ieee754dp x)
 	return (unsigned) ieee754dp_tint(ieee754dp_sub(x, hb)) |
 	    ((unsigned) 1 << 31);
 }
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18

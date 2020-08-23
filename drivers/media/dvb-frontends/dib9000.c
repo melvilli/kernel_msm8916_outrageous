@@ -650,9 +650,15 @@ static int dib9000_risc_debug_buf(struct dib9000_state *state, u16 * data, u8 si
 	if (*b == '~') {
 		b++;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dprintk(b);
 	} else
 		dprintk("RISC%d: %d.%04d %s", state->fe_id, ts / 10000, ts % 10000, *b ? b : "<emtpy>");
+=======
+		dprintk("%s", b);
+	} else
+		dprintk("RISC%d: %d.%04d %s", state->fe_id, ts / 10000, ts % 10000, *b ? b : "<empty>");
+>>>>>>> v3.18
 =======
 		dprintk("%s", b);
 	} else
@@ -1047,6 +1053,7 @@ static int dib9000_risc_apb_access_write(struct dib9000_state *state, u32 addres
 		return -EINVAL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* dprintk( "APB access thru wr fw %d %x", address, attribute); */
 
 	mb[0] = (unsigned short)address;
@@ -1055,6 +1062,8 @@ static int dib9000_risc_apb_access_write(struct dib9000_state *state, u32 addres
 
 	dib9000_mbx_send_attr(state, OUT_MSG_BRIDGE_APB_W, mb, 1 + len / 2, attribute);
 =======
+=======
+>>>>>>> v3.18
 	if (len > 18)
 		return -EINVAL;
 
@@ -1067,6 +1076,9 @@ static int dib9000_risc_apb_access_write(struct dib9000_state *state, u32 addres
 		mb[1 + len / 2] = b[len - 1] << 8;
 
 	dib9000_mbx_send_attr(state, OUT_MSG_BRIDGE_APB_W, mb, (3 + len) / 2, attribute);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return dib9000_mbx_get_message_attr(state, IN_MSG_END_BRIDGE_APB_RW, mb, &s, attribute) == 1 ? 0 : -EINVAL;
 }

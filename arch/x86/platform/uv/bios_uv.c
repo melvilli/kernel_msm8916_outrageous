@@ -40,7 +40,11 @@ s64 uv_bios_call(enum uv_bios_cmd which, u64 a1, u64 a2, u64 a3, u64 a4, u64 a5)
 		return BIOS_STATUS_UNIMPLEMENTED;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = efi_call6((void *)__va(tab->function), (u64)which,
+=======
+	ret = efi_call((void *)__va(tab->function), (u64)which,
+>>>>>>> v3.18
 =======
 	ret = efi_call((void *)__va(tab->function), (u64)which,
 >>>>>>> v3.18

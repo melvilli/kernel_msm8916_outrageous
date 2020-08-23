@@ -30,7 +30,10 @@
 #include <linux/slab.h>
 #include <linux/errno.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/timer.h>
@@ -64,11 +67,17 @@
 		dev_info(oxu_to_hcd(oxu)->self.controller , fmt , ## args)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #ifdef CONFIG_DYNAMIC_DEBUG
 #define DEBUG
 #endif
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static inline struct usb_hcd *oxu_to_hcd(struct oxu_hcd *oxu)
 {
@@ -2054,7 +2063,11 @@ static void intr_deschedule(struct oxu_hcd *oxu, struct ehci_qh *qh)
 	/* simple/paranoid:  always delay, expecting the HC needs to read
 	 * qh->hw_next or finish a writeback after SPLIT/CSPLIT ... and
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * expect khubd to clean up after any CSPLITs we won't issue.
+=======
+	 * expect hub_wq to clean up after any CSPLITs we won't issue.
+>>>>>>> v3.18
 =======
 	 * expect hub_wq to clean up after any CSPLITs we won't issue.
 >>>>>>> v3.18
@@ -2512,6 +2525,7 @@ static irqreturn_t oxu210_hcd_irq(struct usb_hcd *hcd)
 				continue;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			/* start USB_RESUME_TIMEOUT resume signaling from this
 			 * port, and make hub_wq collect PORT_STAT_C_SUSPEND to
 			 * stop that signaling.
@@ -2519,11 +2533,16 @@ static irqreturn_t oxu210_hcd_irq(struct usb_hcd *hcd)
 			oxu->reset_done[i] = jiffies +
 				msecs_to_jiffies(USB_RESUME_TIMEOUT);
 =======
+=======
+>>>>>>> v3.18
 			/* start 20 msec resume signaling from this port,
 			 * and make hub_wq collect PORT_STAT_C_SUSPEND to
 			 * stop that signaling.
 			 */
 			oxu->reset_done[i] = jiffies + msecs_to_jiffies(20);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			oxu_dbg(oxu, "port %d remote wakeup\n", i + 1);
 			mod_timer(&hcd->rh_timer, oxu->reset_done[i]);
@@ -3140,7 +3159,11 @@ static int oxu_hub_status_data(struct usb_hcd *hcd, char *buf)
 		/*
 		 * Return status information even for ports with OWNER set.
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Otherwise khubd wouldn't see the disconnect event when a
+=======
+		 * Otherwise hub_wq wouldn't see the disconnect event when a
+>>>>>>> v3.18
 =======
 		 * Otherwise hub_wq wouldn't see the disconnect event when a
 >>>>>>> v3.18
@@ -3219,7 +3242,11 @@ static int oxu_hub_control(struct usb_hcd *hcd, u16 typeReq,
 		/*
 		 * Even if OWNER is set, so the port is owned by the
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * companion controller, khubd needs to be able to clear
+=======
+		 * companion controller, hub_wq needs to be able to clear
+>>>>>>> v3.18
 =======
 		 * companion controller, hub_wq needs to be able to clear
 >>>>>>> v3.18
@@ -3365,7 +3392,11 @@ static int oxu_hub_control(struct usb_hcd *hcd, u16 typeReq,
 
 		/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 * Even if OWNER is set, there's no harm letting khubd
+=======
+		 * Even if OWNER is set, there's no harm letting hub_wq
+>>>>>>> v3.18
 =======
 		 * Even if OWNER is set, there's no harm letting hub_wq
 >>>>>>> v3.18
@@ -3783,6 +3814,10 @@ static struct usb_hcd *oxu_create(struct platform_device *pdev,
 		return ERR_PTR(ret);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	device_wakeup_enable(hcd->self.controller);
+>>>>>>> v3.18
 =======
 	device_wakeup_enable(hcd->self.controller);
 >>>>>>> v3.18
@@ -3862,6 +3897,7 @@ static int oxu_drv_probe(struct platform_device *pdev)
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!res) {
 		dev_err(&pdev->dev, "no registers address! Check %s setup!\n",
 			dev_name(&pdev->dev));
@@ -3876,6 +3912,8 @@ static int oxu_drv_probe(struct platform_device *pdev)
 		return -EBUSY;
 	}
 =======
+=======
+>>>>>>> v3.18
 	base = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(base)) {
 		ret = PTR_ERR(base);
@@ -3883,12 +3921,16 @@ static int oxu_drv_probe(struct platform_device *pdev)
 	}
 	memstart = res->start;
 	memlen = resource_size(res);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	ret = irq_set_irq_type(irq, IRQF_TRIGGER_FALLING);
 	if (ret) {
 		dev_err(&pdev->dev, "error setting irq type\n");
 		ret = -EFAULT;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		goto error_set_irq_type;
 	}
@@ -3901,11 +3943,15 @@ static int oxu_drv_probe(struct platform_device *pdev)
 =======
 		goto error;
 >>>>>>> v3.18
+=======
+		goto error;
+>>>>>>> v3.18
 	}
 
 	/* Allocate a driver data struct to hold useful info for both
 	 * SPH & OTG devices
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	info = kzalloc(sizeof(struct oxu_info), GFP_KERNEL);
 	if (!info) {
@@ -3913,11 +3959,16 @@ static int oxu_drv_probe(struct platform_device *pdev)
 		ret = -EFAULT;
 		goto error_alloc;
 =======
+=======
+>>>>>>> v3.18
 	info = devm_kzalloc(&pdev->dev, sizeof(struct oxu_info), GFP_KERNEL);
 	if (!info) {
 		dev_dbg(&pdev->dev, "error allocating memory\n");
 		ret = -EFAULT;
 		goto error;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	platform_set_drvdata(pdev, info);
@@ -3926,7 +3977,11 @@ static int oxu_drv_probe(struct platform_device *pdev)
 	if (ret < 0) {
 		dev_dbg(&pdev->dev, "cannot init USB devices\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto error_init;
+=======
+		goto error;
+>>>>>>> v3.18
 =======
 		goto error;
 >>>>>>> v3.18
@@ -3937,6 +3992,7 @@ static int oxu_drv_probe(struct platform_device *pdev)
 
 	return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 error_init:
 	kfree(info);
@@ -3949,6 +4005,9 @@ error_set_irq_type:
 error_ioremap:
 	release_mem_region(memstart, memlen);
 
+=======
+error:
+>>>>>>> v3.18
 =======
 error:
 >>>>>>> v3.18
@@ -3966,9 +4025,12 @@ static int oxu_drv_remove(struct platform_device *pdev)
 {
 	struct oxu_info *info = platform_get_drvdata(pdev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long memstart = info->hcd[0]->rsrc_start,
 			memlen = info->hcd[0]->rsrc_len;
 	void *base = info->hcd[0]->regs;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3976,12 +4038,15 @@ static int oxu_drv_remove(struct platform_device *pdev)
 	oxu_remove(pdev, info->hcd[1]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	iounmap(base);
 	release_mem_region(memstart, memlen);
 
 	kfree(info);
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return 0;

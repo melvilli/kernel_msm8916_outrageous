@@ -12,6 +12,10 @@
 #include <linux/namei.h>
 #include <linux/nfs_fs.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/nfs_mount.h>
+>>>>>>> v3.18
 =======
 #include <linux/nfs_mount.h>
 >>>>>>> v3.18
@@ -125,9 +129,14 @@ static int nfs4_validate_fspath(struct dentry *dentry,
 
 static size_t nfs_parse_server_name(char *string, size_t len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		struct sockaddr *sa, size_t salen, struct nfs_server *server)
 {
 	struct net *net = rpc_net_ns(server->client);
+=======
+		struct sockaddr *sa, size_t salen, struct net *net)
+{
+>>>>>>> v3.18
 =======
 		struct sockaddr *sa, size_t salen, struct net *net)
 {
@@ -146,6 +155,7 @@ static size_t nfs_parse_server_name(char *string, size_t len,
 /**
  * nfs_find_best_sec - Find a security mechanism supported locally
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @flavors: List of security tuples returned by SECINFO procedure
  *
  * Return the pseudoflavor of the first security mechanism in
@@ -158,6 +168,8 @@ rpc_authflavor_t nfs_find_best_sec(struct nfs4_secinfo_flavors *flavors)
 {
 	rpc_authflavor_t pseudoflavor;
 =======
+=======
+>>>>>>> v3.18
  * @server: NFS server struct
  * @flavors: List of security tuples returned by SECINFO procedure
  *
@@ -177,6 +189,9 @@ static struct rpc_clnt *nfs_find_best_sec(struct rpc_clnt *clnt,
 					  struct nfs4_secinfo_flavors *flavors)
 {
 	rpc_authflavor_t pflavor;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct nfs4_secinfo4 *secinfo;
 	unsigned int i;
@@ -188,6 +203,7 @@ static struct rpc_clnt *nfs_find_best_sec(struct rpc_clnt *clnt,
 		case RPC_AUTH_NULL:
 		case RPC_AUTH_UNIX:
 		case RPC_AUTH_GSS:
+<<<<<<< HEAD
 <<<<<<< HEAD
 			pseudoflavor = rpcauth_get_pseudoflavor(secinfo->flavor,
 							&secinfo->flavor_info);
@@ -206,6 +222,8 @@ static rpc_authflavor_t nfs4_negotiate_security(struct inode *inode, struct qstr
 	struct nfs4_secinfo_flavors *flavors;
 	rpc_authflavor_t flavor;
 =======
+=======
+>>>>>>> v3.18
 			pflavor = rpcauth_get_pseudoflavor(secinfo->flavor,
 							&secinfo->flavor_info);
 			/* does the pseudoflavor match a sec= mount opt? */
@@ -254,13 +272,21 @@ nfs4_negotiate_security(struct rpc_clnt *clnt, struct inode *inode,
 	struct page *page;
 	struct nfs4_secinfo_flavors *flavors;
 	struct rpc_clnt *new;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	int err;
 
 	page = alloc_page(GFP_KERNEL);
 	if (!page)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -ENOMEM;
+=======
+		return ERR_PTR(-ENOMEM);
+
+>>>>>>> v3.18
 =======
 		return ERR_PTR(-ENOMEM);
 
@@ -269,6 +295,7 @@ nfs4_negotiate_security(struct rpc_clnt *clnt, struct inode *inode,
 
 	err = nfs4_proc_secinfo(inode, name, flavors);
 	if (err < 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		flavor = err;
 		goto out;
@@ -295,6 +322,8 @@ struct rpc_clnt *nfs4_create_sec_client(struct rpc_clnt *clnt, struct inode *ino
 
 	return rpc_clone_client_set_auth(clnt, flavor);
 =======
+=======
+>>>>>>> v3.18
 		new = ERR_PTR(err);
 		goto out;
 	}
@@ -304,6 +333,9 @@ struct rpc_clnt *nfs4_create_sec_client(struct rpc_clnt *clnt, struct inode *ino
 out:
 	put_page(page);
 	return new;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -313,6 +345,10 @@ static struct vfsmount *try_location(struct nfs_clone_mount *mountdata,
 {
 	const size_t addr_bufsize = sizeof(struct sockaddr_storage);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct net *net = rpc_net_ns(NFS_SB(mountdata->sb)->client);
+>>>>>>> v3.18
 =======
 	struct net *net = rpc_net_ns(NFS_SB(mountdata->sb)->client);
 >>>>>>> v3.18
@@ -342,8 +378,12 @@ static struct vfsmount *try_location(struct nfs_clone_mount *mountdata,
 
 		mountdata->addrlen = nfs_parse_server_name(buf->data, buf->len,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mountdata->addr, addr_bufsize,
 				NFS_SB(mountdata->sb));
+=======
+				mountdata->addr, addr_bufsize, net);
+>>>>>>> v3.18
 =======
 				mountdata->addr, addr_bufsize, net);
 >>>>>>> v3.18
@@ -390,8 +430,12 @@ static struct vfsmount *nfs_follow_referral(struct dentry *dentry,
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("%s: referral at %s/%s\n", __func__,
 		dentry->d_parent->d_name.name, dentry->d_name.name);
+=======
+	dprintk("%s: referral at %pd2\n", __func__, dentry);
+>>>>>>> v3.18
 =======
 	dprintk("%s: referral at %pd2\n", __func__, dentry);
 >>>>>>> v3.18
@@ -459,8 +503,13 @@ static struct vfsmount *nfs_do_refmount(struct rpc_clnt *client, struct dentry *
 
 	parent = dget_parent(dentry);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dprintk("%s: getting locations for %s/%s\n",
 		__func__, parent->d_name.name, dentry->d_name.name);
+=======
+	dprintk("%s: getting locations for %pd2\n",
+		__func__, dentry);
+>>>>>>> v3.18
 =======
 	dprintk("%s: getting locations for %pd2\n",
 		__func__, dentry);
@@ -486,19 +535,29 @@ struct vfsmount *nfs4_submount(struct nfs_server *server, struct dentry *dentry,
 			       struct nfs_fh *fh, struct nfs_fattr *fattr)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dentry *parent = dget_parent(dentry);
 =======
+=======
+>>>>>>> v3.18
 	rpc_authflavor_t flavor = server->client->cl_auth->au_flavor;
 	struct dentry *parent = dget_parent(dentry);
 	struct inode *dir = parent->d_inode;
 	struct qstr *name = &dentry->d_name;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct rpc_clnt *client;
 	struct vfsmount *mnt;
 
 	/* Look it up again to get its attributes and sec flavor */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	client = nfs4_proc_lookup_mountpoint(parent->d_inode, &dentry->d_name, fh, fattr);
+=======
+	client = nfs4_proc_lookup_mountpoint(dir, name, fh, fattr);
+>>>>>>> v3.18
 =======
 	client = nfs4_proc_lookup_mountpoint(dir, name, fh, fattr);
 >>>>>>> v3.18
@@ -506,6 +565,7 @@ struct vfsmount *nfs4_submount(struct nfs_server *server, struct dentry *dentry,
 	if (IS_ERR(client))
 		return ERR_CAST(client);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (fattr->valid & NFS_ATTR_FATTR_V4_REFERRAL)
 		mnt = nfs_do_refmount(client, dentry);
@@ -516,6 +576,8 @@ struct vfsmount *nfs4_submount(struct nfs_server *server, struct dentry *dentry,
 	return mnt;
 }
 =======
+=======
+>>>>>>> v3.18
 	if (fattr->valid & NFS_ATTR_FATTR_V4_REFERRAL) {
 		mnt = nfs_do_refmount(client, dentry);
 		goto out;
@@ -630,4 +692,7 @@ out:
 	free_page((unsigned long)page2);
 	return error;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

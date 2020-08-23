@@ -40,7 +40,11 @@ static DEFINE_SPINLOCK(freezer_lock);
 bool freezing_slow_path(struct task_struct *p)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (p->flags & PF_NOFREEZE)
+=======
+	if (p->flags & (PF_NOFREEZE | PF_SUSPEND_TASK))
+>>>>>>> v3.18
 =======
 	if (p->flags & (PF_NOFREEZE | PF_SUSPEND_TASK))
 >>>>>>> v3.18
@@ -155,12 +159,15 @@ void __thaw_task(struct task_struct *p)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Clear freezing and kick @p if FROZEN.  Clearing is guaranteed to
 	 * be visible to @p as waking up implies wmb.  Waking up inside
 	 * freezer_lock also prevents wakeups from leaking outside
 	 * refrigerator.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&freezer_lock, flags);

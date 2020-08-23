@@ -68,7 +68,11 @@ static inline void arch_spin_unlock(arch_spinlock_t *lock)
 #else /* DEBUG_SPINLOCK */
 #define arch_spin_is_locked(lock)	((void)(lock), 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* for sched.c and kernel_lock.c: */
+=======
+/* for sched/core.c and kernel_lock.c: */
+>>>>>>> v3.18
 =======
 /* for sched/core.c and kernel_lock.c: */
 >>>>>>> v3.18

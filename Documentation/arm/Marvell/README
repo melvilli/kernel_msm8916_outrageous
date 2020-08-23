@@ -54,8 +54,13 @@ Kirkwood family
   Homepage: http://www.marvell.com/embedded-processors/kirkwood/
   Core: Feroceon ARMv5 compatible
 <<<<<<< HEAD
+<<<<<<< HEAD
   Linux kernel mach directory: arch/arm/mach-kirkwood
   Linux kernel plat directory: arch/arm/plat-orion
+=======
+  Linux kernel mach directory: arch/arm/mach-mvebu
+  Linux kernel plat directory: none
+>>>>>>> v3.18
 =======
   Linux kernel mach directory: arch/arm/mach-mvebu
   Linux kernel plat directory: none
@@ -89,7 +94,10 @@ EBU Armada family
         88F6707
         88F6W11
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
     Product Brief:   http://www.marvell.com/embedded-processors/armada-300/assets/Marvell_ARMADA_370_SoC.pdf
     Hardware Spec:   http://www.marvell.com/embedded-processors/armada-300/assets/ARMADA370-datasheet.pdf
     Functional Spec: http://www.marvell.com/embedded-processors/armada-300/assets/ARMADA370-FunctionalSpec-datasheet.pdf
@@ -102,6 +110,9 @@ EBU Armada family
 	88F6810
 	88F6820
 	88F6828
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   Armada XP Flavors:
@@ -109,10 +120,13 @@ EBU Armada family
         MV78260
         MV78460
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   Product Brief: http://www.marvell.com/embedded-processors/armada-xp/assets/Marvell-ArmadaXP-SoC-product%20brief.pdf
   No public datasheet available.
 =======
+=======
+>>>>>>> v3.18
     NOTE: not to be confused with the non-SMP 78xx0 SoCs
     Product Brief: http://www.marvell.com/embedded-processors/armada-xp/assets/Marvell-ArmadaXP-SoC-product%20brief.pdf
     Functional Spec: http://www.marvell.com/embedded-processors/armada-xp/assets/ARMADA-XP-Functional-SpecDatasheet.pdf
@@ -120,6 +134,9 @@ EBU Armada family
       http://www.marvell.com/embedded-processors/armada-xp/assets/HW_MV78230_OS.PDF
       http://www.marvell.com/embedded-processors/armada-xp/assets/HW_MV78260_OS.PDF
       http://www.marvell.com/embedded-processors/armada-xp/assets/HW_MV78460_OS.PDF
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
   Core: Sheeva ARMv7 compatible
@@ -155,7 +172,13 @@ Dove family (application processor)
   Homepage: http://www.marvell.com/application-processors/armada-500/
   Core: ARMv7 compatible
 <<<<<<< HEAD
+<<<<<<< HEAD
   Directory: arch/arm/mach-dove
+=======
+
+  Directory: arch/arm/mach-mvebu (DT enabled platforms)
+             arch/arm/mach-dove (non-DT enabled platforms)
+>>>>>>> v3.18
 =======
 
   Directory: arch/arm/mach-mvebu (DT enabled platforms)
@@ -247,6 +270,7 @@ MMP/MMP2 family (communication processor)
    Linux kernel plat directory: arch/arm/plat-pxa
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Long-term plans
 ---------------
 
@@ -255,6 +279,8 @@ Long-term plans
    Marvell EBU (Engineering Business Unit) in a single mach-<foo>
    directory. The plat-orion/ would therefore disappear.
 =======
+=======
+>>>>>>> v3.18
 Berlin family (Digital Entertainment)
 -------------------------------------
 
@@ -291,6 +317,9 @@ Long-term plans
    mach-mvebu/ to support all SoCs from the Marvell EBU (Engineering
    Business Unit) in a single mach-<foo> directory. The plat-orion/
    would therefore disappear.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
  * Unify the mach-mmp/ and mach-pxa/ into the same mach-pxa

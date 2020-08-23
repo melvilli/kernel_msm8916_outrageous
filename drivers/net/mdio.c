@@ -343,6 +343,7 @@ EXPORT_SYMBOL(mdio45_ethtool_gset_npage);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * mdio45_ethtool_spauseparam_an - set auto-negotiated pause parameters
  * @mdio: MDIO interface
  * @ecmd: Ethtool request structure
@@ -371,6 +372,8 @@ void mdio45_ethtool_spauseparam_an(const struct mdio_if_info *mdio,
 EXPORT_SYMBOL(mdio45_ethtool_spauseparam_an);
 
 /**
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * mdio_mii_ioctl - MII ioctl interface for MDIO (clause 22 or 45) PHYs

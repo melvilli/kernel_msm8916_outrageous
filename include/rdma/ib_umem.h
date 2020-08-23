@@ -47,6 +47,7 @@ struct ib_umem {
 	int                     writable;
 	int                     hugetlb;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head	chunk_list;
 	struct work_struct	work;
 	struct mm_struct       *mm;
@@ -59,6 +60,8 @@ struct ib_umem_chunk {
 	int                     nmap;
 	struct scatterlist      page_list[0];
 =======
+=======
+>>>>>>> v3.18
 	struct work_struct	work;
 	struct pid             *pid;
 	struct mm_struct       *mm;
@@ -66,6 +69,9 @@ struct ib_umem_chunk {
 	struct sg_table sg_head;
 	int             nmap;
 	int             npages;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 

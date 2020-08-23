@@ -2,7 +2,12 @@ I2C for OMAP platforms
 
 Required properties :
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible : Must be "ti,omap3-i2c" or "ti,omap4-i2c"
+=======
+- compatible : Must be "ti,omap2420-i2c", "ti,omap2430-i2c", "ti,omap3-i2c"
+  or "ti,omap4-i2c"
+>>>>>>> v3.18
 =======
 - compatible : Must be "ti,omap2420-i2c", "ti,omap2430-i2c", "ti,omap3-i2c"
   or "ti,omap4-i2c"

@@ -5,6 +5,11 @@ apm-acpi.txt
 basic-pm-debugging.txt
 	- Debugging suspend and resume
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+charger-manager.txt
+	- Battery charger management.
+>>>>>>> v3.18
 =======
 charger-manager.txt
 	- Battery charger management.
@@ -28,6 +33,11 @@ pm_qos_interface.txt
 power_supply_class.txt
 	- Tells userspace about battery, UPS, AC or DC power supply properties
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+runtime_pm.txt
+	- Power management framework for I/O devices.
+>>>>>>> v3.18
 =======
 runtime_pm.txt
 	- Power management framework for I/O devices.
@@ -49,8 +59,11 @@ tricks.txt
 userland-swsusp.txt
 	- Experimental implementation of software suspend in userspace
 <<<<<<< HEAD
+<<<<<<< HEAD
 video_extension.txt
 	- ACPI video extensions
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 video.txt

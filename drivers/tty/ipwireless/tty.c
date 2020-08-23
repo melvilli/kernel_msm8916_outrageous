@@ -16,7 +16,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -98,11 +101,14 @@ static int ipw_open(struct tty_struct *linux_tty, struct file *filp)
 
 	mutex_lock(&tty->ipw_tty_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (tty->closing) {
 		mutex_unlock(&tty->ipw_tty_mutex);
 		return -ENODEV;
 	}
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (tty->port.count == 0)
@@ -184,9 +190,12 @@ void ipwireless_tty_received(struct ipw_tty *tty, unsigned char *data,
 				length - work);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * This may sleep if ->low_latency is set
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (work)

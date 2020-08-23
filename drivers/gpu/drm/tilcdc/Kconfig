@@ -3,6 +3,10 @@ config DRM_TILCDC
 	depends on DRM && OF && ARM
 	select DRM_KMS_HELPER
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select DRM_KMS_FB_HELPER
+>>>>>>> v3.18
 =======
 	select DRM_KMS_FB_HELPER
 >>>>>>> v3.18

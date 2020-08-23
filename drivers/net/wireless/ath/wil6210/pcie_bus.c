@@ -77,6 +77,7 @@ static int wil_if_pcie_enable(struct wil6210_priv *wil)
 	case 3:
 	case 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case 0:
 		break;
 	default:
@@ -102,6 +103,8 @@ static int wil_if_pcie_enable(struct wil6210_priv *wil)
 	}
 
 =======
+=======
+>>>>>>> v3.18
 		wil_dbg_misc(wil, "Setup %d MSI interrupts\n", use_msi);
 		break;
 	case 0:
@@ -124,6 +127,9 @@ static int wil_if_pcie_enable(struct wil6210_priv *wil)
 
 	wil->n_msi = use_msi;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if ((wil->n_msi == 0) && msi_only) {
 		wil_err(wil, "Interrupt pin not routed, unable to use INTx\n");

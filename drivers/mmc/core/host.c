@@ -5,7 +5,10 @@
  *  Copyright (C) 2007-2008 Pierre Ossman
  *  Copyright (C) 2010 Linus Walleij
 <<<<<<< HEAD
+<<<<<<< HEAD
  *  Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  *
@@ -27,7 +30,10 @@
 #include <linux/slab.h>
 #include <linux/suspend.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/pm_runtime.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -44,6 +50,7 @@ static void mmc_host_classdev_release(struct device *dev)
 {
 	struct mmc_host *host = cls_dev_to_mmc_host(dev);
 	mutex_destroy(&host->slot.lock);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	kfree(host->wlock_name);
 	kfree(host);
@@ -183,6 +190,14 @@ static struct class mmc_host_class = {
 	.name		= "mmc_host",
 	.dev_release	= mmc_host_classdev_release,
 >>>>>>> v3.18
+=======
+	kfree(host);
+}
+
+static struct class mmc_host_class = {
+	.name		= "mmc_host",
+	.dev_release	= mmc_host_classdev_release,
+>>>>>>> v3.18
 };
 
 int mmc_register_host_class(void)
@@ -305,9 +320,12 @@ void mmc_host_clk_hold(struct mmc_host *host)
 		spin_unlock_irqrestore(&host->clk_lock, flags);
 		mmc_ungate_clock(host);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		/* Reset clock scaling stats as host is out of idle */
 		mmc_reset_clk_scale_stats(host);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		spin_lock_irqsave(&host->clk_lock, flags);
@@ -323,7 +341,11 @@ void mmc_host_clk_hold(struct mmc_host *host)
  *	@card: card to check.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool mmc_host_may_gate_card(struct mmc_card *card)
+=======
+static bool mmc_host_may_gate_card(struct mmc_card *card)
+>>>>>>> v3.18
 =======
 static bool mmc_host_may_gate_card(struct mmc_card *card)
 >>>>>>> v3.18
@@ -331,6 +353,7 @@ static bool mmc_host_may_gate_card(struct mmc_card *card)
 	/* If there is no card we may gate it */
 	if (!card)
 		return true;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	/*
@@ -340,6 +363,8 @@ static bool mmc_host_may_gate_card(struct mmc_card *card)
 	if (mmc_card_sdio(card) && card->cccr.async_intr_sup)
 		return true;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/*
@@ -469,6 +494,7 @@ static inline void mmc_host_clk_sysfs_init(struct mmc_host *host)
  * parameters.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void mmc_of_parse(struct mmc_host *host)
 {
 	struct device_node *np;
@@ -480,6 +506,8 @@ void mmc_of_parse(struct mmc_host *host)
 	if (!host->parent || !host->parent->of_node)
 		return;
 =======
+=======
+>>>>>>> v3.18
 int mmc_of_parse(struct mmc_host *host)
 {
 	struct device_node *np;
@@ -490,6 +518,9 @@ int mmc_of_parse(struct mmc_host *host)
 
 	if (!host->parent || !host->parent->of_node)
 		return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	np = host->parent->of_node;
@@ -513,7 +544,12 @@ int mmc_of_parse(struct mmc_host *host)
 	default:
 		dev_err(host->parent,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			"Invalid \"bus-width\" value %ud!\n", bus_width);
+=======
+			"Invalid \"bus-width\" value %u!\n", bus_width);
+		return -EINVAL;
+>>>>>>> v3.18
 =======
 			"Invalid \"bus-width\" value %u!\n", bus_width);
 		return -EINVAL;
@@ -540,9 +576,13 @@ int mmc_of_parse(struct mmc_host *host)
 		host->caps |= MMC_CAP_NONREMOVABLE;
 	} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		bool explicit_inv_cd, gpio_inv_cd = false;
 
 		explicit_inv_cd = of_property_read_bool(np, "cd-inverted");
+=======
+		cd_cap_invert = of_property_read_bool(np, "cd-inverted");
+>>>>>>> v3.18
 =======
 		cd_cap_invert = of_property_read_bool(np, "cd-inverted");
 >>>>>>> v3.18
@@ -550,6 +590,7 @@ int mmc_of_parse(struct mmc_host *host)
 		if (of_find_property(np, "broken-cd", &len))
 			host->caps |= MMC_CAP_NEEDS_POLL;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		gpio = of_get_named_gpio_flags(np, "cd-gpios", 0, &flags);
 		if (gpio_is_valid(gpio)) {
@@ -568,6 +609,8 @@ int mmc_of_parse(struct mmc_host *host)
 
 		if (explicit_inv_cd ^ gpio_inv_cd)
 =======
+=======
+>>>>>>> v3.18
 		ret = mmc_gpiod_request_cd(host, "cd", 0, true,
 					   0, &cd_gpio_invert);
 		if (ret) {
@@ -593,11 +636,15 @@ int mmc_of_parse(struct mmc_host *host)
 		 * not inverted.
 		 */
 		if (cd_cap_invert ^ cd_gpio_invert)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			host->caps2 |= MMC_CAP2_CD_ACTIVE_HIGH;
 	}
 
 	/* Parse Write Protection */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	explicit_inv_wp = of_property_read_bool(np, "wp-inverted");
 
@@ -613,6 +660,8 @@ int mmc_of_parse(struct mmc_host *host)
 	}
 	if (explicit_inv_wp ^ gpio_inv_wp)
 =======
+=======
+>>>>>>> v3.18
 	ro_cap_invert = of_property_read_bool(np, "wp-inverted");
 
 	ret = mmc_gpiod_request_ro(host, "wp", 0, false, 0, &ro_gpio_invert);
@@ -629,6 +678,9 @@ int mmc_of_parse(struct mmc_host *host)
 
 	/* See the comment on CD inversion above */
 	if (ro_cap_invert ^ ro_gpio_invert)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		host->caps2 |= MMC_CAP2_RO_ACTIVE_HIGH;
 
@@ -637,7 +689,10 @@ int mmc_of_parse(struct mmc_host *host)
 	if (of_find_property(np, "cap-mmc-highspeed", &len))
 		host->caps |= MMC_CAP_MMC_HIGHSPEED;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (of_find_property(np, "sd-uhs-sdr12", &len))
 		host->caps |= MMC_CAP_UHS_SDR12;
 	if (of_find_property(np, "sd-uhs-sdr25", &len))
@@ -648,12 +703,20 @@ int mmc_of_parse(struct mmc_host *host)
 		host->caps |= MMC_CAP_UHS_SDR104;
 	if (of_find_property(np, "sd-uhs-ddr50", &len))
 		host->caps |= MMC_CAP_UHS_DDR50;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (of_find_property(np, "cap-power-off-card", &len))
 		host->caps |= MMC_CAP_POWER_OFF_CARD;
 	if (of_find_property(np, "cap-sdio-irq", &len))
 		host->caps |= MMC_CAP_SDIO_IRQ;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (of_find_property(np, "full-pwr-cycle", &len))
+		host->caps2 |= MMC_CAP2_FULL_PWR_CYCLE;
+>>>>>>> v3.18
 =======
 	if (of_find_property(np, "full-pwr-cycle", &len))
 		host->caps2 |= MMC_CAP2_FULL_PWR_CYCLE;
@@ -663,7 +726,10 @@ int mmc_of_parse(struct mmc_host *host)
 	if (of_find_property(np, "enable-sdio-wakeup", &len))
 		host->pm_caps |= MMC_PM_WAKE_SDIO_IRQ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	if (of_find_property(np, "mmc-ddr-1_8v", &len))
 		host->caps |= MMC_CAP_1_8V_DDR;
 	if (of_find_property(np, "mmc-ddr-1_2v", &len))
@@ -690,6 +756,9 @@ int mmc_of_parse(struct mmc_host *host)
 out:
 	mmc_gpio_free_cd(host);
 	return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -738,10 +807,13 @@ struct mmc_host *mmc_alloc_host(int extra, struct device *dev)
 	spin_lock_init(&host->lock);
 	init_waitqueue_head(&host->wq);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	host->wlock_name = kasprintf(GFP_KERNEL,
 			"%s_detect", mmc_hostname(host));
 	wake_lock_init(&host->detect_wake_lock, WAKE_LOCK_SUSPEND,
 			host->wlock_name);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	INIT_DELAYED_WORK(&host->detect, mmc_rescan);
@@ -769,6 +841,7 @@ free:
 
 EXPORT_SYMBOL(mmc_alloc_host);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static ssize_t show_enable(struct device *dev,
 		struct device_attribute *attr, char *buf)
@@ -1004,6 +1077,8 @@ static struct attribute_group dev_attr_grp = {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /**
  *	mmc_add_host - initialise host hardware
  *	@host: mmc host
@@ -1020,6 +1095,7 @@ int mmc_add_host(struct mmc_host *host)
 		!host->ops->enable_sdio_irq);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = pm_runtime_set_active(&host->class_dev);
 	if (err)
 		pr_err("%s: %s: failed setting runtime active: err: %d\n",
@@ -1029,12 +1105,17 @@ int mmc_add_host(struct mmc_host *host)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 	err = device_add(&host->class_dev);
 	if (err)
 		return err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	device_enable_async_suspend(&host->class_dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	led_trigger_register_simple(dev_name(&host->class_dev), &host->led);
@@ -1044,6 +1125,7 @@ int mmc_add_host(struct mmc_host *host)
 #endif
 	mmc_host_clk_sysfs_init(host);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	host->clk_scaling.up_threshold = 35;
 	host->clk_scaling.down_threshold = 5;
@@ -1066,6 +1148,10 @@ int mmc_add_host(struct mmc_host *host)
 	mmc_start_host(host);
 	register_pm_notifier(&host->pm_notify);
 >>>>>>> v3.18
+=======
+	mmc_start_host(host);
+	register_pm_notifier(&host->pm_notify);
+>>>>>>> v3.18
 
 	return 0;
 }
@@ -1083,9 +1169,13 @@ EXPORT_SYMBOL(mmc_add_host);
 void mmc_remove_host(struct mmc_host *host)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!(host->pm_flags & MMC_PM_IGNORE_PM_NOTIFY))
 		unregister_pm_notifier(&host->pm_notify);
 
+=======
+	unregister_pm_notifier(&host->pm_notify);
+>>>>>>> v3.18
 =======
 	unregister_pm_notifier(&host->pm_notify);
 >>>>>>> v3.18
@@ -1095,8 +1185,11 @@ void mmc_remove_host(struct mmc_host *host)
 	mmc_remove_host_debugfs(host);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sysfs_remove_group(&host->parent->kobj, &dev_attr_grp);
 	sysfs_remove_group(&host->class_dev.kobj, &clk_scaling_attr_grp);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1121,7 +1214,10 @@ void mmc_free_host(struct mmc_host *host)
 	idr_remove(&mmc_host_idr, host->index);
 	spin_unlock(&mmc_host_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	wake_lock_destroy(&host->detect_wake_lock);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

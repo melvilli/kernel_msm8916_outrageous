@@ -36,8 +36,14 @@ MODULE_ALIAS_LDISC(N_CAIF);
 #define CAIF_MAX_MTU 4096
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*This list is protected by the rtnl lock. */
 static LIST_HEAD(ser_list);
+=======
+static DEFINE_SPINLOCK(ser_lock);
+static LIST_HEAD(ser_list);
+static LIST_HEAD(ser_release_list);
+>>>>>>> v3.18
 =======
 static DEFINE_SPINLOCK(ser_lock);
 static LIST_HEAD(ser_list);
@@ -210,7 +216,10 @@ static void ldisc_receive(struct tty_struct *tty, const u8 *data,
 	skb->protocol = htons(ETH_P_CAIF);
 	skb_reset_mac_header(skb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb->dev = ser->dev;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	debugfs_rx(ser, data, count);
@@ -318,7 +327,10 @@ static void ldisc_tx_wakeup(struct tty_struct *tty)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void ser_release(struct work_struct *work)
 {
 	struct list_head list;
@@ -341,6 +353,9 @@ static void ser_release(struct work_struct *work)
 
 static DECLARE_WORK(ser_release_work, ser_release);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int ldisc_open(struct tty_struct *tty)
 {
@@ -356,9 +371,12 @@ static int ldisc_open(struct tty_struct *tty)
 		return -EPERM;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf(name, "cf%s", tty->name);
 	dev = alloc_netdev(sizeof(*ser), name, caifdev_setup);
 =======
+=======
+>>>>>>> v3.18
 	/* release devices to avoid name collision */
 	ser_release(NULL);
 
@@ -367,6 +385,9 @@ static int ldisc_open(struct tty_struct *tty)
 		return -EINVAL;
 	dev = alloc_netdev(sizeof(*ser), name, NET_NAME_UNKNOWN,
 			   caifdev_setup);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (!dev)
 		return -ENOMEM;
@@ -387,7 +408,13 @@ static int ldisc_open(struct tty_struct *tty)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	list_add(&ser->node, &ser_list);
+=======
+	spin_lock(&ser_lock);
+	list_add(&ser->node, &ser_list);
+	spin_unlock(&ser_lock);
+>>>>>>> v3.18
 =======
 	spin_lock(&ser_lock);
 	list_add(&ser->node, &ser_list);
@@ -403,6 +430,7 @@ static void ldisc_close(struct tty_struct *tty)
 {
 	struct ser_device *ser = tty->disc_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Remove may be called inside or outside of rtnl_lock */
 	int islocked = rtnl_is_locked();
 
@@ -417,6 +445,8 @@ static void ldisc_close(struct tty_struct *tty)
 	if (!islocked)
 		rtnl_unlock();
 =======
+=======
+>>>>>>> v3.18
 
 	tty_kref_put(ser->tty);
 
@@ -424,6 +454,9 @@ static void ldisc_close(struct tty_struct *tty)
 	list_move(&ser->node, &ser_release_list);
 	spin_unlock(&ser_lock);
 	schedule_work(&ser_release_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -500,6 +533,7 @@ static int __init caif_ser_init(void)
 static void __exit caif_ser_exit(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ser_device *ser = NULL;
 	struct list_head *node;
 	struct list_head *_tmp;
@@ -511,11 +545,16 @@ static void __exit caif_ser_exit(void)
 		list_del(node);
 	}
 =======
+=======
+>>>>>>> v3.18
 	spin_lock(&ser_lock);
 	list_splice(&ser_list, &ser_release_list);
 	spin_unlock(&ser_lock);
 	ser_release(NULL);
 	cancel_work_sync(&ser_release_work);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	tty_unregister_ldisc(N_CAIF);
 	debugfs_remove_recursive(debugfsdir);

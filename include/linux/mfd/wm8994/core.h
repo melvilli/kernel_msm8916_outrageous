@@ -30,6 +30,10 @@ enum wm8994_type {
 struct regulator_dev;
 struct regulator_bulk_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct irq_domain;
+>>>>>>> v3.18
 =======
 struct irq_domain;
 >>>>>>> v3.18
@@ -60,8 +64,11 @@ struct irq_domain;
 
 struct wm8994 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mutex irq_lock;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	struct wm8994_pdata pdata;
@@ -81,6 +88,10 @@ struct wm8994 {
 	int irq;
 	struct regmap_irq_chip_data *irq_data;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct irq_domain *edge_irq;
+>>>>>>> v3.18
 =======
 	struct irq_domain *edge_irq;
 >>>>>>> v3.18
@@ -95,6 +106,7 @@ struct wm8994 {
 
 /* Device I/O API */
 <<<<<<< HEAD
+<<<<<<< HEAD
 int wm8994_reg_read(struct wm8994 *wm8994, unsigned short reg);
 int wm8994_reg_write(struct wm8994 *wm8994, unsigned short reg,
 		 unsigned short val);
@@ -106,6 +118,8 @@ int wm8994_bulk_write(struct wm8994 *wm8994, unsigned short reg,
 		     int count, const u16 *buf);
 
 =======
+=======
+>>>>>>> v3.18
 
 static inline int wm8994_reg_read(struct wm8994 *wm8994, unsigned short reg)
 {
@@ -143,6 +157,9 @@ static inline int wm8994_set_bits(struct wm8994 *wm8994, unsigned short reg,
 {
 	return regmap_update_bits(wm8994->regmap, reg, mask, val);
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Helper to save on boilerplate */

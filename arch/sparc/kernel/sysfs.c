@@ -152,7 +152,11 @@ static ssize_t store_mmustat_enable(struct device *s,
 {
 	unsigned long val, err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret = sscanf(buf, "%ld", &val);
+=======
+	int ret = sscanf(buf, "%lu", &val);
+>>>>>>> v3.18
 =======
 	int ret = sscanf(buf, "%lu", &val);
 >>>>>>> v3.18
@@ -251,7 +255,11 @@ static void unregister_cpu_online(unsigned int cpu)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit sysfs_cpu_notify(struct notifier_block *self,
+=======
+static int sysfs_cpu_notify(struct notifier_block *self,
+>>>>>>> v3.18
 =======
 static int sysfs_cpu_notify(struct notifier_block *self,
 >>>>>>> v3.18
@@ -275,7 +283,11 @@ static int sysfs_cpu_notify(struct notifier_block *self,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct notifier_block __cpuinitdata sysfs_cpu_nb = {
+=======
+static struct notifier_block sysfs_cpu_nb = {
+>>>>>>> v3.18
 =======
 static struct notifier_block sysfs_cpu_nb = {
 >>>>>>> v3.18
@@ -313,7 +325,11 @@ static int __init topology_init(void)
 	check_mmu_stats();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	register_cpu_notifier(&sysfs_cpu_nb);
+=======
+	cpu_notifier_register_begin();
+>>>>>>> v3.18
 =======
 	cpu_notifier_register_begin();
 >>>>>>> v3.18
@@ -327,11 +343,17 @@ static int __init topology_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	__register_cpu_notifier(&sysfs_cpu_nb);
 
 	cpu_notifier_register_done();
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }

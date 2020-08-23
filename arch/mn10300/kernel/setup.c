@@ -36,9 +36,12 @@
 struct mn10300_cpuinfo boot_cpu_data;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* For PCI or other memory-mapped resources */
 unsigned long pci_mem_start = 0x18000000;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static char __initdata cmd_line[COMMAND_LINE_SIZE];

@@ -1,6 +1,10 @@
 obj-y += update.o srcu.o
 <<<<<<< HEAD
+<<<<<<< HEAD
 obj-$(CONFIG_RCU_TORTURE_TEST) += torture.o
+=======
+obj-$(CONFIG_RCU_TORTURE_TEST) += rcutorture.o
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_RCU_TORTURE_TEST) += rcutorture.o
 >>>>>>> v3.18

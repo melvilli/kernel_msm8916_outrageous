@@ -577,7 +577,12 @@ int c2_rnic_init(struct c2_dev *c2dev)
 
 	/* Initialize cached the adapter limits */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (c2_rnic_query(c2dev, &c2dev->props))
+=======
+	err = c2_rnic_query(c2dev, &c2dev->props);
+	if (err)
+>>>>>>> v3.18
 =======
 	err = c2_rnic_query(c2dev, &c2dev->props);
 	if (err)

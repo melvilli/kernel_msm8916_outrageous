@@ -52,6 +52,11 @@ Table of Contents
   VIII - Specifying device power management information (sleep property)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  IX - Specifying dma bus information
+
+>>>>>>> v3.18
 =======
   IX - Specifying dma bus information
 
@@ -1338,7 +1343,10 @@ reasonably grouped in this manner, then create a virtual sleep controller
 sleep-map should wait until its necessity is demonstrated).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 IX - Specifying dma bus information
 
 Some devices may have DMA memory range shifted relatively to the beginning of
@@ -1390,6 +1398,9 @@ soc {
 		};
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 Appendix A - Sample SOC node for MPC8540
 ========================================
@@ -1424,7 +1435,10 @@ Appendix A - Sample SOC node for MPC8540
 					interrupts = <5 1>;
 					reg = <0>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -1433,7 +1447,10 @@ Appendix A - Sample SOC node for MPC8540
 					interrupts = <5 1>;
 					reg = <1>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};
@@ -1442,7 +1459,10 @@ Appendix A - Sample SOC node for MPC8540
 					interrupts = <7 1>;
 					reg = <3>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					device_type = "ethernet-phy";
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 				};

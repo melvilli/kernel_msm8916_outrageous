@@ -150,6 +150,7 @@ static int ttl_probe(struct platform_device *pdev)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
 	if (!pdata) {
 		dev_err(dev, "no platform data\n");
@@ -164,6 +165,8 @@ static int ttl_probe(struct platform_device *pdev)
 		goto out_return;
 	}
 =======
+=======
+>>>>>>> v3.18
 	pdata = dev_get_platdata(&pdev->dev);
 	if (!pdata) {
 		dev_err(dev, "no platform data\n");
@@ -173,6 +176,9 @@ static int ttl_probe(struct platform_device *pdev)
 	mod = devm_kzalloc(dev, sizeof(*mod), GFP_KERNEL);
 	if (!mod)
 		return -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	platform_set_drvdata(pdev, mod);
@@ -180,6 +186,7 @@ static int ttl_probe(struct platform_device *pdev)
 
 	/* get access to the MODULbus registers for this module */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!res) {
 		dev_err(dev, "MODULbus registers not found\n");
@@ -193,6 +200,11 @@ static int ttl_probe(struct platform_device *pdev)
 		ret = -ENOMEM;
 		goto out_free_mod;
 	}
+=======
+	mod->regs = devm_ioremap_resource(dev, res);
+	if (IS_ERR(mod->regs))
+		return PTR_ERR(mod->regs);
+>>>>>>> v3.18
 =======
 	mod->regs = devm_ioremap_resource(dev, res);
 	if (IS_ERR(mod->regs))
@@ -217,6 +229,7 @@ static int ttl_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(dev, "unable to add GPIO chip\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto out_iounmap_regs;
 	}
 
@@ -229,16 +242,22 @@ out_free_mod:
 out_return:
 	return ret;
 =======
+=======
+>>>>>>> v3.18
 		return ret;
 	}
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
 static int ttl_remove(struct platform_device *pdev)
 {
 	struct ttl_module *mod = platform_get_drvdata(pdev);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct device *dev = &pdev->dev;
 	int ret;
@@ -251,6 +270,11 @@ static int ttl_remove(struct platform_device *pdev)
 
 	iounmap(mod->regs);
 	kfree(mod);
+=======
+
+	gpiochip_remove(&mod->gpio);
+
+>>>>>>> v3.18
 =======
 
 	gpiochip_remove(&mod->gpio);

@@ -1249,6 +1249,11 @@ static int rs_ioctl(struct tty_struct *tty,
 	void __user *argp = (void __user *)arg;
 	unsigned long flags;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	DEFINE_WAIT(wait);
+	int ret;
+>>>>>>> v3.18
 =======
 	DEFINE_WAIT(wait);
 	int ret;
@@ -1294,10 +1299,15 @@ static int rs_ioctl(struct tty_struct *tty,
 			local_irq_restore(flags);
 			while (1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				interruptible_sleep_on(&info->tport.delta_msr_wait);
 				/* see if a signal did it */
 				if (signal_pending(current))
 					return -ERESTARTSYS;
+=======
+				prepare_to_wait(&info->tport.delta_msr_wait,
+						&wait, TASK_INTERRUPTIBLE);
+>>>>>>> v3.18
 =======
 				prepare_to_wait(&info->tport.delta_msr_wait,
 						&wait, TASK_INTERRUPTIBLE);
@@ -1307,18 +1317,25 @@ static int rs_ioctl(struct tty_struct *tty,
 				local_irq_restore(flags);
 				if (cnow.rng == cprev.rng && cnow.dsr == cprev.dsr && 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				    cnow.dcd == cprev.dcd && cnow.cts == cprev.cts)
 					return -EIO; /* no change => error */
 =======
+=======
+>>>>>>> v3.18
 				    cnow.dcd == cprev.dcd && cnow.cts == cprev.cts) {
 					ret = -EIO; /* no change => error */
 					break;
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				if ( ((arg & TIOCM_RNG) && (cnow.rng != cprev.rng)) ||
 				     ((arg & TIOCM_DSR) && (cnow.dsr != cprev.dsr)) ||
 				     ((arg & TIOCM_CD)  && (cnow.dcd != cprev.dcd)) ||
 				     ((arg & TIOCM_CTS) && (cnow.cts != cprev.cts)) ) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 					return 0;
 				}
@@ -1326,6 +1343,8 @@ static int rs_ioctl(struct tty_struct *tty,
 			}
 			/* NOTREACHED */
 =======
+=======
+>>>>>>> v3.18
 					ret = 0;
 					break;
 				}
@@ -1339,6 +1358,9 @@ static int rs_ioctl(struct tty_struct *tty,
 			}
 			finish_wait(&info->tport.delta_msr_wait, &wait);
 			return ret;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		case TIOCSERGWILD:
@@ -1819,8 +1841,11 @@ static int __exit amiga_serial_remove(struct platform_device *pdev)
 	free_irq(IRQ_AMIGA_RBF, state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	return error;
@@ -1894,6 +1919,12 @@ static struct console sercons = {
 static int __init amiserial_console_init(void)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!MACH_IS_AMIGA)
+		return -ENODEV;
+
+>>>>>>> v3.18
 =======
 	if (!MACH_IS_AMIGA)
 		return -ENODEV;

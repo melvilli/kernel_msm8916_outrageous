@@ -176,7 +176,10 @@ config HID_PRODIKEYS
 	  and some additional multimedia keys.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HID_CP2112
 	tristate "Silicon Labs CP2112 HID USB-to-SMBus Bridge support"
 	depends on USB_HID && I2C && GPIOLIB
@@ -186,6 +189,9 @@ config HID_CP2112
 	and gpiochip to expose these functions of the CP2112. The
 	customizable USB descriptor fields are exposed as sysfs attributes.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HID_CYPRESS
 	tristate "Cypress mouse and barcode readers" if EXPERT
@@ -230,7 +236,10 @@ config HID_ELECOM
 	Support for the ELECOM BM084 (bluetooth mouse).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HID_ELO
 	tristate "ELO USB 4000/4500 touchscreen"
 	depends on USB_HID
@@ -238,6 +247,9 @@ config HID_ELO
 	Support for the ELO USB 4000/4500 touchscreens. Note that this is for
 	different devices than those handled by CONFIG_TOUCHSCREEN_USB_ELO.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HID_EZKEY
 	tristate "Ezkey BTC 8193 keyboard" if EXPERT
@@ -246,6 +258,7 @@ config HID_EZKEY
 	---help---
 	Support for Ezkey BTC 8193 keyboard.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config HID_FIIO
 	tristate "FiiO USB DAC Amp"
@@ -257,6 +270,8 @@ config HID_FIIO
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config HID_HOLTEK
 	tristate "Holtek HID devices"
 	depends on USB_HID
@@ -265,12 +280,18 @@ config HID_HOLTEK
 	  - Holtek On Line Grip based game controller
 	  - Trust GXT 18 Gaming Keyboard
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	  - Sharkoon Drakonia / Perixx MX-2000 gaming mice
 	  - Tracer Sniper TRM-503 / NOVA Gaming Slider X200 /
 	    Zalman ZM-GM1
 	  - SHARKOON DarkGlider Gaming mouse
 	  - LEETGION Hellion Gaming Mouse
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config HOLTEK_FF
@@ -282,7 +303,10 @@ config HOLTEK_FF
 	  and want to have force feedback support for it.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HID_GT683R
 	tristate "MSI GT68xR LED support"
 	depends on LEDS_CLASS && USB_HID
@@ -303,6 +327,9 @@ config HID_HUION
 	---help---
 	Support for Huion 580 tablet.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HID_KEYTOUCH
 	tristate "Keytouch HID devices"
@@ -369,6 +396,7 @@ config HID_LCPOWER
 	Support for LC-Power RC1000MCE RF remote control.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HID_LENOVO_TPKBD
 	tristate "Lenovo ThinkPad USB Keyboard with TrackPoint"
 	depends on USB_HID
@@ -382,6 +410,8 @@ config HID_LENOVO_TPKBD
 	sensitivity of the trackpoint, using the microphone mute button or
 	controlling the mute and microphone mute LEDs.
 =======
+=======
+>>>>>>> v3.18
 config HID_LENOVO
 	tristate "Lenovo / Thinkpad devices"
 	depends on HID
@@ -396,6 +426,9 @@ config HID_LENOVO
 	  configuration)
 	- ThinkPad Compact Bluetooth Keyboard with TrackPoint (supports Fn keys)
 	- ThinkPad Compact USB Keyboard with TrackPoint (supports Fn keys)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config HID_LOGITECH
@@ -408,6 +441,10 @@ config HID_LOGITECH
 config HID_LOGITECH_DJ
 	tristate "Logitech Unifying receivers full support"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	depends on HIDRAW
+>>>>>>> v3.18
 =======
 	depends on HIDRAW
 >>>>>>> v3.18
@@ -431,7 +468,10 @@ config LOGITECH_FF
 	  - Logitech Formula Force EX
 	  - Logitech WingMan Formula Force GP
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  - Logitech MOMO Force wheel
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -511,6 +551,10 @@ config HID_MULTITOUCH
 	  - CVTouch panels
 	  - Cypress TrueTouch panels
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	  - Elan Microelectronics touch panels
+>>>>>>> v3.18
 =======
 	  - Elan Microelectronics touch panels
 >>>>>>> v3.18
@@ -579,7 +623,10 @@ config PANTHERLORD_FF
 	  or adapter and want to enable force feedback support for it.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HID_PENMOUNT
 	tristate "Penmount touch device"
 	depends on USB_HID
@@ -591,6 +638,9 @@ config HID_PENMOUNT
 
 	  Say Y here if you have a Penmount based touch controller.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HID_PETALYNX
 	tristate "Petalynx Maxter remote control"
@@ -672,6 +722,7 @@ config HID_PRIMAX
 	HID standard.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config HID_PS3REMOTE
 	tristate "Sony PS3 BD Remote Control"
 	depends on HID
@@ -681,6 +732,8 @@ config HID_PS3REMOTE
 
 	Support for the 6-axis controllers is provided by HID_SONY.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config HID_ROCCAT
@@ -699,12 +752,18 @@ config HID_SAITEK
 	HID standard.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Currently only supports the PS1000 controller.
 =======
+=======
+>>>>>>> v3.18
 	Supported devices:
 	- PS1000 Dual Analog Pad
 	- R.A.T.7 Gaming Mouse
 	- M.M.O.7 Gaming Mouse
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config HID_SAMSUNG
@@ -715,6 +774,7 @@ config HID_SAMSUNG
 
 config HID_SONY
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Sony PS3 controller"
 	depends on USB_HID
 	---help---
@@ -722,6 +782,8 @@ config HID_SONY
 
 	Support for the Sony PS3 BD Remote is provided by HID_PS3REMOTE.
 =======
+=======
+>>>>>>> v3.18
 	tristate "Sony PS2/3/4 accessories"
 	depends on USB_HID
 	depends on NEW_LEDS
@@ -743,6 +805,9 @@ config SONY_FF
 	---help---
 	Say Y here if you have a Sony PS2/3/4 accessory and want to enable
 	force feedback support for it.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config HID_SPEEDLINK
@@ -764,7 +829,10 @@ config HID_SUNPLUS
 	Support for Sunplus wireless desktop.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config HID_RMI
 	tristate "Synaptics RMI4 device support"
 	depends on HID
@@ -773,6 +841,9 @@ config HID_RMI
 	Say Y here if you have a Synaptics RMI4 touchpads over i2c-hid or usbhid
 	and want support for its special functionalities.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config HID_GREENASIA
 	tristate "GreenAsia (Product ID 0x12) game controller support"
@@ -855,6 +926,7 @@ config THRUSTMASTER_FF
 
 config HID_WACOM
 <<<<<<< HEAD
+<<<<<<< HEAD
 	tristate "Wacom Bluetooth devices support"
 	depends on HID
 	depends on LEDS_CLASS
@@ -865,6 +937,8 @@ config HID_WACOM
 config HID_WIIMOTE
 	tristate "Nintendo Wii Remote support"
 =======
+=======
+>>>>>>> v3.18
 	tristate "Wacom Intuos/Graphire tablet support (USB)"
 	depends on HID
 	select POWER_SUPPLY
@@ -879,12 +953,16 @@ config HID_WIIMOTE
 
 config HID_WIIMOTE
 	tristate "Nintendo Wii / Wii U peripherals"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	depends on HID
 	depends on LEDS_CLASS
 	select POWER_SUPPLY
 	select INPUT_FF_MEMLESS
 	---help---
+<<<<<<< HEAD
 <<<<<<< HEAD
 	Support for the Nintendo Wii Remote bluetooth device.
 
@@ -897,6 +975,8 @@ config HID_WIIMOTE_EXT
 	here if you want to use the Nintendo Motion+, Nunchuck or Classic
 	extension controllers with your Wii Remote.
 =======
+=======
+>>>>>>> v3.18
 	Support for Nintendo Wii and Wii U Bluetooth peripherals. Supported
 	devices are the Wii Remote and its extension devices, but also devices
 	based on the Wii Remote like the Wii U Pro Controller or the
@@ -922,6 +1002,9 @@ config HID_XINMO
 	Support for Xin-Mo devices that are not fully compliant with the HID
 	standard. Currently only supports the Xin-Mo Dual Arcade. Say Y here
 	if you have a Xin-Mo Dual Arcade controller.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config HID_ZEROPLUS
@@ -947,7 +1030,11 @@ config HID_ZYDACRON
 config HID_SENSOR_HUB
 	tristate "HID Sensors framework support"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on HID
+=======
+	depends on HID && HAS_IOMEM
+>>>>>>> v3.18
 =======
 	depends on HID && HAS_IOMEM
 >>>>>>> v3.18

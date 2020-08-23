@@ -13,8 +13,12 @@ menu "Google Firmware Drivers"
 config GOOGLE_SMI
 	tristate "SMI interface for Google platforms"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ACPI && DMI
 	select EFI
+=======
+	depends on ACPI && DMI && EFI
+>>>>>>> v3.18
 =======
 	depends on ACPI && DMI && EFI
 >>>>>>> v3.18

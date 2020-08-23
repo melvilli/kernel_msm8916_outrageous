@@ -18,6 +18,10 @@
 #include <linux/pm.h>
 #include <linux/i2c.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/regmap.h>
+>>>>>>> v3.18
 =======
 #include <linux/regmap.h>
 >>>>>>> v3.18
@@ -31,6 +35,7 @@
 
 #include "wm8974.h"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static const u16 wm8974_reg[WM8974_CACHEREGNUM] = {
 	0x0000, 0x0000, 0x0000, 0x0000,
@@ -49,6 +54,8 @@ static const u16 wm8974_reg[WM8974_CACHEREGNUM] = {
 	0x0000, 0x0000, 0x0039, 0x0000,
 	0x0000,
 =======
+=======
+>>>>>>> v3.18
 static const struct reg_default wm8974_reg_defaults[] = {
 	{  0, 0x0000 }, {  1, 0x0000 }, {  2, 0x0000 }, {  3, 0x0000 },
 	{  4, 0x0050 }, {  5, 0x0000 }, {  6, 0x0140 }, {  7, 0x0000 },
@@ -65,6 +72,9 @@ static const struct reg_default wm8974_reg_defaults[] = {
 	{ 48, 0x0000 }, { 49, 0x0002 }, { 50, 0x0000 }, { 51, 0x0000 },
 	{ 52, 0x0000 }, { 53, 0x0000 }, { 54, 0x0039 }, { 55, 0x0000 },
 	{ 56, 0x0000 },
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -107,8 +117,13 @@ static const struct soc_enum wm8974_enum[] = {
 static const char *wm8974_auxmode_text[] = { "Buffer", "Mixer" };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static const struct soc_enum wm8974_auxmode =
 	SOC_ENUM_SINGLE(WM8974_INPUT,  3, 2, wm8974_auxmode_text);
+=======
+static SOC_ENUM_SINGLE_DECL(wm8974_auxmode,
+			    WM8974_INPUT,  3, wm8974_auxmode_text);
+>>>>>>> v3.18
 =======
 static SOC_ENUM_SINGLE_DECL(wm8974_auxmode,
 			    WM8974_INPUT,  3, wm8974_auxmode_text);
@@ -473,6 +488,7 @@ static int wm8974_pcm_hw_params(struct snd_pcm_substream *substream,
 
 	/* bit size */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	switch (params_format(params)) {
 	case SNDRV_PCM_FORMAT_S16_LE:
 		break;
@@ -484,6 +500,8 @@ static int wm8974_pcm_hw_params(struct snd_pcm_substream *substream,
 		break;
 	case SNDRV_PCM_FORMAT_S32_LE:
 =======
+=======
+>>>>>>> v3.18
 	switch (params_width(params)) {
 	case 16:
 		break;
@@ -494,6 +512,9 @@ static int wm8974_pcm_hw_params(struct snd_pcm_substream *substream,
 		iface |= 0x0040;
 		break;
 	case 32:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		iface |= 0x0060;
 		break;
@@ -556,7 +577,11 @@ static int wm8974_set_bias_level(struct snd_soc_codec *codec,
 
 		if (codec->dapm.bias_level == SND_SOC_BIAS_OFF) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			snd_soc_cache_sync(codec);
+=======
+			regcache_sync(dev_get_regmap(codec->dev, NULL));
+>>>>>>> v3.18
 =======
 			regcache_sync(dev_get_regmap(codec->dev, NULL));
 >>>>>>> v3.18
@@ -625,7 +650,10 @@ static int wm8974_resume(struct snd_soc_codec *codec)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static const struct regmap_config wm8974_regmap = {
 	.reg_bits = 7,
 	.val_bits = 9,
@@ -635,11 +663,15 @@ static const struct regmap_config wm8974_regmap = {
 	.num_reg_defaults = ARRAY_SIZE(wm8974_reg_defaults),
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int wm8974_probe(struct snd_soc_codec *codec)
 {
 	int ret = 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ret = snd_soc_codec_set_cache_io(codec, 7, 9, SND_SOC_I2C);
 	if (ret < 0) {
@@ -647,6 +679,8 @@ static int wm8974_probe(struct snd_soc_codec *codec)
 		return ret;
 	}
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	ret = wm8974_reset(codec);
@@ -674,9 +708,12 @@ static struct snd_soc_codec_driver soc_codec_dev_wm8974 = {
 	.resume =	wm8974_resume,
 	.set_bias_level = wm8974_set_bias_level,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.reg_cache_size = ARRAY_SIZE(wm8974_reg),
 	.reg_word_size = sizeof(u16),
 	.reg_cache_default = wm8974_reg,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -692,9 +729,12 @@ static int wm8974_i2c_probe(struct i2c_client *i2c,
 			    const struct i2c_device_id *id)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 =======
+=======
+>>>>>>> v3.18
 	struct regmap *regmap;
 	int ret;
 
@@ -702,6 +742,9 @@ static int wm8974_i2c_probe(struct i2c_client *i2c,
 	if (IS_ERR(regmap))
 		return PTR_ERR(regmap);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = snd_soc_register_codec(&i2c->dev,
 			&soc_codec_dev_wm8974, &wm8974_dai, 1);

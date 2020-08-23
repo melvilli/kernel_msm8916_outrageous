@@ -23,7 +23,10 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -37,7 +40,12 @@
 struct mdio_gpio_info {
 	struct mdiobb_ctrl ctrl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int mdc, mdio;
+=======
+	int mdc, mdio, mdo;
+	int mdc_active_low, mdio_active_low, mdo_active_low;
+>>>>>>> v3.18
 =======
 	int mdc, mdio, mdo;
 	int mdc_active_low, mdio_active_low, mdo_active_low;
@@ -49,6 +57,10 @@ static void *mdio_gpio_of_get_data(struct platform_device *pdev)
 	struct device_node *np = pdev->dev.of_node;
 	struct mdio_gpio_platform_data *pdata;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	enum of_gpio_flags flags;
+>>>>>>> v3.18
 =======
 	enum of_gpio_flags flags;
 >>>>>>> v3.18
@@ -59,7 +71,11 @@ static void *mdio_gpio_of_get_data(struct platform_device *pdev)
 		return NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ret = of_get_gpio(np, 0);
+=======
+	ret = of_get_gpio_flags(np, 0, &flags);
+>>>>>>> v3.18
 =======
 	ret = of_get_gpio_flags(np, 0, &flags);
 >>>>>>> v3.18
@@ -68,12 +84,15 @@ static void *mdio_gpio_of_get_data(struct platform_device *pdev)
 
 	pdata->mdc = ret;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	ret = of_get_gpio(np, 1);
 	if (ret < 0)
 		return NULL;
 	pdata->mdio = ret;
 =======
+=======
+>>>>>>> v3.18
 	pdata->mdc_active_low = flags & OF_GPIO_ACTIVE_LOW;
 
 	ret = of_get_gpio_flags(np, 1, &flags);
@@ -87,6 +106,9 @@ static void *mdio_gpio_of_get_data(struct platform_device *pdev)
 		pdata->mdo = ret;
 		pdata->mdo_active_low = flags & OF_GPIO_ACTIVE_LOW;
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return pdata;
@@ -98,9 +120,12 @@ static void mdio_dir(struct mdiobb_ctrl *ctrl, int dir)
 		container_of(ctrl, struct mdio_gpio_info, ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (dir)
 		gpio_direction_output(bitbang->mdio, 1);
 =======
+=======
+>>>>>>> v3.18
 	if (bitbang->mdo) {
 		/* Separate output pin. Always set its value to high
 		 * when changing direction. If direction is input,
@@ -114,6 +139,9 @@ static void mdio_dir(struct mdiobb_ctrl *ctrl, int dir)
 	if (dir)
 		gpio_direction_output(bitbang->mdio,
 				      1 ^ bitbang->mdio_active_low);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		gpio_direction_input(bitbang->mdio);
@@ -125,7 +153,11 @@ static int mdio_get(struct mdiobb_ctrl *ctrl)
 		container_of(ctrl, struct mdio_gpio_info, ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return gpio_get_value(bitbang->mdio);
+=======
+	return gpio_get_value(bitbang->mdio) ^ bitbang->mdio_active_low;
+>>>>>>> v3.18
 =======
 	return gpio_get_value(bitbang->mdio) ^ bitbang->mdio_active_low;
 >>>>>>> v3.18
@@ -137,12 +169,18 @@ static void mdio_set(struct mdiobb_ctrl *ctrl, int what)
 		container_of(ctrl, struct mdio_gpio_info, ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_set_value(bitbang->mdio, what);
 =======
+=======
+>>>>>>> v3.18
 	if (bitbang->mdo)
 		gpio_set_value(bitbang->mdo, what ^ bitbang->mdo_active_low);
 	else
 		gpio_set_value(bitbang->mdio, what ^ bitbang->mdio_active_low);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -152,7 +190,11 @@ static void mdc_set(struct mdiobb_ctrl *ctrl, int what)
 		container_of(ctrl, struct mdio_gpio_info, ctrl);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_set_value(bitbang->mdc, what);
+=======
+	gpio_set_value(bitbang->mdc, what ^ bitbang->mdc_active_low);
+>>>>>>> v3.18
 =======
 	gpio_set_value(bitbang->mdc, what ^ bitbang->mdc_active_low);
 >>>>>>> v3.18
@@ -175,7 +217,11 @@ static struct mii_bus *mdio_gpio_bus_init(struct device *dev,
 	int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bitbang = kzalloc(sizeof(*bitbang), GFP_KERNEL);
+=======
+	bitbang = devm_kzalloc(dev, sizeof(*bitbang), GFP_KERNEL);
+>>>>>>> v3.18
 =======
 	bitbang = devm_kzalloc(dev, sizeof(*bitbang), GFP_KERNEL);
 >>>>>>> v3.18
@@ -186,12 +232,15 @@ static struct mii_bus *mdio_gpio_bus_init(struct device *dev,
 	bitbang->ctrl.reset = pdata->reset;
 	bitbang->mdc = pdata->mdc;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bitbang->mdio = pdata->mdio;
 
 	new_bus = alloc_mdio_bitbang(&bitbang->ctrl);
 	if (!new_bus)
 		goto out_free_bitbang;
 =======
+=======
+>>>>>>> v3.18
 	bitbang->mdc_active_low = pdata->mdc_active_low;
 	bitbang->mdio = pdata->mdio;
 	bitbang->mdio_active_low = pdata->mdio_active_low;
@@ -201,6 +250,9 @@ static struct mii_bus *mdio_gpio_bus_init(struct device *dev,
 	new_bus = alloc_mdio_bitbang(&bitbang->ctrl);
 	if (!new_bus)
 		goto out;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	new_bus->name = "GPIO Bitbanged MDIO",
@@ -219,12 +271,15 @@ static struct mii_bus *mdio_gpio_bus_init(struct device *dev,
 	snprintf(new_bus->id, MII_BUS_ID_SIZE, "gpio-%x", bus_id);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (gpio_request(bitbang->mdc, "mdc"))
 		goto out_free_bus;
 
 	if (gpio_request(bitbang->mdio, "mdio"))
 		goto out_free_mdc;
 =======
+=======
+>>>>>>> v3.18
 	if (devm_gpio_request(dev, bitbang->mdc, "mdc"))
 		goto out_free_bus;
 
@@ -237,6 +292,9 @@ static struct mii_bus *mdio_gpio_bus_init(struct device *dev,
 		gpio_direction_output(bitbang->mdo, 1);
 		gpio_direction_input(bitbang->mdio);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	gpio_direction_output(bitbang->mdc, 0);
@@ -246,12 +304,17 @@ static struct mii_bus *mdio_gpio_bus_init(struct device *dev,
 	return new_bus;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 out_free_mdc:
 	gpio_free(bitbang->mdc);
 out_free_bus:
 	free_mdio_bitbang(new_bus);
 out_free_bitbang:
 	kfree(bitbang);
+=======
+out_free_bus:
+	free_mdio_bitbang(new_bus);
+>>>>>>> v3.18
 =======
 out_free_bus:
 	free_mdio_bitbang(new_bus);
@@ -264,6 +327,7 @@ static void mdio_gpio_bus_deinit(struct device *dev)
 {
 	struct mii_bus *bus = dev_get_drvdata(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct mdio_gpio_info *bitbang = bus->priv;
 
 	dev_set_drvdata(dev, NULL);
@@ -271,6 +335,10 @@ static void mdio_gpio_bus_deinit(struct device *dev)
 	gpio_free(bitbang->mdc);
 	free_mdio_bitbang(bus);
 	kfree(bitbang);
+=======
+
+	free_mdio_bitbang(bus);
+>>>>>>> v3.18
 =======
 
 	free_mdio_bitbang(bus);
@@ -295,15 +363,21 @@ static int mdio_gpio_probe(struct platform_device *pdev)
 		pdata = mdio_gpio_of_get_data(pdev);
 		bus_id = of_alias_get_id(pdev->dev.of_node, "mdio-gpio");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		pdata = pdev->dev.platform_data;
 =======
+=======
+>>>>>>> v3.18
 		if (bus_id < 0) {
 			dev_warn(&pdev->dev, "failed to get alias id\n");
 			bus_id = 0;
 		}
 	} else {
 		pdata = dev_get_platdata(&pdev->dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		bus_id = pdev->id;
 	}

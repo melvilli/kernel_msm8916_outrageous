@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_MXC
 	bool "Freescale i.MX family" if ARCH_MULTI_V4_V5 || ARCH_MULTI_V6_V7
 	select ARCH_REQUIRE_GPIOLIB
@@ -28,6 +29,8 @@ config MXC_IRQ_PRIOR
 	  requirements for timing.
 	  Say N here, unless you have a specialized requirement.
 =======
+=======
+>>>>>>> v3.18
 menuconfig ARCH_MXC
 	bool "Freescale i.MX family" if ARCH_MULTI_V4_V5 || ARCH_MULTI_V6_V7
 	select ARCH_REQUIRE_GPIOLIB
@@ -42,6 +45,9 @@ menuconfig ARCH_MXC
 	  Support for Freescale MXC/iMX-based family of processors
 
 if ARCH_MXC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MXC_TZIC
@@ -74,9 +80,12 @@ config MXC_USE_EPIT
 	  may be in use for other purposes.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MXC_ULPI
 	bool
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config ARCH_HAS_RNGA
@@ -102,6 +111,7 @@ config ARCH_MXC_IOMUX_V3
 	bool
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config ARCH_MX1
 	bool
 
@@ -123,6 +133,8 @@ config SOC_IMX21
 	bool
 	select COMMON_CLK
 =======
+=======
+>>>>>>> v3.18
 config SOC_IMX1
 	bool
 	select CPU_ARM920T
@@ -132,6 +144,9 @@ config SOC_IMX1
 
 config SOC_IMX21
 	bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select CPU_ARM926T
 	select IMX_HAVE_IOMUX_V1
@@ -139,6 +154,7 @@ config SOC_IMX21
 
 config SOC_IMX25
 	bool
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select ARCH_MX25
 	select ARCH_MXC_IOMUX_V3
@@ -160,6 +176,8 @@ config SOC_IMX31
 	bool
 	select COMMON_CLK
 =======
+=======
+>>>>>>> v3.18
 	select ARCH_MXC_IOMUX_V3
 	select CPU_ARM926T
 	select MXC_AVIC
@@ -174,6 +192,9 @@ config SOC_IMX27
 
 config SOC_IMX31
 	bool
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select CPU_V6
 	select IMX_HAVE_PLATFORM_MXC_RNGA
@@ -183,6 +204,7 @@ config SOC_IMX31
 config SOC_IMX35
 	bool
 	select ARCH_MXC_IOMUX_V3
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select COMMON_CLK
 	select CPU_V6K
@@ -221,6 +243,8 @@ config ARCH_MX1ADS
 	help
 	  Say Y here if you are using Motorola MX1ADS/MXLADS boards
 =======
+=======
+>>>>>>> v3.18
 	select HAVE_EPIT
 	select MXC_AVIC
 	select PINCTRL_IMX35
@@ -229,12 +253,19 @@ config ARCH_MX1ADS
 if ARCH_MULTI_V4T
 
 comment "MX1 platforms:"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 config MACH_SCB9328
 	bool "Synertronixx scb9328"
 	select IMX_HAVE_PLATFORM_IMX_UART
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	select SOC_IMX1
+>>>>>>> v3.18
 =======
 	select SOC_IMX1
 >>>>>>> v3.18
@@ -250,7 +281,10 @@ config MACH_APF9328
 	  Say Yes here if you are using the Armadeus APF9328 development board
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MACH_IMX1_DT
 	bool "Support i.MX1 platforms from device tree"
 	select SOC_IMX1
@@ -258,6 +292,9 @@ config MACH_IMX1_DT
 	  Include support for Freescale i.MX1 based platforms
 	  using the device tree for discovery.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 
@@ -306,7 +343,11 @@ config MACH_EUKREA_CPUIMX25SD
 	select IMX_HAVE_PLATFORM_MXC_NAND
 	select IMX_HAVE_PLATFORM_SDHCI_ESDHC_IMX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -351,6 +392,7 @@ config MACH_MX27ADS
 	  Include support for MX27ADS platform. This includes specific
 	  configurations for the board and its peripherals.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MACH_PCM038
 	bool "Phytec phyCORE-i.MX27 CPU module (pcm038)"
@@ -434,6 +476,8 @@ endchoice
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 config MACH_MX27_3DS
 	bool "MX27PDK platform"
 	select IMX_HAVE_PLATFORM_FSL_USB2_UDC
@@ -449,7 +493,11 @@ config MACH_MX27_3DS
 	select IMX_HAVE_PLATFORM_SPI_IMX
 	select MXC_DEBUG_BOARD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -476,6 +524,7 @@ config MACH_IMX27_VISSTRIM_M10
 	  peripherals.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config MACH_IMX27LITE
 	bool "LogicPD MX27 LITEKIT platform"
 	select IMX_HAVE_PLATFORM_IMX_SSI
@@ -485,6 +534,8 @@ config MACH_IMX27LITE
 	  Include support for MX27 LITEKIT platform. This includes specific
 	  configurations for the board and its peripherals.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_PCA100
@@ -501,7 +552,11 @@ config MACH_PCA100
 	select IMX_HAVE_PLATFORM_MXC_W1
 	select IMX_HAVE_PLATFORM_SPI_IMX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -510,6 +565,7 @@ config MACH_PCA100
 	  Include support for phyCARD-s (aka pca100) platform. This
 	  includes specific configurations for the module and its peripherals.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config MACH_MXT_TD60
 	bool "Maxtrack i-MXT TD60"
@@ -532,6 +588,8 @@ config MACH_IMX27IPCAM
 	  Include support for IMX27 IPCAM platform. This includes specific
 	  configurations for the board and its peripherals.
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 config MACH_IMX27_DT
@@ -575,7 +633,11 @@ config MACH_MX31LILLY
 	select IMX_HAVE_PLATFORM_MXC_MMC
 	select IMX_HAVE_PLATFORM_SPI_IMX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -595,7 +657,11 @@ config MACH_MX31LITE
 	select IMX_HAVE_PLATFORM_SPI_IMX
 	select LEDS_GPIO_REGISTER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -616,7 +682,11 @@ config MACH_PCM037
 	select IMX_HAVE_PLATFORM_MXC_NAND
 	select IMX_HAVE_PLATFORM_MXC_W1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -650,7 +720,11 @@ config MACH_MX31_3DS
 	select IMX_HAVE_PLATFORM_SPI_IMX
 	select MXC_DEBUG_BOARD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -681,7 +755,11 @@ config MACH_MX31MOBOARD
 	select IMX_HAVE_PLATFORM_SPI_IMX
 	select LEDS_GPIO_REGISTER
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -709,7 +787,11 @@ config MACH_ARMADILLO5X0
 	select IMX_HAVE_PLATFORM_MXC_MMC
 	select IMX_HAVE_PLATFORM_MXC_NAND
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -745,7 +827,10 @@ config MACH_IMX31_DT
 comment "MX35 platforms:"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config MACH_IMX35_DT
 	bool "Support i.MX35 platforms from device tree"
 	select SOC_IMX35
@@ -753,6 +838,9 @@ config MACH_IMX35_DT
 	  Include support for Freescale i.MX35 based platforms
 	  using the device tree for discovery.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 config MACH_PCM043
 	bool "Support Phytec pcm043 (i.MX35) platforms"
@@ -767,7 +855,11 @@ config MACH_PCM043
 	select IMX_HAVE_PLATFORM_MXC_NAND
 	select IMX_HAVE_PLATFORM_SDHCI_ESDHC_IMX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -805,7 +897,11 @@ config MACH_EUKREA_CPUIMX35SD
 	select IMX_HAVE_PLATFORM_MXC_NAND
 	select IMX_HAVE_PLATFORM_SDHCI_ESDHC_IMX
 <<<<<<< HEAD
+<<<<<<< HEAD
 	select MXC_ULPI if USB_ULPI
+=======
+	select USB_ULPI_VIEWPORT if USB_ULPI
+>>>>>>> v3.18
 =======
 	select USB_ULPI_VIEWPORT if USB_ULPI
 >>>>>>> v3.18
@@ -852,6 +948,7 @@ endif
 
 if ARCH_MULTI_V7
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 comment "i.MX51 machines:"
 
@@ -917,6 +1014,8 @@ config	SOC_IMX53
 	select IMX_HAVE_PLATFORM_IMX2_WDT
 	select PINCTRL
 =======
+=======
+>>>>>>> v3.18
 comment "Device tree only"
 
 config SOC_IMX5
@@ -941,6 +1040,9 @@ config SOC_IMX51
 
 config	SOC_IMX53
 	bool "i.MX53 support"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select PINCTRL_IMX53
 	select SOC_IMX5
@@ -948,6 +1050,7 @@ config	SOC_IMX53
 	help
 	  This enables support for Freescale i.MX53 processor.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 config SOC_IMX6Q
 	bool "i.MX6 Quad/DualLite support"
@@ -963,16 +1066,22 @@ config SOC_IMX6Q
 	select HAVE_ARM_TWD if LOCAL_TIMERS
 	select HAVE_CAN_FLEXCAN if CAN
 =======
+=======
+>>>>>>> v3.18
 config SOC_IMX6
 	bool
 	select ARM_ERRATA_754322
 	select ARM_ERRATA_775420
 	select ARM_GIC
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	select HAVE_IMX_ANATOP
 	select HAVE_IMX_GPC
 	select HAVE_IMX_MMDC
 	select HAVE_IMX_SRC
+<<<<<<< HEAD
 <<<<<<< HEAD
 	select HAVE_SMP
 	select MFD_SYSCON
@@ -983,6 +1092,8 @@ config SOC_IMX6
 	select PL310_ERRATA_769419 if CACHE_PL310
 	select PM_OPP if PM
 =======
+=======
+>>>>>>> v3.18
 	select MFD_SYSCON
 	select PL310_ERRATA_769419 if CACHE_L2X0
 
@@ -994,13 +1105,19 @@ config SOC_IMX6Q
 	select PCI_DOMAINS if PCI
 	select PINCTRL_IMX6Q
 	select SOC_IMX6
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	help
 	  This enables support for Freescale i.MX6 Quad processor.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 config SOC_IMX6SL
 	bool "i.MX6 SoloLite support"
 	select PINCTRL_IMX6SL
@@ -1027,13 +1144,20 @@ config SOC_VF610
 	help
 	  This enable support for Freescale Vybrid VF610 processor.
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 endif
 
 source "arch/arm/mach-imx/devices/Kconfig"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 endmenu
+=======
+endif
+>>>>>>> v3.18
 =======
 endif
 >>>>>>> v3.18

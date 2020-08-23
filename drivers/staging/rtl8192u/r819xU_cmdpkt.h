@@ -2,6 +2,7 @@
 #define R819XUSB_CMDPKT_H
 /* Different command packet have dedicated message length and definition. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define		CMPK_RX_TX_FB_SIZE					sizeof(cmpk_txfb_t)		//20
 #define		CMPK_TX_SET_CONFIG_SIZE				sizeof(cmpk_set_cfg_t)	//16
 #define		CMPK_BOTH_QUERY_CONFIG_SIZE			sizeof(cmpk_set_cfg_t)	//16
@@ -14,6 +15,8 @@
 #define ISR_TxBcnErr				BIT26			// Transmit Beacon Error
 #define ISR_BcnTimerIntr			BIT13			// Beacon Timer Interrupt
 =======
+=======
+>>>>>>> v3.18
 #define		CMPK_RX_TX_FB_SIZE		sizeof(cmpk_txfb_t)	/* 20 */
 #define		CMPK_TX_SET_CONFIG_SIZE		sizeof(cmpk_set_cfg_t)	/* 16 */
 #define		CMPK_BOTH_QUERY_CONFIG_SIZE	sizeof(cmpk_set_cfg_t)	/* 16 */
@@ -25,6 +28,9 @@
 #define ISR_TxBcnOk		BIT27		/* Transmit Beacon OK */
 #define ISR_TxBcnErr		BIT26		/* Transmit Beacon Error */
 #define ISR_BcnTimerIntr	BIT13		/* Beacon Timer Interrupt */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -34,6 +40,7 @@
 /* Define different command packet structure. */
 /* 1. RX side: TX feedback packet. */
 typedef struct tag_cmd_pkt_tx_feedback {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// DWORD 0
 	u8	element_id;			/* Command packet type. */
@@ -72,6 +79,8 @@ typedef struct tag_cmd_pkt_tx_feedback {
 /* 2. RX side: Interrupt status packet. It includes Beacon State,
 	  Beacon Timer Interrupt and other useful informations in MAC ISR Reg. */
 =======
+=======
+>>>>>>> v3.18
 	/* DWORD 0 */
 	u8	element_id;			/* Command packet type. */
 	u8	length;				/* Command packet length. */
@@ -108,14 +117,22 @@ typedef struct tag_cmd_pkt_tx_feedback {
 
 /* 2. RX side: Interrupt status packet. It includes Beacon State,
  * Beacon Timer Interrupt and other useful informations in MAC ISR Reg. */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 typedef struct tag_cmd_pkt_interrupt_status {
 	u8	element_id;			/* Command packet type. */
 	u8	length;				/* Command packet length. */
 	u16	reserve;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32	interrupt_status;				/* Interrupt Status. */
 }cmpk_intr_sta_t;
+=======
+	u32	interrupt_status;		/* Interrupt Status. */
+} cmpk_intr_sta_t;
+>>>>>>> v3.18
 =======
 	u32	interrupt_status;		/* Interrupt Status. */
 } cmpk_intr_sta_t;
@@ -126,6 +143,7 @@ typedef struct tag_cmd_pkt_interrupt_status {
 typedef struct tag_cmd_pkt_set_configuration {
 	u8	element_id;			/* Command packet type. */
 	u8	length;				/* Command packet length. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u16	reserve1;			/* */
 	u8	cfg_reserve1:3;
@@ -140,6 +158,8 @@ typedef struct tag_cmd_pkt_set_configuration {
 	u32	mask;				/* */
 }cmpk_set_cfg_t;
 =======
+=======
+>>>>>>> v3.18
 	u16	reserve1;
 	/* Configuration info. */
 	u8	cfg_reserve1:3;
@@ -153,6 +173,9 @@ typedef struct tag_cmd_pkt_set_configuration {
 	u32	value;
 	u32	mask;
 } cmpk_set_cfg_t;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* 4. Both side : TX/RX query configuraton packet. The query structure is the
@@ -160,6 +183,7 @@ typedef struct tag_cmd_pkt_set_configuration {
 #define		cmpk_query_cfg_t	cmpk_set_cfg_t
 
 /* 5. Multi packet feedback status. */
+<<<<<<< HEAD
 <<<<<<< HEAD
 typedef struct tag_tx_stats_feedback { // PJ quick rxcmd 09042007
 	// For endian transfer --> Driver will not the same as firmware structure.
@@ -190,6 +214,8 @@ typedef struct tag_tx_stats_feedback { // PJ quick rxcmd 09042007
 
 	// DW 6-8
 =======
+=======
+>>>>>>> v3.18
 typedef struct tag_tx_stats_feedback {
 	/* For endian transfer --> Driver will not the same as
 	   firmware structure. */
@@ -219,11 +245,15 @@ typedef struct tag_tx_stats_feedback {
 	u16	txucfail;
 
 	/* DW 6-8 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	txmclength;
 	u32	txbclength;
 	u32	txuclength;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// DW 9
 	u16	reserve3_23;
@@ -294,6 +324,8 @@ typedef enum tag_command_packet_directories
 
 typedef enum _rt_status{
 =======
+=======
+>>>>>>> v3.18
 	/* DW 9 */
 	u16	reserve3_23;
 	u8	reserve3_1;
@@ -350,11 +382,15 @@ typedef enum tag_command_packet_directories {
 } cmpk_element_e;
 
 typedef enum _rt_status {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	RT_STATUS_SUCCESS,
 	RT_STATUS_FAILURE,
 	RT_STATUS_PENDING,
 	RT_STATUS_RESOURCE
+<<<<<<< HEAD
 <<<<<<< HEAD
 }rt_status,*prt_status;
 
@@ -363,12 +399,17 @@ extern rt_status cmpk_message_handle_tx(struct net_device *dev, u8* codevirtuala
 extern  u32 cmpk_message_handle_rx(struct net_device *dev, struct ieee80211_rx_stats * pstats);
 extern rt_status SendTxCommandPacket( struct net_device *dev, void* pData, u32 DataLen);
 =======
+=======
+>>>>>>> v3.18
 } rt_status, *prt_status;
 
 extern u32 cmpk_message_handle_rx(struct net_device *dev,
 		struct ieee80211_rx_stats *pstats);
 extern rt_status SendTxCommandPacket(struct net_device *dev,
 		void *pData, u32 DataLen);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 

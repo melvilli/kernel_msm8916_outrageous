@@ -27,6 +27,10 @@
 #include "qxl_object.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <drm/drm_crtc_helper.h>
+>>>>>>> v3.18
 =======
 #include <drm/drm_crtc_helper.h>
 >>>>>>> v3.18
@@ -77,7 +81,10 @@ static bool qxl_check_device(struct qxl_device *qdev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static void setup_hw_slot(struct qxl_device *qdev, int slot_index,
 			  struct qxl_memslot *slot)
 {
@@ -86,6 +93,9 @@ static void setup_hw_slot(struct qxl_device *qdev, int slot_index,
 	qxl_io_memslot_add(qdev, slot_index);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static uint8_t setup_slot(struct qxl_device *qdev, uint8_t slot_index_offset,
 	unsigned long start_phys_addr, unsigned long end_phys_addr)
@@ -94,7 +104,10 @@ static uint8_t setup_slot(struct qxl_device *qdev, uint8_t slot_index_offset,
 	struct qxl_memslot *slot;
 	uint8_t slot_index;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qxl_ram_header *ram_header = qdev->ram_header;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -103,9 +116,15 @@ static uint8_t setup_slot(struct qxl_device *qdev, uint8_t slot_index_offset,
 	slot->start_phys_addr = start_phys_addr;
 	slot->end_phys_addr = end_phys_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ram_header->mem_slot.mem_start = slot->start_phys_addr;
 	ram_header->mem_slot.mem_end = slot->end_phys_addr;
 	qxl_io_memslot_add(qdev, slot_index);
+=======
+
+	setup_hw_slot(qdev, slot_index, slot);
+
+>>>>>>> v3.18
 =======
 
 	setup_hw_slot(qdev, slot_index, slot);
@@ -120,13 +139,19 @@ static uint8_t setup_slot(struct qxl_device *qdev, uint8_t slot_index_offset,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 void qxl_reinit_memslots(struct qxl_device *qdev)
 {
 	setup_hw_slot(qdev, qdev->main_mem_slot, &qdev->mem_slots[qdev->main_mem_slot]);
 	setup_hw_slot(qdev, qdev->surfaces_mem_slot, &qdev->mem_slots[qdev->surfaces_mem_slot]);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void qxl_gc_work(struct work_struct *work)
 {
@@ -135,7 +160,11 @@ static void qxl_gc_work(struct work_struct *work)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int qxl_device_init(struct qxl_device *qdev,
+=======
+static int qxl_device_init(struct qxl_device *qdev,
+>>>>>>> v3.18
 =======
 static int qxl_device_init(struct qxl_device *qdev,
 >>>>>>> v3.18
@@ -144,7 +173,11 @@ static int qxl_device_init(struct qxl_device *qdev,
 		    unsigned long flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int r;
+=======
+	int r, sb;
+>>>>>>> v3.18
 =======
 	int r, sb;
 >>>>>>> v3.18
@@ -164,6 +197,7 @@ static int qxl_device_init(struct qxl_device *qdev,
 	qdev->rom_size = pci_resource_len(pdev, 2);
 	qdev->vram_base = pci_resource_start(pdev, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qdev->surfaceram_base = pci_resource_start(pdev, 1);
 	qdev->surfaceram_size = pci_resource_len(pdev, 1);
 	qdev->io_base = pci_resource_start(pdev, 3);
@@ -172,6 +206,8 @@ static int qxl_device_init(struct qxl_device *qdev,
 	qdev->surface_mapping = io_mapping_create_wc(qdev->surfaceram_base, qdev->surfaceram_size);
 	DRM_DEBUG_KMS("qxl: vram %llx-%llx(%dM %dk), surface %llx-%llx(%dM %dk)\n",
 =======
+=======
+>>>>>>> v3.18
 	qdev->io_base = pci_resource_start(pdev, 3);
 
 	qdev->vram_mapping = io_mapping_create_wc(qdev->vram_base, pci_resource_len(pdev, 0));
@@ -196,6 +232,9 @@ static int qxl_device_init(struct qxl_device *qdev,
 	}
 
 	DRM_DEBUG_KMS("qxl: vram %llx-%llx(%dM %dk), surface %llx-%llx(%dM %dk, %s)\n",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		 (unsigned long long)qdev->vram_base,
 		 (unsigned long long)pci_resource_end(pdev, 0),
@@ -203,14 +242,20 @@ static int qxl_device_init(struct qxl_device *qdev,
 		 (int)pci_resource_len(pdev, 0) / 1024,
 		 (unsigned long long)qdev->surfaceram_base,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 (unsigned long long)pci_resource_end(pdev, 1),
 		 (int)qdev->surfaceram_size / 1024 / 1024,
 		 (int)qdev->surfaceram_size / 1024);
 =======
+=======
+>>>>>>> v3.18
 		 (unsigned long long)pci_resource_end(pdev, sb),
 		 (int)qdev->surfaceram_size / 1024 / 1024,
 		 (int)qdev->surfaceram_size / 1024,
 		 (sb == 4) ? "64bit" : "32bit");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	qdev->rom = ioremap(qdev->rom_base, qdev->rom_size);
@@ -267,6 +312,10 @@ static int qxl_device_init(struct qxl_device *qdev,
 	idr_init(&qdev->release_idr);
 	spin_lock_init(&qdev->release_idr_lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	spin_lock_init(&qdev->release_lock);
+>>>>>>> v3.18
 =======
 	spin_lock_init(&qdev->release_lock);
 >>>>>>> v3.18
@@ -296,10 +345,13 @@ static int qxl_device_init(struct qxl_device *qdev,
 		(unsigned long)qdev->surfaceram_base,
 		(unsigned long)qdev->surfaceram_base + qdev->surfaceram_size);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_INFO("main mem slot %d [%lx,%x)\n",
 		qdev->main_mem_slot,
 		(unsigned long)qdev->vram_base, qdev->rom->ram_header_offset);
 =======
+=======
+>>>>>>> v3.18
 	DRM_INFO("main mem slot %d [%lx,%x]\n",
 		 qdev->main_mem_slot,
 		 (unsigned long)qdev->vram_base, qdev->rom->ram_header_offset);
@@ -307,6 +359,9 @@ static int qxl_device_init(struct qxl_device *qdev,
 		 qdev->surfaces_mem_slot,
 		 (unsigned long)qdev->surfaceram_base,
 		 (unsigned long)qdev->surfaceram_size);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 
@@ -351,6 +406,12 @@ int qxl_driver_unload(struct drm_device *dev)
 	if (qdev == NULL)
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+	drm_vblank_cleanup(dev);
+
+>>>>>>> v3.18
 =======
 
 	drm_vblank_cleanup(dev);
@@ -384,6 +445,7 @@ int qxl_driver_load(struct drm_device *dev, unsigned long flags)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	r = qxl_modeset_init(qdev);
 	if (r) {
 		qxl_driver_unload(dev);
@@ -392,6 +454,8 @@ int qxl_driver_load(struct drm_device *dev, unsigned long flags)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 	r = drm_vblank_init(dev, 1);
 	if (r)
 		goto unload;
@@ -406,6 +470,9 @@ int qxl_driver_load(struct drm_device *dev, unsigned long flags)
 unload:
 	qxl_driver_unload(dev);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	kfree(qdev);

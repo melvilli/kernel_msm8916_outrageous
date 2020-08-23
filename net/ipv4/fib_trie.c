@@ -763,12 +763,18 @@ static struct tnode *inflate(struct trie *t, struct tnode *tn)
 		if (IS_LEAF(node) || ((struct tnode *) node)->pos >
 		   tn->pos + tn->bits - 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (tkey_extract_bits(node->key,
 					      oldtnode->pos + oldtnode->bits,
 					      1) == 0)
 				put_child(tn, 2*i, node);
 			else
 				put_child(tn, 2*i+1, node);
+=======
+			put_child(tn,
+				tkey_extract_bits(node->key, oldtnode->pos, oldtnode->bits + 1),
+				node);
+>>>>>>> v3.18
 =======
 			put_child(tn,
 				tkey_extract_bits(node->key, oldtnode->pos, oldtnode->bits + 1),
@@ -950,7 +956,11 @@ static void insert_leaf_info(struct hlist_head *head, struct leaf_info *new)
 		}
 		if (last)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			hlist_add_after_rcu(&last->hlist, &new->hlist);
+=======
+			hlist_add_behind_rcu(&new->hlist, &last->hlist);
+>>>>>>> v3.18
 =======
 			hlist_add_behind_rcu(&new->hlist, &last->hlist);
 >>>>>>> v3.18
@@ -1131,12 +1141,17 @@ static struct list_head *fib_insert_node(struct trie *t, u32 key, int plen)
 		 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (tp)
 			pos = tp->pos+tp->bits;
 		else
 			pos = 0;
 
 		if (n) {
+=======
+		if (n) {
+			pos = tp ? tp->pos+tp->bits : 0;
+>>>>>>> v3.18
 =======
 		if (n) {
 			pos = tp ? tp->pos+tp->bits : 0;
@@ -2146,7 +2161,11 @@ static void trie_show_stats(struct seq_file *seq, struct trie_stat *stat)
 
 	pointers = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (i = 1; i <= max; i++)
+=======
+	for (i = 1; i < max; i++)
+>>>>>>> v3.18
 =======
 	for (i = 1; i < max; i++)
 >>>>>>> v3.18

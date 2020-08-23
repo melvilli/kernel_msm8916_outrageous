@@ -25,6 +25,11 @@
 #include <linux/slab.h>
 #include <linux/regulator/max1586.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of_device.h>
+#include <linux/regulator/of_regulator.h>
+>>>>>>> v3.18
 =======
 #include <linux/of_device.h>
 #include <linux/regulator/of_regulator.h>
@@ -52,8 +57,11 @@ struct max1586_data {
 	unsigned int v3_curr_sel;
 	unsigned int v6_curr_sel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	struct regulator_dev *rdev[0];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 };
@@ -168,6 +176,7 @@ static struct regulator_desc max1586_reg[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int max1586_pmic_probe(struct i2c_client *client,
 					const struct i2c_device_id *i2c_id)
 {
@@ -180,6 +189,8 @@ static int max1586_pmic_probe(struct i2c_client *client,
 	max1586 = devm_kzalloc(&client->dev, sizeof(struct max1586_data) +
 			sizeof(struct regulator_dev *) * (MAX1586_V6 + 1),
 =======
+=======
+>>>>>>> v3.18
 static int of_get_max1586_platform_data(struct device *dev,
 				 struct max1586_platform_data *pdata)
 {
@@ -263,6 +274,9 @@ static int max1586_pmic_probe(struct i2c_client *client,
 	}
 
 	max1586 = devm_kzalloc(&client->dev, sizeof(struct max1586_data),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			GFP_KERNEL);
 	if (!max1586)
@@ -281,8 +295,14 @@ static int max1586_pmic_probe(struct i2c_client *client,
 	max1586->v6_curr_sel = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rdev = max1586->rdev;
 	for (i = 0; i < pdata->num_subdevs && i <= MAX1586_V6; i++) {
+=======
+	for (i = 0; i < pdata->num_subdevs && i <= MAX1586_V6; i++) {
+		struct regulator_dev *rdev;
+
+>>>>>>> v3.18
 =======
 	for (i = 0; i < pdata->num_subdevs && i <= MAX1586_V6; i++) {
 		struct regulator_dev *rdev;
@@ -294,7 +314,11 @@ static int max1586_pmic_probe(struct i2c_client *client,
 		if (id < MAX1586_V3 || id > MAX1586_V6) {
 			dev_err(&client->dev, "invalid regulator id %d\n", id);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			goto err;
+=======
+			return -EINVAL;
+>>>>>>> v3.18
 =======
 			return -EINVAL;
 >>>>>>> v3.18
@@ -312,6 +336,7 @@ static int max1586_pmic_probe(struct i2c_client *client,
 		config.driver_data = max1586;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		rdev[i] = regulator_register(&max1586_reg[id], &config);
 		if (IS_ERR(rdev[i])) {
 			ret = PTR_ERR(rdev[i]);
@@ -319,12 +344,17 @@ static int max1586_pmic_probe(struct i2c_client *client,
 				max1586_reg[id].name);
 			goto err;
 =======
+=======
+>>>>>>> v3.18
 		rdev = devm_regulator_register(&client->dev,
 						  &max1586_reg[id], &config);
 		if (IS_ERR(rdev)) {
 			dev_err(&client->dev, "failed to register %s\n",
 				max1586_reg[id].name);
 			return PTR_ERR(rdev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -332,6 +362,7 @@ static int max1586_pmic_probe(struct i2c_client *client,
 	i2c_set_clientdata(client, max1586);
 	dev_info(&client->dev, "Maxim 1586 regulator driver loaded\n");
 	return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 err:
@@ -350,6 +381,8 @@ static int max1586_pmic_remove(struct i2c_client *client)
 	return 0;
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 }
 
 static const struct i2c_device_id max1586_id[] = {
@@ -361,15 +394,21 @@ MODULE_DEVICE_TABLE(i2c, max1586_id);
 static struct i2c_driver max1586_pmic_driver = {
 	.probe = max1586_pmic_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove = max1586_pmic_remove,
 	.driver		= {
 		.name	= "max1586",
 		.owner	= THIS_MODULE,
 =======
+=======
+>>>>>>> v3.18
 	.driver		= {
 		.name	= "max1586",
 		.owner	= THIS_MODULE,
 		.of_match_table = of_match_ptr(max1586_of_match),
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 	.id_table	= max1586_id,

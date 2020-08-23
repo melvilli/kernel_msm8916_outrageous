@@ -28,9 +28,12 @@
 #include "radeon.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CURSOR_WIDTH 64
 #define CURSOR_HEIGHT 64
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static void radeon_lock_cursor(struct drm_crtc *crtc, bool lock)
@@ -171,7 +174,12 @@ int radeon_crtc_cursor_set(struct drm_crtc *crtc,
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ((width > CURSOR_WIDTH) || (height > CURSOR_HEIGHT)) {
+=======
+	if ((width > radeon_crtc->max_cursor_width) ||
+	    (height > radeon_crtc->max_cursor_height)) {
+>>>>>>> v3.18
 =======
 	if ((width > radeon_crtc->max_cursor_width) ||
 	    (height > radeon_crtc->max_cursor_height)) {
@@ -242,17 +250,23 @@ int radeon_crtc_cursor_move(struct drm_crtc *crtc,
 
 	if (x < 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		xorigin = min(-x, CURSOR_WIDTH - 1);
 		x = 0;
 	}
 	if (y < 0) {
 		yorigin = min(-y, CURSOR_HEIGHT - 1);
 =======
+=======
+>>>>>>> v3.18
 		xorigin = min(-x, radeon_crtc->max_cursor_width - 1);
 		x = 0;
 	}
 	if (y < 0) {
 		yorigin = min(-y, radeon_crtc->max_cursor_height - 1);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		y = 0;
 	}

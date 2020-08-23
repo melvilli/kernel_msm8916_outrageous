@@ -1,7 +1,12 @@
 menuconfig SND_MXS_SOC
 	tristate "SoC Audio for Freescale MXS CPUs"
 <<<<<<< HEAD
+<<<<<<< HEAD
 	depends on ARCH_MXS
+=======
+	depends on ARCH_MXS || COMPILE_TEST
+	depends on COMMON_CLK
+>>>>>>> v3.18
 =======
 	depends on ARCH_MXS || COMPILE_TEST
 	depends on COMMON_CLK

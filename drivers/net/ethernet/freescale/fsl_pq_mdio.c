@@ -21,7 +21,10 @@
 #include <linux/errno.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/delay.h>
@@ -33,7 +36,13 @@
 
 #include <asm/io.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm/ucc.h>	/* for ucc_set_qe_mux_mii_mng() */
+=======
+#if IS_ENABLED(CONFIG_UCC_GETH)
+#include <asm/ucc.h>	/* for ucc_set_qe_mux_mii_mng() */
+#endif
+>>>>>>> v3.18
 =======
 #if IS_ENABLED(CONFIG_UCC_GETH)
 #include <asm/ucc.h>	/* for ucc_set_qe_mux_mii_mng() */
@@ -113,6 +122,7 @@ static int fsl_pq_mdio_write(struct mii_bus *bus, int mii_id, int regnum,
 	struct fsl_pq_mdio_priv *priv = bus->priv;
 	struct fsl_pq_mii __iomem *regs = priv->regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 status;
 
 	/* Set the PHY address and the register address we want to write */
@@ -127,6 +137,8 @@ static int fsl_pq_mdio_write(struct mii_bus *bus, int mii_id, int regnum,
 
 	return status ? 0 : -ETIMEDOUT;
 =======
+=======
+>>>>>>> v3.18
 	unsigned int timeout;
 
 	/* Set the PHY address and the register address we want to write */
@@ -143,6 +155,9 @@ static int fsl_pq_mdio_write(struct mii_bus *bus, int mii_id, int regnum,
 	}
 
 	return timeout ? 0 : -ETIMEDOUT;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -160,6 +175,7 @@ static int fsl_pq_mdio_read(struct mii_bus *bus, int mii_id, int regnum)
 {
 	struct fsl_pq_mdio_priv *priv = bus->priv;
 	struct fsl_pq_mii __iomem *regs = priv->regs;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	u32 status;
 	u16 value;
@@ -181,6 +197,8 @@ static int fsl_pq_mdio_read(struct mii_bus *bus, int mii_id, int regnum)
 	/* Grab the value of the register from miimstat */
 	value = in_be32(&regs->miimstat);
 =======
+=======
+>>>>>>> v3.18
 	unsigned int timeout;
 	u16 value;
 
@@ -204,6 +222,9 @@ static int fsl_pq_mdio_read(struct mii_bus *bus, int mii_id, int regnum)
 
 	/* Grab the value of the register from miimstat */
 	value = ioread32be(&regs->miimstat);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	dev_dbg(&bus->dev, "read %04x from address %x/%x\n", value, mii_id, regnum);
@@ -216,7 +237,11 @@ static int fsl_pq_mdio_reset(struct mii_bus *bus)
 	struct fsl_pq_mdio_priv *priv = bus->priv;
 	struct fsl_pq_mii __iomem *regs = priv->regs;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u32 status;
+=======
+	unsigned int timeout;
+>>>>>>> v3.18
 =======
 	unsigned int timeout;
 >>>>>>> v3.18
@@ -224,6 +249,7 @@ static int fsl_pq_mdio_reset(struct mii_bus *bus)
 	mutex_lock(&bus->mdio_lock);
 
 	/* Reset the management interface */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	out_be32(&regs->miimcfg, MIIMCFG_RESET);
 
@@ -238,6 +264,8 @@ static int fsl_pq_mdio_reset(struct mii_bus *bus)
 
 	if (!status) {
 =======
+=======
+>>>>>>> v3.18
 	iowrite32be(MIIMCFG_RESET, &regs->miimcfg);
 
 	/* Setup the MII Mgmt clock speed */
@@ -253,6 +281,9 @@ static int fsl_pq_mdio_reset(struct mii_bus *bus)
 	mutex_unlock(&bus->mdio_lock);
 
 	if (!timeout) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_err(&bus->dev, "timeout waiting for MII bus\n");
 		return -EBUSY;
@@ -486,7 +517,11 @@ static int fsl_pq_mdio_probe(struct platform_device *pdev)
 
 	new_bus->parent = &pdev->dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, new_bus);
+=======
+	platform_set_drvdata(pdev, new_bus);
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, new_bus);
 >>>>>>> v3.18
@@ -515,7 +550,11 @@ static int fsl_pq_mdio_probe(struct platform_device *pdev)
 			tbipa = data->get_tbipa(priv->map);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			out_be32(tbipa, be32_to_cpup(prop));
+=======
+			iowrite32be(be32_to_cpup(prop), tbipa);
+>>>>>>> v3.18
 =======
 			iowrite32be(be32_to_cpup(prop), tbipa);
 >>>>>>> v3.18
@@ -553,8 +592,11 @@ static int fsl_pq_mdio_remove(struct platform_device *pdev)
 	mdiobus_unregister(bus);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(device, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	iounmap(priv->map);

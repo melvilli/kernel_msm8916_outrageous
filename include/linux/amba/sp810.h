@@ -1,7 +1,10 @@
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
  * arch/arm/include/asm/hardware/sp810.h
  *
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  * ARM PrimeXsys System Controller SP810 header file
@@ -15,8 +18,13 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef __ASM_ARM_SP810_H
 #define __ASM_ARM_SP810_H
+=======
+#ifndef __AMBA_SP810_H
+#define __AMBA_SP810_H
+>>>>>>> v3.18
 =======
 #ifndef __AMBA_SP810_H
 #define __AMBA_SP810_H
@@ -70,7 +78,11 @@ static inline void sysctl_soft_reset(void __iomem *base)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif	/* __ASM_ARM_SP810_H */
+=======
+#endif /* __AMBA_SP810_H */
+>>>>>>> v3.18
 =======
 #endif /* __AMBA_SP810_H */
 >>>>>>> v3.18

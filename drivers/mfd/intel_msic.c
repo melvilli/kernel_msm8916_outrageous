@@ -28,7 +28,11 @@
 /*
  * MSIC interrupt tree is readable from SRAM at INTEL_MSIC_IRQ_PHYS_BASE.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Since IRQ block starts from address 0x002 we need to substract that from
+=======
+ * Since IRQ block starts from address 0x002 we need to subtract that from
+>>>>>>> v3.18
 =======
  * Since IRQ block starts from address 0x002 we need to subtract that from
 >>>>>>> v3.18
@@ -183,7 +187,11 @@ static struct mfd_cell msic_devs[] = {
  * we can guarantee that the SCU IPC interface is ready.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct mfd_cell msic_other_devs[] = {
+=======
+static const struct mfd_cell msic_other_devs[] = {
+>>>>>>> v3.18
 =======
 static const struct mfd_cell msic_other_devs[] = {
 >>>>>>> v3.18
@@ -319,7 +327,11 @@ static int intel_msic_init_devices(struct intel_msic *msic)
 {
 	struct platform_device *pdev = msic->pdev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct intel_msic_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct intel_msic_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct intel_msic_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -385,7 +397,11 @@ static void intel_msic_remove_devices(struct intel_msic *msic)
 static int intel_msic_probe(struct platform_device *pdev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct intel_msic_platform_data *pdata = pdev->dev.platform_data;
+=======
+	struct intel_msic_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct intel_msic_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -455,7 +471,10 @@ static int intel_msic_remove(struct platform_device *pdev)
 
 	intel_msic_remove_devices(msic);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 

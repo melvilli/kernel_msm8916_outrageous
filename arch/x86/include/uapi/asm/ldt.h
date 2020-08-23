@@ -29,6 +29,7 @@ struct user_desc {
 	unsigned int  useable:1;
 #ifdef __x86_64__
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*
 	 * Because this bit is not present in 32-bit user code, user
 	 * programs can pass uninitialized values here.  Therefore, in
@@ -36,6 +37,8 @@ struct user_desc {
 	 * the kernel must act as though lm == 0, regardless of the
 	 * actual value.
 	 */
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned int  lm:1;

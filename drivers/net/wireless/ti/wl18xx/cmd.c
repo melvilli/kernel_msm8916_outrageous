@@ -79,7 +79,10 @@ out:
 	return ret;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 int wl18xx_cmd_smart_config_start(struct wl1271 *wl, u32 group_bitmap)
 {
@@ -169,4 +172,7 @@ out_free:
 out:
 	return ret;
 }
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

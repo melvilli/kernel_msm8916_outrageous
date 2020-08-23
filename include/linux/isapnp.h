@@ -57,10 +57,13 @@
 		{ .vendor = ISAPNP_VENDOR(_va, _vb, _vc), .function = ISAPNP_FUNCTION(_function) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* export used IDs outside module */
 #define ISAPNP_CARD_TABLE(name) \
 		MODULE_GENERIC_TABLE(isapnp_card, name)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 struct isapnp_card_id {

@@ -4,7 +4,11 @@
 #include "rtl819x_TS.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void TsSetupTimeOut(unsigned long data)
+=======
+static void TsSetupTimeOut(unsigned long data)
+>>>>>>> v3.18
 =======
 static void TsSetupTimeOut(unsigned long data)
 >>>>>>> v3.18
@@ -14,7 +18,11 @@ static void TsSetupTimeOut(unsigned long data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void TsInactTimeout(unsigned long data)
+=======
+static void TsInactTimeout(unsigned long data)
+>>>>>>> v3.18
 =======
 static void TsInactTimeout(unsigned long data)
 >>>>>>> v3.18
@@ -31,7 +39,11 @@ static void TsInactTimeout(unsigned long data)
  *  notice:
 ********************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void RxPktPendingTimeout(unsigned long data)
+=======
+static void RxPktPendingTimeout(unsigned long data)
+>>>>>>> v3.18
 =======
 static void RxPktPendingTimeout(unsigned long data)
 >>>>>>> v3.18
@@ -51,7 +63,11 @@ static void RxPktPendingTimeout(unsigned long data)
 	spin_lock_irqsave(&(ieee->reorder_spinlock), flags);
 	//PlatformAcquireSpinLock(Adapter, RT_RX_SPINLOCK);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"==================>%s()\n",__FUNCTION__);
+=======
+	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"==================>%s()\n",__func__);
+>>>>>>> v3.18
 =======
 	IEEE80211_DEBUG(IEEE80211_DL_REORDER,"==================>%s()\n",__func__);
 >>>>>>> v3.18
@@ -116,7 +132,11 @@ static void RxPktPendingTimeout(unsigned long data)
  *  notice:
 ********************************************************************************************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
 void TsAddBaProcess(unsigned long data)
+=======
+static void TsAddBaProcess(unsigned long data)
+>>>>>>> v3.18
 =======
 static void TsAddBaProcess(unsigned long data)
 >>>>>>> v3.18
@@ -131,7 +151,11 @@ static void TsAddBaProcess(unsigned long data)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ResetTsCommonInfo(PTS_COMMON_INFO	pTsCommonInfo)
+=======
+static void ResetTsCommonInfo(PTS_COMMON_INFO pTsCommonInfo)
+>>>>>>> v3.18
 =======
 static void ResetTsCommonInfo(PTS_COMMON_INFO pTsCommonInfo)
 >>>>>>> v3.18
@@ -144,7 +168,11 @@ static void ResetTsCommonInfo(PTS_COMMON_INFO pTsCommonInfo)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ResetTxTsEntry(PTX_TS_RECORD pTS)
+=======
+static void ResetTxTsEntry(PTX_TS_RECORD pTS)
+>>>>>>> v3.18
 =======
 static void ResetTxTsEntry(PTX_TS_RECORD pTS)
 >>>>>>> v3.18
@@ -159,7 +187,11 @@ static void ResetTxTsEntry(PTX_TS_RECORD pTS)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void ResetRxTsEntry(PRX_TS_RECORD pTS)
+=======
+static void ResetRxTsEntry(PRX_TS_RECORD pTS)
+>>>>>>> v3.18
 =======
 static void ResetRxTsEntry(PRX_TS_RECORD pTS)
 >>>>>>> v3.18
@@ -177,7 +209,11 @@ void TSInitialize(struct ieee80211_device *ieee)
 	PRX_REORDER_ENTRY	pRxReorderEntry = ieee->RxReorderEntry;
 	u8				count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	IEEE80211_DEBUG(IEEE80211_DL_TS, "==========>%s()\n", __FUNCTION__);
+=======
+	IEEE80211_DEBUG(IEEE80211_DL_TS, "==========>%s()\n", __func__);
+>>>>>>> v3.18
 =======
 	IEEE80211_DEBUG(IEEE80211_DL_TS, "==========>%s()\n", __func__);
 >>>>>>> v3.18
@@ -261,7 +297,12 @@ void TSInitialize(struct ieee80211_device *ieee)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void AdmitTS(struct ieee80211_device *ieee, PTS_COMMON_INFO pTsCommonInfo, u32 InactTime)
+=======
+static void AdmitTS(struct ieee80211_device *ieee,
+		    PTS_COMMON_INFO pTsCommonInfo, u32 InactTime)
+>>>>>>> v3.18
 =======
 static void AdmitTS(struct ieee80211_device *ieee,
 		    PTS_COMMON_INFO pTsCommonInfo, u32 InactTime)
@@ -276,7 +317,13 @@ static void AdmitTS(struct ieee80211_device *ieee,
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 PTS_COMMON_INFO SearchAdmitTRStream(struct ieee80211_device *ieee, u8*	Addr, u8 TID, TR_SELECT	TxRxSelect)
+=======
+static PTS_COMMON_INFO SearchAdmitTRStream(struct ieee80211_device *ieee,
+					   u8 *Addr, u8 TID,
+					   TR_SELECT TxRxSelect)
+>>>>>>> v3.18
 =======
 static PTS_COMMON_INFO SearchAdmitTRStream(struct ieee80211_device *ieee,
 					   u8 *Addr, u8 TID,
@@ -287,7 +334,11 @@ static PTS_COMMON_INFO SearchAdmitTRStream(struct ieee80211_device *ieee,
 	u8	dir;
 	bool				search_dir[4] = {0, 0, 0, 0};
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct list_head*		psearch_list; //FIXME
+=======
+	struct list_head		*psearch_list; //FIXME
+>>>>>>> v3.18
 =======
 	struct list_head		*psearch_list; //FIXME
 >>>>>>> v3.18
@@ -361,6 +412,7 @@ static PTS_COMMON_INFO SearchAdmitTRStream(struct ieee80211_device *ieee,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void MakeTSEntry(
 		PTS_COMMON_INFO	pTsCommonInfo,
 		u8*		Addr,
@@ -369,6 +421,11 @@ void MakeTSEntry(
 		u8		TCLAS_Num,
 		u8		TCLAS_Proc
 	)
+=======
+static void MakeTSEntry(PTS_COMMON_INFO pTsCommonInfo, u8 *Addr,
+			PTSPEC_BODY pTSPEC, PQOS_TCLAS pTCLAS, u8 TCLAS_Num,
+			u8 TCLAS_Proc)
+>>>>>>> v3.18
 =======
 static void MakeTSEntry(PTS_COMMON_INFO pTsCommonInfo, u8 *Addr,
 			PTSPEC_BODY pTSPEC, PQOS_TCLAS pTCLAS, u8 TCLAS_Num,
@@ -384,15 +441,21 @@ static void MakeTSEntry(PTS_COMMON_INFO pTsCommonInfo, u8 *Addr,
 
 	if(pTSPEC != NULL)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		memcpy((u8*)(&(pTsCommonInfo->TSpec)), (u8*)pTSPEC, sizeof(TSPEC_BODY));
 
 	for(count = 0; count < TCLAS_Num; count++)
 		memcpy((u8*)(&(pTsCommonInfo->TClass[count])), (u8*)pTCLAS, sizeof(QOS_TCLAS));
 =======
+=======
+>>>>>>> v3.18
 		memcpy((u8 *)(&(pTsCommonInfo->TSpec)), (u8 *)pTSPEC, sizeof(TSPEC_BODY));
 
 	for(count = 0; count < TCLAS_Num; count++)
 		memcpy((u8 *)(&(pTsCommonInfo->TClass[count])), (u8 *)pTCLAS, sizeof(QOS_TCLAS));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	pTsCommonInfo->TClasProc = TCLAS_Proc;
@@ -402,9 +465,15 @@ static void MakeTSEntry(PTS_COMMON_INFO pTsCommonInfo, u8 *Addr,
 
 bool GetTs(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct ieee80211_device*	ieee,
 	PTS_COMMON_INFO			*ppTS,
 	u8*				Addr,
+=======
+	struct ieee80211_device		*ieee,
+	PTS_COMMON_INFO			*ppTS,
+	u8				*Addr,
+>>>>>>> v3.18
 =======
 	struct ieee80211_device		*ieee,
 	PTS_COMMON_INFO			*ppTS,
@@ -434,17 +503,23 @@ bool GetTs(
 		if (!IsACValid(TID))
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
 			IEEE80211_DEBUG(IEEE80211_DL_ERR, " in %s(), TID(%d) is not valid\n", __FUNCTION__, TID);
 			return false;
 		}
 
 		switch(TID)
 =======
+=======
+>>>>>>> v3.18
 			IEEE80211_DEBUG(IEEE80211_DL_ERR, " in %s(), TID(%d) is not valid\n", __func__, TID);
 			return false;
 		}
 
 		switch (TID)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		{
 		case 0:
@@ -495,7 +570,11 @@ bool GetTs(
 			TSPEC_BODY	TSpec;
 			PQOS_TSINFO		pTSInfo = &TSpec.f.TSInfo;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct list_head*	pUnusedList =
+=======
+			struct list_head	*pUnusedList =
+>>>>>>> v3.18
 =======
 			struct list_head	*pUnusedList =
 >>>>>>> v3.18
@@ -504,7 +583,11 @@ bool GetTs(
 								(&ieee->Rx_TS_Unused_List);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			struct list_head*	pAddmitList =
+=======
+			struct list_head	*pAddmitList =
+>>>>>>> v3.18
 =======
 			struct list_head	*pAddmitList =
 >>>>>>> v3.18
@@ -552,7 +635,11 @@ bool GetTs(
 			else
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 				IEEE80211_DEBUG(IEEE80211_DL_ERR, "in function %s() There is not enough TS record to be used!!", __FUNCTION__);
+=======
+				IEEE80211_DEBUG(IEEE80211_DL_ERR, "in function %s() There is not enough TS record to be used!!", __func__);
+>>>>>>> v3.18
 =======
 				IEEE80211_DEBUG(IEEE80211_DL_ERR, "in function %s() There is not enough TS record to be used!!", __func__);
 >>>>>>> v3.18
@@ -563,11 +650,16 @@ bool GetTs(
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void RemoveTsEntry(
 	struct ieee80211_device*	ieee,
 	PTS_COMMON_INFO			pTs,
 	TR_SELECT			TxRxSelect
 	)
+=======
+static void RemoveTsEntry(struct ieee80211_device *ieee, PTS_COMMON_INFO pTs,
+			  TR_SELECT TxRxSelect)
+>>>>>>> v3.18
 =======
 static void RemoveTsEntry(struct ieee80211_device *ieee, PTS_COMMON_INFO pTs,
 			  TR_SELECT TxRxSelect)
@@ -597,7 +689,11 @@ static void RemoveTsEntry(struct ieee80211_device *ieee, PTS_COMMON_INFO pTs,
 			{
 				int i = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				struct ieee80211_rxb * prxb = pRxReorderEntry->prxb;
+=======
+				struct ieee80211_rxb *prxb = pRxReorderEntry->prxb;
+>>>>>>> v3.18
 =======
 				struct ieee80211_rxb *prxb = pRxReorderEntry->prxb;
 >>>>>>> v3.18
@@ -627,7 +723,11 @@ static void RemoveTsEntry(struct ieee80211_device *ieee, PTS_COMMON_INFO pTs,
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void RemovePeerTS(struct ieee80211_device* ieee, u8* Addr)
+=======
+void RemovePeerTS(struct ieee80211_device *ieee, u8 *Addr)
+>>>>>>> v3.18
 =======
 void RemovePeerTS(struct ieee80211_device *ieee, u8 *Addr)
 >>>>>>> v3.18
@@ -678,7 +778,11 @@ void RemovePeerTS(struct ieee80211_device *ieee, u8 *Addr)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void RemoveAllTS(struct ieee80211_device* ieee)
+=======
+void RemoveAllTS(struct ieee80211_device *ieee)
+>>>>>>> v3.18
 =======
 void RemoveAllTS(struct ieee80211_device *ieee)
 >>>>>>> v3.18
@@ -715,7 +819,11 @@ void RemoveAllTS(struct ieee80211_device *ieee)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void TsStartAddBaProcess(struct ieee80211_device* ieee, PTX_TS_RECORD	pTxTS)
+=======
+void TsStartAddBaProcess(struct ieee80211_device *ieee, PTX_TS_RECORD	pTxTS)
+>>>>>>> v3.18
 =======
 void TsStartAddBaProcess(struct ieee80211_device *ieee, PTX_TS_RECORD	pTxTS)
 >>>>>>> v3.18
@@ -736,7 +844,11 @@ void TsStartAddBaProcess(struct ieee80211_device *ieee, PTX_TS_RECORD	pTxTS)
 	}
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "%s()==>BA timer is already added\n", __FUNCTION__);
+=======
+		IEEE80211_DEBUG(IEEE80211_DL_ERR, "%s()==>BA timer is already added\n", __func__);
+>>>>>>> v3.18
 =======
 		IEEE80211_DEBUG(IEEE80211_DL_ERR, "%s()==>BA timer is already added\n", __func__);
 >>>>>>> v3.18

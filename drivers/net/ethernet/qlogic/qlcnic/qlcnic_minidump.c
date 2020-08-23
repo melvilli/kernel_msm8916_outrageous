@@ -16,6 +16,10 @@
 #define QLC_83XX_OCM_INDEX			3
 #define QLC_83XX_PCI_INDEX			0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#define QLC_83XX_DMA_ENGINE_INDEX		8
+>>>>>>> v3.18
 =======
 #define QLC_83XX_DMA_ENGINE_INDEX		8
 >>>>>>> v3.18
@@ -37,7 +41,10 @@ static const u32 qlcnic_ms_read_data[] = {
 #define QLCNIC_DUMP_MASK_MAX	0xff
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 struct qlcnic_pex_dma_descriptor {
 	u32	read_data_size;
 	u32	dma_desc_cmd;
@@ -48,16 +55,22 @@ struct qlcnic_pex_dma_descriptor {
 	u32	rsvd[6];
 } __packed;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qlcnic_common_entry_hdr {
 	u32     type;
 	u32     offset;
 	u32     cap_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8      mask;
 	u8      rsvd[2];
 	u8      flags;
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u8      mask;
 	u8      rsvd[2];
@@ -67,15 +80,21 @@ struct qlcnic_common_entry_hdr {
 	u8      rsvd[2];
 	u8      mask;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
 struct __crb {
 	u32	addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	stride;
 	u8	rsvd1[3];
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u8	stride;
 	u8	rsvd1[3];
@@ -83,6 +102,9 @@ struct __crb {
 	u8	rsvd1[3];
 	u8	stride;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	data_size;
 	u32	no_ops;
@@ -92,12 +114,15 @@ struct __crb {
 struct __ctrl {
 	u32	addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	stride;
 	u8	index_a;
 	u16	timeout;
 	u32	data_size;
 	u32	no_ops;
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u8	stride;
 	u8	index_a;
@@ -110,19 +135,28 @@ struct __ctrl {
 	u32	data_size;
 	u32	no_ops;
 #if defined(__LITTLE_ENDIAN)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u8	opcode;
 	u8	index_v;
 	u8	shl_val;
 	u8	shr_val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #else
 	u8	shr_val;
 	u8	shl_val;
 	u8	index_v;
 	u8	opcode;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	val1;
 	u32	val2;
@@ -132,9 +166,12 @@ struct __ctrl {
 struct __cache {
 	u32	addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16	stride;
 	u16	init_tag_val;
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u16	stride;
 	u16	init_tag_val;
@@ -142,6 +179,9 @@ struct __cache {
 	u16	init_tag_val;
 	u16	stride;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	size;
 	u32	no_ops;
@@ -149,10 +189,13 @@ struct __cache {
 	u32	ctrl_val;
 	u32	read_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	read_addr_stride;
 	u8	read_addr_num;
 	u8	rsvd1[2];
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u8	read_addr_stride;
 	u8	read_addr_num;
@@ -162,6 +205,9 @@ struct __cache {
 	u8	read_addr_num;
 	u8	read_addr_stride;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -176,12 +222,18 @@ struct __ocm {
 
 struct __mem {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	rsvd[24];
 =======
+=======
+>>>>>>> v3.18
 	u32	desc_card_addr;
 	u32	dma_desc_cmd;
 	u32	start_dma_cmd;
 	u32	rsvd[3];
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	addr;
 	u32	size;
@@ -201,9 +253,12 @@ struct __mux {
 struct __queue {
 	u32	sel_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16	stride;
 	u8	rsvd[2];
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u16	stride;
 	u8	rsvd[2];
@@ -211,16 +266,22 @@ struct __queue {
 	u8	rsvd[2];
 	u16	stride;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	size;
 	u32	no_ops;
 	u8	rsvd2[8];
 	u32	read_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	read_addr_stride;
 	u8	read_addr_cnt;
 	u8	rsvd3[2];
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u8	read_addr_stride;
 	u8	read_addr_cnt;
@@ -230,6 +291,9 @@ struct __queue {
 	u8	read_addr_cnt;
 	u8	read_addr_stride;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -238,9 +302,12 @@ struct __pollrd {
 	u32	read_addr;
 	u32	sel_val;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u16	sel_val_stride;
 	u16	no_ops;
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u16	sel_val_stride;
 	u16	no_ops;
@@ -248,6 +315,9 @@ struct __pollrd {
 	u16	no_ops;
 	u16	sel_val_stride;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	u32	poll_wait;
 	u32	poll_mask;
@@ -264,10 +334,13 @@ struct __mux2 {
 	u32	sel_val_mask;
 	u32	read_addr;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	u8	sel_val_stride;
 	u8	data_size;
 	u8	rsvd[2];
 =======
+=======
+>>>>>>> v3.18
 #if defined(__LITTLE_ENDIAN)
 	u8	sel_val_stride;
 	u8	data_size;
@@ -277,6 +350,9 @@ struct __mux2 {
 	u8	data_size;
 	u8	sel_val_stride;
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 } __packed;
 
@@ -334,7 +410,10 @@ enum qlcnic_minidump_opcode {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 inline u32 qlcnic_82xx_get_saved_state(void *t_hdr, u32 index)
 {
 	struct qlcnic_82xx_dump_template_hdr *hdr = t_hdr;
@@ -443,6 +522,9 @@ void qlcnic_83xx_store_cap_mask(void *tmpl_hdr, u32 mask)
 	hdr->drv_cap_mask = mask;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 struct qlcnic_dump_operations {
 	enum qlcnic_minidump_opcode opcode;
@@ -472,17 +554,23 @@ static u32 qlcnic_dump_ctrl(struct qlcnic_adapter *adapter,
 			    struct qlcnic_dump_entry *entry, __le32 *buffer)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int i, k, timeout = 0;
 	u32 addr, data;
 	u8 no_ops;
 	struct __ctrl *ctr = &entry->region.ctrl;
 	struct qlcnic_dump_template_hdr *t_hdr = adapter->ahw->fw_dump.tmpl_hdr;
 =======
+=======
+>>>>>>> v3.18
 	void *hdr = adapter->ahw->fw_dump.tmpl_hdr;
 	struct __ctrl *ctr = &entry->region.ctrl;
 	int i, k, timeout = 0;
 	u32 addr, data, temp;
 	u8 no_ops;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	addr = ctr->addr;
@@ -527,6 +615,7 @@ static u32 qlcnic_dump_ctrl(struct qlcnic_adapter *adapter,
 				break;
 			case QLCNIC_DUMP_RD_SAVE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (ctr->index_a)
 					addr = t_hdr->saved_state[ctr->index_a];
 				data = qlcnic_ind_rd(adapter, addr);
@@ -544,6 +633,8 @@ static u32 qlcnic_dump_ctrl(struct qlcnic_adapter *adapter,
 			case QLCNIC_DUMP_MOD_SAVE_ST:
 				data = t_hdr->saved_state[ctr->index_v];
 =======
+=======
+>>>>>>> v3.18
 				temp = ctr->index_a;
 				if (temp)
 					addr = qlcnic_get_saved_state(adapter,
@@ -572,6 +663,9 @@ static u32 qlcnic_dump_ctrl(struct qlcnic_adapter *adapter,
 			case QLCNIC_DUMP_MOD_SAVE_ST:
 				data = qlcnic_get_saved_state(adapter, hdr,
 							      ctr->index_v);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 				data <<= ctr->shl_val;
 				data >>= ctr->shr_val;
@@ -580,7 +674,12 @@ static u32 qlcnic_dump_ctrl(struct qlcnic_adapter *adapter,
 				data |= ctr->val3;
 				data += ctr->val1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 				t_hdr->saved_state[ctr->index_v] = data;
+=======
+				qlcnic_set_saved_state(adapter, hdr,
+						       ctr->index_v, data);
+>>>>>>> v3.18
 =======
 				qlcnic_set_saved_state(adapter, hdr,
 						       ctr->index_v, data);
@@ -758,6 +857,7 @@ skip_poll:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static u32 qlcnic_read_memory(struct qlcnic_adapter *adapter,
 			      struct qlcnic_dump_entry *entry, __le32 *buffer)
 {
@@ -765,12 +865,17 @@ static u32 qlcnic_read_memory(struct qlcnic_adapter *adapter,
 	int i, reg_read;
 	struct __mem *mem = &entry->region.mem;
 =======
+=======
+>>>>>>> v3.18
 static u32 qlcnic_read_memory_test_agent(struct qlcnic_adapter *adapter,
 					 struct __mem *mem, __le32 *buffer,
 					 int *ret)
 {
 	u32 addr, data, test;
 	int i, reg_read;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	reg_read = mem->size;
@@ -781,7 +886,12 @@ static u32 qlcnic_read_memory_test_agent(struct qlcnic_adapter *adapter,
 			 "Unaligned memory addr:0x%x size:0x%x\n",
 			 addr, reg_read);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		*ret = -EINVAL;
+		return 0;
+>>>>>>> v3.18
 =======
 		*ret = -EINVAL;
 		return 0;
@@ -805,7 +915,11 @@ static u32 qlcnic_read_memory_test_agent(struct qlcnic_adapter *adapter,
 				dev_err(&adapter->pdev->dev,
 					"failed to read through agent\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ret = -EINVAL;
+=======
+				*ret = -EIO;
+>>>>>>> v3.18
 =======
 				*ret = -EIO;
 >>>>>>> v3.18
@@ -826,7 +940,10 @@ out:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /* DMA register base address */
 #define QLC_DMA_REG_BASE_ADDR(dma_no)	(0x77320000 + (dma_no * 0x10000))
 
@@ -1000,6 +1117,9 @@ static u32 qlcnic_read_memory(struct qlcnic_adapter *adapter,
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static u32 qlcnic_dump_nop(struct qlcnic_adapter *adapter,
 			   struct qlcnic_dump_entry *entry, __le32 *buffer)
@@ -1234,8 +1354,13 @@ qlcnic_fw_flash_get_minidump_temp_size(struct qlcnic_adapter *adapter,
 				       struct qlcnic_cmd_args *cmd)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct qlcnic_dump_template_hdr tmp_hdr;
 	u32 size = sizeof(struct qlcnic_dump_template_hdr) / sizeof(u32);
+=======
+	struct qlcnic_83xx_dump_template_hdr tmp_hdr;
+	u32 size = sizeof(tmp_hdr) / sizeof(u32);
+>>>>>>> v3.18
 =======
 	struct qlcnic_83xx_dump_template_hdr tmp_hdr;
 	u32 size = sizeof(tmp_hdr) / sizeof(u32);
@@ -1330,6 +1455,7 @@ free_mem:
 int qlcnic_fw_cmd_get_minidump_temp(struct qlcnic_adapter *adapter)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 	u32 temp_size = 0;
 	u32 version, csum, *tmp_buf;
@@ -1340,6 +1466,8 @@ int qlcnic_fw_cmd_get_minidump_temp(struct qlcnic_adapter *adapter)
 	ahw = adapter->ahw;
 
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_hardware_context *ahw;
 	struct qlcnic_fw_dump *fw_dump;
 	u32 version, csum, *tmp_buf;
@@ -1350,6 +1478,9 @@ int qlcnic_fw_cmd_get_minidump_temp(struct qlcnic_adapter *adapter)
 
 	ahw = adapter->ahw;
 	fw_dump = &ahw->fw_dump;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = qlcnic_fw_get_minidump_temp_size(adapter, &version, &temp_size,
 					       &use_flash_temp);
@@ -1360,17 +1491,23 @@ int qlcnic_fw_cmd_get_minidump_temp(struct qlcnic_adapter *adapter)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ahw->fw_dump.tmpl_hdr = vzalloc(temp_size);
 	if (!ahw->fw_dump.tmpl_hdr)
 		return -ENOMEM;
 
 	tmp_buf = (u32 *)ahw->fw_dump.tmpl_hdr;
 =======
+=======
+>>>>>>> v3.18
 	fw_dump->tmpl_hdr = vzalloc(temp_size);
 	if (!fw_dump->tmpl_hdr)
 		return -ENOMEM;
 
 	tmp_buf = (u32 *)fw_dump->tmpl_hdr;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (use_flash_temp)
 		goto flash_temp;
@@ -1387,8 +1524,13 @@ flash_temp:
 				"Failed to get minidump template header %d\n",
 				err);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			vfree(ahw->fw_dump.tmpl_hdr);
 			ahw->fw_dump.tmpl_hdr = NULL;
+=======
+			vfree(fw_dump->tmpl_hdr);
+			fw_dump->tmpl_hdr = NULL;
+>>>>>>> v3.18
 =======
 			vfree(fw_dump->tmpl_hdr);
 			fw_dump->tmpl_hdr = NULL;
@@ -1403,6 +1545,7 @@ flash_temp:
 		dev_err(&adapter->pdev->dev,
 			"Template header checksum validation failed\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vfree(ahw->fw_dump.tmpl_hdr);
 		ahw->fw_dump.tmpl_hdr = NULL;
 		return -EIO;
@@ -1412,6 +1555,8 @@ flash_temp:
 	tmpl_hdr->drv_cap_mask = QLCNIC_DUMP_MASK_DEF;
 	ahw->fw_dump.enable = 1;
 =======
+=======
+>>>>>>> v3.18
 		vfree(fw_dump->tmpl_hdr);
 		fw_dump->tmpl_hdr = NULL;
 		return -EIO;
@@ -1437,6 +1582,9 @@ flash_temp:
 		 fw_dump->cap_mask);
 
 	qlcnic_enable_fw_dump_state(adapter);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	return 0;
@@ -1444,6 +1592,7 @@ flash_temp:
 
 int qlcnic_dump_fw(struct qlcnic_adapter *adapter)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	__le32 *buffer;
 	u32 ocm_window;
@@ -1461,6 +1610,8 @@ int qlcnic_dump_fw(struct qlcnic_adapter *adapter)
 
 	if (!fw_dump->enable) {
 =======
+=======
+>>>>>>> v3.18
 	struct qlcnic_fw_dump *fw_dump = &adapter->ahw->fw_dump;
 	static const struct qlcnic_dump_operations *fw_dump_ops;
 	struct qlcnic_83xx_dump_template_hdr *hdr_83xx;
@@ -1483,6 +1634,9 @@ int qlcnic_dump_fw(struct qlcnic_adapter *adapter)
 		return -EIO;
 
 	if (!qlcnic_check_fw_dump_state(adapter)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		dev_info(&adapter->pdev->dev, "Dump not enabled\n");
 		return -EIO;
@@ -1498,8 +1652,14 @@ int qlcnic_dump_fw(struct qlcnic_adapter *adapter)
 	/* Calculate the size for dump data area only */
 	for (i = 2, k = 1; (i & QLCNIC_DUMP_MASK_MAX); i <<= 1, k++)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (i & tmpl_hdr->drv_cap_mask)
 			dump_size += tmpl_hdr->cap_sizes[k];
+=======
+		if (i & fw_dump->cap_mask)
+			dump_size += qlcnic_get_cap_size(adapter, tmpl_hdr, k);
+
+>>>>>>> v3.18
 =======
 		if (i & fw_dump->cap_mask)
 			dump_size += qlcnic_get_cap_size(adapter, tmpl_hdr, k);
@@ -1515,21 +1675,28 @@ int qlcnic_dump_fw(struct qlcnic_adapter *adapter)
 	buffer = fw_dump->data;
 	fw_dump->size = dump_size;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	no_entries = tmpl_hdr->num_entries;
 	entry_offset = tmpl_hdr->offset;
 	tmpl_hdr->sys_info[0] = QLCNIC_DRIVER_VERSION;
 	tmpl_hdr->sys_info[1] = adapter->fw_version;
 =======
+=======
+>>>>>>> v3.18
 	no_entries = fw_dump->num_entries;
 	entry_offset = fw_dump->offset;
 	qlcnic_set_sys_info(adapter, tmpl_hdr, 0, QLCNIC_DRIVER_VERSION);
 	qlcnic_set_sys_info(adapter, tmpl_hdr, 1, adapter->fw_version);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (qlcnic_82xx_check(adapter)) {
 		ops_cnt = ARRAY_SIZE(qlcnic_fw_dump_ops);
 		fw_dump_ops = qlcnic_fw_dump_ops;
 	} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		ops_cnt = ARRAY_SIZE(qlcnic_83xx_fw_dump_ops);
 		fw_dump_ops = qlcnic_83xx_fw_dump_ops;
@@ -1542,6 +1709,8 @@ int qlcnic_dump_fw(struct qlcnic_adapter *adapter)
 		entry = (void *)tmpl_hdr + entry_offset;
 		if (!(entry->hdr.mask & tmpl_hdr->drv_cap_mask)) {
 =======
+=======
+>>>>>>> v3.18
 		hdr_83xx = tmpl_hdr;
 		ops_cnt = ARRAY_SIZE(qlcnic_83xx_fw_dump_ops);
 		fw_dump_ops = qlcnic_83xx_fw_dump_ops;
@@ -1553,6 +1722,9 @@ int qlcnic_dump_fw(struct qlcnic_adapter *adapter)
 	for (i = 0; i < no_entries; i++) {
 		entry = tmpl_hdr + entry_offset;
 		if (!(entry->hdr.mask & fw_dump->cap_mask)) {
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			entry->hdr.flags |= QLCNIC_DUMP_SKIP;
 			entry_offset += entry->hdr.offset;
@@ -1569,36 +1741,49 @@ int qlcnic_dump_fw(struct qlcnic_adapter *adapter)
 
 		if (ops_index == ops_cnt) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dev_info(&adapter->pdev->dev,
 				 "Invalid entry type %d, exiting dump\n",
 				 entry->hdr.type);
 			goto error;
 =======
+=======
+>>>>>>> v3.18
 			dev_info(dev, "Skipping unknown entry opcode %d\n",
 				 entry->hdr.type);
 			entry->hdr.flags |= QLCNIC_DUMP_SKIP;
 			entry_offset += entry->hdr.offset;
 			continue;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 
 		/* Collect dump for this entry */
 		dump = fw_dump_ops[ops_index].handler(adapter, entry, buffer);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!qlcnic_valid_dump_entry(&adapter->pdev->dev, entry, dump))
 			entry->hdr.flags |= QLCNIC_DUMP_SKIP;
 =======
+=======
+>>>>>>> v3.18
 		if (!qlcnic_valid_dump_entry(dev, entry, dump)) {
 			entry->hdr.flags |= QLCNIC_DUMP_SKIP;
 			entry_offset += entry->hdr.offset;
 			continue;
 		}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		buf_offset += entry->hdr.cap_size;
 		entry_offset += entry->hdr.offset;
 		buffer = fw_dump->data + buf_offset;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (dump_size != buf_offset) {
 		dev_info(&adapter->pdev->dev,
@@ -1619,6 +1804,8 @@ error:
 	vfree(fw_dump->data);
 	return -EINVAL;
 =======
+=======
+>>>>>>> v3.18
 
 	fw_dump->clr = 1;
 	snprintf(mesg, sizeof(mesg), "FW_DUMP=%s", adapter->netdev->name);
@@ -1629,6 +1816,9 @@ error:
 	kobject_uevent_env(&dev->kobj, KOBJ_CHANGE, msg);
 
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

@@ -19,9 +19,12 @@
 #include "display.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Common address space across OMAP2xxx */
 extern struct omap_hwmod_addr_space omap2xxx_mcbsp2_addrs[];
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /* Common address space across OMAP2xxx/3xxx */
@@ -40,7 +43,10 @@ extern struct omap_hwmod_addr_space omap2_mcspi2_addr_space[];
 extern struct omap_hwmod_addr_space omap2430_mcspi3_addr_space[];
 extern struct omap_hwmod_addr_space omap2_dma_system_addrs[];
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct omap_hwmod_addr_space omap2_mailbox_addrs[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct omap_hwmod_addr_space omap2_mcbsp1_addrs[];
@@ -48,8 +54,11 @@ extern struct omap_hwmod_addr_space omap2_hdq1w_addr_space[];
 
 /* Common IP block data across OMAP2xxx */
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern struct omap_hwmod_irq_info omap2xxx_timer12_mpu_irqs[];
 extern struct omap_hwmod_dma_info omap2xxx_dss_sdma_chs[];
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct omap_gpio_dev_attr omap2xxx_gpio_dev_attr;

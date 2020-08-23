@@ -47,10 +47,13 @@
 #define DRX_I2C_FLAGS         0xF0
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef SIZEOF_ARRAY
 #define SIZEOF_ARRAY(array) (sizeof((array))/sizeof((array)[0]))
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define DEFAULT_LOCK_TIMEOUT    1100
@@ -1022,7 +1025,11 @@ static int HI_CfgCommand(struct drxd_state *state)
 				 HI_RA_RAM_SRV_CMD_CONFIG, 0);
 	else
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = HI_Command(state, HI_RA_RAM_SRV_CMD_CONFIG, 0);
+=======
+		status = HI_Command(state, HI_RA_RAM_SRV_CMD_CONFIG, NULL);
+>>>>>>> v3.18
 =======
 		status = HI_Command(state, HI_RA_RAM_SRV_CMD_CONFIG, NULL);
 >>>>>>> v3.18
@@ -1047,7 +1054,11 @@ static int HI_ResetCommand(struct drxd_state *state)
 			 HI_RA_RAM_SRV_RST_KEY_ACT, 0);
 	if (status == 0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 		status = HI_Command(state, HI_RA_RAM_SRV_CMD_RESET, 0);
+=======
+		status = HI_Command(state, HI_RA_RAM_SRV_CMD_RESET, NULL);
+>>>>>>> v3.18
 =======
 		status = HI_Command(state, HI_RA_RAM_SRV_CMD_RESET, NULL);
 >>>>>>> v3.18
@@ -2644,16 +2655,22 @@ static int DRXD_init(struct drxd_state *state, const u8 *fw, u32 fw_size)
 
 		/* Apply I2c address patch to B1 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!state->type_A && state->m_HiI2cPatch != NULL)
 			status = WriteTable(state, state->m_HiI2cPatch);
 			if (status < 0)
 				break;
 =======
+=======
+>>>>>>> v3.18
 		if (!state->type_A && state->m_HiI2cPatch != NULL) {
 			status = WriteTable(state, state->m_HiI2cPatch);
 			if (status < 0)
 				break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		if (state->type_A) {
@@ -2712,17 +2729,23 @@ static int DRXD_init(struct drxd_state *state, const u8 *fw, u32 fw_size)
 		if (status < 0)
 			break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (state->type_A)
 			status = ResetCEFR(state);
 			if (status < 0)
 				break;
 
 =======
+=======
+>>>>>>> v3.18
 		if (state->type_A) {
 			status = ResetCEFR(state);
 			if (status < 0)
 				break;
 		}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		if (fw) {
 			status = DownloadMicrocode(state, fw, fw_size);
@@ -2862,6 +2885,7 @@ static int drxd_init(struct dvb_frontend *fe)
 {
 	struct drxd_state *state = fe->demodulator_priv;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err = 0;
 
 /*	if (request_firmware(&state->fw, "drxd.fw", state->dev)<0) */
@@ -2874,11 +2898,16 @@ static int drxd_init(struct dvb_frontend *fe)
 
 int drxd_config_i2c(struct dvb_frontend *fe, int onoff)
 =======
+=======
+>>>>>>> v3.18
 
 	return DRXD_init(state, NULL, 0);
 }
 
 static int drxd_config_i2c(struct dvb_frontend *fe, int onoff)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 {
 	struct drxd_state *state = fe->demodulator_priv;
@@ -2889,7 +2918,10 @@ static int drxd_config_i2c(struct dvb_frontend *fe, int onoff)
 	return DRX_ConfigureI2CBridge(state, onoff);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 EXPORT_SYMBOL(drxd_config_i2c);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3012,7 +3044,11 @@ struct dvb_frontend *drxd_attach(const struct drxd_config *config,
 	mutex_init(&state->mutex);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (Read16(state, 0, 0, 0) < 0)
+=======
+	if (Read16(state, 0, NULL, 0) < 0)
+>>>>>>> v3.18
 =======
 	if (Read16(state, 0, NULL, 0) < 0)
 >>>>>>> v3.18

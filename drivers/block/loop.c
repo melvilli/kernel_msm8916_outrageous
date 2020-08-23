@@ -64,7 +64,10 @@
 #include <linux/swap.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/loop.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/compat.h>
@@ -80,6 +83,10 @@
 #include <linux/miscdevice.h>
 #include <linux/falloc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "loop.h"
+>>>>>>> v3.18
 =======
 #include "loop.h"
 >>>>>>> v3.18
@@ -245,7 +252,11 @@ static int __do_lo_send_write(struct file *file,
 	if (likely(bw == len))
 		return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "loop: Write error at byte offset %llu, length %i.\n",
+=======
+	printk_ratelimited(KERN_ERR "loop: Write error at byte offset %llu, length %i.\n",
+>>>>>>> v3.18
 =======
 	printk_ratelimited(KERN_ERR "loop: Write error at byte offset %llu, length %i.\n",
 >>>>>>> v3.18
@@ -289,7 +300,11 @@ static int do_lo_send_write(struct loop_device *lo, struct bio_vec *bvec,
 				page_address(page), bvec->bv_len,
 				pos);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "loop: Transfer error at byte offset %llu, "
+=======
+	printk_ratelimited(KERN_ERR "loop: Transfer error at byte offset %llu, "
+>>>>>>> v3.18
 =======
 	printk_ratelimited(KERN_ERR "loop: Transfer error at byte offset %llu, "
 >>>>>>> v3.18
@@ -304,14 +319,20 @@ static int lo_send(struct loop_device *lo, struct bio *bio, loff_t pos)
 	int (*do_lo_send)(struct loop_device *, struct bio_vec *, loff_t,
 			struct page *page);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bvec;
 	struct page *page = NULL;
 	int i, ret = 0;
 =======
+=======
+>>>>>>> v3.18
 	struct bio_vec bvec;
 	struct bvec_iter iter;
 	struct page *page = NULL;
 	int ret = 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	if (lo->transfer != transfer_none) {
@@ -325,17 +346,23 @@ static int lo_send(struct loop_device *lo, struct bio *bio, loff_t pos)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bio_for_each_segment(bvec, bio, i) {
 		ret = do_lo_send(lo, bvec, pos, page);
 		if (ret < 0)
 			break;
 		pos += bvec->bv_len;
 =======
+=======
+>>>>>>> v3.18
 	bio_for_each_segment(bvec, bio, iter) {
 		ret = do_lo_send(lo, &bvec, pos, page);
 		if (ret < 0)
 			break;
 		pos += bvec.bv_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	if (page) {
@@ -346,7 +373,11 @@ out:
 	return ret;
 fail:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk(KERN_ERR "loop: Failed to allocate temporary page for write.\n");
+=======
+	printk_ratelimited(KERN_ERR "loop: Failed to allocate temporary page for write.\n");
+>>>>>>> v3.18
 =======
 	printk_ratelimited(KERN_ERR "loop: Failed to allocate temporary page for write.\n");
 >>>>>>> v3.18
@@ -379,7 +410,11 @@ lo_splice_actor(struct pipe_inode_info *pipe, struct pipe_buffer *buf,
 
 	if (lo_do_transfer(lo, READ, page, buf->offset, p->page, p->offset, size, IV)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk(KERN_ERR "loop: transfer error block %ld\n",
+=======
+		printk_ratelimited(KERN_ERR "loop: transfer error block %ld\n",
+>>>>>>> v3.18
 =======
 		printk_ratelimited(KERN_ERR "loop: transfer error block %ld\n",
 >>>>>>> v3.18
@@ -431,6 +466,7 @@ static int
 lo_receive(struct loop_device *lo, struct bio *bio, int bsize, loff_t pos)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct bio_vec *bvec;
 	ssize_t s;
 	int i;
@@ -446,6 +482,8 @@ lo_receive(struct loop_device *lo, struct bio *bio, int bsize, loff_t pos)
 		}
 		pos += bvec->bv_len;
 =======
+=======
+>>>>>>> v3.18
 	struct bio_vec bvec;
 	struct bvec_iter iter;
 	ssize_t s;
@@ -460,6 +498,9 @@ lo_receive(struct loop_device *lo, struct bio *bio, int bsize, loff_t pos)
 			break;
 		}
 		pos += bvec.bv_len;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	return 0;
@@ -471,7 +512,11 @@ static int do_bio_filebacked(struct loop_device *lo, struct bio *bio)
 	int ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pos = ((loff_t) bio->bi_sector << 9) + lo->lo_offset;
+=======
+	pos = ((loff_t) bio->bi_iter.bi_sector << 9) + lo->lo_offset;
+>>>>>>> v3.18
 =======
 	pos = ((loff_t) bio->bi_iter.bi_sector << 9) + lo->lo_offset;
 >>>>>>> v3.18
@@ -504,7 +549,11 @@ static int do_bio_filebacked(struct loop_device *lo, struct bio *bio)
 			}
 			ret = file->f_op->fallocate(file, mode, pos,
 <<<<<<< HEAD
+<<<<<<< HEAD
 						    bio->bi_size);
+=======
+						    bio->bi_iter.bi_size);
+>>>>>>> v3.18
 =======
 						    bio->bi_iter.bi_size);
 >>>>>>> v3.18
@@ -611,7 +660,11 @@ static int loop_thread(void *data)
 	struct bio *bio;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	set_user_nice(current, -20);
+=======
+	set_user_nice(current, MIN_NICE);
+>>>>>>> v3.18
 =======
 	set_user_nice(current, MIN_NICE);
 >>>>>>> v3.18
@@ -866,7 +919,11 @@ static void loop_config_discard(struct loop_device *lo)
 	/*
 	 * We use punch hole to reclaim the free space used by the
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * image a.k.a. discard. However we do support discard if
+=======
+	 * image a.k.a. discard. However we do not support discard if
+>>>>>>> v3.18
 =======
 	 * image a.k.a. discard. However we do not support discard if
 >>>>>>> v3.18

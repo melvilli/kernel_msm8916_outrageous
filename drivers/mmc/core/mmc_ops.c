@@ -24,7 +24,10 @@
 #define MMC_OPS_TIMEOUT_MS	(10 * 60 * 1000) /* 10 minute timeout */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static inline int __mmc_send_status(struct mmc_card *card, u32 *status,
 				    bool ignore_crc)
 {
@@ -59,6 +62,9 @@ int mmc_send_status(struct mmc_card *card, u32 *status)
 	return __mmc_send_status(card, status, false);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int _mmc_select_card(struct mmc_host *host, struct mmc_card *card)
 {
@@ -97,6 +103,7 @@ int mmc_deselect_cards(struct mmc_host *host)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int mmc_card_sleepawake(struct mmc_host *host, int sleep)
 {
 	struct mmc_command cmd = {0};
@@ -130,6 +137,8 @@ int mmc_card_sleepawake(struct mmc_host *host, int sleep)
 
 	return err;
 =======
+=======
+>>>>>>> v3.18
 /*
  * Write the value specified in the device tree or board code into the optional
  * 16 bit Driver Stage Register. This can be used to tune raise/fall times and
@@ -148,6 +157,9 @@ int mmc_set_dsr(struct mmc_host *host)
 	cmd.flags = MMC_RSP_NONE | MMC_CMD_AC;
 
 	return mmc_wait_for_cmd(host, &cmd, MMC_CMD_RETRIES);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -463,7 +475,12 @@ int mmc_spi_set_crc(struct mmc_host *host, int use_crc)
  *                   timeout of zero implies maximum possible timeout
  *	@use_busy_signal: use the busy signal as response type
 <<<<<<< HEAD
+<<<<<<< HEAD
  *	@ignore_timeout: set this flag only for commands which can be HPIed
+=======
+ *	@send_status: send status cmd to poll for busy
+ *	@ignore_crc: ignore CRC errors when sending status cmd to poll for busy
+>>>>>>> v3.18
 =======
  *	@send_status: send status cmd to poll for busy
  *	@ignore_crc: ignore CRC errors when sending status cmd to poll for busy
@@ -472,6 +489,7 @@ int mmc_spi_set_crc(struct mmc_host *host, int use_crc)
  *	Modifies the EXT_CSD register for selected card.
  */
 int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 unsigned int timeout_ms, bool use_busy_signal,
 		 bool ignore_timeout)
@@ -484,6 +502,8 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 	BUG_ON(!card);
 	BUG_ON(!card->host);
 =======
+=======
+>>>>>>> v3.18
 		unsigned int timeout_ms, bool use_busy_signal, bool send_status,
 		bool ignore_crc)
 {
@@ -503,6 +523,9 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 	if (timeout_ms && host->max_busy_timeout &&
 		(timeout_ms > host->max_busy_timeout))
 		use_r1b_resp = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	cmd.opcode = MMC_SWITCH;
@@ -511,6 +534,7 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 		  (value << 8) |
 		  set;
 	cmd.flags = MMC_CMD_AC;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (use_busy_signal)
 		cmd.flags |= MMC_RSP_SPI_R1B | MMC_RSP_R1B;
@@ -523,6 +547,8 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 
 	err = mmc_wait_for_cmd(card->host, &cmd, MMC_CMD_RETRIES);
 =======
+=======
+>>>>>>> v3.18
 	if (use_r1b_resp) {
 		cmd.flags |= MMC_RSP_SPI_R1B | MMC_RSP_R1B;
 		/*
@@ -538,6 +564,9 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 		cmd.sanitize_busy = true;
 
 	err = mmc_wait_for_cmd(host, &cmd, MMC_CMD_RETRIES);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	if (err)
 		return err;
@@ -546,6 +575,7 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 	if (!use_busy_signal)
 		return 0;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/* Must check status to be sure of no errors */
 	timeout = jiffies + msecs_to_jiffies(MMC_OPS_TIMEOUT_MS);
@@ -563,6 +593,8 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 			pr_err("%s: Card stuck in programming state! %s\n",
 				mmc_hostname(card->host), __func__);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * CRC errors shall only be ignored in cases were CMD13 is used to poll
 	 * to detect busy completion.
@@ -601,13 +633,20 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 		if (time_after(jiffies, timeout)) {
 			pr_err("%s: Card stuck in programming state! %s\n",
 				mmc_hostname(host), __func__);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			return -ETIMEDOUT;
 		}
 	} while (R1_CURRENT_STATE(status) == R1_STATE_PRG);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (mmc_host_is_spi(card->host)) {
+=======
+	if (mmc_host_is_spi(host)) {
+>>>>>>> v3.18
 =======
 	if (mmc_host_is_spi(host)) {
 >>>>>>> v3.18
@@ -616,8 +655,13 @@ int __mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 	} else {
 		if (status & 0xFDFFA000)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			pr_warning("%s: unexpected status %#x after "
 			       "switch", mmc_hostname(card->host), status);
+=======
+			pr_warn("%s: unexpected status %#x after switch\n",
+				mmc_hostname(host), status);
+>>>>>>> v3.18
 =======
 			pr_warn("%s: unexpected status %#x after switch\n",
 				mmc_hostname(host), status);
@@ -633,6 +677,7 @@ EXPORT_SYMBOL_GPL(__mmc_switch);
 int mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 		unsigned int timeout_ms)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return __mmc_switch(card, set, index, value, timeout_ms, true, false);
 }
@@ -672,11 +717,16 @@ int mmc_send_status(struct mmc_card *card, u32 *status)
 }
 
 =======
+=======
+>>>>>>> v3.18
 	return __mmc_switch(card, set, index, value, timeout_ms, true, true,
 				false);
 }
 EXPORT_SYMBOL_GPL(mmc_switch);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int
 mmc_send_bus_test(struct mmc_card *card, struct mmc_host *host, u8 opcode,
@@ -735,9 +785,13 @@ mmc_send_bus_test(struct mmc_card *card, struct mmc_host *host, u8 opcode,
 	data.sg = &sg;
 	data.sg_len = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data.timeout_ns = 1000000;
 	data.timeout_clks = 0;
 
+=======
+	mmc_set_data_timeout(&data, card);
+>>>>>>> v3.18
 =======
 	mmc_set_data_timeout(&data, card);
 >>>>>>> v3.18
@@ -790,9 +844,15 @@ int mmc_send_hpi_cmd(struct mmc_card *card, u32 *status)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!card->ext_csd.hpi_en) {
 		pr_warning("%s: Card didn't support HPI command\n",
 			   mmc_hostname(card->host));
+=======
+	if (!card->ext_csd.hpi) {
+		pr_warn("%s: Card didn't support HPI command\n",
+			mmc_hostname(card->host));
+>>>>>>> v3.18
 =======
 	if (!card->ext_csd.hpi) {
 		pr_warn("%s: Card didn't support HPI command\n",
@@ -813,7 +873,11 @@ int mmc_send_hpi_cmd(struct mmc_card *card, u32 *status)
 	err = mmc_wait_for_cmd(card->host, &cmd, 0);
 	if (err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pr_debug("%s: error %d interrupting operation. "
+=======
+		pr_warn("%s: error %d interrupting operation. "
+>>>>>>> v3.18
 =======
 		pr_warn("%s: error %d interrupting operation. "
 >>>>>>> v3.18

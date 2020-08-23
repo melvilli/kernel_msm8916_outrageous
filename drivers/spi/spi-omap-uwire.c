@@ -38,7 +38,10 @@
 #include <linux/delay.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/workqueue.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -46,6 +49,10 @@
 #include <linux/clk.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/device.h>
+>>>>>>> v3.18
 =======
 #include <linux/device.h>
 >>>>>>> v3.18
@@ -54,15 +61,21 @@
 #include <linux/spi/spi_bitbang.h>
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <asm/irq.h>
 #include <mach/hardware.h>
 #include <asm/io.h>
 =======
+=======
+>>>>>>> v3.18
 #include <linux/io.h>
 
 #include <asm/irq.h>
 #include <mach/hardware.h>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #include <asm/mach-types.h>
 
@@ -114,7 +127,10 @@ struct uwire_spi {
 
 struct uwire_state {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned	bits_per_word;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned	div1_idx;
@@ -228,9 +244,14 @@ static void uwire_chipselect(struct spi_device *spi, int value)
 static int uwire_txrx(struct spi_device *spi, struct spi_transfer *t)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct uwire_state *ust = spi->controller_state;
 	unsigned	len = t->len;
 	unsigned	bits = ust->bits_per_word;
+=======
+	unsigned	len = t->len;
+	unsigned	bits = t->bits_per_word ? : spi->bits_per_word;
+>>>>>>> v3.18
 =======
 	unsigned	len = t->len;
 	unsigned	bits = t->bits_per_word ? : spi->bits_per_word;
@@ -243,10 +264,13 @@ static int uwire_txrx(struct spi_device *spi, struct spi_transfer *t)
 		return 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Microwire doesn't read and write concurrently */
 	if (t->tx_buf && t->rx_buf)
 		return -EPERM;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	w = spi->chip_select << 10;
@@ -348,7 +372,10 @@ static int uwire_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 	struct uwire_spi	*uwire;
 	unsigned		flags = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned		bits;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	unsigned		hz;
@@ -360,6 +387,7 @@ static int uwire_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 
 	uwire = spi_master_get_devdata(spi->master);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (spi->chip_select > 3) {
 		pr_debug("%s: cs%d?\n", dev_name(&spi->dev), spi->chip_select);
@@ -378,6 +406,8 @@ static int uwire_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 	}
 	ust->bits_per_word = bits;
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* mode 0..3, clock inverted separately;
@@ -504,7 +534,10 @@ static void uwire_off(struct uwire_spi *uwire)
 	uwire_write_reg(UWIRE_SR3, 0);
 	clk_disable(uwire->ck);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_put(uwire->ck);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spi_master_put(uwire->bitbang.master);
@@ -523,7 +556,11 @@ static int uwire_probe(struct platform_device *pdev)
 	uwire = spi_master_get_devdata(master);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	uwire_base = ioremap(UWIRE_BASE_PHYS, UWIRE_IO_SIZE);
+=======
+	uwire_base = devm_ioremap(&pdev->dev, UWIRE_BASE_PHYS, UWIRE_IO_SIZE);
+>>>>>>> v3.18
 =======
 	uwire_base = devm_ioremap(&pdev->dev, UWIRE_BASE_PHYS, UWIRE_IO_SIZE);
 >>>>>>> v3.18
@@ -534,9 +571,15 @@ static int uwire_probe(struct platform_device *pdev)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev_set_drvdata(&pdev->dev, uwire);
 
 	uwire->ck = clk_get(&pdev->dev, "fck");
+=======
+	platform_set_drvdata(pdev, uwire);
+
+	uwire->ck = devm_clk_get(&pdev->dev, "fck");
+>>>>>>> v3.18
 =======
 	platform_set_drvdata(pdev, uwire);
 
@@ -560,7 +603,11 @@ static int uwire_probe(struct platform_device *pdev)
 	/* the spi->mode bits understood by this driver: */
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_CS_HIGH;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 16);
+>>>>>>> v3.18
 =======
 	master->bits_per_word_mask = SPI_BPW_RANGE_MASK(1, 16);
 >>>>>>> v3.18
@@ -580,7 +627,10 @@ static int uwire_probe(struct platform_device *pdev)
 	if (status < 0) {
 		uwire_off(uwire);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		iounmap(uwire_base);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -589,6 +639,7 @@ static int uwire_probe(struct platform_device *pdev)
 
 static int uwire_remove(struct platform_device *pdev)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	struct uwire_spi	*uwire = dev_get_drvdata(&pdev->dev);
 	int			status;
@@ -600,6 +651,8 @@ static int uwire_remove(struct platform_device *pdev)
 	iounmap(uwire_base);
 	return status;
 =======
+=======
+>>>>>>> v3.18
 	struct uwire_spi	*uwire = platform_get_drvdata(pdev);
 
 	// FIXME remove all child devices, somewhere ...
@@ -607,6 +660,9 @@ static int uwire_remove(struct platform_device *pdev)
 	spi_bitbang_stop(&uwire->bitbang);
 	uwire_off(uwire);
 	return 0;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -619,7 +675,12 @@ static struct platform_driver uwire_driver = {
 		.owner		= THIS_MODULE,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= uwire_remove,
+=======
+	.probe = uwire_probe,
+	.remove = uwire_remove,
+>>>>>>> v3.18
 =======
 	.probe = uwire_probe,
 	.remove = uwire_remove,
@@ -646,7 +707,11 @@ static int __init omap_uwire_init(void)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return platform_driver_probe(&uwire_driver, uwire_probe);
+=======
+	return platform_driver_register(&uwire_driver);
+>>>>>>> v3.18
 =======
 	return platform_driver_register(&uwire_driver);
 >>>>>>> v3.18

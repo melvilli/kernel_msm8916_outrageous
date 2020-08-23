@@ -93,7 +93,10 @@ static int _kstrtoull(const char *s, unsigned int base, unsigned long long *res)
 	if (rv & KSTRTOX_OVERFLOW)
 		return -ERANGE;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rv &= ~KSTRTOX_OVERFLOW;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (rv == 0)

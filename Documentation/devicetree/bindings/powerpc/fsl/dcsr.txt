@@ -83,7 +83,11 @@ PROPERTIES
 	Interrupt Status Register (EPISR0,EPISR1).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Interrupt numbers are lised in order (perfmon, event0, event1).
+=======
+	Interrupt numbers are listed in order (perfmon, event0, event1).
+>>>>>>> v3.18
 =======
 	Interrupt numbers are listed in order (perfmon, event0, event1).
 >>>>>>> v3.18

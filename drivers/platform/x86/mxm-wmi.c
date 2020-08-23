@@ -21,8 +21,13 @@
 #include <linux/module.h>
 #include <linux/init.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <acpi/acpi_bus.h>
 #include <acpi/acpi_drivers.h>
+=======
+#include <linux/mxm-wmi.h>
+#include <linux/acpi.h>
+>>>>>>> v3.18
 =======
 #include <linux/mxm-wmi.h>
 #include <linux/acpi.h>

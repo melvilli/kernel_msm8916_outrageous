@@ -161,6 +161,7 @@ void fcoe_ctlr_init(struct fcoe_ctlr *fip, enum fip_state mode)
 EXPORT_SYMBOL(fcoe_ctlr_init);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int fcoe_sysfs_fcf_add(struct fcoe_fcf *new)
 {
 	struct fcoe_ctlr *fip = new->fip;
@@ -168,6 +169,8 @@ static int fcoe_sysfs_fcf_add(struct fcoe_fcf *new)
 	struct fcoe_fcf_device temp, *fcf_dev;
 	int rc = 0;
 =======
+=======
+>>>>>>> v3.18
 /**
  * fcoe_sysfs_fcf_add() - Add a fcoe_fcf{,_device} to a fcoe_ctlr{,_device}
  * @new: The newly discovered FCF
@@ -180,11 +183,15 @@ static int fcoe_sysfs_fcf_add(struct fcoe_fcf *new)
 	struct fcoe_ctlr_device *ctlr_dev;
 	struct fcoe_fcf_device *temp, *fcf_dev;
 	int rc = -ENOMEM;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	LIBFCOE_FIP_DBG(fip, "New FCF fab %16.16llx mac %pM\n",
 			new->fabric_name, new->fcf_mac);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&ctlr_dev->lock);
 
@@ -231,6 +238,8 @@ static void fcoe_sysfs_fcf_del(struct fcoe_fcf *new)
 	struct fcoe_ctlr *fip = new->fip;
 	struct fcoe_ctlr_device *ctlr_dev = fcoe_ctlr_to_ctlr_dev(fip);
 =======
+=======
+>>>>>>> v3.18
 	temp = kzalloc(sizeof(*temp), GFP_KERNEL);
 	if (!temp)
 		goto out;
@@ -298,12 +307,16 @@ static void fcoe_sysfs_fcf_del(struct fcoe_fcf *new)
 {
 	struct fcoe_ctlr *fip = new->fip;
 	struct fcoe_ctlr_device *cdev;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	struct fcoe_fcf_device *fcf_dev;
 
 	list_del(&new->list);
 	fip->fcf_count--;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	mutex_lock(&ctlr_dev->lock);
 
@@ -315,6 +328,8 @@ static void fcoe_sysfs_fcf_del(struct fcoe_fcf *new)
 
 	mutex_unlock(&ctlr_dev->lock);
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * If ctlr_dev doesn't exist then it means we're a libfcoe user
 	 * who doesn't use fcoe_syfs and didn't allocate a fcoe_ctlr_device
@@ -334,6 +349,9 @@ static void fcoe_sysfs_fcf_del(struct fcoe_fcf *new)
 		kfree(new);
 		mutex_unlock(&cdev->lock);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -408,7 +426,11 @@ static void fcoe_ctlr_announce(struct fcoe_ctlr *fip)
 	sel = fip->sel_fcf;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (sel && !compare_ether_addr(sel->fcf_mac, fip->dest_addr))
+=======
+	if (sel && ether_addr_equal(sel->fcf_mac, fip->dest_addr))
+>>>>>>> v3.18
 =======
 	if (sel && ether_addr_equal(sel->fcf_mac, fip->dest_addr))
 >>>>>>> v3.18
@@ -1112,7 +1134,11 @@ static void fcoe_ctlr_recv_adv(struct fcoe_ctlr *fip, struct sk_buff *skb)
 		    fcf->fabric_name == new.fabric_name &&
 		    fcf->fc_map == new.fc_map &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 		    compare_ether_addr(fcf->fcf_mac, new.fcf_mac) == 0) {
+=======
+		    ether_addr_equal(fcf->fcf_mac, new.fcf_mac)) {
+>>>>>>> v3.18
 =======
 		    ether_addr_equal(fcf->fcf_mac, new.fcf_mac)) {
 >>>>>>> v3.18
@@ -1456,7 +1482,11 @@ static void fcoe_ctlr_recv_clr_vlink(struct fcoe_ctlr *fip,
 			if (dlen < sizeof(*mp))
 				goto err;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (compare_ether_addr(mp->fd_mac, fcf->fcf_mac))
+=======
+			if (!ether_addr_equal(mp->fd_mac, fcf->fcf_mac))
+>>>>>>> v3.18
 =======
 			if (!ether_addr_equal(mp->fd_mac, fcf->fcf_mac))
 >>>>>>> v3.18
@@ -1538,8 +1568,13 @@ static void fcoe_ctlr_recv_clr_vlink(struct fcoe_ctlr *fip,
 			 * wwpn
 			 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (compare_ether_addr(fip->get_src_addr(vn_port),
 						vp->fd_mac) != 0 ||
+=======
+			if (!ether_addr_equal(fip->get_src_addr(vn_port),
+					      vp->fd_mac) ||
+>>>>>>> v3.18
 =======
 			if (!ether_addr_equal(fip->get_src_addr(vn_port),
 					      vp->fd_mac) ||
@@ -1578,6 +1613,12 @@ err:
 void fcoe_ctlr_recv(struct fcoe_ctlr *fip, struct sk_buff *skb)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	skb = skb_share_check(skb, GFP_ATOMIC);
+	if (!skb)
+		return;
+>>>>>>> v3.18
 =======
 	skb = skb_share_check(skb, GFP_ATOMIC);
 	if (!skb)
@@ -1610,6 +1651,7 @@ static int fcoe_ctlr_recv_handler(struct fcoe_ctlr *fip, struct sk_buff *skb)
 	eh = eth_hdr(skb);
 	if (fip->mode == FIP_MODE_VN2VN) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (compare_ether_addr(eh->h_dest, fip->ctl_src_addr) &&
 		    compare_ether_addr(eh->h_dest, fcoe_all_vn2vn) &&
 		    compare_ether_addr(eh->h_dest, fcoe_all_p2p))
@@ -1617,12 +1659,17 @@ static int fcoe_ctlr_recv_handler(struct fcoe_ctlr *fip, struct sk_buff *skb)
 	} else if (compare_ether_addr(eh->h_dest, fip->ctl_src_addr) &&
 		   compare_ether_addr(eh->h_dest, fcoe_all_enode))
 =======
+=======
+>>>>>>> v3.18
 		if (!ether_addr_equal(eh->h_dest, fip->ctl_src_addr) &&
 		    !ether_addr_equal(eh->h_dest, fcoe_all_vn2vn) &&
 		    !ether_addr_equal(eh->h_dest, fcoe_all_p2p))
 			goto drop;
 	} else if (!ether_addr_equal(eh->h_dest, fip->ctl_src_addr) &&
 		   !ether_addr_equal(eh->h_dest, fcoe_all_enode))
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		goto drop;
 	fiph = (struct fip_header *)skb->data;
@@ -1996,7 +2043,11 @@ int fcoe_ctlr_recv_flogi(struct fcoe_ctlr *fip, struct fc_lport *lport,
 		 * Otherwise we use the FCoE gateway addr
 		 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (!compare_ether_addr(sa, (u8[6])FC_FCOE_FLOGI_MAC)) {
+=======
+		if (ether_addr_equal(sa, (u8[6])FC_FCOE_FLOGI_MAC)) {
+>>>>>>> v3.18
 =======
 		if (ether_addr_equal(sa, (u8[6])FC_FCOE_FLOGI_MAC)) {
 >>>>>>> v3.18
@@ -2234,13 +2285,19 @@ static struct fc_rport_operations fcoe_ctlr_vn_rport_ops = {
 static void fcoe_ctlr_disc_stop_locked(struct fc_lport *lport)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mutex_lock(&lport->disc.disc_mutex);
 =======
+=======
+>>>>>>> v3.18
 	struct fc_rport_priv *rdata;
 
 	mutex_lock(&lport->disc.disc_mutex);
 	list_for_each_entry_rcu(rdata, &lport->disc.rports, peers)
 		lport->tt.rport_logoff(rdata);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	lport->disc.disc_callback = NULL;
 	mutex_unlock(&lport->disc.disc_mutex);
@@ -2973,8 +3030,13 @@ unlock:
  * when nothing is happening.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 void fcoe_ctlr_mode_set(struct fc_lport *lport, struct fcoe_ctlr *fip,
 			enum fip_state fip_mode)
+=======
+static void fcoe_ctlr_mode_set(struct fc_lport *lport, struct fcoe_ctlr *fip,
+			       enum fip_state fip_mode)
+>>>>>>> v3.18
 =======
 static void fcoe_ctlr_mode_set(struct fc_lport *lport, struct fcoe_ctlr *fip,
 			       enum fip_state fip_mode)

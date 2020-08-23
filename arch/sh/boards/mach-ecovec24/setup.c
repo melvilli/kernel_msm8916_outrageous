@@ -16,6 +16,10 @@
 #include <linux/mmc/sh_mobile_sdhi.h>
 #include <linux/mtd/physmap.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/mfd/tmio.h>
+>>>>>>> v3.18
 =======
 #include <linux/mfd/tmio.h>
 >>>>>>> v3.18
@@ -35,6 +39,10 @@
 #include <linux/input.h>
 #include <linux/input/sh_keysc.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/platform_data/gpio_backlight.h>
+>>>>>>> v3.18
 =======
 #include <linux/platform_data/gpio_backlight.h>
 >>>>>>> v3.18
@@ -168,7 +176,10 @@ static struct sh_eth_plat_data sh_eth_plat = {
 	.phy = 0x1f, /* SMSC LAN8700 */
 	.edmac_endian = EDMAC_LITTLE_ENDIAN,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.register_type = SH_ETH_REG_FAST_SH4,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.phy_interface = PHY_INTERFACE_MODE_MII,
@@ -177,8 +188,13 @@ static struct sh_eth_plat_data sh_eth_plat = {
 
 static struct platform_device sh_eth_device = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.name = "sh-eth",
 	.id	= 0,
+=======
+	.name = "sh7724-ether",
+	.id = 0,
+>>>>>>> v3.18
 =======
 	.name = "sh7724-ether",
 	.id = 0,
@@ -320,7 +336,11 @@ static struct platform_device usbhs_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* LCDC */
+=======
+/* LCDC and backlight */
+>>>>>>> v3.18
 =======
 /* LCDC and backlight */
 >>>>>>> v3.18
@@ -355,6 +375,7 @@ static const struct fb_videomode ecovec_dvi_modes[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ecovec24_set_brightness(int brightness)
 {
 	gpio_set_value(GPIO_PTR1, brightness);
@@ -362,6 +383,8 @@ static int ecovec24_set_brightness(int brightness)
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct sh_mobile_lcdc_info lcdc_info = {
@@ -374,11 +397,14 @@ static struct sh_mobile_lcdc_info lcdc_info = {
 			.height = 91,
 		},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		.bl_info = {
 			.name = "sh_mobile_lcdc_bl",
 			.max_brightness = 1,
 			.set_brightness = ecovec24_set_brightness,
 		},
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	}
@@ -407,7 +433,10 @@ static struct platform_device lcdc_device = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static struct gpio_backlight_platform_data gpio_backlight_data = {
 	.fbdev = &lcdc_device.dev,
 	.gpio = GPIO_PTR1,
@@ -422,6 +451,9 @@ static struct platform_device gpio_backlight_device = {
 	},
 };
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* CEU0 */
 static struct sh_mobile_ceu_info sh_mobile_ceu0_info = {
@@ -543,7 +575,11 @@ static struct platform_device keysc_device = {
 #define IRQ0 evt2irq(0x600)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ts_get_pendown_state(void)
+=======
+static int ts_get_pendown_state(struct device *dev)
+>>>>>>> v3.18
 =======
 static int ts_get_pendown_state(struct device *dev)
 >>>>>>> v3.18
@@ -646,6 +682,7 @@ static struct platform_device sdhi0_power = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void sdhi0_set_pwr(struct platform_device *pdev, int state)
 {
 	static int power_gpio = -EINVAL;
@@ -678,6 +715,8 @@ static struct sh_mobile_sdhi_info sdhi0_info = {
 			  MMC_CAP_NEEDS_POLL,
 	.get_cd		= sdhi0_get_cd,
 =======
+=======
+>>>>>>> v3.18
 static struct sh_mobile_sdhi_info sdhi0_info = {
 	.dma_slave_tx	= SHDMA_SLAVE_SDHI0_TX,
 	.dma_slave_rx	= SHDMA_SLAVE_SDHI0_RX,
@@ -685,6 +724,9 @@ static struct sh_mobile_sdhi_info sdhi0_info = {
 			  MMC_CAP_NEEDS_POLL,
 	.tmio_flags	= TMIO_MMC_USE_GPIO_CD,
 	.cd_gpio	= GPIO_PTY7,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -711,6 +753,7 @@ static struct platform_device sdhi0_device = {
 	},
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 static void cn12_set_pwr(struct platform_device *pdev, int state)
 {
@@ -742,14 +785,23 @@ static int sdhi1_get_cd(struct platform_device *pdev)
 #if !defined(CONFIG_MMC_SH_MMCIF) && !defined(CONFIG_MMC_SH_MMCIF_MODULE)
 /* SDHI1 */
 >>>>>>> v3.18
+=======
+#if !defined(CONFIG_MMC_SH_MMCIF) && !defined(CONFIG_MMC_SH_MMCIF_MODULE)
+/* SDHI1 */
+>>>>>>> v3.18
 static struct sh_mobile_sdhi_info sdhi1_info = {
 	.dma_slave_tx	= SHDMA_SLAVE_SDHI1_TX,
 	.dma_slave_rx	= SHDMA_SLAVE_SDHI1_RX,
 	.tmio_caps      = MMC_CAP_SDIO_IRQ | MMC_CAP_POWER_OFF_CARD |
 			  MMC_CAP_NEEDS_POLL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_pwr	= cn12_set_pwr,
 	.get_cd		= sdhi1_get_cd,
+=======
+	.tmio_flags	= TMIO_MMC_USE_GPIO_CD,
+	.cd_gpio	= GPIO_PTW7,
+>>>>>>> v3.18
 =======
 	.tmio_flags	= TMIO_MMC_USE_GPIO_CD,
 	.cd_gpio	= GPIO_PTW7,
@@ -784,6 +836,7 @@ static struct platform_device sdhi1_device = {
 
 /* MMC SPI */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int mmc_spi_get_ro(struct device *dev)
 {
 	return gpio_get_value(GPIO_PTY6);
@@ -796,6 +849,8 @@ static int mmc_spi_get_cd(struct device *dev)
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void mmc_spi_setpower(struct device *dev, unsigned int maskval)
 {
 	gpio_set_value(GPIO_PTB6, maskval ? 1 : 0);
@@ -803,12 +858,15 @@ static void mmc_spi_setpower(struct device *dev, unsigned int maskval)
 
 static struct mmc_spi_platform_data mmc_spi_info = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.get_ro = mmc_spi_get_ro,
 	.get_cd = mmc_spi_get_cd,
 	.caps = MMC_CAP_NEEDS_POLL,
 	.ocr_mask = MMC_VDD_32_33 | MMC_VDD_33_34, /* 3.3V only */
 	.setpower = mmc_spi_setpower,
 =======
+=======
+>>>>>>> v3.18
 	.caps = MMC_CAP_NEEDS_POLL,
 	.caps2 = MMC_CAP2_RO_ACTIVE_HIGH,
 	.ocr_mask = MMC_VDD_32_33 | MMC_VDD_33_34, /* 3.3V only */
@@ -816,6 +874,9 @@ static struct mmc_spi_platform_data mmc_spi_info = {
 	.flags = MMC_SPI_USE_CD_GPIO | MMC_SPI_USE_RO_GPIO,
 	.cd_gpio = GPIO_PTY7,
 	.ro_gpio = GPIO_PTY6,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -995,6 +1056,7 @@ static struct asoc_simple_card_info fsi_da7210_info = {
 	.codec		= "da7210.0-001a",
 	.platform	= "sh_fsi.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.daifmt		= SND_SOC_DAIFMT_I2S,
 	.cpu_dai = {
 		.name	= "fsib-dai",
@@ -1004,12 +1066,17 @@ static struct asoc_simple_card_info fsi_da7210_info = {
 		.name	= "da7210-hifi",
 		.fmt	= SND_SOC_DAIFMT_CBM_CFM,
 =======
+=======
+>>>>>>> v3.18
 	.daifmt		= SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_CBM_CFM,
 	.cpu_dai = {
 		.name	= "fsib-dai",
 	},
 	.codec_dai = {
 		.name	= "da7210-hifi",
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	},
 };
@@ -1019,6 +1086,11 @@ static struct platform_device fsi_da7210_device = {
 	.dev	= {
 		.platform_data	= &fsi_da7210_info,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.coherent_dma_mask = DMA_BIT_MASK(32),
+		.dma_mask = &fsi_da7210_device.dev.coherent_dma_mask,
+>>>>>>> v3.18
 =======
 		.coherent_dma_mask = DMA_BIT_MASK(32),
 		.dma_mask = &fsi_da7210_device.dev.coherent_dma_mask,
@@ -1091,11 +1163,14 @@ static struct platform_device vou_device = {
 #if defined(CONFIG_MMC_SH_MMCIF) || defined(CONFIG_MMC_SH_MMCIF_MODULE)
 /* SH_MMCIF */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void mmcif_down_pwr(struct platform_device *pdev)
 {
 	cn12_set_pwr(pdev, 0);
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static struct resource sh_mmcif_resources[] = {
@@ -1119,8 +1194,11 @@ static struct resource sh_mmcif_resources[] = {
 
 static struct sh_mmcif_plat_data sh_mmcif_plat = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.set_pwr	= cn12_set_pwr,
 	.down_pwr	= mmcif_down_pwr,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.sup_pclk	= 0, /* SH7724: Max Pclk/2 */
@@ -1150,6 +1228,10 @@ static struct platform_device *ecovec_devices[] __initdata = {
 	&usbhs_device,
 	&lcdc_device,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	&gpio_backlight_device,
+>>>>>>> v3.18
 =======
 	&gpio_backlight_device,
 >>>>>>> v3.18
@@ -1344,11 +1426,17 @@ static int __init arch_setup(void)
 	gpio_request(GPIO_PTE6, NULL);
 	gpio_request(GPIO_PTU1, NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_request(GPIO_PTR1, NULL);
 	gpio_request(GPIO_PTA2, NULL);
 	gpio_direction_input(GPIO_PTE6);
 	gpio_direction_output(GPIO_PTU1, 0);
 	gpio_direction_output(GPIO_PTR1, 0);
+=======
+	gpio_request(GPIO_PTA2, NULL);
+	gpio_direction_input(GPIO_PTE6);
+	gpio_direction_output(GPIO_PTU1, 0);
+>>>>>>> v3.18
 =======
 	gpio_request(GPIO_PTA2, NULL);
 	gpio_direction_input(GPIO_PTE6);
@@ -1367,6 +1455,12 @@ static int __init arch_setup(void)
 		lcdc_info.ch[0].num_modes		= ARRAY_SIZE(ecovec_dvi_modes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		/* No backlight */
+		gpio_backlight_data.fbdev = NULL;
+
+>>>>>>> v3.18
 =======
 		/* No backlight */
 		gpio_backlight_data.fbdev = NULL;
@@ -1382,8 +1476,11 @@ static int __init arch_setup(void)
 		lcdc_info.ch[0].num_modes		= ARRAY_SIZE(ecovec_lcd_modes);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		gpio_set_value(GPIO_PTR1, 1);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 		/* FIXME
@@ -1459,10 +1556,13 @@ static int __init arch_setup(void)
 
 	/* SD-card slot CN11 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Card-detect, used on CN11, either with SDHI0 or with SPI */
 	gpio_request(GPIO_PTY7, NULL);
 	gpio_direction_input(GPIO_PTY7);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #if defined(CONFIG_MMC_SDHI) || defined(CONFIG_MMC_SDHI_MODULE)
@@ -1484,8 +1584,11 @@ static int __init arch_setup(void)
 	gpio_request(GPIO_PTB6, NULL); /* 3.3V power control */
 	gpio_direction_output(GPIO_PTB6, 0); /* disable power by default */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	gpio_request(GPIO_PTY6, NULL); /* write protect */
 	gpio_direction_input(GPIO_PTY6);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1518,10 +1621,13 @@ static int __init arch_setup(void)
 	gpio_request(GPIO_FN_SDHI1D0,  NULL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* Card-detect, used on CN12 with SDHI1 */
 	gpio_request(GPIO_PTW7, NULL);
 	gpio_direction_input(GPIO_PTW7);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	cn12_enabled = true;

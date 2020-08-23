@@ -18,6 +18,10 @@
 #include <linux/ctype.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/major.h>
+>>>>>>> v3.18
 =======
 #include <linux/major.h>
 >>>>>>> v3.18

@@ -26,7 +26,11 @@ void request_event_sources_irqs(struct device_node *np,
 {
 	int i, index, count = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct of_irq oirq;
+=======
+	struct of_phandle_args oirq;
+>>>>>>> v3.18
 =======
 	struct of_phandle_args oirq;
 >>>>>>> v3.18
@@ -60,6 +64,7 @@ void request_event_sources_irqs(struct device_node *np,
 	else {
 		/* First try to do a proper OF tree parsing */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for (index = 0; of_irq_map_one(np, index, &oirq) == 0;
 		     index++) {
 			if (count > 15)
@@ -68,11 +73,16 @@ void request_event_sources_irqs(struct device_node *np,
 							    oirq.specifier,
 							    oirq.size);
 =======
+=======
+>>>>>>> v3.18
 		for (index = 0; of_irq_parse_one(np, index, &oirq) == 0;
 		     index++) {
 			if (count > 15)
 				break;
 			virqs[count] = irq_create_of_mapping(&oirq);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if (virqs[count] == NO_IRQ) {
 				pr_err("event-sources: Unable to allocate "

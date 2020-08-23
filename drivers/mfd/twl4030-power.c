@@ -29,6 +29,11 @@
 #include <linux/i2c/twl.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+#include <linux/of_device.h>
+>>>>>>> v3.18
 =======
 #include <linux/of.h>
 #include <linux/of_device.h>
@@ -39,9 +44,12 @@
 static u8 twl4030_start_script_address = 0x2b;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PWR_P1_SW_EVENTS	0x10
 #define PWR_DEVOFF		(1 << 0)
 =======
+=======
+>>>>>>> v3.18
 /* Register bits for P1, P2 and P3_SW_EVENTS */
 #define PWR_STOPON_PRWON	BIT(6)
 #define PWR_STOPON_SYSEN	BIT(5)
@@ -60,6 +68,9 @@ static u8 twl4030_start_script_address = 0x2b;
 #define STARTON_CHG		BIT(1)	/* Start on charger */
 #define STARTON_PWON		BIT(0)	/* Start on PWRON button */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SEQ_OFFSYNC		(1 << 0)
 
@@ -78,10 +89,13 @@ static u8 twl4030_start_script_address = 0x2b;
 #define R_CFG_P3_TRANSITION	PHY_TO_OFF_PM_MASTER(0x38)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define LVL_WAKEUP	0x08
 
 #define ENABLE_WARMRESET (1<<4)
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define END_OF_SCRIPT		0x3f
@@ -154,7 +168,10 @@ static u8 res_config_addrs[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 /*
  * Usable values for .remap_sleep and .remap_off
  * Based on table "5.3.3 Resource Operating modes"
@@ -202,6 +219,9 @@ enum {
 	  .type = (typ), .type2 = (typ2),				\
 	  .remap_off = TWL_REMAP_OFF, .remap_sleep = TWL_REMAP_OFF, }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int twl4030_write_script_byte(u8 address, u8 byte)
 {
@@ -275,7 +295,11 @@ static int twl4030_config_wakeup3_sequence(u8 address)
 	if (err)
 		goto out;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data |= LVL_WAKEUP;
+=======
+	data |= PWR_LVL_WAKEUP;
+>>>>>>> v3.18
 =======
 	data |= PWR_LVL_WAKEUP;
 >>>>>>> v3.18
@@ -302,7 +326,11 @@ static int twl4030_config_wakeup12_sequence(u8 address)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data |= LVL_WAKEUP;
+=======
+	data |= PWR_LVL_WAKEUP;
+>>>>>>> v3.18
 =======
 	data |= PWR_LVL_WAKEUP;
 >>>>>>> v3.18
@@ -315,7 +343,11 @@ static int twl4030_config_wakeup12_sequence(u8 address)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	data |= LVL_WAKEUP;
+=======
+	data |= PWR_LVL_WAKEUP;
+>>>>>>> v3.18
 =======
 	data |= PWR_LVL_WAKEUP;
 >>>>>>> v3.18
@@ -372,7 +404,11 @@ static int twl4030_config_warmreset_sequence(u8 address)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rd_data |= ENABLE_WARMRESET;
+=======
+	rd_data |= PWR_ENABLE_WARMRESET;
+>>>>>>> v3.18
 =======
 	rd_data |= PWR_ENABLE_WARMRESET;
 >>>>>>> v3.18
@@ -385,7 +421,11 @@ static int twl4030_config_warmreset_sequence(u8 address)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rd_data |= ENABLE_WARMRESET;
+=======
+	rd_data |= PWR_ENABLE_WARMRESET;
+>>>>>>> v3.18
 =======
 	rd_data |= PWR_ENABLE_WARMRESET;
 >>>>>>> v3.18
@@ -398,7 +438,11 @@ static int twl4030_config_warmreset_sequence(u8 address)
 		goto out;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rd_data |= ENABLE_WARMRESET;
+=======
+	rd_data |= PWR_ENABLE_WARMRESET;
+>>>>>>> v3.18
 =======
 	rd_data |= PWR_ENABLE_WARMRESET;
 >>>>>>> v3.18
@@ -524,13 +568,19 @@ static int load_twl4030_script(struct twl4030_script *tscript,
 	}
 	if (tscript->flags & TWL4030_WAKEUP12_SCRIPT) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 		/* Reset any existing sleep script to avoid hangs on reboot */
 		err = twl_i2c_write_u8(TWL_MODULE_PM_MASTER, END_OF_SCRIPT,
 				       R_SEQ_ADD_A2S);
 		if (err)
 			goto out;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		err = twl4030_config_wakeup12_sequence(address);
 		if (err)
@@ -605,7 +655,10 @@ int twl4030_remove_script(u8 flags)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int
 twl4030_power_configure_scripts(const struct twl4030_power_data *pdata)
 {
@@ -700,6 +753,9 @@ relock:
 				TWL4030_PM_MASTER_PROTECT_KEY);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /*
  * In master mode, start the power off sequence.
@@ -711,12 +767,18 @@ void twl4030_power_off(void)
 	int err;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/* Disable start on charger or VBUS as it can break poweroff */
 	err = twl4030_starton_mask_and_set(STARTON_VBUS | STARTON_CHG, 0);
 	if (err)
 		pr_err("TWL4030 Unable to configure start-up\n");
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	err = twl_i2c_write_u8(TWL_MODULE_PM_MASTER, PWR_DEVOFF,
 			       TWL4030_PM_MASTER_P1_SW_EVENTS);
@@ -724,6 +786,7 @@ void twl4030_power_off(void)
 		pr_err("TWL4030 Unable to power off\n");
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void twl4030_power_init(struct twl4030_power_data *twl4030_scripts)
 {
@@ -758,6 +821,8 @@ void twl4030_power_init(struct twl4030_power_data *twl4030_scripts)
 			resconfig++;
 
 =======
+=======
+>>>>>>> v3.18
 static bool twl4030_power_use_poweroff(const struct twl4030_power_data *pdata,
 					struct device_node *node)
 {
@@ -972,13 +1037,20 @@ static int twl4030_power_probe(struct platform_device *pdev)
 		if (err) {
 			pr_err("TWL4030 failed to configure resource\n");
 			goto relock;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
 
 	/* Board has to be wired properly to use this feature */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (twl4030_scripts->use_poweroff && !pm_power_off) {
+=======
+	if (twl4030_power_use_poweroff(pdata, node) && !pm_power_off) {
+>>>>>>> v3.18
 =======
 	if (twl4030_power_use_poweroff(pdata, node) && !pm_power_off) {
 >>>>>>> v3.18
@@ -1003,6 +1075,7 @@ static int twl4030_power_probe(struct platform_device *pdev)
 
 relock:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = twl_i2c_write_u8(TWL_MODULE_PM_MASTER, 0,
 			       TWL4030_PM_MASTER_PROTECT_KEY);
 	if (err)
@@ -1023,6 +1096,8 @@ resource:
 	return;
 }
 =======
+=======
+>>>>>>> v3.18
 	err2 = twl_i2c_write_u8(TWL_MODULE_PM_MASTER, 0,
 			       TWL4030_PM_MASTER_PROTECT_KEY);
 	if (err2) {
@@ -1055,4 +1130,7 @@ MODULE_AUTHOR("Texas Instruments, Inc.");
 MODULE_DESCRIPTION("Power management for TWL4030");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:twl4030_power");
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18

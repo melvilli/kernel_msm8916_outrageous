@@ -2,6 +2,7 @@
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - compatible: Should be "solomon,ssd1307fb-<bus>". The only supported bus for
     now is i2c.
   - reg: Should contain address of the controller on the I2C bus. Most likely
@@ -10,6 +11,8 @@ Required properties:
          specification [0]
   - reset-gpios: Should contain the GPIO used to reset the OLED display
 =======
+=======
+>>>>>>> v3.18
   - compatible: Should be "solomon,<chip>fb-<bus>". The only supported bus for
     now is i2c, and the supported chips are ssd1306 and ssd1307.
   - reg: Should contain address of the controller on the I2C bus. Most likely
@@ -21,6 +24,9 @@ Required properties:
   - solomon,width: Width in pixel of the screen driven by the controller
   - solomon,page-offset: Offset of pages (band of 8 pixels) that the screen is
     mapped to.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Optional properties:

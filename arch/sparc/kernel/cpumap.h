@@ -3,8 +3,13 @@
 
 #ifdef CONFIG_SMP
 <<<<<<< HEAD
+<<<<<<< HEAD
 extern void cpu_map_rebuild(void);
 extern int  map_to_cpu(unsigned int index);
+=======
+void cpu_map_rebuild(void);
+int map_to_cpu(unsigned int index);
+>>>>>>> v3.18
 =======
 void cpu_map_rebuild(void);
 int map_to_cpu(unsigned int index);

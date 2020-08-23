@@ -27,10 +27,13 @@
 #include <core/handle.h>
 #include <core/option.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include <engine/device.h>
 
 =======
+=======
+>>>>>>> v3.18
 #include <nvif/unpack.h>
 #include <nvif/class.h>
 
@@ -186,12 +189,21 @@ nouveau_client_mthd(struct nouveau_object *object, u32 mthd,
 	return -EINVAL;
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static void
 nouveau_client_dtor(struct nouveau_object *object)
 {
 	struct nouveau_client *client = (void *)object;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	int i;
+	for (i = 0; i < ARRAY_SIZE(client->notify); i++)
+		nvkm_client_notify_del(client, i);
+>>>>>>> v3.18
 =======
 	int i;
 	for (i = 0; i < ARRAY_SIZE(client->notify); i++)
@@ -207,6 +219,10 @@ nouveau_client_oclass = {
 	.ofuncs = &(struct nouveau_ofuncs) {
 		.dtor = nouveau_client_dtor,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		.mthd = nouveau_client_mthd,
+>>>>>>> v3.18
 =======
 		.mthd = nouveau_client_mthd,
 >>>>>>> v3.18
@@ -262,16 +278,22 @@ nouveau_client_fini(struct nouveau_client *client, bool suspend)
 {
 	const char *name[2] = { "fini", "suspend" };
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int ret;
 
 	nv_debug(client, "%s running\n", name[suspend]);
 =======
+=======
+>>>>>>> v3.18
 	int ret, i;
 	nv_debug(client, "%s running\n", name[suspend]);
 	nv_debug(client, "%s notify\n", name[suspend]);
 	for (i = 0; i < ARRAY_SIZE(client->notify); i++)
 		nvkm_client_notify_put(client, i);
 	nv_debug(client, "%s object\n", name[suspend]);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	ret = nouveau_handle_fini(client->root, suspend);
 	nv_debug(client, "%s completed with %d\n", name[suspend], ret);

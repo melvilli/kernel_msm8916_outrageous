@@ -18,6 +18,10 @@ obj-$(CONFIG_PCNET32) += pcnet32.o
 obj-$(CONFIG_SUN3LANCE) += sun3lance.o
 obj-$(CONFIG_SUNLANCE) += sunlance.o
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+obj-$(CONFIG_AMD_XGBE) += xgbe/
+>>>>>>> v3.18
 =======
 obj-$(CONFIG_AMD_XGBE) += xgbe/
 >>>>>>> v3.18

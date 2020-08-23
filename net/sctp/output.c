@@ -21,6 +21,7 @@
  *
  * You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  * along with GNU CC; see the file COPYING.  If not, write to
  * the Free Software Foundation, 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
@@ -32,12 +33,17 @@
  * Or submit a bug report through the following website:
  *    http://www.sf.net/projects/lksctp
 =======
+=======
+>>>>>>> v3.18
  * along with GNU CC; see the file COPYING.  If not, see
  * <http://www.gnu.org/licenses/>.
  *
  * Please send any bug reports or fixes you make to the
  * email address(es):
  *    lksctp developers <linux-sctp@vger.kernel.org>
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * Written or modified by:
@@ -46,9 +52,12 @@
  *    Jon Grimm             <jgrimm@austin.ibm.com>
  *    Sridhar Samudrala     <sri@us.ibm.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Any bugs reported given to us we will try to fix... any fixes shared will
  * be incorporated into the next SCTP release.
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
  */
@@ -106,8 +115,12 @@ struct sctp_packet *sctp_packet_config(struct sctp_packet *packet,
 	struct sctp_chunk *chunk = NULL;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: packet:%p vtag:0x%x\n", __func__,
 			  packet, vtag);
+=======
+	pr_debug("%s: packet:%p vtag:0x%x\n", __func__, packet, vtag);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: packet:%p vtag:0x%x\n", __func__, packet, vtag);
 >>>>>>> v3.18
@@ -136,8 +149,12 @@ struct sctp_packet *sctp_packet_init(struct sctp_packet *packet,
 	size_t overhead;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: packet:%p transport:%p\n", __func__,
 			  packet, transport);
+=======
+	pr_debug("%s: packet:%p transport:%p\n", __func__, packet, transport);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: packet:%p transport:%p\n", __func__, packet, transport);
 >>>>>>> v3.18
@@ -166,7 +183,11 @@ void sctp_packet_free(struct sctp_packet *packet)
 	struct sctp_chunk *chunk, *tmp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: packet:%p\n", __func__, packet);
+=======
+	pr_debug("%s: packet:%p\n", __func__, packet);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: packet:%p\n", __func__, packet);
 >>>>>>> v3.18
@@ -192,8 +213,12 @@ sctp_xmit_t sctp_packet_transmit_chunk(struct sctp_packet *packet,
 	int error = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: packet:%p chunk:%p\n", __func__,
 			  packet, chunk);
+=======
+	pr_debug("%s: packet:%p chunk:%p\n", __func__, packet, chunk);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: packet:%p chunk:%p\n", __func__, packet, chunk);
 >>>>>>> v3.18
@@ -217,7 +242,11 @@ sctp_xmit_t sctp_packet_transmit_chunk(struct sctp_packet *packet,
 	case SCTP_XMIT_RWND_FULL:
 	case SCTP_XMIT_OK:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	case SCTP_XMIT_NAGLE_DELAY:
+=======
+	case SCTP_XMIT_DELAY:
+>>>>>>> v3.18
 =======
 	case SCTP_XMIT_DELAY:
 >>>>>>> v3.18
@@ -323,7 +352,11 @@ static sctp_xmit_t __sctp_packet_append_chunk(struct sctp_packet *packet,
 	/* We believe that this chunk is OK to add to the packet */
 	switch (chunk->chunk_hdr->type) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    case SCTP_CID_DATA:
+=======
+	case SCTP_CID_DATA:
+>>>>>>> v3.18
 =======
 	case SCTP_CID_DATA:
 >>>>>>> v3.18
@@ -339,17 +372,23 @@ static sctp_xmit_t __sctp_packet_append_chunk(struct sctp_packet *packet,
 		chunk->sent_at = jiffies;
 		break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    case SCTP_CID_COOKIE_ECHO:
 		packet->has_cookie_echo = 1;
 		break;
 
 	    case SCTP_CID_SACK:
 =======
+=======
+>>>>>>> v3.18
 	case SCTP_CID_COOKIE_ECHO:
 		packet->has_cookie_echo = 1;
 		break;
 
 	case SCTP_CID_SACK:
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		packet->has_sack = 1;
 		if (chunk->asoc)
@@ -357,7 +396,11 @@ static sctp_xmit_t __sctp_packet_append_chunk(struct sctp_packet *packet,
 		break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    case SCTP_CID_AUTH:
+=======
+	case SCTP_CID_AUTH:
+>>>>>>> v3.18
 =======
 	case SCTP_CID_AUTH:
 >>>>>>> v3.18
@@ -383,8 +426,12 @@ sctp_xmit_t sctp_packet_append_chunk(struct sctp_packet *packet,
 	sctp_xmit_t retval = SCTP_XMIT_OK;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("%s: packet:%p chunk:%p\n", __func__, packet,
 			  chunk);
+=======
+	pr_debug("%s: packet:%p chunk:%p\n", __func__, packet, chunk);
+>>>>>>> v3.18
 =======
 	pr_debug("%s: packet:%p chunk:%p\n", __func__, packet, chunk);
 >>>>>>> v3.18
@@ -451,16 +498,22 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 	int padding;		/* How much padding do we need?  */
 	__u8 has_data = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct dst_entry *dst = tp->dst;
 	unsigned char *auth = NULL;	/* pointer to auth in skb data */
 	__u32 cksum_buf_len = sizeof(struct sctphdr);
 
 	SCTP_DEBUG_PRINTK("%s: packet:%p\n", __func__, packet);
 =======
+=======
+>>>>>>> v3.18
 	struct dst_entry *dst;
 	unsigned char *auth = NULL;	/* pointer to auth in skb data */
 
 	pr_debug("%s: packet:%p\n", __func__, packet);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Do NOT generate a chunkless packet. */
@@ -473,7 +526,11 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 
 	/* Allocate the new skb.  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	nskb = alloc_skb(packet->size + MAX_HEADER, GFP_ATOMIC);
+=======
+	nskb = alloc_skb(packet->size + LL_MAX_HEADER, GFP_ATOMIC);
+>>>>>>> v3.18
 =======
 	nskb = alloc_skb(packet->size + LL_MAX_HEADER, GFP_ATOMIC);
 >>>>>>> v3.18
@@ -482,7 +539,11 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 
 	/* Make sure the outbound skb has enough header room reserved. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_reserve(nskb, packet->overhead + MAX_HEADER);
+=======
+	skb_reserve(nskb, packet->overhead + LL_MAX_HEADER);
+>>>>>>> v3.18
 =======
 	skb_reserve(nskb, packet->overhead + LL_MAX_HEADER);
 >>>>>>> v3.18
@@ -500,9 +561,15 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 	}
 	dst = dst_clone(tp->dst);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	skb_dst_set(nskb, dst);
 	if (!dst)
 		goto no_route;
+=======
+	if (!dst)
+		goto no_route;
+	skb_dst_set(nskb, dst);
+>>>>>>> v3.18
 =======
 	if (!dst)
 		goto no_route;
@@ -546,7 +613,13 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 	 * [This whole comment explains WORD_ROUND() below.]
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("***sctp_transmit_packet***\n");
+=======
+
+	pr_debug("***sctp_transmit_packet***\n");
+
+>>>>>>> v3.18
 =======
 
 	pr_debug("***sctp_transmit_packet***\n");
@@ -563,16 +636,22 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 			 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (!tp->rto_pending) {
 				chunk->rtt_in_progress = 1;
 				tp->rto_pending = 1;
 			}
 =======
+=======
+>>>>>>> v3.18
 			if (!chunk->resent && !tp->rto_pending) {
 				chunk->rtt_in_progress = 1;
 				tp->rto_pending = 1;
 			}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			has_data = 1;
 		}
@@ -589,6 +668,7 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 			auth = skb_tail_pointer(nskb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cksum_buf_len += chunk->skb->len;
 		memcpy(skb_put(nskb, chunk->skb->len),
 			       chunk->skb->data, chunk->skb->len);
@@ -604,6 +684,8 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 				  "chunk->skb->len", chunk->skb->len,
 				  "rtt_in_progress", chunk->rtt_in_progress);
 =======
+=======
+>>>>>>> v3.18
 		memcpy(skb_put(nskb, chunk->skb->len),
 			       chunk->skb->data, chunk->skb->len);
 
@@ -614,6 +696,9 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 			 chunk->has_tsn ? ntohl(chunk->subh.data_hdr->tsn) : 0,
 			 ntohs(chunk->chunk_hdr->length), chunk->skb->len,
 			 chunk->rtt_in_progress);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 		/*
@@ -650,6 +735,7 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 		if (!(dst->dev->features & NETIF_F_SCTP_CSUM) ||
 		    (dst_xfrm(dst) != NULL) || packet->ipfragok) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			__u32 crc32 = sctp_start_cksum((__u8 *)sh, cksum_buf_len);
 
 			/* 3) Put the resultant value into the checksum field in the
@@ -662,11 +748,16 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 			nskb->csum_start = (skb_transport_header(nskb) -
 			                    nskb->head);
 =======
+=======
+>>>>>>> v3.18
 			sh->checksum = sctp_compute_cksum(nskb, 0);
 		} else {
 			/* no need to seed pseudo checksum for SCTP */
 			nskb->ip_summed = CHECKSUM_PARTIAL;
 			nskb->csum_start = skb_transport_header(nskb) - nskb->head;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			nskb->csum_offset = offsetof(struct sctphdr, checksum);
 		}
@@ -685,7 +776,11 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 	 * in transmission.  See IP6_ECN_flow_xmit().
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(*tp->af_specific->ecn_capable)(nskb->sk);
+=======
+	tp->af_specific->ecn_capable(nskb->sk);
+>>>>>>> v3.18
 =======
 	tp->af_specific->ecn_capable(nskb->sk);
 >>>>>>> v3.18
@@ -711,7 +806,12 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 
 		/* Restart the AUTOCLOSE timer when sending data. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (sctp_state(asoc, ESTABLISHED) && asoc->autoclose) {
+=======
+		if (sctp_state(asoc, ESTABLISHED) &&
+		    asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE]) {
+>>>>>>> v3.18
 =======
 		if (sctp_state(asoc, ESTABLISHED) &&
 		    asoc->timeouts[SCTP_EVENT_TIMEOUT_AUTOCLOSE]) {
@@ -725,16 +825,22 @@ int sctp_packet_transmit(struct sctp_packet *packet)
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SCTP_DEBUG_PRINTK("***sctp_transmit_packet*** skb len %d\n",
 			  nskb->len);
 
 	nskb->local_df = packet->ipfragok;
 	(*tp->af_specific->sctp_xmit)(nskb, tp);
 =======
+=======
+>>>>>>> v3.18
 	pr_debug("***sctp_transmit_packet*** skb->len:%d\n", nskb->len);
 
 	nskb->ignore_df = packet->ipfragok;
 	tp->af_specific->sctp_xmit(nskb, tp);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 out:
@@ -743,9 +849,13 @@ out:
 no_route:
 	kfree_skb(nskb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (asoc)
 		IP_INC_STATS(sock_net(asoc->base.sk), IPSTATS_MIB_OUTNOROUTES);
+=======
+	IP_INC_STATS(sock_net(asoc->base.sk), IPSTATS_MIB_OUTNOROUTES);
+>>>>>>> v3.18
 =======
 	IP_INC_STATS(sock_net(asoc->base.sk), IPSTATS_MIB_OUTNOROUTES);
 >>>>>>> v3.18
@@ -783,7 +893,10 @@ static sctp_xmit_t sctp_packet_can_append_data(struct sctp_packet *packet,
 					   struct sctp_chunk *chunk)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sctp_xmit_t retval = SCTP_XMIT_OK;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	size_t datasize, rwnd, inflight, flight_size;
@@ -811,6 +924,7 @@ static sctp_xmit_t sctp_packet_can_append_data(struct sctp_packet *packet,
 	datasize = sctp_data_size(chunk);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (datasize > rwnd) {
 		if (inflight > 0) {
 			/* We have (at least) one data chunk in flight,
@@ -821,11 +935,16 @@ static sctp_xmit_t sctp_packet_can_append_data(struct sctp_packet *packet,
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (datasize > rwnd && inflight > 0)
 		/* We have (at least) one data chunk in flight,
 		 * so we can't fall back to rule 6.1 B).
 		 */
 		return SCTP_XMIT_RWND_FULL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* RFC 2960 6.1  Transmission of DATA Chunks
@@ -841,11 +960,17 @@ static sctp_xmit_t sctp_packet_can_append_data(struct sctp_packet *packet,
 	 *    ignore the value of cwnd and SHOULD NOT delay retransmission.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (chunk->fast_retransmit != SCTP_NEED_FRTX)
 		if (flight_size >= transport->cwnd) {
 			retval = SCTP_XMIT_RWND_FULL;
 			goto finish;
 		}
+=======
+	if (chunk->fast_retransmit != SCTP_NEED_FRTX &&
+	    flight_size >= transport->cwnd)
+		return SCTP_XMIT_RWND_FULL;
+>>>>>>> v3.18
 =======
 	if (chunk->fast_retransmit != SCTP_NEED_FRTX &&
 	    flight_size >= transport->cwnd)
@@ -857,6 +982,7 @@ static sctp_xmit_t sctp_packet_can_append_data(struct sctp_packet *packet,
 	 * if any previously transmitted data on the connection remains
 	 * unacknowledged.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	if (!sctp_sk(asoc->base.sk)->nodelay && sctp_packet_empty(packet) &&
 	    inflight && sctp_state(asoc, ESTABLISHED)) {
@@ -878,6 +1004,8 @@ static sctp_xmit_t sctp_packet_can_append_data(struct sctp_packet *packet,
 finish:
 	return retval;
 =======
+=======
+>>>>>>> v3.18
 
 	if (sctp_sk(asoc->base.sk)->nodelay)
 		/* Nagle disabled */
@@ -907,6 +1035,9 @@ finish:
 
 	/* Defer until all data acked or packet full */
 	return SCTP_XMIT_DELAY;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 

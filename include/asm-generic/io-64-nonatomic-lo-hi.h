@@ -5,8 +5,12 @@
 #include <asm-generic/int-ll64.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifndef readq
 static inline __u64 readq(const volatile void __iomem *addr)
+=======
+static inline __u64 lo_hi_readq(const volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 static inline __u64 lo_hi_readq(const volatile void __iomem *addr)
 >>>>>>> v3.18
@@ -20,10 +24,15 @@ static inline __u64 lo_hi_readq(const volatile void __iomem *addr)
 	return low + ((u64)high << 32);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 
 #ifndef writeq
 static inline void writeq(__u64 val, volatile void __iomem *addr)
+=======
+
+static inline void lo_hi_writeq(__u64 val, volatile void __iomem *addr)
+>>>>>>> v3.18
 =======
 
 static inline void lo_hi_writeq(__u64 val, volatile void __iomem *addr)
@@ -33,7 +42,10 @@ static inline void lo_hi_writeq(__u64 val, volatile void __iomem *addr)
 	writel(val >> 32, addr + 4);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 #ifndef readq
 #define readq lo_hi_readq
@@ -41,6 +53,9 @@ static inline void lo_hi_writeq(__u64 val, volatile void __iomem *addr)
 
 #ifndef writeq
 #define writeq lo_hi_writeq
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #endif
 

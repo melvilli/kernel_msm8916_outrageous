@@ -102,7 +102,11 @@ struct swsusp_header {
 	char	orig_sig[10];
 	char	sig[10];
 <<<<<<< HEAD
+<<<<<<< HEAD
 } __attribute__((packed));
+=======
+} __packed;
+>>>>>>> v3.18
 =======
 } __packed;
 >>>>>>> v3.18
@@ -572,7 +576,11 @@ static int lzo_compress_threadfn(void *data)
 /**
  * save_image_lzo - Save the suspend image data compressed with LZO.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @handle: Swap mam handle to use for saving the image.
+=======
+ * @handle: Swap map handle to use for saving the image.
+>>>>>>> v3.18
 =======
  * @handle: Swap map handle to use for saving the image.
 >>>>>>> v3.18

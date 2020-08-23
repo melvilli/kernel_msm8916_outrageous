@@ -45,6 +45,10 @@ static void join_timeout_handler (void *FunctionContext)
 {
 	struct _adapter *adapter = (struct _adapter *)FunctionContext;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -55,6 +59,10 @@ static void _scan_timeout_handler (void *FunctionContext)
 {
 	struct _adapter *adapter = (struct _adapter *)FunctionContext;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -65,6 +73,10 @@ static void dhcp_timeout_handler (void *FunctionContext)
 {
 	struct _adapter *adapter = (struct _adapter *)FunctionContext;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -160,10 +172,16 @@ void r8712_report_sec_ie(struct _adapter *adapter, u8 authmode, u8 *sec_ie)
 	buff = NULL;
 	if (authmode == _WPA_IE_ID_) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		buff = _malloc(IW_CUSTOM_MAX);
 		if (buff == NULL)
 			return;
 		memset(buff, 0, IW_CUSTOM_MAX);
+=======
+		buff = kzalloc(IW_CUSTOM_MAX, GFP_ATOMIC);
+		if (buff == NULL)
+			return;
+>>>>>>> v3.18
 =======
 		buff = kzalloc(IW_CUSTOM_MAX, GFP_ATOMIC);
 		if (buff == NULL)

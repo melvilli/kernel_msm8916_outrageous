@@ -177,8 +177,13 @@ static irqreturn_t tx4939_rtc_interrupt(int irq, void *dev_id)
 	}
 	spin_unlock(&pdata->lock);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (likely(pdata->rtc))
 		rtc_update_irq(pdata->rtc, 1, events);
+=======
+	rtc_update_irq(pdata->rtc, 1, events);
+
+>>>>>>> v3.18
 =======
 	rtc_update_irq(pdata->rtc, 1, events);
 
@@ -250,9 +255,12 @@ static int __init tx4939_rtc_probe(struct platform_device *pdev)
 	int irq, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if (!res)
 		return -ENODEV;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	irq = platform_get_irq(pdev, 0);
@@ -264,6 +272,7 @@ static int __init tx4939_rtc_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, pdata);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!devm_request_mem_region(&pdev->dev, res->start,
 				     resource_size(res), pdev->name))
 		return -EBUSY;
@@ -272,10 +281,15 @@ static int __init tx4939_rtc_probe(struct platform_device *pdev)
 	if (!pdata->rtcreg)
 		return -EBUSY;
 =======
+=======
+>>>>>>> v3.18
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	pdata->rtcreg = devm_ioremap_resource(&pdev->dev, res);
 	if (IS_ERR(pdata->rtcreg))
 		return PTR_ERR(pdata->rtcreg);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	spin_lock_init(&pdata->lock);

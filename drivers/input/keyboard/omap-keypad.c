@@ -26,7 +26,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/interrupt.h>
@@ -252,7 +255,11 @@ static int omap_kp_probe(struct platform_device *pdev)
 	struct omap_kp *omap_kp;
 	struct input_dev *input_dev;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct omap_kp_platform_data *pdata =  pdev->dev.platform_data;
+=======
+	struct omap_kp_platform_data *pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	struct omap_kp_platform_data *pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18

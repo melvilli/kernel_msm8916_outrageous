@@ -22,6 +22,11 @@
 #include "hw.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+struct ath_softc;
+
+>>>>>>> v3.18
 =======
 struct ath_softc;
 
@@ -57,6 +62,7 @@ struct ath_dfs_stats {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * struct ath_dfs_pool_stats - DFS Statistics for global pools
  */
@@ -71,14 +77,19 @@ struct ath_dfs_pool_stats {
 };
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 #if defined(CONFIG_ATH9K_DFS_DEBUGFS)
 
 #define DFS_STAT_INC(sc, c) (sc->debug.stats.dfs_stats.c++)
 void ath9k_dfs_init_debug(struct ath_softc *sc);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DFS_POOL_STAT_INC(c) (global_dfs_pool_stats.c++)
 #define DFS_POOL_STAT_DEC(c) (global_dfs_pool_stats.c--)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 extern struct ath_dfs_pool_stats global_dfs_pool_stats;
@@ -89,8 +100,11 @@ extern struct ath_dfs_pool_stats global_dfs_pool_stats;
 static inline void ath9k_dfs_init_debug(struct ath_softc *sc) { }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define DFS_POOL_STAT_INC(c) do { } while (0)
 #define DFS_POOL_STAT_DEC(c) do { } while (0)
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #endif /* CONFIG_ATH9K_DFS_DEBUGFS */

@@ -47,7 +47,11 @@ static void issue_park_cmd(ide_drive_t *drive, unsigned long timeout)
 	 */
 	rq = blk_get_request(q, READ, GFP_NOWAIT);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (unlikely(!rq))
+=======
+	if (IS_ERR(rq))
+>>>>>>> v3.18
 =======
 	if (IS_ERR(rq))
 >>>>>>> v3.18
@@ -121,13 +125,19 @@ ssize_t ide_park_store(struct device *dev, struct device_attribute *attr,
 	int rc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	rc = strict_strtol(buf, 10, &input);
 	if (rc || input < -2)
 =======
+=======
+>>>>>>> v3.18
 	rc = kstrtol(buf, 10, &input);
 	if (rc)
 		return rc;
 	if (input < -2)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		return -EINVAL;
 	if (input > MAX_PARK_TIMEOUT) {

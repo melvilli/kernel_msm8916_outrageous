@@ -13,6 +13,10 @@
 #include <linux/spinlock.h>
 #include <linux/mutex.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/gfp.h>
+>>>>>>> v3.18
 =======
 #include <linux/gfp.h>
 >>>>>>> v3.18
@@ -45,7 +49,11 @@ struct prop_descriptor {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int prop_descriptor_init(struct prop_descriptor *pd, int shift);
+=======
+int prop_descriptor_init(struct prop_descriptor *pd, int shift, gfp_t gfp);
+>>>>>>> v3.18
 =======
 int prop_descriptor_init(struct prop_descriptor *pd, int shift, gfp_t gfp);
 >>>>>>> v3.18
@@ -70,7 +78,11 @@ struct prop_local_percpu {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int prop_local_init_percpu(struct prop_local_percpu *pl);
+=======
+int prop_local_init_percpu(struct prop_local_percpu *pl, gfp_t gfp);
+>>>>>>> v3.18
 =======
 int prop_local_init_percpu(struct prop_local_percpu *pl, gfp_t gfp);
 >>>>>>> v3.18

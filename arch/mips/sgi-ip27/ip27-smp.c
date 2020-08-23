@@ -174,7 +174,11 @@ static void ip27_send_ipi_mask(const struct cpumask *mask, unsigned int action)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit ip27_init_secondary(void)
+=======
+static void ip27_init_secondary(void)
+>>>>>>> v3.18
 =======
 static void ip27_init_secondary(void)
 >>>>>>> v3.18
@@ -183,7 +187,11 @@ static void ip27_init_secondary(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit ip27_smp_finish(void)
+=======
+static void ip27_smp_finish(void)
+>>>>>>> v3.18
 =======
 static void ip27_smp_finish(void)
 >>>>>>> v3.18
@@ -195,10 +203,13 @@ static void ip27_smp_finish(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __init ip27_cpus_done(void)
 {
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 /*
@@ -207,7 +218,11 @@ static void __init ip27_cpus_done(void)
  * struct so that current_thread_info() will work.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void __cpuinit ip27_boot_secondary(int cpu, struct task_struct *idle)
+=======
+static void ip27_boot_secondary(int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static void ip27_boot_secondary(int cpu, struct task_struct *idle)
 >>>>>>> v3.18
@@ -252,7 +267,10 @@ struct plat_smp_ops ip27_smp_ops = {
 	.init_secondary		= ip27_init_secondary,
 	.smp_finish		= ip27_smp_finish,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.cpus_done		= ip27_cpus_done,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.boot_secondary		= ip27_boot_secondary,

@@ -89,9 +89,15 @@ EXPORT_SYMBOL_GPL(devm_can_led_init);
 /* NETDEV rename notifier to rename the associated led triggers too */
 static int can_led_notifier(struct notifier_block *nb, unsigned long msg,
 <<<<<<< HEAD
+<<<<<<< HEAD
 			void *data)
 {
 	struct net_device *netdev = data;
+=======
+			    void *ptr)
+{
+	struct net_device *netdev = netdev_notifier_info_to_dev(ptr);
+>>>>>>> v3.18
 =======
 			    void *ptr)
 {
@@ -104,6 +110,12 @@ static int can_led_notifier(struct notifier_block *nb, unsigned long msg,
 		return NOTIFY_DONE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if (!priv->tx_led_trig || !priv->rx_led_trig)
+		return NOTIFY_DONE;
+
+>>>>>>> v3.18
 =======
 	if (!priv->tx_led_trig || !priv->rx_led_trig)
 		return NOTIFY_DONE;

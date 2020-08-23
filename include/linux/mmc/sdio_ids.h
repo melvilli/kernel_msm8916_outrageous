@@ -24,7 +24,10 @@
  * Vendors and devices.  Sort key: vendor first, device next.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #define SDIO_VENDOR_ID_BROADCOM			0x02d0
 #define SDIO_DEVICE_ID_BROADCOM_43143		43143
 #define SDIO_DEVICE_ID_BROADCOM_43241		0x4324
@@ -35,6 +38,9 @@
 #define SDIO_DEVICE_ID_BROADCOM_43362		43362
 #define SDIO_DEVICE_ID_BROADCOM_4354		0x4354
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #define SDIO_VENDOR_ID_INTEL			0x0089
 #define SDIO_DEVICE_ID_INTEL_IWMC3200WIMAX	0x1402

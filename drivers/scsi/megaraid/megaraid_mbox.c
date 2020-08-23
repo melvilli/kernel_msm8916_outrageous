@@ -536,7 +536,10 @@ megaraid_probe_one(struct pci_dev *pdev, const struct pci_device_id *id)
 
 out_cmm_unreg:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pci_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	megaraid_cmm_unregister(adapter);
@@ -554,7 +557,11 @@ out_probe_one:
 /**
  * megaraid_detach_one - release framework resources and call LLD release routine
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @pdev	: handle for our PCI cofiguration space
+=======
+ * @pdev	: handle for our PCI configuration space
+>>>>>>> v3.18
 =======
  * @pdev	: handle for our PCI configuration space
 >>>>>>> v3.18
@@ -603,11 +610,14 @@ megaraid_detach_one(struct pci_dev *pdev)
 	megaraid_io_detach(adapter);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// reset the device state in the PCI structure. We check this
 	// condition when we enter here. If the device state is NULL,
 	// that would mean the device has already been removed
 	pci_set_drvdata(pdev, NULL);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	// Unregister from common management module
@@ -991,7 +1001,11 @@ megaraid_fini_mbox(adapter_t *adapter)
  *
  * Allocate and align the shared mailbox. This maibox is used to issue
 <<<<<<< HEAD
+<<<<<<< HEAD
  * all the commands. For IO based controllers, the mailbox is also regsitered
+=======
+ * all the commands. For IO based controllers, the mailbox is also registered
+>>>>>>> v3.18
 =======
  * all the commands. For IO based controllers, the mailbox is also registered
 >>>>>>> v3.18
@@ -1019,8 +1033,14 @@ megaraid_alloc_cmd_packets(adapter_t *adapter)
 	 * mailbox.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	raid_dev->una_mbox64 = pci_alloc_consistent(adapter->pdev,
 			sizeof(mbox64_t), &raid_dev->una_mbox64_dma);
+=======
+	raid_dev->una_mbox64 = pci_zalloc_consistent(adapter->pdev,
+						     sizeof(mbox64_t),
+						     &raid_dev->una_mbox64_dma);
+>>>>>>> v3.18
 =======
 	raid_dev->una_mbox64 = pci_zalloc_consistent(adapter->pdev,
 						     sizeof(mbox64_t),
@@ -1034,7 +1054,10 @@ megaraid_alloc_cmd_packets(adapter_t *adapter)
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(raid_dev->una_mbox64, 0, sizeof(mbox64_t));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1056,8 +1079,13 @@ megaraid_alloc_cmd_packets(adapter_t *adapter)
 
 	// Allocate memory for commands issued internally
 <<<<<<< HEAD
+<<<<<<< HEAD
 	adapter->ibuf = pci_alloc_consistent(pdev, MBOX_IBUF_SIZE,
 				&adapter->ibuf_dma_h);
+=======
+	adapter->ibuf = pci_zalloc_consistent(pdev, MBOX_IBUF_SIZE,
+					      &adapter->ibuf_dma_h);
+>>>>>>> v3.18
 =======
 	adapter->ibuf = pci_zalloc_consistent(pdev, MBOX_IBUF_SIZE,
 					      &adapter->ibuf_dma_h);
@@ -1071,7 +1099,10 @@ megaraid_alloc_cmd_packets(adapter_t *adapter)
 		goto out_free_common_mbox;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(adapter->ibuf, 0, MBOX_IBUF_SIZE);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -2060,7 +2091,11 @@ megaraid_mbox_prepare_pthru(adapter_t *adapter, scb_t *scb,
  * @scp		: scsi command from the mid-layer
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Prepare a command for the scsi physical devices. This rountine prepares
+=======
+ * Prepare a command for the scsi physical devices. This routine prepares
+>>>>>>> v3.18
 =======
  * Prepare a command for the scsi physical devices. This routine prepares
 >>>>>>> v3.18
@@ -2623,7 +2658,11 @@ megaraid_abort_handler(struct scsi_cmnd *scp)
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * megaraid_reset_handler - device reset hadler for mailbox based driver
+=======
+ * megaraid_reset_handler - device reset handler for mailbox based driver
+>>>>>>> v3.18
 =======
  * megaraid_reset_handler - device reset handler for mailbox based driver
 >>>>>>> v3.18
@@ -3018,8 +3057,13 @@ megaraid_mbox_product_info(adapter_t *adapter)
 	 * e.g., max channels, max commands etc.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pinfo = pci_alloc_consistent(adapter->pdev, sizeof(mraid_pinfo_t),
 			&pinfo_dma_h);
+=======
+	pinfo = pci_zalloc_consistent(adapter->pdev, sizeof(mraid_pinfo_t),
+				      &pinfo_dma_h);
+>>>>>>> v3.18
 =======
 	pinfo = pci_zalloc_consistent(adapter->pdev, sizeof(mraid_pinfo_t),
 				      &pinfo_dma_h);
@@ -3033,7 +3077,10 @@ megaraid_mbox_product_info(adapter_t *adapter)
 		return -1;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	memset(pinfo, 0, sizeof(mraid_pinfo_t));
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -3495,7 +3542,11 @@ megaraid_mbox_display_scb(adapter_t *adapter, scb_t *scb)
  * @adapter	: Driver's soft state
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Manange the device ids to have an appropriate mapping between the kernel
+=======
+ * Manage the device ids to have an appropriate mapping between the kernel
+>>>>>>> v3.18
 =======
  * Manage the device ids to have an appropriate mapping between the kernel
 >>>>>>> v3.18

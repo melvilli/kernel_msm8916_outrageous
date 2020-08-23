@@ -5,6 +5,7 @@
 #include "prism2fw.c"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define PRISM_USB_DEVICE(vid, pid, name)	\
 	USB_DEVICE(vid, pid),			\
 	.driver_info = (unsigned long) name
@@ -103,6 +104,8 @@ MODULE_DEVICE_TABLE(usb, usb_prism_tbl);
 *
 ----------------------------------------------------------------*/
 =======
+=======
+>>>>>>> v3.18
 #define PRISM_DEV(vid, pid, name)		\
 	{ USB_DEVICE(vid, pid),			\
 	.driver_info = (unsigned long) name }
@@ -155,6 +158,9 @@ static struct usb_device_id usb_prism_tbl[] = {
 };
 MODULE_DEVICE_TABLE(usb, usb_prism_tbl);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 static int prism2sta_probe_usb(struct usb_interface *interface,
 			       const struct usb_device_id *id)
@@ -196,16 +202,22 @@ static int prism2sta_probe_usb(struct usb_interface *interface,
 					   prism2_reset_settletime, 0);
 		if (result != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			unregister_wlandev(wlandev);
 			hfa384x_destroy(hw);
 			result = -EIO;
 			dev_err(&interface->dev, "hfa384x_corereset() failed.\n");
 			goto failed;
 =======
+=======
+>>>>>>> v3.18
 			result = -EIO;
 			dev_err(&interface->dev,
 				"hfa384x_corereset() failed.\n");
 			goto failed_reset;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		}
 	}
@@ -222,7 +234,11 @@ static int prism2sta_probe_usb(struct usb_interface *interface,
 		dev_err(&interface->dev, "register_wlandev() failed.\n");
 		result = -EIO;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		goto failed;
+=======
+		goto failed_register;
+>>>>>>> v3.18
 =======
 		goto failed_register;
 >>>>>>> v3.18
@@ -231,11 +247,17 @@ static int prism2sta_probe_usb(struct usb_interface *interface,
 	goto done;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 failed_register:
 	usb_put_dev(dev);
 failed_reset:
 	wlan_unsetup(wlandev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 failed:
 	kfree(wlandev);
@@ -247,6 +269,7 @@ done:
 	return result;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*----------------------------------------------------------------
 * prism2sta_disconnect_usb
@@ -269,13 +292,18 @@ done:
 ----------------------------------------------------------------*/
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 static void prism2sta_disconnect_usb(struct usb_interface *interface)
 {
 	wlandevice_t *wlandev;
 
 	wlandev = (wlandevice_t *) usb_get_intfdata(interface);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (wlandev != NULL) {
@@ -370,6 +398,10 @@ static int prism2sta_suspend(struct usb_interface *interface,
 	hfa384x_t *hw = NULL;
 	wlandevice_t *wlandev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -396,6 +428,10 @@ static int prism2sta_resume(struct usb_interface *interface)
 	hfa384x_t *hw = NULL;
 	wlandevice_t *wlandev;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18

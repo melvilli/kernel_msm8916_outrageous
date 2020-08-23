@@ -163,17 +163,23 @@ static const struct file_operations openpromfs_prop_ops = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int openpromfs_readdir(struct file *, void *, filldir_t);
 
 static const struct file_operations openprom_operations = {
 	.read		= generic_read_dir,
 	.readdir	= openpromfs_readdir,
 =======
+=======
+>>>>>>> v3.18
 static int openpromfs_readdir(struct file *, struct dir_context *);
 
 static const struct file_operations openprom_operations = {
 	.read		= generic_read_dir,
 	.iterate	= openpromfs_readdir,
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.llseek		= generic_file_llseek,
 };
@@ -269,9 +275,15 @@ found:
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int openpromfs_readdir(struct file * filp, void * dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
+=======
+static int openpromfs_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 static int openpromfs_readdir(struct file *file, struct dir_context *ctx)
 {
@@ -282,13 +294,17 @@ static int openpromfs_readdir(struct file *file, struct dir_context *ctx)
 	struct device_node *child;
 	struct property *prop;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned int ino;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	int i;
 
 	mutex_lock(&op_mutex);
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	ino = inode->i_ino;
 	i = filp->f_pos;
@@ -344,6 +360,8 @@ static int openpromfs_readdir(struct file *file, struct dir_context *ctx)
 		}
 	}
 =======
+=======
+>>>>>>> v3.18
 	if (ctx->pos == 0) {
 		if (!dir_emit(ctx, ".", 1, inode->i_ino, DT_DIR))
 			goto out;
@@ -391,6 +409,9 @@ static int openpromfs_readdir(struct file *file, struct dir_context *ctx)
 		prop = prop->next;
 	}
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 out:
 	mutex_unlock(&op_mutex);
@@ -443,6 +464,10 @@ static struct inode *openprom_iget(struct super_block *sb, ino_t ino)
 static int openprom_remount(struct super_block *sb, int *flags, char *data)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	sync_filesystem(sb);
+>>>>>>> v3.18
 =======
 	sync_filesystem(sb);
 >>>>>>> v3.18

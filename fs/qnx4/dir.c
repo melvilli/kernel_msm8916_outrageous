@@ -15,9 +15,15 @@
 #include "qnx4.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int qnx4_readdir(struct file *filp, void *dirent, filldir_t filldir)
 {
 	struct inode *inode = file_inode(filp);
+=======
+static int qnx4_readdir(struct file *file, struct dir_context *ctx)
+{
+	struct inode *inode = file_inode(file);
+>>>>>>> v3.18
 =======
 static int qnx4_readdir(struct file *file, struct dir_context *ctx)
 {
@@ -32,6 +38,7 @@ static int qnx4_readdir(struct file *file, struct dir_context *ctx)
 	int size;
 
 	QNX4DEBUG((KERN_INFO "qnx4_readdir:i_size = %ld\n", (long) inode->i_size));
+<<<<<<< HEAD
 <<<<<<< HEAD
 	QNX4DEBUG((KERN_INFO "filp->f_pos         = %ld\n", (long) filp->f_pos));
 
@@ -76,6 +83,8 @@ static int qnx4_readdir(struct file *file, struct dir_context *ctx)
 	}
 out:
 =======
+=======
+>>>>>>> v3.18
 	QNX4DEBUG((KERN_INFO "pos                 = %ld\n", (long) ctx->pos));
 
 	while (ctx->pos < inode->i_size) {
@@ -114,6 +123,9 @@ out:
 		}
 		brelse(bh);
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	return 0;
 }
@@ -123,7 +135,11 @@ const struct file_operations qnx4_dir_operations =
 	.llseek		= generic_file_llseek,
 	.read		= generic_read_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.readdir	= qnx4_readdir,
+=======
+	.iterate	= qnx4_readdir,
+>>>>>>> v3.18
 =======
 	.iterate	= qnx4_readdir,
 >>>>>>> v3.18

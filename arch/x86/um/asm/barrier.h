@@ -41,11 +41,15 @@
 #endif /* CONFIG_X86_PPRO_FENCE */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_X86_OOSTORE
 #define smp_wmb()	wmb()
 #else /* CONFIG_X86_OOSTORE */
 #define smp_wmb()	barrier()
 #endif /* CONFIG_X86_OOSTORE */
+=======
+#define smp_wmb()	barrier()
+>>>>>>> v3.18
 =======
 #define smp_wmb()	barrier()
 >>>>>>> v3.18
@@ -56,13 +60,19 @@
 #else /* CONFIG_SMP */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <asm-generic/barrier.h>
 =======
+=======
+>>>>>>> v3.18
 #define smp_mb()	barrier()
 #define smp_rmb()	barrier()
 #define smp_wmb()	barrier()
 #define smp_read_barrier_depends()	do { } while (0)
 #define set_mb(var, value) do { var = value; barrier(); } while (0)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #endif /* CONFIG_SMP */

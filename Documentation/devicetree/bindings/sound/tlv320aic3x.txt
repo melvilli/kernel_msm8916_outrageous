@@ -4,8 +4,11 @@ The tlv320aic3x serial control bus communicates through I2C protocols
 
 Required properties:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - compatible - "string" -  "ti,tlv320aic3x"
 =======
+=======
+>>>>>>> v3.18
 
 - compatible - "string" - One of:
     "ti,tlv320aic3x" - Generic TLV320AIC3x device
@@ -14,6 +17,9 @@ Required properties:
     "ti,tlv320aic3106" - TLV320AIC3106
 
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 - reg - <int> -  I2C slave address
 
@@ -29,7 +35,10 @@ Optional properties:
 	If this node is not mentioned or if the value is incorrect, then MicBias
 	is powered down.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 - AVDD-supply, IOVDD-supply, DRVDD-supply, DVDD-supply : power supplies for the
   device as covered in Documentation/devicetree/bindings/regulator/regulator.txt
 
@@ -51,6 +60,9 @@ CODEC input pins:
   * LINE2R
 
 The pins can be used in referring sound node's audio-routing property.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 Example:
@@ -59,11 +71,17 @@ tlv320aic3x: tlv320aic3x@1b {
 	compatible = "ti,tlv320aic3x";
 	reg = <0x1b>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 
 	AVDD-supply = <&regulator>;
 	IOVDD-supply = <&regulator>;
 	DRVDD-supply = <&regulator>;
 	DVDD-supply = <&regulator>;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };

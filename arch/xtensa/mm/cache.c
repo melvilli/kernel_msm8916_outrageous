@@ -60,7 +60,10 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if (DCACHE_WAY_SIZE > PAGE_SIZE)
 static inline void kmap_invalidate_coherent(struct page *page,
 					    unsigned long vaddr)
@@ -124,6 +127,9 @@ void copy_user_highpage(struct page *dst, struct page *src,
 
 #endif /* DCACHE_WAY_SIZE > PAGE_SIZE */
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 #if (DCACHE_WAY_SIZE > PAGE_SIZE) && XCHAL_DCACHE_IS_WRITEBACK
 
@@ -166,7 +172,12 @@ void flush_dcache_page(struct page *page)
 			return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		__flush_invalidate_dcache_page((long)page_address(page));
+=======
+		virt = TLBTEMP_BASE_1 + (phys & DCACHE_ALIAS_MASK);
+		__flush_invalidate_dcache_page_alias(virt, phys);
+>>>>>>> v3.18
 =======
 		virt = TLBTEMP_BASE_1 + (phys & DCACHE_ALIAS_MASK);
 		__flush_invalidate_dcache_page_alias(virt, phys);
@@ -190,7 +201,11 @@ void flush_dcache_page(struct page *page)
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_cache_range(struct vm_area_struct* vma,
+=======
+void local_flush_cache_range(struct vm_area_struct *vma,
+>>>>>>> v3.18
 =======
 void local_flush_cache_range(struct vm_area_struct *vma,
 >>>>>>> v3.18
@@ -208,7 +223,11 @@ void local_flush_cache_range(struct vm_area_struct *vma,
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void flush_cache_page(struct vm_area_struct* vma, unsigned long address,
+=======
+void local_flush_cache_page(struct vm_area_struct *vma, unsigned long address,
+>>>>>>> v3.18
 =======
 void local_flush_cache_page(struct vm_area_struct *vma, unsigned long address,
 >>>>>>> v3.18
@@ -239,8 +258,12 @@ update_mmu_cache(struct vm_area_struct * vma, unsigned long addr, pte_t *ptep)
 	/* Invalidate old entry in TLBs */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	invalidate_itlb_mapping(addr);
 	invalidate_dtlb_mapping(addr);
+=======
+	flush_tlb_page(vma, addr);
+>>>>>>> v3.18
 =======
 	flush_tlb_page(vma, addr);
 >>>>>>> v3.18
@@ -248,6 +271,7 @@ update_mmu_cache(struct vm_area_struct * vma, unsigned long addr, pte_t *ptep)
 #if (DCACHE_WAY_SIZE > PAGE_SIZE) && XCHAL_DCACHE_IS_WRITEBACK
 
 	if (!PageReserved(page) && test_bit(PG_arch_1, &page->flags)) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		unsigned long paddr = (unsigned long) page_address(page);
@@ -257,12 +281,17 @@ update_mmu_cache(struct vm_area_struct * vma, unsigned long addr, pte_t *ptep)
 		__flush_invalidate_dcache_page(paddr);
 
 =======
+=======
+>>>>>>> v3.18
 		unsigned long phys = page_to_phys(page);
 		unsigned long tmp;
 
 		tmp = TLBTEMP_BASE_1 + (phys & DCACHE_ALIAS_MASK);
 		__flush_invalidate_dcache_page_alias(tmp, phys);
 		tmp = TLBTEMP_BASE_1 + (addr & DCACHE_ALIAS_MASK);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		__flush_invalidate_dcache_page_alias(tmp, phys);
 		__invalidate_icache_page_alias(tmp, phys);
@@ -273,16 +302,22 @@ update_mmu_cache(struct vm_area_struct * vma, unsigned long addr, pte_t *ptep)
 	if (!PageReserved(page) && !test_bit(PG_arch_1, &page->flags)
 	    && (vma->vm_flags & VM_EXEC) != 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    	unsigned long paddr = (unsigned long) page_address(page);
 		__flush_dcache_page(paddr);
 		__invalidate_icache_page(paddr);
 		set_bit(PG_arch_1, &page->flags);
 =======
+=======
+>>>>>>> v3.18
 		unsigned long paddr = (unsigned long)kmap_atomic(page);
 		__flush_dcache_page(paddr);
 		__invalidate_icache_page(paddr);
 		set_bit(PG_arch_1, &page->flags);
 		kunmap_atomic((void *)paddr);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 #endif

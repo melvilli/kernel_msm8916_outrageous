@@ -76,6 +76,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define BCACHE_JSET_VERSION_UUIDv1	1
 /* Always latest UUID format */
 #define BCACHE_JSET_VERSION_UUID	1
@@ -115,6 +116,8 @@ struct jset {
 
 =======
 >>>>>>> v3.18
+=======
+>>>>>>> v3.18
 /*
  * Only used for holding the journal entries we read in btree_journal_read()
  * during cache_registration
@@ -136,6 +139,10 @@ struct journal_write {
 	struct cache_set	*c;
 	struct closure_waitlist	wait;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	bool			dirty;
+>>>>>>> v3.18
 =======
 	bool			dirty;
 >>>>>>> v3.18
@@ -148,7 +155,13 @@ struct journal {
 	/* used when waiting because the journal was full */
 	struct closure_waitlist	wait;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct closure_with_timer io;
+=======
+	struct closure		io;
+	int			io_in_flight;
+	struct delayed_work	work;
+>>>>>>> v3.18
 =======
 	struct closure		io;
 	int			io_in_flight;
@@ -202,8 +215,12 @@ struct journal_device {
 
 #define journal_pin_cmp(c, l, r)				\
 <<<<<<< HEAD
+<<<<<<< HEAD
 	(fifo_idx(&(c)->journal.pin, (l)->journal) >		\
 	 fifo_idx(&(c)->journal.pin, (r)->journal))
+=======
+	(fifo_idx(&(c)->journal.pin, (l)) > fifo_idx(&(c)->journal.pin, (r)))
+>>>>>>> v3.18
 =======
 	(fifo_idx(&(c)->journal.pin, (l)) > fifo_idx(&(c)->journal.pin, (r)))
 >>>>>>> v3.18
@@ -217,6 +234,7 @@ struct closure;
 struct cache_set;
 struct btree_op;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 void bch_journal(struct closure *);
 void bch_journal_next(struct journal *);
@@ -227,6 +245,8 @@ int bch_journal_read(struct cache_set *, struct list_head *,
 int bch_journal_replay(struct cache_set *, struct list_head *,
 			  struct btree_op *);
 =======
+=======
+>>>>>>> v3.18
 struct keylist;
 
 atomic_t *bch_journal(struct cache_set *, struct keylist *, struct closure *);
@@ -235,6 +255,9 @@ void bch_journal_mark(struct cache_set *, struct list_head *);
 void bch_journal_meta(struct cache_set *, struct closure *);
 int bch_journal_read(struct cache_set *, struct list_head *);
 int bch_journal_replay(struct cache_set *, struct list_head *);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 void bch_journal_free(struct cache_set *);

@@ -21,14 +21,20 @@
 #include "exynos_drm_drv.h"
 #include "exynos_drm_fb.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "exynos_drm_gem.h"
 #include "exynos_drm_iommu.h"
 #include "exynos_drm_encoder.h"
 =======
+=======
+>>>>>>> v3.18
 #include "exynos_drm_fbdev.h"
 #include "exynos_drm_gem.h"
 #include "exynos_drm_iommu.h"
 #include "exynos_drm_crtc.h"
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #define to_exynos_fb(x)	container_of(x, struct exynos_drm_fb, fb)
@@ -78,10 +84,15 @@ static void exynos_drm_fb_destroy(struct drm_framebuffer *fb)
 	unsigned int i;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 	/* make sure that overlay data are updated before relesing fb. */
 	exynos_drm_encoder_complete_scanout(fb);
+=======
+	/* make sure that overlay data are updated before relesing fb. */
+	exynos_drm_crtc_complete_scanout(fb);
+>>>>>>> v3.18
 =======
 	/* make sure that overlay data are updated before relesing fb. */
 	exynos_drm_crtc_complete_scanout(fb);
@@ -110,8 +121,11 @@ static int exynos_drm_fb_create_handle(struct drm_framebuffer *fb,
 	struct exynos_drm_fb *exynos_fb = to_exynos_fb(fb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* This fb should have only one gem object. */
@@ -128,8 +142,11 @@ static int exynos_drm_fb_dirty(struct drm_framebuffer *fb,
 				unsigned num_clips)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	/* TODO */
@@ -181,10 +198,15 @@ exynos_drm_framebuffer_init(struct drm_device *dev,
 
 	exynos_fb = kzalloc(sizeof(*exynos_fb), GFP_KERNEL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (!exynos_fb) {
 		DRM_ERROR("failed to allocate exynos drm framebuffer\n");
 		return ERR_PTR(-ENOMEM);
 	}
+=======
+	if (!exynos_fb)
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 =======
 	if (!exynos_fb)
 		return ERR_PTR(-ENOMEM);
@@ -196,6 +218,10 @@ exynos_drm_framebuffer_init(struct drm_device *dev,
 	ret = drm_framebuffer_init(dev, &exynos_fb->fb, &exynos_drm_fb_funcs);
 	if (ret) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		kfree(exynos_fb);
+>>>>>>> v3.18
 =======
 		kfree(exynos_fb);
 >>>>>>> v3.18
@@ -253,6 +279,7 @@ exynos_user_fb_create(struct drm_device *dev, struct drm_file *file_priv,
 	int i, ret;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
 	exynos_fb = kzalloc(sizeof(*exynos_fb), GFP_KERNEL);
@@ -260,6 +287,11 @@ exynos_user_fb_create(struct drm_device *dev, struct drm_file *file_priv,
 		DRM_ERROR("failed to allocate exynos drm framebuffer\n");
 		return ERR_PTR(-ENOMEM);
 	}
+=======
+	exynos_fb = kzalloc(sizeof(*exynos_fb), GFP_KERNEL);
+	if (!exynos_fb)
+		return ERR_PTR(-ENOMEM);
+>>>>>>> v3.18
 =======
 	exynos_fb = kzalloc(sizeof(*exynos_fb), GFP_KERNEL);
 	if (!exynos_fb)
@@ -327,8 +359,11 @@ struct exynos_drm_gem_buf *exynos_drm_fb_buffer(struct drm_framebuffer *fb,
 	struct exynos_drm_gem_buf *buffer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	DRM_DEBUG_KMS("%s\n", __FILE__);
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	if (index >= MAX_FB_BUFFER)
@@ -351,6 +386,11 @@ static void exynos_drm_output_poll_changed(struct drm_device *dev)
 	if (fb_helper)
 		drm_fb_helper_hotplug_event(fb_helper);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	else
+		exynos_drm_fbdev_init(dev);
+>>>>>>> v3.18
 =======
 	else
 		exynos_drm_fbdev_init(dev);

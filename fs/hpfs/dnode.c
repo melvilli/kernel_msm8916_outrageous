@@ -18,7 +18,11 @@ static loff_t get_pos(struct dnode *d, struct hpfs_dirent *fde)
 		i++;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	printk("HPFS: get_pos: not_found\n");
+=======
+	pr_info("%s(): not_found\n", __func__);
+>>>>>>> v3.18
 =======
 	pr_info("%s(): not_found\n", __func__);
 >>>>>>> v3.18
@@ -37,7 +41,11 @@ void hpfs_add_pos(struct inode *inode, loff_t *pos)
 	if (!(i&0x0f)) {
 		if (!(ppos = kmalloc((i+0x11) * sizeof(loff_t*), GFP_NOFS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("HPFS: out of memory for position list\n");
+=======
+			pr_err("out of memory for position list\n");
+>>>>>>> v3.18
 =======
 			pr_err("out of memory for position list\n");
 >>>>>>> v3.18
@@ -72,7 +80,12 @@ void hpfs_del_pos(struct inode *inode, loff_t *pos)
 	return;
 	not_f:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*printk("HPFS: warning: position pointer %p->%08x not found\n", pos, (int)*pos);*/
+=======
+	/*pr_warn("position pointer %p->%08x not found\n",
+		  pos, (int)*pos);*/
+>>>>>>> v3.18
 =======
 	/*pr_warn("position pointer %p->%08x not found\n",
 		  pos, (int)*pos);*/
@@ -106,14 +119,20 @@ static void hpfs_pos_ins(loff_t *p, loff_t d, loff_t c)
 	if ((*p & ~0x3f) == (d & ~0x3f) && (*p & 0x3f) >= (d & 0x3f)) {
 		int n = (*p & 0x3f) + c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (n > 0x3f) printk("HPFS: hpfs_pos_ins: %08x + %d\n", (int)*p, (int)c >> 8);
 		else *p = (*p & ~0x3f) | n;
 =======
+=======
+>>>>>>> v3.18
 		if (n > 0x3f)
 			pr_err("%s(): %08x + %d\n",
 				__func__, (int)*p, (int)c >> 8);
 		else
 			*p = (*p & ~0x3f) | n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -123,14 +142,20 @@ static void hpfs_pos_del(loff_t *p, loff_t d, loff_t c)
 	if ((*p & ~0x3f) == (d & ~0x3f) && (*p & 0x3f) >= (d & 0x3f)) {
 		int n = (*p & 0x3f) - c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (n < 1) printk("HPFS: hpfs_pos_ins: %08x - %d\n", (int)*p, (int)c >> 8);
 		else *p = (*p & ~0x3f) | n;
 =======
+=======
+>>>>>>> v3.18
 		if (n < 1)
 			pr_err("%s(): %08x - %d\n",
 				__func__, (int)*p, (int)c >> 8);
 		else
 			*p = (*p & ~0x3f) | n;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 }
@@ -269,7 +294,11 @@ static int hpfs_add_to_dnode(struct inode *i, dnode_secno dno,
 	int c1, c2 = 0;
 	if (!(nname = kmalloc(256, GFP_NOFS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: out of memory, can't add to dnode\n");
+=======
+		pr_err("out of memory, can't add to dnode\n");
+>>>>>>> v3.18
 =======
 		pr_err("out of memory, can't add to dnode\n");
 >>>>>>> v3.18
@@ -278,7 +307,11 @@ static int hpfs_add_to_dnode(struct inode *i, dnode_secno dno,
 	go_up:
 	if (namelen >= 256) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		hpfs_error(i->i_sb, "hpfs_add_to_dnode: namelen == %d", namelen);
+=======
+		hpfs_error(i->i_sb, "%s(): namelen == %d", __func__, namelen);
+>>>>>>> v3.18
 =======
 		hpfs_error(i->i_sb, "%s(): namelen == %d", __func__, namelen);
 >>>>>>> v3.18
@@ -319,7 +352,11 @@ static int hpfs_add_to_dnode(struct inode *i, dnode_secno dno,
 		   whole directory, not only file we're adding, would
 		   be lost. */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: out of memory for dnode splitting\n");
+=======
+		pr_err("out of memory for dnode splitting\n");
+>>>>>>> v3.18
 =======
 		pr_err("out of memory for dnode splitting\n");
 >>>>>>> v3.18
@@ -580,6 +617,7 @@ static void delete_empty_dnode(struct inode *i, dnode_secno dno)
 			struct quad_buffer_head qbh1;
 			if (hpfs_sb(i->i_sb)->sb_chk)
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    if (up != i->i_ino) {
 				hpfs_error(i->i_sb,
 					"bad pointer to fnode, dnode %08x, pointing to %08x, should be %08lx",
@@ -587,6 +625,8 @@ static void delete_empty_dnode(struct inode *i, dnode_secno dno)
 				return;
 			    }
 =======
+=======
+>>>>>>> v3.18
 				if (up != i->i_ino) {
 					hpfs_error(i->i_sb,
 						   "bad pointer to fnode, dnode %08x, pointing to %08x, should be %08lx",
@@ -594,6 +634,9 @@ static void delete_empty_dnode(struct inode *i, dnode_secno dno)
 						   (unsigned long)i->i_ino);
 					return;
 				}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 			if ((d1 = hpfs_map_dnode(i->i_sb, down, &qbh1))) {
 				d1->up = cpu_to_le32(up);
@@ -649,7 +692,11 @@ static void delete_empty_dnode(struct inode *i, dnode_secno dno)
 		ndown = de_down_pointer(de_next);
 		if (!(de_cp = kmalloc(le16_to_cpu(de->length), GFP_NOFS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("HPFS: out of memory for dtree balancing\n");
+=======
+			pr_err("out of memory for dtree balancing\n");
+>>>>>>> v3.18
 =======
 			pr_err("out of memory for dtree balancing\n");
 >>>>>>> v3.18
@@ -668,7 +715,12 @@ static void delete_empty_dnode(struct inode *i, dnode_secno dno)
 		}
 		hpfs_add_to_dnode(i, ndown, de_cp->name, de_cp->namelen, de_cp, de_cp->down ? de_down_pointer(de_cp) : 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/*printk("UP-TO-DNODE: %08x (ndown = %08x, down = %08x, dno = %08x)\n", up, ndown, down, dno);*/
+=======
+		/*pr_info("UP-TO-DNODE: %08x (ndown = %08x, down = %08x, dno = %08x)\n",
+		  up, ndown, down, dno);*/
+>>>>>>> v3.18
 =======
 		/*pr_info("UP-TO-DNODE: %08x (ndown = %08x, down = %08x, dno = %08x)\n",
 		  up, ndown, down, dno);*/
@@ -698,8 +750,13 @@ static void delete_empty_dnode(struct inode *i, dnode_secno dno)
 				if (le32_to_cpu(d1->first_free) > 2044) {
 					if (hpfs_sb(i->i_sb)->sb_chk >= 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 						printk("HPFS: warning: unbalanced dnode tree, see hpfs.txt 4 more info\n");
 						printk("HPFS: warning: terminating balancing operation\n");
+=======
+						pr_err("unbalanced dnode tree, see hpfs.txt 4 more info\n");
+						pr_err("terminating balancing operation\n");
+>>>>>>> v3.18
 =======
 						pr_err("unbalanced dnode tree, see hpfs.txt 4 more info\n");
 						pr_err("terminating balancing operation\n");
@@ -710,8 +767,13 @@ static void delete_empty_dnode(struct inode *i, dnode_secno dno)
 				}
 				if (hpfs_sb(i->i_sb)->sb_chk >= 2) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					printk("HPFS: warning: unbalanced dnode tree, see hpfs.txt 4 more info\n");
 					printk("HPFS: warning: goin'on\n");
+=======
+					pr_err("unbalanced dnode tree, see hpfs.txt 4 more info\n");
+					pr_err("goin'on\n");
+>>>>>>> v3.18
 =======
 					pr_err("unbalanced dnode tree, see hpfs.txt 4 more info\n");
 					pr_err("goin'on\n");
@@ -730,7 +792,11 @@ static void delete_empty_dnode(struct inode *i, dnode_secno dno)
 		} else goto endm;
 		if (!(de_cp = kmalloc(le16_to_cpu(de_prev->length), GFP_NOFS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			printk("HPFS: out of memory for dtree balancing\n");
+=======
+			pr_err("out of memory for dtree balancing\n");
+>>>>>>> v3.18
 =======
 			pr_err("out of memory for dtree balancing\n");
 >>>>>>> v3.18
@@ -1075,7 +1141,11 @@ struct hpfs_dirent *map_fnode_dirent(struct super_block *s, fnode_secno fno,
 	name1 = f->name;
 	if (!(name2 = kmalloc(256, GFP_NOFS))) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		printk("HPFS: out of memory, can't map dirent\n");
+=======
+		pr_err("out of memory, can't map dirent\n");
+>>>>>>> v3.18
 =======
 		pr_err("out of memory, can't map dirent\n");
 >>>>>>> v3.18
@@ -1132,8 +1202,13 @@ struct hpfs_dirent *map_fnode_dirent(struct super_block *s, fnode_secno fno,
 		if (hpfs_sb(s)->sb_chk)
 			if (hpfs_stop_cycles(s, dno, &c1, &c2, "map_fnode_dirent #1")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			kfree(name2);
 			return NULL;
+=======
+				kfree(name2);
+				return NULL;
+>>>>>>> v3.18
 =======
 				kfree(name2);
 				return NULL;

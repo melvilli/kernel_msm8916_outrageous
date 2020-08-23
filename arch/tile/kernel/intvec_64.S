@@ -18,6 +18,10 @@
 #include <linux/errno.h>
 #include <linux/unistd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/init.h>
+>>>>>>> v3.18
 =======
 #include <linux/init.h>
 >>>>>>> v3.18
@@ -27,6 +31,10 @@
 #include <asm/asm-offsets.h>
 #include <asm/types.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <asm/traps.h>
+>>>>>>> v3.18
 =======
 #include <asm/traps.h>
 >>>>>>> v3.18
@@ -37,10 +45,13 @@
 #include <arch/spr_def.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #ifdef CONFIG_PREEMPT
 # error "No support for kernel preemption currently"
 #endif
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define PTREGS_PTR(reg, ptreg) addli reg, sp, C_ABI_SAVE_AREA_SIZE + (ptreg)
@@ -48,7 +59,10 @@
 #define PTREGS_OFFSET_SYSCALL PTREGS_OFFSET_REG(TREG_SYSCALL_NR)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if CONFIG_KERNEL_PL == 1 || CONFIG_KERNEL_PL == 2
 /*
  * Set "result" non-zero if ex1 holds the PL of the kernel
@@ -59,6 +73,9 @@
 #else
 # error Recode IS_KERNEL_EX1 for CONFIG_KERNEL_PL
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.macro  push_reg reg, ptr=sp, delta=-8
@@ -123,7 +140,10 @@
 	.endm
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Unalign data exception fast handling: In order to handle
 	 * unaligned data access, a fast JIT version is generated and stored
@@ -303,6 +323,9 @@ ENTRY(__end_unalign_asm_code)
 	iret
 	ENDPROC(intvec_\vecname)
 	.endm
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifdef __COLLECT_LINKER_FEEDBACK__
@@ -325,8 +348,12 @@ intvec_feedback:
 	 * the interrupt. Defaults to "handle_interrupt".
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.macro  int_hand vecnum, vecname, c_routine, processing=handle_interrupt
 	.org    (\vecnum << 8)
+=======
+	.macro __int_hand vecnum, vecname, c_routine,processing=handle_interrupt
+>>>>>>> v3.18
 =======
 	.macro __int_hand vecnum, vecname, c_routine,processing=handle_interrupt
 >>>>>>> v3.18
@@ -337,8 +364,11 @@ intvec_\vecname:
 	mfspr   r0, SPR_EX_CONTEXT_K_1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	andi    r0, r0, SPR_EX_CONTEXT_1_1__PL_MASK  /* mask off ICS */
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * The unalign data fastpath code sets the low bit in sp to
 	 * force us to reset it here on fault.
@@ -347,6 +377,9 @@ intvec_\vecname:
 	 blbs   sp, 2f
 	 IS_KERNEL_EX1(r0, r0)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	.ifc    \vecnum, INT_DOUBLE_FAULT
@@ -398,6 +431,7 @@ intvec_\vecname:
 	.endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/*
 	 * SYSTEM_SAVE_K_0 holds the cpu number in the low bits, and
@@ -408,6 +442,8 @@ intvec_\vecname:
 	mfspr   r0, SPR_SYSTEM_SAVE_K_0
 	mm      r0, zero, LOG2_THREAD_SIZE, 63
 =======
+=======
+>>>>>>> v3.18
 2:
 	/*
 	 * SYSTEM_SAVE_K_0 holds the cpu number in the high bits, and
@@ -417,6 +453,9 @@ intvec_\vecname:
 	 */
 	mfspr   r0, SPR_SYSTEM_SAVE_K_0
 	bfexts  r0, r0, 0, CPU_SHIFT-1
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 0:
@@ -440,6 +479,12 @@ intvec_\vecname:
 	 *    cache line 0: 2 x frame, r0..r5
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#if STACK_TOP_DELTA != 64
+#error STACK_TOP_DELTA must be 64 for assumptions here and in task_pt_regs()
+#endif
+>>>>>>> v3.18
 =======
 #if STACK_TOP_DELTA != 64
 #error STACK_TOP_DELTA must be 64 for assumptions here and in task_pt_regs()
@@ -545,7 +590,11 @@ intvec_\vecname:
 	.else
 	.ifc \vecnum, INT_ILL_TRANS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mfspr   r2, ILL_TRANS_REASON
+=======
+	mfspr   r2, ILL_VA_PC
+>>>>>>> v3.18
 =======
 	mfspr   r2, ILL_VA_PC
 >>>>>>> v3.18
@@ -557,6 +606,7 @@ intvec_\vecname:
 	mfspr   r2, GPV_REASON
 	.else
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.ifc \c_routine, op_handle_perf_interrupt
 	mfspr   r2, PERF_COUNT_STS
 #if CHIP_HAS_AUX_PERF_COUNTERS()
@@ -566,12 +616,17 @@ intvec_\vecname:
 	.endif
 #endif
 =======
+=======
+>>>>>>> v3.18
 	.ifc \c_routine, handle_perf_interrupt
 	mfspr   r2, PERF_COUNT_STS
 	.else
 	.ifc \c_routine, handle_perf_interrupt
 	mfspr   r2, AUX_PERF_COUNT_STS
 	.endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	.endif
 	.endif
@@ -592,7 +647,11 @@ intvec_\vecname:
 	.pushsection .text.intvec_feedback,"ax"
 	.org    (\vecnum << 5)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	FEEDBACK_ENTER_EXPLICIT(intvec_\vecname, .intrpt1, 1 << 8)
+=======
+	FEEDBACK_ENTER_EXPLICIT(intvec_\vecname, .intrpt, 1 << 8)
+>>>>>>> v3.18
 =======
 	FEEDBACK_ENTER_EXPLICIT(intvec_\vecname, .intrpt, 1 << 8)
 >>>>>>> v3.18
@@ -712,18 +771,24 @@ intvec_\vecname:
 	 * If we will be returning to the kernel, we will need to
 	 * reset the interrupt masks to the state they had before.
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * Set DISABLE_IRQ in flags iff we came from PL1 with irqs disabled.
 	 */
 	mfspr   r32, SPR_EX_CONTEXT_K_1
 	{
 	 andi   r32, r32, SPR_EX_CONTEXT_1_1__PL_MASK  /* mask off ICS */
 =======
+=======
+>>>>>>> v3.18
 	 * Set DISABLE_IRQ in flags iff we came from kernel pl with
 	 * irqs disabled.
 	 */
 	mfspr   r32, SPR_EX_CONTEXT_K_1
 	{
 	 IS_KERNEL_EX1(r22, r22)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	 PTREGS_PTR(r21, PTREGS_OFFSET_FLAGS)
 	}
@@ -769,7 +834,11 @@ intvec_\vecname:
 	{
 	 shl16insli r21, r21, hw1(__per_cpu_offset)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 bfextu r20, r20, 0, LOG2_THREAD_SIZE-1
+=======
+	 bfextu r20, r20, CPU_SHIFT, 63
+>>>>>>> v3.18
 =======
 	 bfextu r20, r20, CPU_SHIFT, 63
 >>>>>>> v3.18
@@ -855,7 +924,11 @@ intvec_\vecname:
 	.org    (\vecnum << 8)
 intvec_\vecname:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	j       hv_downcall_dispatch
+=======
+	j       _hv_downcall_dispatch
+>>>>>>> v3.18
 =======
 	j       _hv_downcall_dispatch
 >>>>>>> v3.18
@@ -900,6 +973,7 @@ STD_ENTRY(interrupt_return)
 	}
 	ld      r29, r29
 <<<<<<< HEAD
+<<<<<<< HEAD
 	andi    r29, r29, SPR_EX_CONTEXT_1_1__PL_MASK  /* mask off ICS */
 	{
 	 beqzt  r29, .Lresume_userspace
@@ -909,6 +983,8 @@ STD_ENTRY(interrupt_return)
 	/* If we're resuming to _cpu_idle_nap, bump PC forward by 8. */
 	moveli  r27, hw2_last(_cpu_idle_nap)
 =======
+=======
+>>>>>>> v3.18
 	IS_KERNEL_EX1(r29, r29)
 	{
 	 beqzt  r29, .Lresume_userspace
@@ -942,6 +1018,9 @@ STD_ENTRY(interrupt_return)
 	 moveli r27, hw2_last(_cpu_idle_nap)
 	 PTREGS_PTR(r29, PTREGS_OFFSET_PC)
 	}
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	{
 	 ld     r28, r29
@@ -1038,7 +1117,11 @@ STD_ENTRY(interrupt_return)
 	}
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 andi   r0, r0, SPR_EX_CONTEXT_1_1__PL_MASK
+=======
+	 IS_KERNEL_EX1(r0, r0)
+>>>>>>> v3.18
 =======
 	 IS_KERNEL_EX1(r0, r0)
 >>>>>>> v3.18
@@ -1065,7 +1148,10 @@ STD_ENTRY(interrupt_return)
 3:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 #if INT_PERF_COUNT + 1 != INT_AUX_PERF_COUNT
 # error Bad interrupt assumption
 #endif
@@ -1075,6 +1161,9 @@ STD_ENTRY(interrupt_return)
 	}
 	shli    r0, r0, INT_PERF_COUNT
 	mtspr   SPR_INTERRUPT_MASK_RESET_K, r0
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -1125,7 +1214,11 @@ STD_ENTRY(interrupt_return)
 	{
 	 mtspr  SPR_EX_CONTEXT_K_1, lr
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 andi   lr, lr, SPR_EX_CONTEXT_1_1__PL_MASK  /* mask off ICS */
+=======
+	 IS_KERNEL_EX1(lr, lr)
+>>>>>>> v3.18
 =======
 	 IS_KERNEL_EX1(lr, lr)
 >>>>>>> v3.18
@@ -1297,7 +1390,11 @@ handle_nmi:
 	{
 	 movei  r30, 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 move   r31, r0
+=======
+	 cmpeq  r31, r0, zero
+>>>>>>> v3.18
 =======
 	 cmpeq  r31, r0, zero
 >>>>>>> v3.18
@@ -1557,11 +1654,14 @@ STD_ENTRY(_sys_clone)
 	STD_ENDPROC(_sys_clone)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* The single-step support may need to read all the registers. */
 int_unalign:
 	push_extra_callee_saves r0
 	j       do_trap
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * Recover r3, r2, r1 and r0 here saved by unalign fast vector.
 	 * The vector area limit is 32 bundles, so we handle the reload here.
@@ -1587,6 +1687,9 @@ int_unalign:
 	push_extra_callee_saves r0
 	j       do_unaligned
 ENDPROC(hand_unalign_slow)
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 /* Fill the return address stack with nonzero entries. */
@@ -1602,12 +1705,15 @@ STD_ENTRY(fill_ra_stack)
 	STD_ENDPROC(fill_ra_stack)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Include .intrpt1 array of interrupt vectors */
 	.section ".intrpt1", "ax"
 
 #define op_handle_perf_interrupt bad_intr
 #define op_handle_aux_perf_interrupt bad_intr
 =======
+=======
+>>>>>>> v3.18
 	.macro int_hand  vecnum, vecname, c_routine, processing=handle_interrupt
 	.org   (\vecnum << 8)
 		__int_hand   \vecnum, \vecname, \c_routine, \processing
@@ -1621,6 +1727,9 @@ intrpt_start:
 #ifndef CONFIG_USE_PMC
 #define handle_perf_interrupt bad_intr
 #endif
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 #ifndef CONFIG_HARDWALL
@@ -1650,7 +1759,11 @@ intrpt_start:
 	int_hand     INT_SWINT_0, SWINT_0, do_trap
 	int_hand     INT_ILL_TRANS, ILL_TRANS, do_trap
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int_hand     INT_UNALIGN_DATA, UNALIGN_DATA, int_unalign
+=======
+	int_hand_unalign_fast INT_UNALIGN_DATA, UNALIGN_DATA
+>>>>>>> v3.18
 =======
 	int_hand_unalign_fast INT_UNALIGN_DATA, UNALIGN_DATA
 >>>>>>> v3.18
@@ -1674,9 +1787,15 @@ intrpt_start:
 	int_hand     INT_IPI_0, IPI_0, bad_intr
 	int_hand     INT_PERF_COUNT, PERF_COUNT, \
 <<<<<<< HEAD
+<<<<<<< HEAD
 		     op_handle_perf_interrupt, handle_nmi
 	int_hand     INT_AUX_PERF_COUNT, AUX_PERF_COUNT, \
 		     op_handle_perf_interrupt, handle_nmi
+=======
+		     handle_perf_interrupt, handle_nmi
+	int_hand     INT_AUX_PERF_COUNT, AUX_PERF_COUNT, \
+		     handle_perf_interrupt, handle_nmi
+>>>>>>> v3.18
 =======
 		     handle_perf_interrupt, handle_nmi
 	int_hand     INT_AUX_PERF_COUNT, AUX_PERF_COUNT, \

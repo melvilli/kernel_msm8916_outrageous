@@ -48,8 +48,12 @@
 extern void secondary_startup(void);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int __cpuinit psci_boot_secondary(unsigned int cpu,
 					 struct task_struct *idle)
+=======
+static int psci_boot_secondary(unsigned int cpu, struct task_struct *idle)
+>>>>>>> v3.18
 =======
 static int psci_boot_secondary(unsigned int cpu, struct task_struct *idle)
 >>>>>>> v3.18

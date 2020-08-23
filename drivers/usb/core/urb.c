@@ -3,7 +3,10 @@
 #include <linux/bitops.h>
 #include <linux/slab.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/log2.h>
@@ -11,6 +14,10 @@
 #include <linux/wait.h>
 #include <linux/usb/hcd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include <linux/scatterlist.h>
+>>>>>>> v3.18
 =======
 #include <linux/scatterlist.h>
 >>>>>>> v3.18
@@ -60,9 +67,13 @@ EXPORT_SYMBOL_GPL(usb_init_urb);
  *
  * Creates an urb for the USB driver to use, initializes a few internal
 <<<<<<< HEAD
+<<<<<<< HEAD
  * structures, incrementes the usage counter, and returns a pointer to it.
  *
  * If no memory is available, NULL is returned.
+=======
+ * structures, increments the usage counter, and returns a pointer to it.
+>>>>>>> v3.18
 =======
  * structures, increments the usage counter, and returns a pointer to it.
 >>>>>>> v3.18
@@ -72,6 +83,11 @@ EXPORT_SYMBOL_GPL(usb_init_urb);
  *
  * The driver must call usb_free_urb() when it is finished with the urb.
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: A pointer to the new urb, or %NULL if no memory is available.
+>>>>>>> v3.18
 =======
  *
  * Return: A pointer to the new urb, or %NULL if no memory is available.
@@ -119,7 +135,11 @@ EXPORT_SYMBOL_GPL(usb_free_urb);
  * for urbs.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * A pointer to the urb with the incremented reference counter is returned.
+=======
+ * Return: A pointer to the urb with the incremented reference counter.
+>>>>>>> v3.18
 =======
  * Return: A pointer to the urb with the incremented reference counter.
 >>>>>>> v3.18
@@ -158,13 +178,19 @@ void usb_anchor_urb(struct urb *urb, struct usb_anchor *anchor)
 EXPORT_SYMBOL_GPL(usb_anchor_urb);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 static int usb_anchor_check_wakeup(struct usb_anchor *anchor)
 {
 	return atomic_read(&anchor->suspend_wakeups) == 0 &&
 		list_empty(&anchor->urb_list);
 }
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 /* Callers must hold anchor->lock */
 static void __usb_unanchor_urb(struct urb *urb, struct usb_anchor *anchor)
@@ -173,7 +199,11 @@ static void __usb_unanchor_urb(struct urb *urb, struct usb_anchor *anchor)
 	list_del(&urb->anchor_list);
 	usb_put_urb(urb);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (list_empty(&anchor->urb_list))
+=======
+	if (usb_anchor_check_wakeup(anchor))
+>>>>>>> v3.18
 =======
 	if (usb_anchor_check_wakeup(anchor))
 >>>>>>> v3.18
@@ -233,6 +263,7 @@ EXPORT_SYMBOL_GPL(usb_unanchor_urb);
  * any transfer flags.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Successful submissions return 0; otherwise this routine returns a
  * negative error number.  If the submission is successful, the complete()
  * callback from the URB will be called exactly once, when the USB core and
@@ -241,12 +272,17 @@ EXPORT_SYMBOL_GPL(usb_unanchor_urb);
  * driver which issued the request.  The completion handler may then
  * immediately free or reuse that URB.
 =======
+=======
+>>>>>>> v3.18
  * If the submission is successful, the complete() callback from the URB
  * will be called exactly once, when the USB core and Host Controller Driver
  * (HCD) are finished with the URB.  When the completion function is called,
  * control of the URB is returned to the device driver which issued the
  * request.  The completion handler may then immediately free or reuse that
  * URB.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  *
  * With few exceptions, USB device drivers should never access URB fields
@@ -283,6 +319,12 @@ EXPORT_SYMBOL_GPL(usb_unanchor_urb);
  * endpoints, a synchronous usb_bulk_msg() call is available.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Return:
+ * 0 on successful submissions. A negative error number otherwise.
+ *
+>>>>>>> v3.18
 =======
  * Return:
  * 0 on successful submissions. A negative error number otherwise.
@@ -321,7 +363,11 @@ EXPORT_SYMBOL_GPL(usb_unanchor_urb);
  * Device drivers must explicitly request that repetition, by ensuring that
  * some URB is always on the endpoint's queue (except possibly for short
 <<<<<<< HEAD
+<<<<<<< HEAD
  * periods during completion callacks).  When there is no longer an urb
+=======
+ * periods during completion callbacks).  When there is no longer an urb
+>>>>>>> v3.18
 =======
  * periods during completion callbacks).  When there is no longer an urb
 >>>>>>> v3.18
@@ -369,6 +415,12 @@ EXPORT_SYMBOL_GPL(usb_unanchor_urb);
 int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	static int			pipetypes[4] = {
+		PIPE_CONTROL, PIPE_ISOCHRONOUS, PIPE_BULK, PIPE_INTERRUPT
+	};
+>>>>>>> v3.18
 =======
 	static int			pipetypes[4] = {
 		PIPE_CONTROL, PIPE_ISOCHRONOUS, PIPE_BULK, PIPE_INTERRUPT
@@ -379,6 +431,10 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 	struct usb_host_endpoint	*ep;
 	int				is_out;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	unsigned int			allowed;
+>>>>>>> v3.18
 =======
 	unsigned int			allowed;
 >>>>>>> v3.18
@@ -387,7 +443,11 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 		return -EINVAL;
 	if (urb->hcpriv) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		WARN_ONCE(1, "URB %pK submitted while active\n", urb);
+=======
+		WARN_ONCE(1, "URB %p submitted while active\n", urb);
+>>>>>>> v3.18
 =======
 		WARN_ONCE(1, "URB %p submitted while active\n", urb);
 >>>>>>> v3.18
@@ -480,7 +540,10 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 			urb->iso_frame_desc[n].actual_length = 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	} else if (urb->num_sgs && !urb->dev->bus->no_sg_constraint &&
 			dev->speed != USB_SPEED_WIRELESS) {
 		struct scatterlist *sg;
@@ -489,6 +552,9 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 		for_each_sg(urb->sg, sg, urb->num_sgs - 1, i)
 			if (sg->length % max)
 				return -EINVAL;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 
@@ -496,6 +562,7 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 	if (urb->transfer_buffer_length > INT_MAX)
 		return -EMSGSIZE;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #ifdef DEBUG
 	/* stuff that drivers shouldn't do, but which shouldn't
@@ -507,10 +574,15 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 		PIPE_CONTROL, PIPE_ISOCHRONOUS, PIPE_BULK, PIPE_INTERRUPT
 	};
 =======
+=======
+>>>>>>> v3.18
 	/*
 	 * stuff that drivers shouldn't do, but which shouldn't
 	 * cause problems in HCDs if they get it wrong.
 	 */
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/* Check that the pipe's type matches the endpoint's type */
@@ -524,6 +596,10 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 	switch (xfertype) {
 	case USB_ENDPOINT_XFER_BULK:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	case USB_ENDPOINT_XFER_INT:
+>>>>>>> v3.18
 =======
 	case USB_ENDPOINT_XFER_INT:
 >>>>>>> v3.18
@@ -548,8 +624,12 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 		dev_WARN(&dev->dev, "BOGUS urb flags, %x --> %x\n",
 			urb->transfer_flags, allowed);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 #endif
+=======
+
+>>>>>>> v3.18
 =======
 
 >>>>>>> v3.18
@@ -568,9 +648,15 @@ int usb_submit_urb(struct urb *urb, gfp_t mem_flags)
 		switch (dev->speed) {
 		case USB_SPEED_WIRELESS:
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (urb->interval < 6)
 				return -EINVAL;
 			break;
+=======
+			if ((urb->interval < 6)
+				&& (xfertype == USB_ENDPOINT_XFER_INT))
+				return -EINVAL;
+>>>>>>> v3.18
 =======
 			if ((urb->interval < 6)
 				&& (xfertype == USB_ENDPOINT_XFER_INT))
@@ -663,6 +749,12 @@ EXPORT_SYMBOL_GPL(usb_submit_urb);
  * completion handler cannot deallocate the URB.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ * Return: -EINPROGRESS on success. See description for other values on
+ * failure.
+ *
+>>>>>>> v3.18
 =======
  * Return: -EINPROGRESS on success. See description for other values on
  * failure.
@@ -919,7 +1011,11 @@ EXPORT_SYMBOL_GPL(usb_unpoison_anchored_urbs);
  * this allows all outstanding URBs to be unlinked starting
  * from the back of the queue. This function is asynchronous.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * The unlinking is just tiggered. It may happen after this
+=======
+ * The unlinking is just triggered. It may happen after this
+>>>>>>> v3.18
 =======
  * The unlinking is just triggered. It may happen after this
 >>>>>>> v3.18
@@ -941,7 +1037,10 @@ EXPORT_SYMBOL_GPL(usb_unlink_anchored_urbs);
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
  * usb_anchor_suspend_wakeups
  * @anchor: the anchor you want to suspend wakeups on
  *
@@ -975,6 +1074,9 @@ void usb_anchor_resume_wakeups(struct usb_anchor *anchor)
 EXPORT_SYMBOL_GPL(usb_anchor_resume_wakeups);
 
 /**
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  * usb_wait_anchor_empty_timeout - wait for an anchor to be unused
  * @anchor: the anchor you want to become unused
@@ -983,6 +1085,11 @@ EXPORT_SYMBOL_GPL(usb_anchor_resume_wakeups);
  * Call this is you want to be sure all an anchor's
  * URBs have finished
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ *
+ * Return: Non-zero if the anchor became unused. Zero on timeout.
+>>>>>>> v3.18
 =======
  *
  * Return: Non-zero if the anchor became unused. Zero on timeout.
@@ -992,7 +1099,12 @@ int usb_wait_anchor_empty_timeout(struct usb_anchor *anchor,
 				  unsigned int timeout)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return wait_event_timeout(anchor->wait, list_empty(&anchor->urb_list),
+=======
+	return wait_event_timeout(anchor->wait,
+				  usb_anchor_check_wakeup(anchor),
+>>>>>>> v3.18
 =======
 	return wait_event_timeout(anchor->wait,
 				  usb_anchor_check_wakeup(anchor),
@@ -1006,14 +1118,20 @@ EXPORT_SYMBOL_GPL(usb_wait_anchor_empty_timeout);
  * @anchor: the anchor whose urb you want
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * this will take the oldest urb from an anchor,
  * unanchor and return it
 =======
+=======
+>>>>>>> v3.18
  * This will take the oldest urb from an anchor,
  * unanchor and return it
  *
  * Return: The oldest urb from @anchor, or %NULL if @anchor has no
  * urbs associated with it.
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
  */
 struct urb *usb_get_from_anchor(struct usb_anchor *anchor)
@@ -1064,7 +1182,11 @@ EXPORT_SYMBOL_GPL(usb_scuttle_anchored_urbs);
  * @anchor: the anchor you want to query
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * returns 1 if the anchor has no urbs associated with it
+=======
+ * Return: 1 if the anchor has no urbs associated with it.
+>>>>>>> v3.18
 =======
  * Return: 1 if the anchor has no urbs associated with it.
 >>>>>>> v3.18

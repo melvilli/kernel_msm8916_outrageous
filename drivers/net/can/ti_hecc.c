@@ -38,7 +38,10 @@
 
 #include <linux/module.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <linux/init.h>
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #include <linux/kernel.h>
@@ -290,6 +293,7 @@ static inline u32 hecc_get_bit(struct ti_hecc_priv *priv, int reg, u32 bit_mask)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static int ti_hecc_get_state(const struct net_device *ndev,
 	enum can_state *state)
 {
@@ -299,6 +303,8 @@ static int ti_hecc_get_state(const struct net_device *ndev,
 	return 0;
 }
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int ti_hecc_set_btc(struct ti_hecc_priv *priv)
@@ -534,15 +540,21 @@ static netdev_tx_t ti_hecc_xmit(struct sk_buff *skb, struct net_device *ndev)
 	hecc_write_mbx(priv, mbxno, HECC_CANMID, data);
 	hecc_write_mbx(priv, mbxno, HECC_CANMDL,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		be32_to_cpu(*(u32 *)(cf->data)));
 	if (cf->can_dlc > 4)
 		hecc_write_mbx(priv, mbxno, HECC_CANMDH,
 			be32_to_cpu(*(u32 *)(cf->data + 4)));
 =======
+=======
+>>>>>>> v3.18
 		be32_to_cpu(*(__be32 *)(cf->data)));
 	if (cf->can_dlc > 4)
 		hecc_write_mbx(priv, mbxno, HECC_CANMDH,
 			be32_to_cpu(*(__be32 *)(cf->data + 4)));
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	else
 		*(u32 *)(cf->data + 4) = 0;
@@ -592,6 +604,7 @@ static int ti_hecc_rx_pkt(struct ti_hecc_priv *priv, int mbxno)
 	cf->can_dlc = get_can_dlc(data & 0xF);
 	data = hecc_read_mbx(priv, mbxno, HECC_CANMDL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	*(u32 *)(cf->data) = cpu_to_be32(data);
 	if (cf->can_dlc > 4) {
 		data = hecc_read_mbx(priv, mbxno, HECC_CANMDH);
@@ -599,10 +612,15 @@ static int ti_hecc_rx_pkt(struct ti_hecc_priv *priv, int mbxno)
 	} else {
 		*(u32 *)(cf->data + 4) = 0;
 =======
+=======
+>>>>>>> v3.18
 	*(__be32 *)(cf->data) = cpu_to_be32(data);
 	if (cf->can_dlc > 4) {
 		data = hecc_read_mbx(priv, mbxno, HECC_CANMDH);
 		*(__be32 *)(cf->data + 4) = cpu_to_be32(data);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 	spin_lock_irqsave(&priv->mbx_lock, flags);
@@ -904,6 +922,10 @@ static const struct net_device_ops ti_hecc_netdev_ops = {
 	.ndo_stop		= ti_hecc_close,
 	.ndo_start_xmit		= ti_hecc_xmit,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	.ndo_change_mtu		= can_change_mtu,
+>>>>>>> v3.18
 =======
 	.ndo_change_mtu		= can_change_mtu,
 >>>>>>> v3.18
@@ -919,7 +941,11 @@ static int ti_hecc_probe(struct platform_device *pdev)
 	int err = -ENODEV;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	pdata = pdev->dev.platform_data;
+=======
+	pdata = dev_get_platdata(&pdev->dev);
+>>>>>>> v3.18
 =======
 	pdata = dev_get_platdata(&pdev->dev);
 >>>>>>> v3.18
@@ -969,7 +995,10 @@ static int ti_hecc_probe(struct platform_device *pdev)
 	priv->can.bittiming_const = &ti_hecc_bittiming_const;
 	priv->can.do_set_mode = ti_hecc_do_set_mode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	priv->can.do_get_state = ti_hecc_get_state;
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	priv->can.do_get_berr_counter = ti_hecc_get_berr_counter;
@@ -994,12 +1023,16 @@ static int ti_hecc_probe(struct platform_device *pdev)
 		HECC_DEF_NAPI_WEIGHT);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	err = clk_prepare_enable(priv->clk);
 	if (err) {
 		dev_err(&pdev->dev, "clk_prepare_enable() failed\n");
 		goto probe_exit_clk;
 	}
 
+=======
+	clk_enable(priv->clk);
+>>>>>>> v3.18
 =======
 	clk_enable(priv->clk);
 >>>>>>> v3.18
@@ -1036,7 +1069,11 @@ static int ti_hecc_remove(struct platform_device *pdev)
 
 	unregister_candev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(priv->clk);
+=======
+	clk_disable(priv->clk);
+>>>>>>> v3.18
 =======
 	clk_disable(priv->clk);
 >>>>>>> v3.18
@@ -1046,7 +1083,10 @@ static int ti_hecc_remove(struct platform_device *pdev)
 	release_mem_region(res->start, resource_size(res));
 	free_candev(ndev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	platform_set_drvdata(pdev, NULL);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 
@@ -1069,7 +1109,11 @@ static int ti_hecc_suspend(struct platform_device *pdev, pm_message_t state)
 	priv->can.state = CAN_STATE_SLEEPING;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	clk_disable_unprepare(priv->clk);
+=======
+	clk_disable(priv->clk);
+>>>>>>> v3.18
 =======
 	clk_disable(priv->clk);
 >>>>>>> v3.18
@@ -1082,11 +1126,16 @@ static int ti_hecc_resume(struct platform_device *pdev)
 	struct net_device *dev = platform_get_drvdata(pdev);
 	struct ti_hecc_priv *priv = netdev_priv(dev);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int err;
 
 	err = clk_prepare_enable(priv->clk);
 	if (err)
 		return err;
+=======
+
+	clk_enable(priv->clk);
+>>>>>>> v3.18
 =======
 
 	clk_enable(priv->clk);

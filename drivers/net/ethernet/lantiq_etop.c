@@ -10,8 +10,12 @@
  *
  *   You should have received a copy of the GNU General Public License
 <<<<<<< HEAD
+<<<<<<< HEAD
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+=======
+ *   along with this program; if not, see <http://www.gnu.org/licenses/>.
+>>>>>>> v3.18
 =======
  *   along with this program; if not, see <http://www.gnu.org/licenses/>.
 >>>>>>> v3.18
@@ -287,8 +291,12 @@ ltq_etop_hw_init(struct net_device *dev)
 		if (IS_TX(i)) {
 			ltq_dma_alloc_tx(&ch->dma);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			request_irq(irq, ltq_etop_dma_irq, IRQF_DISABLED,
 				"etop_tx", priv);
+=======
+			request_irq(irq, ltq_etop_dma_irq, 0, "etop_tx", priv);
+>>>>>>> v3.18
 =======
 			request_irq(irq, ltq_etop_dma_irq, 0, "etop_tx", priv);
 >>>>>>> v3.18
@@ -300,8 +308,12 @@ ltq_etop_hw_init(struct net_device *dev)
 					return -ENOMEM;
 			ch->dma.desc = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			request_irq(irq, ltq_etop_dma_irq, IRQF_DISABLED,
 				"etop_rx", priv);
+=======
+			request_irq(irq, ltq_etop_dma_irq, 0, "etop_rx", priv);
+>>>>>>> v3.18
 =======
 			request_irq(irq, ltq_etop_dma_irq, 0, "etop_rx", priv);
 >>>>>>> v3.18
@@ -634,7 +646,12 @@ ltq_etop_set_multicast_list(struct net_device *dev)
 
 static u16
 <<<<<<< HEAD
+<<<<<<< HEAD
 ltq_etop_select_queue(struct net_device *dev, struct sk_buff *skb)
+=======
+ltq_etop_select_queue(struct net_device *dev, struct sk_buff *skb,
+		      void *accel_priv, select_queue_fallback_t fallback)
+>>>>>>> v3.18
 =======
 ltq_etop_select_queue(struct net_device *dev, struct sk_buff *skb,
 		      void *accel_priv, select_queue_fallback_t fallback)
@@ -653,7 +670,10 @@ ltq_etop_init(struct net_device *dev)
 	bool random_mac = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ether_setup(dev);
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	dev->watchdog_timeo = 10 * HZ;

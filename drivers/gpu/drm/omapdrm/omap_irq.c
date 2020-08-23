@@ -46,7 +46,11 @@ static void omap_irq_update(struct drm_device *dev)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void omap_irq_register(struct drm_device *dev, struct omap_drm_irq *irq)
+=======
+void __omap_irq_register(struct drm_device *dev, struct omap_drm_irq *irq)
+>>>>>>> v3.18
 =======
 void __omap_irq_register(struct drm_device *dev, struct omap_drm_irq *irq)
 >>>>>>> v3.18
@@ -55,7 +59,10 @@ void __omap_irq_register(struct drm_device *dev, struct omap_drm_irq *irq)
 	unsigned long flags;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dispc_runtime_get();
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	spin_lock_irqsave(&list_lock, flags);
@@ -68,6 +75,7 @@ void __omap_irq_register(struct drm_device *dev, struct omap_drm_irq *irq)
 
 	spin_unlock_irqrestore(&list_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dispc_runtime_put();
 }
 
@@ -77,6 +85,8 @@ void omap_irq_unregister(struct drm_device *dev, struct omap_drm_irq *irq)
 
 	dispc_runtime_get();
 =======
+=======
+>>>>>>> v3.18
 }
 
 void omap_irq_register(struct drm_device *dev, struct omap_drm_irq *irq)
@@ -92,6 +102,9 @@ void __omap_irq_unregister(struct drm_device *dev, struct omap_drm_irq *irq)
 {
 	unsigned long flags;
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	spin_lock_irqsave(&list_lock, flags);
 
@@ -103,7 +116,10 @@ void __omap_irq_unregister(struct drm_device *dev, struct omap_drm_irq *irq)
 
 	spin_unlock_irqrestore(&list_lock, flags);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 }
 
 void omap_irq_unregister(struct drm_device *dev, struct omap_drm_irq *irq)
@@ -112,6 +128,9 @@ void omap_irq_unregister(struct drm_device *dev, struct omap_drm_irq *irq)
 
 	__omap_irq_unregister(dev, irq);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	dispc_runtime_put();
 }
@@ -210,7 +229,11 @@ void omap_irq_disable_vblank(struct drm_device *dev, int crtc_id)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 irqreturn_t omap_irq_handler(DRM_IRQ_ARGS)
+=======
+irqreturn_t omap_irq_handler(int irq, void *arg)
+>>>>>>> v3.18
 =======
 irqreturn_t omap_irq_handler(int irq, void *arg)
 >>>>>>> v3.18
@@ -302,7 +325,11 @@ int omap_drm_irq_install(struct drm_device *dev)
 		return -EBUSY;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	dev->irq_enabled = 1;
+=======
+	dev->irq_enabled = true;
+>>>>>>> v3.18
 =======
 	dev->irq_enabled = true;
 >>>>>>> v3.18
@@ -317,7 +344,11 @@ int omap_drm_irq_install(struct drm_device *dev)
 	if (ret < 0) {
 		mutex_lock(&dev->struct_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->irq_enabled = 0;
+=======
+		dev->irq_enabled = false;
+>>>>>>> v3.18
 =======
 		dev->irq_enabled = false;
 >>>>>>> v3.18
@@ -332,7 +363,11 @@ int omap_drm_irq_install(struct drm_device *dev)
 	if (ret < 0) {
 		mutex_lock(&dev->struct_mutex);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev->irq_enabled = 0;
+=======
+		dev->irq_enabled = false;
+>>>>>>> v3.18
 =======
 		dev->irq_enabled = false;
 >>>>>>> v3.18
@@ -347,18 +382,24 @@ int omap_drm_irq_uninstall(struct drm_device *dev)
 {
 	unsigned long irqflags;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int irq_enabled, i;
 
 	mutex_lock(&dev->struct_mutex);
 	irq_enabled = dev->irq_enabled;
 	dev->irq_enabled = 0;
 =======
+=======
+>>>>>>> v3.18
 	bool irq_enabled;
 	int i;
 
 	mutex_lock(&dev->struct_mutex);
 	irq_enabled = dev->irq_enabled;
 	dev->irq_enabled = false;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	mutex_unlock(&dev->struct_mutex);
 
@@ -369,9 +410,15 @@ int omap_drm_irq_uninstall(struct drm_device *dev)
 		spin_lock_irqsave(&dev->vbl_lock, irqflags);
 		for (i = 0; i < dev->num_crtcs; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			DRM_WAKEUP(&dev->vbl_queue[i]);
 			dev->vblank_enabled[i] = 0;
 			dev->last_vblank[i] =
+=======
+			wake_up(&dev->vblank[i].queue);
+			dev->vblank[i].enabled = false;
+			dev->vblank[i].last =
+>>>>>>> v3.18
 =======
 			wake_up(&dev->vblank[i].queue);
 			dev->vblank[i].enabled = false;

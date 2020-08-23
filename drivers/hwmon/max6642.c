@@ -9,7 +9,11 @@
  *  Based on the max1619 driver.
  *  Copyright (C) 2003-2004 Oleksij Rempel <bug-track@fisher-privat.net>
 <<<<<<< HEAD
+<<<<<<< HEAD
  *                          Jean Delvare <khali@linux-fr.org>
+=======
+ *                          Jean Delvare <jdelvare@suse.de>
+>>>>>>> v3.18
 =======
  *                          Jean Delvare <jdelvare@suse.de>
 >>>>>>> v3.18
@@ -92,7 +96,11 @@ static int temp_to_reg(int val)
 
 struct max6642_data {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct device *hwmon_dev;
+=======
+	struct i2c_client *client;
+>>>>>>> v3.18
 =======
 	struct i2c_client *client;
 >>>>>>> v3.18
@@ -111,15 +119,21 @@ struct max6642_data {
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static void max6642_init_client(struct i2c_client *client)
 {
 	u8 config;
 	struct max6642_data *data = i2c_get_clientdata(client);
 =======
+=======
+>>>>>>> v3.18
 static void max6642_init_client(struct max6642_data *data,
 				struct i2c_client *client)
 {
 	u8 config;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	/*
@@ -184,8 +198,13 @@ static int max6642_detect(struct i2c_client *client,
 static struct max6642_data *max6642_update_device(struct device *dev)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6642_data *data = i2c_get_clientdata(client);
+=======
+	struct max6642_data *data = dev_get_drvdata(dev);
+	struct i2c_client *client = data->client;
+>>>>>>> v3.18
 =======
 	struct max6642_data *data = dev_get_drvdata(dev);
 	struct i2c_client *client = data->client;
@@ -196,7 +215,11 @@ static struct max6642_data *max6642_update_device(struct device *dev)
 
 	if (time_after(jiffies, data->last_updated + HZ) || !data->valid) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		dev_dbg(&client->dev, "Updating max6642 data.\n");
+=======
+		dev_dbg(dev, "Updating max6642 data.\n");
+>>>>>>> v3.18
 =======
 		dev_dbg(dev, "Updating max6642 data.\n");
 >>>>>>> v3.18
@@ -234,8 +257,13 @@ static ssize_t show_temp_max10(struct device *dev,
 			       struct device_attribute *dev_attr, char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max6642_data *data = max6642_update_device(dev);
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+=======
+	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
+	struct max6642_data *data = max6642_update_device(dev);
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute *attr = to_sensor_dev_attr(dev_attr);
 	struct max6642_data *data = max6642_update_device(dev);
@@ -249,8 +277,13 @@ static ssize_t show_temp_max(struct device *dev, struct device_attribute *attr,
 			     char *buf)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct max6642_data *data = max6642_update_device(dev);
 	struct sensor_device_attribute_2 *attr2 = to_sensor_dev_attr_2(attr);
+=======
+	struct sensor_device_attribute_2 *attr2 = to_sensor_dev_attr_2(attr);
+	struct max6642_data *data = max6642_update_device(dev);
+>>>>>>> v3.18
 =======
 	struct sensor_device_attribute_2 *attr2 = to_sensor_dev_attr_2(attr);
 	struct max6642_data *data = max6642_update_device(dev);
@@ -263,16 +296,22 @@ static ssize_t set_temp_max(struct device *dev, struct device_attribute *attr,
 			    const char *buf, size_t count)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	unsigned long val;
 	int err;
 	struct i2c_client *client = to_i2c_client(dev);
 	struct max6642_data *data = i2c_get_clientdata(client);
 	struct sensor_device_attribute_2 *attr2 = to_sensor_dev_attr_2(attr);
 =======
+=======
+>>>>>>> v3.18
 	struct sensor_device_attribute_2 *attr2 = to_sensor_dev_attr_2(attr);
 	struct max6642_data *data = dev_get_drvdata(dev);
 	unsigned long val;
 	int err;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 
 	err = kstrtoul(buf, 10, &val);
@@ -282,7 +321,11 @@ static ssize_t set_temp_max(struct device *dev, struct device_attribute *attr,
 	mutex_lock(&data->update_lock);
 	data->temp_high[attr2->nr] = clamp_val(temp_to_reg(val), 0, 255);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	i2c_smbus_write_byte_data(client, attr2->index,
+=======
+	i2c_smbus_write_byte_data(data->client, attr2->index,
+>>>>>>> v3.18
 =======
 	i2c_smbus_write_byte_data(data->client, attr2->index,
 >>>>>>> v3.18
@@ -310,7 +353,11 @@ static SENSOR_DEVICE_ATTR(temp1_max_alarm, S_IRUGO, show_alarm, NULL, 6);
 static SENSOR_DEVICE_ATTR(temp2_max_alarm, S_IRUGO, show_alarm, NULL, 4);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 static struct attribute *max6642_attributes[] = {
+=======
+static struct attribute *max6642_attrs[] = {
+>>>>>>> v3.18
 =======
 static struct attribute *max6642_attrs[] = {
 >>>>>>> v3.18
@@ -324,6 +371,7 @@ static struct attribute *max6642_attrs[] = {
 	&sensor_dev_attr_temp2_max_alarm.dev_attr.attr,
 	NULL
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 static const struct attribute_group max6642_group = {
@@ -374,6 +422,8 @@ static int max6642_remove(struct i2c_client *client)
 
 	return 0;
 =======
+=======
+>>>>>>> v3.18
 ATTRIBUTE_GROUPS(max6642);
 
 static int max6642_probe(struct i2c_client *client,
@@ -397,6 +447,9 @@ static int max6642_probe(struct i2c_client *client,
 							   client->name, data,
 							   max6642_groups);
 	return PTR_ERR_OR_ZERO(hwmon_dev);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 }
 
@@ -417,7 +470,10 @@ static struct i2c_driver max6642_driver = {
 	},
 	.probe		= max6642_probe,
 <<<<<<< HEAD
+<<<<<<< HEAD
 	.remove		= max6642_remove,
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 	.id_table	= max6642_id,

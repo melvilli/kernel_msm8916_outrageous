@@ -7,8 +7,11 @@ static inline void set_64bit(volatile u64 *ptr, u64 val)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __HAVE_ARCH_CMPXCHG 1
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 #define cmpxchg64(ptr, o, n)						\

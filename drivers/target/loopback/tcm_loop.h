@@ -11,6 +11,11 @@ struct tcm_loop_cmd {
 	/* State of Linux/SCSI CDB+Data descriptor */
 	u32 sc_cmd_state;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	/* Tagged command queueing */
+	u32 sc_cmd_tag;
+>>>>>>> v3.18
 =======
 	/* Tagged command queueing */
 	u32 sc_cmd_tag;
@@ -31,12 +36,18 @@ struct tcm_loop_tmr {
 
 struct tcm_loop_nexus {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 	int it_nexus_active;
 	/*
 	 * Pointer to Linux/SCSI HBA from linux/include/scsi_host.h
 	 */
 	struct scsi_host *sh;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	/*
 	 * Pointer to TCM session for I_T Nexus
@@ -49,6 +60,7 @@ struct tcm_loop_nacl {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct tcm_loop_tpg {
 	unsigned short tl_tpgt;
 	atomic_t tl_tpg_port_count;
@@ -56,6 +68,8 @@ struct tcm_loop_tpg {
 	struct tcm_loop_hba *tl_hba;
 	struct tcm_loop_nexus *tl_nexus;
 =======
+=======
+>>>>>>> v3.18
 #define TCM_TRANSPORT_ONLINE 0
 #define TCM_TRANSPORT_OFFLINE 1
 
@@ -65,6 +79,9 @@ struct tcm_loop_tpg {
 	atomic_t tl_tpg_port_count;
 	struct se_portal_group tl_se_tpg;
 	struct tcm_loop_hba *tl_hba;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 };
 
@@ -75,6 +92,10 @@ struct tcm_loop_hba {
 	struct se_lun *tl_hba_lun;
 	struct se_port *tl_hba_lun_sep;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	struct tcm_loop_nexus *tl_nexus;
+>>>>>>> v3.18
 =======
 	struct tcm_loop_nexus *tl_nexus;
 >>>>>>> v3.18

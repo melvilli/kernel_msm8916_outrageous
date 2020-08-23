@@ -52,6 +52,7 @@ pte_alloc_one(struct mm_struct *mm, unsigned long addr)
 
 	pte = alloc_pages(PGALLOC_GFP, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (pte) {
 		if (!PageHighMem(pte)) {
 			void *page = page_address(pte);
@@ -59,6 +60,8 @@ pte_alloc_one(struct mm_struct *mm, unsigned long addr)
 		}
 		pgtable_page_ctor(pte);
 =======
+=======
+>>>>>>> v3.18
 	if (!pte)
 		return NULL;
 	if (!PageHighMem(pte)) {
@@ -67,6 +70,9 @@ pte_alloc_one(struct mm_struct *mm, unsigned long addr)
 	}
 	if (!pgtable_page_ctor(pte)) {
 		__free_page(pte);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 	}
 

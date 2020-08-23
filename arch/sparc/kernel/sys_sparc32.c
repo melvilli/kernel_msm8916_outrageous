@@ -50,6 +50,11 @@
 #include <asm/compat_signal.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+#include "systbls.h"
+
+>>>>>>> v3.18
 =======
 #include "systbls.h"
 
@@ -175,15 +180,21 @@ COMPAT_SYSCALL_DEFINE5(rt_sigaction, int, sig,
 		ret = get_user(u_handler, &act->sa_handler);
 		new_ka.sa.sa_handler =  compat_ptr(u_handler);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret |= __copy_from_user(&set32, &act->sa_mask, sizeof(compat_sigset_t));
 		sigset_from_compat(&new_ka.sa.sa_mask, &set32);
 		ret |= __get_user(new_ka.sa.sa_flags, &act->sa_flags);
 		ret |= __get_user(u_restorer, &act->sa_restorer);
 =======
+=======
+>>>>>>> v3.18
 		ret |= copy_from_user(&set32, &act->sa_mask, sizeof(compat_sigset_t));
 		sigset_from_compat(&new_ka.sa.sa_mask, &set32);
 		ret |= get_user(new_ka.sa.sa_flags, &act->sa_flags);
 		ret |= get_user(u_restorer, &act->sa_restorer);
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 		new_ka.sa.sa_restorer = compat_ptr(u_restorer);
                 if (ret)
@@ -196,9 +207,15 @@ COMPAT_SYSCALL_DEFINE5(rt_sigaction, int, sig,
 		sigset_to_compat(&set32, &old_ka.sa.sa_mask);
 		ret = put_user(ptr_to_compat(old_ka.sa.sa_handler), &oact->sa_handler);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ret |= __copy_to_user(&oact->sa_mask, &set32, sizeof(compat_sigset_t));
 		ret |= __put_user(old_ka.sa.sa_flags, &oact->sa_flags);
 		ret |= __put_user(ptr_to_compat(old_ka.sa.sa_restorer), &oact->sa_restorer);
+=======
+		ret |= copy_to_user(&oact->sa_mask, &set32, sizeof(compat_sigset_t));
+		ret |= put_user(old_ka.sa.sa_flags, &oact->sa_flags);
+		ret |= put_user(ptr_to_compat(old_ka.sa.sa_restorer), &oact->sa_restorer);
+>>>>>>> v3.18
 =======
 		ret |= copy_to_user(&oact->sa_mask, &set32, sizeof(compat_sigset_t));
 		ret |= put_user(old_ka.sa.sa_flags, &oact->sa_flags);

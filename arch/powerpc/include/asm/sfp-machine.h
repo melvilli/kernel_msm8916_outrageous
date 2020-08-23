@@ -126,7 +126,11 @@
 #define FP_EX_INEXACT         (1 << (31 - 6))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define __FPU_FPSCR	(current->thread.fpscr.val)
+=======
+#define __FPU_FPSCR	(current->thread.fp_state.fpscr)
+>>>>>>> v3.18
 =======
 #define __FPU_FPSCR	(current->thread.fp_state.fpscr)
 >>>>>>> v3.18

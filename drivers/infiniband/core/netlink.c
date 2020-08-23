@@ -104,7 +104,11 @@ EXPORT_SYMBOL(ibnl_remove_client);
 
 void *ibnl_put_msg(struct sk_buff *skb, struct nlmsghdr **nlh, int seq,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		   int len, int client, int op)
+=======
+		   int len, int client, int op, int flags)
+>>>>>>> v3.18
 =======
 		   int len, int client, int op, int flags)
 >>>>>>> v3.18
@@ -114,7 +118,11 @@ void *ibnl_put_msg(struct sk_buff *skb, struct nlmsghdr **nlh, int seq,
 	prev_tail = skb_tail_pointer(skb);
 	*nlh = nlmsg_put(skb, 0, seq, RDMA_NL_GET_TYPE(client, op),
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 len, NLM_F_MULTI);
+=======
+			 len, flags);
+>>>>>>> v3.18
 =======
 			 len, flags);
 >>>>>>> v3.18
@@ -157,7 +165,11 @@ static int ibnl_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 		if (client->index == index) {
 			if (op < 0 || op >= client->nops ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 			    !client->cb_table[RDMA_NL_GET_OP(op)].dump)
+=======
+			    !client->cb_table[op].dump)
+>>>>>>> v3.18
 =======
 			    !client->cb_table[op].dump)
 >>>>>>> v3.18
@@ -185,7 +197,10 @@ static void ibnl_rcv(struct sk_buff *skb)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> v3.18
 int ibnl_unicast(struct sk_buff *skb, struct nlmsghdr *nlh,
 			__u32 pid)
 {
@@ -200,6 +215,9 @@ int ibnl_multicast(struct sk_buff *skb, struct nlmsghdr *nlh,
 }
 EXPORT_SYMBOL(ibnl_multicast);
 
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
 int __init ibnl_init(void)
 {

@@ -27,10 +27,13 @@
 #include "priv.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct nv10_gpio_priv {
 	struct nouveau_gpio base;
 };
 
+=======
+>>>>>>> v3.18
 =======
 >>>>>>> v3.18
 static int
@@ -86,6 +89,7 @@ nv10_gpio_drive(struct nouveau_gpio *gpio, int line, int dir, int out)
 }
 
 static void
+<<<<<<< HEAD
 <<<<<<< HEAD
 nv10_gpio_intr(struct nouveau_subdev *subdev)
 {
@@ -180,6 +184,8 @@ nv10_gpio_oclass = {
 	},
 };
 =======
+=======
+>>>>>>> v3.18
 nv10_gpio_intr_stat(struct nouveau_gpio *gpio, u32 *hi, u32 *lo)
 {
 	u32 intr = nv_rd32(gpio, 0x001104);
@@ -215,4 +221,7 @@ nv10_gpio_oclass = &(struct nouveau_gpio_impl) {
 	.drive = nv10_gpio_drive,
 	.sense = nv10_gpio_sense,
 }.base;
+<<<<<<< HEAD
+>>>>>>> v3.18
+=======
 >>>>>>> v3.18
